@@ -85,18 +85,11 @@ export default ({
     children,
     elementStyles: {
       element: {
-        maxWidth: `${Styles.token.spacing.maxWidth.smallest}`,
-        paddingBottom: `${Styles.token.spacing.md}`,
-        borderBottom: `1px solid ${Styles.token.color.gray.light}`,
         overflow: 'hidden',
         display: 'flex',
 
         ...theme.media.createContainerQuery('max-width', smallBreakpoint, {
           flexDirection: 'column',
-        }),
-
-        ...(isThemeDark && {
-          borderBottom: `1px solid ${Styles.token.color.gray.dark}`,
         }),
       },
     },

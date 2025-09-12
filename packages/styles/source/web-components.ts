@@ -99,6 +99,12 @@ const elements = {
               paddingTop: spacing.md,
               borderTop: `1px solid ${color.gray.light}`,
             },
+          [`umd-element-${type}[display="list"][data-theme="dark"]  + umd-element-${type}[data-theme="dark"]`]:
+            {
+              marginTop: spacing.md,
+              paddingTop: spacing.md,
+              borderTop: `1px solid ${color.gray.dark}`,
+            },
           [`umd-element-${type}[data-display="list"] + umd-element-${type}[data-display="list"]`]:
             {
               marginTop: spacing.md,
@@ -154,13 +160,17 @@ const elements = {
       ...acc,
       ...createElementStyles(`umd-element-${type}`, {
         custom: {
-          [`umd-element-${type}[display="tabular"] + umd-element-${type}[display="tabular"]`]:
-            {
-              marginTop: spacing.md,
-            },
           [`umd-element-${type}[data-display="tabular"] + umd-element-${type}[data-display="tabular"]`]:
             {
               marginTop: spacing.md,
+              paddingTop: spacing.md,
+              borderTop: `1px solid ${color.gray.light}`,
+            },
+          [`umd-element-${type}[data-display="tabular"][data-theme="dark"] + umd-element-${type}[data-display="tabular"][data-theme="dark"]`]:
+            {
+              marginTop: spacing.md,
+              paddingTop: spacing.md,
+              borderTop: `1px solid ${color.gray.dark}`,
             },
         },
       }),

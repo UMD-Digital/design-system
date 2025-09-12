@@ -40,6 +40,7 @@ jobs:
           yarn run elements:docs
 
       - name: Upload generated docs as artifact
+        if: ${{ !env.ACT }}
         uses: actions/upload-artifact@v4
         with:
           name: documentation
@@ -47,6 +48,7 @@ jobs:
           retention-days: 90
 
       - name: Deploy to GitHub Pages
+        if: ${{ !env.ACT }}
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: docs

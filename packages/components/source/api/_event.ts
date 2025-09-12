@@ -32,13 +32,22 @@ interface ParsedEventData {
 }
 
 /**
+ * Element visual structure matching the return type from elements library
+ */
+interface ElementVisualComponent {
+  element: HTMLElement;
+  className: string;
+  styles: string;
+}
+
+/**
  * Result containing created event components
  */
 interface EventComponents {
   /** Event details/meta component */
-  eventMeta: ComponentRef;
+  eventMeta: ElementVisualComponent;
   /** Date sign component */
-  dateSign: ComponentRef;
+  dateSign: ElementVisualComponent;
 }
 
 /**

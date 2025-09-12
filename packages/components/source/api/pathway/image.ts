@@ -47,11 +47,6 @@ const createComponent: CreateComponentFunction = (element) => {
     });
   }
 
-  const featureEvents = extractEventData(element, {
-    isLargeSize: true,
-    isDateSignDark: false,
-  });
-
   if (isDisplayOverlay) {
     return Composite.pathway.overlay({
       actions: Slots.actions.default({ element }),

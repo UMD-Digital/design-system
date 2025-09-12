@@ -2,7 +2,7 @@ import { token } from '@universityofmaryland/web-styles-library';
 import { buttons } from 'atomic';
 import { Image as LayoutImage } from 'layout';
 import * as Utility from 'utilities';
-import { type ElementVisual } from '_types';
+import { type ElementVisual } from '../../../_types';
 
 type TypeScaleProps = {
   isImageScaled: boolean;

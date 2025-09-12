@@ -2,7 +2,7 @@ import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Atomic from 'atomic';
 import { ElementModel } from 'model';
 import { theme } from 'utilities';
-import { type ElementVisual } from '_types';
+import { type ElementVisual } from '../../_types';
 
 interface PathwayStandardProps {
   actions?: HTMLElement | null;

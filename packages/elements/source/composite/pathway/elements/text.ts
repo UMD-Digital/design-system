@@ -5,7 +5,7 @@ import {
   typography,
 } from '@universityofmaryland/web-styles-library';
 import * as Utility from 'utilities';
-import { type ElementVisual } from '_types';
+import { type ElementVisual } from '../../../_types';
 
 export type TypePathwayTextContainer = {
   eyebrow: HTMLElement | null;

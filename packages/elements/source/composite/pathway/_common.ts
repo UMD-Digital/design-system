@@ -32,6 +32,7 @@ export const createCompositeHeadline = ({
         fontWeight: 800,
         textTransform: 'uppercase',
         textWrap: 'balance',
+        color: Styles.token.color.black,
         ...desktopStyles,
       },
       siblingAfter: {

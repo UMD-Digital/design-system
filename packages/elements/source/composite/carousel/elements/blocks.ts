@@ -146,6 +146,9 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
   const isShowMobileHint = GetViewOptions.shouldShowMobileHint();
   const isShowHint = GetViewOptions.shouldShowHint();
   const count = GetViewOptions.showCount();
+
+  // Force layout recalculation to get accurate measurements
+  void slotContent[0]?.offsetHeight;
   const elementSize = slotContent[0]?.offsetWidth || 0;
   const carouselSize = GetSizes.carouselWidthBasedOnBlock({ count });
   const { fullScreenCallback } = displayLogic;
@@ -180,27 +183,32 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
     const upcomingElement = slotContent[count];
     const hintElement = slotContent[count + 1];
 
+    // Prepare elements before animation
     upcomingElement.style.display = 'block';
-    carouselSlider.style.width = `${temporaryCarouselSize}px`;
     cloneReferenceEvents({ orginal: firstElement, clone: clonedElement });
 
     if (hintElement && (isShowMobileHint || isShowHint)) {
       hintElement.style.display = 'block';
     }
 
+    // Add clone but keep it hidden initially
     carouselSlider.appendChild(clonedElement);
     clonedElement.style.display = 'none';
 
-    setTimeout(() => {
+    // Set width first and force layout recalculation
+    carouselSlider.style.width = `${temporaryCarouselSize}px`;
+    void carouselSlider.offsetHeight;
+
+    // Use requestAnimationFrame for smoother animation timing
+    requestAnimationFrame(() => {
       carouselSlider.style.transition = `transform ${ANIMATION_DURATION}ms ease-in-out`;
       carouselSlider.style.transform = `translateX(-${elementSizeWithSpace}px)`;
-    }, 10);
 
-    setTimeout(() => {
-      SetLayout.carouselWidth({ count });
-
-      carouselSlider.removeChild(firstElement);
-    }, ANIMATION_DURATION + 100);
+      setTimeout(() => {
+        carouselSlider.removeChild(firstElement);
+        SetLayout.carouselWidth({ count });
+      }, ANIMATION_DURATION);
+    });
   };
 
   const animateLeft = () => {
@@ -209,30 +217,41 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
     const hintElementSibiling = slotContent[count];
     const clonedElement = lastElement.cloneNode(true) as HTMLDivElement;
 
-    carouselSlider.style.width = `${temporaryCarouselSize}px`;
-    carouselSlider.prepend(clonedElement);
-    clonedElement.style.display = 'block';
-    carouselSlider.style.transform = `translateX(-${elementSizeWithSpace}px)`;
+    // Prepare clone with proper event handlers
     cloneReferenceEvents({ orginal: lastElement, clone: clonedElement });
 
-    setTimeout(() => {
+    // Set width first before DOM manipulation
+    carouselSlider.style.width = `${temporaryCarouselSize}px`;
+
+    // Add cloned element at the beginning
+    carouselSlider.prepend(clonedElement);
+    clonedElement.style.display = 'block';
+
+    // Set initial transform position
+    carouselSlider.style.transform = `translateX(-${elementSizeWithSpace}px)`;
+
+    // Force layout recalculation
+    void carouselSlider.offsetHeight;
+
+    // Use requestAnimationFrame for smoother animation timing
+    requestAnimationFrame(() => {
       carouselSlider.style.transition = `transform ${ANIMATION_DURATION}ms ease-in-out`;
       carouselSlider.style.transform = `translateX(0)`;
-    }, 10);
 
-    setTimeout(() => {
-      carouselSlider.removeChild(lastElement);
+      setTimeout(() => {
+        carouselSlider.removeChild(lastElement);
 
-      if (!isShowMobileHint && !isShowHint) {
-        removedElement.style.display = 'none';
-      }
+        if (!isShowMobileHint && !isShowHint) {
+          removedElement.style.display = 'none';
+        }
 
-      if (isShowMobileHint || isShowHint) {
-        hintElementSibiling.style.display = 'none';
-      }
+        if (isShowMobileHint || isShowHint) {
+          hintElementSibiling.style.display = 'none';
+        }
 
-      SetLayout.carouselWidth({ count });
-    }, ANIMATION_DURATION + 10);
+        SetLayout.carouselWidth({ count });
+      }, ANIMATION_DURATION);
+    });
   };
 
   isDirectionRight ? animateRight() : animateLeft();
@@ -334,7 +353,7 @@ const CreateButton = ({
 
     setTimeout(() => {
       button.disabled = false;
-    }, ANIMATION_DURATION + 100);
+    }, ANIMATION_DURATION);
   });
 
   return button;

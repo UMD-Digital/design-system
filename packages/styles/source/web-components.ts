@@ -34,7 +34,6 @@ const baseElements = [
   'hero-expand',
   'hero-logo',
   'hero-minimal',
-  'hero',
   'logo',
   'media-inline',
   'media-gif',
@@ -179,18 +178,18 @@ const elements = {
   ),
 };
 
+// Call To ACtion with specific styling
+const action = createElementStyles('umd-element-call-to-action', {
+  defined: {
+    containerType: 'normal',
+  },
+});
+
 // Footer with specific styling
 const breadcrumb = createElementStyles('umd-element-breadcrumb', {
   defined: {
     display: 'block',
     marginTop: `${spacing.sm}`,
-  },
-});
-
-// Call To ACtion with specific styling
-const action = createElementStyles('umd-element-call-to-action', {
-  defined: {
-    containerType: 'normal',
   },
 });
 
@@ -200,6 +199,16 @@ const footer = createElementStyles('umd-element-footer', {
     backgroundColor: color.black,
     height: `calc(${spacing.md} * 20)`,
     '& > *': { display: 'none' },
+  },
+});
+
+// Hero with specific styling
+const hero = createElementStyles('umd-element-hero', {
+  notDefined: {
+    minHeight: `40vh`,
+  },
+  defined: {
+    display: 'block',
   },
 });
 
@@ -346,6 +355,7 @@ export default {
   ...breadcrumb,
   ...action,
   ...footer,
+  ...hero,
   ...navigation,
   ...navigationSticky,
   ...navigationAlertUtility,

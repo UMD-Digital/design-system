@@ -5,9 +5,6 @@
  * These components typically load content from external sources or display collections.
  */
 
-export * as feed from '../api/feed';
-export * as slider from '../api/slider';
-
 import { alert, feed, slider } from '../api';
 import { loadComponentClass, ComponentMap } from './loader';
 

@@ -314,6 +314,8 @@ const LogoStyles = `
     font-family: Crimson Text, Georgia, serif;
     letter-spacing: 1px;
     padding: 10px 0;
+    opacity: 0;
+    transition: opacity .3s ease-in;
   }
 `;
 
@@ -480,6 +482,10 @@ const CreateLogoElement = () => {
   logo.setAttribute('target', '_blank');
   logo.setAttribute('rel', 'noopener noreferrer');
   logo.classList.add(ELEMENT_UTILITY_LOGO);
+
+  setTimeout(() => {
+    logo.style.opacity = '1';
+  }, 200);
 
   return logo;
 };

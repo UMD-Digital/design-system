@@ -240,29 +240,26 @@ const createBackground = (props: PathwayOverlayProps): ElementVisual => {
         width: '100%',
         backgroundColor: getBackgroundColor(),
 
-        ...(props.includesAnimation && {
-          animationTimeline: 'view()',
-          animationRangeStart: 'entry',
-          animationRangeEnd: 'contain',
-
-          ...theme.media.withViewTimelineAnimation({
-            ...(props.isImagePositionLeft === true && {
-              animationName: REF_KEY_FRAME_BACKGROUND_LEFT,
-            }),
-
-            ...(props.isImagePositionLeft === false && {
-              animationName: REF_KEY_FRAME_BACKGROUND_RIGHT,
-            }),
-          }),
-        }),
-
         [`@container (min-width: ${mediumSize}px)`]: {
           right: '-1000px',
           width: 'calc(75% + 1000px)',
 
-          ...(props.isImagePositionLeft === false && {
-            left: '-1000px',
-            right: 'auto',
+          ...(props.includesAnimation && {
+            animationTimeline: 'view()',
+            animationRangeStart: 'entry',
+            animationRangeEnd: 'contain',
+
+            ...theme.media.withViewTimelineAnimation({
+              ...(props.isImagePositionLeft === true && {
+                animationName: REF_KEY_FRAME_BACKGROUND_LEFT,
+              }),
+
+              ...(props.isImagePositionLeft === false && {
+                animationName: REF_KEY_FRAME_BACKGROUND_RIGHT,
+                left: '-1000px',
+                right: 'auto',
+              }),
+            }),
           }),
         },
       },

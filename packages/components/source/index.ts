@@ -33,6 +33,57 @@ import * as umdComponents from './api';
 import * as umdUtilities from './utilities';
 import { loadComponentClass, ComponentMap } from './exports/loader';
 
+// Export all types from the root _types file
+export type {
+  // Core interfaces
+  ElementRef,
+  ComponentRef,
+
+  // Slot configuration types
+  SlotConfig,
+  SlotConfiguration,
+
+  // Event detail types
+  ComponentEventDetail,
+  ComponentReadyDetail,
+  ComponentErrorDetail,
+  ComponentResizeDetail,
+
+  // Component configuration
+  ComponentConfiguration,
+
+  // Component property interfaces
+  ThemeProps,
+  VisualStateProps,
+  LayoutProps,
+
+  // Content structure types
+  BaseContentProps,
+  ExtendedContentProps,
+
+  // Component event handlers
+  ComponentEvents,
+
+  // Function signatures
+  CreateComponentFunction,
+  ComponentRegistration,
+  ComponentFactory,
+
+  // Extended component reference with typed events
+  TypedComponentRef,
+
+  // Attribute element reference
+  AttributeElementRef,
+} from './_types';
+
+// Export model types
+export type {
+  SlotProps,
+  BaseProps,
+  OptionalProps,
+  SlotResult,
+} from './model';
+
 const allList = umdComponents as unknown as ComponentMap;
 
 /**

@@ -243,6 +243,30 @@ const navigationSticky = {
   ),
 };
 
+const navigationAlertUtility = {
+  ...['navigation-utility'].reduce(
+    (acc, name) => ({
+      ...acc,
+      ...createElementStyles(`umd-element-${name}`, {
+        notDefined: {
+          display: 'block !important',
+          '& > *': { display: 'none' },
+        },
+        defined: {
+          '& > *': { display: 'block' },
+        },
+        custom: {
+          [`umd-element-${name}`]: {
+            minHeight: '44px',
+            backgroundColor: color.red,
+          },
+        },
+      }),
+    }),
+    {},
+  ),
+};
+
 // Scroll top component with responsive styling
 const scrollTopTag = 'umd-element-scroll-top';
 const scrollTop = createElementStyles(scrollTopTag, {
@@ -324,6 +348,7 @@ export default {
   ...footer,
   ...navigation,
   ...navigationSticky,
+  ...navigationAlertUtility,
   ...scrollTop,
   ...sectionIntro,
   ...socialSharing,

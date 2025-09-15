@@ -29,6 +29,10 @@ export default defineConfig({
         preserveModules: true,
         preserveModulesRoot: 'source',
         exports: 'named',
+      },
+      onwarn(warning, warn) {
+        if (warning.code === 'EVAL') return;
+        warn(warning);
       }
     }
   },

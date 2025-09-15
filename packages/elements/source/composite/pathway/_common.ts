@@ -118,6 +118,13 @@ export const createAssetContent = (
       Atomic.assets.video.observedAutoPlay({
         video,
         isScaled: isImageScaled,
+        additionalElementStyles: {
+          [`& video`]: {
+            objectFit: 'cover',
+            width: '100%',
+            height: '100%',
+          },
+        },
       }),
     );
   }

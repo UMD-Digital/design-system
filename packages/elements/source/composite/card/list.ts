@@ -69,6 +69,10 @@ const makeImageColumn = ({
           marginBottom: Styles.token.spacing.md,
           width: '120px',
           float: 'right',
+
+          ...(isAligned && {
+            height: '104px',
+          }),
         }),
 
         ...theme.media.createContainerQuery(

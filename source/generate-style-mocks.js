@@ -40,11 +40,11 @@ function mockifyValue(value, path = '') {
   if (isPlainObject(value)) {
     const entries = Object.entries(value).map(([key, val]) => {
       const mockedValue = mockifyValue(val, `${path}.${key}`);
-      // Handle special characters in keys
-      const safeKey = /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(key) ? key : `'${key}'`;
+      // Handle special characters in keys - use JSON.stringify for complex keys
+      const safeKey = /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(key) ? key : JSON.stringify(key);
       return `    ${safeKey}: ${mockedValue}`;
     });
-    
+
     return `{\n${entries.join(',\n')}\n  }`;
   }
   
@@ -53,6 +53,10 @@ function mockifyValue(value, path = '') {
   }
   
   if (typeof value === 'string') {
+    // For property keys that contain quotes (like CSS selectors), use double quotes
+    if (value.includes("'") || value.includes('"')) {
+      return JSON.stringify(value);
+    }
     return `'${value.replace(/'/g, "\\'")}'`;
   }
   
@@ -87,32 +91,9 @@ module.exports = ${mockifyValue(styles)};
     fs.writeFileSync(mockPath, mockContent);
     
     console.log('✅ Mock generated successfully at __mocks__/webStylesLibrary.js');
-    
-    // Also add Utility property if it doesn't exist (for backward compatibility)
-    const mockData = require(mockPath);
-    if (!mockData.Utility && mockData.utilities) {
-      const updatedContent = mockContent.replace(
-        'module.exports = {',
-        `module.exports = {
-  Utility: {
-    theme: {
-      convertJSSObjectToStyles: jest.fn(({ styleObj }) => {
-        // Mock implementation
-        return Object.entries(styleObj || {}).map(([selector, styles]) => {
-          if (typeof styles === 'object' && !Array.isArray(styles)) {
-            const styleString = Object.entries(styles).map(([prop, value]) => 
-              \`\${prop}: \${value};\`
-            ).join(' ');
-            return \`\${selector} { \${styleString} }\`;
-          }
-          return '';
-        }).join('\\n');
-      })
-    }
-  },`
-      );
-      fs.writeFileSync(mockPath, updatedContent);
-    }
+
+    // Skip validation that requires jest to be available
+    // The mock file will be validated when jest runs
     
   } catch (error) {
     console.error('Error generating mock:', error);

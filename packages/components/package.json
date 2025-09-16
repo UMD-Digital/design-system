@@ -62,7 +62,7 @@
   },
   "dependencies": {
     "@types/postcss-js": "^4.0.4",
-    "jest-dom": "^4.0.0",
+    "@testing-library/jest-dom": "^6.1.5",
     "postcss-js": "^4.0.1",
     "tw-to-css": "^0.0.12"
   },

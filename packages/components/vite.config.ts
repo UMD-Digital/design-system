@@ -1,39 +1,29 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
+import { readdirSync, statSync } from 'fs';
 import dts from 'vite-plugin-dts';
 import checker from 'vite-plugin-checker';
 
 const generateComponentEntries = () => {
-  const components = [
-    'accordion',
-    'actions',
-    'alert',
-    'brand',
-    'card',
-    'carousel',
-    'feed',
-    'footer',
-    'hero',
-    'layout',
-    'media',
-    'navigation',
-    'pathway',
-    'person',
-    'quote',
-    'slider',
-    'social',
-    'stat',
-    'tab',
-    'text',
-  ];
-
+  const apiDir = resolve(__dirname, 'source/api');
   const entries: Record<string, string> = {};
-  components.forEach((component) => {
-    entries[`components/${component}`] = resolve(
-      __dirname,
-      `source/api/${component}/index.ts`,
-    );
+  const items = readdirSync(apiDir);
+
+  items.forEach((item) => {
+    const itemPath = resolve(apiDir, item);
+    const stats = statSync(itemPath);
+
+    if (stats.isDirectory() && !item.startsWith('__')) {
+      const indexPath = resolve(itemPath, 'index.ts');
+      try {
+        statSync(indexPath);
+        entries[`components/${item}`] = indexPath;
+      } catch {
+        // Skip directories without index.ts
+      }
+    }
   });
+
   return entries;
 };
 

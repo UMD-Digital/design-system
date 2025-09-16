@@ -30,6 +30,10 @@ export default defineConfig({
           return assetInfo.name || '';
         },
       },
+      onwarn(warning, warn) {
+        if (warning.code === 'EVAL') return;
+        warn(warning);
+      }
     },
     minify: false,
   },

@@ -103,9 +103,9 @@ export default defineConfig(({ mode }) => {
           },
         },
         onwarn(warning, warn) {
-          // Suppress certain warnings
           if (warning.code === 'UNUSED_EXTERNAL_IMPORT') return;
           if (warning.code === 'THIS_IS_UNDEFINED') return;
+          if (warning.code === 'EVAL') return;
           warn(warning);
         },
       },

@@ -20,6 +20,10 @@ export default defineConfig({
       output: {
         preserveModules: true,
         preserveModulesRoot: 'source',
+      },
+      onwarn(warning, warn) {
+        if (warning.code === 'EVAL') return;
+        warn(warning);
       }
     },
     sourcemap: true,

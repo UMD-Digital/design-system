@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-feeds-library",
-  "version": "1.0.9",
+  "version": "1.1.0",
   "description": "UMD Feed Elements",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

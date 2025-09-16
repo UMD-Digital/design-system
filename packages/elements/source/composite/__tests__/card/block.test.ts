@@ -13,6 +13,24 @@ jest.mock('../../../atomic', () => ({
       }),
     },
   },
+  layout: {
+    block: {
+      stacked: {
+        container: jest.fn().mockReturnValue({
+          element: document.createElement('div'),
+          styles: '.mock-container',
+        }),
+        image: jest.fn().mockReturnValue({
+          element: document.createElement('div'),
+          styles: '.mock-layout-image',
+        }),
+        textContainer: jest.fn().mockReturnValue({
+          element: document.createElement('div'),
+          styles: '.mock-text-container',
+        }),
+      },
+    },
+  },
   textLockup: {
     smallScaling: jest.fn().mockReturnValue({
       element: document.createElement('div'),
@@ -21,22 +39,9 @@ jest.mock('../../../atomic', () => ({
   },
 }));
 
-jest.mock('../../../model', () => ({
-  ElementModel: {
-    composite: {
-      card: {
-        block: jest.fn().mockImplementation((props) => ({
-          element: props.element || document.createElement('div'),
-          styles: '.mock-card-block-styles',
-        })),
-      },
-    },
-  },
-}));
 
 describe('Card Block Component', () => {
-  const { assets, textLockup } = require('../../../atomic');
-  const { ElementModel } = require('../../../model');
+  const { assets, textLockup, layout } = require('../../../atomic');
 
   beforeEach(() => {
     jest.clearAllMocks();
@@ -53,10 +58,9 @@ describe('Card Block Component', () => {
       expect(result).toBeDefined();
       expect(result.element).toBeInstanceOf(HTMLElement);
       expect(result.styles).toBeDefined();
-      expect(result.styles).toContain('.mock-card-block-styles');
-      expect(result.styles).toContain('.mock-text-lockup');
       expect(textLockup.smallScaling).toHaveBeenCalledWith(props);
-      expect(ElementModel.composite.card.block).toHaveBeenCalled();
+      expect(layout.block.stacked.textContainer).toHaveBeenCalled();
+      expect(layout.block.stacked.container).toHaveBeenCalled();
     });
 
     it('should return element and styles', () => {
@@ -97,15 +101,15 @@ describe('Card Block Component', () => {
         image,
       };
 
-      const result = Composite.card.block(props);
+      Composite.card.block(props);
 
       expect(assets.image.background).toHaveBeenCalledWith({
-        image,
+        element: image,
         isScaled: true,
         isAspectStandard: undefined,
         dateSign: undefined,
       });
-      expect(result.styles).toContain('.mock-image-background');
+      expect(layout.block.stacked.image).toHaveBeenCalled();
     });
 
     it('should handle image with isAligned property', () => {
@@ -119,7 +123,7 @@ describe('Card Block Component', () => {
       Composite.card.block(props);
 
       expect(assets.image.background).toHaveBeenCalledWith({
-        image,
+        element: image,
         isScaled: true,
         isAspectStandard: true,
         dateSign: undefined,
@@ -161,7 +165,7 @@ describe('Card Block Component', () => {
       Composite.card.block(props);
 
       expect(assets.image.background).toHaveBeenCalledWith({
-        image: props.image,
+        element: props.image,
         isScaled: true,
         isAspectStandard: undefined,
         dateSign,
@@ -170,7 +174,7 @@ describe('Card Block Component', () => {
   });
 
   describe('Style Variants', () => {
-    it('should pass style props to ElementModel', () => {
+    it('should pass style props to layout functions', () => {
       const props: CardBlockProps = {
         headline: createElement('h3', 'Title'),
         hasBorder: true,
@@ -181,11 +185,10 @@ describe('Card Block Component', () => {
 
       Composite.card.block(props);
 
-      const callArgs = ElementModel.composite.card.block.mock.calls[0][0];
-      expect(callArgs.hasBorder).toBe(true);
-      expect(callArgs.isTransparent).toBe(true);
-      expect(callArgs.hasEyebrowRibbon).toBe(true);
-      expect(callArgs.isThemeDark).toBe(true);
+      const containerCallArgs = layout.block.stacked.container.mock.calls[0][0];
+      expect(containerCallArgs.hasBorder).toBe(true);
+      expect(containerCallArgs.isTransparent).toBe(true);
+      expect(containerCallArgs.isThemeDark).toBe(true);
     });
   });
 
@@ -196,10 +199,9 @@ describe('Card Block Component', () => {
         newsId: 'news-123',
       };
 
-      const result = Composite.card.block(props);
+      Composite.card.block(props);
 
-      // Since we're mocking ElementModel, we need to manually check if setAttribute would be called
-      // In the real implementation, it would set the attribute on the element
+      // The newsId would be set on the element in the real implementation
       expect(props.newsId).toBe('news-123');
     });
   });
@@ -250,7 +252,7 @@ describe('Card Block Component', () => {
       expect(typeof result.styles).toBe('string');
       expect(textLockup.smallScaling).toHaveBeenCalledWith(props);
       expect(assets.image.background).toHaveBeenCalled();
-      expect(ElementModel.composite.card.block).toHaveBeenCalled();
+      expect(layout.block.stacked.container).toHaveBeenCalled();
     });
   });
 });

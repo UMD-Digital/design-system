@@ -74,6 +74,7 @@ const createHighlightColumn = ({
         isThemeDark,
         elementStyles: {
           element: {
+            color: Styles.token.color.black,
             fontWeight: '700',
           },
         },

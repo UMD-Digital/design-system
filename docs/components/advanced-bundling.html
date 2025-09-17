@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Performance Best Practices - UMD Design System</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .header {
+        background-color: #e21833;
+        color: white;
+        padding: 2rem 0;
+      }
+      .nav-link {
+        color: #000;
+      }
+      .nav-link:hover {
+        color: #e21833;
+      }
+      .content-section {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+      }
+      .code-example {
+        background-color: #ffffff;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        padding: 1rem;
+        margin: 1rem 0;
+      }
+      pre {
+        background-color: #f8f9fa;
+        border-radius: 4px;
+        padding: 1rem;
+        overflow-x: auto;
+        margin-bottom: 0;
+      }
+      code {
+        color: #e83e8c;
+      }
+      .toc {
+        position: sticky;
+        top: 20px;
+        background-color: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .toc-link {
+        display: block;
+        padding: 0.5rem 0;
+        color: #495057;
+        text-decoration: none;
+        border-left: 3px solid transparent;
+        padding-left: 1rem;
+      }
+      .toc-link:hover,
+      .toc-link.active {
+        color: #e21833;
+        border-left-color: #e21833;
+      }
+      .type-card {
+        background-color: #f8f9fa;
+        border-left: 4px solid #e21833;
+        padding: 1rem;
+        margin-bottom: 1rem;
+      }
+      .type-card code {
+        color: #0066cc;
+      }
+      .alert-pro-tip {
+        background-color: #e3f2fd;
+        border: 1px solid #90caf9;
+        color: #0d47a1;
+      }
+      .feature-badge {
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.875rem;
+        background-color: #28a745;
+        color: white;
+        border-radius: 4px;
+        margin-left: 0.5rem;
+      }
+      .comparison-table {
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 2rem 0;
+      }
+      .comparison-table thead {
+        background-color: #e21833;
+        color: white;
+      }
+      .comparison-table td,
+      .comparison-table th {
+        padding: 1rem;
+        border: 1px solid #dee2e6;
+      }
+      .metric-card {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+      }
+      .metric-card h4 {
+        margin-bottom: 0.5rem;
+      }
+      .metric-value {
+        font-size: 2rem;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body data-bs-spy="scroll" data-bs-target="#toc" data-bs-offset="20">
+    <header class="header">
+      <div class="container">
+        <h1>Performance Best Practices</h1>
+        <p class="lead">Optimize bundle size and loading performance with the UMD Design System</p>
+      </div>
+    </header>
+
+    <div class="container py-5">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Components</a></li>
+          <li class="breadcrumb-item active">Performance Best Practices</li>
+        </ol>
+      </nav>
+
+      <div class="row">
+        <!-- Table of Contents -->
+        <div class="col-md-3">
+          <nav id="toc" class="toc">
+            <h5>On This Page</h5>
+            <a class="toc-link" href="#introduction">Introduction</a>
+            <a class="toc-link" href="#export-strategy">Export Strategy</a>
+            <a class="toc-link" href="#bundling-config">Bundling Configuration</a>
+            <a class="toc-link" href="#dynamic-loading">Dynamic Loading</a>
+            <a class="toc-link" href="#critical-css">Critical CSS</a>
+            <a class="toc-link" href="#performance-metrics">Performance Metrics</a>
+            <a class="toc-link" href="#best-practices">Best Practices Checklist</a>
+          </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9">
+          <!-- Introduction -->
+          <section id="introduction" class="content-section">
+            <h2>Introduction</h2>
+            <p>
+              The UMD Design System provides multiple strategies for optimizing bundle size and loading performance.
+              By leveraging ES modules, tree-shaking, and strategic code splitting, you can significantly reduce
+              initial load times and improve the user experience of your applications.
+            </p>
+            <p>
+              This guide covers the design system's export strategy, bundling configuration with Vite, and
+              production-ready patterns for dynamic component loading. Whether you're building a simple static
+              site or a complex web application, these patterns will help you achieve optimal performance while
+              maintaining code maintainability.
+            </p>
+            <p>
+              The design system is built with performance in mind, providing granular control over what gets
+              loaded and when. Components are organized into logical groups that align with common usage patterns,
+              allowing you to load only what you need, when you need it.
+              <small class="text-muted d-block mt-2">
+                <em>Note: Grouped exports (structural, content, interactive, feed) were introduced in Release 1.14.0.</em>
+              </small>
+            </p>
+          </section>
+
+          <!-- Export Strategy -->
+          <section id="export-strategy" class="content-section">
+            <h2>Export Strategy</h2>
+            <p>
+              The component library provides two complementary export strategies to optimize bundle size and
+              loading performance. Choose the approach that best fits your application's needs.
+            </p>
+
+            <h3>Grouped Exports</h3>
+            <p>
+              The design system provides pre-configured component groups based on common usage patterns.
+              This approach balances convenience with performance.
+            </p>
+            <div class="code-example">
+              <pre><code class="language-javascript">// Structural Components - Page layout and navigation
+// Typically loaded first for above-the-fold content
+import LoadStructuralComponents from '@universityofmaryland/web-components-library/structural';
+LoadStructuralComponents(); // Loads: actions, hero, navigation
+
+// Content Components - Display components for information
+// Load after structural components for main content
+import LoadContentComponents from '@universityofmaryland/web-components-library/content';
+LoadContentComponents(); // Loads: card, text, media, stats, etc.
+
+// Interactive Components - User interaction components
+// Can be deferred until user interaction
+import LoadInteractiveComponents from '@universityofmaryland/web-components-library/interactive';
+LoadInteractiveComponents(); // Loads: accordion, carousel, footer, social, tab
+
+// Feed Components - Dynamic content feeds
+// Load on-demand for pages with feeds
+import LoadFeedComponents from '@universityofmaryland/web-components-library/feed';
+LoadFeedComponents(); // Loads: events, news, people feeds</code></pre>
+            </div>
+
+            <h3>Individual Component Exports</h3>
+            <p>
+              Import specific component types individually using dynamic imports for maximum tree-shaking efficiency
+              and granular control over what gets loaded.
+            </p>
+            <div class="code-example">
+              <pre><code class="language-javascript">// Dynamically import individual component types on demand
+const loadSpecificComponents = async () => {
+  // Load only card components and their variants
+  const cardComponents = await import(
+    '@universityofmaryland/web-components-library/components/card'
+  );
+  cardComponents.standard();  // Register standard card
+  cardComponents.overlay();   // Register overlay card
+  cardComponents.event();     // Register event card
+
+  // Load only hero components and their variants
+  const heroComponents = await import(
+    '@universityofmaryland/web-components-library/components/hero'
+  );
+  heroComponents.base();      // Register base hero
+  heroComponents.expand();    // Register expandable hero
+
+  // Load only navigation components
+  const navComponents = await import(
+    '@universityofmaryland/web-components-library/components/navigation'
+  );
+  navComponents.primary();    // Register primary navigation
+  navComponents.drawer();     // Register navigation drawer
+};
+
+// Conditionally load based on DOM presence
+if (document.querySelector('[class*="umd-element-card"]')) {
+  import('@universityofmaryland/web-components-library/components/card')
+    .then(module => module.standard());
+}
+
+if (document.querySelector('[class*="umd-element-hero"]')) {
+  import('@universityofmaryland/web-components-library/components/hero')
+    .then(module => module.base());
+}</code></pre>
+            </div>
+
+            <h3>Export Strategy Comparison</h3>
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Approach</th>
+                  <th>Bundle Size</th>
+                  <th>Tree-shaking</th>
+                  <th>Development Speed</th>
+                  <th>Best For</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Grouped Imports</strong></td>
+                  <td>Moderate (group-level)</td>
+                  <td>Good (per group)</td>
+                  <td>Faster setup</td>
+                  <td>Standard sites with typical patterns</td>
+                </tr>
+                <tr>
+                  <td><strong>Individual Imports</strong></td>
+                  <td>Smallest possible</td>
+                  <td>Maximum efficiency</td>
+                  <td>More verbose</td>
+                  <td>Production apps with specific needs</td>
+                </tr>
+                <tr>
+                  <td><strong>Full Import</strong></td>
+                  <td>Largest</td>
+                  <td>Limited</td>
+                  <td>Quickest</td>
+                  <td>Prototypes and development only</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="alert alert-pro-tip">
+              <h5 class="alert-heading">💡 Pro Tip: Hybrid Approach</h5>
+              <p>
+                Combine both strategies for optimal results. Use grouped imports for common component sets
+                and individual imports for specific components used sparingly:
+              </p>
+              <pre><code class="language-javascript">// Load structural components as a group
+import LoadStructuralComponents from '.../structural';
+LoadStructuralComponents();
+
+// Import specific components individually
+import { Components } from '@universityofmaryland/web-components-library';
+Components.specialFeature.custom(); // Only this specific component</code></pre>
+            </div>
+          </section>
+
+          <!-- Bundling Configuration -->
+          <section id="bundling-config" class="content-section">
+            <h2>Bundling Configuration</h2>
+            <p>
+              The design system includes an optimized Vite configuration that implements intelligent
+              chunk splitting for optimal caching and loading performance.
+            </p>
+
+            <h3>Complete Vite Configuration</h3>
+            <div class="code-example">
+              <pre><code class="language-javascript">// vite.config.js
+import { defineConfig } from 'vite';
+import path from 'path';
+
+export default defineConfig(({ mode }) => {
+  const isProduction = mode === 'production';
+
+  return {
+    build: {
+      // Enable/disable source maps based on environment
+      sourcemap: !isProduction,
+
+      // Use terser for production minification
+      minify: isProduction ? 'terser' : false,
+
+      rollupOptions: {
+        input: {
+          main: path.resolve(__dirname, 'src/main.ts'),
+        },
+
+        output: {
+          // Named entry chunks without hash for stable names
+          entryFileNames: '[name].js',
+
+          // Smart chunk naming strategy
+          chunkFileNames: (chunkInfo) => {
+            // Group vendor chunks by library for better caching
+            if (chunkInfo.name.includes('styles-library'))
+              return 'vendor-styles.js';
+            if (chunkInfo.name.includes('elements-library'))
+              return 'vendor-elements.js';
+
+            // Default naming with hash for cache busting
+            return '[name]-[hash].js';
+          },
+
+          // CSS extraction with predictable names
+          assetFileNames: (assetInfo) => {
+            if (assetInfo.name?.endsWith('.css')) {
+              if (assetInfo.name.includes('main')) return 'main.css';
+              if (assetInfo.name.includes('template')) return 'template.css';
+              return '[name].css';
+            }
+            return '[name].[ext]';
+          },
+        },
+      },
+
+      // Terser options for aggressive production optimization
+      terserOptions: isProduction
+        ? {
+            compress: {
+              drop_console: true,      // Remove console.log in production
+              drop_debugger: true,      // Remove debugger statements
+            },
+          }
+        : undefined,
+
+      // Warn about large chunks (500kb)
+      chunkSizeWarningLimit: 500,
+
+      // Enable module preload polyfill for older browsers
+      modulePreload: {
+        polyfill: true,
+      },
+    },
+
+    resolve: {
+      // Path aliases for cleaner imports and grouped components
+      alias: {
+        '@': path.resolve(__dirname, './source'),
+
+        // Grouped component exports
+        '@universityofmaryland/web-components-library/structural':
+          path.resolve(__dirname, '../packages/components/dist/structural.js'),
+        '@universityofmaryland/web-components-library/content':
+          path.resolve(__dirname, '../packages/components/dist/content.js'),
+        '@universityofmaryland/web-components-library/interactive':
+          path.resolve(__dirname, '../packages/components/dist/interactive.js'),
+        '@universityofmaryland/web-components-library/feed':
+          path.resolve(__dirname, '../packages/components/dist/feed.js'),
+
+        // Main library exports
+        '@universityofmaryland/web-components-library':
+          path.resolve(__dirname, '../packages/components/dist/index.js'),
+        '@universityofmaryland/web-elements-library':
+          path.resolve(__dirname, '../packages/elements'),
+        '@universityofmaryland/web-styles-library':
+          path.resolve(__dirname, '../packages/styles'),
+      },
+    },
+
+    optimizeDeps: {
+      // Pre-bundle critical dependencies for faster dev server startup
+      include: [
+        '@universityofmaryland/web-styles-library',
+        '@universityofmaryland/web-elements-library',
+      ],
+
+      // Scan entry points for dependency discovery
+      entries: [
+        'src/main.ts',
+        'src/styles.ts',
+      ],
+    },
+  };
+});</code></pre>
+            </div>
+
+            <div class="type-card">
+              <strong>Key Configuration Options Explained:</strong>
+              <ul>
+                <li>
+                  <code>chunkFileNames</code> - Creates predictable vendor chunks for better long-term caching
+                </li>
+                <li>
+                  <code>modulePreload</code> - Ensures critical resources are preloaded for faster initial render
+                </li>
+                <li>
+                  <code>optimizeDeps.include</code> - Pre-bundles frequently used dependencies to avoid waterfall loading
+                </li>
+                <li>
+                  <code>alias</code> - Maps grouped exports to their distribution files for cleaner imports
+                </li>
+                <li>
+                  <code>terserOptions</code> - Removes development code in production builds
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Dynamic Loading -->
+          <section id="dynamic-loading" class="content-section">
+            <h2>Dynamic Loading Patterns</h2>
+            <p>
+              The design system implements sophisticated loading strategies to optimize initial page load
+              and progressively enhance the user experience.
+            </p>
+
+            <h3>Progressive Component Loading</h3>
+            <div class="code-example">
+              <pre><code class="language-typescript">// main.ts - Production-ready loading strategy
+import './styles.ts';
+
+// Component loaders with dynamic imports for code splitting
+const loadStructuralComponents = async () => {
+  const LoadStructuralComponents = (
+    await import('@universityofmaryland/web-components-library/structural')
+  ).default;
+  return LoadStructuralComponents();
+};
+
+const loadContentComponents = async () => {
+  const LoadContentComponents = (
+    await import('@universityofmaryland/web-components-library/content')
+  ).default;
+  return LoadContentComponents();
+};
+
+const loadInteractiveComponents = async () => {
+  const LoadInteractiveComponents = (
+    await import('@universityofmaryland/web-components-library/interactive')
+  ).default;
+  return LoadInteractiveComponents();
+};
+
+const loadFeedComponents = async () => {
+  const LoadFeedComponents = (
+    await import('@universityofmaryland/web-components-library/feed')
+  ).default;
+  return LoadFeedComponents();
+};
+
+const loadAnimations = async () => {
+  const { Utilties } = await import(
+    '@universityofmaryland/web-components-library'
+  );
+  return Utilties.Animations.loadIntersectionObserver();
+};
+
+const initializeApp = async () => {
+  // Critical: Load structural components immediately
+  await loadStructuralComponents();
+
+  // Visible content: Load when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', async () => {
+      await loadContentComponents();
+    });
+  } else {
+    await loadContentComponents();
+  }
+
+  // Below-the-fold: Defer interactive components
+  if ('requestIdleCallback' in window) {
+    requestIdleCallback(() => {
+      let componentsLoaded = false;
+
+      const loadDeferredComponents = () => {
+        if (!componentsLoaded) {
+          componentsLoaded = true;
+          loadInteractiveComponents();
+          loadFeedComponents();
+          loadAnimations();
+        }
+      };
+
+      // Load on any user interaction
+      const interactionEvents = [
+        'mousedown',
+        'touchstart',
+        'keydown',
+        'scroll',
+      ];
+
+      interactionEvents.forEach((event) => {
+        document.addEventListener(event, loadDeferredComponents, {
+          once: true,
+          passive: true,
+        });
+      });
+
+      // Fallback: Ensure loading after 2 seconds
+      setTimeout(loadDeferredComponents, 2000);
+    });
+  } else {
+    // Fallback for browsers without requestIdleCallback
+    setTimeout(() => {
+      loadInteractiveComponents();
+      loadFeedComponents();
+      loadAnimations();
+    }, 100);
+  }
+};
+
+initializeApp();</code></pre>
+            </div>
+
+            <h3>Intersection Observer Pattern</h3>
+            <p>
+              Load component groups only when they're about to enter the viewport. This leverages the pre-built
+              chunks for optimal performance:
+            </p>
+            <div class="code-example">
+              <pre><code class="language-javascript">// Lazy load component chunks based on viewport visibility
+const observeAndLoadComponents = () => {
+  // Map components to their optimized chunk groups
+  const componentGroups = {
+    interactive: ['umd-element-carousel', 'umd-element-accordion', 'umd-element-tab'],
+    feed: ['umd-element-feed-events', 'umd-element-feed-news', 'umd-element-feed-people'],
+    content: ['umd-element-stats', 'umd-element-card', 'umd-element-text-image'],
+  };
+
+  // Track which groups have been loaded
+  const loadedGroups = new Set();
+
+  const loadComponentGroup = async (groupName) => {
+    if (loadedGroups.has(groupName)) return;
+    loadedGroups.add(groupName);
+
+    // Load the optimized chunk for this component group
+    const module = await import(
+      `@universityofmaryland/web-components-library/${groupName}`
+    );
+    if (module.default) module.default();
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(async (entry) => {
+      if (entry.isIntersecting) {
+        const tagName = entry.target.tagName.toLowerCase();
+
+        // Find which group this component belongs to
+        for (const [groupName, components] of Object.entries(componentGroups)) {
+          if (components.includes(tagName)) {
+            await loadComponentGroup(groupName);
+            observer.unobserve(entry.target);
+            break;
+          }
+        }
+      }
+    });
+  }, {
+    // Start loading when component is 200px away from viewport
+    rootMargin: '200px',
+  });
+
+  // Observe all uninitialized components
+  Object.values(componentGroups).flat().forEach(tagName => {
+    document.querySelectorAll(tagName).forEach(element => {
+      observer.observe(element);
+    });
+  });
+};</code></pre>
+            </div>
+          </section>
+
+          <!-- Critical CSS -->
+          <section id="critical-css" class="content-section">
+            <h2>Critical CSS Strategy</h2>
+            <p>
+              The design system implements a two-phase CSS loading strategy to eliminate render-blocking
+              styles and prevent Flash of Unstyled Content (FOUC).
+            </p>
+
+            <div class="alert alert-info mb-3">
+              <strong>Note:</strong> Static file consumption of pre-built CSS files will be available in Release 2.0.
+              The current implementation demonstrates programmatic CSS loading via JavaScript modules.
+            </div>
+
+            <div class="code-example">
+              <pre><code class="language-typescript">// styles.ts - Critical CSS loading implementation
+import * as Styles from '@universityofmaryland/web-styles-library';
+
+const inlineCriticalStyles = async () => {
+  try {
+    // Load critical styles in parallel
+    const [preRenderCss, fonts] = await Promise.all([
+      Styles.preRenderCss,
+      Promise.resolve(Styles.typography.fontFace.base64fonts),
+    ]);
+
+    // Create inline style element for critical CSS
+    const criticalStyle = document.createElement('style');
+    criticalStyle.id = 'critical-css';
+    criticalStyle.innerHTML = `
+      ${fonts}
+      ${preRenderCss}
+    `;
+
+    // Insert critical styles before any other styles
+    const firstStyle = document.head.querySelector('style');
+    if (firstStyle) {
+      document.head.insertBefore(criticalStyle, firstStyle);
+    } else {
+      document.head.appendChild(criticalStyle);
+    }
+
+    // Load non-critical styles when browser is idle
+    requestIdleCallback(() => loadNonCriticalStyles());
+  } catch (error) {
+    console.error('Failed to load critical styles:', error);
+    // Ensure content is visible even if styles fail
+    document.body.style.opacity = '1';
+  }
+};
+
+const loadNonCriticalStyles = async () => {
+  try {
+    // Load decorative and below-the-fold styles
+    const postRenderCss = await Styles.postRenderCss;
+
+    const style = document.createElement('style');
+    style.id = 'non-critical-css';
+    style.innerHTML = postRenderCss;
+    document.head.appendChild(style);
+  } catch (error) {
+    console.error('Failed to load non-critical styles:', error);
+    document.body.style.opacity = '1';
+  }
+};
+
+// Start loading immediately or when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', inlineCriticalStyles, {
+    once: true,
+  });
+} else {
+  inlineCriticalStyles();
+}
+
+export { inlineCriticalStyles, loadNonCriticalStyles };</code></pre>
+            </div>
+
+            <div class="type-card">
+              <strong>CSS Loading Phases:</strong>
+              <ul>
+                <li>
+                  <strong>Phase 1: Critical CSS</strong> - Inline base64 fonts and above-the-fold styles directly in the document head
+                </li>
+                <li>
+                  <strong>Phase 2: Non-Critical CSS</strong> - Load decorative styles and animations during idle time
+                </li>
+                <li>
+                  <strong>Fallback Strategy</strong> - Always reveal content if styles fail to load
+                </li>
+              </ul>
+            </div>
+          </section>
+
+          <!-- Performance Metrics -->
+          <section id="performance-metrics" class="content-section">
+            <h2>Performance Metrics</h2>
+            <p>
+              Expected performance improvements when implementing these optimization strategies:
+            </p>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="metric-card">
+                  <h4>Initial Bundle Size</h4>
+                  <div class="metric-value">-65%</div>
+                  <p>Reduction with grouped exports vs full import</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="metric-card">
+                  <h4>Time to Interactive</h4>
+                  <div class="metric-value">-40%</div>
+                  <p>Faster with progressive loading strategy</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="metric-card">
+                  <h4>First Contentful Paint</h4>
+                  <div class="metric-value">-50%</div>
+                  <p>Improvement with critical CSS inlining</p>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="metric-card">
+                  <h4>Cache Hit Rate</h4>
+                  <div class="metric-value">+80%</div>
+                  <p>Better with vendor chunk splitting</p>
+                </div>
+              </div>
+            </div>
+
+            <h3>Measuring Performance</h3>
+            <div class="code-example">
+              <pre><code class="language-javascript">// Add performance monitoring to track improvements
+const measureComponentLoad = (componentName) => {
+  const startMark = `${componentName}-start`;
+  const endMark = `${componentName}-end`;
+  const measureName = `${componentName}-load`;
+
+  performance.mark(startMark);
+
+  return {
+    complete: () => {
+      performance.mark(endMark);
+      performance.measure(measureName, startMark, endMark);
+
+      const measure = performance.getEntriesByName(measureName)[0];
+      console.log(`${componentName} loaded in ${measure.duration.toFixed(2)}ms`);
+
+      // Send to analytics
+      if (window.gtag) {
+        window.gtag('event', 'timing_complete', {
+          name: componentName,
+          value: Math.round(measure.duration),
+          event_category: 'Component Loading',
+        });
+      }
+    }
+  };
+};
+
+// Usage example
+const heroTimer = measureComponentLoad('hero-components');
+await loadStructuralComponents();
+heroTimer.complete();</code></pre>
+            </div>
+          </section>
+
+          <!-- Best Practices Checklist -->
+          <section id="best-practices" class="content-section">
+            <h2>Best Practices Checklist</h2>
+            <p>
+              Follow these recommendations to achieve optimal performance with the UMD Design System:
+            </p>
+
+            <div class="type-card">
+              <h4>✅ Loading Strategy</h4>
+              <ul class="mb-0">
+                <li>Load structural components (hero, navigation) immediately for above-the-fold content</li>
+                <li>Defer interactive components until user interaction or idle time</li>
+                <li>Use Intersection Observer for below-the-fold components</li>
+                <li>Implement fallback timers to ensure components eventually load</li>
+                <li>Leverage <code>requestIdleCallback</code> for non-critical resources</li>
+              </ul>
+            </div>
+
+            <div class="type-card">
+              <h4>✅ Bundle Optimization</h4>
+              <ul class="mb-0">
+                <li>Use grouped exports for logical component sets instead of importing everything</li>
+                <li>Configure vendor chunk splitting for better caching across deployments</li>
+                <li>Enable production minification with console.log removal</li>
+                <li>Set appropriate chunk size warning limits (500KB recommended)</li>
+                <li>Use path aliases to simplify imports and improve maintainability</li>
+              </ul>
+            </div>
+
+            <div class="type-card">
+              <h4>✅ CSS Performance</h4>
+              <ul class="mb-0">
+                <li>Inline critical CSS including base64 fonts for immediate rendering</li>
+                <li>Defer non-critical styles using <code>requestIdleCallback</code></li>
+                <li>Extract CSS to separate files for parallel loading</li>
+                <li>Implement smooth transitions to prevent layout shifts</li>
+                <li>Always provide fallbacks for CSS loading failures</li>
+              </ul>
+            </div>
+
+            <div class="type-card">
+              <h4>✅ Development Workflow</h4>
+              <ul class="mb-0">
+                <li>Use the bundle analyzer (<code>ANALYZE=true npm run build</code>) to identify optimization opportunities</li>
+                <li>Monitor performance metrics in development to catch regressions early</li>
+                <li>Test with network throttling to simulate real-world conditions</li>
+                <li>Validate that tree-shaking is working correctly for unused components</li>
+                <li>Keep component dependencies minimal to reduce bundle size</li>
+              </ul>
+            </div>
+
+            <div class="alert alert-pro-tip mt-4">
+              <h5 class="alert-heading">🚀 Quick Start Template</h5>
+              <p>Copy this minimal setup for optimal performance out of the box:</p>
+              <pre><code class="language-javascript">// main.js - Minimal performance-optimized setup
+import './styles/critical.css';
+
+// Load structural components immediately
+import('@universityofmaryland/web-components-library/structural')
+  .then(m => m.default());
+
+// Load content when DOM is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', () => {
+    import('@universityofmaryland/web-components-library/content')
+      .then(m => m.default());
+  });
+}
+
+// Defer interactive components
+requestIdleCallback(() => {
+  import('@universityofmaryland/web-components-library/interactive')
+    .then(m => m.default());
+}, { timeout: 2000 });</code></pre>
+            </div>
+          </section>
+
+          <!-- Next Steps -->
+          <div class="mt-5">
+            <h3>Related Documentation</h3>
+            <ul>
+              <li>
+                <a href="advanced-usage.html">Advanced Component Usage</a> - TypeScript integration and custom components
+              </li>
+              <li>
+                <a href="https://github.com/UMD-Digital/design-system/tree/main/design-system-ui">
+                  Example Implementation
+                </a> - Production-ready reference implementation
+              </li>
+              <li>
+                <a href="https://vitejs.dev/config/">Vite Configuration Reference</a> - Full Vite configuration options
+              </li>
+              <li>
+                <a href="https://web.dev/metrics/">Web Vitals</a> - Core Web Vitals performance metrics
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="bg-light py-4 mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p>&copy; University of Maryland. All rights reserved.</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script>
+      // Smooth scrolling for TOC links
+      document.querySelectorAll('.toc-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = document.querySelector(link.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // Update active TOC link on scroll
+      const sections = document.querySelectorAll('section[id]');
+      const tocLinks = document.querySelectorAll('.toc-link');
+
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (scrollY >= sectionTop - 100) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        tocLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

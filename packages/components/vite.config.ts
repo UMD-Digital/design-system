@@ -34,7 +34,7 @@ const getCdnBuildConfig = () => {
       lib: {
         entry: resolve(__dirname, 'source/exports/cdn.ts'),
         name: 'UmdWebComponents',
-        formats: ['iife'],
+        formats: ['iife'] as const,
         fileName: () => 'cdn.js',
       },
       outDir: 'dist',
@@ -43,17 +43,9 @@ const getCdnBuildConfig = () => {
       minify: 'esbuild' as 'esbuild',
       target: 'es2020',
       rollupOptions: {
-        external: [
-          '@universityofmaryland/web-elements-library',
-          '@universityofmaryland/web-styles-library',
-          '@universityofmaryland/web-feeds-library',
-        ],
+        external: [],
         output: {
-          globals: {
-            '@universityofmaryland/web-elements-library': 'UmdWebElements',
-            '@universityofmaryland/web-styles-library': 'UmdWebStyles',
-            '@universityofmaryland/web-feeds-library': 'UmdWebFeeds',
-          },
+          globals: {},
           inlineDynamicImports: true,
         },
       },
@@ -83,12 +75,10 @@ export default defineConfig(({ mode }) => {
       lib: {
         entry: {
           index: resolve(__dirname, 'source/index.ts'),
-
           structural: resolve(__dirname, 'source/exports/structural.ts'),
           interactive: resolve(__dirname, 'source/exports/interactive.ts'),
           feed: resolve(__dirname, 'source/exports/feed.ts'),
           content: resolve(__dirname, 'source/exports/content.ts'),
-
           ...generateComponentEntries(),
         },
         name: 'UmdWebComponents',

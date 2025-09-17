@@ -3,7 +3,59 @@ import path from 'path';
 import dts from 'vite-plugin-dts';
 import checker from 'vite-plugin-checker';
 
-export default defineConfig({
+const getCdnBuildConfig = () => {
+  return {
+    build: {
+      lib: {
+        entry: path.resolve(__dirname, 'source/index.ts'),
+        name: 'Styles',
+        formats: ['iife'] as const,
+        fileName: () => 'cdn.js',
+      },
+      outDir: 'dist',
+      emptyOutDir: false,
+      sourcemap: true,
+      minify: 'esbuild' as 'esbuild',
+      target: 'es2020',
+      rollupOptions: {
+        external: [],
+        output: {
+          globals: {},
+          inlineDynamicImports: true,
+        },
+      },
+    },
+    define: {
+      'process.env.NODE_ENV': JSON.stringify('production'),
+      'process.env': JSON.stringify({}),
+      'process': JSON.stringify({ env: {} })
+    },
+    resolve: {
+      alias: {
+        '@': path.resolve(__dirname, 'source')
+      },
+      extensions: ['.ts', '.js', '.css']
+    },
+    plugins: [],
+    css: {
+      postcss: {
+        plugins: [
+          require('postcss-nesting'),
+          require('postcss-discard-duplicates')
+        ]
+      }
+    }
+  };
+};
+
+export default defineConfig(({ mode }) => {
+  const isCdnBuild = process.env.BUILD_CDN === 'true';
+
+  if (isCdnBuild) {
+    return getCdnBuildConfig();
+  }
+
+  return {
   build: {
     lib: {
       entry: {
@@ -65,4 +117,5 @@ export default defineConfig({
       ]
     }
   }
+  };
 });

@@ -1,4 +1,5 @@
 import { defineConfig } from 'vite';
+import type { Plugin } from 'vite';
 import { resolve } from 'path';
 import { readdirSync, statSync } from 'fs';
 import dts from 'vite-plugin-dts';
@@ -27,25 +28,67 @@ const generateComponentEntries = () => {
   return entries;
 };
 
+const getCdnBuildConfig = () => {
+  return {
+    build: {
+      lib: {
+        entry: resolve(__dirname, 'source/exports/cdn.ts'),
+        name: 'UmdWebComponents',
+        formats: ['iife'],
+        fileName: () => 'cdn.js',
+      },
+      outDir: 'dist',
+      emptyOutDir: false,
+      sourcemap: true,
+      minify: 'esbuild' as 'esbuild',
+      target: 'es2020',
+      rollupOptions: {
+        external: [
+          '@universityofmaryland/web-elements-library',
+          '@universityofmaryland/web-styles-library',
+          '@universityofmaryland/web-feeds-library',
+        ],
+        output: {
+          globals: {
+            '@universityofmaryland/web-elements-library': 'UmdWebElements',
+            '@universityofmaryland/web-styles-library': 'UmdWebStyles',
+            '@universityofmaryland/web-feeds-library': 'UmdWebFeeds',
+          },
+          inlineDynamicImports: true,
+        },
+      },
+    },
+    resolve: {
+      extensions: ['.ts', '.js', '.css'],
+      alias: {
+        model: resolve(__dirname, 'source/model'),
+        utilities: resolve(__dirname, 'source/utilities'),
+      },
+    },
+    plugins: [] as Plugin[],
+  };
+};
+
 export default defineConfig(({ mode }) => {
   const isDevelopment = mode === 'development';
   const isProduction = mode === 'production';
+  const isCdnBuild = process.env.BUILD_CDN === 'true';
+
+  if (isCdnBuild) {
+    return getCdnBuildConfig();
+  }
 
   return {
     build: {
       lib: {
         entry: {
-          // Main bundles
           index: resolve(__dirname, 'source/index.ts'),
-          cdn: resolve(__dirname, 'source/exports/cdn.ts'),
 
-          // Category bundles
           structural: resolve(__dirname, 'source/exports/structural.ts'),
           interactive: resolve(__dirname, 'source/exports/interactive.ts'),
           feed: resolve(__dirname, 'source/exports/feed.ts'),
           content: resolve(__dirname, 'source/exports/content.ts'),
 
-          // Individual component bundles
           ...generateComponentEntries(),
         },
         name: 'UmdWebComponents',

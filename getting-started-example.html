@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My UMD Project</title>
 
-    <!-- Load UMD Components (auto-initializes) -->
+    <!-- Load UMD Components (includes elements and feeds libraries) -->
     <script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/cdn.js"></script>
 
     <!-- Load Companion UMD Styles -->
-    <script src="https://unpkg.com/@universityofmaryland/web-styles-library@latest/dist/umd-styles.js"></script>
+    <script src="https://unpkg.com/@universityofmaryland/web-styles-library/dist/cdn.js"></script>
 
     <script>
       // Styles library pre-render CSS
@@ -127,6 +127,7 @@
     <!-- Styles library post-render CSS -->
     <script>
       window.addEventListener('DOMContentLoaded', () => {
+        console.log(window.Styles);
         if (window.Styles && window.Styles.postRenderCss) {
           window.Styles.postRenderCss.then((css) => {
             const styleSheet = document.createElement('style');

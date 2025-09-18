@@ -1,8 +1,6 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { theme } from 'utilities';
-import { textLockup } from 'atomic';
 import { ElementModel } from 'model';
-import { type PersonTextLockupPropsWithStyles } from '../../_types';
 import { type UMDElement } from '../../../_types';
 
 const smallBreakpoint = Styles.token.media.breakpointValues.small.max;
@@ -103,18 +101,22 @@ export const textContainer = ({
           },
         ),
 
-        ...theme.media.createContainerQuery('min-width', mediumBreakpoint, {
-          paddingTop: Styles.token.spacing.lg,
+        ...theme.media.createContainerQuery(
+          'min-width',
+          mediumBreakpointStart,
+          {
+            paddingTop: Styles.token.spacing.lg,
 
-          ...(hasBorder && {
-            padding: Styles.token.spacing.md,
-          }),
-
-          ...(isThemeDark &&
-            !isTransparent && {
+            ...(hasBorder && {
               padding: Styles.token.spacing.md,
             }),
-        }),
+
+            ...(isThemeDark &&
+              !isTransparent && {
+                padding: Styles.token.spacing.md,
+              }),
+          },
+        ),
 
         ...customStyles,
       },

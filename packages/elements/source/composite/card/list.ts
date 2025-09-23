@@ -69,6 +69,8 @@ const makeImageColumn = ({
           marginBottom: Styles.token.spacing.md,
           width: '120px',
           float: 'right',
+          position: 'relative',
+          zIndex: 99,
 
           ...(isAligned && {
             height: '104px',

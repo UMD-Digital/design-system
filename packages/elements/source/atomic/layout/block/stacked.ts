@@ -28,6 +28,8 @@ export const image = ({
     elementStyles: {
       element: {
         height: 'auto',
+        position: 'relative',
+        zIndex: 99,
 
         // Gif Overwrite
         [`&:has(.${Styles.element.asset.gif.toggle.className})`]: {

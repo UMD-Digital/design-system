@@ -189,6 +189,7 @@ const createText = (props: HeroStandardProps) => {
     isTextCenter = false,
     isHeightSmall = false,
     includesAnimation,
+    isThemeDark,
   } = props;
 
   const text = textLockup.large({
@@ -264,7 +265,7 @@ const createText = (props: HeroStandardProps) => {
 };
 
 export default (props: HeroStandardProps) => {
-  const { isHeightSmall } = props;
+  const { isHeightSmall, isThemeDark } = props;
   const asset = createAsset(props);
   const text = createText(props);
 
@@ -276,6 +277,11 @@ export default (props: HeroStandardProps) => {
         position: 'relative',
         overflow: 'hidden',
         containerType: 'inline-size',
+
+        ...(isThemeDark && {
+          backgroundColor: Styles.token.color.black,
+        }),
+
         [`@container (${Styles.token.media.queries.tablet.min})`]: {
           ...(!isHeightSmall && {
             height: '75vh',
@@ -291,8 +297,10 @@ export default (props: HeroStandardProps) => {
       },
       subElement: {
         [`@container (${Styles.token.media.queries.large.max})`]: {
-          ['*']: {
-            color: `${Styles.token.color.black} !important`,
+          [`*:not(.${Styles.element.asset.image.caption.className})`]: {
+            ...(!isThemeDark && {
+              color: `${Styles.token.color.black} !important`,
+            }),
           },
         },
       },

@@ -1,6 +1,9 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Lifecycle, Slots, Register } from 'model';
-import type { CreateComponentFunction, ComponentRegistration } from '../../_types';
+import type {
+  CreateComponentFunction,
+  ComponentRegistration,
+} from '../../_types';
 
 /**
  * Tag name for the base hero component
@@ -87,6 +90,7 @@ const createComponent: CreateComponentFunction = (element) => {
     return Composite.hero.standard({
       ...makeSlots({ element }),
       isHeightSmall: true,
+      isThemeDark,
       includesAnimation,
     });
   }
@@ -109,6 +113,7 @@ const createComponent: CreateComponentFunction = (element) => {
     ...makeSlots({ element }),
     isHeightSmall: Attributes.isLayout.heightSmall({ element }) || false,
     isTextCenter: Attributes.isLayout.textCentered({ element }) || false,
+    isThemeDark,
     includesAnimation,
   });
 };

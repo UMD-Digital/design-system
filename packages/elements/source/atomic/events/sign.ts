@@ -1,3 +1,4 @@
+import Styles from '@universityofmaryland/web-styles-library';
 import { ElementModel } from 'model';
 import { ElementVisual } from '../../_types';
 
@@ -62,6 +63,11 @@ const makeStartDateBlock = ({
 }) =>
   ElementModel.createParagraph({
     className: 'event-sign-start',
+    elementStyles: {
+      subElement: {
+        color: Styles.token.color.black,
+      },
+    },
     children: [
       makeDateElement({
         element: startMonth,

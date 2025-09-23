@@ -92,6 +92,13 @@ const createAsset = ({
     children,
     elementStyles: {
       element: {
+        [`@media (${Styles.token.media.queries.large.max})`]: {
+          [`&:has(.${Styles.element.asset.gif.toggle.className})`]: {
+            minHeight: '56vw',
+            display: 'grid',
+          },
+        },
+
         [`@container (${Styles.token.media.queries.tablet.min})`]: {
           position: 'absolute',
           width: '60%',

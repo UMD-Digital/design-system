@@ -1,6 +1,6 @@
 # University of Maryland Web Components Library
 
-[![Components Version](https://img.shields.io/badge/Components-v1.14.21-blue)](https://www.npmjs.com/package/@universityofmaryland/web-components-library)
+[![Components Version](https://img.shields.io/badge/Components-v1.15.0-beta.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-components-library)
 
 High-level web components built on the UMD Elements Library, providing feature-rich, accessible, and brand-compliant UI components for University of Maryland digital experiences.
 
@@ -32,18 +32,10 @@ npm install @universityofmaryland/web-elements-library
 ### Load All Components
 
 ```javascript
-// Option 1: Import from bundle (includes all packages)
-import { initializeBundle } from '@universityofmaryland/web-components-library/bundle';
+import LoadUmdComponents from '@universityofmaryland/web-components-library';
 
 // Initialize all components
-initializeBundle();
-
-// Option 2: Import specific component groups for better performance
-import LoadStructuralComponents from '@universityofmaryland/web-components-library/structural';
-import LoadContentComponents from '@universityofmaryland/web-components-library/content';
-
-LoadStructuralComponents(); // Hero, navigation, actions
-LoadContentComponents();    // Cards, text, media, stats
+LoadUmdComponents();
 ```
 
 ### Load Specific Components (Recommended)

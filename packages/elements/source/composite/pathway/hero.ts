@@ -96,6 +96,7 @@ const createAssetColumn = ({
         element: image,
         isScaled: true,
         isShowCaption: true,
+        isGifAllowed: true,
       }),
     );
   }

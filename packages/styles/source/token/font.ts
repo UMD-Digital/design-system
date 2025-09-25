@@ -37,7 +37,7 @@ export const size = {
   '2xl': '22px',
   '3xl': '24px',
   '4xl': '32px',
-  '5xl': '48px',
+  '5xl': '44px',
   '6xl': '56px',
   '7xl': '64px',
   '8xl': '72px',

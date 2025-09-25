@@ -39,7 +39,7 @@ exports[`typography/sans fonts objects should match snapshot for all fonts objec
   },
   "largest": {
     "@media (min-width: 1024px)": {
-      "fontSize": "48px",
+      "fontSize": "44px",
       "lineHeight": "1.04em",
     },
     "@media (min-width: 650px)": {
@@ -189,7 +189,7 @@ exports[`typography/sans should match snapshot 1`] = `
     },
     "largest": {
       "@media (min-width: 1024px)": {
-        "fontSize": "48px",
+        "fontSize": "44px",
         "lineHeight": "1.04em",
       },
       "@media (min-width: 650px)": {
@@ -269,7 +269,7 @@ exports[`typography/sans should match snapshot 1`] = `
   },
   "largest": {
     "@media (min-width: 1024px)": {
-      "fontSize": "48px",
+      "fontSize": "44px",
       "lineHeight": "1.04em",
     },
     "@media (min-width: 650px)": {
@@ -433,7 +433,7 @@ exports[`typography/sans should match snapshot 1`] = `
     },
     "largestUppercase": {
       "@media (min-width: 1024px)": {
-        "fontSize": "48px",
+        "fontSize": "44px",
         "lineHeight": "1.04em",
       },
       "@media (min-width: 650px)": {
@@ -454,7 +454,7 @@ exports[`typography/sans should match snapshot 1`] = `
 exports[`typography/sans size objects should have correctly defined size values 1`] = `
 {
   "@media (min-width: 1024px)": {
-    "fontSize": "48px",
+    "fontSize": "44px",
     "lineHeight": "1.04em",
   },
   "@media (min-width: 650px)": {
@@ -612,7 +612,7 @@ exports[`typography/sans transformations should match snapshot for all transform
   },
   "largestUppercase": {
     "@media (min-width: 1024px)": {
-      "fontSize": "48px",
+      "fontSize": "44px",
       "lineHeight": "1.04em",
     },
     "@media (min-width: 650px)": {

@@ -5,7 +5,7 @@ exports[`typography module should match snapshot 1`] = `
   "campaign": {
     "CampaignSmall": {
       "@media (min-width: 1024px)": {
-        "fontSize": "48px",
+        "fontSize": "44px",
         "letterSpacing": "0.02em",
         "lineHeight": "0.91em",
       },
@@ -33,10 +33,10 @@ exports[`typography module should match snapshot 1`] = `
         "lineHeight": "0.91em",
       },
       "@media (min-width: 650px)": {
-        "fontSize": "calc(48px + 4vw)",
+        "fontSize": "calc(44px + 4vw)",
       },
       "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
-      "fontSize": "48px",
+      "fontSize": "44px",
       "fontStyle": "italic",
       "fontWeight": "700",
       "letterSpacing": "0.02em",
@@ -50,11 +50,11 @@ exports[`typography module should match snapshot 1`] = `
           "lineHeight": "0.91em",
         },
         "@media (min-width: 650px)": {
-          "fontSize": "calc(48px + 4vw)",
+          "fontSize": "calc(44px + 4vw)",
         },
         "className": "umd-campaign-extralarge",
         "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
-        "fontSize": "48px",
+        "fontSize": "44px",
         "fontStyle": "italic",
         "fontWeight": "700",
         "letterSpacing": "0.02em",
@@ -76,11 +76,11 @@ exports[`typography module should match snapshot 1`] = `
           "lineHeight": "0.91em",
         },
         "@media (min-width: 650px)": {
-          "fontSize": "calc(48px + 2.66vw)",
+          "fontSize": "calc(44px + 2.66vw)",
         },
         "className": "umd-campaign-large",
         "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
-        "fontSize": "48px",
+        "fontSize": "44px",
         "fontStyle": "italic",
         "fontWeight": "700",
         "letterSpacing": "0.02em",
@@ -97,7 +97,7 @@ exports[`typography module should match snapshot 1`] = `
         },
         "className": "umd-campaign-maximum",
         "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
-        "fontSize": "48px",
+        "fontSize": "44px",
         "fontStyle": "italic",
         "fontWeight": "700",
         "letterSpacing": "0.02em",
@@ -111,11 +111,11 @@ exports[`typography module should match snapshot 1`] = `
           "lineHeight": "0.94em",
         },
         "@media (min-width: 650px)": {
-          "fontSize": "calc(48px + 1.33vw)",
+          "fontSize": "calc(44px + 1.33vw)",
         },
         "className": "umd-campaign-medium",
         "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
-        "fontSize": "48px",
+        "fontSize": "44px",
         "fontStyle": "italic",
         "fontWeight": "700",
         "letterSpacing": "0.02em",
@@ -124,7 +124,7 @@ exports[`typography module should match snapshot 1`] = `
       },
       "small": {
         "@media (min-width: 1024px)": {
-          "fontSize": "48px",
+          "fontSize": "44px",
           "letterSpacing": "0.02em",
           "lineHeight": "0.91em",
         },
@@ -146,10 +146,10 @@ exports[`typography module should match snapshot 1`] = `
         "lineHeight": "0.91em",
       },
       "@media (min-width: 650px)": {
-        "fontSize": "calc(48px + 2.66vw)",
+        "fontSize": "calc(44px + 2.66vw)",
       },
       "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
-      "fontSize": "48px",
+      "fontSize": "44px",
       "fontStyle": "italic",
       "fontWeight": "700",
       "letterSpacing": "0.02em",
@@ -165,7 +165,7 @@ exports[`typography module should match snapshot 1`] = `
         "fontSize": "calc(80px + 2vw)",
       },
       "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
-      "fontSize": "48px",
+      "fontSize": "44px",
       "fontStyle": "italic",
       "fontWeight": "700",
       "letterSpacing": "0.02em",
@@ -179,10 +179,10 @@ exports[`typography module should match snapshot 1`] = `
         "lineHeight": "0.94em",
       },
       "@media (min-width: 650px)": {
-        "fontSize": "calc(48px + 1.33vw)",
+        "fontSize": "calc(44px + 1.33vw)",
       },
       "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
-      "fontSize": "48px",
+      "fontSize": "44px",
       "fontStyle": "italic",
       "fontWeight": "700",
       "letterSpacing": "0.02em",
@@ -638,7 +638,7 @@ exports[`typography module should match snapshot 1`] = `
       },
       "largest": {
         "@media (min-width: 1024px)": {
-          "fontSize": "48px",
+          "fontSize": "44px",
           "lineHeight": "1.04em",
         },
         "@media (min-width: 650px)": {
@@ -718,7 +718,7 @@ exports[`typography module should match snapshot 1`] = `
     },
     "largest": {
       "@media (min-width: 1024px)": {
-        "fontSize": "48px",
+        "fontSize": "44px",
         "lineHeight": "1.04em",
       },
       "@media (min-width: 650px)": {
@@ -882,7 +882,7 @@ exports[`typography module should match snapshot 1`] = `
       },
       "largestUppercase": {
         "@media (min-width: 1024px)": {
-          "fontSize": "48px",
+          "fontSize": "44px",
           "lineHeight": "1.04em",
         },
         "@media (min-width: 650px)": {

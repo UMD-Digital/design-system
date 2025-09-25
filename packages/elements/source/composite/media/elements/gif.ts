@@ -13,6 +13,14 @@ export default ({ image }: { image: HTMLImageElement }) => {
     if (containerWidth > 0) {
       const calculatedHeight = Math.round(containerWidth * aspectRatio);
       container.style.height = `${calculatedHeight}px`;
+    } else {
+      container.style.width = `${image.naturalWidth}px`;
+
+      setTimeout(() => {
+        const containerWidth = container.offsetWidth;
+        const calculatedHeight = Math.round(containerWidth * aspectRatio);
+        container.style.height = `${calculatedHeight}px`;
+      }, 100);
     }
   };
 

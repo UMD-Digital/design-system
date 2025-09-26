@@ -110,7 +110,7 @@ export const createAssetContent = (
     'dateSign' | 'image' | 'video' | 'isImageScaled'
   >,
 ) => {
-  const { dateSign, image, video, isImageScaled } = props;
+  const { dateSign, image, video, isImageScaled = true } = props;
   const children = [];
 
   if (video) {

@@ -562,12 +562,6 @@ const isLayout = {
       defaultValue: false,
     }),
   imageScaled: (props: AttributeElementProps): boolean =>
-    checkDeprecatedAttribute({
-      ...props,
-      attributeNameOld: AttributeNames.deprecated.layout.LAYOUT_IMAGE_SCALED,
-      attributeNameNew: AttributeNames.layout.imageScaled,
-      attributeValue: AttributesValues.state.TRUE,
-    }) ||
     isAttributeTrue({
       ...props,
       attributeName: AttributeNames.layout.imageScaled,

@@ -277,16 +277,31 @@ npm install @universityofmaryland/web-components-library
 npm install @universityofmaryland/web-styles-library</code></pre>
 
             <p>Then in your JavaScript:</p>
-            <pre><code>import LoadUmdComponents from '@universityofmaryland/web-components-library';
-import '@universityofmaryland/web-styles-library';
+            <pre><code>// Option 1: Code splitting for optimal performance (Recommended)
+// Import only the component groups you need
+import LoadStructuralComponents from '@universityofmaryland/web-components-library/structural';
+import LoadContentComponents from '@universityofmaryland/web-components-library/content';
 
-// Initialize all components
-LoadUmdComponents();
+// Initialize only the components you're using
+LoadStructuralComponents(); // Hero, navigation, actions
+LoadContentComponents();    // Cards, text, media, stats
+</code></pre>
+            <p class="mt-2 mb-3">
+              <a href="components/advanced-bundling.html">→ See the Performance Best Practices guide for complete code splitting patterns</a>
+            </p>
+            <pre><code>// Option 2: Import the complete bundle (all packages included)
+// Method A: Import the entire bundle object
+import UmdBundle from '@universityofmaryland/web-components-library/bundle';
 
-// If using the styles package programmatically
-import { Styles } from '@universityofmaryland/web-styles-library';
+UmdBundle.init(); // Initialize all components
+const { Styles } = UmdBundle; // Access packages from the bundle
 
-// Apply pre-render styles
+// Method B: Import specific exports from the bundle
+import { initializeBundle, Styles } from '@universityofmaryland/web-components-library/bundle';
+
+initializeBundle(); // Initialize all components
+
+// Both methods: Apply pre-render styles
 Styles.preRenderCss.then(css => {
   const styleElement = document.createElement('style');
   styleElement.textContent = css;

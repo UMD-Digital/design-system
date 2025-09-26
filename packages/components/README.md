@@ -32,10 +32,18 @@ npm install @universityofmaryland/web-elements-library
 ### Load All Components
 
 ```javascript
-import LoadUmdComponents from '@universityofmaryland/web-components-library';
+// Option 1: Import from bundle (includes all packages)
+import { initializeBundle } from '@universityofmaryland/web-components-library/bundle';
 
 // Initialize all components
-LoadUmdComponents();
+initializeBundle();
+
+// Option 2: Import specific component groups for better performance
+import LoadStructuralComponents from '@universityofmaryland/web-components-library/structural';
+import LoadContentComponents from '@universityofmaryland/web-components-library/content';
+
+LoadStructuralComponents(); // Hero, navigation, actions
+LoadContentComponents();    // Cards, text, media, stats
 ```
 
 ### Load Specific Components (Recommended)

@@ -158,15 +158,19 @@ npm install @universityofmaryland/web-elements-library</code></pre>
 
         <h3>Basic Setup</h3>
         <div class="code-example">
-          <pre><code>// Option 1: Load all components (simple but larger bundle)
-import LoadUmdComponents from '@universityofmaryland/web-components-library';
-LoadUmdComponents();
+          <pre><code>// Option 1: Load all components from bundle (simple but larger)
+import { initializeBundle } from '@universityofmaryland/web-components-library/bundle';
+initializeBundle();
 
-// Option 2: Load specific components (recommended)
-import { Components } from '@universityofmaryland/web-components-library';
-Components.hero.base();
-Components.card.standard();
-Components.navigation.primary();</code></pre>
+// Option 2: Load specific components (recommended for optimal tree-shaking)
+import * as accordionComponents from '@universityofmaryland/web-components-library/components/accordion';
+import * as cardComponents from '@universityofmaryland/web-components-library/components/card';
+import * as heroComponents from '@universityofmaryland/web-components-library/components/hero';
+
+// Register only the component variants you need
+accordionComponents.item();
+cardComponents.standard();
+heroComponents.base();</code></pre>
         </div>
       </section>
 

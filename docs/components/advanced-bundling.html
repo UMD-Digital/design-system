@@ -178,6 +178,16 @@
                 <em>Note: Grouped exports (structural, content, interactive, feed) were introduced in Release 1.14.0.</em>
               </small>
             </p>
+
+            <div class="alert alert-info mt-3">
+              <strong>📦 Alternative Loading Methods:</strong> While this guide focuses on performance optimization through code splitting,
+              simpler options are available for prototyping and development:
+              <ul class="mb-0 mt-2">
+                <li><strong>CDN Usage</strong> - Quick setup via unpkg for prototypes (see <a href="../getting-started.html">Getting Started</a>)</li>
+                <li><strong>Bundle Import</strong> - Single import with all packages included via <code>@universityofmaryland/web-components-library/bundle</code></li>
+              </ul>
+              For production applications, we recommend the code splitting approaches detailed below.
+            </div>
           </section>
 
           <!-- Export Strategy -->
@@ -258,6 +268,23 @@ if (document.querySelector('[class*="umd-element-hero"]')) {
 }</code></pre>
             </div>
 
+            <h3>Bundle Import with Tree-Shaking</h3>
+            <p>
+              Even when using the bundle import, you can still benefit from tree-shaking by importing specific components:
+            </p>
+            <div class="code-example">
+              <pre><code class="language-javascript">// Import specific components from the bundle for tree-shaking
+import { Components, Styles } from '@universityofmaryland/web-components-library/bundle';
+
+// Register only the components you need
+Components.card.standard();
+Components.hero.base();
+Components.navigation.primary();
+
+// The bundler will tree-shake unused components from Elements, Feeds, etc.
+// This gives you the convenience of a single import path with optimized output</code></pre>
+            </div>
+
             <h3>Export Strategy Comparison</h3>
             <table class="comparison-table">
               <thead>
@@ -285,9 +312,16 @@ if (document.querySelector('[class*="umd-element-hero"]')) {
                   <td>Production apps with specific needs</td>
                 </tr>
                 <tr>
-                  <td><strong>Full Import</strong></td>
+                  <td><strong>Bundle + Tree-shaking</strong></td>
+                  <td>Small (with proper imports)</td>
+                  <td>Good (when destructured)</td>
+                  <td>Simple imports</td>
+                  <td>Apps wanting single import path</td>
+                </tr>
+                <tr>
+                  <td><strong>Full Bundle Init</strong></td>
                   <td>Largest</td>
-                  <td>Limited</td>
+                  <td>None</td>
                   <td>Quickest</td>
                   <td>Prototypes and development only</td>
                 </tr>

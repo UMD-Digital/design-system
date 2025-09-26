@@ -1,20 +1,58 @@
 import { defineConfig } from 'vite';
-import type { Plugin } from 'vite';
+import type { Plugin, LibraryFormats } from 'vite';
 import { resolve } from 'path';
 import { readdirSync, statSync } from 'fs';
 import dts from 'vite-plugin-dts';
 import checker from 'vite-plugin-checker';
 
+const SOURCE_DIR = resolve(__dirname, 'source');
+const DIST_DIR = 'dist';
+const BUILD_TARGET = 'es2020';
+const DEV_TARGET = 'esnext';
+
+const EXTERNAL_DEPS = [
+  '@universityofmaryland/web-elements-library',
+  '@universityofmaryland/web-styles-library',
+  '@universityofmaryland/web-feeds-library',
+];
+
+const PATH_ALIASES = {
+  model: resolve(SOURCE_DIR, 'model'),
+  utilities: resolve(SOURCE_DIR, 'utilities'),
+};
+
+const DTS_COMMON_OPTIONS = {
+  outDir: DIST_DIR,
+  exclude: [
+    'node_modules/**',
+    '**/node_modules/**',
+    '**/__tests__/**',
+    '**/*.test.ts',
+    '**/test-helpers/**',
+  ],
+  compilerOptions: {
+    skipLibCheck: true,
+    skipDefaultLibCheck: true,
+    declaration: true,
+    declarationMap: true,
+    emitDeclarationOnly: true,
+    rootDir: 'source',
+    baseUrl: 'source',
+    paths: {
+      model: ['./model'],
+      utilities: ['./utilities'],
+    },
+  },
+};
+
+// Generate entries for individual components
 const generateComponentEntries = () => {
-  const apiDir = resolve(__dirname, 'source/api');
+  const apiDir = resolve(SOURCE_DIR, 'api');
   const entries: Record<string, string> = {};
-  const items = readdirSync(apiDir);
 
-  items.forEach((item) => {
+  readdirSync(apiDir).forEach((item) => {
     const itemPath = resolve(apiDir, item);
-    const stats = statSync(itemPath);
-
-    if (stats.isDirectory() && !item.startsWith('__')) {
+    if (statSync(itemPath).isDirectory() && !item.startsWith('__')) {
       const indexPath = resolve(itemPath, 'index.ts');
       try {
         statSync(indexPath);
@@ -28,76 +66,133 @@ const generateComponentEntries = () => {
   return entries;
 };
 
-const getCdnBuildConfig = () => {
-  return {
-    build: {
-      lib: {
-        entry: resolve(__dirname, 'source/exports/cdn.ts'),
-        name: 'UmdWebComponents',
-        formats: ['iife'] as const,
-        fileName: () => 'cdn.js',
-      },
-      outDir: 'dist',
-      emptyOutDir: false,
-      sourcemap: true,
-      minify: 'esbuild' as 'esbuild',
-      target: 'es2020',
-      rollupOptions: {
-        external: [],
-        output: {
-          globals: {},
-          inlineDynamicImports: true,
-        },
-      },
+// Create base build configuration shared across special builds
+const createSpecialBuildConfig = (
+  entry: string,
+  name: string,
+  format: LibraryFormats,
+  fileName: string,
+  plugins: Plugin[] = [],
+) => ({
+  build: {
+    lib: {
+      entry: resolve(SOURCE_DIR, entry),
+      name,
+      formats: [format],
+      fileName: () => fileName,
     },
-    resolve: {
-      extensions: ['.ts', '.js', '.css'],
-      alias: {
-        model: resolve(__dirname, 'source/model'),
-        utilities: resolve(__dirname, 'source/utilities'),
-      },
+    outDir: DIST_DIR,
+    emptyOutDir: false,
+    sourcemap: true,
+    minify: 'esbuild' as const,
+    target: BUILD_TARGET,
+    rollupOptions: {
+      external: format === 'iife' ? [] : [],
+      output:
+        format === 'iife'
+          ? { globals: {}, inlineDynamicImports: true }
+          : { inlineDynamicImports: true },
     },
-    plugins: [] as Plugin[],
-  };
+  },
+  resolve: {
+    extensions: ['.ts', '.js', '.css'],
+    alias: PATH_ALIASES,
+  },
+  plugins,
+});
+
+// CDN build configuration (IIFE format for browser)
+const getCdnBuildConfig = () =>
+  createSpecialBuildConfig(
+    'exports/cdn.ts',
+    'UmdWebComponents',
+    'iife',
+    'cdn.js',
+  );
+
+const getBundleBuildConfig = () => {
+  const bundleDtsPlugin = dts({
+    ...DTS_COMMON_OPTIONS,
+    insertTypesEntry: false,
+    rollupTypes: false,
+    include: ['source/**/*.ts'],
+    afterBuild: async () => {
+      const fs = await import('fs');
+      const path = await import('path');
+      const sourcePath = path.resolve(__dirname, 'dist/exports/bundle.d.ts');
+      const destPath = path.resolve(__dirname, 'dist/bundle.d.ts');
+
+      if (fs.existsSync(sourcePath)) {
+        let content = fs.readFileSync(sourcePath, 'utf-8');
+        content = content
+          .replace(/from '\.\.\/api'/g, "from './api'")
+          .replace(/from '\.\.\/utilities'/g, "from './utilities'");
+        fs.writeFileSync(destPath, content);
+
+        const sourceMapPath = `${sourcePath}.map`;
+        const destMapPath = `${destPath}.map`;
+        if (fs.existsSync(sourceMapPath)) {
+          fs.copyFileSync(sourceMapPath, destMapPath);
+        }
+      }
+    },
+  });
+
+  return createSpecialBuildConfig(
+    'exports/bundle.ts',
+    'UmdBundle',
+    'es',
+    'bundle.js',
+    [bundleDtsPlugin],
+  );
 };
 
-export default defineConfig(({ mode }) => {
+// Main export entries for standard build
+const MAIN_ENTRIES = {
+  index: 'index.ts',
+  structural: 'exports/structural.ts',
+  interactive: 'exports/interactive.ts',
+  feed: 'exports/feed.ts',
+  content: 'exports/content.ts',
+};
+
+const createWarningHandler = () => (warning: any, warn: any) => {
+  const ignoredCodes = ['UNUSED_EXTERNAL_IMPORT', 'THIS_IS_UNDEFINED', 'EVAL'];
+  if (!ignoredCodes.includes(warning.code)) {
+    warn(warning);
+  }
+};
+
+export default defineConfig((configEnv) => {
+  const { mode } = configEnv;
   const isDevelopment = mode === 'development';
   const isProduction = mode === 'production';
-  const isCdnBuild = process.env.BUILD_CDN === 'true';
 
-  if (isCdnBuild) {
-    return getCdnBuildConfig();
-  }
+  // Check for special build modes
+  if (process.env.BUILD_CDN === 'true') return getCdnBuildConfig();
+  if (process.env.BUILD_BUNDLE === 'true') return getBundleBuildConfig();
+
+  // Standard build configuration
+  const buildEntries = Object.entries(MAIN_ENTRIES).reduce(
+    (acc, [key, path]) => ({ ...acc, [key]: resolve(SOURCE_DIR, path) }),
+    generateComponentEntries(),
+  );
 
   return {
     build: {
       lib: {
-        entry: {
-          index: resolve(__dirname, 'source/index.ts'),
-          structural: resolve(__dirname, 'source/exports/structural.ts'),
-          interactive: resolve(__dirname, 'source/exports/interactive.ts'),
-          feed: resolve(__dirname, 'source/exports/feed.ts'),
-          content: resolve(__dirname, 'source/exports/content.ts'),
-          ...generateComponentEntries(),
-        },
+        entry: buildEntries,
         name: 'UmdWebComponents',
-        formats: ['es'],
-        fileName: (_format, entryName) => {
-          return `${entryName}.js`;
-        },
+        formats: ['es'] as LibraryFormats[],
+        fileName: (_format, entryName) => `${entryName}.js`,
       },
-      outDir: 'dist',
+      outDir: DIST_DIR,
       emptyOutDir: true,
       sourcemap: isDevelopment ? 'inline' : true,
       minify: isDevelopment ? false : 'esbuild',
-      target: isDevelopment ? 'esnext' : 'es2020',
+      target: isDevelopment ? DEV_TARGET : BUILD_TARGET,
       rollupOptions: {
-        external: [
-          '@universityofmaryland/web-elements-library',
-          '@universityofmaryland/web-styles-library',
-          '@universityofmaryland/web-feeds-library',
-        ],
+        external: EXTERNAL_DEPS,
         output: {
           globals: {
             '@universityofmaryland/web-elements-library': 'UmdWebElements',
@@ -107,30 +202,18 @@ export default defineConfig(({ mode }) => {
           preserveModules: false,
           exports: 'named',
           manualChunks: (id) => {
-            if (id.includes('/utilities/')) {
-              return 'shared/utilities';
-            }
-            if (id.includes('/model/')) {
-              return 'shared/model';
-            }
-            if (id.includes('/_types')) {
-              return 'shared/types';
-            }
+            if (id.includes('/utilities/')) return 'shared/utilities';
+            if (id.includes('/model/')) return 'shared/model';
+            if (id.includes('/_types')) return 'shared/types';
           },
           chunkFileNames: (chunkInfo) => {
-            const names = chunkInfo.name.split('-');
-            if (names[0] === 'shared') {
-              return 'shared/[name]-[hash].js';
-            }
-            return '[name]-[hash].js';
+            const [prefix] = chunkInfo.name.split('-');
+            return prefix === 'shared'
+              ? 'shared/[name]-[hash].js'
+              : '[name]-[hash].js';
           },
         },
-        onwarn(warning, warn) {
-          if (warning.code === 'UNUSED_EXTERNAL_IMPORT') return;
-          if (warning.code === 'THIS_IS_UNDEFINED') return;
-          if (warning.code === 'EVAL') return;
-          warn(warning);
-        },
+        onwarn: createWarningHandler(),
       },
       cssCodeSplit: true,
       cssMinify: true,
@@ -138,51 +221,23 @@ export default defineConfig(({ mode }) => {
     logLevel: 'warn',
     resolve: {
       extensions: ['.ts', '.js', '.css'],
-      alias: {
-        model: resolve(__dirname, 'source/model'),
-        utilities: resolve(__dirname, 'source/utilities'),
-      },
+      alias: PATH_ALIASES,
     },
     css: {
       modules: false,
-      postcss: {
-        plugins: [],
-      },
+      postcss: { plugins: [] },
     },
     plugins: [
       checker({
         typescript: true,
-        overlay: {
-          initialIsOpen: false,
-          position: 'br',
-        },
+        overlay: { initialIsOpen: false, position: 'br' },
         terminal: true,
         enableBuild: true,
       }),
       dts({
-        outDir: 'dist',
+        ...DTS_COMMON_OPTIONS,
         insertTypesEntry: true,
         rollupTypes: false,
-        exclude: [
-          'node_modules/**',
-          '**/node_modules/**',
-          '**/__tests__/**',
-          '**/*.test.ts',
-          '**/test-helpers/**',
-        ],
-        compilerOptions: {
-          skipLibCheck: true,
-          skipDefaultLibCheck: true,
-          declaration: true,
-          declarationMap: true,
-          emitDeclarationOnly: true,
-          rootDir: 'source',
-          baseUrl: 'source',
-          paths: {
-            model: ['./model'],
-            utilities: ['./utilities'],
-          },
-        },
         logLevel: 'silent',
         copyDtsFiles: true,
         staticImport: true,
@@ -193,7 +248,7 @@ export default defineConfig(({ mode }) => {
       open: false,
     },
     esbuild: {
-      target: isDevelopment ? 'esnext' : 'es2020',
+      target: isDevelopment ? DEV_TARGET : BUILD_TARGET,
       format: 'esm',
       keepNames: isDevelopment,
     },

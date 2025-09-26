@@ -16,6 +16,11 @@
       "import": "./dist/cdn.js",
       "require": "./dist/cdn.js"
     },
+    "./bundle": {
+      "types": "./dist/bundle.d.ts",
+      "import": "./dist/bundle.js",
+      "require": "./dist/bundle.js"
+    },
     "./structural": {
       "types": "./dist/structural.d.ts",
       "import": "./dist/structural.js",
@@ -52,8 +57,9 @@
     "docs": "npx typedoc --options ./typedoc.json",
     "prebuild": "node ../../source/update-badges.js",
     "release": "npm run test && npm run build && npm publish --access public",
-    "build": "vite build --mode production && npm run build:cdn",
     "build:cdn": "BUILD_CDN=true vite build --mode production",
+    "build:bundle": "BUILD_BUNDLE=true vite build --mode production",
+    "build": "vite build --mode production && npm run build:cdn && npm run build:bundle",
     "vite": "vite build --mode development --watch",
     "start": "npm run vite",
     "preview": "vite preview",

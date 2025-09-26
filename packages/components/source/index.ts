@@ -31,7 +31,6 @@
  */
 import * as umdComponents from './api';
 import * as umdUtilities from './utilities';
-import { loadComponentClass, ComponentMap } from './exports/loader';
 
 // Export all types from the root _types file
 export type {
@@ -77,31 +76,21 @@ export type {
 } from './_types';
 
 // Export model types
-export type {
-  SlotProps,
-  BaseProps,
-  OptionalProps,
-  SlotResult,
-} from './model';
-
-const allList = umdComponents as unknown as ComponentMap;
+export type { SlotProps, BaseProps, OptionalProps, SlotResult } from './model';
 
 /**
- * Registers all UMD web components with the browser.
- * Also initializes the intersection observer for animations.
- *
- * @example
+ * @deprecated This function is deprecated and will be removed in version 2.0.
+ * Use the bundle export instead:
  * ```typescript
- * import LoadUmdComponents from '@universityofmaryland/web-components-library';
- *
- * // Register all components when DOM is ready
- * document.addEventListener('DOMContentLoaded', () => {
- *   LoadUmdComponents();
- * });
+ * import { initializeBundle } from '@universityofmaryland/web-components-library/bundle';
+ * initializeBundle();
  * ```
  */
 const LoadUmdComponents = () => {
-  loadComponentClass(allList);
+  console.error(
+    '[DEPRECATED] LoadUmdComponents is deprecated.\n' +
+      'Use: import { initializeBundle } from "@universityofmaryland/web-components-library/bundle"',
+  );
 };
 
 /**

@@ -1,6 +1,6 @@
 # University of Maryland Design System
 
-[![Components Version](https://img.shields.io/badge/Components-v1.14.11-blue)](https://www.npmjs.com/package/@universityofmaryland/web-components-library)
+[![Components Version](https://img.shields.io/badge/Components-v1.14.12-blue)](https://www.npmjs.com/package/@universityofmaryland/web-components-library)
 [![Elements Version](https://img.shields.io/badge/Elements-v1.4.2-blue)](https://www.npmjs.com/package/@universityofmaryland/web-elements-library)
 [![Feeds Version](https://img.shields.io/badge/Feeds-v1.1.1-blue)](https://www.npmjs.com/package/@universityofmaryland/web-feeds-library)
 [![Styles Version](https://img.shields.io/badge/Styles-v1.6.2-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)

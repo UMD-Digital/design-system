@@ -219,7 +219,7 @@ const createLock = (props: PathwayStandardProps) => {
           display: 'grid',
           gridTemplateColumns: '50% 50%',
           alignItems: 'center',
-          minHeight: '48vh',
+          minHeight: '56vh',
         },
       },
     },

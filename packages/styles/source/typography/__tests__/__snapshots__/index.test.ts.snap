@@ -752,7 +752,7 @@ exports[`typography module should match snapshot 1`] = `
         "@container (min-width: 320px)": {
           "fontSize": "calc(18px + 0.5vw)",
         },
-        "@container (min-width: 480px)": {
+        "@container (min-width: 650px)": {
           "fontSize": "32px",
         },
         "className": "umd-sans-scaling-larger",
@@ -784,7 +784,7 @@ exports[`typography module should match snapshot 1`] = `
       "@container (min-width: 320px)": {
         "fontSize": "calc(18px + 0.5vw)",
       },
-      "@container (min-width: 480px)": {
+      "@container (min-width: 650px)": {
         "fontSize": "32px",
       },
       "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",

@@ -1,22 +1,65 @@
-export type TypeQuoteImageContainer = {
-  image: HTMLImageElement;
+import { ElementModel } from 'model';
+import { CreateIconSpan, SMALL, BaseProps } from '..';
+import { token } from '@universityofmaryland/web-styles-library';
+import { ElementVisual } from '_types';
+
+export interface QuoteImageProps extends BaseProps {
+  isSizeLarge: boolean;
+}
+
+const CreateQuoteImageContainer = (
+  props: QuoteImageProps,
+  image: HTMLImageElement,
+) => {
+  const { isTypeInline, isSizeLarge, isThemeMaryland } = props;
+  const iconSpan = CreateIconSpan(props);
+  const imageContainerChildren: ElementVisual[] = [];
+  const imageElement = ElementModel.create({
+    element: image,
+    className: 'quote-image',
+    elementStyles: {
+      element: {
+        maxWidth: '100%',
+        height: 'auto',
+
+        ...(isTypeInline && {
+          maxWidth: '160px',
+
+          ...(isSizeLarge && { maxWidth: '200px' }),
+
+          [`@container (min-width: ${SMALL}px)`]: {
+            borderRight: `2px solid ${token.color.red}`,
+
+            ...(isThemeMaryland && {
+              borderRight: `2px solid ${token.color.gold}`,
+            }),
+          },
+        }),
+      },
+    },
+  });
+
+  if (isTypeInline) {
+    imageContainerChildren.push(iconSpan);
+  }
+
+  imageContainerChildren.push(imageElement);
+
+  return ElementModel.createDiv({
+    className: 'quote-image-container',
+    children: imageContainerChildren,
+    elementStyles: {
+      element: {
+        display: 'inline-block',
+        position: 'relative',
+
+        ...(isTypeInline && {
+          marginBottom: token.spacing.sm,
+          position: 'relative',
+        }),
+      },
+    },
+  });
 };
 
-const IMAGE_CONTAINER = 'quote-image-container';
-
-const CreateQuoteImageContainer = ({ image }: TypeQuoteImageContainer) => {
-  const container = document.createElement('div');
-
-  container.classList.add(IMAGE_CONTAINER);
-
-  container.appendChild(image);
-
-  return { element: container, styles: '' };
-};
-
-export default {
-  create: CreateQuoteImageContainer,
-  elements: {
-    container: IMAGE_CONTAINER,
-  },
-};
+export default CreateQuoteImageContainer;

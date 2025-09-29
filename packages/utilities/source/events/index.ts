@@ -1,0 +1,1 @@
+export { createEventSwipe } from './createEventSwipe';

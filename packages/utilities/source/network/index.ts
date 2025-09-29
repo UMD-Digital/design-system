@@ -1,0 +1,1 @@
+export { fetchGraphQL, type GraphQLVariables } from './fetchGraphQL';

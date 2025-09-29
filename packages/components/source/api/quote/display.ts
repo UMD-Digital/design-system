@@ -1,4 +1,7 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import {
+  Composite,
+  Utilities,
+} from '@universityofmaryland/web-elements-library';
 import { Attributes, Register, Slots } from 'model';
 import { Markup } from 'utilities';
 import {
@@ -101,10 +104,34 @@ const slots: SlotConfiguration = {
   },
 };
 
-const MakeData = ({ element }: { element: HTMLElement }) => {
+const MakeData = ({
+  element,
+  type,
+}: {
+  element: HTMLElement;
+  type: String;
+}) => {
+  const GetActionLimitOne = () => {
+    const action = Slots.actions.default({ element });
+
+    if (action && action.children.length > 1 && action.firstChild) {
+      console.error('Quote element does not support more than one link');
+
+      return action.firstChild as HTMLElement;
+    }
+
+    return action;
+  };
+
   const isThemeDark = Attributes.isTheme.dark({ element });
   const isThemeMaryland = Attributes.isTheme.maryland({ element });
   const isTransparent = Attributes.isVisual.transparent({ element });
+  const isTypeFeatured = type === 'featured';
+  const isTypeInline = type === 'inline';
+  const includesAnimation =
+    Attributes.includesFeature.animation({ element }) &&
+    !Utilities.accessibility.isPrefferdReducedMotion();
+  const action = GetActionLimitOne();
 
   return {
     quote: Markup.create.SlotWithDefaultStyling({
@@ -114,7 +141,7 @@ const MakeData = ({ element }: { element: HTMLElement }) => {
     image: Markup.create.SlotWithDefaultStyling({
       element,
       slotRef: Slots.name.assets.image,
-    }),
+    }) as HTMLImageElement,
     attribution: Markup.create.SlotWithDefaultStyling({
       element,
       slotRef: Slots.name.ATTRIBUTION,
@@ -123,10 +150,13 @@ const MakeData = ({ element }: { element: HTMLElement }) => {
       element,
       slotRef: Slots.name.ATTRIBUTION_SUB_TEXT,
     }),
-    action: Slots.actions.default({ element }),
+    action: action,
     isTransparent,
     isThemeDark,
     isThemeMaryland,
+    isTypeFeatured,
+    isTypeInline,
+    includesAnimation,
   };
 };
 
@@ -136,13 +166,13 @@ const createComponent: CreateComponentFunction = (element) => {
 
   if (isTypeFeatured) {
     return Composite.quote.featured({
-      ...MakeData({ element }),
+      ...MakeData({ element, type: 'featured' }),
       isSizeLarge,
     });
   }
 
   return Composite.quote.inline({
-    ...MakeData({ element }),
+    ...MakeData({ element, type: 'inline' }),
     isSizeLarge,
   });
 };

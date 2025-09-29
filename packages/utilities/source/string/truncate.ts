@@ -18,14 +18,29 @@ export const truncate = (
   maxLength: number,
   ellipsis: string = '...'
 ): string => {
-  if (!str || typeof str !== 'string') {
-    return str || '';
+  // Handle non-string input
+  if (typeof str !== 'string') {
+    return '';
   }
 
+  // Handle empty string or null/undefined
+  if (!str) {
+    return '';
+  }
+
+  // If string fits within maxLength, return as-is
   if (str.length <= maxLength) {
     return str;
   }
 
-  const truncateLength = maxLength - ellipsis.length;
+  // Calculate truncation point
+  const truncateLength = Math.max(0, maxLength - ellipsis.length);
+
+  // Handle edge case where maxLength is less than or equal to ellipsis length
+  if (truncateLength <= 0) {
+    // Just return the full ellipsis
+    return ellipsis;
+  }
+
   return str.slice(0, truncateLength) + ellipsis;
 };

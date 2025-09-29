@@ -8,9 +8,18 @@ export default defineConfig({
     lib: {
       entry: {
         index: resolve(__dirname, 'source/index.ts'),
+        accessibility: resolve(__dirname, 'source/accessibility/index.ts'),
+        animation: resolve(__dirname, 'source/animation/index.ts'),
+        date: resolve(__dirname, 'source/date/index.ts'),
         dom: resolve(__dirname, 'source/dom/index.ts'),
         elements: resolve(__dirname, 'source/elements/index.ts'),
+        events: resolve(__dirname, 'source/events/index.ts'),
+        media: resolve(__dirname, 'source/media/index.ts'),
+        network: resolve(__dirname, 'source/network/index.ts'),
+        performance: resolve(__dirname, 'source/performance/index.ts'),
+        storage: resolve(__dirname, 'source/storage/index.ts'),
         string: resolve(__dirname, 'source/string/index.ts'),
+        styles: resolve(__dirname, 'source/styles/index.ts'),
         validation: resolve(__dirname, 'source/validation/index.ts'),
       },
       name: 'UniversityOfMarylandWebUtilitiesLibrary',
@@ -20,7 +29,7 @@ export default defineConfig({
     emptyOutDir: true,
     sourcemap: true,
     rollupOptions: {
-      external: [],
+      external: ['@universityofmaryland/web-styles-library', 'postcss', 'postcss-js', 'postcss-nesting'],
       output: {
         preserveModules: true,
         preserveModulesRoot: 'source',

@@ -50,6 +50,96 @@
       "types": "./dist/validation/*.d.ts",
       "import": "./dist/validation/*.mjs",
       "require": "./dist/validation/*.js"
+    },
+    "./accessibility": {
+      "types": "./dist/accessibility.d.ts",
+      "import": "./dist/accessibility.mjs",
+      "require": "./dist/accessibility.js"
+    },
+    "./accessibility/*": {
+      "types": "./dist/accessibility/*.d.ts",
+      "import": "./dist/accessibility/*.mjs",
+      "require": "./dist/accessibility/*.js"
+    },
+    "./animation": {
+      "types": "./dist/animation.d.ts",
+      "import": "./dist/animation.mjs",
+      "require": "./dist/animation.js"
+    },
+    "./animation/*": {
+      "types": "./dist/animation/*.d.ts",
+      "import": "./dist/animation/*.mjs",
+      "require": "./dist/animation/*.js"
+    },
+    "./date": {
+      "types": "./dist/date.d.ts",
+      "import": "./dist/date.mjs",
+      "require": "./dist/date.js"
+    },
+    "./date/*": {
+      "types": "./dist/date/*.d.ts",
+      "import": "./dist/date/*.mjs",
+      "require": "./dist/date/*.js"
+    },
+    "./events": {
+      "types": "./dist/events.d.ts",
+      "import": "./dist/events.mjs",
+      "require": "./dist/events.js"
+    },
+    "./events/*": {
+      "types": "./dist/events/*.d.ts",
+      "import": "./dist/events/*.mjs",
+      "require": "./dist/events/*.js"
+    },
+    "./media": {
+      "types": "./dist/media.d.ts",
+      "import": "./dist/media.mjs",
+      "require": "./dist/media.js"
+    },
+    "./media/*": {
+      "types": "./dist/media/*.d.ts",
+      "import": "./dist/media/*.mjs",
+      "require": "./dist/media/*.js"
+    },
+    "./network": {
+      "types": "./dist/network.d.ts",
+      "import": "./dist/network.mjs",
+      "require": "./dist/network.js"
+    },
+    "./network/*": {
+      "types": "./dist/network/*.d.ts",
+      "import": "./dist/network/*.mjs",
+      "require": "./dist/network/*.js"
+    },
+    "./performance": {
+      "types": "./dist/performance.d.ts",
+      "import": "./dist/performance.mjs",
+      "require": "./dist/performance.js"
+    },
+    "./performance/*": {
+      "types": "./dist/performance/*.d.ts",
+      "import": "./dist/performance/*.mjs",
+      "require": "./dist/performance/*.js"
+    },
+    "./storage": {
+      "types": "./dist/storage.d.ts",
+      "import": "./dist/storage.mjs",
+      "require": "./dist/storage.js"
+    },
+    "./storage/*": {
+      "types": "./dist/storage/*.d.ts",
+      "import": "./dist/storage/*.mjs",
+      "require": "./dist/storage/*.js"
+    },
+    "./styles": {
+      "types": "./dist/styles.d.ts",
+      "import": "./dist/styles.mjs",
+      "require": "./dist/styles.js"
+    },
+    "./styles/*": {
+      "types": "./dist/styles/*.d.ts",
+      "import": "./dist/styles/*.mjs",
+      "require": "./dist/styles/*.js"
     }
   },
   "license": "MIT",
@@ -70,7 +160,12 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"
   },
-  "dependencies": {},
+  "dependencies": {
+    "@universityofmaryland/web-styles-library": "^1.4.2",
+    "postcss": "^8.4.49",
+    "postcss-js": "^4.0.1",
+    "postcss-nesting": "^13.0.1"
+  },
   "devDependencies": {
     "vite": "^7.1.4",
     "vite-plugin-checker": "^0.10.3",

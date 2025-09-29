@@ -372,21 +372,25 @@ When migrating utilities from other packages:
 3. ⏳ Feeds package utilities (Future work)
 4. ⏳ Styles package utilities (Future work)
 
-### Potential Categories
+### Actual Categories (Based on Analysis)
 
-As utilities are migrated, these categories may be created:
-- `dom` - DOM manipulation
-- `string` - String processing
-- `array` - Array utilities
-- `object` - Object manipulation
-- `validation` - Input validation
-- `async` - Async patterns (debounce, throttle)
-- `date` - Date/time utilities
-- `accessibility` - A11y helpers
-- `animation` - Animation utilities
-- `layout` - Layout calculations
+After analyzing the components and elements packages, these categories have been identified:
 
-The actual categories will be determined based on what utilities actually exist.
+1. **`accessibility/`** - Focus management, zoom detection, reduced motion checks
+2. **`animation/`** - Element animations, scroll behaviors, link span wrapping
+3. **`date/`** - Date formatting and comparison utilities
+4. **`dom/`** - DOM manipulation (addClass, removeClass, findParent, cleanCopy, etc.)
+5. **`elements/`** - Element creation helpers (slots, links, style templates)
+6. **`events/`** - Event handling (swipe detection, etc.)
+7. **`media/`** - Image/SVG utilities, responsive sizing
+8. **`network/`** - GraphQL and API fetch wrappers
+9. **`performance/`** - Debounce, throttle, and optimization utilities
+10. **`storage/`** - localStorage wrappers
+11. **`string/`** - String processing (capitalize, truncate, etc.)
+12. **`styles/`** - CSS-in-JS conversion, media queries, style combination
+13. **`validation/`** - Input and accessibility validation
+
+See `ANALYSIS.md` for complete details on each utility function.
 
 ## Integration with Monorepo
 

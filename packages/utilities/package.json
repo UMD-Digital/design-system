@@ -30,6 +30,26 @@
       "types": "./dist/string/*.d.ts",
       "import": "./dist/string/*.mjs",
       "require": "./dist/string/*.js"
+    },
+    "./elements": {
+      "types": "./dist/elements.d.ts",
+      "import": "./dist/elements.mjs",
+      "require": "./dist/elements.js"
+    },
+    "./elements/*": {
+      "types": "./dist/elements/*.d.ts",
+      "import": "./dist/elements/*.mjs",
+      "require": "./dist/elements/*.js"
+    },
+    "./validation": {
+      "types": "./dist/validation.d.ts",
+      "import": "./dist/validation.mjs",
+      "require": "./dist/validation.js"
+    },
+    "./validation/*": {
+      "types": "./dist/validation/*.d.ts",
+      "import": "./dist/validation/*.mjs",
+      "require": "./dist/validation/*.js"
     }
   },
   "license": "MIT",

@@ -21,7 +21,7 @@ export const removeClass = (
   }
 
   const classes = Array.isArray(classNames)
-    ? classNames
+    ? classNames.filter(Boolean)
     : classNames.split(' ').filter(Boolean);
 
   element.classList.remove(...classes);

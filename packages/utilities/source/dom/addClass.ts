@@ -21,7 +21,7 @@ export const addClass = (
   }
 
   const classes = Array.isArray(classNames)
-    ? classNames
+    ? classNames.filter(Boolean)
     : classNames.split(' ').filter(Boolean);
 
   element.classList.add(...classes);

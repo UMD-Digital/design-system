@@ -12,8 +12,14 @@
  * ```
  */
 export const capitalize = (str: string): string => {
-  if (!str || typeof str !== 'string') {
-    return str || '';
+  // Handle non-string input
+  if (typeof str !== 'string') {
+    return '';
+  }
+
+  // Handle empty string or null/undefined
+  if (!str) {
+    return '';
   }
 
   return str.charAt(0).toUpperCase() + str.slice(1);

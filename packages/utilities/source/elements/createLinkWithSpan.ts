@@ -31,10 +31,10 @@ export const createLinkWithSpan = (
   link.setAttribute('target', '_blank');
   link.setAttribute('rel', 'noopener noreferrer');
 
-  span.innerText = title;
+  span.textContent = title;
   link.appendChild(span);
 
-  if (label) {
+  if (label !== undefined) {
     link.setAttribute('aria-label', label);
   }
 

@@ -18,8 +18,9 @@
 export const imageHasAlt = (image: HTMLImageElement | null): boolean => {
   if (!image) return true;
 
-  const altText = image.getAttribute('alt');
-  if (!altText) {
+  // Check if alt attribute exists (even if empty)
+  // Empty alt (alt="") is valid for decorative images per WCAG
+  if (!image.hasAttribute('alt')) {
     console.error('Image elements require alt text');
     return false;
   }

@@ -8,6 +8,8 @@ export default defineConfig({
     lib: {
       entry: {
         index: resolve(__dirname, 'source/index.ts'),
+        dom: resolve(__dirname, 'source/dom/index.ts'),
+        string: resolve(__dirname, 'source/string/index.ts'),
       },
       name: 'UniversityOfMarylandWebUtilitiesLibrary',
       formats: ['es', 'cjs'],

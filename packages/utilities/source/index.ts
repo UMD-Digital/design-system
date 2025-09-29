@@ -7,5 +7,8 @@
  * @packageDocumentation
  */
 
-// This file will be updated as utility categories are added
 export const VERSION = '0.1.0';
+
+// Category exports
+export * from './dom';
+export * from './string';

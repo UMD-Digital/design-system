@@ -218,6 +218,42 @@ Recommendations:
 - Use individual imports for single utility from a category
 - Use main export for prototyping or when bundle size isn't critical
 
+### Implementation Details
+
+The selective import pattern is implemented through:
+
+1. **Category Structure**: Each category is a directory with an index.ts barrel export
+   ```
+   source/dom/
+   ├── index.ts          # Exports all DOM utilities
+   ├── addClass.ts       # Individual utility
+   └── removeClass.ts    # Individual utility
+   ```
+
+2. **Vite Entry Points**: Each category is a separate build entry
+   ```typescript
+   // vite.config.ts
+   entry: {
+     index: resolve(__dirname, 'source/index.ts'),
+     dom: resolve(__dirname, 'source/dom/index.ts'),
+     string: resolve(__dirname, 'source/string/index.ts'),
+   }
+   ```
+
+3. **Package.json Exports**: Maps import paths to built files
+   ```json
+   {
+     "exports": {
+       "./dom": "./dist/dom/index.mjs",
+       "./dom/*": "./dist/dom/*.mjs",
+       "./string": "./dist/string/index.mjs",
+       "./string/*": "./dist/string/*.mjs"
+     }
+   }
+   ```
+
+This enables optimal tree-shaking while maintaining developer convenience.
+
 ## Architectural Decisions
 
 ### Decision Log
@@ -252,6 +288,10 @@ Recommendations:
 ### Short Term (Current Phase)
 - ✅ Package foundation setup
 - ✅ Selective import pattern implementation
+  - Implemented category-based entry points (dom, string)
+  - Configured package.json exports for selective imports
+  - Added Vite entry points for each category
+  - Demonstrated pattern with example utilities
 - ⏳ Utility analysis and architecture design
 - ⏳ Components package migration
 - ⏳ Elements package migration

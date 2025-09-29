@@ -1,0 +1,39 @@
+{
+  "name": "@universityofmaryland/web-utilities-library",
+  "version": "0.1.0",
+  "description": "UMD Design System Utilities - Shared utility functions for all design system packages",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "license": "MIT",
+  "repository": "",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "docs": "npx typedoc --options ./typedoc.json",
+    "prebuild": "node ../../source/update-badges.js",
+    "release": "npm run test && npm run build && npm publish --access public",
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "start": "npm run dev",
+    "pretest": "npm run pretest --prefix ../..",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "vite": "^7.1.4",
+    "vite-plugin-checker": "^0.10.3",
+    "vite-plugin-dts": "^4.5.4"
+  }
+}

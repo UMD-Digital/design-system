@@ -17,6 +17,7 @@ const EXTERNAL_DEPS = [
 ];
 
 const PATH_ALIASES = {
+  '@universityofmaryland/web-utilities-library': resolve(__dirname, '../utilities/source'),
   model: resolve(SOURCE_DIR, 'model'),
   utilities: resolve(SOURCE_DIR, 'utilities'),
 };

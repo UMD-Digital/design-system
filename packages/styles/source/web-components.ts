@@ -38,7 +38,6 @@ const baseElements = [
   'media-inline',
   'media-gif',
   'pathway-highlight',
-  'pathway',
   'person-bio',
   'person-hero',
   'quote',
@@ -205,9 +204,21 @@ const footer = createElementStyles('umd-element-footer', {
 // Hero with specific styling
 const hero = createElementStyles('umd-element-hero', {
   notDefined: {
+    minHeight: `50vh`,
+  },
+  defined: {
+    containerType: 'inline-size',
+    display: 'block',
+  },
+});
+
+// Pathway with specific styling
+const pathway = createElementStyles('umd-element-pathway', {
+  notDefined: {
     minHeight: `40vh`,
   },
   defined: {
+    containerType: 'inline-size',
     display: 'block',
   },
 });
@@ -356,6 +367,7 @@ export default {
   ...action,
   ...footer,
   ...hero,
+  ...pathway,
   ...navigation,
   ...navigationSticky,
   ...navigationAlertUtility,

@@ -1,10 +1,10 @@
 /**
  * Bundle export that includes all components and external library resources.
- * Includes all dependencies from web-elements-library, web-styles-library, and web-feeds-library.
+ * Includes all dependencies from web-elements-library, web-styles-library, web-feeds-library, and web-utilities-library.
  */
 import * as Components from '../api';
 import { loadComponentClass } from './loader';
-import * as Utilities from '../utilities';
+import * as Utilities from '@universityofmaryland/web-utilities-library';
 import * as Elements from '@universityofmaryland/web-elements-library';
 import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Feeds from '@universityofmaryland/web-feeds-library';
@@ -14,7 +14,7 @@ import * as Feeds from '@universityofmaryland/web-feeds-library';
  */
 const initializeBundle = () => {
   loadComponentClass(Components as any);
-  Utilities.Animations.loadIntersectionObserver();
+  Utilities.loadGridAnimationObserver();
 };
 
 const UmdBundle = {
@@ -33,13 +33,6 @@ const UmdBundle = {
   },
 };
 
-export {
-  initializeBundle,
-  Components,
-  Utilities,
-  Elements,
-  Styles,
-  Feeds,
-};
+export { initializeBundle, Components, Utilities, Elements, Styles, Feeds };
 
 export default UmdBundle;

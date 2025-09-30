@@ -33,7 +33,7 @@ export default defineConfig({
       onwarn(warning, warn) {
         if (warning.code === 'EVAL') return;
         warn(warning);
-      }
+      },
     },
     minify: false,
   },
@@ -51,7 +51,11 @@ export default defineConfig({
     dts({
       insertTypesEntry: true,
       include: ['source/**/*.ts'],
-      exclude: ['source/**/*.test.ts', 'source/**/*.spec.ts', 'source/__tests__/**'],
+      exclude: [
+        'source/**/*.test.ts',
+        'source/**/*.spec.ts',
+        'source/__tests__/**',
+      ],
       outDir: 'dist',
       rollupTypes: false,
       copyDtsFiles: true,
@@ -65,12 +69,19 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@universityofmaryland/web-styles-library': resolve(__dirname, '../styles/dist/umd-styles.js'),
-      'utilities': resolve(__dirname, 'source/utilities'),
-      'atomic': resolve(__dirname, 'source/atomic'),
-      'composite': resolve(__dirname, 'source/composite'),
-      'layout': resolve(__dirname, 'source/layout'),
-      'model': resolve(__dirname, 'source/model'),
+      '@universityofmaryland/web-styles-library': resolve(
+        __dirname,
+        '../styles/dist/umd-styles.js',
+      ),
+      '@universityofmaryland/web-utilities-library': resolve(
+        __dirname,
+        '../utilities/source',
+      ),
+      utilities: resolve(__dirname, 'source/utilities'),
+      atomic: resolve(__dirname, 'source/atomic'),
+      composite: resolve(__dirname, 'source/composite'),
+      layout: resolve(__dirname, 'source/layout'),
+      model: resolve(__dirname, 'source/model'),
     },
   },
   css: {
@@ -82,6 +93,8 @@ export default defineConfig({
     },
   },
   define: {
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
+    'process.env.NODE_ENV': JSON.stringify(
+      process.env.NODE_ENV || 'production',
+    ),
   },
 });

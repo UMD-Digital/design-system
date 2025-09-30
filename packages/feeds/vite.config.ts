@@ -34,6 +34,7 @@ export default defineConfig({
   resolve: {
     extensions: ['.ts', '.js', '.css'],
     alias: {
+      '@universityofmaryland/web-utilities-library': path.resolve(__dirname, '../utilities/source'),
       'macros': path.resolve(__dirname, 'source/macros'),
       'elements': path.resolve(__dirname, 'source/elements')
     }

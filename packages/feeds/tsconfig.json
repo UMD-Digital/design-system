@@ -5,6 +5,11 @@
     "rootDir": "source",
     "baseUrl": "source",
     "isolatedModules": true,
+    "moduleResolution": "bundler",
+    "paths": {
+      "@universityofmaryland/web-utilities-library": ["../utilities/source/index.ts"],
+      "@universityofmaryland/web-utilities-library/*": ["../utilities/source/*"]
+    }
   },
   "include": [
     "./source"

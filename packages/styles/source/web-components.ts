@@ -205,6 +205,7 @@ const footer = createElementStyles('umd-element-footer', {
 const hero = createElementStyles('umd-element-hero', {
   notDefined: {
     minHeight: `50vh`,
+    display: 'block',
   },
   defined: {
     containerType: 'inline-size',
@@ -216,6 +217,7 @@ const hero = createElementStyles('umd-element-hero', {
 const pathway = createElementStyles('umd-element-pathway', {
   notDefined: {
     minHeight: `40vh`,
+    display: 'block',
   },
   defined: {
     containerType: 'inline-size',

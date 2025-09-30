@@ -91,6 +91,7 @@ export default defineConfig(({ mode }) => {
   logLevel: 'warn',
   resolve: {
     alias: {
+      '@universityofmaryland/web-utilities-library': path.resolve(__dirname, '../utilities/source'),
       '@': path.resolve(__dirname, 'source')
     },
     extensions: ['.ts', '.js', '.css']

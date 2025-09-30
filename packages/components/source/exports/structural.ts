@@ -5,12 +5,13 @@
  * These are typically above-the-fold components that should load first.
  */
 
-import { actions, hero, navigation } from '../api';
+import { actions, hero, pathway, navigation } from '../api';
 import { loadComponentClass, ComponentMap } from './loader';
 
 export const structuralComponents: ComponentMap = {
   actions,
   hero,
+  pathway,
   navigation,
 };
 

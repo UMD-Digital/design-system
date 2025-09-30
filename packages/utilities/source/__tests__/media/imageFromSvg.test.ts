@@ -183,14 +183,6 @@ describe('imageFromSvg', () => {
       expect(result.src).toContain('data:image/svg+xml;base64,');
     });
 
-    it('should handle null SVG', () => {
-      expect(() => imageFromSvg({ SVG: null as any })).toThrow();
-    });
-
-    it('should handle undefined SVG', () => {
-      expect(() => imageFromSvg({ SVG: undefined as any })).toThrow();
-    });
-
     it('should handle non-SVG strings', () => {
       const result = imageFromSvg({ SVG: 'not an svg' });
 

@@ -17,8 +17,8 @@ describe('createDateCompareString', () => {
     });
 
     it('should ignore time component', () => {
-      const date1 = new Date('2025-09-29T00:00:00');
-      const date2 = new Date('2025-09-29T23:59:59');
+      const date1 = new Date(Date.UTC(2025, 8, 29, 0, 0, 0));
+      const date2 = new Date(Date.UTC(2025, 8, 29, 23, 59, 59));
 
       const result1 = createDateCompareString(date1);
       const result2 = createDateCompareString(date2);
@@ -61,7 +61,7 @@ describe('createDateCompareString', () => {
     });
 
     it('should handle December 31st', () => {
-      const date = new Date('2025-12-31T23:59:59');
+      const date = new Date(Date.UTC(2025, 11, 31, 23, 59, 59));
       const result = createDateCompareString(date);
 
       expect(result.palindromeTruncated).toBe('2025-12-31');
@@ -131,8 +131,8 @@ describe('createDateCompareString', () => {
     });
 
     it('should allow string comparison for equal dates', () => {
-      const date1 = new Date('2025-09-29T10:00:00');
-      const date2 = new Date('2025-09-29T20:00:00');
+      const date1 = new Date(Date.UTC(2025, 8, 29, 10, 0, 0));
+      const date2 = new Date(Date.UTC(2025, 8, 29, 20, 0, 0));
 
       const result1 = createDateCompareString(date1);
       const result2 = createDateCompareString(date2);
@@ -161,10 +161,9 @@ describe('createDateCompareString', () => {
   describe('error conditions', () => {
     it('should handle invalid date', () => {
       const invalidDate = new Date('invalid');
-      const result = createDateCompareString(invalidDate);
 
-      // Invalid dates return "Invalid Date" from toISOString()
-      expect(() => result.palindromeTruncated).not.toThrow();
+      // Invalid dates throw when toISOString() is called
+      expect(() => createDateCompareString(invalidDate)).toThrow();
     });
 
     it('should throw for null date', () => {

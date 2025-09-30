@@ -147,8 +147,9 @@ describe('truncateTextBasedOnSize', () => {
     });
 
     it('should handle empty text', () => {
-      // Empty text causes issue in truncateText, so we expect it to throw or handle gracefully
-      expect(() => truncateTextBasedOnSize({ text: '', size: 500 })).toThrow();
+      // Empty text now returns empty string gracefully
+      const result = truncateTextBasedOnSize({ text: '', size: 500 });
+      expect(result).toBe('');
     });
 
     it('should handle short text that doesnt need truncation', () => {

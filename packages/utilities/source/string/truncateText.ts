@@ -30,7 +30,7 @@ export const truncateText = ({
 
   wrapper.innerHTML = cleanedText;
 
-  let textContent = wrapper.textContent || wrapper.innerText;
+  let textContent = wrapper.textContent || wrapper.innerText || '';
   let orginalString = textContent;
   textContent = textContent.slice(0, maxTextSize);
 
@@ -47,7 +47,7 @@ export const truncateText = ({
 
   walkAndReplace(wrapper);
 
-  if (orginalString.length >= maxTextSize) {
+  if (orginalString.length > maxTextSize) {
     const lastChild = wrapper.children[
       wrapper.children.length - 1
     ] as HTMLElement;

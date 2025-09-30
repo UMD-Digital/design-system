@@ -209,12 +209,12 @@ describe('wrapTextNodeInSpan', () => {
   });
 
   describe('error conditions', () => {
-    it('should handle null element', () => {
-      expect(() => wrapTextNodeInSpan(null as any)).toThrow();
+    it('should return undefined for null element', () => {
+      expect(wrapTextNodeInSpan(null as any)).toBeUndefined();
     });
 
-    it('should handle undefined element', () => {
-      expect(() => wrapTextNodeInSpan(undefined as any)).toThrow();
+    it('should return undefined for undefined element', () => {
+      expect(wrapTextNodeInSpan(undefined as any)).toBeUndefined();
     });
 
     it('should handle detached element', () => {

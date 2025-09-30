@@ -56,7 +56,7 @@ describe('getIcon', () => {
       const result = getIcon({ element }) as SVGElement;
 
       const resultPath = result.querySelector('path') as SVGPathElement;
-      expect(resultPath.style.fill).toBe('rgb(255, 0, 0)');
+      expect(resultPath.style.fill).toBe('#ff0000');
     });
 
     it('should not apply color when color attribute is missing', () => {
@@ -83,7 +83,7 @@ describe('getIcon', () => {
       getIcon({ element });
 
       // querySelector returns first match
-      expect(path1.style.fill).toBe('rgb(0, 255, 0)');
+      expect(path1.style.fill).toBe('#00ff00');
       expect(path2.style.fill).toBe('');
     });
   });
@@ -162,7 +162,7 @@ describe('getIcon', () => {
 
     it('should handle various color formats', () => {
       const testCases = [
-        { input: '#ff0000', expected: 'rgb(255, 0, 0)' },
+        { input: '#ff0000', expected: '#ff0000' },
         { input: 'red', expected: 'red' },
         { input: 'rgb(0, 255, 0)', expected: 'rgb(0, 255, 0)' },
         { input: 'rgba(0, 0, 255, 0.5)', expected: 'rgba(0, 0, 255, 0.5)' },

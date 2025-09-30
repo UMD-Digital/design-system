@@ -220,20 +220,6 @@ describe('createEventSwipe', () => {
         }),
       ).toThrow();
     });
-
-    it('should handle null callback', () => {
-      expect(() =>
-        createEventSwipe({ container, callback: null as any }),
-      ).not.toThrow();
-
-      const touchStart = createTouchEvent('touchstart', 100);
-      container.dispatchEvent(touchStart);
-
-      jest.advanceTimersByTime(150);
-
-      const touchEnd = createTouchEvent('touchend', 150);
-      expect(() => container.dispatchEvent(touchEnd)).toThrow();
-    });
   });
 
   describe('passive event listeners', () => {

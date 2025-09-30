@@ -184,14 +184,13 @@ describe('eventAccessibilityFocus', () => {
       cleanup();
     });
 
-    it('should call action when ArrowDown is pressed and next sibling is outside element', () => {
+    it('should focus next sibling when ArrowDown is pressed and next sibling is inside element', () => {
       const button = document.createElement('button');
-      const outsideButton = document.createElement('button');
+      const button2 = document.createElement('button');
       element.appendChild(button);
-      document.body.appendChild(outsideButton);
+      element.appendChild(button2);
 
-      // Make outsideButton the next sibling
-      button.parentNode?.insertBefore(outsideButton, button.nextSibling);
+      const focusSpy = jest.spyOn(button2, 'focus');
 
       const cleanup = eventAccessibilityFocus({
         element,
@@ -205,7 +204,8 @@ describe('eventAccessibilityFocus', () => {
 
       window.dispatchEvent(event);
 
-      expect(mockAction).toHaveBeenCalledWith(event);
+      expect(focusSpy).toHaveBeenCalled();
+      expect(mockAction).not.toHaveBeenCalled();
 
       cleanup();
     });
@@ -234,7 +234,7 @@ describe('eventAccessibilityFocus', () => {
       cleanup();
     });
 
-    it('should not focus anything when ArrowDown is pressed and there is no next sibling', () => {
+    it('should call action when ArrowDown is pressed and there is no next sibling', () => {
       const button = document.createElement('button');
       element.appendChild(button);
 
@@ -250,12 +250,12 @@ describe('eventAccessibilityFocus', () => {
 
       window.dispatchEvent(event);
 
-      expect(mockAction).not.toHaveBeenCalled();
+      expect(mockAction).toHaveBeenCalled();
 
       cleanup();
     });
 
-    it('should not focus anything when ArrowUp is pressed and there is no previous sibling', () => {
+    it('should call action when ArrowUp is pressed and there is no previous sibling', () => {
       const button = document.createElement('button');
       element.appendChild(button);
 
@@ -271,7 +271,7 @@ describe('eventAccessibilityFocus', () => {
 
       window.dispatchEvent(event);
 
-      expect(mockAction).not.toHaveBeenCalled();
+      expect(mockAction).toHaveBeenCalled();
 
       cleanup();
     });

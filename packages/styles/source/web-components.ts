@@ -30,10 +30,6 @@ const baseElements = [
   'carousel-people',
   'carousel-thumbnail',
   'carousel',
-  'hero-brand-video',
-  'hero-expand',
-  'hero-logo',
-  'hero-minimal',
   'logo',
   'media-inline',
   'media-gif',
@@ -202,14 +198,42 @@ const footer = createElementStyles('umd-element-footer', {
 });
 
 // Hero with specific styling
-const hero = createElementStyles('umd-element-hero', {
+const hero = [
+  'umd-element-hero',
+  'umd-element-hero-brand-video',
+  'umd-element-hero-expand',
+  'umd-element-hero-logo',
+].reduce(
+  (acc, element) => ({
+    ...acc,
+    ...createElementStyles(element, {
+      notDefined: {
+        minHeight: `50vh`,
+        display: 'block',
+        opacity: '0',
+      },
+      defined: {
+        containerType: 'inline-size',
+        display: 'block',
+        opacity: '1',
+      },
+    }),
+  }),
+  {},
+);
+
+// Hero Minimal with specific styling
+const heroMinimal = createElementStyles('umd-element-hero-minimal', {
   notDefined: {
-    minHeight: `50vh`,
+    minHeight: `30vh`,
     display: 'block',
+    opacity: '0',
   },
   defined: {
     containerType: 'inline-size',
     display: 'block',
+    opacity: '1',
+    transition: 'opacity 0.2s ease-in-out',
   },
 });
 
@@ -218,10 +242,13 @@ const pathway = createElementStyles('umd-element-pathway', {
   notDefined: {
     minHeight: `40vh`,
     display: 'block',
+    opacity: '0',
   },
   defined: {
     containerType: 'inline-size',
     display: 'block',
+    opacity: '1',
+    transition: 'opacity 0.2s ease-in-out',
   },
 });
 
@@ -369,6 +396,7 @@ export default {
   ...action,
   ...footer,
   ...hero,
+  ...heroMinimal,
   ...pathway,
   ...navigation,
   ...navigationSticky,

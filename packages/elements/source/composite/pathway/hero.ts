@@ -111,7 +111,6 @@ const createAssetColumn = ({
 
         [`@container (max-width: ${BREAK_SMALL}px)`]: {
           aspectRatio: '16 / 9',
-          maxHeight: '50vh',
         },
 
         [`@container (min-width: ${BREAK_MEDIUM}px)`]: {

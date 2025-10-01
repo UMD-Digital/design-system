@@ -75,7 +75,7 @@ export const slideRight: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-slide-right`,
 
   [`@media (prefers-reduced-motion: no-preference)`]: {
-    [`@supports (animation-timeline: view())`]: {
+    [`@supports (animation-timeline: scroll())`]: {
       animation: 'slide-in-from-left forwards',
       animationTimeline: 'view()',
       animationRangeStart: '0',

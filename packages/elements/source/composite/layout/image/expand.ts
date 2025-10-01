@@ -53,7 +53,7 @@ const TextAnimation = `
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
+    @supports (animation-timeline: scroll()) {
       .${ELEMENT_EXPAND_TEXT_ANIMATION} {
         position: absolute;
         top: 0;
@@ -65,7 +65,7 @@ const TextAnimation = `
 
   @media (${token.media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
-      @supports (animation-timeline: view()) {
+      @supports (animation-timeline: scroll()) {
         .${ELEMENT_EXPAND_TEXT_ANIMATION} {
           transform: translateY(100vh);
         }
@@ -92,7 +92,7 @@ const ImageOverlayContainer = `
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
+    @supports (animation-timeline: scroll()) {
       .${ELEMENT_EXPAND_IMAGE_OVERLAY} {
         opacity: 1;
         animation: img-overlay forwards;
@@ -116,7 +116,7 @@ const ImageSizeContainer = `
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
+    @supports (animation-timeline: scroll()) {
       .${ELEMENT_EXPAND_IMAGE_SIZE} {
         width: ${token.spacing.maxWidth.smallest};
         height: 70vh;
@@ -128,7 +128,7 @@ const ImageSizeContainer = `
     }
   }
 
-  @supports not (animation-timeline: view()) {
+  @supports not (animation-timeline: scroll()) {
     .${ELEMENT_EXPAND_IMAGE_SIZE} {
       height: 100%;
     }
@@ -149,7 +149,7 @@ const ImagePosition = `
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
+    @supports (animation-timeline: scroll()) {
       .${ELEMENT_EXPAND_IMAGE_POSITION} {
         display: flex;
         justify-content: center;
@@ -163,7 +163,7 @@ const ImagePosition = `
     }
   }
 
-  @supports not (animation-timeline: view()) {
+  @supports not (animation-timeline: scroll()) {
     .${ELEMENT_EXPAND_IMAGE_POSITION} {
       height: 100%;
     }
@@ -187,7 +187,7 @@ const ImageContainer = `
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
+    @supports (animation-timeline: scroll()) {
       .${ELEMENT_EXPAND_IMAGE_CONTAINER} {
         position: relative;
       }
@@ -212,7 +212,7 @@ const STYLES_LAYOUT_IMAGE_EXPAND = `
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
+    @supports (animation-timeline: scroll()) {
       .${ELEMENT_EXPLAND_DECLARATION} {
         height: 180vh;
       }
@@ -221,7 +221,7 @@ const STYLES_LAYOUT_IMAGE_EXPAND = `
 
   @media (${token.media.queries.tablet.min}) {
     @media (prefers-reduced-motion: no-preference) {
-      @supports (animation-timeline: view()) {
+      @supports (animation-timeline: scroll()) {
         .${ELEMENT_EXPLAND_DECLARATION} {
           height: 200vh;
         }

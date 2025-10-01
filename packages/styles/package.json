@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-styles-library",
-  "version": "1.6.7",
+  "version": "1.6.8",
   "description": "Styles used for use in the University of Maryland Design System",
   "main": "dist/index.js",
   "author": "UMD Web Services <digital@umd.edu>",

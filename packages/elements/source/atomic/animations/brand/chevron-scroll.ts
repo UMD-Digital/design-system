@@ -24,7 +24,7 @@ const FirstChevronStyles = `
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
+    @supports (animation-timeline: scroll()) {
       .${ELEMENT_FIRST_CHEVRON} {
         transform: translateX(40%);
         animation: chevron-one forwards;
@@ -59,7 +59,7 @@ const SecondChevronStyles = `
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
+    @supports (animation-timeline: scroll()) {
       .${ELEMENT_SECOND_CHEVRON} {
         transform: translateX(24%);
         animation: chevron-two forwards;
@@ -93,7 +93,7 @@ const ThirdChevronStyles = `
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
+    @supports (animation-timeline: scroll()) {
       .${ELEMENT_THIRD_CHEVRON} {
         transform: translateX(60%);
         animation: chevron-three forwards;

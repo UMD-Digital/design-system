@@ -237,7 +237,7 @@ const ContainerStyles = `
   }
 
   @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
+    @supports (animation-timeline: scroll()) {
       .${CAROUSEL_CONTAINER} > svg {
         animation: card-carousel-slide-in ease-in-out forwards;
         animation-timeline: view();

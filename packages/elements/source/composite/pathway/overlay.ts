@@ -236,21 +236,21 @@ const createBackground = (props: PathwayOverlayProps): ElementVisual => {
         position: 'absolute',
         top: '0',
         bottom: '0',
-        right: '0',
-        width: '100%',
+        right: `-${Styles.token.spacing.xl}`,
+        width: `calc(100% + ${Styles.token.spacing['6xl']})`,
         backgroundColor: getBackgroundColor(),
 
         [`@container (min-width: ${mediumSize}px)`]: {
-          right: '-1000px',
-          width: 'calc(75% + 1000px)',
-
           ...(props.includesAnimation && {
             animationTimeline: 'view()',
             animationRangeStart: 'entry',
             animationRangeEnd: 'contain',
 
             ...theme.media.withViewTimelineAnimation({
+              width: 'calc(75% + 1000px)',
+
               ...(props.isImagePositionLeft === true && {
+                right: '-1000px',
                 animationName: REF_KEY_FRAME_BACKGROUND_LEFT,
               }),
 

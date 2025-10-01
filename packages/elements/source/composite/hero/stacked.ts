@@ -74,7 +74,7 @@ const createOverlay = (includesAnimation?: boolean) => {
         ...(includesAnimation && {
           [`@media (${Styles.token.media.queries.tablet.min})`]: {
             [`@media (prefers-reduced-motion: no-preference)`]: {
-              [`@supports (animation-timeline: view())`]: {
+              [`@supports (animation-timeline: scroll())`]: {
                 animation: `${REF_KEY_FRAME_FADE_OVER} ease-in-out forwards`,
                 animationTimeline: 'view()',
                 animationRangeStart: '30vh',

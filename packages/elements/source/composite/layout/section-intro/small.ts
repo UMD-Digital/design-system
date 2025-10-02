@@ -1,4 +1,4 @@
-import { token } from '@universityofmaryland/web-styles-library';
+import { token, typography } from '@universityofmaryland/web-styles-library';
 import { ElementModel } from 'model';
 import { type ElementVisual } from '../../../_types';
 
@@ -94,7 +94,7 @@ const createTextContainer = (
     'headline' | 'text' | 'actions' | 'isThemeDark' | 'includesAnimation'
   >,
 ) => {
-  const { headline, text, actions, includesAnimation } = props;
+  const { headline, text, actions, includesAnimation, isThemeDark } = props;
 
   const headlineElement = createHeadline({ headline });
   const textElement = createText({ text });
@@ -112,6 +112,17 @@ const createTextContainer = (
         ...(includesAnimation && {
           opacity: 0,
         }),
+
+        ['& > *, p']: {
+          ...(!headline && {
+            ...typography.sans.transformations.largerBold,
+            color: token.color.black,
+
+            ...(isThemeDark && {
+              color: token.color.white,
+            }),
+          }),
+        },
 
         ['.intro-default-animated &']: {
           transform: 'translateY(100px)',

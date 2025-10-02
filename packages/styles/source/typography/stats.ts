@@ -37,12 +37,8 @@ export const large = {
   fontStyle: 'italic',
   lineHeight: '1',
 
-  [`@media (${breakpointLarge})`]: {
-    fontSize: `calc(${font.size['9xl']} + 3.33vw)`,
-  },
-
   [`@media (${breakpointDesktop})`]: {
-    fontSize: font.size['max'],
+    fontSize: '112px',
   },
 };
 

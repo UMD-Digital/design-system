@@ -1,7 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementModel } from 'model';
 import { assets } from 'atomic';
-import { theme } from 'utilities';
+import { theme, accessibility } from 'utilities';
 import { type ElementVisual } from '../../../_types';
 
 interface CardStackProps {
@@ -341,6 +341,12 @@ const STACK_GRID_ERROR_CLASS = `${STACK_GRID_CLASS}-error`;
 const KEY_FRAME_GRID_EXPAND = 'grid-expand';
 const KEY_FRAME_GRID_ITEM = 'grid-item';
 const KEY_FRAME_FEATURED_SIZE = 'featured-size';
+
+const isPreferReducedMotion = accessibility.isPrefferdReducedMotion();
+const isScrollTimelineSupported = () =>
+  'ScrollTimeline' in window || CSS.supports('animation-timeline', 'scroll()');
+const isDisplayWithoutAnimation =
+  isPreferReducedMotion || !isScrollTimelineSupported();
 
 const getResponsiveSizes = () => {
   const windowWidth = window.innerWidth;
@@ -762,10 +768,14 @@ const createGridItem = (
         height: '100%',
 
         [`@media (${Styles.token.media.queries.large.max})`]: {
-          [`@supports not (animation-timeline: view())`]: {
+          [`@supports not (animation-timeline: scroll())`]: {
             display: 'none',
           },
         },
+
+        ...(isDisplayWithoutAnimation && {
+          display: 'none',
+        }),
 
         ...theme.media.withViewTimelineAnimation({
           animation: `${KEY_FRAME_GRID_ITEM} ease-in-out forwards`,
@@ -806,7 +816,7 @@ const createGrid = (props: CardStackProps) => {
         minHeight: '300px',
 
         [`@media (${Styles.token.media.queries.large.max})`]: {
-          '@supports not (animation-timeline: view())': {
+          '@supports not (animation-timeline: scroll())': {
             width: '100%',
           },
         },
@@ -864,6 +874,10 @@ const createFeatured = (
         zIndex: 999,
         width: `${widthPercentage * 100}%`,
         height: `${heightVh * 100}vh`,
+
+        ...(isDisplayWithoutAnimation && {
+          top: '0',
+        }),
 
         [`@media (${Styles.token.media.queries.large.max})`]: {
           '@supports not (animation-timeline: view())': {

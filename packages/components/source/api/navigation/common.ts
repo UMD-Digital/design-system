@@ -1,5 +1,5 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Markup } from 'utilities';
+import { Markup } from 'helpers';
 
 const { Node } = Markup.create;
 

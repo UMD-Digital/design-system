@@ -1,6 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Model, Register, Slots } from 'model';
-import { Markup } from 'utilities';
+import { Markup } from 'helpers';
 
 const { card } = Composite;
 

@@ -1,6 +1,6 @@
 import { Atomic } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots } from 'model';
-import { Markup } from 'utilities';
+import { Markup } from 'helpers';
 import { ComponentRef } from '../_types';
 
 /**

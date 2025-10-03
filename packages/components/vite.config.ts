@@ -19,7 +19,7 @@ const EXTERNAL_DEPS = [
 const PATH_ALIASES = {
   '@universityofmaryland/web-utilities-library': resolve(__dirname, '../utilities/source'),
   model: resolve(SOURCE_DIR, 'model'),
-  utilities: resolve(SOURCE_DIR, 'utilities'),
+  helpers: resolve(SOURCE_DIR, 'helpers'),
 };
 
 const DTS_COMMON_OPTIONS = {
@@ -41,7 +41,7 @@ const DTS_COMMON_OPTIONS = {
     baseUrl: 'source',
     paths: {
       model: ['./model'],
-      utilities: ['./utilities'],
+      helpers: ['./helpers'],
     },
   },
 };

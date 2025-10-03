@@ -1,7 +1,7 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Slots, Register } from 'model';
 import { extractEventData } from '../_event';
-import { toUMDElement } from 'utilities/markup/validate';
+import { toUMDElement } from 'helpers/markup/validate';
 import type {
   CreateComponentFunction,
   ComponentRegistration,

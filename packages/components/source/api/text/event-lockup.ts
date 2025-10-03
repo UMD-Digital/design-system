@@ -1,6 +1,6 @@
 import { Atomic } from '@universityofmaryland/web-elements-library';
 import { Attributes, Register, Slots, Lifecycle } from 'model';
-import * as Utilities from 'utilities';
+import * as Utilities from 'helpers';
 import { CreateComponentFunction, ComponentRegistration } from '../../_types';
 
 const tagName = 'umd-element-events-date';

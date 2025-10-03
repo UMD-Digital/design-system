@@ -1,6 +1,6 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { Attributes, Register, Slots } from 'model';
-import { Markup } from 'utilities';
+import { Markup } from 'helpers';
 import { CommonPersonData } from './common';
 import {
   CreateComponentFunction,

@@ -1,6 +1,6 @@
 import { Slots } from 'model';
 import slots from 'model/slots';
-import { Markup } from 'utilities';
+import { Markup } from 'helpers';
 
 export const CommonPersonData = ({
   element,

@@ -26,11 +26,9 @@
  *
  * - **Components** - All web component registration functions
  * - **Elements** - Base element classes and primitives from web-elements-library
- * - **Utilities** - Helper functions for animations, markup, and more
  * - **LoadUmdComponents** - Function to register all components at once
  */
 import * as umdComponents from './api';
-import * as umdUtilities from './utilities';
 import { loadComponentClass, ComponentMap } from './exports/loader';
 
 export type {
@@ -91,27 +89,5 @@ const LoadUmdComponents = () => {
  * ```
  */
 export const Components = umdComponents;
-
-/**
- * Utility functions for animations, markup creation, validation, and more.
- * Combines utilities from both this library and the web-elements-library.
- *
- * @example
- * ```typescript
- * import { Utilties } from '@universityofmaryland/web-components-library';
- *
- * // Use animation utilities
- * Utilties.Animations.loadIntersectionObserver();
- *
- * // Create markup
- * const element = Utilties.Markup.create.element({
- *   elementType: 'div',
- *   attributes: { class: 'container' }
- * });
- * ```
- */
-export const Utilties = {
-  ...umdUtilities,
-};
 
 export default LoadUmdComponents;

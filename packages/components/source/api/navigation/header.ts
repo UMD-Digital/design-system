@@ -4,7 +4,7 @@ declare global {
   }
 }
 
-import { Markup, Styles } from 'utilities';
+import { Markup, Styles } from 'helpers';
 import { Composite } from '@universityofmaryland/web-elements-library';
 import { SLOTS as GlobalSlots, MakeNavDrawer } from './common';
 

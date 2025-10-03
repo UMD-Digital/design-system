@@ -5,7 +5,7 @@ declare global {
 }
 
 import { Composite } from '@universityofmaryland/web-elements-library';
-import { Markup, Styles } from 'utilities';
+import { Markup, Styles } from 'helpers';
 import { SLOTS, MakeNavDrawer } from './common';
 import {
   ComponentRegistration,

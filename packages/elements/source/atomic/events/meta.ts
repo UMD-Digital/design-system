@@ -1,4 +1,4 @@
-import * as Utility from 'utilities';
+import * as asset from 'helpers/assets';
 import { ElementModel } from 'model';
 import { ElementVisual } from '../../_types';
 
@@ -69,7 +69,7 @@ const createDayText = ({
   }
 
   return MakeDetailItem({
-    icon: Utility.asset.icon.CALENDAR,
+    icon: asset.icon.CALENDAR,
     text,
   });
 };
@@ -82,7 +82,7 @@ const createTimeText = ({ startTime, endTime }: DateDisplayType) => {
   }
 
   return MakeDetailItem({
-    icon: Utility.asset.icon.CLOCK,
+    icon: asset.icon.CLOCK,
     text,
   });
 };
@@ -117,7 +117,7 @@ export default (props: TypeMetaDisplay) => {
     wrapperChildren.push(
       MakeDetailItem({
         ...props,
-        icon: Utility.asset.icon.PIN,
+        icon: asset.icon.PIN,
         text: location[0].title,
       }),
     );

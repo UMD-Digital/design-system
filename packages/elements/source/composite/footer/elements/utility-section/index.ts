@@ -5,7 +5,7 @@ import {
   animation,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import * as Utils from 'utilities';
+import { animationLinkSpan } from '@universityofmaryland/web-utilities-library/animation';
 import { BREAKPOINTS } from '../../globals';
 import { type ElementVisual } from '../../../../_types';
 import { FooterProps } from 'composite/footer/options';
@@ -74,7 +74,7 @@ export default (props: FooterProps): ElementVisual => {
     ) as HTMLAnchorElement[];
 
     slottedLinks.forEach((link) => {
-      Utils.markup.modify.animationLinkSpan({ element: link });
+      animationLinkSpan({ element: link });
       linkElements.push(createUtilityContainerLink(link));
     });
   }

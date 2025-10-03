@@ -1,5 +1,7 @@
 import { token, typography } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import { scrollTo } from '@universityofmaryland/web-utilities-library/animation';
+import * as theme from 'helpers/theme';
+import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 
 type TypeTabsProps = {
   tabsContainer: HTMLElement;
@@ -158,8 +160,8 @@ const SetDisplay = ({
   const SetContentPosition = () => {
     const activeContent = contents[activeTab];
     const space = isFlexLayout
-      ? Utility.theme.convertPixelStringToNumber(token.spacing.xl)
-      : Utility.theme.convertPixelStringToNumber(token.spacing.md);
+      ? theme.convertPixelStringToNumber(token.spacing.xl)
+      : theme.convertPixelStringToNumber(token.spacing.md);
 
     if (activeContent) {
       if (transition) {
@@ -173,14 +175,14 @@ const SetDisplay = ({
       activeContent.style.width = '100%';
 
       if (!isFlexLayout && transition) {
-        const convertedSpace = Utility.theme.convertPixelStringToNumber(
+        const convertedSpace = theme.convertPixelStringToNumber(
           token.spacing.md,
         );
         const spread = additionalSpread
           ? convertedSpace + additionalSpread
           : convertedSpace;
 
-        Utility.theme.animations.scrollTo({
+        scrollTo({
           element: activeContent,
           spread,
         });
@@ -374,7 +376,7 @@ export default (props: TypeTabsProps) =>
 
     window.addEventListener(
       'resize',
-      Utility.performance.debounce(EventResize, 10),
+      debounce(EventResize, 10),
     );
 
     return {

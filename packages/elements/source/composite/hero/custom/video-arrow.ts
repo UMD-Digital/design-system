@@ -1,5 +1,5 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import * as Utils from 'utilities';
+import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { animations, assets } from 'atomic';
 import { ElementModel } from 'model';
 import { type HeroVideoArrowProps as BaseHeroVideoArrowProps } from '../_types';
@@ -182,7 +182,7 @@ const createEventHandlers = (
 
   window.addEventListener(
     'resize',
-    Utils.performance.debounce(eventResize, 20),
+    debounce(eventResize, 20),
   );
 
   return { load: eventLoad };

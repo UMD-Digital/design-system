@@ -1,7 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { animations, buttons } from 'atomic';
 import { Image as LayoutImage } from 'layout';
-import * as Utility from 'utilities';
+import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
 import * as carouselElements from '../elements';
 
 type TypeImage = {
@@ -141,7 +141,7 @@ const TextContainerStyles = `
     }
   }
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_SLIDE_HEADLINE}`]: typography.sans.large,
     },
@@ -152,7 +152,7 @@ const TextContainerStyles = `
     color: ${token.color.gray.dark}
   }
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_SLIDE_RICH_TEXT}`]: element.text.rich.advanced,
     },

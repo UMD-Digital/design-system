@@ -1,4 +1,4 @@
-import * as Utility from 'utilities';
+import * as asset from 'helpers/assets';
 import { ElementModel } from 'model';
 
 const create = ({
@@ -15,7 +15,7 @@ const create = ({
       callback(index);
     });
     button.setAttribute('aria-label', 'View Full Screen');
-    button.innerHTML = `Full Screen <span></span>${Utility.asset.icon.FULL_SCREEN}`;
+    button.innerHTML = `Full Screen <span></span>${asset.icon.FULL_SCREEN}`;
 
     return ElementModel.buttons.fullScreen({
       element: button,

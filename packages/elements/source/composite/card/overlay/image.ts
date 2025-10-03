@@ -1,7 +1,9 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementModel } from 'model';
 import { actions, assets, textLockup } from 'atomic';
-import { asset, markup, theme } from 'utilities';
+import * as asset from 'helpers/assets';
+import * as markup from 'helpers/markup';
+import * as theme from 'helpers/theme';
 import { CardOverlayProps } from '../_types';
 import { ElementVisual } from '../../../_types';
 

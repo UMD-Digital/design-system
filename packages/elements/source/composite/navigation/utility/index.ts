@@ -1,5 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import { convertJSSObjectToStyles, getStyleStringFromJssObject } from '@universityofmaryland/web-utilities-library/styles';
+import { eventAccessibilityFocus } from '@universityofmaryland/web-utilities-library/accessibility';
+import * as asset from 'helpers/assets';
 import {
   createNavAlert,
   STYLES_NAV_ALERT,
@@ -60,13 +62,13 @@ const isDesktop = () => window.innerWidth >= DESKTOP;
 
 // prettier-ignore
 const LockStyles = `
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_UTILITY_LOCK}`]: layout.space.horizontal.larger,
     },
   })}
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_LOCK_FULL}`]: layout.space.horizontal.full,
     },
@@ -384,7 +386,7 @@ const CreateSearchFormButton = ({
       if (focusElement) focusElement.focus();
     }, 100);
 
-    focusCallback = Utility.accessibility.eventAccessibilityFocus({
+    focusCallback = eventAccessibilityFocus({
       element: expandElement,
       action: () => eventClose(),
     });
@@ -392,7 +394,7 @@ const CreateSearchFormButton = ({
 
   button.setAttribute('aria-label', 'enable the search form');
   button.setAttribute('type', 'button');
-  button.innerHTML = `${Utility.asset.icon.MAGNIFY_GLASS}`;
+  button.innerHTML = `${asset.icon.MAGNIFY_GLASS}`;
   button.setAttribute('aria-controls', UtilitySearch.Elements.form);
   button.classList.add(ELEMENT_UTILITY_SEARCH_BUTTON);
   button.setAttribute('aria-expanded', 'false');
@@ -449,13 +451,13 @@ const CreateMobileMenuButton = ({
       if (focusElement) focusElement.focus();
     }, 100);
 
-    focusCallback = Utility.accessibility.eventAccessibilityFocus({
+    focusCallback = eventAccessibilityFocus({
       element: expandElement,
       action: () => eventClose(),
     });
   };
 
-  button.innerHTML = `${Utility.asset.icon.CHEVRON_SMALL}`;
+  button.innerHTML = `${asset.icon.CHEVRON_SMALL}`;
   button.setAttribute('type', 'button');
   button.setAttribute('aria-label', 'toggle mobile menu');
   button.setAttribute('aria-controls', `${ELEMENT_UTILITY_MOBILE_MENU}`);
@@ -632,7 +634,7 @@ const CreateNavigationUtility = (props: TypeUtilityRequirements) =>
 
       let styles =
         STYLES_NAVIGATION_UTILITY +
-        Utility.theme.getStyleStringFromJssObject(secondaryCta);
+        getStyleStringFromJssObject(secondaryCta);
 
       const setLayout = () => {
         const menuItems = CreateMenuItems({ ...props });

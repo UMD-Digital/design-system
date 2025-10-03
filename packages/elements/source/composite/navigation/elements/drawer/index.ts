@@ -1,5 +1,8 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import * as assets from 'helpers/assets';
+import * as theme from 'helpers/theme';
+import { debounce } from '@universityofmaryland/web-utilities-library/performance';
+import { eventAccessibilityFocus } from '@universityofmaryland/web-utilities-library/accessibility';
 import { TypeMenuDisplayButtonRequirements } from '../menu-button';
 import NavDrawerSlider, { TypeNavSliderRequirements } from '../slider';
 
@@ -92,7 +95,7 @@ const STYLES_NAV_DRAWER_ELEMENT = `
 const CreateDrawerButton = (element: TypeDrawerCloseButton) => {
   const drawerCloseButton = document.createElement('button');
 
-  drawerCloseButton.innerHTML = Utility.asset.icon.X;
+  drawerCloseButton.innerHTML = assets.icon.X;
   drawerCloseButton.classList.add(ELEMENT_NAV_DRAWER_CLOSE_BUTTON);
   drawerCloseButton.setAttribute('aria-label', 'Close navigation drawer');
   drawerCloseButton.addEventListener('click', element.eventClose.bind(element));
@@ -183,7 +186,7 @@ const CreateNavDrawerElement = (props: TypeNavDrawerRequirements) =>
         body.style.overflow = 'hidden';
         closeButton.focus();
 
-        Utility.accessibility.eventAccessibilityFocus({
+        eventAccessibilityFocus({
           element: elementContainer,
           action: () => eventClose(),
           shadowDomContext: context,

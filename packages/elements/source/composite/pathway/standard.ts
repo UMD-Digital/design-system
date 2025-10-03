@@ -1,6 +1,6 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementModel } from 'model';
-import { theme } from 'utilities';
+import * as theme from 'helpers/theme';
 import { createTextLockupMedium, createAssetContent } from './_common';
 import { type ElementVisual } from '../../_types';
 import { type PathwayStandardProps } from './_types';

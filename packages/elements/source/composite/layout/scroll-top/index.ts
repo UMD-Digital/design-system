@@ -1,5 +1,6 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import * as asset from 'helpers/assets';
+import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 
 type TypeScrollTopProps = {
   isFixed?: boolean;
@@ -116,7 +117,7 @@ export default (props: TypeScrollTopProps) =>
         behavior: 'smooth',
       });
     });
-    container.innerHTML = Utility.asset.icon.ARROW;
+    container.innerHTML = asset.icon.ARROW;
     container.appendChild(text);
 
     declaration.appendChild(container);
@@ -127,12 +128,12 @@ export default (props: TypeScrollTopProps) =>
 
       window.addEventListener(
         'scroll',
-        Utility.performance.debounce(() => eventScroll(), 10),
+        debounce(() => eventScroll(), 10),
       );
 
       window.addEventListener(
         'resize',
-        Utility.performance.debounce(() => eventResize(), 20),
+        debounce(() => eventResize(), 20),
       );
     }
 

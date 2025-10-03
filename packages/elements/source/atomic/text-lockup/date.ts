@@ -1,5 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
+import { truncateText } from '@universityofmaryland/web-utilities-library/string';
+import { animationLinkSpan } from '@universityofmaryland/web-utilities-library/animation';
 
 type TypeEventLockupDate = {
   headline: HTMLElement | null;
@@ -24,13 +26,13 @@ const HeadlineStyles = `
     margin-left: ${token.spacing.sm};
   }
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${EVENT_HEADLINE}`]: typography.sans.large,
     },
   })}
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${EVENT_HEADLINE} *`]: typography.sans.large,
     },
@@ -44,15 +46,15 @@ const HeadlineStyles = `
     }
   }
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${EVENT_HEADLINE} a`]: animation.line.slideUnderBlack,
     },
   })}
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
-      [`.${EVENT_DATE_CONTAINER}${IS_THEME_DARK} .${EVENT_HEADLINE} a`]: animation.line.slideUnderWhite, 
+      [`.${EVENT_DATE_CONTAINER}${IS_THEME_DARK} .${EVENT_HEADLINE} a`]: animation.line.slideUnderWhite,
     },
   })}
 `;
@@ -87,14 +89,14 @@ export default (props: TypeEventLockupDate) => {
   }
 
   if (headline) {
-    const modifiedText = Utility.markup.modify.truncateText({
+    const modifiedText = truncateText({
       text: headline.innerHTML,
       maxTextSize: 50,
     });
 
     headline.innerHTML = modifiedText;
     headline.classList.add(EVENT_HEADLINE);
-    Utility.markup.modify.animationLinkSpan({ element: headline });
+    animationLinkSpan({ element: headline });
     container.appendChild(headline);
   }
 

@@ -78,6 +78,7 @@ export default defineConfig({
         '../utilities/source',
       ),
       utilities: resolve(__dirname, 'source/utilities'),
+      helpers: resolve(__dirname, 'source/helpers'),
       atomic: resolve(__dirname, 'source/atomic'),
       composite: resolve(__dirname, 'source/composite'),
       layout: resolve(__dirname, 'source/layout'),

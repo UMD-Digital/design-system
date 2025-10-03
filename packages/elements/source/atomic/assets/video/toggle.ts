@@ -1,5 +1,5 @@
 import { ElementModel } from 'model';
-import * as Utility from 'utilities';
+import * as asset from 'helpers/assets';
 
 interface VideoProps {
   video: HTMLVideoElement;
@@ -46,7 +46,7 @@ export default (props: VideoProps) =>
 
     const setPlay = () => {
       button.element.setAttribute('aria-label', 'Pause');
-      button.element.innerHTML = Utility.asset.icon.PAUSE;
+      button.element.innerHTML = asset.icon.PAUSE;
       video.muted = true;
       video.play().catch((error) => {
         if (error.name === 'NotAllowedError') {
@@ -57,14 +57,14 @@ export default (props: VideoProps) =>
     };
     const setPause = () => {
       button.element.setAttribute('aria-label', 'Play');
-      button.element.innerHTML = Utility.asset.icon.PLAY;
+      button.element.innerHTML = asset.icon.PLAY;
       video.pause();
     };
 
     // Load styles and attributes
 
     button.element.setAttribute('aria-label', 'Play');
-    button.element.innerHTML = Utility.asset.icon.PLAY;
+    button.element.innerHTML = asset.icon.PLAY;
     button.element.setAttribute('type', 'button');
     button.element.addEventListener('click', () => {
       if (video.paused) {

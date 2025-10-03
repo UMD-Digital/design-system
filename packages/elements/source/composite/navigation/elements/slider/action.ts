@@ -1,5 +1,6 @@
 import { token, typography } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import * as theme from 'helpers/theme';
+import * as assets from 'helpers/assets';
 
 export type TypeActionProps = {
   GetContainer: () => Element | null;
@@ -19,7 +20,7 @@ const ELEMENT_SLIDE_ACTION_BUTTON = 'nav-slide-action-button';
 
 // prettier-ignore
 const LinkStyles = `
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_SLIDE_ACTION_LINK}`]: typography.sans.small,
     },
@@ -94,7 +95,7 @@ const CreateSlideButton = ({
   button.classList.add(ELEMENT_SLIDE_ACTION_BUTTON);
   button.setAttribute('type', 'button');
   button.setAttribute('aria-label', 'Next level of navigation');
-  button.innerHTML = Utility.asset.icon.CHEVRON_SMALL;
+  button.innerHTML = assets.icon.CHEVRON_SMALL;
   button.addEventListener('click', () => {
     setUpcomingSlide(childReference);
     eventSlideLeft();

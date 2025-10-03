@@ -1,5 +1,5 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 
 const ELEMENT_SLIDE_INDICATOR_CONTAINER = 'slide-indicator-container';
 const ELEMENT_SLIDE_INDICATOR_LINE = 'slide-indicator-line';
@@ -170,7 +170,7 @@ export default ({
 
     window.addEventListener(
       'resize',
-      Utility.performance.debounce(eventResize, 20),
+      debounce(eventResize, 20),
     );
 
     return {

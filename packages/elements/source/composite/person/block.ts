@@ -1,5 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { asset, markup, theme } from 'utilities';
+import * as asset from 'helpers/assets';
+import { imageFromSvg } from '@universityofmaryland/web-utilities-library/media';
+import * as theme from 'helpers/theme';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
 import { PersonCard } from './_types';
@@ -16,7 +18,7 @@ export default (props: PersonCard) => {
   let image = personImage;
 
   if (!image) {
-    image = markup.create.imageFromSvg({
+    image = imageFromSvg({
       SVG: asset.icon.PERSON,
     });
   }

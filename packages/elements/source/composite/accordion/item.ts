@@ -1,5 +1,6 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
+import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 
 type TypeHeadlineText = { headline?: HTMLElement | null };
 type TypeBodyText = { text?: HTMLElement | null };
@@ -89,7 +90,7 @@ const OverwriteThemeDark = `
 
 // prettier-ignore
 const bodyStyles = `
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_BODY_WRAPPER}`]: Styles.typography.sans.medium
     },
@@ -129,7 +130,7 @@ const bodyStyles = `
 
 // prettier-ignore
 const headlineStyles = `
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HEADLINE}`]: Styles.typography.sans.large,
     },
@@ -368,7 +369,7 @@ export default (props: TypeAccordionProps) =>
       open({ hasAnimation: false });
     }
 
-    window.addEventListener('resize', Utility.performance.debounce(resize, 20));
+    window.addEventListener('resize', debounce(resize, 20));
 
     return {
       element: declaration,

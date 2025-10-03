@@ -1,6 +1,6 @@
 import { token } from '@universityofmaryland/web-styles-library';
 import { ElementModel } from 'model';
-import * as utilities from 'utilities';
+import * as asset from 'helpers/assets';
 import { BaseProps } from '../../_types';
 import { type ElementVisual } from '../../../../_types';
 import { BREAKPOINTS } from '../../globals';
@@ -20,8 +20,8 @@ export default ({ isThemeLight }: CampaignProps): ElementVisual => {
   );
 
   link.innerHTML =
-    (!isThemeLight && utilities.asset.logo.CAMPAIGN_LOGO) ||
-    utilities.asset.logo.CAMPAIGN_LOGO_DARK;
+    (!isThemeLight && asset.logo.CAMPAIGN_LOGO) ||
+    asset.logo.CAMPAIGN_LOGO_DARK;
 
   const linkElement = ElementModel.create({
     element: link,

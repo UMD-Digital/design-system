@@ -1,5 +1,5 @@
 import { token, layout } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
 import { ElementModel } from 'model';
 
 export type TypeAlertTextProps = {
@@ -25,7 +25,7 @@ const ctaStyles = `
     margin-top: ${token.spacing.sm};
   }
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${className.actions}`]: layout.grid.inline.tabletRows,
     },

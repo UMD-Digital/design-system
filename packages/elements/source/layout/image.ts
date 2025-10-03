@@ -1,5 +1,5 @@
 import { token, typography } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import * as theme from 'helpers/theme';
 
 const ATTRIBUTE_CAPTION = 'data-caption';
 const ATTRIBUTE_CREDIT = 'data-credit';
@@ -13,7 +13,7 @@ const STYLES_IMAGE_CONTAINER = `
     display: inline-block;
   }
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_IMAGE_CONTAINER} > span`]: typography.sans.min,
     },

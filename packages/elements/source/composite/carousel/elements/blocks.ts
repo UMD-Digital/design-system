@@ -1,5 +1,8 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import { debounce } from '@universityofmaryland/web-utilities-library/performance';
+import { createEventSwipe } from '@universityofmaryland/web-utilities-library/events';
+import * as asset from 'helpers/assets';
+import * as theme from 'helpers/theme';
 
 type TypeDisplayLogic = {
   mobileCount: number;
@@ -269,7 +272,7 @@ const EventSwipe = (props: TypeHelpers) => {
     }
   };
 
-  Utility.javascriptEvents.CreateEventSwipe({ container, callback: swipes });
+  createEventSwipe({ container, callback: swipes });
 };
 
 const ButtonVisibility = (props: TypeHelpers) => {
@@ -335,7 +338,7 @@ const CreateButton = ({
   button.setAttribute('type', 'button');
   button.setAttribute('aria-label', 'Next');
   button.classList.add(ELEMENT_ANIMATION_CAROUSEL_BUTTON);
-  button.innerHTML = Utility.asset.icon.FORWARD_ARROW;
+  button.innerHTML = asset.icon.FORWARD_ARROW;
 
   if (isRight) {
     button.classList.add(ELEMENT_ANIMATION_CAROUSEL_NEXT);
@@ -373,7 +376,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       tabletCount: 2,
       desktopCount: 3,
       maxCount: 4,
-      blockGap: Utility.theme.convertPixelStringToNumber(token.spacing.lg),
+      blockGap: theme.convertPixelStringToNumber(token.spacing.lg),
       hasRightButton: true,
       hasLeftButton: true,
       showMobileHint: true,
@@ -605,7 +608,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
 
     window.addEventListener(
       'resize',
-      Utility.performance.debounce(Event.resize, 30),
+      debounce(Event.resize, 30),
     );
 
     return {

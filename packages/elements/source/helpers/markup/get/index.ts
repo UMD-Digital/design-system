@@ -16,3 +16,22 @@ export const icon = ({ element }: { element: HTMLElement }) => {
   if (imgIcon) return imgIcon;
   return null;
 };
+
+export const findParent = ({
+  element,
+  attr,
+}: {
+  element: HTMLElement;
+  attr: string;
+}): HTMLElement | null => {
+  let currentElement: HTMLElement | null = element;
+
+  while (currentElement && currentElement !== document.body) {
+    if (currentElement.hasAttribute(attr)) {
+      return currentElement;
+    }
+    currentElement = currentElement.parentElement;
+  }
+
+  return null;
+};

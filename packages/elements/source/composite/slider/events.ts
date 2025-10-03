@@ -1,5 +1,8 @@
 import { token, typography } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import * as theme from 'helpers/theme';
+import * as assets from 'helpers/assets';
+import { createEventSwipe } from '@universityofmaryland/web-utilities-library/events';
+import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 
 type TypeSliderEventButtonProps = {
   SetCountForward: () => void;
@@ -230,7 +233,7 @@ const IntroStyles = `
     display: block;
   }
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_SLIDER_EVENT_INTRO_HEADLINE}`]: typography.sans.larger,
     },
@@ -320,7 +323,7 @@ const CreateBackButton = ({
 }: TypeSliderEventButtonProps) => {
   const button = document.createElement('button');
 
-  button.innerHTML = Utility.asset.icon.BACK_ARROW;
+  button.innerHTML = assets.icon.BACK_ARROW;
   button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON);
   button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON_BACK);
   button.style.display = 'none';
@@ -347,7 +350,7 @@ const CreateForwardButton = ({
 }: TypeSliderEventButtonProps) => {
   const button = document.createElement('button');
 
-  button.innerHTML = Utility.asset.icon.FORWARD_ARROW;
+  button.innerHTML = assets.icon.FORWARD_ARROW;
   button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON);
   button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON_FORWARD);
   button.setAttribute('type', 'button');
@@ -518,7 +521,7 @@ const SizeDatesElements = ({
       })[0];
       const height =
         maxHeightElement.offsetHeight +
-        Utility.theme.convertPixelStringToNumber(
+        theme.convertPixelStringToNumber(
           maxHeightElement.style.marginTop,
         );
 
@@ -655,7 +658,7 @@ const EventSwipe = ({
     SetButtonVisibility();
   };
 
-  Utility.javascriptEvents.CreateEventSwipe({ container, callback: swipes });
+  createEventSwipe({ container, callback: swipes });
 };
 
 const OnLoadStyles = ({ dataSlider }: { dataSlider: HTMLElement }) => {
@@ -743,7 +746,7 @@ export default (props: TypeSliderEventProps) =>
 
     window.addEventListener(
       'resize',
-      Utility.performance.debounce(EventResize, 20),
+      debounce(EventResize, 20),
     );
 
     return {

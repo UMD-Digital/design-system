@@ -5,7 +5,9 @@ import {
   typography,
 } from '@universityofmaryland/web-styles-library';
 import { actions } from 'atomic';
-import * as Utility from 'utilities';
+import * as theme from 'helpers/theme';
+import * as assets from 'helpers/assets';
+import { fetchGraphQL } from '@universityofmaryland/web-utilities-library/network';
 
 type AlertData = {
   id: string;
@@ -39,7 +41,6 @@ type CacheCheckResult = {
   cachedData: AlertData | null;
 };
 
-const { FetchGraphQL } = Utility.network;
 
 const QUERY = `
   query CampusAlertsQuery {
@@ -178,7 +179,7 @@ const CloseButtonStyles = `
 
 // prettier-ignore
 const TextStyles = `
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${theme.convertJSSObjectToStyles({
     styleObj: {
       [`${ALERT_TITLE}`]: typography.sans.large,
     },
@@ -192,7 +193,7 @@ const TextStyles = `
     margin-top: ${token.spacing.sm};
   }
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${theme.convertJSSObjectToStyles({
     styleObj: {
       [`${ALERT_TEXT}`]: element.text.rich.advanced,
     },
@@ -231,7 +232,7 @@ const WrapperStyles = `
 
 // prettier-ignore
 const LockStyles = `
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${theme.convertJSSObjectToStyles({
     styleObj: {
       [`${LOCK}`]: layout.space.horizontal.full,
     },
@@ -353,7 +354,7 @@ const createCloseButton = (container: HTMLElement): HTMLButtonElement => {
     'aria-label': 'remove alert',
   }) as HTMLButtonElement;
 
-  button.innerHTML = Utility.asset.icon.X;
+  button.innerHTML = assets.icon.X;
   button.addEventListener('click', () => {
     const cachedAlert = getStoredValue<AlertData>(
       ALERT_CONSTANTS.STORAGE_KEYS.ALERT,
@@ -457,7 +458,7 @@ const fetchAlerts = async ({
   try {
     const url = alertUrl || ALERT_CONSTANTS.URLS.DEFAULT;
 
-    return await FetchGraphQL({
+    return await fetchGraphQL({
       query: QUERY,
       url,
       token: 'VIDnMeNYHTrLvWPtPpK5MNpjuv5WmmhU',

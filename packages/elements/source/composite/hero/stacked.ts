@@ -1,5 +1,5 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import * as Utils from 'utilities';
+import * as theme from 'helpers/theme';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
 import { type ElementVisual } from '../../_types';
@@ -187,7 +187,7 @@ const createHeadline = (
 
   const animationStyles = {
     [`@container (${Styles.token.media.queries.tablet.min})`]: {
-      ...Utils.theme.media.withViewTimelineAnimation({
+      ...theme.media.withViewTimelineAnimation({
         animation: `${REF_KEY_FRAME_FONT_COLOR} ease-in-out forwards`,
         animationTimeline: 'view()',
         animationRangeStart: '100vh',
@@ -272,7 +272,7 @@ const createText = (
 
         ...(includesAnimation && {
           [`@container (${Styles.token.media.queries.tablet.min})`]: {
-            ...Utils.theme.media.withViewTimelineAnimation({
+            ...theme.media.withViewTimelineAnimation({
               position: 'sticky',
               top: additionalSpread || 0,
             }),
@@ -283,7 +283,7 @@ const createText = (
           ...(includesAnimation && {
             ...(!isThemeDark && {
               [`@container (${Styles.token.media.queries.tablet.min})`]: {
-                ...Utils.theme.media.withViewTimelineAnimation({
+                ...theme.media.withViewTimelineAnimation({
                   animation: `${REF_KEY_FRAME_FONT_COLOR} ease-in-out forwards`,
                   animationTimeline: 'view()',
                   animationRangeStart: '90vh',

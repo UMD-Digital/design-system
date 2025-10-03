@@ -1,5 +1,5 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { theme } from 'utilities';
+import * as theme from 'helpers/theme';
 import { ElementModel } from 'model';
 import { type UMDElement } from '../../../_types';
 

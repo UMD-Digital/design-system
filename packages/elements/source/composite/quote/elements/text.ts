@@ -1,252 +1,242 @@
-import { typography, token } from '@universityofmaryland/web-styles-library';
-import { ElementModel } from 'model';
-import { ElementVisual } from '_types';
-import { CreateAction, CreateIconSpan, SMALL, BaseProps } from '..';
+import {
+  typography,
+  layout,
+  token,
+} from '@universityofmaryland/web-styles-library';
+import * as theme from 'helpers/theme';
+import * as assets from 'helpers/assets';
 
-export interface QuoteTextContainer extends BaseProps {
+export type TypeQuoteTextContainer = {
+  quote: HTMLElement | null;
   attribution: HTMLElement | null;
   attributionSubText: HTMLElement | null;
   action: HTMLElement | null;
+  isThemeDark?: boolean;
+  isThemeMaryland?: boolean;
+};
+
+type TypeQuoteTextContainerProps = TypeQuoteTextContainer & {
   isSizeLarge?: boolean;
-}
+};
 
-export default (props: QuoteTextContainer) => {
-  const {
-    isThemeDark,
-    isThemeMaryland,
-    isSizeLarge = false,
-    isTypeInline,
-    image,
-    quote,
-    attribution,
-    attributionSubText,
-    action,
-    includesAnimation,
-  } = props;
+const TEXT_CONTAINER_ELEMENT_NAME = 'umd-element-quote-text-container';
+const ATTRIBUTE_THEME = 'theme';
+const ATTRIBUTE_SIZE = 'size';
+const THEME_DARK = 'dark';
+const THEME_MARYLAND = 'maryland';
+const SIZE_LARGE = 'large';
 
-  const createQuoteText = (
-    quote: HTMLElement,
-    quoteChildren: ElementVisual[],
-  ) => {
-    let quoteTextElement: HTMLElement = quote;
-    const wordsList = splitWords(quote);
+const TEXT_CONTAINER = 'quote-text-container';
+const TEXT_CONTAINER_WRAPPER = 'quote-text-container-wrapper';
+const TEXT_CONTAINER_QUOTE_WRAPPER = 'quote-container-quote';
+const TEXT_CONTAINER_ATTRIBUTION_WRAPPER = 'quote-container-attribution';
+const TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER =
+  'quote-container-text-attribution-sub-text';
+const ELEMENTS_TEXT_CONTAINER_ACTIONS = 'quote-container-actions';
 
-    if (includesAnimation) {
-      quoteTextElement = document.createElement('div');
+const IS_THEME_DARK = `.${TEXT_CONTAINER}[${ATTRIBUTE_THEME}='${THEME_DARK}']`;
+const IS_THEME_MARYLAND = `.${TEXT_CONTAINER}[${ATTRIBUTE_THEME}='${THEME_MARYLAND}']`;
+const IS_SIZE_LARGE = `.${TEXT_CONTAINER}[${ATTRIBUTE_SIZE}='${SIZE_LARGE}']`;
 
-      wordsList.map((word) => {
-        quoteTextElement.appendChild(word);
-      });
-    }
+// prettier-ignore
+const VarationSizeLarge = `
+  ${theme.convertJSSObjectToStyles({
+    styleObj: {
+      [`${IS_SIZE_LARGE} .${TEXT_CONTAINER_QUOTE_WRAPPER}`]: typography.sans.extraLarge,
+    },
+  })}
 
-    const quoteElement = ElementModel.create({
-      element: quoteTextElement,
-      className: 'quote-container-quote',
-      children: quoteChildren,
-      elementStyles: {
-        element: {
-          position: 'relative',
-          fontWeight: '700',
-          color: token.color.black,
-          ...typography.sans.larger,
+  ${theme.convertJSSObjectToStyles({
+    styleObj: {
+      [`${IS_SIZE_LARGE} .${TEXT_CONTAINER_QUOTE_WRAPPER} *`]: typography.sans.extraLarge,
+    },
+  })}
+`
 
-          ...(isSizeLarge && { ...typography.sans.extraLarge }),
+// prettier-ignore
+const VarationThemeDark = `
+  ${IS_THEME_DARK} * {
+    color: ${token.color.white};
+  }
+`
 
-          ...((isThemeDark || isThemeMaryland) && {
-            color: token.color.white,
-          }),
+// prettier-ignore
+const VarationThemeMaryland = `
+  ${IS_THEME_MARYLAND} * {
+    color: ${token.color.white};
+  }
+`
 
-          [`&::before`]: {
-            content: '""',
-            position: 'absolute',
-            left: `-${token.spacing.md}`,
-            top: '7px',
-            height: 'calc(100% - 14px)',
-            width: '2px',
-            display: 'block',
-            backgroundColor: token.color.red,
-            ...(isThemeMaryland && { backgroundColor: token.color.gold }),
+// prettier-ignore
+const QuoteStyles = `
+  & .${TEXT_CONTAINER_QUOTE_WRAPPER} {
+    font-weight: 700;
+  }
 
-            ...(image &&
-              isTypeInline && {
-                display: 'none',
-              }),
+  .${TEXT_CONTAINER_QUOTE_WRAPPER} {
+    font-weight: 700;
+    color: ${token.color.black};
+  }
 
-            [`@container (min-width: ${SMALL}px)`]: {
-              left: `-${token.spacing.md}`,
-            },
+  .${TEXT_CONTAINER_QUOTE_WRAPPER} * {
+    color: currentColor;
+  }
 
-            [`@container (max-width: ${SMALL - 1}px)`]: {
-              ...(isTypeInline && {
-                display: 'block',
-              }),
-            },
-          },
+  ${theme.convertJSSObjectToStyles({
+    styleObj: {
+      [`.${TEXT_CONTAINER_QUOTE_WRAPPER}`]: typography.sans.larger,
+    },
+  })}
 
-          ['& *']: {
-            color: 'currentColor',
-            ...typography.sans.larger,
-            ...(isSizeLarge && { ...typography.sans.extraLarge }),
-          },
-        },
-      },
-    });
+  ${theme.convertJSSObjectToStyles({
+    styleObj: {
+      [`.${TEXT_CONTAINER_QUOTE_WRAPPER} *`]: typography.sans.larger,
+    },
+  })}
 
-    return quoteElement;
-  };
+  .${TEXT_CONTAINER_QUOTE_WRAPPER} span {
+    display: none;
+  }
+`;
 
-  const getQuoteTextContainerChildren = (props: QuoteTextContainer) => {
-    const wrapperChildren: ElementVisual[] = [];
+// prettier-ignore
+const AttributionStyles = `
+  * + .${TEXT_CONTAINER_ATTRIBUTION_WRAPPER} {
+    margin-top: ${token.spacing.sm};
+  }
 
-    if (quote) {
-      const quoteChildren: ElementVisual[] = [];
-      const iconSpan = CreateIconSpan(props);
+  .${TEXT_CONTAINER_ATTRIBUTION_WRAPPER} {
+    color: ${token.color.gray.dark};
+  }
 
-      if (!image) {
-        quoteChildren.push(iconSpan);
-      }
+  .${TEXT_CONTAINER_ATTRIBUTION_WRAPPER} * {
+    color: currentColor;
+  }
 
-      const quoteElement = createQuoteText(quote, quoteChildren);
+  ${theme.convertJSSObjectToStyles({
+    styleObj: {
+      [`.${TEXT_CONTAINER_ATTRIBUTION_WRAPPER}`]: typography.sans.medium,
+    },
+  })}
 
-      wrapperChildren.push(quoteElement);
-    }
+  ${theme.convertJSSObjectToStyles({
+    styleObj: {
+      [`.${TEXT_CONTAINER_ATTRIBUTION_WRAPPER} *`]: typography.sans.medium,
+    },
+  })}
+`;
 
-    if (attribution) {
-      const attributionElement = ElementModel.create({
-        element: attribution,
-        className: 'quote-container-attribution',
-        elementStyles: {
-          element: {
-            marginTop: token.spacing.sm,
+// prettier-ignore
+const AttributionSubTextStyles = `
+  * + .${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER} {
+    margin-top: 2px;
+  }
 
-            ...(includesAnimation && {
-              opacity: '0',
-              transform: 'translateY(20px)',
-              transition: 'opacity 1s ease, transform 0.5s ease',
-            }),
+  .${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER} {
+    color: ${token.color.gray.dark};
+    font-style: italic;
+  }
 
-            ...(isThemeDark && {
-              color: token.color.white,
-            }),
+  .${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER} * {
+    color: currentColor;
+  }
+  
+  ${theme.convertJSSObjectToStyles({
+    styleObj: {
+      [`.${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER}`]: typography.sans.small,
+    },
+  })}
+  
+  ${theme.convertJSSObjectToStyles({
+    styleObj: {
+      [`.${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER} *`]: typography.sans.small,
+    },
+  })}
+`;
 
-            [`& *`]: {
-              color: 'currentColor',
-              ...typography.sans.medium,
-            },
-          },
-        },
-      });
+// prettier-ignore
+const ActionStyles = `
+  * + .${ELEMENTS_TEXT_CONTAINER_ACTIONS} {
+    margin-top: ${token.spacing.sm};
+  }
 
-      wrapperChildren.push(attributionElement);
-    }
+  ${theme.convertJSSObjectToStyles({
+    styleObj: {
+      [`.${ELEMENTS_TEXT_CONTAINER_ACTIONS}`]: layout.grid.inline.tabletRows,
+    },
+  })}
+`;
 
-    if (attributionSubText) {
-      const attributionSubTextElement = ElementModel.create({
-        element: attributionSubText,
-        className: 'quote-container-text-attribution-sub-text',
-        elementStyles: {
-          element: {
-            color: token.color.gray.dark,
-            fontStyle: 'italic',
-            ...typography.sans.small,
+// prettier-ignore
+const STYLES_QUOTE_TEXT_CONTAINER = `
+  .${TEXT_CONTAINER} {
+    container: ${TEXT_CONTAINER_ELEMENT_NAME} / inline-size;
+    width: 100%;
+  }
 
-            ...(includesAnimation && {
-              opacity: '0',
-              transform: 'translateY(20px)',
-              transition: 'opacity 1s ease, transform 0.5s ease',
-            }),
+  ${QuoteStyles}
+  ${AttributionStyles}
+  ${AttributionSubTextStyles}
+  ${ActionStyles}
+  ${VarationThemeDark}
+  ${VarationThemeMaryland}
+  ${VarationSizeLarge}
+`;
 
-            ...((isThemeDark || isThemeMaryland) && {
-              color: token.color.white,
-            }),
-          },
-        },
-      });
+const CreateQuoteTextContainer = ({
+  quote,
+  attribution,
+  attributionSubText,
+  action,
+  isThemeDark,
+  isThemeMaryland,
+  isSizeLarge = false,
+}: TypeQuoteTextContainerProps) => {
+  const container = document.createElement('div');
+  const wrapper = document.createElement('div');
 
-      wrapperChildren.push(attributionSubTextElement);
-    }
+  wrapper.classList.add(TEXT_CONTAINER_WRAPPER);
 
-    if (action) {
-      const actionElement = CreateAction(action, props);
+  if (quote) {
+    const iconSpan = document.createElement('span');
+    iconSpan.innerHTML = assets.icon.QUOTE;
 
-      wrapperChildren.push(actionElement);
-    }
+    quote.appendChild(iconSpan);
+    quote.classList.add(TEXT_CONTAINER_QUOTE_WRAPPER);
+    wrapper.appendChild(quote);
+  }
 
-    return wrapperChildren;
-  };
+  if (attribution) {
+    attribution.classList.add(TEXT_CONTAINER_ATTRIBUTION_WRAPPER);
+    wrapper.appendChild(attribution);
+  }
 
-  const splitWords = (quote: HTMLElement) => {
-    const text = quote.textContent ?? '';
-    const words = text.trim().split(/\s+/);
+  if (attributionSubText) {
+    attributionSubText.classList.add(
+      TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER,
+    );
+    wrapper.appendChild(attributionSubText);
+  }
 
-    const wordElements = words.map((word, index) => {
-      const wordElement = document.createElement('div');
-      wordElement.classList.add('quote-text-split-word');
+  if (action) {
+    action.classList.add(ELEMENTS_TEXT_CONTAINER_ACTIONS);
+    wrapper.appendChild(action);
+  }
 
-      Object.assign(wordElement.style, {
-        display: 'inline-block',
-        whiteSpace: 'pre-wrap',
-        opacity: '0',
-        transform: 'translateY(20px)',
-        transition: 'opacity 1s ease, transform 0.5s ease',
-      });
+  if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
+  if (isThemeMaryland) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
+  if (isSizeLarge) container.setAttribute(ATTRIBUTE_SIZE, SIZE_LARGE);
 
-      wordElement.textContent = word + (index < words.length - 1 ? ' ' : '');
+  container.classList.add(TEXT_CONTAINER);
+  container.appendChild(wrapper);
 
-      return wordElement;
-    });
+  return { element: container, styles: STYLES_QUOTE_TEXT_CONTAINER };
+};
 
-    return wordElements;
-  };
-
-  const CreateQuoteTextContainer = (props: QuoteTextContainer) => {
-    const wrapperChildren = getQuoteTextContainerChildren(props);
-
-    const wrapper = ElementModel.createDiv({
-      className: 'quote-text-container-wrapper',
-      children: wrapperChildren,
-    });
-
-    return ElementModel.createDiv({
-      className: 'quote-text-container',
-      children: [wrapper],
-      elementStyles: {
-        element: {
-          width: '100%',
-          ...typography.sans.medium,
-
-          [`@container (max-width: ${SMALL - 1}px)`]: {
-            paddingTop: token.spacing.lg,
-            paddingLeft: token.spacing.md,
-
-            ...(isTypeInline && {
-              ...(isSizeLarge && { paddingTop: token.spacing['2xl'] }),
-            }),
-          },
-
-          [`@container (min-width: ${SMALL}px)`]: {
-            paddingLeft: token.spacing['4xl'],
-
-            ...(isTypeInline && {
-              ...(image && { paddingLeft: '0' }),
-            }),
-          },
-
-          [`& *`]: {
-            ...typography.sans.medium,
-
-            ...(isThemeDark && {
-              color: token.color.white,
-            }),
-
-            ...(isThemeMaryland && {
-              color: token.color.white,
-            }),
-          },
-        },
-      },
-    });
-  };
-
-  return CreateQuoteTextContainer(props);
+export default {
+  create: CreateQuoteTextContainer,
+  elements: {
+    container: TEXT_CONTAINER,
+    quoteWrapper: TEXT_CONTAINER_QUOTE_WRAPPER,
+  },
 };

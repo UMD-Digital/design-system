@@ -1,5 +1,6 @@
 import { token, layout } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import * as theme from 'helpers/theme';
+import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 
 type TypeStickyProps = {
   stickyColumn?: HTMLElement | null;
@@ -46,7 +47,7 @@ const STYLES_STICKY_COLUMNS_ELEMENT = `
     container: ${ELEMENT_NAME} / inline-size;
   }
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_STICKY_CONTAINER_WRAPPER}`]: layout.grid.gap.two,
     },

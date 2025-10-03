@@ -1,5 +1,5 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import * as asset from 'helpers/assets';
 import { ElementModel } from 'model';
 import { type ElementVisual } from '../../_types';
 import { type PersonContactProps } from '../_types';
@@ -53,7 +53,7 @@ const makeContactLink = ({
   isThemeDark?: boolean;
 }) => {
   const isLink =
-    element.getAttribute('href') && icon !== Utility.asset.icon.PIN;
+    element.getAttribute('href') && icon !== asset.icon.PIN;
   const textSpan = makeText({ text: element.innerHTML, isThemeDark });
   const iconSpan = makeIcon({ icon, isThemeDark });
   const containerStyles = {
@@ -108,7 +108,7 @@ export default ({
         children: [
           makeContactLink({
             element: phone,
-            icon: Utility.asset.icon.PHONE,
+            icon: asset.icon.PHONE,
             isThemeDark,
           }),
         ],
@@ -123,7 +123,7 @@ export default ({
         children: [
           makeContactLink({
             element: email,
-            icon: Utility.asset.icon.EMAIL,
+            icon: asset.icon.EMAIL,
             isThemeDark,
           }),
         ],
@@ -138,7 +138,7 @@ export default ({
         children: [
           makeContactLink({
             element: linkendIn,
-            icon: Utility.asset.social.LINKEDIN,
+            icon: asset.social.LINKEDIN,
             isThemeDark,
           }),
         ],
@@ -153,7 +153,7 @@ export default ({
         children: [
           makeContactLink({
             element: address,
-            icon: Utility.asset.icon.PIN,
+            icon: asset.icon.PIN,
             isThemeDark,
           }),
         ],

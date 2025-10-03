@@ -1,5 +1,5 @@
 import { token, typography } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import * as theme from 'helpers/theme';
 import Slides from './slides';
 import SlideAction, { TypeActionProps } from './action';
 
@@ -33,7 +33,7 @@ const OVERWRITE_ACTION_PRIMARY_LINK = `.${ELEMENT_SLIDER_FIRST_SLIDE_PRIMARY_LIN
 
 //prettier-ignore;
 const OverwriteSlidePrimaryLink = `
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${theme.convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_ACTION_PRIMARY_LINK}`]: typography.sans.large,
     },

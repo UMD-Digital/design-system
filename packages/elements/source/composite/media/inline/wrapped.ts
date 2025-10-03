@@ -1,5 +1,5 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { Image as LayoutImage } from 'layout';
 import CaptionContainer from '../elements/caption';
 
@@ -185,7 +185,7 @@ const CreateMediaInlineWrapped = (props: TypeMediaInlineWrappedRequirements) =>
 
     window.addEventListener(
       'resize',
-      Utility.performance.debounce(() => {
+      debounce(() => {
         eventResize();
       }, 20),
     );

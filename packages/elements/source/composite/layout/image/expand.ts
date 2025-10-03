@@ -1,5 +1,7 @@
 import { token, layout } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
+import { isScreenZoomed, isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
+import * as theme from 'helpers/theme';
 
 type TypeLayoutImageExpandProps = {
   content: HTMLElement;
@@ -23,7 +25,7 @@ const ELEMENT_EXPAND_TEXT_ANIMATION = 'layout-image-expand-text-animation';
 
 // prettier-ignore
 const TextLock = `
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_EXPAND_TEXT_LOCK}`]: layout.space.horizontal.larger,
     },
@@ -292,7 +294,7 @@ export default (props: TypeLayoutImageExpandProps) => {
   const sizeImageForText = () => {
     const textContainerHeight =
       textContainer.clientHeight +
-      Utility.theme.convertPixelStringToNumber(spacing['2xl']) * 2;
+      theme.convertPixelStringToNumber(spacing['2xl']) * 2;
     const imageContainerHeight = container.clientHeight;
 
     if (textContainerHeight > imageContainerHeight) {
@@ -301,8 +303,8 @@ export default (props: TypeLayoutImageExpandProps) => {
   };
 
   if (
-    Utility.accessibility.isScreenZoomed() &&
-    !Utility.accessibility.isPrefferdReducedMotion()
+    isScreenZoomed() &&
+    !isPreferredReducedMotion()
   ) {
     textContainer.style.height = '90vh';
     textContainer.style.transform = 'translateY(0)';

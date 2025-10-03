@@ -1,6 +1,6 @@
 import { token } from '@universityofmaryland/web-styles-library';
 import { ElementModel } from 'model';
-import * as utilities from 'utilities';
+import * as asset from 'helpers/assets';
 import createCampaignRow, { type CampaignProps } from '../campaign';
 import createCallToAction, { type CallToActionProps } from '../call-to-action';
 import { BREAKPOINTS } from '../../../globals';
@@ -28,8 +28,8 @@ const createLogoLinkElement = (
     );
 
     logoLink.innerHTML = !isThemeLight
-      ? `${utilities.asset.logo.DARK_LOGO}`
-      : `${utilities.asset.logo.LIGHT_LOGO}`;
+      ? `${asset.logo.DARK_LOGO}`
+      : `${asset.logo.LIGHT_LOGO}`;
 
     return logoLink;
   };

@@ -1,6 +1,6 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { assets, layout, textLockup } from 'atomic';
-import { theme } from 'utilities';
+import * as theme from 'helpers/theme';
 import { CardBlockProps } from './_types';
 import { type UMDElement } from '../../_types';
 

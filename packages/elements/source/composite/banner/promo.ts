@@ -4,7 +4,8 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import * as asset from 'helpers/assets';
+import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
 
 type TypeBannerPromoProps = {
   headline?: HTMLElement | null;
@@ -48,7 +49,7 @@ const OverwriteThemeDark = `
     color: ${token.color.white};
   }
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_THEME_DARK_RICH_TEXT}`]: element.text.rich.advancedDark,
     },
@@ -77,13 +78,13 @@ const ActionsStyles = `
 
 // prettier-ignore
 const TextStyles = `
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_RICH_TEXT}`]: element.text.rich.advanced,
     },
   })}
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_RICH_TEXT} a`]: animation.line.fadeUnderRed,
     },
@@ -100,7 +101,7 @@ const TextStyles = `
 
 // prettier-ignore
 const HeadlineStyles = `
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HEADLINE}`]: typography.sans.extraLarge,
     },
@@ -214,7 +215,7 @@ const CreateBannerPromoElement = (props: TypeBannerPromoProps) =>
     }
 
     if (includeSeal) {
-      let seal = Utility.asset.logo.SEAL_WHITE;
+      let seal = asset.logo.SEAL_WHITE;
 
       container.innerHTML = `${seal}`;
     }

@@ -1,5 +1,5 @@
 import { token, typography } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
 
 export type TypeLogoRequirements = {
   isBordered?: boolean;
@@ -59,13 +59,13 @@ const TextStyles = `
     color: ${token.color.gray.darker};
   }
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_LOGO_BLOCK_TEXT}`]: typography.sans.min,
     },
   })}
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_LOGO_BLOCK_TEXT} *`]: typography.sans.min,
     },

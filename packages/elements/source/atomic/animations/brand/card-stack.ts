@@ -1,7 +1,8 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementModel } from 'model';
 import { assets } from 'atomic';
-import { theme, accessibility } from 'utilities';
+import * as theme from 'helpers/theme';
+import { isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
 import { type ElementVisual } from '../../../_types';
 
 interface CardStackProps {
@@ -342,7 +343,7 @@ const KEY_FRAME_GRID_EXPAND = 'grid-expand';
 const KEY_FRAME_GRID_ITEM = 'grid-item';
 const KEY_FRAME_FEATURED_SIZE = 'featured-size';
 
-const isPreferReducedMotion = accessibility.isPrefferdReducedMotion();
+const isPreferReducedMotion = isPreferredReducedMotion();
 const isScrollTimelineSupported = () =>
   'ScrollTimeline' in window || CSS.supports('animation-timeline', 'scroll()');
 const isDisplayWithoutAnimation =

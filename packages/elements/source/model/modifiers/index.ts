@@ -1,4 +1,5 @@
-import * as Utility from 'utilities';
+import { combineStyles } from '@universityofmaryland/web-utilities-library/styles';
+import { wrapTextNodeInSpan } from '@universityofmaryland/web-utilities-library';
 import { modifiers } from './style';
 import {
   type ElementProps,
@@ -45,35 +46,35 @@ const CONFIG = {
   builders: {
     action: {
       styleModifiers: (props: StyleModifierProps) =>
-        Utility.theme.combineStyles(
+        combineStyles(
           ...CONFIG.modifiers.withoutTextColor(props),
         ),
     },
 
     animationLine: {
       styleModifiers: (props: StyleModifierProps) =>
-        Utility.theme.combineStyles(
+        combineStyles(
           ...CONFIG.modifiers.withAnimationLink(props),
         ),
       elementModifiers: [
         (element: HTMLElement) =>
-          Utility.markup.modify.wrapTextNodeInSpan(element),
+          wrapTextNodeInSpan(element),
       ],
     },
 
     base: {
       styleModifiers: (props: StyleModifierProps) =>
-        Utility.theme.combineStyles(...CONFIG.modifiers.base(props)),
+        combineStyles(...CONFIG.modifiers.base(props)),
     },
 
     childLink: {
       styleModifiers: (props: StyleModifierProps) =>
-        Utility.theme.combineStyles(...CONFIG.modifiers.withChildLink(props)),
+        combineStyles(...CONFIG.modifiers.withChildLink(props)),
     },
 
     default: {
       styleModifiers: (props: StyleModifierProps) =>
-        Utility.theme.combineStyles(...CONFIG.modifiers.default(props)),
+        combineStyles(...CONFIG.modifiers.default(props)),
     },
   },
 };

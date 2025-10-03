@@ -4,7 +4,7 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
 import * as carouselElements from '../elements';
 
 type TypeCarouselCardsRequirements = {
@@ -92,13 +92,13 @@ const OverwriteCarouselStyles = `
 
 // prettier-ignore
 const HeadlineStyles = `
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${INTRO_CONTAINER_HEADLINE}`]: typography.sans.largest,
     },
   })}
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${INTRO_CONTAINER_HEADLINE} *`]: typography.sans.largest,
     },
@@ -118,13 +118,13 @@ const TextStyles = `
     margin-top: ${token.spacing.md};
   }
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${INTRO_CONTAINER_TEXT}`]: element.text.rich.advancedDark,
     },
   })}
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${INTRO_CONTAINER_TEXT}`]: typography.sans.medium,
     },
@@ -169,7 +169,7 @@ const IntroContainer = `
 const ContainerLock = `
   .${CAROUSEL_LOCK} {
     position: relative;
-    ${Utility.theme.convertJSSObjectToStyles({
+    ${convertJSSObjectToStyles({
       styleObj: layout.space.horizontal.larger,
     })}
   }

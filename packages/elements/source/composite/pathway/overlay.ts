@@ -1,7 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Atomic from 'atomic';
 import { ElementModel } from 'model';
-import { theme } from 'utilities';
+import * as theme from 'helpers/theme';
 import { createTextLockupMedium, createAssetContent } from './_common';
 import { type PathwayOverlayProps } from './_types';
 import { type ElementVisual } from '../../_types';

@@ -1,5 +1,6 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import * as assets from 'helpers/assets';
+import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 
 type TypeSocialSharingProps = {
   isFixed?: boolean;
@@ -103,7 +104,7 @@ const STYLES_SOCIAL_SHARING_ELEMENT = `
 const CreateFacebook = () => {
   const button = document.createElement('button');
 
-  button.innerHTML = Utility.asset.social.FACEBOOK;
+  button.innerHTML = assets.social.FACEBOOK;
   button.setAttribute('aria-label', 'share this page on facebook');
 
   button.addEventListener('click', () => {
@@ -124,7 +125,7 @@ const CreateFacebook = () => {
 const CreateTwitter = ({ url, title }: { url: string; title: string }) => {
   const button = document.createElement('button');
 
-  button.innerHTML = Utility.asset.social.X;
+  button.innerHTML = assets.social.X;
   button.setAttribute('aria-label', 'share this page on twitter');
 
   button.addEventListener('click', () => {
@@ -143,7 +144,7 @@ const CreateEmail = ({ url, title }: { url: string; title: string }) => {
   link.setAttribute('aria-label', 'email this page');
   link.setAttribute('target', '_blank');
 
-  link.innerHTML = Utility.asset.icon.EMAIL;
+  link.innerHTML = assets.icon.EMAIL;
 
   return link;
 };
@@ -151,7 +152,7 @@ const CreateEmail = ({ url, title }: { url: string; title: string }) => {
 const CreatePrint = () => {
   const button = document.createElement('button');
 
-  button.innerHTML = Utility.asset.icon.PRINTER;
+  button.innerHTML = assets.icon.PRINTER;
   button.setAttribute('aria-label', 'print this page');
   button.addEventListener('click', () => window.print());
 
@@ -266,12 +267,12 @@ const CreateSocialSharingElement = (props: TypeSocialSharingProps) =>
       container.setAttribute(ATTRIBUTE_FIXED, '');
       window.addEventListener(
         'scroll',
-        Utility.performance.debounce(() => eventScroll(), 20),
+        debounce(() => eventScroll(), 20),
       );
 
       window.addEventListener(
         'resize',
-        Utility.performance.debounce(() => eventResize(), 20),
+        debounce(() => eventResize(), 20),
       );
     }
 

@@ -1,5 +1,8 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import * as asset from 'helpers/assets';
+import { getResponsiveImageSize } from 'helpers/theme/assets';
+import * as javascriptEvents from 'helpers/js-events';
+import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 
 type TypeCarouselImageProps = {
   slides: HTMLElement[];
@@ -96,7 +99,7 @@ const CreateButton = ({
   const button = document.createElement('button');
   button.setAttribute('type', 'button');
   button.classList.add(ELEMENT_CAROUSEL_SLIDER_BUTTON);
-  button.innerHTML = Utility.asset.icon.FORWARD_ARROW;
+  button.innerHTML = asset.icon.FORWARD_ARROW;
 
   if (!isRight) {
     button.setAttribute('aria-label', 'Previous');
@@ -140,7 +143,7 @@ const SetCarouselSize = ({
       ? windowHeight
       : maxHeight
     : windowHeight;
-  const imageSize = Utility.theme.assets.getResponsiveImageSize({
+  const imageSize = getResponsiveImageSize({
     image: img,
     parentNode: slider,
     maxWindowHeight,
@@ -275,7 +278,7 @@ export default (props: TypeCarouselImageProps) =>
         }
       };
 
-      Utility.javascriptEvents.CreateEventSwipe({
+      javascriptEvents.createEventSwipe({
         container: slider,
         callback: swipes,
       });
@@ -311,7 +314,7 @@ export default (props: TypeCarouselImageProps) =>
 
     window.addEventListener(
       'resize',
-      Utility.performance.debounce(EventResize, 10),
+      debounce(EventResize, 10),
     );
     EventSwipe();
 

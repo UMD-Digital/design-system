@@ -1,4 +1,4 @@
-import * as Utility from 'utilities';
+import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 
 const ELEMENT_NAV_STICKY_CONTAINER = 'nav-sticky-container';
 const ELEMENT_NAV_STICKY_WRAPPER = 'nav-sticky-wrapper';
@@ -80,7 +80,7 @@ export default ({
     window.addEventListener('scroll', eventScroll);
     window.addEventListener(
       'resize',
-      Utility.performance.debounce(() => {
+      debounce(() => {
         eventResize();
       }, 20),
     );

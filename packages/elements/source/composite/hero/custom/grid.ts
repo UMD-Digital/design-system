@@ -1,7 +1,8 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
-import { accessibility, theme } from 'utilities';
+import { isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
+import * as theme from 'helpers/theme';
 import { type ContentElement } from '../../../_types';
 
 interface CornerProps {
@@ -23,7 +24,7 @@ interface HeroGridProps {
   isThemeDark?: boolean;
 }
 
-const isPreferReducedMotion = accessibility.isPrefferdReducedMotion();
+const isPreferReducedMotion = isPreferredReducedMotion();
 const isScrollTimelineSupported = () =>
   'ScrollTimeline' in window || CSS.supports('animation-timeline', 'scroll()');
 const isDisplayWithoutAnimation =

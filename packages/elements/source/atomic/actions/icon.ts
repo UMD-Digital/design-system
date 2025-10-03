@@ -1,6 +1,6 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementModel } from 'model';
-import { asset } from 'utilities';
+import * as asset from 'helpers/assets';
 
 interface ActionIconProps {
   ctaIcon: HTMLElement;

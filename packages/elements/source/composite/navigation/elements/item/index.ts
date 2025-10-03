@@ -1,5 +1,8 @@
 import { animation, token } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import * as theme from 'helpers/theme';
+import * as assets from 'helpers/assets';
+import * as markup from 'helpers/markup';
+import { eventAccessibilityFocus } from '@universityofmaryland/web-utilities-library/accessibility';
 
 type TypePrimaryLinkRequirements = {
   primaryLinkContainer?: HTMLElement | null;
@@ -158,7 +161,7 @@ const DropdownListStyles = `
     line-height: 1.5em;
   }
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_DROPDOWN_LIST_CONTAINER} a`]:
       animation.line.slideUnderRed,
@@ -239,11 +242,11 @@ const CreateMultipleColumns = ({ links }: { links: HTMLAnchorElement[] }) => {
   const firstColumnLinks = links.splice(0, Math.ceil(links.length / 2));
 
   firstColumnLinks.forEach((link) => {
-    Utility.markup.modify.animationLinkSpan({ element: link });
+    markup.modify.animationLinkSpan({ element: link });
     column1.appendChild(link);
   });
   links.forEach((link) => {
-    Utility.markup.modify.animationLinkSpan({ element: link });
+    markup.modify.animationLinkSpan({ element: link });
     column2.appendChild(link);
   });
 
@@ -253,7 +256,7 @@ const CreateMultipleColumns = ({ links }: { links: HTMLAnchorElement[] }) => {
 const CreateSingleColumn = ({ links }: { links: HTMLAnchorElement[] }) => {
   const container = document.createElement('div');
   links.forEach((link) => {
-    Utility.markup.modify.animationLinkSpan({ element: link });
+    markup.modify.animationLinkSpan({ element: link });
     container.appendChild(link);
   });
 
@@ -310,7 +313,7 @@ const CreateButton = ({
   const button = document.createElement('button');
 
   button.classList.add(ELEMENT_PRIMARY_LINK_CONTAINER_BUTTON);
-  button.innerHTML = Utility.asset.icon.CHEVRON_SMALL;
+  button.innerHTML = assets.icon.CHEVRON_SMALL;
   button.addEventListener('click', () => buttonClick());
   button.setAttribute('aria-expanded', 'false');
   button.setAttribute('aria-controls', `nav-links-`);
@@ -377,7 +380,7 @@ const CreateNavItemElement = (props: TypeNavItem) =>
         const hasSpan = link.querySelector('span');
 
         if (!hasSpan) {
-          Utility.markup.modify.animationLinkSpan({ element: link });
+          markup.modify.animationLinkSpan({ element: link });
           link.appendChild(link);
         }
       });
@@ -420,7 +423,7 @@ const CreateNavItemElement = (props: TypeNavItem) =>
     const EventButtonClick = () => {
       if (isShowing && dropdownLinksContainer) {
         ShowDropdown();
-        focusCallback = Utility.accessibility.eventAccessibilityFocus({
+        focusCallback = eventAccessibilityFocus({
           element: elementContainer,
           action: () => HideDropdown(),
           shadowDomContext: context,

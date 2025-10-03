@@ -1,6 +1,6 @@
 import { token } from '@universityofmaryland/web-styles-library';
 import { layout } from 'atomic';
-import * as Utility from 'utilities';
+import * as asset from 'helpers/assets';
 
 type TypeFixedFullScreenProps = {
   content: HTMLElement;
@@ -42,7 +42,7 @@ export default ({ content, callback }: TypeFixedFullScreenProps) => {
   closeButton.setAttribute('type', 'button');
   closeButton.setAttribute('aria-label', 'Close');
   closeButton.classList.add(ELEMENT_CLOSE_BUTTON);
-  closeButton.innerHTML = Utility.asset.icon.X;
+  closeButton.innerHTML = asset.icon.X;
   closeButton.addEventListener('click', modal.events.hide);
 
   modal.element.appendChild(closeButton);

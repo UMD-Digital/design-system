@@ -1,4 +1,4 @@
-export const CreateEventSwipe = ({
+export const createEventSwipe = ({
   container,
   callback,
 }: {

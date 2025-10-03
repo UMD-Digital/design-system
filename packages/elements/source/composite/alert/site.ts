@@ -1,5 +1,8 @@
 import { token, layout } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import * as asset from 'helpers/assets';
+import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
+import { shrinkThenRemove } from '@universityofmaryland/web-utilities-library/animation';
+import * as storage from 'helpers/storage';
 import {
   CreateAlertText as AlertText,
   CONSTANTS as TEXT_CONSTANTS,
@@ -60,7 +63,7 @@ const ButtonStyles = `
 `;
 
 const LockStyles = `
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_ALERT_SITE_LOCK}`]: layout.space.horizontal.larger,
     },
@@ -102,11 +105,11 @@ const CreateCloseButton = ({ container }: TypeAlertButtonProps) => {
   const closeButton = document.createElement('button');
 
   closeButton.classList.add(ELEMENT_ALERT_SITE_CLOSE_BUTTON);
-  closeButton.innerHTML = Utility.asset.icon.CLOSE_BUTTON;
+  closeButton.innerHTML = asset.icon.CLOSE_BUTTON;
   closeButton.setAttribute('aria-label', 'Close alert');
   closeButton.addEventListener('click', () => {
-    Utility.theme.animations.shrinkThenRemove({ container });
-    Utility.storage.local.set({ key: ALERT_LOCAL_STORAGE_KEY });
+    shrinkThenRemove({ container });
+    storage.setLocalStorageTimestamp({ key: ALERT_LOCAL_STORAGE_KEY });
   });
 
   return closeButton;
@@ -115,7 +118,7 @@ const CreateCloseButton = ({ container }: TypeAlertButtonProps) => {
 const ShouldShow = ({ daysToHide }: TypeShouldShowProps) => {
   const now = new Date().getTime();
   const millisecondsPerDay = 24 * 60 * 60 * 1000;
-  const lastClosedTime = Utility.storage.local.get({
+  const lastClosedTime = storage.getLocalStorageInt({
     key: ALERT_LOCAL_STORAGE_KEY,
   });
 

@@ -1,5 +1,5 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { asset } from 'utilities';
+import * as asset from 'helpers/assets';
 import { animations } from 'atomic';
 import { ElementModel } from 'model';
 import { createElementWithRefs } from './_elementModel';

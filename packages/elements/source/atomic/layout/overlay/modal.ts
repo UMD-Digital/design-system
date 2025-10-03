@@ -1,5 +1,5 @@
 import { token } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import { eventAccessibilityFocusTrap } from '@universityofmaryland/web-utilities-library/accessibility';
 
 type TypeFixedFullScreenProps = {
   content: HTMLElement | null;
@@ -62,7 +62,7 @@ export const createModal = ({
     });
 
     accessibiltyEventReference =
-      Utility.accessibility.eventAccessibilityFocusTrap({
+      eventAccessibilityFocusTrap({
         element: container,
         action: hide,
         shadowDomContext: context || null,

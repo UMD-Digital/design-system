@@ -1,5 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import * as asset from 'helpers/assets';
+import * as get from 'helpers/markup/get';
+import { svgFromString } from '@universityofmaryland/web-utilities-library/media';
 import { ElementModel } from 'model';
 
 interface ElementProps {
@@ -35,19 +37,19 @@ type ActionVariants = {
 type Actions = Record<ElementType, ActionVariants>;
 
 const ICONS: Record<IconType, string> = {
-  email: Utility.asset.icon.EMAIL,
-  newWindow: Utility.asset.icon.NEW_WINDOW,
-  document: Utility.asset.icon.DOCUMENT,
-  fearless: Utility.asset.icon.FEARLESS,
+  email: asset.icon.EMAIL,
+  newWindow: asset.icon.NEW_WINDOW,
+  document: asset.icon.DOCUMENT,
+  fearless: asset.icon.FEARLESS,
 };
 
 function insertIcon(element: HTMLElement, svg: string): void {
-  const icon = Utility.markup.create.svgFromString(svg);
+  const icon = svgFromString(svg);
   if (icon) element.insertBefore(icon, element.firstChild);
 }
 
 function createLinkIcon(element: HTMLElement, type: ElementType): void {
-  const existingIcon = Utility.markup.get.icon({ element });
+  const existingIcon = get.icon({ element });
   if (existingIcon) {
     element.insertBefore(existingIcon, element.firstChild);
     return;

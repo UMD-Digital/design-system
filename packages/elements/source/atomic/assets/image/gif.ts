@@ -1,4 +1,5 @@
-import * as Utilities from 'utilities';
+import * as asset from 'helpers/assets';
+import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { ElementModel } from 'model';
 
 const extractImageElement = (
@@ -20,13 +21,13 @@ const applyGifToggle = (image: HTMLImageElement, container: HTMLElement) => {
   const button = document.createElement('button');
   const setButtonPlay = () => {
     button.setAttribute('aria-label', 'Pause');
-    button.innerHTML = Utilities.asset.icon.PAUSE;
+    button.innerHTML = asset.icon.PAUSE;
     canvas.style.opacity = '0';
     image.style.opacity = '1';
   };
   const setButtonPause = () => {
     button.setAttribute('aria-label', 'Play');
-    button.innerHTML = Utilities.asset.icon.PLAY;
+    button.innerHTML = asset.icon.PLAY;
     canvas.style.opacity = '1';
     image.style.opacity = '0';
   };
@@ -105,7 +106,7 @@ const applyGifToggle = (image: HTMLImageElement, container: HTMLElement) => {
 
   window.addEventListener(
     'resize',
-    Utilities.performance.debounce(() => {
+    debounce(() => {
       sizeCanvas({ container });
     }, 50),
   );

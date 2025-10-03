@@ -1,7 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementModel } from 'model';
 import { assets } from 'atomic';
-import { theme } from 'utilities';
+import * as theme from 'helpers/theme';
 import { type HeroExpandProps as BaseHeroExpandProps } from '../_types';
 import { type ElementVisual, type ContentElement } from '../../../_types';
 

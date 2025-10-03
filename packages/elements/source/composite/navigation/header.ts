@@ -1,5 +1,6 @@
 import { token, typography } from '@universityofmaryland/web-styles-library';
-import * as Utility from 'utilities';
+import * as theme from 'helpers/theme';
+import * as assets from 'helpers/assets';
 import MenuButton from './elements/menu-button';
 import NavigationItem from './elements/item';
 
@@ -155,13 +156,13 @@ const LogoColumnStyles = `
     height: 240px;
   }
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HEADER_LOGO}`]: typography.sans.larger,
     },
   })}
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HEADER_LOGO} *`]: typography.sans.larger,
     },
@@ -173,13 +174,13 @@ const LogoColumnStyles = `
     width: 100%;
   }
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HEADER_LOGO}[size="large"]`]: typography.sans.extraLarge,
     },
   })}
 
-  ${Utility.theme.convertJSSObjectToStyles({
+  ${theme.convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_HEADER_LOGO}[size="large"] *`]: typography.sans.extraLarge,
     },
@@ -238,7 +239,7 @@ const CreateSearchLink = ({ searchUrl }: TypeSearchLink) => {
 
   searchLink.href = searchUrl;
   searchLink.ariaLabel = 'Visit the search page';
-  searchLink.innerHTML = Utility.asset.icon.MAGNIFY_GLASS;
+  searchLink.innerHTML = assets.icon.MAGNIFY_GLASS;
   searchLink.classList.add(ELEMENT_HEADER_MENU_SEARCH);
 
   return searchLink;

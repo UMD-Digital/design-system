@@ -1,7 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementModel } from 'model';
 import { assets, textLockup } from 'atomic';
-import { theme } from 'utilities';
+import * as theme from 'helpers/theme';
 import { type ElementVisual } from '../../_types';
 
 interface PathwayHeroProps {

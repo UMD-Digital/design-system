@@ -11,6 +11,8 @@
       "_types": ["./_types"],
       "model": ["./model"],
       "model/*": ["./model/*"],
+      "helpers": ["./helpers"],
+      "helpers/*": ["./helpers/*"],
       "*": ["./*"]
     }
   },

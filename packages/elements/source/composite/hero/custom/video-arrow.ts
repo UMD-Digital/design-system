@@ -136,6 +136,7 @@ const createTextContainer = (
 const createVideo = (video: HTMLVideoElement) => {
   return assets.video.observedAutoPlay({
     video,
+    isScaled: true,
     additionalElementStyles: {
       width: '100%',
       height: '100%',

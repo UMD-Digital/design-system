@@ -1019,10 +1019,7 @@ exports[`typography module should match snapshot 1`] = `
     "fonts": {
       "statLarge": {
         "@media (min-width: 1024px)": {
-          "fontSize": "120px",
-        },
-        "@media (min-width: 650px)": {
-          "fontSize": "calc(80px + 3.33vw)",
+          "fontSize": "112px",
         },
         "className": "umd-statistic-sans-large",
         "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
@@ -1056,10 +1053,7 @@ exports[`typography module should match snapshot 1`] = `
     },
     "large": {
       "@media (min-width: 1024px)": {
-        "fontSize": "120px",
-      },
-      "@media (min-width: 650px)": {
-        "fontSize": "calc(80px + 3.33vw)",
+        "fontSize": "112px",
       },
       "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
       "fontSize": "80px",

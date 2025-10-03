@@ -1,9 +1,9 @@
 # University of Maryland Design System
 
-[![Components Version](https://img.shields.io/badge/Components-v1.14.18-blue)](https://www.npmjs.com/package/@universityofmaryland/web-components-library)
-[![Elements Version](https://img.shields.io/badge/Elements-v1.4.5-blue)](https://www.npmjs.com/package/@universityofmaryland/web-elements-library)
+[![Components Version](https://img.shields.io/badge/Components-v1.14.19-blue)](https://www.npmjs.com/package/@universityofmaryland/web-components-library)
+[![Elements Version](https://img.shields.io/badge/Elements-v1.4.6-blue)](https://www.npmjs.com/package/@universityofmaryland/web-elements-library)
 [![Feeds Version](https://img.shields.io/badge/Feeds-v1.1.1-blue)](https://www.npmjs.com/package/@universityofmaryland/web-feeds-library)
-[![Styles Version](https://img.shields.io/badge/Styles-v1.6.8-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)
+[![Styles Version](https://img.shields.io/badge/Styles-v1.6.9-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)
 
 The University of Maryland's Design System is intended for use by university campus entities and partners. The packages prompt consistency in brand, design, and accessibility compliance across university web properties.
 

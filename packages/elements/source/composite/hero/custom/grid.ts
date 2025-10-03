@@ -1,7 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
-import { theme } from 'utilities';
+import { accessibility, theme } from 'utilities';
 import { type ContentElement } from '../../../_types';
 
 interface CornerProps {
@@ -22,6 +22,12 @@ interface HeroGridProps {
   center: CenterProps | null;
   isThemeDark?: boolean;
 }
+
+const isPreferReducedMotion = accessibility.isPrefferdReducedMotion();
+const isScrollTimelineSupported = () =>
+  'ScrollTimeline' in window || CSS.supports('animation-timeline', 'scroll()');
+const isDisplayWithoutAnimation =
+  isPreferReducedMotion || !isScrollTimelineSupported();
 
 const ANIMATION_RANGES = {
   GRID_COLUMNS: { start: '110vh', end: '230vh' },
@@ -252,11 +258,8 @@ const createTextContainer = (
 ) => {
   const { actions, headline, text, isThemeDark } = props;
   let shouldRenderBlackText = null;
-  const allowsMotion =
-    !window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-    !CSS.supports('animation-timeline', 'view()');
 
-  if (!allowsMotion && !isThemeDark) {
+  if (isDisplayWithoutAnimation && !isThemeDark) {
     shouldRenderBlackText = true;
   }
 

@@ -10,6 +10,7 @@ export default defineConfig({
         index: resolve(__dirname, 'source/index.ts'),
         accessibility: resolve(__dirname, 'source/accessibility/index.ts'),
         animation: resolve(__dirname, 'source/animation/index.ts'),
+        converter: resolve(__dirname, 'source/converter/index.ts'),
         date: resolve(__dirname, 'source/date/index.ts'),
         dom: resolve(__dirname, 'source/dom/index.ts'),
         elements: resolve(__dirname, 'source/elements/index.ts'),
@@ -29,7 +30,12 @@ export default defineConfig({
     emptyOutDir: true,
     sourcemap: true,
     rollupOptions: {
-      external: ['@universityofmaryland/web-styles-library', 'postcss', 'postcss-js', 'postcss-nesting'],
+      external: [
+        '@universityofmaryland/web-styles-library',
+        'postcss',
+        'postcss-js',
+        'postcss-nesting',
+      ],
       output: {
         preserveModules: true,
         preserveModulesRoot: 'source',
@@ -41,7 +47,7 @@ export default defineConfig({
       onwarn(warning, warn) {
         if (warning.code === 'EVAL') return;
         warn(warning);
-      }
+      },
     },
     minify: false,
   },
@@ -59,7 +65,11 @@ export default defineConfig({
     dts({
       insertTypesEntry: true,
       include: ['source/**/*.ts'],
-      exclude: ['source/**/*.test.ts', 'source/**/*.spec.ts', 'source/__tests__/**'],
+      exclude: [
+        'source/**/*.test.ts',
+        'source/**/*.spec.ts',
+        'source/__tests__/**',
+      ],
       outDir: 'dist',
       rollupTypes: false,
       copyDtsFiles: true,
@@ -75,6 +85,8 @@ export default defineConfig({
     alias: {},
   },
   define: {
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'production'),
+    'process.env.NODE_ENV': JSON.stringify(
+      process.env.NODE_ENV || 'production',
+    ),
   },
 });

@@ -1,4 +1,4 @@
-import { isHTMLElement } from '../../dom/isHTMLElement';
+import { isHTMLElement } from '../../validation/isHTMLElement';
 
 describe('isHTMLElement', () => {
   describe('happy path', () => {

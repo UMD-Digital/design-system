@@ -11,46 +11,6 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
-    "./dom": {
-      "types": "./dist/dom.d.ts",
-      "import": "./dist/dom.mjs",
-      "require": "./dist/dom.js"
-    },
-    "./dom/*": {
-      "types": "./dist/dom/*.d.ts",
-      "import": "./dist/dom/*.mjs",
-      "require": "./dist/dom/*.js"
-    },
-    "./string": {
-      "types": "./dist/string.d.ts",
-      "import": "./dist/string.mjs",
-      "require": "./dist/string.js"
-    },
-    "./string/*": {
-      "types": "./dist/string/*.d.ts",
-      "import": "./dist/string/*.mjs",
-      "require": "./dist/string/*.js"
-    },
-    "./elements": {
-      "types": "./dist/elements.d.ts",
-      "import": "./dist/elements.mjs",
-      "require": "./dist/elements.js"
-    },
-    "./elements/*": {
-      "types": "./dist/elements/*.d.ts",
-      "import": "./dist/elements/*.mjs",
-      "require": "./dist/elements/*.js"
-    },
-    "./validation": {
-      "types": "./dist/validation.d.ts",
-      "import": "./dist/validation.mjs",
-      "require": "./dist/validation.js"
-    },
-    "./validation/*": {
-      "types": "./dist/validation/*.d.ts",
-      "import": "./dist/validation/*.mjs",
-      "require": "./dist/validation/*.js"
-    },
     "./accessibility": {
       "types": "./dist/accessibility.d.ts",
       "import": "./dist/accessibility.mjs",
@@ -71,6 +31,16 @@
       "import": "./dist/animation/*.mjs",
       "require": "./dist/animation/*.js"
     },
+    "./converter": {
+      "types": "./dist/converter.d.ts",
+      "import": "./dist/converter.mjs",
+      "require": "./dist/converter.js"
+    },
+    "./converter/*": {
+      "types": "./dist/converter/*.d.ts",
+      "import": "./dist/converter/*.mjs",
+      "require": "./dist/converter/*.js"
+    },
     "./date": {
       "types": "./dist/date.d.ts",
       "import": "./dist/date.mjs",
@@ -80,6 +50,26 @@
       "types": "./dist/date/*.d.ts",
       "import": "./dist/date/*.mjs",
       "require": "./dist/date/*.js"
+    },
+    "./dom": {
+      "types": "./dist/dom.d.ts",
+      "import": "./dist/dom.mjs",
+      "require": "./dist/dom.js"
+    },
+    "./dom/*": {
+      "types": "./dist/dom/*.d.ts",
+      "import": "./dist/dom/*.mjs",
+      "require": "./dist/dom/*.js"
+    },
+    "./elements": {
+      "types": "./dist/elements.d.ts",
+      "import": "./dist/elements.mjs",
+      "require": "./dist/elements.js"
+    },
+    "./elements/*": {
+      "types": "./dist/elements/*.d.ts",
+      "import": "./dist/elements/*.mjs",
+      "require": "./dist/elements/*.js"
     },
     "./events": {
       "types": "./dist/events.d.ts",
@@ -131,6 +121,16 @@
       "import": "./dist/storage/*.mjs",
       "require": "./dist/storage/*.js"
     },
+    "./string": {
+      "types": "./dist/string.d.ts",
+      "import": "./dist/string.mjs",
+      "require": "./dist/string.js"
+    },
+    "./string/*": {
+      "types": "./dist/string/*.d.ts",
+      "import": "./dist/string/*.mjs",
+      "require": "./dist/string/*.js"
+    },
     "./styles": {
       "types": "./dist/styles.d.ts",
       "import": "./dist/styles.mjs",
@@ -140,6 +140,16 @@
       "types": "./dist/styles/*.d.ts",
       "import": "./dist/styles/*.mjs",
       "require": "./dist/styles/*.js"
+    },
+    "./validation": {
+      "types": "./dist/validation.d.ts",
+      "import": "./dist/validation.mjs",
+      "require": "./dist/validation.js"
+    },
+    "./validation/*": {
+      "types": "./dist/validation/*.d.ts",
+      "import": "./dist/validation/*.mjs",
+      "require": "./dist/validation/*.js"
     }
   },
   "license": "MIT",

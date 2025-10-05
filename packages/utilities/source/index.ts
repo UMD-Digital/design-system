@@ -12,6 +12,7 @@ export const VERSION = '0.1.0';
 // Category exports
 export * from './accessibility';
 export * from './animation';
+export * from './converter';
 export * from './date';
 export * from './dom';
 export * from './elements';

@@ -108,7 +108,7 @@ describe('loadGridAnimationObserver', () => {
       const mockEntry = {
         target: child,
         isIntersecting: true,
-      } as IntersectionObserverEntry;
+      } as unknown as IntersectionObserverEntry;
 
       const observerInstance = mockIntersectionObserver.mock.results[0].value;
       observeCallback!([mockEntry], observerInstance);
@@ -128,7 +128,7 @@ describe('loadGridAnimationObserver', () => {
       const mockEntry = {
         target: child,
         isIntersecting: true,
-      } as IntersectionObserverEntry;
+      } as unknown as IntersectionObserverEntry;
 
       const observerInstance = mockIntersectionObserver.mock.results[0].value;
       observeCallback!([mockEntry], observerInstance);
@@ -167,11 +167,11 @@ describe('loadGridAnimationObserver', () => {
       const mockEntry1 = {
         target: child1,
         isIntersecting: true,
-      } as IntersectionObserverEntry;
+      } as unknown as IntersectionObserverEntry;
       const mockEntry2 = {
         target: child2,
         isIntersecting: true,
-      } as IntersectionObserverEntry;
+      } as unknown as IntersectionObserverEntry;
 
       const observerInstance = mockIntersectionObserver.mock.results[0].value;
       observeCallback!([mockEntry1], observerInstance);
@@ -230,7 +230,7 @@ describe('loadGridAnimationObserver', () => {
       const mockEntry = {
         target: child,
         isIntersecting: false,
-      } as IntersectionObserverEntry;
+      } as unknown as IntersectionObserverEntry;
 
       const observerInstance = mockIntersectionObserver.mock.results[0].value;
       observeCallback!([mockEntry], observerInstance);
@@ -276,11 +276,11 @@ describe('loadGridAnimationObserver', () => {
       const mockEntry1 = {
         target: child1,
         isIntersecting: true,
-      } as IntersectionObserverEntry;
+      } as unknown as IntersectionObserverEntry;
       const mockEntry2 = {
         target: child2,
         isIntersecting: true,
-      } as IntersectionObserverEntry;
+      } as unknown as IntersectionObserverEntry;
 
       const observerInstance = mockIntersectionObserver.mock.results[0].value;
       observeCallback!([mockEntry1], observerInstance);

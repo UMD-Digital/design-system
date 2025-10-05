@@ -5,8 +5,8 @@
  */
 
 export { addClass } from './addClass';
-export { removeClass } from './removeClass';
-export { isHTMLElement } from './isHTMLElement';
-export { findParent } from './findParent';
-export { wrapTextNodeInSpan } from './wrapTextNodeInSpan';
 export { cleanCopy } from './cleanCopy';
+export { findParent } from './findParent';
+export { getImageFromSlot } from './getImageFromSlot';
+export { removeClass } from './removeClass';
+export { wrapTextNodeInSpan } from './wrapTextNodeInSpan';

@@ -1,6 +1,6 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { layout } from '@universityofmaryland/web-elements-library/composite';
+import * as validation from '@universityofmaryland/web-utilities-library/validation';
 import { Attributes, Slots, Register } from 'model';
-import { Markup } from 'helpers';
 import {
   CreateComponentFunction,
   ComponentRegistration,
@@ -16,10 +16,10 @@ const slots: SlotConfiguration = {
 };
 
 const createComponent: CreateComponentFunction = (element) =>
-  Composite.layout.box.logo({
-    image: Markup.validate.ImageSlot({
+  layout.box.logo({
+    image: validation.slotImage({
       element,
-      ImageSlot: Slots.name.assets.image,
+      slotName: Slots.name.assets.image,
     }) as HTMLImageElement,
     text: Slots.text.default({ element }),
     isThemeDark: Attributes.isTheme.dark({ element }),

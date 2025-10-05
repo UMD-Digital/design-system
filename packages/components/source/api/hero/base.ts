@@ -1,22 +1,12 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { hero } from '@universityofmaryland/web-elements-library/composite';
 import { Attributes, Lifecycle, Slots, Register } from 'model';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
 } from '../../_types';
 
-/**
- * Tag name for the base hero component
- * @internal
- */
 const tagName = 'umd-element-hero';
 
-/**
- * Creates a hero component based on type attribute
- * @param element - The host HTML element
- * @returns Configured hero component
- * @internal
- */
 const createComponent: CreateComponentFunction = (element) => {
   const makeSlots = ({ element }: { element: HTMLElement }) => ({
     eyebrow: Slots.eyebrow.default({ element }),
@@ -32,14 +22,14 @@ const createComponent: CreateComponentFunction = (element) => {
   const isThemeDark = Attributes.isTheme.dark({ element });
 
   if (isDisplayOverlay) {
-    return Composite.hero.overlay({
+    return hero.overlay({
       ...makeSlots({ element }),
       includesAnimation,
     });
   }
 
   if (isDisplayStacked) {
-    return Composite.hero.stacked({
+    return hero.stacked({
       ...makeSlots({ element }),
       isHeightSmall: Attributes.isLayout.heightSmall({ element }) || false,
       isWidthLarge:
@@ -58,7 +48,7 @@ const createComponent: CreateComponentFunction = (element) => {
       element,
     })
   ) {
-    return Composite.hero.stacked({
+    return hero.stacked({
       ...makeSlots({ element }),
       isHeightSmall: true,
       isWidthLarge: true,
@@ -73,7 +63,7 @@ const createComponent: CreateComponentFunction = (element) => {
       element,
     })
   ) {
-    return Composite.hero.standard({
+    return hero.standard({
       ...makeSlots({ element }),
       isTextCenter: true,
       isHeightSmall: false,
@@ -87,7 +77,7 @@ const createComponent: CreateComponentFunction = (element) => {
       element,
     })
   ) {
-    return Composite.hero.standard({
+    return hero.standard({
       ...makeSlots({ element }),
       isHeightSmall: true,
       isThemeDark,
@@ -101,7 +91,7 @@ const createComponent: CreateComponentFunction = (element) => {
       element,
     })
   ) {
-    return Composite.hero.standard({
+    return hero.standard({
       ...makeSlots({ element }),
       isHeightSmall: true,
       isTextCenter: true,
@@ -109,7 +99,7 @@ const createComponent: CreateComponentFunction = (element) => {
     });
   }
 
-  return Composite.hero.standard({
+  return hero.standard({
     ...makeSlots({ element }),
     isHeightSmall: Attributes.isLayout.heightSmall({ element }) || false,
     isTextCenter: Attributes.isLayout.textCentered({ element }) || false,

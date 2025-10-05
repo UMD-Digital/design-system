@@ -1,4 +1,4 @@
-import { Atomic } from '@universityofmaryland/web-elements-library';
+import { actions } from '@universityofmaryland/web-elements-library/atomic';
 import { Attributes, Register, Slots } from 'model';
 import {
   CreateComponentFunction,
@@ -6,16 +6,8 @@ import {
   SlotConfiguration,
 } from '../../_types';
 
-const { actions } = Atomic;
-
-/**
- * Tag name for the call-to-action web component
- */
 const tagName = 'umd-element-call-to-action';
 
-/**
- * Slot configuration for the call-to-action component
- */
 const slots: SlotConfiguration = {
   text: {
     allowedElements: ['a', 'button'],
@@ -27,9 +19,6 @@ const slots: SlotConfiguration = {
   },
 };
 
-/**
- * Creates a call-to-action component from the host element
- */
 const createComponent: CreateComponentFunction = (element) => {
   const interactiveElement = element.querySelector('button, a:not([slot])');
   const plainTextSlot = element.querySelector(

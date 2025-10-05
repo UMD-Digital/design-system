@@ -1,4 +1,4 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { person } from '@universityofmaryland/web-elements-library/composite';
 import { Attributes, Register, Slots } from 'model';
 import { CommonPersonData } from './common';
 import {
@@ -30,14 +30,14 @@ const createComponent: CreateComponentFunction = (element) => {
   const isThemeDark = Attributes.isTheme.dark({ element });
 
   if (isDisplayList) {
-    return Composite.person.list(CommonPersonData({ element, isThemeDark }));
+    return person.list(CommonPersonData({ element, isThemeDark }));
   }
 
   if (isDisplayTabular) {
-    return Composite.person.tabular(CommonPersonData({ element, isThemeDark }));
+    return person.tabular(CommonPersonData({ element, isThemeDark }));
   }
 
-  return Composite.person.block(CommonPersonData({ element, isThemeDark }));
+  return person.block(CommonPersonData({ element, isThemeDark }));
 };
 
 /**

@@ -1,6 +1,6 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { person } from '@universityofmaryland/web-elements-library/composite';
+import { createSlot } from '@universityofmaryland/web-utilities-library/elements';
 import { Attributes, Register, Slots } from 'model';
-import { Markup } from 'helpers';
 import { CommonPersonData } from './common';
 import {
   CreateComponentFunction,
@@ -9,8 +9,6 @@ import {
 } from '../../_types';
 
 const tagName = 'umd-element-person-hero';
-
-const { Node } = Markup.create;
 
 const slots: SlotConfiguration = {
   name: {},
@@ -32,7 +30,7 @@ const createComponent: CreateComponentFunction = (element) => {
   const isThemeDark = Attributes.isTheme.dark({
     element,
   });
-  const breadcrumbSlot = Node.slot({ type: Slots.name.BREADCRUMB });
+  const breadcrumbSlot = createSlot(Slots.name.BREADCRUMB);
 
   if (breadcrumbSlot) {
     const breadcrumb = element.querySelector(
@@ -46,10 +44,10 @@ const createComponent: CreateComponentFunction = (element) => {
     }
   }
 
-  return Composite.person.hero({
+  return person.hero({
     ...CommonPersonData({ element, isThemeDark }),
-    breadcrumbDesktop: Node.slot({ type: Slots.name.BREADCRUMB }),
-    breadcrumbMobile: Node.slot({ type: Slots.name.BREADCRUMB_COPY }),
+    breadcrumbDesktop: createSlot(Slots.name.BREADCRUMB),
+    breadcrumbMobile: createSlot(Slots.name.BREADCRUMB_COPY),
   });
 };
 

@@ -1,6 +1,6 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { person } from '@universityofmaryland/web-elements-library/composite';
+import { createSlotWithStyleOverwrite } from '@universityofmaryland/web-utilities-library/elements';
 import { Attributes, Register, Slots } from 'model';
-import { Markup } from 'helpers';
 import { CommonPersonData } from './common';
 import {
   CreateComponentFunction,
@@ -9,8 +9,6 @@ import {
 } from '../../_types';
 
 const tagName = 'umd-element-person-bio';
-
-const { SlotWithDefaultStyling } = Markup.create;
 
 const slots: SlotConfiguration = {
   name: {},
@@ -33,18 +31,18 @@ const createComponent: CreateComponentFunction = (element) => {
   const isFullImage = Attributes.isLayout.fullImage({ element });
 
   if (isFullImage) {
-    return Composite.person.bio.full({
+    return person.bio.full({
       ...CommonPersonData({ element, isThemeDark }),
-      description: SlotWithDefaultStyling({
+      description: createSlotWithStyleOverwrite({
         element,
         slotRef: Slots.name.DESCRIPTION,
       }),
     });
   }
 
-  return Composite.person.bio.small({
+  return person.bio.small({
     ...CommonPersonData({ element, isThemeDark }),
-    description: SlotWithDefaultStyling({
+    description: createSlotWithStyleOverwrite({
       element,
       slotRef: Slots.name.DESCRIPTION,
     }),

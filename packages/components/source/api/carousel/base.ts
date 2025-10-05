@@ -1,6 +1,6 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { carousel } from '@universityofmaryland/web-elements-library/composite';
+import { createSlot } from '@universityofmaryland/web-utilities-library/elements';
 import { Attributes, Slots, Register, Lifecycle } from 'model';
-import { Markup } from 'helpers';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
@@ -60,7 +60,7 @@ const createComponent: CreateComponentFunction = (element) => {
   if (attributeHint === 'false') hint = false;
 
   const createCardShadowRef = () => {
-    const slot = Markup.create.Node.slot({ type: Slots.name.BLOCKS });
+    const slot = createSlot(Slots.name.BLOCKS);
     shadow.appendChild(slot);
   };
 
@@ -70,7 +70,7 @@ const createComponent: CreateComponentFunction = (element) => {
     `[name="${Slots.name.BLOCKS}"]`,
   ) as HTMLElement;
 
-  return Composite.carousel.macro({
+  return carousel.macro({
     slide,
     shadowRef,
     blocks,

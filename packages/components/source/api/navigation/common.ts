@@ -1,7 +1,5 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
-import { Markup } from 'helpers';
-
-const { Node } = Markup.create;
+import { navigation } from '@universityofmaryland/web-elements-library/composite';
+import { createSlot } from '@universityofmaryland/web-utilities-library/elements';
 
 const DRAWER_SLOTS = {
   PRIMARY_SLIDE_LINKS: 'primary-slide-links',
@@ -57,9 +55,7 @@ export const MakeSliderData = ({
   const hasPrimarySlideContent =
     primarySlideSlot && primarySlideSlot.children.length > 0;
   const primarySlideContent = hasPrimarySlideContent
-    ? Node.slot({
-        type: PRIMARY_SLIDE_CONTENT,
-      })
+    ? createSlot(PRIMARY_SLIDE_CONTENT)
     : null;
 
   let primarySlideLinks;
@@ -85,10 +81,7 @@ export const MakeSliderData = ({
     childrenSlotContent.forEach((element) => {
       const type = element.getAttribute('slot');
       if (type) {
-        const reference = Node.slot({
-          type,
-        });
-
+        const reference = createSlot(type);
         childrenSlideContent.push(reference);
       }
     });
@@ -105,7 +98,7 @@ export const MakeSliderData = ({
 
 export const MakeNavDrawer = (props: TypeNavDrawerRequirements) => {
   const { element, displayType } = props;
-  return Composite.navigation.elements.drawer.CreateElement({
+  return navigation.elements.drawer.CreateElement({
     ...MakeSliderData(props),
     context: element,
     displayType,
@@ -113,7 +106,7 @@ export const MakeNavDrawer = (props: TypeNavDrawerRequirements) => {
 };
 
 export const MakeNavSlider = (props: TypeSliderRequirements) =>
-  Composite.navigation.elements.slider.CreateElement({
+  navigation.elements.slider.CreateElement({
     ...MakeSliderData(props),
     displayType: 'interior-nav',
   });

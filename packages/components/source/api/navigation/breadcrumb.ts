@@ -1,29 +1,18 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { navigation } from '@universityofmaryland/web-elements-library/composite';
+import { createSlotWithStyleOverwrite } from '@universityofmaryland/web-utilities-library/elements';
 import { Attributes, Slots, Register } from 'model';
-import { Markup } from 'helpers';
 import { CreateComponentFunction, SlotConfiguration } from '../../_types';
 
-const { SlotWithDefaultStyling } = Markup.create;
-
-/**
- * Tag name for the breadcrumb navigation web component
- */
 const tagName = 'umd-element-breadcrumb';
 
-/**
- * Slot configuration for the breadcrumb component
- */
 const slots: SlotConfiguration = {
   paths: {
     required: true,
   },
 };
 
-/**
- * Creates a breadcrumb navigation component with the provided configuration
- */
 const createComponent: CreateComponentFunction = (element) => {
-  const linkListSlot = SlotWithDefaultStyling({
+  const linkListSlot = createSlotWithStyleOverwrite({
     element,
     slotRef: Slots.name.PATHS,
   });
@@ -31,7 +20,7 @@ const createComponent: CreateComponentFunction = (element) => {
   if (!linkListSlot)
     return { element: document.createElement('div'), styles: '' };
 
-  return Composite.navigation.elements.breadcrumb({
+  return navigation.elements.breadcrumb({
     isThemeDark: Attributes.isTheme.dark({ element }),
     linkListSlot,
   });

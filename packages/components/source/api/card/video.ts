@@ -1,5 +1,5 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Slots, Register, Lifecycle } from 'model';
+import { card } from '@universityofmaryland/web-elements-library/composite';
+import { Attributes, Slots, Register } from 'model';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
@@ -32,12 +32,12 @@ const createComponent: CreateComponentFunction = (element) => {
   }
 
   if (isTypeShort) {
-    return Composite.card.video.short({
+    return card.video.short({
       video,
     });
   }
 
-  return Composite.card.video.block({
+  return card.video.block({
     video,
     isAutoplay,
   });

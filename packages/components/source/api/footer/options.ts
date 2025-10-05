@@ -1,4 +1,4 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { footer } from '@universityofmaryland/web-elements-library/composite';
 import { Attributes, Register } from 'model';
 import type {
   CreateComponentFunction,
@@ -6,10 +6,6 @@ import type {
   SlotConfiguration,
 } from '../../_types';
 
-/**
- * Tag name for the footer component
- * @internal
- */
 const tagName = 'umd-element-footer';
 
 /**
@@ -97,7 +93,7 @@ const createComponent: CreateComponentFunction = (element) => {
     element.setAttribute('aria-label', 'site footer');
   }
 
-  return Composite.footer.options({
+  return footer.options({
     isThemeLight: Attributes.isTheme.light({ element }),
     isTypeSimple,
     isTypeVisual,

@@ -4,16 +4,12 @@ declare global {
   }
 }
 
-import { Composite } from '@universityofmaryland/web-elements-library';
-import { Markup, Styles } from 'helpers';
+import { navigation } from '@universityofmaryland/web-elements-library/composite';
+import { createStyleTemplate } from '@universityofmaryland/web-utilities-library/elements';
+import { reset } from '../../helpers/styles';
 import { SLOTS, MakeNavDrawer } from './common';
-import {
-  ComponentRegistration,
-} from '../../_types';
+import { ComponentRegistration } from '../../_types';
 
-/**
- * Tag name for the navigation drawer web component
- */
 const tagName = 'umd-element-nav-drawer';
 
 export const styles = `
@@ -21,9 +17,9 @@ export const styles = `
     display: block;
   }
 
-  ${Styles.reset}
-  ${Composite.navigation.elements.drawer.Styles}
-  ${Composite.navigation.elements.menuButton.Styles}
+  ${reset}
+  ${navigation.elements.drawer.Styles}
+  ${navigation.elements.menuButton.Styles}
 `;
 
 const CreateNavigationDrawerElement = ({
@@ -34,7 +30,7 @@ const CreateNavigationDrawerElement = ({
   const container = document.createElement('div');
   const drawer = MakeNavDrawer({ element, ...SLOTS });
   if (!drawer) return null;
-  const button = Composite.navigation.elements.menuButton.CreateElement({
+  const button = navigation.elements.menuButton.CreateElement({
     eventOpen: drawer.events.eventOpen,
   });
 
@@ -48,7 +44,7 @@ class UMDNavDrawerFeature extends HTMLElement {
   _shadow: ShadowRoot;
 
   constructor() {
-    const template = Markup.create.Node.stylesTemplate({ styles });
+    const template = createStyleTemplate(styles);
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
     this._shadow.appendChild(template.content.cloneNode(true));
@@ -125,8 +121,7 @@ class UMDNavDrawerFeature extends HTMLElement {
  * @since 1.0.0
  */
 const navDrawerRegistration: ComponentRegistration = () => {
-  const hasElement =
-    document.getElementsByTagName(tagName).length > 0;
+  const hasElement = document.getElementsByTagName(tagName).length > 0;
 
   if (!window.customElements.get(tagName) && hasElement) {
     window.UMDNavDrawerFeature = UMDNavDrawerFeature;

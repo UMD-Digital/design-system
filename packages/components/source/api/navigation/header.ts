@@ -4,12 +4,14 @@ declare global {
   }
 }
 
-import { Markup, Styles } from 'helpers';
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { navigation } from '@universityofmaryland/web-elements-library/composite';
+import {
+  createSlot,
+  createSlotWithStyleOverwrite,
+  createStyleTemplate,
+} from '@universityofmaryland/web-utilities-library/elements';
+import { reset } from '../../helpers/styles';
 import { SLOTS as GlobalSlots, MakeNavDrawer } from './common';
-
-const { Node } = Markup.create;
-const { SlotWithDefaultStyling } = Markup.create;
 
 const ELEMENT_NAME = 'umd-element-navigation-header';
 const ATTRIBUTE_SEARCH_URL = 'search-url';
@@ -28,9 +30,9 @@ const styles = `
     display: block;
   }
 
-  ${Styles.reset}
-  ${Composite.navigation.elements.drawer.Styles}
-  ${Composite.navigation.header.Styles}
+  ${reset}
+  ${navigation.elements.drawer.Styles}
+  ${navigation.header.Styles}
 `;
 
 /**
@@ -126,7 +128,7 @@ const CreateNavItemSlots = ({ element }: { element: HTMLElement }) => {
       const slotAttr = `nav-item-${i}`;
       item.setAttribute(`slot`, slotAttr);
 
-      navItems.push(Node.slot({ type: slotAttr }));
+      navItems.push(createSlot(slotAttr));
       element.appendChild(item);
     });
 
@@ -144,7 +146,7 @@ const CreateHeader = ({
   eventOpen?: () => void;
 }) => {
   const { LOGO, UTILITY } = SLOTS;
-  const logoSlot = SlotWithDefaultStyling({
+  const logoSlot = createSlotWithStyleOverwrite({
     element,
     slotRef: LOGO,
   });
@@ -153,9 +155,7 @@ const CreateHeader = ({
     `[slot="${UTILITY}"]`,
   ) as HTMLElement;
   const utilityRow =
-    utilitySlotElement?.childElementCount > 0
-      ? Node.slot({ type: UTILITY })
-      : null;
+    utilitySlotElement?.childElementCount > 0 ? createSlot(UTILITY) : null;
   const searchUrl = element.getAttribute(ATTRIBUTE_SEARCH_URL);
   const ctaUrl = element.getAttribute(ATTRIBUTE_CTA_URL);
   const ctaText = element.getAttribute(ATTRIBUTE_CTA_TEXT);
@@ -164,7 +164,7 @@ const CreateHeader = ({
     console.error('UMDHeaderElement: Logo slot is required');
   }
 
-  const value = Composite.navigation.header.CreateElement({
+  const value = navigation.header.CreateElement({
     logo: logoSlot,
     utilityRow,
     navItems: CreateNavItemSlots({ element }),
@@ -187,7 +187,7 @@ class UMDHeaderElement extends HTMLElement {
   } | null;
 
   constructor() {
-    const template = Node.stylesTemplate({ styles });
+    const template = createStyleTemplate(styles);
 
     super();
     this._shadow = this.attachShadow({ mode: 'open' });

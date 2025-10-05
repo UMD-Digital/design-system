@@ -1,18 +1,14 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Slots, Register, Lifecycle } from 'model';
-import { Markup } from 'helpers';
+import { carousel } from '@universityofmaryland/web-elements-library/composite';
+import { imageHasAlt } from '@universityofmaryland/web-utilities-library/validation';
+import { Attributes, Slots, Register } from 'model';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
 } from '../../../_types';
 
-const { ImageHasAlt } = Markup.validate;
-
-// Tag name for the single image carousel component
 const tagName = 'umd-element-carousel-image';
 
-// Slot configuration for the single image carousel component
 const slots: SlotConfiguration = {
   images: {
     required: true,
@@ -26,7 +22,6 @@ const slots: SlotConfiguration = {
   },
 };
 
-// Attribute handlers for the single image carousel component
 const attributes = Attributes.handler.common.resize((element) =>
   element.events?.SetEventReize(),
 );
@@ -59,13 +54,13 @@ const createComponent: CreateComponentFunction = (element) => {
   const images = slottedImages
     .map((image) => {
       if (image.nodeName === 'IMG') {
-        if (ImageHasAlt({ image })) return image.cloneNode(true);
+        if (imageHasAlt(image)) return image.cloneNode(true);
       }
       return null;
     })
     .filter((image) => image !== null) as HTMLImageElement[];
 
-  return Composite.carousel.image({
+  return carousel.image({
     images,
     headlines,
     texts,

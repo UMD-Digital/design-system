@@ -1,4 +1,4 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { alert } from '@universityofmaryland/web-elements-library/composite';
 import { Attributes, Slots, Register } from 'model';
 import {
   CreateComponentFunction,
@@ -6,14 +6,8 @@ import {
   SlotConfiguration,
 } from '../../_types';
 
-/**
- * Tag name for the page alert web component
- */
 const tagName = 'umd-element-alert-page';
 
-/**
- * Slot configuration for the page alert component
- */
 const slots: SlotConfiguration = {
   headline: Slots.element.allowed.headline,
   body: Slots.element.allowed.body,
@@ -21,11 +15,8 @@ const slots: SlotConfiguration = {
   actions: Slots.element.allowed.actions,
 };
 
-/**
- * Creates a page alert component
- */
 const createComponent: CreateComponentFunction = (element) =>
-  Composite.alert.page({
+  alert.page({
     headline: Slots.headline.default({ element }),
     text: Slots.deprecated.body({ element }) || Slots.text.default({ element }),
     actions: Slots.actions.default({ element }),

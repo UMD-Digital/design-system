@@ -1,7 +1,6 @@
-import { Atomic } from '@universityofmaryland/web-elements-library';
+import { events } from '@universityofmaryland/web-elements-library/atomic';
+import * as date from '@universityofmaryland/web-utilities-library/date';
 import { Attributes, Slots } from 'model';
-import { Markup } from 'helpers';
-import { ComponentRef } from '../_types';
 
 /**
  * Configuration options for creating event components
@@ -22,11 +21,11 @@ interface EventComponentOptions {
  */
 interface ParsedEventData {
   /** Processed date and location data from Markup.event.createDetailsData */
-  detailsData: ReturnType<typeof Markup.event.createDetailsData>;
+  detailsData: ReturnType<typeof date.createEventDetails>;
   /** Parsed start date object */
-  startDate: ReturnType<typeof Markup.event.createDate>;
+  startDate: ReturnType<typeof date.createEventDate>;
   /** Parsed end date object (optional) */
-  endDate: ReturnType<typeof Markup.event.createDate>;
+  endDate: ReturnType<typeof date.createEventDate>;
   /** Location element (optional) */
   locationElement: Element | null;
 }
@@ -78,15 +77,15 @@ const extractEventSlots = (element: HTMLElement): EventSlots => ({
  * @returns Parsed event data or null if start date is missing
  */
 const parseEventData = (slots: EventSlots): ParsedEventData | null => {
-  const startDate = Markup.event.createDate({ element: slots.startDate });
+  const startDate = date.createEventDate({ element: slots.startDate });
 
   if (!startDate) {
     return null;
   }
 
-  const endDate = Markup.event.createDate({ element: slots.endDate });
+  const endDate = date.createEventDate({ element: slots.endDate });
 
-  const detailsData = Markup.event.createDetailsData({
+  const detailsData = date.createEventDetails({
     locationElement: slots.location,
     startDate,
     endDate,
@@ -132,12 +131,12 @@ export const createEventComponents = (
   } = options;
 
   return {
-    eventMeta: Atomic.events.meta({
+    eventMeta: events.meta({
       ...eventData.detailsData,
       isThemeDark,
       showTime,
     }),
-    dateSign: Atomic.events.sign({
+    dateSign: events.sign({
       ...eventData.detailsData,
       isThemeDark: isDateSignDark ?? isThemeDark,
       isLargeSize,

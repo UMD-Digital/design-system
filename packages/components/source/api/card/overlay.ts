@@ -1,18 +1,14 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { card } from '@universityofmaryland/web-elements-library/composite';
+import { createSlotWithStyleOverwrite } from '@universityofmaryland/web-utilities-library/elements';
 import { Attributes, Slots, Register, Lifecycle } from 'model';
-import { Markup } from 'helpers';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
 } from '../../_types';
 
-const { SlotWithDefaultStyling } = Markup.create;
-
-// Tag name for the overlay card component
 const tagName = 'umd-element-card-overlay';
 
-// Slot configuration for the overlay card component
 const slots: SlotConfiguration = {
   headline: {
     ...Slots.element.allowed.headline,
@@ -38,7 +34,10 @@ const MakeOverlayContent = ({ element }: { element: HTMLElement }) => ({
   text: Slots.text.default({ element }),
   date: Slots.date.default({ element }),
   actions: Slots.actions.default({ element }),
-  ctaIcon: SlotWithDefaultStyling({ element, slotRef: Slots.name.CTA_ICON }),
+  ctaIcon: createSlotWithStyleOverwrite({
+    element,
+    slotRef: Slots.name.CTA_ICON,
+  }),
   isQuote: Attributes.isVisual.quote({ element }),
   isThemeDark: Attributes.isTheme.dark({ element }),
   isThemeLight: Attributes.isTheme.light({ element }),
@@ -52,7 +51,7 @@ const MakeOverlayContent = ({ element }: { element: HTMLElement }) => ({
  */
 const createComponent: CreateComponentFunction = (element) => {
   if (Attributes.isLayout.image({ element })) {
-    const ImageOverlay = Composite.card.overlay.image({
+    const ImageOverlay = card.overlay.image({
       ...MakeOverlayContent({ element }),
       backgroundImage: Slots.assets.image({ element }) as HTMLImageElement,
     });
@@ -62,7 +61,7 @@ const createComponent: CreateComponentFunction = (element) => {
     }
   }
 
-  return Composite.card.overlay.color({ ...MakeOverlayContent({ element }) });
+  return card.overlay.color({ ...MakeOverlayContent({ element }) });
 };
 
 /**

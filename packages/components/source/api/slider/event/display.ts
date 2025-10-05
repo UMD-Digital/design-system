@@ -1,4 +1,4 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { slider } from '@universityofmaryland/web-elements-library/composite';
 import { Attributes, Register, Slots, Lifecycle } from 'model';
 import {
   CreateComponentFunction,
@@ -101,7 +101,7 @@ const createComponent: CreateComponentFunction = (element) => {
 
   dataSlider.innerHTML = dataSliderSlot.innerHTML;
 
-  return Composite.slider.events({
+  return slider.events({
     isThemeDark: Attributes.isTheme.dark({ element }),
     dataSlider,
     headline: Slots.headline.default({ element }),

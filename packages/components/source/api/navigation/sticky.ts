@@ -1,28 +1,20 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { navigation } from '@universityofmaryland/web-elements-library/composite';
+import { createSlot } from '@universityofmaryland/web-utilities-library/elements';
 import { Register } from 'model';
-import { Markup } from 'helpers';
+
 import { CreateComponentFunction, SlotConfiguration } from '../../_types';
 
-/**
- * Tag name for the sticky navigation web component
- */
 const tagName = 'umd-element-navigation-sticky';
 
-/**
- * Slot configuration for the sticky navigation component
- */
 const slots: SlotConfiguration = {
   content: {
     required: true,
   },
 };
 
-/**
- * Creates a sticky navigation component with the provided configuration
- */
 const createComponent: CreateComponentFunction = (element) =>
-  Composite.navigation.elements.sticky({
-    content: Markup.create.Node.slot({ type: 'content' }),
+  navigation.elements.sticky({
+    content: createSlot('content'),
     component: element,
   });
 

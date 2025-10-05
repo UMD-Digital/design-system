@@ -1,8 +1,6 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { card } from '@universityofmaryland/web-elements-library/composite';
+import * as validation from '@universityofmaryland/web-utilities-library/validation';
 import { Attributes, Model, Register, Slots } from 'model';
-import { Markup } from 'helpers';
-
-const { card } = Composite;
 
 interface CardData {
   image: HTMLImageElement | null;
@@ -31,9 +29,9 @@ const createCardComponent = ({ tagName }: CardConfig) => {
   };
 
   const createComponentData = (element: HTMLElement): CardData => ({
-    image: Markup.validate.ImageSlot({
+    image: validation.slotImage({
       element,
-      ImageSlot: Slots.name.assets.image,
+      slotName: Slots.name.assets.image,
     }),
     eyebrow: Slots.eyebrow.default({ element }),
     headline: Slots.headline.default({ element }),

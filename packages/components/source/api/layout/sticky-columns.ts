@@ -1,6 +1,6 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { layout } from '@universityofmaryland/web-elements-library/composite';
+import { createSlot } from '@universityofmaryland/web-utilities-library/elements';
 import { Attributes, Slots, Register } from 'model';
-import { Markup } from 'helpers';
 import {
   CreateComponentFunction,
   ComponentRegistration,
@@ -32,13 +32,9 @@ const attributes = Attributes.handler.combine(
 );
 
 const createComponent: CreateComponentFunction = (element) =>
-  Composite.layout.stickyColumns({
-    stickyColumn: Markup.create.Node.slot({
-      type: Slots.name.STICKY_COLUMN,
-    }),
-    staticColumn: Markup.create.Node.slot({
-      type: Slots.name.STATIC_COLUMN,
-    }),
+  layout.stickyColumns({
+    stickyColumn: createSlot(Slots.name.STICKY_COLUMN),
+    staticColumn: createSlot(Slots.name.STATIC_COLUMN),
     isStickyLast: !Attributes.isVisual.stickyFirst({ element }),
     topPosition: Attributes.getValue.topPosition({ element }),
   });

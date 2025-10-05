@@ -1,4 +1,5 @@
-import * as Feeds from '@universityofmaryland/web-feeds-library';
+import { slider as academicSlider } from '@universityofmaryland/web-feeds-library/academic';
+import { slider as eventSlider } from '@universityofmaryland/web-feeds-library/events';
 import { Attributes, Register, Slots } from 'model';
 import {
   CreateComponentFunction,
@@ -111,9 +112,9 @@ const createComponent: CreateComponentFunction = (element) => {
     actions: Slots.actions.default({ element }),
   };
 
-  if (isTypeAcademic) return Feeds.academic.slider(sliderProps);
+  if (isTypeAcademic) return academicSlider(sliderProps);
 
-  return Feeds.events.slider(sliderProps);
+  return eventSlider(sliderProps);
 };
 
 /**

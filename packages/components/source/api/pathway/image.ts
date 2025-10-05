@@ -1,17 +1,11 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { pathway } from '@universityofmaryland/web-elements-library/composite';
+import { toElementVisual } from '@universityofmaryland/web-utilities-library/converter';
 import { Attributes, Slots, Register, Lifecycle } from 'model';
 import { extractEventData } from '../_event';
-import { toElementVisual } from 'helpers/markup/validate';
 import { CreateComponentFunction } from '../../_types';
 
-/**
- * Tag name for the pathway web component
- */
 const tagName = 'umd-element-pathway';
 
-/**
- * Creates a pathway component with the provided configuration
- */
 const createComponent: CreateComponentFunction = (element) => {
   const isImageScaledDeprecated = element.getAttribute('image-scaled');
   const isImageScaledNew = Attributes.isLayout.imageScaled({ element });
@@ -43,7 +37,7 @@ const createComponent: CreateComponentFunction = (element) => {
   });
 
   if (isDisplayHero) {
-    return Composite.pathway.hero({
+    return pathway.hero({
       actions: Slots.actions.default({ element }),
       eyebrow: Slots.eyebrow.default({ element }),
       headline: Slots.headline.default({ element }),
@@ -56,7 +50,7 @@ const createComponent: CreateComponentFunction = (element) => {
   }
 
   if (isDisplayOverlay) {
-    return Composite.pathway.overlay({
+    return pathway.overlay({
       actions: Slots.actions.default({ element }),
       dateSign: toElementVisual(featureEvents?.dateSign),
       eventDetails: toElementVisual(featureEvents?.eventMeta),
@@ -76,7 +70,7 @@ const createComponent: CreateComponentFunction = (element) => {
   }
 
   if (isDisplaySticky) {
-    return Composite.pathway.sticky({
+    return pathway.sticky({
       actions: Slots.actions.default({ element }),
       dateSign: toElementVisual(featureEvents?.dateSign),
       eventDetails: toElementVisual(featureEvents?.eventMeta),
@@ -92,7 +86,7 @@ const createComponent: CreateComponentFunction = (element) => {
     });
   }
 
-  return Composite.pathway.standard({
+  return pathway.standard({
     actions: Slots.actions.default({ element }),
     dateSign: toElementVisual(featureEvents?.dateSign),
     eventDetails: toElementVisual(featureEvents?.eventMeta),

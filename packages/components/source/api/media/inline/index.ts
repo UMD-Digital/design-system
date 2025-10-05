@@ -1,6 +1,6 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { media } from '@universityofmaryland/web-elements-library/composite';
+import * as validation from '@universityofmaryland/web-utilities-library/validation';
 import { Attributes, Slots, Register, Lifecycle } from 'model';
-import { Markup } from 'helpers';
 import { CreateComponentFunction, SlotConfiguration } from '../../../_types';
 
 /**
@@ -106,22 +106,22 @@ const createComponent: CreateComponentFunction = (element) => {
     isAlignmentRight,
     isThemeDark,
     caption,
-    image: Markup.validate.ImageSlot({
+    image: validation.slotImage({
       element,
-      ImageSlot: Slots.name.assets.image,
+      slotName: Slots.name.assets.image,
     }),
     wrappingText,
   };
 
   if (hasWrappingText) {
-    return Composite.media.inline.wrapped(content);
+    return media.inline.wrapped(content);
   }
 
   if (hasCaption) {
-    return Composite.media.inline.caption(content);
+    return media.inline.caption(content);
   }
 
-  return Composite.media.inline.standard(content);
+  return media.inline.standard(content);
 };
 
 /**

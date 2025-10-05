@@ -1,12 +1,15 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { layout } from '@universityofmaryland/web-elements-library/composite';
 import { Attributes, Register } from 'model';
 import { CommonIntroData } from './common';
-import { CreateComponentFunction, ComponentRegistration } from '../../../_types';
+import {
+  CreateComponentFunction,
+  ComponentRegistration,
+} from '../../../_types';
 
 const tagName = 'umd-element-section-intro-wide';
 
 const createComponent: CreateComponentFunction = (element) =>
-  Composite.layout.sectionIntro.wide(
+  layout.sectionIntro.wide(
     CommonIntroData({
       element,
       isThemeDark: Attributes.isTheme.dark({ element }),

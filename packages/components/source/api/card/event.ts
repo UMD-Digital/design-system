@@ -1,7 +1,7 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { card } from '@universityofmaryland/web-elements-library/composite';
+import { toUMDElement } from '@universityofmaryland/web-utilities-library/converter';
 import { Attributes, Slots, Register } from 'model';
 import { extractEventData } from '../_event';
-import { toUMDElement } from 'helpers/markup/validate';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
@@ -46,7 +46,7 @@ const createComponent: CreateComponentFunction = (element) => {
       isDateSignDark: false,
     });
 
-    return Composite.card.block({
+    return card.block({
       actions: Slots.actions.default({ element }),
       dateSign: toUMDElement(featureEvents?.dateSign),
       eventMeta: toUMDElement(featureEvents?.eventMeta),
@@ -68,7 +68,7 @@ const createComponent: CreateComponentFunction = (element) => {
       isDateSignDark: false,
     });
 
-    return Composite.card.overlay.image({
+    return card.overlay.image({
       actions: Slots.actions.default({ element }),
       backgroundImage: Slots.assets.image({ element }) as HTMLImageElement,
       dateSign: toUMDElement(promoEvents?.dateSign),
@@ -86,7 +86,7 @@ const createComponent: CreateComponentFunction = (element) => {
       isLargeSize: true,
     });
 
-    return Composite.card.list({
+    return card.list({
       actions: Slots.actions.default({ element }),
       dateSign: toUMDElement(listEvents?.dateSign),
       eventMeta: toUMDElement(listEvents?.eventMeta),
@@ -100,7 +100,7 @@ const createComponent: CreateComponentFunction = (element) => {
   // Default: block layout with standard configuration
 
   const { eventMeta } = eventComponents;
-  return Composite.card.block({
+  return card.block({
     actions: Slots.actions.default({ element }),
     eventMeta: toUMDElement(eventMeta) as any,
     headline: Slots.headline.default({ element }),

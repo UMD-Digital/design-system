@@ -1,12 +1,11 @@
-import * as Feeds from '@universityofmaryland/web-feeds-library';
+import { list } from '@universityofmaryland/web-feeds-library/events';
 import { Attributes, Register } from 'model';
 import { CommonFeedEventsData } from './common';
-import { CreateComponentFunction, ComponentRegistration } from '../../../_types';
+import {
+  CreateComponentFunction,
+  ComponentRegistration,
+} from '../../../_types';
 
-/**
- * Tag name for the events list feed component
- * @internal
- */
 const tagName = 'umd-feed-events-list';
 
 const createComponent: CreateComponentFunction = (element) => {
@@ -19,7 +18,7 @@ const createComponent: CreateComponentFunction = (element) => {
 
   const rowCount = Number(Attributes.getValue.layoutRowCount({ element })) || 5;
 
-  return Feeds.events.list({
+  return list({
     ...data,
     numberOfRowsToStart: Math.min(Math.max(rowCount, 1), 10),
   });

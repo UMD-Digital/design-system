@@ -1,17 +1,14 @@
-import { Atomic } from '@universityofmaryland/web-elements-library';
+import { layout } from '@universityofmaryland/web-elements-library/atomic';
 import { Attributes, Slots, Register } from 'model';
 import { CreateComponentFunction, LayoutProps } from '../../_types';
 
-const tagName = 'umd-element-modal';
-
-/**
- * Props for modal component
- */
 interface ModalProps extends LayoutProps {
   content: HTMLElement | null;
   context: HTMLElement;
   callback: () => void;
 }
+
+const tagName = 'umd-element-modal';
 
 const createComponent: CreateComponentFunction = (element) => {
   const callback = () => {
@@ -28,7 +25,7 @@ const createComponent: CreateComponentFunction = (element) => {
     callback,
   };
 
-  return Atomic.layout.overlay.modal(props);
+  return layout.overlay.modal(props);
 };
 
 const attributes = Attributes.handler.common.visualShowHide({

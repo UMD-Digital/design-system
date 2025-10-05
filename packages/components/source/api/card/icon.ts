@@ -1,16 +1,14 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { card } from '@universityofmaryland/web-elements-library/composite';
+import * as validation from '@universityofmaryland/web-utilities-library/validation';
 import { Attributes, Slots, Register } from 'model';
-import { Markup } from 'helpers';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
 } from '../../_types';
 
-// Tag name for the icon card component
 const tagName = 'umd-element-card-icon';
 
-// Slot configuration for the icon card component
 const slots: SlotConfiguration = {
   headline: {
     ...Slots.element.allowed.headline,
@@ -27,10 +25,10 @@ const slots: SlotConfiguration = {
  * @internal
  */
 const createComponent: CreateComponentFunction = (element) =>
-  Composite.card.overlay.icon({
-    image: Markup.validate.ImageSlot({
+  card.overlay.icon({
+    image: validation.slotImage({
       element,
-      ImageSlot: Slots.name.assets.image,
+      slotName: Slots.name.assets.image,
     }),
     headline: Slots.headline.default({ element }),
     text: Slots.text.default({ element }),

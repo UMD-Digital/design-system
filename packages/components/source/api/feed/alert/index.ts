@@ -1,15 +1,9 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { navigation } from '@universityofmaryland/web-elements-library/composite';
 import { Attributes, Register } from 'model';
 import { CreateComponentFunction } from '../../../_types';
 
-/**
- * Tag name for the utility navigation web component
- */
 const tagName = 'umd-element-navigation-utility';
 
-/**
- * Creates a utility navigation component with the provided configuration
- */
 const createComponent: CreateComponentFunction = (element) => {
   const hasLandmark = element.hasAttribute('role');
   const hasLabel = element.hasAttribute('aria-label');
@@ -22,7 +16,7 @@ const createComponent: CreateComponentFunction = (element) => {
     element.setAttribute('aria-label', 'Utility navigation');
   }
 
-  return Composite.navigation.utility({
+  return navigation.utility({
     alertUrl: Attributes.getValue.alertUrl({ element }),
     giftUrl:
       Attributes.getValue.giftUrl({

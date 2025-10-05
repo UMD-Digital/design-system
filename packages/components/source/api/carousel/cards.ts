@@ -1,16 +1,14 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { carousel } from '@universityofmaryland/web-elements-library/composite';
+import { createSlot } from '@universityofmaryland/web-utilities-library/elements';
 import { Attributes, Slots, Register, Lifecycle } from 'model';
-import { Markup } from 'helpers';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
 } from '../../_types';
 
-// Tag name for the cards carousel component
 const tagName = 'umd-element-carousel-cards';
 
-// Slot configuration for the cards carousel component
 const slots: SlotConfiguration = {
   cards: {
     required: true,
@@ -20,7 +18,6 @@ const slots: SlotConfiguration = {
   actions: Slots.element.allowed.actions,
 };
 
-// Attribute handlers for the cards carousel component
 const attributes = Attributes.handler.common.resize((element) =>
   element.events?.resize(),
 );
@@ -41,7 +38,7 @@ const createComponent: CreateComponentFunction = (element) => {
   ) as HTMLElement[];
 
   const createCardShadowRef = () => {
-    const slot = Markup.create.Node.slot({ type: Slots.name.CARDS });
+    const slot = createSlot(Slots.name.CARDS);
     shadow.appendChild(slot);
   };
 
@@ -51,7 +48,7 @@ const createComponent: CreateComponentFunction = (element) => {
     `[name="${Slots.name.CARDS}"]`,
   ) as HTMLElement;
 
-  return Composite.carousel.cards({
+  return carousel.cards({
     slide,
     shadowRef,
     cards,

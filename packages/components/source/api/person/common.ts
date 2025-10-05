@@ -1,6 +1,6 @@
+import * as validation from '@universityofmaryland/web-utilities-library/validation';
 import { Slots } from 'model';
 import slots from 'model/slots';
-import { Markup } from 'helpers';
 
 export const CommonPersonData = ({
   element,
@@ -17,9 +17,9 @@ export const CommonPersonData = ({
   pronouns: Slots.person.pronouns({ element }),
   phone: Slots.contact.phone({ element }),
   linkendIn: Slots.social.linkedin({ element }),
-  image: Markup.validate.ImageSlot({
+  image: validation.slotImage({
     element,
-    ImageSlot: Slots.name.assets.image,
+    slotName: Slots.name.assets.image,
   }),
   additionalContact: Slots.contact.additional({ element }),
   subText: Slots.text.subText({ element }),

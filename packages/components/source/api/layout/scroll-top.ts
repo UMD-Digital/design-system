@@ -1,13 +1,10 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { layout } from '@universityofmaryland/web-elements-library/composite';
 import { Attributes, Register, Lifecycle } from 'model';
 import { CreateComponentFunction, LayoutProps } from '../../_types';
 
-const tagName = 'umd-element-scroll-top';
-
-/**
- * Props for scroll-to-top component
- */
 interface ScrollTopProps extends Pick<LayoutProps, 'isFixed'> {}
+
+const tagName = 'umd-element-scroll-top';
 
 const createComponent: CreateComponentFunction = (element) => {
   const props: ScrollTopProps = {
@@ -16,7 +13,7 @@ const createComponent: CreateComponentFunction = (element) => {
     ),
   };
 
-  return Composite.layout.scrollTop(props);
+  return layout.scrollTop(props);
 };
 
 /**

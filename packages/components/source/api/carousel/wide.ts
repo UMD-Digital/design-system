@@ -1,13 +1,11 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
-import { Attributes, Slots, Register, Lifecycle } from 'model';
-import { Markup } from 'helpers';
+import { carousel } from '@universityofmaryland/web-elements-library/composite';
+import { imageHasAlt } from '@universityofmaryland/web-utilities-library/validation';
+import { Attributes, Register, Lifecycle } from 'model';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
 } from '../../_types';
-
-const { ImageHasAlt } = Markup.validate;
 
 const tagName = 'umd-element-carousel-image-wide';
 
@@ -43,7 +41,7 @@ const createComponent: CreateComponentFunction = (element) => {
       const headline = slide.querySelector('[data-headline]');
       const text = slide.querySelector('[data-text]');
 
-      if (image && !ImageHasAlt({ image })) {
+      if (image && !imageHasAlt(image)) {
         console.warn('Carousel slide image missing alt text:', image);
         return null;
       }
@@ -62,7 +60,7 @@ const createComponent: CreateComponentFunction = (element) => {
     text?: HTMLElement;
   }>;
 
-  return Composite.carousel.wide({
+  return carousel.wide({
     slides,
     title: title || undefined,
     isThemeDark: Attributes.isTheme.dark({ element }),

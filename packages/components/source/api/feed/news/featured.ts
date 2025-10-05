@@ -1,12 +1,11 @@
-import * as Feeds from '@universityofmaryland/web-feeds-library';
+import { featured } from '@universityofmaryland/web-feeds-library/news';
 import { Attributes, Register } from 'model';
 import { CommonFeedNewsData } from './common';
-import { CreateComponentFunction, ComponentRegistration } from '../../../_types';
+import {
+  CreateComponentFunction,
+  ComponentRegistration,
+} from '../../../_types';
 
-/**
- * Tag name for the featured news feed component
- * @internal
- */
 const tagName = 'umd-feed-news-featured';
 
 const attributes = Attributes.handler.combine(
@@ -24,7 +23,7 @@ const createComponent: CreateComponentFunction = (element) => {
 
   const topPosition = Attributes.getValue.topPosition({ element });
 
-  return Feeds.news.featured({
+  return featured({
     ...data,
     numberOfRowsToStart: 1,
     isTransparent: Attributes.isVisual.transparent({ element }),

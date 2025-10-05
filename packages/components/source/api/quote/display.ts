@@ -1,9 +1,7 @@
-import {
-  Composite,
-  Utilities,
-} from '@universityofmaryland/web-elements-library';
+import { quote } from '@universityofmaryland/web-elements-library/composite';
+import { createSlotWithStyleOverwrite } from '@universityofmaryland/web-utilities-library/elements';
 import { Attributes, Register, Slots } from 'model';
-import { Markup } from 'helpers';
+
 import {
   CreateComponentFunction,
   ComponentRegistration,
@@ -104,59 +102,32 @@ const slots: SlotConfiguration = {
   },
 };
 
-const MakeData = ({
-  element,
-  type,
-}: {
-  element: HTMLElement;
-  type: String;
-}) => {
-  const GetActionLimitOne = () => {
-    const action = Slots.actions.default({ element });
-
-    if (action && action.children.length > 1 && action.firstChild) {
-      console.error('Quote element does not support more than one link');
-
-      return action.firstChild as HTMLElement;
-    }
-
-    return action;
-  };
-
+const MakeData = ({ element }: { element: HTMLElement }) => {
   const isThemeDark = Attributes.isTheme.dark({ element });
   const isThemeMaryland = Attributes.isTheme.maryland({ element });
   const isTransparent = Attributes.isVisual.transparent({ element });
-  const isTypeFeatured = type === 'featured';
-  const isTypeInline = type === 'inline';
-  const includesAnimation =
-    Attributes.includesFeature.animation({ element }) &&
-    !Utilities.accessibility.isPrefferdReducedMotion();
-  const action = GetActionLimitOne();
 
   return {
-    quote: Markup.create.SlotWithDefaultStyling({
+    quote: createSlotWithStyleOverwrite({
       element,
       slotRef: Slots.name.QUOTE,
     }),
-    image: Markup.create.SlotWithDefaultStyling({
+    image: createSlotWithStyleOverwrite({
       element,
       slotRef: Slots.name.assets.image,
-    }) as HTMLImageElement,
-    attribution: Markup.create.SlotWithDefaultStyling({
+    }),
+    attribution: createSlotWithStyleOverwrite({
       element,
       slotRef: Slots.name.ATTRIBUTION,
     }),
-    attributionSubText: Markup.create.SlotWithDefaultStyling({
+    attributionSubText: createSlotWithStyleOverwrite({
       element,
       slotRef: Slots.name.ATTRIBUTION_SUB_TEXT,
     }),
-    action: action,
+    action: Slots.actions.default({ element }),
     isTransparent,
     isThemeDark,
     isThemeMaryland,
-    isTypeFeatured,
-    isTypeInline,
-    includesAnimation,
   };
 };
 
@@ -165,14 +136,14 @@ const createComponent: CreateComponentFunction = (element) => {
   const isTypeFeatured = Attributes.isDisplay.featured({ element });
 
   if (isTypeFeatured) {
-    return Composite.quote.featured({
-      ...MakeData({ element, type: 'featured' }),
+    return quote.featured({
+      ...MakeData({ element }),
       isSizeLarge,
     });
   }
 
-  return Composite.quote.inline({
-    ...MakeData({ element, type: 'inline' }),
+  return quote.inline({
+    ...MakeData({ element }),
     isSizeLarge,
   });
 };

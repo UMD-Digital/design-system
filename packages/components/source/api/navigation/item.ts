@@ -4,17 +4,14 @@ declare global {
   }
 }
 
-import { Composite } from '@universityofmaryland/web-elements-library';
-import { Markup, Styles } from 'helpers';
+import { navigation } from '@universityofmaryland/web-elements-library/composite';
 import {
-  ComponentRegistration,
-} from '../../_types';
+  createSlot,
+  createStyleTemplate,
+} from '@universityofmaryland/web-utilities-library/elements';
+import { reset } from '../../helpers/styles';
+import { ComponentRegistration } from '../../_types';
 
-const { Node } = Markup.create;
-
-/**
- * Tag name for the navigation item web component
- */
 const tagName = 'umd-element-nav-item';
 
 const SLOTS = {
@@ -23,21 +20,20 @@ const SLOTS = {
   DROPDOWN_CALLOUT: 'dropdown-callout',
 };
 
-// prettier-ignore
 export const styles = `
   :host {
     display: block;
   }
 
-  ${Styles.reset}
-  ${Composite.navigation.elements.item.Styles}
+  ${reset}
+  ${navigation.elements.item.Styles}
 `;
 
 class UMDNavItemElement extends HTMLElement {
   _shadow: ShadowRoot;
 
   constructor() {
-    const template = Node.stylesTemplate({ styles });
+    const template = createStyleTemplate(styles);
     super();
     this._shadow = this.attachShadow({ mode: 'open' });
     this._shadow.appendChild(template.content.cloneNode(true));
@@ -79,9 +75,7 @@ class UMDNavItemElement extends HTMLElement {
     };
 
     if (calloutSlot && calloutSlot.children.length > 0) {
-      const dropdownCalloutsSlot = Node.slot({
-        type: SLOTS.DROPDOWN_CALLOUT,
-      });
+      const dropdownCalloutsSlot = createSlot(SLOTS.DROPDOWN_CALLOUT);
       elementData = { ...elementData, dropdownCalloutsSlot };
     }
 
@@ -89,7 +83,7 @@ class UMDNavItemElement extends HTMLElement {
       throw new Error('Primary link is required for a nav item');
     }
 
-    const navItem = Composite.navigation.elements.item.CreateElement({
+    const navItem = navigation.elements.item.CreateElement({
       ...elementData,
     });
 
@@ -161,8 +155,7 @@ class UMDNavItemElement extends HTMLElement {
  * @since 1.0.0
  */
 const navItemRegistration: ComponentRegistration = () => {
-  const hasElement =
-    document.getElementsByTagName(tagName).length > 0;
+  const hasElement = document.getElementsByTagName(tagName).length > 0;
 
   if (!window.customElements.get(tagName) && hasElement) {
     window.UMDNavItemElement = UMDNavItemElement;

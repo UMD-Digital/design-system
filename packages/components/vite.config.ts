@@ -11,13 +11,13 @@ const BUILD_TARGET = 'es2020';
 const DEV_TARGET = 'esnext';
 
 const EXTERNAL_DEPS = [
-  '@universityofmaryland/web-elements-library',
+  '@universityofmaryland/web-utilities-library',
   '@universityofmaryland/web-styles-library',
+  '@universityofmaryland/web-elements-library',
   '@universityofmaryland/web-feeds-library',
 ];
 
 const PATH_ALIASES = {
-  '@universityofmaryland/web-utilities-library': resolve(__dirname, '../utilities/source'),
   model: resolve(SOURCE_DIR, 'model'),
   helpers: resolve(SOURCE_DIR, 'helpers'),
 };
@@ -193,11 +193,12 @@ export default defineConfig((configEnv) => {
       minify: isDevelopment ? false : 'esbuild',
       target: isDevelopment ? DEV_TARGET : BUILD_TARGET,
       rollupOptions: {
-        external: EXTERNAL_DEPS,
+        external: (id) => EXTERNAL_DEPS.some((dep) => id === dep || id.startsWith(`${dep}/`)),
         output: {
           globals: {
-            '@universityofmaryland/web-elements-library': 'UmdWebElements',
+            '@universityofmaryland/web-utilities-library': 'UmdWebUtilities',
             '@universityofmaryland/web-styles-library': 'UmdWebStyles',
+            '@universityofmaryland/web-elements-library': 'UmdWebElements',
             '@universityofmaryland/web-feeds-library': 'UmdWebFeeds',
           },
           preserveModules: false,

@@ -1,12 +1,11 @@
-import * as Feeds from '@universityofmaryland/web-feeds-library';
+import { list } from '@universityofmaryland/web-feeds-library/news';
 import { Attributes, Register } from 'model';
 import { CommonFeedNewsData } from './common';
-import { CreateComponentFunction, ComponentRegistration } from '../../../_types';
+import {
+  CreateComponentFunction,
+  ComponentRegistration,
+} from '../../../_types';
 
-/**
- * Tag name for the news list feed component
- * @internal
- */
 const tagName = 'umd-feed-news-list';
 
 const createComponent: CreateComponentFunction = (element) => {
@@ -18,7 +17,7 @@ const createComponent: CreateComponentFunction = (element) => {
 
   const rowCount = Number(Attributes.getValue.layoutRowCount({ element })) || 5;
 
-  return Feeds.news.list({
+  return list({
     ...data,
     numberOfRowsToStart: rowCount >= 1 && rowCount <= 10 ? rowCount : 5,
   });

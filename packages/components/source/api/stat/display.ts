@@ -1,31 +1,22 @@
+import { text } from '@universityofmaryland/web-elements-library/atomic';
 import { Attributes, Register, Slots } from 'model';
 import {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
 } from '../../_types';
-import { Atomic } from '@universityofmaryland/web-elements-library';
 
-/**
- * Tag name for the statistic display web component
- */
 const tagName = 'umd-element-stat';
 
-/**
- * Slot configuration for the statistic display component
- */
 const slots: SlotConfiguration = {
   stat: Slots.element.allowed.subHeadline,
   'sub-text': Slots.element.allowed.text,
 };
 
-/**
- * Creates a statistic display component with the provided configuration
- */
 const createComponent: CreateComponentFunction = (element) => {
   const isDisplayBlock = Attributes.isDisplay.block({ element });
 
-  return Atomic.text.stat({
+  return text.stat({
     isThemeDark: Attributes.isTheme.dark({ element }),
     isDisplayBlock: isDisplayBlock,
     isSizeLarge: isDisplayBlock || Attributes.isVisual.sizeLarge({ element }),

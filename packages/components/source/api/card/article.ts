@@ -1,7 +1,6 @@
 import CardModel from './_model';
 import type { ComponentRegistration } from '../../_types';
 
-// Tag name for the article card component
 const tagName = 'umd-element-article';
 
 /**

@@ -1,17 +1,11 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { accordion } from '@universityofmaryland/web-elements-library/composite';
 import { Attributes, Slots, Register } from 'model';
 import { CreateComponentFunction, SlotConfiguration } from '../../_types';
 
-/**
- * Tag name for the accordion item web component
- */
 const tagName = 'umd-element-accordion-item';
 
-/**
- * Creates an accordion item component with the provided configuration
- */
 const createComponent: CreateComponentFunction = (element) =>
-  Composite.accordion.item({
+  accordion.item({
     text:
       Slots.deprecated.body({ element, isDefaultStyling: false }) ||
       Slots.text.default({ element, isDefaultStyling: false }),
@@ -27,9 +21,6 @@ const createComponent: CreateComponentFunction = (element) =>
     }),
   });
 
-/**
- * Slot configuration for the accordion item component
- */
 const slots: SlotConfiguration = {
   headline: {
     ...Slots.element.allowed.headline,
@@ -42,10 +33,6 @@ const slots: SlotConfiguration = {
   },
 };
 
-/**
- * Attribute handlers for the accordion item component
- * Manages state changes and animations
- */
 const attributes = Attributes.handler.common.accordion();
 
 /**

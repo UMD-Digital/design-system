@@ -1,15 +1,13 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { hero } from '@universityofmaryland/web-elements-library/composite';
+import { createSlot } from '@universityofmaryland/web-utilities-library/elements';
+import { slotImage } from '@universityofmaryland/web-utilities-library/validation';
 import { Attributes, Slots, Register } from 'model';
-import { Markup } from 'helpers';
+
 import type {
   CreateComponentFunction,
   ComponentRegistration,
 } from '../../../_types';
 
-/**
- * Tag name for the expandable hero component
- * @internal
- */
 const tagName = 'umd-element-hero-expand';
 
 const attributes = Attributes.handler.combine(
@@ -26,13 +24,13 @@ const attributes = Attributes.handler.combine(
 );
 
 const createComponent: CreateComponentFunction = (element) => {
-  const image = Markup.validate.ImageSlot({
+  const image = slotImage({
     element,
-    ImageSlot: Slots.name.assets.image,
+    slotName: Slots.name.assets.image,
   });
   const videoSlot = element.querySelector(`[slot="video"]`) as HTMLElement;
-  const actions = Markup.create.Node.slot({ type: Slots.name.actions.default });
-  const additional = Markup.create.Node.slot({ type: Slots.name.ADDITIONAL });
+  const actions = createSlot(Slots.name.actions.default);
+  const additional = createSlot(Slots.name.ADDITIONAL);
 
   const elementData: {
     image?: HTMLImageElement;
@@ -70,7 +68,7 @@ const createComponent: CreateComponentFunction = (element) => {
     elementData.additional = additional;
   }
 
-  return Composite.hero.custom.expand(elementData);
+  return hero.custom.expand(elementData);
 };
 
 /**

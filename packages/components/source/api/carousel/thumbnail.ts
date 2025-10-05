@@ -1,4 +1,4 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { carousel } from '@universityofmaryland/web-elements-library/composite';
 import { Attributes, Slots, Register, Lifecycle } from 'model';
 import type {
   CreateComponentFunction,
@@ -6,17 +6,14 @@ import type {
   SlotConfiguration,
 } from '../../_types';
 
-// Tag name for the thumbnail carousel component
 const tagName = 'umd-element-carousel-thumbnail';
 
-// Slot configuration for the thumbnail carousel component
 const slots: SlotConfiguration = {
   blocks: {
     required: true,
   },
 };
 
-// Attribute handlers for the thumbnail carousel component
 const attributes = Attributes.handler.common.resize((element) =>
   element.events?.resize(),
 );
@@ -36,7 +33,7 @@ const createComponent: CreateComponentFunction = (element) => {
     block.cloneNode(true),
   ) as HTMLElement[];
 
-  return Composite.carousel.thumbnail({
+  return carousel.thumbnail({
     blocks,
     isThemeDark: Attributes.isTheme.dark({ element }),
   });

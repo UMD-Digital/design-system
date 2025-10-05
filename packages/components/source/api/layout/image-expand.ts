@@ -1,6 +1,7 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { layout } from '@universityofmaryland/web-elements-library/composite';
+import { createSlot } from '@universityofmaryland/web-utilities-library/elements';
+import * as validation from '@universityofmaryland/web-utilities-library/validation';
 import { Slots, Register } from 'model';
-import { Markup } from 'helpers';
 import {
   CreateComponentFunction,
   ComponentRegistration,
@@ -19,11 +20,11 @@ const slots: SlotConfiguration = {
 };
 
 const createComponent: CreateComponentFunction = (element) =>
-  Composite.layout.image.expand({
-    content: Markup.create.Node.slot({ type: 'content' }),
-    image: Markup.validate.ImageSlot({
+  layout.image.expand({
+    content: createSlot('content'),
+    image: validation.slotImage({
       element,
-      ImageSlot: Slots.name.assets.image,
+      slotName: Slots.name.assets.image,
     }) as HTMLImageElement,
   });
 

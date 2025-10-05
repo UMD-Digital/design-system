@@ -4,16 +4,12 @@ declare global {
   }
 }
 
-import { Composite } from '@universityofmaryland/web-elements-library';
-import { Markup, Styles } from 'helpers';
+import { navigation } from '@universityofmaryland/web-elements-library/composite';
+import { createStyleTemplate } from '@universityofmaryland/web-utilities-library/elements';
+import { reset } from '../../helpers/styles';
 import { MakeNavSlider, SLOTS } from './common';
-import {
-  ComponentRegistration,
-} from '../../_types';
+import { ComponentRegistration } from '../../_types';
 
-/**
- * Tag name for the navigation slider web component
- */
 const tagName = 'umd-element-nav-slider';
 const ATTRIBUTE_RESIZE = 'resize';
 
@@ -22,8 +18,8 @@ export const styles = `
     display: block;
   }
 
-  ${Styles.reset}
-  ${Composite.navigation.elements.slider.Styles}
+  ${reset}
+  ${navigation.elements.slider.Styles}
 `;
 
 const CreateShadowDom = ({ element }: { element: HTMLElement }) =>
@@ -39,7 +35,7 @@ class UMDNavSlider extends HTMLElement {
   } | null;
 
   constructor() {
-    const template = Markup.create.Node.stylesTemplate({ styles });
+    const template = createStyleTemplate(styles);
     super();
     this._elementRef = null;
     this._shadow = this.attachShadow({ mode: 'open' });
@@ -123,8 +119,7 @@ class UMDNavSlider extends HTMLElement {
  * @since 1.0.0
  */
 const navSliderRegistration: ComponentRegistration = () => {
-  const hasElement =
-    document.getElementsByTagName(tagName).length > 0;
+  const hasElement = document.getElementsByTagName(tagName).length > 0;
 
   if (!window.customElements.get(tagName) && hasElement) {
     window.UMDNavSlider = UMDNavSlider;

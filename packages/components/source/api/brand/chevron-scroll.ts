@@ -1,17 +1,11 @@
-import { Atomic } from '@universityofmaryland/web-elements-library';
+import { animations } from '@universityofmaryland/web-elements-library/atomic';
 import { Register } from 'model';
 import { CreateComponentFunction, ComponentRegistration } from '../../_types';
 
-/**
- * Tag name for the brand chevron animation component
- */
 const tagName = 'umd-element-brand-logo-animation';
 
-/**
- * Creates the brand chevron animation component
- */
 const createComponent: CreateComponentFunction = () =>
-  Atomic.animations.brand.chevronScroll();
+  animations.brand.chevronScroll();
 
 /**
  * Brand Chevron Scroll Animation

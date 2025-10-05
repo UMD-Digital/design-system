@@ -1,15 +1,14 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { hero } from '@universityofmaryland/web-elements-library/composite';
 import { Attributes, Register, Slots, Lifecycle } from 'model';
-import type { CreateComponentFunction, ComponentRegistration } from '../../_types';
+import type {
+  CreateComponentFunction,
+  ComponentRegistration,
+} from '../../_types';
 
-/**
- * Tag name for the logo hero component
- * @internal
- */
 const tagName = 'umd-element-hero-logo';
 
 const createComponent: CreateComponentFunction = (element) =>
-  Composite.hero.logo({
+  hero.logo({
     isThemeDark: Attributes.isTheme.dark({
       element,
     }),

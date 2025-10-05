@@ -1,29 +1,21 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { pathway } from '@universityofmaryland/web-elements-library/composite';
+import { createSlotWithStyleOverwrite } from '@universityofmaryland/web-utilities-library/elements';
 import { Attributes, Slots, Register } from 'model';
-import { Markup } from 'helpers';
 import { CreateComponentFunction } from '../../_types';
 
-const { SlotWithDefaultStyling } = Markup.create;
-
-/**
- * Tag name for the pathway highlight web component
- */
 const tagName = 'umd-element-pathway-highlight';
 
-/**
- * Creates a pathway highlight component with the provided configuration
- */
 const createComponent: CreateComponentFunction = (element) =>
-  Composite.pathway.highlight({
+  pathway.highlight({
     actions: Slots.actions.default({ element }),
     eyebrow: Slots.eyebrow.default({ element }),
     headline: Slots.headline.default({ element }),
     text: Slots.text.default({ element }),
-    quote: SlotWithDefaultStyling({
+    quote: createSlotWithStyleOverwrite({
       element,
       slotRef: Slots.name.HIGHLIGHT,
     }),
-    attribution: SlotWithDefaultStyling({
+    attribution: createSlotWithStyleOverwrite({
       element,
       slotRef: Slots.name.HIGHLIGHT_ATTRIBUTION,
     }),

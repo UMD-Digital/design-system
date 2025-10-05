@@ -1,14 +1,10 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { hero } from '@universityofmaryland/web-elements-library/composite';
 import { Attributes, Slots, Register } from 'model';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
 } from '../../../_types';
 
-/**
- * Tag name for the grid hero component
- * @internal
- */
 const tagName = 'umd-element-hero-grid';
 
 const createComponent: CreateComponentFunction = (element) => {
@@ -56,7 +52,7 @@ const createComponent: CreateComponentFunction = (element) => {
     isThemeDark: Attributes.isTheme.dark({ element }) || false,
   };
 
-  const gridElement = Composite.hero.custom.grid(elementData);
+  const gridElement = hero.custom.grid(elementData);
 
   if (gridElement) return gridElement;
 

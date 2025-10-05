@@ -1,11 +1,8 @@
-import { Atomic } from '@universityofmaryland/web-elements-library';
+import { animations } from '@universityofmaryland/web-elements-library/atomic';
 import { Attributes, Lifecycle, Register } from 'model';
 import { CreateComponentFunction, ComponentRegistration } from '../../_types';
 
-/**
- * Tag name for the card stack component
- * @internal
- */ const tagName = 'umd-element-brand-card-stack';
+const tagName = 'umd-element-brand-card-stack';
 
 /**
  * Creates a card fireworks component with a featured element and accompanying images
@@ -49,7 +46,7 @@ const createComponent: CreateComponentFunction = (element) => {
     })
     .filter((img) => img !== null) as HTMLImageElement[];
 
-  return Atomic.animations.brand.cardStack({
+  return animations.brand.cardStack({
     featured,
     images,
     isExpandFeature: Attributes.includesFeature.imageExpand({

@@ -1,4 +1,4 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { social } from '@universityofmaryland/web-elements-library/composite';
 import { Attributes, Register, Lifecycle } from 'model';
 import { CreateComponentFunction, ComponentRegistration } from '../../_types';
 
@@ -75,7 +75,7 @@ const tagName = 'umd-element-social-sharing';
  * @since 1.0.0
  */
 const createComponent: CreateComponentFunction = (element) =>
-  Composite.social.sharing({
+  social.sharing({
     isFixed: Attributes.isLayout.fixed({ element }),
     title: Attributes.getValue.title({ element }),
     url: Attributes.getValue.url({ element }),

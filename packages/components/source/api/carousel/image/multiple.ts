@@ -1,18 +1,14 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { carousel } from '@universityofmaryland/web-elements-library/composite';
+import { imageHasAlt } from '@universityofmaryland/web-utilities-library/validation';
 import { Attributes, Slots, Register } from 'model';
-import { Markup } from 'helpers';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
   SlotConfiguration,
 } from '../../../_types';
 
-const { ImageHasAlt } = Markup.validate;
-
-// Tag name for the multiple image carousel component
 const tagName = 'umd-element-carousel-multiple-image';
 
-// Slot configuration for the multiple image carousel component
 const slots: SlotConfiguration = {
   images: {
     required: true,
@@ -20,7 +16,6 @@ const slots: SlotConfiguration = {
   },
 };
 
-// Attribute handlers for the multiple image carousel component
 const attributes = Attributes.handler.common.resize((element) =>
   element.events?.SetEventReize(),
 );
@@ -39,13 +34,13 @@ const createComponent: CreateComponentFunction = (element) => {
   const images = slottedImages
     .map((image) => {
       if (image.nodeName === 'IMG') {
-        if (ImageHasAlt({ image })) return image.cloneNode(true);
+        if (imageHasAlt(image)) return image.cloneNode(true);
       }
       return null;
     })
     .filter((image) => image !== null) as HTMLImageElement[];
 
-  return Composite.carousel.images({
+  return carousel.images({
     images,
     isThemeDark: Attributes.isTheme.dark({ element }),
     isFullScreenOption: Attributes.includesFeature.fullScreenOption({

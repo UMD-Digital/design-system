@@ -1,21 +1,17 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { hero } from '@universityofmaryland/web-elements-library/composite';
 import { Lifecycle, Slots, Register } from 'model';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
 } from '../../../_types';
 
-/**
- * Tag name for the brand video hero component
- * @internal
- */
 const tagName = 'umd-element-hero-brand-video';
 
 const createComponent: CreateComponentFunction = (element) => {
   const animationTriggerAttribute = element.getAttribute('animation-trigger');
   const video = element.querySelector('video') as HTMLVideoElement;
 
-  return Composite.hero.custom.videoArrow({
+  return hero.custom.videoArrow({
     video,
     headline: Slots.headline.default({ element }),
     text: Slots.text.default({ element }),

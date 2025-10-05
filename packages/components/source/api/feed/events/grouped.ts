@@ -1,20 +1,13 @@
-import * as Feeds from '@universityofmaryland/web-feeds-library';
+import { grouped } from '@universityofmaryland/web-feeds-library/events';
 import { Register } from 'model';
 import { CommonFeedEventsData } from './common';
-import { CreateComponentFunction, ComponentRegistration } from '../../../_types';
+import {
+  CreateComponentFunction,
+  ComponentRegistration,
+} from '../../../_types';
 
-/**
- * Tag name for the events grid feed component
- * @internal
- */
 const tagName = 'umd-feed-events-grouped';
 
-/**
- * Creates an events grid feed component
- * @param element - The host HTML element
- * @returns Configured feed component
- * @internal
- */
 const createComponent: CreateComponentFunction = (element) => {
   const data = CommonFeedEventsData({ element });
 
@@ -23,7 +16,7 @@ const createComponent: CreateComponentFunction = (element) => {
     return { element: document.createElement('div'), styles: '' };
   }
 
-  return Feeds.events.grouped({
+  return grouped({
     ...data,
     isLazyLoad: true,
     numberOfRowsToStart: 10,

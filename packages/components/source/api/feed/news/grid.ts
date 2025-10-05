@@ -1,12 +1,11 @@
-import * as Feeds from '@universityofmaryland/web-feeds-library';
+import { grid } from '@universityofmaryland/web-feeds-library/news';
 import { Attributes, Register } from 'model';
 import { CommonFeedNewsData } from './common';
-import { CreateComponentFunction, ComponentRegistration } from '../../../_types';
+import {
+  CreateComponentFunction,
+  ComponentRegistration,
+} from '../../../_types';
 
-/**
- * Tag name for the news grid feed component
- * @internal
- */
 const tagName = 'umd-feed-news';
 
 const createComponent: CreateComponentFunction = (element) => {
@@ -20,7 +19,7 @@ const createComponent: CreateComponentFunction = (element) => {
     Number(Attributes.getValue.layoutColumnCount({ element })) || 3;
   const rowCount = Number(Attributes.getValue.layoutRowCount({ element })) || 1;
 
-  return Feeds.news.grid({
+  return grid({
     ...data,
     numberOfColumnsToShow: Math.min(Math.max(columnCount, 1), 4),
     numberOfRowsToStart: Math.min(Math.max(rowCount, 1), 2),

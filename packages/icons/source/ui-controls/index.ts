@@ -1,0 +1,19 @@
+/**
+ * UI Controls Icons
+ *
+ * Icons for user interface controls and actions
+ */
+
+export const CLOSE_BUTTON = `<svg title="close button icon" aria-hidden="true" id="icon_close" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3.2561" y="0.321533" width="20.75" height="4.15" transform="rotate(45 3.2561 0.321533)" fill="none"/><rect x="17.9285" y="3.25598" width="20.75" height="4.15" transform="rotate(135 17.9285 3.25598)" fill="none"/></svg>`;
+
+export const CLOSE_X = `<svg title="X icon" aria-hidden="true" id="icon_x" width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="25.0241" y="13.2861" width="83" height="16.6" transform="rotate(45 25.0241 13.2861)"></rect><rect x="83.7139" y="25.0241" width="83" height="16.6" transform="rotate(135 83.7139 25.0241)"></rect></svg>`;
+
+export const PAUSE = `<svg title="pause icon" aria-hidden="true" id="icon_pause" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 96 97" style="enable-background:new 0 0 96 97;" xml:space="preserve"><style type="text/css">.st0{fill-rule:evenodd;clip-rule:evenodd;}</style><path class="st0" d="M36.6,8.8c0-0.6-0.4-1-1-1H21c-0.6,0-1,0.4-1,1v81c0,0.6,0.4,1,1,1h14.6c0.6,0,1-0.4,1-1V8.8z M75.6,8.8c0-0.6-0.4-1-1-1H60c-0.6,0-1,0.4-1,1v81c0,0.6,0.4,1,1,1h14.6c0.6,0,1-0.4,1-1V8.8z"/></svg>`;
+
+export const PLAY = `<svg title="play icon" aria-hidden="true" id="icon_play" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"viewBox="0 0 96 97" style="enable-background:new 0 0 96 97;" xml:space="preserve"><path d="M21.1,16.4c0-0.8,0.8-1.2,1.5-0.9l56.7,32.1c0.7,0.4,0.7,1.4,0,1.7L22.6,81.5c-0.7,0.4-1.5-0.1-1.5-0.9V16.4z"/></svg>`;
+
+export const FULL_SCREEN = `<svg title="full screen icon" aria-hidden="true" id="icon_full_screen" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" clip-rule="evenodd" d="M12.0172 4.97734L12.0154 7.75584L13.3244 6.44684L13.3662 2.67066H13.3293L13.3293 2.63376L9.55316 2.6756L8.24415 3.98461L11.282 3.98263L8.28453 6.98009L9.14949 7.84505L12.0172 4.97734Z" fill="white"/><path fill-rule="evenodd" clip-rule="evenodd" d="M3.9828 11.0227L3.98461 8.24416L2.67561 9.55316L2.63377 13.3293H2.67066V13.3662L6.44684 13.3244L7.75585 12.0154L4.71801 12.0174L7.71547 9.01991L6.85051 8.15495L3.9828 11.0227Z" fill="white"/></svg>`;
+
+export const PRINTER = `<svg title="printer icon" aria-hidden="true" id="icon_printer" width="22" height="20" viewBox="0 0 22 20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M17.5 0.25H4.5V4.58333H17.5M18.5833 10C18.296 10 18.0205 9.88586 17.8173 9.6827C17.6141 9.47953 17.5 9.20398 17.5 8.91667C17.5 8.62935 17.6141 8.3538 17.8173 8.15063C18.0205 7.94747 18.296 7.83333 18.5833 7.83333C18.8707 7.83333 19.1462 7.94747 19.3494 8.15063C19.5525 8.3538 19.6667 8.62935 19.6667 8.91667C19.6667 9.20398 19.5525 9.47953 19.3494 9.6827C19.1462 9.88586 18.8707 10 18.5833 10ZM15.3333 17.5833H6.66667V12.1667H15.3333M18.5833 5.66667H3.41667C2.55471 5.66667 1.72806 6.00908 1.11857 6.61857C0.509077 7.22806 0.166667 8.05471 0.166667 8.91667V15.4167H4.5V19.75H17.5V15.4167H21.8333V8.91667C21.8333 8.05471 21.4909 7.22806 20.8814 6.61857C20.2719 6.00908 19.4453 5.66667 18.5833 5.66667Z" fill="black"/></svg>`;
+
+export const NEW_WINDOW = `<svg title="new window icon" id="icon_new_window" aria-hidden="true" data-name="new-window-icon" viewBox="0 0 13 9" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10.42 10.67"><defs><style>.cls-1 { fill: #fff; fill-rule: evenodd; } </style></defs><path class="cls-1" d="M6.67,2.28H1.28S3.63,0,3.63,0h4.49s2.29,0,2.29,0h0s0,2.28,0,2.28h0v4.49s-2.29,2.35-2.29,2.35V3.95S1.55,10.67,1.55,10.67l-1.55-1.55L6.67,2.28Z"/></svg>`;

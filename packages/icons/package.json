@@ -1,0 +1,112 @@
+{
+  "name": "@universityofmaryland/web-icons-library",
+  "version": "1.0.0",
+  "description": "Icon and logo assets for the University of Maryland Design System",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./navigation": {
+      "types": "./dist/navigation/index.d.ts",
+      "import": "./dist/navigation/index.mjs",
+      "require": "./dist/navigation/index.js"
+    },
+    "./ui-controls": {
+      "types": "./dist/ui-controls/index.d.ts",
+      "import": "./dist/ui-controls/index.mjs",
+      "require": "./dist/ui-controls/index.js"
+    },
+    "./communication": {
+      "types": "./dist/communication/index.d.ts",
+      "import": "./dist/communication/index.mjs",
+      "require": "./dist/communication/index.js"
+    },
+    "./documents": {
+      "types": "./dist/documents/index.d.ts",
+      "import": "./dist/documents/index.mjs",
+      "require": "./dist/documents/index.js"
+    },
+    "./time": {
+      "types": "./dist/time/index.d.ts",
+      "import": "./dist/time/index.mjs",
+      "require": "./dist/time/index.js"
+    },
+    "./media": {
+      "types": "./dist/media/index.d.ts",
+      "import": "./dist/media/index.mjs",
+      "require": "./dist/media/index.js"
+    },
+    "./alerts": {
+      "types": "./dist/alerts/index.d.ts",
+      "import": "./dist/alerts/index.mjs",
+      "require": "./dist/alerts/index.js"
+    },
+    "./search": {
+      "types": "./dist/search/index.d.ts",
+      "import": "./dist/search/index.mjs",
+      "require": "./dist/search/index.js"
+    },
+    "./logos": {
+      "types": "./dist/logos/index.d.ts",
+      "import": "./dist/logos/index.mjs",
+      "require": "./dist/logos/index.js"
+    },
+    "./social": {
+      "types": "./dist/social/index.d.ts",
+      "import": "./dist/social/index.mjs",
+      "require": "./dist/social/index.js"
+    },
+    "./brand": {
+      "types": "./dist/brand/index.d.ts",
+      "import": "./dist/brand/index.mjs",
+      "require": "./dist/brand/index.js"
+    },
+    "./user": {
+      "types": "./dist/user/index.d.ts",
+      "import": "./dist/user/index.mjs",
+      "require": "./dist/user/index.js"
+    },
+    "./location": {
+      "types": "./dist/location/index.d.ts",
+      "import": "./dist/location/index.mjs",
+      "require": "./dist/location/index.js"
+    },
+    "./content": {
+      "types": "./dist/content/index.d.ts",
+      "import": "./dist/content/index.mjs",
+      "require": "./dist/content/index.js"
+    }
+  },
+  "license": "MIT",
+  "repository": "",
+  "private": false,
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "docs": "npx typedoc --options ./typedoc.json",
+    "prebuild": "node ../../source/update-badges.js",
+    "release": "npm run test && npm run build && npm publish --access public",
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "start": "npm run dev",
+    "pretest": "npm run pretest --prefix ../..",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:snapshot": "jest --updateSnapshot"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-legacy": "^7.2.1",
+    "typescript": "^5.8.2",
+    "vite": "^7.1.4",
+    "vite-plugin-checker": "^0.10.3",
+    "vite-plugin-dts": "^4.5.4"
+  }
+}

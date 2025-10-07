@@ -266,6 +266,10 @@ export default (props: ContactProps): ElementVisual => {
           lineHeight: '1.4em',
         },
 
+        ['& > .umd-footer-social-column_wrapper']: {
+          display: 'block',
+        },
+
         [`@container (max-width: ${MEDIUM - 1})`]: {
           paddingTop: token.spacing.md,
         },

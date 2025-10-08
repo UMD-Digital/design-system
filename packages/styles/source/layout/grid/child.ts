@@ -61,3 +61,27 @@ export const startSecond: JssObject = create.jss.objectWithClassName({
 
   className: `${classNamePrefix}-start-second`,
 });
+
+/**
+ * Grid child that is 100% height.
+ * @returns {JssObject} Grid child that is 100% height starting at tablet screens.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.child.fillHeight
+ * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-child-fill-height"
+ * ```
+ * @since 1.1.0
+ */
+export const fillHeight: JssObject = create.jss.objectWithClassName({
+  [`@media (${media.queries.tablet.min})`]: {
+    ['&, & > *']: {
+      height: '100%',
+    },
+  },
+
+  className: `${classNamePrefix}-fill-height`,
+});

@@ -127,7 +127,6 @@
     <!-- Styles library post-render CSS -->
     <script>
       window.addEventListener('DOMContentLoaded', () => {
-        console.log(window.Styles);
         if (window.Styles && window.Styles.postRenderCss) {
           window.Styles.postRenderCss.then((css) => {
             const styleSheet = document.createElement('style');

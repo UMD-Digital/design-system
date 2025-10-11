@@ -1,228 +1,187 @@
-# CLAUDE.md
+# CLAUDE.md - Elements Package
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+## Package Overview
 
-## Project Overview
+The **Elements Package** (`@universityofmaryland/web-elements-library`) provides foundational UI element builders using the Element Model pattern. Elements return JavaScript objects containing DOM nodes and their associated styles.
 
-This is the University of Maryland Web Elements Library - a foundational UI library that provides atomic and composite building blocks for creating UMD digital properties. The library is built with TypeScript and follows a modular architecture.
+**Version**: 1.4.8
+**Dependencies**: 
+- `@universityofmaryland/web-styles-library` (peer)
+- `@universityofmaryland/web-icons-library` (peer)
+- `@universityofmaryland/web-utilities-library`
 
-## Build Commands
+## Build System
+
+### Vite Configuration
+
+- **Builder**: Vite with TypeScript
+- **Output Formats**: ES Modules (`.mjs`) and CommonJS (`.js`)
+- **External Dependencies**: All `@universityofmaryland/*` packages
+- **Type Declarations**: Generated with `vite-plugin-dts`
+- **Module Preservation**: `preserveModules: true` for granular imports
+
+### Build Commands
 
 ```bash
-# Development - watch mode with webpack
-npm start
-# or
-npm run webpack
-
-# Production build
-npm run build
-
-# Clean build artifacts
-npm run clean
-
-# Publish to npm (includes build)
-npm run release
-
-# Update version badges
-npm run prebuild
+npm run build      # Production build
+npm run dev        # Watch mode
+npm run clean      # Remove dist and build directories
+npm test          # Run all tests
 ```
 
-## Architecture
+## Package Structure
 
-The library is organized into five main categories:
+### Source Organization
 
-1. **Atomic Elements** (`source/atomic/`) - Basic building blocks
-   - actions (buttons, links)
-   - animations (transitions, loaders)
-   - assets (images, icons)
-   - buttons (specialized button components)
-   - events (event-related UI)
-   - layout (basic layout components)
-   - text-lockup (text groupings)
+```
+source/
+├── atomic/       # Simple, single-purpose elements
+│   ├── actions/      # Links, buttons
+│   ├── animations/   # Animation elements
+│   ├── assets/       # Images, videos
+│   ├── buttons/      # Button elements
+│   ├── events/       # Event-related displays
+│   ├── layout/       # Layout containers
+│   └── text-lockup/  # Text composition elements
+├── composite/    # Complex, multi-part elements
+│   ├── alert/        # Alert components
+│   ├── card/         # Card variations
+│   ├── carousel/     # Carousel systems
+│   ├── footer/       # Footer compositions
+│   ├── hero/         # Hero sections
+│   ├── navigation/   # Navigation systems
+│   ├── person/       # Person displays
+│   ├── quote/        # Quote displays
+│   └── ...
+├── layout/       # Layout utilities
+└── model/        # Element models and utilities
+```
 
-2. **Composite Elements** (`source/composite/`) - Complex UI patterns built from atomic elements
-   - Components like accordion, alert, banner, card, carousel, footer, hero, navigation, person, quote, etc.
-   - Each composite typically has multiple variations (e.g., card has block, list, overlay)
+### Export Pattern
 
-3. **Layout** (`source/layout/`) - Page layout controls
-
-4. **Model** (`source/model/`) - Element creation and interaction patterns
-   - elements/ - Factory functions for creating various element types
-   - modifiers/ - Style and behavior modifiers
-
-5. **Utilities** (`source/utilities/`) - Helper functions
-   - accessibility - ARIA and focus management
-   - assets - Icon and logo utilities
-   - markup - DOM manipulation helpers
-   - styles - CSS-in-JS utilities
-
-## Key Patterns
-
-### Element Structure
-Elements typically return an object with:
-- `element`: The DOM HTMLElement
-- `styles`: Associated CSS styles
-- `update`: Method to update properties
-- `destroy`: Cleanup method
-
-### File Structure Pattern
-All element files should follow this consistent structure:
-
-1. **Imports** - External dependencies, utilities, and types
-2. **Interfaces** - File-specific TypeScript interfaces
-3. **Constants** - Structured constants using `as const`
-   - `CLASS_NAMES` - All CSS class names
-   - `THEME_VALUES` - Theme-related values (sizes, colors, etc.)
-   - `ANIMATION_CONFIG` - Animation configurations
-   - Other domain-specific constants
-4. **Reusable pure functions** - Small, testable, Unix-type functions
-5. **Component structure** - UI element creation functions
-6. **Default export** - Main component function
-
-### Type System Pattern
-The library follows a specific pattern for organizing types. See `source/TYPES_PATTERN.md` for detailed guidelines. Key principles:
-
-- **Be explicit about component needs** - Don't extend interfaces wholesale; use `Pick` to select specific properties
-- **Separate concerns** - Base interfaces should only contain truly shared properties
-- **Required vs optional** - Be clear about which properties are required for each variant
-- **Avoid type gymnastics** - Keep types simple and readable
-
-Example:
 ```typescript
-// Good - Explicit about needs
-interface CardBlockProps extends 
-  Pick<ThemeProps, 'isThemeDark'> {
-  headline: ContentElement;  // Required
-  text?: ContentElement;     // Optional
-  hasBorder?: boolean;
-}
+// Category import
+import { textLockup, assets } from '@universityofmaryland/web-elements-library/atomic';
+import { createAlert } from '@universityofmaryland/web-elements-library/composite';
 
-// Avoid - Too generic
-interface CardBlockProps extends 
-  Partial<CommonContentProps>,
-  ThemeProps {
-  hasBorder?: boolean;
+// Main export
+import { textLockup, createAlert } from '@universityofmaryland/web-elements-library';
+```
+
+## Element Model Pattern
+
+All elements return an `ElementModel` object:
+
+```typescript
+interface ElementModel {
+  element: HTMLElement | DocumentFragment;  // DOM node
+  styles: string;                          // Associated CSS
+  update?: (props: any) => void;           // Optional updater
+  destroy?: () => void;                    // Optional cleanup
 }
 ```
 
-Example structure:
+### Example Usage
+
 ```typescript
-// Imports
-import * as Styles from '@universityofmaryland/web-styles-library';
-import * as Utils from 'utilities';
-import { ElementModel } from 'model';
-import { type ElementVisual } from '_types';
+import { textLockup } from '@universityofmaryland/web-elements-library/atomic';
 
-// Interfaces
-interface ComponentProps {
-  // ...
-}
+const myElement = textLockup.small({
+  eyebrow: 'Category',
+  headline: 'My Headline',
+  text: 'Description text'
+});
 
-// Constants
-const CLASS_NAMES = {
-  CONTAINER: 'component-container',
-  // ...
-} as const;
+// Inject into DOM
+document.body.appendChild(myElement.element);
 
-const THEME_VALUES = {
-  MAX_WIDTH: '1200px',
-  // ...
-} as const;
+// Inject styles
+const styleEl = document.createElement('style');
+styleEl.textContent = myElement.styles;
+document.head.appendChild(styleEl);
+```
 
-// Pure functions
-const buildChildren = (props: ComponentProps): ElementVisual[] => {
-  // ...
-};
+## package.json Exports
 
-// Component structure
-const createSubComponent = (props: ComponentProps) => {
-  return ElementModel.create({
-    element: document.createElement('div'),
-    className: CLASS_NAMES.SUB,
-    children: buildChildren(props),
-    elementStyles: { /* ... */ },
-  });
-};
-
-// Default export
-export default (props: ComponentProps) => {
-  return ElementModel.create({
-    element: document.createElement('div'),
-    className: CLASS_NAMES.CONTAINER,
-    children: [createSubComponent(props)],
-    elementStyles: { /* ... */ },
-    events: {
-      onClick: () => { /* ... */ },
+```json
+{
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
     },
-  });
-};
+    "./atomic": {
+      "types": "./dist/atomic.d.ts",
+      "import": "./dist/atomic.mjs",
+      "require": "./dist/atomic.js"
+    },
+    "./composite": {
+      "types": "./dist/composite.d.ts",
+      "import": "./dist/composite.mjs",
+      "require": "./dist/composite.js"
+    }
+  }
+}
 ```
 
-### Best Practices
-- Use the `children` property in ElementModel instead of manual DOM manipulation
-- Extract magic numbers and strings into constants
-- Create helper functions for building children arrays
-- Use `Utils` imports instead of direct utility imports
-- Return early from functions when appropriate
-- Avoid IIFEs in default exports
+## Key Concepts
 
-### TypeScript Configuration
-- Source files in `source/` directory
-- Output to `dist/` directory
-- Uses module resolution for clean imports
-- Extends base tsconfig from repository root
+### Atomic vs Composite
 
-### Component Type Files (_types.ts)
-When a component has multiple variants or complex type needs, create a `_types.ts` file in the component directory:
+- **Atomic**: Simple, single-purpose elements (buttons, text lockups, images)
+- **Composite**: Complex combinations of atomic elements (heroes, cards, footers)
+
+### Style Integration
+
+Elements use JSS from the styles package:
 
 ```typescript
-// composite/card/_types.ts
-import { 
-  type ContentElement,
-  type ThemeProps 
-} from '_types';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as layout from '@universityofmaryland/web-styles-library/layout';
+import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
 
-// Shared interfaces for multiple variants
-export interface CardMediaProps {
-  image?: ImageElement | LinkElement;
-  isAligned?: boolean;
-}
-
-// Variant-specific interfaces
-export interface CardBlockProps extends 
-  CardMediaProps,
-  Pick<ThemeProps, 'isThemeDark'> {
-  headline: ContentElement;   // Required
-  text?: ContentElement;      // Optional
-  actions?: ContentElement;   // Optional
-  // Variant-specific props
-  hasBorder?: boolean;
-  isTransparent?: boolean;
-}
+const styles = convertJSSObjectToStyles({
+  styleObj: {
+    '.my-element': {
+      padding: token.spacing.md,
+      ...layout.grid.inline.tabletRows
+    }
+  }
+});
 ```
 
-Key guidelines:
-- Only create base interfaces if properties are truly shared by ALL variants
-- Be explicit about which properties each variant needs
-- Use `Pick<Interface, 'prop1' | 'prop2'>` to select specific properties from shared interfaces
-- Clearly mark required vs optional properties
-- Avoid using `Partial<Interface>` which obscures what's actually needed
+## Testing
 
-### Webpack Configuration
-- Entry point: `source/index.ts`
-- Outputs UMD module to `dist/index.js`
-- Handles TypeScript, CSS (with PostCSS), and images
-- PostCSS configured for autoprefixing and modern CSS features
+- **Framework**: Jest with JSDOM
+- **Location**: `source/__tests__/`
+- **Pattern**: Test element creation, styles, and props
+- **Mocks**: Mock external dependencies
 
-### CSS Processing
-- PostCSS with autoprefixer
-- CSS modules loaded as strings for CSS-in-JS
-- Supports IE 11 through postcss-preset-env
+## Best Practices
 
-## Development Tips
+1. **Use Namespace Imports**: For styles library modules
+   - ✅ `import * as token from '@universityofmaryland/web-styles-library/token'`
+   - ❌ `import token from '@universityofmaryland/web-styles-library/token'`
 
-- The library exports everything through the main index file
-- Each category (Atomic, Composite, etc.) has its own index that re-exports all sub-modules
-- Elements are designed to be tree-shakable
-- CSS is typically included within components as strings
-- Follow existing patterns when adding new elements - check similar components first
+2. **Element Model**: Always return `{ element, styles }`
+3. **Props Validation**: Use TypeScript interfaces for props
+4. **Style Scoping**: Use unique class names to avoid conflicts
+5. **Accessibility**: Include ARIA attributes and semantic HTML
+
+## Build Output
+
+- `dist/index.{js,mjs,d.ts}` - Main export with all elements
+- `dist/atomic.{js,mjs,d.ts}` - Atomic elements
+- `dist/composite.{js,mjs,d.ts}` - Composite elements
+- `dist/layout.{js,mjs,d.ts}` - Layout utilities
+- `dist/model.{js,mjs,d.ts}` - Element models
+- Preserved module structure for granular imports
+
+## Notes
+
+- Elements are framework-agnostic
+- Peer dependencies allow version flexibility
+- Element Model pattern enables consistent API
+- Styles are co-located with elements
+- Used as building blocks for components package

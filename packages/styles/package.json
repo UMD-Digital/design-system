@@ -13,39 +13,39 @@
       "require": "./dist/index.js"
     },
     "./accessibility": {
-      "types": "./dist/accessibility/index.d.ts",
-      "import": "./dist/accessibility/index.mjs",
-      "require": "./dist/accessibility/index.js"
+      "types": "./dist/accessibility.d.ts",
+      "import": "./dist/accessibility.mjs",
+      "require": "./dist/accessibility.js"
     },
     "./animation": {
-      "types": "./dist/animation/index.d.ts",
-      "import": "./dist/animation/index.mjs",
-      "require": "./dist/animation/index.js"
+      "types": "./dist/animation.d.ts",
+      "import": "./dist/animation.mjs",
+      "require": "./dist/animation.js"
     },
     "./element": {
-      "types": "./dist/element/index.d.ts",
-      "import": "./dist/element/index.mjs",
-      "require": "./dist/element/index.js"
+      "types": "./dist/element.d.ts",
+      "import": "./dist/element.mjs",
+      "require": "./dist/element.js"
     },
     "./layout": {
-      "types": "./dist/layout/index.d.ts",
-      "import": "./dist/layout/index.mjs",
-      "require": "./dist/layout/index.js"
+      "types": "./dist/layout.d.ts",
+      "import": "./dist/layout.mjs",
+      "require": "./dist/layout.js"
     },
     "./token": {
-      "types": "./dist/token/index.d.ts",
-      "import": "./dist/token/index.mjs",
-      "require": "./dist/token/index.js"
+      "types": "./dist/token.d.ts",
+      "import": "./dist/token.mjs",
+      "require": "./dist/token.js"
     },
     "./typography": {
-      "types": "./dist/typography/index.d.ts",
-      "import": "./dist/typography/index.mjs",
-      "require": "./dist/typography/index.js"
+      "types": "./dist/typography.d.ts",
+      "import": "./dist/typography.mjs",
+      "require": "./dist/typography.js"
     },
     "./utilities": {
-      "types": "./dist/utilities/index.d.ts",
-      "import": "./dist/utilities/index.mjs",
-      "require": "./dist/utilities/index.js"
+      "types": "./dist/utilities.d.ts",
+      "import": "./dist/utilities.mjs",
+      "require": "./dist/utilities.js"
     }
   },
   "license": "MIT",

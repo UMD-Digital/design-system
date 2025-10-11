@@ -11,75 +11,75 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
-    "./navigation": {
-      "types": "./dist/navigation/index.d.ts",
-      "import": "./dist/navigation/index.mjs",
-      "require": "./dist/navigation/index.js"
-    },
-    "./ui-controls": {
-      "types": "./dist/ui-controls/index.d.ts",
-      "import": "./dist/ui-controls/index.mjs",
-      "require": "./dist/ui-controls/index.js"
-    },
-    "./communication": {
-      "types": "./dist/communication/index.d.ts",
-      "import": "./dist/communication/index.mjs",
-      "require": "./dist/communication/index.js"
-    },
-    "./documents": {
-      "types": "./dist/documents/index.d.ts",
-      "import": "./dist/documents/index.mjs",
-      "require": "./dist/documents/index.js"
-    },
-    "./time": {
-      "types": "./dist/time/index.d.ts",
-      "import": "./dist/time/index.mjs",
-      "require": "./dist/time/index.js"
-    },
-    "./media": {
-      "types": "./dist/media/index.d.ts",
-      "import": "./dist/media/index.mjs",
-      "require": "./dist/media/index.js"
-    },
     "./alerts": {
-      "types": "./dist/alerts/index.d.ts",
-      "import": "./dist/alerts/index.mjs",
-      "require": "./dist/alerts/index.js"
-    },
-    "./search": {
-      "types": "./dist/search/index.d.ts",
-      "import": "./dist/search/index.mjs",
-      "require": "./dist/search/index.js"
-    },
-    "./logos": {
-      "types": "./dist/logos/index.d.ts",
-      "import": "./dist/logos/index.mjs",
-      "require": "./dist/logos/index.js"
-    },
-    "./social": {
-      "types": "./dist/social/index.d.ts",
-      "import": "./dist/social/index.mjs",
-      "require": "./dist/social/index.js"
+      "types": "./dist/alerts.d.ts",
+      "import": "./dist/alerts.mjs",
+      "require": "./dist/alerts.js"
     },
     "./brand": {
-      "types": "./dist/brand/index.d.ts",
-      "import": "./dist/brand/index.mjs",
-      "require": "./dist/brand/index.js"
+      "types": "./dist/brand.d.ts",
+      "import": "./dist/brand.mjs",
+      "require": "./dist/brand.js"
     },
-    "./user": {
-      "types": "./dist/user/index.d.ts",
-      "import": "./dist/user/index.mjs",
-      "require": "./dist/user/index.js"
-    },
-    "./location": {
-      "types": "./dist/location/index.d.ts",
-      "import": "./dist/location/index.mjs",
-      "require": "./dist/location/index.js"
+    "./communication": {
+      "types": "./dist/communication.d.ts",
+      "import": "./dist/communication.mjs",
+      "require": "./dist/communication.js"
     },
     "./content": {
-      "types": "./dist/content/index.d.ts",
-      "import": "./dist/content/index.mjs",
-      "require": "./dist/content/index.js"
+      "types": "./dist/content.d.ts",
+      "import": "./dist/content.mjs",
+      "require": "./dist/content.js"
+    },
+    "./documents": {
+      "types": "./dist/documents.d.ts",
+      "import": "./dist/documents.mjs",
+      "require": "./dist/documents.js"
+    },
+    "./location": {
+      "types": "./dist/location.d.ts",
+      "import": "./dist/location.mjs",
+      "require": "./dist/location.js"
+    },
+    "./logos": {
+      "types": "./dist/logos.d.ts",
+      "import": "./dist/logos.mjs",
+      "require": "./dist/logos.js"
+    },
+    "./media": {
+      "types": "./dist/media.d.ts",
+      "import": "./dist/media.mjs",
+      "require": "./dist/media.js"
+    },
+    "./navigation": {
+      "types": "./dist/navigation.d.ts",
+      "import": "./dist/navigation.mjs",
+      "require": "./dist/navigation.js"
+    },
+    "./search": {
+      "types": "./dist/search.d.ts",
+      "import": "./dist/search.mjs",
+      "require": "./dist/search.js"
+    },
+    "./social": {
+      "types": "./dist/social.d.ts",
+      "import": "./dist/social.mjs",
+      "require": "./dist/social.js"
+    },
+    "./time": {
+      "types": "./dist/time.d.ts",
+      "import": "./dist/time.mjs",
+      "require": "./dist/time.js"
+    },
+    "./ui-controls": {
+      "types": "./dist/ui-controls.d.ts",
+      "import": "./dist/ui-controls.mjs",
+      "require": "./dist/ui-controls.js"
+    },
+    "./user": {
+      "types": "./dist/user.d.ts",
+      "import": "./dist/user.mjs",
+      "require": "./dist/user.js"
     }
   },
   "license": "MIT",

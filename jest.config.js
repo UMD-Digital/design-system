@@ -21,9 +21,21 @@ module.exports = {
       __dirname,
       './__mocks__/webStylesLibrary.js',
     ),
+    '^@universityofmaryland/web-elements-library/atomic$': path.resolve(
+      __dirname,
+      './__mocks__/@universityofmaryland/web-elements-library/atomic.js',
+    ),
+    '^@universityofmaryland/web-elements-library/composite$': path.resolve(
+      __dirname,
+      './__mocks__/@universityofmaryland/web-elements-library/composite.js',
+    ),
     '^@universityofmaryland/web-elements-library$': path.resolve(
       __dirname,
       './__mocks__/webElementsLibrary.js',
+    ),
+    '^@universityofmaryland/web-utilities-library/network$': path.resolve(
+      __dirname,
+      './__mocks__/@universityofmaryland/web-utilities-library/network.js',
     ),
     '^@universityofmaryland/web-feeds-library$': path.resolve(
       __dirname,

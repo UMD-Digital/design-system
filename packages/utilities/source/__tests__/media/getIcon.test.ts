@@ -1,4 +1,4 @@
-import { getIcon } from '../../media/getIcon';
+import { getIcon } from '../../dom/getIcon';
 
 describe('getIcon', () => {
   let element: HTMLElement;
@@ -48,7 +48,10 @@ describe('getIcon', () => {
 
     it('should apply color to SVG path when color attribute is set', () => {
       const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      const path = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'path',
+      );
       svg.setAttribute('color', '#ff0000');
       svg.appendChild(path);
       element.appendChild(svg);
@@ -61,20 +64,31 @@ describe('getIcon', () => {
 
     it('should not apply color when color attribute is missing', () => {
       const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      const path = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'path',
+      );
       svg.appendChild(path);
       element.appendChild(svg);
 
       const result = getIcon({ element });
 
-      const resultPath = (result as SVGElement).querySelector('path') as SVGPathElement;
+      const resultPath = (result as SVGElement).querySelector(
+        'path',
+      ) as SVGPathElement;
       expect(resultPath.style.fill).toBe('');
     });
 
     it('should handle SVG with multiple paths (only colors first)', () => {
       const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      const path1 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      const path2 = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      const path1 = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'path',
+      );
+      const path2 = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'path',
+      );
       svg.setAttribute('color', '#00ff00');
       svg.appendChild(path1);
       svg.appendChild(path2);
@@ -117,7 +131,10 @@ describe('getIcon', () => {
 
     it('should handle SVG with color but no path', () => {
       const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+      const circle = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'circle',
+      );
       svg.setAttribute('color', '#ff0000');
       svg.appendChild(circle);
       element.appendChild(svg);
@@ -149,7 +166,10 @@ describe('getIcon', () => {
 
     it('should handle empty color attribute', () => {
       const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      const path = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'path',
+      );
       svg.setAttribute('color', '');
       svg.appendChild(path);
       element.appendChild(svg);
@@ -170,8 +190,14 @@ describe('getIcon', () => {
 
       testCases.forEach(({ input, expected }) => {
         element.innerHTML = '';
-        const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        const svg = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'svg',
+        );
+        const path = document.createElementNS(
+          'http://www.w3.org/2000/svg',
+          'path',
+        );
         svg.setAttribute('color', input);
         svg.appendChild(path);
         element.appendChild(svg);
@@ -184,7 +210,10 @@ describe('getIcon', () => {
 
     it('should handle SVG with path but null color', () => {
       const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      const path = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'path',
+      );
       svg.appendChild(path);
       element.appendChild(svg);
 
@@ -204,8 +233,14 @@ describe('getIcon', () => {
     });
 
     it('should find first SVG when multiple exist', () => {
-      const svg1 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      const svg2 = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      const svg1 = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'svg',
+      );
+      const svg2 = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'svg',
+      );
       svg1.id = 'first';
       svg2.id = 'second';
 
@@ -255,7 +290,10 @@ describe('getIcon', () => {
   describe('color application', () => {
     it('should modify SVG path fill style', () => {
       const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      const path = document.createElementNS(
+        'http://www.w3.org/2000/svg',
+        'path',
+      );
       path.style.fill = 'blue';
       svg.setAttribute('color', 'red');
       svg.appendChild(path);

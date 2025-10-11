@@ -1,7 +1,6 @@
 import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
-import checker from 'vite-plugin-checker';
 
 export default defineConfig({
   build: {
@@ -30,12 +29,11 @@ export default defineConfig({
     emptyOutDir: true,
     sourcemap: true,
     rollupOptions: {
-      external: [
-        '@universityofmaryland/web-styles-library',
-        'postcss',
-        'postcss-js',
-        'postcss-nesting',
-      ],
+      external: (id: string) =>
+        id.startsWith('@universityofmaryland/') ||
+        id === 'postcss' ||
+        id === 'postcss-js' ||
+        id === 'postcss-nesting',
       output: {
         preserveModules: true,
         preserveModulesRoot: 'source',
@@ -51,17 +49,8 @@ export default defineConfig({
     },
     minify: false,
   },
-  logLevel: 'warn',
+  logLevel: 'error',
   plugins: [
-    checker({
-      typescript: true,
-      overlay: {
-        initialIsOpen: false,
-        position: 'br',
-      },
-      terminal: true,
-      enableBuild: true,
-    }),
     dts({
       insertTypesEntry: true,
       include: ['source/**/*.ts'],

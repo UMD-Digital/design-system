@@ -4,8 +4,20 @@
     "outDir": "dist",
     "rootDir": "source",
     "baseUrl": "source",
+    "declaration": true,
+    "declarationMap": true,
+    "emitDeclarationOnly": false,
+    "skipLibCheck": true,
+    "incremental": false
   },
   "include": [
-    "./source"
+    "./source/**/*.ts"
+  ],
+  "exclude": [
+    "./source/**/*.test.ts",
+    "./source/**/*.spec.ts",
+    "./source/__tests__/**",
+    "./node_modules",
+    "./dist"
   ]
 }

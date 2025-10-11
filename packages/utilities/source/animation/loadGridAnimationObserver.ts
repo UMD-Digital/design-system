@@ -17,8 +17,9 @@ import { animation } from '@universityofmaryland/web-styles-library';
  * ```
  */
 export const loadGridAnimationObserver = () => {
-  // Check for reduced motion preference
-  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const prefersReducedMotion = window.matchMedia(
+    '(prefers-reduced-motion: reduce)',
+  ).matches;
   if (prefersReducedMotion) return;
 
   const idGridFadeIn = `umd-animation-transition-fade-bottom`;

@@ -9,4 +9,3 @@
 export { imageFromSvg } from './imageFromSvg';
 export { svgFromString } from './svgFromString';
 export { getResponsiveImageSize } from './getResponsiveImageSize';
-export { getIcon } from './getIcon';

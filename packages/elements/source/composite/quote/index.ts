@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
-import { QUOTE } from '@universityofmaryland/web-icons-library/content';
+import { quote as iconQuote } from '@universityofmaryland/web-icons-library/brand';
 import { ElementModel } from 'model';
 import { ElementVisual } from '_types';
 
@@ -67,7 +67,7 @@ export const CreateIconSpan = ({
     },
   });
 
-  iconSpan.element.innerHTML = QUOTE;
+  iconSpan.element.innerHTML = iconQuote;
 
   return iconSpan;
 };

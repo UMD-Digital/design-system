@@ -1,10 +1,10 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import {
-  EMAIL,
-  PHONE,
+  email as iconEmail,
+  phone as iconPhone,
 } from '@universityofmaryland/web-icons-library/communication';
-import { PIN } from '@universityofmaryland/web-icons-library/location';
-import { LINKEDIN } from '@universityofmaryland/web-icons-library/social';
+import { pin as iconPin } from '@universityofmaryland/web-icons-library/location';
+import { linkedin as iconLinkedIn } from '@universityofmaryland/web-icons-library/social';
 import { ElementModel } from 'model';
 import { type ElementVisual } from '../../_types';
 import { type PersonContactProps } from '../_types';
@@ -57,7 +57,7 @@ const makeContactLink = ({
   icon: string;
   isThemeDark?: boolean;
 }) => {
-  const isLink = element.getAttribute('href') && icon !== PIN;
+  const isLink = element.getAttribute('href') && icon !== iconPin;
   const textSpan = makeText({ text: element.innerHTML, isThemeDark });
   const iconSpan = makeIcon({ icon, isThemeDark });
   const containerStyles = {
@@ -112,7 +112,7 @@ export default ({
         children: [
           makeContactLink({
             element: phone,
-            icon: PHONE,
+            icon: iconPhone,
             isThemeDark,
           }),
         ],
@@ -127,7 +127,7 @@ export default ({
         children: [
           makeContactLink({
             element: email,
-            icon: EMAIL,
+            icon: iconEmail,
             isThemeDark,
           }),
         ],
@@ -142,7 +142,7 @@ export default ({
         children: [
           makeContactLink({
             element: linkendIn,
-            icon: LINKEDIN,
+            icon: iconLinkedIn,
             isThemeDark,
           }),
         ],
@@ -157,7 +157,7 @@ export default ({
         children: [
           makeContactLink({
             element: address,
-            icon: PIN,
+            icon: iconPin,
             isThemeDark,
           }),
         ],

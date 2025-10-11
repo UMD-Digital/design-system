@@ -2,7 +2,7 @@ import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
 import { cleanCopy } from '@universityofmaryland/web-utilities-library/dom';
-import { CHEVRON_SMALL } from '@universityofmaryland/web-icons-library/navigation';
+import { chevron_down as iconChevronDown } from '@universityofmaryland/web-icons-library/controls';
 import FirstSlide, { TypeFirstSlideProps, TypeFirstSlide } from './slide-first';
 import SlideAction, { TypeActionProps } from './action';
 
@@ -114,7 +114,7 @@ const createSlideBackButton = (props: TypeSlideBackContainer) => {
   const backButtonContainer = document.createElement('div');
   const slideBackButton = document.createElement('button');
 
-  slideBackButton.innerHTML = `${CHEVRON_SMALL} Back`;
+  slideBackButton.innerHTML = `${iconChevronDown} Back`;
   slideBackButton.setAttribute('type', 'button');
   slideBackButton.setAttribute('aria-label', 'Previous level of navigation');
   slideBackButton.addEventListener('click', () => {

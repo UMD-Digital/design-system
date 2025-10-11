@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { imageFromSvg } from '@universityofmaryland/web-utilities-library/media';
 import { createContainerQuery } from '@universityofmaryland/web-utilities-library/styles';
-import { PERSON } from '@universityofmaryland/web-icons-library/user';
+import { person as iconPerson } from '@universityofmaryland/web-icons-library/people';
 import { ElementModel } from 'model';
 import { assets, textLockup } from 'atomic';
 import { PersonCard } from './_types';
@@ -19,7 +19,7 @@ export default (props: PersonCard) => {
 
   if (!image) {
     image = imageFromSvg({
-      SVG: PERSON,
+      SVG: iconPerson,
     });
   }
 

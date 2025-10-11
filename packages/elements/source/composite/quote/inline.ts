@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { QUOTE } from '@universityofmaryland/web-icons-library/content';
+import { quote as iconQuote } from '@universityofmaryland/web-icons-library/brand';
 import Text, { TypeQuoteTextContainer } from './elements/text';
 import Image from './elements/image';
 

@@ -6,7 +6,7 @@ import {
   getLocalStorageInt,
   setLocalStorageTimestamp,
 } from '@universityofmaryland/web-utilities-library/storage';
-import { CLOSE_BUTTON } from '@universityofmaryland/web-icons-library/ui-controls';
+import { close as iconClose } from '@universityofmaryland/web-icons-library/controls';
 import {
   CreateAlertText as AlertText,
   CONSTANTS as TEXT_CONSTANTS,
@@ -109,7 +109,7 @@ const CreateCloseButton = ({ container }: TypeAlertButtonProps) => {
   const closeButton = document.createElement('button');
 
   closeButton.classList.add(ELEMENT_ALERT_SITE_CLOSE_BUTTON);
-  closeButton.innerHTML = CLOSE_BUTTON;
+  closeButton.innerHTML = iconClose;
   closeButton.setAttribute('aria-label', 'Close alert');
   closeButton.addEventListener('click', () => {
     shrinkThenRemove({ container });

@@ -4,7 +4,7 @@ import {
   token,
 } from '@universityofmaryland/web-styles-library';
 import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
-import { QUOTE } from '@universityofmaryland/web-icons-library/content';
+import { quote as iconQuote } from '@universityofmaryland/web-icons-library/brand';
 
 export type TypeQuoteTextContainer = {
   quote: HTMLElement | null;
@@ -199,7 +199,7 @@ const CreateQuoteTextContainer = ({
 
   if (quote) {
     const iconSpan = document.createElement('span');
-    iconSpan.innerHTML = QUOTE;
+    iconSpan.innerHTML = iconQuote;
 
     quote.appendChild(iconSpan);
     quote.classList.add(TEXT_CONTAINER_QUOTE_WRAPPER);

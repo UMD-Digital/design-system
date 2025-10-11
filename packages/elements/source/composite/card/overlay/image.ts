@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { QUOTE } from '@universityofmaryland/web-icons-library/content';
+import { quote as iconQuote } from '@universityofmaryland/web-icons-library/brand';
 import { truncateTextBasedOnSize } from '@universityofmaryland/web-utilities-library/string';
 import { createContainerQuery } from '@universityofmaryland/web-utilities-library/styles';
 import { ElementModel } from 'model';
@@ -116,7 +116,7 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
       },
     });
 
-    quoteWrapper.element.innerHTML = QUOTE;
+    quoteWrapper.element.innerHTML = iconQuote;
     wrapperChildren.push(quoteWrapper);
   }
 

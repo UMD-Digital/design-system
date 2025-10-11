@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { FORWARD_ARROW } from '@universityofmaryland/web-icons-library/navigation';
+import { arrow_right as iconArrowRight } from '@universityofmaryland/web-icons-library/arrows';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { getResponsiveImageSize } from '@universityofmaryland/web-utilities-library/media';
 import { createEventSwipe } from '@universityofmaryland/web-utilities-library/events';
@@ -99,7 +99,7 @@ const CreateButton = ({
   const button = document.createElement('button');
   button.setAttribute('type', 'button');
   button.classList.add(ELEMENT_CAROUSEL_SLIDER_BUTTON);
-  button.innerHTML = FORWARD_ARROW;
+  button.innerHTML = iconArrowRight;
 
   if (!isRight) {
     button.setAttribute('aria-label', 'Previous');

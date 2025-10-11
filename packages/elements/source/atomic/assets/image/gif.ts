@@ -1,8 +1,8 @@
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import {
-  PAUSE,
-  PLAY,
-} from '@universityofmaryland/web-icons-library/ui-controls';
+  pause as iconPause,
+  play as iconPlay,
+} from '@universityofmaryland/web-icons-library/controls';
 import { ElementModel } from 'model';
 
 const extractImageElement = (
@@ -24,13 +24,13 @@ const applyGifToggle = (image: HTMLImageElement, container: HTMLElement) => {
   const button = document.createElement('button');
   const setButtonPlay = () => {
     button.setAttribute('aria-label', 'Pause');
-    button.innerHTML = PAUSE;
+    button.innerHTML = iconPause;
     canvas.style.opacity = '0';
     image.style.opacity = '1';
   };
   const setButtonPause = () => {
     button.setAttribute('aria-label', 'Play');
-    button.innerHTML = PLAY;
+    button.innerHTML = iconPlay;
     canvas.style.opacity = '1';
     image.style.opacity = '0';
   };

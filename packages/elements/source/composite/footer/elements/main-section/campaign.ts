@@ -1,8 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import {
-  CAMPAIGN_LOGO,
-  CAMPAIGN_LOGO_DARK,
-} from '@universityofmaryland/web-icons-library/logos';
+import * as Logos from '@universityofmaryland/web-icons-library/logos';
 import { ElementModel } from 'model';
 import { BaseProps } from '../../_types';
 import { BREAKPOINTS } from '../../globals';
@@ -22,7 +19,7 @@ export default ({ isThemeLight }: CampaignProps): ElementVisual => {
     'Link to the Fearlessly Forward Brand website',
   );
 
-  link.innerHTML = (!isThemeLight && CAMPAIGN_LOGO) || CAMPAIGN_LOGO_DARK;
+  link.innerHTML = (!isThemeLight && Logos.campaign.light) || Logos.campaign.dark;
 
   const linkElement = ElementModel.create({
     element: link,

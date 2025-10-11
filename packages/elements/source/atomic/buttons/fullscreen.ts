@@ -1,4 +1,4 @@
-import { FULL_SCREEN } from '@universityofmaryland/web-icons-library/ui-controls';
+import { fullscreen as iconFullscreen } from '@universityofmaryland/web-icons-library/controls';
 import { ElementModel } from 'model';
 
 const create = ({
@@ -15,7 +15,7 @@ const create = ({
       callback(index);
     });
     button.setAttribute('aria-label', 'View Full Screen');
-    button.innerHTML = `Full Screen <span></span>${FULL_SCREEN}`;
+    button.innerHTML = `Full Screen <span></span>${iconFullscreen}`;
 
     return ElementModel.buttons.fullScreen({
       element: button,

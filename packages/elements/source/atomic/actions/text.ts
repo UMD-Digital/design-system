@@ -2,10 +2,10 @@ import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import { svgFromString } from '@universityofmaryland/web-utilities-library/media';
 import { getIcon } from '@universityofmaryland/web-utilities-library/dom';
-import { NEW_WINDOW } from '@universityofmaryland/web-icons-library/ui-controls';
-import { EMAIL } from '@universityofmaryland/web-icons-library/communication';
-import { DOCUMENT } from '@universityofmaryland/web-icons-library/documents';
-import { FEARLESS } from '@universityofmaryland/web-icons-library/brand';
+import { external_link as iconExternalLink } from '@universityofmaryland/web-icons-library/controls';
+import { email as iconEmail } from '@universityofmaryland/web-icons-library/communication';
+import { document as iconDocument } from '@universityofmaryland/web-icons-library/files';
+import { fearless as iconFearless } from '@universityofmaryland/web-icons-library/brand';
 import { ElementModel } from 'model';
 
 interface ElementProps {
@@ -41,10 +41,10 @@ type ActionVariants = {
 type Actions = Record<ElementType, ActionVariants>;
 
 const ICONS: Record<IconType, string> = {
-  email: EMAIL,
-  newWindow: NEW_WINDOW,
-  document: DOCUMENT,
-  fearless: FEARLESS,
+  email: iconEmail,
+  newWindow: iconExternalLink,
+  document: iconDocument,
+  fearless: iconFearless,
 };
 
 function insertIcon(element: HTMLElement, svg: string): void {

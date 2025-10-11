@@ -1,0 +1,32 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "name": "UMD Web Icons Library",
+  "entryPoints": [
+    "./source/index.ts",
+    "./source/arrows",
+    "./source/controls",
+    "./source/indicators",
+    "./source/calendar",
+    "./source/files",
+    "./source/search",
+    "./source/media",
+    "./source/brand",
+    "./source/people",
+    "./source/location",
+    "./source/communication",
+    "./source/social",
+    "./source/logos"
+  ],
+  "entryPointStrategy": "resolve",
+  "excludeExternals": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "skipErrorChecking": true,
+  "hideGenerator": true,
+  "cleanOutputDir": false,
+  "searchInDocuments": true,
+  "out": "../../docs/icons",
+  "readme": "README.md",
+  "githubPages": true,
+  "logLevel": "Error"
+}

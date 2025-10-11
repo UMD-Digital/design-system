@@ -3,7 +3,7 @@ import * as animation from '@universityofmaryland/web-styles-library/animation';
 import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
 import { animationLinkSpan } from '@universityofmaryland/web-utilities-library/animation';
 import { eventAccessibilityFocus } from '@universityofmaryland/web-utilities-library/accessibility';
-import { CHEVRON_SMALL } from '@universityofmaryland/web-icons-library/navigation';
+import { chevron_down as iconChevronDown } from '@universityofmaryland/web-icons-library/controls';
 
 type TypePrimaryLinkRequirements = {
   primaryLinkContainer?: HTMLElement | null;
@@ -314,7 +314,7 @@ const CreateButton = ({
   const button = document.createElement('button');
 
   button.classList.add(ELEMENT_PRIMARY_LINK_CONTAINER_BUTTON);
-  button.innerHTML = CHEVRON_SMALL;
+  button.innerHTML = iconChevronDown;
   button.addEventListener('click', () => buttonClick());
   button.setAttribute('aria-expanded', 'false');
   button.setAttribute('aria-controls', `nav-links-`);

@@ -4,7 +4,7 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import { SEAL_WHITE } from '@universityofmaryland/web-icons-library/logos';
+import { seal } from '@universityofmaryland/web-icons-library/logos';
 import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
 
 type TypeBannerPromoProps = {
@@ -215,8 +215,6 @@ const CreateBannerPromoElement = (props: TypeBannerPromoProps) =>
     }
 
     if (includeSeal) {
-      let seal = SEAL_WHITE;
-
       container.innerHTML = `${seal}`;
     }
     if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);

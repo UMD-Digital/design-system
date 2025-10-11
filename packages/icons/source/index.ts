@@ -5,42 +5,39 @@
  *
  * @example
  * ```typescript
- * // Import from specific categories
- * import { ARROW, CHEVRON_SMALL } from '@universityofmaryland/web-icons-library/navigation';
- * import { PAUSE, PLAY } from '@universityofmaryland/web-icons-library/ui-controls';
- * import { FACEBOOK, X } from '@universityofmaryland/web-icons-library/social';
+ * // Import from specific categories (recommended)
+ * import { arrow_up as iconArrowUp } from '@universityofmaryland/web-icons-library/arrows';
+ * import { search as iconSearch } from '@universityofmaryland/web-icons-library/search';
+ * import { facebook as iconFacebook } from '@universityofmaryland/web-icons-library/social';
  *
  * // Or import everything
  * import * as Icons from '@universityofmaryland/web-icons-library';
  * ```
  */
 
-// Navigation icons
-export * from './navigation';
+// Arrow icons
+export * from './arrows';
 
-// UI Control icons
-export * from './ui-controls';
+// Control icons (UI controls and actions)
+export * from './controls';
 
 // Communication icons
 export * from './communication';
 
-// Document icons
-export * from './documents';
+// File icons
+export * from './files';
 
-// Time-related icons
-export * from './time';
+// Calendar and time icons
+export * from './calendar';
 
 // Media icons
 export * from './media';
 
-// Alert and notification icons
-export * from './alerts';
+// Indicator icons (alerts and notifications)
+export * from './indicators';
 
 // Search icons
 export * from './search';
-
-// Logo assets
-export * from './logos';
 
 // Social media icons
 export * from './social';
@@ -48,11 +45,11 @@ export * from './social';
 // Brand icons
 export * from './brand';
 
-// User/person icons
-export * from './user';
+// People icons
+export * from './people';
 
 // Location icons
 export * from './location';
 
-// Content type icons
-export * from './content';
+// Logo assets
+export * from './logos';

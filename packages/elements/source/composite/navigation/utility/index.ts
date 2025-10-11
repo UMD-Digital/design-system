@@ -6,8 +6,8 @@ import {
   getStyleStringFromJssObject,
 } from '@universityofmaryland/web-utilities-library/styles';
 import { eventAccessibilityFocus } from '@universityofmaryland/web-utilities-library/accessibility';
-import { MAGNIFY_GLASS } from '@universityofmaryland/web-icons-library/search';
-import { CHEVRON_SMALL } from '@universityofmaryland/web-icons-library/navigation';
+import { search as iconSearch } from '@universityofmaryland/web-icons-library/search';
+import { chevron_down as iconChevronDown } from '@universityofmaryland/web-icons-library/controls';
 import {
   createNavAlert,
   STYLES_NAV_ALERT,
@@ -398,7 +398,7 @@ const CreateSearchFormButton = ({
 
   button.setAttribute('aria-label', 'enable the search form');
   button.setAttribute('type', 'button');
-  button.innerHTML = `${MAGNIFY_GLASS}`;
+  button.innerHTML = `${iconSearch}`;
   button.setAttribute('aria-controls', UtilitySearch.Elements.form);
   button.classList.add(ELEMENT_UTILITY_SEARCH_BUTTON);
   button.setAttribute('aria-expanded', 'false');
@@ -461,7 +461,7 @@ const CreateMobileMenuButton = ({
     });
   };
 
-  button.innerHTML = `${CHEVRON_SMALL}`;
+  button.innerHTML = `${iconChevronDown}`;
   button.setAttribute('type', 'button');
   button.setAttribute('aria-label', 'toggle mobile menu');
   button.setAttribute('aria-controls', `${ELEMENT_UTILITY_MOBILE_MENU}`);

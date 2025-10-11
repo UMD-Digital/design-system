@@ -1,46 +1,66 @@
 import * as SocialIcons from '../social';
 
 describe('Social Media Icons', () => {
-  it('should export FACEBOOK icon', () => {
-    expect(SocialIcons.FACEBOOK).toBeDefined();
-    expect(SocialIcons.FACEBOOK).toContain('<svg');
-    expect(SocialIcons.FACEBOOK).toContain('icon_facebook');
+  it('should export facebook icon', () => {
+    expect(SocialIcons.facebook).toBeDefined();
+    expect(SocialIcons.facebook).toContain('<svg');
+    expect(SocialIcons.facebook).toContain('aria-hidden="true"');
+    expect(SocialIcons.facebook).toContain('title="facebook icon"');
   });
 
-  it('should export X icon', () => {
-    expect(SocialIcons.X).toBeDefined();
-    expect(SocialIcons.X).toContain('<svg');
-    expect(SocialIcons.X).toContain('icon_x');
+  it('should export x icon', () => {
+    expect(SocialIcons.x).toBeDefined();
+    expect(SocialIcons.x).toContain('<svg');
+    expect(SocialIcons.x).toContain('aria-hidden="true"');
+    expect(SocialIcons.x).toContain('title="x icon"');
   });
 
-  it('should export INSTAGRAM icon', () => {
-    expect(SocialIcons.INSTAGRAM).toBeDefined();
-    expect(SocialIcons.INSTAGRAM).toContain('<svg');
-    expect(SocialIcons.INSTAGRAM).toContain('icon_instagram');
+  it('should export twitter icon', () => {
+    expect(SocialIcons.twitter).toBeDefined();
+    expect(SocialIcons.twitter).toContain('<svg');
+    expect(SocialIcons.twitter).toContain('aria-hidden="true"');
+    expect(SocialIcons.twitter).toContain('title="twitter icon"');
   });
 
-  it('should export YOUTUBE icon', () => {
-    expect(SocialIcons.YOUTUBE).toBeDefined();
-    expect(SocialIcons.YOUTUBE).toContain('<svg');
-    expect(SocialIcons.YOUTUBE).toContain('icon_youtube');
+  it('should export instagram icon', () => {
+    expect(SocialIcons.instagram).toBeDefined();
+    expect(SocialIcons.instagram).toContain('<svg');
+    expect(SocialIcons.instagram).toContain('aria-hidden="true"');
+    expect(SocialIcons.instagram).toContain('title="instagram icon"');
   });
 
-  it('should export LINKEDIN icon', () => {
-    expect(SocialIcons.LINKEDIN).toBeDefined();
-    expect(SocialIcons.LINKEDIN).toContain('<svg');
-    expect(SocialIcons.LINKEDIN).toContain('icon_linkedin');
+  it('should export youtube icon', () => {
+    expect(SocialIcons.youtube).toBeDefined();
+    expect(SocialIcons.youtube).toContain('<svg');
+    expect(SocialIcons.youtube).toContain('aria-hidden="true"');
+    expect(SocialIcons.youtube).toContain('title="youtube icon"');
   });
 
-  it('should export THREADS icon', () => {
-    expect(SocialIcons.THREADS).toBeDefined();
-    expect(SocialIcons.THREADS).toContain('<svg');
-    expect(SocialIcons.THREADS).toContain('icon_threads');
+  it('should export linkedin icon', () => {
+    expect(SocialIcons.linkedin).toBeDefined();
+    expect(SocialIcons.linkedin).toContain('<svg');
+    expect(SocialIcons.linkedin).toContain('aria-hidden="true"');
+    expect(SocialIcons.linkedin).toContain('title="linkedin icon"');
+  });
+
+  it('should export threads icon', () => {
+    expect(SocialIcons.threads).toBeDefined();
+    expect(SocialIcons.threads).toContain('<svg');
+    expect(SocialIcons.threads).toContain('aria-hidden="true"');
+    expect(SocialIcons.threads).toContain('title="threads icon"');
   });
 
   it('should have aria-hidden on all icons', () => {
     const icons = Object.values(SocialIcons);
     icons.forEach(icon => {
       expect(icon).toContain('aria-hidden="true"');
+    });
+  });
+
+  it('should have valid SVG markup for all icons', () => {
+    const icons = Object.values(SocialIcons);
+    icons.forEach(icon => {
+      expect(icon).toMatch(/<svg[^>]*>.*<\/svg>/);
     });
   });
 });

@@ -1,9 +1,10 @@
 # University of Maryland Design System
 
 [![Components Version](https://img.shields.io/badge/Components-v1.15.0-beta.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-components-library)
-[![Elements Version](https://img.shields.io/badge/Elements-v1.4.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-elements-library)
-[![Feeds Version](https://img.shields.io/badge/Feeds-v1.1.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-feeds-library)
-[![Styles Version](https://img.shields.io/badge/Styles-v1.6.2-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)
+[![Elements Version](https://img.shields.io/badge/Elements-v1.4.8-blue)](https://www.npmjs.com/package/@universityofmaryland/web-elements-library)
+[![Feeds Version](https://img.shields.io/badge/Feeds-v1.1.1-blue)](https://www.npmjs.com/package/@universityofmaryland/web-feeds-library)
+[![Icons Version](https://img.shields.io/badge/Icons-v1.0.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-icons-library)
+[![Styles Version](https://img.shields.io/badge/Styles-v1.6.9-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)
 [![Utilities Version](https://img.shields.io/badge/Utilities-v0.1.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-utilities-library)
 
 The University of Maryland's Design System is intended for use by university campus entities and partners. The packages prompt consistency in brand, design, and accessibility compliance across university web properties.
@@ -12,10 +13,11 @@ The University of Maryland's Design System is intended for use by university cam
 
 The design system consists of the following packages:
 
-- **[Styles](packages/styles/README.md)**: JSS objects and utilities for styling consistent with UMD brand guidelines
+- **[Icons](packages/icons/README.md)**: SVG icon and logo assets organized by category for optimal tree-shaking
 - **[Utilities](packages/utilities/)**: Shared utility functions for DOM manipulation, accessibility, animations, and more
-- **[Feeds](packages/feeds/README.md)**: Components for displaying dynamic content feeds (news, events, etc.)
+- **[Styles](packages/styles/README.md)**: JSS objects and utilities for styling consistent with UMD brand guidelines
 - **[Elements](packages/elements/README.md)**: Foundational UI elements that make up the components
+- **[Feeds](packages/feeds/README.md)**: Components for displaying dynamic content feeds (news, events, etc.)
 - **[Components](packages/components/README.md)**: High-level web components built from the elements library for interfaces, interactivity, layout, and data feeds
 
 ### For information, visit [UMD Design System Website](https://designsystem.umd.edu)

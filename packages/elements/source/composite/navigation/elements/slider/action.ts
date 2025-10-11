@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
-import { CHEVRON_SMALL } from '@universityofmaryland/web-icons-library/navigation';
+import { chevron_down as iconChevronDown } from '@universityofmaryland/web-icons-library/controls';
 
 export type TypeActionProps = {
   GetContainer: () => Element | null;
@@ -96,7 +96,7 @@ const CreateSlideButton = ({
   button.classList.add(ELEMENT_SLIDE_ACTION_BUTTON);
   button.setAttribute('type', 'button');
   button.setAttribute('aria-label', 'Next level of navigation');
-  button.innerHTML = CHEVRON_SMALL;
+  button.innerHTML = iconChevronDown;
   button.addEventListener('click', () => {
     setUpcomingSlide(childReference);
     eventSlideLeft();

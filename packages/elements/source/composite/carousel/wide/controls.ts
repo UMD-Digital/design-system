@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { BACK_ARROW } from '@universityofmaryland/web-icons-library/navigation';
+import { arrow_left as iconArrowLeft } from '@universityofmaryland/web-icons-library/arrows';
 import { animations } from 'atomic';
 import { ElementModel } from 'model';
 import { createElementWithRefs } from './_elementModel';
@@ -85,7 +85,7 @@ export const createControlButton = (
   srText.element.textContent = altText;
 
   button.element.append(srText.element);
-  button.element.insertAdjacentHTML('afterbegin', BACK_ARROW);
+  button.element.insertAdjacentHTML('afterbegin', iconArrowLeft);
 
   return button;
 };

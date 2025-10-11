@@ -1,5 +1,5 @@
-import { PIN } from '@universityofmaryland/web-icons-library/location';
-import { CALENDAR, CLOCK } from '@universityofmaryland/web-icons-library/time';
+import { pin as iconPin } from '@universityofmaryland/web-icons-library/location';
+import { calendar as iconCalendar, clock as iconClock } from '@universityofmaryland/web-icons-library/calendar';
 import { ElementModel } from 'model';
 import { ElementVisual } from '../../_types';
 
@@ -70,7 +70,7 @@ const createDayText = ({
   }
 
   return MakeDetailItem({
-    icon: CALENDAR,
+    icon: iconCalendar,
     text,
   });
 };
@@ -83,7 +83,7 @@ const createTimeText = ({ startTime, endTime }: DateDisplayType) => {
   }
 
   return MakeDetailItem({
-    icon: CLOCK,
+    icon: iconClock,
     text,
   });
 };
@@ -118,7 +118,7 @@ export default (props: TypeMetaDisplay) => {
     wrapperChildren.push(
       MakeDetailItem({
         ...props,
-        icon: PIN,
+        icon: iconPin,
         text: location[0].title,
       }),
     );

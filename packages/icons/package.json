@@ -11,30 +11,40 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
-    "./alerts": {
-      "types": "./dist/alerts.d.ts",
-      "import": "./dist/alerts.mjs",
-      "require": "./dist/alerts.js"
+    "./arrows": {
+      "types": "./dist/arrows.d.ts",
+      "import": "./dist/arrows.mjs",
+      "require": "./dist/arrows.js"
     },
     "./brand": {
       "types": "./dist/brand.d.ts",
       "import": "./dist/brand.mjs",
       "require": "./dist/brand.js"
     },
+    "./calendar": {
+      "types": "./dist/calendar.d.ts",
+      "import": "./dist/calendar.mjs",
+      "require": "./dist/calendar.js"
+    },
     "./communication": {
       "types": "./dist/communication.d.ts",
       "import": "./dist/communication.mjs",
       "require": "./dist/communication.js"
     },
-    "./content": {
-      "types": "./dist/content.d.ts",
-      "import": "./dist/content.mjs",
-      "require": "./dist/content.js"
+    "./controls": {
+      "types": "./dist/controls.d.ts",
+      "import": "./dist/controls.mjs",
+      "require": "./dist/controls.js"
     },
-    "./documents": {
-      "types": "./dist/documents.d.ts",
-      "import": "./dist/documents.mjs",
-      "require": "./dist/documents.js"
+    "./files": {
+      "types": "./dist/files.d.ts",
+      "import": "./dist/files.mjs",
+      "require": "./dist/files.js"
+    },
+    "./indicators": {
+      "types": "./dist/indicators.d.ts",
+      "import": "./dist/indicators.mjs",
+      "require": "./dist/indicators.js"
     },
     "./location": {
       "types": "./dist/location.d.ts",
@@ -51,10 +61,10 @@
       "import": "./dist/media.mjs",
       "require": "./dist/media.js"
     },
-    "./navigation": {
-      "types": "./dist/navigation.d.ts",
-      "import": "./dist/navigation.mjs",
-      "require": "./dist/navigation.js"
+    "./people": {
+      "types": "./dist/people.d.ts",
+      "import": "./dist/people.mjs",
+      "require": "./dist/people.js"
     },
     "./search": {
       "types": "./dist/search.d.ts",
@@ -65,21 +75,6 @@
       "types": "./dist/social.d.ts",
       "import": "./dist/social.mjs",
       "require": "./dist/social.js"
-    },
-    "./time": {
-      "types": "./dist/time.d.ts",
-      "import": "./dist/time.mjs",
-      "require": "./dist/time.js"
-    },
-    "./ui-controls": {
-      "types": "./dist/ui-controls.d.ts",
-      "import": "./dist/ui-controls.mjs",
-      "require": "./dist/ui-controls.js"
-    },
-    "./user": {
-      "types": "./dist/user.d.ts",
-      "import": "./dist/user.mjs",
-      "require": "./dist/user.js"
     }
   },
   "license": "MIT",

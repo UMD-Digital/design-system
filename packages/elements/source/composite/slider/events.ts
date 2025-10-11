@@ -5,9 +5,9 @@ import { createEventSwipe } from '@universityofmaryland/web-utilities-library/ev
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { convertPixelStringToNumber } from '@universityofmaryland/web-utilities-library/string';
 import {
-  BACK_ARROW,
-  FORWARD_ARROW,
-} from '@universityofmaryland/web-icons-library/navigation';
+  arrow_left as iconArrowLeft,
+  arrow_right as iconArrowRight,
+} from '@universityofmaryland/web-icons-library/arrows';
 
 type TypeSliderEventButtonProps = {
   SetCountForward: () => void;
@@ -328,7 +328,7 @@ const CreateBackButton = ({
 }: TypeSliderEventButtonProps) => {
   const button = document.createElement('button');
 
-  button.innerHTML = BACK_ARROW;
+  button.innerHTML = iconArrowLeft;
   button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON);
   button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON_BACK);
   button.style.display = 'none';
@@ -355,7 +355,7 @@ const CreateForwardButton = ({
 }: TypeSliderEventButtonProps) => {
   const button = document.createElement('button');
 
-  button.innerHTML = FORWARD_ARROW;
+  button.innerHTML = iconArrowRight;
   button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON);
   button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON_FORWARD);
   button.setAttribute('type', 'button');

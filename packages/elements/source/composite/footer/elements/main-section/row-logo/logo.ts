@@ -1,8 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import {
-  DARK_LOGO,
-  LIGHT_LOGO,
-} from '@universityofmaryland/web-icons-library/logos';
+import * as Logos from '@universityofmaryland/web-icons-library/logos';
 import { ElementModel } from 'model';
 import createCampaignRow, { type CampaignProps } from '../campaign';
 import createCallToAction, { type CallToActionProps } from '../call-to-action';
@@ -30,7 +27,7 @@ const createLogoLinkElement = (
       'Link to the University of Maryland homepage',
     );
 
-    logoLink.innerHTML = !isThemeLight ? `${DARK_LOGO}` : `${LIGHT_LOGO}`;
+    logoLink.innerHTML = !isThemeLight ? `${Logos.umd.dark}` : `${Logos.umd.light}`;
 
     return logoLink;
   };

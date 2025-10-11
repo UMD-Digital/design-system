@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { NEW_WINDOW } from '@universityofmaryland/web-icons-library/ui-controls';
-import { DOCUMENT } from '@universityofmaryland/web-icons-library/documents';
-import { SHORT_ARROW } from '@universityofmaryland/web-icons-library/navigation';
+import { external_link as iconExternalLink } from '@universityofmaryland/web-icons-library/controls';
+import { document as iconDocument } from '@universityofmaryland/web-icons-library/files';
+import { arrow_long as iconArrowLong } from '@universityofmaryland/web-icons-library/arrows';
 import { ElementModel } from 'model';
 
 interface ActionIconProps {
@@ -22,15 +22,15 @@ export default ({ ctaIcon, isThemeLight }: ActionIconProps) => {
     const isDownloadLink = ctaIcon.getAttribute('download') === '';
 
     if (isExternalLink) {
-      ctaIcon.innerHTML = NEW_WINDOW;
+      ctaIcon.innerHTML = iconExternalLink;
     }
 
     if (isDownloadLink) {
-      ctaIcon.innerHTML = DOCUMENT;
+      ctaIcon.innerHTML = iconDocument;
     }
 
     if (!isExternalLink && !isDownloadLink) {
-      ctaIcon.innerHTML = SHORT_ARROW;
+      ctaIcon.innerHTML = iconArrowLong;
     }
   }
 

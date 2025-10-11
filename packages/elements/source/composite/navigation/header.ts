@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
-import { MAGNIFY_GLASS } from '@universityofmaryland/web-icons-library/search';
+import { search as iconSearch } from '@universityofmaryland/web-icons-library/search';
 import MenuButton from './elements/menu-button';
 import NavigationItem from './elements/item';
 
@@ -240,7 +240,7 @@ const CreateSearchLink = ({ searchUrl }: TypeSearchLink) => {
 
   searchLink.href = searchUrl;
   searchLink.ariaLabel = 'Visit the search page';
-  searchLink.innerHTML = MAGNIFY_GLASS;
+  searchLink.innerHTML = iconSearch;
   searchLink.classList.add(ELEMENT_HEADER_MENU_SEARCH);
 
   return searchLink;

@@ -6,7 +6,7 @@ import {
 } from '@universityofmaryland/web-styles-library';
 import { fetchGraphQL } from '@universityofmaryland/web-utilities-library/network';
 import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
-import { CLOSE_X } from '@universityofmaryland/web-icons-library/ui-controls';
+import { close_large as iconCloseLarge } from '@universityofmaryland/web-icons-library/controls';
 import { actions } from 'atomic';
 
 type AlertData = {
@@ -353,7 +353,7 @@ const createCloseButton = (container: HTMLElement): HTMLButtonElement => {
     'aria-label': 'remove alert',
   }) as HTMLButtonElement;
 
-  button.innerHTML = CLOSE_X;
+  button.innerHTML = iconCloseLarge;
   button.addEventListener('click', () => {
     const cachedAlert = getStoredValue<AlertData>(
       ALERT_CONSTANTS.STORAGE_KEYS.ALERT,

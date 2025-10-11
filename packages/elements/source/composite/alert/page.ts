@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { shrinkThenRemove } from '@universityofmaryland/web-utilities-library/animation';
-import { CLOSE_BUTTON } from '@universityofmaryland/web-icons-library/ui-controls';
-import { NOTIFICATION } from '@universityofmaryland/web-icons-library/alerts';
+import { close as iconClose } from '@universityofmaryland/web-icons-library/controls';
+import { warning as iconWarning } from '@universityofmaryland/web-icons-library/indicators';
 import {
   CreateAlertText as AlertText,
   TypeAlertTextProps,
@@ -107,7 +107,7 @@ const STYLES_ALERT_PAGE_ELEMENT = `
 
 const CreateIcon = () => {
   const iconWrapper = document.createElement('div');
-  let icon = NOTIFICATION;
+  let icon = iconWarning;
 
   iconWrapper.classList.add(ELEMENT_ALERT_PAGE_ICON);
   iconWrapper.innerHTML = icon;
@@ -119,7 +119,7 @@ const CreateCloseButton = ({ container }: TypeAlertButtonProps) => {
   const closeButton = document.createElement('button');
 
   closeButton.classList.add(ELEMENT_ALERT_PAGE_CLOSE_BUTTON);
-  closeButton.innerHTML = CLOSE_BUTTON;
+  closeButton.innerHTML = iconClose;
   closeButton.setAttribute('aria-label', 'Close alert');
   closeButton.addEventListener('click', () => {
     shrinkThenRemove({ container });

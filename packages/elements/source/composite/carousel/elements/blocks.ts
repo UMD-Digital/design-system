@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as element from '@universityofmaryland/web-styles-library/element';
-import { FORWARD_ARROW } from '@universityofmaryland/web-icons-library/navigation';
+import { arrow_right as iconArrowRight } from '@universityofmaryland/web-icons-library/arrows';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { createEventSwipe } from '@universityofmaryland/web-utilities-library/events';
 import { convertPixelStringToNumber } from '@universityofmaryland/web-utilities-library/string';
@@ -338,7 +338,7 @@ const CreateButton = ({
   button.setAttribute('type', 'button');
   button.setAttribute('aria-label', 'Next');
   button.classList.add(ELEMENT_ANIMATION_CAROUSEL_BUTTON);
-  button.innerHTML = FORWARD_ARROW;
+  button.innerHTML = iconArrowRight;
 
   if (isRight) {
     button.classList.add(ELEMENT_ANIMATION_CAROUSEL_NEXT);

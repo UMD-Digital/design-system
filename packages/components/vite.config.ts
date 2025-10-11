@@ -24,6 +24,7 @@ const PATH_ALIASES = {
 
 const DTS_COMMON_OPTIONS = {
   outDir: DIST_DIR,
+  include: ['source/**/*.ts'],
   exclude: [
     'node_modules/**',
     '**/node_modules/**',
@@ -36,13 +37,7 @@ const DTS_COMMON_OPTIONS = {
     skipDefaultLibCheck: true,
     declaration: true,
     declarationMap: true,
-    emitDeclarationOnly: true,
-    rootDir: 'source',
-    baseUrl: 'source',
-    paths: {
-      model: ['./model'],
-      helpers: ['./helpers'],
-    },
+    emitDeclarationOnly: false,
   },
 };
 
@@ -58,9 +53,7 @@ const generateComponentEntries = () => {
       try {
         statSync(indexPath);
         entries[`components/${item}`] = indexPath;
-      } catch {
-        // Skip directories without index.ts
-      }
+      } catch {}
     }
   });
 
@@ -148,7 +141,6 @@ const getBundleBuildConfig = () => {
   );
 };
 
-// Main export entries for standard build
 const MAIN_ENTRIES = {
   index: 'index.ts',
   structural: 'exports/structural.ts',
@@ -169,11 +161,9 @@ export default defineConfig((configEnv) => {
   const isDevelopment = mode === 'development';
   const isProduction = mode === 'production';
 
-  // Check for special build modes
   if (process.env.BUILD_CDN === 'true') return getCdnBuildConfig();
   if (process.env.BUILD_BUNDLE === 'true') return getBundleBuildConfig();
 
-  // Standard build configuration
   const buildEntries = Object.entries(MAIN_ENTRIES).reduce(
     (acc, [key, path]) => ({ ...acc, [key]: resolve(SOURCE_DIR, path) }),
     generateComponentEntries(),
@@ -193,7 +183,7 @@ export default defineConfig((configEnv) => {
       minify: isDevelopment ? false : 'esbuild',
       target: isDevelopment ? DEV_TARGET : BUILD_TARGET,
       rollupOptions: {
-        external: (id) => EXTERNAL_DEPS.some((dep) => id === dep || id.startsWith(`${dep}/`)),
+        external: (id: string) => id.startsWith('@universityofmaryland/'),
         output: {
           globals: {
             '@universityofmaryland/web-utilities-library': 'UmdWebUtilities',

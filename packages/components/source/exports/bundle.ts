@@ -1,10 +1,11 @@
 /**
  * Bundle export that includes all components and external library resources.
- * Includes all dependencies from web-elements-library, web-styles-library, web-feeds-library, and web-utilities-library.
+ * Includes all dependencies from web-elements-library, web-styles-library, web-feeds-library, web-utilities-library, and web-icons-library.
  */
 import * as Components from '../api';
 import { loadComponentClass } from './loader';
 import * as Utilities from '@universityofmaryland/web-utilities-library';
+import * as Icons from '@universityofmaryland/web-icons-library';
 import * as Elements from '@universityofmaryland/web-elements-library';
 import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Feeds from '@universityofmaryland/web-feeds-library';
@@ -21,6 +22,7 @@ const UmdBundle = {
   init: initializeBundle,
   Components,
   Utilities,
+  Icons,
   Elements,
   Styles,
   Feeds,
@@ -30,9 +32,18 @@ const UmdBundle = {
     styles: Styles,
     feeds: Feeds,
     utilities: Utilities,
+    icons: Icons,
   },
 };
 
-export { initializeBundle, Components, Utilities, Elements, Styles, Feeds };
+export {
+  initializeBundle,
+  Components,
+  Utilities,
+  Icons,
+  Elements,
+  Styles,
+  Feeds,
+};
 
 export default UmdBundle;

@@ -1,9 +1,9 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import { QUOTE } from '@universityofmaryland/web-icons-library/content';
+import { truncateTextBasedOnSize } from '@universityofmaryland/web-utilities-library/string';
+import { createContainerQuery } from '@universityofmaryland/web-utilities-library/styles';
 import { ElementModel } from 'model';
 import { actions, assets, textLockup } from 'atomic';
-import * as asset from 'helpers/assets';
-import * as markup from 'helpers/markup';
-import * as theme from 'helpers/theme';
 import { CardOverlayProps } from '../_types';
 import { ElementVisual } from '../../../_types';
 
@@ -17,7 +17,7 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
     const sizeElements = () => {
       const textCopy = text?.innerHTML;
       if (text && textCopy) {
-        const modifiedText = markup.modify.truncateTextBasedOnSize({
+        const modifiedText = truncateTextBasedOnSize({
           text: textCopy,
           size: composite.element.offsetWidth,
         });
@@ -92,7 +92,7 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
             alignSelf: `flex-start`,
           },
           siblingAfter: {
-            marginTop: `${Styles.token.spacing.min}`,
+            marginTop: `${token.spacing.min}`,
           },
         },
         children: [dateSign],
@@ -107,16 +107,16 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
         element: {
           width: '41px',
           height: '30px',
-          marginBottom: `${Styles.token.spacing.xs}`,
+          marginBottom: `${token.spacing.xs}`,
 
           '& svg': {
-            fill: `${Styles.token.color.red}`,
+            fill: `${token.color.red}`,
           },
         },
       },
     });
 
-    quoteWrapper.element.innerHTML = asset.icon.QUOTE;
+    quoteWrapper.element.innerHTML = QUOTE;
     wrapperChildren.push(quoteWrapper);
   }
 
@@ -132,7 +132,7 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
     elementStyles: {
       element: {
         height: 'auto',
-        paddingRight: `${ctaIcon ? Styles.token.spacing['2xl'] : 0}`,
+        paddingRight: `${ctaIcon ? token.spacing['2xl'] : 0}`,
       },
     },
     children: [
@@ -141,7 +141,7 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
         className: 'card-overlay-image-text-content',
         elementStyles: {
           element: {
-            maxWidth: `${Styles.token.spacing.maxWidth.smallest}`,
+            maxWidth: `${token.spacing.maxWidth.smallest}`,
             height: '100%',
             display: 'flex',
             flexDirection: 'column',
@@ -162,8 +162,8 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
         elementStyles: {
           element: {
             position: 'relative',
-            padding: `${Styles.token.spacing.lg} ${Styles.token.spacing.md}`,
-            paddingTop: `${Styles.token.spacing['4xl']}`,
+            padding: `${token.spacing.lg} ${token.spacing.md}`,
+            paddingTop: `${token.spacing['4xl']}`,
             display: 'flex',
             flexDirection: 'column',
             justifyContent: 'flex-end',
@@ -171,11 +171,11 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
             height: '100%',
             overflow: 'hidden',
 
-            ...theme.media.createContainerQuery(
+            ...createContainerQuery(
               'min-width',
-              Styles.token.media.breakpointValues.medium.min,
+              token.media.breakpointValues.medium.min,
               {
-                paddingTop: `${Styles.token.spacing['8xl']}`,
+                paddingTop: `${token.spacing['8xl']}`,
                 minHeight: `424px`,
               },
             ),

@@ -3,8 +3,8 @@ import {
   layout,
   token,
 } from '@universityofmaryland/web-styles-library';
-import * as theme from 'helpers/theme';
-import * as assets from 'helpers/assets';
+import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
+import { QUOTE } from '@universityofmaryland/web-icons-library/content';
 
 export type TypeQuoteTextContainer = {
   quote: HTMLElement | null;
@@ -40,13 +40,13 @@ const IS_SIZE_LARGE = `.${TEXT_CONTAINER}[${ATTRIBUTE_SIZE}='${SIZE_LARGE}']`;
 
 // prettier-ignore
 const VarationSizeLarge = `
-  ${theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${IS_SIZE_LARGE} .${TEXT_CONTAINER_QUOTE_WRAPPER}`]: typography.sans.extraLarge,
     },
   })}
 
-  ${theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${IS_SIZE_LARGE} .${TEXT_CONTAINER_QUOTE_WRAPPER} *`]: typography.sans.extraLarge,
     },
@@ -82,13 +82,13 @@ const QuoteStyles = `
     color: currentColor;
   }
 
-  ${theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${TEXT_CONTAINER_QUOTE_WRAPPER}`]: typography.sans.larger,
     },
   })}
 
-  ${theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${TEXT_CONTAINER_QUOTE_WRAPPER} *`]: typography.sans.larger,
     },
@@ -113,13 +113,13 @@ const AttributionStyles = `
     color: currentColor;
   }
 
-  ${theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${TEXT_CONTAINER_ATTRIBUTION_WRAPPER}`]: typography.sans.medium,
     },
   })}
 
-  ${theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${TEXT_CONTAINER_ATTRIBUTION_WRAPPER} *`]: typography.sans.medium,
     },
@@ -141,13 +141,13 @@ const AttributionSubTextStyles = `
     color: currentColor;
   }
   
-  ${theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER}`]: typography.sans.small,
     },
   })}
   
-  ${theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER} *`]: typography.sans.small,
     },
@@ -160,7 +160,7 @@ const ActionStyles = `
     margin-top: ${token.spacing.sm};
   }
 
-  ${theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENTS_TEXT_CONTAINER_ACTIONS}`]: layout.grid.inline.tabletRows,
     },
@@ -199,7 +199,7 @@ const CreateQuoteTextContainer = ({
 
   if (quote) {
     const iconSpan = document.createElement('span');
-    iconSpan.innerHTML = assets.icon.QUOTE;
+    iconSpan.innerHTML = QUOTE;
 
     quote.appendChild(iconSpan);
     quote.classList.add(TEXT_CONTAINER_QUOTE_WRAPPER);

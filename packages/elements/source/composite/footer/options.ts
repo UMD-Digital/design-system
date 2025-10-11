@@ -1,8 +1,9 @@
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as animation from '@universityofmaryland/web-styles-library/animation';
 import { ElementModel } from 'model';
 import createMain, { type MainSectionProps } from './elements/main-section';
 import createUtility, { type UtilityProps } from './elements/utility-section';
 import { BaseProps } from './_types';
-import { animation, token } from '@universityofmaryland/web-styles-library';
 
 export interface FooterProps
   extends BaseProps,

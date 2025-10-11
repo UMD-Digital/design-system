@@ -1,6 +1,6 @@
-import { token } from '@universityofmaryland/web-styles-library';
-import * as markup from 'helpers/markup';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
+import { findParent } from '@universityofmaryland/web-utilities-library/dom';
 import Slides, { TypeSlideProps } from './slides';
 import SlideFirst from './slide-first';
 import SlideAction from './action';
@@ -195,7 +195,7 @@ const CreateNavSliderElement = (props: TypeNavSliderRequirements) =>
       const upcomingSlide = elementContainer.querySelector(
         `[${ATTRIBUTE_CHILD_REF}=${upcomingSlideRef}]`,
       ) as HTMLDivElement;
-      const parent = markup.get.findParent({
+      const parent = findParent({
         element: upcomingSlide,
         attr: ATTRIBUTE_DATA_SLIDE,
       });

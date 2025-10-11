@@ -1,6 +1,9 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import {
+  createContainerQuery,
+  createRangeContainerQuery,
+} from '@universityofmaryland/web-utilities-library/styles';
 import { assets, textLockup } from 'atomic';
-import * as theme from 'helpers/theme';
 import { ElementModel } from 'model';
 import {
   type PersonContactPropsWithStyles,
@@ -8,9 +11,9 @@ import {
   type PersonFullProps,
 } from '../../_types';
 
-const smallBreakpoint = Styles.token.media.breakpointValues.small.max;
-const mediumBreakpointStart = Styles.token.media.breakpointValues.medium.min;
-const mediumBreakpoint = Styles.token.media.breakpointValues.large.min;
+const smallBreakpoint = token.media.breakpointValues.small.max;
+const mediumBreakpointStart = token.media.breakpointValues.medium.min;
+const mediumBreakpoint = token.media.breakpointValues.large.min;
 
 export const image = ({
   customStyles,
@@ -25,34 +28,30 @@ export const image = ({
     className: 'person-column-image',
     elementStyles: {
       element: {
-        ...theme.media.createContainerQuery('max-width', smallBreakpoint, {
-          marginBottom: `${Styles.token.spacing.md}`,
-          backgroundColor: `${Styles.token.color.gray.lighter}`,
+        ...createContainerQuery('max-width', smallBreakpoint, {
+          marginBottom: `${token.spacing.md}`,
+          backgroundColor: `${token.color.gray.lighter}`,
           display: 'flex',
           justifyContent: 'center',
 
           ...(isThemeDark && {
-            ...theme.media.createContainerQuery('max-width', smallBreakpoint, {
-              backgroundColor: `${Styles.token.color.gray.darker}`,
+            ...createContainerQuery('max-width', smallBreakpoint, {
+              backgroundColor: `${token.color.gray.darker}`,
             }),
           }),
         }),
 
-        ...theme.media.createContainerQuery(
-          'min-width',
-          mediumBreakpointStart,
-          {
-            display: 'block',
-            width: '96px',
-            paddingRight: `${Styles.token.spacing.md}`,
-            alignSelf: 'flex-start',
-          },
-        ),
+        ...createContainerQuery('min-width', mediumBreakpointStart, {
+          display: 'block',
+          width: '96px',
+          paddingRight: `${token.spacing.md}`,
+          alignSelf: 'flex-start',
+        }),
 
         ...customStyles,
 
         '& img, & svg': {
-          ...theme.media.createContainerQuery('max-width', smallBreakpoint, {
+          ...createContainerQuery('max-width', smallBreakpoint, {
             height: 'auto !important',
             width: '140px',
           }),
@@ -128,17 +127,13 @@ export const contact = (props: PersonContactPropsWithStyles) => {
     className: 'person-column-contact',
     elementStyles: {
       element: {
-        marginTop: `${Styles.token.spacing.sm}`,
+        marginTop: `${token.spacing.sm}`,
 
-        ...theme.media.createContainerQuery(
-          'min-width',
-          mediumBreakpointStart,
-          {
-            paddingLeft: `${Styles.token.spacing.md}`,
-          },
-        ),
+        ...createContainerQuery('min-width', mediumBreakpointStart, {
+          paddingLeft: `${token.spacing.md}`,
+        }),
 
-        ...theme.media.createContainerQuery('min-width', mediumBreakpoint, {
+        ...createContainerQuery('min-width', mediumBreakpoint, {
           width: '30%',
         }),
 

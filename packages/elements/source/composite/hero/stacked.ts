@@ -1,5 +1,6 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
-import * as theme from 'helpers/theme';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as elementStyles from '@universityofmaryland/web-styles-library/element';
+import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
 import { type ElementVisual } from '../../_types';
@@ -17,8 +18,8 @@ const keyFrameFadeOver = `
 
 const keyFrameFontColor = `
   @keyframes ${REF_KEY_FRAME_FONT_COLOR} {
-    from { color: ${Styles.token.color.black}; }
-    to { color: ${Styles.token.color.white}; }
+    from { color: ${token.color.black}; }
+    to { color: ${token.color.white}; }
   }
 `;
 
@@ -36,19 +37,19 @@ const createImageAsset = (image: HTMLImageElement) => {
     isGifAllowed: true,
     isShowCaption: true,
     customStyles: {
-      [`@media (${Styles.token.media.queries.large.max})`]: {
-        [`&:has(.${Styles.element.asset.gif.toggle.className})`]: {
+      [`@media (${token.media.queries.large.max})`]: {
+        [`&:has(.${elementStyles.asset.gif.toggle.className})`]: {
           minHeight: '56vw',
         },
       },
 
-      [`@media (${Styles.token.media.queries.tablet.min})`]: {
-        [`&:has(.${Styles.element.asset.gif.toggle.className})`]: {
+      [`@media (${token.media.queries.tablet.min})`]: {
+        [`&:has(.${elementStyles.asset.gif.toggle.className})`]: {
           minHeight: '550px',
         },
       },
 
-      [`& .${Styles.element.asset.gif.toggle.className} button`]: {
+      [`& .${elementStyles.asset.gif.toggle.className} button`]: {
         zIndex: 99999,
       },
     },
@@ -72,7 +73,7 @@ const createOverlay = (includesAnimation?: boolean) => {
         opacity: 0,
 
         ...(includesAnimation && {
-          [`@media (${Styles.token.media.queries.tablet.min})`]: {
+          [`@media (${token.media.queries.tablet.min})`]: {
             [`@media (prefers-reduced-motion: no-preference)`]: {
               [`@supports (animation-timeline: scroll())`]: {
                 animation: `${REF_KEY_FRAME_FADE_OVER} ease-in-out forwards`,
@@ -148,7 +149,7 @@ const createAsset = ({
           objectFit: 'cover',
           aspectRatio: '5 / 4',
 
-          [`@container (${Styles.token.media.queries.tablet.min})`]: {
+          [`@container (${token.media.queries.tablet.min})`]: {
             maxHeight: '700px',
             minHeight: '300px',
 
@@ -178,7 +179,7 @@ const createHeadline = (
   if (!headline) return null;
 
   const desktopStyles = {
-    [`@container (${Styles.token.media.queries.desktop.min})`]: {
+    [`@container (${token.media.queries.desktop.min})`]: {
       ...(isOverwriteHeadline && {
         fontSize: '80px',
       }),
@@ -186,8 +187,8 @@ const createHeadline = (
   };
 
   const animationStyles = {
-    [`@container (${Styles.token.media.queries.tablet.min})`]: {
-      ...theme.media.withViewTimelineAnimation({
+    [`@container (${token.media.queries.tablet.min})`]: {
+      ...withViewTimelineAnimation({
         animation: `${REF_KEY_FRAME_FONT_COLOR} ease-in-out forwards`,
         animationTimeline: 'view()',
         animationRangeStart: '100vh',
@@ -203,14 +204,14 @@ const createHeadline = (
 
   const elementStyles = {
     element: {
-      color: Styles.token.color.black,
+      color: token.color.black,
       maxWidth: '700px',
       margin: '0 auto',
       textTransform: 'uppercase',
-      marginTop: `${Styles.token.spacing.sm}`,
+      marginTop: `${token.spacing.sm}`,
 
       ...(isThemeDark && {
-        color: Styles.token.color.white,
+        color: token.color.white,
       }),
 
       ...(includesAnimation && {
@@ -222,7 +223,7 @@ const createHeadline = (
       ...desktopStyles,
     },
     siblingAfter: {
-      marginTop: `${Styles.token.spacing.md}`,
+      marginTop: `${token.spacing.md}`,
     },
   };
 
@@ -259,20 +260,20 @@ const createText = (
     children: [lock],
     elementStyles: {
       element: {
-        padding: `${Styles.token.spacing.lg} 0`,
+        padding: `${token.spacing.lg} 0`,
         display: 'flex',
         justifyContent: 'center',
         textAlign: 'center',
         position: 'relative',
         zIndex: '999',
 
-        [`@container (${Styles.token.media.queries.tablet.min})`]: {
-          padding: `${Styles.token.spacing['6xl']} 0 ${Styles.token.spacing['3xl']}`,
+        [`@container (${token.media.queries.tablet.min})`]: {
+          padding: `${token.spacing['6xl']} 0 ${token.spacing['3xl']}`,
         },
 
         ...(includesAnimation && {
-          [`@container (${Styles.token.media.queries.tablet.min})`]: {
-            ...theme.media.withViewTimelineAnimation({
+          [`@container (${token.media.queries.tablet.min})`]: {
+            ...withViewTimelineAnimation({
               position: 'sticky',
               top: additionalSpread || 0,
             }),
@@ -282,8 +283,8 @@ const createText = (
         [`& *`]: {
           ...(includesAnimation && {
             ...(!isThemeDark && {
-              [`@container (${Styles.token.media.queries.tablet.min})`]: {
-                ...theme.media.withViewTimelineAnimation({
+              [`@container (${token.media.queries.tablet.min})`]: {
+                ...withViewTimelineAnimation({
                   animation: `${REF_KEY_FRAME_FONT_COLOR} ease-in-out forwards`,
                   animationTimeline: 'view()',
                   animationRangeStart: '90vh',
@@ -299,11 +300,11 @@ const createText = (
           }),
         },
 
-        [`& .${Styles.element.text.decoration.ribbon.className[0]}`]: {
+        [`& .${elementStyles.text.decoration.ribbon.className[0]}`]: {
           animation: 'none !important',
         },
 
-        [`& .${Styles.element.text.rich.simpleLargest.className}`]: {
+        [`& .${elementStyles.text.rich.simpleLargest.className}`]: {
           maxWidth: '860px',
           marginLeft: 'auto',
           marginRight: 'auto',
@@ -336,7 +337,7 @@ export default (props: HeroStackedProps) => {
         containerType: 'inline-size',
 
         ...(props.isThemeDark && {
-          backgroundColor: Styles.token.color.black,
+          backgroundColor: token.color.black,
         }),
       },
     },

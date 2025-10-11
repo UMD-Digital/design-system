@@ -1,4 +1,5 @@
-import { token, typography } from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as typography from '@universityofmaryland/web-styles-library/typography';
 import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
 
 export type TypeLogoRequirements = {

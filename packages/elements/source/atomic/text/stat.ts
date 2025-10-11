@@ -1,4 +1,8 @@
-import Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import {
+  stats as statsFont,
+  sans as sansFonts,
+} from '@universityofmaryland/web-styles-library/typography';
 import { ElementModel } from 'model';
 import { type ElementVisual } from '../../_types';
 
@@ -33,25 +37,25 @@ const createStat = (
     element: statElement,
     className: 'stat-display',
     elementStyles: {
-      siblingAfter: { marginTop: Styles.token.spacing.min },
+      siblingAfter: { marginTop: token.spacing.min },
 
       element: {
-        ...Styles.typography.stats.medium,
-        color: Styles.token.color.red,
+        ...statsFont.medium,
+        color: token.color.red,
         WebkitFontSmoothing: 'antialiased',
 
-        ...(isThemeDark && { color: Styles.token.color.gold }),
-        ...(isSizeLarge && { ...Styles.typography.stats.large }),
+        ...(isThemeDark && { color: token.color.gold }),
+        ...(isSizeLarge && { ...statsFont.large }),
 
         [`& *`]: {
-          ...Styles.typography.stats.medium,
+          ...statsFont.medium,
           color: 'currentColor',
           WebkitFontSmoothing: 'antialiased',
 
-          ...(isSizeLarge && Styles.typography.stats.large),
+          ...(isSizeLarge && statsFont.large),
         },
 
-        [`& + *`]: { marginTop: Styles.token.spacing.min },
+        [`& + *`]: { marginTop: token.spacing.min },
       },
     },
   });
@@ -68,18 +72,18 @@ const createSubtext = (
     className: 'stat-sub-text',
     elementStyles: {
       element: {
-        ...Styles.typography.sans.min,
-        marginTop: Styles.token.spacing.min,
-        color: Styles.token.color.gray.mediumAA,
+        ...sansFonts.min,
+        marginTop: token.spacing.min,
+        color: token.color.gray.mediumAA,
 
-        ...(isSizeLarge && Styles.typography.sans.small),
-        ...(isThemeDark && { color: Styles.token.color.gray.light }),
+        ...(isSizeLarge && sansFonts.small),
+        ...(isThemeDark && { color: token.color.gray.light }),
 
         ['& *']: {
-          ...Styles.typography.sans.min,
+          ...sansFonts.min,
           color: 'currentColor',
 
-          ...(isSizeLarge && Styles.typography.sans.small),
+          ...(isSizeLarge && sansFonts.small),
         },
       },
     },
@@ -97,7 +101,7 @@ const createText = (
       element: text,
       isThemeDark,
       elementStyles: {
-        siblingAfter: { marginTop: Styles.token.spacing.md },
+        siblingAfter: { marginTop: token.spacing.md },
       },
     });
   }
@@ -106,7 +110,7 @@ const createText = (
     element: text,
     isThemeDark,
     elementStyles: {
-      siblingAfter: { marginTop: Styles.token.spacing.min },
+      siblingAfter: { marginTop: token.spacing.min },
     },
   });
 };
@@ -136,16 +140,16 @@ const createWrapper = (
         position: 'relative',
 
         ...(hasLine && {
-          paddingLeft: Styles.token.spacing.md,
-          borderLeft: `2px solid ${Styles.token.color.gold}`,
+          paddingLeft: token.spacing.md,
+          borderLeft: `2px solid ${token.color.gold}`,
 
           [`@container umd-element-stat (min-width: 400px)`]: {
-            paddingLeft: Styles.token.spacing.xl,
+            paddingLeft: token.spacing.xl,
           },
         }),
 
         ...(isThemeDark && {
-          [`& .stat-sub-text`]: { color: Styles.token.color.gray.light },
+          [`& .stat-sub-text`]: { color: token.color.gray.light },
         }),
       },
     },
@@ -163,21 +167,21 @@ const createDisplayBlock = (
     children: [wrapperElement],
     elementStyles: {
       element: {
-        padding: `${Styles.token.spacing.lg} ${Styles.token.spacing.sm}`,
-        borderTop: `2px solid ${Styles.token.color.red}`,
-        backgroundColor: `${Styles.token.color.gray.lightest}`,
+        padding: `${token.spacing.lg} ${token.spacing.sm}`,
+        borderTop: `2px solid ${token.color.red}`,
+        backgroundColor: `${token.color.gray.lightest}`,
         position: 'relative',
         overflow: 'hidden',
         height: `100%`,
         display: `flex`,
         alignItems: `center`,
 
-        [`@media (min-width: ${Styles.token.media.breakpoints.large.min})`]: {
-          padding: Styles.token.spacing.lg,
+        [`@media (min-width: ${token.media.breakpoints.large.min})`]: {
+          padding: token.spacing.lg,
         },
 
-        [`@media (min-width: ${Styles.token.media.breakpoints.highDef.min})`]: {
-          padding: `${Styles.token.spacing['2xl']} ${Styles.token.spacing['3xl']}`,
+        [`@media (min-width: ${token.media.breakpoints.highDef.min})`]: {
+          padding: `${token.spacing['2xl']} ${token.spacing['3xl']}`,
         },
 
         [`& > svg`]: {

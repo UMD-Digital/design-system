@@ -1,8 +1,7 @@
-import { token } from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import { imageFromSvg } from '@universityofmaryland/web-utilities-library/media';
 import InlineQuote, { TypeInlineInline } from './inline';
 import QuoteText from './elements/text';
-import * as theme from 'helpers/theme';
-import { imageFromSvg } from '@universityofmaryland/web-utilities-library';
 
 type TypeQuoteFeatured = TypeInlineInline & {
   isTransparent: boolean;

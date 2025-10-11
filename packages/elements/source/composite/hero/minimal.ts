@@ -1,4 +1,4 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
 import { type ElementVisual } from '../../_types';
@@ -21,17 +21,15 @@ const buildAssetChildren = ({
 };
 
 const getBorderColor = (isThemeDark?: boolean, isThemeMaryland?: boolean) => {
-  return isThemeDark || isThemeMaryland
-    ? Styles.token.color.gold
-    : Styles.token.color.red;
+  return isThemeDark || isThemeMaryland ? token.color.gold : token.color.red;
 };
 
 const getBackgroundColor = (props: HeroMinimalProps) => {
   const { isThemeDark, isThemeLight, isThemeMaryland } = props;
 
-  if (isThemeDark) return Styles.token.color.black;
-  if (isThemeMaryland) return Styles.token.color.red;
-  if (isThemeLight) return Styles.token.color.gray.lightest;
+  if (isThemeDark) return token.color.black;
+  if (isThemeMaryland) return token.color.red;
+  if (isThemeLight) return token.color.gray.lightest;
   return 'transparent';
 };
 
@@ -47,7 +45,7 @@ const createAsset = ({ image }: Pick<HeroMinimalProps, 'image'>) => {
     children,
     elementStyles: {
       element: {
-        [`@container (${Styles.token.media.queries.tablet.min})`]: {
+        [`@container (${token.media.queries.tablet.min})`]: {
           position: 'absolute',
           right: 0,
           top: 0,
@@ -56,7 +54,7 @@ const createAsset = ({ image }: Pick<HeroMinimalProps, 'image'>) => {
         },
 
         ['& img']: {
-          [`@container (${Styles.token.media.queries.tablet.min})`]: {
+          [`@container (${token.media.queries.tablet.min})`]: {
             objectFit: 'cover',
             objectPosition: 'center',
             height: '100%',
@@ -81,7 +79,7 @@ const createHeadline = (
   if (!headline) return null;
 
   const desktopStyles = {
-    [`@container (${Styles.token.media.queries.desktop.min})`]: {
+    [`@container (${token.media.queries.desktop.min})`]: {
       ...(isOverwriteHeadline && {
         fontSize: '64px',
       }),
@@ -97,7 +95,7 @@ const createHeadline = (
         ...desktopStyles,
       },
       siblingAfter: {
-        marginTop: Styles.token.spacing.sm,
+        marginTop: token.spacing.sm,
       },
     },
     isThemeDark: isThemeDark || isThemeMaryland,
@@ -110,11 +108,11 @@ const buildTextWrapperStyles = (
 ) => {
   return {
     element: {
-      paddingLeft: Styles.token.spacing.md,
+      paddingLeft: token.spacing.md,
       borderLeft: `2px solid ${getBorderColor(isThemeDark, isThemeMaryland)}`,
 
-      [`@container (${Styles.token.media.queries.desktop.min})`]: {
-        paddingLeft: Styles.token.spacing.lg,
+      [`@container (${token.media.queries.desktop.min})`]: {
+        paddingLeft: token.spacing.lg,
       },
     },
   };
@@ -123,12 +121,12 @@ const buildTextWrapperStyles = (
 const buildTextContainerStyles = (hasAsset: boolean) => {
   return {
     element: {
-      padding: `${Styles.token.spacing.xl} 0`,
+      padding: `${token.spacing.xl} 0`,
 
-      [`@container (${Styles.token.media.queries.tablet.min})`]: {
+      [`@container (${token.media.queries.tablet.min})`]: {
         ...(hasAsset && {
-          padding: `${Styles.token.spacing['4xl']} 0`,
-          width: `calc(50% - ${Styles.token.spacing['4xl']})`,
+          padding: `${token.spacing['4xl']} 0`,
+          width: `calc(50% - ${token.spacing['4xl']})`,
         }),
       },
     },
@@ -190,11 +188,11 @@ export default (props: HeroMinimalProps) => {
         display: 'flex',
         containerType: 'inline-size',
 
-        [`@container (${Styles.token.media.queries.large.max})`]: {
+        [`@container (${token.media.queries.large.max})`]: {
           flexDirection: 'column-reverse',
         },
 
-        [`@container (${Styles.token.media.queries.tablet.min})`]: {
+        [`@container (${token.media.queries.tablet.min})`]: {
           minHeight: '288px',
           alignItems: 'center',
         },

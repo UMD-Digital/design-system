@@ -1,6 +1,7 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
-import { assets, textLockup } from 'atomic';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import { ElementModel } from 'model';
+import { assets, textLockup } from 'atomic';
 import { type PersonBio } from '../_types';
 import { type ElementVisual } from '../../../_types';
 
@@ -25,14 +26,14 @@ export default (props: PersonBio) => {
         isThemeDark,
         elementStyles: {
           element: {
-            marginTop: Styles.token.spacing.lg,
-            color: `${Styles.token.color.black}`,
+            marginTop: token.spacing.lg,
+            color: `${token.color.black}`,
             textTransform: 'uppercase',
             fontWeight: '800',
             display: 'block',
           },
           siblingAfter: {
-            marginTop: Styles.token.spacing.min,
+            marginTop: token.spacing.min,
           },
         },
       }),
@@ -49,8 +50,8 @@ export default (props: PersonBio) => {
         isThemeDark,
         elementStyles: {
           element: {
-            marginTop: Styles.token.spacing.lg,
-            maxWidth: Styles.token.spacing.maxWidth.smallest,
+            marginTop: token.spacing.lg,
+            maxWidth: token.spacing.maxWidth.smallest,
           },
         },
       }),
@@ -63,7 +64,7 @@ export default (props: PersonBio) => {
         element: actions,
         elementStyles: {
           element: {
-            marginTop: Styles.token.spacing.sm,
+            marginTop: token.spacing.sm,
           },
         },
       }),
@@ -75,8 +76,8 @@ export default (props: PersonBio) => {
     children,
     elementStyles: {
       element: {
-        [`& .${Styles.element.asset.image.wrapper.className}`]: {
-          [`@container (max-width: ${Styles.token.media.breakpointValues.medium.max}px)`]:
+        [`& .${elementStyles.asset.image.wrapper.className}`]: {
+          [`@container (max-width: ${token.media.breakpointValues.medium.max}px)`]:
             {
               display: 'flex',
             },

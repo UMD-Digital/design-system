@@ -1,5 +1,8 @@
+import {
+  PAUSE,
+  PLAY,
+} from '@universityofmaryland/web-icons-library/ui-controls';
 import { ElementModel } from 'model';
-import * as asset from 'helpers/assets';
 
 interface VideoProps {
   video: HTMLVideoElement;
@@ -46,7 +49,7 @@ export default (props: VideoProps) =>
 
     const setPlay = () => {
       button.element.setAttribute('aria-label', 'Pause');
-      button.element.innerHTML = asset.icon.PAUSE;
+      button.element.innerHTML = PAUSE;
       video.muted = true;
       video.play().catch((error) => {
         if (error.name === 'NotAllowedError') {
@@ -57,14 +60,14 @@ export default (props: VideoProps) =>
     };
     const setPause = () => {
       button.element.setAttribute('aria-label', 'Play');
-      button.element.innerHTML = asset.icon.PLAY;
+      button.element.innerHTML = PLAY;
       video.pause();
     };
 
     // Load styles and attributes
 
     button.element.setAttribute('aria-label', 'Play');
-    button.element.innerHTML = asset.icon.PLAY;
+    button.element.innerHTML = PLAY;
     button.element.setAttribute('type', 'button');
     button.element.addEventListener('click', () => {
       if (video.paused) {

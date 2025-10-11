@@ -1,7 +1,7 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
-import { assets, textLockup } from 'atomic';
-import * as theme from 'helpers/theme';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import { createContainerQuery } from '@universityofmaryland/web-utilities-library/styles';
 import { ElementModel } from 'model';
+import { assets, textLockup } from 'atomic';
 import { PersonBio } from '../_types';
 import { type ElementVisual } from '../../../_types';
 
@@ -16,13 +16,13 @@ const createTextContainer = (props: PersonBio) => {
         isThemeDark,
         elementStyles: {
           element: {
-            color: `${Styles.token.color.black}`,
+            color: `${token.color.black}`,
             textTransform: 'uppercase',
             fontWeight: '800',
             display: 'block',
           },
           siblingAfter: {
-            marginTop: Styles.token.spacing.sm,
+            marginTop: token.spacing.sm,
           },
         },
       }),
@@ -50,7 +50,7 @@ const createTextColumn = (props: PersonBio) => {
         element: actions,
         elementStyles: {
           element: {
-            marginTop: Styles.token.spacing.sm,
+            marginTop: token.spacing.sm,
           },
         },
       }),
@@ -75,18 +75,18 @@ const makeContainer = (props: PersonBio) => {
         isScaled: false,
         customStyles: {
           element: {
-            ...theme.media.createContainerQuery(
+            ...createContainerQuery(
               'max-width',
-              Styles.token.media.breakpointValues.medium.max,
+              token.media.breakpointValues.medium.max,
               {
                 display: 'flex',
               },
             ),
 
             [`& img`]: {
-              ...theme.media.createContainerQuery(
+              ...createContainerQuery(
                 'min-width',
-                Styles.token.media.breakpointValues.large.min,
+                token.media.breakpointValues.large.min,
                 {
                   width: `100%`,
                   height: `auto !important`,
@@ -107,22 +107,22 @@ const makeContainer = (props: PersonBio) => {
     elementStyles: {
       element: {
         display: 'grid',
-        gridGap: `${Styles.token.spacing.md}`,
+        gridGap: `${token.spacing.md}`,
 
-        ...theme.media.createContainerQuery(
+        ...createContainerQuery(
           'min-width',
-          Styles.token.media.breakpointValues.large.min,
+          token.media.breakpointValues.large.min,
           {
             gridTemplateColumns: `repeat(8, 1fr)`,
-            gridGap: `${Styles.token.spacing.lg}`,
+            gridGap: `${token.spacing.lg}`,
             alignItems: `center`,
           },
         ),
 
         [`& > *`]: {
-          ...theme.media.createContainerQuery(
+          ...createContainerQuery(
             'min-width',
-            Styles.token.media.breakpointValues.large.min,
+            token.media.breakpointValues.large.min,
             {
               gridColumn: `span 5`,
             },
@@ -130,9 +130,9 @@ const makeContainer = (props: PersonBio) => {
         },
 
         [`&:has(> :nth-child(2)) > *:first-child `]: {
-          ...theme.media.createContainerQuery(
+          ...createContainerQuery(
             'min-width',
-            Styles.token.media.breakpointValues.large.min,
+            token.media.breakpointValues.large.min,
             {
               gridColumn: `span 3`,
               alignSelf: `flex-start`,
@@ -156,8 +156,8 @@ export default (props: PersonBio) => {
         isThemeDark,
         elementStyles: {
           element: {
-            marginTop: Styles.token.spacing.lg,
-            maxWidth: Styles.token.spacing.maxWidth.smallest,
+            marginTop: token.spacing.lg,
+            maxWidth: token.spacing.maxWidth.smallest,
           },
         },
       }),

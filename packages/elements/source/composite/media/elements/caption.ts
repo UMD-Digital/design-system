@@ -1,5 +1,6 @@
-import { token, typography } from '@universityofmaryland/web-styles-library';
-import * as theme from 'helpers/theme';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as typography from '@universityofmaryland/web-styles-library/typography';
+import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
 
 export type TypeMediaCaptionRequirements = {
   caption: HTMLElement;
@@ -17,13 +18,13 @@ const OVERWRITE_CONTAINER_DARK = `.${ELEMENT_MEDIA_CAPTIONS_CONTAINER}${IS_THEME
 
 // prettier-ignore
 const STYLES_MEDIA_CAPTIONS_ELEMENT = `
-  ${theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_MEDIA_CAPTIONS_CONTAINER}`]: typography.sans.small,
     },
   })}
 
-  ${theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${ELEMENT_MEDIA_CAPTIONS_CONTAINER} *`]: typography.sans.small,
     },

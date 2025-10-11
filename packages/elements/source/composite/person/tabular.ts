@@ -1,11 +1,11 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
-import * as theme from 'helpers/theme';
-import { layout } from 'atomic';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import { createContainerQuery } from '@universityofmaryland/web-utilities-library/styles';
 import { ElementModel } from 'model';
+import { layout } from 'atomic';
 import { PersonCard } from './_types';
 import { ElementVisual } from '../../_types';
 
-const smallBreakpoint = Styles.token.media.breakpointValues.small.max;
+const smallBreakpoint = token.media.breakpointValues.small.max;
 
 export default ({
   actions,
@@ -38,11 +38,11 @@ export default ({
       element: name,
       elementStyles: {
         element: {
-          fontWeight: `${Styles.token.font.weight.bold}`,
-          color: `${Styles.token.color.black}`,
+          fontWeight: `${token.font.weight.bold}`,
+          color: `${token.color.black}`,
 
           [`& + *`]: {
-            marginTop: Styles.token.spacing.min,
+            marginTop: token.spacing.min,
           },
         },
         subElement: {
@@ -88,7 +88,7 @@ export default ({
         overflow: 'hidden',
         display: 'flex',
 
-        ...theme.media.createContainerQuery('max-width', smallBreakpoint, {
+        ...createContainerQuery('max-width', smallBreakpoint, {
           flexDirection: 'column',
         }),
       },

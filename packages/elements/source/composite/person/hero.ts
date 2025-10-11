@@ -1,8 +1,4 @@
-import {
-  token,
-  layout,
-  typography,
-} from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
 import { PersonContact } from './_types';

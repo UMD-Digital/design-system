@@ -5,8 +5,8 @@ import createSocialCampaignColumns, {
 } from '../social';
 import createLinkColumns, { type slotColumnsProps } from './link-columns';
 import { BREAKPOINTS } from '../../../globals';
+import { BaseProps } from '../../../_types';
 import { type ElementVisual } from '../../../../../_types';
-import { BaseProps } from 'composite/footer/_types';
 
 const { LARGE } = BREAKPOINTS;
 

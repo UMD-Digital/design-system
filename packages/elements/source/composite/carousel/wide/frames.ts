@@ -1,4 +1,4 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { assets } from 'atomic';
 import { ElementModel } from 'model';
 import { createElementWithRefs } from './_elementModel';
@@ -34,23 +34,23 @@ const createSlideContent = ({
         cursor: 'pointer',
         fontSize: '20px',
         fontWeight: 'bold',
-        padding: Styles.token.spacing.min,
+        padding: token.spacing.min,
         lineHeight: 1,
-        color: Styles.token.color.gray.dark,
+        color: token.color.gray.dark,
         transition: 'color 0.2s ease',
 
-        [`@media (${Styles.token.media.queries.large.max})`]: {
+        [`@media (${token.media.queries.large.max})`]: {
           display: 'none',
         },
 
         '&:hover, &:focus': {
-          outline: `2px solid ${Styles.token.color.blue}`,
+          outline: `2px solid ${token.color.blue}`,
         },
 
         ...(isThemeDark && {
-          color: Styles.token.color.gray.light,
+          color: token.color.gray.light,
           '&:hover': {
-            color: Styles.token.color.white,
+            color: token.color.white,
           },
         }),
       },
@@ -71,10 +71,10 @@ const createSlideContent = ({
         element: slide.headline,
         elementStyles: {
           element: {
-            color: `${Styles.token.color.black}`,
+            color: `${token.color.black}`,
           },
           siblingAfter: {
-            marginTop: Styles.token.spacing.sm,
+            marginTop: token.spacing.sm,
           },
         },
         isThemeDark,
@@ -98,10 +98,10 @@ const createSlideContent = ({
     children,
     elementStyles: {
       element: {
-        backgroundColor: Styles.token.color.white,
-        border: `1px solid ${Styles.token.color.gray.light}`,
+        backgroundColor: token.color.white,
+        border: `1px solid ${token.color.gray.light}`,
         display: 'block',
-        padding: Styles.token.spacing.md,
+        padding: token.spacing.md,
         width: '100%',
         position: 'relative',
         opacity: 0,
@@ -109,21 +109,21 @@ const createSlideContent = ({
         transition: 'opacity 0.6s ease-out, transform 0.6s ease-out',
 
         ...(isThemeDark && {
-          backgroundColor: Styles.token.color.black,
-          border: `1px solid ${Styles.token.color.gray.dark}`,
+          backgroundColor: token.color.black,
+          border: `1px solid ${token.color.gray.dark}`,
         }),
 
-        [`@media (${Styles.token.media.queries.large.max})`]: {
+        [`@media (${token.media.queries.large.max})`]: {
           borderTop: 'none',
         },
 
-        [`@media (${Styles.token.media.queries.tablet.min})`]: {
+        [`@media (${token.media.queries.tablet.min})`]: {
           border: 'none',
           boxShadow: '0 0 5px 0 rgba(0, 0, 0, 0.4)',
           maxWidth: '50%',
           position: 'absolute',
-          bottom: Styles.token.spacing.sm,
-          left: Styles.token.spacing.sm,
+          bottom: token.spacing.sm,
+          left: token.spacing.sm,
 
           ...(isThemeDark && {
             border: 'none',
@@ -167,7 +167,7 @@ const createMainFrameSlide = (
         transform: 'translateX(0)',
         aspectRatio: ASPECT_RATIO,
 
-        [`@media (${Styles.token.media.queries.tablet.min})`]: {
+        [`@media (${token.media.queries.tablet.min})`]: {
           position: 'absolute',
           width: '100%',
           height: '100%',
@@ -187,7 +187,7 @@ const createMainFrameSlide = (
           display: 'block',
           opacity: 1,
 
-          [`@media (${Styles.token.media.queries.large.max})`]: {
+          [`@media (${token.media.queries.large.max})`]: {
             position: 'absolute',
             width: '100%',
             top: 0,
@@ -225,7 +225,7 @@ const createPreviewContainer = (position: 'left' | 'right') => {
         overflow: 'hidden',
         position: 'relative',
 
-        [`@media (${Styles.token.media.queries.tablet.min})`]: {
+        [`@media (${token.media.queries.tablet.min})`]: {
           display: 'flex',
           alignItems: 'flex-end',
           height: '100%',
@@ -252,7 +252,7 @@ const createPreviewContainer = (position: 'left' | 'right') => {
             left: '0',
             right: '0',
             bottom: '0',
-            background: Styles.token.color.gray.darker,
+            background: token.color.gray.darker,
             opacity: 0.5,
             zIndex: 1,
           },
@@ -314,24 +314,24 @@ export const createFramesContainer = (
       element: {
         position: 'relative',
 
-        [`@media (${Styles.token.media.queries.large.max})`]: {
-          padding: `0 ${Styles.token.spacing.md}`,
+        [`@media (${token.media.queries.large.max})`]: {
+          padding: `0 ${token.spacing.md}`,
         },
 
-        [`@media (${Styles.token.media.queries.tablet.min})`]: {
+        [`@media (${token.media.queries.tablet.min})`]: {
           display: 'grid',
           gridTemplateColumns: '10vw 1fr 10vw',
-          gridGap: Styles.token.spacing.md,
+          gridGap: token.spacing.md,
           height: '56vw',
           maxHeight: '60vh',
         },
 
-        [`@media (${Styles.token.media.queries.desktop.min})`]: {
+        [`@media (${token.media.queries.desktop.min})`]: {
           gridTemplateColumns: '15vw 1fr 15vw',
-          gridGap: Styles.token.spacing.lg,
+          gridGap: token.spacing.lg,
         },
 
-        [`@media (${Styles.token.media.queries.highDef.min})`]: {
+        [`@media (${token.media.queries.highDef.min})`]: {
           gridTemplateColumns: '20vw 1fr 20vw',
         },
       },

@@ -1,8 +1,13 @@
-import { token, typography } from '@universityofmaryland/web-styles-library';
-import * as theme from 'helpers/theme';
-import * as assets from 'helpers/assets';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as typography from '@universityofmaryland/web-styles-library/typography';
+import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
 import { createEventSwipe } from '@universityofmaryland/web-utilities-library/events';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
+import { convertPixelStringToNumber } from '@universityofmaryland/web-utilities-library/string';
+import {
+  BACK_ARROW,
+  FORWARD_ARROW,
+} from '@universityofmaryland/web-icons-library/navigation';
 
 type TypeSliderEventButtonProps = {
   SetCountForward: () => void;
@@ -233,7 +238,7 @@ const IntroStyles = `
     display: block;
   }
 
-  ${theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_SLIDER_EVENT_INTRO_HEADLINE}`]: typography.sans.larger,
     },
@@ -323,7 +328,7 @@ const CreateBackButton = ({
 }: TypeSliderEventButtonProps) => {
   const button = document.createElement('button');
 
-  button.innerHTML = assets.icon.BACK_ARROW;
+  button.innerHTML = BACK_ARROW;
   button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON);
   button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON_BACK);
   button.style.display = 'none';
@@ -350,7 +355,7 @@ const CreateForwardButton = ({
 }: TypeSliderEventButtonProps) => {
   const button = document.createElement('button');
 
-  button.innerHTML = assets.icon.FORWARD_ARROW;
+  button.innerHTML = FORWARD_ARROW;
   button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON);
   button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON_FORWARD);
   button.setAttribute('type', 'button');
@@ -521,9 +526,7 @@ const SizeDatesElements = ({
       })[0];
       const height =
         maxHeightElement.offsetHeight +
-        theme.convertPixelStringToNumber(
-          maxHeightElement.style.marginTop,
-        );
+        convertPixelStringToNumber(maxHeightElement.style.marginTop);
 
       sliderWrapper.style.height = `${height}px`;
     };
@@ -744,10 +747,7 @@ export default (props: TypeSliderEventProps) =>
     declaration.classList.add(ELEMENT_SLIDER_EVENT_DECLRATION);
     declaration.appendChild(container);
 
-    window.addEventListener(
-      'resize',
-      debounce(EventResize, 20),
-    );
+    window.addEventListener('resize', debounce(EventResize, 20));
 
     return {
       element: declaration,

@@ -1,6 +1,5 @@
-import { token } from '@universityofmaryland/web-styles-library';
-import * as theme from 'helpers/theme';
-import * as assets from 'helpers/assets';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import { QUOTE } from '@universityofmaryland/web-icons-library/content';
 import Text, { TypeQuoteTextContainer } from './elements/text';
 import Image from './elements/image';
 
@@ -34,7 +33,7 @@ const IS_SIZE_LARGE_CONTAINER = `.${QUOTE_INLINE_CONTAINER}${IS_SIZE_LARGE}`;
 const IS_SIZE_LARGE_WITH_IMAGE_CONTAINER = `${IS_WITH_IMAGE_CONTAINER}${IS_WITH_IMAGE}`;
 
 const IS_TEXT_CONTAINER_OVERWRITE = `.${QUOTE_INLINE_CONTAINER} .${TEXT_CONTAINER}`;
-const IS_IMAGE_CONTAINER_OVERWRITE = `.${QUOTE_INLINE_CONTAINER} .${Image.elements.container}`;
+const IS_IMAGE_CONTAINER_OVERWRITE = `.${QUOTE_INLINE_CONTAINER} .quote-image`;
 
 const IS_MARYLAND_CONTAINER = `.${QUOTE_INLINE_CONTAINER}${IS_THEME_MARYLAND}`;
 const IS_SIZE_LARGE_TEXT_CONTAINER = `${IS_SIZE_LARGE_CONTAINER} .${TEXT_CONTAINER}`;
@@ -50,7 +49,7 @@ const OverwriteThemeMaryland = `
   }
   
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${IS_MARYLAND_CONTAINER} .${Image.elements.container} img  {
+    ${IS_MARYLAND_CONTAINER} .quote-image img  {
       border-right: 2px solid ${token.color.gold};
     }
   }
@@ -68,11 +67,11 @@ const OverwriteSizeLarge = `
     }
   }
 
-  ${IS_SIZE_LARGE_CONTAINER} .${Image.elements.container} img {
+  ${IS_SIZE_LARGE_CONTAINER} .quote-image img {
     max-width: 200px;
   }
 
-  ${IS_SIZE_LARGE_CONTAINER} .${Image.elements.container} span {
+  ${IS_SIZE_LARGE_CONTAINER} .quote-image span {
     bottom: -7px;
     left: -2px;
     height: 26px;
@@ -80,7 +79,7 @@ const OverwriteSizeLarge = `
   }
 
   @container ${ELEMENT_NAME} (min-width: ${SMALL}px) {
-    ${IS_SIZE_LARGE_CONTAINER} .${Image.elements.container} span {
+    ${IS_SIZE_LARGE_CONTAINER} .$quote-image span {
       height: 30px;
       width: 41px;
       top: -14px;
@@ -278,22 +277,22 @@ export default (props: TypeInlineInline) => {
   });
   let styles = STYLES_QUOTE_INLINE_ELEMENT;
 
-  if (hasImage) {
-    const imageContainer = Image.create({
-      image: image as HTMLImageElement,
-    });
+  // if (hasImage) {
+  //   const imageContainer = Image.create({
+  //     image: image as HTMLImageElement,
+  //   });
 
-    if (imageContainer) {
-      const iconSpan = document.createElement('span');
-      iconSpan.innerHTML = assets.icon.QUOTE;
-      imageContainer.element.appendChild(iconSpan);
+  //   if (imageContainer) {
+  //     const iconSpan = document.createElement('span');
+  //     iconSpan.innerHTML = QUOTE;
+  //     imageContainer.element.appendChild(iconSpan);
 
-      wrapper.appendChild(imageContainer.element);
-      styles += imageContainer.styles;
+  //     wrapper.appendChild(imageContainer.element);
+  //     styles += imageContainer.styles;
 
-      container.setAttribute(ATTRIBUTE_WITH_IMAGE, '');
-    }
-  }
+  //     container.setAttribute(ATTRIBUTE_WITH_IMAGE, '');
+  //   }
+  // }
 
   wrapper.classList.add(QUOTE_INLINE_CONTAINER_WRAPPER);
   wrapper.appendChild(textContainer.element);

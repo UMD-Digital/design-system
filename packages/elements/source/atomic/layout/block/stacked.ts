@@ -1,11 +1,15 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
-import * as theme from 'helpers/theme';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import { asset as assetElement } from '@universityofmaryland/web-styles-library/element';
+import {
+  createContainerQuery,
+  createRangeContainerQuery,
+} from '@universityofmaryland/web-utilities-library/styles';
 import { ElementModel } from 'model';
 import { type UMDElement } from '../../../_types';
 
-const smallBreakpoint = Styles.token.media.breakpointValues.small.max;
-const mediumBreakpointStart = Styles.token.media.breakpointValues.medium.min;
-const mediumBreakpoint = Styles.token.media.breakpointValues.large.min;
+const smallBreakpoint = token.media.breakpointValues.small.max;
+const mediumBreakpointStart = token.media.breakpointValues.medium.min;
+const mediumBreakpoint = token.media.breakpointValues.large.min;
 
 interface BoxProps {
   hasBorder?: boolean;
@@ -32,13 +36,13 @@ export const image = ({
         zIndex: 99,
 
         // Gif Overwrite
-        [`&:has(.${Styles.element.asset.gif.toggle.className})`]: {
+        [`&:has(.${assetElement.gif.toggle.className})`]: {
           aspectRatio: '4 / 3',
         },
 
-        ...theme.media.createContainerQuery('max-width', smallBreakpoint, {
-          marginLeft: Styles.token.spacing.sm,
-          marginBottom: Styles.token.spacing.md,
+        ...createContainerQuery('max-width', smallBreakpoint, {
+          marginLeft: token.spacing.sm,
+          marginBottom: token.spacing.md,
           width: '120px',
           float: 'right',
           alignSelf: 'flex-start',
@@ -49,28 +53,20 @@ export const image = ({
           }),
         }),
 
-        ...theme.media.createContainerQuery(
-          'min-width',
-          mediumBreakpointStart,
-          {
-            display: 'block',
-          },
-        ),
+        ...createContainerQuery('min-width', mediumBreakpointStart, {
+          display: 'block',
+        }),
 
-        ...theme.media.createRangeContainerQuery(
-          mediumBreakpointStart,
-          mediumBreakpoint,
-          {
-            ...(hasBorder && {
-              marginLeft: Styles.token.spacing.sm,
-            }),
-          },
-        ),
+        ...createRangeContainerQuery(mediumBreakpointStart, mediumBreakpoint, {
+          ...(hasBorder && {
+            marginLeft: token.spacing.sm,
+          }),
+        }),
 
         ...customStyles,
 
         '& img': {
-          ...theme.media.createContainerQuery('max-width', smallBreakpoint, {
+          ...createContainerQuery('max-width', smallBreakpoint, {
             height: 'auto !important',
           }),
         },
@@ -93,32 +89,24 @@ export const textContainer = ({
     children,
     elementStyles: {
       element: {
-        maxWidth: `${Styles.token.spacing.maxWidth.smallest}`,
+        maxWidth: `${token.spacing.maxWidth.smallest}`,
 
-        ...theme.media.createContainerQuery(
-          'min-width',
-          mediumBreakpointStart,
-          {
-            paddingTop: Styles.token.spacing.md,
-          },
-        ),
+        ...createContainerQuery('min-width', mediumBreakpointStart, {
+          paddingTop: token.spacing.md,
+        }),
 
-        ...theme.media.createContainerQuery(
-          'min-width',
-          mediumBreakpointStart,
-          {
-            paddingTop: Styles.token.spacing.lg,
+        ...createContainerQuery('min-width', mediumBreakpointStart, {
+          paddingTop: token.spacing.lg,
 
-            ...(hasBorder && {
-              padding: Styles.token.spacing.md,
+          ...(hasBorder && {
+            padding: token.spacing.md,
+          }),
+
+          ...(isThemeDark &&
+            !isTransparent && {
+              padding: token.spacing.md,
             }),
-
-            ...(isThemeDark &&
-              !isTransparent && {
-                padding: Styles.token.spacing.md,
-              }),
-          },
-        ),
+        }),
 
         ...customStyles,
       },
@@ -144,7 +132,7 @@ export const container = ({
         height: '100%',
 
         ...(isThemeDark && {
-          backgroundColor: Styles.token.color.gray.darker,
+          backgroundColor: token.color.gray.darker,
         }),
 
         ...(isTransparent && {
@@ -152,22 +140,22 @@ export const container = ({
         }),
 
         ...(hasBorder && {
-          border: `1px solid ${Styles.token.color.gray.light}`,
+          border: `1px solid ${token.color.gray.light}`,
         }),
 
         ...(hasBorder &&
           isThemeDark && {
-            border: `1px solid ${Styles.token.color.gray.darker}`,
+            border: `1px solid ${token.color.gray.darker}`,
           }),
 
-        ...theme.media.createContainerQuery('max-width', smallBreakpoint, {
+        ...createContainerQuery('max-width', smallBreakpoint, {
           ...(isThemeDark &&
             !isTransparent && {
-              padding: Styles.token.spacing.md,
+              padding: token.spacing.md,
             }),
 
           ...(hasBorder && {
-            padding: Styles.token.spacing.md,
+            padding: token.spacing.md,
           }),
         }),
 

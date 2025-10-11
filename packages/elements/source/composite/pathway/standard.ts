@@ -1,6 +1,6 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
 import { ElementModel } from 'model';
-import * as theme from 'helpers/theme';
 import { createTextLockupMedium, createAssetContent } from './_common';
 import { type ElementVisual } from '../../_types';
 import { type PathwayStandardProps } from './_types';
@@ -97,7 +97,7 @@ const createAssetColumn = (
         height: '100%',
 
         ...(includesAnimation && {
-          ...theme.media.withViewTimelineAnimation({
+          ...withViewTimelineAnimation({
             opacity: '0',
             transform: 'translateY(100px)',
             transition: 'opacity 1s, transform 1s',
@@ -131,10 +131,10 @@ const createTextContent = (props: PathwayStandardProps): ElementVisual => {
     children: [createTextLockupMedium(props)],
     elementStyles: {
       element: {
-        padding: `${Styles.token.spacing.md} ${Styles.token.spacing.lg}`,
+        padding: `${token.spacing.md} ${token.spacing.lg}`,
 
         [`@container (min-width: ${mediumSize}px)`]: {
-          padding: `0 ${Styles.token.spacing['2xl']}`,
+          padding: `0 ${token.spacing['2xl']}`,
 
           ...(props.isImagePositionLeft === false && {
             paddingLeft: '0',
@@ -146,7 +146,7 @@ const createTextContent = (props: PathwayStandardProps): ElementVisual => {
         },
 
         [`@container (min-width: ${largeSize}px)`]: {
-          padding: `0 ${Styles.token.spacing['6xl']}`,
+          padding: `0 ${token.spacing['6xl']}`,
 
           ...(props.isImagePositionLeft === false && {
             paddingLeft: '0',
@@ -168,7 +168,7 @@ const createTextContent = (props: PathwayStandardProps): ElementVisual => {
         container: 'inline-size',
 
         ...(props.includesAnimation && {
-          ...theme.media.withViewTimelineAnimation({
+          ...withViewTimelineAnimation({
             opacity: '0',
             transform: 'translateY(100px)',
             transition: 'opacity 1s, transform 1s',
@@ -177,13 +177,13 @@ const createTextContent = (props: PathwayStandardProps): ElementVisual => {
         }),
 
         ...(props.isThemeDark && {
-          backgroundColor: Styles.token.color.black,
-          color: Styles.token.color.white,
+          backgroundColor: token.color.black,
+          color: token.color.white,
         }),
 
         ...(props.isThemeMaryland && {
-          backgroundColor: Styles.token.color.red,
-          color: Styles.token.color.white,
+          backgroundColor: token.color.red,
+          color: token.color.white,
         }),
 
         [`@container (min-width: ${mediumSize}px)`]: {

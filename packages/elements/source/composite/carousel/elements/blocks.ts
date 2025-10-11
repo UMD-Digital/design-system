@@ -1,8 +1,9 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as element from '@universityofmaryland/web-styles-library/element';
+import { FORWARD_ARROW } from '@universityofmaryland/web-icons-library/navigation';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { createEventSwipe } from '@universityofmaryland/web-utilities-library/events';
-import * as asset from 'helpers/assets';
-import * as theme from 'helpers/theme';
+import { convertPixelStringToNumber } from '@universityofmaryland/web-utilities-library/string';
 
 type TypeDisplayLogic = {
   mobileCount: number;
@@ -57,8 +58,7 @@ type TypeEventScroll = TypeHelpers & {
   isDirectionRight?: boolean;
 };
 
-const { token } = Styles;
-const fullScreenClassName = Styles.element.action.button.fullScreen.className;
+const fullScreenClassName = element.action.button.fullScreen.className;
 
 const ATTRIBUTE_SINGLE_BLOCK = 'single';
 const ANIMATION_DURATION = 750;
@@ -338,7 +338,7 @@ const CreateButton = ({
   button.setAttribute('type', 'button');
   button.setAttribute('aria-label', 'Next');
   button.classList.add(ELEMENT_ANIMATION_CAROUSEL_BUTTON);
-  button.innerHTML = asset.icon.FORWARD_ARROW;
+  button.innerHTML = FORWARD_ARROW;
 
   if (isRight) {
     button.classList.add(ELEMENT_ANIMATION_CAROUSEL_NEXT);
@@ -376,7 +376,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       tabletCount: 2,
       desktopCount: 3,
       maxCount: 4,
-      blockGap: theme.convertPixelStringToNumber(token.spacing.lg),
+      blockGap: convertPixelStringToNumber(token.spacing.lg),
       hasRightButton: true,
       hasLeftButton: true,
       showMobileHint: true,
@@ -606,10 +606,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     declaration.classList.add(ELEMENT_ANIMATION_CAROUSEL_DECLARATION);
     declaration.appendChild(container);
 
-    window.addEventListener(
-      'resize',
-      debounce(Event.resize, 30),
-    );
+    window.addEventListener('resize', debounce(Event.resize, 30));
 
     return {
       element: declaration,

@@ -1,5 +1,5 @@
-import { default as toggle } from './toggle';
 import { isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
+import { default as toggle } from './toggle';
 
 interface CardVideoShortProps {
   video: HTMLVideoElement;

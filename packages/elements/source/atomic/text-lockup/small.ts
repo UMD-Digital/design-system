@@ -1,4 +1,5 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as elementStyles from '@universityofmaryland/web-styles-library/element';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { ElementModel } from 'model';
 import { type UMDElement } from '../../_types';
 
@@ -25,7 +26,7 @@ export type TypeTextLockupSmall = TypeTheme & {
 };
 
 const ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER = 'text-lockup-small-container';
-const metaContainer = Styles?.element?.event?.meta?.container;
+const metaContainer = elementStyles?.event?.meta?.container;
 const metaClass: string = (() => {
   if (!metaContainer?.className) return '';
 
@@ -39,8 +40,6 @@ const metaClass: string = (() => {
 
   return '';
 })();
-
-const { token } = Styles;
 
 export const eyebrowStyles = {
   element: {

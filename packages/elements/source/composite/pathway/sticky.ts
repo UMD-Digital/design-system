@@ -1,4 +1,5 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as layout from '@universityofmaryland/web-styles-library/layout';
 import { ElementModel } from 'model';
 import { createAssetContent, createTextLockupMedium } from './_common';
 import { type PathwayStickyProps } from './_types';
@@ -69,14 +70,14 @@ const createTextContent = (props: PathwayStickyProps): ElementVisual => {
     children: [createTextLockupMedium(props)],
     elementStyles: {
       element: {
-        padding: `${Styles.token.spacing.md} 0`,
+        padding: `${token.spacing.md} 0`,
 
         [`@container (max-width: ${mediumSize - 1}px)`]: {
-          ...Styles.layout.space.horizontal.larger,
+          ...layout.space.horizontal.larger,
         },
 
         [`@container (min-width: ${mediumSize}px)`]: {
-          padding: `0 ${Styles.token.spacing['2xl']}`,
+          padding: `0 ${token.spacing['2xl']}`,
 
           ...(props.isImagePositionLeft === false && {
             paddingLeft: '0',
@@ -88,7 +89,7 @@ const createTextContent = (props: PathwayStickyProps): ElementVisual => {
         },
 
         [`@container (min-width: ${largeSize}px)`]: {
-          padding: `0 ${Styles.token.spacing['6xl']}`,
+          padding: `0 ${token.spacing['6xl']}`,
 
           ...(props.isImagePositionLeft === false && {
             paddingLeft: '0',
@@ -108,13 +109,13 @@ const createTextContent = (props: PathwayStickyProps): ElementVisual => {
     elementStyles: {
       element: {
         ...(props.isThemeDark && {
-          backgroundColor: Styles.token.color.black,
-          color: Styles.token.color.white,
+          backgroundColor: token.color.black,
+          color: token.color.white,
         }),
 
         ...(props.isThemeMaryland && {
-          backgroundColor: Styles.token.color.red,
-          color: Styles.token.color.white,
+          backgroundColor: token.color.red,
+          color: token.color.white,
         }),
 
         [`@container (min-width: ${mediumSize}px)`]: {

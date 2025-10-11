@@ -1,4 +1,6 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as animation from '@universityofmaryland/web-styles-library/animation';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as typography from '@universityofmaryland/web-styles-library/typography';
 import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
 import { truncateText } from '@universityofmaryland/web-utilities-library/string';
 import { animationLinkSpan } from '@universityofmaryland/web-utilities-library/animation';
@@ -8,10 +10,6 @@ type TypeEventLockupDate = {
   dateSign?: { element: HTMLElement; styles: string };
   isThemeDark?: boolean;
 };
-
-// To Do - Refactor to use element model
-
-const { animation, token, typography } = Styles;
 
 const ATTRIBUTE_THEME = 'theme';
 const THEME_DARK = 'dark';

@@ -1,8 +1,6 @@
-import { token } from '@universityofmaryland/web-styles-library';
-import * as assets from 'helpers/assets';
-import * as theme from 'helpers/theme';
-import { debounce } from '@universityofmaryland/web-utilities-library/performance';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { eventAccessibilityFocus } from '@universityofmaryland/web-utilities-library/accessibility';
+import { CLOSE_X } from '@universityofmaryland/web-icons-library/ui-controls';
 import { TypeMenuDisplayButtonRequirements } from '../menu-button';
 import NavDrawerSlider, { TypeNavSliderRequirements } from '../slider';
 
@@ -95,7 +93,7 @@ const STYLES_NAV_DRAWER_ELEMENT = `
 const CreateDrawerButton = (element: TypeDrawerCloseButton) => {
   const drawerCloseButton = document.createElement('button');
 
-  drawerCloseButton.innerHTML = assets.icon.X;
+  drawerCloseButton.innerHTML = CLOSE_X;
   drawerCloseButton.classList.add(ELEMENT_NAV_DRAWER_CLOSE_BUTTON);
   drawerCloseButton.setAttribute('aria-label', 'Close navigation drawer');
   drawerCloseButton.addEventListener('click', element.eventClose.bind(element));

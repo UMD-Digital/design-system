@@ -1,7 +1,11 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import {
+  element,
+  token,
+  typography,
+} from '@universityofmaryland/web-styles-library';
+import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
 import { animations, buttons } from 'atomic';
 import { Image as LayoutImage } from 'layout';
-import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
 import * as carouselElements from '../elements';
 
 type TypeImage = {
@@ -36,8 +40,6 @@ type TypeCarouselImageStandardProps = TypeSlideContent &
   TypeFullScreen & {
     isThemeDark?: boolean;
   };
-
-const { element, token, typography } = Styles;
 
 const MEDIUM = 500;
 

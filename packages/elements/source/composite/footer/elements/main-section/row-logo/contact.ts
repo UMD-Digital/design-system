@@ -7,10 +7,10 @@ import { animationLinkSpan } from '@universityofmaryland/web-utilities-library/a
 import createSocialCampaignColumns, {
   type SocialCampaignColumnsProps,
 } from '../social';
-import { BREAKPOINTS } from '../../../globals';
 import { ElementModel } from 'model';
-import { type ElementVisual } from '../../../../../_types';
+import { BREAKPOINTS } from '../../../globals';
 import { BaseProps } from '../../../_types';
+import { type ElementVisual } from '../../../../../_types';
 
 interface HeadlineProps {
   slotHeadline: HTMLSlotElement;

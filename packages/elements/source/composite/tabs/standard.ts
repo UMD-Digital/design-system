@@ -1,7 +1,8 @@
-import { token, typography } from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as typography from '@universityofmaryland/web-styles-library/typography';
 import { scrollTo } from '@universityofmaryland/web-utilities-library/animation';
-import * as theme from 'helpers/theme';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
+import { convertPixelStringToNumber } from '@universityofmaryland/web-utilities-library/string';
 
 type TypeTabsProps = {
   tabsContainer: HTMLElement;
@@ -160,8 +161,8 @@ const SetDisplay = ({
   const SetContentPosition = () => {
     const activeContent = contents[activeTab];
     const space = isFlexLayout
-      ? theme.convertPixelStringToNumber(token.spacing.xl)
-      : theme.convertPixelStringToNumber(token.spacing.md);
+      ? convertPixelStringToNumber(token.spacing.xl)
+      : convertPixelStringToNumber(token.spacing.md);
 
     if (activeContent) {
       if (transition) {
@@ -175,9 +176,7 @@ const SetDisplay = ({
       activeContent.style.width = '100%';
 
       if (!isFlexLayout && transition) {
-        const convertedSpace = theme.convertPixelStringToNumber(
-          token.spacing.md,
-        );
+        const convertedSpace = convertPixelStringToNumber(token.spacing.md);
         const spread = additionalSpread
           ? convertedSpace + additionalSpread
           : convertedSpace;
@@ -374,10 +373,7 @@ export default (props: TypeTabsProps) =>
     declaration.classList.add(ELEMENT_DECLARATION);
     declaration.appendChild(container);
 
-    window.addEventListener(
-      'resize',
-      debounce(EventResize, 10),
-    );
+    window.addEventListener('resize', debounce(EventResize, 10));
 
     return {
       element: declaration,

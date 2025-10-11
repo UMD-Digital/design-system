@@ -1,5 +1,13 @@
 import { token, typography } from '@universityofmaryland/web-styles-library';
-import * as asset from 'helpers/assets';
+import {
+  FACEBOOK,
+  X,
+  LINKEDIN,
+  TWITTER,
+  YOUTUBE,
+  INSTAGRAM,
+  THREADS,
+} from '@universityofmaryland/web-icons-library/social';
 import createCampaignRow from './campaign';
 import { BREAKPOINTS } from '../../globals';
 import { BaseProps } from '../../_types';
@@ -20,13 +28,13 @@ const GetSocialIcon = ({ link }: { link: HTMLAnchorElement }) => {
   const url = link.getAttribute('href') || null;
   if (!url) return link;
 
-  if (url.match(/facebook.com/)) link.innerHTML = asset.social.FACEBOOK;
-  if (url.match(/x.com/)) link.innerHTML = asset.social.X;
-  if (url.match(/instagram.com/)) link.innerHTML = asset.social.INSTAGRAM;
-  if (url.match(/youtube.com/)) link.innerHTML = asset.social.YOUTUBE;
-  if (url.match(/twitter.com/)) link.innerHTML = asset.social.TWITTER;
-  if (url.match(/linkedin.com/)) link.innerHTML = asset.social.LINKEDIN;
-  if (url.match(/threads.net/)) link.innerHTML = asset.social.THREADS;
+  if (url.match(/facebook.com/)) link.innerHTML = FACEBOOK;
+  if (url.match(/x.com/)) link.innerHTML = X;
+  if (url.match(/instagram.com/)) link.innerHTML = INSTAGRAM;
+  if (url.match(/youtube.com/)) link.innerHTML = YOUTUBE;
+  if (url.match(/twitter.com/)) link.innerHTML = TWITTER;
+  if (url.match(/linkedin.com/)) link.innerHTML = LINKEDIN;
+  if (url.match(/threads.net/)) link.innerHTML = THREADS;
 
   return link;
 };

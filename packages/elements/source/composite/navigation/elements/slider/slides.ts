@@ -1,7 +1,8 @@
-import { token, typography } from '@universityofmaryland/web-styles-library';
-import * as theme from 'helpers/theme';
-import * as assets from 'helpers/assets';
-import * as markup from 'helpers/markup';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as typography from '@universityofmaryland/web-styles-library/typography';
+import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
+import { cleanCopy } from '@universityofmaryland/web-utilities-library/dom';
+import { CHEVRON_SMALL } from '@universityofmaryland/web-icons-library/navigation';
 import FirstSlide, { TypeFirstSlideProps, TypeFirstSlide } from './slide-first';
 import SlideAction, { TypeActionProps } from './action';
 
@@ -84,7 +85,7 @@ const BackButtonStyles = `
 
 // prettier-ignore
 const HeadlineStyles = `
-  ${theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_NAV_SLIDE_HEADLINE}`]: typography.sans.large,
     },
@@ -113,7 +114,7 @@ const createSlideBackButton = (props: TypeSlideBackContainer) => {
   const backButtonContainer = document.createElement('div');
   const slideBackButton = document.createElement('button');
 
-  slideBackButton.innerHTML = `${assets.icon.CHEVRON_SMALL} Back`;
+  slideBackButton.innerHTML = `${CHEVRON_SMALL} Back`;
   slideBackButton.setAttribute('type', 'button');
   slideBackButton.setAttribute('aria-label', 'Previous level of navigation');
   slideBackButton.addEventListener('click', () => {
@@ -130,7 +131,7 @@ const createSlideBackButton = (props: TypeSlideBackContainer) => {
 const createSlideHeadline = ({ link }: { link: HTMLAnchorElement }) => {
   const slideHeadline = document.createElement('p');
 
-  slideHeadline.appendChild(markup.modify.cleanCopy({ element: link }));
+  slideHeadline.appendChild(cleanCopy({ element: link }));
   slideHeadline.classList.add(ELEMENT_NAV_SLIDE_HEADLINE);
 
   return slideHeadline;

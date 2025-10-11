@@ -1,9 +1,12 @@
-import { token } from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import {
+  CAMPAIGN_LOGO,
+  CAMPAIGN_LOGO_DARK,
+} from '@universityofmaryland/web-icons-library/logos';
 import { ElementModel } from 'model';
-import * as asset from 'helpers/assets';
 import { BaseProps } from '../../_types';
-import { type ElementVisual } from '../../../../_types';
 import { BREAKPOINTS } from '../../globals';
+import { type ElementVisual } from '../../../../_types';
 
 export interface CampaignProps extends BaseProps {}
 
@@ -19,9 +22,7 @@ export default ({ isThemeLight }: CampaignProps): ElementVisual => {
     'Link to the Fearlessly Forward Brand website',
   );
 
-  link.innerHTML =
-    (!isThemeLight && asset.logo.CAMPAIGN_LOGO) ||
-    asset.logo.CAMPAIGN_LOGO_DARK;
+  link.innerHTML = (!isThemeLight && CAMPAIGN_LOGO) || CAMPAIGN_LOGO_DARK;
 
   const linkElement = ElementModel.create({
     element: link,

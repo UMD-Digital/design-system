@@ -1,4 +1,4 @@
-import { token } from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { Image as LayoutImage } from 'layout';
 import CaptionContainer from '../elements/caption';

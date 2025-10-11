@@ -1,6 +1,6 @@
-import { token, layout } from '@universityofmaryland/web-styles-library';
-import * as theme from 'helpers/theme';
-import { debounce } from '@universityofmaryland/web-utilities-library/performance';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as layout from '@universityofmaryland/web-styles-library/layout';
+import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
 
 type TypeStickyProps = {
   stickyColumn?: HTMLElement | null;
@@ -8,8 +8,6 @@ type TypeStickyProps = {
   isStickyLast?: boolean | null;
   topPosition?: string | null;
 };
-
-const { media } = token;
 
 const ELEMENT_NAME = 'umd-sticky-columns';
 const ATTRIBUTE_STICKY_LAST = 'sticky-last';
@@ -47,7 +45,7 @@ const STYLES_STICKY_COLUMNS_ELEMENT = `
     container: ${ELEMENT_NAME} / inline-size;
   }
 
-  ${theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_STICKY_CONTAINER_WRAPPER}`]: layout.grid.gap.two,
     },

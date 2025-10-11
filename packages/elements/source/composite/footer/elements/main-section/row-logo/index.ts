@@ -9,8 +9,8 @@ import createCallToActionContainer, {
 import createContactContainer, { type ContactProps } from './contact';
 import createLogoContainer, { LogoProps } from './logo';
 import { BREAKPOINTS } from '../../../globals';
+import { BaseProps } from '../../../_types';
 import { type ElementVisual } from '../../../../../_types';
-import { BaseProps } from 'composite/footer/_types';
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
 

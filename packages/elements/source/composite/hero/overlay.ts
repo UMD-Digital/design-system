@@ -1,4 +1,5 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
 import { type ElementVisual } from '../../_types';
@@ -92,17 +93,17 @@ const createAsset = ({
     children,
     elementStyles: {
       element: {
-        [`@media (${Styles.token.media.queries.large.max})`]: {
-          [`&:has(.${Styles.element.asset.gif.toggle.className})`]: {
+        [`@media (${token.media.queries.large.max})`]: {
+          [`&:has(.${elementStyles.asset.gif.toggle.className})`]: {
             minHeight: '56vw',
             display: 'grid',
           },
         },
 
-        [`@container (${Styles.token.media.queries.tablet.min})`]: {
+        [`@container (${token.media.queries.tablet.min})`]: {
           position: 'absolute',
           width: '60%',
-          height: `calc(100% - ${Styles.token.spacing['5xl']})`,
+          height: `calc(100% - ${token.spacing['5xl']})`,
           right: 0,
           top: 0,
           overflow: 'visible',
@@ -131,7 +132,7 @@ const createHeadline = (props: Pick<HeroOverlayProps, 'headline'>) => {
   if (!headline) return null;
 
   const desktopStyles = {
-    [`@container (${Styles.token.media.queries.desktop.min})`]: {
+    [`@container (${token.media.queries.desktop.min})`]: {
       ...(isOverwriteHeadline && {
         fontSize: '80px',
       }),
@@ -147,7 +148,7 @@ const createHeadline = (props: Pick<HeroOverlayProps, 'headline'>) => {
         ...desktopStyles,
       },
       siblingAfter: {
-        marginTop: Styles.token.spacing.md,
+        marginTop: token.spacing.md,
       },
     },
     isThemeDark: true,
@@ -172,12 +173,12 @@ const createTextContent = (
     children: [textLockupElement],
     elementStyles: {
       element: {
-        [`@container (${Styles.token.media.queries.tablet.min})`]: {
+        [`@container (${token.media.queries.tablet.min})`]: {
           maxWidth: '55%',
         },
 
-        [`& .${Styles.element.text.rich.simpleLargeDark.className}`]: {
-          [`@container (${Styles.token.media.queries.tablet.min})`]: {
+        [`& .${elementStyles.text.rich.simpleLargeDark.className}`]: {
+          [`@container (${token.media.queries.tablet.min})`]: {
             maxWidth: '60%',
           },
         },
@@ -212,14 +213,14 @@ const createText = (
     children: [lock],
     elementStyles: {
       element: {
-        padding: `${Styles.token.spacing.lg} 0`,
+        padding: `${token.spacing.lg} 0`,
         display: 'flex',
         position: 'relative',
         zIndex: 999,
         width: '100%',
 
-        [`@container (${Styles.token.media.queries.tablet.min})`]: {
-          padding: `${Styles.token.spacing['5xl']} 0`,
+        [`@container (${token.media.queries.tablet.min})`]: {
+          padding: `${token.spacing['5xl']} 0`,
 
           ...(includesAnimation && {
             [`@media (prefers-reduced-motion: no-preference)`]: {
@@ -247,15 +248,15 @@ export default (props: HeroOverlayProps) => {
     elementStyles: {
       element: {
         position: 'relative',
-        backgroundColor: Styles.token.color.black,
+        backgroundColor: token.color.black,
         overflow: 'clip',
 
-        [`@container (${Styles.token.media.queries.large.max})`]: {
+        [`@container (${token.media.queries.large.max})`]: {
           display: 'flex',
           flexDirection: 'column-reverse',
         },
 
-        [`@container (${Styles.token.media.queries.tablet.min})`]: {
+        [`@container (${token.media.queries.tablet.min})`]: {
           minHeight: '640px',
           display: 'flex',
           alignItems: 'center',
@@ -273,7 +274,7 @@ export default (props: HeroOverlayProps) => {
           },
         },
 
-        [`@container (${Styles.token.media.queries.desktop.min})`]: {
+        [`@container (${token.media.queries.desktop.min})`]: {
           minHeight: '764px',
         },
       },

@@ -1,8 +1,8 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import { isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
+import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
-import { isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
-import * as theme from 'helpers/theme';
 import { type ContentElement } from '../../../_types';
 
 interface CornerProps {
@@ -87,16 +87,16 @@ const keyFrameTint = `
 const columnBase = {
   display: 'grid',
   gridAutoFlow: 'row dense',
-  gridGap: `${Styles.token.spacing.min}`,
+  gridGap: `${token.spacing.min}`,
   width: '100%',
   height: '100vh',
 
-  [`@media (${Styles.token.media.queries.tablet.min})`]: {
-    gridGap: `${Styles.token.spacing.md}`,
+  [`@media (${token.media.queries.tablet.min})`]: {
+    gridGap: `${token.spacing.md}`,
   },
 
-  [`@media (${Styles.token.media.queries.desktop.min})`]: {
-    gridGap: `${Styles.token.spacing.lg}`,
+  [`@media (${token.media.queries.desktop.min})`]: {
+    gridGap: `${token.spacing.lg}`,
   },
 
   ['& > *']: {
@@ -173,7 +173,7 @@ const createCenter = ({ images, video }: CenterProps) => {
           backgroundColor: 'rgba(0, 0, 0, 0.5)',
           zIndex: 9,
           opacity: 0,
-          ...theme.media.withViewTimelineAnimation({
+          ...withViewTimelineAnimation({
             animation: 'tint-fade ease-in-out forwards',
             animationTimeline: 'view()',
             animationRangeStart: ANIMATION_RANGES.TINT_FADE.start,
@@ -210,7 +210,7 @@ const createCenter = ({ images, video }: CenterProps) => {
       element: {
         ...columnBase,
         gridTemplateRows: GRID_LAYOUT.ROWS.INITIAL,
-        ...theme.media.withViewTimelineAnimation({
+        ...withViewTimelineAnimation({
           animation: 'grid-rows ease-in-out forwards',
           animationTimeline: 'view()',
           animationRangeStart: ANIMATION_RANGES.GRID_ROWS.start,
@@ -229,7 +229,7 @@ const createHeadline = (props: Pick<HeroGridProps, 'headline'>) => {
   if (!headline) return null;
 
   const desktopStyles = {
-    [`@container (${Styles.token.media.queries.desktop.min})`]: {
+    [`@container (${token.media.queries.desktop.min})`]: {
       ...(isOverwriteHeadline && {
         fontSize: '80px',
       }),
@@ -245,7 +245,7 @@ const createHeadline = (props: Pick<HeroGridProps, 'headline'>) => {
         ...desktopStyles,
       },
       siblingAfter: {
-        marginTop: Styles.token.spacing.md,
+        marginTop: token.spacing.md,
       },
     },
     isThemeDark: true,
@@ -276,26 +276,26 @@ const createTextContainer = (
         height: '100%',
         zIndex: 9999,
         textAlign: 'center',
-        padding: `${Styles.token.spacing.md} 0`,
+        padding: `${token.spacing.md} 0`,
 
-        [`@container (${Styles.token.media.queries.tablet.min})`]: {
-          padding: `${Styles.token.spacing['3xl']} 0`,
+        [`@container (${token.media.queries.tablet.min})`]: {
+          padding: `${token.spacing['3xl']} 0`,
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
         },
 
-        [`@container (${Styles.token.media.queries.highDef.min})`]: {
-          padding: `${Styles.token.spacing['6xl']} 0`,
+        [`@container (${token.media.queries.highDef.min})`]: {
+          padding: `${token.spacing['6xl']} 0`,
         },
 
-        ...theme.media.withViewTimelineAnimation({
+        ...withViewTimelineAnimation({
           paddingTop: '140vh',
         }),
 
         ['*']: {
           ...(shouldRenderBlackText && {
-            color: `${Styles.token.color.black} !important`,
+            color: `${token.color.black} !important`,
           }),
         },
       },
@@ -387,17 +387,17 @@ const createGridLayout = (
     height: '100vh',
     width: '100%',
     display: 'grid',
-    gridGap: `${Styles.token.spacing.min}`,
+    gridGap: `${token.spacing.min}`,
 
-    [`@media (${Styles.token.media.queries.tablet.min})`]: {
-      gridGap: `${Styles.token.spacing.md}`,
+    [`@media (${token.media.queries.tablet.min})`]: {
+      gridGap: `${token.spacing.md}`,
     },
 
-    [`@media (${Styles.token.media.queries.desktop.min})`]: {
-      gridGap: `${Styles.token.spacing.lg}`,
+    [`@media (${token.media.queries.desktop.min})`]: {
+      gridGap: `${token.spacing.lg}`,
     },
 
-    ...theme.media.withViewTimelineAnimation({
+    ...withViewTimelineAnimation({
       position: 'sticky',
       top: 0,
       animation: 'grid-columns ease-in-out forwards',
@@ -443,7 +443,7 @@ export default (props: HeroGridProps) => {
         width: '100%',
         display: 'block',
         containerType: 'inline-size',
-        ...theme.media.withViewTimelineAnimation({
+        ...withViewTimelineAnimation({
           height: '300vh',
         }),
         ['img, video']: {

@@ -1,4 +1,3 @@
-import { ElementModel } from 'model';
 import {
   token,
   layout,
@@ -6,9 +5,10 @@ import {
   typography,
 } from '@universityofmaryland/web-styles-library';
 import { animationLinkSpan } from '@universityofmaryland/web-utilities-library/animation';
+import { ElementModel } from 'model';
 import { BREAKPOINTS } from '../../globals';
+import { FooterProps } from '../../options';
 import { type ElementVisual } from '../../../../_types';
-import { FooterProps } from 'composite/footer/options';
 
 export interface UtilityProps {
   slotUtilityLinks?: HTMLElement | null;

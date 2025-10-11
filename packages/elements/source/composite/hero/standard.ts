@@ -1,4 +1,5 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
 import { type ElementVisual } from '../../_types';
@@ -89,11 +90,11 @@ const buildAssetChildren = ({
 const buildAssetStyles = (includesAnimation?: boolean) => {
   return {
     element: {
-      [`@container (${Styles.token.media.queries.large.max})`]: {
+      [`@container (${token.media.queries.large.max})`]: {
         aspectRatio: '16 / 9',
       },
 
-      [`@container (${Styles.token.media.queries.tablet.min})`]: {
+      [`@container (${token.media.queries.tablet.min})`]: {
         position: 'absolute',
         top: 0,
         left: 0,
@@ -103,7 +104,7 @@ const buildAssetStyles = (includesAnimation?: boolean) => {
       },
 
       [`&:before`]: {
-        [`@container (${Styles.token.media.queries.tablet.min})`]: {
+        [`@container (${token.media.queries.tablet.min})`]: {
           content: '""',
           position: 'absolute',
           top: 0,
@@ -155,7 +156,7 @@ const createHeadline = (
     maxWidth: '700px',
     marginLeft: 'auto',
     marginRight: 'auto',
-    color: Styles.token.color.white,
+    color: token.color.white,
   };
 
   const desktopStyles = {
@@ -168,14 +169,14 @@ const createHeadline = (
     elementStyles: {
       element: {
         textTransform: 'uppercase',
-        [`@media (${Styles.token.media.queries.tablet.min})`]: tabletStyles,
-        [`@media (${Styles.token.media.queries.desktop.min})`]: desktopStyles,
+        [`@media (${token.media.queries.tablet.min})`]: tabletStyles,
+        [`@media (${token.media.queries.desktop.min})`]: desktopStyles,
       },
       subElement: {
         color: 'currentColor',
       },
       siblingAfter: {
-        marginTop: Styles.token.spacing.sm,
+        marginTop: token.spacing.sm,
       },
     },
     isThemeDark,
@@ -220,10 +221,10 @@ const createText = (props: HeroStandardProps) => {
           animation: `hero-slide-up forwards ${ANIMATION_CONFIG.SLIDE_UP.DURATION}`,
         }),
 
-        [`@container (${Styles.token.media.queries.tablet.min})`]: {
+        [`@container (${token.media.queries.tablet.min})`]: {
           maxWidth: '736px',
-          paddingTop: `${Styles.token.spacing['2xl']}`,
-          paddingBottom: `${Styles.token.spacing['2xl']}`,
+          paddingTop: `${token.spacing['2xl']}`,
+          paddingBottom: `${token.spacing['2xl']}`,
           ...(!isTextCenter && {
             width: '80%',
           }),
@@ -234,7 +235,7 @@ const createText = (props: HeroStandardProps) => {
           }),
         },
 
-        [`@container (${Styles.token.media.queries.desktop.min})`]: {
+        [`@container (${token.media.queries.desktop.min})`]: {
           maxWidth: '808px',
         },
       },
@@ -251,10 +252,10 @@ const createText = (props: HeroStandardProps) => {
         position: 'relative',
         zIndex: 99,
 
-        [`@container (${Styles.token.media.queries.tablet.max})`]: {
-          paddingTop: `${Styles.token.spacing.sm}`,
+        [`@container (${token.media.queries.tablet.max})`]: {
+          paddingTop: `${token.spacing.sm}`,
 
-          [`&:has(.${Styles.element.text.decoration.ribbon.className})`]: {
+          [`&:has(.${elementStyles.text.decoration.ribbon.className})`]: {
             paddingTop: `0`,
             marginTop: '-14px',
           },
@@ -279,27 +280,27 @@ export default (props: HeroStandardProps) => {
         containerType: 'inline-size',
 
         ...(isThemeDark && {
-          backgroundColor: Styles.token.color.black,
+          backgroundColor: token.color.black,
         }),
 
-        [`@container (${Styles.token.media.queries.tablet.min})`]: {
+        [`@container (${token.media.queries.tablet.min})`]: {
           ...(!isHeightSmall && {
             height: '75vh',
             minHeight: '480px',
           }),
         },
 
-        [`@container (${Styles.token.media.queries.desktop.min})`]: {
+        [`@container (${token.media.queries.desktop.min})`]: {
           ...(!isHeightSmall && {
             minHeight: '720px',
           }),
         },
       },
       subElement: {
-        [`@container (${Styles.token.media.queries.large.max})`]: {
-          [`*:not(.${Styles.element.asset.image.caption.className})`]: {
+        [`@container (${token.media.queries.large.max})`]: {
+          [`*:not(.${elementStyles.asset.image.caption.className})`]: {
             ...(!isThemeDark && {
-              color: `${Styles.token.color.black} !important`,
+              color: `${token.color.black} !important`,
             }),
           },
         },

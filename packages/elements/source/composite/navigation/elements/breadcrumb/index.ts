@@ -1,6 +1,7 @@
-import { animation, token } from '@universityofmaryland/web-styles-library';
-import * as theme from 'helpers/theme';
-import * as markup from 'helpers/markup';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as animation from '@universityofmaryland/web-styles-library/animation';
+import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
+import { animationLinkSpan } from '@universityofmaryland/web-utilities-library/animation';
 
 export interface BreadcrumbProps {
   isThemeDark?: boolean;
@@ -37,7 +38,7 @@ const OverwriteThemeStyles = `
     background-color: ${token.color.gray.dark};
   }
   
-  ${theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`${OVERWRITE_THEME_DARK_PATH}:not(:last-child)`]:
         animation.line.slideUnderGrayDarkRed,
@@ -90,7 +91,7 @@ const ContainerStyles = `
     position: relative;
   }
 
-  ${theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_CONTAINER} a:not(:last-child)`]:
         animation.line.slideUnderGrayRed,
@@ -115,7 +116,7 @@ export default ({ isThemeDark, linkListSlot }: BreadcrumbProps) => {
 
   for (const linkElement of links) {
     linkElement.classList.add(ELEMENT_PATH);
-    markup.modify.animationLinkSpan({
+    animationLinkSpan({
       element: linkElement,
     });
   }

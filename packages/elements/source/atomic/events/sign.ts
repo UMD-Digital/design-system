@@ -1,4 +1,4 @@
-import Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { ElementModel } from 'model';
 import { ElementVisual } from '../../_types';
 
@@ -65,7 +65,7 @@ const makeStartDateBlock = ({
     className: 'event-sign-start',
     elementStyles: {
       subElement: {
-        color: Styles.token.color.black,
+        color: token.color.black,
       },
     },
     children: [

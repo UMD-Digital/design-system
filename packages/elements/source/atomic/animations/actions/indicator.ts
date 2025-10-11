@@ -1,4 +1,4 @@
-import { token } from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 
 const ELEMENT_SLIDE_INDICATOR_CONTAINER = 'slide-indicator-container';
@@ -168,10 +168,7 @@ export default ({
 
     load();
 
-    window.addEventListener(
-      'resize',
-      debounce(eventResize, 20),
-    );
+    window.addEventListener('resize', debounce(eventResize, 20));
 
     return {
       element: container,

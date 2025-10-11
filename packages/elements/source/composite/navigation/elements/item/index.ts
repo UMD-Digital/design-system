@@ -1,8 +1,9 @@
-import { animation, token } from '@universityofmaryland/web-styles-library';
-import * as theme from 'helpers/theme';
-import * as assets from 'helpers/assets';
-import * as markup from 'helpers/markup';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as animation from '@universityofmaryland/web-styles-library/animation';
+import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
+import { animationLinkSpan } from '@universityofmaryland/web-utilities-library/animation';
 import { eventAccessibilityFocus } from '@universityofmaryland/web-utilities-library/accessibility';
+import { CHEVRON_SMALL } from '@universityofmaryland/web-icons-library/navigation';
 
 type TypePrimaryLinkRequirements = {
   primaryLinkContainer?: HTMLElement | null;
@@ -161,7 +162,7 @@ const DropdownListStyles = `
     line-height: 1.5em;
   }
 
-  ${theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_DROPDOWN_LIST_CONTAINER} a`]:
       animation.line.slideUnderRed,
@@ -242,11 +243,11 @@ const CreateMultipleColumns = ({ links }: { links: HTMLAnchorElement[] }) => {
   const firstColumnLinks = links.splice(0, Math.ceil(links.length / 2));
 
   firstColumnLinks.forEach((link) => {
-    markup.modify.animationLinkSpan({ element: link });
+    animationLinkSpan({ element: link });
     column1.appendChild(link);
   });
   links.forEach((link) => {
-    markup.modify.animationLinkSpan({ element: link });
+    animationLinkSpan({ element: link });
     column2.appendChild(link);
   });
 
@@ -256,7 +257,7 @@ const CreateMultipleColumns = ({ links }: { links: HTMLAnchorElement[] }) => {
 const CreateSingleColumn = ({ links }: { links: HTMLAnchorElement[] }) => {
   const container = document.createElement('div');
   links.forEach((link) => {
-    markup.modify.animationLinkSpan({ element: link });
+    animationLinkSpan({ element: link });
     container.appendChild(link);
   });
 
@@ -313,7 +314,7 @@ const CreateButton = ({
   const button = document.createElement('button');
 
   button.classList.add(ELEMENT_PRIMARY_LINK_CONTAINER_BUTTON);
-  button.innerHTML = assets.icon.CHEVRON_SMALL;
+  button.innerHTML = CHEVRON_SMALL;
   button.addEventListener('click', () => buttonClick());
   button.setAttribute('aria-expanded', 'false');
   button.setAttribute('aria-controls', `nav-links-`);
@@ -380,7 +381,7 @@ const CreateNavItemElement = (props: TypeNavItem) =>
         const hasSpan = link.querySelector('span');
 
         if (!hasSpan) {
-          markup.modify.animationLinkSpan({ element: link });
+          animationLinkSpan({ element: link });
           link.appendChild(link);
         }
       });

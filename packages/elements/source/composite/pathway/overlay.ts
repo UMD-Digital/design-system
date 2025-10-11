@@ -1,7 +1,7 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
-import * as Atomic from 'atomic';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as layout from '@universityofmaryland/web-styles-library/layout';
+import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
 import { ElementModel } from 'model';
-import * as theme from 'helpers/theme';
 import { createTextLockupMedium, createAssetContent } from './_common';
 import { type PathwayOverlayProps } from './_types';
 import { type ElementVisual } from '../../_types';
@@ -125,7 +125,7 @@ const createAssetColumn = (
         height: '100%',
 
         ...(includesAnimation && {
-          ...theme.media.withViewTimelineAnimation({
+          ...withViewTimelineAnimation({
             opacity: '0',
             transform: 'translateY(100px)',
             transition: 'opacity 1s, transform 1s',
@@ -160,14 +160,14 @@ const createTextContent = (props: PathwayOverlayProps): ElementVisual => {
     children: [createTextLockupMedium(props)],
     elementStyles: {
       element: {
-        padding: `${Styles.token.spacing.md} 0`,
+        padding: `${token.spacing.md} 0`,
 
         [`@container (max-width: ${mediumSize - 1}px)`]: {
-          ...Styles.layout.space.horizontal.larger,
+          ...layout.space.horizontal.larger,
         },
 
         [`@container (min-width: ${mediumSize}px)`]: {
-          padding: `${Styles.token.spacing['4xl']} ${Styles.token.spacing['2xl']}`,
+          padding: `${token.spacing['4xl']} ${token.spacing['2xl']}`,
 
           ...(props.isImagePositionLeft === false && {
             paddingLeft: '0',
@@ -179,7 +179,7 @@ const createTextContent = (props: PathwayOverlayProps): ElementVisual => {
         },
 
         [`@container (min-width: ${largeSize}px)`]: {
-          padding: `${Styles.token.spacing['8xl']} ${Styles.token.spacing['6xl']}`,
+          padding: `${token.spacing['8xl']} ${token.spacing['6xl']}`,
 
           ...(props.isImagePositionLeft === false && {
             paddingLeft: '0',
@@ -201,7 +201,7 @@ const createTextContent = (props: PathwayOverlayProps): ElementVisual => {
         zIndex: '99',
 
         ...(props.includesAnimation && {
-          ...theme.media.withViewTimelineAnimation({
+          ...withViewTimelineAnimation({
             opacity: '0',
             transform: 'translateY(100px)',
             transition: 'opacity 1s, transform 1s',
@@ -223,10 +223,10 @@ const createTextContent = (props: PathwayOverlayProps): ElementVisual => {
 
 const createBackground = (props: PathwayOverlayProps): ElementVisual => {
   const getBackgroundColor = () => {
-    if (props.isThemeDark) return Styles.token.color.black;
-    if (props.isThemeLight) return Styles.token.color.gray.lighter;
-    if (props.isThemeMaryland) return Styles.token.color.red;
-    return Styles.token.color.white;
+    if (props.isThemeDark) return token.color.black;
+    if (props.isThemeLight) return token.color.gray.lighter;
+    if (props.isThemeMaryland) return token.color.red;
+    return token.color.white;
   };
 
   return ElementModel.createDiv({
@@ -236,8 +236,8 @@ const createBackground = (props: PathwayOverlayProps): ElementVisual => {
         position: 'absolute',
         top: '0',
         bottom: '0',
-        right: `-${Styles.token.spacing.xl}`,
-        width: `calc(100% + ${Styles.token.spacing['6xl']})`,
+        right: `-${token.spacing.xl}`,
+        width: `calc(100% + ${token.spacing['6xl']})`,
         backgroundColor: getBackgroundColor(),
 
         [`@container (min-width: ${mediumSize}px)`]: {
@@ -246,7 +246,7 @@ const createBackground = (props: PathwayOverlayProps): ElementVisual => {
             animationRangeStart: 'entry',
             animationRangeEnd: 'contain',
 
-            ...theme.media.withViewTimelineAnimation({
+            ...withViewTimelineAnimation({
               width: 'calc(75% + 1000px)',
 
               ...(props.isImagePositionLeft === true && {
@@ -293,7 +293,7 @@ const createLock = (props: PathwayOverlayProps) => {
           alignItems: 'center',
 
           ...(isThemeApplied && {
-            padding: `${Styles.token.spacing['6xl']} 0`,
+            padding: `${token.spacing['6xl']} 0`,
           }),
         },
       },

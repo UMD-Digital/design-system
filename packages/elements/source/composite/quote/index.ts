@@ -1,6 +1,7 @@
-import * as Utility from 'utilities';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as layout from '@universityofmaryland/web-styles-library/layout';
+import { QUOTE } from '@universityofmaryland/web-icons-library/content';
 import { ElementModel } from 'model';
-import { layout, token } from '@universityofmaryland/web-styles-library';
 import { ElementVisual } from '_types';
 
 export interface BaseProps {
@@ -66,7 +67,7 @@ export const CreateIconSpan = ({
     },
   });
 
-  iconSpan.element.innerHTML = Utility.asset.icon.QUOTE;
+  iconSpan.element.innerHTML = QUOTE;
 
   return iconSpan;
 };

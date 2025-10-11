@@ -1,4 +1,5 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
 import { type HeroLogoProps } from './_types';
@@ -7,10 +8,10 @@ import { type ElementVisual } from '../../_types';
 const getBackgroundColor = (props: HeroLogoProps) => {
   const { isThemeDark, isThemeMaryland, isThemeLight } = props;
 
-  if (isThemeDark) return Styles.token.color.black;
-  if (isThemeMaryland) return Styles.token.color.red;
-  if (isThemeLight) return Styles.token.color.gray.lightest;
-  return Styles.token.color.white;
+  if (isThemeDark) return token.color.black;
+  if (isThemeMaryland) return token.color.red;
+  if (isThemeLight) return token.color.gray.lightest;
+  return token.color.white;
 };
 
 const createAsset = ({ image }: Pick<HeroLogoProps, 'image'>) => {
@@ -31,7 +32,7 @@ const createAsset = ({ image }: Pick<HeroLogoProps, 'image'>) => {
         justifyContent: 'center',
         maxWidth: '800px',
         margin: '0 auto',
-        marginBottom: Styles.token.spacing.xl,
+        marginBottom: token.spacing.xl,
 
         ['& img']: {
           maxWidth: '100%',
@@ -58,7 +59,7 @@ const createHeadline = (
         textTransform: 'uppercase',
       },
       siblingAfter: {
-        marginTop: Styles.token.spacing.sm,
+        marginTop: token.spacing.sm,
       },
     },
     isThemeDark: isThemeDark || isThemeMaryland || false,
@@ -85,8 +86,8 @@ const createText = (
     children: [textLockupElement],
     elementStyles: {
       element: {
-        [`& .${Styles.element.text.rich.simpleLargest.className}`]: {
-          color: Styles.token.color.gray.dark,
+        [`& .${elementStyles.text.rich.simpleLargest.className}`]: {
+          color: token.color.gray.dark,
         },
       },
     },
@@ -130,13 +131,13 @@ export default (props: HeroLogoProps) => {
     children: [makeLock(props)],
     elementStyles: {
       element: {
-        padding: `${Styles.token.spacing['5xl']} 0 ${Styles.token.spacing.lg}`,
+        padding: `${token.spacing['5xl']} 0 ${token.spacing.lg}`,
         backgroundColor: getBackgroundColor(props),
 
         // Dark them should have additonal padding at the bottom
-        [`@container (${Styles.token.media.queries.desktop.min})`]: {
+        [`@container (${token.media.queries.desktop.min})`]: {
           ...(isThemeDark && {
-            paddingBottom: `${Styles.token.spacing['5xl']}`,
+            paddingBottom: `${token.spacing['5xl']}`,
           }),
         },
       },

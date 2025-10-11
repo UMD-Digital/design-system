@@ -1,5 +1,6 @@
-import { token, typography } from '@universityofmaryland/web-styles-library';
-import * as theme from 'helpers/theme';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as typography from '@universityofmaryland/web-styles-library/typography';
+import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
 
 const ATTRIBUTE_CAPTION = 'data-caption';
 const ATTRIBUTE_CREDIT = 'data-credit';
@@ -13,7 +14,7 @@ const STYLES_IMAGE_CONTAINER = `
     display: inline-block;
   }
 
-  ${theme.convertJSSObjectToStyles({
+  ${convertJSSObjectToStyles({
     styleObj: {
       [`.${ELEMENT_IMAGE_CONTAINER} > span`]: typography.sans.min,
     },

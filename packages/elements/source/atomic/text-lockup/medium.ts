@@ -1,4 +1,4 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { ElementModel } from 'model';
 import { ElementVisual } from '../../_types';
 
@@ -38,7 +38,7 @@ export default ({
         element: ribbon,
         elementStyles: {
           siblingAfter: {
-            marginTop: Styles.token.spacing.sm,
+            marginTop: token.spacing.sm,
           },
         },
       }),
@@ -55,7 +55,7 @@ export default ({
         element: headline,
         elementStyles: {
           element: {
-            color: `${Styles.token.color.black}`,
+            color: `${token.color.black}`,
             fontWeight: 800,
             textTransform: 'uppercase',
             textWrap: 'balance',
@@ -65,7 +65,7 @@ export default ({
             },
           },
           siblingAfter: {
-            marginTop: Styles.token.spacing.sm,
+            marginTop: token.spacing.sm,
           },
         },
       }),
@@ -79,7 +79,7 @@ export default ({
         children: [eventDetails],
         elementStyles: {
           siblingAfter: {
-            marginTop: Styles.token.spacing.md,
+            marginTop: token.spacing.md,
           },
         },
       }),
@@ -92,7 +92,7 @@ export default ({
         element: text,
         elementStyles: {
           siblingAfter: {
-            marginTop: Styles.token.spacing.md,
+            marginTop: token.spacing.md,
           },
         },
         isThemeDark: isThemeDark || isThemeMaryland || false,
@@ -110,10 +110,10 @@ export default ({
         element: actions,
         elementStyles: {
           element: {
-            marginTop: Styles.token.spacing.md,
+            marginTop: token.spacing.md,
 
             [`${BREAKPOINTS.large}`]: {
-              marginTop: Styles.token.spacing.lg,
+              marginTop: token.spacing.lg,
             },
           },
         },

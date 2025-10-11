@@ -1,7 +1,7 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
 import { ElementModel } from 'model';
 import { assets, textLockup } from 'atomic';
-import * as theme from 'helpers/theme';
 import { type ElementVisual } from '../../_types';
 
 interface PathwayHeroProps {
@@ -130,7 +130,7 @@ const createAssetColumn = ({
         [`& img, & video`]: {
           [`@container (min-width: ${BREAK_MEDIUM}px)`]: {
             ...(includesAnimation && {
-              ...theme.media.withViewTimelineAnimation({
+              ...withViewTimelineAnimation({
                 animation: `pathway-hero-resize forwards ${ANIMATION_CONFIG.RESIZE.DURATION}`,
               }),
             }),
@@ -149,7 +149,7 @@ const createHeadline = (props: Pick<PathwayHeroProps, 'headline'>) => {
   if (!headline) return null;
 
   const desktopStyles = {
-    [`@container (${Styles.token.media.queries.desktop.min})`]: {
+    [`@container (${token.media.queries.desktop.min})`]: {
       ...(isOverwriteHeadline && {
         fontSize: '80px',
       }),
@@ -158,14 +158,14 @@ const createHeadline = (props: Pick<PathwayHeroProps, 'headline'>) => {
 
   const elementStyles = {
     element: {
-      color: Styles.token.color.black,
+      color: token.color.black,
       margin: '0 auto',
       textTransform: 'uppercase',
-      marginTop: `${Styles.token.spacing.sm}`,
+      marginTop: `${token.spacing.sm}`,
       ...desktopStyles,
     },
     siblingAfter: {
-      marginTop: `${Styles.token.spacing.md}`,
+      marginTop: `${token.spacing.md}`,
     },
   };
 
@@ -203,11 +203,11 @@ const createTextWrapper = (props: PathwayHeroProps) =>
         width: '100%',
 
         [`@container  (max-width: ${BREAK_SMALL}px)`]: {
-          padding: `${Styles.token.spacing.md} 0`,
+          padding: `${token.spacing.md} 0`,
         },
 
         [`@container  (min-width: ${BREAK_MEDIUM}px)`]: {
-          padding: `${Styles.token.spacing['4xl']} 0`,
+          padding: `${token.spacing['4xl']} 0`,
 
           ...(props.isImagePositionLeft && {
             paddingRight: 0,
@@ -218,14 +218,14 @@ const createTextWrapper = (props: PathwayHeroProps) =>
           }),
 
           ...(props.includesAnimation && {
-            ...theme.media.withViewTimelineAnimation({
+            ...withViewTimelineAnimation({
               animation: `pathway-hero-slide-up forwards ${ANIMATION_CONFIG.SLIDE_UP.DURATION}`,
             }),
           }),
         },
 
         [`@container  (min-width: ${BREAK_LARGE}px)`]: {
-          padding: `${Styles.token.spacing['8xl']} 0`,
+          padding: `${token.spacing['8xl']} 0`,
         },
       },
     },
@@ -245,22 +245,22 @@ const createLockColumn = (props: PathwayHeroProps) =>
           minHeight: '720px',
 
           ...(props.isImagePositionLeft && {
-            paddingRight: Styles.token.spacing['2xl'],
+            paddingRight: token.spacing['2xl'],
           }),
 
           ...(!props.isImagePositionLeft && {
-            paddingLeft: Styles.token.spacing['2xl'],
+            paddingLeft: token.spacing['2xl'],
             order: 1,
           }),
         },
 
         [`@container (min-width: ${BREAK_LARGE}px)`]: {
           ...(!props.isImagePositionLeft && {
-            paddingRight: Styles.token.spacing['4xl'],
+            paddingRight: token.spacing['4xl'],
           }),
 
           ...(props.isImagePositionLeft && {
-            paddingLeft: Styles.token.spacing['4xl'],
+            paddingLeft: token.spacing['4xl'],
           }),
         },
       },

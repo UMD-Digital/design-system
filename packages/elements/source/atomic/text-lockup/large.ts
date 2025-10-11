@@ -1,4 +1,4 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { ElementModel } from 'model';
 import { ElementVisual } from '../../_types';
 
@@ -33,10 +33,10 @@ export default ({
           element: {
             textTransform: 'uppercase',
             fontWeight: 600,
-            color: Styles.token.color.black,
+            color: token.color.black,
           },
           siblingAfter: {
-            marginTop: Styles.token.spacing.sm,
+            marginTop: token.spacing.sm,
           },
         },
         isThemeDark,
@@ -50,7 +50,7 @@ export default ({
         element: ribbon,
         elementStyles: {
           siblingAfter: {
-            marginTop: Styles.token.spacing.sm,
+            marginTop: token.spacing.sm,
           },
         },
       }),
@@ -67,7 +67,7 @@ export default ({
         element: text,
         elementStyles: {
           siblingAfter: {
-            marginTop: Styles.token.spacing.lg,
+            marginTop: token.spacing.lg,
           },
         },
         isThemeDark,
@@ -81,7 +81,7 @@ export default ({
         element: textLargest,
         elementStyles: {
           siblingAfter: {
-            marginTop: Styles.token.spacing.lg,
+            marginTop: token.spacing.lg,
           },
         },
         isThemeDark,

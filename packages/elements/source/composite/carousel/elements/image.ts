@@ -1,8 +1,8 @@
-import { token } from '@universityofmaryland/web-styles-library';
-import * as asset from 'helpers/assets';
-import { getResponsiveImageSize } from 'helpers/theme/assets';
-import * as javascriptEvents from 'helpers/js-events';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import { FORWARD_ARROW } from '@universityofmaryland/web-icons-library/navigation';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
+import { getResponsiveImageSize } from '@universityofmaryland/web-utilities-library/media';
+import { createEventSwipe } from '@universityofmaryland/web-utilities-library/events';
 
 type TypeCarouselImageProps = {
   slides: HTMLElement[];
@@ -99,7 +99,7 @@ const CreateButton = ({
   const button = document.createElement('button');
   button.setAttribute('type', 'button');
   button.classList.add(ELEMENT_CAROUSEL_SLIDER_BUTTON);
-  button.innerHTML = asset.icon.FORWARD_ARROW;
+  button.innerHTML = FORWARD_ARROW;
 
   if (!isRight) {
     button.setAttribute('aria-label', 'Previous');
@@ -278,7 +278,7 @@ export default (props: TypeCarouselImageProps) =>
         }
       };
 
-      javascriptEvents.createEventSwipe({
+      createEventSwipe({
         container: slider,
         callback: swipes,
       });
@@ -312,10 +312,7 @@ export default (props: TypeCarouselImageProps) =>
     container.classList.add(ELEMENT_CAROUSEL_DECLARATION);
     container.appendChild(slider);
 
-    window.addEventListener(
-      'resize',
-      debounce(EventResize, 10),
-    );
+    window.addEventListener('resize', debounce(EventResize, 10));
     EventSwipe();
 
     return {

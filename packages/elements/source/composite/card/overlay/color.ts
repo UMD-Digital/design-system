@@ -1,4 +1,5 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as layout from '@universityofmaryland/web-styles-library/layout';
 import { actions, textLockup } from 'atomic';
 import { ElementModel } from 'model';
 import { CardOverlayProps } from '../_types';
@@ -24,7 +25,7 @@ export default (props: CardOverlayProps) => {
       className: 'card-overlay-color-wrapper',
       elementStyles: {
         element: {
-          paddingRight: `${ctaIcon ? Styles.token.spacing['2xl'] : 0}`,
+          paddingRight: `${ctaIcon ? token.spacing['2xl'] : 0}`,
           height: '100%',
 
           [`& > *`]: {
@@ -33,7 +34,7 @@ export default (props: CardOverlayProps) => {
             flexDirection: 'column',
             zIndex: 9,
             position: 'relative',
-            maxWidth: `${Styles.token.spacing.maxWidth.smallest}`,
+            maxWidth: `${token.spacing.maxWidth.smallest}`,
           },
         },
       },
@@ -47,19 +48,19 @@ export default (props: CardOverlayProps) => {
     elementStyles: {
       element: {
         containerType: 'inline-size',
-        padding: `${Styles.token.spacing.lg} ${Styles.token.spacing.md}`,
+        padding: `${token.spacing.lg} ${token.spacing.md}`,
         minHeight: '360px',
         height: '100%',
         overflow: 'hidden',
         position: 'relative',
-        backgroundColor: Styles.token.color.gray.lightest,
+        backgroundColor: token.color.gray.lightest,
 
         ...(isThemeDark && {
-          backgroundColor: Styles.token.color.gray.darker,
+          backgroundColor: token.color.gray.darker,
         }),
 
-        [`& .${Styles.layout.grid.inline.tabletRows.className}`]: {
-          [`@media (${Styles.token.media.queries.tablet.min})`]: {
+        [`& .${layout.grid.inline.tabletRows.className}`]: {
+          [`@media (${token.media.queries.tablet.min})`]: {
             marginTop: 'auto !important',
           },
         },

@@ -1,5 +1,8 @@
-import * as asset from 'helpers/assets';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
+import {
+  PAUSE,
+  PLAY,
+} from '@universityofmaryland/web-icons-library/ui-controls';
 import { ElementModel } from 'model';
 
 const extractImageElement = (
@@ -21,13 +24,13 @@ const applyGifToggle = (image: HTMLImageElement, container: HTMLElement) => {
   const button = document.createElement('button');
   const setButtonPlay = () => {
     button.setAttribute('aria-label', 'Pause');
-    button.innerHTML = asset.icon.PAUSE;
+    button.innerHTML = PAUSE;
     canvas.style.opacity = '0';
     image.style.opacity = '1';
   };
   const setButtonPause = () => {
     button.setAttribute('aria-label', 'Play');
-    button.innerHTML = asset.icon.PLAY;
+    button.innerHTML = PLAY;
     canvas.style.opacity = '1';
     image.style.opacity = '0';
   };

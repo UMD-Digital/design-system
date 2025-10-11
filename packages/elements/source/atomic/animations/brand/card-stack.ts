@@ -1,8 +1,8 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import { isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
+import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
 import { ElementModel } from 'model';
 import { assets } from 'atomic';
-import * as theme from 'helpers/theme';
-import { isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
 import { type ElementVisual } from '../../../_types';
 
 interface CardStackProps {
@@ -734,7 +734,7 @@ const createGridElement = (
         height: '100%',
         width: '100%',
 
-        ...theme.media.withViewTimelineAnimation({
+        ...withViewTimelineAnimation({
           animation: `${KEY_FRAME_GRID_EXPAND} ease-in-out forwards`,
           animationTimeline: 'view()',
           animationRangeStart,
@@ -768,7 +768,7 @@ const createGridItem = (
         width: '100%',
         height: '100%',
 
-        [`@media (${Styles.token.media.queries.large.max})`]: {
+        [`@media (${token.media.queries.large.max})`]: {
           [`@supports not (animation-timeline: scroll())`]: {
             display: 'none',
           },
@@ -778,7 +778,7 @@ const createGridItem = (
           display: 'none',
         }),
 
-        ...theme.media.withViewTimelineAnimation({
+        ...withViewTimelineAnimation({
           animation: `${KEY_FRAME_GRID_ITEM} ease-in-out forwards`,
           animationTimeline: 'view()',
           animationRangeStart,
@@ -813,16 +813,16 @@ const createGrid = (props: CardStackProps) => {
         display: 'grid',
         gridTemplateColumns: 'repeat(16, 1fr)',
         gridTemplateRows: 'repeat(16, 2vh)',
-        gap: Styles.token.spacing.min,
+        gap: token.spacing.min,
         minHeight: '300px',
 
-        [`@media (${Styles.token.media.queries.large.max})`]: {
+        [`@media (${token.media.queries.large.max})`]: {
           '@supports not (animation-timeline: scroll())': {
             width: '100%',
           },
         },
 
-        ...theme.media.withViewTimelineAnimation({
+        ...withViewTimelineAnimation({
           gridTemplateColumns: config.layout.gridTemplateColumns,
           gridTemplateRows: config.layout.gridTemplateRows,
           transform: 'translate(-50%, -25%)',
@@ -880,7 +880,7 @@ const createFeatured = (
           top: '0',
         }),
 
-        [`@media (${Styles.token.media.queries.large.max})`]: {
+        [`@media (${token.media.queries.large.max})`]: {
           '@supports not (animation-timeline: view())': {
             width: '100% !important',
             height: '100% !important',
@@ -889,7 +889,7 @@ const createFeatured = (
         },
 
         ...(isExpand && {
-          ...theme.media.withViewTimelineAnimation({
+          ...withViewTimelineAnimation({
             top: '30vh',
             animation: `${KEY_FRAME_FEATURED_SIZE} ease-in-out forwards`,
             animationTimeline: 'view()',
@@ -938,7 +938,7 @@ const createSticky = (props: CardStackProps) => {
       element: {
         position: 'relative',
 
-        ...theme.media.withViewTimelineAnimation({
+        ...withViewTimelineAnimation({
           position: 'sticky',
           top: 0,
         }),
@@ -951,7 +951,7 @@ const createSticky = (props: CardStackProps) => {
     children: [wrapper],
     elementStyles: {
       element: {
-        ...theme.media.withViewTimelineAnimation({
+        ...withViewTimelineAnimation({
           height: '200vh',
 
           ...(props.isExpandFeature && {

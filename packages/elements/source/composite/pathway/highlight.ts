@@ -1,4 +1,4 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { ElementModel } from 'model';
 import { createTextLockupMedium } from './_common';
 import { PathwayHighlightProps } from './_types';
@@ -30,25 +30,25 @@ const createTextContent = (props: PathwayHighlightProps): ElementVisual => {
         zIndex: '99',
 
         ...(props.isThemeDark && {
-          backgroundColor: Styles.token.color.black,
-          color: Styles.token.color.white,
+          backgroundColor: token.color.black,
+          color: token.color.white,
         }),
 
         ...(props.isThemeMaryland && {
-          backgroundColor: Styles.token.color.red,
-          color: Styles.token.color.white,
+          backgroundColor: token.color.red,
+          color: token.color.white,
         }),
 
         [`@container (max-width: ${mediumSize - 1}px)`]: {
-          paddingBottom: Styles.token.spacing.md,
+          paddingBottom: token.spacing.md,
         },
 
         [`@container (min-width: ${mediumSize}px)`]: {
-          paddingRight: Styles.token.spacing['4xl'],
+          paddingRight: token.spacing['4xl'],
         },
 
         [`@container (min-width: ${largeSize}px)`]: {
-          paddingRight: Styles.token.spacing['6xl'],
+          paddingRight: token.spacing['6xl'],
         },
       },
     },
@@ -74,7 +74,7 @@ const createHighlightColumn = ({
         isThemeDark,
         elementStyles: {
           element: {
-            color: Styles.token.color.black,
+            color: token.color.black,
             fontWeight: '700',
           },
         },
@@ -89,7 +89,7 @@ const createHighlightColumn = ({
         isThemeDark,
         elementStyles: {
           element: {
-            marginTop: Styles.token.spacing.sm,
+            marginTop: token.spacing.sm,
           },
         },
       }),
@@ -102,18 +102,18 @@ const createHighlightColumn = ({
     elementStyles: {
       element: {
         [`@container (min-width: ${mediumSize}px)`]: {
-          paddingLeft: Styles.token.spacing['xl'],
+          paddingLeft: token.spacing['xl'],
           position: 'relative',
         },
 
         '&:before': {
           content: "''",
           position: 'absolute',
-          backgroundColor: Styles.token.color.red,
+          backgroundColor: token.color.red,
 
           [`@container (max-width: ${mediumSize - 1}px)`]: {
-            top: Styles.token.spacing['2xl'],
-            width: Styles.token.spacing['5xl'],
+            top: token.spacing['2xl'],
+            width: token.spacing['5xl'],
             height: '2px',
           },
 
@@ -132,23 +132,23 @@ const createHighlightColumn = ({
     children: [wrapper],
     elementStyles: {
       element: {
-        backgroundColor: Styles.token.color.gray.lightest,
+        backgroundColor: token.color.gray.lightest,
         position: 'relative',
-        padding: `${Styles.token.spacing['5xl']} ${Styles.token.spacing.md} ${Styles.token.spacing.md} ${Styles.token.spacing.md}`,
+        padding: `${token.spacing['5xl']} ${token.spacing.md} ${token.spacing.md} ${token.spacing.md}`,
 
         [`@container (min-width: ${mediumSize}px)`]: {
-          padding: `${Styles.token.spacing['4xl']} ${Styles.token.spacing['2xl']}`,
+          padding: `${token.spacing['4xl']} ${token.spacing['2xl']}`,
         },
 
         [`@container (min-width: ${largeSize}px)`]: {
-          padding: `${Styles.token.spacing['8xl']} ${Styles.token.spacing['xl']}`,
+          padding: `${token.spacing['8xl']} ${token.spacing['xl']}`,
         },
 
         ...(isThemeDark && {
-          backgroundColor: Styles.token.color.gray.darker,
+          backgroundColor: token.color.gray.darker,
 
           [`& *`]: {
-            color: Styles.token.color.white,
+            color: token.color.white,
           },
         }),
       },

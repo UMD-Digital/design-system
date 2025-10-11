@@ -5,9 +5,9 @@ import {
 } from '@universityofmaryland/web-styles-library';
 import { animationLinkSpan } from '@universityofmaryland/web-utilities-library/animation';
 import { ElementModel } from 'model';
-import { type ElementVisual } from '../../../../../_types';
 import { BREAKPOINTS } from '../../../globals';
-import { BaseProps } from 'composite/footer/_types';
+import { BaseProps } from '../../../_types';
+import { type ElementVisual } from '../../../../../_types';
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
 

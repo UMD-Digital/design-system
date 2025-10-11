@@ -1,4 +1,4 @@
-import { token } from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { Image as LayoutImage } from 'layout';
 import * as carouselElements from '../elements';
 

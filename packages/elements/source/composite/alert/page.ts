@@ -1,7 +1,11 @@
-import { token } from '@universityofmaryland/web-styles-library';
-import * as asset from 'helpers/assets';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { shrinkThenRemove } from '@universityofmaryland/web-utilities-library/animation';
-import { CreateAlertText as AlertText, TypeAlertTextProps } from './elements/text';
+import { CLOSE_BUTTON } from '@universityofmaryland/web-icons-library/ui-controls';
+import { NOTIFICATION } from '@universityofmaryland/web-icons-library/alerts';
+import {
+  CreateAlertText as AlertText,
+  TypeAlertTextProps,
+} from './elements/text';
 
 type TypeShouldShowProps = {
   daysToHide?: string;
@@ -103,7 +107,7 @@ const STYLES_ALERT_PAGE_ELEMENT = `
 
 const CreateIcon = () => {
   const iconWrapper = document.createElement('div');
-  let icon = asset.icon.NOTIFICATION;
+  let icon = NOTIFICATION;
 
   iconWrapper.classList.add(ELEMENT_ALERT_PAGE_ICON);
   iconWrapper.innerHTML = icon;
@@ -115,7 +119,7 @@ const CreateCloseButton = ({ container }: TypeAlertButtonProps) => {
   const closeButton = document.createElement('button');
 
   closeButton.classList.add(ELEMENT_ALERT_PAGE_CLOSE_BUTTON);
-  closeButton.innerHTML = asset.icon.CLOSE_BUTTON;
+  closeButton.innerHTML = CLOSE_BUTTON;
   closeButton.setAttribute('aria-label', 'Close alert');
   closeButton.addEventListener('click', () => {
     shrinkThenRemove({ container });

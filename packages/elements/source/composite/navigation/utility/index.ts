@@ -1,7 +1,13 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
-import { convertJSSObjectToStyles, getStyleStringFromJssObject } from '@universityofmaryland/web-utilities-library/styles';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as elementStyles from '@universityofmaryland/web-styles-library/element';
+import * as layout from '@universityofmaryland/web-styles-library/layout';
+import {
+  convertJSSObjectToStyles,
+  getStyleStringFromJssObject,
+} from '@universityofmaryland/web-utilities-library/styles';
 import { eventAccessibilityFocus } from '@universityofmaryland/web-utilities-library/accessibility';
-import * as asset from 'helpers/assets';
+import { MAGNIFY_GLASS } from '@universityofmaryland/web-icons-library/search';
+import { CHEVRON_SMALL } from '@universityofmaryland/web-icons-library/navigation';
 import {
   createNavAlert,
   STYLES_NAV_ALERT,
@@ -25,8 +31,6 @@ type TypeMenuItemsRequirements = {
 };
 
 type TypeUtilityRequirements = TypeMenuItemsRequirements & TypeAlertProps;
-
-const { token, layout } = Styles;
 
 const flagIcon = `<svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="29" height="28" viewBox="0 0 29 28"><title>Flag</title><path d="M5 4c0 .72-.39 1.36-1 1.72V25.5c0 .266-.234.5-.5.5h-1c-.266 0-.5-.234-.5-.5V5.72c-.61-.36-1-1-1-1.72 0-1.11.89-2 2-2s2 .89 2 2zm23 1v11.922c0 .578-.36.797-.812 1.03-1.766.954-3.72 1.814-5.766 1.814-2.875 0-4.25-2.188-7.656-2.188-2.484 0-5.094 1.125-7.25 2.28-.172.095-.328.142-.516.142-.547 0-1-.453-1-1V7.406c0-.375.187-.64.484-.86.375-.25.828-.468 1.234-.67 1.97-1 4.36-1.876 6.578-1.876 2.453 0 4.375.812 6.547 1.828.438.22.89.297 1.375.297C23.67 6.125 26.312 4 26.998 4c.548 0 1 .453 1 1z"></path></svg>`;
 const homeIcon = `<svg aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" width="26" height="28" viewBox="0 0 26 28"><title>School</title><path d="M22 15.5V23c0 .547-.453 1-1 1h-6v-6h-4v6H5c-.547 0-1-.453-1-1v-7.5c0-.03.016-.063.016-.094L13 8l8.984 7.406c.016.03.016.063.016.094zm3.484-1.078l-.97 1.156c-.077.094-.202.156-.327.172h-.047c-.125 0-.234-.03-.328-.11L13 6.626 2.185 15.64c-.11.08-.234.126-.375.11-.124-.016-.25-.078-.327-.172l-.97-1.156c-.17-.203-.14-.53.064-.703L11.81 4.36c.657-.547 1.72-.547 2.376 0L18 7.547V4.5c0-.28.218-.5.5-.5h3c.28 0 .5.22.5.5v6.375l3.42 2.844c.204.17.235.5.064.702z"></path></svg>`;
@@ -394,7 +398,7 @@ const CreateSearchFormButton = ({
 
   button.setAttribute('aria-label', 'enable the search form');
   button.setAttribute('type', 'button');
-  button.innerHTML = `${asset.icon.MAGNIFY_GLASS}`;
+  button.innerHTML = `${MAGNIFY_GLASS}`;
   button.setAttribute('aria-controls', UtilitySearch.Elements.form);
   button.classList.add(ELEMENT_UTILITY_SEARCH_BUTTON);
   button.setAttribute('aria-expanded', 'false');
@@ -457,7 +461,7 @@ const CreateMobileMenuButton = ({
     });
   };
 
-  button.innerHTML = `${asset.icon.CHEVRON_SMALL}`;
+  button.innerHTML = `${CHEVRON_SMALL}`;
   button.setAttribute('type', 'button');
   button.setAttribute('aria-label', 'toggle mobile menu');
   button.setAttribute('aria-controls', `${ELEMENT_UTILITY_MOBILE_MENU}`);
@@ -630,11 +634,10 @@ const CreateNavigationUtility = (props: TypeUtilityRequirements) =>
       const wrapper = document.createElement('div');
       const logoElement = CreateLogoElement();
 
-      const secondaryCta = Styles.element.action.secondary.normal;
+      const secondaryCta = elementStyles.action.secondary.normal;
 
       let styles =
-        STYLES_NAVIGATION_UTILITY +
-        getStyleStringFromJssObject(secondaryCta);
+        STYLES_NAVIGATION_UTILITY + getStyleStringFromJssObject(secondaryCta);
 
       const setLayout = () => {
         const menuItems = CreateMenuItems({ ...props });

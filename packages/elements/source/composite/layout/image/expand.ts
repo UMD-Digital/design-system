@@ -1,7 +1,11 @@
-import { token, layout } from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as layout from '@universityofmaryland/web-styles-library/layout';
 import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
-import { isScreenZoomed, isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
-import * as theme from 'helpers/theme';
+import { convertPixelStringToNumber } from '@universityofmaryland/web-utilities-library/string';
+import {
+  isScreenZoomed,
+  isPreferredReducedMotion,
+} from '@universityofmaryland/web-utilities-library/accessibility';
 
 type TypeLayoutImageExpandProps = {
   content: HTMLElement;
@@ -294,7 +298,7 @@ export default (props: TypeLayoutImageExpandProps) => {
   const sizeImageForText = () => {
     const textContainerHeight =
       textContainer.clientHeight +
-      theme.convertPixelStringToNumber(spacing['2xl']) * 2;
+      convertPixelStringToNumber(spacing['2xl']) * 2;
     const imageContainerHeight = container.clientHeight;
 
     if (textContainerHeight > imageContainerHeight) {
@@ -302,10 +306,7 @@ export default (props: TypeLayoutImageExpandProps) => {
     }
   };
 
-  if (
-    isScreenZoomed() &&
-    !isPreferredReducedMotion()
-  ) {
+  if (isScreenZoomed() && !isPreferredReducedMotion()) {
     textContainer.style.height = '90vh';
     textContainer.style.transform = 'translateY(0)';
   }

@@ -1,6 +1,8 @@
-import { token } from '@universityofmaryland/web-styles-library';
-import * as assets from 'helpers/assets';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
+import { FACEBOOK, X } from '@universityofmaryland/web-icons-library/social';
+import { EMAIL } from '@universityofmaryland/web-icons-library/communication';
+import { PRINTER } from '@universityofmaryland/web-icons-library/ui-controls';
 
 type TypeSocialSharingProps = {
   isFixed?: boolean;
@@ -104,7 +106,7 @@ const STYLES_SOCIAL_SHARING_ELEMENT = `
 const CreateFacebook = () => {
   const button = document.createElement('button');
 
-  button.innerHTML = assets.social.FACEBOOK;
+  button.innerHTML = FACEBOOK;
   button.setAttribute('aria-label', 'share this page on facebook');
 
   button.addEventListener('click', () => {
@@ -125,7 +127,7 @@ const CreateFacebook = () => {
 const CreateTwitter = ({ url, title }: { url: string; title: string }) => {
   const button = document.createElement('button');
 
-  button.innerHTML = assets.social.X;
+  button.innerHTML = X;
   button.setAttribute('aria-label', 'share this page on twitter');
 
   button.addEventListener('click', () => {
@@ -144,7 +146,7 @@ const CreateEmail = ({ url, title }: { url: string; title: string }) => {
   link.setAttribute('aria-label', 'email this page');
   link.setAttribute('target', '_blank');
 
-  link.innerHTML = assets.icon.EMAIL;
+  link.innerHTML = EMAIL;
 
   return link;
 };
@@ -152,7 +154,7 @@ const CreateEmail = ({ url, title }: { url: string; title: string }) => {
 const CreatePrint = () => {
   const button = document.createElement('button');
 
-  button.innerHTML = assets.icon.PRINTER;
+  button.innerHTML = PRINTER;
   button.setAttribute('aria-label', 'print this page');
   button.addEventListener('click', () => window.print());
 

@@ -1,4 +1,4 @@
-import { token } from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { eventAccessibilityFocusTrap } from '@universityofmaryland/web-utilities-library/accessibility';
 
 type TypeFixedFullScreenProps = {
@@ -61,12 +61,11 @@ export const createModal = ({
       if (target === container) hide();
     });
 
-    accessibiltyEventReference =
-      eventAccessibilityFocusTrap({
-        element: container,
-        action: hide,
-        shadowDomContext: context || null,
-      });
+    accessibiltyEventReference = eventAccessibilityFocusTrap({
+      element: container,
+      action: hide,
+      shadowDomContext: context || null,
+    });
 
     setTimeout(() => {
       if (content) content.focus();

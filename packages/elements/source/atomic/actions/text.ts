@@ -1,7 +1,11 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
-import * as asset from 'helpers/assets';
-import * as get from 'helpers/markup/get';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import { svgFromString } from '@universityofmaryland/web-utilities-library/media';
+import { getIcon } from '@universityofmaryland/web-utilities-library/dom';
+import { NEW_WINDOW } from '@universityofmaryland/web-icons-library/ui-controls';
+import { EMAIL } from '@universityofmaryland/web-icons-library/communication';
+import { DOCUMENT } from '@universityofmaryland/web-icons-library/documents';
+import { FEARLESS } from '@universityofmaryland/web-icons-library/brand';
 import { ElementModel } from 'model';
 
 interface ElementProps {
@@ -37,10 +41,10 @@ type ActionVariants = {
 type Actions = Record<ElementType, ActionVariants>;
 
 const ICONS: Record<IconType, string> = {
-  email: asset.icon.EMAIL,
-  newWindow: asset.icon.NEW_WINDOW,
-  document: asset.icon.DOCUMENT,
-  fearless: asset.icon.FEARLESS,
+  email: EMAIL,
+  newWindow: NEW_WINDOW,
+  document: DOCUMENT,
+  fearless: FEARLESS,
 };
 
 function insertIcon(element: HTMLElement, svg: string): void {
@@ -49,7 +53,7 @@ function insertIcon(element: HTMLElement, svg: string): void {
 }
 
 function createLinkIcon(element: HTMLElement, type: ElementType): void {
-  const existingIcon = get.icon({ element });
+  const existingIcon = getIcon({ element });
   if (existingIcon) {
     element.insertBefore(existingIcon, element.firstChild);
     return;
@@ -131,19 +135,19 @@ const createPlainText = (props: OptionProps) => {
   const plainTextStyles = {
     element: {
       ...(isThemeDark
-        ? Styles.element.text.link.white
-        : Styles.element.text.link.red),
-      marginTop: `${Styles.token.spacing.min}`,
+        ? elementStyles.text.link.white
+        : elementStyles.text.link.red),
+      marginTop: `${token.spacing.min}`,
     },
   };
 
   const plainTextSecondaryStyles = {
     element: {
       ...(isThemeDark
-        ? Styles.element.text.link.white
-        : Styles.element.text.link.red),
-      marginTop: `${Styles.token.spacing.min}`,
-      marginLeft: `${Styles.token.spacing.lg}`,
+        ? elementStyles.text.link.white
+        : elementStyles.text.link.red),
+      marginTop: `${token.spacing.min}`,
+      marginLeft: `${token.spacing.lg}`,
       alignSelf: 'baseline',
     },
   };

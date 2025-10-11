@@ -1,8 +1,8 @@
-import { token } from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { ElementModel } from 'model';
+import { BREAKPOINTS } from '../../globals';
+import { BaseProps } from '../../_types';
 import { type ElementVisual } from '../../../../_types';
-import { BREAKPOINTS } from 'composite/footer/globals';
-import { BaseProps } from 'composite/footer/_types';
 
 export interface CallToActionProps extends BaseProps {
   slotCta?: HTMLAnchorElement;

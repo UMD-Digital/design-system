@@ -1,6 +1,6 @@
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { ElementModel } from 'model';
-import { CreateIconSpan, SMALL, BaseProps } from '..';
-import { token } from '@universityofmaryland/web-styles-library';
+import { CreateIconSpan, SMALL, BaseProps } from '../index';
 import { ElementVisual } from '_types';
 
 export interface QuoteImageProps extends BaseProps {

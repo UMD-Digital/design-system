@@ -1,4 +1,4 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { ElementModel } from 'model';
 import { type ElementVisual } from '../../_types';
 import { type PersonTextLockupProps } from '../_types';
@@ -26,7 +26,7 @@ export default ({
         elementStyles: {
           element: {
             fontWeight: '700',
-            color: `${Styles.token.color.black}`,
+            color: `${token.color.black}`,
 
             [`& + *`]: {
               marginTop: '4px',
@@ -66,7 +66,7 @@ export default ({
           element: {
             lineHeight: '1.2em',
             display: 'block',
-            color: `${Styles.token.color.gray.dark}`,
+            color: `${token.color.gray.dark}`,
 
             [`& + *`]: {
               marginTop: '4px',
@@ -125,7 +125,7 @@ export default ({
         element: actions,
         elementStyles: {
           element: {
-            marginTop: Styles.token.spacing.sm,
+            marginTop: token.spacing.sm,
           },
         },
       }),

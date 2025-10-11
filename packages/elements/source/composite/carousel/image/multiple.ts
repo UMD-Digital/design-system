@@ -1,4 +1,5 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import { buttons } from 'atomic';
 import { Image as LayoutImage } from 'layout';
 import * as carouselElements from '../elements';
@@ -9,8 +10,7 @@ type TypeCarouselMultipleProps = {
   isFullScreenOption?: boolean;
 };
 
-const { token } = Styles;
-const fullScreenClassName = Styles.element.action.button.fullScreen.className;
+const fullScreenClassName = elementStyles.action.button.fullScreen.className;
 
 const ATTRIBUTE_THEME = 'data-theme';
 const THEME_DARK = 'dark';

@@ -1,11 +1,10 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
 import { ElementModel } from 'model';
 import { assets } from 'atomic';
-import * as theme from 'helpers/theme';
 import { type HeroExpandProps as BaseHeroExpandProps } from '../_types';
 import { type ElementVisual, type ContentElement } from '../../../_types';
 
-// Extend the base type to add additional properties
 interface HeroExpandProps extends BaseHeroExpandProps {
   eyebrow?: ContentElement;
   additional?: HTMLSlotElement | null;
@@ -83,7 +82,7 @@ const createImageOverlay = () =>
         background: 'rgba(0,0,0,0.65)',
         opacity: 1,
 
-        ...theme.media.withViewTimelineAnimation({
+        ...withViewTimelineAnimation({
           opacity: 0,
           animation: `${ANIMATION_CONFIG.IMAGE_OVERLAY.NAME} forwards`,
           animationTimeline: 'view()',
@@ -142,14 +141,14 @@ const createImageSize = (props: Pick<HeroExpandProps, 'image' | 'video'>) => {
         height: '100%',
         width: '100%',
 
-        ...theme.media.withViewTimelineAnimation({
+        ...withViewTimelineAnimation({
           height: ANIMATION_CONFIG.IMAGE_SIZE.INITIAL_HEIGHT,
           animation: `${ANIMATION_CONFIG.IMAGE_SIZE.NAME} ease-in-out forwards`,
           animationTimeline: 'view()',
           animationRangeStart: ANIMATION_CONFIG.IMAGE_SIZE.RANGE.START,
           animationRangeEnd: ANIMATION_CONFIG.IMAGE_SIZE.RANGE.END,
 
-          [`@container (${Styles.token.media.queries.tablet.min})`]: {
+          [`@container (${token.media.queries.tablet.min})`]: {
             animationRangeEnd: ANIMATION_CONFIG.IMAGE_SIZE.RANGE.END_TABLET,
           },
         }),
@@ -178,7 +177,7 @@ const createAssetContainer = (
         display: 'flex',
         alignItems: 'center',
 
-        ...theme.media.withViewTimelineAnimation({
+        ...withViewTimelineAnimation({
           width: ANIMATION_CONFIG.COMPONENT_SIZE.INITIAL_WIDTH,
           position: 'absolute',
           top: 0,
@@ -189,7 +188,7 @@ const createAssetContainer = (
           animationRangeStart: ANIMATION_CONFIG.COMPONENT_SIZE.RANGE.START,
           animationRangeEnd: ANIMATION_CONFIG.COMPONENT_SIZE.RANGE.END,
 
-          [`@container (${Styles.token.media.queries.tablet.min})`]: {
+          [`@container (${token.media.queries.tablet.min})`]: {
             width: ANIMATION_CONFIG.COMPONENT_SIZE.INITIAL_WIDTH_TABLET,
             animation: `${ANIMATION_CONFIG.COMPONENT_SIZE.NAME_TABLET} ease-in-out forwards`,
             animationTimeline: 'view()',
@@ -209,7 +208,7 @@ const createEyebrow = (eyebrow?: HTMLElement | null) => {
     element: eyebrow,
     elementStyles: {
       siblingAfter: {
-        marginTop: Styles.token.spacing.md,
+        marginTop: token.spacing.md,
       },
     },
   });
@@ -225,12 +224,12 @@ const createHeadline = (headline?: HTMLElement | null) => {
     element: headline,
     elementStyles: {
       element: {
-        color: Styles.token.color.white,
+        color: token.color.white,
         fontWeight: 800,
         textTransform: 'uppercase',
         textWrap: 'balance',
 
-        [`@container (${Styles.token.media.queries.desktop.min})`]: {
+        [`@container (${token.media.queries.desktop.min})`]: {
           ...(isOverwriteHeadline && {
             fontSize: '96px',
           }),
@@ -270,7 +269,7 @@ const createBottomTextChildren = ({
       className: 'hero-expand-text-actions',
       elementStyles: {
         siblingAfter: {
-          marginTop: Styles.token.spacing.lg,
+          marginTop: token.spacing.lg,
         },
       },
     });
@@ -304,7 +303,7 @@ const createTextContainer = (
       children: topTextChildren,
       elementStyles: {
         siblingAfter: {
-          marginTop: Styles.token.spacing.lg,
+          marginTop: token.spacing.lg,
         },
       },
     });
@@ -334,17 +333,17 @@ const createTextContainer = (
         height: '100%',
         zIndex: 9999,
         textAlign: 'center',
-        padding: `${Styles.token.spacing.md} 0`,
+        padding: `${token.spacing.md} 0`,
 
-        [`@container (${Styles.token.media.queries.tablet.min})`]: {
-          padding: `${Styles.token.spacing['3xl']} 0`,
+        [`@container (${token.media.queries.tablet.min})`]: {
+          padding: `${token.spacing['3xl']} 0`,
           display: 'flex',
           flexDirection: 'column',
           justifyContent: 'space-between',
         },
 
-        [`@container (${Styles.token.media.queries.highDef.min})`]: {
-          padding: `${Styles.token.spacing['6xl']} 0`,
+        [`@container (${token.media.queries.highDef.min})`]: {
+          padding: `${token.spacing['6xl']} 0`,
         },
       },
     },
@@ -363,8 +362,8 @@ const createSticky = (props: HeroExpandProps) => {
       element: {
         position: 'relative',
 
-        [`@container (${Styles.token.media.queries.tablet.min})`]: {
-          ...theme.media.withViewTimelineAnimation({
+        [`@container (${token.media.queries.tablet.min})`]: {
+          ...withViewTimelineAnimation({
             position: 'sticky',
             top: 0,
             height: '100vh',
@@ -389,10 +388,10 @@ export default (props: HeroExpandProps) => {
     elementStyles: {
       element: {
         containerType: 'inline-size',
-        ...theme.media.withViewTimelineAnimation({
+        ...withViewTimelineAnimation({
           position: 'relative',
 
-          [`@container (${Styles.token.media.queries.tablet.min})`]: {
+          [`@container (${token.media.queries.tablet.min})`]: {
             height: '200vh',
           },
         }),

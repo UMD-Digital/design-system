@@ -1,4 +1,5 @@
-import { token, typography } from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as typography from '@universityofmaryland/web-styles-library/typography';
 import { ElementModel } from 'model';
 import { type ElementVisual } from '../../../_types';
 

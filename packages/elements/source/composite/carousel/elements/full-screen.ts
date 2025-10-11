@@ -1,6 +1,6 @@
-import { token } from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import { CLOSE_X } from '@universityofmaryland/web-icons-library/ui-controls';
 import { layout } from 'atomic';
-import * as asset from 'helpers/assets';
 
 type TypeFixedFullScreenProps = {
   content: HTMLElement;
@@ -42,7 +42,7 @@ export default ({ content, callback }: TypeFixedFullScreenProps) => {
   closeButton.setAttribute('type', 'button');
   closeButton.setAttribute('aria-label', 'Close');
   closeButton.classList.add(ELEMENT_CLOSE_BUTTON);
-  closeButton.innerHTML = asset.icon.X;
+  closeButton.innerHTML = CLOSE_X;
   closeButton.addEventListener('click', modal.events.hide);
 
   modal.element.appendChild(closeButton);

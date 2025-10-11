@@ -1,28 +1,28 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import { createContainerQuery } from '@universityofmaryland/web-utilities-library/styles';
 import { textLockup, assets } from 'atomic';
-import * as theme from 'helpers/theme';
 import { ElementModel } from 'model';
 import { CardListProps } from './_types';
 import { type UMDElement } from '../../_types';
 
-const smallBreakpoint = Styles.token.media.breakpointValues.small.max;
-const mediumBreakpointStart = Styles.token.media.breakpointValues.medium.min;
-const mediumBreakpoint = Styles.token.media.breakpointValues.large.min;
+const smallBreakpoint = token.media.breakpointValues.small.max;
+const mediumBreakpointStart = token.media.breakpointValues.medium.min;
+const mediumBreakpoint = token.media.breakpointValues.large.min;
 
 const makeDateColumn = (dateSign: UMDElement) =>
   ElementModel.createDiv({
     className: 'card-list-date-sign-wrapper',
     elementStyles: {
       element: {
-        width: `${Styles.token.spacing.xl}`,
+        width: `${token.spacing.xl}`,
         order: 1,
         alignSelf: 'flex-start',
 
-        ...theme.media.createContainerQuery('max-width', mediumBreakpoint, {
+        ...createContainerQuery('max-width', mediumBreakpoint, {
           display: 'none',
         }),
-        ...theme.media.createContainerQuery('min-width', mediumBreakpoint, {
-          width: `${Styles.token.spacing['8xl']}`,
+        ...createContainerQuery('min-width', mediumBreakpoint, {
+          width: `${token.spacing['8xl']}`,
         }),
       },
     },
@@ -36,16 +36,12 @@ const makeTextColumn = (props: CardListProps) =>
       element: {
         flex: '1 0',
 
-        ...theme.media.createContainerQuery(
-          'min-width',
-          mediumBreakpointStart,
-          {
-            paddingRight: `${Styles.token.spacing.md}`,
-            order: '2',
-          },
-        ),
+        ...createContainerQuery('min-width', mediumBreakpointStart, {
+          paddingRight: `${token.spacing.md}`,
+          order: '2',
+        }),
 
-        ...theme.media.createContainerQuery('min-width', mediumBreakpoint, {
+        ...createContainerQuery('min-width', mediumBreakpoint, {
           width: '208px',
         }),
       },
@@ -64,9 +60,9 @@ const makeImageColumn = ({
     className: 'card-list-image-wrapper',
     elementStyles: {
       element: {
-        ...theme.media.createContainerQuery('max-width', smallBreakpoint, {
-          marginLeft: Styles.token.spacing.min,
-          marginBottom: Styles.token.spacing.md,
+        ...createContainerQuery('max-width', smallBreakpoint, {
+          marginLeft: token.spacing.min,
+          marginBottom: token.spacing.md,
           width: '120px',
           float: 'right',
           position: 'relative',
@@ -77,26 +73,22 @@ const makeImageColumn = ({
           }),
         }),
 
-        ...theme.media.createContainerQuery(
-          'min-width',
-          mediumBreakpointStart,
-          {
-            display: 'block',
-            width: '160px',
-            order: '3',
+        ...createContainerQuery('min-width', mediumBreakpointStart, {
+          display: 'block',
+          width: '160px',
+          order: '3',
 
-            ...(isAligned && {
-              height: '160px',
-            }),
-          },
-        ),
+          ...(isAligned && {
+            height: '160px',
+          }),
+        }),
 
-        ...theme.media.createContainerQuery('min-width', mediumBreakpoint, {
+        ...createContainerQuery('min-width', mediumBreakpoint, {
           width: '208px',
         }),
 
         '& img': {
-          ...theme.media.createContainerQuery('max-width', smallBreakpoint, {
+          ...createContainerQuery('max-width', smallBreakpoint, {
             height: 'auto !important',
           }),
         },
@@ -131,14 +123,10 @@ export default (props: CardListProps) => {
       element: {
         containerType: 'inline-size',
 
-        ...theme.media.createContainerQuery(
-          'min-width',
-          mediumBreakpointStart,
-          {
-            display: 'flex',
-            justifyContent: 'space-between',
-          },
-        ),
+        ...createContainerQuery('min-width', mediumBreakpointStart, {
+          display: 'flex',
+          justifyContent: 'space-between',
+        }),
       },
     },
     children,
@@ -152,8 +140,8 @@ export default (props: CardListProps) => {
         overflow: 'hidden',
 
         ...(isThemeDark && {
-          backgroundColor: Styles.token.color.black,
-          color: Styles.token.color.white,
+          backgroundColor: token.color.black,
+          color: token.color.white,
         }),
       },
     },

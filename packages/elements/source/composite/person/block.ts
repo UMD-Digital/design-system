@@ -1,13 +1,13 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
-import * as asset from 'helpers/assets';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { imageFromSvg } from '@universityofmaryland/web-utilities-library/media';
-import * as theme from 'helpers/theme';
-import { assets, textLockup } from 'atomic';
+import { createContainerQuery } from '@universityofmaryland/web-utilities-library/styles';
+import { PERSON } from '@universityofmaryland/web-icons-library/user';
 import { ElementModel } from 'model';
+import { assets, textLockup } from 'atomic';
 import { PersonCard } from './_types';
 import { ElementVisual } from '../../_types';
 
-const mediumBreakpointStart = Styles.token.media.breakpointValues.medium.min;
+const mediumBreakpointStart = token.media.breakpointValues.medium.min;
 
 export default (props: PersonCard) => {
   const { image: personImage, isThemeDark } = props;
@@ -19,7 +19,7 @@ export default (props: PersonCard) => {
 
   if (!image) {
     image = imageFromSvg({
-      SVG: asset.icon.PERSON,
+      SVG: PERSON,
     });
   }
 
@@ -30,11 +30,11 @@ export default (props: PersonCard) => {
         element: {
           display: 'flex',
           justifyContent: 'center',
-          backgroundColor: `${Styles.token.color.gray.lighter}`,
-          marginBottom: `${Styles.token.spacing.md}`,
+          backgroundColor: `${token.color.gray.lighter}`,
+          marginBottom: `${token.spacing.md}`,
 
           ...(isThemeDark && {
-            backgroundColor: `${Styles.token.color.gray.darker}`,
+            backgroundColor: `${token.color.gray.darker}`,
           }),
 
           ['& img, & svg']: {
@@ -43,13 +43,9 @@ export default (props: PersonCard) => {
             objectFit: 'contain',
             height: '140px !important',
 
-            ...theme.media.createContainerQuery(
-              'min-width',
-              mediumBreakpointStart,
-              {
-                height: '200px !important',
-              },
-            ),
+            ...createContainerQuery('min-width', mediumBreakpointStart, {
+              height: '200px !important',
+            }),
           },
         },
       },

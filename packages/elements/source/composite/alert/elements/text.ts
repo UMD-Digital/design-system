@@ -1,4 +1,5 @@
-import { token, layout } from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as layout from '@universityofmaryland/web-styles-library/layout';
 import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
 import { ElementModel } from 'model';
 
@@ -105,4 +106,3 @@ export const CreateAlertText = (props: TypeAlertTextProps) => {
     styles,
   };
 };
-

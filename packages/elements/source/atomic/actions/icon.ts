@@ -1,6 +1,8 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import { NEW_WINDOW } from '@universityofmaryland/web-icons-library/ui-controls';
+import { DOCUMENT } from '@universityofmaryland/web-icons-library/documents';
+import { SHORT_ARROW } from '@universityofmaryland/web-icons-library/navigation';
 import { ElementModel } from 'model';
-import * as asset from 'helpers/assets';
 
 interface ActionIconProps {
   ctaIcon: HTMLElement;
@@ -20,15 +22,15 @@ export default ({ ctaIcon, isThemeLight }: ActionIconProps) => {
     const isDownloadLink = ctaIcon.getAttribute('download') === '';
 
     if (isExternalLink) {
-      ctaIcon.innerHTML = asset.icon.NEW_WINDOW;
+      ctaIcon.innerHTML = NEW_WINDOW;
     }
 
     if (isDownloadLink) {
-      ctaIcon.innerHTML = asset.icon.DOCUMENT;
+      ctaIcon.innerHTML = DOCUMENT;
     }
 
     if (!isExternalLink && !isDownloadLink) {
-      ctaIcon.innerHTML = asset.icon.SHORT_ARROW;
+      ctaIcon.innerHTML = SHORT_ARROW;
     }
   }
 
@@ -37,8 +39,8 @@ export default ({ ctaIcon, isThemeLight }: ActionIconProps) => {
     elementStyles: {
       element: {
         position: 'absolute',
-        bottom: Styles.token.spacing.sm,
-        right: Styles.token.spacing.sm,
+        bottom: token.spacing.sm,
+        right: token.spacing.sm,
         zIndex: 9999,
 
         ['& a']: {
@@ -48,28 +50,28 @@ export default ({ ctaIcon, isThemeLight }: ActionIconProps) => {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
-          backgroundColor: Styles.token.color.white,
+          backgroundColor: token.color.white,
           transition: 'background-color 0.3s ease-in-out',
 
           ...(isThemeLight && {
-            backgroundColor: `${Styles.token.color.gray.darker}`,
+            backgroundColor: `${token.color.gray.darker}`,
           }),
         },
 
         ['& a:hover, & a:focus']: {
-          backgroundColor: `${Styles.token.color.gray.darker}`,
-          border: `1px solid ${Styles.token.color.white}`,
+          backgroundColor: `${token.color.gray.darker}`,
+          border: `1px solid ${token.color.white}`,
 
           ...(isThemeLight && {
-            backgroundColor: `${Styles.token.color.white}`,
-            border: `1px solid ${Styles.token.color.gray.darker}`,
+            backgroundColor: `${token.color.white}`,
+            border: `1px solid ${token.color.gray.darker}`,
           }),
 
           [`& svg, & path`]: {
-            fill: Styles.token.color.white,
+            fill: token.color.white,
 
             ...(isThemeLight && {
-              fill: `${Styles.token.color.gray.darker}`,
+              fill: `${token.color.gray.darker}`,
             }),
           },
         },
@@ -77,15 +79,15 @@ export default ({ ctaIcon, isThemeLight }: ActionIconProps) => {
         ['& svg']: {
           height: '15px',
           width: '15px',
-          fill: Styles.token.color.gray.darker,
+          fill: token.color.gray.darker,
           transition: 'background-color 0.3s ease-in-out',
         },
 
         ['& svg, & path']: {
-          fill: `${Styles.token.color.gray.darker}`,
+          fill: `${token.color.gray.darker}`,
 
           ...(isThemeLight && {
-            fill: `${Styles.token.color.white}`,
+            fill: `${token.color.white}`,
           }),
         },
       },

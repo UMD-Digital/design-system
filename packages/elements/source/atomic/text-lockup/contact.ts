@@ -1,5 +1,10 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
-import * as asset from 'helpers/assets';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import {
+  EMAIL,
+  PHONE,
+} from '@universityofmaryland/web-icons-library/communication';
+import { PIN } from '@universityofmaryland/web-icons-library/location';
+import { LINKEDIN } from '@universityofmaryland/web-icons-library/social';
 import { ElementModel } from 'model';
 import { type ElementVisual } from '../../_types';
 import { type PersonContactProps } from '../_types';
@@ -33,7 +38,7 @@ const makeText = ({
     isThemeDark,
     elementStyles: {
       element: {
-        color: `${Styles.token.color.gray.dark}`,
+        color: `${token.color.gray.dark}`,
       },
     },
   });
@@ -52,8 +57,7 @@ const makeContactLink = ({
   icon: string;
   isThemeDark?: boolean;
 }) => {
-  const isLink =
-    element.getAttribute('href') && icon !== asset.icon.PIN;
+  const isLink = element.getAttribute('href') && icon !== PIN;
   const textSpan = makeText({ text: element.innerHTML, isThemeDark });
   const iconSpan = makeIcon({ icon, isThemeDark });
   const containerStyles = {
@@ -108,7 +112,7 @@ export default ({
         children: [
           makeContactLink({
             element: phone,
-            icon: asset.icon.PHONE,
+            icon: PHONE,
             isThemeDark,
           }),
         ],
@@ -123,7 +127,7 @@ export default ({
         children: [
           makeContactLink({
             element: email,
-            icon: asset.icon.EMAIL,
+            icon: EMAIL,
             isThemeDark,
           }),
         ],
@@ -138,7 +142,7 @@ export default ({
         children: [
           makeContactLink({
             element: linkendIn,
-            icon: asset.social.LINKEDIN,
+            icon: LINKEDIN,
             isThemeDark,
           }),
         ],
@@ -153,7 +157,7 @@ export default ({
         children: [
           makeContactLink({
             element: address,
-            icon: asset.icon.PIN,
+            icon: PIN,
             isThemeDark,
           }),
         ],
@@ -167,7 +171,7 @@ export default ({
         element: actions,
         elementStyles: {
           element: {
-            marginTop: Styles.token.spacing.sm,
+            marginTop: token.spacing.sm,
           },
         },
       }),
@@ -179,7 +183,7 @@ export default ({
     children,
     elementStyles: {
       element: {
-        marginTop: `${Styles.token.spacing.sm}`,
+        marginTop: `${token.spacing.sm}`,
       },
     },
   });

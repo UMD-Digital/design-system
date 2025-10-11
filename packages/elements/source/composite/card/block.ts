@@ -1,10 +1,10 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import { createContainerQuery } from '@universityofmaryland/web-utilities-library/styles';
 import { assets, layout, textLockup } from 'atomic';
-import * as theme from 'helpers/theme';
 import { CardBlockProps } from './_types';
 import { type UMDElement } from '../../_types';
 
-const smallBreakpoint = Styles.token.media.breakpointValues.small.max;
+const smallBreakpoint = token.media.breakpointValues.small.max;
 
 export default (props: CardBlockProps) => {
   const {
@@ -38,8 +38,8 @@ export default (props: CardBlockProps) => {
         ],
         customStyles: {
           ...(shouldImageBeFullWidth && {
-            ...theme.media.createContainerQuery('max-width', smallBreakpoint, {
-              marginBottom: Styles.token.spacing.md,
+            ...createContainerQuery('max-width', smallBreakpoint, {
+              marginBottom: token.spacing.md,
               width: '100%',
             }),
           }),

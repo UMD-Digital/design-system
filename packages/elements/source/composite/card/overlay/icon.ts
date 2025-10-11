@@ -1,4 +1,4 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { ElementModel } from 'model';
 import { textLockup } from 'atomic';
 import { ElementVisual } from '../../../_types';
@@ -20,7 +20,7 @@ export default (props: CardIconProps) => {
         element: {
           display: 'flex',
           justifyContent: 'flex-end',
-          marginBottom: `${Styles.token.spacing.lg}`,
+          marginBottom: `${token.spacing.lg}`,
 
           '& *': {
             maxHeight: '120px',
@@ -50,12 +50,12 @@ export default (props: CardIconProps) => {
         height: '100%',
         overflow: 'hidden',
         position: 'relative',
-        padding: `${Styles.token.spacing.md}`,
-        paddingTop: `${Styles.token.spacing.sm}`,
-        backgroundColor: Styles.token.color.gray.lightest,
+        padding: `${token.spacing.md}`,
+        paddingTop: `${token.spacing.sm}`,
+        backgroundColor: token.color.gray.lightest,
 
         ...(props.isThemeDark && {
-          backgroundColor: Styles.token.color.gray.darker,
+          backgroundColor: token.color.gray.darker,
         }),
       },
     },

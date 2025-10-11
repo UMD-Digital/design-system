@@ -1,6 +1,9 @@
-import { token } from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import {
+  DARK_LOGO,
+  LIGHT_LOGO,
+} from '@universityofmaryland/web-icons-library/logos';
 import { ElementModel } from 'model';
-import * as asset from 'helpers/assets';
 import createCampaignRow, { type CampaignProps } from '../campaign';
 import createCallToAction, { type CallToActionProps } from '../call-to-action';
 import { BREAKPOINTS } from '../../../globals';
@@ -27,9 +30,7 @@ const createLogoLinkElement = (
       'Link to the University of Maryland homepage',
     );
 
-    logoLink.innerHTML = !isThemeLight
-      ? `${asset.logo.DARK_LOGO}`
-      : `${asset.logo.LIGHT_LOGO}`;
+    logoLink.innerHTML = !isThemeLight ? `${DARK_LOGO}` : `${LIGHT_LOGO}`;
 
     return logoLink;
   };

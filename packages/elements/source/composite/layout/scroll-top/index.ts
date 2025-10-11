@@ -1,6 +1,6 @@
-import { token } from '@universityofmaryland/web-styles-library';
-import * as asset from 'helpers/assets';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
+import { ARROW } from '@universityofmaryland/web-icons-library/navigation';
 
 type TypeScrollTopProps = {
   isFixed?: boolean;
@@ -117,7 +117,7 @@ export default (props: TypeScrollTopProps) =>
         behavior: 'smooth',
       });
     });
-    container.innerHTML = asset.icon.ARROW;
+    container.innerHTML = ARROW;
     container.appendChild(text);
 
     declaration.appendChild(container);

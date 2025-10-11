@@ -1,10 +1,9 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { assets } from 'atomic';
 import { ElementModel } from 'model';
 import { createContainer } from './container';
 import { type CarouselWideProps } from '../_types';
 
-// Interfaces
 interface CarouselState {
   currentIndex: number;
   isAnimating: boolean;
@@ -295,7 +294,7 @@ export default (props: CarouselWideProps) => {
         display: 'block',
         position: 'relative',
 
-        [`@media (${Styles.token.media.queries.large.min})`]: {
+        [`@media (${token.media.queries.large.min})`]: {
           paddingBottom: 0,
         },
       },

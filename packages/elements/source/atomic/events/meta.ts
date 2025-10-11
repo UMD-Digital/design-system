@@ -1,4 +1,5 @@
-import * as asset from 'helpers/assets';
+import { PIN } from '@universityofmaryland/web-icons-library/location';
+import { CALENDAR, CLOCK } from '@universityofmaryland/web-icons-library/time';
 import { ElementModel } from 'model';
 import { ElementVisual } from '../../_types';
 
@@ -69,7 +70,7 @@ const createDayText = ({
   }
 
   return MakeDetailItem({
-    icon: asset.icon.CALENDAR,
+    icon: CALENDAR,
     text,
   });
 };
@@ -82,7 +83,7 @@ const createTimeText = ({ startTime, endTime }: DateDisplayType) => {
   }
 
   return MakeDetailItem({
-    icon: asset.icon.CLOCK,
+    icon: CLOCK,
     text,
   });
 };
@@ -117,7 +118,7 @@ export default (props: TypeMetaDisplay) => {
     wrapperChildren.push(
       MakeDetailItem({
         ...props,
-        icon: asset.icon.PIN,
+        icon: PIN,
         text: location[0].title,
       }),
     );

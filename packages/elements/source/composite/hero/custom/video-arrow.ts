@@ -1,11 +1,12 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as typography from '@universityofmaryland/web-styles-library/typography';
+import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
-import { animations, assets } from 'atomic';
 import { ElementModel } from 'model';
+import { animations, assets } from 'atomic';
 import { type HeroVideoArrowProps as BaseHeroVideoArrowProps } from '../_types';
 import { type ElementVisual } from '../../../_types';
 
-// Extend base type to add animation property and ensure video is required
 interface HeroVideoArrowProps extends Omit<BaseHeroVideoArrowProps, 'video'> {
   video: HTMLVideoElement;
   isAnimationOnLoad?: boolean;
@@ -40,7 +41,7 @@ const createHeadline = (headline?: HTMLElement | null) => {
         textWrap: 'balance',
       },
       siblingAfter: {
-        marginTop: Styles.token.spacing.md,
+        marginTop: token.spacing.md,
       },
     },
   });
@@ -104,10 +105,10 @@ const createTextContainer = (
         textAlign: 'center',
         width: `calc(100% - 24px)`,
         maxWidth: '950px',
-        padding: `${Styles.token.spacing.xl} ${Styles.token.spacing.md}`,
+        padding: `${token.spacing.xl} ${token.spacing.md}`,
 
         ['& *']: {
-          color: Styles.token.color.white,
+          color: token.color.white,
         },
       },
     },
@@ -153,10 +154,10 @@ const createAnimationSequence = (container: HTMLElement) => {
       `.${OVERLAY_CLASS}`,
     ) as HTMLDivElement;
     const headline = container.querySelector(
-      `.${Styles.typography.campaign.fonts.extraLarge.className}`,
+      `.${typography.campaign.fonts.extraLarge.className}`,
     ) as HTMLDivElement;
     const text = container.querySelector(
-      `.${Styles.element.text.rich.simpleLargest.className}`,
+      `.${elementStyles.text.rich.simpleLargest.className}`,
     ) as HTMLDivElement;
 
     if (overlay) overlay.style.opacity = '1';
@@ -180,10 +181,7 @@ const createEventHandlers = (
     eventResize();
   };
 
-  window.addEventListener(
-    'resize',
-    debounce(eventResize, 20),
-  );
+  window.addEventListener('resize', debounce(eventResize, 20));
 
   return { load: eventLoad };
 };

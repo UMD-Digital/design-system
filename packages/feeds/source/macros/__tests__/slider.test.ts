@@ -1,71 +1,36 @@
 import slider from '../slider';
-import {
-  Atomic,
-  Composite,
-  Utilities,
-} from '@universityofmaryland/web-elements-library';
+import { fetchGraphQL } from '@universityofmaryland/web-utilities-library/network';
+import { events, textLockup } from '@universityofmaryland/web-elements-library/atomic';
+import { slider as sliderComposite } from '@universityofmaryland/web-elements-library/composite';
 
-jest.mock('@universityofmaryland/web-elements-library', () => {
-  const mockFetchGraphQL = jest.fn();
-  const mockLoad = jest.fn();
-
-  return {
-    Atomic: {
-      events: {
-        sign: jest.fn().mockReturnValue({
-          element: document.createElement('div'),
-          styles: '.mock-style-sign',
-        }),
-      },
-      textLockup: {
-        date: jest.fn().mockReturnValue({
-          element: document.createElement('div'),
-          styles: '.mock-style-textlockup',
-        }),
+jest.mock('@universityofmaryland/web-styles-library', () => ({
+  utilities: {
+    transform: {
+      css: {
+        removeDuplicates: jest.fn().mockResolvedValue('optimized-css'),
       },
     },
-    Composite: {
-      slider: {
-        events: jest.fn().mockReturnValue({
-          element: document.createElement('div'),
-          styles: '.mock-style-slider',
-          events: {
-            load: mockLoad,
-          },
-        }),
-      },
-    },
-    Utilities: {
-      network: {
-        FetchGraphQL: mockFetchGraphQL,
-      },
-      styles: {
-        optimizedCss: jest.fn().mockResolvedValue('optimized-css'),
-      },
-    },
-  };
-});
+  },
+}));
 
 describe('Slider Component', () => {
   beforeEach(() => {
     jest.clearAllMocks();
     jest.useFakeTimers();
 
-    (Utilities.network.FetchGraphQL as jest.Mock).mockImplementation(() =>
-      Promise.resolve({
-        data: {
-          entries: {
-            events: [
-              {
-                title: 'Event 1',
-                startMonth: 'Jan',
-                startDay: '01',
-              },
-            ],
-          },
+    (fetchGraphQL as jest.Mock).mockResolvedValue({
+      data: {
+        entries: {
+          events: [
+            {
+              title: 'Event 1',
+              startMonth: 'Jan',
+              startDay: '01',
+            },
+          ],
         },
-      }),
-    );
+      },
+    });
   });
 
   afterEach(() => {
@@ -73,28 +38,26 @@ describe('Slider Component', () => {
   });
 
   test('creates a slider component with correct structure', async () => {
-    (Utilities.network.FetchGraphQL as jest.Mock).mockImplementation(() =>
-      Promise.resolve({
-        data: {
-          entries: {
-            events: [
-              {
-                title: 'Event 1',
-                startMonth: 'Jan',
-                startDay: '01',
-              },
-              {
-                title: 'Event 2',
-                startMonth: 'Feb',
-                startDay: '02',
-                endMonth: 'Feb',
-                endDay: '03',
-              },
-            ],
-          },
+    (fetchGraphQL as jest.Mock).mockResolvedValue({
+      data: {
+        entries: {
+          events: [
+            {
+              title: 'Event 1',
+              startMonth: 'Jan',
+              startDay: '01',
+            },
+            {
+              title: 'Event 2',
+              startMonth: 'Feb',
+              startDay: '02',
+              endMonth: 'Feb',
+              endDay: '03',
+            },
+          ],
         },
-      }),
-    );
+      },
+    });
 
     const sliderComponent = slider({
       token: 'token123',
@@ -106,7 +69,7 @@ describe('Slider Component', () => {
     expect(sliderComponent.events).toBeDefined();
     expect(sliderComponent.events.callback).toBeDefined();
 
-    expect(Composite.slider.events).toHaveBeenCalledWith(
+    expect(sliderComposite.events).toHaveBeenCalledWith(
       expect.objectContaining({
         isThemeDark: undefined,
         dataSlider: expect.any(HTMLDivElement),
@@ -116,7 +79,7 @@ describe('Slider Component', () => {
     );
 
     await Promise.resolve();
-    expect(Utilities.network.FetchGraphQL).toHaveBeenCalledWith(
+    expect(fetchGraphQL).toHaveBeenCalledWith(
       expect.objectContaining({
         query: 'query{}',
         url: 'https://example.com/api',
@@ -127,22 +90,20 @@ describe('Slider Component', () => {
       }),
     );
 
-    expect(Atomic.events.sign).toHaveBeenCalledTimes(2);
-    expect(Atomic.textLockup.date).toHaveBeenCalledTimes(2);
+    expect(events.sign).toHaveBeenCalledTimes(2);
+    expect(textLockup.date).toHaveBeenCalledTimes(2);
 
     jest.runAllTimers();
   });
 
   test('handles categories parameter', async () => {
-    (Utilities.network.FetchGraphQL as jest.Mock).mockImplementation(() =>
-      Promise.resolve({
-        data: {
-          entries: {
-            events: [],
-          },
+    (fetchGraphQL as jest.Mock).mockResolvedValue({
+      data: {
+        entries: {
+          events: [],
         },
-      }),
-    );
+      },
+    });
 
     slider({
       token: 'token123',
@@ -152,7 +113,7 @@ describe('Slider Component', () => {
     });
 
     await Promise.resolve();
-    expect(Utilities.network.FetchGraphQL).toHaveBeenCalledWith(
+    expect(fetchGraphQL).toHaveBeenCalledWith(
       expect.objectContaining({
         variables: expect.objectContaining({
           related: ['cat1', 'cat2', 'cat3'],
@@ -184,11 +145,9 @@ describe('Slider Component', () => {
   test('handles errors in feed data', async () => {
     console.error = jest.fn();
 
-    (Utilities.network.FetchGraphQL as jest.Mock).mockImplementation(() =>
-      Promise.resolve({
-        message: 'Error message',
-      }),
-    );
+    (fetchGraphQL as jest.Mock).mockResolvedValue({
+      message: 'Error message',
+    });
 
     expect(() => {
       slider({
@@ -204,11 +163,9 @@ describe('Slider Component', () => {
   test('handles missing feed data', async () => {
     console.error = jest.fn();
 
-    (Utilities.network.FetchGraphQL as jest.Mock).mockImplementation(() =>
-      Promise.resolve({
-        data: {},
-      }),
-    );
+    (fetchGraphQL as jest.Mock).mockResolvedValue({
+      data: {},
+    });
 
     expect(() => {
       slider({

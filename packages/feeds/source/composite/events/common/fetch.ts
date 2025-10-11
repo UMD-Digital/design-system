@@ -1,4 +1,4 @@
-import { Utilities } from '@universityofmaryland/web-elements-library';
+import { fetchGraphQL } from '@universityofmaryland/web-utilities-library/network';
 import * as feedMacros from 'macros';
 import { EVENTS_COUNT_QUERY, EVENTS_QUERY } from './queries';
 import * as dataComposed from './data';
@@ -49,7 +49,7 @@ const fetchFeed = async ({
     offset,
   };
 
-  return await Utilities.network.FetchGraphQL({
+  return await fetchGraphQL({
     query,
     url: 'https://calendar.umd.edu/graphql',
     token: token,

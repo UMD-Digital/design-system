@@ -1,7 +1,9 @@
 import * as feedFetch from '../common/fetch';
 import * as dataComposed from '../common/data';
-import { Utilities } from '@universityofmaryland/web-elements-library';
+import { fetchGraphQL } from '@universityofmaryland/web-utilities-library/network';
 import * as feedMacros from 'macros';
+
+jest.mock('@universityofmaryland/web-utilities-library/network');
 
 const originalConsoleError = console.error;
 console.error = jest.fn();
@@ -110,9 +112,7 @@ describe('Events Fetch Utilities', () => {
       }),
     }));
 
-    jest
-      .spyOn(Utilities.network, 'FetchGraphQL')
-      .mockImplementation(async () => createMockFetchResponse());
+    (fetchGraphQL as jest.Mock).mockResolvedValue(createMockFetchResponse());
 
     jest
       .spyOn(feedMacros.buttonLazyLoad, 'remove')

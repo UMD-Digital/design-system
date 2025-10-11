@@ -1,4 +1,4 @@
-import { Utilities } from '@universityofmaryland/web-elements-library';
+import { fetchGraphQL } from '@universityofmaryland/web-utilities-library/network';
 import * as feedMacros from 'macros';
 import { ARTICLES_QUERY } from './queries';
 import * as dataComposed from './data';
@@ -51,7 +51,7 @@ const getEntries = async ({
     not,
   };
 
-  const feedData = await Utilities.network.FetchGraphQL({
+  const feedData = await fetchGraphQL({
     query: ARTICLES_QUERY,
     url: 'https://today.umd.edu/graphql',
     token: token,

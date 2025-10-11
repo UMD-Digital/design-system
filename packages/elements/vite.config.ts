@@ -12,7 +12,6 @@ export default defineConfig({
         composite: resolve(__dirname, 'source/composite/index.ts'),
         layout: resolve(__dirname, 'source/layout/index.ts'),
         model: resolve(__dirname, 'source/model/index.ts'),
-        utilities: resolve(__dirname, 'source/utilities/index.ts'),
       },
       name: 'UniversityOfMarylandWebElementsLibrary',
       formats: ['es', 'cjs'],
@@ -21,7 +20,7 @@ export default defineConfig({
     emptyOutDir: true,
     sourcemap: true,
     rollupOptions: {
-      external: ['@universityofmaryland/web-styles-library'],
+      external: (id: string) => id.startsWith('@universityofmaryland/'),
       output: {
         preserveModules: true,
         preserveModulesRoot: 'source',
@@ -69,16 +68,6 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@universityofmaryland/web-styles-library': resolve(
-        __dirname,
-        '../styles/dist/umd-styles.js',
-      ),
-      '@universityofmaryland/web-utilities-library': resolve(
-        __dirname,
-        '../utilities/source',
-      ),
-      utilities: resolve(__dirname, 'source/utilities'),
-      helpers: resolve(__dirname, 'source/helpers'),
       atomic: resolve(__dirname, 'source/atomic'),
       composite: resolve(__dirname, 'source/composite'),
       layout: resolve(__dirname, 'source/layout'),

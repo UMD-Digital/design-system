@@ -6,8 +6,12 @@
     "baseUrl": "source",
     "moduleResolution": "bundler",
     "paths": {
+      "@universityofmaryland/web-styles-library": ["../styles/dist/index.d.ts"],
+      "@universityofmaryland/web-styles-library/*": ["../styles/dist/*"],
       "@universityofmaryland/web-utilities-library": ["../utilities/source/index.ts"],
       "@universityofmaryland/web-utilities-library/*": ["../utilities/source/*"],
+      "@universityofmaryland/web-icons-library": ["../icons/dist/index.d.ts"],
+      "@universityofmaryland/web-icons-library/*": ["../icons/dist/*"],
       "_types": ["./_types"],
       "model": ["./model"],
       "model/*": ["./model/*"],

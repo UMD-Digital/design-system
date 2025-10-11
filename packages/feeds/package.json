@@ -12,19 +12,19 @@
       "require": "./dist/index.js"
     },
     "./academic": {
-      "types": "./dist/composite/academic/index.d.ts",
-      "import": "./dist/composite/academic/index.mjs",
-      "require": "./dist/composite/academic/index.js"
+      "types": "./dist/academic.d.ts",
+      "import": "./dist/academic.mjs",
+      "require": "./dist/academic.js"
     },
     "./events": {
-      "types": "./dist/composite/events/index.d.ts",
-      "import": "./dist/composite/events/index.mjs",
-      "require": "./dist/composite/events/index.js"
+      "types": "./dist/events.d.ts",
+      "import": "./dist/events.mjs",
+      "require": "./dist/events.js"
     },
     "./news": {
-      "types": "./dist/composite/news/index.d.ts",
-      "import": "./dist/composite/news/index.mjs",
-      "require": "./dist/composite/news/index.js"
+      "types": "./dist/news.d.ts",
+      "import": "./dist/news.mjs",
+      "require": "./dist/news.js"
     }
   },
   "license": "MIT",

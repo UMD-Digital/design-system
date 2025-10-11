@@ -12,29 +12,24 @@
       "require": "./dist/index.js"
     },
     "./atomic": {
-      "types": "./dist/atomic/index.d.ts",
-      "import": "./dist/atomic/index.mjs",
-      "require": "./dist/atomic/index.js"
+      "types": "./dist/atomic.d.ts",
+      "import": "./dist/atomic.mjs",
+      "require": "./dist/atomic.js"
     },
     "./composite": {
-      "types": "./dist/composite/index.d.ts",
-      "import": "./dist/composite/index.mjs",
-      "require": "./dist/composite/index.js"
+      "types": "./dist/composite.d.ts",
+      "import": "./dist/composite.mjs",
+      "require": "./dist/composite.js"
     },
     "./layout": {
-      "types": "./dist/layout/index.d.ts",
-      "import": "./dist/layout/index.mjs",
-      "require": "./dist/layout/index.js"
+      "types": "./dist/layout.d.ts",
+      "import": "./dist/layout.mjs",
+      "require": "./dist/layout.js"
     },
     "./model": {
-      "types": "./dist/model/index.d.ts",
-      "import": "./dist/model/index.mjs",
-      "require": "./dist/model/index.js"
-    },
-    "./utilities": {
-      "types": "./dist/utilities/index.d.ts",
-      "import": "./dist/utilities/index.mjs",
-      "require": "./dist/utilities/index.js"
+      "types": "./dist/model.d.ts",
+      "import": "./dist/model.mjs",
+      "require": "./dist/model.js"
     }
   },
   "license": "MIT",
@@ -58,6 +53,10 @@
   },
   "dependencies": {
     "@types/postcss-js": "^4.0.4"
+  },
+  "peerDependencies": {
+    "@universityofmaryland/web-styles-library": "^1.0.0",
+    "@universityofmaryland/web-icons-library": "^1.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-legacy": "^7.2.1",

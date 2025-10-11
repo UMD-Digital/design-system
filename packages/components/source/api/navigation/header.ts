@@ -7,7 +7,7 @@ declare global {
 import { navigation } from '@universityofmaryland/web-elements-library/composite';
 import {
   createSlot,
-  createSlotWithStyleOverwrite,
+  createStyledSlotOrClone,
   createStyleTemplate,
 } from '@universityofmaryland/web-utilities-library/elements';
 import { reset } from '../../helpers/styles';
@@ -146,7 +146,7 @@ const CreateHeader = ({
   eventOpen?: () => void;
 }) => {
   const { LOGO, UTILITY } = SLOTS;
-  const logoSlot = createSlotWithStyleOverwrite({
+  const logoSlot = createStyledSlotOrClone({
     element,
     slotRef: LOGO,
   });

@@ -17,7 +17,7 @@ const slots: SlotConfiguration = {
 
 const createComponent: CreateComponentFunction = (element) =>
   layout.box.logo({
-    image: validation.slotImage({
+    image: validation.getValidatedSlotImage({
       element,
       slotName: Slots.name.assets.image,
     }) as HTMLImageElement,

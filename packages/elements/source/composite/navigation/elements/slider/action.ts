@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
+import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import { chevron_down as iconChevronDown } from '@universityofmaryland/web-icons-library/controls';
 
 export type TypeActionProps = {
@@ -21,7 +21,7 @@ const ELEMENT_SLIDE_ACTION_BUTTON = 'nav-slide-action-button';
 
 // prettier-ignore
 const LinkStyles = `
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${ELEMENT_SLIDE_ACTION_LINK}`]: typography.sans.small,
     },

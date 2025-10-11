@@ -17,7 +17,7 @@ export const CommonPersonData = ({
   pronouns: Slots.person.pronouns({ element }),
   phone: Slots.contact.phone({ element }),
   linkendIn: Slots.social.linkedin({ element }),
-  image: validation.slotImage({
+  image: validation.getValidatedSlotImage({
     element,
     slotName: Slots.name.assets.image,
   }),

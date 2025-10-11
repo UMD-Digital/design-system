@@ -3,7 +3,7 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import { animationLinkSpan } from '@universityofmaryland/web-utilities-library/animation';
+import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
 import { ElementModel } from 'model';
 import { BREAKPOINTS } from '../../../globals';
 import { BaseProps } from '../../../_types';
@@ -230,7 +230,7 @@ const createSlotColumn = ({
   const linkChildren: ElementVisual[] = Array.from(
     slot.querySelectorAll('a'),
   ).map((link) => {
-    animationLinkSpan({ element: link });
+    wrapLinkForAnimation({ element: link });
 
     const slotColumnChild = [createLinkColumnFontsLink(link)];
 

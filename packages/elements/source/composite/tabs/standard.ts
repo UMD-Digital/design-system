@@ -1,8 +1,8 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import { scrollTo } from '@universityofmaryland/web-utilities-library/animation';
+import { smoothScrollToElement } from '@universityofmaryland/web-utilities-library/animation';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
-import { convertPixelStringToNumber } from '@universityofmaryland/web-utilities-library/string';
+import { parsePixelValue } from '@universityofmaryland/web-utilities-library/styles';
 
 type TypeTabsProps = {
   tabsContainer: HTMLElement;
@@ -161,8 +161,8 @@ const SetDisplay = ({
   const SetContentPosition = () => {
     const activeContent = contents[activeTab];
     const space = isFlexLayout
-      ? convertPixelStringToNumber(token.spacing.xl)
-      : convertPixelStringToNumber(token.spacing.md);
+      ? parsePixelValue(token.spacing.xl)
+      : parsePixelValue(token.spacing.md);
 
     if (activeContent) {
       if (transition) {
@@ -176,12 +176,12 @@ const SetDisplay = ({
       activeContent.style.width = '100%';
 
       if (!isFlexLayout && transition) {
-        const convertedSpace = convertPixelStringToNumber(token.spacing.md);
+        const convertedSpace = parsePixelValue(token.spacing.md);
         const spread = additionalSpread
           ? convertedSpace + additionalSpread
           : convertedSpace;
 
-        scrollTo({
+        smoothScrollToElement({
           element: activeContent,
           spread,
         });

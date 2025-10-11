@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
-import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
+import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 
 type TypeStickyProps = {
   stickyColumn?: HTMLElement | null;
@@ -45,7 +45,7 @@ const STYLES_STICKY_COLUMNS_ELEMENT = `
     container: ${ELEMENT_NAME} / inline-size;
   }
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${ELEMENT_STICKY_CONTAINER_WRAPPER}`]: layout.grid.gap.two,
     },

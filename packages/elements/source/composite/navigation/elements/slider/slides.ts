@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
-import { cleanCopy } from '@universityofmaryland/web-utilities-library/dom';
+import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
+import { cloneElementWithoutAttributes } from '@universityofmaryland/web-utilities-library/dom';
 import { chevron_down as iconChevronDown } from '@universityofmaryland/web-icons-library/controls';
 import FirstSlide, { TypeFirstSlideProps, TypeFirstSlide } from './slide-first';
 import SlideAction, { TypeActionProps } from './action';
@@ -85,7 +85,7 @@ const BackButtonStyles = `
 
 // prettier-ignore
 const HeadlineStyles = `
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${ELEMENT_NAV_SLIDE_HEADLINE}`]: typography.sans.large,
     },
@@ -131,7 +131,7 @@ const createSlideBackButton = (props: TypeSlideBackContainer) => {
 const createSlideHeadline = ({ link }: { link: HTMLAnchorElement }) => {
   const slideHeadline = document.createElement('p');
 
-  slideHeadline.appendChild(cleanCopy({ element: link }));
+  slideHeadline.appendChild(cloneElementWithoutAttributes({ element: link }));
   slideHeadline.classList.add(ELEMENT_NAV_SLIDE_HEADLINE);
 
   return slideHeadline;

@@ -1,9 +1,9 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
-import { createEventSwipe } from '@universityofmaryland/web-utilities-library/events';
+import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
+import { setupSwipeDetection } from '@universityofmaryland/web-utilities-library/events';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
-import { convertPixelStringToNumber } from '@universityofmaryland/web-utilities-library/string';
+import { parsePixelValue } from '@universityofmaryland/web-utilities-library/styles';
 import {
   arrow_left as iconArrowLeft,
   arrow_right as iconArrowRight,
@@ -238,7 +238,7 @@ const IntroStyles = `
     display: block;
   }
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${ELEMENT_SLIDER_EVENT_INTRO_HEADLINE}`]: typography.sans.larger,
     },
@@ -526,7 +526,7 @@ const SizeDatesElements = ({
       })[0];
       const height =
         maxHeightElement.offsetHeight +
-        convertPixelStringToNumber(maxHeightElement.style.marginTop);
+        parsePixelValue(maxHeightElement.style.marginTop);
 
       sliderWrapper.style.height = `${height}px`;
     };
@@ -661,7 +661,7 @@ const EventSwipe = ({
     SetButtonVisibility();
   };
 
-  createEventSwipe({ container, callback: swipes });
+  setupSwipeDetection({ container, callback: swipes });
 };
 
 const OnLoadStyles = ({ dataSlider }: { dataSlider: HTMLElement }) => {

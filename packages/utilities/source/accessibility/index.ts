@@ -1,4 +1,3 @@
-export { eventAccessibilityFocus } from './eventAccessibilityFocus';
-export { eventAccessibilityFocusTrap } from './eventAccessibilityFocusTrap';
+export { trapFocus } from './trapFocus';
 export { isScreenZoomed } from './isScreenZoomed';
 export { isPreferredReducedMotion } from './isPreferredReducedMotion';

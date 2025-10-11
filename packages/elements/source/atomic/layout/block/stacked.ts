@@ -1,8 +1,8 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { asset as assetElement } from '@universityofmaryland/web-styles-library/element';
 import {
-  createContainerQuery,
-  createRangeContainerQuery,
+  createMediaQuery,
+  createMediaQueryRange,
 } from '@universityofmaryland/web-utilities-library/styles';
 import { ElementModel } from 'model';
 import { type UMDElement } from '../../../_types';
@@ -40,7 +40,7 @@ export const image = ({
           aspectRatio: '4 / 3',
         },
 
-        ...createContainerQuery('max-width', smallBreakpoint, {
+        ...createMediaQuery('max-width', smallBreakpoint, {
           marginLeft: token.spacing.sm,
           marginBottom: token.spacing.md,
           width: '120px',
@@ -53,11 +53,11 @@ export const image = ({
           }),
         }),
 
-        ...createContainerQuery('min-width', mediumBreakpointStart, {
+        ...createMediaQuery('min-width', mediumBreakpointStart, {
           display: 'block',
         }),
 
-        ...createRangeContainerQuery(mediumBreakpointStart, mediumBreakpoint, {
+        ...createMediaQueryRange(mediumBreakpointStart, mediumBreakpoint, {
           ...(hasBorder && {
             marginLeft: token.spacing.sm,
           }),
@@ -66,7 +66,7 @@ export const image = ({
         ...customStyles,
 
         '& img': {
-          ...createContainerQuery('max-width', smallBreakpoint, {
+          ...createMediaQuery('max-width', smallBreakpoint, {
             height: 'auto !important',
           }),
         },
@@ -91,11 +91,11 @@ export const textContainer = ({
       element: {
         maxWidth: `${token.spacing.maxWidth.smallest}`,
 
-        ...createContainerQuery('min-width', mediumBreakpointStart, {
+        ...createMediaQuery('min-width', mediumBreakpointStart, {
           paddingTop: token.spacing.md,
         }),
 
-        ...createContainerQuery('min-width', mediumBreakpointStart, {
+        ...createMediaQuery('min-width', mediumBreakpointStart, {
           paddingTop: token.spacing.lg,
 
           ...(hasBorder && {
@@ -148,7 +148,7 @@ export const container = ({
             border: `1px solid ${token.color.gray.darker}`,
           }),
 
-        ...createContainerQuery('max-width', smallBreakpoint, {
+        ...createMediaQuery('max-width', smallBreakpoint, {
           ...(isThemeDark &&
             !isTransparent && {
               padding: token.spacing.md,

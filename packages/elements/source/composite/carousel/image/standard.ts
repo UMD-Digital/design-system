@@ -3,7 +3,7 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
+import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import { animations, buttons } from 'atomic';
 import { Image as LayoutImage } from 'layout';
 import * as carouselElements from '../elements';
@@ -143,7 +143,7 @@ const TextContainerStyles = `
     }
   }
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${ELEMENT_SLIDE_HEADLINE}`]: typography.sans.large,
     },
@@ -154,7 +154,7 @@ const TextContainerStyles = `
     color: ${token.color.gray.dark}
   }
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${ELEMENT_SLIDE_RICH_TEXT}`]: element.text.rich.advanced,
     },

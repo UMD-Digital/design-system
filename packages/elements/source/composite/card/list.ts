@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { createContainerQuery } from '@universityofmaryland/web-utilities-library/styles';
+import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
 import { textLockup, assets } from 'atomic';
 import { ElementModel } from 'model';
 import { CardListProps } from './_types';
@@ -18,10 +18,10 @@ const makeDateColumn = (dateSign: UMDElement) =>
         order: 1,
         alignSelf: 'flex-start',
 
-        ...createContainerQuery('max-width', mediumBreakpoint, {
+        ...createMediaQuery('max-width', mediumBreakpoint, {
           display: 'none',
         }),
-        ...createContainerQuery('min-width', mediumBreakpoint, {
+        ...createMediaQuery('min-width', mediumBreakpoint, {
           width: `${token.spacing['8xl']}`,
         }),
       },
@@ -36,12 +36,12 @@ const makeTextColumn = (props: CardListProps) =>
       element: {
         flex: '1 0',
 
-        ...createContainerQuery('min-width', mediumBreakpointStart, {
+        ...createMediaQuery('min-width', mediumBreakpointStart, {
           paddingRight: `${token.spacing.md}`,
           order: '2',
         }),
 
-        ...createContainerQuery('min-width', mediumBreakpoint, {
+        ...createMediaQuery('min-width', mediumBreakpoint, {
           width: '208px',
         }),
       },
@@ -60,7 +60,7 @@ const makeImageColumn = ({
     className: 'card-list-image-wrapper',
     elementStyles: {
       element: {
-        ...createContainerQuery('max-width', smallBreakpoint, {
+        ...createMediaQuery('max-width', smallBreakpoint, {
           marginLeft: token.spacing.min,
           marginBottom: token.spacing.md,
           width: '120px',
@@ -73,7 +73,7 @@ const makeImageColumn = ({
           }),
         }),
 
-        ...createContainerQuery('min-width', mediumBreakpointStart, {
+        ...createMediaQuery('min-width', mediumBreakpointStart, {
           display: 'block',
           width: '160px',
           order: '3',
@@ -83,12 +83,12 @@ const makeImageColumn = ({
           }),
         }),
 
-        ...createContainerQuery('min-width', mediumBreakpoint, {
+        ...createMediaQuery('min-width', mediumBreakpoint, {
           width: '208px',
         }),
 
         '& img': {
-          ...createContainerQuery('max-width', smallBreakpoint, {
+          ...createMediaQuery('max-width', smallBreakpoint, {
             height: 'auto !important',
           }),
         },
@@ -123,7 +123,7 @@ export default (props: CardListProps) => {
       element: {
         containerType: 'inline-size',
 
-        ...createContainerQuery('min-width', mediumBreakpointStart, {
+        ...createMediaQuery('min-width', mediumBreakpointStart, {
           display: 'flex',
           justifyContent: 'space-between',
         }),

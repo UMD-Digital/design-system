@@ -29,7 +29,7 @@ const createCardComponent = ({ tagName }: CardConfig) => {
   };
 
   const createComponentData = (element: HTMLElement): CardData => ({
-    image: validation.slotImage({
+    image: validation.getValidatedSlotImage({
       element,
       slotName: Slots.name.assets.image,
     }),

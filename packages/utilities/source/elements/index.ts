@@ -5,6 +5,6 @@
  */
 
 export { createSlot } from './createSlot';
-export { createSlotWithStyleOverwrite } from './createSlotWithStyleOverwrite';
+export { createStyledSlotOrClone } from './createStyledSlotOrClone';
 export { createLinkWithSpan } from './createLinkWithSpan';
 export { createStyleTemplate } from './createStyleTemplate';

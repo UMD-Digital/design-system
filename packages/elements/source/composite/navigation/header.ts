@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
+import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import { search as iconSearch } from '@universityofmaryland/web-icons-library/search';
 import MenuButton from './elements/menu-button';
 import NavigationItem from './elements/item';
@@ -157,13 +157,13 @@ const LogoColumnStyles = `
     height: 240px;
   }
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${ELEMENT_HEADER_LOGO}`]: typography.sans.larger,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${ELEMENT_HEADER_LOGO} *`]: typography.sans.larger,
     },
@@ -175,13 +175,13 @@ const LogoColumnStyles = `
     width: 100%;
   }
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${ELEMENT_HEADER_LOGO}[size="large"]`]: typography.sans.extraLarge,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${ELEMENT_HEADER_LOGO}[size="large"] *`]: typography.sans.extraLarge,
     },

@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
-import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
+import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import { shrinkThenRemove } from '@universityofmaryland/web-utilities-library/animation';
 import {
   getLocalStorageInt,
@@ -67,7 +67,7 @@ const ButtonStyles = `
 `;
 
 const LockStyles = `
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${ELEMENT_ALERT_SITE_LOCK}`]: layout.space.horizontal.larger,
     },

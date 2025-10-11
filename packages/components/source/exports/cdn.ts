@@ -1,10 +1,10 @@
-import { loadGridAnimationObserver } from '@universityofmaryland/web-utilities-library/animation';
+import { observeGridAnimations } from '@universityofmaryland/web-utilities-library/animation';
 import * as Components from '../api';
 import { loadComponentClass } from './loader';
 
 const LoadUmdComponents = () => {
   loadComponentClass(Components as any);
-  loadGridAnimationObserver();
+  observeGridAnimations();
 };
 
 // CDN initialization for script tag usage

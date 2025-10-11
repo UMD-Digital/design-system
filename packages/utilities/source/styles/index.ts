@@ -8,8 +8,9 @@
  */
 
 export { combineStyles } from './combineStyles';
-export { convertJSSObjectToStyles } from './convertJSSObjectToStyles';
-export { getStyleStringFromJssObject } from './getStyleStringFromJssObject';
+export { jssToCSS } from './jssToCSS';
+export { jssEntryToCSS } from './jssEntryToCSS';
 export { withViewTimelineAnimation } from './withViewTimelineAnimation';
-export { createContainerQuery } from './createContainerQuery';
-export { createRangeContainerQuery } from './createRangeContainerQuery';
+export { createMediaQuery } from './createMediaQuery';
+export { createMediaQueryRange } from './createMediaQueryRange';
+export { parsePixelValue } from './parsePixelValue';

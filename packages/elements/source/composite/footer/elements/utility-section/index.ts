@@ -4,7 +4,7 @@ import {
   animation,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import { animationLinkSpan } from '@universityofmaryland/web-utilities-library/animation';
+import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
 import { ElementModel } from 'model';
 import { BREAKPOINTS } from '../../globals';
 import { FooterProps } from '../../options';
@@ -74,7 +74,7 @@ export default (props: FooterProps): ElementVisual => {
     ) as HTMLAnchorElement[];
 
     slottedLinks.forEach((link) => {
-      animationLinkSpan({ element: link });
+      wrapLinkForAnimation({ element: link });
       linkElements.push(createUtilityContainerLink(link));
     });
   }

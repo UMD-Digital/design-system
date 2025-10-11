@@ -1,5 +1,5 @@
 import { card } from '@universityofmaryland/web-elements-library/composite';
-import { createSlotWithStyleOverwrite } from '@universityofmaryland/web-utilities-library/elements';
+import { createStyledSlotOrClone } from '@universityofmaryland/web-utilities-library/elements';
 import { Attributes, Slots, Register, Lifecycle } from 'model';
 import type {
   CreateComponentFunction,
@@ -34,7 +34,7 @@ const MakeOverlayContent = ({ element }: { element: HTMLElement }) => ({
   text: Slots.text.default({ element }),
   date: Slots.date.default({ element }),
   actions: Slots.actions.default({ element }),
-  ctaIcon: createSlotWithStyleOverwrite({
+  ctaIcon: createStyledSlotOrClone({
     element,
     slotRef: Slots.name.CTA_ICON,
   }),

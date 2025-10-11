@@ -1,5 +1,5 @@
 import { person } from '@universityofmaryland/web-elements-library/composite';
-import { createSlotWithStyleOverwrite } from '@universityofmaryland/web-utilities-library/elements';
+import { createStyledSlotOrClone } from '@universityofmaryland/web-utilities-library/elements';
 import { Attributes, Register, Slots } from 'model';
 import { CommonPersonData } from './common';
 import {
@@ -33,7 +33,7 @@ const createComponent: CreateComponentFunction = (element) => {
   if (isFullImage) {
     return person.bio.full({
       ...CommonPersonData({ element, isThemeDark }),
-      description: createSlotWithStyleOverwrite({
+      description: createStyledSlotOrClone({
         element,
         slotRef: Slots.name.DESCRIPTION,
       }),
@@ -42,7 +42,7 @@ const createComponent: CreateComponentFunction = (element) => {
 
   return person.bio.small({
     ...CommonPersonData({ element, isThemeDark }),
-    description: createSlotWithStyleOverwrite({
+    description: createStyledSlotOrClone({
       element,
       slotRef: Slots.name.DESCRIPTION,
     }),

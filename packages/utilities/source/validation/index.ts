@@ -5,5 +5,5 @@
  */
 
 export { imageHasAlt } from './imageHasAlt';
-export { slotImage } from './slotImage';
+export { getValidatedSlotImage } from './getValidatedSlotImage';
 export { isHTMLElement } from './isHTMLElement';

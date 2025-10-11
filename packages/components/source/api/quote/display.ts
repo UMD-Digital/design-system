@@ -1,5 +1,5 @@
 import { quote } from '@universityofmaryland/web-elements-library/composite';
-import { createSlotWithStyleOverwrite } from '@universityofmaryland/web-utilities-library/elements';
+import { createStyledSlotOrClone } from '@universityofmaryland/web-utilities-library/elements';
 import { Attributes, Register, Slots } from 'model';
 
 import {
@@ -108,19 +108,19 @@ const MakeData = ({ element }: { element: HTMLElement }) => {
   const isTransparent = Attributes.isVisual.transparent({ element });
 
   return {
-    quote: createSlotWithStyleOverwrite({
+    quote: createStyledSlotOrClone({
       element,
       slotRef: Slots.name.QUOTE,
     }),
-    image: createSlotWithStyleOverwrite({
+    image: createStyledSlotOrClone({
       element,
       slotRef: Slots.name.assets.image,
     }),
-    attribution: createSlotWithStyleOverwrite({
+    attribution: createStyledSlotOrClone({
       element,
       slotRef: Slots.name.ATTRIBUTION,
     }),
-    attributionSubText: createSlotWithStyleOverwrite({
+    attributionSubText: createStyledSlotOrClone({
       element,
       slotRef: Slots.name.ATTRIBUTION_SUB_TEXT,
     }),

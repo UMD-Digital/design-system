@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { createContainerQuery } from '@universityofmaryland/web-utilities-library/styles';
+import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
 import { ElementModel } from 'model';
 import { layout } from 'atomic';
 import { PersonCard } from './_types';
@@ -88,7 +88,7 @@ export default ({
         overflow: 'hidden',
         display: 'flex',
 
-        ...createContainerQuery('max-width', smallBreakpoint, {
+        ...createMediaQuery('max-width', smallBreakpoint, {
           flexDirection: 'column',
         }),
       },

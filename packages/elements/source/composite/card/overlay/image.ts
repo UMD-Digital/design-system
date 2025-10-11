@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { quote as iconQuote } from '@universityofmaryland/web-icons-library/brand';
 import { truncateTextBasedOnSize } from '@universityofmaryland/web-utilities-library/string';
-import { createContainerQuery } from '@universityofmaryland/web-utilities-library/styles';
+import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
 import { ElementModel } from 'model';
 import { actions, assets, textLockup } from 'atomic';
 import { CardOverlayProps } from '../_types';
@@ -171,7 +171,7 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
             height: '100%',
             overflow: 'hidden',
 
-            ...createContainerQuery(
+            ...createMediaQuery(
               'min-width',
               token.media.breakpointValues.medium.min,
               {

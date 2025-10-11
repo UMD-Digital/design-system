@@ -2,7 +2,7 @@ import * as token from '@universityofmaryland/web-styles-library/token';
 import { arrow_right as iconArrowRight } from '@universityofmaryland/web-icons-library/arrows';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { getResponsiveImageSize } from '@universityofmaryland/web-utilities-library/media';
-import { createEventSwipe } from '@universityofmaryland/web-utilities-library/events';
+import { setupSwipeDetection } from '@universityofmaryland/web-utilities-library/events';
 
 type TypeCarouselImageProps = {
   slides: HTMLElement[];
@@ -278,7 +278,7 @@ export default (props: TypeCarouselImageProps) =>
         }
       };
 
-      createEventSwipe({
+      setupSwipeDetection({
         container: slider,
         callback: swipes,
       });

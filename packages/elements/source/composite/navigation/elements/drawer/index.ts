@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { eventAccessibilityFocus } from '@universityofmaryland/web-utilities-library/accessibility';
+import { handleKeyboardNavigation } from '@universityofmaryland/web-utilities-library/events';
 import { close_large as iconCloseLarge } from '@universityofmaryland/web-icons-library/controls';
 import { TypeMenuDisplayButtonRequirements } from '../menu-button';
 import NavDrawerSlider, { TypeNavSliderRequirements } from '../slider';
@@ -184,7 +184,7 @@ const CreateNavDrawerElement = (props: TypeNavDrawerRequirements) =>
         body.style.overflow = 'hidden';
         closeButton.focus();
 
-        eventAccessibilityFocus({
+        handleKeyboardNavigation({
           element: elementContainer,
           action: () => eventClose(),
           shadowDomContext: context,

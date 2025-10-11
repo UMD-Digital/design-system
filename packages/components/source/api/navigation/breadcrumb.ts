@@ -1,5 +1,5 @@
 import { navigation } from '@universityofmaryland/web-elements-library/composite';
-import { createSlotWithStyleOverwrite } from '@universityofmaryland/web-utilities-library/elements';
+import { createStyledSlotOrClone } from '@universityofmaryland/web-utilities-library/elements';
 import { Attributes, Slots, Register } from 'model';
 import { CreateComponentFunction, SlotConfiguration } from '../../_types';
 
@@ -12,7 +12,7 @@ const slots: SlotConfiguration = {
 };
 
 const createComponent: CreateComponentFunction = (element) => {
-  const linkListSlot = createSlotWithStyleOverwrite({
+  const linkListSlot = createStyledSlotOrClone({
     element,
     slotRef: Slots.name.PATHS,
   });

@@ -23,9 +23,9 @@ interface ParsedEventData {
   /** Processed date and location data from Markup.event.createDetailsData */
   detailsData: ReturnType<typeof date.createEventDetails>;
   /** Parsed start date object */
-  startDate: ReturnType<typeof date.createEventDate>;
+  startDate: ReturnType<typeof date.parseDateFromElement>;
   /** Parsed end date object (optional) */
-  endDate: ReturnType<typeof date.createEventDate>;
+  endDate: ReturnType<typeof date.parseDateFromElement>;
   /** Location element (optional) */
   locationElement: Element | null;
 }
@@ -77,13 +77,13 @@ const extractEventSlots = (element: HTMLElement): EventSlots => ({
  * @returns Parsed event data or null if start date is missing
  */
 const parseEventData = (slots: EventSlots): ParsedEventData | null => {
-  const startDate = date.createEventDate({ element: slots.startDate });
+  const startDate = date.parseDateFromElement({ element: slots.startDate });
 
   if (!startDate) {
     return null;
   }
 
-  const endDate = date.createEventDate({ element: slots.endDate });
+  const endDate = date.parseDateFromElement({ element: slots.endDate });
 
   const detailsData = date.createEventDetails({
     locationElement: slots.location,

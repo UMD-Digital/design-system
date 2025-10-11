@@ -3,7 +3,7 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import { animationLinkSpan } from '@universityofmaryland/web-utilities-library/animation';
+import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
 import createSocialCampaignColumns, {
   type SocialCampaignColumnsProps,
 } from '../social';
@@ -236,7 +236,7 @@ export default (props: ContactProps): ElementVisual => {
 
   if (hasSlot) {
     if (slotHeadline) {
-      animationLinkSpan({ element: slotHeadline });
+      wrapLinkForAnimation({ element: slotHeadline });
       contactChildren.push(
         createContactListHeadline({ props: props, element: slotHeadline }),
       );

@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import {
-  createContainerQuery,
-  createRangeContainerQuery,
+  createMediaQuery,
+  createMediaQueryRange,
 } from '@universityofmaryland/web-utilities-library/styles';
 import { assets, textLockup } from 'atomic';
 import { ElementModel } from 'model';
@@ -28,20 +28,20 @@ export const image = ({
     className: 'person-column-image',
     elementStyles: {
       element: {
-        ...createContainerQuery('max-width', smallBreakpoint, {
+        ...createMediaQuery('max-width', smallBreakpoint, {
           marginBottom: `${token.spacing.md}`,
           backgroundColor: `${token.color.gray.lighter}`,
           display: 'flex',
           justifyContent: 'center',
 
           ...(isThemeDark && {
-            ...createContainerQuery('max-width', smallBreakpoint, {
+            ...createMediaQuery('max-width', smallBreakpoint, {
               backgroundColor: `${token.color.gray.darker}`,
             }),
           }),
         }),
 
-        ...createContainerQuery('min-width', mediumBreakpointStart, {
+        ...createMediaQuery('min-width', mediumBreakpointStart, {
           display: 'block',
           width: '96px',
           paddingRight: `${token.spacing.md}`,
@@ -51,7 +51,7 @@ export const image = ({
         ...customStyles,
 
         '& img, & svg': {
-          ...createContainerQuery('max-width', smallBreakpoint, {
+          ...createMediaQuery('max-width', smallBreakpoint, {
             height: 'auto !important',
             width: '140px',
           }),
@@ -129,11 +129,11 @@ export const contact = (props: PersonContactPropsWithStyles) => {
       element: {
         marginTop: `${token.spacing.sm}`,
 
-        ...createContainerQuery('min-width', mediumBreakpointStart, {
+        ...createMediaQuery('min-width', mediumBreakpointStart, {
           paddingLeft: `${token.spacing.md}`,
         }),
 
-        ...createContainerQuery('min-width', mediumBreakpoint, {
+        ...createMediaQuery('min-width', mediumBreakpoint, {
           width: '30%',
         }),
 

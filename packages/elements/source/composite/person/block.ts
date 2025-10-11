@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { imageFromSvg } from '@universityofmaryland/web-utilities-library/media';
-import { createContainerQuery } from '@universityofmaryland/web-utilities-library/styles';
+import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
 import { person as iconPerson } from '@universityofmaryland/web-icons-library/people';
 import { ElementModel } from 'model';
 import { assets, textLockup } from 'atomic';
@@ -43,7 +43,7 @@ export default (props: PersonCard) => {
             objectFit: 'contain',
             height: '140px !important',
 
-            ...createContainerQuery('min-width', mediumBreakpointStart, {
+            ...createMediaQuery('min-width', mediumBreakpointStart, {
               height: '200px !important',
             }),
           },

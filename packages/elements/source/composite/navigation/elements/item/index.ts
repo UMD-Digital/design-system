@@ -1,8 +1,8 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as animation from '@universityofmaryland/web-styles-library/animation';
-import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
-import { animationLinkSpan } from '@universityofmaryland/web-utilities-library/animation';
-import { eventAccessibilityFocus } from '@universityofmaryland/web-utilities-library/accessibility';
+import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
+import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
+import { handleKeyboardNavigation } from '@universityofmaryland/web-utilities-library/events';
 import { chevron_down as iconChevronDown } from '@universityofmaryland/web-icons-library/controls';
 
 type TypePrimaryLinkRequirements = {
@@ -162,7 +162,7 @@ const DropdownListStyles = `
     line-height: 1.5em;
   }
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${ELEMENT_DROPDOWN_LIST_CONTAINER} a`]:
       animation.line.slideUnderRed,
@@ -243,11 +243,11 @@ const CreateMultipleColumns = ({ links }: { links: HTMLAnchorElement[] }) => {
   const firstColumnLinks = links.splice(0, Math.ceil(links.length / 2));
 
   firstColumnLinks.forEach((link) => {
-    animationLinkSpan({ element: link });
+    wrapLinkForAnimation({ element: link });
     column1.appendChild(link);
   });
   links.forEach((link) => {
-    animationLinkSpan({ element: link });
+    wrapLinkForAnimation({ element: link });
     column2.appendChild(link);
   });
 
@@ -257,7 +257,7 @@ const CreateMultipleColumns = ({ links }: { links: HTMLAnchorElement[] }) => {
 const CreateSingleColumn = ({ links }: { links: HTMLAnchorElement[] }) => {
   const container = document.createElement('div');
   links.forEach((link) => {
-    animationLinkSpan({ element: link });
+    wrapLinkForAnimation({ element: link });
     container.appendChild(link);
   });
 
@@ -381,7 +381,7 @@ const CreateNavItemElement = (props: TypeNavItem) =>
         const hasSpan = link.querySelector('span');
 
         if (!hasSpan) {
-          animationLinkSpan({ element: link });
+          wrapLinkForAnimation({ element: link });
           link.appendChild(link);
         }
       });
@@ -424,7 +424,7 @@ const CreateNavItemElement = (props: TypeNavItem) =>
     const EventButtonClick = () => {
       if (isShowing && dropdownLinksContainer) {
         ShowDropdown();
-        focusCallback = eventAccessibilityFocus({
+        focusCallback = handleKeyboardNavigation({
           element: elementContainer,
           action: () => HideDropdown(),
           shadowDomContext: context,

@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { createContainerQuery } from '@universityofmaryland/web-utilities-library/styles';
+import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
 import { ElementModel } from 'model';
 import { layout } from 'atomic';
 import { PersonCard } from './_types';
@@ -29,14 +29,14 @@ export default ({
     children.push(
       layout.person.columns.image({
         customStyles: {
-          ...createContainerQuery('min-width', mediumBreakpointStart, {
+          ...createMediaQuery('min-width', mediumBreakpointStart, {
             display: 'block',
             width: '160px',
             paddingRight: `${token.spacing.md}`,
             alignSelf: 'flex-start',
           }),
 
-          ...createContainerQuery('min-width', mediumBreakpoint, {
+          ...createMediaQuery('min-width', mediumBreakpoint, {
             width: '208px',
           }),
         },
@@ -73,7 +73,7 @@ export default ({
         overflow: 'hidden',
         display: 'flex',
 
-        ...createContainerQuery('max-width', smallBreakpoint, {
+        ...createMediaQuery('max-width', smallBreakpoint, {
           flexDirection: 'column',
         }),
       },

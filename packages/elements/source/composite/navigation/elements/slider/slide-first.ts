@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
+import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import Slides from './slides';
 import SlideAction, { TypeActionProps } from './action';
 
@@ -34,7 +34,7 @@ const OVERWRITE_ACTION_PRIMARY_LINK = `.${ELEMENT_SLIDER_FIRST_SLIDE_PRIMARY_LIN
 
 //prettier-ignore;
 const OverwriteSlidePrimaryLink = `
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`${OVERWRITE_ACTION_PRIMARY_LINK}`]: typography.sans.large,
     },

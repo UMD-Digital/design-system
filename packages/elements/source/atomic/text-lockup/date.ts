@@ -1,9 +1,9 @@
 import * as animation from '@universityofmaryland/web-styles-library/animation';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
+import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import { truncateText } from '@universityofmaryland/web-utilities-library/string';
-import { animationLinkSpan } from '@universityofmaryland/web-utilities-library/animation';
+import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
 
 type TypeEventLockupDate = {
   headline: HTMLElement | null;
@@ -24,13 +24,13 @@ const HeadlineStyles = `
     margin-left: ${token.spacing.sm};
   }
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${EVENT_HEADLINE}`]: typography.sans.large,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${EVENT_HEADLINE} *`]: typography.sans.large,
     },
@@ -44,13 +44,13 @@ const HeadlineStyles = `
     }
   }
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${EVENT_HEADLINE} a`]: animation.line.slideUnderBlack,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${EVENT_DATE_CONTAINER}${IS_THEME_DARK} .${EVENT_HEADLINE} a`]: animation.line.slideUnderWhite,
     },
@@ -94,7 +94,7 @@ export default (props: TypeEventLockupDate) => {
 
     headline.innerHTML = modifiedText;
     headline.classList.add(EVENT_HEADLINE);
-    animationLinkSpan({ element: headline });
+    wrapLinkForAnimation({ element: headline });
     container.appendChild(headline);
   }
 

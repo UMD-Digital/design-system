@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { createContainerQuery } from '@universityofmaryland/web-utilities-library/styles';
+import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
 import { ElementModel } from 'model';
 import { assets, textLockup } from 'atomic';
 import { PersonBio } from '../_types';
@@ -75,7 +75,7 @@ const makeContainer = (props: PersonBio) => {
         isScaled: false,
         customStyles: {
           element: {
-            ...createContainerQuery(
+            ...createMediaQuery(
               'max-width',
               token.media.breakpointValues.medium.max,
               {
@@ -84,7 +84,7 @@ const makeContainer = (props: PersonBio) => {
             ),
 
             [`& img`]: {
-              ...createContainerQuery(
+              ...createMediaQuery(
                 'min-width',
                 token.media.breakpointValues.large.min,
                 {
@@ -109,7 +109,7 @@ const makeContainer = (props: PersonBio) => {
         display: 'grid',
         gridGap: `${token.spacing.md}`,
 
-        ...createContainerQuery(
+        ...createMediaQuery(
           'min-width',
           token.media.breakpointValues.large.min,
           {
@@ -120,7 +120,7 @@ const makeContainer = (props: PersonBio) => {
         ),
 
         [`& > *`]: {
-          ...createContainerQuery(
+          ...createMediaQuery(
             'min-width',
             token.media.breakpointValues.large.min,
             {
@@ -130,7 +130,7 @@ const makeContainer = (props: PersonBio) => {
         },
 
         [`&:has(> :nth-child(2)) > *:first-child `]: {
-          ...createContainerQuery(
+          ...createMediaQuery(
             'min-width',
             token.media.breakpointValues.large.min,
             {

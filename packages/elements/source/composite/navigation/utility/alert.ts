@@ -5,7 +5,7 @@ import {
   typography,
 } from '@universityofmaryland/web-styles-library';
 import { fetchGraphQL } from '@universityofmaryland/web-utilities-library/network';
-import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
+import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import { close_large as iconCloseLarge } from '@universityofmaryland/web-icons-library/controls';
 import { actions } from 'atomic';
 
@@ -178,7 +178,7 @@ const CloseButtonStyles = `
 
 // prettier-ignore
 const TextStyles = `
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`${ALERT_TITLE}`]: typography.sans.large,
     },
@@ -192,7 +192,7 @@ const TextStyles = `
     margin-top: ${token.spacing.sm};
   }
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`${ALERT_TEXT}`]: element.text.rich.advanced,
     },
@@ -231,7 +231,7 @@ const WrapperStyles = `
 
 // prettier-ignore
 const LockStyles = `
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`${LOCK}`]: layout.space.horizontal.full,
     },

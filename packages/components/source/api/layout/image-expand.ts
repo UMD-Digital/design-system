@@ -22,7 +22,7 @@ const slots: SlotConfiguration = {
 const createComponent: CreateComponentFunction = (element) =>
   layout.image.expand({
     content: createSlot('content'),
-    image: validation.slotImage({
+    image: validation.getValidatedSlotImage({
       element,
       slotName: Slots.name.assets.image,
     }) as HTMLImageElement,

@@ -1,5 +1,5 @@
-export { createVisualFormattedDate } from './createVisualFormattedDate';
-export { createDateCompareString } from './createDateCompareString';
+export { formatDateForDisplay } from './formatDateForDisplay';
+export { formatDateForComparison } from './formatDateForComparison';
 
-export { createEventDate } from './createEventDate';
+export { parseDateFromElement } from './parseDateFromElement';
 export { createEventDetails } from './createEventDetails';

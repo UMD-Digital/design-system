@@ -5,7 +5,7 @@ import {
   typography,
 } from '@universityofmaryland/web-styles-library';
 import { seal } from '@universityofmaryland/web-icons-library/logos';
-import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
+import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 
 type TypeBannerPromoProps = {
   headline?: HTMLElement | null;
@@ -49,7 +49,7 @@ const OverwriteThemeDark = `
     color: ${token.color.white};
   }
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`${OVERWRITE_THEME_DARK_RICH_TEXT}`]: element.text.rich.advancedDark,
     },
@@ -78,13 +78,13 @@ const ActionsStyles = `
 
 // prettier-ignore
 const TextStyles = `
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${ELEMENT_RICH_TEXT}`]: element.text.rich.advanced,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${ELEMENT_RICH_TEXT} a`]: animation.line.fadeUnderRed,
     },
@@ -101,7 +101,7 @@ const TextStyles = `
 
 // prettier-ignore
 const HeadlineStyles = `
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${ELEMENT_HEADLINE}`]: typography.sans.extraLarge,
     },

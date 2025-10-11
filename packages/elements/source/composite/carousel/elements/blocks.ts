@@ -2,8 +2,8 @@ import * as token from '@universityofmaryland/web-styles-library/token';
 import * as element from '@universityofmaryland/web-styles-library/element';
 import { arrow_right as iconArrowRight } from '@universityofmaryland/web-icons-library/arrows';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
-import { createEventSwipe } from '@universityofmaryland/web-utilities-library/events';
-import { convertPixelStringToNumber } from '@universityofmaryland/web-utilities-library/string';
+import { setupSwipeDetection } from '@universityofmaryland/web-utilities-library/events';
+import { parsePixelValue } from '@universityofmaryland/web-utilities-library/styles';
 
 type TypeDisplayLogic = {
   mobileCount: number;
@@ -272,7 +272,7 @@ const EventSwipe = (props: TypeHelpers) => {
     }
   };
 
-  createEventSwipe({ container, callback: swipes });
+  setupSwipeDetection({ container, callback: swipes });
 };
 
 const ButtonVisibility = (props: TypeHelpers) => {
@@ -376,7 +376,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       tabletCount: 2,
       desktopCount: 3,
       maxCount: 4,
-      blockGap: convertPixelStringToNumber(token.spacing.lg),
+      blockGap: parsePixelValue(token.spacing.lg),
       hasRightButton: true,
       hasLeftButton: true,
       showMobileHint: true,

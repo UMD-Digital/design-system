@@ -2,10 +2,10 @@ import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
 import {
-  convertJSSObjectToStyles,
-  getStyleStringFromJssObject,
+  jssToCSS,
+  jssEntryToCSS,
 } from '@universityofmaryland/web-utilities-library/styles';
-import { eventAccessibilityFocus } from '@universityofmaryland/web-utilities-library/accessibility';
+import { handleKeyboardNavigation } from '@universityofmaryland/web-utilities-library/events';
 import { search as iconSearch } from '@universityofmaryland/web-icons-library/search';
 import { chevron_down as iconChevronDown } from '@universityofmaryland/web-icons-library/controls';
 import {
@@ -66,13 +66,13 @@ const isDesktop = () => window.innerWidth >= DESKTOP;
 
 // prettier-ignore
 const LockStyles = `
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${ELEMENT_UTILITY_LOCK}`]: layout.space.horizontal.larger,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`${OVERWRITE_LOCK_FULL}`]: layout.space.horizontal.full,
     },
@@ -390,7 +390,7 @@ const CreateSearchFormButton = ({
       if (focusElement) focusElement.focus();
     }, 100);
 
-    focusCallback = eventAccessibilityFocus({
+    focusCallback = handleKeyboardNavigation({
       element: expandElement,
       action: () => eventClose(),
     });
@@ -455,7 +455,7 @@ const CreateMobileMenuButton = ({
       if (focusElement) focusElement.focus();
     }, 100);
 
-    focusCallback = eventAccessibilityFocus({
+    focusCallback = handleKeyboardNavigation({
       element: expandElement,
       action: () => eventClose(),
     });
@@ -637,7 +637,7 @@ const CreateNavigationUtility = (props: TypeUtilityRequirements) =>
       const secondaryCta = elementStyles.action.secondary.normal;
 
       let styles =
-        STYLES_NAVIGATION_UTILITY + getStyleStringFromJssObject(secondaryCta);
+        STYLES_NAVIGATION_UTILITY + jssEntryToCSS(secondaryCta);
 
       const setLayout = () => {
         const menuItems = CreateMenuItems({ ...props });

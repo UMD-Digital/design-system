@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
-import { svgFromString } from '@universityofmaryland/web-utilities-library/media';
-import { getIcon } from '@universityofmaryland/web-utilities-library/dom';
+import { parseSvgString } from '@universityofmaryland/web-utilities-library/media';
+import { extractIconElement } from '@universityofmaryland/web-utilities-library/dom';
 import { external_link as iconExternalLink } from '@universityofmaryland/web-icons-library/controls';
 import { email as iconEmail } from '@universityofmaryland/web-icons-library/communication';
 import { document as iconDocument } from '@universityofmaryland/web-icons-library/files';
@@ -48,12 +48,12 @@ const ICONS: Record<IconType, string> = {
 };
 
 function insertIcon(element: HTMLElement, svg: string): void {
-  const icon = svgFromString(svg);
+  const icon = parseSvgString(svg);
   if (icon) element.insertBefore(icon, element.firstChild);
 }
 
 function createLinkIcon(element: HTMLElement, type: ElementType): void {
-  const existingIcon = getIcon({ element });
+  const existingIcon = extractIconElement({ element });
   if (existingIcon) {
     element.insertBefore(existingIcon, element.firstChild);
     return;

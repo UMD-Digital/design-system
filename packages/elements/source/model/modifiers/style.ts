@@ -1,5 +1,5 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
+import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import { StyleModifierProps } from './_types';
 
 export enum StyleType {
@@ -61,7 +61,7 @@ const createSelector = (className: string, type: StyleType) => {
 const createStyles = (selector: string, styles: Record<string, any> | null) => {
   if (styles === null) return '';
 
-  return convertJSSObjectToStyles({
+  return jssToCSS({
     styleObj: { [selector]: styles },
   });
 };

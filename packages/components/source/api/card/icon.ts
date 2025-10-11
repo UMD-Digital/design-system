@@ -26,7 +26,7 @@ const slots: SlotConfiguration = {
  */
 const createComponent: CreateComponentFunction = (element) =>
   card.overlay.icon({
-    image: validation.slotImage({
+    image: validation.getValidatedSlotImage({
       element,
       slotName: Slots.name.assets.image,
     }),

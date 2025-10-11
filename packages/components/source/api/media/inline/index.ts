@@ -106,7 +106,7 @@ const createComponent: CreateComponentFunction = (element) => {
     isAlignmentRight,
     isThemeDark,
     caption,
-    image: validation.slotImage({
+    image: validation.getValidatedSlotImage({
       element,
       slotName: Slots.name.assets.image,
     }),

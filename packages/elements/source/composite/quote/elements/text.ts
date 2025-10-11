@@ -3,7 +3,7 @@ import {
   layout,
   token,
 } from '@universityofmaryland/web-styles-library';
-import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
+import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import { quote as iconQuote } from '@universityofmaryland/web-icons-library/brand';
 
 export type TypeQuoteTextContainer = {
@@ -40,13 +40,13 @@ const IS_SIZE_LARGE = `.${TEXT_CONTAINER}[${ATTRIBUTE_SIZE}='${SIZE_LARGE}']`;
 
 // prettier-ignore
 const VarationSizeLarge = `
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`${IS_SIZE_LARGE} .${TEXT_CONTAINER_QUOTE_WRAPPER}`]: typography.sans.extraLarge,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`${IS_SIZE_LARGE} .${TEXT_CONTAINER_QUOTE_WRAPPER} *`]: typography.sans.extraLarge,
     },
@@ -82,13 +82,13 @@ const QuoteStyles = `
     color: currentColor;
   }
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${TEXT_CONTAINER_QUOTE_WRAPPER}`]: typography.sans.larger,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${TEXT_CONTAINER_QUOTE_WRAPPER} *`]: typography.sans.larger,
     },
@@ -113,13 +113,13 @@ const AttributionStyles = `
     color: currentColor;
   }
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${TEXT_CONTAINER_ATTRIBUTION_WRAPPER}`]: typography.sans.medium,
     },
   })}
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${TEXT_CONTAINER_ATTRIBUTION_WRAPPER} *`]: typography.sans.medium,
     },
@@ -141,13 +141,13 @@ const AttributionSubTextStyles = `
     color: currentColor;
   }
   
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER}`]: typography.sans.small,
     },
   })}
   
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${TEXT_CONTAINER_ATTRIBUTION_SUB_TEXT_WRAPPER} *`]: typography.sans.small,
     },
@@ -160,7 +160,7 @@ const ActionStyles = `
     margin-top: ${token.spacing.sm};
   }
 
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${ELEMENTS_TEXT_CONTAINER_ACTIONS}`]: layout.grid.inline.tabletRows,
     },

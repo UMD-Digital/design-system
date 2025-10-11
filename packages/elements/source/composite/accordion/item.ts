@@ -1,5 +1,5 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
+import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 
 type TypeHeadlineText = { headline?: HTMLElement | null };
@@ -90,7 +90,7 @@ const OverwriteThemeDark = `
 
 // prettier-ignore
 const bodyStyles = `
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${ELEMENT_BODY_WRAPPER}`]: Styles.typography.sans.medium
     },
@@ -130,7 +130,7 @@ const bodyStyles = `
 
 // prettier-ignore
 const headlineStyles = `
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${ELEMENT_HEADLINE}`]: Styles.typography.sans.large,
     },

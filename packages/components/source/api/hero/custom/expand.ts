@@ -1,6 +1,6 @@
 import { hero } from '@universityofmaryland/web-elements-library/composite';
 import { createSlot } from '@universityofmaryland/web-utilities-library/elements';
-import { slotImage } from '@universityofmaryland/web-utilities-library/validation';
+import { getValidatedSlotImage } from '@universityofmaryland/web-utilities-library/validation';
 import { Attributes, Slots, Register } from 'model';
 
 import type {
@@ -24,7 +24,7 @@ const attributes = Attributes.handler.combine(
 );
 
 const createComponent: CreateComponentFunction = (element) => {
-  const image = slotImage({
+  const image = getValidatedSlotImage({
     element,
     slotName: Slots.name.assets.image,
   });

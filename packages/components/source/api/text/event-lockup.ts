@@ -3,7 +3,7 @@ import {
   textLockup,
 } from '@universityofmaryland/web-elements-library/atomic';
 import {
-  createEventDate,
+  parseDateFromElement,
   createEventDetails,
 } from '@universityofmaryland/web-utilities-library/date';
 import { Attributes, Register, Slots, Lifecycle } from 'model';
@@ -25,10 +25,10 @@ const createComponent: CreateComponentFunction = (element) => {
   const endDateSlot = element.querySelector(
     `[slot="${Slots.name.DATE_END_ISO}"]`,
   );
-  const startDate = createEventDate({
+  const startDate = parseDateFromElement({
     element: startDateSlot,
   });
-  const endDate = createEventDate({ element: endDateSlot });
+  const endDate = parseDateFromElement({ element: endDateSlot });
 
   if (!startDate) {
     return textLockup.date({

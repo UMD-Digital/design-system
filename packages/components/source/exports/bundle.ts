@@ -15,7 +15,7 @@ import * as Feeds from '@universityofmaryland/web-feeds-library';
  */
 const initializeBundle = () => {
   loadComponentClass(Components as any);
-  Utilities.loadGridAnimationObserver();
+  Utilities.observeGridAnimations();
 };
 
 const UmdBundle = {

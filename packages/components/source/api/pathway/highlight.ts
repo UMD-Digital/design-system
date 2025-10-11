@@ -1,5 +1,5 @@
 import { pathway } from '@universityofmaryland/web-elements-library/composite';
-import { createSlotWithStyleOverwrite } from '@universityofmaryland/web-utilities-library/elements';
+import { createStyledSlotOrClone } from '@universityofmaryland/web-utilities-library/elements';
 import { Attributes, Slots, Register } from 'model';
 import { CreateComponentFunction } from '../../_types';
 
@@ -11,11 +11,11 @@ const createComponent: CreateComponentFunction = (element) =>
     eyebrow: Slots.eyebrow.default({ element }),
     headline: Slots.headline.default({ element }),
     text: Slots.text.default({ element }),
-    quote: createSlotWithStyleOverwrite({
+    quote: createStyledSlotOrClone({
       element,
       slotRef: Slots.name.HIGHLIGHT,
     }),
-    attribution: createSlotWithStyleOverwrite({
+    attribution: createStyledSlotOrClone({
       element,
       slotRef: Slots.name.HIGHLIGHT_ATTRIBUTION,
     }),

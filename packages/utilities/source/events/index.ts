@@ -1,1 +1,2 @@
-export { createEventSwipe } from './createEventSwipe';
+export { handleKeyboardNavigation } from './handleKeyboardNavigation';
+export { setupSwipeDetection } from './setupSwipeDetection';

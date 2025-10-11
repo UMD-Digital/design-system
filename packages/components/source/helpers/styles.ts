@@ -70,7 +70,7 @@ export const reset = `
   }
 `;
 
-export const convertJSSObjectToStyles = ({ styleObj }: { styleObj: any }) => {
+export const jssToCSS = ({ styleObj }: { styleObj: any }) => {
   const root = postcssJs.parse(styleObj);
   return postcss(postcssNesting).process(root as any).css;
 };

@@ -1,4 +1,4 @@
 export { shrinkThenRemove } from './shrinkThenRemove';
-export { scrollTo } from './scrollTo';
-export { animationLinkSpan } from './animationLinkSpan';
-export { loadGridAnimationObserver } from './loadGridAnimationObserver';
+export { smoothScrollToElement } from './smoothScrollToElement';
+export { wrapLinkForAnimation } from './wrapLinkForAnimation';
+export { observeGridAnimations } from './observeGridAnimations';

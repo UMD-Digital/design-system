@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
-import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
-import { convertPixelStringToNumber } from '@universityofmaryland/web-utilities-library/string';
+import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
+import { parsePixelValue } from '@universityofmaryland/web-utilities-library/styles';
 import {
   isScreenZoomed,
   isPreferredReducedMotion,
@@ -29,7 +29,7 @@ const ELEMENT_EXPAND_TEXT_ANIMATION = 'layout-image-expand-text-animation';
 
 // prettier-ignore
 const TextLock = `
-  ${convertJSSObjectToStyles({
+  ${jssToCSS({
     styleObj: {
       [`.${ELEMENT_EXPAND_TEXT_LOCK}`]: layout.space.horizontal.larger,
     },
@@ -298,7 +298,7 @@ export default (props: TypeLayoutImageExpandProps) => {
   const sizeImageForText = () => {
     const textContainerHeight =
       textContainer.clientHeight +
-      convertPixelStringToNumber(spacing['2xl']) * 2;
+      parsePixelValue(spacing['2xl']) * 2;
     const imageContainerHeight = container.clientHeight;
 
     if (textContainerHeight > imageContainerHeight) {

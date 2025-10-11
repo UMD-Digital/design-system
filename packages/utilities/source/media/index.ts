@@ -7,5 +7,5 @@
  */
 
 export { imageFromSvg } from './imageFromSvg';
-export { svgFromString } from './svgFromString';
+export { parseSvgString } from './parseSvgString';
 export { getResponsiveImageSize } from './getResponsiveImageSize';

@@ -1,63 +1,174 @@
-# CLAUDE.md
+# CLAUDE.md - Styles Package
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+## Package Overview
 
-## Essential Commands
+The **Styles Package** (`@universityofmaryland/web-styles-library`) provides JSS (JavaScript Style Sheets) objects, design tokens, and CSS utilities for the UMD Design System. All styles are JavaScript objects that can be transformed to CSS.
 
-### Development
+**Version**: 1.6.9
+**Dependencies**: `postcss`, `postcss-discard-duplicates`, `postcss-js`, `postcss-nesting`
+
+## Build System
+
+### Vite Configuration
+
+- **Builder**: Vite with TypeScript
+- **Output Formats**: ES Modules (`.mjs`) and CommonJS (`.js`)
+- **External Dependencies**: All `@universityofmaryland/*` packages
+- **Special Build**: CDN bundle (IIFE format) via `build:cdn` script
+- **Type Declarations**: Generated with `vite-plugin-dts`
+- **Module Preservation**: `preserveModules: true` for granular imports
+
+### Build Commands
+
 ```bash
-npm run start       # Run webpack in watch mode for development
-npm run build       # Build production bundle
-npm test           # Run all tests
-npm run test:watch # Run tests in watch mode
-npm run test:coverage # Generate test coverage report
-npm run test:snapshot # Update Jest snapshots
-npm run docs       # Generate TypeDoc documentation
-npm run clean      # Clean dist directory
+npm run build      # Main build + CDN build
+npm run build:cdn  # CDN-only build (IIFE format)
+npm run dev        # Watch mode
+npm run clean      # Remove dist
+npm test          # Run all tests
 ```
 
-### Testing Individual Files
-```bash
-npm test -- path/to/test.ts  # Run specific test file
-npm test -- --updateSnapshot # Update snapshots for failing tests
+### Special Builds
+
+The styles package creates TWO builds:
+
+1. **Module Build** (`npm run build`): Code-split ES/CJS modules
+2. **CDN Build** (`BUILD_CDN=true`): Single-file IIFE bundle for `<script>` tags
+
+## Package Structure
+
+### Source Organization
+
+```
+source/
+├── accessibility/  # Accessibility-focused styles
+├── animation/      # Animation keyframes and utilities
+├── element/        # Element-specific styles (buttons, forms, etc.)
+├── layout/         # Layout utilities (grid, flex, etc.)
+├── token/          # Design tokens (colors, spacing, fonts, media)
+├── typography/     # Typography styles and font faces
+├── utilities/      # Style transformation utilities
+└── web-components/ # Web component-specific styles
 ```
 
-## Architecture Overview
+### Export Pattern
 
-This package provides JSS (JavaScript Style Sheets) objects for the University of Maryland design system. The styles are JavaScript objects that can be:
-- Used inline with JavaScript frameworks
-- Converted to CSS strings using provided utilities
-- Integrated with Tailwind CSS
-- Split for optimal loading (preRender/postRender)
+```typescript
+// Namespace import (recommended for JSS modules)
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as layout from '@universityofmaryland/web-styles-library/layout';
 
-### Core Structure
+// Named exports from main
+import { token, layout } from '@universityofmaryland/web-styles-library';
 
-**Source Organization:**
-- `token/` - Design tokens (colors, spacing, fonts, media queries)
-- `typography/` - Font definitions and text styles
-- `element/` - UI component styles (buttons, forms, cards, etc.)
-- `layout/` - Layout utilities (grid, alignment, backgrounds)
-- `animation/` - Transitions and animations
-- `accessibility/` - Screen reader and skip navigation utilities
-- `utilities/` - Helper functions for JSS/CSS transformation
+// Use tokens
+const myStyles = {
+  color: token.color.red,
+  padding: token.spacing.md
+};
+```
 
-### Key Patterns
+## package.json Exports
 
-1. **JSS Objects**: All styles are defined as JavaScript objects with `className` properties
-2. **CSS Variables**: Tokens are exposed as CSS custom properties
-3. **Media Queries**: Responsive styles use predefined breakpoints from `token/media.ts`
-4. **Type Safety**: Full TypeScript definitions for all style objects
+```json
+{
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./token": {
+      "types": "./dist/token.d.ts",
+      "import": "./dist/token.mjs",
+      "require": "./dist/token.js"
+    }
+    // ... other categories
+  }
+}
+```
 
-### Testing
+## JSS Pattern
 
-- Jest with snapshot testing for style objects
-- Tests are co-located with source files in `__tests__` directories
-- Focus on testing the structure and values of JSS objects
+All styles are JavaScript objects:
 
-### Build Output
+```typescript
+export const myStyle = {
+  className: 'my-class',
+  color: 'red',
+  '&:hover': { color: 'blue' }
+};
+```
 
-The webpack build produces:
-- ES module bundle at `dist/index.js`
-- TypeScript definitions
-- Minified production code
-- PostCSS processing with nesting support
+## Design Tokens
+
+Centralized design system values:
+
+### Token Categories
+- **Colors**: `token.color.red`, `token.color.gray.dark`
+- **Spacing**: `token.spacing.sm`, `token.spacing.maxWidth.small`
+- **Typography**: `token.font.family.sans`, `token.font.size.lg`
+- **Media Queries**: `token.media.min.desktop` (Mobile: 0-767px, Tablet: 768-1023px, Desktop: 1024px+)
+
+## CDN Build
+
+The CDN build bundles everything into a single IIFE file:
+
+```html
+<script src="https://cdn.example.com/styles/cdn.js"></script>
+<script>
+  const { token, layout } = window.Styles;
+</script>
+```
+
+**Use Case**: Quick prototyping or legacy integrations without build tools
+
+## Testing
+
+- **Framework**: Jest with TypeScript
+- **Location**: `source/__tests__/`
+- **Test Pattern**: Snapshot testing for CSS output consistency
+
+## Best Practices
+
+1. **Use Namespace Imports**: JSS modules export objects, not primitives
+   - ✅ `import * as token from '.../ token'`
+   - ❌ `import token from '.../token'`  (no default export)
+
+2. **Design Tokens First**: Use tokens before custom values
+3. **Transform Before Use**: Convert JSS to CSS using utilities package
+4. **Type Safety**: Leverage TypeScript for autocomplete
+
+## Build Output
+
+### Module Build
+- `dist/index.{js,mjs,d.ts}` - Main export
+- `dist/{category}.{js,mjs,d.ts}` - Category exports
+- `dist/{category}/{module}.{js,mjs,d.ts}` - Individual modules
+
+### CDN Build
+- `dist/cdn.js` - Single IIFE bundle (no externals)
+
+## Utilities Integration
+
+The styles package provides JSS objects. Use the utilities package to convert them:
+
+```typescript
+import * as token from '@universityofmaryland/web-styles-library/token';
+import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
+
+const css = convertJSSObjectToStyles({
+  styleObj: {
+    '.my-class': {
+      color: token.color.red
+    }
+  }
+});
+```
+
+## Notes
+
+- JSS enables dynamic, type-safe styling
+- All values are JavaScript - no CSS parsing needed
+- PostCSS processes output for nesting and optimization
+- CDN build is self-contained with no external dependencies

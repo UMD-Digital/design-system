@@ -76,7 +76,7 @@ export default defineConfig(({ mode }) => {
     sourcemap: true,
     minify: false,
     rollupOptions: {
-      external: [],
+      external: (id: string) => id.startsWith('@universityofmaryland/'),
       output: {
         preserveModules: true,
         preserveModulesRoot: 'source',
@@ -91,7 +91,6 @@ export default defineConfig(({ mode }) => {
   logLevel: 'warn',
   resolve: {
     alias: {
-      '@universityofmaryland/web-utilities-library': path.resolve(__dirname, '../utilities/source'),
       '@': path.resolve(__dirname, 'source')
     },
     extensions: ['.ts', '.js', '.css']

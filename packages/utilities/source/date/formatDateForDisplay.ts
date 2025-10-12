@@ -19,6 +19,8 @@
  * //   time: '2:30pm'
  * // }
  * ```
+ *
+ * @category date
  */
 export const formatDateForDisplay = (date: Date) => {
   return {

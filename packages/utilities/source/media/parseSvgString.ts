@@ -12,6 +12,8 @@
  * document.body.appendChild(svgElement);
  * // Inserts the SVG element directly into the DOM
  * ```
+ *
+ * @category media
  */
 export function parseSvgString(svgString: string): ChildNode | null {
   const div = document.createElement('div');

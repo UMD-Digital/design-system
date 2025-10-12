@@ -1,4 +1,4 @@
-import { imageHasAlt } from '../../validation/imageHasAlt';
+import { imageHasAlt } from '../../accessibility/imageHasAlt';
 
 describe('imageHasAlt', () => {
   // Suppress console.error for tests

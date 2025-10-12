@@ -14,6 +14,8 @@
  * wrapTextNodeInSpan(button);
  * // Result: <button><span>Click me</span></button>
  * ```
+ *
+ * @category dom
  */
 export const wrapTextNodeInSpan = (
   element: HTMLElement | HTMLAnchorElement | HTMLButtonElement,

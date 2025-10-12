@@ -18,6 +18,8 @@
  *   frames: 45   // Slightly faster scroll
  * });
  * ```
+ *
+ * @category animation
  */
 export const smoothScrollToElement = ({
   element,

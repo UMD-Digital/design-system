@@ -23,6 +23,8 @@
  * // Later, cleanup when modal closes
  * cleanup();
  * ```
+ *
+ * @category accessibility
  */
 export const trapFocus = ({
   element,

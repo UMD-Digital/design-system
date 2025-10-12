@@ -31,15 +31,15 @@
       "import": "./dist/animation/*.mjs",
       "require": "./dist/animation/*.js"
     },
-    "./converter": {
-      "types": "./dist/converter.d.ts",
-      "import": "./dist/converter.mjs",
-      "require": "./dist/converter.js"
+    "./adapters": {
+      "types": "./dist/adapters.d.ts",
+      "import": "./dist/adapters.mjs",
+      "require": "./dist/adapters.js"
     },
-    "./converter/*": {
-      "types": "./dist/converter/*.d.ts",
-      "import": "./dist/converter/*.mjs",
-      "require": "./dist/converter/*.js"
+    "./adapters/*": {
+      "types": "./dist/adapters/*.d.ts",
+      "import": "./dist/adapters/*.mjs",
+      "require": "./dist/adapters/*.js"
     },
     "./date": {
       "types": "./dist/date.d.ts",

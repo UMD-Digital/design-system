@@ -22,6 +22,8 @@ import { formatDateForDisplay } from './formatDateForDisplay';
  * //   time: '2:30pm'
  * // }
  * ```
+ *
+ * @category date
  */
 export const parseDateFromElement = ({
   element,

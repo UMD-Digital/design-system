@@ -8,8 +8,8 @@ export default defineConfig({
       entry: {
         index: resolve(__dirname, 'source/index.ts'),
         accessibility: resolve(__dirname, 'source/accessibility/index.ts'),
+        adapters: resolve(__dirname, 'source/adapters/index.ts'),
         animation: resolve(__dirname, 'source/animation/index.ts'),
-        converter: resolve(__dirname, 'source/converter/index.ts'),
         date: resolve(__dirname, 'source/date/index.ts'),
         dom: resolve(__dirname, 'source/dom/index.ts'),
         elements: resolve(__dirname, 'source/elements/index.ts'),

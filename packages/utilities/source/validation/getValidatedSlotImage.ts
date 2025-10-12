@@ -1,6 +1,6 @@
 import { getImageFromSlot } from '../dom';
 import { createStyledSlotOrClone } from '../elements';
-import { imageHasAlt } from './imageHasAlt';
+import { imageHasAlt } from '../accessibility/imageHasAlt';
 
 /**
  * Retrieves and validates an image from a slot element

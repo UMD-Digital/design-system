@@ -14,6 +14,8 @@
  * const dialog = findParent({ element: button, attr: 'role' });
  * // Returns the closest ancestor with a 'role' attribute
  * ```
+ *
+ * @category dom
  */
 export const findParent = ({
   element,

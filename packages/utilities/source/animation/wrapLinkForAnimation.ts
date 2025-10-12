@@ -16,6 +16,8 @@
  * wrapLinkForAnimation({ element: link });
  * // Result: <a href="#"><span>Click me</span></a>
  * ```
+ *
+ * @category animation
  */
 export const wrapLinkForAnimation = ({
   element,

@@ -18,6 +18,8 @@
  *   console.log(`Last visited ${Math.floor(daysSince)} days ago`);
  * }
  * ```
+ *
+ * @category storage
  */
 export const setLocalStorageTimestamp = ({ key }: { key: string }): void => {
   const currentTime = new Date().getTime();

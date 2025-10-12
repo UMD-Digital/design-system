@@ -17,6 +17,8 @@
  * const icon = extractIconElement({ element: container });
  * // Returns the SVG element with color applied
  * ```
+ *
+ * @category dom
  */
 export const extractIconElement = ({ element }: { element: HTMLElement }) => {
   const svgIcon = element.querySelector(`svg`);

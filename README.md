@@ -11,14 +11,23 @@ The University of Maryland's Design System is intended for use by university cam
 
 ## Packages
 
-The design system consists of the following packages:
+The design system consists of the following packages, listed in dependency order:
 
-- **[Icons](packages/icons/README.md)**: SVG icon and logo assets organized by category for optimal tree-shaking
-- **[Utilities](packages/utilities/)**: Shared utility functions for DOM manipulation, accessibility, animations, and more
-- **[Styles](packages/styles/README.md)**: JSS objects and utilities for styling consistent with UMD brand guidelines
-- **[Elements](packages/elements/README.md)**: Foundational UI elements that make up the components
-- **[Feeds](packages/feeds/README.md)**: Components for displaying dynamic content feeds (news, events, etc.)
-- **[Components](packages/components/README.md)**: High-level web components built from the elements library for interfaces, interactivity, layout, and data feeds
+### Foundation Layer
+
+- **[Icons](packages/icons/README.md)** (`v1.0.0`): SVG icon and logo assets organized by category for optimal tree-shaking. Includes navigation, controls, social media, brand assets, and UMD logos.
+
+- **[Utilities](packages/utilities/README.md)** (`v0.1.0`): Shared utility functions organized into 14 categories: accessibility, adapters, animation, date, DOM manipulation, elements, events, media, network, performance, storage, string processing, style utilities, and validation. Includes 100% test coverage and comprehensive TypeDoc documentation.
+
+- **[Styles](packages/styles/README.md)** (`v1.6.9`): JSS objects, design tokens, and style utilities consistent with UMD brand guidelines. Includes colors, typography, spacing, media queries, and layout patterns.
+
+### Component Layer
+
+- **[Elements](packages/elements/README.md)** (`v1.4.8`): Foundational UI element builders that create consistent, accessible HTML structures. Includes atomic components (typography, actions, media) and composite components (cards, navigation, tabs, sliders).
+
+- **[Feeds](packages/feeds/README.md)** (`v1.1.1`): Dynamic content feed components for displaying news articles, events, testimonials, and data visualizations from various data sources.
+
+- **[Components](packages/components/README.md)** (`v1.15.0-beta.0`): High-level Web Components (Custom Elements) built from the elements library. Provides encapsulated, reusable components with Shadow DOM for interfaces, interactivity, layout, and data feeds.
 
 ### For information, visit [UMD Design System Website](https://designsystem.umd.edu)
 

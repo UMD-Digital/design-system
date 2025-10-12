@@ -21,6 +21,8 @@ import { createSlot } from './createSlot';
  * const result = createStyledSlotOrClone({ element: container, slotRef: 'content' });
  * // Returns a slot element for styled content
  * ```
+ *
+ * @category elements
  */
 export const createStyledSlotOrClone = ({
   element,

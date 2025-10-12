@@ -12,6 +12,8 @@
  * document.body.appendChild(img);
  * // Creates an img element with src="data:image/svg+xml;base64,..."
  * ```
+ *
+ * @category media
  */
 export const imageFromSvg = ({ SVG }: { SVG: string }): HTMLImageElement => {
   const image = document.createElement('img');

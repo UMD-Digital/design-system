@@ -1,5 +1,5 @@
 import { card } from '@universityofmaryland/web-elements-library/composite';
-import { toUMDElement } from '@universityofmaryland/web-utilities-library/converter';
+import { toUMDElement } from '@universityofmaryland/web-utilities-library/adapters';
 import { Attributes, Slots, Register } from 'model';
 import { extractEventData } from '../_event';
 import type {

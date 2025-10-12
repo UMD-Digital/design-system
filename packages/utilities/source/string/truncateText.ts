@@ -13,6 +13,8 @@
  * const result = truncateText({ text: html, maxTextSize: 20 });
  * // result: '<p>This is a <strong>long</strong> te ...</p>'
  * ```
+ *
+ * @category string
  */
 export const truncateText = ({
   text,

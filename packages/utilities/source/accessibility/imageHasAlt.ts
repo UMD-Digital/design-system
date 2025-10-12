@@ -14,6 +14,8 @@
  *   // Handle missing alt text
  * }
  * ```
+ *
+ * @category accessibility
  */
 export const imageHasAlt = (image: HTMLImageElement | null): boolean => {
   if (!image) return true;

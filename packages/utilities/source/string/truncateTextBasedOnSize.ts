@@ -30,6 +30,8 @@ import { truncateText } from './truncateText';
  * const max = truncateTextBasedOnSize({ text: html, size: 700 });
  * // Truncated to 280 characters
  * ```
+ *
+ * @category string
  */
 export const truncateTextBasedOnSize = ({
   text,

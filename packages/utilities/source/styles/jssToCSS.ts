@@ -36,6 +36,8 @@ import postcssJs from 'postcss-js';
  * //   background: #f0f0f0;
  * // }
  * ```
+ *
+ * @category styles
  */
 export const jssToCSS = ({ styleObj }: { styleObj: any }): string => {
   // @ts-ignore - PostCSS version incompatibility between monorepo dependencies

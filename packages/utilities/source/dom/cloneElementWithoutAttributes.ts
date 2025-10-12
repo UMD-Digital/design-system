@@ -18,6 +18,8 @@
  * // Result: <a href="https://example.com"></a>
  * // All attributes except href are removed
  * ```
+ *
+ * @category dom
  */
 export const cloneElementWithoutAttributes = ({
   element,

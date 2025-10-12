@@ -16,6 +16,8 @@
  *   element.classList.add('with-animation');
  * }
  * ```
+ *
+ * @category accessibility
  */
 export const isPreferredReducedMotion = (): boolean =>
   window.matchMedia('(prefers-reduced-motion: reduce)').matches === true;

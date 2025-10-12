@@ -12,6 +12,8 @@
  * truncate('Hello World', 20); // 'Hello World'
  * truncate('Hello World', 8, '…'); // 'Hello …'
  * ```
+ *
+ * @category string
  */
 export const truncate = (
   str: string,

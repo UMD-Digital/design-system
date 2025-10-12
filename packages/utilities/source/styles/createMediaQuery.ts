@@ -23,6 +23,8 @@
  * });
  * // Returns: { '@media (max-width: 767px)': { fontSize: '16px', padding: '1rem' } }
  * ```
+ *
+ * @category styles
  */
 export const createMediaQuery = (
   comparison = 'max-width',

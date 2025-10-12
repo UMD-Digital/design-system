@@ -23,6 +23,8 @@
  *   }
  * });
  * ```
+ *
+ * @category events
  */
 export const setupSwipeDetection = ({
   container,

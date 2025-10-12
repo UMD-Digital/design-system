@@ -19,6 +19,8 @@
  * const debouncedResize = debounce(handleResize, 200);
  * window.addEventListener('resize', debouncedResize);
  * ```
+ *
+ * @category performance
  */
 export const debounce = <T extends (...args: any[]) => any>(
   callback: T,

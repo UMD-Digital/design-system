@@ -11,6 +11,8 @@
  * addClass(element, 'active visible');
  * addClass(element, ['active', 'visible']);
  * ```
+ *
+ * @category dom
  */
 export const addClass = (
   element: HTMLElement,

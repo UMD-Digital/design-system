@@ -11,6 +11,8 @@
  * removeClass(element, 'active visible');
  * removeClass(element, ['active', 'visible']);
  * ```
+ *
+ * @category dom
  */
 export const removeClass = (
   element: HTMLElement,

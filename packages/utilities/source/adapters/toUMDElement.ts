@@ -21,6 +21,8 @@ export interface ComponentRef {
  * const dateSign = extractEventData(element);
  * const umdElement = toUMDElement(dateSign);
  * ```
+ *
+ * @category adapters
  */
 export function toUMDElement(ref: ComponentRef | undefined) {
   if (!ref) return undefined;

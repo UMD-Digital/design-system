@@ -13,6 +13,8 @@
  *   element.classList.add('zoomed-layout');
  * }
  * ```
+ *
+ * @category accessibility
  */
 export const isScreenZoomed = (): boolean => {
   const isHighDPI = window.devicePixelRatio > 1;

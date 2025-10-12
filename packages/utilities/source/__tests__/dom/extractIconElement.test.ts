@@ -1,6 +1,6 @@
-import { getIcon } from '../../dom/getIcon';
+import { extractIconElement } from '../../dom/extractIconElement';
 
-describe('getIcon', () => {
+describe('extractIconElement', () => {
   let element: HTMLElement;
 
   beforeEach(() => {
@@ -17,7 +17,7 @@ describe('getIcon', () => {
       const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       element.appendChild(svg);
 
-      const result = getIcon({ element });
+      const result = extractIconElement({ element });
 
       expect(result).toBe(svg);
       expect(result).toBeInstanceOf(SVGElement);
@@ -28,7 +28,7 @@ describe('getIcon', () => {
       img.src = 'icon.png';
       element.appendChild(img);
 
-      const result = getIcon({ element });
+      const result = extractIconElement({ element });
 
       expect(result).toBe(img);
       expect(result).toBeInstanceOf(HTMLImageElement);
@@ -41,7 +41,7 @@ describe('getIcon', () => {
       element.appendChild(img);
       element.appendChild(svg);
 
-      const result = getIcon({ element });
+      const result = extractIconElement({ element });
 
       expect(result).toBe(svg);
     });
@@ -56,7 +56,7 @@ describe('getIcon', () => {
       svg.appendChild(path);
       element.appendChild(svg);
 
-      const result = getIcon({ element }) as SVGElement;
+      const result = extractIconElement({ element }) as SVGElement;
 
       const resultPath = result.querySelector('path') as SVGPathElement;
       expect(resultPath.style.fill).toBe('#ff0000');
@@ -71,7 +71,7 @@ describe('getIcon', () => {
       svg.appendChild(path);
       element.appendChild(svg);
 
-      const result = getIcon({ element });
+      const result = extractIconElement({ element });
 
       const resultPath = (result as SVGElement).querySelector(
         'path',
@@ -94,7 +94,7 @@ describe('getIcon', () => {
       svg.appendChild(path2);
       element.appendChild(svg);
 
-      getIcon({ element });
+      extractIconElement({ element });
 
       // querySelector returns first match
       expect(path1.style.fill).toBe('#00ff00');
@@ -107,13 +107,13 @@ describe('getIcon', () => {
       const div = document.createElement('div');
       element.appendChild(div);
 
-      const result = getIcon({ element });
+      const result = extractIconElement({ element });
 
       expect(result).toBeNull();
     });
 
     it('should return null for empty element', () => {
-      const result = getIcon({ element });
+      const result = extractIconElement({ element });
 
       expect(result).toBeNull();
     });
@@ -123,7 +123,7 @@ describe('getIcon', () => {
       svg.setAttribute('color', '#ff0000');
       element.appendChild(svg);
 
-      const result = getIcon({ element });
+      const result = extractIconElement({ element });
 
       expect(result).toBe(svg);
       // Should not throw error
@@ -139,7 +139,7 @@ describe('getIcon', () => {
       svg.appendChild(circle);
       element.appendChild(svg);
 
-      expect(() => getIcon({ element })).not.toThrow();
+      expect(() => extractIconElement({ element })).not.toThrow();
     });
 
     it('should handle nested SVG', () => {
@@ -148,7 +148,7 @@ describe('getIcon', () => {
       container.appendChild(svg);
       element.appendChild(container);
 
-      const result = getIcon({ element });
+      const result = extractIconElement({ element });
 
       expect(result).toBe(svg);
     });
@@ -159,7 +159,7 @@ describe('getIcon', () => {
       container.appendChild(img);
       element.appendChild(container);
 
-      const result = getIcon({ element });
+      const result = extractIconElement({ element });
 
       expect(result).toBe(img);
     });
@@ -174,7 +174,7 @@ describe('getIcon', () => {
       svg.appendChild(path);
       element.appendChild(svg);
 
-      const result = getIcon({ element });
+      const result = extractIconElement({ element });
 
       expect(result).toBe(svg);
       expect(path.style.fill).toBe('');
@@ -202,7 +202,7 @@ describe('getIcon', () => {
         svg.appendChild(path);
         element.appendChild(svg);
 
-        getIcon({ element });
+        extractIconElement({ element });
 
         expect(path.style.fill).toBe(expected);
       });
@@ -217,7 +217,7 @@ describe('getIcon', () => {
       svg.appendChild(path);
       element.appendChild(svg);
 
-      const result = getIcon({ element });
+      const result = extractIconElement({ element });
 
       expect(result).toBe(svg);
       expect(path.style.fill).toBe('');
@@ -227,7 +227,7 @@ describe('getIcon', () => {
       const img = document.createElement('img');
       element.appendChild(img);
 
-      const result = getIcon({ element });
+      const result = extractIconElement({ element });
 
       expect(result).toBe(img);
     });
@@ -247,7 +247,7 @@ describe('getIcon', () => {
       element.appendChild(svg1);
       element.appendChild(svg2);
 
-      const result = getIcon({ element }) as SVGElement;
+      const result = extractIconElement({ element }) as SVGElement;
 
       expect(result.id).toBe('first');
     });
@@ -261,7 +261,7 @@ describe('getIcon', () => {
       element.appendChild(img1);
       element.appendChild(img2);
 
-      const result = getIcon({ element }) as HTMLImageElement;
+      const result = extractIconElement({ element }) as HTMLImageElement;
 
       expect(result.alt).toBe('first');
     });
@@ -269,11 +269,11 @@ describe('getIcon', () => {
 
   describe('error conditions', () => {
     it('should handle null element', () => {
-      expect(() => getIcon({ element: null as any })).toThrow();
+      expect(() => extractIconElement({ element: null as any })).toThrow();
     });
 
     it('should handle undefined element', () => {
-      expect(() => getIcon({ element: undefined as any })).toThrow();
+      expect(() => extractIconElement({ element: undefined as any })).toThrow();
     });
 
     it('should handle element not in DOM', () => {
@@ -281,7 +281,7 @@ describe('getIcon', () => {
       const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       detached.appendChild(svg);
 
-      const result = getIcon({ element: detached });
+      const result = extractIconElement({ element: detached });
 
       expect(result).toBe(svg);
     });
@@ -299,7 +299,7 @@ describe('getIcon', () => {
       svg.appendChild(path);
       element.appendChild(svg);
 
-      getIcon({ element });
+      extractIconElement({ element });
 
       expect(path.style.fill).toBe('red');
     });
@@ -309,7 +309,7 @@ describe('getIcon', () => {
       svg.setAttribute('color', 'red');
       element.appendChild(svg);
 
-      expect(() => getIcon({ element })).not.toThrow();
+      expect(() => extractIconElement({ element })).not.toThrow();
     });
 
     it('should not modify IMG elements', () => {
@@ -318,7 +318,7 @@ describe('getIcon', () => {
       element.appendChild(img);
 
       const originalSrc = img.src;
-      getIcon({ element });
+      extractIconElement({ element });
 
       expect(img.src).toBe(originalSrc);
     });
@@ -329,7 +329,7 @@ describe('getIcon', () => {
       const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       element.appendChild(svg);
 
-      const result = getIcon({ element });
+      const result = extractIconElement({ element });
 
       expect(result).toBeInstanceOf(SVGElement);
     });
@@ -338,13 +338,13 @@ describe('getIcon', () => {
       const img = document.createElement('img');
       element.appendChild(img);
 
-      const result = getIcon({ element });
+      const result = extractIconElement({ element });
 
       expect(result).toBeInstanceOf(HTMLImageElement);
     });
 
     it('should return null type when no icon', () => {
-      const result = getIcon({ element });
+      const result = extractIconElement({ element });
 
       expect(result).toBeNull();
     });

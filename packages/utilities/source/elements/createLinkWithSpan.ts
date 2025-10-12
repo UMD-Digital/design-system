@@ -18,6 +18,8 @@
  * );
  * document.body.appendChild(link);
  * ```
+ *
+ * @category elements
  */
 export const createLinkWithSpan = (
   url: string,

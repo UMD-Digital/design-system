@@ -15,6 +15,8 @@
  * // Returns: '.container { padding: 1rem; }.container { border: 1px solid; }'
  * // (conditionalStyles was null, so it was filtered out)
  * ```
+ *
+ * @category styles
  */
 export const combineStyles = (
   ...styles: (string | null | undefined)[]

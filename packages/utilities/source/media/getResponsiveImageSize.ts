@@ -22,6 +22,8 @@
  * img.style.height = `${optimalHeight}px`;
  * // Sets the image to an optimal height that fits within constraints
  * ```
+ *
+ * @category media
  */
 export const getResponsiveImageSize = ({
   image,

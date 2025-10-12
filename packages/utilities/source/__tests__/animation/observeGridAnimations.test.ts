@@ -206,8 +206,8 @@ describe('observeGridAnimations', () => {
 
       observeGridAnimations();
 
-      const observerInstance = mockIntersectionObserver.mock.results[0]?.value;
-      expect(observerInstance?.observe).toBeUndefined();
+      // IntersectionObserver should still be created for potential future elements
+      expect(mockIntersectionObserver).toHaveBeenCalled();
     });
 
     it('should handle empty grid containers', () => {

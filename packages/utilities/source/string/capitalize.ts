@@ -10,6 +10,8 @@
  * capitalize('hello world'); // 'Hello world'
  * capitalize(''); // ''
  * ```
+ *
+ * @category string
  */
 export const capitalize = (str: string): string => {
   // Handle non-string input

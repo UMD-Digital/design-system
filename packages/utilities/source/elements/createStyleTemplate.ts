@@ -17,6 +17,8 @@
  * `);
  * shadowRoot.appendChild(template.content.cloneNode(true));
  * ```
+ *
+ * @category elements
  */
 export const createStyleTemplate = (styles: string): HTMLTemplateElement => {
   const template = document.createElement('template');

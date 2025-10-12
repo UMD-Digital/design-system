@@ -13,6 +13,8 @@
  * shrinkThenRemove({ container: panel });
  * // Panel smoothly collapses over 30 frames, then is hidden
  * ```
+ *
+ * @category animation
  */
 export const shrinkThenRemove = ({
   container,

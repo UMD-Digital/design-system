@@ -34,6 +34,8 @@ export type GraphQLVariables = {
  *   variables: { id: '123' }
  * });
  * ```
+ *
+ * @category network
  */
 export const fetchGraphQL = async ({
   query,

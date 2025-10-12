@@ -30,6 +30,8 @@ import { jssToCSS } from './jssToCSS';
  * //   color: blue;
  * // }
  * ```
+ *
+ * @category styles
  */
 export const jssEntryToCSS = (
   styleObj: Styles.JssEntry

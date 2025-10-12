@@ -15,6 +15,8 @@ import { animation } from '@universityofmaryland/web-styles-library';
  *   <div>Item 3</div>
  * </div>
  * ```
+ *
+ * @category animation
  */
 export const observeGridAnimations = () => {
   const prefersReducedMotion = window.matchMedia(

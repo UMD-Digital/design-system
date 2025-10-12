@@ -11,6 +11,8 @@
  * const headlineSlot = createSlot('headline');
  * shadowRoot.appendChild(headlineSlot);
  * ```
+ *
+ * @category elements
  */
 export const createSlot = (name: string): HTMLSlotElement => {
   const slot = document.createElement('slot');

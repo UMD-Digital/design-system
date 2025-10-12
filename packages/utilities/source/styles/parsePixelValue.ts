@@ -17,6 +17,8 @@
  * const padding = parsePixelValue('12px') * 2;
  * // padding: 24
  * ```
+ *
+ * @category styles
  */
 export const parsePixelValue = (styleStr: string): number =>
   parseInt(styleStr.replace('px', ''));

@@ -24,6 +24,8 @@
  * //   }
  * // }
  * ```
+ *
+ * @category styles
  */
 export const withViewTimelineAnimation = (
   styles: Record<string, any>

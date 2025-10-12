@@ -1,5 +1,5 @@
 import { carousel } from '@universityofmaryland/web-elements-library/composite';
-import { imageHasAlt } from '@universityofmaryland/web-utilities-library/validation';
+import { imageHasAlt } from '@universityofmaryland/web-utilities-library/accessibility';
 import { Attributes, Slots, Register } from 'model';
 import type {
   CreateComponentFunction,

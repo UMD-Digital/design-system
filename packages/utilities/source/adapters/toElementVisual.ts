@@ -21,6 +21,8 @@ export interface ComponentRef {
  * const eventMeta = extractEventData(element);
  * const elementVisual = toElementVisual(eventMeta);
  * ```
+ *
+ * @category adapters
  */
 export function toElementVisual(ref: ComponentRef | undefined) {
   if (!ref) return undefined;

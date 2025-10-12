@@ -24,6 +24,8 @@
  * //   }
  * // }
  * ```
+ *
+ * @category styles
  */
 export const createMediaQueryRange = (
   min: number,

@@ -14,6 +14,8 @@
  *   console.log(`You've visited ${count} times`);
  * }
  * ```
+ *
+ * @category storage
  */
 export const getLocalStorageInt = ({ key }: { key: string }): number | null => {
   const string = localStorage.getItem(key);

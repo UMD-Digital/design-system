@@ -19,6 +19,8 @@
  *   console.log('date1 is earlier');
  * }
  * ```
+ *
+ * @category date
  */
 export const formatDateForComparison = (date: Date) => {
   return {

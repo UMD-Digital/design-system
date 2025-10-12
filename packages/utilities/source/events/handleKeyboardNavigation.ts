@@ -23,6 +23,8 @@
  * // Later, cleanup when component unmounts
  * cleanup();
  * ```
+ *
+ * @category events
  */
 export const handleKeyboardNavigation = ({
   element,

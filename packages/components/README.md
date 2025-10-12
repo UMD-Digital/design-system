@@ -121,7 +121,7 @@ The Styles Package provides utility classes for spacing, grids, and typography:
 </div>
 ```
 
-[Learn more about Styles integration →](components/usage.html#styles-integration)
+[Learn more about Styles integration →](./usage.html#styles-integration)
 
 ### Elements Package Relationship
 

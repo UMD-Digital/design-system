@@ -10,6 +10,7 @@
   "excludeExternals": true,
   "excludePrivate": true,
   "excludeProtected": true,
+  "excludeInternal": true,
   "skipErrorChecking": true,
   "hideGenerator": true,
    "cleanOutputDir": false,

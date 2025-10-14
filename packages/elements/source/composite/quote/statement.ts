@@ -1,9 +1,7 @@
 import { ElementModel } from 'model';
-import { BaseProps } from '.';
+import { type QuoteStatementProps } from './_types';
 
-interface TypeQuoteStatement extends BaseProps {}
-
-export const CreateQuoteStatementElement = (element: TypeQuoteStatement) => {
+export const CreateQuoteStatementElement = (element: QuoteStatementProps) => {
   const container = ElementModel.createDiv({
     className: 'quote-statement',
     elementStyles: {

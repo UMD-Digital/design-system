@@ -1,18 +1,32 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { ElementModel } from 'model';
-import { CreateIconSpan, SMALL, BaseProps } from '../index';
-import { ElementVisual } from '_types';
+import { default as elementIcon } from './icon';
+import { SMALL } from '../_constants';
+import {
+  type QuoteBaseProps,
+  type QuoteVariantProps,
+  type QuoteSizeProps,
+} from '../_types';
+import { type ElementVisual } from '../../../_types';
 
-export interface QuoteImageProps extends BaseProps {
-  isSizeLarge: boolean;
+interface QuoteImageProps
+  extends QuoteVariantProps,
+    QuoteSizeProps,
+    Pick<QuoteBaseProps, 'isThemeMaryland'> {
+  image: HTMLImageElement;
 }
 
-const CreateQuoteImageContainer = (
-  props: QuoteImageProps,
-  image: HTMLImageElement,
-) => {
-  const { isTypeInline, isSizeLarge, isThemeMaryland } = props;
-  const iconSpan = CreateIconSpan(props);
+export default ({
+  image,
+  isSizeLarge,
+  isThemeMaryland,
+  isTypeFeatured,
+}: QuoteImageProps) => {
+  const iconSpan = elementIcon({
+    hasImage: image != null,
+    isTypeFeatured,
+    isThemeMaryland,
+  });
   const imageContainerChildren: ElementVisual[] = [];
   const imageElement = ElementModel.create({
     element: image,
@@ -22,24 +36,25 @@ const CreateQuoteImageContainer = (
         maxWidth: '100%',
         height: 'auto',
 
-        ...(isTypeInline && {
+        ...(!isTypeFeatured && {
           maxWidth: '160px',
-
-          ...(isSizeLarge && { maxWidth: '200px' }),
 
           [`@container (min-width: ${SMALL}px)`]: {
             borderRight: `2px solid ${token.color.red}`,
-
-            ...(isThemeMaryland && {
-              borderRight: `2px solid ${token.color.gold}`,
-            }),
           },
         }),
+
+        ...(!isTypeFeatured && isSizeLarge && { maxWidth: '200px' }),
+
+        ...(!isTypeFeatured &&
+          isThemeMaryland && {
+            borderRight: `2px solid ${token.color.gold}`,
+          }),
       },
     },
   });
 
-  if (isTypeInline) {
+  if (!isTypeFeatured) {
     imageContainerChildren.push(iconSpan);
   }
 
@@ -53,7 +68,7 @@ const CreateQuoteImageContainer = (
         display: 'inline-block',
         position: 'relative',
 
-        ...(isTypeInline && {
+        ...(!isTypeFeatured && {
           marginBottom: token.spacing.sm,
           position: 'relative',
         }),
@@ -61,5 +76,3 @@ const CreateQuoteImageContainer = (
     },
   });
 };
-
-export default CreateQuoteImageContainer;

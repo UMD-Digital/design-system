@@ -4,8 +4,9 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import { seal } from '@universityofmaryland/web-icons-library/logos';
+import { seal as logoSeal } from '@universityofmaryland/web-icons-library/logos';
 import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
+import { imageFromSvg } from '@universityofmaryland/web-utilities-library/media';
 
 type TypeBannerPromoProps = {
   headline?: HTMLElement | null;
@@ -157,7 +158,7 @@ const STYLES_BANNER_PROMO_ELEMENT = `
     }
   }
 
-  .${ELEMENT_CONTAINER} > svg {
+  .${ELEMENT_CONTAINER} > img {
     position: absolute;
     right: -50px;
     top: -40px;
@@ -166,7 +167,7 @@ const STYLES_BANNER_PROMO_ELEMENT = `
   }
 
   @container ${ELEMENT_NAME} (max-width: ${SMALL - 1}px) {
-    .${ELEMENT_CONTAINER} > svg {
+    .${ELEMENT_CONTAINER} > img {
       display: none;
     }
   }
@@ -215,7 +216,10 @@ const CreateBannerPromoElement = (props: TypeBannerPromoProps) =>
     }
 
     if (includeSeal) {
-      container.innerHTML = `${seal}`;
+      const img = imageFromSvg({ SVG: logoSeal.white });
+
+      img.alt = 'University of Maryland Seal';
+      container.appendChild(img);
     }
     if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
     container.classList.add(ELEMENT_CONTAINER);

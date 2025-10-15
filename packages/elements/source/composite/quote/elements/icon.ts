@@ -16,37 +16,44 @@ export default ({
   isTypeFeatured = false,
 }: QuoteIconProps) => {
   const imageWithFeaturedLayout = hasImage && isTypeFeatured;
-  const imageWithoutFeaturedLayout = hasImage && !isTypeFeatured;
 
   const iconSpan = ElementModel.createSpan({
     className: 'quote-icon-span',
     elementStyles: {
       element: {
-        position: 'absolute',
-        left: '-24px',
-        top: '-32px',
-        height: '15px',
-        width: '22px',
         display: 'block',
+        position: 'absolute',
 
         ...(imageWithFeaturedLayout && {
           display: 'none',
         }),
 
-        ...(imageWithoutFeaturedLayout && {
-          height: '20px',
-          width: '29px',
-          top: '-11px',
-          right: '-20px',
-          left: 'inherit',
-        }),
+        ...(!hasImage && {
+          height: '15px',
+          width: '22px',
+          left: '-24px',
+          top: '-32px',
 
-        [`@container (min-width: ${SMALL}px)`]: {
-          ...(!hasImage && {
+          [`@container (min-width: ${SMALL}px)`]: {
             left: `-${token.spacing['4xl']}`,
             top: '0',
-          }),
-        },
+          },
+        }),
+
+        ...(hasImage && {
+          bottom: '-7px',
+          left: '-2px',
+          height: '15px',
+          width: '21px',
+
+          [`@container (min-width: ${SMALL}px)`]: {
+            height: '20px',
+            width: '29px',
+            top: '-11px',
+            right: '-20px',
+            left: 'inherit',
+          },
+        }),
 
         ['& svg']: {
           fill: token.color.red,

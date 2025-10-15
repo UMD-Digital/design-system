@@ -143,7 +143,7 @@ export default (props: QuoteFeaturedProps) => {
   const { isThemeDark, isThemeMaryland, image, isTransparent } = props;
   const wrapperChildren: ElementVisual[] = [];
 
-  const inlineQuote = InlineQuote(props);
+  const inlineQuote = InlineQuote({ ...props, isTypeFeatured: true });
 
   const textContainer = ElementModel.createDiv({
     className: 'quote-featured-text',
@@ -230,10 +230,17 @@ export default (props: QuoteFeaturedProps) => {
     },
   });
 
-  quoteAnimation({
-    ...props,
-    quoteElement: container,
-  });
+  const loadAnimation = () => {
+    quoteAnimation({
+      ...props,
+      quoteElement: container,
+    });
+  };
 
-  return container;
+  return {
+    ...container,
+    events: {
+      loadAnimation,
+    },
+  };
 };

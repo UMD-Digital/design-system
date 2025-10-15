@@ -1,7 +1,8 @@
 import { quote as quoteComponent } from '@universityofmaryland/web-elements-library/composite';
 import { createStyledSlotOrClone } from '@universityofmaryland/web-utilities-library/elements';
 import { isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
-import { Attributes, Register, Slots } from 'model';
+import { getLinkFromSlot } from '@universityofmaryland/web-utilities-library/dom';
+import { Attributes, Lifecycle, Register, Slots } from 'model';
 import {
   CreateComponentFunction,
   ComponentRegistration,
@@ -22,20 +23,7 @@ const getAction = ({
   element: HTMLElement;
 }): HTMLAnchorElement | null => {
   const actionSlot = Slots.actions.default({ element });
-
-  if (!actionSlot) {
-    return null;
-  }
-
-  const links = actionSlot.querySelectorAll('a');
-
-  if (links.length > 1) {
-    console.warn(
-      'Quote element does not support more than one link. Using the first link.',
-    );
-  }
-
-  return links.length > 0 ? (links[0] as HTMLAnchorElement) : null;
+  return getLinkFromSlot(actionSlot);
 };
 
 const createComponent: CreateComponentFunction = (element) => {
@@ -184,6 +172,7 @@ const registration: ComponentRegistration = Register.webComponent({
   tagName,
   slots,
   createComponent,
+  afterConnect: Lifecycle.hooks.loadAnimation,
 });
 
 export default registration;

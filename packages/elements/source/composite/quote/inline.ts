@@ -7,7 +7,7 @@ import { type QuoteInlineProps } from './_types';
 import { type ElementVisual } from '../../_types';
 
 export default (props: QuoteInlineProps) => {
-  const { isSizeLarge, image } = props;
+  const { isSizeLarge, image, isTypeFeatured = false } = props;
   const textContainer = elementText(props);
   const getInlineWrapperChildren = (props: QuoteInlineProps) => {
     const wrapperChildren: ElementVisual[] = [];
@@ -15,7 +15,7 @@ export default (props: QuoteInlineProps) => {
     if (image) {
       const imageContainer = elementImage({
         ...props,
-        isTypeFeatured: false,
+        isTypeFeatured,
         image,
       });
 
@@ -58,10 +58,17 @@ export default (props: QuoteInlineProps) => {
   const wrapperChildren = getInlineWrapperChildren(props);
   const wrapper = createWrapper(wrapperChildren);
 
-  quoteAnimation({
-    ...props,
-    quoteElement: wrapper,
-  });
+  const loadAnimation = () => {
+    quoteAnimation({
+      ...props,
+      quoteElement: wrapper,
+    });
+  };
 
-  return createContainer(wrapper);
+  return {
+    ...createContainer(wrapper),
+    events: {
+      loadAnimation,
+    },
+  };
 };

@@ -14,6 +14,8 @@ export const quoteAnimation = ({
   quote,
   quoteElement,
 }: QuoteAnimationProps) => {
+  if (!includesAnimation || !quote) return;
+
   const quoteTextElement = quoteElement.element.querySelector(
     '.quote-container-quote',
   ) as HTMLElement;
@@ -27,52 +29,82 @@ export const quoteAnimation = ({
     '.quote-container-actions',
   ) as HTMLElement;
 
+  const animateAction = !isTypeFeatured || (isTypeFeatured && !image);
+
+  const applyFinalState = () => {
+    const wordsList = Array.from(
+      quoteTextElement.querySelectorAll('.quote-text-split-word'),
+    ) as HTMLElement[];
+
+    wordsList.forEach((word) => {
+      word.style.transition = 'none';
+      word.style.opacity = '1';
+      word.style.transform = 'translateY(0)';
+    });
+
+    if (attributionElement) {
+      attributionElement.style.transition = 'none';
+      attributionElement.style.opacity = '1';
+      attributionElement.style.transform = 'translateY(0)';
+    }
+
+    if (attributionSubTextElement) {
+      attributionSubTextElement.style.transition = 'none';
+      attributionSubTextElement.style.opacity = '1';
+      attributionSubTextElement.style.transform = 'translateY(0)';
+    }
+
+    if (actionsElement && animateAction) {
+      actionsElement.style.transition = 'none';
+      actionsElement.style.opacity = '1';
+      actionsElement.style.transform = 'translateY(0)';
+    }
+  };
+
+  const runAnimation = () => {
+    const wordsList = Array.from(
+      quoteTextElement.querySelectorAll('.quote-text-split-word'),
+    ) as HTMLElement[];
+
+    let quoteAnimationLength = 50;
+
+    wordsList.forEach((word, i) => {
+      setTimeout(() => {
+        word.style.opacity = '1';
+        word.style.transform = 'translateY(0)';
+      }, i * 50);
+
+      quoteAnimationLength += 50;
+    });
+
+    if (attributionElement) {
+      setTimeout(() => {
+        attributionElement.style.opacity = '1';
+        attributionElement.style.transform = 'translateY(0)';
+      }, quoteAnimationLength);
+    }
+
+    if (attributionSubTextElement) {
+      setTimeout(() => {
+        attributionSubTextElement.style.opacity = '1';
+        attributionSubTextElement.style.transform = 'translateY(0)';
+      }, quoteAnimationLength);
+    }
+
+    if (actionsElement && animateAction) {
+      setTimeout(() => {
+        actionsElement.style.opacity = '1';
+        actionsElement.style.transform = 'translateY(0)';
+      }, quoteAnimationLength);
+    }
+  };
+
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          if (!quote || !includesAnimation || !quoteTextElement) {
-            return;
-          }
-
-          const wordsList = Array.from(
-            quoteTextElement.querySelectorAll('.quote-text-split-word'),
-          ) as HTMLElement[];
-          const animateAction = !isTypeFeatured || (isTypeFeatured && !image);
-
-          let quoteAnimationLength = 50;
-
-          wordsList.forEach((word, i) => {
-            setTimeout(() => {
-              word.style.opacity = '1';
-              word.style.transform = 'translateY(0)';
-            }, i * 50);
-
-            quoteAnimationLength += 50;
-          });
-
-          if (attributionElement) {
-            setTimeout(() => {
-              if (attributionElement) {
-                attributionElement.style.opacity = '1';
-                attributionElement.style.transform = 'translateY(0)';
-              }
-            }, quoteAnimationLength);
-          }
-
-          if (attributionSubTextElement) {
-            setTimeout(() => {
-              attributionSubTextElement.style.opacity = '1';
-              attributionSubTextElement.style.transform = 'translateY(0)';
-            }, quoteAnimationLength);
-          }
-
-          if (actionsElement && animateAction) {
-            setTimeout(() => {
-              actionsElement.style.opacity = '1';
-              actionsElement.style.transform = 'translateY(0)';
-            }, quoteAnimationLength);
-          }
+          runAnimation();
+          observer.unobserve(entry.target);
         }
       });
     },
@@ -82,7 +114,15 @@ export const quoteAnimation = ({
     },
   );
 
-  if (quoteTextElement && includesAnimation) {
+  const rect = quoteTextElement.getBoundingClientRect();
+  const windowHeight =
+    window.innerHeight || document.documentElement.clientHeight;
+  const triggerPoint = windowHeight - 120;
+  const isAlreadyPast = rect.top < triggerPoint;
+
+  if (isAlreadyPast) {
+    applyFinalState();
+  } else {
     observer.observe(quoteTextElement);
   }
 };

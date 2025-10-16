@@ -2,12 +2,12 @@ import * as token from '@universityofmaryland/web-styles-library/token';
 import { ElementModel } from 'model';
 import type { ElementVisual } from '../../../_types';
 
-export type TypeAlertText = {
+export interface TypeAlertText {
   headline?: HTMLElement | null;
   text?: HTMLElement | null;
   actions?: HTMLElement | null;
   isThemeDark?: boolean;
-};
+}
 
 const STYLES_ALERT_TEXT = `
   .wrapper {

@@ -8,20 +8,26 @@ import {
 } from '@universityofmaryland/web-utilities-library/storage';
 import { close as iconClose } from '@universityofmaryland/web-icons-library/controls';
 import { CreateAlertText as AlertText, TypeAlertText } from './elements/text';
+import { ElementModel } from 'model';
 import { BREAKPOINTS } from './globals';
 
-type TypeShouldShowProps = {
+// type TypeShouldShowProps = {
+//   daysToHide?: string;
+// };
+
+// type TypeAlertProps = TypeShouldShowProps &
+//   TypeAlertText & {
+//     isShowIcon?: boolean;
+//   };
+
+// type TypeAlertButtonProps = {
+//   container: HTMLElement;
+// };
+
+export interface AlertSiteType extends TypeAlertText {
   daysToHide?: string;
-};
-
-type TypeAlertProps = TypeShouldShowProps &
-  TypeAlertText & {
-    isShowIcon?: boolean;
-  };
-
-type TypeAlertButtonProps = {
-  container: HTMLElement;
-};
+  isShowIcon?: boolean;
+}
 
 export const TEXT_CONSTANTS = {
   className: {
@@ -118,21 +124,49 @@ const STYLES_ALERT_SITE_ELEMENT = `
   ${OverwriteText}
 `;
 
-const CreateCloseButton = ({ container }: TypeAlertButtonProps) => {
-  const closeButton = document.createElement('button');
+const CreateCloseButton = (props: Pick<AlertSiteType, 'isThemeDark'>) => {
+  const { isThemeDark } = props;
 
-  closeButton.classList.add(ELEMENT_ALERT_SITE_CLOSE_BUTTON);
-  closeButton.innerHTML = iconClose;
-  closeButton.setAttribute('aria-label', 'Close alert');
-  closeButton.addEventListener('click', () => {
-    shrinkThenRemove({ container });
-    setLocalStorageTimestamp({ key: ALERT_LOCAL_STORAGE_KEY });
+  const button = document.createElement('button');
+  button.setAttribute('aria-label', 'Close alert');
+  button.type = 'button';
+  button.innerHTML = iconClose;
+
+  const model = ElementModel.create({
+    className: 'alert-page-close-button',
+    element: button,
+    elementStyles: {
+      element: {
+        position: 'absolute',
+        top: token.spacing.lg,
+        right: token.spacing.lg,
+
+        ['& rect']: {
+          fill: token.color.black,
+          ...(isThemeDark && { fill: token.color.white }),
+        },
+
+        [`@container ${ELEMENT_NAME} (max-width: ${MEDIUM}px)`]: {
+          top: token.spacing.sm,
+          right: token.spacing.sm,
+        },
+      },
+    },
   });
 
-  return closeButton;
+  model.element.addEventListener('click', () => {
+    const alertWrapper = model.element.closest('.alert-page-declaration');
+    if (alertWrapper instanceof HTMLElement) {
+      shrinkThenRemove({ container: alertWrapper });
+    }
+  });
+
+  return model;
 };
 
-const ShouldShow = ({ daysToHide }: TypeShouldShowProps) => {
+const ShouldShow = (props: Pick<AlertSiteType, 'daysToHide'>) => {
+  const { daysToHide } = props;
+
   const now = new Date().getTime();
   const millisecondsPerDay = 24 * 60 * 60 * 1000;
   const lastClosedTime = getLocalStorageInt({
@@ -151,7 +185,17 @@ const ShouldShow = ({ daysToHide }: TypeShouldShowProps) => {
   return futureTime > now;
 };
 
-export const CreateAlertSiteElement = (props: TypeAlertProps) =>
+export const CreateAlertSiteElement = (
+  props: Pick<
+    AlertSiteType,
+    | 'actions'
+    | 'daysToHide'
+    | 'headline'
+    | 'isShowIcon'
+    | 'isThemeDark'
+    | 'text'
+  >,
+) =>
   (() => {
     const elementContainer = document.createElement('div');
     const container = document.createElement('div');

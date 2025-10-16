@@ -6,9 +6,8 @@ import { CreateAlertText as AlertText, TypeAlertText } from './elements/text';
 import { ElementModel } from 'model';
 import { type ElementVisual } from '../../_types';
 import { BREAKPOINTS } from './globals';
+
 export interface AlertPageType extends TypeAlertText {
-  daysToHide?: string;
-  isThemeLight?: boolean;
   isShowIcon?: boolean;
 }
 
@@ -47,11 +46,9 @@ const createIcon = () => {
   return iconWrapper;
 };
 
-const createCloseButton = ({
-  isThemeDark = false,
-}: {
-  isThemeDark?: boolean;
-}) => {
+const createCloseButton = (props: Pick<AlertPageType, 'isThemeDark'>) => {
+  const { isThemeDark } = props;
+
   const button = document.createElement('button');
   button.setAttribute('aria-label', 'Close alert');
   button.type = 'button';
@@ -93,7 +90,7 @@ export const CreateAlertPageElement = (
   props: AlertPageType,
 ): ElementVisual & { events: { onMount: () => void } } =>
   (() => {
-    const { isShowIcon = true, isThemeDark, isThemeLight } = props;
+    const { isShowIcon = true, isThemeDark } = props;
 
     const textModel = AlertText(props);
     const iconModel = isShowIcon ? createIcon() : null;

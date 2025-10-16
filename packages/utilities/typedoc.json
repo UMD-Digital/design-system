@@ -1,0 +1,33 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "name": "UMD Web Utilities Library",
+  "entryPoints": [
+    "./source/index.ts",
+    "./source/accessibility",
+    "./source/adapters",
+    "./source/animation",
+    "./source/date",
+    "./source/dom",
+    "./source/elements",
+    "./source/events",
+    "./source/media",
+    "./source/network",
+    "./source/performance",
+    "./source/storage",
+    "./source/string",
+    "./source/styles",
+    "./source/validation"
+  ],
+  "entryPointStrategy": "resolve",
+  "excludeExternals": true,
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "skipErrorChecking": true,
+  "hideGenerator": true,
+  "cleanOutputDir": false,
+  "searchInDocuments": true,
+  "out": "../../docs/utilities",
+  "readme": "README.md",
+  "githubPages": true,
+  "logLevel": "Error"
+}

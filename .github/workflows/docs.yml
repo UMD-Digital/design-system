@@ -27,17 +27,21 @@ jobs:
       - name: Install dependencies
         run: |
           yarn install --frozen-lockfile
+          yarn lerna run build --scope=@universityofmaryland/web-icons-library
           yarn lerna run build --scope=@universityofmaryland/web-styles-library
+          yarn lerna run build --scope=@universityofmaryland/web-utilities-library
           yarn lerna run build --scope=@universityofmaryland/web-elements-library
           yarn lerna run build --scope=@universityofmaryland/web-feeds-library
           yarn lerna run build --scope=@universityofmaryland/web-components-library
 
-      - name: Generate style package documentation
+      - name: Generate package documentation
         run: |
+          yarn run icons:docs
+          yarn run utilities:docs
           yarn run styles:docs
+          yarn run elements:docs
           yarn run feed:docs
           yarn run components:docs
-          yarn run elements:docs
 
       - name: Upload generated docs as artifact
         if: ${{ !env.ACT }}

@@ -2,155 +2,146 @@ import * as token from '@universityofmaryland/web-styles-library/token';
 import { shrinkThenRemove } from '@universityofmaryland/web-utilities-library/animation';
 import { close as iconClose } from '@universityofmaryland/web-icons-library/controls';
 import { warning as iconWarning } from '@universityofmaryland/web-icons-library/indicators';
-import {
-  CreateAlertText as AlertText,
-  TypeAlertTextProps,
-} from './elements/text';
-
-type TypeShouldShowProps = {
+import { CreateAlertText as AlertText, TypeAlertText } from './elements/text';
+import { ElementModel } from 'model';
+import { type ElementVisual } from '../../_types';
+import { BREAKPOINTS } from './globals';
+export interface AlertPageType extends TypeAlertText {
   daysToHide?: string;
-};
+  isThemeLight?: boolean;
+  isShowIcon?: boolean;
+}
 
-type TypeAlertProps = TypeShouldShowProps &
-  TypeAlertTextProps & {
-    isThemeLight?: boolean;
-    isThemeDark?: boolean;
-    isShowIcon?: boolean;
-  };
-
-type TypeAlertButtonProps = {
-  container: HTMLElement;
-};
-
-const MEDUM = 500;
-const ATTRIBUTE_THEME = 'theme';
-const THEME_DARK = 'dark';
-
-const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
+const { MEDIUM } = BREAKPOINTS;
 
 const ELEMENT_NAME = 'umd-element-alert-page';
-const ELEMENT_ALERT_PAGE_DECLARATION = 'alert-page-declaration';
-const ELEMENT_ALERT_PAGE_CONTAINER = 'alert-page-container';
-const ELEMENT_ALERT_PAGE_CLOSE_BUTTON = 'alert-page-close-button';
-const ELEMENT_ALERT_PAGE_ICON = 'alert-page-icon';
 
-const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_ALERT_PAGE_CONTAINER}${IS_THEME_DARK}`;
-const OVERWRITE_THEME_DARK_CLOSE_BUTTON = `${OVERWRITE_THEME_DARK_CONTAINER} .${ELEMENT_ALERT_PAGE_CLOSE_BUTTON}`;
-
-const OverwriteThemeStyles = `
-  ${OVERWRITE_THEME_DARK_CONTAINER} * {
+const STYLES_ALERT_PAGE_ELEMENT = `
+  .alert-page-container[theme="dark"] * {
     color: ${token.color.white};
   }
 
-  ${OVERWRITE_THEME_DARK_CLOSE_BUTTON} rect {
+  .alert-page-container[theme="dark"] .alert-page-close-button rect {
     fill: ${token.color.white};
   }
 `;
 
-const ButtonStyles = `
-  .${ELEMENT_ALERT_PAGE_CLOSE_BUTTON} {
-    position: absolute;
-    top: ${token.spacing.lg};
-    right: ${token.spacing.lg};
-  }
-
-  .${ELEMENT_ALERT_PAGE_CLOSE_BUTTON} rect {
-    fill: ${token.color.black};
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${MEDUM}px) {
-    .${ELEMENT_ALERT_PAGE_CLOSE_BUTTON} {
-      top: ${token.spacing.sm};
-      right: ${token.spacing.sm};
-    }
-  }
-`;
-
-const IconStyles = `
-  .${ELEMENT_ALERT_PAGE_ICON} {
-    display: block;
-    fill: ${token.color.gold};
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${MEDUM}px) {
-    .${ELEMENT_ALERT_PAGE_ICON} {
-      position: absolute;
-      top: -20px;
-    }
-  }
-`;
-
-const STYLES_ALERT_PAGE_ELEMENT = `
-  .${ELEMENT_ALERT_PAGE_DECLARATION} {
-    container: ${ELEMENT_NAME} / inline-size;
-  }
-
-  .${ELEMENT_ALERT_PAGE_CONTAINER} {
-    display: flex;
-    position: relative;
-    padding: ${token.spacing.lg};
-    padding-right: ${token.spacing['2xl']};
-    gap: ${token.spacing.lg};
-    border: solid 4px ${token.color.gold};
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${MEDUM}px) {
-    .${ELEMENT_ALERT_PAGE_CONTAINER} {
-      padding-right: ${token.spacing.lg};
-    }
-  }
-
-  ${IconStyles}
-  ${ButtonStyles}
-  ${OverwriteThemeStyles}
-`;
-
-const CreateIcon = () => {
-  const iconWrapper = document.createElement('div');
+const createIcon = () => {
   let icon = iconWarning;
+  const iconWrapper = ElementModel.createDiv({
+    className: 'alert-page-icon',
+    elementStyles: {
+      element: {
+        display: 'block',
+        fill: token.color.gold,
 
-  iconWrapper.classList.add(ELEMENT_ALERT_PAGE_ICON);
-  iconWrapper.innerHTML = icon;
+        [`@container ${ELEMENT_NAME} (max-width: ${MEDIUM}px)`]: {
+          position: 'absolute',
+          top: '-20px',
+        },
+      },
+    },
+  });
 
+  iconWrapper.element.innerHTML = icon;
   return iconWrapper;
 };
 
-const CreateCloseButton = ({ container }: TypeAlertButtonProps) => {
-  const closeButton = document.createElement('button');
+const createCloseButton = ({
+  isThemeDark = false,
+}: {
+  isThemeDark?: boolean;
+}) => {
+  const button = document.createElement('button');
+  button.setAttribute('aria-label', 'Close alert');
+  button.type = 'button';
+  button.innerHTML = iconClose;
 
-  closeButton.classList.add(ELEMENT_ALERT_PAGE_CLOSE_BUTTON);
-  closeButton.innerHTML = iconClose;
-  closeButton.setAttribute('aria-label', 'Close alert');
-  closeButton.addEventListener('click', () => {
-    shrinkThenRemove({ container });
+  const model = ElementModel.create({
+    className: 'alert-page-close-button',
+    element: button,
+    elementStyles: {
+      element: {
+        position: 'absolute',
+        top: token.spacing.lg,
+        right: token.spacing.lg,
+
+        ['& rect']: {
+          fill: token.color.black,
+          ...(isThemeDark && { fill: token.color.white }),
+        },
+
+        [`@container ${ELEMENT_NAME} (max-width: ${MEDIUM}px)`]: {
+          top: token.spacing.sm,
+          right: token.spacing.sm,
+        },
+      },
+    },
   });
 
-  return closeButton;
+  model.element.addEventListener('click', () => {
+    const alertWrapper = model.element.closest('.alert-page-declaration');
+    if (alertWrapper instanceof HTMLElement) {
+      shrinkThenRemove({ container: alertWrapper });
+    }
+  });
+
+  return model;
 };
 
-export const CreateAlertPageElement = (props: TypeAlertProps) =>
+export const CreateAlertPageElement = (
+  props: AlertPageType,
+): ElementVisual & { events: { onMount: () => void } } =>
   (() => {
     const { isShowIcon = true, isThemeDark, isThemeLight } = props;
-    const elementContainer = document.createElement('div');
-    const container = document.createElement('div');
-    const textWrapper = AlertText(props);
+
+    const textModel = AlertText(props);
+    const iconModel = isShowIcon ? createIcon() : null;
+
+    const closeButtonModel = createCloseButton({ isThemeDark: !!isThemeDark });
+
+    const containerModel = ElementModel.createDiv({
+      className: 'alert-page-container',
+      children: [iconModel, textModel, closeButtonModel].filter(
+        Boolean,
+      ) as any[],
+      elementStyles: {
+        element: {
+          display: 'flex',
+          position: 'relative',
+          padding: token.spacing.lg,
+          paddingRight: token.spacing['2xl'],
+          gap: token.spacing.lg,
+          border: `solid 4px ${token.color.gold}`,
+
+          [`@container ${ELEMENT_NAME} (max-width: ${MEDIUM}px)`]: {
+            paddingRight: token.spacing.lg,
+          },
+        },
+      },
+      isThemeDark: isThemeDark || false,
+    });
+
+    const declarationModel = ElementModel.createDiv({
+      className: 'alert-page-declaration',
+      children: [containerModel],
+      elementStyles: {
+        element: {
+          container: `${ELEMENT_NAME} / inline-size`,
+        },
+      },
+    });
+
     let styles = STYLES_ALERT_PAGE_ELEMENT;
-
-    container.classList.add(ELEMENT_ALERT_PAGE_CONTAINER);
-    if (isShowIcon) container.appendChild(CreateIcon());
-    if (isThemeLight) container.setAttribute(ATTRIBUTE_THEME, 'light');
-    if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, 'dark');
-
-    container.appendChild(textWrapper.element);
-    styles += textWrapper.styles;
-
-    container.appendChild(CreateCloseButton({ container: elementContainer }));
-
-    elementContainer.appendChild(container);
-    elementContainer.classList.add(ELEMENT_ALERT_PAGE_DECLARATION);
+    styles += textModel.styles || '';
+    if (iconModel) styles += iconModel.styles || '';
+    styles += closeButtonModel.styles || '';
+    styles += containerModel.styles || '';
+    styles += declarationModel.styles || '';
 
     return {
-      element: elementContainer,
+      className: declarationModel.className,
+      element: declarationModel.element,
       styles,
-    };
+    } as ElementVisual & { events: { onMount: () => void } };
   })();

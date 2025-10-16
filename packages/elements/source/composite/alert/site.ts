@@ -7,18 +7,15 @@ import {
   setLocalStorageTimestamp,
 } from '@universityofmaryland/web-utilities-library/storage';
 import { close as iconClose } from '@universityofmaryland/web-icons-library/controls';
-import {
-  CreateAlertText as AlertText,
-  CONSTANTS as TEXT_CONSTANTS,
-  TypeAlertTextProps,
-} from './elements/text';
+import { CreateAlertText as AlertText, TypeAlertText } from './elements/text';
+import { BREAKPOINTS } from './globals';
 
 type TypeShouldShowProps = {
   daysToHide?: string;
 };
 
 type TypeAlertProps = TypeShouldShowProps &
-  TypeAlertTextProps & {
+  TypeAlertText & {
     isShowIcon?: boolean;
   };
 
@@ -26,7 +23,15 @@ type TypeAlertButtonProps = {
   container: HTMLElement;
 };
 
-const MEDUM = 500;
+export const TEXT_CONSTANTS = {
+  className: {
+    wrapper: 'wrapper',
+    text: 'text',
+    actions: 'actions',
+  },
+};
+
+const { MEDIUM } = BREAKPOINTS;
 const DEFAULT_HIDE_TIME = 30;
 const ALERT_LOCAL_STORAGE_KEY = 'umd-alert-site-time';
 
@@ -58,7 +63,15 @@ const ButtonStyles = `
     right: ${token.spacing.lg};
   }
 
-  @container ${ELEMENT_NAME} (max-width: ${MEDUM}px) {
+  .${ELEMENT_ALERT_SITE_CLOSE_BUTTON} rect {
+    fill: ${token.color.black};
+  }
+
+  .${ELEMENT_ALERT_SITE_CLOSE_BUTTON} path {
+    fill: ${token.color.black};
+  }
+
+  @container ${ELEMENT_NAME} (max-width: ${MEDIUM}px) {
     .${ELEMENT_ALERT_SITE_CLOSE_BUTTON} {
       top: ${token.spacing.sm};
       right: ${token.spacing.sm};
@@ -92,7 +105,7 @@ const STYLES_ALERT_SITE_ELEMENT = `
     border-left: 4px solid ${token.color.red};
   }
 
-  @container ${ELEMENT_NAME} (min-width: ${MEDUM}px) {
+  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
     .${ELEMENT_ALERT_SITE_CONTAINER} {
       border-left: 8px solid ${token.color.red};
       padding-right: ${token.spacing['2xl']};

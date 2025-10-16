@@ -1,108 +1,100 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import * as layout from '@universityofmaryland/web-styles-library/layout';
-import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import { ElementModel } from 'model';
+import type { ElementVisual } from '../../../_types';
 
-export type TypeAlertTextProps = {
+export type TypeAlertText = {
   headline?: HTMLElement | null;
   text?: HTMLElement | null;
   actions?: HTMLElement | null;
   isThemeDark?: boolean;
 };
 
-export const CONSTANTS = {
-  className: {
-    wrapper: 'wrapper',
-    text: 'text',
-    actions: 'actions',
-  },
-};
-
-const { className } = CONSTANTS;
-
-// prettier-ignore
-const ctaStyles = `
-  * + .${className.actions} {
-    margin-top: ${token.spacing.sm};
-  }
-
-  ${jssToCSS({
-    styleObj: {
-      [`.${className.actions}`]: layout.grid.inline.tabletRows,
-    },
-  })}
-`;
-
 const STYLES_ALERT_TEXT = `
-  .${className.wrapper} {
+  .wrapper {
      max-width: ${token.spacing.maxWidth.small};
   }
-
-  ${ctaStyles}
 `;
 
-const headlineStyles = {
-  element: {
-    paddingRight: token.spacing.md,
-  },
-  siblingAfter: {
-    marginTop: token.spacing.sm,
-  },
-  subElement: {
-    color: 'currentColor',
-  },
+const createHeadline = (props: Pick<TypeAlertText, 'headline'>) => {
+  const { headline } = props;
+  if (!headline) return;
+
+  return ElementModel.headline.sansLarge({
+    element: headline,
+    elementStyles: {
+      element: { paddingRight: token.spacing.md },
+      siblingAfter: { marginTop: token.spacing.sm },
+      subElement: { color: 'currentColor' },
+    },
+  });
 };
 
-const richTextStyles: Record<string, any> = {
-  element: {
-    fontWeight: 500,
-  },
-  siblingAfter: {
-    marginTop: token.spacing.sm,
-  },
+const createText = (props: Pick<TypeAlertText, 'text' | 'isThemeDark'>) => {
+  const { text, isThemeDark } = props;
+  if (!text) return;
+
+  return ElementModel.richText.simple({
+    element: text,
+    elementStyles: {
+      element: {
+        ...(!isThemeDark && { color: token.color.gray.dark }),
+        fontWeight: 500,
+      },
+      siblingAfter: { marginTop: token.spacing.sm },
+    },
+    isThemeDark: isThemeDark || false,
+  });
 };
 
-export const CreateAlertText = (props: TypeAlertTextProps) => {
+const createActions = (props: Pick<TypeAlertText, 'actions'>) => {
+  const { actions } = props;
+  if (!actions) return;
+
+  return ElementModel.layout.gridInlineTabletRows({
+    element: actions,
+    elementStyles: {
+      element: {
+        [`* + &`]: {
+          marginTop: `${token.spacing.sm}`,
+        },
+      },
+    },
+  });
+};
+
+export const CreateAlertText = (
+  props: Pick<TypeAlertText, 'headline' | 'text' | 'actions' | 'isThemeDark'>,
+): ElementVisual => {
   const { headline, text, actions, isThemeDark } = props;
 
-  const wrapper = document.createElement('div');
+  const headlineModel = createHeadline({ headline });
+  const textModel = createText({ text, isThemeDark });
+  const actionsModel = createActions({ actions });
+
+  const childElements = [headlineModel, textModel, actionsModel].filter(
+    Boolean,
+  ) as ElementVisual[];
+
+  const wrapperModel = ElementModel.createDiv({
+    className: 'wrapper',
+    children: childElements,
+    elementStyles: {
+      element: {
+        maxWidth: token.spacing.maxWidth.small,
+        ...(isThemeDark && { color: token.color.white }),
+      },
+    },
+  });
+
   let styles = STYLES_ALERT_TEXT;
-
-  if (headline) {
-    const headlineModel = ElementModel.headline.sansLarge({
-      ...props,
-      elementStyles: headlineStyles,
-      element: headline,
-    });
-
-    wrapper.appendChild(headlineModel.element);
-    styles += headlineModel.styles;
-  }
-
-  if (text) {
-    if (!isThemeDark) {
-      richTextStyles.element.color = token.color.gray.dark;
-    }
-
-    const textModel = ElementModel.richText.simple({
-      ...props,
-      elementStyles: richTextStyles,
-      element: text,
-    });
-
-    wrapper.appendChild(textModel.element);
-    styles += textModel.styles;
-  }
-
-  if (actions) {
-    actions.classList.add(className.actions);
-    wrapper.appendChild(actions);
-  }
-
-  wrapper.classList.add(className.wrapper);
+  if (headlineModel) styles += headlineModel.styles;
+  if (textModel) styles += textModel.styles;
+  if (actionsModel) styles += actionsModel.styles;
+  styles += wrapperModel.styles;
 
   return {
-    element: wrapper,
+    className: wrapperModel.className,
+    element: wrapperModel.element,
     styles,
   };
 };

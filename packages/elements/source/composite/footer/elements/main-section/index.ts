@@ -37,7 +37,7 @@ const createVisualContainer = (
     }
   } else if (isTypeVisual) {
     altText = 'The University of Maryland Campus';
-    imageSrc = new URL('../../assets/visual-default.jpg', import.meta.url).href;
+    imageSrc = new URL('../../assets/visual-default.jpg', import.meta.url as any).href;
   }
 
   if (!imageSrc || !altText) return;

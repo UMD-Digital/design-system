@@ -9,6 +9,12 @@
 
 The University of Maryland's Design System is intended for use by university campus entities and partners. The packages prompt consistency in brand, design, and accessibility compliance across university web properties.
 
+### For information, visit [UMD Design System Website](https://designsystem.umd.edu)
+
+### For storybook, visit [UMD Design System Playground](http://playground.designsystem.umd.edu)
+
+### For documentation, visit [UMD Design System Github Pages](https://umd-digital.github.io/design-system/)
+
 ## Packages
 
 ### Primary Package
@@ -32,9 +38,3 @@ Low-level primitives for building custom implementations:
 - **[Icons](packages/icons/README.md)**: SVG icon and logo assets organized by category for optimal tree-shaking. Includes navigation, controls, social media, brand assets, and UMD logos.
 
 - **[Utilities](packages/utilities/README.md)**: Shared utility functions organized into 14 categories: accessibility, adapters, animation, date, DOM manipulation, elements, events, media, network, performance, storage, string processing, style utilities, and validation. Includes 100% test coverage and comprehensive TypeDoc documentation.
-
-### For information, visit [UMD Design System Website](https://designsystem.umd.edu)
-
-### For storybook, visit [UMD Design System Playground](http://playground.designsystem.umd.edu)
-
-### For documentation, visit [UMD Design System Github Pages](https://umd-digital.github.io/design-system/)

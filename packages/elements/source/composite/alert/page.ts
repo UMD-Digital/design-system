@@ -87,14 +87,13 @@ const createCloseButton = (props: Pick<AlertPageType, 'isThemeDark'>) => {
 };
 
 export const CreateAlertPageElement = (
-  props: AlertPageType,
-): ElementVisual & { events: { onMount: () => void } } =>
+  props: Pick<AlertPageType, 'isShowIcon' | 'isThemeDark'>,
+) =>
   (() => {
     const { isShowIcon = true, isThemeDark } = props;
 
     const textModel = AlertText(props);
     const iconModel = isShowIcon ? createIcon() : null;
-
     const closeButtonModel = createCloseButton({ isThemeDark: !!isThemeDark });
 
     const containerModel = ElementModel.createDiv({
@@ -140,5 +139,5 @@ export const CreateAlertPageElement = (
       className: declarationModel.className,
       element: declarationModel.element,
       styles,
-    } as ElementVisual & { events: { onMount: () => void } };
+    } as ElementVisual;
   })();

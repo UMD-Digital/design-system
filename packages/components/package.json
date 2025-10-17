@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-components-library",
-  "version": "1.15.0",
+  "version": "1.15.1",
   "description": "UMD Web Components",
   "main": "dist/index.js",
   "module": "dist/index.js",
@@ -10,6 +10,11 @@
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.js"
+    },
+    "./bundle": {
+      "types": "./dist/bundle.d.ts",
+      "import": "./dist/bundle.js",
+      "require": "./dist/bundle.js"
     },
     "./cdn": {
       "types": "./dist/cdn.d.ts",
@@ -52,7 +57,8 @@
     "docs": "npx typedoc --options ./typedoc.json",
     "prebuild": "node ../../source/update-badges.js",
     "release": "npm run test && npm run build && npm publish --access public",
-    "build": "vite build --mode production && npm run build:cdn",
+    "build": "vite build --mode production && npm run build:bundle && npm run build:cdn",
+    "build:bundle": "BUILD_BUNDLE=true vite build --mode production",
     "build:cdn": "BUILD_CDN=true vite build --mode production",
     "vite": "vite build --mode development --watch",
     "start": "npm run vite",

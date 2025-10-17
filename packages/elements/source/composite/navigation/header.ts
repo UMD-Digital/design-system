@@ -1,6 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
+import { isExternalUrl } from '@universityofmaryland/web-utilities-library/network';
 import { search as iconSearch } from '@universityofmaryland/web-icons-library/search';
 import MenuButton from './elements/menu-button';
 import NavigationItem from './elements/item';
@@ -252,7 +253,9 @@ const CreateCtaLink = ({ ctaUrl, ctaText }: TypeCtaLink) => {
   const cta = document.createElement('a');
 
   cta.innerHTML = ctaText;
-  cta.setAttribute('target', '_blank');
+  if (isExternalUrl(ctaUrl)) {
+    cta.setAttribute('target', '_blank');
+  }
   cta.setAttribute('href', ctaUrl);
   cta.classList.add(ELEMENT_HEADER_MENU_CTA);
 

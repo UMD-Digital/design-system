@@ -49,8 +49,8 @@ describe('getLinkFromSlot', () => {
     container.appendChild(slot);
 
     const result = getLinkFromSlot(slot);
-    expect(result).toBe(anchor);
-    expect(result?.href).toContain('/single');
+    expect(result).toBe(slot);
+    expect(result?.querySelector('a')?.href).toContain('/single');
   });
 
   it('returns the first anchor when slot contains nested single link', () => {
@@ -65,8 +65,8 @@ describe('getLinkFromSlot', () => {
     container.appendChild(slot);
 
     const result = getLinkFromSlot(slot);
-    expect(result).toBe(anchor);
-    expect(result?.href).toContain('/nested');
+    expect(result).toBe(slot);
+    expect(result?.querySelector('a')?.href).toContain('/nested');
   });
 
   it('warns and removes parent elements of additional links when multiple links exist', () => {
@@ -75,21 +75,18 @@ describe('getLinkFromSlot', () => {
     const slot = document.createElement('div');
     slot.setAttribute('slot', 'actions');
 
-    // First link wrapper
     const wrapper1 = document.createElement('div');
     const anchor1 = document.createElement('a');
     anchor1.href = '/first';
     anchor1.textContent = 'First Link';
     wrapper1.appendChild(anchor1);
 
-    // Second link wrapper
     const wrapper2 = document.createElement('div');
     const anchor2 = document.createElement('a');
     anchor2.href = '/second';
     anchor2.textContent = 'Second Link';
     wrapper2.appendChild(anchor2);
 
-    // Third link wrapper
     const wrapper3 = document.createElement('div');
     const anchor3 = document.createElement('a');
     anchor3.href = '/third';
@@ -103,20 +100,16 @@ describe('getLinkFromSlot', () => {
 
     const result = getLinkFromSlot(slot);
 
-    // Should return first link
-    expect(result).toBe(anchor1);
-    expect(result?.href).toContain('/first');
+    expect(result).toBe(slot);
+    expect(result?.querySelector('a')?.href).toContain('/first');
 
-    // Should warn about multiple links
     expect(consoleWarnSpy).toHaveBeenCalledWith(
       'Multiple links found in slot. Using the first link and removing parent elements of additional links.',
     );
 
-    // Should only have one child left in slot
     expect(slot.children.length).toBe(1);
     expect(slot.children[0]).toBe(wrapper1);
 
-    // Second and third wrappers should be removed
     expect(slot.contains(wrapper2)).toBe(false);
     expect(slot.contains(wrapper3)).toBe(false);
 
@@ -143,13 +136,8 @@ describe('getLinkFromSlot', () => {
 
     const result = getLinkFromSlot(slot);
 
-    // Should return first link
-    expect(result).toBe(anchor1);
-
-    // Should warn
+    expect(result).toBe(slot);
     expect(consoleWarnSpy).toHaveBeenCalled();
-
-    // Second anchor should be removed since it's a direct child
     expect(slot.contains(anchor2)).toBe(false);
 
     consoleWarnSpy.mockRestore();
@@ -161,18 +149,15 @@ describe('getLinkFromSlot', () => {
     const slot = document.createElement('div');
     slot.setAttribute('slot', 'actions');
 
-    // First link
     const anchor1 = document.createElement('a');
     anchor1.href = '/first';
     anchor1.textContent = 'First';
     slot.appendChild(anchor1);
 
-    // Non-link content
     const paragraph = document.createElement('p');
     paragraph.textContent = 'Some text';
     slot.appendChild(paragraph);
 
-    // Second link
     const anchor2 = document.createElement('a');
     anchor2.href = '/second';
     anchor2.textContent = 'Second';
@@ -182,13 +167,8 @@ describe('getLinkFromSlot', () => {
 
     const result = getLinkFromSlot(slot);
 
-    // Should return first link
-    expect(result).toBe(anchor1);
-
-    // Non-link content should remain
+    expect(result).toBe(slot);
     expect(slot.contains(paragraph)).toBe(true);
-
-    // Second link should be removed
     expect(slot.contains(anchor2)).toBe(false);
 
     consoleWarnSpy.mockRestore();
@@ -200,7 +180,6 @@ describe('getLinkFromSlot', () => {
     const slot = document.createElement('div');
     slot.setAttribute('slot', 'actions');
 
-    // First nested link
     const wrapper1 = document.createElement('div');
     const inner1 = document.createElement('span');
     const anchor1 = document.createElement('a');
@@ -208,7 +187,6 @@ describe('getLinkFromSlot', () => {
     inner1.appendChild(anchor1);
     wrapper1.appendChild(inner1);
 
-    // Second nested link
     const wrapper2 = document.createElement('div');
     const inner2 = document.createElement('span');
     const anchor2 = document.createElement('a');
@@ -222,13 +200,8 @@ describe('getLinkFromSlot', () => {
 
     const result = getLinkFromSlot(slot);
 
-    // Should return first link
-    expect(result).toBe(anchor1);
-
-    // First wrapper should remain
+    expect(result).toBe(slot);
     expect(slot.contains(wrapper1)).toBe(true);
-
-    // Second wrapper should be removed
     expect(slot.contains(wrapper2)).toBe(false);
 
     consoleWarnSpy.mockRestore();

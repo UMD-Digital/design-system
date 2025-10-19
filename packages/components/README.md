@@ -254,10 +254,10 @@ if (card) {
 
 ## Documentation
 
-- **[Component Reference](./)** - Complete API documentation
-- **[Usage Examples](./usage.html)** - Practical implementation guide with real-world examples
-- **[Advanced Guide](./advanced-usage.html)** - TypeScript, testing, reactive components, and custom development
-- **[Advanced Bundling](./advanced-bundling.html)** - Bundle optimization, tree-shaking, and production build strategies
+- **[Component Reference](index.html)** - Complete API documentation
+- **[Usage Examples](usage.html)** - Practical implementation guide with real-world examples
+- **[Advanced Guide](advanced-usage.html)** - TypeScript, testing, reactive components, and custom development
+- **[Advanced Bundling](advanced-bundling.html)** - Bundle optimization, tree-shaking, and production build strategies
 - **[Design System](https://designsystem.umd.edu)** - Full design system docs
 
 ## Testing

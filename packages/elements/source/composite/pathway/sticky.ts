@@ -2,8 +2,8 @@ import * as token from '@universityofmaryland/web-styles-library/token';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { createAssetContent, createTextLockupMedium } from './_common';
-import { type PathwayStickyProps } from './_types';
 import { type ElementVisual } from '../../_types';
+import { type PathwayStickyProps } from './_types';
 
 const mediumSize = 800;
 const largeSize = 1200;

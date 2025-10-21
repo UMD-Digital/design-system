@@ -3,8 +3,8 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
 import { BREAKPOINTS } from '../../../globals';
 import { BaseProps } from '../../../_types';
 import { type ElementVisual } from '../../../../../_types';

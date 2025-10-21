@@ -1,15 +1,15 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import {
   createMediaQuery,
   createMediaQueryRange,
 } from '@universityofmaryland/web-utilities-library/styles';
-import { assets, textLockup } from 'atomic';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
 import {
   type PersonContactPropsWithStyles,
   type PersonTextLockupPropsWithStyles,
   type PersonFullProps,
 } from '../../_types';
+import { assets, textLockup } from 'atomic';
 
 const smallBreakpoint = token.media.breakpointValues.small.max;
 const mediumBreakpointStart = token.media.breakpointValues.medium.min;

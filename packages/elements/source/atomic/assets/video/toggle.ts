@@ -1,8 +1,8 @@
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import {
   pause as iconPause,
   play as iconPlay,
 } from '@universityofmaryland/web-icons-library/controls';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
 
 interface VideoProps {
   video: HTMLVideoElement;

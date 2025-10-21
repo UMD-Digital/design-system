@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
-import { textLockup } from 'atomic';
 import { ElementVisual } from '../../../_types';
+import { textLockup } from 'atomic';
 
 interface CardIconProps {
   headline: HTMLElement | null;

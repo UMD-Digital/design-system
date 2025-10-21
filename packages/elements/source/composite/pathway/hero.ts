@@ -1,8 +1,8 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
-import { assets, textLockup } from 'atomic';
+import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
 import { type ElementVisual } from '../../_types';
+import { assets, textLockup } from 'atomic';
 
 interface PathwayHeroProps {
   actions: HTMLElement | null;

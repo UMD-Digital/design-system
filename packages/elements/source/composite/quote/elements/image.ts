@@ -2,12 +2,12 @@ import * as token from '@universityofmaryland/web-styles-library/token';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { default as elementIcon } from './icon';
 import { SMALL } from '../_constants';
+import { type ElementVisual } from '../../../_types';
 import {
   type QuoteBaseProps,
   type QuoteVariantProps,
   type QuoteSizeProps,
 } from '../_types';
-import { type ElementVisual } from '../../../_types';
 
 interface QuoteImageProps
   extends QuoteVariantProps,

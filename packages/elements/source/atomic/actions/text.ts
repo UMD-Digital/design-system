@@ -1,12 +1,12 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { parseSvgString } from '@universityofmaryland/web-utilities-library/media';
 import { extractIconElement } from '@universityofmaryland/web-utilities-library/dom';
 import { external_link as iconExternalLink } from '@universityofmaryland/web-icons-library/controls';
 import { email as iconEmail } from '@universityofmaryland/web-icons-library/communication';
 import { document as iconDocument } from '@universityofmaryland/web-icons-library/files';
 import { fearless as iconFearless } from '@universityofmaryland/web-icons-library/brand';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
 
 interface ElementProps {
   element: HTMLElement;

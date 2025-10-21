@@ -1,10 +1,10 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
-import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
 import { createTextLockupMedium, createAssetContent } from './_common';
-import { type PathwayOverlayProps } from './_types';
 import { type ElementVisual } from '../../_types';
+import { type PathwayOverlayProps } from './_types';
 
 const REF_TEXT_ELEMENT = 'pathway-text-container';
 const REF_IMAGE_ELEMENT = 'pathway-image-container';

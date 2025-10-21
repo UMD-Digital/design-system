@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import * as Logos from '@universityofmaryland/web-icons-library/logos';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as Logos from '@universityofmaryland/web-icons-library/logos';
 import createCampaignRow, { type CampaignProps } from '../campaign';
 import createCallToAction, { type CallToActionProps } from '../call-to-action';
 import { BREAKPOINTS } from '../../../globals';

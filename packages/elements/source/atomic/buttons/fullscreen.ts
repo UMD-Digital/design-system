@@ -1,5 +1,5 @@
-import { fullscreen as iconFullscreen } from '@universityofmaryland/web-icons-library/controls';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { fullscreen as iconFullscreen } from '@universityofmaryland/web-icons-library/controls';
 
 const create = ({
   callback,

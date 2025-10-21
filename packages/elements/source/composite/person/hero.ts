@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { assets, textLockup } from 'atomic';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { assets, textLockup } from 'atomic';
 import { PersonContact } from './_types';
 
 interface Theme {

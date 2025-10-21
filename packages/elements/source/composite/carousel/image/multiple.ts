@@ -1,8 +1,8 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
+import * as carouselElements from '../elements';
 import { buttons } from 'atomic';
 import { Image as LayoutImage } from 'layout';
-import * as carouselElements from '../elements';
 
 type TypeCarouselMultipleProps = {
   images: HTMLImageElement[];

@@ -1,8 +1,8 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
-import { assets, textLockup } from 'atomic';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { type ElementVisual } from '../../_types';
+import { assets, textLockup } from 'atomic';
 import { type HeroOverlayProps } from './_types';
 
 const ANIMATION_CONFIG = {

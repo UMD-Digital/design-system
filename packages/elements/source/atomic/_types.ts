@@ -4,7 +4,6 @@ import {
   type ThemeProps,
 } from '../_types';
 
-// Base interface for components with CTA actions
 export interface PersonCtaProps {
   actions?: ContentElement;
 }

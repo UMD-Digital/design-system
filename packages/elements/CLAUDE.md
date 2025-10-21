@@ -158,16 +158,61 @@ const styles = convertJSSObjectToStyles({
 - **Pattern**: Test element creation, styles, and props
 - **Mocks**: Mock external dependencies
 
+## Import Organization
+
+All TypeScript files should follow this import ordering structure:
+
+```typescript
+// 1. Styles package - Use namespace imports
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as layout from '@universityofmaryland/web-styles-library/layout';
+
+// 2. Builder package - Default import
+import ElementBuilder from '@universityofmaryland/web-builder-library';
+
+// 3. Utilities package - Named imports with specific paths
+import { extractIconElement } from '@universityofmaryland/web-utilities-library/dom';
+import { combineStyles } from '@universityofmaryland/web-utilities-library/styles';
+
+// 4. Icons package - Named imports with aliases
+import { email as iconEmail } from '@universityofmaryland/web-icons-library/communication';
+import { arrow_long as iconArrowLong } from '@universityofmaryland/web-icons-library/arrows';
+
+// 5. Relative directory resources - Named imports
+import { createContainer } from './container';
+import { createImage } from './image';
+
+// 6. Package resources - Named imports using aliases
+import { assets } from 'atomic';
+import { textLockup } from 'atomic';
+
+// 7. Local types - Type imports from component _types
+import { type CarouselWideProps } from './_types';
+
+// 8. Package types - Type imports from package-level _types
+import { type BaseProps } from '../../_types';
+```
+
+**Key Rules:**
+- Styles: Always use namespace imports (`import * as`)
+- Builder: Always use default import
+- Utilities: Use specific subpath imports
+- Icons: Use named imports with `icon` prefix aliases
+- Types: Always use `type` keyword in imports
+- Group related imports together
+- Maintain blank lines between groups
+
 ## Best Practices
 
 1. **Use Namespace Imports**: For styles library modules
    - ✅ `import * as token from '@universityofmaryland/web-styles-library/token'`
    - ❌ `import token from '@universityofmaryland/web-styles-library/token'`
 
-2. **Element Model**: Always return `{ element, styles }`
-3. **Props Validation**: Use TypeScript interfaces for props
-4. **Style Scoping**: Use unique class names to avoid conflicts
-5. **Accessibility**: Include ARIA attributes and semantic HTML
+2. **Import Ordering**: Follow the structure defined above
+3. **Element Model**: Always return `{ element, styles }`
+4. **Props Validation**: Use TypeScript interfaces for props
+5. **Style Scoping**: Use unique class names to avoid conflicts
+6. **Accessibility**: Include ARIA attributes and semantic HTML
 
 ## Build Output
 

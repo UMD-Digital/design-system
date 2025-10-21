@@ -1,11 +1,11 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
-import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { debounce } from '@universityofmaryland/web-utilities-library/performance';
+import { type ElementVisual } from '../../../_types';
 import { animations, assets } from 'atomic';
 import { type HeroVideoArrowProps as BaseHeroVideoArrowProps } from '../_types';
-import { type ElementVisual } from '../../../_types';
 
 interface HeroVideoArrowProps extends Omit<BaseHeroVideoArrowProps, 'video'> {
   video: HTMLVideoElement;

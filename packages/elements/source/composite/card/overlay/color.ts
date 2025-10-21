@@ -1,9 +1,9 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
-import { actions, textLockup } from 'atomic';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
-import { CardOverlayProps } from '../_types';
 import { ElementVisual } from '../../../_types';
+import { actions, textLockup } from 'atomic';
+import { CardOverlayProps } from '../_types';
 
 export default (props: CardOverlayProps) => {
   const { isThemeDark, ctaIcon } = props;

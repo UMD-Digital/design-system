@@ -3,8 +3,8 @@ import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { image as elementImage, text as elementText } from './elements';
 import { quoteAnimation } from './helper/animation';
 import { SMALL } from './_constants';
-import { type QuoteInlineProps } from './_types';
 import { type ElementVisual } from '../../_types';
+import { type QuoteInlineProps } from './_types';
 
 export default (props: QuoteInlineProps) => {
   const { isSizeLarge, image, isTypeFeatured = false } = props;

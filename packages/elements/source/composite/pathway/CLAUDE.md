@@ -124,7 +124,7 @@ All pathway components will follow the Element Model pattern:
 
 ```typescript
 // Structure following Element Model
-import * as ElementModel from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import * as Utils from 'utilities';
 import * as Atomic from 'atomic';
 
@@ -135,9 +135,9 @@ const CLASS_NAMES = {
   // ...
 } as const;
 
-// Use ElementModel.create()
+// Use ElementBuilder.create.element()
 export default (props: PathwayProps) => {
-  return ElementModel.create({
+  return ElementBuilder.create.element({
     element: document.createElement('div'),
     className: CLASS_NAMES.CONTAINER,
     children: [
@@ -173,7 +173,7 @@ Follow CSS-in-JS patterns with the Element Model:
 - `textLockup.*`: Text grouping patterns from atomic
 - `assets.image.*`: Image handling from atomic
 - `layout.container()`: Layout containers from atomic
-- `ElementModel.create()`: Element creation helper
+- `ElementBuilder.create.element()`: Element creation helper
 - `Utils.markup.*`: DOM manipulation utilities
 
 ## Testing Considerations

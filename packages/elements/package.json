@@ -25,11 +25,6 @@
       "types": "./dist/layout.d.ts",
       "import": "./dist/layout.mjs",
       "require": "./dist/layout.js"
-    },
-    "./model": {
-      "types": "./dist/model.d.ts",
-      "import": "./dist/model.mjs",
-      "require": "./dist/model.js"
     }
   },
   "license": "MIT",

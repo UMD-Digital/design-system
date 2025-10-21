@@ -207,8 +207,8 @@ elementStyles: {
 - `assets.image.background()`: Creates responsive image containers
 - `assets.video.observedAutoPlay()`: Performance-optimized video playback
 - `textLockup.large()`: Consistent text grouping patterns
-- `ElementModel.headline.*`: Typography components
-- `ElementModel.layout.*`: Spacing containers
+- `ElementBuilder.styled.headline.*`: Typography components
+- `ElementBuilder.styled.layout.*`: Spacing containers
 - `Utils.theme.media.withViewTimelineAnimation()`: Scroll animation wrapper
 
 ## Performance Notes

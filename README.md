@@ -35,6 +35,8 @@ Mid-level building blocks that combine foundation packages:
 
 Low-level primitives for building custom implementations:
 
+- **[Builder](packages/builder/README.md)**: Element builder utilities for creating pre-styled components and custom elements. Provides `ElementBuilder.styled.*` for UMD design system elements and `ElementBuilder.create.*` for custom implementations.
+
 - **[Icons](packages/icons/README.md)**: SVG icon and logo assets organized by category for optimal tree-shaking. Includes navigation, controls, social media, brand assets, and UMD logos.
 
 - **[Utilities](packages/utilities/README.md)**: Shared utility functions organized into 14 categories: accessibility, adapters, animation, date, DOM manipulation, elements, events, media, network, performance, storage, string processing, style utilities, and validation. Includes 100% test coverage and comprehensive TypeDoc documentation.

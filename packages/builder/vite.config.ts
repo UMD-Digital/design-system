@@ -19,7 +19,6 @@ export default defineConfig({
         'styledElements/text': resolve(__dirname, 'source/styledElements/text.ts'),
         'core/index': resolve(__dirname, 'source/core/index.ts'),
         'core/style': resolve(__dirname, 'source/core/style.ts'),
-        'core/_types': resolve(__dirname, 'source/core/_types.ts'),
       },
       name: 'UniversityOfMarylandWebBuilderLibrary',
       formats: ['es', 'cjs'],

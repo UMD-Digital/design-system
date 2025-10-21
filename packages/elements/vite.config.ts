@@ -11,7 +11,6 @@ export default defineConfig({
         atomic: resolve(__dirname, 'source/atomic/index.ts'),
         composite: resolve(__dirname, 'source/composite/index.ts'),
         layout: resolve(__dirname, 'source/layout/index.ts'),
-        model: resolve(__dirname, 'source/model/index.ts'),
       },
       name: 'UniversityOfMarylandWebElementsLibrary',
       formats: ['es', 'cjs'],

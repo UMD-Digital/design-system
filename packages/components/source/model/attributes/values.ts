@@ -1,5 +1,9 @@
 // Values
 
+const campaign = {
+  forward: 'forward',
+};
+
 const data = {
   type: {
     academic: 'academic',
@@ -69,6 +73,7 @@ const type = {
 };
 
 const AttributeValues = {
+  campaign,
   data,
   display,
   layout,

@@ -78,6 +78,7 @@ const theme = {
 
 const visual = {
   bordered: 'data-visual-bordered',
+  campaign: 'data-visual-campaign',
   imageAligned: 'data-visual-image-aligned',
   icon: 'data-visual-icon',
   iconSeal: 'data-visual-icon-seal',

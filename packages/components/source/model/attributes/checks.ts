@@ -716,6 +716,10 @@ const isVisual = {
       attributeName: AttributeNames.visual.bordered,
       attributeValue: AttributesValues.state.TRUE,
     }),
+  campaign: createAttributeCheck(
+    AttributeNames.visual.campaign,
+    AttributesValues.campaign.forward,
+  ),
   icon_seal: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,

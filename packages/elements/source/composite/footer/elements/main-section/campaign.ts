@@ -5,11 +5,12 @@ import { BaseProps } from '../../_types';
 import { BREAKPOINTS } from '../../globals';
 import { type ElementVisual } from '../../../../_types';
 
-export interface CampaignProps extends BaseProps {}
+export interface CampaignProps
+  extends Pick<BaseProps, 'isThemeLight' | 'isCampaignForward'> {}
 
 const { LARGE } = BREAKPOINTS;
 
-export default ({ isThemeLight }: CampaignProps): ElementVisual => {
+const createFearlesslyForwardCampaign = (isThemeLight: boolean) => {
   const link = document.createElement('a');
   link.href = 'https://fearlesslyforward.umd.edu';
   link.setAttribute('target', '_blank');
@@ -19,7 +20,31 @@ export default ({ isThemeLight }: CampaignProps): ElementVisual => {
     'Link to the Fearlessly Forward Brand website',
   );
 
-  link.innerHTML = (!isThemeLight && Logos.campaign.light) || Logos.campaign.dark;
+  link.innerHTML =
+    (!isThemeLight && Logos.campaign.light) || Logos.campaign.dark;
+
+  return link;
+};
+
+const createForwardCampaign = (isThemeLight: boolean) => {
+  const link = document.createElement('a');
+  link.href = 'https://forward.umd.edu';
+  link.setAttribute('target', '_blank');
+  link.setAttribute('rel', 'noopener noreferrer');
+  link.setAttribute('aria-label', 'Link to the Forward Brand website');
+
+  link.innerHTML = (!isThemeLight && Logos.forward.light) || Logos.forward.dark;
+
+  return link;
+};
+
+export default ({
+  isThemeLight,
+  isCampaignForward,
+}: CampaignProps): ElementVisual => {
+  const link = isCampaignForward
+    ? createForwardCampaign(!!isThemeLight)
+    : createFearlesslyForwardCampaign(!!isThemeLight);
 
   const linkElement = ElementModel.create({
     element: link,
@@ -45,6 +70,10 @@ export default ({ isThemeLight }: CampaignProps): ElementVisual => {
 
           [`& .umd-footer-logo-container`]: {
             display: 'none',
+          },
+
+          [`& svg`]: {
+            maxWidth: '100%',
           },
         },
 

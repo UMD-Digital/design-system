@@ -45,6 +45,7 @@ const slots: SlotConfiguration = {
 const createComponent: CreateComponentFunction = (element) => {
   const isTypeMega = element.getAttribute('type') === 'mega';
   const isTypeVisual = element.getAttribute('type') === 'visual';
+  const isCampaignForward = Attributes.isVisual.campaign({ element });
   const columnOne = element.querySelector(
     `[slot="${SLOTS.LINK_COLUMN_ONE}"]`,
   ) as HTMLSlotElement;
@@ -98,6 +99,7 @@ const createComponent: CreateComponentFunction = (element) => {
     isTypeSimple,
     isTypeVisual,
     isTypeMega,
+    isCampaignForward,
     slotVisualImage: element.querySelector(
       `[slot="${SLOTS.BACKGROUND_IMAGE}"]`,
     ) as HTMLImageElement,

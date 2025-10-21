@@ -3,4 +3,5 @@ export interface BaseProps {
   isTypeSimple?: boolean;
   isTypeVisual?: boolean;
   isTypeMega?: boolean;
+  isCampaignForward?: boolean;
 }

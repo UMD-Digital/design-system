@@ -1,0 +1,12 @@
+source/
+__tests__/
+*.test.ts
+*.spec.ts
+tsconfig.json
+vite.config.ts
+jest.config.js
+.DS_Store
+node_modules/
+coverage/
+.vscode/
+.idea/

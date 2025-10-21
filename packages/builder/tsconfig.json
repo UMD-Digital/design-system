@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "source",
+    "baseUrl": "source",
+    "moduleResolution": "bundler",
+    "paths": {
+      "@universityofmaryland/web-styles-library": ["../styles/dist/index.d.ts"],
+      "@universityofmaryland/web-styles-library/*": ["../styles/dist/*"],
+      "@universityofmaryland/web-utilities-library": ["../utilities/source/index.ts"],
+      "@universityofmaryland/web-utilities-library/*": ["../utilities/source/*"]
+    }
+  },
+  "include": ["./source"]
+}

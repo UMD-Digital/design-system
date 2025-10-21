@@ -1,9 +1,9 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
+import { type ElementVisual } from '../../../_types';
 import { assets, textLockup } from 'atomic';
 import { PersonBio } from '../_types';
-import { type ElementVisual } from '../../../_types';
 
 const createTextContainer = (props: PersonBio) => {
   const { isThemeDark, name, ...textProps } = props;

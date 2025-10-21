@@ -1,9 +1,9 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
+import { type ElementVisual, type ContentElement } from '../../../_types';
 import { assets } from 'atomic';
 import { type HeroExpandProps as BaseHeroExpandProps } from '../_types';
-import { type ElementVisual, type ContentElement } from '../../../_types';
 
 interface HeroExpandProps extends BaseHeroExpandProps {
   eyebrow?: ContentElement;

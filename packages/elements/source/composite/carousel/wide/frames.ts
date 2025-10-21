@@ -1,9 +1,9 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { assets } from 'atomic';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { createElementWithRefs } from './_elementModel';
 import { createControlButton } from './controls';
 import { type ElementVisual } from '../../../_types';
+import { assets } from 'atomic';
 import { type CarouselWideProps } from '../_types';
 
 const ASPECT_RATIO = '16 / 9';

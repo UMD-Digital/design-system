@@ -1,11 +1,11 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import {
   email as iconEmail,
   phone as iconPhone,
 } from '@universityofmaryland/web-icons-library/communication';
 import { pin as iconPin } from '@universityofmaryland/web-icons-library/location';
 import { linkedin as iconLinkedIn } from '@universityofmaryland/web-icons-library/social';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { type ElementVisual } from '../../_types';
 import { type PersonContactProps } from '../_types';
 

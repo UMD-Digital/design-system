@@ -1,12 +1,12 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { imageFromSvg } from '@universityofmaryland/web-utilities-library/media';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { imageFromSvg } from '@universityofmaryland/web-utilities-library/media';
 import InlineQuote from './inline';
 import { image as elementImage, action as elementAction } from './elements';
 import { quoteAnimation } from './helper/animation';
 import { MEDIUM, SMALL } from './_constants';
-import { type QuoteFeaturedProps } from './_types';
 import { type ElementVisual } from '../../_types';
+import { type QuoteFeaturedProps } from './_types';
 
 const BACKGROUND_TEXTURE_LIGHT = `<svg id="quote_background_light" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 850.5 532.1"><path d="M.3,0h332.7L.3,326.6V0Z" fill="#757575" fill-rule="evenodd" isolation="isolate" opacity=".04" stroke-width="0"/><path d="M517.9,532.1h332.7L308.6,0H0v23.6l517.9,508.5Z" fill="#000" fill-rule="evenodd" isolation="isolate" opacity=".04" stroke-width="0"/></svg>`;
 const BACKGROUND_TEXTURE_DARK = `<svg id="quote_background_dark" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 614.86 300.65"><defs><style>.cls-1{opacity:.25;}.cls-1,.cls-2{fill:#757575;fill-rule:evenodd;isolation:isolate;}.cls-2{opacity:.1;}</style></defs><path class="cls-2" d="m.27,0h332.67L27.46,299.93H.27V0Z"/><path class="cls-1" d="m0,0h308.65l306.21,300.65h-332.67L0,23.59V0Z"/></svg>`;

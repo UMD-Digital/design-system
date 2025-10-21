@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { Image as LayoutImage } from 'layout';
 import * as carouselElements from '../elements';
+import { Image as LayoutImage } from 'layout';
 
 const ELEMENT_CAROUSEL_OVERLAY_COINTAINER = 'carousel-overlay-container';
 

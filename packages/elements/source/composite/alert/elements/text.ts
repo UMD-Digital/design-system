@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
-import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 
 export type TypeAlertTextProps = {
   headline?: HTMLElement | null;

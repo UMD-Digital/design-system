@@ -1,9 +1,9 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as element from '@universityofmaryland/web-styles-library/element';
-import { arrow_right as iconArrowRight } from '@universityofmaryland/web-icons-library/arrows';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { setupSwipeDetection } from '@universityofmaryland/web-utilities-library/events';
 import { parsePixelValue } from '@universityofmaryland/web-utilities-library/styles';
+import { arrow_right as iconArrowRight } from '@universityofmaryland/web-icons-library/arrows';
 
 type TypeDisplayLogic = {
   mobileCount: number;

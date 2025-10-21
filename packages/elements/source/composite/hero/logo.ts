@@ -1,9 +1,9 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
-import { assets, textLockup } from 'atomic';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
-import { type HeroLogoProps } from './_types';
 import { type ElementVisual } from '../../_types';
+import { assets, textLockup } from 'atomic';
+import { type HeroLogoProps } from './_types';
 
 const getBackgroundColor = (props: HeroLogoProps) => {
   const { isThemeDark, isThemeMaryland, isThemeLight } = props;

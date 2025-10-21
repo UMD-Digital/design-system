@@ -1,14 +1,14 @@
-/**
- * Hero-specific type definitions that extend the base types from _types.ts
- * These types provide explicit interfaces for each hero variation
- */
-
 import {
   type ContentElement,
   type ImageElement,
   type VideoElement,
   type ThemeProps,
 } from '../../_types';
+
+/**
+ * Hero-specific type definitions that extend the base types from _types.ts
+ * These types provide explicit interfaces for each hero variation
+ */
 
 /**
  * Hero-specific animation properties

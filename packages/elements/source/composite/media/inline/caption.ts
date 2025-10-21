@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
-import { Image as LayoutImage } from 'layout';
 import CaptionContainer from '../elements/caption';
+import { Image as LayoutImage } from 'layout';
 
 export type TypeMediaInlineRequirements = {
   image?: HTMLImageElement | null;

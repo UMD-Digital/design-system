@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { assets, textLockup } from 'atomic';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { type ElementVisual } from '../../_types';
+import { assets, textLockup } from 'atomic';
 import { type HeroMinimalProps } from './_types';
 
 const createImageAsset = (image: HTMLImageElement) => {

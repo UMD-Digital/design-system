@@ -1,6 +1,6 @@
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { pin as iconPin } from '@universityofmaryland/web-icons-library/location';
 import { calendar as iconCalendar, clock as iconClock } from '@universityofmaryland/web-icons-library/calendar';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { ElementVisual } from '../../_types';
 
 type LocationType = {

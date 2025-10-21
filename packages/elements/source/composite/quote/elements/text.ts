@@ -4,8 +4,8 @@ import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { default as elementAction } from './action';
 import { default as elementQuote } from './quote';
 import { SMALL } from '../_constants';
-import { type QuoteTextProps } from '../_types';
 import { type ElementVisual } from '../../../_types';
+import { type QuoteTextProps } from '../_types';
 
 interface ChildrenProps
   extends Pick<

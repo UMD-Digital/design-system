@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { assets } from 'atomic';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { createContainer } from './container';
+import { assets } from 'atomic';
 import { type CarouselWideProps } from '../_types';
 
 interface CarouselState {

@@ -3,11 +3,11 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
 import createSocialCampaignColumns, {
   type SocialCampaignColumnsProps,
 } from '../social';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { BREAKPOINTS } from '../../../globals';
 import { BaseProps } from '../../../_types';
 import { type ElementVisual } from '../../../../../_types';

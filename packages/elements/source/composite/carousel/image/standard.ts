@@ -4,9 +4,9 @@ import {
   typography,
 } from '@universityofmaryland/web-styles-library';
 import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
+import * as carouselElements from '../elements';
 import { animations, buttons } from 'atomic';
 import { Image as LayoutImage } from 'layout';
-import * as carouselElements from '../elements';
 
 type TypeImage = {
   image: HTMLImageElement;

@@ -1,11 +1,11 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { quote as iconQuote } from '@universityofmaryland/web-icons-library/brand';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { truncateTextBasedOnSize } from '@universityofmaryland/web-utilities-library/string';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { quote as iconQuote } from '@universityofmaryland/web-icons-library/brand';
+import { ElementVisual } from '../../../_types';
 import { actions, assets, textLockup } from 'atomic';
 import { CardOverlayProps } from '../_types';
-import { ElementVisual } from '../../../_types';
 
 export const classRef = 'card-overlay-image';
 

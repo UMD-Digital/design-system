@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import * as Logos from '@universityofmaryland/web-icons-library/logos';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { imageFromSvg } from '@universityofmaryland/web-utilities-library/media';
+import * as Logos from '@universityofmaryland/web-icons-library/logos';
 import { BaseProps } from '../../_types';
 import { BREAKPOINTS } from '../../globals';
 import { type ElementVisual } from '../../../../_types';

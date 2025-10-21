@@ -1,9 +1,9 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
 import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
-import { assets, textLockup } from 'atomic';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { type ContentElement } from '../../../_types';
+import { assets, textLockup } from 'atomic';
 
 interface CornerProps {
   images: Array<HTMLImageElement>;

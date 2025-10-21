@@ -1,12 +1,12 @@
-/**
- * Carousel-specific type definitions that extend the base types from _types.ts
- * These types provide explicit interfaces for each carousel variation
- */
-
 import {
   type ContentElement,
   type ThemeProps,
 } from '../../_types';
+
+/**
+ * Carousel-specific type definitions that extend the base types from _types.ts
+ * These types provide explicit interfaces for each carousel variation
+ */
 
 /**
  * Carousel slide properties

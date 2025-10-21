@@ -1,8 +1,8 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { arrow_right as iconArrowRight } from '@universityofmaryland/web-icons-library/arrows';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { getResponsiveImageSize } from '@universityofmaryland/web-utilities-library/media';
 import { setupSwipeDetection } from '@universityofmaryland/web-utilities-library/events';
+import { arrow_right as iconArrowRight } from '@universityofmaryland/web-icons-library/arrows';
 
 type TypeCarouselImageProps = {
   slides: HTMLElement[];

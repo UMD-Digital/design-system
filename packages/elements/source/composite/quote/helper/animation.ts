@@ -1,5 +1,5 @@
-import { type QuoteBaseProps, type QuoteVariantProps } from '../_types';
 import { type ElementVisual } from '../../../_types';
+import { type QuoteBaseProps, type QuoteVariantProps } from '../_types';
 
 interface QuoteAnimationProps
   extends QuoteVariantProps,

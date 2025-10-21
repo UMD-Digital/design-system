@@ -4,9 +4,9 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import { seal as logoSeal } from '@universityofmaryland/web-icons-library/logos';
 import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import { imageFromSvg } from '@universityofmaryland/web-utilities-library/media';
+import { seal as logoSeal } from '@universityofmaryland/web-icons-library/logos';
 
 type TypeBannerPromoProps = {
   headline?: HTMLElement | null;

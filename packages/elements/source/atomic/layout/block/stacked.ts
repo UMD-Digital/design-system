@@ -1,10 +1,10 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { asset as assetElement } from '@universityofmaryland/web-styles-library/element';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import {
   createMediaQuery,
   createMediaQueryRange,
 } from '@universityofmaryland/web-utilities-library/styles';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { type UMDElement } from '../../../_types';
 
 const smallBreakpoint = token.media.breakpointValues.small.max;

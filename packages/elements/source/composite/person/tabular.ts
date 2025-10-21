@@ -1,9 +1,9 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
+import { ElementVisual } from '../../_types';
 import { layout } from 'atomic';
 import { PersonCard } from './_types';
-import { ElementVisual } from '../../_types';
 
 const smallBreakpoint = token.media.breakpointValues.small.max;
 

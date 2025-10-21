@@ -1,9 +1,9 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { type ElementVisual } from '../../../_types';
 import { assets, textLockup } from 'atomic';
 import { type PersonBio } from '../_types';
-import { type ElementVisual } from '../../../_types';
 
 export default (props: PersonBio) => {
   const { isThemeDark, image, actions, description } = props;

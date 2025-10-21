@@ -7,10 +7,10 @@ import {
 import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
 import { ElementModel } from 'model';
 import { BREAKPOINTS } from '../../globals';
-import { FooterProps } from '../../options';
+import { type BaseProps } from '../../_types';
 import { type ElementVisual } from '../../../../_types';
 
-export interface UtilityProps {
+export interface UtilityProps extends Pick<BaseProps, 'isThemeLight'> {
   slotUtilityLinks?: HTMLElement | null;
 }
 
@@ -62,7 +62,7 @@ const createSubLink = ({ title, url }: { title: string; url: string }) => {
   });
 };
 
-export default (props: FooterProps): ElementVisual => {
+export default (props: UtilityProps) => {
   const { isThemeLight, slotUtilityLinks } = props;
   const linkElements: ElementVisual[] = [];
   const copyRightElement = ElementModel.createParagraph({
@@ -131,7 +131,7 @@ export default (props: FooterProps): ElementVisual => {
     },
   });
 
-  const container = ElementModel.createDiv({
+  return ElementModel.createDiv({
     className: 'umd-footer-utility-container',
     children: [wrapper],
     elementStyles: {
@@ -159,6 +159,4 @@ export default (props: FooterProps): ElementVisual => {
       },
     },
   });
-
-  return container;
 };

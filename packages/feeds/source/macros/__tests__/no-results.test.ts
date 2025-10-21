@@ -1,5 +1,6 @@
+import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { Atomic } from '@universityofmaryland/web-elements-library';
 import noResults from '../no-results';
-import { Atomic, Model } from '@universityofmaryland/web-elements-library';
 
 jest.mock('@universityofmaryland/web-elements-library', () => {
   return {
@@ -45,14 +46,14 @@ describe('No Results Component', () => {
     expect(component.styles).toContain('.mock-style-grid');
     expect(component.styles).toContain('.mock-style-headline');
 
-    expect(Model.ElementModel.layout.gridStacked).toHaveBeenCalledWith(
+    expect(ElementBuilder.styled.layout.gridStacked).toHaveBeenCalledWith(
       expect.objectContaining({
         element: expect.any(HTMLDivElement),
         isThemeDark: undefined,
       }),
     );
 
-    expect(Model.ElementModel.headline.sansExtraLarge).toHaveBeenCalledWith(
+    expect(ElementBuilder.styled.headline.sansExtraLarge).toHaveBeenCalledWith(
       expect.objectContaining({
         element: expect.any(HTMLElement),
         isThemeDark: undefined,
@@ -101,13 +102,13 @@ describe('No Results Component', () => {
     const isThemeDark = true;
     const component = noResults({ isThemeDark });
 
-    expect(Model.ElementModel.layout.gridStacked).toHaveBeenCalledWith(
+    expect(ElementBuilder.styled.layout.gridStacked).toHaveBeenCalledWith(
       expect.objectContaining({
         isThemeDark: true,
       }),
     );
 
-    expect(Model.ElementModel.headline.sansExtraLarge).toHaveBeenCalledWith(
+    expect(ElementBuilder.styled.headline.sansExtraLarge).toHaveBeenCalledWith(
       expect.objectContaining({
         isThemeDark: true,
       }),
@@ -118,7 +119,7 @@ describe('No Results Component', () => {
     const isAlignedCenter = false;
     const component = noResults({ isAlignedCenter });
 
-    expect(Model.ElementModel.layout.gridStacked).toHaveBeenCalledWith(
+    expect(ElementBuilder.styled.layout.gridStacked).toHaveBeenCalledWith(
       expect.objectContaining({
         elementStyles: expect.objectContaining({
           element: expect.objectContaining({

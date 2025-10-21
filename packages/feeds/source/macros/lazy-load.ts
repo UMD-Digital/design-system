@@ -1,5 +1,5 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { Model } from '@universityofmaryland/web-elements-library';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 
 type LazyLoadCreate = {
   callback: (args: any) => void;
@@ -22,7 +22,7 @@ const create = ({
   if (!callback) return;
   if (offset >= totalEntries) return;
 
-  const composite = Model.ElementModel.layout.alignedCenter({
+  const composite = ElementBuilder.styled.layout.alignedCenter({
     element: document.createElement('div'),
     isThemeDark,
     elementStyles: {
@@ -32,7 +32,7 @@ const create = ({
     },
   });
 
-  const ctaButton = Model.ElementModel.actions.outlineOptions({
+  const ctaButton = ElementBuilder.styled.actions.outlineOptions({
     element: document.createElement('button'),
     isThemeDark,
   });

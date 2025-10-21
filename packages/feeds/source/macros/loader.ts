@@ -1,5 +1,5 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { Model } from '@universityofmaryland/web-elements-library';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 
 const ID_UMD_LOADER = 'umd-loader-container';
 
@@ -48,7 +48,7 @@ const create = ({ isThemeDark }: { isThemeDark?: boolean }) => {
     }),
   };
 
-  const innerElmOne = Model.ElementModel.createDiv({
+  const innerElmOne = ElementBuilder.create.div({
     className: `${ID_UMD_LOADER}-one`,
     elementStyles: {
       element: {
@@ -59,7 +59,7 @@ const create = ({ isThemeDark }: { isThemeDark?: boolean }) => {
     },
   });
 
-  const innerElmTwo = Model.ElementModel.createDiv({
+  const innerElmTwo = ElementBuilder.create.div({
     className: `${ID_UMD_LOADER}-two`,
     elementStyles: {
       element: {
@@ -70,7 +70,7 @@ const create = ({ isThemeDark }: { isThemeDark?: boolean }) => {
     },
   });
 
-  const innerElmThree = Model.ElementModel.createDiv({
+  const innerElmThree = ElementBuilder.create.div({
     className: `${ID_UMD_LOADER}-three`,
     elementStyles: {
       element: {
@@ -80,7 +80,7 @@ const create = ({ isThemeDark }: { isThemeDark?: boolean }) => {
       },
     },
   });
-  const innerElmFour = Model.ElementModel.createDiv({
+  const innerElmFour = ElementBuilder.create.div({
     className: `${ID_UMD_LOADER}-four`,
     elementStyles: {
       element: {
@@ -91,7 +91,7 @@ const create = ({ isThemeDark }: { isThemeDark?: boolean }) => {
     },
   });
 
-  const wrapper = Model.ElementModel.createDiv({
+  const wrapper = ElementBuilder.create.div({
     className: `${ID_UMD_LOADER}-wrapper`,
     children: [innerElmOne, innerElmTwo, innerElmThree, innerElmFour],
     elementStyles: {
@@ -101,7 +101,7 @@ const create = ({ isThemeDark }: { isThemeDark?: boolean }) => {
     },
   });
 
-  const composite = Model.ElementModel.createDiv({
+  const composite = ElementBuilder.create.div({
     className: ID_UMD_LOADER,
     children: [wrapper],
     elementStyles: {

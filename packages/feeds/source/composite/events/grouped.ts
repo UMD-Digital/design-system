@@ -1,9 +1,6 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import {
-  Atomic,
-  Composite,
-  Model,
-} from '@universityofmaryland/web-elements-library';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { Atomic, Composite } from '@universityofmaryland/web-elements-library';
 import * as feedElements from 'elements';
 import * as feedMacros from 'macros';
 import * as feedFetch from './common/fetch';
@@ -232,7 +229,7 @@ export default (props: ListProps): ElementModel =>
     };
 
     const groupLayout = (): { element: HTMLElement; styles: string } => {
-      return Model.ElementModel.createDiv({
+      return ElementBuilder.create.div({
         className: 'umd-feed-events-grouped',
         elementStyles: {
           element: {},
@@ -251,7 +248,7 @@ export default (props: ListProps): ElementModel =>
           dateHeadline.textContent = group.date;
 
           entries.push(
-            Model.ElementModel.text.ribbon({
+            ElementBuilder.styled.text.ribbon({
               element: dateHeadline,
               elementStyles: {
                 element: {
@@ -283,7 +280,7 @@ export default (props: ListProps): ElementModel =>
         actualEventCount += group.events.length;
 
         entries.push(
-          Model.ElementModel.createDiv({
+          ElementBuilder.create.div({
             className: 'umd-feed-events-grouped-entries',
             children: [...dateEntries],
             elementStyles: {

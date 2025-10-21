@@ -1,10 +1,11 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { Model, Composite } from '@universityofmaryland/web-elements-library';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { Composite } from '@universityofmaryland/web-elements-library';
 
 export const stacked = (
   isThemeDark?: boolean,
 ): { element: HTMLElement; styles: string } =>
-  Model.ElementModel.layout.gridStacked({
+  ElementBuilder.styled.layout.gridStacked({
     element: document.createElement('div'),
     elementStyles: {
       element: {
@@ -36,7 +37,7 @@ export const grid = ({
   count?: number;
   isTypeGap?: boolean;
 }): { element: HTMLElement; styles: string } =>
-  Model.ElementModel.layout.grid({
+  ElementBuilder.styled.layout.grid({
     element: document.createElement('div'),
     elementStyles: {
       element: {
@@ -59,7 +60,7 @@ export const gridGap = ({
 }: {
   count?: number;
 }): { element: HTMLElement; styles: string } =>
-  Model.ElementModel.layout.grid({
+  ElementBuilder.styled.layout.grid({
     element: document.createElement('div'),
     elementStyles: {
       element: {
@@ -84,7 +85,7 @@ export const gridOffsetGap = ({
   isLayoutReversed?: boolean;
   overwriteStickyPosition?: number;
 }) =>
-  Model.ElementModel.layout.grid({
+  ElementBuilder.styled.layout.grid({
     element: document.createElement('div'),
     elementStyles: {
       element: {

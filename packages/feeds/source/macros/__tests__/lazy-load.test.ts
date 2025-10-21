@@ -1,6 +1,6 @@
 import lazyLoad from '../lazy-load';
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { Model } from '@universityofmaryland/web-elements-library';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 
 describe('Lazy Load Component', () => {
   beforeEach(() => {
@@ -26,7 +26,7 @@ describe('Lazy Load Component', () => {
     expect(component?.styles).toContain('.aligned-center');
     expect(component?.styles).toContain('.outline-button');
 
-    expect(Model.ElementModel.layout.alignedCenter).toHaveBeenCalledWith(
+    expect(ElementBuilder.styled.layout.alignedCenter).toHaveBeenCalledWith(
       expect.objectContaining({
         isThemeDark: false,
         elementStyles: expect.objectContaining({
@@ -37,7 +37,7 @@ describe('Lazy Load Component', () => {
       }),
     );
 
-    expect(Model.ElementModel.actions.outlineOptions).toHaveBeenCalledWith(
+    expect(ElementBuilder.styled.actions.outlineOptions).toHaveBeenCalledWith(
       expect.objectContaining({
         isThemeDark: false,
       }),

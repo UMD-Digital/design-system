@@ -160,6 +160,10 @@ import * as UMDLogos from '@universityofmaryland/web-icons-library/logos';
 UMDLogos.umd.dark    // Dark background logo
 UMDLogos.umd.light   // Light background logo
 
+// Forward logos
+UMDLogos.forward.dark   // Forward logo for dark backgrounds
+UMDLogos.forward.light  // Forward logo for light backgrounds
+
 // Campaign logos
 UMDLogos.campaign./*  // Campaign logo variants
 

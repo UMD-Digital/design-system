@@ -29,4 +29,23 @@ describe('Logo Assets', () => {
     expect(Logos.umd.light).toContain('aria-hidden="true"');
     expect(Logos.umd.light).toContain('title="umd logo"');
   });
+
+  it('should export forward namespace', () => {
+    expect(Logos.forward).toBeDefined();
+    expect(typeof Logos.forward).toBe('object');
+  });
+
+  it('should have valid dark logo in forward namespace', () => {
+    expect(Logos.forward.dark).toBeDefined();
+    expect(Logos.forward.dark).toContain('<svg');
+    expect(Logos.forward.dark).toContain('aria-hidden="true"');
+    expect(Logos.forward.dark).toContain('title="umd forward logo"');
+  });
+
+  it('should have valid light logo in forward namespace', () => {
+    expect(Logos.forward.light).toBeDefined();
+    expect(Logos.forward.light).toContain('<svg');
+    expect(Logos.forward.light).toContain('aria-hidden="true"');
+    expect(Logos.forward.light).toContain('title="umd forward logo"');
+  });
 });

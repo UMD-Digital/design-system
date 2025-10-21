@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { createAssetContent, createTextLockupMedium } from './_common';
 import { type PathwayStickyProps } from './_types';
 import { type ElementVisual } from '../../_types';
@@ -23,7 +23,7 @@ const createAssetColumn = (
 
   if (!image && !video) return null;
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'pathway-image-container',
     children: [createAssetContent(props)],
     elementStyles: {
@@ -65,7 +65,7 @@ const createAssetColumn = (
 };
 
 const createTextContent = (props: PathwayStickyProps): ElementVisual => {
-  const wrapper = ElementModel.createDiv({
+  const wrapper = ElementBuilder.create.div({
     className: 'pathway-text-container-wrapper',
     children: [createTextLockupMedium(props)],
     elementStyles: {
@@ -103,7 +103,7 @@ const createTextContent = (props: PathwayStickyProps): ElementVisual => {
     },
   });
 
-  const container = ElementModel.createDiv({
+  const container = ElementBuilder.create.div({
     className: 'pathway-text-container',
     children: [wrapper],
     elementStyles: {
@@ -140,7 +140,7 @@ const createLock = (props: PathwayStickyProps) => {
   }
   children.push(textContent);
 
-  const lockWrapper = ElementModel.createDiv({
+  const lockWrapper = ElementBuilder.create.div({
     className: 'pathway-container-lock-wrapper',
     children,
     elementStyles: {
@@ -162,7 +162,7 @@ const createLock = (props: PathwayStickyProps) => {
     },
   });
 
-  return ElementModel.layout.spaceHorizontalLarger({
+  return ElementBuilder.styled.layout.spaceHorizontalLarger({
     element: document.createElement('div'),
     children: [lockWrapper],
     elementStyles: {
@@ -177,10 +177,10 @@ const createLock = (props: PathwayStickyProps) => {
 };
 
 export default (props: PathwayStickyProps) =>
-  ElementModel.createDiv({
+  ElementBuilder.create.div({
     className: 'pathway-sticky-container',
     children: [
-      ElementModel.createDiv({
+      ElementBuilder.create.div({
         className: 'pathway-sticky-container-wrapper',
         children: [createLock(props)],
       }),

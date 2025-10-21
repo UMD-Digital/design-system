@@ -5,7 +5,7 @@ import {
 } from '@universityofmaryland/web-icons-library/communication';
 import { pin as iconPin } from '@universityofmaryland/web-icons-library/location';
 import { linkedin as iconLinkedIn } from '@universityofmaryland/web-icons-library/social';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { type ElementVisual } from '../../_types';
 import { type PersonContactProps } from '../_types';
 
@@ -16,7 +16,7 @@ const makeIcon = ({
   icon: string;
   isThemeDark?: boolean;
 }) => {
-  const iconElement = ElementModel.actions.iconSmall({
+  const iconElement = ElementBuilder.styled.actions.iconSmall({
     element: document.createElement('span'),
     isThemeDark,
   });
@@ -33,7 +33,7 @@ const makeText = ({
   text: string;
   isThemeDark?: boolean;
 }) => {
-  const textElement = ElementModel.headline.sansSmaller({
+  const textElement = ElementBuilder.styled.headline.sansSmaller({
     element: document.createElement('span'),
     isThemeDark,
     elementStyles: {
@@ -72,7 +72,7 @@ const makeContactLink = ({
   };
 
   if (isLink) {
-    const link = ElementModel.layout.gridInlineRow({
+    const link = ElementBuilder.styled.layout.gridInlineRow({
       element: document.createElement('a'),
       elementStyles: containerStyles,
       isThemeDark,
@@ -87,7 +87,7 @@ const makeContactLink = ({
     return link;
   }
 
-  return ElementModel.layout.gridInlineRow({
+  return ElementBuilder.styled.layout.gridInlineRow({
     element: document.createElement('div'),
     elementStyles: containerStyles,
     isThemeDark,
@@ -107,7 +107,7 @@ export default ({
 
   if (phone) {
     children.push(
-      ElementModel.createDiv({
+      ElementBuilder.create.div({
         className: 'text-lockup-contact-phone',
         children: [
           makeContactLink({
@@ -122,7 +122,7 @@ export default ({
 
   if (email) {
     children.push(
-      ElementModel.createDiv({
+      ElementBuilder.create.div({
         className: 'text-lockup-contact-email',
         children: [
           makeContactLink({
@@ -137,7 +137,7 @@ export default ({
 
   if (linkendIn) {
     children.push(
-      ElementModel.createDiv({
+      ElementBuilder.create.div({
         className: 'text-lockup-contact-linkedin',
         children: [
           makeContactLink({
@@ -152,7 +152,7 @@ export default ({
 
   if (address) {
     children.push(
-      ElementModel.createDiv({
+      ElementBuilder.create.div({
         className: 'text-lockup-contact-address',
         children: [
           makeContactLink({
@@ -167,7 +167,7 @@ export default ({
 
   if (actions) {
     children.push(
-      ElementModel.layout.gridInlineTabletRows({
+      ElementBuilder.styled.layout.gridInlineTabletRows({
         element: actions,
         elementStyles: {
           element: {
@@ -178,7 +178,7 @@ export default ({
     );
   }
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'text-lockup-contact',
     children,
     elementStyles: {

@@ -3,7 +3,7 @@ import {
   stats as statsFont,
   sans as sansFonts,
 } from '@universityofmaryland/web-styles-library/typography';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { type ElementVisual } from '../../_types';
 
 export interface StatProps {
@@ -33,7 +33,7 @@ const createStat = (
     statElement.textContent = rawText.slice(0, 6);
   }
 
-  return ElementModel.create({
+  return ElementBuilder.create.element({
     element: statElement,
     className: 'stat-display',
     elementStyles: {
@@ -67,7 +67,7 @@ const createSubtext = (
   const { subText, isThemeDark, isSizeLarge } = props;
   if (!subText) return;
 
-  return ElementModel.create({
+  return ElementBuilder.create.element({
     element: subText,
     className: 'stat-sub-text',
     elementStyles: {
@@ -97,7 +97,7 @@ const createText = (
   if (!text) return;
 
   if (isSizeLarge) {
-    return ElementModel.richText.simpleLargest({
+    return ElementBuilder.styled.richText.simpleLargest({
       element: text,
       isThemeDark,
       elementStyles: {
@@ -106,7 +106,7 @@ const createText = (
     });
   }
 
-  return ElementModel.richText.simpleLarge({
+  return ElementBuilder.styled.richText.simpleLarge({
     element: text,
     isThemeDark,
     elementStyles: {
@@ -131,7 +131,7 @@ const createWrapper = (
     Boolean,
   ) as ElementVisual[];
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'stat-wrapper',
     children: childElements,
     elementStyles: {
@@ -162,7 +162,7 @@ const createDisplayBlock = (
   const { isDisplayBlock, wrapperElement } = props;
   if (!isDisplayBlock) return null;
 
-  const block = ElementModel.createDiv({
+  const block = ElementBuilder.create.div({
     className: 'stat-display-block',
     children: [wrapperElement],
     elementStyles: {
@@ -201,7 +201,7 @@ const createDisplayBlock = (
 };
 
 const createContainer = (containerChild: ElementVisual) => {
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'stat-container',
     children: [containerChild],
     elementStyles: {

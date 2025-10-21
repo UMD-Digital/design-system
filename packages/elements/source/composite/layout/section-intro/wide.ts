@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { type ElementVisual } from '../../../_types';
 
 export interface SectionIntroWideProps {
@@ -16,7 +16,7 @@ const createHeadline = (
   const { headline } = props;
   if (!headline) return;
 
-  return ElementModel.headline.sansLargest({
+  return ElementBuilder.styled.headline.sansLargest({
     element: headline,
     elementStyles: {
       element: {
@@ -33,7 +33,7 @@ const createActions = (
   const { actions } = props;
   if (!actions) return;
 
-  return ElementModel.create({
+  return ElementBuilder.create.element({
     element: actions,
     className: 'intro-wide-actions',
     elementStyles: {
@@ -58,7 +58,7 @@ const createWrapper = (
     Boolean,
   ) as ElementVisual[];
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'intro-wide-container-wrapper',
     children,
     elementStyles: {
@@ -79,7 +79,7 @@ const createContainer = (
   const { isThemeDark } = props;
   const wrapperElement = createWrapper(props);
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'intro-wide-container',
     children: [wrapperElement],
     elementStyles: {

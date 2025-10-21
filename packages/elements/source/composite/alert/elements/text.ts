@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
 import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 
 export type TypeAlertTextProps = {
   headline?: HTMLElement | null;
@@ -69,7 +69,7 @@ export const CreateAlertText = (props: TypeAlertTextProps) => {
   let styles = STYLES_ALERT_TEXT;
 
   if (headline) {
-    const headlineModel = ElementModel.headline.sansLarge({
+    const headlineModel = ElementBuilder.styled.headline.sansLarge({
       ...props,
       elementStyles: headlineStyles,
       element: headline,
@@ -84,7 +84,7 @@ export const CreateAlertText = (props: TypeAlertTextProps) => {
       richTextStyles.element.color = token.color.gray.dark;
     }
 
-    const textModel = ElementModel.richText.simple({
+    const textModel = ElementBuilder.styled.richText.simple({
       ...props,
       elementStyles: richTextStyles,
       element: text,

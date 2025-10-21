@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { type ElementVisual } from '../../_types';
 import { type PersonTextLockupProps } from '../_types';
 
@@ -21,7 +21,7 @@ export default ({
 
   if (name) {
     children.push(
-      ElementModel.headline.sansLarger({
+      ElementBuilder.styled.headline.sansLarger({
         element: name,
         elementStyles: {
           element: {
@@ -43,7 +43,7 @@ export default ({
 
   if (job) {
     children.push(
-      ElementModel.headline.sansSmall({
+      ElementBuilder.styled.headline.sansSmall({
         element: job,
         elementStyles: {
           element: {
@@ -60,7 +60,7 @@ export default ({
 
   if (association) {
     children.push(
-      ElementModel.headline.sansSmall({
+      ElementBuilder.styled.headline.sansSmall({
         element: association,
         elementStyles: {
           element: {
@@ -88,7 +88,7 @@ export default ({
   if (pronouns) {
     pronouns.innerHTML = `<i>${pronouns.innerHTML}</i>`;
     children.push(
-      ElementModel.headline.sansSmall({
+      ElementBuilder.styled.headline.sansSmall({
         element: pronouns,
         elementStyles: {
           element: {
@@ -107,7 +107,7 @@ export default ({
 
   if (subText) {
     children.push(
-      ElementModel.headline.sansSmall({
+      ElementBuilder.styled.headline.sansSmall({
         element: subText,
         elementStyles: {
           siblingAfter: {
@@ -121,7 +121,7 @@ export default ({
 
   if (actions) {
     children.push(
-      ElementModel.layout.gridInlineTabletRows({
+      ElementBuilder.styled.layout.gridInlineTabletRows({
         element: actions,
         elementStyles: {
           element: {
@@ -132,7 +132,7 @@ export default ({
     );
   }
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'text-lockup-person-container',
     children,
     elementStyles: {

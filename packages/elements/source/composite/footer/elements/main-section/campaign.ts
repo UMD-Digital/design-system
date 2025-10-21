@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as Logos from '@universityofmaryland/web-icons-library/logos';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { imageFromSvg } from '@universityofmaryland/web-utilities-library/media';
-import { ElementModel } from 'model';
 import { BaseProps } from '../../_types';
 import { BREAKPOINTS } from '../../globals';
 import { type ElementVisual } from '../../../../_types';
@@ -56,7 +56,7 @@ export default ({
     ? createForwardCampaign(!!isThemeLight)
     : createFearlesslyForwardCampaign(!!isThemeLight);
 
-  const linkElement = ElementModel.create({
+  const linkElement = ElementBuilder.create.element({
     element: link,
     className: 'campaign-column-link',
     elementStyles: {
@@ -68,7 +68,7 @@ export default ({
     },
   });
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'campaign-column-wrapper',
     children: [linkElement],
     elementStyles: {

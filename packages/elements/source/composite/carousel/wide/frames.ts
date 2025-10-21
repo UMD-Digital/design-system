@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { assets } from 'atomic';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { createElementWithRefs } from './_elementModel';
 import { createControlButton } from './controls';
 import { type ElementVisual } from '../../../_types';
@@ -20,7 +20,7 @@ const createSlideContent = ({
   // Create content container first to get reference
   let contentContainer: ElementVisual | null = null;
 
-  const closeButton = ElementModel.create({
+  const closeButton = ElementBuilder.create.element({
     element: document.createElement('button'),
     className: 'umd-carousel-wide__slide-content-close',
     attributes: [{ type: 'button' }, { 'aria-label': 'Close content' }],
@@ -67,7 +67,7 @@ const createSlideContent = ({
 
   if (slide.headline) {
     children.push(
-      ElementModel.headline.sansLarge({
+      ElementBuilder.styled.headline.sansLarge({
         element: slide.headline,
         elementStyles: {
           element: {
@@ -84,7 +84,7 @@ const createSlideContent = ({
 
   if (slide.text) {
     children.push(
-      ElementModel.richText.simple({
+      ElementBuilder.styled.richText.simple({
         element: slide.text,
         isThemeDark,
       }),
@@ -93,7 +93,7 @@ const createSlideContent = ({
 
   if (children.length === 1) return null;
 
-  contentContainer = ElementModel.createDiv({
+  contentContainer = ElementBuilder.create.div({
     className: 'umd-carousel-wide__slide-content',
     children,
     elementStyles: {
@@ -154,7 +154,7 @@ const createMainFrameSlide = (
 
   if (slideContentWrapper) children.push(slideContentWrapper);
 
-  return ElementModel.create({
+  return ElementBuilder.create.element({
     element: document.createElement('figure'),
     className: 'umd-carousel-wide__slide',
     children,
@@ -214,7 +214,7 @@ const createMainFrameSlide = (
 
 const createPreviewContainer = (position: 'left' | 'right') => {
   const isPositionLeft = position === 'left';
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: isPositionLeft
       ? 'umd-carousel-wide__preview--left'
       : 'umd-carousel-wide__preview--right',
@@ -277,7 +277,7 @@ const createMainContainer = (
   }
 
   return {
-    component: ElementModel.createDiv({
+    component: ElementBuilder.create.div({
       className: 'umd-carousel-wide__main-container',
       children: slideElements,
       elementStyles: {

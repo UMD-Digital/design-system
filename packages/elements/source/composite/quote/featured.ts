@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { imageFromSvg } from '@universityofmaryland/web-utilities-library/media';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import InlineQuote from './inline';
 import { image as elementImage, action as elementAction } from './elements';
 import { quoteAnimation } from './helper/animation';
@@ -38,7 +38,7 @@ const createImageContainer = (props: QuoteFeaturedProps) => {
   };
 
   const createImageContainerElement = () => {
-    return ElementModel.createDiv({
+    return ElementBuilder.create.div({
       className: 'quote-featured-image',
       children: containerChildren,
       elementStyles: {
@@ -104,11 +104,11 @@ const createTextureContainer = ({
     SVG: isDarkText ? BACKGROUND_TEXTURE_DARK : BACKGROUND_TEXTURE_LIGHT,
   });
 
-  const backgroundTextureElement = ElementModel.create({
+  const backgroundTextureElement = ElementBuilder.create.element({
     element: backgroundTexture,
     className: 'quote-background-texture',
   });
-  const container = ElementModel.createDiv({
+  const container = ElementBuilder.create.div({
     className: 'quote-featured-texture',
     children: [backgroundTextureElement],
     elementStyles: {
@@ -145,7 +145,7 @@ export default (props: QuoteFeaturedProps) => {
 
   const inlineQuote = InlineQuote({ ...props, isTypeFeatured: true });
 
-  const textContainer = ElementModel.createDiv({
+  const textContainer = ElementBuilder.create.div({
     className: 'quote-featured-text',
     children: [inlineQuote],
     elementStyles: {
@@ -177,7 +177,7 @@ export default (props: QuoteFeaturedProps) => {
 
   wrapperChildren.push(textContainer);
 
-  const wrapper = ElementModel.createDiv({
+  const wrapper = ElementBuilder.create.div({
     className: 'quote-featured-container-wrapper',
     children: wrapperChildren,
     elementStyles: {
@@ -201,7 +201,7 @@ export default (props: QuoteFeaturedProps) => {
     },
   });
 
-  const spacer = ElementModel.createDiv({
+  const spacer = ElementBuilder.create.div({
     className: 'quote-featured-container-spacer',
     children: [wrapper],
     elementStyles: {
@@ -220,7 +220,7 @@ export default (props: QuoteFeaturedProps) => {
     },
   });
 
-  const container = ElementModel.createDiv({
+  const container = ElementBuilder.create.div({
     className: 'quote-featured-container',
     children: [spacer],
     elementStyles: {

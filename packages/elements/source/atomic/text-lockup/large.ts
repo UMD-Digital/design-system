@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { ElementVisual } from '../../_types';
 
 interface TypeTextLockupLarge {
@@ -27,7 +27,7 @@ export default ({
 
   if (eyebrow) {
     children.push(
-      ElementModel.headline.sansSmall({
+      ElementBuilder.styled.headline.sansSmall({
         element: eyebrow,
         elementStyles: {
           element: {
@@ -46,7 +46,7 @@ export default ({
 
   if (ribbon) {
     children.push(
-      ElementModel.text.ribbon({
+      ElementBuilder.styled.text.ribbon({
         element: ribbon,
         elementStyles: {
           siblingAfter: {
@@ -63,7 +63,7 @@ export default ({
 
   if (text) {
     children.push(
-      ElementModel.richText.simpleLarge({
+      ElementBuilder.styled.richText.simpleLarge({
         element: text,
         elementStyles: {
           siblingAfter: {
@@ -77,7 +77,7 @@ export default ({
 
   if (textLargest) {
     children.push(
-      ElementModel.richText.simpleLargest({
+      ElementBuilder.styled.richText.simpleLargest({
         element: textLargest,
         elementStyles: {
           siblingAfter: {
@@ -91,13 +91,13 @@ export default ({
 
   if (actions) {
     children.push(
-      ElementModel.layout.gridStacked({
+      ElementBuilder.styled.layout.gridStacked({
         element: actions,
       }),
     );
   }
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'text-lockup-large',
     children,
     elementStyles: {

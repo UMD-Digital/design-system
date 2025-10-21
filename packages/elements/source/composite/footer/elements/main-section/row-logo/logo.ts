@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as Logos from '@universityofmaryland/web-icons-library/logos';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import createCampaignRow, { type CampaignProps } from '../campaign';
 import createCallToAction, { type CallToActionProps } from '../call-to-action';
 import { BREAKPOINTS } from '../../../globals';
@@ -34,7 +34,7 @@ const createLogoLinkElement = (
 
   const logoLink = logo ?? createDefaultLogoLink();
 
-  return ElementModel.create({
+  return ElementBuilder.create.element({
     element: logoLink,
     className: 'umd-footer-logo-container_link',
     elementStyles: {
@@ -57,7 +57,7 @@ const createContainer = (
   campaignElement: ElementVisual,
   callToActionElement: ElementVisual,
 ): ElementVisual => {
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'umd-footer-logo-container',
     children: [logoLinkElement, campaignElement, callToActionElement],
     elementStyles: {

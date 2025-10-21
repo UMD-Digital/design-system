@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { ElementVisual } from '../../_types';
 
 const makeDateElement = ({
@@ -25,27 +25,27 @@ const makeDateElement = ({
   }
 
   if (isDay && isLargeSize && !isMultiDay) {
-    return ElementModel.headline.sansExtraLarge({
+    return ElementBuilder.styled.headline.sansExtraLarge({
       element: dateElement,
       isThemeDark,
     });
   }
 
   if (isDay) {
-    return ElementModel.headline.sansLarger({
+    return ElementBuilder.styled.headline.sansLarger({
       element: dateElement,
       isThemeDark,
     });
   }
 
   if (isMonth && isLargeSize && !isMultiDay) {
-    return ElementModel.headline.sansSmall({
+    return ElementBuilder.styled.headline.sansSmall({
       element: dateElement,
       isThemeDark,
     });
   }
 
-  return ElementModel.headline.sansMin({ element: dateElement, isThemeDark });
+  return ElementBuilder.styled.headline.sansMin({ element: dateElement, isThemeDark });
 };
 
 const makeStartDateBlock = ({
@@ -61,7 +61,7 @@ const makeStartDateBlock = ({
   isMultiDay?: boolean;
   isThemeDark?: boolean;
 }) =>
-  ElementModel.createParagraph({
+  ElementBuilder.create.paragraph({
     className: 'event-sign-start',
     elementStyles: {
       subElement: {
@@ -95,7 +95,7 @@ const makeEndDateBlock = ({
   endMonth: string | HTMLElement;
   isThemeDark?: boolean;
 }) =>
-  ElementModel.createParagraph({
+  ElementBuilder.create.paragraph({
     className: 'event-sign-end',
     children: [
       makeDateElement({
@@ -145,10 +145,10 @@ export default (props: {
   );
 
   if (isMultiDay && endDay && endMonth) {
-    const srOnly = ElementModel.createSpan({
+    const srOnly = ElementBuilder.create.span({
       className: 'sr-only',
     });
-    const dash = ElementModel.createSpan({
+    const dash = ElementBuilder.create.span({
       className: 'dash',
       elementStyles: {
         element: {
@@ -174,7 +174,7 @@ export default (props: {
     );
   }
 
-  return ElementModel.event.signContainer({
+  return ElementBuilder.styled.event.signContainer({
     element: document.createElement('div'),
     children,
   });

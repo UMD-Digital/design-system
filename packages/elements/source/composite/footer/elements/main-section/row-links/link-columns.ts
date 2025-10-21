@@ -4,7 +4,7 @@ import {
   typography,
 } from '@universityofmaryland/web-styles-library';
 import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { BREAKPOINTS } from '../../../globals';
 import { BaseProps } from '../../../_types';
 import { type ElementVisual } from '../../../../../_types';
@@ -92,7 +92,7 @@ const createLinkColumn = (
 ) => {
   const { isThemeLight } = props;
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'link-column-fonts',
     children: children,
     elementStyles: {
@@ -131,7 +131,7 @@ const createLinkColumn = (
 };
 
 const createLinkColumnFontsLink = (element: HTMLElement) => {
-  return ElementModel.create({
+  return ElementBuilder.create.element({
     element: element,
     className: `link-column-fonts-link`,
     elementStyles: {
@@ -184,7 +184,7 @@ const createRowLinksColumnWrapper = ({
 }: {
   children: ElementVisual[];
 }) => {
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'umd-footer-row-links-column-wrapper',
     children,
     elementStyles: {
@@ -258,7 +258,7 @@ const createSlotColumn = ({
 };
 
 const createLinkColumnHeadline = (element: HTMLElement) => {
-  return ElementModel.create({
+  return ElementBuilder.create.element({
     element: element,
     className: 'link-column-headline',
     elementStyles: {
@@ -318,7 +318,7 @@ export default (props: slotColumnsProps): ElementVisual => {
     ];
   }
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'umd-footer-row-links-columns',
     children,
     elementStyles: {

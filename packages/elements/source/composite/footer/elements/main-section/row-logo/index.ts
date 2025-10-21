@@ -1,5 +1,5 @@
 import { token, layout } from '@universityofmaryland/web-styles-library';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import createSocialCampaignColumns, {
   type SocialCampaignColumnsProps,
 } from '../social';
@@ -31,7 +31,7 @@ export default (props: RowLogoProps): ElementVisual => {
     (isTypeSimple && createSocialCampaignColumns(props)) ||
     createCallToActionContainer(props);
 
-  const wrapper = ElementModel.createDiv({
+  const wrapper = ElementBuilder.create.div({
     className: 'umd-footer-row-logo-container-wrapper',
     children: [logoElement, contactElement, thirdColumnElement],
     elementStyles: {
@@ -56,7 +56,7 @@ export default (props: RowLogoProps): ElementVisual => {
     },
   });
 
-  const lock = ElementModel.createDiv({
+  const lock = ElementBuilder.create.div({
     className: 'umd-footer-row-logo-container-lock',
     children: [wrapper],
     elementStyles: {
@@ -66,7 +66,7 @@ export default (props: RowLogoProps): ElementVisual => {
     },
   });
 
-  const rowLogoContainer = ElementModel.createDiv({
+  const rowLogoContainer = ElementBuilder.create.div({
     className: 'umd-footer-row-logo-container',
     children: [lock],
     elementStyles: {

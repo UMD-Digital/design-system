@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as animation from '@universityofmaryland/web-styles-library/animation';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import createMain, { type MainSectionProps } from './elements/main-section';
 import createUtility, { type UtilityProps } from './elements/utility-section';
 import { BaseProps } from './_types';
@@ -16,7 +16,7 @@ export default (props: FooterProps) => {
   const main = createMain(props);
   const utility = createUtility(props);
 
-  const wrapper = ElementModel.createDiv({
+  const wrapper = ElementBuilder.create.div({
     className: 'umd-footer-element-wrapper',
     children: [main, utility],
     elementStyles: {

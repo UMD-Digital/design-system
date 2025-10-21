@@ -1,4 +1,4 @@
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import {
   createEyebrow,
   createRibbonEyebrow,
@@ -44,7 +44,7 @@ export default ({
 
   if (headline) {
     children.push(
-      ElementModel.headline.sansScalingLarger({
+      ElementBuilder.styled.headline.sansScalingLarger({
         element: headline,
         elementStyles: headlineStyles,
         isThemeDark,
@@ -58,7 +58,7 @@ export default ({
 
   if (text) {
     children.push(
-      ElementModel.richText.simpleScaling({
+      ElementBuilder.styled.richText.simpleScaling({
         element: text,
         elementStyles: textStyles,
         isThemeDark,
@@ -68,7 +68,7 @@ export default ({
 
   if (date) {
     children.push(
-      ElementModel.headline.sansScalingMin({
+      ElementBuilder.styled.headline.sansScalingMin({
         element: date,
         elementStyles: dateStyles,
         isThemeDark,
@@ -80,7 +80,7 @@ export default ({
     children.push(createActions({ actions }));
   }
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'scaling-font-block-container',
     children,
     elementStyles: {

@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { layout } from 'atomic';
 import { PersonCard } from './_types';
 import { ElementVisual } from '../../_types';
@@ -34,7 +34,7 @@ export default ({
   }
 
   if (name) {
-    const nameComposite = ElementModel.headline.sansLarge({
+    const nameComposite = ElementBuilder.styled.headline.sansLarge({
       element: name,
       elementStyles: {
         element: {
@@ -80,7 +80,7 @@ export default ({
     );
   }
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'person-tabular-container',
     children,
     elementStyles: {

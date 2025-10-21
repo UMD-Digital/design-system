@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import { assets, textLockup } from 'atomic';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { type ElementVisual } from '../../_types';
 import { type HeroStandardProps } from './_types';
 
@@ -136,7 +136,7 @@ const createAsset = ({
   const children = buildAssetChildren({ image, video });
   const elementStyles = buildAssetStyles(includesAnimation);
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'umd-hero-default__asset',
     children,
     elementStyles,
@@ -164,7 +164,7 @@ const createHeadline = (
     ...(isOverwriteHeadline && { fontSize: '80px' }),
   };
 
-  const headlineElement = ElementModel.headline.campaignExtraLarge({
+  const headlineElement = ElementBuilder.styled.headline.campaignExtraLarge({
     element: headline,
     elementStyles: {
       element: {
@@ -201,7 +201,7 @@ const createText = (props: HeroStandardProps) => {
     isThemeDark: true,
   });
 
-  const textContainer = ElementModel.createDiv({
+  const textContainer = ElementBuilder.create.div({
     className: 'umd-hero-default__text',
     children: [text],
     elementStyles: {
@@ -242,7 +242,7 @@ const createText = (props: HeroStandardProps) => {
     },
   });
 
-  return ElementModel.layout.spaceHorizontalLarger({
+  return ElementBuilder.styled.layout.spaceHorizontalLarger({
     element: document.createElement('div'),
     children: [textContainer],
     elementStyles: {
@@ -270,7 +270,7 @@ export default (props: HeroStandardProps) => {
   const asset = createAsset(props);
   const text = createText(props);
 
-  const composite = ElementModel.createDiv({
+  const composite = ElementBuilder.create.div({
     className: 'umd-hero-default',
     children: [asset, text],
     elementStyles: {

@@ -4,7 +4,7 @@ import {
   createMediaQuery,
   createMediaQueryRange,
 } from '@universityofmaryland/web-utilities-library/styles';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { type UMDElement } from '../../../_types';
 
 const smallBreakpoint = token.media.breakpointValues.small.max;
@@ -26,7 +26,7 @@ export const image = ({
   children: UMDElement[];
   customStyles?: Record<string, any>;
 }) =>
-  ElementModel.createDiv({
+  ElementBuilder.create.div({
     className: 'layout-block-stacked-image',
     children,
     elementStyles: {
@@ -84,7 +84,7 @@ export const textContainer = ({
   customStyles?: Record<string, any>;
   children: UMDElement[];
 }) =>
-  ElementModel.createDiv({
+  ElementBuilder.create.div({
     className: 'layout-block-stacked-text',
     children,
     elementStyles: {
@@ -123,7 +123,7 @@ export const container = ({
   customStyles?: Record<string, any>;
   children: UMDElement[];
 }) =>
-  ElementModel.createDiv({
+  ElementBuilder.create.div({
     className: 'layout-block-stacked-container',
     children,
     elementStyles: {

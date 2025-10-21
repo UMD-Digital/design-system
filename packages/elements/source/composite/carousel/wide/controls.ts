@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { arrow_left as iconArrowLeft } from '@universityofmaryland/web-icons-library/arrows';
 import { animations } from 'atomic';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { createElementWithRefs } from './_elementModel';
 import { type CarouselWideProps } from '../_types';
 
@@ -18,7 +18,7 @@ export const createControlButton = (
   const buttonDesktopPosition = `calc(15vw - (${token.spacing['xl']} + ${token.spacing.md}))`;
   const buttonHighPosition = `calc(20vw - (${token.spacing['xl']} + ${token.spacing.md}))`;
 
-  const button = ElementModel.create({
+  const button = ElementBuilder.create.element({
     element: document.createElement('button'),
     className: isPrev
       ? 'umd-carousel-wide__control--prev'
@@ -78,7 +78,7 @@ export const createControlButton = (
     },
   });
 
-  const srText = ElementModel.create({
+  const srText = ElementBuilder.create.element({
     element: document.createElement('span'),
     className: 'sr-only',
   });

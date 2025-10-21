@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
 import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { createTextLockupMedium, createAssetContent } from './_common';
 import { type PathwayOverlayProps } from './_types';
 import { type ElementVisual } from '../../_types';
@@ -116,7 +116,7 @@ const createAssetColumn = (
 
   if (!image && !video) return null;
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: REF_IMAGE_ELEMENT,
     children: [createAssetContent(props)],
     elementStyles: {
@@ -155,7 +155,7 @@ const createAssetColumn = (
 };
 
 const createTextContent = (props: PathwayOverlayProps): ElementVisual => {
-  const wrapper = ElementModel.createDiv({
+  const wrapper = ElementBuilder.create.div({
     className: 'pathway-text-container-wrapper',
     children: [createTextLockupMedium(props)],
     elementStyles: {
@@ -193,7 +193,7 @@ const createTextContent = (props: PathwayOverlayProps): ElementVisual => {
     },
   });
 
-  const container = ElementModel.createDiv({
+  const container = ElementBuilder.create.div({
     className: REF_TEXT_ELEMENT,
     children: [wrapper],
     elementStyles: {
@@ -229,7 +229,7 @@ const createBackground = (props: PathwayOverlayProps): ElementVisual => {
     return token.color.white;
   };
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'pathway-overlay-container-background',
     elementStyles: {
       element: {
@@ -276,7 +276,7 @@ const createLock = (props: PathwayOverlayProps) => {
   const isThemeApplied =
     props.isThemeDark || props.isThemeLight || props.isThemeMaryland;
 
-  const lockWrapper = ElementModel.createDiv({
+  const lockWrapper = ElementBuilder.create.div({
     className: 'pathway-overlay-container-lock-wrapper',
     children,
     elementStyles: {
@@ -300,7 +300,7 @@ const createLock = (props: PathwayOverlayProps) => {
     },
   });
 
-  return ElementModel.layout.spaceHorizontalLarger({
+  return ElementBuilder.styled.layout.spaceHorizontalLarger({
     element: document.createElement('div'),
     children: [lockWrapper],
     elementStyles: {
@@ -315,10 +315,10 @@ const createLock = (props: PathwayOverlayProps) => {
 };
 
 export default (props: PathwayOverlayProps) => {
-  const composite = ElementModel.createDiv({
+  const composite = ElementBuilder.create.div({
     className: 'pathway-overlay-container',
     children: [
-      ElementModel.createDiv({
+      ElementBuilder.create.div({
         className: 'pathway-overlay-container-wrapper',
         children: [createLock(props)],
       }),

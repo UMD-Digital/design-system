@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
 import { actions, textLockup } from 'atomic';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { CardOverlayProps } from '../_types';
 import { ElementVisual } from '../../../_types';
 
@@ -21,7 +21,7 @@ export default (props: CardOverlayProps) => {
   }
 
   children.push(
-    ElementModel.createDiv({
+    ElementBuilder.create.div({
       className: 'card-overlay-color-wrapper',
       elementStyles: {
         element: {
@@ -42,7 +42,7 @@ export default (props: CardOverlayProps) => {
     }),
   );
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'card-overlay-color',
     children,
     elementStyles: {

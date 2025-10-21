@@ -1,4 +1,4 @@
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { assets } from 'atomic';
 
 export default ({ image }: { image: HTMLImageElement }) => {
@@ -44,7 +44,7 @@ export default ({ image }: { image: HTMLImageElement }) => {
     resizeObserver.observe(container);
   }, 0);
 
-  const elementModel = ElementModel.create({
+  const elementModel = ElementBuilder.create.element({
     element: container,
     className: 'media-gif',
     children: [

@@ -11,7 +11,7 @@ import {
 import createCampaignRow from './campaign';
 import { BREAKPOINTS } from '../../globals';
 import { BaseProps } from '../../_types';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { type ElementVisual } from '../../../../_types';
 
 interface SocialProps extends BaseProps {
@@ -81,7 +81,7 @@ const CreateSocialRow = (props: SocialProps): ElementVisual => {
     );
   }
 
-  const headline = ElementModel.create({
+  const headline = ElementBuilder.create.element({
     element: document.createElement('p'),
     className: 'umd-footer-social-container_headline',
     elementStyles: {
@@ -95,7 +95,7 @@ const CreateSocialRow = (props: SocialProps): ElementVisual => {
   headline.element.innerText = 'Stay Connected';
 
   const socialLinkChildren = socialLinks.map((link) =>
-    ElementModel.create({
+    ElementBuilder.create.element({
       element: GetSocialIcon({ link }),
       className: 'umd-footer-social-link',
       elementStyles: {
@@ -144,7 +144,7 @@ const CreateSocialRow = (props: SocialProps): ElementVisual => {
 
   const gridColumns = Math.min(socialLinks.length, 3);
 
-  const linksWrapper = ElementModel.createDiv({
+  const linksWrapper = ElementBuilder.create.div({
     className: 'umd-footer-social-container_wrapper',
     children: socialLinkChildren,
     elementStyles: {
@@ -160,7 +160,7 @@ const CreateSocialRow = (props: SocialProps): ElementVisual => {
 
   const containerChildren = [headline, linksWrapper];
 
-  const container = ElementModel.createDiv({
+  const container = ElementBuilder.create.div({
     className: 'umd-footer-social-container',
     children: containerChildren,
     elementStyles: {
@@ -196,7 +196,7 @@ export default (props: SocialCampaignColumnsProps): ElementVisual => {
   const campaignContainer = createCampaignRow(props);
   const { isTypeSimple } = props;
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'umd-footer-social-column_wrapper',
     children: [socialContainer, campaignContainer],
     elementStyles: {

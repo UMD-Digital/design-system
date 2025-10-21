@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { type QuoteBaseProps, type QuoteVariantProps } from '../_types';
 
 interface QuoteActionProps
@@ -15,7 +15,7 @@ export default ({
   includesAnimation,
   isTypeFeatured = false,
 }: QuoteActionProps) =>
-  ElementModel.create({
+  ElementBuilder.create.element({
     element: action,
     className: 'quote-container-actions',
     elementStyles: {

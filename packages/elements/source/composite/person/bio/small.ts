@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { assets, textLockup } from 'atomic';
 import { PersonBio } from '../_types';
 import { type ElementVisual } from '../../../_types';
@@ -11,7 +11,7 @@ const createTextContainer = (props: PersonBio) => {
 
   if (name) {
     children.push(
-      ElementModel.headline.sansExtraLarge({
+      ElementBuilder.styled.headline.sansExtraLarge({
         element: name,
         isThemeDark,
         elementStyles: {
@@ -31,7 +31,7 @@ const createTextContainer = (props: PersonBio) => {
 
   children.push(textLockup.person({ ...textProps, isThemeDark }));
 
-  return ElementModel.text.lineAdjustmentInset({
+  return ElementBuilder.styled.text.lineAdjustmentInset({
     element: document.createElement('div'),
     children,
   });
@@ -46,7 +46,7 @@ const createTextColumn = (props: PersonBio) => {
 
   if (actions) {
     children.push(
-      ElementModel.layout.gridInlineTabletRows({
+      ElementBuilder.styled.layout.gridInlineTabletRows({
         element: actions,
         elementStyles: {
           element: {
@@ -57,7 +57,7 @@ const createTextColumn = (props: PersonBio) => {
     );
   }
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'person-bio-summary-text-column',
     children,
   });
@@ -101,7 +101,7 @@ const makeContainer = (props: PersonBio) => {
 
   children.push(textColumn);
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'person-bio-summary-container',
     children,
     elementStyles: {
@@ -151,7 +151,7 @@ export default (props: PersonBio) => {
 
   if (description) {
     children.push(
-      ElementModel.richText.simpleLarge({
+      ElementBuilder.styled.richText.simpleLarge({
         element: description,
         isThemeDark,
         elementStyles: {
@@ -164,7 +164,7 @@ export default (props: PersonBio) => {
     );
   }
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'person-bio-summary-composite',
     children,
   });

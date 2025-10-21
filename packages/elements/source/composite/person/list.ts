@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { layout } from 'atomic';
 import { PersonCard } from './_types';
 import { ElementVisual } from '../../_types';
@@ -65,7 +65,7 @@ export default ({
     );
   }
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'person-list-container',
     children,
     elementStyles: {

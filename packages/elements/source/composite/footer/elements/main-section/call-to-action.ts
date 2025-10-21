@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { BREAKPOINTS } from '../../globals';
 import { BaseProps } from '../../_types';
 import { type ElementVisual } from '../../../../_types';
@@ -25,7 +25,7 @@ const createLinkElement = (
 ): ElementVisual => {
   const { isThemeLight } = props;
 
-  return ElementModel.actions.primary({
+  return ElementBuilder.styled.actions.primary({
     element: link,
     elementStyles: {
       element: {
@@ -42,7 +42,7 @@ export default (props: CallToActionProps): ElementVisual => {
   const baseLink = slotCta ?? makeGivingLink();
   const styledLink = createLinkElement(props, baseLink);
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'umd-footer-call-to-action-container',
     children: [styledLink],
     elementStyles: {

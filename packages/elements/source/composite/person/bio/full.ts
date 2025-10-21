@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { assets, textLockup } from 'atomic';
 import { type PersonBio } from '../_types';
 import { type ElementVisual } from '../../../_types';
@@ -21,7 +21,7 @@ export default (props: PersonBio) => {
 
   if (name) {
     children.push(
-      ElementModel.headline.sansExtraLarge({
+      ElementBuilder.styled.headline.sansExtraLarge({
         element: name,
         isThemeDark,
         elementStyles: {
@@ -45,7 +45,7 @@ export default (props: PersonBio) => {
 
   if (description) {
     children.push(
-      ElementModel.richText.simpleLarge({
+      ElementBuilder.styled.richText.simpleLarge({
         element: description,
         isThemeDark,
         elementStyles: {
@@ -60,7 +60,7 @@ export default (props: PersonBio) => {
 
   if (actions) {
     children.push(
-      ElementModel.layout.gridInlineTabletRows({
+      ElementBuilder.styled.layout.gridInlineTabletRows({
         element: actions,
         elementStyles: {
           element: {
@@ -71,7 +71,7 @@ export default (props: PersonBio) => {
     );
   }
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'person-bio-full-container',
     children,
     elementStyles: {

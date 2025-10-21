@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { type ElementVisual } from '../../../_types';
 
 export interface SectionIntroProps {
@@ -43,7 +43,7 @@ const createHeadline = (props: Pick<SectionIntroProps, 'headline'>) => {
   const { headline } = props;
   if (!headline) return;
 
-  return ElementModel.headline.sansLargest({
+  return ElementBuilder.styled.headline.sansLargest({
     element: headline,
     elementStyles: {
       element: {
@@ -58,7 +58,7 @@ const createText = (props: Pick<SectionIntroProps, 'text'>) => {
   const { text } = props;
   if (!text) return;
 
-  return ElementModel.richText.simpleLarge({
+  return ElementBuilder.styled.richText.simpleLarge({
     element: text,
     elementStyles: {
       element: {
@@ -74,7 +74,7 @@ const createActions = (props: Pick<SectionIntroProps, 'actions'>) => {
   const { actions } = props;
   if (!actions) return;
 
-  return ElementModel.layout.gridInlineTabletRows({
+  return ElementBuilder.styled.layout.gridInlineTabletRows({
     element: actions,
     elementStyles: {
       element: {
@@ -105,7 +105,7 @@ const createTextContainer = (
     Boolean,
   ) as ElementVisual[];
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'intro-default-container-text',
     children,
     elementStyles: {
@@ -150,7 +150,7 @@ const createWrapper = (
 ) => {
   const textContainerElement = createTextContainer(props);
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'intro-default-container-wrapper',
     children: [textContainerElement],
     elementStyles: {
@@ -176,7 +176,7 @@ const createContainer = (
 
   const wrapperElement = createWrapper(props);
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'intro-default-container',
     children: [wrapperElement],
     elementStyles: {

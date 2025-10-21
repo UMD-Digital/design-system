@@ -1,4 +1,4 @@
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { type ElementVisual } from '../../../_types';
 
 interface ElementWithRefsProps<T extends Record<string, any>> {
@@ -23,11 +23,11 @@ export function createElementWithRefs<T extends Record<string, any>>(
   const { refs, element, ...elementProps } = props;
 
   const component = element
-    ? ElementModel.create({
+    ? ElementBuilder.create.element({
         element,
         ...elementProps,
       })
-    : ElementModel.createDiv(elementProps);
+    : ElementBuilder.create.div(elementProps);
 
   return {
     ...component,

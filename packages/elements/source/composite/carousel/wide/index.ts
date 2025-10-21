@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { assets } from 'atomic';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { createContainer } from './container';
 import { type CarouselWideProps } from '../_types';
 
@@ -282,7 +282,7 @@ export default (props: CarouselWideProps) => {
     animateSlides(refs, state, index, direction);
   });
 
-  const composite = ElementModel.createDiv({
+  const composite = ElementBuilder.create.div({
     className: 'umd-carousel-wide',
     children: [container],
     attributes: [

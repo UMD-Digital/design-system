@@ -12,9 +12,9 @@
       "@universityofmaryland/web-utilities-library/*": ["../utilities/source/*"],
       "@universityofmaryland/web-icons-library": ["../icons/dist/index.d.ts"],
       "@universityofmaryland/web-icons-library/*": ["../icons/dist/*"],
+      "@universityofmaryland/web-builder-library": ["../builder/source/index.ts"],
+      "@universityofmaryland/web-builder-library/*": ["../builder/source/*"],
       "_types": ["./_types"],
-      "model": ["./model"],
-      "model/*": ["./model/*"],
       "helpers": ["./helpers"],
       "helpers/*": ["./helpers/*"],
       "*": ["./*"]

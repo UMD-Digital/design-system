@@ -12,7 +12,7 @@ import {
 
 export { ElementBuilder };
 
-interface styleObject {
+export interface styleObject {
   className: string | string[];
   [key: string]: any;
 }

@@ -15,8 +15,6 @@ module.exports = {
     '^composite/(.*)$': '<rootDir>/source/composite/$1',
     '^layout$': '<rootDir>/source/layout',
     '^layout/(.*)$': '<rootDir>/source/layout/$1',
-    '^model$': '<rootDir>/source/model',
-    '^model/(.*)$': '<rootDir>/source/model/$1',
     '^utilities$': '<rootDir>/source/utilities',
     '^utilities/(.*)$': '<rootDir>/source/utilities/$1',
     '^_types$': '<rootDir>/source/_types',

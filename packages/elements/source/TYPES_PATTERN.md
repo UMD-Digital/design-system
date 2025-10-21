@@ -104,13 +104,13 @@ Component files should follow this pattern:
 // [component]/[variant].ts
 import * as Styles from '@universityofmaryland/web-styles-library';
 import * as Utils from 'utilities';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import {
   type ElementVisual,
   type ImageElement,
   isImageElement,
 } from '_types';
-import { type ComponentVariantProps } from './_types';
+import { type ComponentVariantProps} from './_types';
 
 // Constants
 const CLASS_NAMES = { /* ... */ } as const;

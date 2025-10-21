@@ -10,55 +10,123 @@ npm install @universityofmaryland/web-builder-library
 
 ## Usage
 
-### Default Export - Element Builder
+### Quick Start - Default Import
+
+The simplest way to use the builder is through the default export:
 
 ```typescript
-import { ElementBuilder, createStyledElement } from '@universityofmaryland/web-builder-library';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 
-// Use the ElementBuilder class directly
-const builder = new ElementBuilder('my-class', document.createElement('div'));
-const result = builder.createElement({
-  config: {
-    styleModifiers: (props) => `/* CSS styles */`
+// Use pre-styled elements
+const button = document.createElement('a');
+button.textContent = 'Click Me';
+button.href = '/page';
+
+const { element, styles } = ElementBuilder.styled.actions.primary({ element: button });
+
+// Inject into DOM
+document.body.appendChild(element);
+
+// Inject styles
+const styleTag = document.createElement('style');
+styleTag.textContent = styles;
+document.head.appendChild(styleTag);
+```
+
+### API Structure
+
+ElementBuilder provides three main interfaces:
+
+#### 1. Styled Elements - Pre-configured UMD Design System Styles
+
+```typescript
+import ElementBuilder from '@universityofmaryland/web-builder-library';
+
+// Actions
+ElementBuilder.styled.actions.primary({ element });
+ElementBuilder.styled.actions.secondary({ element });
+ElementBuilder.styled.actions.outline({ element });
+
+// Buttons
+ElementBuilder.styled.buttons.fullScreen({ element });
+ElementBuilder.styled.buttons.videoState({ element });
+
+// Text
+ElementBuilder.styled.text.eyebrow({ element });
+ElementBuilder.styled.text.ribbon({ element });
+
+// Headlines
+ElementBuilder.styled.headline.sansLarge({ element });
+ElementBuilder.styled.headline.sansMin({ element });
+
+// Layout
+ElementBuilder.styled.layout.gridStacked({ element });
+ElementBuilder.styled.layout.overlay({ element });
+
+// Rich Text
+ElementBuilder.styled.richText.container({ element });
+
+// Assets
+ElementBuilder.styled.assets.image({ element });
+
+// Event
+ElementBuilder.styled.event.meta({ element });
+```
+
+#### 2. Create Utilities - Custom Styled Elements
+
+```typescript
+import ElementBuilder from '@universityofmaryland/web-builder-library';
+
+// Create custom styled div
+const myDiv = ElementBuilder.create.div({
+  className: 'my-custom-class',
+  elementStyles: {
+    element: { padding: '20px', backgroundColor: '#fff' }
   }
 });
 
-// Or use the createStyledElement factory
-const element = createStyledElement(
-  { element: document.createElement('div') },
-  { className: 'my-class' }
+// Create custom styled paragraph
+const myParagraph = ElementBuilder.create.paragraph({
+  className: 'my-paragraph',
+  elementStyles: {
+    element: { fontSize: '16px', lineHeight: '1.5' }
+  }
+});
+
+// Create custom styled span
+const mySpan = ElementBuilder.create.span({
+  className: 'my-span'
+});
+
+// Create custom element with any tag
+const mySection = ElementBuilder.create.element({
+  element: document.createElement('section'),
+  className: 'my-section'
+});
+```
+
+#### 3. Advanced - Direct Access to Builder Class
+
+```typescript
+import ElementBuilder from '@universityofmaryland/web-builder-library';
+
+// Use the ElementBuilder class directly for advanced use cases
+const builder = new ElementBuilder.ElementBuilder('my-class', document.createElement('div'));
+const result = builder.createElement({
+  config: {
+    styleModifiers: (props) => `/* Custom CSS */`
+  }
+});
+
+// Use advanced factory with builder variants
+const element = ElementBuilder.create.advanced(
+  {
+    element: document.createElement('div'),
+    elementStyles: { element: { margin: '10px' } }
+  },
+  { className: 'advanced-element' }
 );
-```
-
-### Styled Elements - Pre-configured Builders
-
-```typescript
-import * as actions from '@universityofmaryland/web-builder-library/styledElements/actions';
-import * as buttons from '@universityofmaryland/web-builder-library/styledElements/buttons';
-import * as text from '@universityofmaryland/web-builder-library/styledElements/text';
-
-// Create action elements
-const primaryAction = actions.primary({
-  element: document.createElement('a'),
-});
-
-// Create button elements
-const fullscreenButton = buttons.fullScreen({
-  element: document.createElement('button'),
-});
-
-// Create text elements
-const eyebrow = text.eyebrow({
-  element: document.createElement('span'),
-});
-```
-
-Or use utility functions from styledElements:
-
-```typescript
-import { create, createDiv } from '@universityofmaryland/web-builder-library/styledElements';
-
-const myElement = createDiv({ className: 'my-custom-class' });
 ```
 
 ### Element Model Pattern
@@ -76,52 +144,107 @@ interface ElementModel {
 ### Complete Example
 
 ```typescript
-import * as actions from '@universityofmaryland/web-builder-library/styledElements/actions';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 
-const button = document.createElement('a');
-button.textContent = 'Click Me';
-button.href = '/page';
+// Create a primary action button
+const link = document.createElement('a');
+link.textContent = 'Learn More';
+link.href = '/about';
 
-const { element, styles } = actions.primary({ element: button });
+const action = ElementBuilder.styled.actions.primary({ element: link });
 
-// Inject element into DOM
-document.body.appendChild(element);
+// Create a custom container
+const container = ElementBuilder.create.div({
+  className: 'action-container',
+  elementStyles: {
+    element: {
+      display: 'flex',
+      justifyContent: 'center',
+      padding: '2rem'
+    }
+  }
+});
 
-// Inject styles into head
+// Combine elements
+container.element.appendChild(action.element);
+
+// Inject into DOM
+document.body.appendChild(container.element);
+
+// Inject combined styles
 const styleTag = document.createElement('style');
-styleTag.textContent = styles;
+styleTag.textContent = action.styles + container.styles;
 document.head.appendChild(styleTag);
+```
+
+## Alternative Import Patterns
+
+For tree-shaking and selective imports, you can import specific modules:
+
+```typescript
+// Import specific styled element category
+import * as actions from '@universityofmaryland/web-builder-library/styledElements/actions';
+const primaryAction = actions.primary({ element });
+
+// Import utility functions
+import { createDiv } from '@universityofmaryland/web-builder-library/styledElements';
+const myDiv = createDiv({ className: 'my-class' });
+
+// Import core classes
+import { ElementBuilder, createStyledElement } from '@universityofmaryland/web-builder-library/core';
 ```
 
 ## API Documentation
 
-### Core Exports
-
-- `ElementBuilder` - Main builder class
-- `createStyledElement` - Factory function with builder variants
-- Type exports: `ElementProps`, `BuilderConfig`, `StyleModifierProps`, etc.
-
-### Styled Elements
+### Styled Element Categories
 
 Pre-configured element builders integrating with UMD Design System styles:
 
-- `actions` - Link and action elements (primary, secondary, outline, icon)
-- `assets` - Asset-related elements
-- `buttons` - Button elements (fullScreen, videoState)
-- `event` - Event-related elements
-- `headline` - Headline elements
-- `layout` - Layout container elements
-- `richText` - Rich text elements
-- `text` - Text decoration elements (eyebrow, ribbon, lineAdjustment)
+- **`styled.actions`** - Link and action elements
+  - `primary`, `primaryLarge`, `secondary`, `secondaryLarge`, `secondaryWhite`, `secondaryGold`, `outline`, `outlineLarge`, `outlineWhite`, `icon`
 
-### Utility Functions
+- **`styled.buttons`** - Button elements
+  - `fullScreen`, `videoState`
 
-From `styledElements`:
+- **`styled.text`** - Text decoration elements
+  - `eyebrow`, `ribbon`, `lineAdjustment`
 
-- `create(props)` - Create styled element with className
-- `createDiv(props)` - Create styled div element
-- `createParagraph(props)` - Create styled p element
-- `createSpan(props)` - Create styled span element
+- **`styled.headline`** - Headline elements
+  - `sansLarge`, `sansMin`, `sansMedium`, `sansSmall`, `serifLarge`, `serifMedium`
+
+- **`styled.layout`** - Layout container elements
+  - `gridStacked`, `overlay`
+
+- **`styled.richText`** - Rich text elements
+  - `container`
+
+- **`styled.assets`** - Asset-related elements
+  - `image`
+
+- **`styled.event`** - Event-related elements
+  - `meta`, `sign`
+
+### Create Utilities
+
+- **`create.element(props)`** - Create styled element with custom tag
+- **`create.div(props)`** - Create styled div element
+- **`create.paragraph(props)`** - Create styled p element
+- **`create.span(props)`** - Create styled span element
+- **`create.advanced(props, options)`** - Advanced factory with builder variants
+
+### Type Exports
+
+```typescript
+import type {
+  ElementProps,
+  ElementStyles,
+  StyleOptions,
+  CompositeChild,
+  BuilderConfig,
+  StyleModifierProps,
+  styleObject
+} from '@universityofmaryland/web-builder-library';
+```
 
 ## Peer Dependencies
 

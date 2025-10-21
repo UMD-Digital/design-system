@@ -1,0 +1,93 @@
+{
+  "name": "@universityofmaryland/web-builder-library",
+  "version": "1.0.0",
+  "description": "Element Builder for the University of Maryland Design System",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./styledElements": {
+      "types": "./dist/styledElements/index.d.ts",
+      "import": "./dist/styledElements/index.mjs",
+      "require": "./dist/styledElements/index.js"
+    },
+    "./styledElements/actions": {
+      "types": "./dist/styledElements/actions.d.ts",
+      "import": "./dist/styledElements/actions.mjs",
+      "require": "./dist/styledElements/actions.js"
+    },
+    "./styledElements/assets": {
+      "types": "./dist/styledElements/assets.d.ts",
+      "import": "./dist/styledElements/assets.mjs",
+      "require": "./dist/styledElements/assets.js"
+    },
+    "./styledElements/buttons": {
+      "types": "./dist/styledElements/buttons.d.ts",
+      "import": "./dist/styledElements/buttons.mjs",
+      "require": "./dist/styledElements/buttons.js"
+    },
+    "./styledElements/event": {
+      "types": "./dist/styledElements/event.d.ts",
+      "import": "./dist/styledElements/event.mjs",
+      "require": "./dist/styledElements/event.js"
+    },
+    "./styledElements/headline": {
+      "types": "./dist/styledElements/headline.d.ts",
+      "import": "./dist/styledElements/headline.mjs",
+      "require": "./dist/styledElements/headline.js"
+    },
+    "./styledElements/layout": {
+      "types": "./dist/styledElements/layout.d.ts",
+      "import": "./dist/styledElements/layout.mjs",
+      "require": "./dist/styledElements/layout.js"
+    },
+    "./styledElements/rich-text": {
+      "types": "./dist/styledElements/rich-text.d.ts",
+      "import": "./dist/styledElements/rich-text.mjs",
+      "require": "./dist/styledElements/rich-text.js"
+    },
+    "./styledElements/text": {
+      "types": "./dist/styledElements/text.d.ts",
+      "import": "./dist/styledElements/text.mjs",
+      "require": "./dist/styledElements/text.js"
+    }
+  },
+  "license": "MIT",
+  "repository": "",
+  "private": false,
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist build",
+    "docs": "npx typedoc --options ./typedoc.json",
+    "prebuild": "node ../../source/update-badges.js",
+    "release": "npm run test && npm run build && npm publish --access public",
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "start": "npm run dev",
+    "pretest": "npm run pretest --prefix ../..",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:snapshot": "jest --updateSnapshot"
+  },
+  "peerDependencies": {
+    "@universityofmaryland/web-styles-library": "^1.0.0"
+  },
+  "dependencies": {
+    "@universityofmaryland/web-utilities-library": "^1.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-legacy": "^7.2.1",
+    "typescript": "^5.8.2",
+    "vite": "^7.1.4",
+    "vite-plugin-checker": "^0.10.3",
+    "vite-plugin-dts": "^4.5.4"
+  }
+}

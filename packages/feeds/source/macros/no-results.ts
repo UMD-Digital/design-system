@@ -1,5 +1,6 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { Atomic, Model } from '@universityofmaryland/web-elements-library';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { Atomic } from '@universityofmaryland/web-elements-library';
 
 interface NoResultsContentType {
   message?: string;
@@ -17,7 +18,7 @@ export default ({
   isThemeDark,
   isAlignedCenter = true,
 }: NoResultsContentType) => {
-  const composite = Model.ElementModel.layout.gridStacked({
+  const composite = ElementBuilder.styled.layout.gridStacked({
     element: document.createElement('div'),
     isThemeDark,
     elementStyles: {
@@ -32,7 +33,7 @@ export default ({
     },
   });
 
-  const headline = Model.ElementModel.headline.sansExtraLarge({
+  const headline = ElementBuilder.styled.headline.sansExtraLarge({
     element: document.createElement('p'),
     isThemeDark,
     elementStyles: {

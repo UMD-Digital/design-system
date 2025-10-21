@@ -2,7 +2,7 @@ import * as token from '@universityofmaryland/web-styles-library/token';
 import { imageFromSvg } from '@universityofmaryland/web-utilities-library/media';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
 import { person as iconPerson } from '@universityofmaryland/web-icons-library/people';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { assets, textLockup } from 'atomic';
 import { PersonCard } from './_types';
 import { ElementVisual } from '../../_types';
@@ -24,7 +24,7 @@ export default (props: PersonCard) => {
   }
 
   children.push(
-    ElementModel.createDiv({
+    ElementBuilder.create.div({
       className: 'person-block-image',
       elementStyles: {
         element: {
@@ -64,7 +64,7 @@ export default (props: PersonCard) => {
   children.push(textLockupElement);
   children.push(contactLockupElement);
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'person-block',
     children,
   });

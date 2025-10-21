@@ -2,7 +2,7 @@ import * as token from '@universityofmaryland/web-styles-library/token';
 import { isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
 import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
 import { assets, textLockup } from 'atomic';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { type ContentElement } from '../../../_types';
 
 interface CornerProps {
@@ -136,7 +136,7 @@ const createVideoWrapper = (video: HTMLVideoElement) =>
 const createCorner = ({ images, isCornerLeft }: CornerProps) => {
   const children = images.map((image) => createImageWrapper(image));
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: isCornerLeft
       ? 'hero-grid-corner-left'
       : 'hero-grid-corner-right',
@@ -160,7 +160,7 @@ const createCorner = ({ images, isCornerLeft }: CornerProps) => {
 
 const createCenter = ({ images, video }: CenterProps) => {
   const children = [
-    ElementModel.create({
+    ElementBuilder.create.element({
       element: document.createElement('div'),
       className: 'hero-grid-tint',
       elementStyles: {
@@ -202,7 +202,7 @@ const createCenter = ({ images, video }: CenterProps) => {
     });
   }
 
-  return ElementModel.create({
+  return ElementBuilder.create.element({
     element: document.createElement('div'),
     className: 'hero-grid-center',
     children,
@@ -236,7 +236,7 @@ const createHeadline = (props: Pick<HeroGridProps, 'headline'>) => {
     },
   };
 
-  const headlineElement = ElementModel.headline.campaignExtraLarge({
+  const headlineElement = ElementBuilder.styled.headline.campaignExtraLarge({
     element: headline,
     elementStyles: {
       element: {
@@ -268,7 +268,7 @@ const createTextContainer = (
     return null;
   }
 
-  const textContainer = ElementModel.createDiv({
+  const textContainer = ElementBuilder.create.div({
     className: 'hero-expand-text-container',
     elementStyles: {
       element: {
@@ -302,7 +302,7 @@ const createTextContainer = (
     },
   });
 
-  const lock = ElementModel.layout.spaceHorizontalSmallest({
+  const lock = ElementBuilder.styled.layout.spaceHorizontalSmallest({
     element: document.createElement('div'),
     elementStyles: {
       element: {
@@ -407,7 +407,7 @@ const createGridLayout = (
     }),
   };
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'hero-grid-layout',
 
     children: [
@@ -435,7 +435,7 @@ export default (props: HeroGridProps) => {
 
   const children = text ? [grid, text] : [grid];
 
-  const composite = ElementModel.createDiv({
+  const composite = ElementBuilder.create.div({
     className: 'hero-grid-container',
     children,
     elementStyles: {

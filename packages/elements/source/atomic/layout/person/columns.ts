@@ -4,7 +4,7 @@ import {
   createMediaQueryRange,
 } from '@universityofmaryland/web-utilities-library/styles';
 import { assets, textLockup } from 'atomic';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import {
   type PersonContactPropsWithStyles,
   type PersonTextLockupPropsWithStyles,
@@ -24,7 +24,7 @@ export const image = ({
   image: HTMLImageElement;
   isThemeDark?: boolean;
 }) =>
-  ElementModel.createDiv({
+  ElementBuilder.create.div({
     className: 'person-column-image',
     elementStyles: {
       element: {
@@ -89,7 +89,7 @@ const personLockup = ({
 
 export const details = (props: PersonTextLockupPropsWithStyles) => {
   const { customStyles = {} } = props;
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'person-column-details',
     elementStyles: {
       element: {
@@ -123,7 +123,7 @@ const contactLockup = ({
 export const contact = (props: PersonContactPropsWithStyles) => {
   const { customStyles = {} } = props;
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'person-column-contact',
     elementStyles: {
       element: {
@@ -159,7 +159,7 @@ export const information = ({
   pronouns,
   subText,
 }: PersonFullProps) => {
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'person-column-information',
     elementStyles: {
       element: {

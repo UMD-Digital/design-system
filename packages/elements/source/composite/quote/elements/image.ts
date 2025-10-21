@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { default as elementIcon } from './icon';
 import { SMALL } from '../_constants';
 import {
@@ -28,7 +28,7 @@ export default ({
     isThemeMaryland,
   });
   const imageContainerChildren: ElementVisual[] = [];
-  const imageElement = ElementModel.create({
+  const imageElement = ElementBuilder.create.element({
     element: image,
     className: 'quote-image',
     elementStyles: {
@@ -60,7 +60,7 @@ export default ({
 
   imageContainerChildren.push(imageElement);
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'quote-image-container',
     children: imageContainerChildren,
     elementStyles: {

@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { default as elementIcon } from './icon';
 import { SMALL } from '../_constants';
 import { type QuoteTextProps } from '../_types';
@@ -73,7 +73,7 @@ export default (props: QuoteProps) => {
     });
   }
 
-  const quoteElement = ElementModel.create({
+  const quoteElement = ElementBuilder.create.element({
     element: quoteTextElement,
     className: 'quote-container-quote',
     children,

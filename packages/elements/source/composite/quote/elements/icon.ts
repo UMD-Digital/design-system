@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { quote as iconQuote } from '@universityofmaryland/web-icons-library/brand';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { SMALL } from '../_constants';
 import { type QuoteBaseProps, type QuoteVariantProps } from '../_types';
 
@@ -17,7 +17,7 @@ export default ({
 }: QuoteIconProps) => {
   const imageWithFeaturedLayout = hasImage && isTypeFeatured;
 
-  const iconSpan = ElementModel.createSpan({
+  const iconSpan = ElementBuilder.create.span({
     className: 'quote-icon-span',
     elementStyles: {
       element: {

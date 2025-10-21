@@ -1,8 +1,8 @@
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { type QuoteStatementProps } from './_types';
 
 export const CreateQuoteStatementElement = (element: QuoteStatementProps) => {
-  const container = ElementModel.createDiv({
+  const container = ElementBuilder.create.div({
     className: 'quote-statement',
     elementStyles: {
       element: {},

@@ -2,7 +2,7 @@ import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
 import { assets, textLockup } from 'atomic';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { type ElementVisual } from '../../_types';
 import { type HeroStackedProps } from './_types';
 
@@ -57,7 +57,7 @@ const createImageAsset = (image: HTMLImageElement) => {
 };
 
 const createOverlay = (includesAnimation?: boolean) => {
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'umd-hero-stacked__overlay',
     elementStyles: {
       element: {
@@ -111,7 +111,7 @@ const createAsset = ({
     return null;
   }
 
-  const assetInteriorElement = ElementModel.createDiv({
+  const assetInteriorElement = ElementBuilder.create.div({
     className: 'umd-hero-stacked__asset--interior',
     children: [mediaElement, createOverlay(includesAnimation)],
     elementStyles: {
@@ -123,7 +123,7 @@ const createAsset = ({
     },
   });
 
-  const horizontalLock = ElementModel.layout.spaceHorizontalLarger({
+  const horizontalLock = ElementBuilder.styled.layout.spaceHorizontalLarger({
     element: document.createElement('div'),
     children: [assetInteriorElement],
     elementStyles: {
@@ -134,7 +134,7 @@ const createAsset = ({
     },
   });
 
-  const assetContainer = ElementModel.createDiv({
+  const assetContainer = ElementBuilder.create.div({
     className: 'umd-hero-stacked__asset',
     children: isWidthLarge
       ? [horizontalLock]
@@ -226,7 +226,7 @@ const createHeadline = (
     },
   };
 
-  return ElementModel.headline.campaignLarge({
+  return ElementBuilder.styled.headline.campaignLarge({
     element: headline,
     elementStyles,
   });
@@ -244,7 +244,7 @@ const createText = (
     textLargest: props.text,
   });
 
-  const lock = ElementModel.layout.spaceHorizontalSmall({
+  const lock = ElementBuilder.styled.layout.spaceHorizontalSmall({
     element: document.createElement('div'),
     children: [textLockupElement],
     elementStyles: {
@@ -254,7 +254,7 @@ const createText = (
     },
   });
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'umd-hero-stacked__text',
     children: [lock],
     elementStyles: {
@@ -328,7 +328,7 @@ export default (props: HeroStackedProps) => {
     children.push(asset);
   }
 
-  const composite = ElementModel.createDiv({
+  const composite = ElementBuilder.create.div({
     className: 'umd-hero-stacked',
     children,
     elementStyles: {

@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { assets, textLockup } from 'atomic';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { PersonContact } from './_types';
 
 interface Theme {
@@ -26,7 +26,7 @@ interface PersonHero extends PersonText, PersonInfo {
 
 const CreateImageBlock = (props: PersonInfo) => {
   const { image, association, pronouns, isThemeDark } = props;
-  const container = ElementModel.create({
+  const container = ElementBuilder.create.element({
     element: document.createElement('div'),
     className: 'umd-person-hero-image-container',
     elementStyles: {
@@ -52,7 +52,7 @@ const CreateImageBlock = (props: PersonInfo) => {
     },
   });
 
-  const wrapper = ElementModel.create({
+  const wrapper = ElementBuilder.create.element({
     element: document.createElement('div'),
     className: 'umd-person-hero-image-wrapper',
   });
@@ -63,7 +63,7 @@ const CreateImageBlock = (props: PersonInfo) => {
   });
 
   if (image) {
-    const imageContainer = ElementModel.create({
+    const imageContainer = ElementBuilder.create.element({
       element: document.createElement('div'),
       className: 'umd-person-hero-image',
       elementStyles: {
@@ -95,7 +95,7 @@ const CreateImageBlock = (props: PersonInfo) => {
   }
 
   if (association) {
-    const styledAssociation = ElementModel.headline.sansLarge({
+    const styledAssociation = ElementBuilder.styled.headline.sansLarge({
       element: association,
       isThemeDark: !isThemeDark,
       elementStyles: {
@@ -115,7 +115,7 @@ const CreateImageBlock = (props: PersonInfo) => {
     const italicStyle = document.createElement('i');
     italicStyle.appendChild(pronouns);
 
-    const styledPronouns = ElementModel.create({
+    const styledPronouns = ElementBuilder.create.element({
       element: italicStyle,
       className: 'umd-person-hero-pronouns',
       isThemeDark: !isThemeDark,
@@ -150,7 +150,7 @@ const CreateTextContainer = ({
   subText,
   isThemeDark,
 }: PersonText) => {
-  const container = ElementModel.create({
+  const container = ElementBuilder.create.element({
     element: document.createElement('div'),
     className: 'person-hero-text',
     elementStyles: {
@@ -188,7 +188,7 @@ const CreateTextContainer = ({
     },
   });
 
-  const lineWrapper = ElementModel.text.lineAdjustmentInset({
+  const lineWrapper = ElementBuilder.styled.text.lineAdjustmentInset({
     element: document.createElement('div'),
     elementStyles: {
       pseudoBefore: {
@@ -198,7 +198,7 @@ const CreateTextContainer = ({
   });
 
   if (subText) {
-    const styledSubText = ElementModel.headline.sansSmall({
+    const styledSubText = ElementBuilder.styled.headline.sansSmall({
       element: subText,
       isThemeDark,
       elementStyles: {
@@ -224,7 +224,7 @@ const CreateTextContainer = ({
   }
 
   if (name) {
-    const styledName = ElementModel.headline.campaignLarge({
+    const styledName = ElementBuilder.styled.headline.campaignLarge({
       element: name,
       isThemeDark,
       elementStyles: {
@@ -249,7 +249,7 @@ const CreateTextContainer = ({
   }
 
   if (job) {
-    const styledJob = ElementModel.headline.sansMedium({
+    const styledJob = ElementBuilder.styled.headline.sansMedium({
       element: job,
       isThemeDark,
       elementStyles: {
@@ -270,7 +270,7 @@ const CreateTextContainer = ({
 
 export default (props: PersonHero) => {
   const { breadcrumbMobile, breadcrumbDesktop } = props;
-  const composite = ElementModel.create({
+  const composite = ElementBuilder.create.element({
     element: document.createElement('div'),
     className: 'umd-person-hero',
     elementStyles: {
@@ -280,7 +280,7 @@ export default (props: PersonHero) => {
       },
     },
   });
-  const elementLock = ElementModel.layout.spaceHorizontalLarger({
+  const elementLock = ElementBuilder.styled.layout.spaceHorizontalLarger({
     element: document.createElement('div'),
     elementStyles: {
       element: {
@@ -291,7 +291,7 @@ export default (props: PersonHero) => {
     },
   });
 
-  const elementWrapper = ElementModel.create({
+  const elementWrapper = ElementBuilder.create.element({
     element: document.createElement('div'),
     className: 'umd-person-hero-wrapper',
     elementStyles: {
@@ -305,7 +305,7 @@ export default (props: PersonHero) => {
     },
   });
 
-  const textColumns = ElementModel.create({
+  const textColumns = ElementBuilder.create.element({
     element: document.createElement('div'),
     className: 'umd-person-hero-columns',
     elementStyles: {
@@ -325,7 +325,7 @@ export default (props: PersonHero) => {
   elementWrapper.styles += textColumns.styles;
 
   if (breadcrumbDesktop) {
-    const textColumnBreadcrumb = ElementModel.create({
+    const textColumnBreadcrumb = ElementBuilder.create.element({
       element: document.createElement('div'),
       className: 'umd-person-hero-breadcrumb-desktop',
       elementStyles: {
@@ -353,7 +353,7 @@ export default (props: PersonHero) => {
   composite.styles += elementLock.styles;
 
   if (breadcrumbMobile) {
-    const mainBreadcrumb = ElementModel.create({
+    const mainBreadcrumb = ElementBuilder.create.element({
       element: document.createElement('div'),
       className: 'umd-person-hero-breadcrumb-mobile',
       elementStyles: {

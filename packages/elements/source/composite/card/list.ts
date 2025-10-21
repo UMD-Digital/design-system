@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
 import { textLockup, assets } from 'atomic';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { CardListProps } from './_types';
 import { type UMDElement } from '../../_types';
 
@@ -10,7 +10,7 @@ const mediumBreakpointStart = token.media.breakpointValues.medium.min;
 const mediumBreakpoint = token.media.breakpointValues.large.min;
 
 const makeDateColumn = (dateSign: UMDElement) =>
-  ElementModel.createDiv({
+  ElementBuilder.create.div({
     className: 'card-list-date-sign-wrapper',
     elementStyles: {
       element: {
@@ -30,7 +30,7 @@ const makeDateColumn = (dateSign: UMDElement) =>
   });
 
 const makeTextColumn = (props: CardListProps) =>
-  ElementModel.createDiv({
+  ElementBuilder.create.div({
     className: 'card-list-text-wrapper',
     elementStyles: {
       element: {
@@ -56,7 +56,7 @@ const makeImageColumn = ({
   image: NonNullable<CardListProps['image']>;
   isAligned?: CardListProps['isAligned'];
 }) =>
-  ElementModel.createDiv({
+  ElementBuilder.create.div({
     className: 'card-list-image-wrapper',
     elementStyles: {
       element: {
@@ -117,7 +117,7 @@ export default (props: CardListProps) => {
 
   children.push(makeTextColumn(props));
 
-  const wrapper = ElementModel.createDiv({
+  const wrapper = ElementBuilder.create.div({
     className: 'card-list-wrapper',
     elementStyles: {
       element: {
@@ -132,7 +132,7 @@ export default (props: CardListProps) => {
     children,
   });
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'card-list-container',
     elementStyles: {
       element: {

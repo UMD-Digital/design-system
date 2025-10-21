@@ -1,5 +1,5 @@
 import { layout, token } from '@universityofmaryland/web-styles-library';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import createSocialCampaignColumns, {
   type SocialCampaignColumnsProps,
 } from '../social';
@@ -19,7 +19,7 @@ export default (props: RowLinksProps): ElementVisual => {
   const { isThemeLight } = props;
   const socialColumnWrapper = createSocialCampaignColumns(props);
   const linkColumnWrapper = createLinkColumns(props);
-  const wrapperElement = ElementModel.createDiv({
+  const wrapperElement = ElementBuilder.create.div({
     className: 'umd-footer-row-links-wrapper',
     children: [linkColumnWrapper, socialColumnWrapper],
     elementStyles: {
@@ -37,7 +37,7 @@ export default (props: RowLinksProps): ElementVisual => {
       },
     },
   });
-  const lockElement = ElementModel.createDiv({
+  const lockElement = ElementBuilder.create.div({
     className: 'umd-footer-row-links-lock',
     children: [wrapperElement],
     elementStyles: {
@@ -47,7 +47,7 @@ export default (props: RowLinksProps): ElementVisual => {
     },
   });
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'umd-footer-row-links',
     children: [lockElement],
     elementStyles: {

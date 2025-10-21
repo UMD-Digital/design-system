@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { assets, textLockup } from 'atomic';
 import { type ElementVisual } from '../../_types';
 
@@ -101,7 +101,7 @@ const createAssetColumn = ({
     );
   }
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'pathway-hero-container-asset-wrapper',
     children,
     elementStyles: {
@@ -169,7 +169,7 @@ const createHeadline = (props: Pick<PathwayHeroProps, 'headline'>) => {
     },
   };
 
-  return ElementModel.headline.campaignExtraLarge({
+  return ElementBuilder.styled.headline.campaignExtraLarge({
     element: headline,
     elementStyles,
   });
@@ -195,7 +195,7 @@ const createTextColumn = (
 };
 
 const createTextWrapper = (props: PathwayHeroProps) =>
-  ElementModel.createDiv({
+  ElementBuilder.create.div({
     className: 'pathway-hero-container-lock-wrapper',
     children: [createTextColumn(props)],
     elementStyles: {
@@ -232,7 +232,7 @@ const createTextWrapper = (props: PathwayHeroProps) =>
   });
 
 const createLockColumn = (props: PathwayHeroProps) =>
-  ElementModel.layout.spaceHorizontalLarger({
+  ElementBuilder.styled.layout.spaceHorizontalLarger({
     element: document.createElement('div'),
     children: [createTextWrapper(props)],
     elementStyles: {
@@ -278,7 +278,7 @@ const createWrapper = (props: PathwayHeroProps) => {
 
   children.push(createLockColumn(props));
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'pathway-hero-container-wrapper',
     elementStyles: {
       element: {
@@ -302,7 +302,7 @@ const createWrapper = (props: PathwayHeroProps) => {
 };
 
 export default (props: PathwayHeroProps) => {
-  const composite = ElementModel.createDiv({
+  const composite = ElementBuilder.create.div({
     className: 'pathway-hero-container',
     children: [createWrapper(props)],
     elementStyles: {

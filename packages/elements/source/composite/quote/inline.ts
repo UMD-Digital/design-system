@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { image as elementImage, text as elementText } from './elements';
 import { quoteAnimation } from './helper/animation';
 import { SMALL } from './_constants';
@@ -27,7 +27,7 @@ export default (props: QuoteInlineProps) => {
   };
 
   const createWrapper = (children: ElementVisual[]) => {
-    return ElementModel.createDiv({
+    return ElementBuilder.create.div({
       className: 'quote-inline-container-wrapper',
       children: children,
       elementStyles: {
@@ -43,7 +43,7 @@ export default (props: QuoteInlineProps) => {
   };
 
   const createContainer = (wrapper: ElementVisual) => {
-    return ElementModel.createDiv({
+    return ElementBuilder.create.div({
       className: 'quote-inline-container',
       children: [wrapper],
       elementStyles: {

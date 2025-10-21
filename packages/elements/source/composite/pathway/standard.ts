@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { createTextLockupMedium, createAssetContent } from './_common';
 import { type ElementVisual } from '../../_types';
 import { type PathwayStandardProps } from './_types';
@@ -88,7 +88,7 @@ const createAssetColumn = (
 
   if (!image && !video) return null;
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'pathway-image-container',
     children: [createAssetContent(props)],
     elementStyles: {
@@ -126,7 +126,7 @@ const createAssetColumn = (
 };
 
 const createTextContent = (props: PathwayStandardProps): ElementVisual => {
-  const wrapper = ElementModel.createDiv({
+  const wrapper = ElementBuilder.create.div({
     className: 'pathway-text-container-wrapper',
     children: [createTextLockupMedium(props)],
     elementStyles: {
@@ -160,7 +160,7 @@ const createTextContent = (props: PathwayStandardProps): ElementVisual => {
     },
   });
 
-  const container = ElementModel.createDiv({
+  const container = ElementBuilder.create.div({
     className: 'pathway-text-container',
     children: [wrapper],
     elementStyles: {
@@ -208,7 +208,7 @@ const createLock = (props: PathwayStandardProps) => {
   }
   children.push(textContent);
 
-  const lockWrapper = ElementModel.createDiv({
+  const lockWrapper = ElementBuilder.create.div({
     className: 'pathway-container-lock-wrapper',
     children,
     elementStyles: {
@@ -225,7 +225,7 @@ const createLock = (props: PathwayStandardProps) => {
     },
   });
 
-  return ElementModel.layout.spaceHorizontalLarger({
+  return ElementBuilder.styled.layout.spaceHorizontalLarger({
     element: document.createElement('div'),
     children: [lockWrapper],
     elementStyles: {
@@ -240,10 +240,10 @@ const createLock = (props: PathwayStandardProps) => {
 };
 
 export default (props: PathwayStandardProps) => {
-  const composite = ElementModel.createDiv({
+  const composite = ElementBuilder.create.div({
     className: 'pathway-container',
     children: [
-      ElementModel.createDiv({
+      ElementBuilder.create.div({
         className: 'pathway-container-wrapper',
         children: [createLock(props)],
       }),

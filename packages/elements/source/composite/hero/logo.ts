@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import { assets, textLockup } from 'atomic';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { type HeroLogoProps } from './_types';
 import { type ElementVisual } from '../../_types';
 
@@ -17,7 +17,7 @@ const getBackgroundColor = (props: HeroLogoProps) => {
 const createAsset = ({ image }: Pick<HeroLogoProps, 'image'>) => {
   if (!image) return null;
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'umd-hero-logo__asset',
     children: [
       assets.image.background({
@@ -52,7 +52,7 @@ const createHeadline = (
 
   if (!headline) return null;
 
-  const headlineElement = ElementModel.headline.campaignLarge({
+  const headlineElement = ElementBuilder.styled.headline.campaignLarge({
     element: headline,
     elementStyles: {
       element: {
@@ -81,7 +81,7 @@ const createText = (
     isThemeDark: isThemeDark || isThemeMaryland || false,
   });
 
-  const textContent = ElementModel.createDiv({
+  const textContent = ElementBuilder.create.div({
     className: 'umd-hero-logo__text-content',
     children: [textLockupElement],
     elementStyles: {
@@ -93,7 +93,7 @@ const createText = (
     },
   });
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'umd-hero-logo__text',
     children: [textContent],
     elementStyles: {
@@ -117,7 +117,7 @@ const makeLock = (props: HeroLogoProps) => {
 
   children.push(text);
 
-  return ElementModel.layout.spaceHorizontalSmall({
+  return ElementBuilder.styled.layout.spaceHorizontalSmall({
     element: document.createElement('div'),
     children,
   });
@@ -126,7 +126,7 @@ const makeLock = (props: HeroLogoProps) => {
 export default (props: HeroLogoProps) => {
   const { isThemeDark } = props;
 
-  const container = ElementModel.createDiv({
+  const container = ElementBuilder.create.div({
     className: 'umd-hero-logo__container',
     children: [makeLock(props)],
     elementStyles: {
@@ -144,7 +144,7 @@ export default (props: HeroLogoProps) => {
     },
   });
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'umd-hero-logo',
     children: [container],
     elementStyles: {

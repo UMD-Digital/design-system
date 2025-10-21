@@ -1,5 +1,5 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import * as Atomic from 'atomic';
 import { type PathwayTextLockupProps, type PathwayAssetProps } from './_types';
 
@@ -24,7 +24,7 @@ export const createCompositeHeadline = ({
     },
   };
 
-  return ElementModel.headline.sansLargest({
+  return ElementBuilder.styled.headline.sansLargest({
     element: headline,
     isThemeDark: isThemeDark || isThemeMaryland,
     elementStyles: {
@@ -49,7 +49,7 @@ export const createCompositeStat = ({
 
   if (!stats) return null;
 
-  const statWrapper = ElementModel.createDiv({
+  const statWrapper = ElementBuilder.create.div({
     className: 'text-lockup-medium-stats',
     elementStyles: {
       element: {
@@ -141,7 +141,7 @@ export const createAssetContent = (
     );
   }
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'pathway-image-container-wrapper',
     children,
     elementStyles: {

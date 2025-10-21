@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { createTextLockupMedium } from './_common';
 import { PathwayHighlightProps } from './_types';
 import { type ElementVisual } from '../../_types';
@@ -8,7 +8,7 @@ const mediumSize = 1000;
 const largeSize = 1200;
 
 const createTextContent = (props: PathwayHighlightProps): ElementVisual => {
-  const wrapper = ElementModel.createDiv({
+  const wrapper = ElementBuilder.create.div({
     className: 'pathway-text-container-wrapper',
     children: [createTextLockupMedium(props)],
     elementStyles: {
@@ -19,7 +19,7 @@ const createTextContent = (props: PathwayHighlightProps): ElementVisual => {
     },
   });
 
-  const container = ElementModel.createDiv({
+  const container = ElementBuilder.create.div({
     className: 'pathway-text-container',
     children: [wrapper],
     elementStyles: {
@@ -69,7 +69,7 @@ const createHighlightColumn = ({
 
   if (quote) {
     children.push(
-      ElementModel.headline.sansLarger({
+      ElementBuilder.styled.headline.sansLarger({
         element: quote,
         isThemeDark,
         elementStyles: {
@@ -84,7 +84,7 @@ const createHighlightColumn = ({
 
   if (attribution) {
     children.push(
-      ElementModel.headline.sansMedium({
+      ElementBuilder.styled.headline.sansMedium({
         element: attribution,
         isThemeDark,
         elementStyles: {
@@ -96,7 +96,7 @@ const createHighlightColumn = ({
     );
   }
 
-  const wrapper = ElementModel.createDiv({
+  const wrapper = ElementBuilder.create.div({
     className: 'pathway-highlight-column-wrapper',
     children,
     elementStyles: {
@@ -127,7 +127,7 @@ const createHighlightColumn = ({
     },
   });
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'pathway-highlight-column-container',
     children: [wrapper],
     elementStyles: {
@@ -161,7 +161,7 @@ const createLock = (props: PathwayHighlightProps) => {
   const highlightColumn = createHighlightColumn(props);
   const children: ElementVisual[] = [textContent, highlightColumn];
 
-  return ElementModel.layout.spaceHorizontalLarger({
+  return ElementBuilder.styled.layout.spaceHorizontalLarger({
     element: document.createElement('div'),
     children,
     elementStyles: {
@@ -180,7 +180,7 @@ const createLock = (props: PathwayHighlightProps) => {
 };
 
 export default (props: PathwayHighlightProps) =>
-  ElementModel.createDiv({
+  ElementBuilder.create.div({
     className: 'pathway-highlight-container',
     children: [createLock(props)],
     elementStyles: {

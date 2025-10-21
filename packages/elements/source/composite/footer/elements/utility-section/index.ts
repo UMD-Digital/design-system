@@ -5,7 +5,7 @@ import {
   typography,
 } from '@universityofmaryland/web-styles-library';
 import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { BREAKPOINTS } from '../../globals';
 import { type BaseProps } from '../../_types';
 import { type ElementVisual } from '../../../../_types';
@@ -28,18 +28,18 @@ const requiredSubLinks = [
 ];
 
 const createUtilityContainerLink = (link: HTMLElement) => {
-  return ElementModel.create({
+  return ElementBuilder.create.element({
     element: link,
     className: 'umd-footer-utility-container-link',
   });
 };
 
 const createSubLink = ({ title, url }: { title: string; url: string }) => {
-  const span = ElementModel.createSpan({
+  const span = ElementBuilder.create.span({
     className: 'umd-footer-utility-container-sublink-text',
   });
 
-  const link = ElementModel.create({
+  const link = ElementBuilder.create.element({
     element: document.createElement('a'),
     className: 'umd-footer-utility-container-sublink',
     children: [span],
@@ -56,7 +56,7 @@ const createSubLink = ({ title, url }: { title: string; url: string }) => {
 
   span.element.innerText = title;
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'umd-footer-utility-container-link-wrapper',
     children: [createUtilityContainerLink(link.element)],
   });
@@ -65,7 +65,7 @@ const createSubLink = ({ title, url }: { title: string; url: string }) => {
 export default (props: UtilityProps) => {
   const { isThemeLight, slotUtilityLinks } = props;
   const linkElements: ElementVisual[] = [];
-  const copyRightElement = ElementModel.createParagraph({
+  const copyRightElement = ElementBuilder.create.paragraph({
     className: 'umd-footer-utility-container-copyright',
   });
   if (slotUtilityLinks) {
@@ -88,7 +88,7 @@ export default (props: UtilityProps) => {
 
   linkElements.push(copyRight);
 
-  const wrapper = ElementModel.createDiv({
+  const wrapper = ElementBuilder.create.div({
     className: 'umd-footer-utility-container-lock',
     children: linkElements,
     elementStyles: {
@@ -131,7 +131,7 @@ export default (props: UtilityProps) => {
     },
   });
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'umd-footer-utility-container',
     children: [wrapper],
     elementStyles: {

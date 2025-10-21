@@ -1,4 +1,4 @@
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { default as gifToggle } from './gif';
 import { type UMDElement } from '../../../_types';
 
@@ -67,7 +67,7 @@ const createCaption = (
   const caption = document.createElement('span');
   caption.textContent = text;
 
-  return ElementModel.assets.imageCaption({
+  return ElementBuilder.styled.assets.imageCaption({
     element: caption,
   });
 };
@@ -91,12 +91,12 @@ const embedAsset = ({
   }
 
   if (isAspectStandard) {
-    return ElementModel.assets.imageAspect({
+    return ElementBuilder.styled.assets.imageAspect({
       element,
     });
   }
 
-  const defaultContainer = ElementModel.createDiv({
+  const defaultContainer = ElementBuilder.create.div({
     className: 'image-container',
     elementStyles: {
       element: {
@@ -132,7 +132,7 @@ export default (props: Props) => {
 
   if (dateSign) {
     children.push(
-      ElementModel.layout.backgroundBoxWhite({
+      ElementBuilder.styled.layout.backgroundBoxWhite({
         element: document.createElement('div'),
         children: [dateSign],
       }),
@@ -143,7 +143,7 @@ export default (props: Props) => {
     children.push(asset);
   }
 
-  return ElementModel.assets.imageWrapper({
+  return ElementBuilder.styled.assets.imageWrapper({
     element: document.createElement('div'),
     children,
     isScaled,

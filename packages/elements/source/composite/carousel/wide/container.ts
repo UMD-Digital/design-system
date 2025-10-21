@@ -1,11 +1,11 @@
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { createIndicator } from './controls';
 import { createFramesContainer } from './frames';
 import { createElementWithRefs } from './_elementModel';
 import { type CarouselWideProps } from '../_types';
 
 const createAriaLive = () => {
-  const liveText = ElementModel.create({
+  const liveText = ElementBuilder.create.element({
     element: document.createElement('p'),
     className: 'umd-carousel-wide__aria-live',
     attributes: [{ 'aria-live': 'polite' }],

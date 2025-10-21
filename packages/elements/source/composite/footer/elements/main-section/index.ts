@@ -1,4 +1,4 @@
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import createRowLogo, { type RowLogoProps } from './row-logo';
 import createRowLinks, { type RowLinksProps } from './row-links';
 import { BaseProps } from '../../_types';
@@ -45,7 +45,7 @@ const createVisualContainer = (
 
   if (!imageSrc || !altText) return;
 
-  const gradientElement = ElementModel.createDiv({
+  const gradientElement = ElementBuilder.create.div({
     className: 'umd-footer-background-image-graident',
     elementStyles: {
       element: {
@@ -60,7 +60,7 @@ const createVisualContainer = (
     },
   });
 
-  const imageElement = ElementModel.create({
+  const imageElement = ElementBuilder.create.element({
     element: document.createElement('img'),
     className: 'umd-footer-background-image',
     elementStyles: {
@@ -76,7 +76,7 @@ const createVisualContainer = (
   imageElement.element.setAttribute('src', imageSrc);
   imageElement.element.setAttribute('alt', altText);
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'umd-footer-background-image-container',
     children: [gradientElement, imageElement],
     elementStyles: {
@@ -100,7 +100,7 @@ const createContainer = (
   visualContainerElement?: ElementVisual,
   linksRowElement?: ElementVisual,
 ): ElementVisual => {
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'umd-footer-main-container',
     children: [visualContainerElement, logoRow, linksRowElement].filter(
       Boolean,

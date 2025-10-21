@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { assets, textLockup } from 'atomic';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { type ElementVisual } from '../../_types';
 import { type HeroMinimalProps } from './_types';
 
@@ -40,7 +40,7 @@ const createAsset = ({ image }: Pick<HeroMinimalProps, 'image'>) => {
     return null;
   }
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'umd-hero-minimal__asset',
     children,
     elementStyles: {
@@ -86,7 +86,7 @@ const createHeadline = (
     },
   };
 
-  return ElementModel.headline.campaignLarge({
+  return ElementBuilder.styled.headline.campaignLarge({
     element: headline,
     elementStyles: {
       element: {
@@ -144,19 +144,19 @@ const createText = (props: HeroMinimalProps, hasAsset: boolean) => {
     isThemeDark: isThemeDark || isThemeMaryland || false,
   });
 
-  const textWrapper = ElementModel.createDiv({
+  const textWrapper = ElementBuilder.create.div({
     className: 'umd-hero-minimal__text-wrapper',
     children: [textLockupElement],
     elementStyles: buildTextWrapperStyles(isThemeDark, isThemeMaryland),
   });
 
-  const textContainer = ElementModel.createDiv({
+  const textContainer = ElementBuilder.create.div({
     className: 'umd-hero-minimal__text',
     children: [textWrapper],
     elementStyles: buildTextContainerStyles(hasAsset),
   });
 
-  return ElementModel.layout.spaceHorizontalLarger({
+  return ElementBuilder.styled.layout.spaceHorizontalLarger({
     element: document.createElement('div'),
     children: [textContainer],
     elementStyles: {
@@ -178,7 +178,7 @@ export default (props: HeroMinimalProps) => {
     children.push(asset);
   }
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'umd-hero-minimal',
     children,
     elementStyles: {

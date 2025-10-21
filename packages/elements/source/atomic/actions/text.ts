@@ -6,7 +6,7 @@ import { external_link as iconExternalLink } from '@universityofmaryland/web-ico
 import { email as iconEmail } from '@universityofmaryland/web-icons-library/communication';
 import { document as iconDocument } from '@universityofmaryland/web-icons-library/files';
 import { fearless as iconFearless } from '@universityofmaryland/web-icons-library/brand';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 
 interface ElementProps {
   element: HTMLElement;
@@ -91,19 +91,19 @@ function createElement(type: ElementType, props: ElementProps) {
 
   const actions: Actions = {
     primary: {
-      default: ElementModel.actions.primary,
-      large: ElementModel.actions.primaryLarge,
+      default: ElementBuilder.styled.actions.primary,
+      large: ElementBuilder.styled.actions.primaryLarge,
     },
     secondary: {
-      default: ElementModel.actions.secondary,
-      large: ElementModel.actions.secondaryLarge,
-      dark: ElementModel.actions.secondaryWhite,
-      gold: ElementModel.actions.secondaryGold,
+      default: ElementBuilder.styled.actions.secondary,
+      large: ElementBuilder.styled.actions.secondaryLarge,
+      dark: ElementBuilder.styled.actions.secondaryWhite,
+      gold: ElementBuilder.styled.actions.secondaryGold,
     },
     outline: {
-      default: ElementModel.actions.outline,
-      large: ElementModel.actions.outlineLarge,
-      dark: ElementModel.actions.outlineWhite,
+      default: ElementBuilder.styled.actions.outline,
+      large: ElementBuilder.styled.actions.outlineLarge,
+      dark: ElementBuilder.styled.actions.outlineWhite,
     },
   };
 
@@ -124,7 +124,7 @@ function createElement(type: ElementType, props: ElementProps) {
 const createPlainTextContainer = (props: OptionProps) => {
   const { isTypeSecondary } = props;
 
-  return ElementModel.layout.gridStacked({
+  return ElementBuilder.styled.layout.gridStacked({
     element: document.createElement('div'),
     elementStyles: isTypeSecondary ? {} : { element: { alignItems: 'center' } },
   });
@@ -153,7 +153,7 @@ const createPlainText = (props: OptionProps) => {
   };
 
   if (plainText) {
-    return ElementModel.headline.sansMin({
+    return ElementBuilder.styled.headline.sansMin({
       element: plainText,
       isThemeDark,
       elementStyles: isTypeSecondary

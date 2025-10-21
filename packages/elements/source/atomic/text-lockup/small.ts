@@ -1,6 +1,6 @@
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { type UMDElement } from '../../_types';
 
 type TypeTheme = {
@@ -99,20 +99,20 @@ export const dateStyles = {
 };
 
 export const createEyebrow = ({ eyebrow, isThemeDark }: TypeEyebrow) =>
-  ElementModel.text.eyebrow({
+  ElementBuilder.styled.text.eyebrow({
     element: eyebrow,
     elementStyles: eyebrowStyles,
     isThemeDark,
   });
 
 export const createRibbonEyebrow = ({ eyebrow }: TypeEyebrow) =>
-  ElementModel.text.ribbon({
+  ElementBuilder.styled.text.ribbon({
     element: eyebrow,
     elementStyles: ribbonStyles,
   });
 
 export const createActions = ({ actions }: TypeActions) =>
-  ElementModel.layout.gridInlineTabletRows({
+  ElementBuilder.styled.layout.gridInlineTabletRows({
     element: actions,
     elementStyles: {
       element: {
@@ -138,7 +138,7 @@ export const createTextLockupSmall = ({
 
   if (headline) {
     children.push(
-      ElementModel.headline.sansLarger({
+      ElementBuilder.styled.headline.sansLarger({
         element: headline,
         elementStyles: headlineStyles,
         isThemeDark,
@@ -152,7 +152,7 @@ export const createTextLockupSmall = ({
 
   if (text) {
     children.push(
-      ElementModel.richText.simple({
+      ElementBuilder.styled.richText.simple({
         element: text,
         elementStyles: textStyles,
         isThemeDark,
@@ -162,7 +162,7 @@ export const createTextLockupSmall = ({
 
   if (date) {
     children.push(
-      ElementModel.headline.sansMin({
+      ElementBuilder.styled.headline.sansMin({
         element: date,
         elementStyles: dateStyles,
         isThemeDark,
@@ -178,7 +178,7 @@ export const createTextLockupSmall = ({
     );
   }
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER,
     children,
     elementStyles: {

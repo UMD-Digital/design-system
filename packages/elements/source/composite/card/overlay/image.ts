@@ -2,7 +2,7 @@ import * as token from '@universityofmaryland/web-styles-library/token';
 import { quote as iconQuote } from '@universityofmaryland/web-icons-library/brand';
 import { truncateTextBasedOnSize } from '@universityofmaryland/web-utilities-library/string';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { actions, assets, textLockup } from 'atomic';
 import { CardOverlayProps } from '../_types';
 import { ElementVisual } from '../../../_types';
@@ -85,7 +85,7 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
 
   if (dateSign) {
     wrapperChildren.push(
-      ElementModel.layout.backgroundBoxWhite({
+      ElementBuilder.styled.layout.backgroundBoxWhite({
         element: document.createElement('div'),
         elementStyles: {
           element: {
@@ -101,7 +101,7 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
   }
 
   if (isQuote) {
-    const quoteWrapper = ElementModel.createDiv({
+    const quoteWrapper = ElementBuilder.create.div({
       className: 'card-overlay-image-quote-wrapper',
       elementStyles: {
         element: {
@@ -127,7 +127,7 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
     }),
   );
 
-  const textWrapper = ElementModel.createDiv({
+  const textWrapper = ElementBuilder.create.div({
     className: 'card-overlay-image-text-wrapper',
     elementStyles: {
       element: {
@@ -136,7 +136,7 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
       },
     },
     children: [
-      ElementModel.createDiv({
+      ElementBuilder.create.div({
         children: wrapperChildren,
         className: 'card-overlay-image-text-content',
         elementStyles: {
@@ -153,10 +153,10 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
     ],
   });
 
-  const composite = ElementModel.createDiv({
+  const composite = ElementBuilder.create.div({
     className: classRef,
     children: [
-      ElementModel.createDiv({
+      ElementBuilder.create.div({
         className: 'card-overlay-image-container',
         children: [...children, textWrapper],
         elementStyles: {

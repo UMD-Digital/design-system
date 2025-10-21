@@ -1,6 +1,6 @@
 import { pin as iconPin } from '@universityofmaryland/web-icons-library/location';
 import { calendar as iconCalendar, clock as iconClock } from '@universityofmaryland/web-icons-library/calendar';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { ElementVisual } from '../../_types';
 
 type LocationType = {
@@ -37,7 +37,7 @@ const MakeDetailItem = (props: {
   isThemeDark?: boolean;
 }) => {
   const { icon, text } = props;
-  const container = ElementModel.event.metaItem({
+  const container = ElementBuilder.styled.event.metaItem({
     element: document.createElement('p'),
     ...props,
   });
@@ -124,13 +124,13 @@ export default (props: TypeMetaDisplay) => {
     );
   }
 
-  const wrapper = ElementModel.event.metaWrapper({
+  const wrapper = ElementBuilder.styled.event.metaWrapper({
     element: document.createElement('div'),
     children: wrapperChildren,
     ...props,
   });
 
-  return ElementModel.event.metaContainer({
+  return ElementBuilder.styled.event.metaContainer({
     element: document.createElement('div'),
     children: [wrapper],
     ...props,

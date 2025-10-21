@@ -7,7 +7,7 @@ import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-librar
 import createSocialCampaignColumns, {
   type SocialCampaignColumnsProps,
 } from '../social';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { BREAKPOINTS } from '../../../globals';
 import { BaseProps } from '../../../_types';
 import { type ElementVisual } from '../../../../../_types';
@@ -62,7 +62,7 @@ const createContactListHeadline = ({
 }) => {
   const { isThemeLight } = props;
 
-  return ElementModel.create({
+  return ElementBuilder.create.element({
     element: element ?? document.createElement('p'),
     className: 'umd-footer-contact-list-headline',
     children: children ?? [],
@@ -106,7 +106,7 @@ const createDefaultHeadline = (props: ContactProps): ElementVisual => {
 };
 
 const createAddress = (address: HTMLElement) => {
-  return ElementModel.create({
+  return ElementBuilder.create.element({
     element: address,
     className: 'umd-footer-contact-list-address',
     elementStyles: {
@@ -163,7 +163,7 @@ const linkWithSpan = (
   span.innerText = title;
   link.appendChild(span);
 
-  return ElementModel.create({
+  return ElementBuilder.create.element({
     className: 'umd-element-footer-contact-link',
     element: link,
     elementStyles: {
@@ -205,7 +205,7 @@ const createContactLinksList = ({
   element?: HTMLElement;
   children?: ElementVisual[];
 }) => {
-  return ElementModel.create({
+  return ElementBuilder.create.element({
     element: element ?? document.createElement('p'),
     className: 'umd-footer-contact-links-list',
     children: children ?? [],
@@ -257,7 +257,7 @@ export default (props: ContactProps): ElementVisual => {
 
   contactChildren.push(socialContainer);
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'umd-footer-contact-container',
     children: contactChildren,
     elementStyles: {

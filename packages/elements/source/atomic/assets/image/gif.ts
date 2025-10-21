@@ -3,7 +3,7 @@ import {
   pause as iconPause,
   play as iconPlay,
 } from '@universityofmaryland/web-icons-library/controls';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 
 const extractImageElement = (
   element: HTMLImageElement | HTMLAnchorElement,
@@ -129,7 +129,7 @@ export default ({
   const isAnchor = element instanceof HTMLAnchorElement;
   const container = isAnchor ? element : document.createElement('div');
 
-  const composite = ElementModel.assets.gifToggle({
+  const composite = ElementBuilder.styled.assets.gifToggle({
     element: container,
   });
 

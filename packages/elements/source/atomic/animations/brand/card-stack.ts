@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
 import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { assets } from 'atomic';
 import { type ElementVisual } from '../../../_types';
 
@@ -725,7 +725,7 @@ const createGridElement = (
   const animationRangeStart = `${startRange}vh`;
   const animationRangeEnd = `${endRange}vh`;
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: `${STACK_ELEMENT_CLASS}-${index}`,
     children,
     elementStyles: {
@@ -757,7 +757,7 @@ const createGridItem = (
   const animationRangeStart = `${startRange}vh`;
   const animationRangeEnd = `${endRange}vh`;
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: `${STACK_ITEM_CLASS}-${index}`,
     children: [createGridElement(element, index, placement)],
     elementStyles: {
@@ -795,7 +795,7 @@ const createGrid = (props: CardStackProps) => {
 
   if (!config) {
     console.warn(`No configuration found for ${totalCount} elements`);
-    return ElementModel.createDiv({
+    return ElementBuilder.create.div({
       className: STACK_GRID_ERROR_CLASS,
     });
   }
@@ -805,7 +805,7 @@ const createGrid = (props: CardStackProps) => {
     return createGridItem(element, placement, index);
   });
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: STACK_GRID_CLASS,
     children: gridItems,
     elementStyles: {
@@ -863,7 +863,7 @@ const createFeatured = (
 
   const { width: widthPercentage, height: heightVh } = getResponsiveSizes();
 
-  const featuredElement = ElementModel.createDiv({
+  const featuredElement = ElementBuilder.create.div({
     className: `${STACK_ELEMENT_CLASS}-featured`,
     children,
     elementStyles: {
@@ -924,7 +924,7 @@ const createFeatured = (
 };
 
 const createSticky = (props: CardStackProps) => {
-  const wrapper = ElementModel.createDiv({
+  const wrapper = ElementBuilder.create.div({
     className: `${STACK_CONTAINER_CLASS}-sticky-wrapper`,
     children: [
       createGrid(props),
@@ -946,7 +946,7 @@ const createSticky = (props: CardStackProps) => {
     },
   });
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: `${STACK_CONTAINER_CLASS}-sticky`,
     children: [wrapper],
     elementStyles: {
@@ -964,7 +964,7 @@ const createSticky = (props: CardStackProps) => {
 };
 
 export default (props: CardStackProps) => {
-  const composite = ElementModel.createDiv({
+  const composite = ElementBuilder.create.div({
     className: STACK_CONTAINER_CLASS,
     children: [createSticky(props)],
     elementStyles: {

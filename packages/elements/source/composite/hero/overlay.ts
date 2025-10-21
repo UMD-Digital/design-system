@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import { assets, textLockup } from 'atomic';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { type ElementVisual } from '../../_types';
 import { type HeroOverlayProps } from './_types';
 
@@ -88,7 +88,7 @@ const createAsset = ({
     return null;
   }
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'umd-hero-overlay__asset',
     children,
     elementStyles: {
@@ -139,7 +139,7 @@ const createHeadline = (props: Pick<HeroOverlayProps, 'headline'>) => {
     },
   };
 
-  const headlineElement = ElementModel.headline.campaignExtraLarge({
+  const headlineElement = ElementBuilder.styled.headline.campaignExtraLarge({
     element: headline,
     elementStyles: {
       element: {
@@ -168,7 +168,7 @@ const createTextContent = (
     isThemeDark: true,
   });
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'umd-hero-overlay__text-content',
     children: [textLockupElement],
     elementStyles: {
@@ -196,7 +196,7 @@ const createText = (
   const { includesAnimation } = props;
   const textContent = createTextContent(props);
 
-  const lock = ElementModel.layout.spaceHorizontalLarger({
+  const lock = ElementBuilder.styled.layout.spaceHorizontalLarger({
     element: document.createElement('div'),
     children: [textContent],
     elementStyles: {
@@ -208,7 +208,7 @@ const createText = (
     },
   });
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'umd-hero-overlay__text',
     children: [lock],
     elementStyles: {
@@ -242,7 +242,7 @@ export default (props: HeroOverlayProps) => {
     children.push(asset);
   }
 
-  const container = ElementModel.createDiv({
+  const container = ElementBuilder.create.div({
     className: 'umd-hero-overlay__container',
     children,
     elementStyles: {
@@ -281,7 +281,7 @@ export default (props: HeroOverlayProps) => {
     },
   });
 
-  const composite = ElementModel.createDiv({
+  const composite = ElementBuilder.create.div({
     className: 'umd-hero-overlay',
     children: [container],
     elementStyles: {

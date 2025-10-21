@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { textLockup } from 'atomic';
 import { ElementVisual } from '../../../_types';
 
@@ -14,7 +14,7 @@ export default (props: CardIconProps) => {
   const children: ElementVisual[] = [];
 
   if (props.image) {
-    const imageContainer = ElementModel.createDiv({
+    const imageContainer = ElementBuilder.create.div({
       className: 'card-overlay-icon-image',
       elementStyles: {
         element: {
@@ -41,7 +41,7 @@ export default (props: CardIconProps) => {
     }),
   );
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'card-overlay-icon',
     children,
     elementStyles: {

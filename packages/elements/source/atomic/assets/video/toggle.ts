@@ -2,7 +2,7 @@ import {
   pause as iconPause,
   play as iconPlay,
 } from '@universityofmaryland/web-icons-library/controls';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 
 interface VideoProps {
   video: HTMLVideoElement;
@@ -19,7 +19,7 @@ export default (props: VideoProps) =>
       isScaled = false,
       callback,
     } = props;
-    const composite = ElementModel.create({
+    const composite = ElementBuilder.create.element({
       element: document.createElement('div'),
       className: 'umd-element-video',
       elementStyles: {
@@ -43,7 +43,7 @@ export default (props: VideoProps) =>
         },
       },
     });
-    const button = ElementModel.buttons.videoState({
+    const button = ElementBuilder.styled.buttons.videoState({
       element: document.createElement('button'),
     });
 

@@ -2,7 +2,7 @@ import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { animations, assets } from 'atomic';
 import { type HeroVideoArrowProps as BaseHeroVideoArrowProps } from '../_types';
 import { type ElementVisual } from '../../../_types';
@@ -30,7 +30,7 @@ const ANIMATION_CONFIG = {
 const createHeadline = (headline?: HTMLElement | null) => {
   if (!headline) return null;
 
-  return ElementModel.headline.campaignExtraLarge({
+  return ElementBuilder.styled.headline.campaignExtraLarge({
     element: headline,
     elementStyles: {
       element: {
@@ -50,7 +50,7 @@ const createHeadline = (headline?: HTMLElement | null) => {
 const createText = (text?: HTMLElement | null) => {
   if (!text) return null;
 
-  return ElementModel.richText.simpleLargest({
+  return ElementBuilder.styled.richText.simpleLargest({
     element: text,
     elementStyles: {
       element: {
@@ -95,7 +95,7 @@ const createTextContainer = (
 
   if (children.length === 0) return null;
 
-  const container = ElementModel.create({
+  const container = ElementBuilder.create.element({
     element: document.createElement('div'),
     className: 'hero-logo-brand-text-container',
     children,
@@ -114,7 +114,7 @@ const createTextContainer = (
     },
   });
 
-  return ElementModel.create({
+  return ElementBuilder.create.element({
     element: document.createElement('div'),
     className: OVERLAY_CLASS,
     children: [container],
@@ -189,7 +189,7 @@ const createEventHandlers = (
 export default (props: HeroVideoArrowProps) => {
   const { video, isAnimationOnLoad } = props;
 
-  const composite = ElementModel.create({
+  const composite = ElementBuilder.create.element({
     element: document.createElement('section'),
     className: 'umd-element-hero-brand-video',
     elementStyles: {
@@ -208,7 +208,7 @@ export default (props: HeroVideoArrowProps) => {
     wrapperChildren.push(textContainer);
   }
 
-  const wrapper = ElementModel.create({
+  const wrapper = ElementBuilder.create.element({
     element: document.createElement('div'),
     className: 'hero-logo-brand-video-wrapper',
     children: wrapperChildren,

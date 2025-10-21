@@ -1,4 +1,4 @@
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 
 interface CardVideoShortProps {
   video: HTMLVideoElement;
@@ -6,7 +6,7 @@ interface CardVideoShortProps {
 
 export default (props: CardVideoShortProps) => {
   const { video } = props;
-  const composite = ElementModel.create({
+  const composite = ElementBuilder.create.element({
     element: document.createElement('div'),
     className: 'card-video-short-container',
     elementStyles: {

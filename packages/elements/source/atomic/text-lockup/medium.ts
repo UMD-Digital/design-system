@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { ElementVisual } from '../../_types';
 
 interface TypeTextLockupMedium {
@@ -34,7 +34,7 @@ export default ({
 
   if (ribbon) {
     children.push(
-      ElementModel.text.ribbon({
+      ElementBuilder.styled.text.ribbon({
         element: ribbon,
         elementStyles: {
           siblingAfter: {
@@ -51,7 +51,7 @@ export default ({
 
   if (headline && !compositeHeadline) {
     children.push(
-      ElementModel.headline.sansLargest({
+      ElementBuilder.styled.headline.sansLargest({
         element: headline,
         elementStyles: {
           element: {
@@ -74,7 +74,7 @@ export default ({
 
   if (eventDetails) {
     children.push(
-      ElementModel.createDiv({
+      ElementBuilder.create.div({
         className: 'text-lockup-medium-event-details',
         children: [eventDetails],
         elementStyles: {
@@ -88,7 +88,7 @@ export default ({
 
   if (text) {
     children.push(
-      ElementModel.richText.advanced({
+      ElementBuilder.styled.richText.advanced({
         element: text,
         elementStyles: {
           siblingAfter: {
@@ -106,7 +106,7 @@ export default ({
 
   if (actions) {
     children.push(
-      ElementModel.layout.gridStacked({
+      ElementBuilder.styled.layout.gridStacked({
         element: actions,
         elementStyles: {
           element: {
@@ -121,7 +121,7 @@ export default ({
     );
   }
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'text-lockup-medium',
     children,
     elementStyles: {

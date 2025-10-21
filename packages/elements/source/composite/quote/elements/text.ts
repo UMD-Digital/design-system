@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { default as elementAction } from './action';
 import { default as elementQuote } from './quote';
 import { SMALL } from '../_constants';
@@ -44,7 +44,7 @@ const createChildren = (props: ChildrenProps) => {
   }
 
   if (attribution) {
-    const attributionElement = ElementModel.create({
+    const attributionElement = ElementBuilder.create.element({
       element: attribution,
       className: 'quote-container-attribution',
       elementStyles: {
@@ -73,7 +73,7 @@ const createChildren = (props: ChildrenProps) => {
   }
 
   if (attributionSubText) {
-    const attributionSubTextElement = ElementModel.create({
+    const attributionSubTextElement = ElementBuilder.create.element({
       element: attributionSubText,
       className: 'quote-container-text-attribution-sub-text',
       elementStyles: {
@@ -137,7 +137,7 @@ export default (
   const hasImage = image != null;
   const isHasImageAndNotFeatured = hasImage && !isTypeFeatured;
 
-  const wrapper = ElementModel.createDiv({
+  const wrapper = ElementBuilder.create.div({
     className: 'quote-text-container-wrapper',
     children: [
       ...createChildren({
@@ -148,7 +148,7 @@ export default (
     ],
   });
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'quote-text-container',
     children: [wrapper],
     elementStyles: {

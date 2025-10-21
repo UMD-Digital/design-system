@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
-import { ElementModel } from 'model';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
 import { assets } from 'atomic';
 import { type HeroExpandProps as BaseHeroExpandProps } from '../_types';
 import { type ElementVisual, type ContentElement } from '../../../_types';
@@ -70,7 +70,7 @@ const keyFrameComponentSize = `
 `;
 
 const createImageOverlay = () =>
-  ElementModel.createDiv({
+  ElementBuilder.create.div({
     className: 'hero-expand-image-overlay',
     elementStyles: {
       element: {
@@ -131,7 +131,7 @@ const createImageSize = (props: Pick<HeroExpandProps, 'image' | 'video'>) => {
   const asset = createAssetElement(props);
   const children = asset ? [asset, overlay] : [overlay];
 
-  const container = ElementModel.createDiv({
+  const container = ElementBuilder.create.div({
     className: 'hero-expand-image-size',
     children,
     elementStyles: {
@@ -162,7 +162,7 @@ const createImageSize = (props: Pick<HeroExpandProps, 'image' | 'video'>) => {
 const createAssetContainer = (
   props: Pick<HeroExpandProps, 'image' | 'video'>,
 ) =>
-  ElementModel.createDiv({
+  ElementBuilder.create.div({
     className: 'hero-expand-image-container',
     children: [createImageSize(props)],
     elementStyles: {
@@ -204,7 +204,7 @@ const createAssetContainer = (
 const createEyebrow = (eyebrow?: HTMLElement | null) => {
   if (!eyebrow) return null;
 
-  return ElementModel.text.ribbon({
+  return ElementBuilder.styled.text.ribbon({
     element: eyebrow,
     elementStyles: {
       siblingAfter: {
@@ -220,7 +220,7 @@ const createHeadline = (headline?: HTMLElement | null) => {
 
   if (!headline) return null;
 
-  return ElementModel.headline.campaignMaximum({
+  return ElementBuilder.styled.headline.campaignMaximum({
     element: headline,
     elementStyles: {
       element: {
@@ -265,7 +265,7 @@ const createBottomTextChildren = ({
   const children: ElementVisual[] = [];
 
   if (actions) {
-    const actionsContainer = ElementModel.createDiv({
+    const actionsContainer = ElementBuilder.create.div({
       className: 'hero-expand-text-actions',
       elementStyles: {
         siblingAfter: {
@@ -278,7 +278,7 @@ const createBottomTextChildren = ({
   }
 
   if (additional) {
-    const additionalContainer = ElementModel.createDiv({
+    const additionalContainer = ElementBuilder.create.div({
       className: 'hero-expand-text-additional',
     });
     additionalContainer.element.appendChild(additional);
@@ -298,7 +298,7 @@ const createTextContainer = (
 
   const topTextChildren = createTopTextChildren(props);
   if (topTextChildren.length > 0) {
-    const topText = ElementModel.layout.spaceHorizontalNormal({
+    const topText = ElementBuilder.styled.layout.spaceHorizontalNormal({
       element: document.createElement('div'),
       children: topTextChildren,
       elementStyles: {
@@ -312,7 +312,7 @@ const createTextContainer = (
 
   const bottomTextChildren = createBottomTextChildren(props);
   if (bottomTextChildren.length > 0) {
-    const bottomText = ElementModel.layout.spaceHorizontalNormal({
+    const bottomText = ElementBuilder.styled.layout.spaceHorizontalNormal({
       element: document.createElement('div'),
       children: bottomTextChildren,
       elementStyles: {
@@ -324,7 +324,7 @@ const createTextContainer = (
     textChildren.push(bottomText);
   }
 
-  return ElementModel.createDiv({
+  return ElementBuilder.create.div({
     className: 'hero-expand-text-container',
     children: textChildren,
     elementStyles: {
@@ -354,7 +354,7 @@ const createSticky = (props: HeroExpandProps) => {
   const assetContainer = createAssetContainer(props);
   const textContainer = createTextContainer(props);
 
-  return ElementModel.create({
+  return ElementBuilder.create.element({
     element: document.createElement('div'),
     className: 'hero-expand-sticky',
     children: [assetContainer, textContainer],
@@ -381,7 +381,7 @@ const createSticky = (props: HeroExpandProps) => {
 export default (props: HeroExpandProps) => {
   const sticky = createSticky(props);
 
-  const composite = ElementModel.create({
+  const composite = ElementBuilder.create.element({
     element: document.createElement('div'),
     className: 'umd-hero-expand',
     children: [sticky],

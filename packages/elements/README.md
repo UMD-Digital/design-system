@@ -1,6 +1,6 @@
 # University of Maryland Web Elements Library
 
-[![Elements Version](https://img.shields.io/badge/Elements-v1.5.2-blue)](https://www.npmjs.com/package/@universityofmaryland/web-elements-library)
+[![Elements Version](https://img.shields.io/badge/Elements-v1.5.3-blue)](https://www.npmjs.com/package/@universityofmaryland/web-elements-library)
 
 Foundational UI building blocks for the UMD Design System, providing atomic elements that combine to create complex, accessible, and brand-compliant University of Maryland digital experiences.
 

@@ -1,6 +1,6 @@
 # @universityofmaryland/web-icons-library
 
-[![Icons Version](https://img.shields.io/badge/Icons-v1.0.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-icons-library)
+[![Icons Version](https://img.shields.io/badge/Icons-v1.0.1-blue)](https://www.npmjs.com/package/@universityofmaryland/web-icons-library)
 
 Icon and logo assets for the University of Maryland Design System, organized by category for optimal tree-shaking and selective imports.
 

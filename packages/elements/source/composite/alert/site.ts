@@ -1,125 +1,25 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import * as layout from '@universityofmaryland/web-styles-library/layout';
-import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
-import { shrinkThenRemove } from '@universityofmaryland/web-utilities-library/animation';
 import {
   getLocalStorageInt,
   setLocalStorageTimestamp,
 } from '@universityofmaryland/web-utilities-library/storage';
-import { close as iconClose } from '@universityofmaryland/web-icons-library/controls';
-import {
-  CreateAlertText as AlertText,
-  CONSTANTS as TEXT_CONSTANTS,
-  TypeAlertTextProps,
-} from './elements/text';
+import { CreateAlertText as AlertText, AlertTextProps } from './elements/text';
+import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { type ElementVisual } from '../../_types';
+import { BREAKPOINTS } from './globals';
+import { CreateCloseButton } from './elements/closeButton';
 
-type TypeShouldShowProps = {
+export interface AlertSiteProps extends AlertTextProps {
   daysToHide?: string;
-};
+}
 
-type TypeAlertProps = TypeShouldShowProps &
-  TypeAlertTextProps & {
-    isShowIcon?: boolean;
-  };
-
-type TypeAlertButtonProps = {
-  container: HTMLElement;
-};
-
-const MEDUM = 500;
+const { MEDIUM } = BREAKPOINTS;
 const DEFAULT_HIDE_TIME = 30;
 const ALERT_LOCAL_STORAGE_KEY = 'umd-alert-site-time';
 
-const ELEMENT_NAME = 'umd-element-alert-site';
-const ELEMENT_ALERT_SITE_DECLARATION = 'alert-site-declaration';
-const ELEMENT_ALERT_SITE_CONTAINER = 'alert-site-container';
-const ELEMENT_ALERT_SITE_LOCK = 'alert-site-lock';
-const ELEMENT_ALERT_SITE_CLOSE_BUTTON = 'alert-site-close-button';
+const shouldShow = (props: Pick<AlertSiteProps, 'daysToHide'>) => {
+  const { daysToHide } = props;
 
-const OVERWRITE_TEXT_WRAPPER = `.${ELEMENT_ALERT_SITE_CONTAINER} .${TEXT_CONSTANTS.className.text}`;
-const OVERWRITE_TEXT_BODY = `.${ELEMENT_ALERT_SITE_CONTAINER} .${TEXT_CONSTANTS.className.wrapper}`;
-
-const OverwriteText = `
-  ${OVERWRITE_TEXT_WRAPPER} {
-    max-width: ${token.spacing.maxWidth.large};
-  }
-
-  ${OVERWRITE_TEXT_BODY},
-  ${OVERWRITE_TEXT_BODY} * {
-    color: ${token.color.black};
-    max-width: ${token.spacing.maxWidth.large};
-  }
-`;
-
-const ButtonStyles = `
-  .${ELEMENT_ALERT_SITE_CLOSE_BUTTON} {
-    position: absolute;
-    top: ${token.spacing.lg};
-    right: ${token.spacing.lg};
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${MEDUM}px) {
-    .${ELEMENT_ALERT_SITE_CLOSE_BUTTON} {
-      top: ${token.spacing.sm};
-      right: ${token.spacing.sm};
-    }
-  }
-`;
-
-const LockStyles = `
-  ${jssToCSS({
-    styleObj: {
-      [`.${ELEMENT_ALERT_SITE_LOCK}`]: layout.space.horizontal.larger,
-    },
-  })}
-
-  .${ELEMENT_ALERT_SITE_LOCK} {
-    width: 100%;
-  }
-`;
-
-const STYLES_ALERT_SITE_ELEMENT = `
-  .${ELEMENT_ALERT_SITE_DECLARATION} {
-    container: ${ELEMENT_NAME} / inline-size;
-  }
-
-  .${ELEMENT_ALERT_SITE_CONTAINER} {
-    display: flex;
-    position: relative;
-    padding: ${token.spacing.lg} 0;
-    gap: ${token.spacing.lg};
-    background-color: ${token.color.gold};
-    border-left: 4px solid ${token.color.red};
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDUM}px) {
-    .${ELEMENT_ALERT_SITE_CONTAINER} {
-      border-left: 8px solid ${token.color.red};
-      padding-right: ${token.spacing['2xl']};
-    }
-  }
-
-
-  ${ButtonStyles}
-  ${LockStyles}
-  ${OverwriteText}
-`;
-
-const CreateCloseButton = ({ container }: TypeAlertButtonProps) => {
-  const closeButton = document.createElement('button');
-
-  closeButton.classList.add(ELEMENT_ALERT_SITE_CLOSE_BUTTON);
-  closeButton.innerHTML = iconClose;
-  closeButton.setAttribute('aria-label', 'Close alert');
-  closeButton.addEventListener('click', () => {
-    shrinkThenRemove({ container });
-    setLocalStorageTimestamp({ key: ALERT_LOCAL_STORAGE_KEY });
-  });
-
-  return closeButton;
-};
-
-const ShouldShow = ({ daysToHide }: TypeShouldShowProps) => {
   const now = new Date().getTime();
   const millisecondsPerDay = 24 * 60 * 60 * 1000;
   const lastClosedTime = getLocalStorageInt({
@@ -138,31 +38,86 @@ const ShouldShow = ({ daysToHide }: TypeShouldShowProps) => {
   return futureTime > now;
 };
 
-export const CreateAlertSiteElement = (props: TypeAlertProps) =>
-  (() => {
-    const elementContainer = document.createElement('div');
-    const container = document.createElement('div');
-    const lock = document.createElement('div');
-    const textWrapper = AlertText(props);
-    const shouldHide = ShouldShow(props);
-    let styles = STYLES_ALERT_SITE_ELEMENT;
+const createLock = (
+  props: Pick<AlertSiteProps, 'headline' | 'text' | 'actions' | 'isThemeDark'>,
+): ElementVisual => {
+  const textModel = AlertText(props);
+  const children = [textModel];
 
-    if (shouldHide) container.style.display = 'none';
+  return ElementBuilder.styled.layout.spaceHorizontalLarger({
+    element: document.createElement('div'),
+    children,
+    elementStyles: {
+      element: {
+        width: '100%',
+      },
+      subElement: {
+        color: token.color.black,
+        maxWidth: token.spacing.maxWidth.large,
+      },
+    },
+  });
+};
 
-    lock.classList.add(ELEMENT_ALERT_SITE_LOCK);
-    lock.appendChild(textWrapper.element);
+const createCloseButton = () =>
+  CreateCloseButton({
+    targetSelector: '.alert-site-declaration',
+    onBeforeClose: () =>
+      setLocalStorageTimestamp({ key: ALERT_LOCAL_STORAGE_KEY }),
+  });
 
-    styles += textWrapper.styles;
+const createContainer = (
+  props: Pick<
+    AlertSiteProps,
+    'daysToHide' | 'isThemeDark' | 'headline' | 'text' | 'actions'
+  >,
+) => {
+  const lockElement = createLock(props);
+  const closeButtonElement = createCloseButton();
+  const children = [lockElement, closeButtonElement].filter(
+    Boolean,
+  ) as ElementVisual[];
 
-    container.classList.add(ELEMENT_ALERT_SITE_CONTAINER);
-    container.appendChild(lock);
-    container.appendChild(CreateCloseButton({ container: elementContainer }));
+  return ElementBuilder.create.div({
+    className: 'alert-site-container',
+    children,
+    elementStyles: {
+      element: {
+        display: 'flex',
+        position: 'relative',
+        padding: `${token.spacing.lg} 0`,
+        gap: token.spacing.lg,
+        backgroundColor: token.color.gold,
+        borderLeft: `4px solid ${token.color.red}`,
 
-    elementContainer.appendChild(container);
-    elementContainer.classList.add(ELEMENT_ALERT_SITE_DECLARATION);
+        [`@container (min-width: ${MEDIUM}px)`]: {
+          borderLeft: `8px solid ${token.color.red}`,
+          paddingRight: token.spacing['2xl'],
+        },
+      },
+    },
+  });
+};
 
-    return {
-      element: elementContainer,
-      styles,
-    };
-  })();
+const createWrapper = (container: ElementVisual): ElementVisual => {
+  return ElementBuilder.create.div({
+    className: 'alert-site-declaration',
+    children: [container],
+    elementStyles: {
+      element: {
+        containerType: 'inline-size',
+      },
+    },
+  });
+};
+
+export default (props: AlertSiteProps) => {
+  const containerModel = createContainer(props);
+  const declarationModel = createWrapper(containerModel);
+
+  if (shouldShow(props)) {
+    (declarationModel.element as HTMLElement).style.display = 'none';
+  }
+
+  return declarationModel;
+};

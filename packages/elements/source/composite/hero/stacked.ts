@@ -205,7 +205,6 @@ const createHeadline = (
   const elementStyles = {
     element: {
       color: token.color.black,
-      maxWidth: '700px',
       margin: '0 auto',
       textTransform: 'uppercase',
       marginTop: `${token.spacing.sm}`,

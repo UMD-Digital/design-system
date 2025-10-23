@@ -132,6 +132,7 @@ export default (props: ListProps): ElementModel =>
       ${loader.styles}
     `;
     let shadowRoot: ShadowRoot | null = null;
+    let lastDateHeadline: string | null = null;
 
     const helperFunctions = {
       setTotalEntries,
@@ -163,19 +164,23 @@ export default (props: ListProps): ElementModel =>
       let actualEventCount = 0;
 
       groupedEvents.forEach((group) => {
-        const dateHeadline = document.createElement('p');
-        dateHeadline.textContent = group.date;
+        if (group.date !== lastDateHeadline) {
+          const dateHeadline = document.createElement('p');
+          dateHeadline.textContent = group.date;
 
-        entries.push(
-          Model.ElementModel.text.ribbon({
-            element: dateHeadline,
-            elementStyles: {
-              element: {
-                margin: `${Styles.token.spacing.lg} 0`,
+          entries.push(
+            Model.ElementModel.text.ribbon({
+              element: dateHeadline,
+              elementStyles: {
+                element: {
+                  margin: `${Styles.token.spacing.lg} 0`,
+                },
               },
-            },
-          }),
-        );
+            }),
+          );
+
+          lastDateHeadline = group.date;
+        }
 
         const dateEntries = group.events.map((entry) =>
           Composite.card.list({
@@ -204,6 +209,11 @@ export default (props: ListProps): ElementModel =>
                 [` > *:not(:last-child)`]: {
                   paddingBottom: Styles.token.spacing.lg,
                   marginBottom: Styles.token.spacing.lg,
+                },
+
+                [`+ .umd-feed-events-grouped-entries`]: {
+                  paddingTop: Styles.token.spacing.lg,
+                  marginTop: Styles.token.spacing.lg,
                 },
               },
             },

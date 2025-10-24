@@ -11,50 +11,55 @@
       "import": "./dist/index.mjs",
       "require": "./dist/index.js"
     },
-    "./styledElements": {
-      "types": "./dist/styledElements/index.d.ts",
-      "import": "./dist/styledElements/index.mjs",
-      "require": "./dist/styledElements/index.js"
+    "./core": {
+      "types": "./dist/core/index.d.ts",
+      "import": "./dist/core/index.mjs",
+      "require": "./dist/core/index.js"
     },
-    "./styledElements/actions": {
-      "types": "./dist/styledElements/actions.d.ts",
-      "import": "./dist/styledElements/actions.mjs",
-      "require": "./dist/styledElements/actions.js"
+    "./core/ElementBuilder": {
+      "types": "./dist/core/ElementBuilder.d.ts",
+      "import": "./dist/core/ElementBuilder.mjs",
+      "require": "./dist/core/ElementBuilder.js"
     },
-    "./styledElements/assets": {
-      "types": "./dist/styledElements/assets.d.ts",
-      "import": "./dist/styledElements/assets.mjs",
-      "require": "./dist/styledElements/assets.js"
+    "./core/StyleManager": {
+      "types": "./dist/core/StyleManager.d.ts",
+      "import": "./dist/core/StyleManager.mjs",
+      "require": "./dist/core/StyleManager.js"
     },
-    "./styledElements/buttons": {
-      "types": "./dist/styledElements/buttons.d.ts",
-      "import": "./dist/styledElements/buttons.mjs",
-      "require": "./dist/styledElements/buttons.js"
+    "./core/LifecycleManager": {
+      "types": "./dist/core/LifecycleManager.d.ts",
+      "import": "./dist/core/LifecycleManager.mjs",
+      "require": "./dist/core/LifecycleManager.js"
     },
-    "./styledElements/event": {
-      "types": "./dist/styledElements/event.d.ts",
-      "import": "./dist/styledElements/event.mjs",
-      "require": "./dist/styledElements/event.js"
+    "./core/types": {
+      "types": "./dist/core/types.d.ts",
+      "import": "./dist/core/types.mjs",
+      "require": "./dist/core/types.js"
     },
-    "./styledElements/headline": {
-      "types": "./dist/styledElements/headline.d.ts",
-      "import": "./dist/styledElements/headline.mjs",
-      "require": "./dist/styledElements/headline.js"
+    "./factories": {
+      "types": "./dist/factories/index.d.ts",
+      "import": "./dist/factories/index.mjs",
+      "require": "./dist/factories/index.js"
     },
-    "./styledElements/layout": {
-      "types": "./dist/styledElements/layout.d.ts",
-      "import": "./dist/styledElements/layout.mjs",
-      "require": "./dist/styledElements/layout.js"
+    "./factories/presets": {
+      "types": "./dist/factories/presets.d.ts",
+      "import": "./dist/factories/presets.mjs",
+      "require": "./dist/factories/presets.js"
     },
-    "./styledElements/rich-text": {
-      "types": "./dist/styledElements/rich-text.d.ts",
-      "import": "./dist/styledElements/rich-text.mjs",
-      "require": "./dist/styledElements/rich-text.js"
+    "./factories/compose": {
+      "types": "./dist/factories/compose.d.ts",
+      "import": "./dist/factories/compose.mjs",
+      "require": "./dist/factories/compose.js"
     },
-    "./styledElements/text": {
-      "types": "./dist/styledElements/text.d.ts",
-      "import": "./dist/styledElements/text.mjs",
-      "require": "./dist/styledElements/text.js"
+    "./presets": {
+      "types": "./dist/factories/presets.d.ts",
+      "import": "./dist/factories/presets.mjs",
+      "require": "./dist/factories/presets.js"
+    },
+    "./compose": {
+      "types": "./dist/factories/compose.d.ts",
+      "import": "./dist/factories/compose.mjs",
+      "require": "./dist/factories/compose.js"
     }
   },
   "license": "MIT",

@@ -1,214 +1,63 @@
-import { combineStyles } from '@universityofmaryland/web-utilities-library/styles';
-import { wrapTextNodeInSpan } from '@universityofmaryland/web-utilities-library';
-import { modifiers } from './style';
-import {
-  type ElementProps,
-  type BuilderProps,
-  type BuilderConfig,
-  type StyleModifierProps,
-  type ConfigurationProps,
-  type CompositeChild,
-} from './_types';
+/**
+ * @file index.ts
+ * @description Core exports for the UMD Design System Element Builder (v2)
+ *
+ * This module exports the core builder components:
+ * - ElementBuilder: Main chainable builder class
+ * - StyleManager: Style compilation and deduplication
+ * - LifecycleManager: Resource tracking and cleanup
+ * - Type definitions and utilities
+ */
 
-export { ElementBuilder };
+// Core classes
+export { ElementBuilder } from './ElementBuilder';
+export { StyleManager, createStyleTag, injectStyles } from './StyleManager';
+export {
+  LifecycleManager,
+  getGlobalLifecycleRegistry,
+  cleanupAll,
+  getLifecycleStats,
+} from './LifecycleManager';
 
-export interface styleObject {
-  className: string | string[];
-  [key: string]: any;
-}
+// Type definitions
+export type {
+  // Base types
+  ThemeType,
+  AnimationType,
 
-// Configuration
-const CONFIG = {
-  modifiers: {
-    base: (props: StyleModifierProps) => [
-      modifiers.baseStyles(props),
-      modifiers.element(props),
-      modifiers.elementBefore(props),
-      modifiers.elementChild(props),
-      modifiers.elementSiblingAfter(props),
-    ],
-    default: (props: StyleModifierProps) => [
-      ...CONFIG.modifiers.base(props),
-      modifiers.textColor(props),
-      modifiers.iconColor(props),
-    ],
-    withChildLink: (props: StyleModifierProps) => [
-      ...CONFIG.modifiers.default(props),
-      modifiers.childLink(props),
-    ],
-    withAnimationLink: (props: StyleModifierProps) => [
-      ...CONFIG.modifiers.default(props),
-      modifiers.animationLink(props),
-    ],
-    withoutTextColor: (props: StyleModifierProps) => [
-      ...CONFIG.modifiers.base(props),
-    ],
-  },
+  // Style types
+  ElementStyles,
+  StyleDefinition,
+  StyleEntry,
+  StyleType,
 
-  builders: {
-    action: {
-      styleModifiers: (props: StyleModifierProps) =>
-        combineStyles(
-          ...CONFIG.modifiers.withoutTextColor(props),
-        ),
-    },
+  // Builder types
+  BuilderOptions,
+  ElementModel,
+  ElementBuilderInterface,
 
-    animationLine: {
-      styleModifiers: (props: StyleModifierProps) =>
-        combineStyles(
-          ...CONFIG.modifiers.withAnimationLink(props),
-        ),
-      elementModifiers: [
-        (element: HTMLElement) =>
-          wrapTextNodeInSpan(element),
-      ],
-    },
+  // Lifecycle types
+  TrackedListener,
+  TrackedObserver,
+  CleanupFunction,
+  ResourceCounts,
 
-    base: {
-      styleModifiers: (props: StyleModifierProps) =>
-        combineStyles(...CONFIG.modifiers.base(props)),
-    },
+  // Factory types
+  ElementFactory,
+  ActionFactories,
+  HeadlineFactories,
+  TextFactories,
+  LayoutFactories,
 
-    childLink: {
-      styleModifiers: (props: StyleModifierProps) =>
-        combineStyles(...CONFIG.modifiers.withChildLink(props)),
-    },
+  // Utility types
+  DeepPartial,
+  BuilderElement,
+  AnimationConfig,
 
-    default: {
-      styleModifiers: (props: StyleModifierProps) =>
-        combineStyles(...CONFIG.modifiers.default(props)),
-    },
-  },
-};
+  // Plugin types
+  BuilderPlugin,
+  PresetConfig,
+} from './types';
 
-// Model
-
-class ElementBuilder {
-  private className: string;
-  private element: HTMLElement;
-
-  constructor(className: string, element: HTMLElement) {
-    this.className = className;
-    this.element = element;
-  }
-
-  createElement(
-    props: BuilderProps & {
-      children?: CompositeChild[];
-      attributes?: Record<string, string>[];
-    },
-  ) {
-    const { config, options = {}, children, attributes } = props;
-    const className = this.className;
-    const element = this.element;
-
-    if (!className || !element) {
-      throw new Error(`element & className is required for Element Builder`);
-    }
-
-    let styles = '';
-
-    if (config.styleModifiers) {
-      styles += config.styleModifiers({ className, ...options });
-    }
-
-    if (config.elementModifiers) {
-      for (const modifier of config.elementModifiers) {
-        modifier(element);
-      }
-    }
-
-    element.classList.add(className);
-
-    // Apply attributes if provided
-    if (attributes && attributes.length > 0) {
-      attributes.forEach((attrObject) => {
-        Object.entries(attrObject).forEach(([key, value]) => {
-          element.setAttribute(key, value);
-        });
-      });
-    }
-
-    // Process children if provided
-    if (children && children.length > 0) {
-      children.forEach((child) => {
-        element.appendChild(child.element);
-        styles += child.styles;
-      });
-    }
-
-    return {
-      element,
-      className,
-      styles,
-    };
-  }
-}
-
-// Helper Functions
-
-const createElementBuild = (
-  props: ConfigurationProps,
-  config: BuilderConfig,
-) => {
-  const { element, className, elementStyles, children, attributes, ...rest } =
-    props;
-
-  return new ElementBuilder(className, element).createElement({
-    config,
-    options: {
-      ...elementStyles,
-      ...rest,
-    },
-    children,
-    attributes,
-  });
-};
-
-const createElementWithConfig = (
-  props: ElementProps,
-  stylesObj: styleObject,
-  builderType: keyof typeof CONFIG.builders,
-) => {
-  const { className, ...baseStyles } = stylesObj;
-  const config = CONFIG.builders[builderType];
-
-  if (Array.isArray(className)) {
-    return createElementBuild(
-      { ...props, className: className[0], baseStyles },
-      config,
-    );
-  }
-
-  return createElementBuild({ ...props, className, baseStyles }, config);
-};
-
-const createElementFactory = (builderType: keyof typeof CONFIG.builders) => {
-  return (props: ElementProps, stylesObj: styleObject) =>
-    createElementWithConfig(props, stylesObj, builderType);
-};
-
-// Create Elements
-
-type ElementFactoryFn = (
-  props: ElementProps,
-  stylesObj: styleObject,
-) => ReturnType<typeof createElementBuild>;
-
-type StyledElementCreator = ElementFactoryFn & {
-  [K in keyof typeof CONFIG.builders]: ElementFactoryFn;
-};
-
-const createStyledElementFn = createElementFactory(
-  'default',
-) as StyledElementCreator;
-
-(Object.keys(CONFIG.builders) as Array<keyof typeof CONFIG.builders>).forEach(
-  (key) => {
-    createStyledElementFn[key] = createElementFactory(key);
-  },
-);
-
-createStyledElementFn.default = createStyledElementFn;
-
-export const createStyledElement = createStyledElementFn;
+// Type guards
+export { isStyleDefinition, isElementStyles, isElementBuilder } from './types';

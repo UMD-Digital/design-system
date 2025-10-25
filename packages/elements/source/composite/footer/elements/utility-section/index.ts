@@ -4,11 +4,11 @@ import {
   animation,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
 import { BREAKPOINTS } from '../../globals';
 import { type BaseProps } from '../../_types';
-import { type ElementVisual } from '../../../../_types';
+import { type UMDElement } from '../../../../_types';
 
 export interface UtilityProps extends Pick<BaseProps, 'isThemeLight'> {
   slotUtilityLinks?: HTMLElement | null;
@@ -28,46 +28,44 @@ const requiredSubLinks = [
 ];
 
 const createUtilityContainerLink = (link: HTMLElement) => {
-  return ElementBuilder.create.element({
-    element: link,
-    className: 'umd-footer-utility-container-link',
-  });
+  return new ElementBuilder(link)
+    .withClassName('umd-footer-utility-container-link')
+    .build();
 };
 
 const createSubLink = ({ title, url }: { title: string; url: string }) => {
-  const span = ElementBuilder.create.span({
-    className: 'umd-footer-utility-container-sublink-text',
-  });
+  const span = new ElementBuilder('span')
+    .withClassName('umd-footer-utility-container-sublink-text')
+    .withText(title)
+    .build();
 
-  const link = ElementBuilder.create.element({
-    element: document.createElement('a'),
-    className: 'umd-footer-utility-container-sublink',
-    children: [span],
-    attributes: [
-      {
-        href: url,
-      },
-      {
-        target: '_blank',
-      },
-      { rel: 'noopener noreferrer' },
-    ],
-  });
+  const anchor = document.createElement('a');
+  anchor.setAttribute('href', url);
+  anchor.setAttribute('target', '_blank');
+  anchor.setAttribute('rel', 'noopener noreferrer');
 
-  span.element.innerText = title;
+  const link = new ElementBuilder(anchor)
+    .withClassName('umd-footer-utility-container-sublink')
+    .withChild(span)
+    .build();
 
-  return ElementBuilder.create.div({
-    className: 'umd-footer-utility-container-link-wrapper',
-    children: [createUtilityContainerLink(link.element)],
-  });
+  return new ElementBuilder()
+    .withClassName('umd-footer-utility-container-link-wrapper')
+    .withChild(createUtilityContainerLink(link.element))
+    .build();
 };
 
 export default (props: UtilityProps) => {
   const { isThemeLight, slotUtilityLinks } = props;
-  const linkElements: ElementVisual[] = [];
-  const copyRightElement = ElementBuilder.create.paragraph({
-    className: 'umd-footer-utility-container-copyright',
-  });
+  const linkElements: UMDElement[] = [];
+
+  const copyRightPara = document.createElement('p');
+  copyRightPara.innerHTML = `©${new Date().getFullYear()} UNIVERSITY OF MARYLAND`;
+
+  const copyRightElement = new ElementBuilder(copyRightPara)
+    .withClassName('umd-footer-utility-container-copyright')
+    .build();
+
   if (slotUtilityLinks) {
     const slottedLinks = Array.from(
       slotUtilityLinks.querySelectorAll('a'),
@@ -78,20 +76,18 @@ export default (props: UtilityProps) => {
       linkElements.push(createUtilityContainerLink(link));
     });
   }
+
   const copyRight = createUtilityContainerLink(copyRightElement.element);
 
   requiredSubLinks.forEach((link) => {
     linkElements.push(createSubLink(link));
   });
 
-  copyRightElement.element.innerHTML = `©${new Date().getFullYear()} UNIVERSITY OF MARYLAND`;
-
   linkElements.push(copyRight);
 
-  const wrapper = ElementBuilder.create.div({
-    className: 'umd-footer-utility-container-lock',
-    children: linkElements,
-    elementStyles: {
+  const wrapper = new ElementBuilder()
+    .withClassName('umd-footer-utility-container-lock')
+    .withStyles({
       element: {
         ...layout.space.horizontal.larger,
 
@@ -128,13 +124,13 @@ export default (props: UtilityProps) => {
           ...(isThemeLight && { color: token.color.black }),
         },
       },
-    },
-  });
+    })
+    .withChildren(...linkElements)
+    .build();
 
-  return ElementBuilder.create.div({
-    className: 'umd-footer-utility-container',
-    children: [wrapper],
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('umd-footer-utility-container')
+    .withStyles({
       element: {
         padding: `${token.spacing.sm} 0`,
         backgroundColor: token.color.gray.darker,
@@ -157,6 +153,7 @@ export default (props: UtilityProps) => {
           }),
         },
       },
-    },
-  });
+    })
+    .withChild(wrapper)
+    .build();
 };

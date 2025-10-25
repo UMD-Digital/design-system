@@ -1,10 +1,10 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { imageFromSvg } from '@universityofmaryland/web-utilities-library/media';
 import * as Logos from '@universityofmaryland/web-icons-library/logos';
 import { BaseProps } from '../../_types';
 import { BREAKPOINTS } from '../../globals';
-import { type ElementVisual } from '../../../../_types';
+import { type UMDElement } from '../../../../_types';
 
 export interface CampaignProps
   extends Pick<BaseProps, 'isThemeLight' | 'isCampaignForward'> {}
@@ -51,27 +51,25 @@ const createForwardCampaign = (isThemeLight: boolean) => {
 export default ({
   isThemeLight,
   isCampaignForward,
-}: CampaignProps): ElementVisual => {
+}: CampaignProps): UMDElement => {
   const link = isCampaignForward
     ? createForwardCampaign(!!isThemeLight)
     : createFearlesslyForwardCampaign(!!isThemeLight);
 
-  const linkElement = ElementBuilder.create.element({
-    element: link,
-    className: 'campaign-column-link',
-    elementStyles: {
+  const linkElement = new ElementBuilder(link)
+    .withClassName('campaign-column-link')
+    .withStyles({
       element: {
         display: 'block',
         marginTop: token.spacing.lg,
         maxWidth: '250px',
       },
-    },
-  });
+    })
+    .build();
 
-  return ElementBuilder.create.div({
-    className: 'campaign-column-wrapper',
-    children: [linkElement],
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('campaign-column-wrapper')
+    .withStyles({
       element: {
         [`& img`]: {
           maxWidth: '144px',
@@ -94,6 +92,7 @@ export default ({
           },
         },
       },
-    },
-  });
+    })
+    .withChild(linkElement)
+    .build();
 };

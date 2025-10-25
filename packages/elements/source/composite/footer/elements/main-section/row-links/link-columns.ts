@@ -3,11 +3,11 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
 import { BREAKPOINTS } from '../../../globals';
 import { BaseProps } from '../../../_types';
-import { type ElementVisual } from '../../../../../_types';
+import { type UMDElement } from '../../../../../_types';
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
 
@@ -86,16 +86,13 @@ const COLUMN_THREE_DEFAULT_LINKS: ColumnRow[] = [
   },
 ];
 
-const createLinkColumn = (
-  props: slotColumnsProps,
-  children: ElementVisual[],
-) => {
+const createLinkColumn = (props: slotColumnsProps, children: UMDElement[]) => {
   const { isThemeLight } = props;
 
-  return ElementBuilder.create.div({
-    className: 'link-column-fonts',
-    children: children,
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('link-column-fonts')
+    .withChildren(...children)
+    .withStyles({
       element: {
         marginBottom: token.spacing.sm,
 
@@ -126,29 +123,28 @@ const createLinkColumn = (
           },
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 const createLinkColumnFontsLink = (element: HTMLElement) => {
-  return ElementBuilder.create.element({
-    element: element,
-    className: `link-column-fonts-link`,
-    elementStyles: {
+  return new ElementBuilder(element)
+    .withClassName(`link-column-fonts-link`)
+    .withStyles({
       element: {
         [`&p`]: {
           gridColumn: '1 / span 2',
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 const createDefaultColumn = (
   props: slotColumnsProps,
   defaultContent: ColumnRow[],
-): ElementVisual => {
-  const children: ElementVisual[] = defaultContent
+): UMDElement => {
+  const children: UMDElement[] = defaultContent
     .map((row) => {
       if (row.elmentType === 'link' && row.url) {
         const link = document.createElement('a');
@@ -172,9 +168,9 @@ const createDefaultColumn = (
         return createLinkColumnHeadline(headline);
       }
 
-      return undefined as unknown as ElementVisual;
+      return undefined as unknown as UMDElement;
     })
-    .filter(Boolean) as ElementVisual[];
+    .filter(Boolean) as UMDElement[];
 
   return createRowLinksColumnWrapper({ children: children });
 };
@@ -182,12 +178,12 @@ const createDefaultColumn = (
 const createRowLinksColumnWrapper = ({
   children,
 }: {
-  children: ElementVisual[];
+  children: UMDElement[];
 }) => {
-  return ElementBuilder.create.div({
-    className: 'umd-footer-row-links-column-wrapper',
-    children,
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('umd-footer-row-links-column-wrapper')
+    .withChildren(...children)
+    .withStyles({
       element: {
         [`@container (min-width: ${MEDIUM}px) and (max-width: ${LARGE}px)`]: {
           display: 'grid',
@@ -212,8 +208,8 @@ const createRowLinksColumnWrapper = ({
           },
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 const createSlotColumn = ({
@@ -226,18 +222,18 @@ const createSlotColumn = ({
   slot: HTMLElement;
   slotHasHeadline: boolean;
   isColumnOne: boolean;
-}): ElementVisual => {
-  const linkChildren: ElementVisual[] = Array.from(
-    slot.querySelectorAll('a'),
-  ).map((link) => {
-    wrapLinkForAnimation({ element: link });
+}): UMDElement => {
+  const linkChildren: UMDElement[] = Array.from(slot.querySelectorAll('a')).map(
+    (link) => {
+      wrapLinkForAnimation({ element: link });
 
-    const slotColumnChild = [createLinkColumnFontsLink(link)];
+      const slotColumnChild = [createLinkColumnFontsLink(link)];
 
-    return createLinkColumn(props, slotColumnChild);
-  });
+      return createLinkColumn(props, slotColumnChild);
+    },
+  );
 
-  const wrapperChildren: ElementVisual[] = [];
+  const wrapperChildren: UMDElement[] = [];
 
   if (slotHasHeadline) {
     const headlineAttr = slot.getAttribute('data-headline') ?? '';
@@ -258,28 +254,27 @@ const createSlotColumn = ({
 };
 
 const createLinkColumnHeadline = (element: HTMLElement) => {
-  return ElementBuilder.create.element({
-    element: element,
-    className: 'link-column-headline',
-    elementStyles: {
+  return new ElementBuilder(element)
+    .withClassName('link-column-headline')
+    .withStyles({
       element: {
         ...typography.elements.interativeMedium,
         marginBottom: token.spacing.sm,
         fontWeight: 700,
         gridColumn: '1 / span 2',
       },
-    },
-  });
+    })
+    .build();
 };
 
 export interface slotColumnsProps extends BaseProps {
   slotColumns?: HTMLSlotElement[];
 }
 
-export default (props: slotColumnsProps): ElementVisual => {
+export default (props: slotColumnsProps): UMDElement => {
   const { slotColumns } = props;
 
-  let children: ElementVisual[];
+  let children: UMDElement[];
 
   if (slotColumns) {
     const hasHeadlines = slotColumns.some((slot) =>
@@ -318,10 +313,10 @@ export default (props: slotColumnsProps): ElementVisual => {
     ];
   }
 
-  return ElementBuilder.create.div({
-    className: 'umd-footer-row-links-columns',
-    children,
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('umd-footer-row-links-columns')
+    .withChildren(...children)
+    .withStyles({
       element: {
         [`@container (min-width: ${LARGE}px)`]: {
           [`&`]: {
@@ -334,6 +329,6 @@ export default (props: slotColumnsProps): ElementVisual => {
           paddingTop: token.spacing.md,
         },
       },
-    },
-  });
+    })
+    .build();
 };

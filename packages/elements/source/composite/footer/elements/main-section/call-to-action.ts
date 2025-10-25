@@ -1,8 +1,9 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { actions } from '@universityofmaryland/web-builder-library/presets';
 import { BREAKPOINTS } from '../../globals';
 import { BaseProps } from '../../_types';
-import { type ElementVisual } from '../../../../_types';
+import { type UMDElement } from '../../../../_types';
 
 export interface CallToActionProps extends BaseProps {
   slotCta?: HTMLAnchorElement;
@@ -22,30 +23,29 @@ const makeGivingLink = (): HTMLAnchorElement => {
 const createLinkElement = (
   props: CallToActionProps,
   link: HTMLAnchorElement,
-): ElementVisual => {
+): UMDElement => {
   const { isThemeLight } = props;
 
-  return ElementBuilder.styled.actions.primary({
-    element: link,
-    elementStyles: {
+  return actions
+    .primary()
+    .withChild(link)
+    .withStylesIf(!!isThemeLight, {
       element: {
-        ...(isThemeLight && {
-          color: `${token.color.white} !important`,
-        }),
+        color: `${token.color.white} !important`,
       },
-    },
-  });
+    })
+    .build();
 };
 
-export default (props: CallToActionProps): ElementVisual => {
+export default (props: CallToActionProps): UMDElement => {
   const { isTypeSimple, slotCta } = props;
   const baseLink = slotCta ?? makeGivingLink();
   const styledLink = createLinkElement(props, baseLink);
 
-  return ElementBuilder.create.div({
-    className: 'umd-footer-call-to-action-container',
-    children: [styledLink],
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('umd-footer-call-to-action-container')
+    .withChild(styledLink)
+    .withStyles({
       element: {
         marginLeft: 'auto',
 
@@ -59,6 +59,6 @@ export default (props: CallToActionProps): ElementVisual => {
           },
         },
       },
-    },
-  });
+    })
+    .build();
 };

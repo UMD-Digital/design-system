@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { external_link as iconExternalLink } from '@universityofmaryland/web-icons-library/controls';
 import { document as iconDocument } from '@universityofmaryland/web-icons-library/files';
 import { arrow_long as iconArrowLong } from '@universityofmaryland/web-icons-library/arrows';
@@ -34,9 +34,9 @@ export default ({ ctaIcon, isThemeLight }: ActionIconProps) => {
     }
   }
 
-  const container = ElementBuilder.create.div({
-    className: 'actions-cta-icon',
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('actions-cta-icon')
+    .withStyles({
       element: {
         position: 'absolute',
         bottom: token.spacing.sm,
@@ -91,10 +91,7 @@ export default ({ ctaIcon, isThemeLight }: ActionIconProps) => {
           }),
         },
       },
-    },
-  });
-
-  container.element.appendChild(ctaIcon);
-
-  return container;
+    })
+    .withChild(ctaIcon)
+    .build();
 };

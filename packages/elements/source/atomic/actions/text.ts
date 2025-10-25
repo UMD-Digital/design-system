@@ -1,6 +1,9 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as layoutStyles from '@universityofmaryland/web-styles-library/layout';
+import * as typography from '@universityofmaryland/web-styles-library/typography';
+import type { JssObject } from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { parseSvgString } from '@universityofmaryland/web-utilities-library/media';
 import { extractIconElement } from '@universityofmaryland/web-utilities-library/dom';
 import { external_link as iconExternalLink } from '@universityofmaryland/web-icons-library/controls';
@@ -26,34 +29,24 @@ interface OptionProps extends ElementProps {
 type ElementType = 'primary' | 'secondary' | 'outline';
 type IconType = 'email' | 'newWindow' | 'document' | 'fearless';
 
-type ActionFunction = (props: ElementProps) => {
-  element: HTMLElement;
-  styles: string;
-};
-
 type ActionVariants = {
-  default: ActionFunction;
-  large?: ActionFunction;
-  dark?: ActionFunction;
-  gold?: ActionFunction;
+  default: JssObject;
+  large?: JssObject;
+  dark?: JssObject;
+  gold?: JssObject;
 };
 
 type Actions = Record<ElementType, ActionVariants>;
 
-const ICONS: Record<IconType, string> = {
-  email: iconEmail,
-  newWindow: iconExternalLink,
-  document: iconDocument,
-  fearless: iconFearless,
-};
-
-function insertIcon(element: HTMLElement, svg: string): void {
-  const icon = parseSvgString(svg);
-  if (icon) element.insertBefore(icon, element.firstChild);
-}
-
-function createLinkIcon(element: HTMLElement, type: ElementType): void {
+const createLinkIcon = (element: HTMLElement, type: ElementType): void => {
   const existingIcon = extractIconElement({ element });
+  const ICONS: Record<IconType, string> = {
+    email: iconEmail,
+    newWindow: iconExternalLink,
+    document: iconDocument,
+    fearless: iconFearless,
+  };
+
   if (existingIcon) {
     element.insertBefore(existingIcon, element.firstChild);
     return;
@@ -63,6 +56,10 @@ function createLinkIcon(element: HTMLElement, type: ElementType): void {
   const isExternalTab = element.getAttribute('target') === '_blank';
   const isDownload = element.getAttribute('download') !== null;
   const isMail = href?.includes('mailto:');
+  const insertIcon = (element: HTMLElement, svg: string): void => {
+    const icon = parseSvgString(svg);
+    if (icon) element.insertBefore(icon, element.firstChild);
+  };
 
   if (isMail) {
     insertIcon(element, ICONS.email);
@@ -73,37 +70,61 @@ function createLinkIcon(element: HTMLElement, type: ElementType): void {
   } else if (type === 'secondary') {
     insertIcon(element, ICONS.fearless);
   }
-}
+};
 
-function createElementWithStyle(
-  actionFn: (props: ElementProps) => { element: HTMLElement; styles: string },
-  props: ElementProps,
-) {
-  const result = actionFn({
-    element: props.element,
-    elementStyles: props.elementStyles,
-  });
-  return { element: result.element, styles: result.styles };
-}
+const createPlainText = ({
+  isThemeDark,
+  isTypeSecondary,
+  plainText,
+}: Pick<OptionProps, 'isThemeDark' | 'isTypeSecondary' | 'plainText'>) => {
+  if (!plainText) return null;
 
-function createElement(type: ElementType, props: ElementProps) {
+  const textColor = isThemeDark
+    ? elementStyles.text.link.white
+    : elementStyles.text.link.red;
+
+  return new ElementBuilder(plainText)
+    .styled(typography.sans.fonts.min)
+    .withStyles({
+      element: {
+        ...textColor,
+
+        ...(isTypeSecondary && {
+          marginLeft: `${token.spacing.lg}`,
+          alignSelf: 'baseline',
+        }),
+      },
+    })
+    .build();
+};
+
+const createElement = (type: ElementType, props: ElementProps) => {
+  const createElementWithStyle = (
+    styleObject: JssObject,
+    props: ElementProps,
+  ) => {
+    return new ElementBuilder(props.element)
+      .styled(styleObject)
+      .withStylesIf(!!props.elementStyles, props.elementStyles || {})
+      .build();
+  };
   createLinkIcon(props.element, type);
 
   const actions: Actions = {
     primary: {
-      default: ElementBuilder.styled.actions.primary,
-      large: ElementBuilder.styled.actions.primaryLarge,
+      default: elementStyles.action.primary.normal,
+      large: elementStyles.action.primary.large,
     },
     secondary: {
-      default: ElementBuilder.styled.actions.secondary,
-      large: ElementBuilder.styled.actions.secondaryLarge,
-      dark: ElementBuilder.styled.actions.secondaryWhite,
-      gold: ElementBuilder.styled.actions.secondaryGold,
+      default: elementStyles.action.secondary.normal,
+      large: elementStyles.action.secondary.large,
+      dark: elementStyles.action.secondary.white,
+      gold: elementStyles.action.secondary.gold,
     },
     outline: {
-      default: ElementBuilder.styled.actions.outline,
-      large: ElementBuilder.styled.actions.outlineLarge,
-      dark: ElementBuilder.styled.actions.outlineWhite,
+      default: elementStyles.action.outline.normal,
+      large: elementStyles.action.outline.large,
+      dark: elementStyles.action.outline.white,
     },
   };
 
@@ -119,48 +140,6 @@ function createElement(type: ElementType, props: ElementProps) {
     return createElementWithStyle(typeActions.large, props);
   }
   return createElementWithStyle(typeActions.default, props);
-}
-
-const createPlainTextContainer = (props: OptionProps) => {
-  const { isTypeSecondary } = props;
-
-  return ElementBuilder.styled.layout.gridStacked({
-    element: document.createElement('div'),
-    elementStyles: isTypeSecondary ? {} : { element: { alignItems: 'center' } },
-  });
-};
-
-const createPlainText = (props: OptionProps) => {
-  const { isThemeDark, isTypeSecondary, plainText } = props;
-  const plainTextStyles = {
-    element: {
-      ...(isThemeDark
-        ? elementStyles.text.link.white
-        : elementStyles.text.link.red),
-      marginTop: `${token.spacing.min}`,
-    },
-  };
-
-  const plainTextSecondaryStyles = {
-    element: {
-      ...(isThemeDark
-        ? elementStyles.text.link.white
-        : elementStyles.text.link.red),
-      marginTop: `${token.spacing.min}`,
-      marginLeft: `${token.spacing.lg}`,
-      alignSelf: 'baseline',
-    },
-  };
-
-  if (plainText) {
-    return ElementBuilder.styled.headline.sansMin({
-      element: plainText,
-      isThemeDark,
-      elementStyles: isTypeSecondary
-        ? plainTextSecondaryStyles
-        : plainTextStyles,
-    });
-  }
 };
 
 export const primary = (props: ElementProps) => createElement('primary', props);
@@ -170,41 +149,39 @@ export const outline = (props: ElementProps) => createElement('outline', props);
 
 export const options = (props: OptionProps) => {
   const { plainText, isTypePrimary, isTypeSecondary, isTypeOutline } = props;
-  const container = document.createElement('div');
-  let styles = '';
+
+  let actionModel;
 
   if (isTypePrimary) {
-    const result = primary(props);
-    container.appendChild(result.element);
-    styles = result.styles;
-  }
-
-  if (isTypeSecondary) {
-    const result = secondary(props);
-    container.appendChild(result.element);
-    styles = result.styles;
-  }
-
-  if (isTypeOutline) {
-    const result = outline(props);
-    container.appendChild(result.element);
-    styles = result.styles;
+    actionModel = primary(props);
+  } else if (isTypeSecondary) {
+    actionModel = secondary(props);
+  } else if (isTypeOutline) {
+    actionModel = outline(props);
   }
 
   if (plainText) {
-    const plainTextContainer = createPlainTextContainer(props);
     const plainTextElement = createPlainText(props);
-    if (!plainTextElement) return { element: container, styles };
 
-    plainTextContainer.element.innerHTML = container.innerHTML;
-    plainTextContainer.element.appendChild(plainTextElement.element);
-    container.innerHTML = '';
+    if (plainTextElement) {
+      return new ElementBuilder()
+        .styled(layoutStyles.grid.stacked)
+        .withStyles({
+          element: {
+            display: 'grid',
+            gap: token.spacing.sm,
+            ...(!isTypeSecondary && { alignItems: 'center' }),
 
-    container.appendChild(plainTextContainer.element);
-
-    styles += plainTextContainer.styles;
-    styles += plainTextElement.styles;
+            ['& > *']: {
+              marginBottom: '0 !important',
+            },
+          },
+        })
+        .withChild(actionModel)
+        .withChild(plainTextElement)
+        .build();
+    }
   }
 
-  return { element: container, styles };
+  return new ElementBuilder().withChild(actionModel).build();
 };

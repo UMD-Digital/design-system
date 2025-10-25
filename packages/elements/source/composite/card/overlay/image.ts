@@ -1,9 +1,10 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
 import { truncateTextBasedOnSize } from '@universityofmaryland/web-utilities-library/string';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
 import { quote as iconQuote } from '@universityofmaryland/web-icons-library/brand';
-import { ElementVisual } from '../../../_types';
+import { type UMDElement } from '../../../_types';
 import { actions, assets, textLockup } from 'atomic';
 import { CardOverlayProps } from '../_types';
 
@@ -11,8 +12,8 @@ export const classRef = 'card-overlay-image';
 
 export const createCardOverlayImage = (props: CardOverlayProps) => {
   const { isQuote, ctaIcon, dateSign, backgroundImage, text } = props;
-  const children: ElementVisual[] = [];
-  const wrapperChildren: ElementVisual[] = [];
+  const children: UMDElement[] = [];
+  const wrapperChildren: UMDElement[] = [];
   const load = () => {
     const sizeElements = () => {
       const textCopy = text?.innerHTML;
@@ -85,25 +86,25 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
 
   if (dateSign) {
     wrapperChildren.push(
-      ElementBuilder.styled.layout.backgroundBoxWhite({
-        element: document.createElement('div'),
-        elementStyles: {
+      new ElementBuilder()
+        .styled(Styles.layout.background.box.white)
+        .withStyles({
           element: {
             alignSelf: `flex-start`,
           },
           siblingAfter: {
             marginTop: `${token.spacing.min}`,
           },
-        },
-        children: [dateSign],
-      }),
+        })
+        .withChild(dateSign.element)
+        .build(),
     );
   }
 
   if (isQuote) {
-    const quoteWrapper = ElementBuilder.create.div({
-      className: 'card-overlay-image-quote-wrapper',
-      elementStyles: {
+    const quoteWrapper = new ElementBuilder()
+      .withClassName('card-overlay-image-quote-wrapper')
+      .withStyles({
         element: {
           width: '41px',
           height: '30px',
@@ -113,10 +114,10 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
             fill: `${token.color.red}`,
           },
         },
-      },
-    });
+      })
+      .withHTML(iconQuote)
+      .build();
 
-    quoteWrapper.element.innerHTML = iconQuote;
     wrapperChildren.push(quoteWrapper);
   }
 
@@ -127,63 +128,62 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
     }),
   );
 
-  const textWrapper = ElementBuilder.create.div({
-    className: 'card-overlay-image-text-wrapper',
-    elementStyles: {
+  const textContent = new ElementBuilder()
+    .withClassName('card-overlay-image-text-content')
+    .withStyles({
+      element: {
+        maxWidth: `${token.spacing.maxWidth.smallest}`,
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        zIndex: 9,
+        position: 'relative',
+      },
+    })
+    .withChildren(...wrapperChildren)
+    .build();
+
+  const textWrapper = new ElementBuilder()
+    .withClassName('card-overlay-image-text-wrapper')
+    .withStyles({
       element: {
         height: 'auto',
         paddingRight: `${ctaIcon ? token.spacing['2xl'] : 0}`,
       },
-    },
-    children: [
-      ElementBuilder.create.div({
-        children: wrapperChildren,
-        className: 'card-overlay-image-text-content',
-        elementStyles: {
-          element: {
-            maxWidth: `${token.spacing.maxWidth.smallest}`,
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            zIndex: 9,
-            position: 'relative',
-          },
-        },
-      }),
-    ],
-  });
+    })
+    .withChild(textContent)
+    .build();
 
-  const composite = ElementBuilder.create.div({
-    className: classRef,
-    children: [
-      ElementBuilder.create.div({
-        className: 'card-overlay-image-container',
-        children: [...children, textWrapper],
-        elementStyles: {
-          element: {
-            position: 'relative',
-            padding: `${token.spacing.lg} ${token.spacing.md}`,
-            paddingTop: `${token.spacing['4xl']}`,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'flex-end',
-            minHeight: '360px',
-            height: '100%',
-            overflow: 'hidden',
+  const container = new ElementBuilder()
+    .withClassName('card-overlay-image-container')
+    .withStyles({
+      element: {
+        position: 'relative',
+        padding: `${token.spacing.lg} ${token.spacing.md}`,
+        paddingTop: `${token.spacing['4xl']}`,
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'flex-end',
+        minHeight: '360px',
+        height: '100%',
+        overflow: 'hidden',
 
-            ...createMediaQuery(
-              'min-width',
-              token.media.breakpointValues.medium.min,
-              {
-                paddingTop: `${token.spacing['8xl']}`,
-                minHeight: `424px`,
-              },
-            ),
+        ...createMediaQuery(
+          'min-width',
+          token.media.breakpointValues.medium.min,
+          {
+            paddingTop: `${token.spacing['8xl']}`,
+            minHeight: `424px`,
           },
-        },
-      }),
-    ],
-    elementStyles: {
+        ),
+      },
+    })
+    .withChildren(...children, textWrapper)
+    .build();
+
+  const composite = new ElementBuilder()
+    .withClassName(classRef)
+    .withStyles({
       element: {
         height: '100%',
         containerType: 'inline-size',
@@ -198,8 +198,9 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
           transition: 'transform 0.5s ease-in-out',
         },
       },
-    },
-  });
+    })
+    .withChild(container.element)
+    .build();
 
   return {
     ...composite,

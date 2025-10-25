@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
 import { type UMDElement } from '../../_types';
 import { textLockup, assets } from 'atomic';
@@ -10,9 +10,9 @@ const mediumBreakpointStart = token.media.breakpointValues.medium.min;
 const mediumBreakpoint = token.media.breakpointValues.large.min;
 
 const makeDateColumn = (dateSign: UMDElement) =>
-  ElementBuilder.create.div({
-    className: 'card-list-date-sign-wrapper',
-    elementStyles: {
+  new ElementBuilder()
+    .withClassName('card-list-date-sign-wrapper')
+    .withStyles({
       element: {
         width: `${token.spacing.xl}`,
         order: 1,
@@ -25,14 +25,16 @@ const makeDateColumn = (dateSign: UMDElement) =>
           width: `${token.spacing['8xl']}`,
         }),
       },
-    },
-    children: [dateSign],
-  });
+    })
+    .withChild(dateSign.element)
+    .build();
 
-const makeTextColumn = (props: CardListProps) =>
-  ElementBuilder.create.div({
-    className: 'card-list-text-wrapper',
-    elementStyles: {
+const makeTextColumn = (props: CardListProps) => {
+  const lockup = textLockup.small(props);
+
+  return new ElementBuilder()
+    .withClassName('card-list-text-wrapper')
+    .withStyles({
       element: {
         flex: '1 0',
 
@@ -45,9 +47,10 @@ const makeTextColumn = (props: CardListProps) =>
           width: '208px',
         }),
       },
-    },
-    children: [textLockup.small(props)],
-  });
+    })
+    .withChild(lockup.element)
+    .build();
+};
 
 const makeImageColumn = ({
   image,
@@ -55,10 +58,16 @@ const makeImageColumn = ({
 }: {
   image: NonNullable<CardListProps['image']>;
   isAligned?: CardListProps['isAligned'];
-}) =>
-  ElementBuilder.create.div({
-    className: 'card-list-image-wrapper',
-    elementStyles: {
+}) => {
+  const backgroundImage = assets.image.background({
+    element: image,
+    isScaled: isAligned,
+    isGifAllowed: false,
+  });
+
+  return new ElementBuilder()
+    .withClassName('card-list-image-wrapper')
+    .withStyles({
       element: {
         ...createMediaQuery('max-width', smallBreakpoint, {
           marginLeft: token.spacing.min,
@@ -93,15 +102,10 @@ const makeImageColumn = ({
           }),
         },
       },
-    },
-    children: [
-      assets.image.background({
-        element: image,
-        isScaled: isAligned,
-        isGifAllowed: false,
-      }),
-    ],
-  });
+    })
+    .withChild(backgroundImage.element)
+    .build();
+};
 
 export default (props: CardListProps) => {
   const { image, isAligned, isThemeDark, dateSign } = props;
@@ -117,9 +121,9 @@ export default (props: CardListProps) => {
 
   children.push(makeTextColumn(props));
 
-  const wrapper = ElementBuilder.create.div({
-    className: 'card-list-wrapper',
-    elementStyles: {
+  const wrapper = new ElementBuilder()
+    .withClassName('card-list-wrapper')
+    .withStyles({
       element: {
         containerType: 'inline-size',
 
@@ -128,13 +132,13 @@ export default (props: CardListProps) => {
           justifyContent: 'space-between',
         }),
       },
-    },
-    children,
-  });
+    })
+    .withChildren(...children)
+    .build();
 
-  return ElementBuilder.create.div({
-    className: 'card-list-container',
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('card-list-container')
+    .withStyles({
       element: {
         height: '100%',
         overflow: 'hidden',
@@ -144,7 +148,7 @@ export default (props: CardListProps) => {
           color: token.color.white,
         }),
       },
-    },
-    children: [wrapper],
-  });
+    })
+    .withChild(wrapper.element)
+    .build();
 };

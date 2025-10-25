@@ -1,4 +1,4 @@
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 
 interface CardVideoShortProps {
   video: HTMLVideoElement;
@@ -6,27 +6,6 @@ interface CardVideoShortProps {
 
 export default (props: CardVideoShortProps) => {
   const { video } = props;
-  const composite = ElementBuilder.create.element({
-    element: document.createElement('div'),
-    className: 'card-video-short-container',
-    elementStyles: {
-      element: {
-        height: '100%',
-        width: '100%',
-        aspectRatio: '9/16',
-
-        [`& video`]: {
-          height: '100%',
-          width: '100%',
-          objectFit: 'cover',
-
-          ['&:hover']: {
-            cursor: 'pointer',
-          },
-        },
-      },
-    },
-  });
 
   const setPlay = () => {
     if (video.paused) {
@@ -54,7 +33,27 @@ export default (props: CardVideoShortProps) => {
   video.addEventListener('mouseleave', setPause);
   video.addEventListener('blur', setPause);
 
-  composite.element.appendChild(video);
+  const composite = new ElementBuilder()
+    .withClassName('card-video-short-container')
+    .withStyles({
+      element: {
+        height: '100%',
+        width: '100%',
+        aspectRatio: '9/16',
+
+        [`& video`]: {
+          height: '100%',
+          width: '100%',
+          objectFit: 'cover',
+
+          ['&:hover']: {
+            cursor: 'pointer',
+          },
+        },
+      },
+    })
+    .withChild(video)
+    .build();
 
   return composite;
 };

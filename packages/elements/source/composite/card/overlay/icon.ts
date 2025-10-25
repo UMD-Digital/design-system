@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
-import { ElementVisual } from '../../../_types';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { type UMDElement } from '../../../_types';
 import { textLockup } from 'atomic';
 
 interface CardIconProps {
@@ -11,12 +11,12 @@ interface CardIconProps {
 }
 
 export default (props: CardIconProps) => {
-  const children: ElementVisual[] = [];
+  const children: UMDElement[] = [];
 
   if (props.image) {
-    const imageContainer = ElementBuilder.create.div({
-      className: 'card-overlay-icon-image',
-      elementStyles: {
+    const imageContainer = new ElementBuilder()
+      .withClassName('card-overlay-icon-image')
+      .withStyles({
         element: {
           display: 'flex',
           justifyContent: 'flex-end',
@@ -26,9 +26,10 @@ export default (props: CardIconProps) => {
             maxHeight: '120px',
           },
         },
-      },
-    });
-    imageContainer.element.appendChild(props.image);
+      })
+      .withChild(props.image)
+      .build();
+
     children.push(imageContainer);
   }
 
@@ -41,10 +42,9 @@ export default (props: CardIconProps) => {
     }),
   );
 
-  return ElementBuilder.create.div({
-    className: 'card-overlay-icon',
-    children,
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('card-overlay-icon')
+    .withStyles({
       element: {
         containerType: 'inline-size',
         height: '100%',
@@ -58,6 +58,7 @@ export default (props: CardIconProps) => {
           backgroundColor: token.color.gray.darker,
         }),
       },
-    },
-  });
+    })
+    .withChildren(...children)
+    .build();
 };

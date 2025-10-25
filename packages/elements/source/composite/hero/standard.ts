@@ -1,7 +1,8 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
-import { type ElementVisual } from '../../_types';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { type ElementModel } from '../../_types';
 import { assets, textLockup } from 'atomic';
 import { type HeroStandardProps } from './_types';
 
@@ -69,8 +70,8 @@ const createImageAsset = (image: HTMLImageElement) => {
 const buildAssetChildren = ({
   image,
   video,
-}: Pick<HeroStandardProps, 'image' | 'video'>): ElementVisual[] => {
-  const children: ElementVisual[] = [];
+}: Pick<HeroStandardProps, 'image' | 'video'>): ElementModel<HTMLElement>[] => {
+  const children: ElementModel<HTMLElement>[] = [];
 
   if (video) {
     children.push(createVideoAsset(video));
@@ -136,16 +137,16 @@ const createAsset = ({
   const children = buildAssetChildren({ image, video });
   const elementStyles = buildAssetStyles(includesAnimation);
 
-  return ElementBuilder.create.div({
-    className: 'umd-hero-default__asset',
-    children,
-    elementStyles,
-  });
+  return new ElementBuilder()
+    .withClassName('umd-hero-default__asset')
+    .withChildren(...children)
+    .withStyles(elementStyles)
+    .build();
 };
 
 const createHeadline = (
   props: Pick<HeroStandardProps, 'headline' | 'isHeightSmall' | 'isThemeDark'>,
-) => {
+): ElementModel<HTMLElement> | null => {
   const { headline, isHeightSmall, isThemeDark } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
   const isOverwriteHeadline = characterCount > 10 && isHeightSmall;
@@ -164,9 +165,9 @@ const createHeadline = (
     ...(isOverwriteHeadline && { fontSize: '80px' }),
   };
 
-  const headlineElement = ElementBuilder.styled.headline.campaignExtraLarge({
-    element: headline,
-    elementStyles: {
+  return new ElementBuilder(headline)
+    .styled(Styles.typography.campaign.fonts.extraLarge)
+    .withStyles({
       element: {
         textTransform: 'uppercase',
         [`@media (${token.media.queries.tablet.min})`]: tabletStyles,
@@ -178,11 +179,9 @@ const createHeadline = (
       siblingAfter: {
         marginTop: token.spacing.sm,
       },
-    },
-    isThemeDark,
-  });
-
-  return headlineElement;
+    })
+    .withThemeDark(isThemeDark || false)
+    .build();
 };
 
 const createText = (props: HeroStandardProps) => {
@@ -201,10 +200,10 @@ const createText = (props: HeroStandardProps) => {
     isThemeDark: true,
   });
 
-  const textContainer = ElementBuilder.create.div({
-    className: 'umd-hero-default__text',
-    children: [text],
-    elementStyles: {
+  const textContainer = new ElementBuilder()
+    .withClassName('umd-hero-default__text')
+    .withChild(text)
+    .withStyles({
       element: {
         display: 'flex',
         alignItems: 'flex-end',
@@ -239,13 +238,13 @@ const createText = (props: HeroStandardProps) => {
           maxWidth: '808px',
         },
       },
-    },
-  });
+    })
+    .build();
 
-  return ElementBuilder.styled.layout.spaceHorizontalLarger({
-    element: document.createElement('div'),
-    children: [textContainer],
-    elementStyles: {
+  return new ElementBuilder()
+    .styled(Styles.layout.space.horizontal.larger)
+    .withChild(textContainer)
+    .withStyles({
       element: {
         height: '100%',
         width: '100%',
@@ -261,8 +260,8 @@ const createText = (props: HeroStandardProps) => {
           },
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 export default (props: HeroStandardProps) => {
@@ -270,10 +269,10 @@ export default (props: HeroStandardProps) => {
   const asset = createAsset(props);
   const text = createText(props);
 
-  const composite = ElementBuilder.create.div({
-    className: 'umd-hero-default',
-    children: [asset, text],
-    elementStyles: {
+  const composite = new ElementBuilder()
+    .withClassName('umd-hero-default')
+    .withChildren(asset, text)
+    .withStyles({
       element: {
         position: 'relative',
         overflow: 'hidden',
@@ -305,8 +304,8 @@ export default (props: HeroStandardProps) => {
           },
         },
       },
-    },
-  });
+    })
+    .build();
 
   composite.styles += keyFrameHeroScaleDown;
   composite.styles += keyFrameHeroSlideUp;

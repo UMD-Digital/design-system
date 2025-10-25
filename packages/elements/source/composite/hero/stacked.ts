@@ -1,8 +1,9 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
-import { type ElementVisual } from '../../_types';
+import { type ElementModel } from '../../_types';
 import { assets, textLockup } from 'atomic';
 import { type HeroStackedProps } from './_types';
 
@@ -57,9 +58,9 @@ const createImageAsset = (image: HTMLImageElement) => {
 };
 
 const createOverlay = (includesAnimation?: boolean) => {
-  return ElementBuilder.create.div({
-    className: 'umd-hero-stacked__overlay',
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('umd-hero-stacked__overlay')
+    .withStyles({
       element: {
         position: 'absolute',
         top: '50%',
@@ -85,8 +86,8 @@ const createOverlay = (includesAnimation?: boolean) => {
           },
         }),
       },
-    },
-  });
+    })
+    .build();
 };
 
 const createAsset = ({
@@ -99,7 +100,7 @@ const createAsset = ({
   HeroStackedProps,
   'image' | 'video' | 'includesAnimation' | 'isWidthLarge' | 'isHeightSmall'
 >) => {
-  let mediaElement: ElementVisual | null = null;
+  let mediaElement: ElementModel<HTMLElement> | null = null;
 
   if (video && video instanceof HTMLVideoElement) {
     mediaElement = createVideoAsset(video);
@@ -111,35 +112,39 @@ const createAsset = ({
     return null;
   }
 
-  const assetInteriorElement = ElementBuilder.create.div({
-    className: 'umd-hero-stacked__asset--interior',
-    children: [mediaElement, createOverlay(includesAnimation)],
-    elementStyles: {
+  const assetInteriorElement = new ElementBuilder()
+    .withClassName('umd-hero-stacked__asset--interior')
+    .withChildren(mediaElement, createOverlay(includesAnimation))
+    .withStyles({
       element: {
         overflow: 'clip',
         position: 'relative',
         height: '100%',
       },
-    },
-  });
+    })
+    .build();
 
-  const horizontalLock = ElementBuilder.styled.layout.spaceHorizontalLarger({
-    element: document.createElement('div'),
-    children: [assetInteriorElement],
-    elementStyles: {
+  const horizontalLock = new ElementBuilder()
+    .styled(Styles.layout.space.horizontal.larger)
+    .withChild(assetInteriorElement)
+    .withStyles({
       element: {
         height: '100%',
         width: '100%',
       },
-    },
-  });
+    })
+    .build();
 
-  const assetContainer = ElementBuilder.create.div({
-    className: 'umd-hero-stacked__asset',
-    children: isWidthLarge
-      ? [horizontalLock]
-      : [mediaElement, createOverlay(includesAnimation)],
-    elementStyles: {
+  const builder = new ElementBuilder().withClassName('umd-hero-stacked__asset');
+
+  if (isWidthLarge) {
+    builder.withChild(horizontalLock);
+  } else {
+    builder.withChildren(mediaElement, createOverlay(includesAnimation));
+  }
+
+  return builder
+    .withStyles({
       element: {
         position: 'relative',
         overflow: 'clip',
@@ -160,10 +165,8 @@ const createAsset = ({
           },
         },
       },
-    },
-  });
-
-  return assetContainer;
+    })
+    .build();
 };
 
 const createHeadline = (
@@ -171,7 +174,7 @@ const createHeadline = (
     HeroStackedProps,
     'headline' | 'isHeightSmall' | 'includesAnimation' | 'isThemeDark'
   >,
-) => {
+): ElementModel<HTMLElement> | null => {
   const { headline, isHeightSmall, includesAnimation, isThemeDark } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
   const isOverwriteHeadline = characterCount < 30;
@@ -226,10 +229,10 @@ const createHeadline = (
     },
   };
 
-  return ElementBuilder.styled.headline.campaignLarge({
-    element: headline,
-    elementStyles,
-  });
+  return new ElementBuilder(headline)
+    .styled(Styles.typography.campaign.fonts.large)
+    .withStyles(elementStyles)
+    .build();
 };
 
 const createText = (
@@ -244,20 +247,20 @@ const createText = (
     textLargest: props.text,
   });
 
-  const lock = ElementBuilder.styled.layout.spaceHorizontalSmall({
-    element: document.createElement('div'),
-    children: [textLockupElement],
-    elementStyles: {
+  const lock = new ElementBuilder()
+    .styled(Styles.layout.space.horizontal.small)
+    .withChild(textLockupElement)
+    .withStyles({
       element: {
         position: 'relative',
       },
-    },
-  });
+    })
+    .build();
 
-  return ElementBuilder.create.div({
-    className: 'umd-hero-stacked__text',
-    children: [lock],
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('umd-hero-stacked__text')
+    .withChild(lock)
+    .withStyles({
       element: {
         padding: `${token.spacing.lg} 0`,
         display: 'flex',
@@ -309,8 +312,8 @@ const createText = (
           marginRight: 'auto',
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 export default (props: HeroStackedProps) => {
@@ -323,15 +326,15 @@ export default (props: HeroStackedProps) => {
     includesAnimation: shouldAnimateText,
   });
 
-  const children: ElementVisual[] = [text];
+  const children: ElementModel<HTMLElement>[] = [text];
   if (hasAsset) {
     children.push(asset);
   }
 
-  const composite = ElementBuilder.create.div({
-    className: 'umd-hero-stacked',
-    children,
-    elementStyles: {
+  const composite = new ElementBuilder()
+    .withClassName('umd-hero-stacked')
+    .withChildren(...children)
+    .withStyles({
       element: {
         containerType: 'inline-size',
 
@@ -339,8 +342,8 @@ export default (props: HeroStackedProps) => {
           backgroundColor: token.color.black,
         }),
       },
-    },
-  });
+    })
+    .build();
 
   composite.styles += keyFrameFadeOver;
   composite.styles += keyFrameFontColor;

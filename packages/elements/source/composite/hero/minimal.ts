@@ -1,6 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
-import { type ElementVisual } from '../../_types';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { type ElementModel } from '../../_types';
 import { assets, textLockup } from 'atomic';
 import { type HeroMinimalProps } from './_types';
 
@@ -15,7 +16,7 @@ const createImageAsset = (image: HTMLImageElement) => {
 
 const buildAssetChildren = ({
   image,
-}: Pick<HeroMinimalProps, 'image'>): ElementVisual[] => {
+}: Pick<HeroMinimalProps, 'image'>): ElementModel<HTMLElement>[] => {
   if (!image) return [];
   return [createImageAsset(image)];
 };
@@ -40,10 +41,10 @@ const createAsset = ({ image }: Pick<HeroMinimalProps, 'image'>) => {
     return null;
   }
 
-  return ElementBuilder.create.div({
-    className: 'umd-hero-minimal__asset',
-    children,
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('umd-hero-minimal__asset')
+    .withChildren(...children)
+    .withStyles({
       element: {
         [`@container (${token.media.queries.tablet.min})`]: {
           position: 'absolute',
@@ -62,8 +63,8 @@ const createAsset = ({ image }: Pick<HeroMinimalProps, 'image'>) => {
           },
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 const createHeadline = (
@@ -71,7 +72,7 @@ const createHeadline = (
     HeroMinimalProps,
     'headline' | 'isThemeDark' | 'isThemeLight' | 'isThemeMaryland'
   >,
-) => {
+): ElementModel<HTMLElement> | null => {
   const { headline, isThemeDark, isThemeMaryland } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
   const isOverwriteHeadline = characterCount > 40;
@@ -86,9 +87,9 @@ const createHeadline = (
     },
   };
 
-  return ElementBuilder.styled.headline.campaignLarge({
-    element: headline,
-    elementStyles: {
+  return new ElementBuilder(headline)
+    .styled(Styles.typography.campaign.fonts.large)
+    .withStyles({
       element: {
         fontWeight: 800,
         textTransform: 'uppercase',
@@ -97,9 +98,9 @@ const createHeadline = (
       siblingAfter: {
         marginTop: token.spacing.sm,
       },
-    },
-    isThemeDark: isThemeDark || isThemeMaryland,
-  });
+    })
+    .withThemeDark(isThemeDark || isThemeMaryland || false)
+    .build();
 };
 
 const buildTextWrapperStyles = (
@@ -144,44 +145,39 @@ const createText = (props: HeroMinimalProps, hasAsset: boolean) => {
     isThemeDark: isThemeDark || isThemeMaryland || false,
   });
 
-  const textWrapper = ElementBuilder.create.div({
-    className: 'umd-hero-minimal__text-wrapper',
-    children: [textLockupElement],
-    elementStyles: buildTextWrapperStyles(isThemeDark, isThemeMaryland),
-  });
+  const textWrapper = new ElementBuilder()
+    .withClassName('umd-hero-minimal__text-wrapper')
+    .withChild(textLockupElement)
+    .withStyles(buildTextWrapperStyles(isThemeDark, isThemeMaryland))
+    .build();
 
-  const textContainer = ElementBuilder.create.div({
-    className: 'umd-hero-minimal__text',
-    children: [textWrapper],
-    elementStyles: buildTextContainerStyles(hasAsset),
-  });
+  const textContainer = new ElementBuilder()
+    .withClassName('umd-hero-minimal__text')
+    .withChild(textWrapper)
+    .withStyles(buildTextContainerStyles(hasAsset))
+    .build();
 
-  return ElementBuilder.styled.layout.spaceHorizontalLarger({
-    element: document.createElement('div'),
-    children: [textContainer],
-    elementStyles: {
+  return new ElementBuilder()
+    .styled(Styles.layout.space.horizontal.larger)
+    .withChild(textContainer)
+    .withStyles({
       element: {
         height: '100%',
         width: '100%',
         position: 'relative',
       },
-    },
-  });
+    })
+    .build();
 };
 
 export default (props: HeroMinimalProps) => {
   const asset = createAsset(props);
   const text = createText(props, !!asset);
 
-  const children: ElementVisual[] = [text];
-  if (asset) {
-    children.push(asset);
-  }
-
-  return ElementBuilder.create.div({
-    className: 'umd-hero-minimal',
-    children,
-    elementStyles: {
+  const container = new ElementBuilder()
+    .withClassName('umd-hero-minimal')
+    .withChild(text)
+    .withStyles({
       element: {
         backgroundColor: getBackgroundColor(props),
         position: 'relative',
@@ -197,6 +193,11 @@ export default (props: HeroMinimalProps) => {
           alignItems: 'center',
         },
       },
-    },
-  });
+    });
+
+  if (asset) {
+    container.withChild(asset);
+  }
+
+  return container.build();
 };

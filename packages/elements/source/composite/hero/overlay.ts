@@ -1,7 +1,8 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
-import { type ElementVisual } from '../../_types';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { type ElementModel } from '../../_types';
 import { assets, textLockup } from 'atomic';
 import { type HeroOverlayProps } from './_types';
 
@@ -65,7 +66,7 @@ const createImageAsset = (image: HTMLImageElement) => {
 const buildAssetChildren = ({
   image,
   video,
-}: Pick<HeroOverlayProps, 'image' | 'video'>): ElementVisual[] => {
+}: Pick<HeroOverlayProps, 'image' | 'video'>): ElementModel<HTMLElement>[] => {
   if (video && video instanceof HTMLVideoElement) {
     return [createVideoAsset(video)];
   }
@@ -88,10 +89,10 @@ const createAsset = ({
     return null;
   }
 
-  return ElementBuilder.create.div({
-    className: 'umd-hero-overlay__asset',
-    children,
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('umd-hero-overlay__asset')
+    .withChildren(...children)
+    .withStyles({
       element: {
         [`@media (${token.media.queries.large.max})`]: {
           [`&:has(.${elementStyles.asset.gif.toggle.className})`]: {
@@ -120,11 +121,13 @@ const createAsset = ({
           minHeight: '300px',
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
-const createHeadline = (props: Pick<HeroOverlayProps, 'headline'>) => {
+const createHeadline = (
+  props: Pick<HeroOverlayProps, 'headline'>,
+): ElementModel<HTMLElement> | null => {
   const { headline } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
   const isOverwriteHeadline = characterCount > 30;
@@ -139,9 +142,9 @@ const createHeadline = (props: Pick<HeroOverlayProps, 'headline'>) => {
     },
   };
 
-  const headlineElement = ElementBuilder.styled.headline.campaignExtraLarge({
-    element: headline,
-    elementStyles: {
+  return new ElementBuilder(headline)
+    .styled(Styles.typography.campaign.fonts.extraLarge)
+    .withStyles({
       element: {
         textTransform: 'uppercase',
         textWrap: 'pretty',
@@ -150,11 +153,9 @@ const createHeadline = (props: Pick<HeroOverlayProps, 'headline'>) => {
       siblingAfter: {
         marginTop: token.spacing.md,
       },
-    },
-    isThemeDark: true,
-  });
-
-  return headlineElement;
+    })
+    .withThemeDark(true)
+    .build();
 };
 
 const createTextContent = (
@@ -168,10 +169,10 @@ const createTextContent = (
     isThemeDark: true,
   });
 
-  return ElementBuilder.create.div({
-    className: 'umd-hero-overlay__text-content',
-    children: [textLockupElement],
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('umd-hero-overlay__text-content')
+    .withChild(textLockupElement)
+    .withStyles({
       element: {
         [`@container (${token.media.queries.tablet.min})`]: {
           maxWidth: '55%',
@@ -183,8 +184,8 @@ const createTextContent = (
           },
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 const createText = (
@@ -196,22 +197,22 @@ const createText = (
   const { includesAnimation } = props;
   const textContent = createTextContent(props);
 
-  const lock = ElementBuilder.styled.layout.spaceHorizontalLarger({
-    element: document.createElement('div'),
-    children: [textContent],
-    elementStyles: {
+  const lock = new ElementBuilder()
+    .styled(Styles.layout.space.horizontal.larger)
+    .withChild(textContent)
+    .withStyles({
       element: {
         height: '100%',
         width: '100%',
         position: 'relative',
       },
-    },
-  });
+    })
+    .build();
 
-  return ElementBuilder.create.div({
-    className: 'umd-hero-overlay__text',
-    children: [lock],
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('umd-hero-overlay__text')
+    .withChild(lock)
+    .withStyles({
       element: {
         padding: `${token.spacing.lg} 0`,
         display: 'flex',
@@ -229,23 +230,18 @@ const createText = (
           }),
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 export default (props: HeroOverlayProps) => {
   const text = createText(props);
   const asset = createAsset(props);
 
-  const children: ElementVisual[] = [text];
-  if (asset) {
-    children.push(asset);
-  }
-
-  const container = ElementBuilder.create.div({
-    className: 'umd-hero-overlay__container',
-    children,
-    elementStyles: {
+  const container = new ElementBuilder()
+    .withClassName('umd-hero-overlay__container')
+    .withChild(text)
+    .withStyles({
       element: {
         position: 'relative',
         backgroundColor: token.color.black,
@@ -278,18 +274,23 @@ export default (props: HeroOverlayProps) => {
           minHeight: '764px',
         },
       },
-    },
-  });
+    });
 
-  const composite = ElementBuilder.create.div({
-    className: 'umd-hero-overlay',
-    children: [container],
-    elementStyles: {
+  if (asset) {
+    container.withChild(asset);
+  }
+
+  const containerBuilt = container.build();
+
+  const composite = new ElementBuilder()
+    .withClassName('umd-hero-overlay')
+    .withChild(containerBuilt)
+    .withStyles({
       element: {
         containerType: 'inline-size',
       },
-    },
-  });
+    })
+    .build();
 
   composite.styles += keyFrameHeroResize;
   composite.styles += keyFrameHeroSlideUp;

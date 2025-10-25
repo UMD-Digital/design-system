@@ -1,7 +1,8 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
-import { type ElementVisual } from '../../_types';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { type ElementModel } from '../../_types';
 import { assets, textLockup } from 'atomic';
 import { type HeroLogoProps } from './_types';
 
@@ -17,15 +18,15 @@ const getBackgroundColor = (props: HeroLogoProps) => {
 const createAsset = ({ image }: Pick<HeroLogoProps, 'image'>) => {
   if (!image) return null;
 
-  return ElementBuilder.create.div({
-    className: 'umd-hero-logo__asset',
-    children: [
+  return new ElementBuilder()
+    .withClassName('umd-hero-logo__asset')
+    .withChild(
       assets.image.background({
         element: image,
         isScaled: false,
       }),
-    ],
-    elementStyles: {
+    )
+    .withStyles({
       element: {
         textAlign: 'center',
         display: 'flex',
@@ -41,31 +42,29 @@ const createAsset = ({ image }: Pick<HeroLogoProps, 'image'>) => {
           marginRight: 'auto',
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 const createHeadline = (
   props: Pick<HeroLogoProps, 'headline' | 'isThemeDark' | 'isThemeMaryland'>,
-) => {
+): ElementModel<HTMLElement> | null => {
   const { headline, isThemeDark, isThemeMaryland } = props;
 
   if (!headline) return null;
 
-  const headlineElement = ElementBuilder.styled.headline.campaignLarge({
-    element: headline,
-    elementStyles: {
+  return new ElementBuilder(headline)
+    .styled(Styles.typography.campaign.fonts.large)
+    .withStyles({
       element: {
         textTransform: 'uppercase',
       },
       siblingAfter: {
         marginTop: token.spacing.sm,
       },
-    },
-    isThemeDark: isThemeDark || isThemeMaryland || false,
-  });
-
-  return headlineElement;
+    })
+    .withThemeDark(isThemeDark || isThemeMaryland || false)
+    .build();
 };
 
 const createText = (
@@ -81,55 +80,55 @@ const createText = (
     isThemeDark: isThemeDark || isThemeMaryland || false,
   });
 
-  const textContent = ElementBuilder.create.div({
-    className: 'umd-hero-logo__text-content',
-    children: [textLockupElement],
-    elementStyles: {
+  const textContent = new ElementBuilder()
+    .withClassName('umd-hero-logo__text-content')
+    .withChild(textLockupElement)
+    .withStyles({
       element: {
         [`& .${elementStyles.text.rich.simpleLargest.className}`]: {
           color: token.color.gray.dark,
         },
       },
-    },
-  });
+    })
+    .build();
 
-  return ElementBuilder.create.div({
-    className: 'umd-hero-logo__text',
-    children: [textContent],
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('umd-hero-logo__text')
+    .withChild(textContent)
+    .withStyles({
       element: {
         display: 'flex',
         justifyContent: 'center',
         textAlign: 'center',
       },
-    },
-  });
+    })
+    .build();
 };
 
 const makeLock = (props: HeroLogoProps) => {
   const asset = createAsset(props);
   const text = createText(props);
-  const children: ElementVisual[] = [];
+
+  const builder = new ElementBuilder().styled(
+    Styles.layout.space.horizontal.small,
+  );
 
   if (asset) {
-    children.push(asset);
+    builder.withChild(asset);
   }
 
-  children.push(text);
+  builder.withChild(text);
 
-  return ElementBuilder.styled.layout.spaceHorizontalSmall({
-    element: document.createElement('div'),
-    children,
-  });
+  return builder.build();
 };
 
 export default (props: HeroLogoProps) => {
   const { isThemeDark } = props;
 
-  const container = ElementBuilder.create.div({
-    className: 'umd-hero-logo__container',
-    children: [makeLock(props)],
-    elementStyles: {
+  const container = new ElementBuilder()
+    .withClassName('umd-hero-logo__container')
+    .withChild(makeLock(props))
+    .withStyles({
       element: {
         padding: `${token.spacing['5xl']} 0 ${token.spacing.lg}`,
         backgroundColor: getBackgroundColor(props),
@@ -141,16 +140,16 @@ export default (props: HeroLogoProps) => {
           }),
         },
       },
-    },
-  });
+    })
+    .build();
 
-  return ElementBuilder.create.div({
-    className: 'umd-hero-logo',
-    children: [container],
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('umd-hero-logo')
+    .withChild(container)
+    .withStyles({
       element: {
         containerType: 'inline-size',
       },
-    },
-  });
+    })
+    .build();
 };

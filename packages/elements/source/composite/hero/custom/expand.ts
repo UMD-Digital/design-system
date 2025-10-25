@@ -1,7 +1,8 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
-import { type ElementVisual, type ContentElement } from '../../../_types';
+import { type ElementModel, type ContentElement } from '../../../_types';
 import { assets } from 'atomic';
 import { type HeroExpandProps as BaseHeroExpandProps } from '../_types';
 
@@ -70,9 +71,9 @@ const keyFrameComponentSize = `
 `;
 
 const createImageOverlay = () =>
-  ElementBuilder.create.div({
-    className: 'hero-expand-image-overlay',
-    elementStyles: {
+  new ElementBuilder()
+    .withClassName('hero-expand-image-overlay')
+    .withStyles({
       element: {
         position: 'absolute',
         top: 0,
@@ -90,13 +91,16 @@ const createImageOverlay = () =>
           animationRangeEnd: ANIMATION_CONFIG.IMAGE_OVERLAY.RANGE.END,
         }),
       },
-    },
-  });
+    })
+    .build();
 
 const createAssetElement = ({
   image,
   video,
-}: Pick<HeroExpandProps, 'image' | 'video'>): ElementVisual | null => {
+}: Pick<
+  HeroExpandProps,
+  'image' | 'video'
+>): ElementModel<HTMLElement> | null => {
   if (video) {
     return assets.video.toggle({
       video,
@@ -129,12 +133,10 @@ const createAssetElement = ({
 const createImageSize = (props: Pick<HeroExpandProps, 'image' | 'video'>) => {
   const overlay = createImageOverlay();
   const asset = createAssetElement(props);
-  const children = asset ? [asset, overlay] : [overlay];
 
-  const container = ElementBuilder.create.div({
-    className: 'hero-expand-image-size',
-    children,
-    elementStyles: {
+  const container = new ElementBuilder()
+    .withClassName('hero-expand-image-size')
+    .withStyles({
       element: {
         overflow: 'hidden',
         position: 'relative',
@@ -153,19 +155,23 @@ const createImageSize = (props: Pick<HeroExpandProps, 'image' | 'video'>) => {
           },
         }),
       },
-    },
-  });
+    });
 
-  return container;
+  if (asset) {
+    container.withChild(asset);
+  }
+  container.withChild(overlay);
+
+  return container.build();
 };
 
 const createAssetContainer = (
   props: Pick<HeroExpandProps, 'image' | 'video'>,
 ) =>
-  ElementBuilder.create.div({
-    className: 'hero-expand-image-container',
-    children: [createImageSize(props)],
-    elementStyles: {
+  new ElementBuilder()
+    .withClassName('hero-expand-image-container')
+    .withChild(createImageSize(props))
+    .withStyles({
       element: {
         position: 'absolute',
         top: 0,
@@ -198,20 +204,20 @@ const createAssetContainer = (
           },
         }),
       },
-    },
-  });
+    })
+    .build();
 
 const createEyebrow = (eyebrow?: HTMLElement | null) => {
   if (!eyebrow) return null;
 
-  return ElementBuilder.styled.text.ribbon({
-    element: eyebrow,
-    elementStyles: {
+  return new ElementBuilder(eyebrow)
+    .styled(Styles.element.text.decoration.ribbon)
+    .withStyles({
       siblingAfter: {
         marginTop: token.spacing.md,
       },
-    },
-  });
+    })
+    .build();
 };
 
 const createHeadline = (headline?: HTMLElement | null) => {
@@ -220,9 +226,9 @@ const createHeadline = (headline?: HTMLElement | null) => {
 
   if (!headline) return null;
 
-  return ElementBuilder.styled.headline.campaignMaximum({
-    element: headline,
-    elementStyles: {
+  return new ElementBuilder(headline)
+    .styled(Styles.typography.campaign.fonts.maximum)
+    .withStyles({
       element: {
         color: token.color.white,
         fontWeight: 800,
@@ -235,15 +241,18 @@ const createHeadline = (headline?: HTMLElement | null) => {
           }),
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 const createTopTextChildren = ({
   eyebrow,
   headline,
-}: Pick<HeroExpandProps, 'eyebrow' | 'headline'>): ElementVisual[] => {
-  const children: ElementVisual[] = [];
+}: Pick<
+  HeroExpandProps,
+  'eyebrow' | 'headline'
+>): ElementModel<HTMLElement>[] => {
+  const children: ElementModel<HTMLElement>[] = [];
 
   const eyebrowElement = createEyebrow(eyebrow);
   if (eyebrowElement) {
@@ -261,27 +270,30 @@ const createTopTextChildren = ({
 const createBottomTextChildren = ({
   actions,
   additional,
-}: Pick<HeroExpandProps, 'actions' | 'additional'>): ElementVisual[] => {
-  const children: ElementVisual[] = [];
+}: Pick<
+  HeroExpandProps,
+  'actions' | 'additional'
+>): ElementModel<HTMLElement>[] => {
+  const children: ElementModel<HTMLElement>[] = [];
 
   if (actions) {
-    const actionsContainer = ElementBuilder.create.div({
-      className: 'hero-expand-text-actions',
-      elementStyles: {
+    const actionsContainer = new ElementBuilder()
+      .withClassName('hero-expand-text-actions')
+      .withChild(actions)
+      .withStyles({
         siblingAfter: {
           marginTop: token.spacing.lg,
         },
-      },
-    });
-    actionsContainer.element.appendChild(actions);
+      })
+      .build();
     children.push(actionsContainer);
   }
 
   if (additional) {
-    const additionalContainer = ElementBuilder.create.div({
-      className: 'hero-expand-text-additional',
-    });
-    additionalContainer.element.appendChild(additional);
+    const additionalContainer = new ElementBuilder()
+      .withClassName('hero-expand-text-additional')
+      .withChild(additional)
+      .build();
     children.push(additionalContainer);
   }
 
@@ -294,40 +306,9 @@ const createTextContainer = (
     'eyebrow' | 'headline' | 'actions' | 'additional'
   >,
 ) => {
-  const textChildren: ElementVisual[] = [];
-
-  const topTextChildren = createTopTextChildren(props);
-  if (topTextChildren.length > 0) {
-    const topText = ElementBuilder.styled.layout.spaceHorizontalNormal({
-      element: document.createElement('div'),
-      children: topTextChildren,
-      elementStyles: {
-        siblingAfter: {
-          marginTop: token.spacing.lg,
-        },
-      },
-    });
-    textChildren.push(topText);
-  }
-
-  const bottomTextChildren = createBottomTextChildren(props);
-  if (bottomTextChildren.length > 0) {
-    const bottomText = ElementBuilder.styled.layout.spaceHorizontalNormal({
-      element: document.createElement('div'),
-      children: bottomTextChildren,
-      elementStyles: {
-        element: {
-          width: '100%',
-        },
-      },
-    });
-    textChildren.push(bottomText);
-  }
-
-  return ElementBuilder.create.div({
-    className: 'hero-expand-text-container',
-    children: textChildren,
-    elementStyles: {
+  const container = new ElementBuilder()
+    .withClassName('hero-expand-text-container')
+    .withStyles({
       element: {
         position: 'relative',
         height: '100%',
@@ -346,19 +327,47 @@ const createTextContainer = (
           padding: `${token.spacing['6xl']} 0`,
         },
       },
-    },
-  });
+    });
+
+  const topTextChildren = createTopTextChildren(props);
+  if (topTextChildren.length > 0) {
+    const topText = new ElementBuilder()
+      .styled(Styles.layout.space.horizontal.normal)
+      .withChildren(...topTextChildren)
+      .withStyles({
+        siblingAfter: {
+          marginTop: token.spacing.lg,
+        },
+      })
+      .build();
+    container.withChild(topText);
+  }
+
+  const bottomTextChildren = createBottomTextChildren(props);
+  if (bottomTextChildren.length > 0) {
+    const bottomText = new ElementBuilder()
+      .styled(Styles.layout.space.horizontal.normal)
+      .withChildren(...bottomTextChildren)
+      .withStyles({
+        element: {
+          width: '100%',
+        },
+      })
+      .build();
+    container.withChild(bottomText);
+  }
+
+  return container.build();
 };
 
 const createSticky = (props: HeroExpandProps) => {
   const assetContainer = createAssetContainer(props);
   const textContainer = createTextContainer(props);
 
-  return ElementBuilder.create.element({
-    element: document.createElement('div'),
-    className: 'hero-expand-sticky',
-    children: [assetContainer, textContainer],
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('hero-expand-sticky')
+    .withChildren(assetContainer, textContainer)
+    .withStyles({
       element: {
         position: 'relative',
 
@@ -374,18 +383,17 @@ const createSticky = (props: HeroExpandProps) => {
           top: '0 !important',
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 export default (props: HeroExpandProps) => {
   const sticky = createSticky(props);
 
-  const composite = ElementBuilder.create.element({
-    element: document.createElement('div'),
-    className: 'umd-hero-expand',
-    children: [sticky],
-    elementStyles: {
+  const composite = new ElementBuilder()
+    .withClassName('umd-hero-expand')
+    .withChild(sticky)
+    .withStyles({
       element: {
         containerType: 'inline-size',
         ...withViewTimelineAnimation({
@@ -403,8 +411,8 @@ export default (props: HeroExpandProps) => {
           objectFit: 'cover',
         },
       },
-    },
-  });
+    })
+    .build();
 
   const setTopPosition = ({ value }: { value: string | null }) => {
     sticky.element.style.top = value || '0';

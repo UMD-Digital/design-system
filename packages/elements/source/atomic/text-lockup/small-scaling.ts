@@ -1,4 +1,5 @@
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import {
   createEyebrow,
   createRibbonEyebrow,
@@ -32,63 +33,65 @@ export default ({
   isThemeDark,
   text,
 }: TypeTextLockupSmallScaling) => {
-  const children: UMDElement[] = [];
-
-  if (eyebrow && !hasEyebrowRibbon) {
-    children.push(createEyebrow({ eyebrow, isThemeDark }));
-  }
-
-  if (eyebrow && hasEyebrowRibbon) {
-    children.push(createRibbonEyebrow({ eyebrow }));
-  }
-
-  if (headline) {
-    children.push(
-      ElementBuilder.styled.headline.sansScalingLarger({
-        element: headline,
-        elementStyles: headlineStyles,
-        isThemeDark,
-      }),
-    );
-  }
-
-  if (eventMeta) {
-    children.push(eventMeta);
-  }
-
-  if (text) {
-    children.push(
-      ElementBuilder.styled.richText.simpleScaling({
-        element: text,
-        elementStyles: textStyles,
-        isThemeDark,
-      }),
-    );
-  }
-
-  if (date) {
-    children.push(
-      ElementBuilder.styled.headline.sansScalingMin({
-        element: date,
-        elementStyles: dateStyles,
-        isThemeDark,
-      }),
-    );
-  }
-
-  if (actions) {
-    children.push(createActions({ actions }));
-  }
-
-  return ElementBuilder.create.div({
-    className: 'scaling-font-block-container',
-    children,
-    elementStyles: {
+  const container = new ElementBuilder()
+    .withClassName('scaling-font-block-container')
+    .withStyles({
       element: {
         zIndex: '9',
         position: 'relative',
         ...customStyles,
       },
-    },
-  });
+    })
+    .withThemeDark(isThemeDark);
+
+  if (eyebrow && !hasEyebrowRibbon) {
+    const eyebrowElement = createEyebrow({ eyebrow, isThemeDark });
+    container.withChild(eyebrowElement);
+  }
+
+  if (eyebrow && hasEyebrowRibbon) {
+    const ribbonEyebrowElement = createRibbonEyebrow({ eyebrow });
+    container.withChild(ribbonEyebrowElement);
+  }
+
+  if (headline) {
+    const headlineElement = new ElementBuilder(headline)
+      .styled(Styles.typography.sans.scalingFonts.larger)
+      .withStyles(headlineStyles)
+      .withThemeDark(isThemeDark)
+      .build();
+
+    container.withChild(headlineElement);
+  }
+
+  if (eventMeta) {
+    container.withChild(eventMeta);
+  }
+
+  if (text) {
+    const textElement = new ElementBuilder(text)
+      .styled(Styles.element.text.rich.simpleScaling)
+      .withStyles(textStyles)
+      .withThemeDark(isThemeDark)
+      .build();
+
+    container.withChild(textElement);
+  }
+
+  if (date) {
+    const dateElement = new ElementBuilder(date)
+      .styled(Styles.typography.sans.scalingFonts.min)
+      .withStyles(dateStyles)
+      .withThemeDark(isThemeDark)
+      .build();
+
+    container.withChild(dateElement);
+  }
+
+  if (actions) {
+    const actionsElement = createActions({ actions });
+    container.withChild(actionsElement);
+  }
+
+  return container.build();
 };

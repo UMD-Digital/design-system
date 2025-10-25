@@ -1,9 +1,10 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
-import { ElementVisual } from '../../_types';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { ElementModel } from '../../_types';
 
 interface TypeTextLockupLarge {
-  headlineComposite?: ElementVisual | null;
+  headlineComposite?: ElementModel | null;
   eyebrow?: HTMLElement | null;
   ribbon?: HTMLElement | null;
   text?: HTMLElement | null;
@@ -23,89 +24,88 @@ export default ({
   isThemeDark,
   additionalStyles,
 }: TypeTextLockupLarge) => {
-  const children: ElementVisual[] = [];
-
-  if (eyebrow) {
-    children.push(
-      ElementBuilder.styled.headline.sansSmall({
-        element: eyebrow,
-        elementStyles: {
-          element: {
-            textTransform: 'uppercase',
-            fontWeight: 600,
-            color: token.color.black,
-          },
-          siblingAfter: {
-            marginTop: token.spacing.sm,
-          },
-        },
-        isThemeDark,
-      }),
-    );
-  }
-
-  if (ribbon) {
-    children.push(
-      ElementBuilder.styled.text.ribbon({
-        element: ribbon,
-        elementStyles: {
-          siblingAfter: {
-            marginTop: token.spacing.sm,
-          },
-        },
-      }),
-    );
-  }
-
-  if (headlineComposite) {
-    children.push(headlineComposite);
-  }
-
-  if (text) {
-    children.push(
-      ElementBuilder.styled.richText.simpleLarge({
-        element: text,
-        elementStyles: {
-          siblingAfter: {
-            marginTop: token.spacing.lg,
-          },
-        },
-        isThemeDark,
-      }),
-    );
-  }
-
-  if (textLargest) {
-    children.push(
-      ElementBuilder.styled.richText.simpleLargest({
-        element: textLargest,
-        elementStyles: {
-          siblingAfter: {
-            marginTop: token.spacing.lg,
-          },
-        },
-        isThemeDark,
-      }),
-    );
-  }
-
-  if (actions) {
-    children.push(
-      ElementBuilder.styled.layout.gridStacked({
-        element: actions,
-      }),
-    );
-  }
-
-  return ElementBuilder.create.div({
-    className: 'text-lockup-large',
-    children,
-    elementStyles: {
+  const container = new ElementBuilder()
+    .withClassName('text-lockup-large')
+    .withStyles({
       element: {
         zIndex: '9',
         position: 'relative',
         ...additionalStyles,
       },
-    },
-  });
+    })
+    .withThemeDark(isThemeDark);
+
+  if (eyebrow) {
+    const eyebrowElement = new ElementBuilder(eyebrow)
+      .styled(Styles.typography.sans.fonts.small)
+      .withStyles({
+        element: {
+          textTransform: 'uppercase',
+          fontWeight: 600,
+          color: token.color.black,
+        },
+        siblingAfter: {
+          marginTop: token.spacing.sm,
+        },
+      })
+      .withThemeDark(isThemeDark)
+      .build();
+
+    container.withChild(eyebrowElement);
+  }
+
+  if (ribbon) {
+    const ribbonElement = new ElementBuilder(ribbon)
+      .styled(Styles.element.text.decoration.ribbon)
+      .withStyles({
+        siblingAfter: {
+          marginTop: token.spacing.sm,
+        },
+      })
+      .build();
+
+    container.withChild(ribbonElement);
+  }
+
+  if (headlineComposite) {
+    container.withChild(headlineComposite.element);
+  }
+
+  if (text) {
+    const textElement = new ElementBuilder(text)
+      .styled(Styles.element.text.rich.simpleLarge)
+      .withStyles({
+        siblingAfter: {
+          marginTop: token.spacing.lg,
+        },
+      })
+      .withThemeDark(isThemeDark)
+      .build();
+
+    container.withChild(textElement);
+  }
+
+  if (textLargest) {
+    const textLargestElement = new ElementBuilder(textLargest)
+      .styled(Styles.element.text.rich.simpleLargest)
+      .withStyles({
+        siblingAfter: {
+          marginTop: token.spacing.lg,
+        },
+      })
+      .withThemeDark(isThemeDark)
+      .build();
+
+    container.withChild(textLargestElement);
+  }
+
+  if (actions) {
+    const actionsElement = new ElementBuilder(actions)
+      .styled(Styles.layout.grid.stacked)
+      .build();
+
+    container.withChild(actionsElement);
+  }
+
+  return container.build();
 };

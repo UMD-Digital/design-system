@@ -1,12 +1,12 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import {
   email as iconEmail,
   phone as iconPhone,
 } from '@universityofmaryland/web-icons-library/communication';
 import { pin as iconPin } from '@universityofmaryland/web-icons-library/location';
 import { linkedin as iconLinkedIn } from '@universityofmaryland/web-icons-library/social';
-import { type ElementVisual } from '../../_types';
 import { type PersonContactProps } from '../_types';
 
 const makeIcon = ({
@@ -16,14 +16,11 @@ const makeIcon = ({
   icon: string;
   isThemeDark?: boolean;
 }) => {
-  const iconElement = ElementBuilder.styled.actions.iconSmall({
-    element: document.createElement('span'),
-    isThemeDark,
-  });
-
-  iconElement.element.innerHTML = icon;
-
-  return iconElement;
+  return new ElementBuilder('span')
+    .withHTML(icon)
+    .styled(Styles.element.action.icon.small)
+    .withThemeDark(isThemeDark)
+    .build();
 };
 
 const makeText = ({
@@ -33,19 +30,16 @@ const makeText = ({
   text: string;
   isThemeDark?: boolean;
 }) => {
-  const textElement = ElementBuilder.styled.headline.sansSmaller({
-    element: document.createElement('span'),
-    isThemeDark,
-    elementStyles: {
+  return new ElementBuilder('span')
+    .withHTML(text)
+    .styled(Styles.typography.sans.fonts.smaller)
+    .withStyles({
       element: {
         color: `${token.color.gray.dark}`,
       },
-    },
-  });
-
-  textElement.element.innerHTML = text;
-
-  return textElement;
+    })
+    .withThemeDark(isThemeDark)
+    .build();
 };
 
 const makeContactLink = ({
@@ -72,27 +66,25 @@ const makeContactLink = ({
   };
 
   if (isLink) {
-    const link = ElementBuilder.styled.layout.gridInlineRow({
-      element: document.createElement('a'),
-      elementStyles: containerStyles,
-      isThemeDark,
-      children: [iconSpan, textSpan],
-    });
-
     const ariaLabel = element.getAttribute('aria-label');
+    const href = element.getAttribute('href') || '';
 
-    link.element.setAttribute('href', element.getAttribute('href') || '');
-    if (ariaLabel) link.element.setAttribute('aria-label', ariaLabel);
-
-    return link;
+    return new ElementBuilder('a')
+      .styled(Styles.layout.grid.inline.row)
+      .withStyles(containerStyles)
+      .withThemeDark(isThemeDark)
+      .withChildren(iconSpan.element, textSpan.element)
+      .withAttribute('href', href)
+      .withAttributeIf(!!ariaLabel, 'aria-label', ariaLabel || '')
+      .build();
   }
 
-  return ElementBuilder.styled.layout.gridInlineRow({
-    element: document.createElement('div'),
-    elementStyles: containerStyles,
-    isThemeDark,
-    children: [iconSpan, textSpan],
-  });
+  return new ElementBuilder()
+    .styled(Styles.layout.grid.inline.row)
+    .withStyles(containerStyles)
+    .withThemeDark(isThemeDark)
+    .withChildren(iconSpan.element, textSpan.element)
+    .build();
 };
 
 export default ({
@@ -103,88 +95,75 @@ export default ({
   linkendIn,
   phone,
 }: PersonContactProps) => {
-  let children: ElementVisual[] = [];
-
-  if (phone) {
-    children.push(
-      ElementBuilder.create.div({
-        className: 'text-lockup-contact-phone',
-        children: [
-          makeContactLink({
-            element: phone,
-            icon: iconPhone,
-            isThemeDark,
-          }),
-        ],
-      }),
-    );
-  }
-
-  if (email) {
-    children.push(
-      ElementBuilder.create.div({
-        className: 'text-lockup-contact-email',
-        children: [
-          makeContactLink({
-            element: email,
-            icon: iconEmail,
-            isThemeDark,
-          }),
-        ],
-      }),
-    );
-  }
-
-  if (linkendIn) {
-    children.push(
-      ElementBuilder.create.div({
-        className: 'text-lockup-contact-linkedin',
-        children: [
-          makeContactLink({
-            element: linkendIn,
-            icon: iconLinkedIn,
-            isThemeDark,
-          }),
-        ],
-      }),
-    );
-  }
-
-  if (address) {
-    children.push(
-      ElementBuilder.create.div({
-        className: 'text-lockup-contact-address',
-        children: [
-          makeContactLink({
-            element: address,
-            icon: iconPin,
-            isThemeDark,
-          }),
-        ],
-      }),
-    );
-  }
-
-  if (actions) {
-    children.push(
-      ElementBuilder.styled.layout.gridInlineTabletRows({
-        element: actions,
-        elementStyles: {
-          element: {
-            marginTop: token.spacing.sm,
-          },
-        },
-      }),
-    );
-  }
-
-  return ElementBuilder.create.div({
-    className: 'text-lockup-contact',
-    children,
-    elementStyles: {
+  const container = new ElementBuilder()
+    .withClassName('text-lockup-contact')
+    .withStyles({
       element: {
         marginTop: `${token.spacing.sm}`,
       },
-    },
-  });
+    })
+    .withThemeDark(isThemeDark);
+
+  if (phone) {
+    const phoneElement = new ElementBuilder()
+      .withClassName('text-lockup-contact-phone')
+      .withChild(
+        makeContactLink({ element: phone, icon: iconPhone, isThemeDark })
+          .element,
+      )
+      .build();
+
+    container.withChild(phoneElement);
+  }
+
+  if (email) {
+    const emailElement = new ElementBuilder()
+      .withClassName('text-lockup-contact-email')
+      .withChild(
+        makeContactLink({ element: email, icon: iconEmail, isThemeDark })
+          .element,
+      )
+      .build();
+
+    container.withChild(emailElement);
+  }
+
+  if (linkendIn) {
+    const linkedInElement = new ElementBuilder()
+      .withClassName('text-lockup-contact-linkedin')
+      .withChild(
+        makeContactLink({ element: linkendIn, icon: iconLinkedIn, isThemeDark })
+          .element,
+      )
+      .build();
+
+    container.withChild(linkedInElement);
+  }
+
+  if (address) {
+    const addressElement = new ElementBuilder()
+      .withClassName('text-lockup-contact-address')
+      .withChild(
+        makeContactLink({ element: address, icon: iconPin, isThemeDark })
+          .element,
+      )
+      .build();
+
+    container.withChild(addressElement);
+  }
+
+  if (actions) {
+    const actionsElement = new ElementBuilder(actions)
+      .styled(Styles.layout.grid.inline.tabletRows)
+      .withStyles({
+        element: {
+          marginTop: token.spacing.sm,
+        },
+      })
+      .build();
+
+    container.withChild(actionsElement);
+  }
+
+  return container.build();
 };

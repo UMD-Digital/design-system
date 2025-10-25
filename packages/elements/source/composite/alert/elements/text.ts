@@ -1,6 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 
 export type TypeAlertTextProps = {
@@ -65,17 +66,16 @@ const richTextStyles: Record<string, any> = {
 export const CreateAlertText = (props: TypeAlertTextProps) => {
   const { headline, text, actions, isThemeDark } = props;
 
-  const wrapper = document.createElement('div');
   let styles = STYLES_ALERT_TEXT;
+  const builder = new ElementBuilder().withClassName(className.wrapper);
 
   if (headline) {
-    const headlineModel = ElementBuilder.styled.headline.sansLarge({
-      ...props,
-      elementStyles: headlineStyles,
-      element: headline,
-    });
+    const headlineModel = new ElementBuilder(headline)
+      .styled(Styles.typography.sans.large)
+      .withStyles(headlineStyles)
+      .build();
 
-    wrapper.appendChild(headlineModel.element);
+    builder.withChild(headlineModel.element);
     styles += headlineModel.styles;
   }
 
@@ -84,25 +84,24 @@ export const CreateAlertText = (props: TypeAlertTextProps) => {
       richTextStyles.element.color = token.color.gray.dark;
     }
 
-    const textModel = ElementBuilder.styled.richText.simple({
-      ...props,
-      elementStyles: richTextStyles,
-      element: text,
-    });
+    const textModel = new ElementBuilder(text)
+      .styled(Styles.element.text.rich.simple)
+      .withStyles(richTextStyles)
+      .build();
 
-    wrapper.appendChild(textModel.element);
+    builder.withChild(textModel.element);
     styles += textModel.styles;
   }
 
   if (actions) {
     actions.classList.add(className.actions);
-    wrapper.appendChild(actions);
+    builder.withChild(actions);
   }
 
-  wrapper.classList.add(className.wrapper);
+  const wrapper = builder.build();
 
   return {
-    element: wrapper,
+    element: wrapper.element,
     styles,
   };
 };

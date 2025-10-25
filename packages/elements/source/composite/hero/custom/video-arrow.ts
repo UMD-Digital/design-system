@@ -1,9 +1,10 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
-import { type ElementVisual } from '../../../_types';
+import { type ElementModel } from '../../../_types';
 import { animations, assets } from 'atomic';
 import { type HeroVideoArrowProps as BaseHeroVideoArrowProps } from '../_types';
 
@@ -30,9 +31,9 @@ const ANIMATION_CONFIG = {
 const createHeadline = (headline?: HTMLElement | null) => {
   if (!headline) return null;
 
-  return ElementBuilder.styled.headline.campaignExtraLarge({
-    element: headline,
-    elementStyles: {
+  return new ElementBuilder(headline)
+    .styled(Styles.typography.campaign.fonts.extraLarge)
+    .withStyles({
       element: {
         textTransform: 'uppercase',
         opacity: 0,
@@ -43,16 +44,16 @@ const createHeadline = (headline?: HTMLElement | null) => {
       siblingAfter: {
         marginTop: token.spacing.md,
       },
-    },
-  });
+    })
+    .build();
 };
 
 const createText = (text?: HTMLElement | null) => {
   if (!text) return null;
 
-  return ElementBuilder.styled.richText.simpleLargest({
-    element: text,
-    elementStyles: {
+  return new ElementBuilder(text)
+    .styled(Styles.element.text.rich.simpleLargest)
+    .withStyles({
       element: {
         maxWidth: '720px',
         marginLeft: 'auto',
@@ -65,15 +66,15 @@ const createText = (text?: HTMLElement | null) => {
           display: 'none',
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 const createTextChildren = (
   props: Pick<HeroVideoArrowProps, 'headline' | 'text'>,
-): ElementVisual[] => {
+): ElementModel<HTMLElement>[] => {
   const { headline, text } = props;
-  const children: ElementVisual[] = [];
+  const children: ElementModel<HTMLElement>[] = [];
 
   const headlineElement = createHeadline(headline);
   if (headlineElement) {
@@ -95,11 +96,10 @@ const createTextContainer = (
 
   if (children.length === 0) return null;
 
-  const container = ElementBuilder.create.element({
-    element: document.createElement('div'),
-    className: 'hero-logo-brand-text-container',
-    children,
-    elementStyles: {
+  const container = new ElementBuilder()
+    .withClassName('hero-logo-brand-text-container')
+    .withChildren(...children)
+    .withStyles({
       element: {
         zIndex: 99,
         textAlign: 'center',
@@ -111,14 +111,13 @@ const createTextContainer = (
           color: token.color.white,
         },
       },
-    },
-  });
+    })
+    .build();
 
-  return ElementBuilder.create.element({
-    element: document.createElement('div'),
-    className: OVERLAY_CLASS,
-    children: [container],
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName(OVERLAY_CLASS)
+    .withChild(container)
+    .withStyles({
       element: {
         height: '100%',
         width: '100%',
@@ -130,8 +129,8 @@ const createTextContainer = (
         opacity: 0,
         transition: `opacity ${ANIMATION_CONFIG.OVERLAY_FADE.DURATION} ${ANIMATION_CONFIG.OVERLAY_FADE.EASING}`,
       },
-    },
-  });
+    })
+    .build();
 };
 
 const createVideo = (video: HTMLVideoElement) => {
@@ -167,7 +166,7 @@ const createAnimationSequence = (container: HTMLElement) => {
 };
 
 const createEventHandlers = (
-  composite: ElementVisual,
+  composite: ElementModel<HTMLElement>,
   overlay: ReturnType<typeof animations.brand.chevronFlow>,
 ) => {
   const eventResize = () => {
@@ -189,30 +188,23 @@ const createEventHandlers = (
 export default (props: HeroVideoArrowProps) => {
   const { video, isAnimationOnLoad } = props;
 
-  const composite = ElementBuilder.create.element({
-    element: document.createElement('section'),
-    className: 'umd-element-hero-brand-video',
-    elementStyles: {
+  const composite = new ElementBuilder('section')
+    .withClassName('umd-element-hero-brand-video')
+    .withStyles({
       element: {
         aspectRatio: '16 / 9',
         width: '100%',
       },
-    },
-  });
+    })
+    .build();
 
   const videoElement = createVideo(video);
   const textContainer = createTextContainer(props);
 
-  const wrapperChildren: ElementVisual[] = [videoElement];
-  if (textContainer) {
-    wrapperChildren.push(textContainer);
-  }
-
-  const wrapper = ElementBuilder.create.element({
-    element: document.createElement('div'),
-    className: 'hero-logo-brand-video-wrapper',
-    children: wrapperChildren,
-    elementStyles: {
+  const wrapper = new ElementBuilder()
+    .withClassName('hero-logo-brand-video-wrapper')
+    .withChild(videoElement)
+    .withStyles({
       element: {
         containerType: 'inline-size',
         position: 'relative',
@@ -223,21 +215,26 @@ export default (props: HeroVideoArrowProps) => {
         alignItems: 'center',
         justifyContent: 'center',
       },
-    },
-  });
+    });
+
+  if (textContainer) {
+    wrapper.withChild(textContainer);
+  }
+
+  const wrapperBuilt = wrapper.build();
 
   const overlay = animations.brand.chevronFlow({
     sizedContainer: composite.element,
-    sizedWrapper: wrapper.element,
+    sizedWrapper: wrapperBuilt.element,
     completedCallback: createAnimationSequence(composite.element),
     isAnimationOnLoad,
   });
 
-  wrapper.element.appendChild(overlay.element);
-  wrapper.styles += overlay.styles;
+  wrapperBuilt.element.appendChild(overlay.element);
+  wrapperBuilt.styles += overlay.styles;
 
-  composite.element.appendChild(wrapper.element);
-  composite.styles += wrapper.styles;
+  composite.element.appendChild(wrapperBuilt.element);
+  composite.styles += wrapperBuilt.styles;
 
   const events = createEventHandlers(composite, overlay);
 

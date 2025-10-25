@@ -1,8 +1,9 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
 import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
-import { type ContentElement } from '../../../_types';
+import { type ContentElement, type ElementModel } from '../../../_types';
 import { assets, textLockup } from 'atomic';
 
 interface CornerProps {
@@ -136,77 +137,54 @@ const createVideoWrapper = (video: HTMLVideoElement) =>
 const createCorner = ({ images, isCornerLeft }: CornerProps) => {
   const children = images.map((image) => createImageWrapper(image));
 
-  return ElementBuilder.create.div({
-    className: isCornerLeft
-      ? 'hero-grid-corner-left'
-      : 'hero-grid-corner-right',
-    children,
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName(
+      isCornerLeft ? 'hero-grid-corner-left' : 'hero-grid-corner-right',
+    )
+    .withChildren(...children)
+    .withStyles({
       element: {
         ...columnBase,
         gridTemplateRows: GRID_LAYOUT.ROWS.TRIPLE,
       },
-    },
-    attributes: [
-      {
-        role: 'region',
-        'aria-label': `${
-          isCornerLeft ? 'Left' : 'Right'
-        } decorative image grid`,
-      },
-    ],
-  });
+    })
+    .withAttribute('role', 'region')
+    .withAttribute(
+      'aria-label',
+      `${isCornerLeft ? 'Left' : 'Right'} decorative image grid`,
+    )
+    .build();
 };
 
 const createCenter = ({ images, video }: CenterProps) => {
-  const children = [
-    ElementBuilder.create.element({
-      element: document.createElement('div'),
-      className: 'hero-grid-tint',
-      elementStyles: {
-        element: {
-          width: '100%',
-          height: '100%',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
-          zIndex: 9,
-          opacity: 0,
-          ...withViewTimelineAnimation({
-            animation: 'tint-fade ease-in-out forwards',
-            animationTimeline: 'view()',
-            animationRangeStart: ANIMATION_RANGES.TINT_FADE.start,
-            animationRangeEnd: ANIMATION_RANGES.TINT_FADE.end,
-          }),
-        },
+  const tint = new ElementBuilder()
+    .withClassName('hero-grid-tint')
+    .withStyles({
+      element: {
+        width: '100%',
+        height: '100%',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+        zIndex: 9,
+        opacity: 0,
+        ...withViewTimelineAnimation({
+          animation: 'tint-fade ease-in-out forwards',
+          animationTimeline: 'view()',
+          animationRangeStart: ANIMATION_RANGES.TINT_FADE.start,
+          animationRangeEnd: ANIMATION_RANGES.TINT_FADE.end,
+        }),
       },
-      attributes: [
-        {
-          role: 'region',
-          'aria-label': 'Main hero content',
-        },
-      ],
-    }),
-  ];
+    })
+    .withAttribute('role', 'region')
+    .withAttribute('aria-label', 'Main hero content')
+    .build();
 
-  if (video) {
-    children.push(
-      createImageWrapper(images[0]),
-      createVideoWrapper(video),
-      createImageWrapper(images[1]),
-    );
-  } else {
-    images.forEach((image) => {
-      children.push(createImageWrapper(image));
-    });
-  }
-
-  return ElementBuilder.create.element({
-    element: document.createElement('div'),
-    className: 'hero-grid-center',
-    children,
-    elementStyles: {
+  const container = new ElementBuilder()
+    .withClassName('hero-grid-center')
+    .withChild(tint)
+    .withStyles({
       element: {
         ...columnBase,
         gridTemplateRows: GRID_LAYOUT.ROWS.INITIAL,
@@ -217,11 +195,25 @@ const createCenter = ({ images, video }: CenterProps) => {
           animationRangeEnd: ANIMATION_RANGES.GRID_ROWS.end,
         }),
       },
-    },
-  });
+    });
+
+  if (video) {
+    container
+      .withChild(createImageWrapper(images[0]))
+      .withChild(createVideoWrapper(video))
+      .withChild(createImageWrapper(images[1]));
+  } else {
+    images.forEach((image) => {
+      container.withChild(createImageWrapper(image));
+    });
+  }
+
+  return container.build();
 };
 
-const createHeadline = (props: Pick<HeroGridProps, 'headline'>) => {
+const createHeadline = (
+  props: Pick<HeroGridProps, 'headline'>,
+): ElementModel<HTMLElement> | null => {
   const { headline } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
   const isOverwriteHeadline = characterCount > 30;
@@ -236,9 +228,9 @@ const createHeadline = (props: Pick<HeroGridProps, 'headline'>) => {
     },
   };
 
-  const headlineElement = ElementBuilder.styled.headline.campaignExtraLarge({
-    element: headline,
-    elementStyles: {
+  return new ElementBuilder(headline)
+    .styled(Styles.typography.campaign.fonts.extraLarge)
+    .withStyles({
       element: {
         textTransform: 'uppercase',
         textWrap: 'pretty',
@@ -247,11 +239,9 @@ const createHeadline = (props: Pick<HeroGridProps, 'headline'>) => {
       siblingAfter: {
         marginTop: token.spacing.md,
       },
-    },
-    isThemeDark: true,
-  });
-
-  return headlineElement;
+    })
+    .withThemeDark(true)
+    .build();
 };
 
 const createTextContainer = (
@@ -268,9 +258,9 @@ const createTextContainer = (
     return null;
   }
 
-  const textContainer = ElementBuilder.create.div({
-    className: 'hero-expand-text-container',
-    elementStyles: {
+  const textContainer = new ElementBuilder()
+    .withClassName('hero-expand-text-container')
+    .withStyles({
       element: {
         position: 'relative',
         height: '100%',
@@ -299,19 +289,19 @@ const createTextContainer = (
           }),
         },
       },
-    },
-  });
+    })
+    .build();
 
-  const lock = ElementBuilder.styled.layout.spaceHorizontalSmallest({
-    element: document.createElement('div'),
-    elementStyles: {
+  const lock = new ElementBuilder()
+    .styled(Styles.layout.space.horizontal.smallest)
+    .withStyles({
       element: {
         height: '100%',
         width: '100%',
         position: 'relative',
       },
-    },
-  });
+    })
+    .build();
 
   const textLockupElement = textLockup.large({
     headlineComposite: createHeadline(props),
@@ -407,22 +397,17 @@ const createGridLayout = (
     }),
   };
 
-  return ElementBuilder.create.div({
-    className: 'hero-grid-layout',
-
-    children: [
+  return new ElementBuilder()
+    .withClassName('hero-grid-layout')
+    .withChildren(
       createCorner(leftCorner),
       createCenter(center),
       createCorner(rightCorner),
-    ],
-    elementStyles: { element: gridStyles },
-    attributes: [
-      {
-        role: 'region',
-        'aria-label': 'Hero grid layout',
-      },
-    ],
-  });
+    )
+    .withStyles({ element: gridStyles })
+    .withAttribute('role', 'region')
+    .withAttribute('aria-label', 'Hero grid layout')
+    .build();
 };
 
 export default (props: HeroGridProps) => {
@@ -433,12 +418,10 @@ export default (props: HeroGridProps) => {
   const text = createTextContainer(props);
   const grid = createGridLayout(leftCorner, rightCorner, center);
 
-  const children = text ? [grid, text] : [grid];
-
-  const composite = ElementBuilder.create.div({
-    className: 'hero-grid-container',
-    children,
-    elementStyles: {
+  const composite = new ElementBuilder()
+    .withClassName('hero-grid-container')
+    .withChild(grid)
+    .withStyles({
       element: {
         width: '100%',
         display: 'block',
@@ -452,18 +435,19 @@ export default (props: HeroGridProps) => {
           height: '100%',
         },
       },
-    },
-    attributes: [
-      {
-        role: 'main',
-        'aria-label': 'Hero section',
-      },
-    ],
-  });
+    })
+    .withAttribute('role', 'main')
+    .withAttribute('aria-label', 'Hero section');
 
-  composite.styles += keyFrameColumns;
-  composite.styles += keyFrameRows;
-  composite.styles += keyFrameTint;
+  if (text) {
+    composite.withChild(text);
+  }
 
-  return composite;
+  const built = composite.build();
+
+  built.styles += keyFrameColumns;
+  built.styles += keyFrameRows;
+  built.styles += keyFrameTint;
+
+  return built;
 };

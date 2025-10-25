@@ -636,4 +636,169 @@ describe('ElementBuilder', () => {
       expect(handler).not.toHaveBeenCalled();
     });
   });
+
+  describe('ElementModel Children Support', () => {
+    test('should accept ElementModel as child and merge styles', () => {
+      const child = new ElementBuilder('span')
+        .withClassName('child-class')
+        .withText('Child')
+        .withStyles({ element: { color: 'red' } })
+        .build();
+
+      const parent = new ElementBuilder()
+        .withClassName('parent-class')
+        .withChild(child)
+        .withStyles({ element: { padding: '10px' } })
+        .build();
+
+      expect(parent.element.children.length).toBe(1);
+      expect(parent.element.querySelector('.child-class')).toBeTruthy();
+      expect(parent.styles).toContain('color: red'); // Child styles merged
+      expect(parent.styles).toContain('padding: 10px'); // Parent styles present
+    });
+
+    test('should accept multiple ElementModel children via withChildren', () => {
+      const child1 = new ElementBuilder('span')
+        .withText('Child 1')
+        .withStyles({ element: { color: 'red' } })
+        .build();
+
+      const child2 = new ElementBuilder('span')
+        .withText('Child 2')
+        .withStyles({ element: { color: 'blue' } })
+        .build();
+
+      const parent = new ElementBuilder()
+        .withChildren(child1, child2)
+        .build();
+
+      expect(parent.element.children.length).toBe(2);
+      expect(parent.styles).toContain('color: red');
+      expect(parent.styles).toContain('color: blue');
+    });
+
+    test('should mix ElementModel and HTMLElement children', () => {
+      const childModel = new ElementBuilder('span')
+        .withText('Model Child')
+        .withStyles({ element: { fontWeight: 'bold' } })
+        .build();
+
+      const childElement = document.createElement('div');
+      childElement.textContent = 'Plain Element';
+
+      const parent = new ElementBuilder()
+        .withChildren(childModel, childElement, 'Text node')
+        .build();
+
+      expect(parent.element.children.length).toBe(2); // Model + Element
+      expect(parent.element.textContent).toContain('Model Child');
+      expect(parent.element.textContent).toContain('Plain Element');
+      expect(parent.element.textContent).toContain('Text node');
+      expect(parent.styles).toContain('font-weight: bold');
+    });
+  });
+
+  describe('Custom Events Support', () => {
+    test('should add custom events via withEvents', () => {
+      const playFn = jest.fn();
+      const pauseFn = jest.fn();
+
+      const model = new ElementBuilder()
+        .withEvents({
+          play: playFn,
+          pause: pauseFn,
+        })
+        .build();
+
+      expect(model.events).toBeDefined();
+      expect(model.events?.play).toBe(playFn);
+      expect(model.events?.pause).toBe(pauseFn);
+
+      model.events?.play();
+      expect(playFn).toHaveBeenCalled();
+
+      model.events?.pause();
+      expect(pauseFn).toHaveBeenCalled();
+    });
+
+    test('should not include events property when no events added', () => {
+      const model = new ElementBuilder().build();
+
+      expect(model.events).toBeUndefined();
+    });
+
+    test('should merge multiple withEvents calls', () => {
+      const fn1 = jest.fn();
+      const fn2 = jest.fn();
+
+      const model = new ElementBuilder()
+        .withEvents({ method1: fn1 })
+        .withEvents({ method2: fn2 })
+        .build();
+
+      expect(model.events?.method1).toBe(fn1);
+      expect(model.events?.method2).toBe(fn2);
+    });
+
+    test('should work with closures for stateful events', () => {
+      const videoElement = document.createElement('video');
+      let isPaused = true;
+
+      const model = new ElementBuilder()
+        .withChild(videoElement)
+        .withEvents({
+          play: () => {
+            isPaused = false;
+            videoElement.play();
+          },
+          pause: () => {
+            isPaused = true;
+            videoElement.pause();
+          },
+          isPaused: () => isPaused,
+        })
+        .build();
+
+      expect(model.events?.isPaused()).toBe(true);
+      model.events?.play();
+      expect(model.events?.isPaused()).toBe(false);
+      model.events?.pause();
+      expect(model.events?.isPaused()).toBe(true);
+    });
+  });
+
+  describe('Combined ElementModel Children + Events', () => {
+    test('should handle ElementModel child with events and merge both styles and events', () => {
+      const buttonFn = jest.fn();
+      const button = new ElementBuilder('button')
+        .withText('Play')
+        .withStyles({ element: { backgroundColor: 'blue' } })
+        .withEvents({ click: buttonFn })
+        .build();
+
+      const containerPlayFn = jest.fn();
+      const container = new ElementBuilder()
+        .withChild(button)
+        .withStyles({ element: { padding: '20px' } })
+        .withEvents({ play: containerPlayFn })
+        .build();
+
+      // Check child was added
+      expect(container.element.querySelector('button')).toBeTruthy();
+
+      // Check styles were merged
+      expect(container.styles).toContain('background-color: blue');
+      expect(container.styles).toContain('padding: 20px');
+
+      // Check container events work
+      expect(container.events?.play).toBe(containerPlayFn);
+      container.events?.play();
+      expect(containerPlayFn).toHaveBeenCalled();
+
+      // Note: Button's events are on its own model, not the container
+      expect(button.events?.click).toBe(buttonFn);
+      button.events?.click();
+      expect(buttonFn).toHaveBeenCalled();
+    });
+  });
 });

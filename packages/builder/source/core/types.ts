@@ -128,6 +128,8 @@ export interface ElementModel<T extends HTMLElement = HTMLElement> {
   update?: (props: Partial<BuilderOptions>) => void;
   /** Optional destroy method for cleanup */
   destroy?: () => void;
+  /** Optional custom events/methods attached to the element */
+  events?: Record<string, Function>;
 }
 
 // ====================
@@ -383,4 +385,11 @@ export function isElementStyles(obj: any): obj is ElementStyles {
  */
 export function isElementBuilder(obj: any): obj is ElementBuilderInterface {
   return obj && typeof obj === 'object' && 'build' in obj && typeof obj.build === 'function';
+}
+
+/**
+ * Type guard to check if an object is an ElementModel
+ */
+export function isElementModel(obj: any): obj is ElementModel {
+  return obj && typeof obj === 'object' && 'element' in obj && 'styles' in obj && obj.element instanceof HTMLElement;
 }

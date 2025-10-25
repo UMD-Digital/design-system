@@ -1,14 +1,14 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
-import { ElementVisual } from '../../../_types';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { type UMDElement } from '../../../_types';
 import { actions, textLockup } from 'atomic';
 import { CardOverlayProps } from '../_types';
 
 export default (props: CardOverlayProps) => {
   const { isThemeDark, ctaIcon } = props;
 
-  const children: ElementVisual[] = [];
+  const children: UMDElement[] = [];
 
   if (ctaIcon && ctaIcon instanceof HTMLElement) {
     children.push(
@@ -20,32 +20,33 @@ export default (props: CardOverlayProps) => {
     );
   }
 
-  children.push(
-    ElementBuilder.create.div({
-      className: 'card-overlay-color-wrapper',
-      elementStyles: {
-        element: {
-          paddingRight: `${ctaIcon ? token.spacing['2xl'] : 0}`,
-          height: '100%',
+  const lockup = textLockup.smallScaling(props);
 
-          [`& > *`]: {
-            height: '100%',
-            display: 'flex',
-            flexDirection: 'column',
-            zIndex: 9,
-            position: 'relative',
-            maxWidth: `${token.spacing.maxWidth.smallest}`,
-          },
+  const wrapper = new ElementBuilder()
+    .withClassName('card-overlay-color-wrapper')
+    .withStyles({
+      element: {
+        paddingRight: `${ctaIcon ? token.spacing['2xl'] : 0}`,
+        height: '100%',
+
+        [`& > *`]: {
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column',
+          zIndex: 9,
+          position: 'relative',
+          maxWidth: `${token.spacing.maxWidth.smallest}`,
         },
       },
-      children: [textLockup.smallScaling(props)],
-    }),
-  );
+    })
+    .withChild(lockup.element)
+    .build();
 
-  return ElementBuilder.create.div({
-    className: 'card-overlay-color',
-    children,
-    elementStyles: {
+  children.push(wrapper);
+
+  return new ElementBuilder()
+    .withClassName('card-overlay-color')
+    .withStyles({
       element: {
         containerType: 'inline-size',
         padding: `${token.spacing.lg} ${token.spacing.md}`,
@@ -65,6 +66,7 @@ export default (props: CardOverlayProps) => {
           },
         },
       },
-    },
-  });
+    })
+    .withChildren(...children)
+    .build();
 };

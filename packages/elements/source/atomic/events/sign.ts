@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
-import { ElementVisual } from '../../_types';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 
 const makeDateElement = ({
   element,
@@ -25,27 +25,30 @@ const makeDateElement = ({
   }
 
   if (isDay && isLargeSize && !isMultiDay) {
-    return ElementBuilder.styled.headline.sansExtraLarge({
-      element: dateElement,
-      isThemeDark,
-    });
+    return new ElementBuilder(dateElement)
+      .styled(Styles.typography.sans.fonts.extraLarge)
+      .withThemeDark(isThemeDark)
+      .build();
   }
 
   if (isDay) {
-    return ElementBuilder.styled.headline.sansLarger({
-      element: dateElement,
-      isThemeDark,
-    });
+    return new ElementBuilder(dateElement)
+      .styled(Styles.typography.sans.fonts.larger)
+      .withThemeDark(isThemeDark)
+      .build();
   }
 
   if (isMonth && isLargeSize && !isMultiDay) {
-    return ElementBuilder.styled.headline.sansSmall({
-      element: dateElement,
-      isThemeDark,
-    });
+    return new ElementBuilder(dateElement)
+      .styled(Styles.typography.sans.fonts.small)
+      .withThemeDark(isThemeDark)
+      .build();
   }
 
-  return ElementBuilder.styled.headline.sansMin({ element: dateElement, isThemeDark });
+  return new ElementBuilder(dateElement)
+    .styled(Styles.typography.sans.fonts.min)
+    .withThemeDark(isThemeDark)
+    .build();
 };
 
 const makeStartDateBlock = ({
@@ -60,31 +63,32 @@ const makeStartDateBlock = ({
   isLargeSize?: boolean;
   isMultiDay?: boolean;
   isThemeDark?: boolean;
-}) =>
-  ElementBuilder.create.paragraph({
-    className: 'event-sign-start',
-    elementStyles: {
+}) => {
+  const monthElement = makeDateElement({
+    element: startMonth,
+    isMonth: true,
+    isLargeSize,
+    isMultiDay,
+    isThemeDark,
+  });
+  const dayElement = makeDateElement({
+    element: startDay,
+    isDay: true,
+    isLargeSize,
+    isMultiDay,
+    isThemeDark,
+  });
+
+  return new ElementBuilder('p')
+    .withClassName('event-sign-start')
+    .withStyles({
       subElement: {
         color: token.color.black,
       },
-    },
-    children: [
-      makeDateElement({
-        element: startMonth,
-        isMonth: true,
-        isLargeSize,
-        isMultiDay,
-        isThemeDark,
-      }),
-      makeDateElement({
-        element: startDay,
-        isDay: true,
-        isLargeSize,
-        isMultiDay,
-        isThemeDark,
-      }),
-    ],
-  });
+    })
+    .withChildren(monthElement.element, dayElement.element)
+    .build();
+};
 
 const makeEndDateBlock = ({
   endMonth,
@@ -94,24 +98,25 @@ const makeEndDateBlock = ({
   endDay: string | HTMLElement;
   endMonth: string | HTMLElement;
   isThemeDark?: boolean;
-}) =>
-  ElementBuilder.create.paragraph({
-    className: 'event-sign-end',
-    children: [
-      makeDateElement({
-        element: endMonth,
-        isMonth: true,
-        isMultiDay: true,
-        isThemeDark,
-      }),
-      makeDateElement({
-        element: endDay,
-        isDay: true,
-        isMultiDay: true,
-        isThemeDark,
-      }),
-    ],
+}) => {
+  const monthElement = makeDateElement({
+    element: endMonth,
+    isMonth: true,
+    isMultiDay: true,
+    isThemeDark,
   });
+  const dayElement = makeDateElement({
+    element: endDay,
+    isDay: true,
+    isMultiDay: true,
+    isThemeDark,
+  });
+
+  return new ElementBuilder('p')
+    .withClassName('event-sign-end')
+    .withChildren(monthElement.element, dayElement.element)
+    .build();
+};
 
 export default (props: {
   startMonth: string | HTMLElement;
@@ -132,25 +137,28 @@ export default (props: {
   const isTheSameMonth = endMonth === startMonth;
   const isTheSameDay = endDay === startDay;
   const isMultiDay = !isTheSameMonth || !isTheSameDay;
-  let children: ElementVisual[] = [];
 
-  children.push(
-    makeStartDateBlock({
-      startMonth,
-      startDay,
-      isLargeSize,
-      isMultiDay,
-      isThemeDark,
-    }),
-  );
+  const startBlock = makeStartDateBlock({
+    startMonth,
+    startDay,
+    isLargeSize,
+    isMultiDay,
+    isThemeDark,
+  });
 
-  if (isMultiDay && endDay && endMonth) {
-    const srOnly = ElementBuilder.create.span({
-      className: 'sr-only',
-    });
-    const dash = ElementBuilder.create.span({
-      className: 'dash',
-      elementStyles: {
+  const container = new ElementBuilder()
+    .styled(Styles.element.event.sign.container)
+    .withChild(startBlock.element);
+
+  if (isMultiDay && !!endDay && !!endMonth) {
+    const srOnly = new ElementBuilder('span')
+      .withClassName('sr-only')
+      .withHTML('to')
+      .build();
+
+    const dash = new ElementBuilder('span')
+      .withClassName('dash')
+      .withStyles({
         element: {
           width: '10px',
           height: '3px',
@@ -158,24 +166,19 @@ export default (props: {
           display: 'block',
           backgroundColor: isThemeDark ? 'white' : 'black',
         },
-      },
+      })
+      .build();
+
+    const endBlock = makeEndDateBlock({
+      endDay: endDay!,
+      endMonth: endMonth!,
+      isThemeDark,
     });
 
-    srOnly.element.innerHTML = 'to';
-
-    children.push(
-      srOnly,
-      dash,
-      makeEndDateBlock({
-        endDay,
-        endMonth,
-        isThemeDark,
-      }),
-    );
+    container.withChild(srOnly.element);
+    container.withChild(dash.element);
+    container.withChild(endBlock.element);
   }
 
-  return ElementBuilder.styled.event.signContainer({
-    element: document.createElement('div'),
-    children,
-  });
+  return container.build();
 };

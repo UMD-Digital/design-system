@@ -1,7 +1,10 @@
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as elementStyles from '@universityofmaryland/web-styles-library/element';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { pin as iconPin } from '@universityofmaryland/web-icons-library/location';
-import { calendar as iconCalendar, clock as iconClock } from '@universityofmaryland/web-icons-library/calendar';
-import { ElementVisual } from '../../_types';
+import {
+  calendar as iconCalendar,
+  clock as iconClock,
+} from '@universityofmaryland/web-icons-library/calendar';
 
 type LocationType = {
   title: string;
@@ -36,22 +39,16 @@ const MakeDetailItem = (props: {
   text: string;
   isThemeDark?: boolean;
 }) => {
-  const { icon, text } = props;
-  const container = ElementBuilder.styled.event.metaItem({
-    element: document.createElement('p'),
-    ...props,
-  });
+  const { icon, text, isThemeDark } = props;
 
-  const iconElement = document.createElement('span');
-  const textElement = document.createElement('span');
+  const iconElement = new ElementBuilder('span').withHTML(icon).build();
+  const textElement = new ElementBuilder('span').withHTML(text).build();
 
-  iconElement.innerHTML = icon;
-  textElement.innerHTML = text;
-
-  container.element.appendChild(iconElement);
-  container.element.appendChild(textElement);
-
-  return container;
+  return new ElementBuilder('p')
+    .styled(elementStyles.event.meta.item)
+    .withThemeDark(isThemeDark)
+    .withChildren(iconElement, textElement)
+    .build();
 };
 
 const createDayText = ({
@@ -89,50 +86,40 @@ const createTimeText = ({ startTime, endTime }: DateDisplayType) => {
 };
 
 const createDateRow = (props: TypeMetaDisplay) => {
-  const { showTime = true } = props;
-  const container = document.createElement('div');
-  const { startMonth, startDay, endDay, endMonth } = props;
+  const { showTime = true, startMonth, startDay, endDay, endMonth } = props;
   const isMultiDay = startDay != endDay || startMonth != endMonth;
   const dateElement = createDayText({ ...props, isMultiDay });
-
-  let styles = '';
-
-  container.appendChild(dateElement.element);
-  styles += dateElement.styles;
+  const element = new ElementBuilder()
+    .withClassName('event-meta-date-row')
+    .withChild(dateElement);
 
   if (showTime) {
-    const timeElement = createTimeText({ ...props, isMultiDay });
-    container.appendChild(timeElement.element);
-    styles += timeElement.styles;
+    element.withChild(createTimeText({ ...props, isMultiDay }));
   }
 
-  return { element: container, styles, className: 'event-meta-date-row' };
+  return element.build();
 };
 
 export default (props: TypeMetaDisplay) => {
-  const { location } = props;
+  const { location, isThemeDark } = props;
   const dateRow = createDateRow(props);
-  let wrapperChildren: ElementVisual[] = [dateRow];
+
+  const wrapper = new ElementBuilder()
+    .styled(elementStyles.event.meta.wrapper)
+    .withThemeDark(isThemeDark)
+    .withChild(dateRow);
 
   if (location && location.length > 0) {
-    wrapperChildren.push(
-      MakeDetailItem({
-        ...props,
-        icon: iconPin,
-        text: location[0].title,
-      }),
+    wrapper.withChild(
+      MakeDetailItem({ ...props, icon: iconPin, text: location[0].title }),
     );
   }
 
-  const wrapper = ElementBuilder.styled.event.metaWrapper({
-    element: document.createElement('div'),
-    children: wrapperChildren,
-    ...props,
-  });
+  wrapper.build();
 
-  return ElementBuilder.styled.event.metaContainer({
-    element: document.createElement('div'),
-    children: [wrapper],
-    ...props,
-  });
+  return new ElementBuilder()
+    .styled(elementStyles.event.meta.container)
+    .withThemeDark(isThemeDark)
+    .withChild(wrapper)
+    .build();
 };

@@ -10,6 +10,7 @@
  */
 export interface ElementModel {
   element: HTMLElement | DocumentFragment;
+  className?: string;
   styles: string;
   update?: (props: any) => void;
   destroy?: () => void;

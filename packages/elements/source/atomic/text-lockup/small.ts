@@ -1,6 +1,8 @@
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { headlines } from '@universityofmaryland/web-builder-library/presets';
 import { type UMDElement } from '../../_types';
 
 type TypeTheme = {
@@ -99,27 +101,27 @@ export const dateStyles = {
 };
 
 export const createEyebrow = ({ eyebrow, isThemeDark }: TypeEyebrow) =>
-  ElementBuilder.styled.text.eyebrow({
-    element: eyebrow,
-    elementStyles: eyebrowStyles,
-    isThemeDark,
-  });
+  new ElementBuilder(eyebrow)
+    .styled(Styles.typography.elements.fonts.eyebrow)
+    .withStyles(eyebrowStyles)
+    .withThemeDark(isThemeDark)
+    .build();
 
 export const createRibbonEyebrow = ({ eyebrow }: TypeEyebrow) =>
-  ElementBuilder.styled.text.ribbon({
-    element: eyebrow,
-    elementStyles: ribbonStyles,
-  });
+  new ElementBuilder(eyebrow)
+    .styled(Styles.element.text.decoration.ribbon)
+    .withStyles(ribbonStyles)
+    .build();
 
 export const createActions = ({ actions }: TypeActions) =>
-  ElementBuilder.styled.layout.gridInlineTabletRows({
-    element: actions,
-    elementStyles: {
+  new ElementBuilder(actions)
+    .styled(Styles.layout.grid.inline.tabletRows)
+    .withStyles({
       element: {
         marginTop: token.spacing.sm,
       },
-    },
-  });
+    })
+    .build();
 
 export const createTextLockupSmall = ({
   eyebrow,
@@ -130,62 +132,60 @@ export const createTextLockupSmall = ({
   eventMeta,
   isThemeDark,
 }: TypeTextLockupSmall) => {
-  const children: UMDElement[] = [];
-
-  if (eyebrow) {
-    children.push(createEyebrow({ eyebrow, isThemeDark }));
-  }
-
-  if (headline) {
-    children.push(
-      ElementBuilder.styled.headline.sansLarger({
-        element: headline,
-        elementStyles: headlineStyles,
-        isThemeDark,
-      }),
-    );
-  }
-
-  if (eventMeta) {
-    children.push(eventMeta);
-  }
-
-  if (text) {
-    children.push(
-      ElementBuilder.styled.richText.simple({
-        element: text,
-        elementStyles: textStyles,
-        isThemeDark,
-      }),
-    );
-  }
-
-  if (date) {
-    children.push(
-      ElementBuilder.styled.headline.sansMin({
-        element: date,
-        elementStyles: dateStyles,
-        isThemeDark,
-      }),
-    );
-  }
-
-  if (actions) {
-    children.push(
-      createActions({
-        actions,
-      }),
-    );
-  }
-
-  return ElementBuilder.create.div({
-    className: ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER,
-    children,
-    elementStyles: {
+  const container = new ElementBuilder()
+    .withClassName(ELEMENT_TEXT_LOCKUP_SMALL_CONTAINER)
+    .withStyles({
       element: {
         zIndex: '9',
         position: 'relative',
       },
-    },
-  });
+    })
+    .withThemeDark(isThemeDark);
+
+  if (eyebrow) {
+    const eyebrowElement = createEyebrow({ eyebrow, isThemeDark });
+    container.withChild(eyebrowElement);
+  }
+
+  if (headline) {
+    const headlineElement = new ElementBuilder(headline)
+      .styled(Styles.typography.sans.fonts.larger)
+      .withStyles(headlineStyles)
+      .withThemeDark(isThemeDark)
+      .build();
+
+    container.withChild(headlineElement);
+  }
+
+  if (eventMeta) {
+    container.withChild(eventMeta);
+  }
+
+  if (text) {
+    const textElement = new ElementBuilder(text)
+      .styled(Styles.element.text.rich.simple)
+      .withStyles(textStyles)
+      .withThemeDark(isThemeDark)
+      .build();
+
+    container.withChild(textElement);
+  }
+
+  if (date) {
+    const dateElement = headlines
+      .sansMin()
+      .withChild(date)
+      .withStyles(dateStyles)
+      .withThemeDark(isThemeDark)
+      .build();
+
+    container.withChild(dateElement);
+  }
+
+  if (actions) {
+    const actionsElement = createActions({ actions });
+    container.withChild(actionsElement);
+  }
+
+  return container.build();
 };

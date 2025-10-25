@@ -16,7 +16,7 @@ import type {
   AnimationType,
   ElementBuilderInterface,
 } from './types';
-import { isElementBuilder } from './types';
+import { isElementBuilder, isElementModel } from './types';
 
 /**
  * Core fluent builder class with chainable API
@@ -54,7 +54,7 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
   private classNames: Set<string>;
   private styles: StyleManager;
   private attributes: Map<string, string>;
-  private children: Array<ElementBuilderInterface | HTMLElement | string>;
+  private children: Array<ElementBuilderInterface | ElementModel | HTMLElement | string>;
   private eventListeners: Map<
     string,
     Array<{ handler: EventListener; options?: AddEventListenerOptions }>
@@ -63,6 +63,7 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
   private lifecycle: LifecycleManager;
   private options: BuilderOptions;
   private isBuilt: boolean = false;
+  private customEvents: Record<string, Function> = {};
 
   /**
    * Create a new ElementBuilder
@@ -255,27 +256,25 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
   }
 
   /**
-   * Set theme (dark/light) - applies appropriate style modifiers
-   * @param theme - Theme to apply
+   * Apply dark theme styling - applies white text/icon color style modifiers
+   * @param isDark - Whether to apply dark theme (true = apply white colors, false/undefined = no modification)
    * @returns This builder for chaining
+   * @example
+   * ```typescript
+   * // Apply dark theme
+   * .withThemeDark(true)
+   *
+   * // From props
+   * .withThemeDark(props.isThemeDark)
+   *
+   * // Conditional
+   * .withThemeDark(someCondition)
+   * ```
    */
-  withTheme(theme: ThemeType): this {
+  withThemeDark(isDark?: boolean): this {
     this.assertNotBuilt();
-    this.options.theme = theme;
-    this.styles.addTheme(theme);
-    this.withAttribute('data-theme', theme);
-    return this;
-  }
-
-  /**
-   * Conditionally set theme
-   * @param condition - Whether to set the theme
-   * @param theme - Theme to set if condition is true
-   * @returns This builder for chaining
-   */
-  withThemeIf(condition: boolean, theme: ThemeType): this {
-    if (condition) {
-      this.withTheme(theme);
+    if (isDark) {
+      this.options.isThemeDark = true;
     }
     return this;
   }
@@ -462,7 +461,7 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
    * @returns This builder for chaining
    */
   withChild(
-    child: ElementBuilderInterface | HTMLElement | string | null | undefined,
+    child: ElementBuilderInterface | ElementModel | HTMLElement | string | null | undefined,
   ): this {
     this.assertNotBuilt();
     if (child !== null && child !== undefined) {
@@ -473,11 +472,13 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
 
   /**
    * Add multiple children
+   * Supports ElementBuilder, ElementModel, HTMLElement, or string children
+   * ElementModel children will have their styles automatically merged
    * @param children - Children to add
    * @returns This builder for chaining
    */
   withChildren(
-    ...children: Array<ElementBuilderInterface | HTMLElement | string>
+    ...children: Array<ElementBuilderInterface | ElementModel | HTMLElement | string>
   ): this {
     children.forEach((child) => this.withChild(child));
     return this;
@@ -616,6 +617,35 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
   }
 
   /**
+   * Add custom events/methods to the ElementModel
+   * These will be available on the returned ElementModel.events object
+   *
+   * @param events - Object containing custom event handlers or methods
+   * @returns This builder for chaining
+   *
+   * @example
+   * ```typescript
+   * const video = new ElementBuilder('div')
+   *   .withEvents({
+   *     play: () => videoElement.play(),
+   *     pause: () => videoElement.pause(),
+   *     seek: (time) => videoElement.currentTime = time
+   *   })
+   *   .build();
+   *
+   * // Use the events
+   * video.events.play();
+   * video.events.pause();
+   * video.events.seek(30);
+   * ```
+   */
+  withEvents(events: Record<string, Function>): this {
+    this.assertNotBuilt();
+    this.customEvents = { ...this.customEvents, ...events };
+    return this;
+  }
+
+  /**
    * Add a custom element modifier function
    * Useful for imperative DOM manipulation
    * @param modifier - Function that receives the element
@@ -735,6 +765,7 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
         styles: this.styles.compile(),
         update: (props) => this.update(props),
         destroy: () => this.destroy(),
+        ...(Object.keys(this.customEvents).length > 0 && { events: this.customEvents }),
       };
     }
 
@@ -753,6 +784,12 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
         this.element.appendChild(built.element);
         if (built.styles) {
           childStyles.push(built.styles);
+        }
+      } else if (isElementModel(child)) {
+        // Handle ElementModel children - extract element and merge styles
+        this.element.appendChild(child.element);
+        if (child.styles) {
+          childStyles.push(child.styles);
         }
       } else if (child instanceof HTMLElement) {
         this.element.appendChild(child);
@@ -792,6 +829,7 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
       styles: allStyles,
       update: (props: Partial<BuilderOptions>) => this.update(props),
       destroy: () => this.destroy(),
+      ...(Object.keys(this.customEvents).length > 0 && { events: this.customEvents }),
     };
 
     return model;

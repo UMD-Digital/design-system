@@ -175,12 +175,21 @@ const myHero = hero({
 All builders return an `ElementModel` with this structure:
 
 ```typescript
-interface ElementModel {
-  element: HTMLElement; // The styled DOM element
-  className: string; // The class name applied
-  styles: string; // Generated CSS styles
+interface ElementModel<T extends HTMLElement = HTMLElement> {
+  element: T;              // The built HTML element
+  styles: string;          // Compiled CSS styles (including children)
+  update?: (props) => void; // Optional update method for reactivity
+  destroy?: () => void;    // Optional cleanup method
+  events?: Record<string, Function>; // Optional custom events ✨ NEW
 }
 ```
+
+**Properties:**
+- `element` - The DOM element created by the builder
+- `styles` - CSS string including all styles (auto-merged from children)
+- `update()` - Update the element with new props (when supported)
+- `destroy()` - Clean up event listeners and resources
+- `events` - Custom methods/events attached via `.withEvents()` (optional)
 
 ### Complete Example
 
@@ -258,6 +267,170 @@ const fadeInDiv = new ElementBuilder()
 
 **Note**: Keyframe definitions must be provided in your CSS. Phase 2 of the animation system (coming soon) will support inline keyframe definitions.
 
+## Advanced Features
+
+### ElementModel Children with Auto-Style Merging
+
+The builder now intelligently handles `ElementModel` children, automatically merging their styles with the parent. This eliminates the need for manual style concatenation:
+
+```typescript
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { actions } from '@universityofmaryland/web-builder-library/presets';
+
+// Create a button ElementModel
+const button = actions
+  .primary()
+  .withText('Play')
+  .withStyles({ element: { backgroundColor: 'blue' } })
+  .build();
+
+// Pass ElementModel directly to withChildren - styles merge automatically!
+const container = new ElementBuilder()
+  .withClassName('video-container')
+  .withStyles({ element: { padding: '20px' } })
+  .withChildren(videoElement, button)  // button is ElementModel, not button.element
+  .build();
+
+// container.styles now includes both container and button styles
+// No manual concatenation needed!
+```
+
+**Before (manual approach):**
+```typescript
+const button = new ElementBuilder('button').build();
+const container = new ElementBuilder()
+  .withChild(button.element)  // Must extract .element
+  .build();
+
+// Manual style merging required
+const styleTag = document.createElement('style');
+styleTag.textContent = container.styles + button.styles;
+document.head.appendChild(styleTag);
+```
+
+**After (automatic approach):**
+```typescript
+const button = new ElementBuilder('button').build();
+const container = new ElementBuilder()
+  .withChild(button)  // Pass ElementModel directly
+  .build();
+
+// Styles are already merged!
+const styleTag = document.createElement('style');
+styleTag.textContent = container.styles;  // Includes button styles
+document.head.appendChild(styleTag);
+```
+
+**Supported Child Types:**
+- `ElementBuilder` - Another builder (auto-built and merged)
+- `ElementModel` - Previously built element (auto-merged) ✨ **NEW**
+- `HTMLElement` - Plain DOM element
+- `string` - Text content
+
+### Custom Events with `.withEvents()`
+
+Attach custom methods and event handlers to your ElementModel for imperative control:
+
+```typescript
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+
+const videoElement = document.createElement('video');
+const button = document.createElement('button');
+
+const videoPlayer = new ElementBuilder()
+  .withClassName('video-player')
+  .withChildren(videoElement, button)
+  .withEvents({
+    play: () => videoElement.play(),
+    pause: () => videoElement.pause(),
+    seek: (time: number) => videoElement.currentTime = time,
+    getCurrentTime: () => videoElement.currentTime,
+  })
+  .build();
+
+// Use custom events
+videoPlayer.events.play();
+videoPlayer.events.pause();
+videoPlayer.events.seek(30);
+console.log(videoPlayer.events.getCurrentTime());
+```
+
+**Real-World Example - Video Toggle:**
+
+```typescript
+const button = new ElementBuilder('button')
+  .withAttribute('type', 'button')
+  .withAttribute('aria-label', 'Play')
+  .withHTML(playIcon)
+  .build();
+
+const setPlay = () => {
+  button.element.setAttribute('aria-label', 'Pause');
+  button.element.innerHTML = pauseIcon;
+  video.play();
+};
+
+const setPause = () => {
+  button.element.setAttribute('aria-label', 'Play');
+  button.element.innerHTML = playIcon;
+  video.pause();
+};
+
+// Clean, declarative API
+const videoToggle = new ElementBuilder()
+  .withClassName('umd-element-video')
+  .withStyles({ element: { position: 'relative' } })
+  .withChildren(video, button)  // ElementModel auto-merged
+  .withEvents({ setPlay, setPause })  // Custom events attached
+  .build();
+
+// Use the events
+videoToggle.events.setPlay();
+videoToggle.events.setPause();
+```
+
+**Benefits:**
+- Clean separation of DOM structure and behavior
+- No manual object spreading required
+- Type-safe event definitions
+- Events only included when defined (optional property)
+
+### Combined Usage
+
+Both features work together seamlessly for complex components:
+
+```typescript
+// Child component with events
+const controlPanel = new ElementBuilder()
+  .withClassName('controls')
+  .withChildren(playButton, stopButton, volumeSlider)
+  .withEvents({
+    play: () => console.log('play'),
+    stop: () => console.log('stop'),
+  })
+  .build();
+
+// Parent component uses child as ElementModel
+const mediaPlayer = new ElementBuilder()
+  .withClassName('media-player')
+  .withChildren(
+    videoElement,
+    controlPanel,  // ElementModel with events - styles auto-merge
+    progressBar
+  )
+  .withEvents({
+    fullscreen: () => document.documentElement.requestFullscreen(),
+  })
+  .build();
+
+// Both components maintain their own events
+controlPanel.events.play();
+mediaPlayer.events.fullscreen();
+
+// Styles are fully merged
+styleTag.textContent = mediaPlayer.styles;  // Includes controlPanel styles
+```
+
 ## Alternative Import Patterns
 
 For tree-shaking and selective imports, you can import specific modules:
@@ -308,10 +481,11 @@ The core builder class provides a comprehensive fluent API:
 - `withData(attrs)` - Set data attributes
 - `withText(text)` - Set text content
 - `withHTML(html)` - Set inner HTML
-- `withChild(child)` - Add child element
-- `withChildren(...children)` - Add multiple children
+- `withChild(child)` - Add child element (supports ElementModel with auto-style merge)
+- `withChildren(...children)` - Add multiple children (supports ElementModel with auto-style merge)
 - `withChildIf(condition, child)` - Conditionally add child
 - `withChildrenFrom(items, mapper)` - Map array to children
+- `withEvents(events)` - Attach custom events/methods to ElementModel ✨ **NEW**
 - `on(event, handler, options?)` - Add event listener
 - `onClick/onInput/onChange/onFocus/etc` - Convenience event methods
 - `withAnimation(name, options)` - Add CSS animation

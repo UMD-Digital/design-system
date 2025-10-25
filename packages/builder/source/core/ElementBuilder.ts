@@ -14,7 +14,6 @@ import type {
   BuilderOptions,
   ElementModel,
   AnimationType,
-  ThemeType,
   ElementBuilderInterface,
 } from './types';
 import { isElementBuilder } from './types';
@@ -120,8 +119,8 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
     if (options.children) {
       this.withChildren(...options.children);
     }
-    if (options.theme) {
-      this.withTheme(options.theme);
+    if (options.isThemeDark) {
+      this.withThemeDark(options.isThemeDark);
     }
     if (options.styles) {
       this.withStyles(options.styles);
@@ -775,6 +774,11 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
         this.element.addEventListener(event, handler, options);
       });
     });
+
+    // Apply theme modifiers before compiling styles
+    if (this.options.isThemeDark) {
+      this.styles.setThemeDark(true);
+    }
 
     const compiledStyles = this.styles.compile();
     const allStyles = [compiledStyles, ...childStyles]

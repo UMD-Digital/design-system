@@ -114,7 +114,7 @@ export function textLockup(props: TextLockupProps): ElementBuilderInterface<HTML
     .withClassName('umd-text-lockup');
 
   if (theme) {
-    container.withTheme(theme);
+    container.withThemeDark(theme === 'dark');
   }
 
   // Add eyebrow if provided
@@ -187,7 +187,7 @@ export function card(props: CardProps): ElementBuilderInterface<HTMLDivElement> 
     });
 
   if (theme) {
-    container.withTheme(theme);
+    container.withThemeDark(theme === 'dark');
   }
 
   // Add image if provided
@@ -303,7 +303,7 @@ export function hero(props: HeroProps): ElementBuilderInterface<HTMLDivElement> 
     });
 
   if (theme) {
-    container.withTheme(theme);
+    container.withThemeDark(theme === 'dark');
   }
 
   // Add background image if provided

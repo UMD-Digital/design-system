@@ -498,25 +498,28 @@ describe('ElementBuilder', () => {
   });
 
   describe('Theme Support', () => {
-    test('should set theme attribute', () => {
+    test('should apply dark theme to styles', () => {
       const div = document.createElement('div');
 
       const model = new ElementBuilder(div)
-        .withTheme('dark')
+        .withStyles({ element: { color: 'black' } })
+        .withThemeDark(true)
         .build();
 
-      expect(model.element.getAttribute('data-theme')).toBe('dark');
+      // Dark theme should convert black to white
+      expect(model.styles).toContain('color: white');
     });
 
-    test('should apply theme to styles', () => {
+    test('should not apply theme modifiers when false', () => {
       const div = document.createElement('div');
 
       const model = new ElementBuilder(div)
-        .withStyles({ element: { color: 'white' } })
-        .withTheme('dark')
+        .withStyles({ element: { color: 'black' } })
+        .withThemeDark(false)
         .build();
 
-      expect(model.styles).toBeTruthy();
+      // Should keep original color
+      expect(model.styles).toContain('color: black');
     });
   });
 
@@ -600,7 +603,7 @@ describe('ElementBuilder', () => {
       const model = new ElementBuilder(div)
         .withClassName('container')
         .withAttribute('id', 'main')
-        .withTheme('dark')
+        .withThemeDark(true)
         .withChild(child)
         .withAria({ label: 'Container' })
         .withData({ value: '123' })
@@ -609,7 +612,7 @@ describe('ElementBuilder', () => {
 
       expect(model.element.classList.contains('container')).toBe(true);
       expect(model.element.getAttribute('id')).toBe('main');
-      expect(model.element.getAttribute('data-theme')).toBe('dark');
+      // Dark theme applies style modifiers, not attributes
       expect(model.element.getAttribute('aria-label')).toBe('Container');
       expect(model.element.getAttribute('data-value')).toBe('123');
       expect(model.element.children.length).toBe(1);

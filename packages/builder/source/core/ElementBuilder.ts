@@ -750,6 +750,30 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
   }
 
   /**
+   * Get compiled styles without building the element
+   * Useful when you only need the styles from a preset or builder
+   * Does not mark the builder as built
+   * @returns Compiled CSS string
+   *
+   * @example
+   * ```typescript
+   * const presetStyles = actions.primary().getStyles();
+   *
+   * const element = new ElementBuilder(myElement)
+   *   .withStyles(presetStyles)
+   *   .build();
+   * ```
+   */
+  getStyles(): string {
+    // Apply theme modifiers before compiling styles
+    if (this.options.isThemeDark) {
+      this.styles.setThemeDark(true);
+    }
+
+    return this.styles.compile();
+  }
+
+  /**
    * Build the final element with all styles applied
    * This is the terminal operation that returns ElementModel
    * Can only be called once per builder instance

@@ -1,11 +1,11 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { asset as assetElement } from '@universityofmaryland/web-styles-library/element';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import {
   createMediaQuery,
   createMediaQueryRange,
 } from '@universityofmaryland/web-utilities-library/styles';
-import { type UMDElement } from '../../../_types';
+import { type ElementModel } from '../../../_types';
 
 const smallBreakpoint = token.media.breakpointValues.small.max;
 const mediumBreakpointStart = token.media.breakpointValues.medium.min;
@@ -23,13 +23,12 @@ export const image = ({
   hasBorder = false,
   isThemeDark = false,
 }: BoxProps & {
-  children: UMDElement[];
+  children: ElementModel[];
   customStyles?: Record<string, any>;
-}) =>
-  ElementBuilder.create.div({
-    className: 'layout-block-stacked-image',
-    children,
-    elementStyles: {
+}) => {
+  return new ElementBuilder()
+    .withClassName('layout-block-stacked-image')
+    .withStyles({
       element: {
         height: 'auto',
         position: 'relative',
@@ -71,8 +70,10 @@ export const image = ({
           }),
         },
       },
-    },
-  });
+    })
+    .withChildren(...children)
+    .build();
+};
 
 export const textContainer = ({
   children,
@@ -82,12 +83,11 @@ export const textContainer = ({
   isTransparent = false,
 }: BoxProps & {
   customStyles?: Record<string, any>;
-  children: UMDElement[];
-}) =>
-  ElementBuilder.create.div({
-    className: 'layout-block-stacked-text',
-    children,
-    elementStyles: {
+  children: ElementModel[];
+}) => {
+  return new ElementBuilder()
+    .withClassName('layout-block-stacked-text')
+    .withStyles({
       element: {
         maxWidth: `${token.spacing.maxWidth.smallest}`,
 
@@ -110,8 +110,10 @@ export const textContainer = ({
 
         ...customStyles,
       },
-    },
-  });
+    })
+    .withChildren(...children)
+    .build();
+};
 
 export const container = ({
   children,
@@ -121,12 +123,11 @@ export const container = ({
   isTransparent = false,
 }: BoxProps & {
   customStyles?: Record<string, any>;
-  children: UMDElement[];
-}) =>
-  ElementBuilder.create.div({
-    className: 'layout-block-stacked-container',
-    children,
-    elementStyles: {
+  children: ElementModel[];
+}) => {
+  return new ElementBuilder()
+    .withClassName('layout-block-stacked-container')
+    .withStyles({
       element: {
         containerType: 'inline-size',
         height: '100%',
@@ -161,5 +162,7 @@ export const container = ({
 
         ...customStyles,
       },
-    },
-  });
+    })
+    .withChildren(...children)
+    .build();
+};

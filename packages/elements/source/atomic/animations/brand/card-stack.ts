@@ -1,8 +1,8 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
 import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
-import { type ElementVisual } from '../../../_types';
+import { type ElementModel } from '../../../_types';
 import { assets } from 'atomic';
 
 interface CardStackProps {
@@ -693,17 +693,6 @@ const createGridElement = (
   index: number,
   placement: ConfigurationItem,
 ) => {
-  const children: ElementVisual[] = [];
-
-  if (element.tagName === 'IMG') {
-    children.push(
-      assets.image.background({
-        element: element as HTMLImageElement,
-        isScaled: true,
-      }),
-    );
-  }
-
   const rowStart = placement.row ? parseInt(placement.row.split(' / ')[0]) : 0;
 
   const getStartRange = (row: number): number => {
@@ -725,10 +714,9 @@ const createGridElement = (
   const animationRangeStart = `${startRange}vh`;
   const animationRangeEnd = `${endRange}vh`;
 
-  return ElementBuilder.create.div({
-    className: `${STACK_ELEMENT_CLASS}-${index}`,
-    children,
-    elementStyles: {
+  const builder = new ElementBuilder()
+    .withClassName(`${STACK_ELEMENT_CLASS}-${index}`)
+    .withStyles({
       element: {
         overflow: 'clip',
         height: '100%',
@@ -742,8 +730,17 @@ const createGridElement = (
           animationDuration: '1ms',
         }),
       },
-    },
-  });
+    });
+
+  if (element.tagName === 'IMG') {
+    const backgroundImage = assets.image.background({
+      element: element as HTMLImageElement,
+      isScaled: true,
+    });
+    builder.withChild(backgroundImage);
+  }
+
+  return builder.build();
 };
 
 const createGridItem = (
@@ -757,10 +754,11 @@ const createGridItem = (
   const animationRangeStart = `${startRange}vh`;
   const animationRangeEnd = `${endRange}vh`;
 
-  return ElementBuilder.create.div({
-    className: `${STACK_ITEM_CLASS}-${index}`,
-    children: [createGridElement(element, index, placement)],
-    elementStyles: {
+  const gridElement = createGridElement(element, index, placement);
+
+  return new ElementBuilder()
+    .withClassName(`${STACK_ITEM_CLASS}-${index}`)
+    .withStyles({
       element: {
         gridColumn: placement.column,
         gridRow: placement.row,
@@ -785,8 +783,9 @@ const createGridItem = (
           animationRangeEnd,
         }),
       },
-    },
-  });
+    })
+    .withChild(gridElement)
+    .build();
 };
 
 const createGrid = (props: CardStackProps) => {
@@ -795,9 +794,7 @@ const createGrid = (props: CardStackProps) => {
 
   if (!config) {
     console.warn(`No configuration found for ${totalCount} elements`);
-    return ElementBuilder.create.div({
-      className: STACK_GRID_ERROR_CLASS,
-    });
+    return new ElementBuilder().withClassName(STACK_GRID_ERROR_CLASS).build();
   }
 
   const gridItems = props.images.map((element, index) => {
@@ -805,10 +802,11 @@ const createGrid = (props: CardStackProps) => {
     return createGridItem(element, placement, index);
   });
 
-  return ElementBuilder.create.div({
-    className: STACK_GRID_CLASS,
-    children: gridItems,
-    elementStyles: {
+  const gridItemElements = gridItems.map((item) => item);
+
+  return new ElementBuilder()
+    .withClassName(STACK_GRID_CLASS)
+    .withStyles({
       element: {
         display: 'grid',
         gridTemplateColumns: 'repeat(16, 1fr)',
@@ -828,8 +826,9 @@ const createGrid = (props: CardStackProps) => {
           transform: 'translate(-50%, -25%)',
         }),
       },
-    },
-  });
+    })
+    .withChildren(...gridItemElements)
+    .build();
 };
 
 const createFeatured = (
@@ -837,36 +836,12 @@ const createFeatured = (
   isExpand: boolean,
   totalCount: number,
 ) => {
-  const children: ElementVisual[] = [];
-  let video: (ElementVisual & { events: { setPlay: () => void } }) | undefined;
-
-  if (element.tagName === 'IMG') {
-    children.push(
-      assets.image.background({
-        element: element as HTMLImageElement,
-        isScaled: true,
-      }),
-    );
-  }
-
-  if (element.tagName === 'VIDEO') {
-    element.setAttribute('muted', 'true');
-    element.setAttribute('playsinline', 'true');
-    element.setAttribute('loop', 'true');
-
-    video = assets.video.toggle({
-      video: element as HTMLVideoElement,
-      isScaled: true,
-    });
-    children.push(video);
-  }
-
+  let video: ElementModel | undefined;
   const { width: widthPercentage, height: heightVh } = getResponsiveSizes();
 
-  const featuredElement = ElementBuilder.create.div({
-    className: `${STACK_ELEMENT_CLASS}-featured`,
-    children,
-    elementStyles: {
+  const builder = new ElementBuilder()
+    .withClassName(`${STACK_ELEMENT_CLASS}-featured`)
+    .withStyles({
       element: {
         position: 'absolute',
         top: '20vh',
@@ -898,15 +873,39 @@ const createFeatured = (
           }),
         }),
       },
-    },
-  });
+    });
+
+  if (element.tagName === 'IMG') {
+    const backgroundImage = assets.image.background({
+      element: element as HTMLImageElement,
+      isScaled: true,
+    });
+    builder.withChild(backgroundImage);
+  }
+
+  if (element.tagName === 'VIDEO') {
+    element.setAttribute('muted', 'true');
+    element.setAttribute('playsinline', 'true');
+    element.setAttribute('loop', 'true');
+
+    video = assets.video.toggle({
+      video: element as HTMLVideoElement,
+      isScaled: true,
+    });
+
+    if (video && video.element instanceof HTMLElement) {
+      builder.withChild(video as ElementModel & { element: HTMLElement });
+    }
+  }
+
+  const featuredElement = builder.build();
 
   if (isExpand && featuredElement.element instanceof HTMLElement) {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            if (video) video.events.setPlay();
+            if (video?.events?.setPlay) video.events.setPlay();
             observer.disconnect();
           }
         });
@@ -924,17 +923,16 @@ const createFeatured = (
 };
 
 const createSticky = (props: CardStackProps) => {
-  const wrapper = ElementBuilder.create.div({
-    className: `${STACK_CONTAINER_CLASS}-sticky-wrapper`,
-    children: [
-      createGrid(props),
-      createFeatured(
-        props.featured,
-        props.isExpandFeature,
-        props.images.length,
-      ),
-    ],
-    elementStyles: {
+  const grid = createGrid(props);
+  const featured = createFeatured(
+    props.featured,
+    props.isExpandFeature,
+    props.images.length,
+  );
+
+  const wrapper = new ElementBuilder()
+    .withClassName(`${STACK_CONTAINER_CLASS}-sticky-wrapper`)
+    .withStyles({
       element: {
         position: 'relative',
 
@@ -943,13 +941,13 @@ const createSticky = (props: CardStackProps) => {
           top: 0,
         }),
       },
-    },
-  });
+    })
+    .withChildren(grid, featured)
+    .build();
 
-  return ElementBuilder.create.div({
-    className: `${STACK_CONTAINER_CLASS}-sticky`,
-    children: [wrapper],
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName(`${STACK_CONTAINER_CLASS}-sticky`)
+    .withStyles({
       element: {
         ...withViewTimelineAnimation({
           height: '200vh',
@@ -959,22 +957,25 @@ const createSticky = (props: CardStackProps) => {
           }),
         }),
       },
-    },
-  });
+    })
+    .withChild(wrapper)
+    .build();
 };
 
 export default (props: CardStackProps) => {
-  const composite = ElementBuilder.create.div({
-    className: STACK_CONTAINER_CLASS,
-    children: [createSticky(props)],
-    elementStyles: {
+  const sticky = createSticky(props);
+
+  const composite = new ElementBuilder()
+    .withClassName(STACK_CONTAINER_CLASS)
+    .withStyles({
       element: {
         containerType: 'inline-size',
         opacity: '0',
         overflow: 'clip',
       },
-    },
-  });
+    })
+    .withChild(sticky)
+    .build();
 
   const loadAnimation = async () => {
     const totalCount = props.images.length;

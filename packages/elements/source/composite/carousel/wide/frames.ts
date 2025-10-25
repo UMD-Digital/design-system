@@ -1,8 +1,9 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { createElementWithRefs } from './_elementModel';
 import { createControlButton } from './controls';
-import { type ElementVisual } from '../../../_types';
+import { type UMDElement } from '../../../_types';
 import { assets } from 'atomic';
 import { type CarouselWideProps } from '../_types';
 
@@ -15,16 +16,17 @@ const createSlideContent = ({
   slide: CarouselWideProps['slides'][0];
   isThemeDark?: boolean;
 }) => {
-  const children: ElementVisual[] = [];
+  const children: UMDElement[] = [];
 
   // Create content container first to get reference
-  let contentContainer: ElementVisual | null = null;
+  let contentContainer: UMDElement | null = null;
 
-  const closeButton = ElementBuilder.create.element({
-    element: document.createElement('button'),
-    className: 'umd-carousel-wide__slide-content-close',
-    attributes: [{ type: 'button' }, { 'aria-label': 'Close content' }],
-    elementStyles: {
+  const closeButton = new ElementBuilder('button')
+    .withClassName('umd-carousel-wide__slide-content-close')
+    .withAttribute('type', 'button')
+    .withAttribute('aria-label', 'Close content')
+    .withHTML('×')
+    .withStyles({
       element: {
         position: 'absolute',
         top: 0,
@@ -54,49 +56,45 @@ const createSlideContent = ({
           },
         }),
       },
-    },
-  });
-
-  closeButton.element.innerHTML = '×';
-
-  closeButton.element.addEventListener('click', () => {
-    if (contentContainer) contentContainer.element.style.display = 'none';
-  });
+    })
+    .withModifier((el) => {
+      el.addEventListener('click', () => {
+        if (contentContainer) contentContainer.element.style.display = 'none';
+      });
+    })
+    .build();
 
   children.push(closeButton);
 
   if (slide.headline) {
     children.push(
-      ElementBuilder.styled.headline.sansLarge({
-        element: slide.headline,
-        elementStyles: {
+      new ElementBuilder(slide.headline)
+        .styled(Styles.typography.sans.large)
+        .withStyles({
           element: {
             color: `${token.color.black}`,
           },
           siblingAfter: {
             marginTop: token.spacing.sm,
           },
-        },
-        isThemeDark,
-      }),
+        })
+        .build(),
     );
   }
 
   if (slide.text) {
     children.push(
-      ElementBuilder.styled.richText.simple({
-        element: slide.text,
-        isThemeDark,
-      }),
+      new ElementBuilder(slide.text)
+        .styled(Styles.element.text.rich.simple)
+        .build(),
     );
   }
 
   if (children.length === 1) return null;
 
-  contentContainer = ElementBuilder.create.div({
-    className: 'umd-carousel-wide__slide-content',
-    children,
-    elementStyles: {
+  contentContainer = new ElementBuilder()
+    .withClassName('umd-carousel-wide__slide-content')
+    .withStyles({
       element: {
         backgroundColor: token.color.white,
         border: `1px solid ${token.color.gray.light}`,
@@ -131,8 +129,9 @@ const createSlideContent = ({
           }),
         },
       },
-    },
-  });
+    })
+    .withChildren(...children)
+    .build();
 
   return contentContainer;
 };
@@ -142,7 +141,7 @@ const createMainFrameSlide = (
   index: number,
   isThemeDark?: boolean,
 ) => {
-  const children: ElementVisual[] = [];
+  const children: UMDElement[] = [];
   const slideContentWrapper = createSlideContent({ slide, isThemeDark });
 
   children.push(
@@ -154,12 +153,10 @@ const createMainFrameSlide = (
 
   if (slideContentWrapper) children.push(slideContentWrapper);
 
-  return ElementBuilder.create.element({
-    element: document.createElement('figure'),
-    className: 'umd-carousel-wide__slide',
-    children,
-    attributes: [{ 'data-index': `${index}` }],
-    elementStyles: {
+  return new ElementBuilder('figure')
+    .withClassName('umd-carousel-wide__slide')
+    .withAttribute('data-index', `${index}`)
+    .withStyles({
       element: {
         display: 'none',
         opacity: 0,
@@ -208,18 +205,22 @@ const createMainFrameSlide = (
           transform: 'translateY(0)',
         },
       },
-    },
-  });
+    })
+    .withChildren(...children)
+    .build();
 };
 
 const createPreviewContainer = (position: 'left' | 'right') => {
   const isPositionLeft = position === 'left';
-  return ElementBuilder.create.div({
-    className: isPositionLeft
-      ? 'umd-carousel-wide__preview--left'
-      : 'umd-carousel-wide__preview--right',
-    attributes: [{ 'aria-hidden': 'true' }, { role: 'presentation' }],
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName(
+      isPositionLeft
+        ? 'umd-carousel-wide__preview--left'
+        : 'umd-carousel-wide__preview--right',
+    )
+    .withAttribute('aria-hidden', 'true')
+    .withAttribute('role', 'presentation')
+    .withStyles({
       element: {
         display: 'none',
         overflow: 'hidden',
@@ -258,8 +259,8 @@ const createPreviewContainer = (position: 'left' | 'right') => {
           },
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 const createMainContainer = (
@@ -277,16 +278,16 @@ const createMainContainer = (
   }
 
   return {
-    component: ElementBuilder.create.div({
-      className: 'umd-carousel-wide__main-container',
-      children: slideElements,
-      elementStyles: {
+    component: new ElementBuilder()
+      .withClassName('umd-carousel-wide__main-container')
+      .withStyles({
         element: {
           position: 'relative',
           overflow: 'hidden',
         },
-      },
-    }),
+      })
+      .withChildren(...slideElements)
+      .build(),
     refs: slideElements.map((el) => el.element),
   };
 };

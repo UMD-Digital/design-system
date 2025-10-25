@@ -1,4 +1,4 @@
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { assets } from 'atomic';
 
 export default ({ image }: { image: HTMLImageElement }) => {
@@ -44,23 +44,22 @@ export default ({ image }: { image: HTMLImageElement }) => {
     resizeObserver.observe(container);
   }, 0);
 
-  const elementModel = ElementBuilder.create.element({
-    element: container,
-    className: 'media-gif',
-    children: [
-      assets.image.background({
-        element: image,
-        isShowCaption: true,
-        isScaled: false,
-        isGifAllowed: true,
-        customStyles: {
-          width: 'auto',
-          height: '100%',
-          display: 'block',
-        },
-      }),
-    ],
-    elementStyles: {
+  const imageElement = assets.image.background({
+    element: image,
+    isShowCaption: true,
+    isScaled: false,
+    isGifAllowed: true,
+    customStyles: {
+      width: 'auto',
+      height: '100%',
+      display: 'block',
+    },
+  });
+
+  const elementModel = new ElementBuilder(container)
+    .withClassName('media-gif')
+    .withChild(imageElement)
+    .withStyles({
       element: {
         maxHeight: '100%',
         maxWidth: '100%',
@@ -68,8 +67,8 @@ export default ({ image }: { image: HTMLImageElement }) => {
         display: 'block',
         overflow: 'hidden',
       },
-    },
-  });
+    })
+    .build();
 
   return {
     ...elementModel,

@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
-import { type ElementVisual } from '../../_types';
 import { assets, textLockup } from 'atomic';
 
 interface PathwayHeroProps {
@@ -72,39 +72,11 @@ const createAssetColumn = ({
   PathwayHeroProps,
   'image' | 'video' | 'includesAnimation' | 'isImagePositionLeft'
 >) => {
-  const children: ElementVisual[] = [];
-
   if (!image && !video) return;
 
-  if (video) {
-    children.push(
-      assets.video.observedAutoPlay({
-        video,
-        isScaled: true,
-        additionalElementStyles: {
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        },
-      }),
-    );
-  }
-
-  if (image && !video) {
-    children.push(
-      assets.image.background({
-        element: image,
-        isScaled: true,
-        isShowCaption: true,
-        isGifAllowed: true,
-      }),
-    );
-  }
-
-  return ElementBuilder.create.div({
-    className: 'pathway-hero-container-asset-wrapper',
-    children,
-    elementStyles: {
+  const builder = new ElementBuilder()
+    .withClassName('pathway-hero-container-asset-wrapper')
+    .withStyles({
       element: {
         overflow: 'hidden',
         position: 'relative',
@@ -137,8 +109,34 @@ const createAssetColumn = ({
           },
         },
       },
-    },
-  });
+    });
+
+  if (video) {
+    builder.withChild(
+      assets.video.observedAutoPlay({
+        video,
+        isScaled: true,
+        additionalElementStyles: {
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
+      }),
+    );
+  }
+
+  if (image && !video) {
+    builder.withChild(
+      assets.image.background({
+        element: image,
+        isScaled: true,
+        isShowCaption: true,
+        isGifAllowed: true,
+      }),
+    );
+  }
+
+  return builder.build();
 };
 
 const createHeadline = (props: Pick<PathwayHeroProps, 'headline'>) => {
@@ -169,10 +167,10 @@ const createHeadline = (props: Pick<PathwayHeroProps, 'headline'>) => {
     },
   };
 
-  return ElementBuilder.styled.headline.campaignExtraLarge({
-    element: headline,
-    elementStyles,
-  });
+  return new ElementBuilder(headline)
+    .styled(Styles.typography.campaign.fonts.extraLarge)
+    .withStyles(elementStyles)
+    .build();
 };
 
 const createTextColumn = (
@@ -195,10 +193,10 @@ const createTextColumn = (
 };
 
 const createTextWrapper = (props: PathwayHeroProps) =>
-  ElementBuilder.create.div({
-    className: 'pathway-hero-container-lock-wrapper',
-    children: [createTextColumn(props)],
-    elementStyles: {
+  new ElementBuilder()
+    .withClassName('pathway-hero-container-lock-wrapper')
+    .withChild(createTextColumn(props))
+    .withStyles({
       element: {
         width: '100%',
 
@@ -228,14 +226,14 @@ const createTextWrapper = (props: PathwayHeroProps) =>
           padding: `${token.spacing['8xl']} 0`,
         },
       },
-    },
-  });
+    })
+    .build();
 
 const createLockColumn = (props: PathwayHeroProps) =>
-  ElementBuilder.styled.layout.spaceHorizontalLarger({
-    element: document.createElement('div'),
-    children: [createTextWrapper(props)],
-    elementStyles: {
+  new ElementBuilder()
+    .styled(Styles.layout.space.horizontal.larger)
+    .withChild(createTextWrapper(props))
+    .withStyles({
       element: {
         position: 'relative',
 
@@ -264,23 +262,16 @@ const createLockColumn = (props: PathwayHeroProps) =>
           }),
         },
       },
-    },
-  });
+    })
+    .build();
 
 const createWrapper = (props: PathwayHeroProps) => {
   const { isImagePositionLeft = false } = props;
   const imageColumn = createAssetColumn(props);
-  const children: ElementVisual[] = [];
 
-  if (imageColumn) {
-    children.push(imageColumn);
-  }
-
-  children.push(createLockColumn(props));
-
-  return ElementBuilder.create.div({
-    className: 'pathway-hero-container-wrapper',
-    elementStyles: {
+  const builder = new ElementBuilder()
+    .withClassName('pathway-hero-container-wrapper')
+    .withStyles({
       element: {
         position: 'relative',
 
@@ -296,22 +287,28 @@ const createWrapper = (props: PathwayHeroProps) => {
           },
         }),
       },
-    },
-    children,
-  });
+    });
+
+  if (imageColumn) {
+    builder.withChild(imageColumn);
+  }
+
+  builder.withChild(createLockColumn(props));
+
+  return builder.build();
 };
 
 export default (props: PathwayHeroProps) => {
-  const composite = ElementBuilder.create.div({
-    className: 'pathway-hero-container',
-    children: [createWrapper(props)],
-    elementStyles: {
+  const composite = new ElementBuilder()
+    .withClassName('pathway-hero-container')
+    .withChild(createWrapper(props))
+    .withStyles({
       element: {
         containerType: 'inline-size',
         position: 'relative',
       },
-    },
-  });
+    })
+    .build();
 
   composite.styles += keyFramePathwayResize;
   composite.styles += keyFramePathwaySlideUp;

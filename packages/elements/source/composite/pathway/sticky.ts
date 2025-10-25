@@ -1,9 +1,10 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { createAssetContent, createTextLockupMedium } from './_common';
-import { type ElementVisual } from '../../_types';
 import { type PathwayStickyProps } from './_types';
+import { type ElementModel } from '../../_types';
 
 const mediumSize = 800;
 const largeSize = 1200;
@@ -18,15 +19,15 @@ const createAssetColumn = (
     | 'isImagePositionLeft'
     | 'isImageScaled'
   >,
-): ElementVisual | null => {
+): ElementModel<HTMLElement> | null => {
   const { image, video, isImagePositionLeft, isImageScaled } = props;
 
   if (!image && !video) return null;
 
-  return ElementBuilder.create.div({
-    className: 'pathway-image-container',
-    children: [createAssetContent(props)],
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('pathway-image-container')
+    .withChild(createAssetContent(props))
+    .withStyles({
       element: {
         position: 'sticky',
         top: '0',
@@ -60,15 +61,17 @@ const createAssetColumn = (
           },
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
-const createTextContent = (props: PathwayStickyProps): ElementVisual => {
-  const wrapper = ElementBuilder.create.div({
-    className: 'pathway-text-container-wrapper',
-    children: [createTextLockupMedium(props)],
-    elementStyles: {
+const createTextContent = (
+  props: PathwayStickyProps,
+): ElementModel<HTMLElement> => {
+  const wrapper = new ElementBuilder()
+    .withClassName('pathway-text-container-wrapper')
+    .withChild(createTextLockupMedium(props))
+    .withStyles({
       element: {
         padding: `${token.spacing.md} 0`,
 
@@ -100,13 +103,13 @@ const createTextContent = (props: PathwayStickyProps): ElementVisual => {
           }),
         },
       },
-    },
-  });
+    })
+    .build();
 
-  const container = ElementBuilder.create.div({
-    className: 'pathway-text-container',
-    children: [wrapper],
-    elementStyles: {
+  const container = new ElementBuilder()
+    .withClassName('pathway-text-container')
+    .withChild(wrapper)
+    .withStyles({
       element: {
         ...(props.isThemeDark && {
           backgroundColor: token.color.black,
@@ -124,8 +127,8 @@ const createTextContent = (props: PathwayStickyProps): ElementVisual => {
           }),
         },
       },
-    },
-  });
+    })
+    .build();
 
   return container;
 };
@@ -133,17 +136,10 @@ const createTextContent = (props: PathwayStickyProps): ElementVisual => {
 const createLock = (props: PathwayStickyProps) => {
   const textContent = createTextContent(props);
   const assetContent = createAssetColumn(props);
-  const children: ElementVisual[] = [];
 
-  if (assetContent) {
-    children.push(assetContent);
-  }
-  children.push(textContent);
-
-  const lockWrapper = ElementBuilder.create.div({
-    className: 'pathway-container-lock-wrapper',
-    children,
-    elementStyles: {
+  const lockWrapper = new ElementBuilder()
+    .withClassName('pathway-container-lock-wrapper')
+    .withStyles({
       element: {
         position: 'relative',
 
@@ -159,36 +155,43 @@ const createLock = (props: PathwayStickyProps) => {
           },
         },
       },
-    },
-  });
+    });
 
-  return ElementBuilder.styled.layout.spaceHorizontalLarger({
-    element: document.createElement('div'),
-    children: [lockWrapper],
-    elementStyles: {
+  if (assetContent) {
+    lockWrapper.withChild(assetContent);
+  }
+  lockWrapper.withChild(textContent);
+
+  const lockWrapperBuilt = lockWrapper.build();
+
+  return new ElementBuilder()
+    .styled(Styles.layout.space.horizontal.larger)
+    .withChild(lockWrapperBuilt)
+    .withStyles({
       element: {
         [`@container (max-width: ${mediumSize - 1}px)`]: {
           paddingLeft: 0,
           paddingRight: 0,
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
-export default (props: PathwayStickyProps) =>
-  ElementBuilder.create.div({
-    className: 'pathway-sticky-container',
-    children: [
-      ElementBuilder.create.div({
-        className: 'pathway-sticky-container-wrapper',
-        children: [createLock(props)],
-      }),
-    ],
-    elementStyles: {
+export default (props: PathwayStickyProps) => {
+  const wrapper = new ElementBuilder()
+    .withClassName('pathway-sticky-container-wrapper')
+    .withChild(createLock(props))
+    .build();
+
+  return new ElementBuilder()
+    .withClassName('pathway-sticky-container')
+    .withChild(wrapper)
+    .withStyles({
       element: {
         container: 'inline-size',
         position: 'relative',
       },
-    },
-  });
+    })
+    .build();
+};

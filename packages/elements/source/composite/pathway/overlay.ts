@@ -1,10 +1,11 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
 import { createTextLockupMedium, createAssetContent } from './_common';
-import { type ElementVisual } from '../../_types';
 import { type PathwayOverlayProps } from './_types';
+import { type ElementModel } from '../../_types';
 
 const REF_TEXT_ELEMENT = 'pathway-text-container';
 const REF_IMAGE_ELEMENT = 'pathway-image-container';
@@ -111,15 +112,15 @@ const createAssetColumn = (
     | 'isImagePositionLeft'
     | 'isImageScaled'
   >,
-): ElementVisual | null => {
+): ElementModel<HTMLElement> | null => {
   const { image, video, includesAnimation, isImagePositionLeft } = props;
 
   if (!image && !video) return null;
 
-  return ElementBuilder.create.div({
-    className: REF_IMAGE_ELEMENT,
-    children: [createAssetContent(props)],
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName(REF_IMAGE_ELEMENT)
+    .withChild(createAssetContent(props))
+    .withStyles({
       element: {
         position: 'relative',
         height: '100%',
@@ -150,15 +151,17 @@ const createAssetColumn = (
           },
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
-const createTextContent = (props: PathwayOverlayProps): ElementVisual => {
-  const wrapper = ElementBuilder.create.div({
-    className: 'pathway-text-container-wrapper',
-    children: [createTextLockupMedium(props)],
-    elementStyles: {
+const createTextContent = (
+  props: PathwayOverlayProps,
+): ElementModel<HTMLElement> => {
+  const wrapper = new ElementBuilder()
+    .withClassName('pathway-text-container-wrapper')
+    .withChild(createTextLockupMedium(props))
+    .withStyles({
       element: {
         padding: `${token.spacing.md} 0`,
 
@@ -190,13 +193,13 @@ const createTextContent = (props: PathwayOverlayProps): ElementVisual => {
           }),
         },
       },
-    },
-  });
+    })
+    .build();
 
-  const container = ElementBuilder.create.div({
-    className: REF_TEXT_ELEMENT,
-    children: [wrapper],
-    elementStyles: {
+  const container = new ElementBuilder()
+    .withClassName(REF_TEXT_ELEMENT)
+    .withChild(wrapper)
+    .withStyles({
       element: {
         zIndex: '99',
 
@@ -215,13 +218,15 @@ const createTextContent = (props: PathwayOverlayProps): ElementVisual => {
           }),
         },
       },
-    },
-  });
+    })
+    .build();
 
   return container;
 };
 
-const createBackground = (props: PathwayOverlayProps): ElementVisual => {
+const createBackground = (
+  props: PathwayOverlayProps,
+): ElementModel<HTMLElement> => {
   const getBackgroundColor = () => {
     if (props.isThemeDark) return token.color.black;
     if (props.isThemeLight) return token.color.gray.lighter;
@@ -229,9 +234,9 @@ const createBackground = (props: PathwayOverlayProps): ElementVisual => {
     return token.color.white;
   };
 
-  return ElementBuilder.create.div({
-    className: 'pathway-overlay-container-background',
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('pathway-overlay-container-background')
+    .withStyles({
       element: {
         position: 'absolute',
         top: '0',
@@ -263,23 +268,17 @@ const createBackground = (props: PathwayOverlayProps): ElementVisual => {
           }),
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 const createLock = (props: PathwayOverlayProps) => {
-  const children = [
-    createBackground(props),
-    createAssetColumn(props),
-    createTextContent(props),
-  ].filter((item): item is ElementVisual => item !== null);
   const isThemeApplied =
     props.isThemeDark || props.isThemeLight || props.isThemeMaryland;
 
-  const lockWrapper = ElementBuilder.create.div({
-    className: 'pathway-overlay-container-lock-wrapper',
-    children,
-    elementStyles: {
+  const lockWrapper = new ElementBuilder()
+    .withClassName('pathway-overlay-container-lock-wrapper')
+    .withStyles({
       element: {
         position: 'relative',
 
@@ -297,40 +296,50 @@ const createLock = (props: PathwayOverlayProps) => {
           }),
         },
       },
-    },
-  });
+    });
 
-  return ElementBuilder.styled.layout.spaceHorizontalLarger({
-    element: document.createElement('div'),
-    children: [lockWrapper],
-    elementStyles: {
+  lockWrapper.withChild(createBackground(props));
+
+  const assetColumn = createAssetColumn(props);
+  if (assetColumn) {
+    lockWrapper.withChild(assetColumn);
+  }
+
+  lockWrapper.withChild(createTextContent(props));
+
+  const lockWrapperBuilt = lockWrapper.build();
+
+  return new ElementBuilder()
+    .styled(Styles.layout.space.horizontal.larger)
+    .withChild(lockWrapperBuilt)
+    .withStyles({
       element: {
         [`@container (max-width: ${mediumSize - 1}px)`]: {
           paddingLeft: 0,
           paddingRight: 0,
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 export default (props: PathwayOverlayProps) => {
-  const composite = ElementBuilder.create.div({
-    className: 'pathway-overlay-container',
-    children: [
-      ElementBuilder.create.div({
-        className: 'pathway-overlay-container-wrapper',
-        children: [createLock(props)],
-      }),
-    ],
-    elementStyles: {
+  const wrapper = new ElementBuilder()
+    .withClassName('pathway-overlay-container-wrapper')
+    .withChild(createLock(props))
+    .build();
+
+  const composite = new ElementBuilder()
+    .withClassName('pathway-overlay-container')
+    .withChild(wrapper)
+    .withStyles({
       element: {
         container: 'inline-size',
         position: 'relative',
         overflow: 'clip',
       },
-    },
-  });
+    })
+    .build();
 
   const loadAnimation = () => {
     if (props.includesAnimation) {

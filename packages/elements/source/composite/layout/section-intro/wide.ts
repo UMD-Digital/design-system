@@ -1,6 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
-import { type ElementVisual } from '../../../_types';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { type ElementModel } from '../../../_types';
 
 export interface SectionIntroWideProps {
   headline?: HTMLElement | null;
@@ -12,31 +13,30 @@ const TABLET = 500;
 
 const createHeadline = (
   props: Pick<SectionIntroWideProps, 'headline'>,
-): ElementVisual | undefined => {
+): ElementModel<HTMLElement> | null => {
   const { headline } = props;
-  if (!headline) return;
+  if (!headline) return null;
 
-  return ElementBuilder.styled.headline.sansLargest({
-    element: headline,
-    elementStyles: {
+  return new ElementBuilder(headline)
+    .styled(Styles.typography.sans.fonts.largest)
+    .withStyles({
       element: {
         fontWeight: 800,
         textTransform: 'uppercase',
       },
-    },
-  });
+    })
+    .build();
 };
 
 const createActions = (
   props: Pick<SectionIntroWideProps, 'actions'>,
-): ElementVisual | undefined => {
+): ElementModel<HTMLElement> | null => {
   const { actions } = props;
-  if (!actions) return;
+  if (!actions) return null;
 
-  return ElementBuilder.create.element({
-    element: actions,
-    className: 'intro-wide-actions',
-    elementStyles: {
+  return new ElementBuilder(actions)
+    .withClassName('intro-wide-actions')
+    .withStyles({
       element: {
         display: 'block',
 
@@ -44,24 +44,19 @@ const createActions = (
           [`* + &`]: { marginTop: token.spacing.md },
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 const createWrapper = (
   props: Pick<SectionIntroWideProps, 'headline' | 'actions' | 'isThemeDark'>,
-): ElementVisual => {
+): ElementModel<HTMLElement> => {
   const headlineElement = createHeadline(props);
   const actionsElement = createActions(props);
 
-  const children = [headlineElement, actionsElement].filter(
-    Boolean,
-  ) as ElementVisual[];
-
-  return ElementBuilder.create.div({
-    className: 'intro-wide-container-wrapper',
-    children,
-    elementStyles: {
+  const wrapper = new ElementBuilder()
+    .withClassName('intro-wide-container-wrapper')
+    .withStyles({
       element: {
         [`@container (min-width: ${TABLET}px)`]: {
           display: 'flex',
@@ -69,20 +64,29 @@ const createWrapper = (
           alignItems: 'center',
         },
       },
-    },
-  });
+    });
+
+  if (headlineElement) {
+    wrapper.withChild(headlineElement);
+  }
+
+  if (actionsElement) {
+    wrapper.withChild(actionsElement);
+  }
+
+  return wrapper.build();
 };
 
 const createContainer = (
   props: Pick<SectionIntroWideProps, 'isThemeDark' | 'headline' | 'actions'>,
-): ElementVisual => {
+): ElementModel<HTMLElement> => {
   const { isThemeDark } = props;
   const wrapperElement = createWrapper(props);
 
-  return ElementBuilder.create.div({
-    className: 'intro-wide-container',
-    children: [wrapperElement],
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('intro-wide-container')
+    .withChild(wrapperElement)
+    .withStyles({
       element: {
         [`& *`]: {
           ...(isThemeDark && {
@@ -90,8 +94,8 @@ const createContainer = (
           }),
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 export default (props: SectionIntroWideProps) => createContainer(props);

@@ -1,7 +1,8 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
-import { type ElementVisual } from '../../../_types';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { type ElementModel } from '../../../_types';
 
 export interface SectionIntroProps {
   headline?: HTMLElement | null;
@@ -39,44 +40,50 @@ const ANIMATION_CONFIGS = {
   `,
 };
 
-const createHeadline = (props: Pick<SectionIntroProps, 'headline'>) => {
+const createHeadline = (
+  props: Pick<SectionIntroProps, 'headline'>,
+): ElementModel<HTMLElement> | null => {
   const { headline } = props;
-  if (!headline) return;
+  if (!headline) return null;
 
-  return ElementBuilder.styled.headline.sansLargest({
-    element: headline,
-    elementStyles: {
+  return new ElementBuilder(headline)
+    .styled(Styles.typography.sans.fonts.largest)
+    .withStyles({
       element: {
         fontWeight: 800,
         textTransform: 'uppercase',
       },
-    },
-  });
+    })
+    .build();
 };
 
-const createText = (props: Pick<SectionIntroProps, 'text'>) => {
+const createText = (
+  props: Pick<SectionIntroProps, 'text'>,
+): ElementModel<HTMLElement> | null => {
   const { text } = props;
-  if (!text) return;
+  if (!text) return null;
 
-  return ElementBuilder.styled.richText.simpleLarge({
-    element: text,
-    elementStyles: {
+  return new ElementBuilder(text)
+    .styled(Styles.element.text.rich.simpleLarge)
+    .withStyles({
       element: {
         [`* + &`]: {
           marginTop: token.spacing.sm,
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
-const createActions = (props: Pick<SectionIntroProps, 'actions'>) => {
+const createActions = (
+  props: Pick<SectionIntroProps, 'actions'>,
+): ElementModel<HTMLElement> | null => {
   const { actions } = props;
-  if (!actions) return;
+  if (!actions) return null;
 
-  return ElementBuilder.styled.layout.gridInlineTabletRows({
-    element: actions,
-    elementStyles: {
+  return new ElementBuilder(actions)
+    .styled(Styles.layout.grid.inline.tabletRows)
+    .withStyles({
       element: {
         justifyContent: 'center',
         alignItems: 'center',
@@ -85,8 +92,8 @@ const createActions = (props: Pick<SectionIntroProps, 'actions'>) => {
           marginTop: token.spacing.md,
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 const createTextContainer = (
@@ -94,21 +101,16 @@ const createTextContainer = (
     SectionIntroProps,
     'headline' | 'text' | 'actions' | 'isThemeDark' | 'includesAnimation'
   >,
-) => {
+): ElementModel<HTMLElement> => {
   const { headline, text, actions, includesAnimation, isThemeDark } = props;
 
   const headlineElement = createHeadline({ headline });
   const textElement = createText({ text });
   const actionsElement = createActions({ actions });
 
-  const children = [headlineElement, textElement, actionsElement].filter(
-    Boolean,
-  ) as ElementVisual[];
-
-  return ElementBuilder.create.div({
-    className: 'intro-default-container-text',
-    children,
-    elementStyles: {
+  const container = new ElementBuilder()
+    .withClassName('intro-default-container-text')
+    .withStyles({
       element: {
         ...(includesAnimation && {
           opacity: 0,
@@ -138,8 +140,21 @@ const createTextContainer = (
           }),
         },
       },
-    },
-  });
+    });
+
+  if (headlineElement) {
+    container.withChild(headlineElement);
+  }
+
+  if (textElement) {
+    container.withChild(textElement);
+  }
+
+  if (actionsElement) {
+    container.withChild(actionsElement);
+  }
+
+  return container.build();
 };
 
 const createWrapper = (
@@ -147,18 +162,18 @@ const createWrapper = (
     SectionIntroProps,
     'headline' | 'text' | 'actions' | 'isThemeDark'
   >,
-) => {
+): ElementModel<HTMLElement> => {
   const textContainerElement = createTextContainer(props);
 
-  return ElementBuilder.create.div({
-    className: 'intro-default-container-wrapper',
-    children: [textContainerElement],
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('intro-default-container-wrapper')
+    .withChild(textContainerElement)
+    .withStyles({
       element: {
         textAlign: 'center',
       },
-    },
-  });
+    })
+    .build();
 };
 
 const createContainer = (
@@ -171,15 +186,15 @@ const createContainer = (
     | 'actions'
     | 'includesAnimation'
   >,
-) => {
+): ElementModel<HTMLElement> => {
   const { isThemeDark, hasSeparator, includesAnimation } = props;
 
   const wrapperElement = createWrapper(props);
 
-  return ElementBuilder.create.div({
-    className: 'intro-default-container',
-    children: [wrapperElement],
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('intro-default-container')
+    .withChild(wrapperElement)
+    .withStyles({
       element: {
         maxWidth: token.spacing.maxWidth.small,
         margin: '0 auto',
@@ -213,8 +228,8 @@ const createContainer = (
           }),
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 const setupAnimation = (

@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { createContainer } from './container';
 import { assets } from 'atomic';
 import { type CarouselWideProps } from '../_types';
@@ -282,24 +282,30 @@ export default (props: CarouselWideProps) => {
     animateSlides(refs, state, index, direction);
   });
 
-  const composite = ElementBuilder.create.div({
-    className: 'umd-carousel-wide',
-    children: [container],
-    attributes: [
-      ...(title ? [{ title }] : [{ title: 'Animated Image Carousel' }]),
-    ],
-    elementStyles: {
-      element: {
-        container: 'umd-carousel-wide / inline-size',
-        display: 'block',
-        position: 'relative',
+  const builder = new ElementBuilder();
 
-        [`@media (${token.media.queries.large.min})`]: {
-          paddingBottom: 0,
-        },
+  builder.withClassName('umd-carousel-wide');
+  builder.withChild(container);
+
+  if (title) {
+    builder.withAttribute('title', title);
+  } else {
+    builder.withAttribute('title', 'Animated Image Carousel');
+  }
+
+  builder.withStyles({
+    element: {
+      container: 'umd-carousel-wide / inline-size',
+      display: 'block',
+      position: 'relative',
+
+      [`@media (${token.media.queries.large.min})`]: {
+        paddingBottom: 0,
       },
     },
   });
+
+  const composite = builder.build();
 
   // Initialize refs
   const refs: CarouselRefs = {

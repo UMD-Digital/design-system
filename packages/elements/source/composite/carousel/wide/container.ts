@@ -1,15 +1,14 @@
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { createIndicator } from './controls';
 import { createFramesContainer } from './frames';
 import { createElementWithRefs } from './_elementModel';
 import { type CarouselWideProps } from '../_types';
 
 const createAriaLive = () => {
-  const liveText = ElementBuilder.create.element({
-    element: document.createElement('p'),
-    className: 'umd-carousel-wide__aria-live',
-    attributes: [{ 'aria-live': 'polite' }],
-    elementStyles: {
+  const liveText = new ElementBuilder('p')
+    .withClassName('umd-carousel-wide__aria-live')
+    .withAttribute('aria-live', 'polite')
+    .withStyles({
       element: {
         position: 'absolute',
         left: '-10000px',
@@ -17,10 +16,10 @@ const createAriaLive = () => {
         height: '1px',
         overflow: 'hidden',
       },
-    },
-  });
+    })
+    .withText('Slide 1 Selected')
+    .build();
 
-  liveText.element.textContent = 'Slide 1 Selected';
   liveText.element.classList.add('sr-only');
 
   return liveText;

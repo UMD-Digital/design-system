@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { arrow_left as iconArrowLeft } from '@universityofmaryland/web-icons-library/arrows';
 import { createElementWithRefs } from './_elementModel';
 import { animations } from 'atomic';
@@ -18,12 +18,18 @@ export const createControlButton = (
   const buttonDesktopPosition = `calc(15vw - (${token.spacing['xl']} + ${token.spacing.md}))`;
   const buttonHighPosition = `calc(20vw - (${token.spacing['xl']} + ${token.spacing.md}))`;
 
-  const button = ElementBuilder.create.element({
-    element: document.createElement('button'),
-    className: isPrev
-      ? 'umd-carousel-wide__control--prev'
-      : 'umd-carousel-wide__control--next',
-    elementStyles: {
+  const srText = new ElementBuilder('span')
+    .withClassName('sr-only')
+    .withText(altText)
+    .build();
+
+  const button = new ElementBuilder('button')
+    .withClassName(
+      isPrev
+        ? 'umd-carousel-wide__control--prev'
+        : 'umd-carousel-wide__control--next',
+    )
+    .withStyles({
       element: {
         backgroundColor: isThemeDark ? token.color.red : token.color.white,
         height: token.spacing.lg,
@@ -75,17 +81,12 @@ export const createControlButton = (
           },
         },
       },
-    },
-  });
-
-  const srText = ElementBuilder.create.element({
-    element: document.createElement('span'),
-    className: 'sr-only',
-  });
-  srText.element.textContent = altText;
-
-  button.element.append(srText.element);
-  button.element.insertAdjacentHTML('afterbegin', iconArrowLeft);
+    })
+    .withModifier((el) => {
+      el.append(srText.element);
+      el.insertAdjacentHTML('afterbegin', iconArrowLeft);
+    })
+    .build();
 
   return button;
 };

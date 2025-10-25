@@ -1,8 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { default as elementIcon } from './icon';
 import { SMALL } from '../_constants';
-import { type ElementVisual } from '../../../_types';
 import {
   type QuoteBaseProps,
   type QuoteVariantProps,
@@ -27,11 +26,10 @@ export default ({
     isTypeFeatured,
     isThemeMaryland,
   });
-  const imageContainerChildren: ElementVisual[] = [];
-  const imageElement = ElementBuilder.create.element({
-    element: image,
-    className: 'quote-image',
-    elementStyles: {
+
+  const imageElement = new ElementBuilder(image)
+    .withClassName('quote-image')
+    .withStyles({
       element: {
         maxWidth: '100%',
         height: 'auto',
@@ -51,19 +49,12 @@ export default ({
             borderRight: `2px solid ${token.color.gold}`,
           }),
       },
-    },
-  });
+    })
+    .build();
 
-  if (!isTypeFeatured) {
-    imageContainerChildren.push(iconSpan);
-  }
-
-  imageContainerChildren.push(imageElement);
-
-  return ElementBuilder.create.div({
-    className: 'quote-image-container',
-    children: imageContainerChildren,
-    elementStyles: {
+  const container = new ElementBuilder()
+    .withClassName('quote-image-container')
+    .withStyles({
       element: {
         display: 'inline-block',
         position: 'relative',
@@ -73,6 +64,13 @@ export default ({
           position: 'relative',
         }),
       },
-    },
-  });
+    });
+
+  if (!isTypeFeatured) {
+    container.withChild(iconSpan);
+  }
+
+  container.withChild(imageElement);
+
+  return container.build();
 };

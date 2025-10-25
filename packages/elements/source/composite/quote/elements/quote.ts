@@ -1,9 +1,8 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { default as elementIcon } from './icon';
 import { SMALL } from '../_constants';
-import { type ElementVisual } from '../../../_types';
 import { type QuoteTextProps } from '../_types';
 
 interface QuoteProps
@@ -55,15 +54,10 @@ export default (props: QuoteProps) => {
     shouldHaveWhiteText = false,
   } = props;
 
-  const children: ElementVisual[] = [];
   const isHasImageAndNotFeatured = hasImage && !isTypeFeatured;
   const iconSpan = elementIcon(props);
   const wordsList = splitWords(quote);
   let quoteTextElement: HTMLElement = quote;
-
-  if (!hasImage) {
-    children.push(iconSpan);
-  }
 
   if (includesAnimation) {
     quoteTextElement = document.createElement('div');
@@ -73,11 +67,9 @@ export default (props: QuoteProps) => {
     });
   }
 
-  const quoteElement = ElementBuilder.create.element({
-    element: quoteTextElement,
-    className: 'quote-container-quote',
-    children,
-    elementStyles: {
+  const builder = new ElementBuilder(quoteTextElement)
+    .withClassName('quote-container-quote')
+    .withStyles({
       element: {
         position: 'relative',
         fontWeight: '700',
@@ -122,8 +114,11 @@ export default (props: QuoteProps) => {
           ...(isSizeLarge && { ...typography.sans.extraLarge }),
         },
       },
-    },
-  });
+    });
 
-  return quoteElement;
+  if (!hasImage) {
+    builder.withChild(iconSpan);
+  }
+
+  return builder.build();
 };

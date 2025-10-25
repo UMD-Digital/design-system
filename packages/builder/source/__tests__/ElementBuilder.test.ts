@@ -801,4 +801,139 @@ describe('ElementBuilder', () => {
       expect(buttonFn).toHaveBeenCalled();
     });
   });
+
+  describe('getStyles() Method', () => {
+    test('should return compiled styles without building element', () => {
+      const builder = new ElementBuilder()
+        .withClassName('test-class')
+        .withStyles({
+          element: {
+            color: 'red',
+            padding: '10px',
+          },
+        });
+
+      const styles = builder.getStyles();
+
+      expect(typeof styles).toBe('string');
+      expect(styles).toContain('.test-class');
+      expect(styles).toContain('color: red');
+      expect(styles).toContain('padding: 10px');
+    });
+
+    test('should not mark builder as built when calling getStyles()', () => {
+      const builder = new ElementBuilder()
+        .withClassName('test-class')
+        .withStyles({
+          element: { color: 'blue' },
+        });
+
+      const styles1 = builder.getStyles();
+
+      // Should still be able to add more styles
+      expect(() => {
+        builder.withStyles({
+          element: { margin: '5px' },
+        });
+      }).not.toThrow();
+
+      const styles2 = builder.getStyles();
+
+      expect(styles2).toContain('color: blue');
+      expect(styles2).toContain('margin: 5px');
+    });
+
+    test('should apply theme modifiers when calling getStyles()', () => {
+      const builder = new ElementBuilder()
+        .withClassName('dark-test')
+        .withThemeDark(true)
+        .withStyles({
+          element: {
+            color: 'black',
+          },
+        });
+
+      const styles = builder.getStyles();
+
+      expect(styles).toBeDefined();
+      expect(typeof styles).toBe('string');
+    });
+
+    test('should return same styles as build() for styles property', () => {
+      const builder1 = new ElementBuilder()
+        .withClassName('compare-test')
+        .withStyles({
+          element: {
+            fontSize: '16px',
+            fontWeight: 'bold',
+          },
+        });
+
+      const builder2 = new ElementBuilder()
+        .withClassName('compare-test')
+        .withStyles({
+          element: {
+            fontSize: '16px',
+            fontWeight: 'bold',
+          },
+        });
+
+      const stylesFromGet = builder1.getStyles();
+      const stylesFromBuild = builder2.build().styles;
+
+      expect(stylesFromGet).toBe(stylesFromBuild);
+    });
+
+    test('should work with presets to extract styles', () => {
+      const presetBuilder = new ElementBuilder()
+        .withClassName('preset-example')
+        .withStyles({
+          element: {
+            backgroundColor: 'blue',
+            color: 'white',
+            padding: '12px 24px',
+          },
+        });
+
+      const presetStyles = presetBuilder.getStyles();
+
+      const customElement = new ElementBuilder()
+        .withClassName('custom-element')
+        .withStyles({ element: { margin: '10px' } })
+        .build();
+
+      expect(presetStyles).toContain('background-color: blue');
+      expect(presetStyles).toContain('color: white');
+      expect(presetStyles).toContain('padding: 12px 24px');
+    });
+
+    test('should handle empty styles', () => {
+      const builder = new ElementBuilder();
+      const styles = builder.getStyles();
+
+      expect(typeof styles).toBe('string');
+      // Empty styles should return empty string or minimal CSS
+    });
+
+    test('should handle complex nested styles', () => {
+      const builder = new ElementBuilder()
+        .withClassName('complex')
+        .withStyles({
+          element: {
+            display: 'flex',
+            '&:hover': {
+              backgroundColor: 'gray',
+            },
+            '& > *': {
+              margin: '5px',
+            },
+          },
+        });
+
+      const styles = builder.getStyles();
+
+      expect(styles).toContain('.complex');
+      expect(styles).toContain('display: flex');
+    });
+  });
 });

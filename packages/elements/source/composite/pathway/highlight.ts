@@ -1,28 +1,31 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { createTextLockupMedium } from './_common';
-import { type ElementVisual } from '../../_types';
 import { PathwayHighlightProps } from './_types';
+import { type ElementModel } from '../../_types';
 
 const mediumSize = 1000;
 const largeSize = 1200;
 
-const createTextContent = (props: PathwayHighlightProps): ElementVisual => {
-  const wrapper = ElementBuilder.create.div({
-    className: 'pathway-text-container-wrapper',
-    children: [createTextLockupMedium(props)],
-    elementStyles: {
+const createTextContent = (
+  props: PathwayHighlightProps,
+): ElementModel<HTMLElement> => {
+  const wrapper = new ElementBuilder()
+    .withClassName('pathway-text-container-wrapper')
+    .withChild(createTextLockupMedium(props))
+    .withStyles({
       element: {
         width: '100%',
         position: 'relative',
       },
-    },
-  });
+    })
+    .build();
 
-  const container = ElementBuilder.create.div({
-    className: 'pathway-text-container',
-    children: [wrapper],
-    elementStyles: {
+  const container = new ElementBuilder()
+    .withClassName('pathway-text-container')
+    .withChild(wrapper)
+    .withStyles({
       element: {
         container: 'inline-size',
         display: 'flex',
@@ -51,8 +54,8 @@ const createTextContent = (props: PathwayHighlightProps): ElementVisual => {
           paddingRight: token.spacing['6xl'],
         },
       },
-    },
-  });
+    })
+    .build();
 
   return container;
 };
@@ -64,42 +67,10 @@ const createHighlightColumn = ({
 }: Pick<
   PathwayHighlightProps,
   'quote' | 'attribution' | 'isThemeDark'
->): ElementVisual => {
-  const children: ElementVisual[] = [];
-
-  if (quote) {
-    children.push(
-      ElementBuilder.styled.headline.sansLarger({
-        element: quote,
-        isThemeDark,
-        elementStyles: {
-          element: {
-            color: token.color.black,
-            fontWeight: '700',
-          },
-        },
-      }),
-    );
-  }
-
-  if (attribution) {
-    children.push(
-      ElementBuilder.styled.headline.sansMedium({
-        element: attribution,
-        isThemeDark,
-        elementStyles: {
-          element: {
-            marginTop: token.spacing.sm,
-          },
-        },
-      }),
-    );
-  }
-
-  const wrapper = ElementBuilder.create.div({
-    className: 'pathway-highlight-column-wrapper',
-    children,
-    elementStyles: {
+>): ElementModel<HTMLElement> => {
+  const wrapper = new ElementBuilder()
+    .withClassName('pathway-highlight-column-wrapper')
+    .withStyles({
       element: {
         [`@container (min-width: ${mediumSize}px)`]: {
           paddingLeft: token.spacing['xl'],
@@ -124,13 +95,43 @@ const createHighlightColumn = ({
           },
         },
       },
-    },
-  });
+    });
 
-  return ElementBuilder.create.div({
-    className: 'pathway-highlight-column-container',
-    children: [wrapper],
-    elementStyles: {
+  if (quote) {
+    wrapper.withChild(
+      new ElementBuilder(quote)
+        .styled(Styles.typography.sans.fonts.larger)
+        .withThemeDark(isThemeDark)
+        .withStyles({
+          element: {
+            color: token.color.black,
+            fontWeight: '700',
+          },
+        })
+        .build(),
+    );
+  }
+
+  if (attribution) {
+    wrapper.withChild(
+      new ElementBuilder(attribution)
+        .styled(Styles.typography.sans.fonts.medium)
+        .withThemeDark(isThemeDark)
+        .withStyles({
+          element: {
+            marginTop: token.spacing.sm,
+          },
+        })
+        .build(),
+    );
+  }
+
+  const wrapperBuilt = wrapper.build();
+
+  return new ElementBuilder()
+    .withClassName('pathway-highlight-column-container')
+    .withChild(wrapperBuilt)
+    .withStyles({
       element: {
         backgroundColor: token.color.gray.lightest,
         position: 'relative',
@@ -152,19 +153,19 @@ const createHighlightColumn = ({
           },
         }),
       },
-    },
-  });
+    })
+    .build();
 };
 
 const createLock = (props: PathwayHighlightProps) => {
   const textContent = createTextContent(props);
   const highlightColumn = createHighlightColumn(props);
-  const children: ElementVisual[] = [textContent, highlightColumn];
 
-  return ElementBuilder.styled.layout.spaceHorizontalLarger({
-    element: document.createElement('div'),
-    children,
-    elementStyles: {
+  return new ElementBuilder()
+    .styled(Styles.layout.space.horizontal.larger)
+    .withChild(textContent)
+    .withChild(highlightColumn)
+    .withStyles({
       element: {
         [`@container (min-width: ${mediumSize}px)`]: {
           display: 'flex',
@@ -175,17 +176,17 @@ const createLock = (props: PathwayHighlightProps) => {
           },
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 export default (props: PathwayHighlightProps) =>
-  ElementBuilder.create.div({
-    className: 'pathway-highlight-container',
-    children: [createLock(props)],
-    elementStyles: {
+  new ElementBuilder()
+    .withClassName('pathway-highlight-container')
+    .withChild(createLock(props))
+    .withStyles({
       element: {
         container: 'inline-size',
       },
-    },
-  });
+    })
+    .build();

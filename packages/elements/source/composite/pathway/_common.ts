@@ -1,5 +1,5 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as Atomic from 'atomic';
 import { type PathwayTextLockupProps, type PathwayAssetProps } from './_types';
 
@@ -24,10 +24,9 @@ export const createCompositeHeadline = ({
     },
   };
 
-  return ElementBuilder.styled.headline.sansLargest({
-    element: headline,
-    isThemeDark: isThemeDark || isThemeMaryland,
-    elementStyles: {
+  return new ElementBuilder(headline)
+    .styled(Styles.typography.sans.fonts.largest)
+    .withStyles({
       element: {
         fontWeight: 800,
         textTransform: 'uppercase',
@@ -38,8 +37,9 @@ export const createCompositeHeadline = ({
       siblingAfter: {
         marginTop: Styles.token.spacing.md,
       },
-    },
-  });
+    })
+    .withThemeDark(isThemeDark || isThemeMaryland)
+    .build();
 };
 
 export const createCompositeStat = ({
@@ -49,9 +49,9 @@ export const createCompositeStat = ({
 
   if (!stats) return null;
 
-  const statWrapper = ElementBuilder.create.div({
-    className: 'text-lockup-medium-stats',
-    elementStyles: {
+  const statWrapper = new ElementBuilder()
+    .withClassName('text-lockup-medium-stats')
+    .withStyles({
       element: {
         marginTop: Styles.token.spacing.lg,
 
@@ -75,8 +75,8 @@ export const createCompositeStat = ({
           },
         },
       },
-    },
-  });
+    })
+    .build();
 
   statWrapper.element.innerHTML = stats.innerHTML;
 
@@ -141,10 +141,10 @@ export const createAssetContent = (
     );
   }
 
-  return ElementBuilder.create.div({
-    className: 'pathway-image-container-wrapper',
-    children,
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('pathway-image-container-wrapper')
+    .withChildren(...children)
+    .withStyles({
       element: {
         position: 'relative',
         overflow: 'hidden',
@@ -156,6 +156,6 @@ export const createAssetContent = (
           alignItems: 'center',
         },
       },
-    },
-  });
+    })
+    .build();
 };

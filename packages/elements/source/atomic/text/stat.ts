@@ -1,13 +1,14 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
+import * as Styles from '@universityofmaryland/web-styles-library';
 import {
   stats as statsFont,
   sans as sansFonts,
 } from '@universityofmaryland/web-styles-library/typography';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
-import { type ElementVisual } from '../../_types';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { type ElementModel } from '../../_types';
 
 export interface StatProps {
-  isThemeDark: boolean;
+  isThemeDark?: boolean;
   isDisplayBlock: boolean;
   isSizeLarge: boolean;
   hasLine: boolean;
@@ -18,25 +19,26 @@ export interface StatProps {
 
 const BLOCK_TEXTURE = `<svg id="stat_block-texture" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" ><defs><style>.cls-1{opacity:.02;}.cls-1,.cls-2{fill:#454545;fill-rule:evenodd;isolation:isolate;stroke-width:0px;}.cls-2{opacity:.04;}</style></defs><path class="cls-1" d="M109.49,0H0v63.18l181.67,182.32L0,427.82v63.18h109.49l244.61-245.5L109.49,0Z"/><path class="cls-2" d="M108.94,0h172.44l244.61,245.5-244.61,245.5H108.94l244.61-245.5L108.94,0ZM0,179.11l58.16-58.29L0,62.54v116.57Z"/></svg>`;
 
-const createStat = (
-  props: Pick<StatProps, 'stat' | 'isThemeDark' | 'isSizeLarge'>,
-) => {
-  const { stat: statElement, isThemeDark, isSizeLarge } = props;
+const createStat = ({
+  stat: statElement,
+  isThemeDark,
+  isSizeLarge,
+}: Pick<StatProps, 'stat' | 'isThemeDark' | 'isSizeLarge'>) => {
   if (!statElement) return;
 
   let rawText = statElement.textContent;
   if (!rawText) return;
 
   rawText = rawText.trim();
+
   if (rawText.length > 6) {
     console.error('Stat text is too long. Please limit to 6 characters.');
     statElement.textContent = rawText.slice(0, 6);
   }
 
-  return ElementBuilder.create.element({
-    element: statElement,
-    className: 'stat-display',
-    elementStyles: {
+  return new ElementBuilder(statElement)
+    .withClassName('stat-display')
+    .withStyles({
       siblingAfter: { marginTop: token.spacing.min },
 
       element: {
@@ -57,8 +59,8 @@ const createStat = (
 
         [`& + *`]: { marginTop: token.spacing.min },
       },
-    },
-  });
+    })
+    .build();
 };
 
 const createSubtext = (
@@ -67,10 +69,9 @@ const createSubtext = (
   const { subText, isThemeDark, isSizeLarge } = props;
   if (!subText) return;
 
-  return ElementBuilder.create.element({
-    element: subText,
-    className: 'stat-sub-text',
-    elementStyles: {
+  return new ElementBuilder(subText)
+    .withClassName('stat-sub-text')
+    .withStyles({
       element: {
         ...sansFonts.min,
         marginTop: token.spacing.min,
@@ -86,33 +87,38 @@ const createSubtext = (
           ...(isSizeLarge && sansFonts.small),
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 const createText = (
   props: Pick<StatProps, 'text' | 'isThemeDark' | 'isSizeLarge'>,
 ) => {
   const { text, isThemeDark, isSizeLarge } = props;
+  let styles = Styles.element.text.rich.simpleLarge;
   if (!text) return;
 
   if (isSizeLarge) {
-    return ElementBuilder.styled.richText.simpleLargest({
-      element: text,
-      isThemeDark,
-      elementStyles: {
-        siblingAfter: { marginTop: token.spacing.md },
-      },
-    });
+    styles = Styles.element.text.rich.simpleLargest;
   }
 
-  return ElementBuilder.styled.richText.simpleLarge({
-    element: text,
-    isThemeDark,
-    elementStyles: {
-      siblingAfter: { marginTop: token.spacing.min },
-    },
-  });
+  if (isThemeDark) {
+    styles = Styles.element.text.rich.simpleDark;
+  }
+
+  if (isThemeDark && isSizeLarge) {
+    styles = Styles.element.text.rich.simpleLargeDark;
+  }
+
+  const marginTop = isSizeLarge ? token.spacing.md : token.spacing.min;
+
+  return new ElementBuilder(text)
+    .styled(styles)
+    .withThemeDark(isThemeDark)
+    .withStyles({
+      siblingAfter: { marginTop },
+    })
+    .build();
 };
 
 const createWrapper = (
@@ -127,14 +133,11 @@ const createWrapper = (
   const textElement = createText({ text, isThemeDark, isSizeLarge });
   const statElement = createStat({ stat, isThemeDark, isSizeLarge });
 
-  const childElements = [statElement, textElement, subTextElement].filter(
-    Boolean,
-  ) as ElementVisual[];
+  const isDark = isThemeDark;
 
-  return ElementBuilder.create.div({
-    className: 'stat-wrapper',
-    children: childElements,
-    elementStyles: {
+  const wrapper = new ElementBuilder()
+    .withClassName('stat-wrapper')
+    .withStyles({
       element: {
         maxWidth: '720px',
         position: 'relative',
@@ -148,24 +151,36 @@ const createWrapper = (
           },
         }),
 
-        ...(isThemeDark && {
+        ...(isDark && {
           [`& .stat-sub-text`]: { color: token.color.gray.light },
         }),
       },
-    },
-  });
+    });
+
+  if (statElement) {
+    wrapper.withChild(statElement);
+  }
+
+  if (textElement) {
+    wrapper.withChild(textElement);
+  }
+
+  if (subTextElement) {
+    wrapper.withChild(subTextElement);
+  }
+
+  return wrapper.build();
 };
 
 const createDisplayBlock = (
-  props: Pick<StatProps, 'isDisplayBlock'> & { wrapperElement: ElementVisual },
+  props: Pick<StatProps, 'isDisplayBlock'> & { wrapperElement: ElementModel },
 ) => {
   const { isDisplayBlock, wrapperElement } = props;
   if (!isDisplayBlock) return null;
 
-  const block = ElementBuilder.create.div({
-    className: 'stat-display-block',
-    children: [wrapperElement],
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('stat-display-block')
+    .withStyles({
       element: {
         padding: `${token.spacing.lg} ${token.spacing.sm}`,
         borderTop: `2px solid ${token.color.red}`,
@@ -192,37 +207,41 @@ const createDisplayBlock = (
           height: '100%',
         },
       },
-    },
-  });
-
-  block.element.insertAdjacentHTML('afterbegin', BLOCK_TEXTURE);
-
-  return block;
+    })
+    .withModifier((el) => {
+      el.insertAdjacentHTML('afterbegin', BLOCK_TEXTURE);
+    })
+    .withChild(wrapperElement)
+    .build();
 };
 
-const createContainer = (containerChild: ElementVisual) => {
-  return ElementBuilder.create.div({
-    className: 'stat-container',
-    children: [containerChild],
-    elementStyles: {
+const createContainer = (containerChild: ElementModel) => {
+  const container = new ElementBuilder()
+    .withClassName('stat-container')
+    .withStyles({
       element: {
-        container: `umd-element-stat / inline-size`,
+        containerType: `inline-size`,
         height: `inherit`,
       },
-    },
-  });
+    });
+
+  if (containerChild) {
+    container.withChild(containerChild);
+  }
+
+  return container.build();
 };
 
-export default (props: StatProps): ElementVisual => {
+export default (props: StatProps) => {
   const wrapperElement = createWrapper(props);
-  const blockElement = createDisplayBlock({
-    isDisplayBlock: props.isDisplayBlock,
-    wrapperElement,
-  });
 
   if (props.isDisplayBlock) {
-    return createContainer(blockElement as ElementVisual);
-  } else {
-    return createContainer(wrapperElement as ElementVisual);
+    const blockElement = createDisplayBlock({
+      isDisplayBlock: props.isDisplayBlock,
+      wrapperElement,
+    });
+    return createContainer(blockElement!);
   }
+
+  return createContainer(wrapperElement);
 };

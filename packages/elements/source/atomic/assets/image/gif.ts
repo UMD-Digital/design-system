@@ -1,4 +1,5 @@
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import {
   pause as iconPause,
@@ -129,15 +130,15 @@ export default ({
   const isAnchor = element instanceof HTMLAnchorElement;
   const container = isAnchor ? element : document.createElement('div');
 
-  const composite = ElementBuilder.styled.assets.gifToggle({
-    element: container,
-  });
-
-  if (!isAnchor) {
-    container.appendChild(element);
-  }
-
-  applyGifToggle(image, container);
+  const composite = new ElementBuilder(container)
+    .styled(Styles.element.asset.gif.toggle)
+    .withModifier((el) => {
+      if (!isAnchor) {
+        el.appendChild(element);
+      }
+      applyGifToggle(image, el);
+    })
+    .build();
 
   return composite;
 };

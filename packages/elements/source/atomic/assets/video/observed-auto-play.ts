@@ -20,18 +20,22 @@ export default ({
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             if (video.readyState >= 2) {
-              composite.events.setPlay();
+              composite?.events?.setPlay();
             } else {
-              video.addEventListener('loadeddata', composite.events.setPlay, {
-                once: true,
-              });
+              video.addEventListener(
+                'loadeddata',
+                () => composite?.events?.setPlay(),
+                {
+                  once: true,
+                },
+              );
 
               if (video.readyState === 0) {
                 video.load();
               }
             }
           } else {
-            composite.events.setPause();
+            composite?.events?.setPause();
           }
         });
       },

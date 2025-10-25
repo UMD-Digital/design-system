@@ -1,4 +1,5 @@
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { default as gifToggle } from './gif';
 import { type UMDElement } from '../../../_types';
 
@@ -49,7 +50,7 @@ const checkIsGif = (element: HTMLImageElement | HTMLAnchorElement): boolean => {
 const createCaption = (
   element: HTMLImageElement | HTMLAnchorElement,
   isShowCaption: boolean,
-): UMDElement | null => {
+) => {
   if (!isShowCaption) return null;
 
   const attributeCaption = element.getAttribute(ATTRIBUTE_CAPTION);
@@ -64,12 +65,10 @@ const createCaption = (
   const text = attributeCaption || attributeCredit;
   if (!text) return null;
 
-  const caption = document.createElement('span');
-  caption.textContent = text;
-
-  return ElementBuilder.styled.assets.imageCaption({
-    element: caption,
-  });
+  return new ElementBuilder('span')
+    .withText(text)
+    .styled(Styles.element.asset.image.caption)
+    .build();
 };
 
 const embedAsset = ({
@@ -91,25 +90,23 @@ const embedAsset = ({
   }
 
   if (isAspectStandard) {
-    return ElementBuilder.styled.assets.imageAspect({
-      element,
-    });
+    return new ElementBuilder()
+      .styled(Styles.element.asset.image.aspectStandard)
+      .withChild(element)
+      .build();
   }
 
-  const defaultContainer = ElementBuilder.create.div({
-    className: 'image-container',
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('image-container')
+    .withStyles({
       element: {
         position: 'relative',
         width: '100%',
         height: '100%',
       },
-    },
-  });
-
-  defaultContainer.element.appendChild(element);
-
-  return defaultContainer;
+    })
+    .withChild(element)
+    .build();
 };
 
 export default (props: Props) => {
@@ -122,35 +119,35 @@ export default (props: Props) => {
     isShowCaption = false,
     isGifAllowed = false,
   } = props;
+
   const asset = embedAsset({ element, isAspectStandard, isGifAllowed });
   const caption = createCaption(element, isShowCaption);
-  const children: UMDElement[] = [];
+  const styles = isScaled
+    ? Styles.element.asset.image.wrapperScaled
+    : Styles.element.asset.image.wrapper;
+
+  const composite = new ElementBuilder().styled(styles).withStyles({
+    element: {
+      ...customStyles,
+    },
+  });
 
   if (caption) {
-    children.push(caption);
+    composite.withChild(caption);
   }
 
   if (dateSign) {
-    children.push(
-      ElementBuilder.styled.layout.backgroundBoxWhite({
-        element: document.createElement('div'),
-        children: [dateSign],
-      }),
-    );
+    const test = new ElementBuilder()
+      .styled(Styles.layout.background.box.white)
+      .withChild(dateSign)
+      .build();
+
+    composite.withChild(test);
   }
 
   if (asset) {
-    children.push(asset);
+    composite.withChild(asset);
   }
 
-  return ElementBuilder.styled.assets.imageWrapper({
-    element: document.createElement('div'),
-    children,
-    isScaled,
-    elementStyles: {
-      element: {
-        ...customStyles,
-      },
-    },
-  });
+  return composite.build();
 };

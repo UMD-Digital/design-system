@@ -1,4 +1,5 @@
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import {
   pause as iconPause,
   play as iconPlay,
@@ -19,10 +20,52 @@ export default (props: VideoProps) =>
       isScaled = false,
       callback,
     } = props;
-    const composite = ElementBuilder.create.element({
-      element: document.createElement('div'),
-      className: 'umd-element-video',
-      elementStyles: {
+
+    const button = new ElementBuilder('button')
+      .styled(Styles.element.action.button.videoState)
+      .withAttribute('type', 'button')
+      .withAttribute('aria-label', 'Play')
+      .withHTML(iconPlay)
+      .build();
+
+    const setPlay = () => {
+      button.element.setAttribute('aria-label', 'Pause');
+      button.element.innerHTML = iconPause;
+      video.muted = true;
+      video.play().catch((error) => {
+        if (error.name === 'NotAllowedError') {
+          setPause();
+        }
+        console.warn('Video play failed:', error);
+      });
+    };
+
+    const setPause = () => {
+      button.element.setAttribute('aria-label', 'Play');
+      button.element.innerHTML = iconPlay;
+      video.pause();
+    };
+
+    button.element.addEventListener('click', () => {
+      if (video.paused) {
+        if (callback) callback(false);
+        setPlay();
+      } else {
+        if (callback) callback(true);
+        setPause();
+      }
+    });
+
+    if (
+      video.getAttribute('autoplay') === '' ||
+      video.getAttribute('autoplay') === 'true'
+    ) {
+      setPlay();
+    }
+
+    return new ElementBuilder()
+      .withClassName('umd-element-video')
+      .withStyles({
         element: {
           position: 'relative',
           ...additionalElementStyles,
@@ -41,60 +84,8 @@ export default (props: VideoProps) =>
             },
           }),
         },
-      },
-    });
-    const button = ElementBuilder.styled.buttons.videoState({
-      element: document.createElement('button'),
-    });
-
-    const setPlay = () => {
-      button.element.setAttribute('aria-label', 'Pause');
-      button.element.innerHTML = iconPause;
-      video.muted = true;
-      video.play().catch((error) => {
-        if (error.name === 'NotAllowedError') {
-          setPause();
-        }
-        console.warn('Video play failed:', error);
-      });
-    };
-    const setPause = () => {
-      button.element.setAttribute('aria-label', 'Play');
-      button.element.innerHTML = iconPlay;
-      video.pause();
-    };
-
-    // Load styles and attributes
-
-    button.element.setAttribute('aria-label', 'Play');
-    button.element.innerHTML = iconPlay;
-    button.element.setAttribute('type', 'button');
-    button.element.addEventListener('click', () => {
-      if (video.paused) {
-        if (callback) callback(false);
-        setPlay();
-      } else {
-        if (callback) callback(true);
-        setPause();
-      }
-    });
-
-    if (
-      video.getAttribute('autoplay') === '' ||
-      video.getAttribute('autoplay') === 'true'
-    ) {
-      setPlay();
-    }
-
-    composite.element.appendChild(video);
-    composite.element.appendChild(button.element);
-    composite.styles += button.styles;
-
-    return {
-      ...composite,
-      events: {
-        setPlay,
-        setPause,
-      },
-    };
+      })
+      .withChildren(video, button)
+      .withEvents({ setPlay, setPause })
+      .build();
   })();

@@ -26,7 +26,7 @@
  * const headlineElement = document.createElement('h1');
  * const styledHeadline = new ElementBuilder(headlineElement)
  *   .styled(Styles.typography.sans.larger)
- *   .withTheme('dark')
+ *   .withThemeDark('dark')
  *   .withAnimation('fadeIn')
  *   .build();
  *

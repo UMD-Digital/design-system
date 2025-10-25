@@ -39,12 +39,14 @@ export class StyleManager {
   private styleQueue: StyleEntry[];
   private compiled: Map<string, string>;
   private theme?: ThemeType;
+  private isThemeDark: boolean;
   private styleIds: Set<string>;
 
   constructor() {
     this.styleQueue = [];
     this.compiled = new Map();
     this.styleIds = new Set();
+    this.isThemeDark = false;
   }
 
   /**
@@ -215,6 +217,14 @@ export class StyleManager {
   }
 
   /**
+   * Set dark theme flag for style modifiers
+   * Applies white text/icon colors during compilation
+   */
+  setThemeDark(isDark: boolean): void {
+    this.isThemeDark = isDark;
+  }
+
+  /**
    * Compile all queued styles into a CSS string
    * Handles priority ordering, selector grouping, and theme application
    *
@@ -235,8 +245,8 @@ export class StyleManager {
       Object.assign(grouped.get(selector)!, this.deepMerge(styles));
     });
 
-    if (this.theme) {
-      this.applyThemeModifiers(grouped, this.theme);
+    if (this.isThemeDark) {
+      this.applyDarkThemeModifiers(grouped);
     }
 
     const cssRules: string[] = [];
@@ -278,48 +288,49 @@ export class StyleManager {
   }
 
   /**
-   * Apply theme-specific style modifiers
-   * This modifies the grouped styles in place based on the theme
+   * Apply dark theme style modifiers
+   * Sets white color for text and icons (matching V1 behavior)
    */
-  private applyThemeModifiers(
+  private applyDarkThemeModifiers(
     grouped: Map<string, Record<string, any>>,
-    theme: ThemeType,
   ): void {
-    if (theme === 'dark') {
-      grouped.forEach((styles) => {
+    grouped.forEach((styles) => {
+      // Apply white color to text elements
+      if (
+        styles.color &&
+        styles.color !== 'white' &&
+        styles.color !== '#fff' &&
+        styles.color !== '#ffffff'
+      ) {
+        styles.color = 'white';
+      }
+
+      // Apply white fill to icons/SVG
+      if (styles.fill && styles.fill !== 'white') {
+        styles.fill = 'white';
+      }
+
+      // Apply to nested selectors (& , ., svg, path, etc.)
+      Object.keys(styles).forEach((key) => {
         if (
-          styles.color &&
-          styles.color !== 'white' &&
-          styles.color !== '#fff' &&
-          styles.color !== '#ffffff'
+          key.startsWith('&') ||
+          key.startsWith('.') ||
+          key === 'svg' ||
+          key === 'path' ||
+          key === '*'
         ) {
-          styles.color = 'white';
-        }
-
-        if (styles.fill && styles.fill !== 'white') {
-          styles.fill = 'white';
-        }
-
-        Object.keys(styles).forEach((key) => {
-          if (
-            key.startsWith('&') ||
-            key.startsWith('.') ||
-            key === 'svg' ||
-            key === 'path'
-          ) {
-            const nested = styles[key];
-            if (nested && typeof nested === 'object') {
-              if (nested.color && nested.color !== 'white') {
-                nested.color = 'white';
-              }
-              if (nested.fill && nested.fill !== 'white') {
-                nested.fill = 'white';
-              }
+          const nested = styles[key];
+          if (nested && typeof nested === 'object') {
+            if (nested.color && nested.color !== 'white') {
+              nested.color = 'white';
+            }
+            if (nested.fill && nested.fill !== 'white') {
+              nested.fill = 'white';
             }
           }
-        });
+        }
       });
-    }
+    });
   }
 
   /**
@@ -331,6 +342,7 @@ export class StyleManager {
     cloned.compiled = new Map(this.compiled);
     cloned.styleIds = new Set(this.styleIds);
     cloned.theme = this.theme;
+    cloned.isThemeDark = this.isThemeDark;
     return cloned;
   }
 

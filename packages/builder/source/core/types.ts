@@ -90,6 +90,8 @@ export interface BuilderOptions {
   children?: Array<ElementBuilderInterface | HTMLElement | string>;
   /** Theme variant to apply */
   theme?: ThemeType;
+  /** Apply dark theme (white text/icon colors) */
+  isThemeDark?: boolean;
   /** Style definitions to apply */
   styles?: ElementStyles | StyleDefinition | Record<string, any>;
   /** Animation configuration */
@@ -189,7 +191,7 @@ export interface ElementBuilderInterface<T extends HTMLElement = HTMLElement> {
     styles: StyleDefinition | ElementStyles | Record<string, any>,
     priority?: number
   ): this;
-  withTheme(theme: ThemeType): this;
+  withThemeDark(isDark?: boolean): this;
 
   // Attribute methods
   withAttributes(attrs: Record<string, string | number | boolean>): this;

@@ -301,7 +301,7 @@ The core builder class provides a comprehensive fluent API:
 - `withClassName(...names: string[])` - Add CSS class names
 - `withStyles(styles, priority?)` - Add JSS style objects
 - `styled(styleObject, priority?)` - Apply UMD Design System style object
-- `withTheme(theme)` - Set theme (light/dark)
+- `withThemeDark(isDark?)` - Apply dark theme (white text/icon colors)
 - `withAttribute(key, value)` - Set HTML attribute
 - `withAttributes(attrs)` - Set multiple attributes
 - `withAria(attrs)` - Set ARIA attributes
@@ -327,7 +327,6 @@ The core builder class provides a comprehensive fluent API:
 
 - `withClassNameIf(condition, ...names)`
 - `withStylesIf(condition, styles)`
-- `withThemeIf(condition, theme)`
 - `withAttributeIf(condition, key, value)`
 - `withTextIf(condition, text)`
 - `withChildIf(condition, child)`

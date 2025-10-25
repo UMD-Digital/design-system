@@ -43,18 +43,16 @@ describe('Presets', () => {
       expect(model.element.classList.contains('umd-action-secondary-large')).toBe(true);
     });
 
-    test('secondaryWhite should return slot element with dark theme', () => {
+    test('secondaryWhite should return slot element with correct class', () => {
       const model = actions.secondaryWhite().build();
       expect(model.element).toBeInstanceOf(HTMLSlotElement);
       expect(model.element.classList.contains('umd-action-secondary-white')).toBe(true);
-      expect(model.element.getAttribute('data-theme')).toBe('dark');
     });
 
-    test('secondaryGold should return slot element with dark theme', () => {
+    test('secondaryGold should return slot element with correct class', () => {
       const model = actions.secondaryGold().build();
       expect(model.element).toBeInstanceOf(HTMLSlotElement);
       expect(model.element.classList.contains('umd-action-secondary-gold')).toBe(true);
-      expect(model.element.getAttribute('data-theme')).toBe('dark');
     });
 
     test('outline should return slot element with correct class', () => {

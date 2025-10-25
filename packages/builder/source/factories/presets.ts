@@ -93,7 +93,7 @@ export const actions = {
       .withClassName('umd-action-secondary-white')
       .withStyles(Styles.element.action.secondary.white)
       .withAnimation('slideUnder')
-      .withTheme('dark') as unknown as ElementBuilderInterface<HTMLSlotElement>,
+      .withThemeDark(true) as unknown as ElementBuilderInterface<HTMLSlotElement>,
 
   /**
    * Gold secondary action (for dark backgrounds)
@@ -105,7 +105,7 @@ export const actions = {
       .withClassName('umd-action-secondary-gold')
       .withStyles(Styles.element.action.secondary.gold)
       .withAnimation('slideUnder')
-      .withTheme('dark') as unknown as ElementBuilderInterface<HTMLSlotElement>,
+      .withThemeDark(true) as unknown as ElementBuilderInterface<HTMLSlotElement>,
 
   /**
    * Outline action button

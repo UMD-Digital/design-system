@@ -1,5 +1,5 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { quote as iconQuote } from '@universityofmaryland/web-icons-library/brand';
 import { SMALL } from '../_constants';
 import { type QuoteBaseProps, type QuoteVariantProps } from '../_types';
@@ -17,9 +17,9 @@ export default ({
 }: QuoteIconProps) => {
   const imageWithFeaturedLayout = hasImage && isTypeFeatured;
 
-  const iconSpan = ElementBuilder.create.span({
-    className: 'quote-icon-span',
-    elementStyles: {
+  const iconSpan = new ElementBuilder('span')
+    .withClassName('quote-icon-span')
+    .withStyles({
       element: {
         display: 'block',
         position: 'absolute',
@@ -63,8 +63,8 @@ export default ({
           }),
         },
       },
-    },
-  });
+    })
+    .build();
 
   iconSpan.element.innerHTML = iconQuote;
 

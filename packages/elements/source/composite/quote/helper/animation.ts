@@ -1,10 +1,10 @@
-import { type ElementVisual } from '../../../_types';
+import { type ElementModel } from '../../../_types';
 import { type QuoteBaseProps, type QuoteVariantProps } from '../_types';
 
 interface QuoteAnimationProps
   extends QuoteVariantProps,
     Pick<QuoteBaseProps, 'quote' | 'includesAnimation' | 'image'> {
-  quoteElement: ElementVisual;
+  quoteElement: ElementModel<HTMLElement>;
 }
 
 export const quoteAnimation = ({

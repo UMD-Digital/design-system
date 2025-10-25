@@ -1,10 +1,10 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { default as elementAction } from './action';
 import { default as elementQuote } from './quote';
 import { SMALL } from '../_constants';
-import { type ElementVisual } from '../../../_types';
+import { type ElementModel } from '../../../_types';
 import { type QuoteTextProps } from '../_types';
 
 interface ChildrenProps
@@ -24,7 +24,7 @@ interface ChildrenProps
   hasImage: boolean;
 }
 
-const createChildren = (props: ChildrenProps) => {
+const createChildren = (props: ChildrenProps): ElementModel<HTMLElement>[] => {
   const {
     action,
     attribution,
@@ -35,7 +35,7 @@ const createChildren = (props: ChildrenProps) => {
     quote,
     shouldHaveWhiteText,
   } = props;
-  const wrapperChildren: ElementVisual[] = [];
+  const wrapperChildren: ElementModel<HTMLElement>[] = [];
 
   if (quote) {
     wrapperChildren.push(
@@ -44,10 +44,9 @@ const createChildren = (props: ChildrenProps) => {
   }
 
   if (attribution) {
-    const attributionElement = ElementBuilder.create.element({
-      element: attribution,
-      className: 'quote-container-attribution',
-      elementStyles: {
+    const attributionElement = new ElementBuilder(attribution)
+      .withClassName('quote-container-attribution')
+      .withStyles({
         element: {
           marginTop: token.spacing.sm,
 
@@ -66,17 +65,16 @@ const createChildren = (props: ChildrenProps) => {
             ...typography.sans.medium,
           },
         },
-      },
-    });
+      })
+      .build();
 
     wrapperChildren.push(attributionElement);
   }
 
   if (attributionSubText) {
-    const attributionSubTextElement = ElementBuilder.create.element({
-      element: attributionSubText,
-      className: 'quote-container-text-attribution-sub-text',
-      elementStyles: {
+    const attributionSubTextElement = new ElementBuilder(attributionSubText)
+      .withClassName('quote-container-text-attribution-sub-text')
+      .withStyles({
         element: {
           color: token.color.gray.dark,
           fontStyle: 'italic',
@@ -92,8 +90,8 @@ const createChildren = (props: ChildrenProps) => {
             color: token.color.white,
           }),
         },
-      },
-    });
+      })
+      .build();
 
     wrapperChildren.push(attributionSubTextElement);
   }
@@ -137,21 +135,21 @@ export default (
   const hasImage = image != null;
   const isHasImageAndNotFeatured = hasImage && !isTypeFeatured;
 
-  const wrapper = ElementBuilder.create.div({
-    className: 'quote-text-container-wrapper',
-    children: [
-      ...createChildren({
-        ...props,
-        shouldHaveWhiteText,
-        hasImage,
-      }),
-    ],
+  const children = createChildren({
+    ...props,
+    shouldHaveWhiteText,
+    hasImage,
   });
 
-  return ElementBuilder.create.div({
-    className: 'quote-text-container',
-    children: [wrapper],
-    elementStyles: {
+  const wrapper = new ElementBuilder()
+    .withClassName('quote-text-container-wrapper')
+    .withChildren(...children)
+    .build();
+
+  return new ElementBuilder()
+    .withClassName('quote-text-container')
+    .withChild(wrapper)
+    .withStyles({
       element: {
         width: '100%',
         ...typography.sans.medium,
@@ -182,6 +180,6 @@ export default (
           }),
         },
       },
-    },
-  });
+    })
+    .build();
 };

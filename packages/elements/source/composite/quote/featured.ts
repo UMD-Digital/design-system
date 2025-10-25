@@ -1,11 +1,10 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { imageFromSvg } from '@universityofmaryland/web-utilities-library/media';
 import InlineQuote from './inline';
 import { image as elementImage, action as elementAction } from './elements';
 import { quoteAnimation } from './helper/animation';
 import { MEDIUM, SMALL } from './_constants';
-import { type ElementVisual } from '../../_types';
 import { type QuoteFeaturedProps } from './_types';
 
 const BACKGROUND_TEXTURE_LIGHT = `<svg id="quote_background_light" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 850.5 532.1"><path d="M.3,0h332.7L.3,326.6V0Z" fill="#757575" fill-rule="evenodd" isolation="isolate" opacity=".04" stroke-width="0"/><path d="M517.9,532.1h332.7L308.6,0H0v23.6l517.9,508.5Z" fill="#000" fill-rule="evenodd" isolation="isolate" opacity=".04" stroke-width="0"/></svg>`;
@@ -14,69 +13,57 @@ const BACKGROUND_TEXTURE_DARK = `<svg id="quote_background_dark" aria-hidden="tr
 const createImageContainer = (props: QuoteFeaturedProps) => {
   const { image, action } = props;
 
-  const getContainerChildren = () => {
-    const containerChildren: ElementVisual[] = [];
+  const containerBuilder = new ElementBuilder()
+    .withClassName('quote-featured-image')
+    .withStyles({
+      element: {
+        position: 'relative',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginTop: `-${token.spacing.lg}`,
 
-    if (image) {
-      const imageElement = elementImage({
-        ...props,
-        isTypeFeatured: true,
-        image,
-      });
-      containerChildren.push(imageElement);
-    }
+        ['&[align-center=true]']: {
+          marginTop: '0',
+          justifyContent: 'center',
+        },
 
-    if (action) {
-      const actionElement = elementAction({
-        isTypeFeatured: true,
-        action,
-      });
-      containerChildren.push(actionElement);
-    }
+        [`@container (max-width: ${SMALL - 1}px)`]: {
+          padding: `0 ${token.spacing.lg}`,
+        },
 
-    return containerChildren;
-  };
-
-  const createImageContainerElement = () => {
-    return ElementBuilder.create.div({
-      className: 'quote-featured-image',
-      children: containerChildren,
-      elementStyles: {
-        element: {
-          position: 'relative',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          marginTop: `-${token.spacing.lg}`,
-
-          ['&[align-center=true]']: {
-            marginTop: '0',
-            justifyContent: 'center',
-          },
-
-          [`@container (max-width: ${SMALL - 1}px)`]: {
-            padding: `0 ${token.spacing.lg}`,
-          },
-
-          [`@container (min-width: ${SMALL}px) and (max-width: ${
-            MEDIUM - 1
-          }px)`]: {
+        [`@container (min-width: ${SMALL}px) and (max-width: ${MEDIUM - 1}px)`]:
+          {
             margin: '0 auto',
             marginTop: `-${token.spacing['8xl']}`,
             maxWidth: '300px',
           },
 
-          [`@container (min-width: ${MEDIUM}px)`]: {
-            paddingLeft: token.spacing['6xl'],
-            width: `calc(300px + ${token.spacing['6xl']})`,
-          },
+        [`@container (min-width: ${MEDIUM}px)`]: {
+          paddingLeft: token.spacing['6xl'],
+          width: `calc(300px + ${token.spacing['6xl']})`,
         },
       },
     });
-  };
 
-  const containerChildren = getContainerChildren();
-  const container = createImageContainerElement();
+  if (image) {
+    const imageElement = elementImage({
+      ...props,
+      isTypeFeatured: true,
+      image,
+    });
+    containerBuilder.withChild(imageElement);
+  }
+
+  if (action) {
+    const actionElement = elementAction({
+      isTypeFeatured: true,
+      action,
+    });
+    containerBuilder.withChild(actionElement);
+  }
+
+  const container = containerBuilder.build();
 
   if (window.innerWidth >= MEDIUM && image instanceof HTMLImageElement) {
     image.addEventListener('load', () => {
@@ -104,14 +91,14 @@ const createTextureContainer = ({
     SVG: isDarkText ? BACKGROUND_TEXTURE_DARK : BACKGROUND_TEXTURE_LIGHT,
   });
 
-  const backgroundTextureElement = ElementBuilder.create.element({
-    element: backgroundTexture,
-    className: 'quote-background-texture',
-  });
-  const container = ElementBuilder.create.div({
-    className: 'quote-featured-texture',
-    children: [backgroundTextureElement],
-    elementStyles: {
+  const backgroundTextureElement = new ElementBuilder(backgroundTexture)
+    .withClassName('quote-background-texture')
+    .build();
+
+  const container = new ElementBuilder()
+    .withClassName('quote-featured-texture')
+    .withChild(backgroundTextureElement)
+    .withStyles({
       element: {
         overflow: 'hidden',
         position: 'absolute',
@@ -133,22 +120,21 @@ const createTextureContainer = ({
           display: 'none',
         },
       },
-    },
-  });
+    })
+    .build();
 
   return container;
 };
 
 export default (props: QuoteFeaturedProps) => {
   const { isThemeDark, isThemeMaryland, image, isTransparent } = props;
-  const wrapperChildren: ElementVisual[] = [];
 
   const inlineQuote = InlineQuote({ ...props, isTypeFeatured: true });
 
-  const textContainer = ElementBuilder.create.div({
-    className: 'quote-featured-text',
-    children: [inlineQuote],
-    elementStyles: {
+  const textContainer = new ElementBuilder()
+    .withClassName('quote-featured-text')
+    .withChild(inlineQuote)
+    .withStyles({
       element: {
         padding: token.spacing.lg,
         position: 'relative',
@@ -164,23 +150,12 @@ export default (props: QuoteFeaturedProps) => {
           padding: `${token.spacing['4xl']}`,
         },
       },
-    },
-  });
+    })
+    .build();
 
-  if (!isTransparent) {
-    wrapperChildren.push(createTextureContainer(props));
-  }
-
-  if (image) {
-    wrapperChildren.push(createImageContainer(props));
-  }
-
-  wrapperChildren.push(textContainer);
-
-  const wrapper = ElementBuilder.create.div({
-    className: 'quote-featured-container-wrapper',
-    children: wrapperChildren,
-    elementStyles: {
+  const wrapper = new ElementBuilder()
+    .withClassName('quote-featured-container-wrapper')
+    .withStyles({
       element: {
         backgroundColor: token.color.gray.lightest,
         position: 'relative',
@@ -198,13 +173,24 @@ export default (props: QuoteFeaturedProps) => {
           },
         }),
       },
-    },
-  });
+    });
 
-  const spacer = ElementBuilder.create.div({
-    className: 'quote-featured-container-spacer',
-    children: [wrapper],
-    elementStyles: {
+  if (!isTransparent) {
+    wrapper.withChild(createTextureContainer(props));
+  }
+
+  if (image) {
+    wrapper.withChild(createImageContainer(props));
+  }
+
+  wrapper.withChild(textContainer);
+
+  const wrapperBuilt = wrapper.build();
+
+  const spacer = new ElementBuilder()
+    .withClassName('quote-featured-container-spacer')
+    .withChild(wrapperBuilt)
+    .withStyles({
       element: {
         paddingTop: token.spacing.lg,
 
@@ -217,18 +203,18 @@ export default (props: QuoteFeaturedProps) => {
             }),
           },
       },
-    },
-  });
+    })
+    .build();
 
-  const container = ElementBuilder.create.div({
-    className: 'quote-featured-container',
-    children: [spacer],
-    elementStyles: {
+  const container = new ElementBuilder()
+    .withClassName('quote-featured-container')
+    .withChild(spacer)
+    .withStyles({
       element: {
         containerType: 'inline-size',
       },
-    },
-  });
+    })
+    .build();
 
   const loadAnimation = () => {
     quoteAnimation({

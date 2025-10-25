@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { type QuoteBaseProps, type QuoteVariantProps } from '../_types';
 
 interface QuoteActionProps
@@ -15,10 +15,9 @@ export default ({
   includesAnimation,
   isTypeFeatured = false,
 }: QuoteActionProps) =>
-  ElementBuilder.create.element({
-    element: action,
-    className: 'quote-container-actions',
-    elementStyles: {
+  new ElementBuilder(action)
+    .withClassName('quote-container-actions')
+    .withStyles({
       element: {
         marginTop: token.spacing.sm,
 
@@ -33,5 +32,5 @@ export default ({
             transition: 'opacity 1s ease, transform 0.5s ease',
           }),
       },
-    },
-  });
+    })
+    .build();

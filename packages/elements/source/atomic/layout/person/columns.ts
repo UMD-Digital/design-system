@@ -1,15 +1,12 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
-import {
-  createMediaQuery,
-  createMediaQueryRange,
-} from '@universityofmaryland/web-utilities-library/styles';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
+import { assets, textLockup } from 'atomic';
 import {
   type PersonContactPropsWithStyles,
   type PersonTextLockupPropsWithStyles,
   type PersonFullProps,
 } from '../../_types';
-import { assets, textLockup } from 'atomic';
 
 const smallBreakpoint = token.media.breakpointValues.small.max;
 const mediumBreakpointStart = token.media.breakpointValues.medium.min;
@@ -23,10 +20,15 @@ export const image = ({
   customStyles?: Record<string, any>;
   image: HTMLImageElement;
   isThemeDark?: boolean;
-}) =>
-  ElementBuilder.create.div({
-    className: 'person-column-image',
-    elementStyles: {
+}) => {
+  const backgroundImage = assets.image.background({
+    element: image,
+    isScaled: false,
+  });
+
+  return new ElementBuilder()
+    .withClassName('person-column-image')
+    .withStyles({
       element: {
         ...createMediaQuery('max-width', smallBreakpoint, {
           marginBottom: `${token.spacing.md}`,
@@ -57,14 +59,10 @@ export const image = ({
           }),
         },
       },
-    },
-    children: [
-      assets.image.background({
-        element: image,
-        isScaled: false,
-      }),
-    ],
-  });
+    })
+    .withChild(backgroundImage)
+    .build();
+};
 
 const personLockup = ({
   actions,
@@ -89,16 +87,18 @@ const personLockup = ({
 
 export const details = (props: PersonTextLockupPropsWithStyles) => {
   const { customStyles = {} } = props;
-  return ElementBuilder.create.div({
-    className: 'person-column-details',
-    elementStyles: {
+  const lockup = personLockup(props);
+
+  return new ElementBuilder()
+    .withClassName('person-column-details')
+    .withStyles({
       element: {
         flex: '1 0',
         ...customStyles,
       },
-    },
-    children: [personLockup(props)],
-  });
+    })
+    .withChild(lockup)
+    .build();
 };
 
 const contactLockup = ({
@@ -122,10 +122,11 @@ const contactLockup = ({
 
 export const contact = (props: PersonContactPropsWithStyles) => {
   const { customStyles = {} } = props;
+  const lockup = contactLockup(props);
 
-  return ElementBuilder.create.div({
-    className: 'person-column-contact',
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('person-column-contact')
+    .withStyles({
       element: {
         marginTop: `${token.spacing.sm}`,
 
@@ -139,9 +140,9 @@ export const contact = (props: PersonContactPropsWithStyles) => {
 
         ...customStyles,
       },
-    },
-    children: [contactLockup(props)],
-  });
+    })
+    .withChild(lockup)
+    .build();
 };
 
 export const information = ({
@@ -159,31 +160,32 @@ export const information = ({
   pronouns,
   subText,
 }: PersonFullProps) => {
-  return ElementBuilder.create.div({
-    className: 'person-column-information',
-    elementStyles: {
+  const person = personLockup({
+    association,
+    isThemeDark,
+    job,
+    name,
+    pronouns,
+    subText,
+  });
+
+  const contact = contactLockup({
+    actions,
+    additionalContact,
+    address,
+    email,
+    isThemeDark,
+    linkendIn,
+    phone,
+  });
+
+  return new ElementBuilder()
+    .withClassName('person-column-information')
+    .withStyles({
       element: {
         ...customStyles,
       },
-    },
-    children: [
-      personLockup({
-        association,
-        isThemeDark,
-        job,
-        name,
-        pronouns,
-        subText,
-      }),
-      contactLockup({
-        actions,
-        additionalContact,
-        address,
-        email,
-        isThemeDark,
-        linkendIn,
-        phone,
-      }),
-    ],
-  });
+    })
+    .withChildren(person, contact)
+    .build();
 };

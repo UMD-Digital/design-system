@@ -1,8 +1,8 @@
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import createRowLogo, { type RowLogoProps } from './row-logo';
 import createRowLinks, { type RowLinksProps } from './row-links';
 import { BaseProps } from '../../_types';
-import { type ElementVisual } from '../../../../_types';
+import { type UMDElement } from '../../../../_types';
 
 export interface MainSectionProps
   extends BaseProps,
@@ -16,7 +16,7 @@ const createVisualContainer = (
     MainSectionProps,
     'isTypeVisual' | 'isTypeSimple' | 'slotVisualImage'
   >,
-): ElementVisual | undefined => {
+): UMDElement | undefined => {
   const { isTypeVisual, isTypeSimple, slotVisualImage } = props;
   const isShowVisualImage = isTypeVisual || isTypeSimple;
 
@@ -45,9 +45,9 @@ const createVisualContainer = (
 
   if (!imageSrc || !altText) return;
 
-  const gradientElement = ElementBuilder.create.div({
-    className: 'umd-footer-background-image-graident',
-    elementStyles: {
+  const gradientElement = new ElementBuilder()
+    .withClassName('umd-footer-background-image-graident')
+    .withStyles({
       element: {
         display: 'block',
         position: 'absolute',
@@ -57,29 +57,28 @@ const createVisualContainer = (
         height: '100px',
         background: `linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, #e4edf9 100%)`,
       },
-    },
-  });
+    })
+    .build();
 
-  const imageElement = ElementBuilder.create.element({
-    element: document.createElement('img'),
-    className: 'umd-footer-background-image',
-    elementStyles: {
+  const img = document.createElement('img');
+  img.setAttribute('src', imageSrc);
+  img.setAttribute('alt', altText);
+
+  const imageElement = new ElementBuilder(img)
+    .withClassName('umd-footer-background-image')
+    .withStyles({
       element: {
         width: '100% !important',
         objectFit: 'cover !important',
         display: 'block !important',
         objectPosition: 'center',
       },
-    },
-  });
+    })
+    .build();
 
-  imageElement.element.setAttribute('src', imageSrc);
-  imageElement.element.setAttribute('alt', altText);
-
-  return ElementBuilder.create.div({
-    className: 'umd-footer-background-image-container',
-    children: [gradientElement, imageElement],
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('umd-footer-background-image-container')
+    .withStyles({
       element: {
         position: 'relative',
         paddingTop: '100px',
@@ -91,33 +90,32 @@ const createVisualContainer = (
           objectPosition: 'center',
         },
       },
-    },
-  });
+    })
+    .withChildren(gradientElement, imageElement)
+    .build();
 };
 
-const createContainer = (
-  logoRow: ElementVisual,
-  visualContainerElement?: ElementVisual,
-  linksRowElement?: ElementVisual,
-): ElementVisual => {
-  return ElementBuilder.create.div({
-    className: 'umd-footer-main-container',
-    children: [visualContainerElement, logoRow, linksRowElement].filter(
-      Boolean,
-    ) as ElementVisual[],
-  });
-};
-
-export default (props: MainSectionProps): ElementVisual => {
+export default (props: MainSectionProps): UMDElement => {
   const { isTypeMega, isTypeVisual } = props;
 
   const logoRow = createRowLogo(props);
   const visualContainerElement = createVisualContainer(props);
   const linksRowElement = (isTypeMega || isTypeVisual) && createRowLinks(props);
 
-  return createContainer(
-    logoRow,
-    visualContainerElement,
-    linksRowElement || undefined,
+  // Container-first pattern
+  const container = new ElementBuilder().withClassName(
+    'umd-footer-main-container',
   );
+
+  if (visualContainerElement) {
+    container.withChild(visualContainerElement);
+  }
+
+  container.withChild(logoRow);
+
+  if (linksRowElement) {
+    container.withChild(linksRowElement);
+  }
+
+  return container.build();
 };

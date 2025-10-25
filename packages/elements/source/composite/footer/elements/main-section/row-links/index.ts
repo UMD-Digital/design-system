@@ -1,12 +1,12 @@
 import { layout, token } from '@universityofmaryland/web-styles-library';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import createSocialCampaignColumns, {
   type SocialCampaignColumnsProps,
 } from '../social';
 import createLinkColumns, { type slotColumnsProps } from './link-columns';
 import { BREAKPOINTS } from '../../../globals';
 import { BaseProps } from '../../../_types';
-import { type ElementVisual } from '../../../../../_types';
+import { type UMDElement } from '../../../../../_types';
 
 const { LARGE } = BREAKPOINTS;
 
@@ -15,14 +15,14 @@ export interface RowLinksProps
     BaseProps,
     slotColumnsProps {}
 
-export default (props: RowLinksProps): ElementVisual => {
+export default (props: RowLinksProps): UMDElement => {
   const { isThemeLight } = props;
   const socialColumnWrapper = createSocialCampaignColumns(props);
   const linkColumnWrapper = createLinkColumns(props);
-  const wrapperElement = ElementBuilder.create.div({
-    className: 'umd-footer-row-links-wrapper',
-    children: [linkColumnWrapper, socialColumnWrapper],
-    elementStyles: {
+
+  const wrapperElement = new ElementBuilder()
+    .withClassName('umd-footer-row-links-wrapper')
+    .withStyles({
       element: {
         display: 'flex',
 
@@ -35,22 +35,23 @@ export default (props: RowLinksProps): ElementVisual => {
           },
         },
       },
-    },
-  });
-  const lockElement = ElementBuilder.create.div({
-    className: 'umd-footer-row-links-lock',
-    children: [wrapperElement],
-    elementStyles: {
+    })
+    .withChildren(linkColumnWrapper, socialColumnWrapper)
+    .build();
+
+  const lockElement = new ElementBuilder()
+    .withClassName('umd-footer-row-links-lock')
+    .withStyles({
       element: {
         ...layout.space.horizontal.larger,
       },
-    },
-  });
+    })
+    .withChild(wrapperElement)
+    .build();
 
-  return ElementBuilder.create.div({
-    className: 'umd-footer-row-links',
-    children: [lockElement],
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('umd-footer-row-links')
+    .withStyles({
       element: {
         paddingBottom: token.spacing.lg,
         backgroundColor: token.color.black,
@@ -63,6 +64,7 @@ export default (props: RowLinksProps): ElementVisual => {
           paddingBottom: token.spacing['2xl'],
         },
       },
-    },
-  });
+    })
+    .withChild(lockElement)
+    .build();
 };

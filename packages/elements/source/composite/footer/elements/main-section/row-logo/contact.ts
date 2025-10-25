@@ -3,14 +3,14 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
 import createSocialCampaignColumns, {
   type SocialCampaignColumnsProps,
 } from '../social';
 import { BREAKPOINTS } from '../../../globals';
 import { BaseProps } from '../../../_types';
-import { type ElementVisual } from '../../../../../_types';
+import { type UMDElement } from '../../../../../_types';
 
 interface HeadlineProps {
   slotHeadline: HTMLSlotElement;
@@ -58,15 +58,20 @@ const createContactListHeadline = ({
 }: {
   props: ContactProps;
   element?: HTMLElement;
-  children?: ElementVisual[];
+  children?: UMDElement[];
 }) => {
   const { isThemeLight } = props;
 
-  return ElementBuilder.create.element({
-    element: element ?? document.createElement('p'),
-    className: 'umd-footer-contact-list-headline',
-    children: children ?? [],
-    elementStyles: {
+  const builder = new ElementBuilder(
+    element ?? document.createElement('p'),
+  ).withClassName('umd-footer-contact-list-headline');
+
+  if (children) {
+    builder.withChildren(...children);
+  }
+
+  return builder
+    .withStyles({
       element: {
         marginBottom: token.spacing.min,
         color: token.color.white,
@@ -95,21 +100,20 @@ const createContactListHeadline = ({
           paddingTop: token.spacing.md,
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
-const createDefaultHeadline = (props: ContactProps): ElementVisual => {
+const createDefaultHeadline = (props: ContactProps): UMDElement => {
   const headlineLink = linkWithSpan(props, DEFAULT_HEADLINE_LINK);
 
   return createContactListHeadline({ props: props, children: [headlineLink] });
 };
 
 const createAddress = (address: HTMLElement) => {
-  return ElementBuilder.create.element({
-    element: address,
-    className: 'umd-footer-contact-list-address',
-    elementStyles: {
+  return new ElementBuilder(address)
+    .withClassName('umd-footer-contact-list-address')
+    .withStyles({
       element: {
         [`& *`]: {
           display: 'block',
@@ -120,11 +124,11 @@ const createAddress = (address: HTMLElement) => {
           marginTop: '2px',
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
-const createDefaultAddress = (): ElementVisual => {
+const createDefaultAddress = (): UMDElement => {
   const address = document.createElement('address');
   const addressParagraphOne = document.createElement('p');
   const addressParagraphTwo = document.createElement('p');
@@ -163,10 +167,9 @@ const linkWithSpan = (
   span.innerText = title;
   link.appendChild(span);
 
-  return ElementBuilder.create.element({
-    className: 'umd-element-footer-contact-link',
-    element: link,
-    elementStyles: {
+  return new ElementBuilder(link)
+    .withClassName('umd-element-footer-contact-link')
+    .withStyles({
       element: {
         display: 'block',
         ...animation.line.slideUnderWhite,
@@ -194,8 +197,8 @@ const linkWithSpan = (
           left: 0,
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 const createContactLinksList = ({
@@ -203,36 +206,41 @@ const createContactLinksList = ({
   children,
 }: {
   element?: HTMLElement;
-  children?: ElementVisual[];
+  children?: UMDElement[];
 }) => {
-  return ElementBuilder.create.element({
-    element: element ?? document.createElement('p'),
-    className: 'umd-footer-contact-links-list',
-    children: children ?? [],
-    elementStyles: {
+  const builder = new ElementBuilder(
+    element ?? document.createElement('p'),
+  ).withClassName('umd-footer-contact-links-list');
+
+  if (children) {
+    builder.withChildren(...children);
+  }
+
+  return builder
+    .withStyles({
       element: {
         display: 'flex',
         [`& *`]: {
           ...typography.sans.small,
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
-const createDefaultLinks = (props: ContactProps): ElementVisual => {
+const createDefaultLinks = (props: ContactProps): UMDElement => {
   const email = linkWithSpan(props, DEFAULT_EMAIL);
   const phone = linkWithSpan(props, DEFAULT_PHONE);
 
   return createContactLinksList({ children: [email, phone] });
 };
 
-export default (props: ContactProps): ElementVisual => {
+export default (props: ContactProps): UMDElement => {
   const { slotAddress, slotHeadline, slotContentLinks } = props;
   const socialContainer = createSocialCampaignColumns(props);
   const hasSlot = slotAddress || slotHeadline || slotContentLinks;
 
-  const contactChildren: ElementVisual[] = [];
+  const contactChildren: UMDElement[] = [];
 
   if (hasSlot) {
     if (slotHeadline) {
@@ -257,10 +265,10 @@ export default (props: ContactProps): ElementVisual => {
 
   contactChildren.push(socialContainer);
 
-  return ElementBuilder.create.div({
-    className: 'umd-footer-contact-container',
-    children: contactChildren,
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('umd-footer-contact-container')
+    .withChildren(...contactChildren)
+    .withStyles({
       element: {
         ['& p']: {
           lineHeight: '1.4em',
@@ -278,6 +286,6 @@ export default (props: ContactProps): ElementVisual => {
           paddingLeft: token.spacing['xl'],
         },
       },
-    },
-  });
+    })
+    .build();
 };

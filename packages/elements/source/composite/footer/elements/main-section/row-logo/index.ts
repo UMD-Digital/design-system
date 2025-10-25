@@ -1,5 +1,5 @@
 import { token, layout } from '@universityofmaryland/web-styles-library';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import createSocialCampaignColumns, {
   type SocialCampaignColumnsProps,
 } from '../social';
@@ -10,7 +10,7 @@ import createContactContainer, { type ContactProps } from './contact';
 import createLogoContainer, { LogoProps } from './logo';
 import { BREAKPOINTS } from '../../../globals';
 import { BaseProps } from '../../../_types';
-import { type ElementVisual } from '../../../../../_types';
+import { type UMDElement } from '../../../../../_types';
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
 
@@ -21,7 +21,7 @@ export interface RowLogoProps
     CallToActionProps,
     ContactProps {}
 
-export default (props: RowLogoProps): ElementVisual => {
+export default (props: RowLogoProps): UMDElement => {
   const { isThemeLight, isTypeSimple } = props;
 
   const logoElement = createLogoContainer(props);
@@ -31,10 +31,9 @@ export default (props: RowLogoProps): ElementVisual => {
     (isTypeSimple && createSocialCampaignColumns(props)) ||
     createCallToActionContainer(props);
 
-  const wrapper = ElementBuilder.create.div({
-    className: 'umd-footer-row-logo-container-wrapper',
-    children: [logoElement, contactElement, thirdColumnElement],
-    elementStyles: {
+  const wrapper = new ElementBuilder()
+    .withClassName('umd-footer-row-logo-container-wrapper')
+    .withStyles({
       element: {
         [`@container (min-width: ${LARGE}px)`]: {
           display: 'flex',
@@ -53,23 +52,23 @@ export default (props: RowLogoProps): ElementVisual => {
           gap: token.spacing.md,
         },
       },
-    },
-  });
+    })
+    .withChildren(logoElement, contactElement, thirdColumnElement)
+    .build();
 
-  const lock = ElementBuilder.create.div({
-    className: 'umd-footer-row-logo-container-lock',
-    children: [wrapper],
-    elementStyles: {
+  const lock = new ElementBuilder()
+    .withClassName('umd-footer-row-logo-container-lock')
+    .withStyles({
       element: {
         ...layout.space.horizontal.larger,
       },
-    },
-  });
+    })
+    .withChild(wrapper)
+    .build();
 
-  const rowLogoContainer = ElementBuilder.create.div({
-    className: 'umd-footer-row-logo-container',
-    children: [lock],
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('umd-footer-row-logo-container')
+    .withStyles({
       element: {
         backgroundColor:
           (!isThemeLight && token.color.black) || token.color.gray.lightest,
@@ -85,8 +84,7 @@ export default (props: RowLogoProps): ElementVisual => {
           }),
         },
       },
-    },
-  });
-
-  return rowLogoContainer;
+    })
+    .withChild(lock)
+    .build();
 };

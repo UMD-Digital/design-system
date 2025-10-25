@@ -1,5 +1,5 @@
 import { token, typography } from '@universityofmaryland/web-styles-library';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import {
   facebook as iconFacebook,
   x as iconX,
@@ -12,7 +12,7 @@ import {
 import createCampaignRow from './campaign';
 import { BREAKPOINTS } from '../../globals';
 import { BaseProps } from '../../_types';
-import { type ElementVisual } from '../../../../_types';
+import { type UMDElement } from '../../../../_types';
 
 interface SocialProps extends BaseProps {
   slotSocialLinks?: HTMLSlotElement;
@@ -39,7 +39,7 @@ const GetSocialIcon = ({ link }: { link: HTMLAnchorElement }) => {
   return link;
 };
 
-const CreateSocialRow = (props: SocialProps): ElementVisual => {
+const CreateSocialRow = (props: SocialProps): UMDElement => {
   const { isThemeLight, slotSocialLinks } = props;
 
   let socialLinks: HTMLAnchorElement[] = [];
@@ -81,24 +81,22 @@ const CreateSocialRow = (props: SocialProps): ElementVisual => {
     );
   }
 
-  const headline = ElementBuilder.create.element({
-    element: document.createElement('p'),
-    className: 'umd-footer-social-container_headline',
-    elementStyles: {
+  const headline = new ElementBuilder('p')
+    .withClassName('umd-footer-social-container_headline')
+    .withStyles({
       element: {
         paddingTop: '3px',
         fontWeight: 700,
         ...typography.elements.interativeMedium,
       },
-    },
-  });
-  headline.element.innerText = 'Stay Connected';
+    })
+    .withText('Stay Connected')
+    .build();
 
   const socialLinkChildren = socialLinks.map((link) =>
-    ElementBuilder.create.element({
-      element: GetSocialIcon({ link }),
-      className: 'umd-footer-social-link',
-      elementStyles: {
+    new ElementBuilder(GetSocialIcon({ link }))
+      .withClassName('umd-footer-social-link')
+      .withStyles({
         element: {
           backgroundColor: token.color.gray.darker,
           height: '32px',
@@ -138,32 +136,29 @@ const CreateSocialRow = (props: SocialProps): ElementVisual => {
             },
           }),
         },
-      },
-    }),
+      })
+      .build(),
   );
 
   const gridColumns = Math.min(socialLinks.length, 3);
 
-  const linksWrapper = ElementBuilder.create.div({
-    className: 'umd-footer-social-container_wrapper',
-    children: socialLinkChildren,
-    elementStyles: {
+  const linksWrapper = new ElementBuilder()
+    .withClassName('umd-footer-social-container_wrapper')
+    .withStyles({
       element: {
         display: 'grid',
         gridTemplateColumns: `repeat(${gridColumns}, 1fr)`,
         gridGap: token.spacing.xs,
         marginLeft: token.spacing.xs,
       },
-    },
-  });
-  linksWrapper.element.setAttribute('count', `${socialLinks.length}`);
+    })
+    .withChildren(...socialLinkChildren)
+    .withAttribute('count', `${socialLinks.length}`)
+    .build();
 
-  const containerChildren = [headline, linksWrapper];
-
-  const container = ElementBuilder.create.div({
-    className: 'umd-footer-social-container',
-    children: containerChildren,
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('umd-footer-social-container')
+    .withStyles({
       element: {
         marginLeft: 'auto',
         display: 'flex',
@@ -181,25 +176,24 @@ const CreateSocialRow = (props: SocialProps): ElementVisual => {
           paddingLeft: token.spacing['2xl'],
         },
       },
-    },
-  });
-
-  if (socialLinks.length >= 4) {
-    container.element.setAttribute(ATTRIBUTE_LAYOUT, LAYOUT_GRID);
-  }
-
-  return container;
+    })
+    .withChildren(headline, linksWrapper)
+    .withModifier((el) => {
+      if (socialLinks.length >= 4) {
+        el.setAttribute(ATTRIBUTE_LAYOUT, LAYOUT_GRID);
+      }
+    })
+    .build();
 };
 
-export default (props: SocialCampaignColumnsProps): ElementVisual => {
+export default (props: SocialCampaignColumnsProps): UMDElement => {
   const socialContainer = CreateSocialRow(props);
   const campaignContainer = createCampaignRow(props);
   const { isTypeSimple } = props;
 
-  return ElementBuilder.create.div({
-    className: 'umd-footer-social-column_wrapper',
-    children: [socialContainer, campaignContainer],
-    elementStyles: {
+  return new ElementBuilder()
+    .withClassName('umd-footer-social-column_wrapper')
+    .withStyles({
       element: {
         [`@container  (max-width: ${LARGE - 1}px)`]: {
           marginTop: token.spacing.md,
@@ -221,6 +215,7 @@ export default (props: SocialCampaignColumnsProps): ElementVisual => {
           },
         },
       },
-    },
-  });
+    })
+    .withChildren(socialContainer, campaignContainer)
+    .build();
 };

@@ -1,5 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { type ElementModel } from '../../_types';
 import { assets, textLockup } from 'atomic';
 import { PersonContact } from './_types';
 
@@ -24,12 +26,95 @@ interface PersonHero extends PersonText, PersonInfo {
   breadcrumbDesktop?: HTMLElement | null;
 }
 
-const CreateImageBlock = (props: PersonInfo) => {
+const CreateImageBlock = (props: PersonInfo): ElementModel<HTMLElement> => {
   const { image, association, pronouns, isThemeDark } = props;
-  const container = ElementBuilder.create.element({
-    element: document.createElement('div'),
-    className: 'umd-person-hero-image-container',
-    elementStyles: {
+
+  const wrapper = new ElementBuilder()
+    .withClassName('umd-person-hero-image-wrapper');
+
+  const contactContainer = textLockup.contact({
+    ...props,
+    isThemeDark: !isThemeDark,
+  });
+
+  if (image) {
+    const imageBlock = assets.image.background({
+      element: image,
+      isScaled: false,
+    });
+
+    const imageContainer = new ElementBuilder()
+      .withClassName('umd-person-hero-image')
+      .withChild(imageBlock)
+      .withStyles({
+        element: {
+          backgroundColor: `${
+            isThemeDark ? token.color.gray.lightest : token.color.gray.darker
+          }`,
+          display: 'flex',
+          justifyContent: 'center',
+          marginBottom: token.spacing.md,
+
+          ['& img']: {
+            [`@container (max-width: ${token.media.breakpoints.large.max})`]: {
+              maxHeight: '160px',
+            },
+          },
+        },
+      })
+      .build();
+
+    wrapper.withChild(imageContainer);
+  }
+
+  if (association) {
+    wrapper.withChild(
+      new ElementBuilder(association)
+        .styled(Styles.typography.sans.fonts.large)
+        .withThemeDark(!isThemeDark)
+        .withStyles({
+          element: {
+            display: 'block',
+          },
+          siblingAfter: {
+            marginTop: token.spacing.min,
+          },
+        })
+        .build(),
+    );
+  }
+
+  if (pronouns) {
+    const italicStyle = document.createElement('i');
+    italicStyle.appendChild(pronouns);
+
+    wrapper.withChild(
+      new ElementBuilder(italicStyle)
+        .withClassName('umd-person-hero-pronouns')
+        .withThemeDark(!isThemeDark)
+        .withStyles({
+          element: {
+            display: 'block',
+          },
+          siblingAfter: {
+            display: 'block',
+            marginTop: token.spacing.min,
+          },
+        })
+        .build(),
+    );
+  }
+
+  if (contactContainer) {
+    wrapper.withChild(contactContainer);
+  }
+
+  const wrapperBuilt = wrapper.build();
+
+  return new ElementBuilder()
+    .withClassName('umd-person-hero-image-container')
+    .withChild(wrapperBuilt)
+    .withStyles({
       element: {
         paddingTop: `${token.spacing.lg}`,
         paddingBottom: `${token.spacing.lg}`,
@@ -49,99 +134,8 @@ const CreateImageBlock = (props: PersonInfo) => {
           maxWidth: '320px',
         },
       },
-    },
-  });
-
-  const wrapper = ElementBuilder.create.element({
-    element: document.createElement('div'),
-    className: 'umd-person-hero-image-wrapper',
-  });
-
-  const contactContainer = textLockup.contact({
-    ...props,
-    isThemeDark: !isThemeDark,
-  });
-
-  if (image) {
-    const imageContainer = ElementBuilder.create.element({
-      element: document.createElement('div'),
-      className: 'umd-person-hero-image',
-      elementStyles: {
-        element: {
-          backgroundColor: `${
-            isThemeDark ? token.color.gray.lightest : token.color.gray.darker
-          }`,
-          display: 'flex',
-          justifyContent: 'center',
-          marginBottom: token.spacing.md,
-
-          ['& img']: {
-            [`@container (max-width: ${token.media.breakpoints.large.max})`]: {
-              maxHeight: '160px',
-            },
-          },
-        },
-      },
-    });
-    const imageBlock = assets.image.background({
-      element: image,
-      isScaled: false,
-    });
-
-    imageContainer.element.appendChild(imageBlock.element);
-    imageContainer.styles += imageBlock.styles;
-    wrapper.element.appendChild(imageContainer.element);
-    wrapper.styles += imageContainer.styles;
-  }
-
-  if (association) {
-    const styledAssociation = ElementBuilder.styled.headline.sansLarge({
-      element: association,
-      isThemeDark: !isThemeDark,
-      elementStyles: {
-        element: {
-          display: 'block',
-        },
-        siblingAfter: {
-          marginTop: token.spacing.min,
-        },
-      },
-    });
-    wrapper.element.appendChild(styledAssociation.element);
-    wrapper.styles += styledAssociation.styles;
-  }
-
-  if (pronouns) {
-    const italicStyle = document.createElement('i');
-    italicStyle.appendChild(pronouns);
-
-    const styledPronouns = ElementBuilder.create.element({
-      element: italicStyle,
-      className: 'umd-person-hero-pronouns',
-      isThemeDark: !isThemeDark,
-      elementStyles: {
-        element: {
-          display: 'block',
-        },
-        siblingAfter: {
-          display: 'block',
-          marginTop: token.spacing.min,
-        },
-      },
-    });
-
-    wrapper.element.appendChild(styledPronouns.element);
-    wrapper.styles += styledPronouns.styles;
-  }
-
-  if (contactContainer) {
-    wrapper.element.append(contactContainer.element);
-    wrapper.styles += contactContainer.styles;
-  }
-
-  container.element.appendChild(wrapper.element);
-  container.styles += wrapper.styles;
-  return container;
+    })
+    .build();
 };
 
 const CreateTextContainer = ({
@@ -149,11 +143,84 @@ const CreateTextContainer = ({
   job,
   subText,
   isThemeDark,
-}: PersonText) => {
-  const container = ElementBuilder.create.element({
-    element: document.createElement('div'),
-    className: 'person-hero-text',
-    elementStyles: {
+}: PersonText): ElementModel<HTMLElement> => {
+  const lineWrapper = new ElementBuilder()
+    .styled(Styles.element.text.line.adjustentInset)
+    .withStyles({
+      pseudoBefore: {
+        backgroundColor: `${isThemeDark ? token.color.gold : token.color.red}`,
+      },
+    });
+
+  if (subText) {
+    lineWrapper.withChild(
+      new ElementBuilder(subText)
+        .styled(Styles.typography.sans.fonts.small)
+        .withThemeDark(isThemeDark)
+        .withStyles({
+          element: {
+            display: 'block',
+            textTransform: 'uppercase',
+            fontWeight: '700',
+            color: `${token.color.black}`,
+            maxWidth: '650px',
+          },
+          siblingAfter: {
+            marginTop: token.spacing.min,
+
+            [`@container (min-width: ${token.media.breakpoints.tablet.min})`]: {
+              marginTop: token.spacing.sm,
+            },
+          },
+        })
+        .build(),
+    );
+  }
+
+  if (name) {
+    lineWrapper.withChild(
+      new ElementBuilder(name)
+        .styled(Styles.typography.campaign.fonts.large)
+        .withThemeDark(isThemeDark)
+        .withStyles({
+          element: {
+            textTransform: 'uppercase',
+            fontWeight: '700',
+            display: 'block',
+            color: `${token.color.black}`,
+          },
+          siblingAfter: {
+            marginTop: token.spacing.min,
+
+            [`@container (min-width: ${token.media.breakpoints.tablet.min})`]: {
+              marginTop: token.spacing.md,
+            },
+          },
+        })
+        .build(),
+    );
+  }
+
+  if (job) {
+    lineWrapper.withChild(
+      new ElementBuilder(job)
+        .styled(Styles.typography.sans.fonts.medium)
+        .withThemeDark(isThemeDark)
+        .withStyles({
+          element: {
+            display: 'block',
+          },
+        })
+        .build(),
+    );
+  }
+
+  const lineWrapperBuilt = lineWrapper.build();
+
+  return new ElementBuilder()
+    .withClassName('person-hero-text')
+    .withChild(lineWrapperBuilt)
+    .withStyles({
       element: {
         backgroundColor: `${
           isThemeDark ? token.color.black : token.color.gray.lightest
@@ -185,116 +252,49 @@ const CreateTextContainer = ({
           isThemeDark ? token.color.black : token.color.gray.lightest
         }`,
       },
-    },
-  });
-
-  const lineWrapper = ElementBuilder.styled.text.lineAdjustmentInset({
-    element: document.createElement('div'),
-    elementStyles: {
-      pseudoBefore: {
-        backgroundColor: `${isThemeDark ? token.color.gold : token.color.red}`,
-      },
-    },
-  });
-
-  if (subText) {
-    const styledSubText = ElementBuilder.styled.headline.sansSmall({
-      element: subText,
-      isThemeDark,
-      elementStyles: {
-        element: {
-          display: 'block',
-          textTransform: 'uppercase',
-          fontWeight: '700',
-          color: `${token.color.black}`,
-          maxWidth: '650px',
-        },
-        siblingAfter: {
-          marginTop: token.spacing.min,
-
-          [`@container (min-width: ${token.media.breakpoints.tablet.min})`]: {
-            marginTop: token.spacing.sm,
-          },
-        },
-      },
-    });
-
-    lineWrapper.element.appendChild(styledSubText.element);
-    lineWrapper.styles += styledSubText.styles;
-  }
-
-  if (name) {
-    const styledName = ElementBuilder.styled.headline.campaignLarge({
-      element: name,
-      isThemeDark,
-      elementStyles: {
-        element: {
-          textTransform: 'uppercase',
-          fontWeight: '700',
-          display: 'block',
-          color: `${token.color.black}`,
-        },
-        siblingAfter: {
-          marginTop: token.spacing.min,
-
-          [`@container (min-width: ${token.media.breakpoints.tablet.min})`]: {
-            marginTop: token.spacing.md,
-          },
-        },
-      },
-    });
-
-    lineWrapper.element.appendChild(styledName.element);
-    lineWrapper.styles += styledName.styles;
-  }
-
-  if (job) {
-    const styledJob = ElementBuilder.styled.headline.sansMedium({
-      element: job,
-      isThemeDark,
-      elementStyles: {
-        element: {
-          display: 'block',
-        },
-      },
-    });
-    lineWrapper.element.appendChild(styledJob.element);
-    lineWrapper.styles += styledJob.styles;
-  }
-
-  container.element.appendChild(lineWrapper.element);
-  container.styles += lineWrapper.styles;
-
-  return container;
+    })
+    .build();
 };
 
-export default (props: PersonHero) => {
+export default (props: PersonHero): ElementModel<HTMLElement> => {
   const { breadcrumbMobile, breadcrumbDesktop } = props;
-  const composite = ElementBuilder.create.element({
-    element: document.createElement('div'),
-    className: 'umd-person-hero',
-    elementStyles: {
+  const textContainer = CreateTextContainer(props);
+
+  const textColumns = new ElementBuilder()
+    .withClassName('umd-person-hero-columns')
+    .withChild(textContainer)
+    .withStyles({
       element: {
-        overflow: 'hidden',
-        containerType: 'inline-size',
-      },
-    },
-  });
-  const elementLock = ElementBuilder.styled.layout.spaceHorizontalLarger({
-    element: document.createElement('div'),
-    elementStyles: {
-      element: {
-        [`@container (max-width: ${token.media.breakpoints.large.max})`]: {
-          padding: '0',
+        [`@container (min-width: ${token.media.breakpoints.tablet.min})`]: {
+          width: '70%',
         },
       },
-    },
-  });
+    });
 
-  const elementWrapper = ElementBuilder.create.element({
-    element: document.createElement('div'),
-    className: 'umd-person-hero-wrapper',
-    elementStyles: {
+  if (breadcrumbDesktop) {
+    const textColumnBreadcrumb = new ElementBuilder()
+      .withClassName('umd-person-hero-breadcrumb-desktop')
+      .withChild(breadcrumbDesktop)
+      .withStyles({
+        element: {
+          [`@container (max-width: ${token.media.breakpoints.large.max})`]: {
+            display: 'none',
+          },
+        },
+      })
+      .build();
+
+    textColumns.withChild(textColumnBreadcrumb);
+  }
+
+  const textColumnsBuilt = textColumns.build();
+  const imageBlock = CreateImageBlock(props);
+
+  const elementWrapper = new ElementBuilder()
+    .withClassName('umd-person-hero-wrapper')
+    .withChild(textColumnsBuilt)
+    .withChild(imageBlock)
+    .withStyles({
       element: {
         [`@container (min-width: ${token.media.breakpoints.tablet.min})`]: {
           display: 'flex',
@@ -302,61 +302,25 @@ export default (props: PersonHero) => {
           paddingTop: `${token.spacing['7xl']}`,
         },
       },
-    },
-  });
+    })
+    .build();
 
-  const textColumns = ElementBuilder.create.element({
-    element: document.createElement('div'),
-    className: 'umd-person-hero-columns',
-    elementStyles: {
+  const elementLock = new ElementBuilder()
+    .styled(Styles.layout.space.horizontal.larger)
+    .withChild(elementWrapper)
+    .withStyles({
       element: {
-        [`@container (min-width: ${token.media.breakpoints.tablet.min})`]: {
-          width: '70%',
-        },
-      },
-    },
-  });
-
-  const textContainer = CreateTextContainer(props);
-
-  textColumns.element.appendChild(textContainer.element);
-  textColumns.styles += textContainer.styles;
-  elementWrapper.element.appendChild(textColumns.element);
-  elementWrapper.styles += textColumns.styles;
-
-  if (breadcrumbDesktop) {
-    const textColumnBreadcrumb = ElementBuilder.create.element({
-      element: document.createElement('div'),
-      className: 'umd-person-hero-breadcrumb-desktop',
-      elementStyles: {
-        element: {
-          [`@container (max-width: ${token.media.breakpoints.large.max})`]: {
-            display: 'none',
-          },
+        [`@container (max-width: ${token.media.breakpoints.large.max})`]: {
+          padding: '0',
         },
       },
     });
 
-    textColumnBreadcrumb.element.appendChild(breadcrumbDesktop);
-    textColumns.element.appendChild(textColumnBreadcrumb.element);
-    elementWrapper.styles += textColumnBreadcrumb.styles;
-  }
-
-  const imageBlock = CreateImageBlock(props);
-  elementWrapper.element.appendChild(imageBlock.element);
-  elementWrapper.styles += imageBlock.styles;
-
-  elementLock.element.appendChild(elementWrapper.element);
-  elementLock.styles += elementWrapper.styles;
-
-  composite.element.appendChild(elementLock.element);
-  composite.styles += elementLock.styles;
-
   if (breadcrumbMobile) {
-    const mainBreadcrumb = ElementBuilder.create.element({
-      element: document.createElement('div'),
-      className: 'umd-person-hero-breadcrumb-mobile',
-      elementStyles: {
+    const mainBreadcrumb = new ElementBuilder()
+      .withClassName('umd-person-hero-breadcrumb-mobile')
+      .withChild(breadcrumbMobile)
+      .withStyles({
         element: {
           paddingLeft: `${token.spacing.md}`,
           paddingRight: `${token.spacing.md}`,
@@ -365,13 +329,22 @@ export default (props: PersonHero) => {
             display: 'none',
           },
         },
-      },
-    });
+      })
+      .build();
 
-    mainBreadcrumb.element.appendChild(breadcrumbMobile);
-    elementLock.element.appendChild(mainBreadcrumb.element);
-    composite.styles += mainBreadcrumb.styles;
+    elementLock.withChild(mainBreadcrumb);
   }
 
-  return composite;
+  const elementLockBuilt = elementLock.build();
+
+  return new ElementBuilder()
+    .withClassName('umd-person-hero')
+    .withChild(elementLockBuilt)
+    .withStyles({
+      element: {
+        overflow: 'hidden',
+        containerType: 'inline-size',
+      },
+    })
+    .build();
 };

@@ -1,7 +1,8 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
-import { ElementVisual } from '../../_types';
+import { type ElementModel } from '../../_types';
 import { layout } from 'atomic';
 import { PersonCard } from './_types';
 
@@ -21,11 +22,22 @@ export default ({
   phone,
   pronouns,
   subText,
-}: PersonCard) => {
-  let children: ElementVisual[] = [];
+}: PersonCard): ElementModel<HTMLElement> => {
+  const builder = new ElementBuilder()
+    .withClassName('person-tabular-container')
+    .withStyles({
+      element: {
+        overflow: 'hidden',
+        display: 'flex',
+
+        ...createMediaQuery('max-width', smallBreakpoint, {
+          flexDirection: 'column',
+        }),
+      },
+    });
 
   if (image) {
-    children.push(
+    builder.withChild(
       layout.person.columns.image({
         image,
         isThemeDark,
@@ -34,9 +46,10 @@ export default ({
   }
 
   if (name) {
-    const nameComposite = ElementBuilder.styled.headline.sansLarge({
-      element: name,
-      elementStyles: {
+    const nameModel = new ElementBuilder(name)
+      .styled(Styles.typography.sans.fonts.large)
+      .withThemeDark(isThemeDark)
+      .withStyles({
         element: {
           fontWeight: `${token.font.weight.bold}`,
           color: `${token.color.black}`,
@@ -48,11 +61,15 @@ export default ({
         subElement: {
           color: 'currentColor',
         },
-      },
-      isThemeDark,
-    });
+      })
+      .build();
 
-    children.push(
+    const nameComposite = {
+      ...nameModel,
+      className: 'person-tabular-name',
+    };
+
+    builder.withChild(
       layout.person.columns.details({
         actions,
         association,
@@ -67,7 +84,7 @@ export default ({
   }
 
   if (additionalContact || address || email || linkendIn || phone) {
-    children.push(
+    builder.withChild(
       layout.person.columns.contact({
         additionalContact,
         address,
@@ -80,18 +97,5 @@ export default ({
     );
   }
 
-  return ElementBuilder.create.div({
-    className: 'person-tabular-container',
-    children,
-    elementStyles: {
-      element: {
-        overflow: 'hidden',
-        display: 'flex',
-
-        ...createMediaQuery('max-width', smallBreakpoint, {
-          flexDirection: 'column',
-        }),
-      },
-    },
-  });
+  return builder.build();
 };

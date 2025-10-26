@@ -8,7 +8,13 @@
     "moduleResolution": "bundler",
     "paths": {
       "@universityofmaryland/web-utilities-library": ["../utilities/source/index.ts"],
-      "@universityofmaryland/web-utilities-library/*": ["../utilities/source/*"]
+      "@universityofmaryland/web-utilities-library/*": ["../utilities/source/*"],
+      "@universityofmaryland/web-builder-library": ["../builder/dist/index.d.ts"],
+      "@universityofmaryland/web-builder-library/*": ["../builder/dist/*"],
+      "@universityofmaryland/web-elements-library": ["../elements/dist/index.d.ts"],
+      "@universityofmaryland/web-elements-library/*": ["../elements/dist/*"],
+      "@universityofmaryland/web-styles-library": ["../styles/dist/index.d.ts"],
+      "@universityofmaryland/web-styles-library/*": ["../styles/dist/*"]
     }
   },
   "include": [

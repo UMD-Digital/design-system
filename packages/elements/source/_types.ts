@@ -3,24 +3,15 @@
  * This file contains shared interfaces and types used across atomic, composite, and model modules
  */
 
+import type { ElementModel as BuilderElementModel } from '@universityofmaryland/web-builder-library';
+
 // ===== Core Element Types =====
 
 /**
- * Base structure for all element return types
- * Generic type parameter allows specifying HTMLElement or DocumentFragment
+ * Re-export ElementModel from builder package for consistency
+ * This is the standard return type for all element creation functions
  */
-export interface ElementModel<
-  T extends HTMLElement | DocumentFragment = HTMLElement | DocumentFragment,
-> {
-  element: T;
-  className?: string;
-  styles: string;
-  update?: (props: any) => void;
-  destroy?: () => void;
-  events?: {
-    [key: string]: Function;
-  };
-}
+export type ElementModel<T extends HTMLElement = HTMLElement> = BuilderElementModel<T>;
 
 /**
  * Visual element structure

@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
-import { ElementVisual } from '../../_types';
+import { type ElementModel } from '../../_types';
 import { layout } from 'atomic';
 import { PersonCard } from './_types';
 
@@ -22,11 +22,22 @@ export default ({
   phone,
   pronouns,
   subText,
-}: PersonCard) => {
-  let children: ElementVisual[] = [];
+}: PersonCard): ElementModel<HTMLElement> => {
+  const builder = new ElementBuilder()
+    .withClassName('person-list-container')
+    .withStyles({
+      element: {
+        overflow: 'hidden',
+        display: 'flex',
+
+        ...createMediaQuery('max-width', smallBreakpoint, {
+          flexDirection: 'column',
+        }),
+      },
+    });
 
   if (image) {
-    children.push(
+    builder.withChild(
       layout.person.columns.image({
         customStyles: {
           ...createMediaQuery('min-width', mediumBreakpointStart, {
@@ -47,7 +58,7 @@ export default ({
   }
 
   if (name) {
-    children.push(
+    builder.withChild(
       layout.person.columns.information({
         actions,
         address,
@@ -65,18 +76,5 @@ export default ({
     );
   }
 
-  return ElementBuilder.create.div({
-    className: 'person-list-container',
-    children,
-    elementStyles: {
-      element: {
-        overflow: 'hidden',
-        display: 'flex',
-
-        ...createMediaQuery('max-width', smallBreakpoint, {
-          flexDirection: 'column',
-        }),
-      },
-    },
-  });
+  return builder.build();
 };

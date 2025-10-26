@@ -5,13 +5,13 @@ import { ElementModel } from '../../_types';
 
 interface TypeTextLockupMedium {
   actions?: HTMLElement | null;
-  compositeHeadline?: ElementModel | null;
-  eventDetails?: ElementModel;
+  compositeHeadline?: ElementModel<HTMLElement> | null;
+  eventDetails?: ElementModel<HTMLElement>;
   headline?: HTMLElement | null;
   isThemeDark?: boolean;
   isThemeMaryland?: boolean;
   ribbon?: HTMLElement | null;
-  compositeStats?: ElementModel | null;
+  compositeStats?: ElementModel<HTMLElement> | null;
   text?: HTMLElement | null;
 }
 
@@ -57,7 +57,7 @@ export default ({
   }
 
   if (compositeHeadline) {
-    container.withChild(compositeHeadline.element);
+    container.withChild(compositeHeadline);
   }
 
   if (headline && !compositeHeadline) {
@@ -86,7 +86,7 @@ export default ({
   if (eventDetails) {
     const eventDetailsElement = new ElementBuilder()
       .withClassName('text-lockup-medium-event-details')
-      .withChild(eventDetails.element)
+      .withChild(eventDetails)
       .withStyles({
         siblingAfter: {
           marginTop: token.spacing.md,
@@ -112,7 +112,7 @@ export default ({
   }
 
   if (compositeStats) {
-    container.withChild(compositeStats.element);
+    container.withChild(compositeStats);
   }
 
   if (actions) {

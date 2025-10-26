@@ -1,20 +1,23 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
-import { type ElementVisual } from '../../../_types';
+import { type ElementModel } from '../../../_types';
 import { assets, textLockup } from 'atomic';
 import { PersonBio } from '../_types';
 
-const createTextContainer = (props: PersonBio) => {
+const createTextContainer = (props: PersonBio): ElementModel<HTMLElement> => {
   const { isThemeDark, name, ...textProps } = props;
-  const children: ElementVisual[] = [];
+
+  const builder = new ElementBuilder()
+    .styled(Styles.element.text.line.adjustentInset);
 
   if (name) {
-    children.push(
-      ElementBuilder.styled.headline.sansExtraLarge({
-        element: name,
-        isThemeDark,
-        elementStyles: {
+    builder.withChild(
+      new ElementBuilder(name)
+        .styled(Styles.typography.sans.fonts.extraLarge)
+        .withThemeDark(isThemeDark)
+        .withStyles({
           element: {
             color: `${token.color.black}`,
             textTransform: 'uppercase',
@@ -24,87 +27,48 @@ const createTextContainer = (props: PersonBio) => {
           siblingAfter: {
             marginTop: token.spacing.sm,
           },
-        },
-      }),
+        })
+        .build(),
     );
   }
 
-  children.push(textLockup.person({ ...textProps, isThemeDark }));
+  builder.withChild(textLockup.person({ ...textProps, isThemeDark }));
 
-  return ElementBuilder.styled.text.lineAdjustmentInset({
-    element: document.createElement('div'),
-    children,
-  });
+  return builder.build();
 };
 
-const createTextColumn = (props: PersonBio) => {
+const createTextColumn = (props: PersonBio): ElementModel<HTMLElement> => {
   const { actions } = props;
   const textContainer = createTextContainer(props);
-  const children: ElementVisual[] = [];
 
-  children.push(textContainer, textLockup.contact(props));
+  const builder = new ElementBuilder()
+    .withClassName('person-bio-summary-text-column')
+    .withChild(textContainer)
+    .withChild(textLockup.contact(props));
 
   if (actions) {
-    children.push(
-      ElementBuilder.styled.layout.gridInlineTabletRows({
-        element: actions,
-        elementStyles: {
+    builder.withChild(
+      new ElementBuilder(actions)
+        .styled(Styles.layout.grid.inline.tabletRows)
+        .withStyles({
           element: {
             marginTop: token.spacing.sm,
           },
-        },
-      }),
+        })
+        .build(),
     );
   }
 
-  return ElementBuilder.create.div({
-    className: 'person-bio-summary-text-column',
-    children,
-  });
+  return builder.build();
 };
 
-const makeContainer = (props: PersonBio) => {
+const makeContainer = (props: PersonBio): ElementModel<HTMLElement> => {
   const { image } = props;
   const textColumn = createTextColumn(props);
-  const children: ElementVisual[] = [];
 
-  if (image) {
-    children.push(
-      assets.image.background({
-        element: image,
-        isScaled: false,
-        customStyles: {
-          element: {
-            ...createMediaQuery(
-              'max-width',
-              token.media.breakpointValues.medium.max,
-              {
-                display: 'flex',
-              },
-            ),
-
-            [`& img`]: {
-              ...createMediaQuery(
-                'min-width',
-                token.media.breakpointValues.large.min,
-                {
-                  width: `100%`,
-                  height: `auto !important`,
-                },
-              ),
-            },
-          },
-        },
-      }),
-    );
-  }
-
-  children.push(textColumn);
-
-  return ElementBuilder.create.div({
-    className: 'person-bio-summary-container',
-    children,
-    elementStyles: {
+  const builder = new ElementBuilder()
+    .withClassName('person-bio-summary-container')
+    .withStyles({
       element: {
         display: 'grid',
         gridGap: `${token.spacing.md}`,
@@ -140,32 +104,66 @@ const makeContainer = (props: PersonBio) => {
           ),
         },
       },
-    },
-  });
-};
+    });
 
-export default (props: PersonBio) => {
-  const { isThemeDark, description } = props;
-  const container = makeContainer(props);
-  const children: ElementVisual[] = [container];
-
-  if (description) {
-    children.push(
-      ElementBuilder.styled.richText.simpleLarge({
-        element: description,
-        isThemeDark,
-        elementStyles: {
+  if (image) {
+    builder.withChild(
+      assets.image.background({
+        element: image,
+        isScaled: false,
+        customStyles: {
           element: {
-            marginTop: token.spacing.lg,
-            maxWidth: token.spacing.maxWidth.smallest,
+            ...createMediaQuery(
+              'max-width',
+              token.media.breakpointValues.medium.max,
+              {
+                display: 'flex',
+              },
+            ),
+
+            [`& img`]: {
+              ...createMediaQuery(
+                'min-width',
+                token.media.breakpointValues.large.min,
+                {
+                  width: `100%`,
+                  height: `auto !important`,
+                },
+              ),
+            },
           },
         },
       }),
     );
   }
 
-  return ElementBuilder.create.div({
-    className: 'person-bio-summary-composite',
-    children,
-  });
+  builder.withChild(textColumn);
+
+  return builder.build();
+};
+
+export default (props: PersonBio): ElementModel<HTMLElement> => {
+  const { isThemeDark, description } = props;
+  const container = makeContainer(props);
+
+  const builder = new ElementBuilder()
+    .withClassName('person-bio-summary-composite')
+    .withChild(container);
+
+  if (description) {
+    builder.withChild(
+      new ElementBuilder(description)
+        .styled(Styles.element.text.rich.simpleLarge)
+        .withThemeDark(isThemeDark)
+        .withStyles({
+          element: {
+            marginTop: token.spacing.lg,
+            maxWidth: token.spacing.maxWidth.smallest,
+          },
+        })
+        .build(),
+    );
+  }
+
+  return builder.build();
 };

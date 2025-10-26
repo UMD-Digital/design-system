@@ -72,6 +72,7 @@ export default defineConfig({
         declaration: true,
         declarationMap: true,
         emitDeclarationOnly: false,
+        paths: {},
       },
       logLevel: 'silent',
     }),

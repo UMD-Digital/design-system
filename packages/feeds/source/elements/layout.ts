@@ -1,13 +1,14 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { Composite } from '@universityofmaryland/web-elements-library';
+import { type ElementModel } from '../_types';
 
 export const stacked = (
   isThemeDark?: boolean,
-): { element: HTMLElement; styles: string } =>
-  ElementBuilder.styled.layout.gridStacked({
-    element: document.createElement('div'),
-    elementStyles: {
+): ElementModel =>
+  new ElementBuilder()
+    .styled(Styles.layout.grid.stacked)
+    .withStyles({
       element: {
         gridGap: `${Styles.token.spacing.md}`,
         [` > *`]: {
@@ -28,18 +29,22 @@ export const stacked = (
           alignSelf: 'flex-start',
         },
       },
-    },
-  });
+    })
+    .build();
 
 export const grid = ({
   count = 2,
 }: {
   count?: number;
   isTypeGap?: boolean;
-}): { element: HTMLElement; styles: string } =>
-  ElementBuilder.styled.layout.grid({
-    element: document.createElement('div'),
-    elementStyles: {
+}): ElementModel => {
+  let gridStyle = Styles.layout.grid.columnsTwo;
+  if (count === 3) gridStyle = Styles.layout.grid.columnsThree;
+  if (count === 4) gridStyle = Styles.layout.grid.columnsFour;
+
+  return new ElementBuilder()
+    .styled(gridStyle)
+    .withStyles({
       element: {
         [` > *`]: {
           containerType: 'inline-size',
@@ -48,33 +53,31 @@ export const grid = ({
           },
         },
       },
-    },
-    isGap: false,
-    isColumnsTwo: count === 2,
-    isColumnsThree: count === 3,
-    isColumnsFour: count === 4,
-  });
+    })
+    .build();
+};
 
 export const gridGap = ({
   count = 2,
 }: {
   count?: number;
-}): { element: HTMLElement; styles: string } =>
-  ElementBuilder.styled.layout.grid({
-    element: document.createElement('div'),
-    elementStyles: {
+}): ElementModel => {
+  let gridStyle = Styles.layout.grid.gap.two;
+  if (count === 3) gridStyle = Styles.layout.grid.gap.three;
+  if (count === 4) gridStyle = Styles.layout.grid.gap.four;
+
+  return new ElementBuilder()
+    .styled(gridStyle)
+    .withStyles({
       element: {
         [` > *`]: {
           alignSelf: 'flex-start',
           containerType: 'inline-size',
         },
       },
-    },
-    isGap: true,
-    isColumnsTwo: count === 2,
-    isColumnsThree: count === 3,
-    isColumnsFour: count === 4,
-  });
+    })
+    .build();
+};
 
 export const gridOffsetGap = ({
   count = 2,
@@ -84,10 +87,14 @@ export const gridOffsetGap = ({
   count?: number;
   isLayoutReversed?: boolean;
   overwriteStickyPosition?: number;
-}) =>
-  ElementBuilder.styled.layout.grid({
-    element: document.createElement('div'),
-    elementStyles: {
+}): ElementModel => {
+  let gridStyle = Styles.layout.grid.gap.two;
+  if (count === 3) gridStyle = Styles.layout.grid.gap.three;
+  if (count === 4) gridStyle = Styles.layout.grid.gap.four;
+
+  return new ElementBuilder()
+    .styled(gridStyle)
+    .withStyles({
       element: {
         [` > *`]: {
           alignSelf: 'flex-start',
@@ -120,9 +127,6 @@ export const gridOffsetGap = ({
           },
         },
       },
-    },
-    isGap: true,
-    isColumnsTwo: count === 2,
-    isColumnsThree: count === 3,
-    isColumnsFour: count === 4,
-  });
+    })
+    .build();
+};

@@ -1,5 +1,6 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { type ElementModel } from '../_types';
 
 const ID_UMD_LOADER = 'umd-loader-container';
 
@@ -32,7 +33,7 @@ const keyframes = `
   }
 `;
 
-const create = ({ isThemeDark }: { isThemeDark?: boolean }) => {
+const create = ({ isThemeDark }: { isThemeDark?: boolean }): ElementModel => {
   const defaultDotStyles = {
     position: 'absolute',
     top: '50%',
@@ -48,63 +49,67 @@ const create = ({ isThemeDark }: { isThemeDark?: boolean }) => {
     }),
   };
 
-  const innerElmOne = ElementBuilder.create.div({
-    className: `${ID_UMD_LOADER}-one`,
-    elementStyles: {
+  const innerElmOne = new ElementBuilder()
+    .withClassName(`${ID_UMD_LOADER}-one`)
+    .withStyles({
       element: {
         ...defaultDotStyles,
         left: '5px',
         animation: 'loader-first-animation 0.6s infinite',
       },
-    },
-  });
+    })
+    .build();
 
-  const innerElmTwo = ElementBuilder.create.div({
-    className: `${ID_UMD_LOADER}-two`,
-    elementStyles: {
+  const innerElmTwo = new ElementBuilder()
+    .withClassName(`${ID_UMD_LOADER}-two`)
+    .withStyles({
       element: {
         ...defaultDotStyles,
         left: '5px',
         animation: 'loader-middle-animation 0.6s infinite',
       },
-    },
-  });
+    })
+    .build();
 
-  const innerElmThree = ElementBuilder.create.div({
-    className: `${ID_UMD_LOADER}-three`,
-    elementStyles: {
+  const innerElmThree = new ElementBuilder()
+    .withClassName(`${ID_UMD_LOADER}-three`)
+    .withStyles({
       element: {
         ...defaultDotStyles,
         left: '24px',
         animation: 'loader-middle-animation 0.6s infinite',
       },
-    },
-  });
-  const innerElmFour = ElementBuilder.create.div({
-    className: `${ID_UMD_LOADER}-four`,
-    elementStyles: {
+    })
+    .build();
+
+  const innerElmFour = new ElementBuilder()
+    .withClassName(`${ID_UMD_LOADER}-four`)
+    .withStyles({
       element: {
         ...defaultDotStyles,
         left: '45px',
         animation: 'loader-last-animation 0.6s infinite',
       },
-    },
-  });
+    })
+    .build();
 
-  const wrapper = ElementBuilder.create.div({
-    className: `${ID_UMD_LOADER}-wrapper`,
-    children: [innerElmOne, innerElmTwo, innerElmThree, innerElmFour],
-    elementStyles: {
+  const wrapper = new ElementBuilder()
+    .withClassName(`${ID_UMD_LOADER}-wrapper`)
+    .withChild(innerElmOne)
+    .withChild(innerElmTwo)
+    .withChild(innerElmThree)
+    .withChild(innerElmFour)
+    .withStyles({
       element: {
         position: 'relative',
       },
-    },
-  });
+    })
+    .build();
 
-  const composite = ElementBuilder.create.div({
-    className: ID_UMD_LOADER,
-    children: [wrapper],
-    elementStyles: {
+  const composite = new ElementBuilder()
+    .withClassName(ID_UMD_LOADER)
+    .withChild(wrapper)
+    .withStyles({
       element: {
         display: 'flex',
         justifyContent: 'center',
@@ -114,8 +119,8 @@ const create = ({ isThemeDark }: { isThemeDark?: boolean }) => {
         position: 'relative',
         gridColumn: '1 / -1',
       },
-    },
-  });
+    })
+    .build();
 
   composite.styles += keyframes;
 

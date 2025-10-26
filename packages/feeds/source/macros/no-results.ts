@@ -1,6 +1,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { Atomic } from '@universityofmaryland/web-elements-library';
+import { type ElementModel } from '../_types';
 
 interface NoResultsContentType {
   message?: string;
@@ -17,11 +18,24 @@ export default ({
   linkText,
   isThemeDark,
   isAlignedCenter = true,
-}: NoResultsContentType) => {
-  const composite = ElementBuilder.styled.layout.gridStacked({
-    element: document.createElement('div'),
-    isThemeDark,
-    elementStyles: {
+}: NoResultsContentType): ElementModel => {
+  const headline = new ElementBuilder(document.createElement('p'))
+    .styled(Styles.typography.sans.fonts.extraLarge)
+    .withThemeDark(isThemeDark)
+    .withStyles({
+      element: {
+        textTransform: 'uppercase',
+      },
+    })
+    .build();
+
+  headline.element.innerHTML = message || 'No results found';
+
+  const composite = new ElementBuilder()
+    .styled(Styles.layout.grid.stacked)
+    .withThemeDark(isThemeDark)
+    .withChild(headline)
+    .withStyles({
       element: {
         [`& *`]: {
           textAlign: isAlignedCenter ? 'center' : 'left',
@@ -30,22 +44,7 @@ export default ({
           marginTop: `${Styles.token.spacing.md}`,
         },
       },
-    },
-  });
-
-  const headline = ElementBuilder.styled.headline.sansExtraLarge({
-    element: document.createElement('p'),
-    isThemeDark,
-    elementStyles: {
-      element: {
-        textTransform: 'uppercase',
-      },
-    },
-  });
-
-  headline.element.innerHTML = message || 'No results found';
-  composite.element.appendChild(headline.element);
-  composite.styles += headline.styles;
+    });
 
   if (linkUrl && linkText) {
     const link = document.createElement('a');
@@ -60,9 +59,8 @@ export default ({
       isThemeDark,
     });
 
-    composite.element.appendChild(ctaButton.element);
-    composite.styles += ctaButton.styles;
+    composite.withChild(ctaButton);
   }
 
-  return composite;
+  return composite.build();
 };

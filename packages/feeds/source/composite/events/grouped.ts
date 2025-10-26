@@ -1,5 +1,5 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { Atomic, Composite } from '@universityofmaryland/web-elements-library';
 import * as feedElements from 'elements';
 import * as feedMacros from 'macros';
@@ -228,18 +228,15 @@ export default (props: ListProps): ElementModel =>
       shadowRoot = shadow;
     };
 
-    const groupLayout = (): { element: HTMLElement; styles: string } => {
-      return ElementBuilder.create.div({
-        className: 'umd-feed-events-grouped',
-        elementStyles: {
-          element: {},
-        },
-      });
+    const groupLayout = (): ElementModel => {
+      return new ElementBuilder()
+        .withClassName('umd-feed-events-grouped')
+        .build();
     };
 
     const displayResults = async ({ feedData }: FeedDisplay) => {
       const groupedEvents = groupEventsByDate(feedData);
-      const entries: { element: HTMLElement; styles: string }[] = [];
+      const entries: ElementModel[] = [];
       let actualEventCount = 0;
 
       groupedEvents.forEach((group) => {
@@ -248,14 +245,14 @@ export default (props: ListProps): ElementModel =>
           dateHeadline.textContent = group.date;
 
           entries.push(
-            ElementBuilder.styled.text.ribbon({
-              element: dateHeadline,
-              elementStyles: {
+            new ElementBuilder(dateHeadline)
+              .styled(Styles.element.text.decoration.ribbon)
+              .withStyles({
                 element: {
                   margin: `${Styles.token.spacing.lg} 0`,
                 },
-              },
-            }),
+              })
+              .build(),
           );
 
           lastDateHeadline = group.date;
@@ -279,35 +276,35 @@ export default (props: ListProps): ElementModel =>
 
         actualEventCount += group.events.length;
 
-        entries.push(
-          ElementBuilder.create.div({
-            className: 'umd-feed-events-grouped-entries',
-            children: [...dateEntries],
-            elementStyles: {
-              element: {
-                [` > *:not(:last-child)`]: {
-                  paddingBottom: Styles.token.spacing.md,
-                  marginBottom: Styles.token.spacing.md,
-                  borderBottom: `1px solid ${
-                    isThemeDark
-                      ? Styles.token.color.gray.dark
-                      : Styles.token.color.gray.light
-                  }`,
-                },
+        const entriesBuilder = new ElementBuilder()
+          .withClassName('umd-feed-events-grouped-entries')
+          .withStyles({
+            element: {
+              [` > *:not(:last-child)`]: {
+                paddingBottom: Styles.token.spacing.md,
+                marginBottom: Styles.token.spacing.md,
+                borderBottom: `1px solid ${
+                  isThemeDark
+                    ? Styles.token.color.gray.dark
+                    : Styles.token.color.gray.light
+                }`,
+              },
 
-                [`+ .umd-feed-events-grouped-entries`]: {
-                  paddingTop: Styles.token.spacing.md,
-                  marginTop: Styles.token.spacing.md,
-                  borderTop: `1px solid ${
-                    isThemeDark
-                      ? Styles.token.color.gray.dark
-                      : Styles.token.color.gray.light
-                  }`,
-                },
+              [`+ .umd-feed-events-grouped-entries`]: {
+                paddingTop: Styles.token.spacing.md,
+                marginTop: Styles.token.spacing.md,
+                borderTop: `1px solid ${
+                  isThemeDark
+                    ? Styles.token.color.gray.dark
+                    : Styles.token.color.gray.light
+                }`,
               },
             },
-          }),
-        );
+          });
+
+        dateEntries.forEach((entry) => entriesBuilder.withChild(entry));
+
+        entries.push(entriesBuilder.build());
       });
 
       // Override the offset with actual event count to fix lazy load

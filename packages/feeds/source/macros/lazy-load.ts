@@ -1,5 +1,6 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { type ElementModel } from '../_types';
 
 type LazyLoadCreate = {
   callback: (args: any) => void;
@@ -15,35 +16,32 @@ const create = ({
   isLazyLoad,
   totalEntries,
   offset,
-}: LazyLoadCreate) => {
+}: LazyLoadCreate): ElementModel | undefined => {
   if (!isLazyLoad) return;
   if (!totalEntries) return;
   if (!offset) return;
   if (!callback) return;
   if (offset >= totalEntries) return;
 
-  const composite = ElementBuilder.styled.layout.alignedCenter({
-    element: document.createElement('div'),
-    isThemeDark,
-    elementStyles: {
+  const button = document.createElement('button');
+  button.innerHTML = 'Load more';
+  button.addEventListener('click', callback);
+
+  const ctaButton = new ElementBuilder(button)
+    .styled(Styles.element.action.outline.normal)
+    .withThemeDark(isThemeDark)
+    .build();
+
+  return new ElementBuilder()
+    .styled(Styles.layout.alignment.block.center)
+    .withThemeDark(isThemeDark)
+    .withChild(ctaButton)
+    .withStyles({
       element: {
         marginTop: `${Styles.token.spacing.lg}`,
       },
-    },
-  });
-
-  const ctaButton = ElementBuilder.styled.actions.outlineOptions({
-    element: document.createElement('button'),
-    isThemeDark,
-  });
-
-  ctaButton.element.innerHTML = 'Load more';
-  ctaButton.element.addEventListener('click', callback);
-
-  composite.element.appendChild(ctaButton.element);
-  composite.styles += ctaButton.styles;
-
-  return composite;
+    })
+    .build();
 };
 
 const remove = ({ container }: { container: HTMLElement }) => {

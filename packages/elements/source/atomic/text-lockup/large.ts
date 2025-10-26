@@ -4,7 +4,7 @@ import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { ElementModel } from '../../_types';
 
 interface TypeTextLockupLarge {
-  headlineComposite?: ElementModel | null;
+  headlineComposite?: ElementModel<HTMLElement> | null;
   eyebrow?: HTMLElement | null;
   ribbon?: HTMLElement | null;
   text?: HTMLElement | null;
@@ -68,7 +68,7 @@ export default ({
   }
 
   if (headlineComposite) {
-    container.withChild(headlineComposite.element);
+    container.withChild(headlineComposite);
   }
 
   if (text) {

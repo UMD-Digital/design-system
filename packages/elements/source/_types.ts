@@ -7,9 +7,12 @@
 
 /**
  * Base structure for all element return types
+ * Generic type parameter allows specifying HTMLElement or DocumentFragment
  */
-export interface ElementModel {
-  element: HTMLElement | DocumentFragment;
+export interface ElementModel<
+  T extends HTMLElement | DocumentFragment = HTMLElement | DocumentFragment,
+> {
+  element: T;
   className?: string;
   styles: string;
   update?: (props: any) => void;

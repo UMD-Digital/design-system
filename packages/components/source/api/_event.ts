@@ -35,7 +35,6 @@ interface ParsedEventData {
  */
 interface ElementVisualComponent {
   element: HTMLElement;
-  className: string;
   styles: string;
 }
 

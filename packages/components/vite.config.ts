@@ -38,6 +38,7 @@ const DTS_COMMON_OPTIONS = {
     declaration: true,
     declarationMap: true,
     emitDeclarationOnly: false,
+    paths: {},
   },
 };
 

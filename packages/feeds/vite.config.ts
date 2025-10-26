@@ -56,6 +56,9 @@ export default defineConfig({
       outDir: 'dist',
       include: ['source/**/*.ts'],
       exclude: ['**/__tests__/**', '**/*.test.ts'],
+      compilerOptions: {
+        paths: {},
+      },
       logLevel: 'silent'
     })
   ]

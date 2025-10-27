@@ -9,6 +9,7 @@ import * as feedMacros from 'macros';
 import * as feedFetch from './common/fetch';
 import * as feedDisplay from './common/display';
 import * as dataComposed from './common/data';
+import { EVENTS_RANGE_QUERY, EVENTS_COUNT_RANGE_QUERY } from './common/queries';
 import { type ListProps, type FeedDisplay, type EventType } from './_types';
 import { type ElementModel } from '../../_types';
 
@@ -240,6 +241,7 @@ export default (props: ListProps): ElementModel =>
         ...helperFunctions,
         displayResults,
         entries,
+        query: EVENTS_RANGE_QUERY,
       });
 
       // Restore original setOffset
@@ -262,6 +264,8 @@ export default (props: ListProps): ElementModel =>
       displayResultStart: feedDisplay.resultStart,
       displayNoResults: feedDisplay.noResults,
       layoutElement: groupLayout(),
+      query: EVENTS_RANGE_QUERY,
+      countQuery: EVENTS_COUNT_RANGE_QUERY,
     });
 
     return {

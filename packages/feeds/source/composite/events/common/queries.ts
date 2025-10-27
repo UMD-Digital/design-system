@@ -1,7 +1,11 @@
-export const EVENTS_COUNT_QUERY = `
+type DateFilterType = 'startsAfterOrAt' | 'rangeStart';
+
+const buildEventsCountQuery = (
+  dateFilter: DateFilterType = 'startsAfterOrAt',
+) => `
 query getEventsCount($startDate: String!, $related: [QueryArgument]) {
   count: solspace_calendar {
-    events(relatedTo: $related, loadOccurrences: true, startsAfterOrAt: $startDate) {
+    events(relatedTo: $related, loadOccurrences: true, ${dateFilter}: $startDate) {
       ... on communications_Event {
         id
       }
@@ -13,13 +17,13 @@ query getEventsCount($startDate: String!, $related: [QueryArgument]) {
 }
 `;
 
-export const EVENTS_QUERY = `
+const buildEventsQuery = (dateFilter: DateFilterType = 'startsAfterOrAt') => `
 query getEvents($startDate: String!, $related: [QueryArgument], $limit: Int, $offset: Int) {
   entries: solspace_calendar {
     events(
       relatedTo: $related
       loadOccurrences: true
-      startsAfterOrAt: $startDate
+      ${dateFilter}: $startDate
       limit: $limit
       offset: $offset
     ) {
@@ -101,3 +105,9 @@ query getEvents($startDate: String!, $related: [QueryArgument], $limit: Int, $of
   }
 }
 `;
+
+export const EVENTS_COUNT_QUERY = buildEventsCountQuery();
+export const EVENTS_COUNT_RANGE_QUERY = buildEventsCountQuery('rangeStart');
+
+export const EVENTS_QUERY = buildEventsQuery();
+export const EVENTS_RANGE_QUERY = buildEventsQuery('rangeStart');

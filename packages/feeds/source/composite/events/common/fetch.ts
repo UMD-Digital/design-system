@@ -9,11 +9,15 @@ import {
   DisplayProps,
 } from '../_types';
 
-interface LoadMoreProps extends DisplayProps {}
+interface LoadMoreProps extends DisplayProps {
+  query?: string;
+}
 
 interface CreateProps extends DisplayStartProps {
   displayResultStart: (props: DisplayStartResultsProps) => void;
   displayNoResults: (props: NoResultsProps) => void;
+  query?: string;
+  countQuery?: string;
 }
 
 export const ID_GRID_LAYOUT_CONTAINER = 'umd-grid-gap-layout-container';
@@ -57,10 +61,16 @@ const fetchFeed = async ({
   });
 };
 
-const getCount = async ({ variables }: { variables: TypeAPIFeedVariables }) => {
+const getCount = async ({
+  variables,
+  query,
+}: {
+  variables: TypeAPIFeedVariables;
+  query?: string;
+}) => {
   const feedData = await fetchFeed({
     ...variables,
-    query: EVENTS_COUNT_QUERY,
+    query: query || EVENTS_COUNT_QUERY,
   });
 
   if (!feedData || !feedData.data || feedData.message) {
@@ -73,10 +83,15 @@ const getCount = async ({ variables }: { variables: TypeAPIFeedVariables }) => {
 
 const getEntries = async ({
   variables,
+  query,
 }: {
   variables: TypeAPIFeedVariables;
+  query?: string;
 }) => {
-  const feedData = await fetchFeed({ ...variables, query: EVENTS_QUERY });
+  const feedData = await fetchFeed({
+    ...variables,
+    query: query || EVENTS_QUERY,
+  });
   const graceFail = ({ message }: { message: string }) => {
     throw new Error(message);
   };
@@ -111,6 +126,7 @@ export const load = async (props: LoadMoreProps) => {
 
   getEntries({
     variables: dataComposed.apiVariables(props),
+    query: props.query,
   }).then((feedData) => {
     displayResults({ feedData });
 
@@ -128,6 +144,7 @@ export const start = async (props: CreateProps) => {
 
   await getCount({
     variables: dataComposed.apiVariables(props),
+    query: props.countQuery,
   }).then((count) => {
     if (count === 0) {
       displayNoResults({ ...props });
@@ -149,5 +166,6 @@ export const start = async (props: CreateProps) => {
 
   getEntries({
     variables: dataComposed.apiVariables(props),
+    query: props.query,
   }).then((feedData) => displayResultStart({ ...props, feedData }));
 };

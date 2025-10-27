@@ -11,6 +11,7 @@ import {
 
 interface DisplayLoadProps extends DisplayProps {
   entries: { element: HTMLElement; styles: string }[];
+  query?: string;
 }
 
 export const ID_GRID_LAYOUT_CONTAINER = 'umd-grid-gap-layout-container';
@@ -91,10 +92,11 @@ export const resultLoad = async (props: DisplayLoadProps): Promise<void> => {
       setStyles(entry.styles);
     });
 
+    const callback = () => feedFetch.load(props);
     const lazyLoadButton = feedMacros.buttonLazyLoad.create(
       dataComposed.lazyLoadVariables({
         ...props,
-        callback: feedFetch.load,
+        callback,
       }),
     );
 

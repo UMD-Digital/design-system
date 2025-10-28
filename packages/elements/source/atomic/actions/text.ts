@@ -2,7 +2,6 @@ import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import * as layoutStyles from '@universityofmaryland/web-styles-library/layout';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import type { JssObject } from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { parseSvgString } from '@universityofmaryland/web-utilities-library/media';
 import { extractIconElement } from '@universityofmaryland/web-utilities-library/dom';
@@ -28,15 +27,6 @@ interface OptionProps extends ElementProps {
 
 type ElementType = 'primary' | 'secondary' | 'outline';
 type IconType = 'email' | 'newWindow' | 'document' | 'fearless';
-
-type ActionVariants = {
-  default: JssObject;
-  large?: JssObject;
-  dark?: JssObject;
-  gold?: JssObject;
-};
-
-type Actions = Record<ElementType, ActionVariants>;
 
 const createLinkIcon = (element: HTMLElement, type: ElementType): void => {
   const existingIcon = extractIconElement({ element });
@@ -99,47 +89,34 @@ const createPlainText = ({
 };
 
 const createElement = (type: ElementType, props: ElementProps) => {
-  const createElementWithStyle = (
-    styleObject: JssObject,
-    props: ElementProps,
-  ) => {
-    return new ElementBuilder(props.element)
-      .styled(styleObject)
-      .withStylesIf(!!props.elementStyles, props.elementStyles || {})
-      .build();
-  };
   createLinkIcon(props.element, type);
 
-  const actions: Actions = {
-    primary: {
-      default: elementStyles.action.primary.normal,
-      large: elementStyles.action.primary.large,
-    },
-    secondary: {
-      default: elementStyles.action.secondary.normal,
-      large: elementStyles.action.secondary.large,
-      dark: elementStyles.action.secondary.white,
-      gold: elementStyles.action.secondary.gold,
-    },
-    outline: {
-      default: elementStyles.action.outline.normal,
-      large: elementStyles.action.outline.large,
-      dark: elementStyles.action.outline.white,
-    },
-  };
+  const size = props.isSizeLarge ? 'large' : 'normal';
+  let styleObject;
 
-  const typeActions = actions[type];
+  if (type === 'primary') {
+    const color = props.isThemeDark ? 'white' : 'default';
+    styleObject = elementStyles.action.primary.composePrimary({ size, color });
+  } else if (type === 'secondary') {
+    let color: 'default' | 'white' | 'gold' = 'default';
+    if (props.isThemeGold) {
+      color = 'gold';
+    } else if (props.isThemeDark) {
+      color = 'white';
+    }
+    styleObject = elementStyles.action.secondary.composeSecondary({
+      size,
+      color,
+    });
+  } else if (type === 'outline') {
+    const color = props.isThemeDark ? 'white' : 'default';
+    styleObject = elementStyles.action.outline.composeOutline({ size, color });
+  }
 
-  if (props.isThemeGold && typeActions.gold) {
-    return createElementWithStyle(typeActions.gold, props);
-  }
-  if (props.isThemeDark && typeActions.dark) {
-    return createElementWithStyle(typeActions.dark, props);
-  }
-  if (props.isSizeLarge && typeActions.large) {
-    return createElementWithStyle(typeActions.large, props);
-  }
-  return createElementWithStyle(typeActions.default, props);
+  return new ElementBuilder(props.element)
+    .styled(styleObject!)
+    .withStylesIf(!!props.elementStyles, props.elementStyles || {})
+    .build();
 };
 
 export const primary = (props: ElementProps) => createElement('primary', props);

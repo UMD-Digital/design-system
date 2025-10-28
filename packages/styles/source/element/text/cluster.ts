@@ -12,11 +12,19 @@ import type { JssObject } from '../../_types';
 const classNamePrefix = 'umd-text-cluster';
 
 /**
+ * Options for pill style variants
+ * @since 1.7.0
+ */
+export interface PillOptions {
+  theme?: 'light' | 'dark';
+}
+
+/**
  * Base pill element styles.
  * @type {object}
  * @private
  */
-const pill = {
+const pillBase = {
   ...sans.min,
   display: 'inline-block',
   padding: `${spacing.min} ${spacing.xs}`,
@@ -42,6 +50,91 @@ const pillSvg = {
 };
 
 /**
+ * Composable pill/tag list style selector
+ *
+ * Creates pill list styles with configurable theme options.
+ * This function enables dynamic style composition based on theme requirements.
+ *
+ * @param options - Configuration object for style variants
+ * @returns JSS object with composed styles and appropriate className
+ *
+ * @example
+ * ```typescript
+ * // Light theme (default)
+ * const styles = composePill();
+ *
+ * // Dark theme
+ * const styles = composePill({ theme: 'dark' });
+ * ```
+ *
+ * @since 1.7.0
+ */
+export function composePill(options?: PillOptions): JssObject {
+  const { theme = 'light' } = options || {};
+
+  let composed: Record<string, any> = {
+    marginTop: `-${spacing.min}`,
+
+    '& > *': {
+      ...pillBase,
+    },
+
+    '& svg': {
+      ...pillSvg,
+    },
+  };
+
+  if (theme === 'light') {
+    composed = {
+      ...composed,
+      '& > *': {
+        ...composed['& > *'],
+        backgroundColor: color.gray.lightest,
+      },
+      '& a:hover, & a:focus': {
+        backgroundColor: color.gold,
+      },
+    };
+  } else if (theme === 'dark') {
+    composed = {
+      ...composed,
+      '& > *': {
+        ...composed['& > *'],
+        backgroundColor: color.gray.dark,
+        color: color.white,
+      },
+      '& svg': {
+        ...pillSvg,
+        fill: color.white,
+      },
+      '& a:hover, & a:focus': {
+        backgroundColor: color.gray.lighter,
+        color: color.black,
+
+        '& svg': {
+          fill: color.black,
+        },
+      },
+    };
+  }
+
+  // Generate appropriate className
+  const className =
+    theme === 'dark'
+      ? `${classNamePrefix}-pill-dark`
+      : `${classNamePrefix}-pill`;
+
+  // Add deprecated aliases
+  const deprecatedAliases =
+    theme === 'dark' ? ['umd-pill-list-dark'] : ['umd-pill-list'];
+
+  return create.jss.objectWithClassName({
+    ...composed,
+    className: [className, ...deprecatedAliases],
+  });
+}
+
+/**
  * Light pill/tag list.
  * @returns {JssObject} Light-themed pill list with hover effects.
  * @example
@@ -59,28 +152,7 @@ const pillSvg = {
  * ```
  * @since 1.1.0
  */
-export const pillList: JssObject = create.jss.objectWithClassName({
-  className: [
-    `${classNamePrefix}-pill`,
-    /** @deprecated Use 'umd-text-cluster-pill' instead */
-    'umd-pill-list',
-  ],
-
-  marginTop: `-${spacing.min}`,
-
-  '& > *': {
-    ...pill,
-    backgroundColor: color.gray.lightest,
-  },
-
-  '& svg': {
-    ...pillSvg,
-  },
-
-  '& a:hover, & a:focus': {
-    backgroundColor: color.gold,
-  },
-});
+export const pillList: JssObject = composePill();
 
 /**
  * Dark pill/tag list.
@@ -100,35 +172,7 @@ export const pillList: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const pillListDark: JssObject = create.jss.objectWithClassName({
-  ...pillList,
-
-  className: [
-    `${classNamePrefix}-pill-dark`,
-    /** @deprecated Use 'umd-text-cluster-pill-dark' instead */
-    'umd-pill-list-dark',
-  ],
-
-  '& > *': {
-    ...pill,
-    backgroundColor: color.gray.dark,
-    color: color.white,
-  },
-
-  '& svg': {
-    ...pillSvg,
-    fill: color.white,
-  },
-
-  '& a:hover, & a:focus': {
-    backgroundColor: color.gray.lighter,
-    color: color.black,
-
-    '& svg': {
-      fill: color.black,
-    },
-  },
-});
+export const pillListDark: JssObject = composePill({ theme: 'dark' });
 
 /**
  * Legacy pill list style.

@@ -12,6 +12,199 @@ import type { JssObject } from '../../_types';
 const classNamePrefix = 'umd-text-line';
 
 /**
+ * Options for trailing line style variants
+ * @since 1.7.0
+ */
+export interface TrailingOptions {
+  theme?: 'default' | 'light' | 'dark';
+}
+
+/**
+ * Options for adjacent line style variants
+ * @since 1.7.0
+ */
+export interface AdjacentOptions {
+  inset?: boolean;
+}
+
+/**
+ * Common styles for trailing line before element.
+ * @type {object}
+ * @private
+ */
+const trailingBefore = {
+  content: '""',
+  position: 'absolute',
+  top: '9px',
+  right: `0`,
+  width: `100vw`,
+  height: '1px',
+  background: `${color.black}`,
+  zIndex: 1,
+};
+
+/**
+ * Composable trailing line text style selector
+ *
+ * Creates trailing line styles with configurable theme options.
+ * Trailing lines extend horizontally from the text to the right edge.
+ *
+ * @param options - Configuration object for style variants
+ * @returns JSS object with composed styles and appropriate className
+ *
+ * @example
+ * ```typescript
+ * // Default white background
+ * const styles = composeTrailing();
+ *
+ * // Light background
+ * const styles = composeTrailing({ theme: 'light' });
+ *
+ * // Dark background
+ * const styles = composeTrailing({ theme: 'dark' });
+ * ```
+ *
+ * @since 1.7.0
+ */
+export function composeTrailing(options?: TrailingOptions): JssObject {
+  const { theme = 'default' } = options || {};
+
+  let composed: Record<string, any> = {
+    ...elements.labelSmall,
+    textTransform: 'uppercase',
+    position: 'relative',
+    overflow: 'hidden',
+
+    '&::before': {
+      ...trailingBefore,
+    },
+
+    '& > span': {
+      position: 'relative',
+      backgroundColor: `inherit`,
+      paddingRight: spacing.min,
+      zIndex: 2,
+    },
+
+    '& + *': {
+      marginTop: spacing.xl,
+    },
+  };
+
+  // Apply theme-specific styles
+  if (theme === 'default') {
+    composed = {
+      ...composed,
+      backgroundColor: `${color.white}`,
+    };
+  } else if (theme === 'light') {
+    composed = {
+      ...composed,
+      backgroundColor: `${color.gray.lighter}`,
+    };
+  } else if (theme === 'dark') {
+    composed = {
+      ...composed,
+      backgroundColor: `${color.gray.darker}`,
+      color: `${color.white}`,
+
+      '&::before': {
+        ...trailingBefore,
+        background: `${color.white}`,
+      },
+    };
+  }
+
+  // Generate appropriate className
+  let className = `${classNamePrefix}-trailing`;
+  const deprecatedAliases: string[] = [];
+
+  if (theme === 'light') {
+    className = `${classNamePrefix}-trailing-light`;
+    deprecatedAliases.push('umd-tailwing-right-headline[theme="light"]');
+  } else if (theme === 'dark') {
+    className = `${classNamePrefix}-trailing-dark`;
+    deprecatedAliases.push('umd-tailwing-right-headline[theme="dark"]');
+  } else {
+    deprecatedAliases.push('umd-tailwing-right-headline');
+  }
+
+  return create.jss.objectWithClassName({
+    ...composed,
+    className: deprecatedAliases.length > 0 ? [className, ...deprecatedAliases] : className,
+  });
+}
+
+/**
+ * Composable adjacent line decoration style selector
+ *
+ * Creates vertical line decoration styles with optional inset padding.
+ * Adjacent lines appear as vertical red bars to the left of text.
+ *
+ * @param options - Configuration object for style variants
+ * @returns JSS object with composed styles and appropriate className
+ *
+ * @example
+ * ```typescript
+ * // Adjacent line without inset
+ * const styles = composeAdjacent();
+ *
+ * // Adjacent line with inset padding
+ * const styles = composeAdjacent({ inset: true });
+ * ```
+ *
+ * @since 1.7.0
+ */
+export function composeAdjacent(options?: AdjacentOptions): JssObject {
+  const { inset = false } = options || {};
+
+  let composed: Record<string, any> = {
+    position: 'relative',
+
+    '&::before': {
+      content: '""',
+      display: 'block',
+      position: 'absolute',
+      top: 0,
+      width: '2px',
+      height: '100%',
+      backgroundColor: color.red,
+    },
+  };
+
+  if (inset) {
+    composed = {
+      ...composed,
+      paddingLeft: `${spacing.md}`,
+      '&::before': {
+        ...composed['&::before'],
+        left: 0,
+      },
+    };
+  } else {
+    composed = {
+      ...composed,
+      '&::before': {
+        ...composed['&::before'],
+        left: `-${spacing.md}`,
+      },
+    };
+  }
+
+  // Generate appropriate className
+  const className = inset
+    ? `${classNamePrefix}-adjustent-inset`
+    : `${classNamePrefix}-adjustent`;
+
+  const deprecatedAliases = inset ? [] : ['umd-adjacent-line-text'];
+
+  return create.jss.objectWithClassName({
+    ...composed,
+    className: deprecatedAliases.length > 0 ? [className, ...deprecatedAliases] : className,
+  });
+}
+
+/**
  * Tailwing text with centered line decoration.
  * @returns {JssObject} Styles for text with horizontal centered line.
  * @example
@@ -86,22 +279,6 @@ export const tailwing: JssObject = create.jss.objectWithClassName({
 });
 
 /**
- * Common styles for trailing line before element.
- * @type {object}
- * @private
- */
-const trailingBefore = {
-  content: '""',
-  position: 'absolute',
-  top: '9px',
-  right: `0`,
-  width: `100vw`,
-  height: '1px',
-  background: `${color.black}`,
-  zIndex: 1,
-};
-
-/**
  * Trailing line text style.
  * @returns {JssObject} Styles for text with trailing horizontal line.
  * @example
@@ -119,34 +296,7 @@ const trailingBefore = {
  * ```
  * @since 1.1.0
  */
-export const trailing = create.jss.objectWithClassName({
-  className: [
-    `${classNamePrefix}-trailing`,
-    /** @deprecated Use 'umd-text-line-trailing' instead */
-    'umd-tailwing-right-headline',
-  ],
-
-  ...elements.labelSmall,
-  textTransform: 'uppercase',
-  position: 'relative',
-  overflow: 'hidden',
-  backgroundColor: `${color.white}`,
-
-  '&::before': {
-    ...trailingBefore,
-  },
-
-  '& > span': {
-    position: 'relative',
-    backgroundColor: `inherit`,
-    paddingRight: spacing.min,
-    zIndex: 2,
-  },
-
-  '& + *': {
-    marginTop: spacing.xl,
-  },
-});
+export const trailing: JssObject = composeTrailing();
 
 /**
  * Light-themed trailing line text style.
@@ -166,16 +316,7 @@ export const trailing = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const trailingLight: JssObject = create.jss.objectWithClassName({
-  ...trailing,
-  backgroundColor: `${color.gray.lighter}`,
-
-  className: [
-    `${classNamePrefix}-trailing-light`,
-    /** @deprecated Use 'umd-text-line-trailing-light' instead */
-    'umd-tailwing-right-headline[theme="light"]',
-  ],
-});
+export const trailingLight: JssObject = composeTrailing({ theme: 'light' });
 
 /**
  * Dark-themed trailing line text style.
@@ -195,22 +336,7 @@ export const trailingLight: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const trailingDark: JssObject = create.jss.objectWithClassName({
-  ...trailing,
-  backgroundColor: `${color.gray.darker}`,
-  color: `${color.white}`,
-
-  className: [
-    `${classNamePrefix}-trailing-dark`,
-    /** @deprecated Use 'umd-text-line-trailing-dark' instead */
-    'umd-tailwing-right-headline[theme="dark"]',
-  ],
-
-  '&::before': {
-    ...trailingBefore,
-    background: `${color.white}`,
-  },
-});
+export const trailingDark: JssObject = composeTrailing({ theme: 'dark' });
 
 /**
  * Adjacent vertical line decoration style.
@@ -230,26 +356,7 @@ export const trailingDark: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const adjustent: JssObject = create.jss.objectWithClassName({
-  className: [
-    `${classNamePrefix}-adjustent`,
-    /** @deprecated Use 'umd-text-line-adjustent' instead */
-    'umd-adjacent-line-text',
-  ],
-
-  position: 'relative',
-
-  '&::before': {
-    content: '""',
-    display: 'block',
-    position: 'absolute',
-    top: 0,
-    left: `-${spacing.md}`,
-    width: '2px',
-    height: '100%',
-    backgroundColor: color.red,
-  },
-});
+export const adjustent: JssObject = composeAdjacent();
 
 /**
  * Inset vertical line decoration style.
@@ -265,19 +372,4 @@ export const adjustent: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const adjustentInset: JssObject = create.jss.objectWithClassName({
-  className: `${classNamePrefix}-adjustent-inset`,
-  position: 'relative',
-  paddingLeft: `${spacing.md}`,
-
-  '&::before': {
-    content: '""',
-    display: 'block',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '2px',
-    height: '100%',
-    backgroundColor: color.red,
-  },
-});
+export const adjustentInset: JssObject = composeAdjacent({ inset: true });

@@ -13,6 +13,14 @@ import type { JssObject } from '../../_types';
 const classNamePrefix = 'umd-text-decoration';
 
 /**
+ * Options for watermark style variants
+ * @since 1.7.0
+ */
+export interface WatermarkOptions {
+  theme?: 'light' | 'dark';
+}
+
+/**
  * Base styles for watermark text.
  * @type {object}
  * @private
@@ -26,15 +34,81 @@ const watermarkChild = {
   textTransform: 'uppercase',
   fontSize: `min(calc(${font.size['5xl']} + 13vw), 240px)`,
   lineHeight: '0',
-  opacity: ' 0.6',
   pointerEvents: 'none',
   userSelect: 'none',
-  zIndex: '-1',
 
   [`@media (${media.queries.large.max})`]: {
     display: 'none',
   },
 };
+
+/**
+ * Composable watermark decoration style selector
+ *
+ * Creates watermark styles with configurable theme options.
+ * Watermarks are large, subtle background text elements.
+ *
+ * @param options - Configuration object for style variants
+ * @returns JSS object with composed styles and appropriate className
+ *
+ * @example
+ * ```typescript
+ * // Light theme (default)
+ * const styles = composeWatermark();
+ *
+ * // Dark theme
+ * const styles = composeWatermark({ theme: 'dark' });
+ * ```
+ *
+ * @since 1.7.0
+ */
+export function composeWatermark(options?: WatermarkOptions): JssObject {
+  const { theme = 'light' } = options || {};
+
+  let composed: Record<string, any> = {
+    position: 'relative',
+
+    '> *': {
+      ...watermarkChild,
+      ...transition.slideRight,
+    },
+  };
+
+  if (theme === 'light') {
+    composed = {
+      ...composed,
+      '> *': {
+        ...composed['> *'],
+        opacity: '0.6',
+        zIndex: '-1',
+      },
+    };
+  } else if (theme === 'dark') {
+    composed = {
+      ...composed,
+      '> *': {
+        ...composed['> *'],
+        opacity: '0.12',
+        zIndex: 'inherit',
+      },
+    };
+  }
+
+  // Generate appropriate className
+  const className =
+    theme === 'dark'
+      ? `${classNamePrefix}-watermark-dark`
+      : `${classNamePrefix}-watermark`;
+
+  // Add deprecated aliases
+  const deprecatedAliases =
+    theme === 'dark' ? ['umd-watermark-dark'] : ['umd-watermark'];
+
+  return create.jss.objectWithClassName({
+    ...composed,
+    className: [className, ...deprecatedAliases],
+  });
+}
 
 /**
  * Light watermark decoration style.
@@ -54,20 +128,7 @@ const watermarkChild = {
  * ```
  * @since 1.1.0
  */
-export const watermark: JssObject = create.jss.objectWithClassName({
-  className: [
-    `${classNamePrefix}-watermark`,
-    /** @deprecated Use 'umd-text-decoration-watermark' instead */
-    'umd-watermark',
-  ],
-
-  position: 'relative',
-
-  '> *': {
-    ...watermarkChild,
-    ...transition.slideRight,
-  },
-});
+export const watermark: JssObject = composeWatermark();
 
 /**
  * Dark watermark decoration style.
@@ -87,22 +148,7 @@ export const watermark: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const watermarkDark: JssObject = create.jss.objectWithClassName({
-  ...watermark,
-
-  className: [
-    `${classNamePrefix}-watermark-dark`,
-    /** @deprecated Use 'umd-text-decoration-watermark-dark' instead */
-    'umd-watermark-dark',
-  ],
-
-  '> *': {
-    ...watermarkChild,
-    ...transition.slideRight,
-    opacity: '0.12',
-    zIndex: 'inherit',
-  },
-});
+export const watermarkDark: JssObject = composeWatermark({ theme: 'dark' });
 
 /**
  * Ribbon/eyebrow decoration.

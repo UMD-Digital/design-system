@@ -13,7 +13,24 @@ import type { JssObject } from '../../_types';
 const classNamePrefix = 'umd-asset-image';
 
 /**
+ * Options for image wrapper style variants
+ * @since 1.7.0
+ */
+export interface WrapperOptions {
+  scaled?: boolean;
+}
+
+/**
+ * Options for image aspect ratio style variants
+ * @since 1.7.0
+ */
+export interface AspectOptions {
+  ratio?: 'standard' | 'square';
+}
+
+/**
  * Base image container styles.
+ * @type {object}
  * @private
  */
 const base = {
@@ -24,6 +41,7 @@ const base = {
 
 /**
  * Base image element styles.
+ * @type {object}
  * @private
  */
 const imageBase = {
@@ -32,6 +50,7 @@ const imageBase = {
 
 /**
  * Styles for scaled image display with cover behavior.
+ * @type {object}
  * @private
  */
 const imageScaled = {
@@ -44,6 +63,7 @@ const imageScaled = {
 
 /**
  * Initial animation state for hover effects.
+ * @type {object}
  * @private
  */
 const imageAnimationStart = {
@@ -53,6 +73,7 @@ const imageAnimationStart = {
 
 /**
  * Final animation state for hover effects.
+ * @type {object}
  * @private
  */
 const imageAnimationEnd = {
@@ -61,6 +82,7 @@ const imageAnimationEnd = {
 
 /**
  * Base link styles for image links.
+ * @type {object}
  * @private
  */
 const linkBase = {
@@ -71,6 +93,7 @@ const linkBase = {
 
 /**
  * Styles for sign/badge overlays.
+ * @type {object}
  * @private
  */
 const signBase = {
@@ -87,6 +110,7 @@ const signBase = {
 
 /**
  * Styles for linked images with hover effects.
+ * @type {object}
  * @private
  */
 const linkImage = {
@@ -111,6 +135,7 @@ const linkImage = {
 
 /**
  * Styles for linked scaled images with hover effects.
+ * @type {object}
  * @private
  */
 const linkImageScaled = {
@@ -136,6 +161,107 @@ const linkImageScaled = {
     },
   },
 };
+
+/**
+ * Composable image wrapper style selector
+ *
+ * Creates image wrapper styles with configurable scaling options.
+ * Wrappers provide container styles with animation and sign overlay support.
+ *
+ * @param options - Configuration object for style variants
+ * @returns JSS object with composed styles and appropriate className
+ *
+ * @example
+ * ```typescript
+ * // Basic wrapper without scaling
+ * const styles = composeWrapper();
+ *
+ * // Wrapper with scaled image behavior
+ * const styles = composeWrapper({ scaled: true });
+ * ```
+ *
+ * @since 1.7.0
+ */
+export function composeWrapper(options?: WrapperOptions): JssObject {
+  const { scaled = false } = options || {};
+
+  let composed: Record<string, any> = {
+    ...base,
+    ...signBase,
+  };
+
+  if (scaled) {
+    composed = {
+      ...composed,
+      width: '100%',
+      height: `100%`,
+      ...linkImageScaled,
+    };
+  } else {
+    composed = {
+      ...composed,
+      ...linkImage,
+    };
+  }
+
+  // Generate appropriate className
+  const className = scaled
+    ? `${classNamePrefix}-wrapper-scaled`
+    : `${classNamePrefix}-wrapper`;
+
+  return create.jss.objectWithClassName({
+    ...composed,
+    className,
+  });
+}
+
+/**
+ * Composable aspect ratio style selector
+ *
+ * Creates aspect ratio constraint styles for images.
+ * Aspect ratios maintain consistent image dimensions across different content.
+ *
+ * @param options - Configuration object for aspect ratio variants
+ * @returns JSS object with composed styles and appropriate className
+ *
+ * @example
+ * ```typescript
+ * // Standard 4:3 aspect ratio
+ * const styles = composeAspect({ ratio: 'standard' });
+ *
+ * // Square 1:1 aspect ratio
+ * const styles = composeAspect({ ratio: 'square' });
+ * ```
+ *
+ * @since 1.7.0
+ */
+export function composeAspect(options?: AspectOptions): JssObject {
+  const { ratio = 'standard' } = options || {};
+
+  let aspectValue: string;
+  let className: string;
+
+  if (ratio === 'square') {
+    aspectValue = '1/1';
+    className = `${classNamePrefix}-aspect-square`;
+  } else {
+    // standard (4:3)
+    aspectValue = '4/3';
+    className = `${classNamePrefix}-aspect-standard`;
+  }
+
+  return create.jss.objectWithClassName({
+    aspectRatio: aspectValue,
+    width: 'auto',
+
+    '& img': {
+      aspectRatio: aspectValue,
+      width: 'auto',
+    },
+
+    className,
+  });
+}
 
 /**
  * Image caption overlay style.
@@ -179,12 +305,7 @@ export const caption: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const wrapper: JssObject = create.jss.objectWithClassName({
-  className: `${classNamePrefix}-wrapper`,
-  ...base,
-  ...linkImage,
-  ...signBase,
-});
+export const wrapper: JssObject = composeWrapper();
 
 /**
  * Scaled image wrapper style.
@@ -200,14 +321,7 @@ export const wrapper: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const wrapperScaled: JssObject = create.jss.objectWithClassName({
-  className: `${classNamePrefix}-wrapper-scaled`,
-  ...base,
-  width: '100%',
-  height: `100%`,
-  ...linkImageScaled,
-  ...signBase,
-});
+export const wrapperScaled: JssObject = composeWrapper({ scaled: true });
 
 /**
  * Standard aspect ratio (4:3) for images.
@@ -223,16 +337,7 @@ export const wrapperScaled: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const aspectStandard: JssObject = create.jss.objectWithClassName({
-  className: `${classNamePrefix}-aspect-standard`,
-  aspectRatio: `4/3`,
-  width: 'auto',
-
-  '& img': {
-    aspectRatio: `4/3`,
-    width: 'auto',
-  },
-});
+export const aspectStandard: JssObject = composeAspect({ ratio: 'standard' });
 
 /**
  * Square aspect ratio (1:1) for images.
@@ -248,13 +353,4 @@ export const aspectStandard: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const aspectSquare: JssObject = create.jss.objectWithClassName({
-  className: `${classNamePrefix}-aspect-square`,
-  aspectRatio: `1/1`,
-  width: 'auto',
-
-  '& img': {
-    aspectRatio: `1/1`,
-    width: 'auto',
-  },
-});
+export const aspectSquare: JssObject = composeAspect({ ratio: 'square' });

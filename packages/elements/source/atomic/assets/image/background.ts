@@ -122,9 +122,7 @@ export default (props: Props) => {
 
   const asset = embedAsset({ element, isAspectStandard, isGifAllowed });
   const caption = createCaption(element, isShowCaption);
-  const styles = isScaled
-    ? Styles.element.asset.image.wrapperScaled
-    : Styles.element.asset.image.wrapper;
+  const styles = Styles.element.asset.image.composeWrapper({ scaled: isScaled });
 
   const composite = new ElementBuilder().styled(styles).withStyles({
     element: {

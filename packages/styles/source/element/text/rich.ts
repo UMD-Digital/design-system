@@ -18,6 +18,24 @@ const classNamePrefix = 'umd-text-rich';
 const scalingContainerMedium = 650;
 
 /**
+ * Options for simple rich text style variants
+ * @since 1.7.0
+ */
+export interface SimpleRichTextOptions {
+  size?: 'base' | 'large' | 'largest';
+  theme?: 'light' | 'dark';
+  scaling?: boolean;
+}
+
+/**
+ * Options for advanced rich text style variants
+ * @since 1.7.0
+ */
+export interface AdvancedRichTextOptions {
+  theme?: 'light' | 'dark';
+}
+
+/**
  * Dark theme color styles for rich text.
  * @type {object}
  * @private
@@ -134,6 +152,197 @@ const advancedBase = {
 };
 
 /**
+ * Composable simple rich text style selector
+ *
+ * Creates rich text styles with configurable size, theme, and scaling options.
+ * This function replaces the need for multiple separate exports like
+ * simpleLarge, simpleDark, simpleLargeDark, etc.
+ *
+ * @param options - Configuration object for style variants
+ * @returns JSS object with composed styles and appropriate className
+ *
+ * @example
+ * ```typescript
+ * // Base simple text
+ * const styles = composeSimple();
+ *
+ * // Large size with dark theme
+ * const styles = composeSimple({ size: 'large', theme: 'dark' });
+ *
+ * // Largest size with scaling
+ * const styles = composeSimple({ size: 'largest', scaling: true });
+ * ```
+ *
+ * @since 1.7.0
+ */
+export function composeSimple(options?: SimpleRichTextOptions): JssObject {
+  const { size = 'base', theme = 'light', scaling = false } = options || {};
+  let composed: Record<string, any> = { ...simpleBase };
+
+  if (size === 'large') {
+    composed = {
+      ...composed,
+      fontSize: font.size.lg,
+      '& > *': {
+        ...composed['& > *'],
+        fontSize: font.size.lg,
+      },
+    };
+  } else if (size === 'largest') {
+    composed = {
+      ...composed,
+      fontSize: font.size.lg,
+      [`@media (${media.queries.desktop.min})`]: {
+        ...largestTypography,
+      },
+      '& > *': {
+        ...composed['& > *'],
+        fontSize: font.size.lg,
+        [`@media (${media.queries.desktop.min})`]: {
+          ...largestTypography,
+        },
+      },
+    };
+  }
+
+  if (scaling) {
+    const baseFontSize = size === 'base' ? font.size.base : font.size.lg;
+    const scaledFontSize = font.size.lg;
+
+    composed = {
+      ...composed,
+      fontSize: baseFontSize,
+      '& > *': {
+        ...composed['& > *'],
+        fontSize: baseFontSize,
+      },
+      [`@container (min-width: ${scalingContainerMedium}px)`]: {
+        fontSize: scaledFontSize,
+        '& > *': {
+          fontSize: scaledFontSize,
+          ...childSpacing,
+        },
+      },
+    };
+  }
+
+  if (theme === 'dark') {
+    composed = {
+      ...composed,
+      ...themeDarkColors,
+    };
+  }
+
+  // Generate appropriate className
+  const classNameParts = [classNamePrefix, 'simple'];
+  if (size !== 'base') classNameParts.push(size);
+  if (scaling) classNameParts.push('scaling');
+  if (theme === 'dark') classNameParts.push('dark');
+
+  const className = classNameParts.join('-');
+
+  // Deprecated aliases
+  const deprecatedAliases: string[] = [];
+  if (size === 'base' && !scaling && theme === 'light') {
+    deprecatedAliases.push('umd-text-simple');
+  }
+  if (size === 'large' && !scaling && theme === 'light') {
+    deprecatedAliases.push('umd-text-simple-large');
+  }
+
+  return create.jss.objectWithClassName({
+    ...composed,
+    className:
+      deprecatedAliases.length > 0
+        ? [className, ...deprecatedAliases]
+        : className,
+  });
+}
+
+/**
+ * Composable advanced rich text style selector
+ *
+ * Creates advanced rich text styles with support for lists, tables, code blocks,
+ * and quotes. Supports theme configuration.
+ *
+ * @param options - Configuration object for theme variant
+ * @returns JSS object with composed styles and appropriate className
+ *
+ * @example
+ * ```typescript
+ * // Light theme (default)
+ * const styles = composeAdvanced();
+ *
+ * // Dark theme
+ * const styles = composeAdvanced({ theme: 'dark' });
+ * ```
+ *
+ * @since 1.7.0
+ */
+export function composeAdvanced(options?: AdvancedRichTextOptions): JssObject {
+  const { theme = 'light' } = options || {};
+
+  let composed: Record<string, any> = {
+    FontWeight: font.weight.normal,
+    ...advancedBase,
+    ...code,
+    ...quote,
+    [`& ul, & ol ul`]: {
+      ...list.unordered,
+    },
+    [`& ol, & ul ol`]: {
+      ...list.ordered,
+    },
+    '& + ol, &ol + ul': {
+      marginTop: spacing.sm,
+    },
+    '& table': {
+      ...table.inline,
+    },
+  };
+
+  if (theme === 'dark') {
+    composed = {
+      ...composed,
+      ...themeDarkColors,
+      '& table': {
+        ...table.inline,
+        '& tr:nth-child(even)': {
+          background: 'none',
+        },
+      },
+      [`& ul, & ol ul`]: {
+        ...list.unordered,
+        '& *, & * > *': {
+          color: color.white,
+        },
+      },
+      [`& ol, & ul ol`]: {
+        ...list.ordered,
+        '& *, & * > *': {
+          color: color.white,
+        },
+      },
+    };
+  }
+
+  // Generate className
+  const className =
+    theme === 'dark'
+      ? `${classNamePrefix}-advanced-dark`
+      : `${classNamePrefix}-advanced`;
+
+  // Add deprecated aliases
+  const deprecatedAliases =
+    theme === 'dark' ? ['umd-rich-text-dark'] : ['umd-rich-text'];
+
+  return create.jss.objectWithClassName({
+    ...composed,
+    className: [className, ...deprecatedAliases],
+  });
+}
+
+/**
  * Simple rich text styles.
  * @returns {JssObject} Basic rich text styles with standard formatting.
  * @example
@@ -151,15 +360,7 @@ const advancedBase = {
  * ```
  * @since 1.1.0
  */
-export const simple: JssObject = create.jss.objectWithClassName({
-  ...simpleBase,
-
-  className: [
-    `${classNamePrefix}-simple`,
-    /** @deprecated Use 'umd-text-rich-simple' instead */
-    `umd-text-simple`,
-  ],
-});
+export const simple: JssObject = composeSimple();
 
 /**
  * Simple rich text with dark theme.
@@ -175,11 +376,7 @@ export const simple: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const simpleDark: JssObject = create.jss.objectWithClassName({
-  ...simpleBase,
-  ...themeDarkColors,
-  className: `${classNamePrefix}-simple-dark`,
-});
+export const simpleDark: JssObject = composeSimple({ theme: 'dark' });
 
 /**
  * Large simple rich text styles.
@@ -199,21 +396,7 @@ export const simpleDark: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const simpleLarge: JssObject = create.jss.objectWithClassName({
-  ...simpleBase,
-  fontSize: font.size.lg,
-
-  '& > *': {
-    fontSize: font.size.lg,
-    ...childSpacing,
-  },
-
-  className: [
-    `${classNamePrefix}-simple-large`,
-    /** @deprecated Use 'umd-text-rich-simple-large' instead */
-    `umd-text-simple-large`,
-  ],
-});
+export const simpleLarge: JssObject = composeSimple({ size: 'large' });
 
 /**
  * Large simple rich text with dark theme.
@@ -229,17 +412,9 @@ export const simpleLarge: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const simpleLargeDark: JssObject = create.jss.objectWithClassName({
-  ...simpleBase,
-  ...themeDarkColors,
-  fontSize: font.size.lg,
-
-  '& > *': {
-    fontSize: font.size.lg,
-    ...childSpacing,
-  },
-
-  className: `${classNamePrefix}-simple-large-dark`,
+export const simpleLargeDark: JssObject = composeSimple({
+  size: 'large',
+  theme: 'dark',
 });
 
 /**
@@ -256,25 +431,7 @@ export const simpleLargeDark: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.4.8
  */
-export const simpleLargest: JssObject = create.jss.objectWithClassName({
-  ...simpleBase,
-  fontSize: font.size.lg,
-
-  [`@media (${media.queries.desktop.min})`]: {
-    ...largestTypography,
-  },
-
-  '& > *': {
-    fontSize: font.size.lg,
-    ...childSpacing,
-
-    [`@media (${media.queries.desktop.min})`]: {
-      ...largestTypography,
-    },
-  },
-
-  className: [`${classNamePrefix}-simple-largest`],
-});
+export const simpleLargest: JssObject = composeSimple({ size: 'largest' });
 
 /**
  * Large simple rich text with dark theme.
@@ -290,25 +447,9 @@ export const simpleLargest: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.4.8
  */
-export const simpleLargestDark: JssObject = create.jss.objectWithClassName({
-  ...simpleBase,
-  ...themeDarkColors,
-  fontSize: font.size.lg,
-
-  [`@media (${media.queries.desktop.min})`]: {
-    ...largestTypography,
-  },
-
-  '& > *': {
-    fontSize: font.size.lg,
-    ...childSpacing,
-
-    [`@media (${media.queries.desktop.min})`]: {
-      ...largestTypography,
-    },
-  },
-
-  className: `${classNamePrefix}-simple-largest-dark`,
+export const simpleLargestDark: JssObject = composeSimple({
+  size: 'largest',
+  theme: 'dark',
 });
 
 /**
@@ -325,26 +466,7 @@ export const simpleLargestDark: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const simpleScaling: JssObject = create.jss.objectWithClassName({
-  ...simpleBase,
-  fontSize: font.size.base,
-
-  '& > *': {
-    fontSize: font.size.base,
-    ...childSpacing,
-  },
-
-  [`@container (min-width: ${scalingContainerMedium}px)`]: {
-    fontSize: font.size.lg,
-
-    '& > *': {
-      fontSize: font.size.lg,
-      ...childSpacing,
-    },
-  },
-
-  className: `${classNamePrefix}-simple-scaling`,
-});
+export const simpleScaling: JssObject = composeSimple({ scaling: true });
 
 /**
  * Container-responsive simple rich text with dark theme.
@@ -360,26 +482,9 @@ export const simpleScaling: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const simpleScalingDark: JssObject = create.jss.objectWithClassName({
-  ...simpleBase,
-  ...themeDarkColors,
-  fontSize: font.size.base,
-
-  '& > *': {
-    fontSize: font.size.base,
-    ...childSpacing,
-  },
-
-  [`@container (min-width: ${scalingContainerMedium}px)`]: {
-    fontSize: font.size.lg,
-
-    '& > *': {
-      fontSize: font.size.lg,
-      ...childSpacing,
-    },
-  },
-
-  className: `${classNamePrefix}-simple-scaling-dark`,
+export const simpleScalingDark: JssObject = composeSimple({
+  scaling: true,
+  theme: 'dark',
 });
 
 /**
@@ -400,37 +505,7 @@ export const simpleScalingDark: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const advanced: JssObject = create.jss.objectWithClassName({
-  FontWeight: font.weight.normal,
-
-  ...advancedBase,
-  ...code,
-  ...quote,
-
-  [`& ul,
-    & ol ul`]: {
-    ...list.unordered,
-  },
-
-  [`& ol,
-    & ul ol`]: {
-    ...list.ordered,
-  },
-
-  '& + ol, &ol + ul': {
-    marginTop: spacing.sm,
-  },
-
-  '& table': {
-    ...table.inline,
-  },
-
-  className: [
-    `${classNamePrefix}-advanced`,
-    /** @deprecated Use 'umd-text-rich-advanced' instead */
-    `umd-rich-text`,
-  ],
-});
+export const advanced: JssObject = composeAdvanced();
 
 /**
  * Advanced rich text styles with dark theme.
@@ -450,38 +525,4 @@ export const advanced: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const advancedDark: JssObject = create.jss.objectWithClassName({
-  ...advanced,
-  ...themeDarkColors,
-
-  '& table': {
-    ...table.inline,
-    '& tr:nth-child(even)': {
-      background: 'none',
-    },
-  },
-
-  [`& ul,
-    & ol ul`]: {
-    ...list.unordered,
-
-    '& *, & * > *': {
-      color: color.white,
-    },
-  },
-
-  [`& ol,
-    & ul ol`]: {
-    ...list.ordered,
-
-    '& *, & * > *': {
-      color: color.white,
-    },
-  },
-
-  className: [
-    `${classNamePrefix}-advanced-dark`,
-    /** @deprecated Use 'umd-text-rich-advanced-dark' instead */
-    `umd-rich-text-dark`,
-  ],
-});
+export const advancedDark: JssObject = composeAdvanced({ theme: 'dark' });

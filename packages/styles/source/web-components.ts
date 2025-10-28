@@ -39,6 +39,7 @@ const baseElements = [
   'quote',
   'slider-events-feed',
   'slider-events',
+  'stat',
 ].reduce(
   (acc, name) => ({
     ...acc,

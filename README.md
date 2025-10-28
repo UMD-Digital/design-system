@@ -3,7 +3,7 @@
 [![Components Version](https://img.shields.io/badge/Components-v1.15.6-blue)](https://www.npmjs.com/package/@universityofmaryland/web-components-library)
 [![Elements Version](https://img.shields.io/badge/Elements-v1.5.3-blue)](https://www.npmjs.com/package/@universityofmaryland/web-elements-library)
 [![Feeds Version](https://img.shields.io/badge/Feeds-v1.2.2-blue)](https://www.npmjs.com/package/@universityofmaryland/web-feeds-library)
-[![Styles Version](https://img.shields.io/badge/Styles-v1.7.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)
+[![Styles Version](https://img.shields.io/badge/Styles-v1.7.1-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)
 [![Utilities Version](https://img.shields.io/badge/Utilities-v1.0.1-blue)](https://www.npmjs.com/package/@universityofmaryland/web-utilities-library)
 [![Icons Version](https://img.shields.io/badge/Icons-v1.0.1-blue)](https://www.npmjs.com/package/@universityofmaryland/web-icons-library)
 

@@ -1,10 +1,10 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as elementStyles from '@universityofmaryland/web-styles-library/element';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import {
   stats as statsFont,
   sans as sansFonts,
 } from '@universityofmaryland/web-styles-library/typography';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { type ElementModel } from '../../_types';
 
 export interface StatProps {
@@ -95,26 +95,17 @@ const createText = (
   props: Pick<StatProps, 'text' | 'isThemeDark' | 'isSizeLarge'>,
 ) => {
   const { text, isThemeDark, isSizeLarge } = props;
-  let styles = Styles.element.text.rich.simpleLarge;
   if (!text) return;
 
-  if (isSizeLarge) {
-    styles = Styles.element.text.rich.simpleLargest;
-  }
-
-  if (isThemeDark) {
-    styles = Styles.element.text.rich.simpleDark;
-  }
-
-  if (isThemeDark && isSizeLarge) {
-    styles = Styles.element.text.rich.simpleLargeDark;
-  }
+  const styles = elementStyles.text.rich.composeSimple({
+    size: isSizeLarge ? 'largest' : 'large',
+    theme: isThemeDark ? 'dark' : 'light',
+  });
 
   const marginTop = isSizeLarge ? token.spacing.md : token.spacing.min;
 
   return new ElementBuilder(text)
     .styled(styles)
-    .withThemeDark(isThemeDark)
     .withStyles({
       siblingAfter: { marginTop },
     })

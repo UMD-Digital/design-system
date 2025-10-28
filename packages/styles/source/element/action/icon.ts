@@ -3,7 +3,7 @@
  * Provides icon-based action button styles.
  */
 
-import { color, spacing } from '../../token';
+import { color } from '../../token';
 import { create } from '../../utilities';
 import type { JssObject } from '../../_types';
 
@@ -11,7 +11,16 @@ import type { JssObject } from '../../_types';
 const classNamePrefix = 'umd-element-action-icon';
 
 /**
+ * Options for icon button style variants
+ * @since 1.7.0
+ */
+export interface IconButtonOptions {
+  theme?: 'light' | 'dark';
+}
+
+/**
  * Base SVG icon styles.
+ * @type {object}
  * @private
  */
 const svgIcon = {
@@ -22,6 +31,7 @@ const svgIcon = {
 
 /**
  * Base small icon button styles.
+ * @type {object}
  * @private
  */
 const baseIconSmall = {
@@ -43,6 +53,72 @@ const baseIconSmall = {
 };
 
 /**
+ * Composable icon button style selector
+ *
+ * Creates icon button styles with configurable theme options.
+ * Icon buttons are small, compact buttons that contain only an icon.
+ *
+ * @param options - Configuration object for style variants
+ * @returns JSS object with composed styles and appropriate className
+ *
+ * @example
+ * ```typescript
+ * // Light theme (default)
+ * const styles = composeIcon();
+ *
+ * // Dark theme
+ * const styles = composeIcon({ theme: 'dark' });
+ * ```
+ *
+ * @since 1.7.0
+ */
+export function composeIcon(options?: IconButtonOptions): JssObject {
+  const { theme = 'light' } = options || {};
+
+  let composed: Record<string, any> = {
+    ...baseIconSmall,
+  };
+
+  if (theme === 'light') {
+    composed = {
+      ...composed,
+      backgroundColor: `${color.gray.lightest}`,
+
+      '& svg, & path': {
+        ...svgIcon,
+      },
+    };
+  } else if (theme === 'dark') {
+    composed = {
+      ...composed,
+      backgroundColor: `${color.gray.darker}`,
+      color: `${color.white}`,
+
+      '&:hover, &:focus': {
+        backgroundColor: `${color.gray.light}`,
+
+        '& svg, & path': {
+          fill: `${color.gray.darker}`,
+        },
+      },
+
+      '& svg, & path': {
+        ...svgIcon,
+        fill: `${color.white}`,
+      },
+    };
+  }
+
+  // Generate className (both themes use same className for now)
+  const className = `${classNamePrefix}-button`;
+
+  return create.jss.objectWithClassName({
+    ...composed,
+    className,
+  });
+}
+
+/**
  * Small icon button style with light background.
  * @returns {JssObject} Small icon button styles with light theme.
  * @example
@@ -56,15 +132,7 @@ const baseIconSmall = {
  * ```
  * @since 1.1.0
  */
-export const small: JssObject = create.jss.objectWithClassName({
-  className: `${classNamePrefix}-button`,
-  ...baseIconSmall,
-  backgroundColor: `${color.gray.lightest}`,
-
-  '& svg, & path': {
-    ...svgIcon,
-  },
-});
+export const small: JssObject = composeIcon();
 
 /**
  * Small icon button style with dark background.
@@ -80,22 +148,4 @@ export const small: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const smallDark: JssObject = create.jss.objectWithClassName({
-  className: `${classNamePrefix}-button`,
-  ...baseIconSmall,
-  backgroundColor: `${color.gray.darker}`,
-  color: `${color.white}`,
-
-  '&:hover, &:focus': {
-    backgroundColor: `${color.gray.light}`,
-
-    '& svg, & path': {
-      fill: `${color.gray.darker}`,
-    },
-  },
-
-  '& svg, & path': {
-    ...svgIcon,
-    fill: `${color.white}`,
-  },
-});
+export const smallDark: JssObject = composeIcon({ theme: 'dark' });

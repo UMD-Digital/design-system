@@ -270,7 +270,7 @@ export default (props: ListProps): ElementModel =>
             dateSign: Atomic.events.sign({
               ...entry,
               isThemeDark,
-              isLargeSize: false,
+              isLargeSize: true,
             }),
             image: feedElements.asset.standard({
               images: entry.image,

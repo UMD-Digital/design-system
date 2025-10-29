@@ -11,14 +11,111 @@ import { base } from './base';
 // Consistent naming
 const classNamePrefix = 'umd-layout-grid-border';
 
-const boarderBase = {
-  border: `1px solid ${color.gray.light}`,
-  borderBottom: `none`,
+/**
+ * Options for bordered grid style variants
+ * @since 1.7.0
+ */
+export interface BorderedGridOptions {
+  columns: 2 | 3 | 4;
+  theme?: 'light' | 'dark';
+}
 
-  [`@media (${media.queries.medium.max})`]: {
-    gridGap: 0,
-  },
-};
+/**
+ * Composable bordered grid style selector
+ *
+ * Creates bordered grid layouts with configurable column count and theme.
+ * Bordered grids display borders between cells with responsive behavior.
+ *
+ * @param options - Configuration object for style variants
+ * @returns JSS object with composed styles and appropriate className
+ *
+ * @example
+ * ```typescript
+ * // Two-column light border (default)
+ * const styles = composeBordered({ columns: 2 });
+ *
+ * // Three-column dark border
+ * const styles = composeBordered({ columns: 3, theme: 'dark' });
+ *
+ * // Four-column light border
+ * const styles = composeBordered({ columns: 4, theme: 'light' });
+ * ```
+ *
+ * @since 1.7.0
+ */
+export function composeBordered(options: BorderedGridOptions): JssObject {
+  const { columns, theme = 'light' } = options;
+
+  // Get base grid configuration
+  let baseGrid: Record<string, any>;
+  if (columns === 2) {
+    baseGrid = base.two;
+  } else if (columns === 3) {
+    baseGrid = base.three;
+  } else {
+    baseGrid = base.four;
+  }
+
+  // Determine border color
+  const borderColor = theme === 'dark' ? color.gray.dark : color.gray.light;
+
+  // Build border base styles
+  const borderBase = {
+    border: `1px solid ${borderColor}`,
+    borderBottom: `none`,
+
+    [`@media (${media.queries.medium.max})`]: {
+      gridGap: 0,
+    },
+  };
+
+  // Build child border rules
+  const childBorders = {
+    '& > *': {
+      borderBottom: `1px solid ${borderColor}`,
+      borderRight: `1px solid ${borderColor}`,
+    },
+  };
+
+  // Build complex nth-child rules based on column count
+  let nthChildRules: Record<string, any> = {
+    borderTop: `none`,
+    borderRight: `none`,
+  };
+
+  for (let i = 1; i <= columns; i++) {
+    const selector = i === 1 ? '& > *:first-child' : `& > *:nth-child(${i})`;
+    nthChildRules[selector] = {
+      borderTop: `1px solid ${borderColor}`,
+    };
+  }
+
+  // Determine className and deprecated aliases
+  const isDark = theme === 'dark';
+  let className: string;
+  let deprecatedAliases: string[] = [];
+
+  if (columns === 2) {
+    className = isDark ? `${classNamePrefix}-dark-two` : `${classNamePrefix}-two`;
+    deprecatedAliases.push(isDark ? 'umd-grid-border-dark' : 'umd-grid-border');
+  } else if (columns === 3) {
+    className = isDark ? `${classNamePrefix}-dark-three` : `${classNamePrefix}-three`;
+    deprecatedAliases.push(isDark ? 'umd-grid-three-border-dark' : 'umd-grid-three-border');
+  } else {
+    className = isDark ? `${classNamePrefix}-dark-four` : `${classNamePrefix}-four`;
+    deprecatedAliases.push(isDark ? 'umd-grid-four-border-dark' : 'umd-grid-four-border');
+  }
+
+  return create.jss.objectWithClassName({
+    ...baseGrid,
+    ...borderBase,
+    ...childBorders,
+
+    [`&:not(:has(> :last-child:nth-child(${columns})))`]: nthChildRules,
+
+    className: deprecatedAliases.length > 0 ? [className, ...deprecatedAliases] : className,
+  });
+}
 
 /**
  * Two-column grid with light borders.
@@ -38,34 +135,7 @@ const boarderBase = {
  * ```
  * @since 1.1.0
  */
-export const columnsTwo: JssObject = create.jss.objectWithClassName({
-  ...base.two,
-  ...boarderBase,
-
-  className: [
-    `${classNamePrefix}-two`,
-    /** @deprecated Use 'umd-layout-grid-border-two' instead */
-    'umd-grid-border',
-  ],
-
-  '& > *': {
-    borderBottom: `1px solid ${color.gray.light}`,
-    borderRight: `1px solid ${color.gray.light}`,
-  },
-
-  '&:not(:has(> :last-child:nth-child(2)))': {
-    borderTop: `none`,
-    borderRight: `none`,
-
-    '& > *:first-child': {
-      borderTop: `1px solid ${color.gray.light}`,
-    },
-
-    '& > *:nth-child(2)': {
-      borderTop: `1px solid ${color.gray.light}`,
-    },
-  },
-});
+export const columnsTwo: JssObject = composeBordered({ columns: 2, theme: 'light' });
 
 /**
  * Three-column grid with light borders.
@@ -85,38 +155,7 @@ export const columnsTwo: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const columnsThree: JssObject = create.jss.objectWithClassName({
-  ...base.three,
-  ...boarderBase,
-
-  className: [
-    `${classNamePrefix}-three`,
-    /** @deprecated Use 'umd-layout-grid-border-three' instead */
-    'umd-grid-three-border',
-  ],
-
-  '& > *': {
-    borderBottom: `1px solid ${color.gray.light}`,
-    borderRight: `1px solid ${color.gray.light}`,
-  },
-
-  '&:not(:has(> :last-child:nth-child(3)))': {
-    borderTop: `none`,
-    borderRight: `none`,
-
-    '& > *:first-child': {
-      borderTop: `1px solid ${color.gray.light}`,
-    },
-
-    '& > *:nth-child(2)': {
-      borderTop: `1px solid ${color.gray.light}`,
-    },
-
-    '& > *:nth-child(3)': {
-      borderTop: `1px solid ${color.gray.light}`,
-    },
-  },
-});
+export const columnsThree: JssObject = composeBordered({ columns: 3, theme: 'light' });
 
 /**
  * Four-column grid with light borders.
@@ -136,39 +175,64 @@ export const columnsThree: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const columnsFour: JssObject = create.jss.objectWithClassName({
-  ...base.four,
-  ...boarderBase,
+export const columnsFour: JssObject = composeBordered({ columns: 4, theme: 'light' });
 
-  className: [
-    `${classNamePrefix}-four`,
-    /** @deprecated Use 'umd-layout-grid-border-four' instead */
-    'umd-grid-four-border',
-  ],
+/**
+ * Two-column grid with dark borders.
+ * @returns {JssObject} Two-column grid with dark borders between cells.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.border.columnsTwoDark
+ * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-border-dark-two"
+ * ```
+ * @example
+ * ```text
+ * Use 'umd-layout-grid-border-dark-two' instead of 'umd-grid-border-dark'.
+ * ```
+ * @since 1.1.0
+ */
+export const columnsTwoDark: JssObject = composeBordered({ columns: 2, theme: 'dark' });
 
-  '& > *': {
-    borderBottom: `1px solid ${color.gray.light}`,
-    borderRight: `1px solid ${color.gray.light}`,
-  },
+/**
+ * Three-column grid with dark borders.
+ * @returns {JssObject} Three-column grid with dark borders between cells.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.border.columnsThreeDark
+ * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-border-dark-three"
+ * ```
+ * @example
+ * ```text
+ * Use 'umd-layout-grid-border-dark-three' instead of 'umd-grid-three-border-dark'.
+ * ```
+ * @since 1.1.0
+ */
+export const columnsThreeDark: JssObject = composeBordered({ columns: 3, theme: 'dark' });
 
-  '&:not(:has(> :last-child:nth-child(4)))': {
-    borderTop: `none`,
-    borderRight: `none`,
-
-    '& > *:first-child': {
-      borderTop: `1px solid ${color.gray.light}`,
-    },
-
-    '& > *:nth-child(2)': {
-      borderTop: `1px solid ${color.gray.light}`,
-    },
-
-    '& > *:nth-child(3)': {
-      borderTop: `1px solid ${color.gray.light}`,
-    },
-
-    '& > *:nth-child(4)': {
-      borderTop: `1px solid ${color.gray.light}`,
-    },
-  },
-});
+/**
+ * Four-column grid with dark borders.
+ * @returns {JssObject} Four-column grid with dark borders between cells.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.layout.grid.border.columnsFourDark
+ * ```
+ * @example
+ * ```css
+ * class="umd-layout-grid-border-dark-four"
+ * ```
+ * @example
+ * ```text
+ * Use 'umd-layout-grid-border-dark-four' instead of 'umd-grid-four-border-dark'.
+ * ```
+ * @since 1.1.0
+ */
+export const columnsFourDark: JssObject = composeBordered({ columns: 4, theme: 'dark' });

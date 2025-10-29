@@ -70,6 +70,9 @@ const type = {
   OUTLINE: 'outline',
   PRIMARY: 'primary',
   SECONDARY: 'secondary',
+  MEGA: 'mega',
+  VISUAL: 'visual',
+  SIMPLE: 'simple',
 };
 
 const AttributeValues = {

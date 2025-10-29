@@ -43,8 +43,8 @@ const slots: SlotConfiguration = {
  * @internal
  */
 const createComponent: CreateComponentFunction = (element) => {
-  const isTypeMega = element.getAttribute('type') === 'mega';
-  const isTypeVisual = element.getAttribute('type') === 'visual';
+  const isTypeMega = Attributes.isType.mega({ element });
+  const isTypeVisual = Attributes.isType.visual({ element });
   const isCampaignForward = Attributes.isVisual.campaign({ element });
   const columnOne = element.querySelector(
     `[slot="${SLOTS.LINK_COLUMN_ONE}"]`,
@@ -58,7 +58,7 @@ const createComponent: CreateComponentFunction = (element) => {
   const hasLandmark = element.hasAttribute('role');
   const hasLabel = element.hasAttribute('aria-label');
   const columns = [];
-  let isTypeSimple = element.getAttribute('type') === 'simple';
+  let isTypeSimple = Attributes.isType.simple({ element });
 
   const logoElement = element.querySelector(`[slot="${SLOTS.LOGO}"]`) as
     | HTMLImageElement

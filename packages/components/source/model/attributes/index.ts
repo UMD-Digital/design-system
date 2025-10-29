@@ -29,7 +29,7 @@
  * - Current attributes: `Attributes.names.visual.size`
  * - Single-value attributes: `Attributes.names.theme.default`, `Attributes.names.display.default`
  * - Deprecated attributes: `Attributes.names.deprecated.visual.VISUAL_SIZE`
- * 
+ *
  * @module Attributes
  */
 import handler from './handler';
@@ -47,14 +47,15 @@ export {
   isSharing,
   includesSharing,
   isTheme,
+  isType,
   isVisual,
   getValue,
   type AttributeElementProps,
 } from './checks';
 export { handler, names, values };
-export type { 
+export type {
   AttributeElementRef,
   AttributeCallback,
   AttributeHandlerConfig,
-  AttributeHandlerProps 
+  AttributeHandlerProps,
 } from './handler';

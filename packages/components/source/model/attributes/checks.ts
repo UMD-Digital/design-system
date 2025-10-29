@@ -826,6 +826,46 @@ const isVisual = {
     }),
 } as const;
 
+// Type checks
+const isType = {
+  mega: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.type.TYPE,
+      attributeNameNew: AttributeNames.type.default,
+      attributeValue: AttributesValues.type.MEGA,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.type.default,
+      attributeValue: AttributesValues.type.MEGA,
+    }),
+  visual: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.type.TYPE,
+      attributeNameNew: AttributeNames.type.default,
+      attributeValue: AttributesValues.type.VISUAL,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.type.default,
+      attributeValue: AttributesValues.type.VISUAL,
+    }),
+  simple: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.type.TYPE,
+      attributeNameNew: AttributeNames.type.default,
+      attributeValue: AttributesValues.type.SIMPLE,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.type.default,
+      attributeValue: AttributesValues.type.SIMPLE,
+    }),
+} as const;
+
 // Value getters
 const getValue = {
   alertUrl: createValueGetter({
@@ -895,6 +935,7 @@ export {
   isSharing,
   includesSharing,
   isTheme,
+  isType,
   isVisual,
   getValue,
 };

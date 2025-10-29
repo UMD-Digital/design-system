@@ -11,6 +11,19 @@ import { padding } from './full';
 // Consistent naming
 const classNamePrefix = 'umd-layout-background-quarter';
 
+/**
+ * Options for quarter background style variants
+ * @since 1.7.0
+ */
+export interface QuarterBackgroundOptions {
+  theme?: 'light' | 'dark';
+}
+
+/**
+ * Base pseudo-element styles for quarter backgrounds.
+ * @type {object}
+ * @private
+ */
 const psuedo = {
   content: '""',
   position: 'absolute',
@@ -29,15 +42,55 @@ const psuedo = {
   },
 };
 
-const quarter = {
-  position: 'relative',
-  ...padding,
+/**
+ * Composable quarter background style selector
+ *
+ * Creates quarter-width background styles with configurable theme options.
+ * Quarter backgrounds cover 75% of the container width on larger screens.
+ *
+ * @param options - Configuration object for style variants
+ * @returns JSS object with composed styles and appropriate className
+ *
+ * @example
+ * ```typescript
+ * // Light theme (default)
+ * const styles = composeQuarter();
+ *
+ * // Dark theme
+ * const styles = composeQuarter({ theme: 'dark' });
+ * ```
+ *
+ * @since 1.7.0
+ */
+export function composeQuarter(options?: QuarterBackgroundOptions): JssObject {
+  const { theme = 'light' } = options || {};
 
-  '&:before': {
-    ...psuedo,
-    backgroundColor: `${color.gray.lightest}`,
-  },
-};
+  let backgroundColor: string;
+
+  if (theme === 'light') {
+    backgroundColor = color.gray.lightest;
+  } else {
+    backgroundColor = color.gray.darker;
+  }
+
+  const className = `${classNamePrefix}-${theme}`;
+
+  return create.jss.objectWithClassName({
+    position: 'relative',
+    ...padding,
+
+    '&:before': {
+      ...psuedo,
+      backgroundColor,
+    },
+
+    className: [
+      className,
+      /** @deprecated Use 'umd-layout-background-quarter-{theme}' instead */
+      'umd-layout-background-quater-color',
+    ],
+  });
+}
 
 /**
  * Light quarter background.
@@ -57,15 +110,7 @@ const quarter = {
  * ```
  * @since 1.1.0
  */
-export const light: JssObject = create.jss.objectWithClassName({
-  ...quarter,
-
-  className: [
-    `${classNamePrefix}-light`,
-    /** @deprecated Use 'umd-layout-background-quarter-light' instead */
-    'umd-layout-background-quater-color',
-  ],
-});
+export const light: JssObject = composeQuarter({ theme: 'light' });
 
 /**
  * Dark quarter background.
@@ -85,17 +130,4 @@ export const light: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const dark: JssObject = create.jss.objectWithClassName({
-  ...quarter,
-
-  '&:before': {
-    ...psuedo,
-    backgroundColor: `${color.gray.darker}`,
-  },
-
-  className: [
-    `${classNamePrefix}-dark`,
-    /** @deprecated Use 'umd-layout-background-quarter-dark' instead */
-    'umd-layout-background-quater-color',
-  ],
-});
+export const dark: JssObject = composeQuarter({ theme: 'dark' });

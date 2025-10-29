@@ -10,6 +10,19 @@ import type { JssObject } from '../../_types';
 // Consistent naming
 const classNamePrefix = 'umd-layout-background-wrap';
 
+/**
+ * Options for wrap background style variants
+ * @since 1.7.0
+ */
+export interface WrapBackgroundOptions {
+  color?: 'white' | 'light' | 'dark';
+}
+
+/**
+ * Base box styles for wrap backgrounds.
+ * @type {object}
+ * @private
+ */
 const box = {
   padding: `${spacing.md}`,
 
@@ -21,6 +34,63 @@ const box = {
     padding: `${spacing['3xl']}`,
   },
 };
+
+/**
+ * Composable wrap background style selector
+ *
+ * Creates wrap background styles with configurable color options.
+ * Wrap backgrounds provide responsive padding for content containers.
+ *
+ * @param options - Configuration object for style variants
+ * @returns JSS object with composed styles and appropriate className
+ *
+ * @example
+ * ```typescript
+ * // White background (default)
+ * const styles = composeWrap();
+ *
+ * // Light gray background
+ * const styles = composeWrap({ color: 'light' });
+ *
+ * // Dark gray background
+ * const styles = composeWrap({ color: 'dark' });
+ * ```
+ *
+ * @since 1.7.0
+ */
+export function composeWrap(options?: WrapBackgroundOptions): JssObject {
+  const { color: bgColor = 'white' } = options || {};
+
+  let composed: Record<string, any> = {
+    ...box,
+  };
+
+  let className: string;
+  let deprecatedAliases: string[] = [];
+
+  if (bgColor === 'white') {
+    className = `${classNamePrefix}`;
+  } else if (bgColor === 'light') {
+    composed = {
+      ...composed,
+      backgroundColor: color.gray.lighter,
+    };
+    className = `${classNamePrefix}-light`;
+    deprecatedAliases.push('umd-forms-layout');
+  } else {
+    // dark
+    composed = {
+      ...composed,
+      backgroundColor: color.gray.darker,
+    };
+    className = `${classNamePrefix}-dark`;
+  }
+
+  return create.jss.objectWithClassName({
+    ...composed,
+    className: deprecatedAliases.length > 0 ? [className, ...deprecatedAliases] : className,
+  });
+}
 
 /**
  * White background wrap with responsive padding.
@@ -36,11 +106,7 @@ const box = {
  * ```
  * @since 1.1.0
  */
-export const white: JssObject = create.jss.objectWithClassName({
-  ...box,
-
-  className: `${classNamePrefix}`,
-});
+export const white: JssObject = composeWrap({ color: 'white' });
 
 /**
  * Light gray background wrap with responsive padding.
@@ -60,16 +126,7 @@ export const white: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const light: JssObject = create.jss.objectWithClassName({
-  ...box,
-  backgroundColor: `${color.gray.lighter}`,
-
-  className: [
-    `${classNamePrefix}-light`,
-    /** @deprecated Use 'umd-layout-background-wrap-light' instead */
-    'umd-forms-layout',
-  ],
-});
+export const light: JssObject = composeWrap({ color: 'light' });
 
 /**
  * Dark gray background wrap with responsive padding.
@@ -85,9 +142,4 @@ export const light: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const dark: JssObject = create.jss.objectWithClassName({
-  ...box,
-  backgroundColor: `${color.gray.darker}`,
-
-  className: `${classNamePrefix}-dark`,
-});
+export const dark: JssObject = composeWrap({ color: 'dark' });

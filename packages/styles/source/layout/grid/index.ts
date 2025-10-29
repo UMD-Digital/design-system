@@ -6,11 +6,12 @@
 import { columnsTwo, columnsThree, columnsFour, stacked } from './base';
 
 /**
- * Grid layouts with light borders.
+ * Grid layouts with light and dark borders.
  * @example
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
- * Styles.layout.grid.border
+ * Styles.layout.grid.border.columnsTwo // light borders
+ * Styles.layout.grid.border.columnsTwoDark // dark borders
  * ```
  * @since 1.1.0
  */
@@ -21,11 +22,22 @@ export * as border from './border';
  * @example
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
- * Styles.layout.grid.borderDark
+ * Styles.layout.grid.borderDark.columnsTwo
  * ```
+ * @deprecated Use border.columnsTwoDark, border.columnsThreeDark, border.columnsFourDark instead
  * @since 1.1.0
  */
-export * as borderDark from './border-dark';
+import {
+  columnsTwoDark,
+  columnsThreeDark,
+  columnsFourDark,
+} from './border';
+
+export const borderDark = {
+  columnsTwo: columnsTwoDark,
+  columnsThreeDark,
+  columnsFourDark,
+};
 
 /**
  * Utilities for grid child elements.

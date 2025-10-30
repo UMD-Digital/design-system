@@ -10,6 +10,19 @@ import type { JssObject } from '../../_types';
 // Consistent naming
 const classNamePrefix = 'umd-layout-grid-columns';
 
+/**
+ * Options for column grid style variants
+ * @since 1.7.0
+ */
+export interface ColumnGridOptions {
+  columns: 2 | 3 | 4;
+}
+
+/**
+ * Base small screen grid styles
+ * @type {object}
+ * @private
+ */
 const baseSmallScreen = {
   display: 'grid',
 
@@ -17,6 +30,77 @@ const baseSmallScreen = {
     gridGap: spacing.lg,
   },
 };
+
+/**
+ * Composable column grid style selector
+ *
+ * Creates responsive grid layouts with configurable column counts.
+ * Column grids automatically adjust for different screen sizes.
+ *
+ * @param options - Configuration object for style variants
+ * @returns JSS object with composed styles and appropriate className
+ *
+ * @example
+ * ```typescript
+ * // Two-column grid
+ * const styles = composeColumns({ columns: 2 });
+ *
+ * // Three-column grid
+ * const styles = composeColumns({ columns: 3 });
+ *
+ * // Four-column grid
+ * const styles = composeColumns({ columns: 4 });
+ * ```
+ *
+ * @since 1.7.0
+ */
+export function composeColumns(options: ColumnGridOptions): JssObject {
+  const { columns } = options;
+
+  let composed: Record<string, any> = {
+    ...baseSmallScreen,
+  };
+
+  let className: string = `${classNamePrefix}`;
+  let deprecatedAliases: string[] = [];
+
+  if (columns === 2) {
+    composed = {
+      ...composed,
+      [`@media (${media.queries.large.min})`]: {
+        gridTemplateColumns: 'repeat(2, 1fr)',
+      },
+    };
+    className = `${classNamePrefix}-two`;
+    deprecatedAliases.push('umd-grid');
+  } else if (columns === 3) {
+    composed = {
+      ...composed,
+      [`@media (${media.queries.tablet.min})`]: {
+        gridTemplateColumns: 'repeat(3, 1fr)',
+      },
+    };
+    className = `${classNamePrefix}-three`;
+    deprecatedAliases.push('umd-grid-three');
+  } else if (columns === 4) {
+    composed = {
+      ...composed,
+      [`@media (${media.queries.large.min})`]: {
+        gridTemplateColumns: 'repeat(2, 1fr)',
+      },
+      [`@media (${media.queries.desktop.min})`]: {
+        gridTemplateColumns: 'repeat(4, 1fr)',
+      },
+    };
+    className = `${classNamePrefix}-four`;
+    deprecatedAliases.push('umd-grid-four');
+  }
+
+  return create.jss.objectWithClassName({
+    ...composed,
+    className: deprecatedAliases.length > 0 ? [className, ...deprecatedAliases] : className,
+  });
+}
 
 /**
  * Base grid configurations for different column layouts.
@@ -75,15 +159,7 @@ export const base = {
  * ```
  * @since 1.1.0
  */
-export const columnsTwo: JssObject = create.jss.objectWithClassName({
-  ...base.two,
-
-  className: [
-    `${classNamePrefix}-two`,
-    /** @deprecated Use 'umd-layout-grid-columns-two' instead */
-    'umd-grid',
-  ],
-});
+export const columnsTwo: JssObject = composeColumns({ columns: 2 });
 
 /**
  * Three-column grid layout.
@@ -103,15 +179,7 @@ export const columnsTwo: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const columnsThree: JssObject = create.jss.objectWithClassName({
-  ...base.three,
-
-  className: [
-    `${classNamePrefix}-three`,
-    /** @deprecated Use 'umd-layout-grid-columns-three' instead */
-    'umd-grid-three',
-  ],
-});
+export const columnsThree: JssObject = composeColumns({ columns: 3 });
 
 /**
  * Four-column grid layout.
@@ -131,15 +199,7 @@ export const columnsThree: JssObject = create.jss.objectWithClassName({
  * ```
  * @since 1.1.0
  */
-export const columnsFour: JssObject = create.jss.objectWithClassName({
-  ...base.four,
-
-  className: [
-    `${classNamePrefix}-four`,
-    /** @deprecated Use 'umd-layout-grid-columns-four' instead */
-    'umd-grid-four',
-  ],
-});
+export const columnsFour: JssObject = composeColumns({ columns: 4 });
 
 /**
  * Stacked vertical layout.

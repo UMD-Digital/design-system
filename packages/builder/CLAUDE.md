@@ -24,7 +24,7 @@ const element = new ElementBuilder('div')
   .build();
 ```
 
-### Three-Layer Architecture
+### Two-Layer Architecture
 
 #### 1. Core Layer (`source/core/`)
 
@@ -49,23 +49,7 @@ const element = new ElementBuilder('div')
 - Provides global cleanup registry
 - Prevents memory leaks on element destruction
 
-#### 2. Factory Layer (`source/factories/`)
-
-**Presets** (`presets.ts`)
-
-- Pre-configured builders with UMD Design System styles
-- Categories: actions, headlines, text, layouts, assets
-- Returns ElementBuilder instances ready for further chaining
-- Uses slot elements as default for content projection
-
-**Compose** (`compose.ts`)
-
-- High-level composition functions for complex patterns
-- Includes: textLockup, card, hero, list, grid
-- Combines multiple presets into cohesive components
-- Handles conditional rendering and prop-based configuration
-
-#### 3. Type Layer (`source/core/types.ts`)
+#### 2. Type Layer (`source/core/types.ts`)
 
 Comprehensive TypeScript definitions for:
 
@@ -73,7 +57,6 @@ Comprehensive TypeScript definitions for:
 - Style definitions and elements
 - Animation configurations
 - Lifecycle tracking types
-- Factory function signatures
 
 ## Key Architectural Decisions
 
@@ -104,19 +87,7 @@ Comprehensive TypeScript definitions for:
 
 **Exception**: `.build()` can be called multiple times but returns cached result with warning.
 
-### Decision 3: Slot Elements for Presets
-
-**Chosen**: Presets return `ElementBuilder<HTMLSlotElement>`
-**Rejected**: Returning specific element types (div, span, etc.)
-
-**Rationale**:
-
-- Content projection semantics
-- Clear placeholder intent
-- Flexible content insertion
-- Web Component compatibility
-
-### Decision 4: Style Integration via `.styled()` Method
+### Decision 3: Style Integration via `.styled()` Method
 
 **Method**: `.styled(styleObject)` accepts JSS objects from styles library
 **Automatic**: Extracts className and applies full style object
@@ -161,16 +132,12 @@ Generates: `animation: slideUnder 300ms ease-in-out 100ms;`
 ```
 source/
 ├── index.ts                    # Main exports (named only)
-├── core/
-│   ├── ElementBuilder.ts       # Main builder class
-│   ├── StyleManager.ts         # Style compilation
-│   ├── LifecycleManager.ts     # Resource tracking
-│   ├── types.ts                # Type definitions
-│   └── index.ts                # Core exports
-└── factories/
-    ├── presets.ts              # Pre-configured builders
-    ├── compose.ts              # Composition helpers
-    └── index.ts                # Factory exports
+└── core/
+    ├── ElementBuilder.ts       # Main builder class
+    ├── StyleManager.ts         # Style compilation
+    ├── LifecycleManager.ts     # Resource tracking
+    ├── types.ts                # Type definitions
+    └── index.ts                # Core exports
 ```
 
 ## Export Strategy
@@ -192,36 +159,26 @@ source/
 // Core
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 
-// Presets
-import {
-  actions,
-  headlines,
-  text,
-} from '@universityofmaryland/web-builder-library/presets';
-
-// Compose
-import {
-  textLockup,
-  card,
-  hero,
-} from '@universityofmaryland/web-builder-library/compose';
-
 // Types
 import type {
   ElementModel,
   BuilderOptions,
 } from '@universityofmaryland/web-builder-library';
+
+// UMD Design System Styles
+import * as Styles from '@universityofmaryland/web-styles-library';
 ```
 
 ### Package.json Exports
 
 All exports are explicit in package.json:
 
-- `.` - Main entry (core + factories)
+- `.` - Main entry (core exports)
 - `./core` - Core modules only
 - `./core/ElementBuilder` - Individual core modules
-- `./presets` - Preset factories (convenience)
-- `./compose` - Composition helpers (convenience)
+- `./core/StyleManager` - Style manager module
+- `./core/LifecycleManager` - Lifecycle manager module
+- `./core/types` - TypeScript type definitions
 
 ## ElementModel Return Type
 
@@ -268,36 +225,32 @@ const headline = new ElementBuilder(headlineElement)
   .build();
 ```
 
-### Pattern 3: Using Presets
+### Pattern 3: Using UMD Design System Styles
 
 ```typescript
-import {
-  actions,
-  headlines,
-} from '@universityofmaryland/web-builder-library/presets';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
 
-const button = actions
-  .primary()
+const button = new ElementBuilder('slot')
+  .withClassName('umd-action-primary')
+  .withStyles(Styles.element.action.primary.normal)
   .withText('Click Me')
   .withAttribute('href', '/page')
   .on('click', () => console.log('clicked'))
   .build();
+
+// Using composable functions for custom variants
+const customButton = new ElementBuilder('slot')
+  .withClassName('umd-action-primary-large-white')
+  .withStyles(Styles.element.action.primary.composePrimary({
+    size: 'large',
+    color: 'white'
+  }))
+  .withText('Custom Button')
+  .build();
 ```
 
-### Pattern 4: Composition
-
-```typescript
-import { textLockup } from '@universityofmaryland/web-builder-library/compose';
-
-const lockup = textLockup({
-  eyebrow: 'News',
-  headline: 'Latest Updates',
-  text: 'Check out what's new',
-  headlineSize: 'large'
-}).build();
-```
-
-### Pattern 5: Conditional Building
+### Pattern 4: Conditional Building
 
 ```typescript
 const builder = new ElementBuilder()
@@ -312,7 +265,7 @@ if (hasTitle) {
 const element = builder.build();
 ```
 
-### Pattern 6: Array Mapping
+### Pattern 5: Array Mapping
 
 ```typescript
 const list = new ElementBuilder('ul')
@@ -333,8 +286,8 @@ Tests are co-located in `source/__tests__/`:
 - `ElementBuilder.test.ts` - Core builder functionality
 - `StyleManager.test.ts` - Style compilation
 - `LifecycleManager.test.ts` - Resource cleanup
-- `presets.test.ts` - Factory presets
 - `createElement.test.ts` - Element creation utilities
+- `refactor-validation.test.ts` - Refactoring validation tests
 
 ### Testing Best Practices
 

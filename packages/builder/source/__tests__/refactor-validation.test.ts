@@ -7,7 +7,6 @@
  */
 
 import { ElementBuilder } from '../core/ElementBuilder';
-import { actions, headlines, text, layouts } from '../factories/presets';
 import type { ElementModel } from '../core/types';
 
 describe('REFACTOR.md Pattern Validation', () => {

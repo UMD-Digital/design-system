@@ -12,25 +12,22 @@ npm install @universityofmaryland/web-builder-library
 
 ### Quick Start
 
-The builder package provides three main ways to create elements:
-
-1. **ElementBuilder Class** - Core fluent builder API
-2. **Presets** - Pre-configured builders with UMD Design System styles
-3. **Compose** - High-level composition functions for complex patterns
+The builder package provides a fluent API for creating HTML elements with UMD Design System styles:
 
 ```typescript
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import { actions } from '@universityofmaryland/web-builder-library/presets';
+import * as Styles from '@universityofmaryland/web-styles-library';
 
-// Method 1: Using ElementBuilder directly
+// Create a simple element
 const container = new ElementBuilder()
   .withClassName('container')
   .withText('Hello World')
   .build();
 
-// Method 2: Using presets
-const button = actions
-  .primary()
+// Create an element with UMD styles
+const button = new ElementBuilder('slot')
+  .withClassName('umd-action-primary')
+  .withStyles(Styles.element.action.primary.normal)
   .withText('Click Me')
   .withAttribute('href', '/page')
   .build();
@@ -46,9 +43,7 @@ document.head.appendChild(styleTag);
 
 ### API Structure
 
-The builder package provides three main interfaces:
-
-#### 1. ElementBuilder - Core Fluent Builder API
+#### ElementBuilder - Core Fluent Builder API
 
 The main class for building elements with a chainable interface:
 
@@ -76,99 +71,46 @@ const headline = new ElementBuilder(headlineElement)
   .build();
 ```
 
-#### 2. Presets - Pre-configured UMD Design System Builders
+### Using with UMD Design System Styles
 
-Pre-configured builders that return ElementBuilder instances ready for further customization:
-
-```typescript
-import {
-  actions,
-  headlines,
-  text,
-  layouts,
-} from '@universityofmaryland/web-builder-library/presets';
-
-// Actions (buttons and links)
-const primary = actions.primary().withText('Primary Action').build();
-const secondary = actions.secondary().withText('Secondary Action').build();
-const outline = actions.outline().withText('Outline Action').build();
-
-// Headlines (various sizes)
-const largeHeadline = headlines.sansLarge().withText('Large Headline').build();
-const mediumHeadline = headlines
-  .sansMedium()
-  .withText('Medium Headline')
-  .build();
-
-// Text elements
-const eyebrow = text.eyebrow().withText('Eyebrow Text').build();
-const body = text.body().withText('Body text content').build();
-
-// Layouts
-const grid = layouts.grid(3, true).withChildren(card1, card2, card3).build();
-
-const stacked = layouts
-  .stacked('medium')
-  .withChildren(headline, text, action)
-  .build();
-```
-
-**Available Preset Categories**:
-
-- **actions**: `primary`, `primaryLarge`, `primaryWhite`, `secondary`, `secondaryLarge`, `secondaryWhite`, `secondaryGold`, `outline`, `outlineLarge`, `outlineWhite`, `iconSmall`, `iconSmallDark`
-- **headlines**: `sansExtraLarge`, `sansLargest`, `sansLarger`, `sansLarge`, `sansMedium`, `sansSmall`, `sansSmaller`, `sansMin`, `sansScalingLarger`, `sansScalingMin`, `campaignMaximum`, `campaignExtraLarge`, `campaignLarge`
-- **text**: `eyebrow`, `ribbon`, `body`
-- **layouts**: `grid(columns, withGap)`, `container`, `centered`, `stacked(gap)`, `inline(gap)`, `gridStacked`
-- **assets**: `image(isScaled)`, `caption`
-
-#### 3. Compose - High-Level Composition Helpers
-
-Composition functions for common UI patterns:
+The builder integrates seamlessly with the styles package composable functions:
 
 ```typescript
-import { textLockup, card, hero } from '@universityofmaryland/web-builder-library/compose';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
 
-// Text lockup (eyebrow + headline + text)
-const lockup = textLockup({
-  eyebrow: 'News & Events',
-  headline: 'Latest Updates',
-  text: 'Check out what's happening at UMD',
-  headlineSize: 'large'
-}).build();
+// Primary action button
+const primaryButton = new ElementBuilder('slot')
+  .withClassName('umd-action-primary')
+  .withStyles(Styles.element.action.primary.normal)
+  .withText('Click Me')
+  .build();
 
-// Card component
-const myCard = card({
-  image: '/image.jpg',
-  imageAlt: 'Card image',
-  eyebrow: 'Featured',
-  headline: 'Card Title',
-  text: 'Card description',
-  action: {
-    text: 'Learn More',
-    href: '/learn-more',
-    type: 'secondary'
-  }
-}).build();
+// Large headline with animation
+const headline = new ElementBuilder('slot')
+  .withClassName('umd-headline-sans-large')
+  .withStyles(Styles.typography.sans.fonts.large)
+  .withAnimation('slideUnder')
+  .withText('My Headline')
+  .build();
 
-// Hero component
-const myHero = hero({
-  image: '/hero.jpg',
-  headline: 'Welcome',
-  text: 'University of Maryland',
-  actions: [
-    { text: 'Apply Now', href: '/apply', type: 'primary' },
-    { text: 'Learn More', href: '/about', type: 'secondary' }
-  ]
-}).build();
+// Grid layout with gap
+const grid = new ElementBuilder()
+  .withClassName('umd-grid-3')
+  .withStyles(Styles.layout.grid.gap.three)
+  .withChildren(item1, item2, item3)
+  .build();
+
+// Custom composable options
+const customButton = new ElementBuilder('slot')
+  .withClassName('umd-action-primary-large-white')
+  .withStyles(Styles.element.action.primary.composePrimary({
+    size: 'large',
+    color: 'white'
+  }))
+  .withText('Custom Button')
+  .build();
 ```
-
-**Available Composition Functions**:
-
-- `textLockup(props)` - Eyebrow + headline + text pattern
-- `card(props)` - Card with image, content, and action
-- `hero(props)` - Hero section with background and actions
-- `list(props)` - List from array of items
-- `grid(props)` - Grid layout with mapped items
 
 ### Element Model Pattern
 
@@ -195,11 +137,12 @@ interface ElementModel<T extends HTMLElement = HTMLElement> {
 
 ```typescript
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import { actions } from '@universityofmaryland/web-builder-library/presets';
+import * as Styles from '@universityofmaryland/web-styles-library';
 
-// Create a primary action button
-const action = actions
-  .primary()
+// Create a primary action button with UMD styles
+const action = new ElementBuilder('slot')
+  .withClassName('umd-action-primary')
+  .withStyles(Styles.element.action.primary.normal)
   .withText('Learn More')
   .withAttribute('href', '/about')
   .build();
@@ -232,11 +175,12 @@ The builder includes CSS animation support for adding motion to elements:
 
 ```typescript
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import { actions } from '@universityofmaryland/web-builder-library/presets';
+import * as Styles from '@universityofmaryland/web-styles-library';
 
-// Add animation to an element
-const animatedButton = actions
-  .primary()
+// Add animation to an element with UMD styles
+const animatedButton = new ElementBuilder('slot')
+  .withClassName('umd-action-primary')
+  .withStyles(Styles.element.action.primary.normal)
   .withText('Click Me')
   .withAnimation('slideUnder', {
     duration: '300ms',
@@ -322,11 +266,12 @@ The builder now intelligently handles `ElementModel` children, automatically mer
 
 ```typescript
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import { actions } from '@universityofmaryland/web-builder-library/presets';
+import * as Styles from '@universityofmaryland/web-styles-library';
 
 // Create a button ElementModel
-const button = actions
-  .primary()
+const button = new ElementBuilder('slot')
+  .withClassName('umd-action-primary')
+  .withStyles(Styles.element.action.primary.normal)
   .withText('Play')
   .withStyles({ element: { backgroundColor: 'blue' } })
   .build();
@@ -486,28 +431,18 @@ For tree-shaking and selective imports, you can import specific modules:
 // Import core builder
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 
-// Import specific preset categories
-import {
-  actions,
-  headlines,
-  text,
-} from '@universityofmaryland/web-builder-library/presets';
-
-// Import composition helpers
-import {
-  textLockup,
-  card,
-  hero,
-} from '@universityofmaryland/web-builder-library/compose';
-
 // Import from core modules
 import {
+  ElementBuilder,
   StyleManager,
   LifecycleManager,
 } from '@universityofmaryland/web-builder-library/core';
 
 // Import individual core modules
 import { ElementBuilder } from '@universityofmaryland/web-builder-library/core/ElementBuilder';
+
+// Import UMD Design System styles
+import * as Styles from '@universityofmaryland/web-styles-library';
 ```
 
 ## API Documentation

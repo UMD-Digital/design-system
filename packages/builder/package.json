@@ -35,31 +35,6 @@
       "types": "./dist/core/types.d.ts",
       "import": "./dist/core/types.mjs",
       "require": "./dist/core/types.js"
-    },
-    "./factories": {
-      "types": "./dist/factories/index.d.ts",
-      "import": "./dist/factories/index.mjs",
-      "require": "./dist/factories/index.js"
-    },
-    "./factories/presets": {
-      "types": "./dist/factories/presets.d.ts",
-      "import": "./dist/factories/presets.mjs",
-      "require": "./dist/factories/presets.js"
-    },
-    "./factories/compose": {
-      "types": "./dist/factories/compose.d.ts",
-      "import": "./dist/factories/compose.mjs",
-      "require": "./dist/factories/compose.js"
-    },
-    "./presets": {
-      "types": "./dist/factories/presets.d.ts",
-      "import": "./dist/factories/presets.mjs",
-      "require": "./dist/factories/presets.js"
-    },
-    "./compose": {
-      "types": "./dist/factories/compose.d.ts",
-      "import": "./dist/factories/compose.mjs",
-      "require": "./dist/factories/compose.js"
     }
   },
   "license": "MIT",

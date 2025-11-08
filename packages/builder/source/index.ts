@@ -29,13 +29,7 @@
  *   .withThemeDark('dark')
  *   .withAnimation('fadeIn')
  *   .build();
- *
- * // Using preset builders (returns slot elements with UMD styles)
- * const actionSlot = actions.primary().build();
- * const headlineSlot = headlines.sansLarge().build();
  * ```
  */
 
 export * from './core';
-export * from './factories/presets';
-export * from './factories/compose';

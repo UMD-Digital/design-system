@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
+import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import { actions } from '@universityofmaryland/web-builder-library/presets';
 import { BREAKPOINTS } from '../../globals';
 import { BaseProps } from '../../_types';
 import { type UMDElement } from '../../../../_types';
@@ -26,8 +26,9 @@ const createLinkElement = (
 ): UMDElement => {
   const { isThemeLight } = props;
 
-  return actions
-    .primary()
+  return new ElementBuilder('slot')
+    .withClassName('umd-action-primary')
+    .withStyles(Styles.element.action.primary.normal)
     .withChild(link)
     .withStylesIf(!!isThemeLight, {
       element: {

@@ -2,7 +2,6 @@ import * as elementStyles from '@universityofmaryland/web-styles-library/element
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import { headlines } from '@universityofmaryland/web-builder-library/presets';
 import { type UMDElement } from '../../_types';
 
 type TypeTheme = {
@@ -172,8 +171,10 @@ export const createTextLockupSmall = ({
   }
 
   if (date) {
-    const dateElement = headlines
-      .sansMin()
+    const dateElement = new ElementBuilder('slot')
+      .withClassName('umd-headline-sans-min')
+      .withStyles(Styles.typography.sans.fonts.min)
+      .withAnimation('slideUnder')
       .withChild(date)
       .withStyles(dateStyles)
       .withThemeDark(isThemeDark)

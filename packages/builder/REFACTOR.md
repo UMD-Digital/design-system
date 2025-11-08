@@ -958,7 +958,7 @@ export const createModal = ({
     .withData({ hidden: isHidden })
     .role('dialog')
     .withAria({ label: 'Modal dialog', modal: 'true' })
-    .focusable(-1)
+    .withAttribute('tabindex', '-1')
     .withModifier((el) => {
       if (isHidden) el.style.display = 'none';
     })
@@ -1824,7 +1824,7 @@ element.setAttribute('tabindex', '0');
 builder
   .role('button')
   .withAria({ label: 'Close' })
-  .focusable(0)
+  .withAttribute('tabindex', '0')
 ```
 
 ### 8. **Event Handlers in Closures**

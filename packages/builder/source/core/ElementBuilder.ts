@@ -322,15 +322,6 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
   }
 
   /**
-   * Make element focusable with keyboard
-   * @param tabindex - Tab order (-1 for programmatic focus only, 0 for natural order, positive for custom order)
-   * @returns This builder for chaining
-   */
-  focusable(tabindex: number = 0): this {
-    return this.withAttribute('tabindex', String(tabindex));
-  }
-
-  /**
    * Set text content (replaces existing text)
    * @param text - Text content to set
    * @returns This builder for chaining

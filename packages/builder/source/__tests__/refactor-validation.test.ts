@@ -342,7 +342,7 @@ describe('REFACTOR.md Pattern Validation', () => {
       const model = new ElementBuilder()
         .role('dialog')
         .withAria({ label: 'Modal dialog' })
-        .focusable(-1)
+        .withAttribute('tabindex', '-1')
         .build();
 
       expect(model.element.getAttribute('role')).toBe('dialog');

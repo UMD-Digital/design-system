@@ -558,7 +558,6 @@ The core builder class provides a comprehensive fluent API:
 - `ariaPressed(pressed)`
 - `ariaCurrent(current)`
 - `role(role)`
-- `focusable(tabindex)`
 
 ### Preset Factories
 

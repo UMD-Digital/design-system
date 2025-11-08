@@ -541,6 +541,7 @@ The core builder class provides a comprehensive fluent API:
 - `apply(fn)` - Apply function to builder
 - `clone()` - Clone builder (immutable branching)
 - `getStyles()` - Get compiled styles without building
+- `getClassNames()` - Get accumulated class names
 - `getElement()` - Get element with classes/attributes applied (non-destructive)
 - `build()` - Build final ElementModel (terminal operation)
 - `mountTo(parent)` - Build and mount to parent

@@ -443,6 +443,7 @@ describe('ElementBuilder', () => {
       const div = document.createElement('div');
 
       const model = new ElementBuilder(div)
+        .withClassName('test-class')
         .withStylesIf(true, { element: { color: 'red' } })
         .build();
 
@@ -500,6 +501,7 @@ describe('ElementBuilder', () => {
       const div = document.createElement('div');
 
       const model = new ElementBuilder(div)
+        .withClassName('test-class')
         .withStyles({ element: { color: 'black' } })
         .withThemeDark(true)
         .build();
@@ -512,6 +514,7 @@ describe('ElementBuilder', () => {
       const div = document.createElement('div');
 
       const model = new ElementBuilder(div)
+        .withClassName('test-class')
         .withStyles({ element: { color: 'black' } })
         .withThemeDark(false)
         .build();
@@ -539,7 +542,7 @@ describe('ElementBuilder', () => {
       const div = document.createElement('div');
 
       const addRedColor = (builder: ElementBuilder<HTMLDivElement>) =>
-        builder.withStyles({ element: { color: 'red' } });
+        builder.withClassName('test-class').withStyles({ element: { color: 'red' } });
 
       const model = new ElementBuilder(div)
         .apply(addRedColor)
@@ -658,11 +661,13 @@ describe('ElementBuilder', () => {
     test('should accept multiple ElementModel children via withChildren', () => {
       const child1 = new ElementBuilder('span')
         .withText('Child 1')
+        .withClassName('child-1')
         .withStyles({ element: { color: 'red' } })
         .build();
 
       const child2 = new ElementBuilder('span')
         .withText('Child 2')
+        .withClassName('child-2')
         .withStyles({ element: { color: 'blue' } })
         .build();
 
@@ -678,6 +683,7 @@ describe('ElementBuilder', () => {
     test('should mix ElementModel and HTMLElement children', () => {
       const childModel = new ElementBuilder('span')
         .withText('Model Child')
+        .withClassName('model-child')
         .withStyles({ element: { fontWeight: 'bold' } })
         .build();
 
@@ -770,12 +776,14 @@ describe('ElementBuilder', () => {
       const buttonFn = jest.fn();
       const button = new ElementBuilder('button')
         .withText('Play')
+        .withClassName('play-button')
         .withStyles({ element: { backgroundColor: 'blue' } })
         .withEvents({ click: buttonFn })
         .build();
 
       const containerPlayFn = jest.fn();
       const container = new ElementBuilder()
+        .withClassName('container')
         .withChild(button)
         .withStyles({ element: { padding: '20px' } })
         .withEvents({ play: containerPlayFn })

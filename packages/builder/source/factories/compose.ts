@@ -409,13 +409,11 @@ export function hero(props: HeroProps): ElementBuilderInterface<HTMLDivElement> 
 export function list<T>(props: ListProps<T>): ElementBuilderInterface<HTMLUListElement | HTMLOListElement> {
   const { items, mapper, ordered = false, className } = props;
 
-  const listElement = ordered
-    ? new ElementBuilder().withStyles({ element: { listStyleType: 'decimal' } }) as any
-    : new ElementBuilder().withStyles({ element: { listStyleType: 'disc' } }) as any;
+  const listClassName = className || 'umd-list';
 
-  if (className) {
-    listElement.withClassName(className);
-  }
+  const listElement = ordered
+    ? new ElementBuilder().withClassName(listClassName).withStyles({ element: { listStyleType: 'decimal' } }) as any
+    : new ElementBuilder().withClassName(listClassName).withStyles({ element: { listStyleType: 'disc' } }) as any;
 
   items.forEach((item, index) => {
     listElement.withChild(mapper(item, index));

@@ -153,6 +153,9 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
    * Add styles (JSS object, ElementStyles, or StyleDefinition from styles library)
    * Styles are accumulated and merged with proper priority
    *
+   * Note: Requires a className to be set via .withClassName() or .styled()
+   * If no className is present, styles will be skipped with a warning
+   *
    * @param styles - Style definition or ElementStyles object
    * @param priority - Optional priority for style ordering (higher = applied last)
    * @returns This builder for chaining
@@ -163,6 +166,16 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
   ): this {
     this.assertNotBuilt();
     const className = this.getCurrentClassName();
+
+    if (!className) {
+      console.warn(
+        'ElementBuilder.withStyles(): No className found. ' +
+        'Use .withClassName() or .styled() before adding styles. ' +
+        'Skipping style application.'
+      );
+      return this;
+    }
+
     this.styles.add(styles, className, priority);
     return this;
   }
@@ -597,6 +610,25 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
   }
 
   /**
+   * Get accumulated class names
+   * Returns array of all class names added to this builder
+   * Does not mark the builder as built
+   * @returns Array of class names
+   *
+   * @example
+   * ```typescript
+   * const builder = new ElementBuilder('div')
+   *   .withClassName('container')
+   *   .withClassName('active');
+   *
+   * const classes = builder.getClassNames(); // ['container', 'active']
+   * ```
+   */
+  getClassNames(): string[] {
+    return Array.from(this.classNames);
+  }
+
+  /**
    * Get the element with accumulated changes applied (classes, attributes)
    * Useful when you need the element reference before finalizing with .build()
    * Does not mark the builder as built
@@ -748,17 +780,11 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
 
   /**
    * Get current primary class name (for style generation)
-   * @returns The first class name or a default
+   * @returns The first class name or null if no class names exist
    */
-  private getCurrentClassName(): string {
+  private getCurrentClassName(): string | null {
     const first = Array.from(this.classNames)[0];
-    if (first) return first;
-
-    const uniqueClass = `umd-element-${Math.random()
-      .toString(36)
-      .substr(2, 9)}`;
-    this.classNames.add(uniqueClass);
-    return uniqueClass;
+    return first || null;
   }
 
   /**

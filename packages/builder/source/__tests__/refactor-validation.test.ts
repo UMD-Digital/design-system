@@ -37,6 +37,7 @@ describe('REFACTOR.md Pattern Validation', () => {
       const isThemeDark = false;
 
       const model = new ElementBuilder(link)
+        .withClassName('test-link')
         .withStylesIf(isThemeGold, { element: { color: 'gold' } })
         .withStylesIf(isThemeDark, { element: { color: 'white' } })
         .build();
@@ -91,14 +92,17 @@ describe('REFACTOR.md Pattern Validation', () => {
 
     test('should accumulate styles from children', () => {
       const child1 = new ElementBuilder('div')
+        .withClassName('child-1')
         .withStyles({ element: { color: 'red' } })
         .build();
 
       const child2 = new ElementBuilder('div')
+        .withClassName('child-2')
         .withStyles({ element: { color: 'blue' } })
         .build();
 
       const parent = new ElementBuilder()
+        .withClassName('parent')
         .withStyles({ element: { padding: '10px' } })
         .withChild(child1.element)
         .withChild(child2.element)
@@ -132,6 +136,7 @@ describe('REFACTOR.md Pattern Validation', () => {
 
     test('should apply theme to nested elements', () => {
       const wrapper = new ElementBuilder()
+        .withClassName('wrapper')
         .withStyles({ element: { color: 'black' } })
         .withThemeDark(true)
         .withChild(
@@ -179,6 +184,7 @@ describe('REFACTOR.md Pattern Validation', () => {
       const shouldHaveWhiteText = false;
 
       const model = new ElementBuilder()
+        .withClassName('test-element')
         .withStyles({ element: { fontWeight: '700' } })
         .withStylesIf(isSizeLarge, { element: { fontSize: '2rem' } })
         .withStylesIf(shouldHaveWhiteText, { element: { color: 'white' } })
@@ -261,6 +267,7 @@ describe('REFACTOR.md Pattern Validation', () => {
       const isThemeDark = true;
 
       const container = new ElementBuilder()
+        .withClassName('themed-container')
         .withStyles({ element: { color: 'black' } })
         .withThemeDark(isThemeDark)
         .build();
@@ -525,6 +532,7 @@ describe('REFACTOR.md Pattern Validation', () => {
       const isThemeLight = true;
 
       const model = new ElementBuilder()
+        .withClassName('theme-container')
         .withStyles({
           element: { backgroundColor: '#333' }
         })
@@ -541,6 +549,7 @@ describe('REFACTOR.md Pattern Validation', () => {
       const gridColumns = Math.min(itemCount, 3);
 
       const model = new ElementBuilder()
+        .withClassName('grid-container')
         .withStyles({
           element: {
             display: 'grid',
@@ -631,6 +640,7 @@ describe('REFACTOR.md Pattern Validation', () => {
       };
 
       const model = new ElementBuilder()
+        .withClassName('custom-element')
         .withStyles({
           element: {
             display: 'block',
@@ -695,14 +705,17 @@ describe('REFACTOR.md Pattern Validation', () => {
 
     test('should maintain style accumulation across nested builders', () => {
       const child1 = new ElementBuilder()
+        .withClassName('child-1')
         .withStyles({ element: { margin: '10px' } })
         .build();
 
       const child2 = new ElementBuilder()
+        .withClassName('child-2')
         .withStyles({ element: { padding: '20px' } })
         .build();
 
       const parent = new ElementBuilder()
+        .withClassName('parent')
         .withStyles({ element: { display: 'flex' } })
         .withChildren(child1.element, child2.element)
         .build();

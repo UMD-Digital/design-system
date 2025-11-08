@@ -228,6 +228,7 @@ export interface ElementBuilderInterface<T extends HTMLElement = HTMLElement> {
   // Utility methods
   clone(): ElementBuilderInterface<T>;
   getStyles(): string;
+  getClassNames(): string[];
   getElement(): T;
 
   // Terminal methods (return different types)

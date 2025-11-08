@@ -54,14 +54,19 @@ export class StyleManager {
    * Automatically handles ElementStyles structure and StyleDefinition objects
    *
    * @param styles - Style definition from styles library or ElementStyles object
-   * @param className - Class name to use as selector
+   * @param className - Class name to use as selector (null will skip style application)
    * @param priority - Priority for style ordering (higher = applied last)
    */
   add(
     styles: StyleDefinition | ElementStyles | Record<string, any>,
-    className: string,
+    className: string | null,
     priority: number = 0,
   ): void {
+    if (!className) {
+      // Skip style application if no className provided
+      return;
+    }
+
     if (isElementStyles(styles)) {
       this.addElementStyles(styles, className, priority);
     } else if (isStyleDefinition(styles)) {

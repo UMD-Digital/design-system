@@ -1,7 +1,8 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { shrinkThenRemove } from '@universityofmaryland/web-utilities-library/animation';
 import { close as iconClose } from '@universityofmaryland/web-icons-library/controls';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { type ElementVisual } from '../../../_types';
 import { AlertTextProps } from './text';
 
 export interface CloseButtonProps extends AlertTextProps {
@@ -14,19 +15,18 @@ export const CreateCloseButton = (
     CloseButtonProps,
     'isThemeDark' | 'targetSelector' | 'onBeforeClose'
   >,
-) => {
+): ElementVisual => {
   const { isThemeDark = false, targetSelector, onBeforeClose } = props;
 
   const MEDIUM = 768;
   const button = document.createElement('button');
-  button.setAttribute('aria-label', 'Close alert');
-  button.type = 'button';
-  button.innerHTML = iconClose;
 
-  const model = ElementBuilder.create.element({
-    className: 'alert-close-button',
-    element: button,
-    elementStyles: {
+  const model = new ElementBuilder(button)
+    .withClassName('alert-close-button')
+    .withAttribute('aria-label', 'Close alert')
+    .withAttribute('type', 'button')
+    .withHTML(iconClose)
+    .withStyles({
       element: {
         position: 'absolute',
         top: token.spacing.lg,
@@ -42,15 +42,17 @@ export const CreateCloseButton = (
           right: token.spacing.sm,
         },
       },
-    },
-  });
+    })
+    .on('click', () => {
+      if (typeof onBeforeClose === 'function') onBeforeClose();
+      const wrapper = button.closest(targetSelector);
+      if (wrapper instanceof HTMLElement)
+        shrinkThenRemove({ container: wrapper });
+    })
+    .build();
 
-  model.element.addEventListener('click', () => {
-    if (typeof onBeforeClose === 'function') onBeforeClose();
-    const wrapper = model.element.closest(targetSelector);
-    if (wrapper instanceof HTMLElement)
-      shrinkThenRemove({ container: wrapper });
-  });
-
-  return model;
+  return {
+    ...model,
+    className: 'alert-close-button',
+  };
 };

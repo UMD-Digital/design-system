@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { warning as iconWarning } from '@universityofmaryland/web-icons-library/indicators';
 import { CreateAlertText as AlertText, AlertTextProps } from './elements/text';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { type ElementVisual } from '../../_types';
 import { BREAKPOINTS } from './globals';
 import { CreateCloseButton } from './elements/closeButton';
@@ -14,9 +14,10 @@ export interface AlertPageProps extends AlertTextProps {
 const { MEDIUM } = BREAKPOINTS;
 
 const createIcon = (iconMarkup: string): ElementVisual => {
-  const iconWrapper = ElementBuilder.create.div({
-    className: 'alert-page-icon',
-    elementStyles: {
+  const model = new ElementBuilder()
+    .withClassName('alert-page-icon')
+    .withHTML(iconMarkup)
+    .withStyles({
       element: {
         display: 'block',
         fill: token.color.gold,
@@ -26,10 +27,13 @@ const createIcon = (iconMarkup: string): ElementVisual => {
           top: '-20px',
         },
       },
-    },
-  });
-  iconWrapper.element.innerHTML = iconMarkup;
-  return iconWrapper as ElementVisual;
+    })
+    .build();
+
+  return {
+    ...model,
+    className: 'alert-page-icon',
+  };
 };
 
 const createContainer = (
@@ -53,13 +57,15 @@ const createContainer = (
     targetSelector: '.alert-page-declaration',
   });
 
-  return ElementBuilder.create.div({
-    className: 'alert-page-container',
-    children: [iconModel, textModel, closeButtonModel].filter(
-      Boolean,
-    ) as ElementVisual[],
-    isThemeDark: isThemeDark,
-    elementStyles: {
+  const children = [iconModel, textModel, closeButtonModel].filter(
+    Boolean,
+  ) as ElementVisual[];
+
+  const model = new ElementBuilder()
+    .withClassName('alert-page-container')
+    .withChildren(...children)
+    .withThemeDark(isThemeDark)
+    .withStyles({
       element: {
         ...(isThemeDark && { color: token.color.white }),
         display: 'flex',
@@ -73,20 +79,30 @@ const createContainer = (
           paddingRight: token.spacing.lg,
         },
       },
-    },
-  });
+    })
+    .build();
+
+  return {
+    ...model,
+    className: 'alert-page-container',
+  };
 };
 
 const createWrapper = (containerElement: ElementVisual): ElementVisual => {
-  return ElementBuilder.create.div({
-    className: 'alert-page-declaration',
-    children: [containerElement],
-    elementStyles: {
+  const model = new ElementBuilder()
+    .withClassName('alert-page-declaration')
+    .withChild(containerElement)
+    .withStyles({
       element: {
         containerType: 'inline-size',
       },
-    },
-  });
+    })
+    .build();
+
+  return {
+    ...model,
+    className: 'alert-page-declaration',
+  };
 };
 
 export default (props: AlertPageProps) => {

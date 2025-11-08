@@ -1,5 +1,9 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import * as animation from '@universityofmaryland/web-styles-library/animation';
+import * as typography from '@universityofmaryland/web-styles-library/typography';
+import * as layout from '@universityofmaryland/web-styles-library/layout';
+import * as elementStyles from '@universityofmaryland/web-styles-library/element';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import type { ElementVisual } from '../../../_types';
 
 export interface AlertTextProps {
@@ -15,49 +19,57 @@ const createHeadline = (
   const { headline, isThemeDark } = props;
   if (!headline) return;
 
-  return ElementBuilder.styled.headline.sansLarge({
-    element: headline,
-    isThemeDark: isThemeDark,
-    elementStyles: {
+  const styleElements = {
+    ...typography.sans.fonts.large,
+    ...animation.line.slideUnderBlack,
+  };
+
+  return new ElementBuilder(headline)
+    .styled(styleElements)
+    .withThemeDark(isThemeDark)
+    .withStyles({
       element: {
         paddingRight: token.spacing.md,
       },
       siblingAfter: { marginTop: token.spacing.sm },
-    },
-  });
+    })
+    .build();
 };
 
 const createText = (props: Pick<AlertTextProps, 'text' | 'isThemeDark'>) => {
   const { text, isThemeDark } = props;
   if (!text) return;
 
-  return ElementBuilder.styled.richText.simple({
-    element: text,
-    isThemeDark: isThemeDark,
-    elementStyles: {
+  return new ElementBuilder(text)
+    .styled(
+      elementStyles.text.rich.composeSimple({
+        theme: isThemeDark ? 'dark' : 'light',
+      }),
+    )
+    .withThemeDark(isThemeDark)
+    .withStyles({
       element: {
-        ...(isThemeDark && { color: token.color.white }),
         fontWeight: 500,
       },
       siblingAfter: { marginTop: token.spacing.sm },
-    },
-  });
+    })
+    .build();
 };
 
 const createActions = (props: Pick<AlertTextProps, 'actions'>) => {
   const { actions } = props;
   if (!actions) return;
 
-  return ElementBuilder.styled.layout.gridInlineTabletRows({
-    element: actions,
-    elementStyles: {
+  return new ElementBuilder(actions)
+    .styled(layout.grid.inline.tabletRows)
+    .withStyles({
       element: {
         [`* + &`]: {
           marginTop: token.spacing.sm,
         },
       },
-    },
-  });
+    })
+    .build();
 };
 
 export const CreateAlertText = (
@@ -65,7 +77,7 @@ export const CreateAlertText = (
 ): ElementVisual => {
   const { headline, text, actions, isThemeDark } = props;
 
-  const headlineModel = createHeadline({ headline });
+  const headlineModel = createHeadline({ headline, isThemeDark });
   const textModel = createText({ text, isThemeDark });
   const actionsModel = createActions({ actions });
 
@@ -73,16 +85,19 @@ export const CreateAlertText = (
     Boolean,
   ) as ElementVisual[];
 
-  const wrapperModel = ElementBuilder.create.div({
-    className: 'wrapper',
-    children: childElements,
-    elementStyles: {
+  const model = new ElementBuilder()
+    .withClassName('wrapper')
+    .withChildren(...childElements)
+    .withStyles({
       element: {
         maxWidth: token.spacing.maxWidth.small,
         ...(isThemeDark && { color: token.color.white }),
       },
-    },
-  });
+    })
+    .build();
 
-  return wrapperModel as ElementVisual;
+  return {
+    ...model,
+    className: 'wrapper',
+  };
 };

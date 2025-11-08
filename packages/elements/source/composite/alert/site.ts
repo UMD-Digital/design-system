@@ -1,10 +1,11 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
+import * as layout from '@universityofmaryland/web-styles-library/layout';
 import {
   getLocalStorageInt,
   setLocalStorageTimestamp,
 } from '@universityofmaryland/web-utilities-library/storage';
 import { CreateAlertText as AlertText, AlertTextProps } from './elements/text';
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { type ElementVisual } from '../../_types';
 import { BREAKPOINTS } from './globals';
 import { CreateCloseButton } from './elements/closeButton';
@@ -42,12 +43,11 @@ const createLock = (
   props: Pick<AlertSiteProps, 'headline' | 'text' | 'actions' | 'isThemeDark'>,
 ): ElementVisual => {
   const textModel = AlertText(props);
-  const children = [textModel];
 
-  return ElementBuilder.styled.layout.spaceHorizontalLarger({
-    element: document.createElement('div'),
-    children,
-    elementStyles: {
+  const model = new ElementBuilder()
+    .styled(layout.space.horizontal.larger)
+    .withChild(textModel)
+    .withStyles({
       element: {
         width: '100%',
       },
@@ -55,8 +55,18 @@ const createLock = (
         color: token.color.black,
         maxWidth: token.spacing.maxWidth.large,
       },
-    },
-  });
+    })
+    .build();
+
+  const className = layout.space.horizontal.larger.className;
+  const classNameString = Array.isArray(className)
+    ? className.join(' ')
+    : className || 'alert-site-lock';
+
+  return {
+    ...model,
+    className: classNameString,
+  };
 };
 
 const createCloseButton = () =>
@@ -78,10 +88,10 @@ const createContainer = (
     Boolean,
   ) as ElementVisual[];
 
-  return ElementBuilder.create.div({
-    className: 'alert-site-container',
-    children,
-    elementStyles: {
+  const model = new ElementBuilder()
+    .withClassName('alert-site-container')
+    .withChildren(...children)
+    .withStyles({
       element: {
         display: 'flex',
         position: 'relative',
@@ -95,20 +105,30 @@ const createContainer = (
           paddingRight: token.spacing['2xl'],
         },
       },
-    },
-  });
+    })
+    .build();
+
+  return {
+    ...model,
+    className: 'alert-site-container',
+  };
 };
 
 const createWrapper = (container: ElementVisual): ElementVisual => {
-  return ElementBuilder.create.div({
-    className: 'alert-site-declaration',
-    children: [container],
-    elementStyles: {
+  const model = new ElementBuilder()
+    .withClassName('alert-site-declaration')
+    .withChild(container)
+    .withStyles({
       element: {
         containerType: 'inline-size',
       },
-    },
-  });
+    })
+    .build();
+
+  return {
+    ...model,
+    className: 'alert-site-declaration',
+  };
 };
 
 export default (props: AlertSiteProps) => {

@@ -54,7 +54,9 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
   private classNames: Set<string>;
   private styles: StyleManager;
   private attributes: Map<string, string>;
-  private children: Array<ElementBuilderInterface | ElementModel | HTMLElement | string>;
+  private children: Array<
+    ElementBuilderInterface | ElementModel | HTMLElement | string
+  >;
   private eventListeners: Map<
     string,
     Array<{ handler: EventListener; options?: AddEventListenerOptions }>
@@ -64,6 +66,10 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
   private options: BuilderOptions;
   private isBuilt: boolean = false;
   private customEvents: Record<string, Function> = {};
+
+  // ============================================================================
+  // CONSTRUCTOR
+  // ============================================================================
 
   /**
    * Create a new ElementBuilder
@@ -134,6 +140,10 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
     }
   }
 
+  // ============================================================================
+  // CLASS NAME METHODS
+  // ============================================================================
+
   /**
    * Add one or more CSS class names to the element
    * @param names - Class names to add
@@ -148,6 +158,10 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
     });
     return this;
   }
+
+  // ============================================================================
+  // STYLE METHODS
+  // ============================================================================
 
   /**
    * Add styles (JSS object, ElementStyles, or StyleDefinition from styles library)
@@ -170,8 +184,8 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
     if (!className) {
       console.warn(
         'ElementBuilder.withStyles(): No className found. ' +
-        'Use .withClassName() or .styled() before adding styles. ' +
-        'Skipping style application.'
+          'Use .withClassName() or .styled() before adding styles. ' +
+          'Skipping style application.',
       );
       return this;
     }
@@ -272,6 +286,10 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
     return this;
   }
 
+  // ============================================================================
+  // ATTRIBUTE METHODS
+  // ============================================================================
+
   /**
    * Add HTML attributes
    * @param attrs - Object of attribute key-value pairs
@@ -334,6 +352,10 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
     return this.withAttribute('role', role);
   }
 
+  // ============================================================================
+  // CONTENT METHODS
+  // ============================================================================
+
   /**
    * Set text content (replaces existing text)
    * @param text - Text content to set
@@ -361,13 +383,23 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
     return this;
   }
 
+  // ============================================================================
+  // CHILD METHODS
+  // ============================================================================
+
   /**
    * Add a child element
    * @param child - Child to add (Builder, HTMLElement, or string)
    * @returns This builder for chaining
    */
   withChild(
-    child: ElementBuilderInterface | ElementModel | HTMLElement | string | null | undefined,
+    child:
+      | ElementBuilderInterface
+      | ElementModel
+      | HTMLElement
+      | string
+      | null
+      | undefined,
   ): this {
     this.assertNotBuilt();
     if (child !== null && child !== undefined) {
@@ -384,7 +416,9 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
    * @returns This builder for chaining
    */
   withChildren(
-    ...children: Array<ElementBuilderInterface | ElementModel | HTMLElement | string>
+    ...children: Array<
+      ElementBuilderInterface | ElementModel | HTMLElement | string
+    >
   ): this {
     children.forEach((child) => this.withChild(child));
     return this;
@@ -429,6 +463,10 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
     });
     return this;
   }
+
+  // ============================================================================
+  // EVENT METHODS
+  // ============================================================================
 
   /**
    * Add an event listener
@@ -480,6 +518,10 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
     this.customEvents = { ...this.customEvents, ...events };
     return this;
   }
+
+  // ============================================================================
+  // MODIFIER METHODS
+  // ============================================================================
 
   /**
    * Add a custom element modifier function
@@ -558,6 +600,10 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
     return this;
   }
 
+  // ============================================================================
+  // UTILITY METHODS
+  // ============================================================================
+
   /**
    * Apply a function to this builder
    * Useful for extracting reusable builder patterns
@@ -584,6 +630,10 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
     // This is intentional for performance and to avoid infinite loops
     return cloned;
   }
+
+  // ============================================================================
+  // GETTER METHODS (Non-destructive)
+  // ============================================================================
 
   /**
    * Get compiled styles without building the element
@@ -657,6 +707,10 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
     return this.element;
   }
 
+  // ============================================================================
+  // TERMINAL METHODS (Build & Mount)
+  // ============================================================================
+
   /**
    * Build the final element with all styles applied
    * This is the terminal operation that returns ElementModel
@@ -673,7 +727,9 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
         styles: this.styles.compile(),
         update: (props) => this.update(props),
         destroy: () => this.destroy(),
-        ...(Object.keys(this.customEvents).length > 0 && { events: this.customEvents }),
+        ...(Object.keys(this.customEvents).length > 0 && {
+          events: this.customEvents,
+        }),
       };
     }
 
@@ -737,7 +793,9 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
       styles: allStyles,
       update: (props: Partial<BuilderOptions>) => this.update(props),
       destroy: () => this.destroy(),
-      ...(Object.keys(this.customEvents).length > 0 && { events: this.customEvents }),
+      ...(Object.keys(this.customEvents).length > 0 && {
+        events: this.customEvents,
+      }),
     };
 
     return model;
@@ -754,6 +812,10 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
     parent.appendChild(result.element);
     return this;
   }
+
+  // ============================================================================
+  // PRIVATE METHODS
+  // ============================================================================
 
   /**
    * Update the element with new props (for reactivity)

@@ -240,10 +240,10 @@ export interface ElementBuilderInterface<T extends HTMLElement = HTMLElement> {
   // Utility methods
   clone(): ElementBuilderInterface<T>;
   getStyles(): string;
+  getElement(): T;
 
   // Terminal methods (return different types)
   build(): ElementModel<T>;
-  buildElement(): T;
   mountTo(parent: HTMLElement): this;
 }
 

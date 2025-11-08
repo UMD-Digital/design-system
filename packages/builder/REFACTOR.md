@@ -690,7 +690,7 @@ export const createTextLockupSmall = ({
         .styled(Styles.typography.sans.larger)
         .withStyles(headlineStyles)
         .withThemeDark(isThemeDark)
-        .buildElement()
+        .build().element
     )
     .withChildIf(!!eventMeta, eventMeta)
     .withChildIf(
@@ -699,7 +699,7 @@ export const createTextLockupSmall = ({
         .styled(Styles.element.richText.simple)
         .withStyles(textStyles)
         .withThemeDark(isThemeDark)
-        .buildElement()
+        .build().element
     )
     .withChildIf(
       !!date,
@@ -707,7 +707,7 @@ export const createTextLockupSmall = ({
         .withChild(date)
         .withStyles(dateStyles)
         .withThemeDark(isThemeDark)
-        .buildElement()
+        .build().element
     )
     .withChildIf(
       !!actions,
@@ -720,7 +720,7 @@ export const createTextLockupSmall = ({
 **Key Changes**:
 - Replace manual children array building with chained `withChildIf()` calls
 - Use lambda functions in `withChildIf()` for lazy evaluation
-- Use `buildElement()` convenience method when only element is needed
+- Use `.build().element` when only element is needed
 - Eliminate imperative children.push() pattern
 - Apply theme once at container level, or per-child as needed
 
@@ -1514,7 +1514,7 @@ const CreateSocialRow = (props: SocialProps): ElementVisual => {
             },
           }
         })
-        .buildElement();
+        .build().element;
     })
     .build();
 
@@ -1527,7 +1527,7 @@ const CreateSocialRow = (props: SocialProps): ElementVisual => {
 - Use `withChildrenFrom()` for array mapping
 - Use `withHTML()` to inject icon after element creation
 - Use `withStylesIf()` for conditional theme styles
-- Use `buildElement()` in mapper for convenience
+- Use `.build().element` in mapper for convenience
 - Eliminate manual `.map()` + children array pattern
 
 ---
@@ -1688,7 +1688,7 @@ export default (props: Props) => {
       return new ElementBuilder()
         .styled(Styles.layout.backgroundBoxWhite)
         .withChild(dateSign)
-        .buildElement();
+        .build().element;
     })
     .withChildIf(!!asset, asset)
     .build();
@@ -1755,7 +1755,7 @@ elements.forEach(el => parent.appendChild(el));
 **After**:
 ```typescript
 builder.withChildrenFrom(items, (item) =>
-  new ElementBuilder().withText(item.text).buildElement()
+  new ElementBuilder().withText(item.text).build().element
 )
 ```
 
@@ -1952,7 +1952,7 @@ When migrating a component to V2 ElementBuilder:
 - [ ] Use `styled()` method for JSS objects
 - [ ] Update closure references to use `model.element`
 - [ ] Concatenate child styles if needed
-- [ ] Use `buildElement()` when only element is needed
+- [ ] Use `.build().element` when only element is needed
 - [ ] Add `withModifier()` for imperative operations
 - [ ] Test that all styles are applied correctly
 - [ ] Verify event handlers still work
@@ -1980,9 +1980,9 @@ return new ElementBuilder()
         !!innerChild,
         () => new ElementBuilder(innerChild)
           .withStyles({ element: { margin: '10px' } })
-          .buildElement()
+          .build().element
       )
-      .buildElement()
+      .build().element
   )
   .build();
 ```
@@ -2019,7 +2019,7 @@ if (eyebrow) {
       },
     })
     .withThemeDark(isThemeDark)
-    .buildElement();
+    .build().element;
 
   container.withChild(eyebrowElement);
 }
@@ -2032,7 +2032,7 @@ if (ribbon) {
         marginTop: token.spacing.sm,
       },
     })
-    .buildElement();
+    .build().element;
 
   container.withChild(ribbonElement);
 }

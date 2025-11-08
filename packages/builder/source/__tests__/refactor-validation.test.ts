@@ -111,12 +111,12 @@ describe('REFACTOR.md Pattern Validation', () => {
         .withChildIf(hasLocation, () => {
           return new ElementBuilder('p')
             .withText('Location detail')
-            .buildElement();
+            .build().element;
         })
         .withChildIf(hasDate, () => {
           return new ElementBuilder('p')
             .withText('Date detail')
-            .buildElement();
+            .build().element;
         })
         .build();
 
@@ -131,7 +131,7 @@ describe('REFACTOR.md Pattern Validation', () => {
         .withChild(
           new ElementBuilder('span')
             .withText('Themed content')
-            .buildElement()
+            .build().element
         )
         .build();
 
@@ -159,7 +159,7 @@ describe('REFACTOR.md Pattern Validation', () => {
                 transform: 'translateY(20px)',
               }
             })
-            .buildElement();
+            .build().element;
         })
         .build();
 
@@ -191,7 +191,7 @@ describe('REFACTOR.md Pattern Validation', () => {
           return new ElementBuilder()
             .withAttribute('data-index', index)
             .withText(item)
-            .buildElement();
+            .build().element;
         })
         .build();
 
@@ -507,7 +507,7 @@ describe('REFACTOR.md Pattern Validation', () => {
             .withAttribute('href', link.href)
             .withHTML(link.icon)
             .withClassName('social-link')
-            .buildElement();
+            .build().element;
         })
         .build();
 
@@ -610,7 +610,7 @@ describe('REFACTOR.md Pattern Validation', () => {
           return new ElementBuilder()
             .withClassName('date-box')
             .withChild(dateContent)
-            .buildElement();
+            .build().element;
         })
         .build();
 
@@ -660,7 +660,7 @@ describe('REFACTOR.md Pattern Validation', () => {
           return new ElementBuilder('header')
             .withText('Component Header')
             .withClassName('component-header')
-            .buildElement();
+            .build().element;
         })
         .withChild(
           new ElementBuilder()
@@ -670,9 +670,9 @@ describe('REFACTOR.md Pattern Validation', () => {
                 .withClassName('item')
                 .withAttribute('data-index', index)
                 .withText(item)
-                .buildElement();
+                .build().element;
             })
-            .buildElement()
+            .build().element
         )
         .withData({ theme: 'dark', items: items.length })
         .role('region')

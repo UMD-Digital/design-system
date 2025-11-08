@@ -774,6 +774,35 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
   }
 
   /**
+   * Get the element with accumulated changes applied (classes, attributes)
+   * Useful when you need the element reference before finalizing with .build()
+   * Does not mark the builder as built
+   * Does not apply children, modifiers, or event listeners
+   * @returns The underlying HTML element with classes and attributes applied
+   *
+   * @example
+   * ```typescript
+   * const builder = new ElementBuilder('div')
+   *   .withClassName('container')
+   *   .withAttribute('data-test', 'true');
+   *
+   * const element = builder.getElement(); // Element has classes and attributes
+   * // Builder can still be modified and built later
+   * ```
+   */
+  getElement(): T {
+    // Apply accumulated classes
+    this.classNames.forEach((name) => this.element.classList.add(name));
+
+    // Apply accumulated attributes
+    this.attributes.forEach((value, key) => {
+      this.element.setAttribute(key, value);
+    });
+
+    return this.element;
+  }
+
+  /**
    * Build the final element with all styles applied
    * This is the terminal operation that returns ElementModel
    * Can only be called once per builder instance
@@ -857,16 +886,6 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
     };
 
     return model;
-  }
-
-  /**
-   * Build and return just the element (without styles)
-   * Useful when you only need the DOM node
-   * @returns The built HTML element
-   */
-  buildElement(): T {
-    const model = this.build();
-    return model.element;
   }
 
   /**

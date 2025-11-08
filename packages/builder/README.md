@@ -269,6 +269,53 @@ const fadeInDiv = new ElementBuilder()
 
 ## Advanced Features
 
+### Non-Destructive Element Access with `.getElement()`
+
+The `.getElement()` method provides non-destructive access to the underlying element with accumulated classes and attributes applied. Unlike `.build()`, it does not finalize the builder, allowing you to continue modifying it:
+
+```typescript
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+
+// Create a builder and get the element without finalizing
+const builder = new ElementBuilder('div')
+  .withClassName('container')
+  .withAttribute('data-id', '123')
+  .withData({ test: 'true' });
+
+// Get element with classes and attributes applied
+const element = builder.getElement();
+
+console.log(element.className); // 'container'
+console.log(element.getAttribute('data-id')); // '123'
+console.log(element.getAttribute('data-test')); // 'true'
+
+// Builder can still be modified!
+builder
+  .withClassName('active')
+  .withChild(document.createElement('span'));
+
+// Now build the final version
+const model = builder.build();
+console.log(model.element.classList.contains('active')); // true
+```
+
+**Use Cases:**
+- Getting element reference for external libraries before finalizing
+- Early DOM manipulation while preserving builder state
+- Conditional logic based on element properties before building
+
+**Comparison with `.build().element`:**
+
+```typescript
+// .getElement() - Non-destructive, builder remains usable
+const el1 = builder.getElement();
+builder.withClassName('more-classes'); // ✅ Still works
+
+// .build().element - Finalizes builder (terminal operation)
+const el2 = builder.build().element;
+builder.withClassName('classes'); // ⚠️ Warning: builder already built
+```
+
 ### ElementModel Children with Auto-Style Merging
 
 The builder now intelligently handles `ElementModel` children, automatically merging their styles with the parent. This eliminates the need for manual style concatenation:
@@ -493,8 +540,9 @@ The core builder class provides a comprehensive fluent API:
 - `ref(callback)` - Get reference to element
 - `apply(fn)` - Apply function to builder
 - `clone()` - Clone builder (immutable branching)
+- `getStyles()` - Get compiled styles without building
+- `getElement()` - Get element with classes/attributes applied (non-destructive)
 - `build()` - Build final ElementModel (terminal operation)
-- `buildElement()` - Build and return just the element
 - `mountTo(parent)` - Build and mount to parent
 
 **Conditional Methods**:

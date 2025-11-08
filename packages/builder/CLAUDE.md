@@ -280,7 +280,7 @@ const button = actions
   .primary()
   .withText('Click Me')
   .withAttribute('href', '/page')
-  .onClick(() => console.log('clicked'))
+  .on('click', () => console.log('clicked'))
   .build();
 ```
 

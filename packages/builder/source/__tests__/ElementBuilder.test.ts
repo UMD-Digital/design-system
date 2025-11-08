@@ -277,24 +277,12 @@ describe('ElementBuilder', () => {
   });
 
   describe('Event Listeners', () => {
-    test('should add event listener using onClick', () => {
+    test('should add event listener using on method', () => {
       const button = document.createElement('button');
       const handler = jest.fn();
 
       const model = new ElementBuilder(button)
-        .onClick(handler)
-        .build();
-
-      model.element.dispatchEvent(new Event('click'));
-      expect(handler).toHaveBeenCalledTimes(1);
-    });
-
-    test('should use convenience onClick method', () => {
-      const button = document.createElement('button');
-      const handler = jest.fn();
-
-      const model = new ElementBuilder(button)
-        .onClick(handler)
+        .on('click', handler)
         .build();
 
       model.element.dispatchEvent(new Event('click'));
@@ -306,7 +294,7 @@ describe('ElementBuilder', () => {
       const handler = jest.fn();
 
       const model = new ElementBuilder(button)
-        .onClick(handler)
+        .on('click', handler)
         .build();
 
       model.element.dispatchEvent(new Event('click'));
@@ -325,9 +313,9 @@ describe('ElementBuilder', () => {
       const inputHandler = jest.fn();
 
       const model = new ElementBuilder(input)
-        .onFocus(focusHandler)
-        .onBlur(blurHandler)
-        .onInput(inputHandler)
+        .on('focus', focusHandler)
+        .on('blur', blurHandler)
+        .on('input', inputHandler)
         .build();
 
       input.dispatchEvent(new Event('focus'));
@@ -617,7 +605,7 @@ describe('ElementBuilder', () => {
         .withChild(child)
         .withAria({ label: 'Container' })
         .withData({ value: '123' })
-        .onClick(() => {})
+        .on('click', () => {})
         .build();
 
       expect(model.element.classList.contains('container')).toBe(true);
@@ -635,7 +623,7 @@ describe('ElementBuilder', () => {
       const handler = jest.fn();
 
       const model = new ElementBuilder(div)
-        .onClick(handler)
+        .on('click', handler)
         .build();
 
       expect(model.destroy).toBeDefined();

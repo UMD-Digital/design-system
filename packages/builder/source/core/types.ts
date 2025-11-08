@@ -219,16 +219,6 @@ export interface ElementBuilderInterface<T extends HTMLElement = HTMLElement> {
 
   // Event methods
   on(event: string, handler: EventListener, options?: AddEventListenerOptions): this;
-  onClick(handler: EventListener): this;
-  onInput(handler: EventListener): this;
-  onChange(handler: EventListener): this;
-  onSubmit(handler: EventListener): this;
-  onKeydown(handler: EventListener): this;
-  onKeyup(handler: EventListener): this;
-  onFocus(handler: EventListener): this;
-  onBlur(handler: EventListener): this;
-  onMouseEnter(handler: EventListener): this;
-  onMouseLeave(handler: EventListener): this;
 
   // Modifier methods
   withModifier(modifier: (el: T) => void): this;

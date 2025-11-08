@@ -14,7 +14,7 @@ const create = ({
       .withAttribute('data-index', index.toString())
       .withAttribute('aria-label', 'View Full Screen')
       .withHTML(`Full Screen <span></span>${iconFullscreen}`)
-      .onClick(() => callback(index))
+      .on('click', () => callback(index))
       .styled(Styles.element.action.button.fullScreen)
       .build();
   })();

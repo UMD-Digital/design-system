@@ -278,7 +278,7 @@ describe('REFACTOR.md Pattern Validation', () => {
       const clickHandler = jest.fn();
 
       const model = new ElementBuilder('button')
-        .onClick(clickHandler)
+        .on('click', clickHandler)
         .build();
 
       model.element.dispatchEvent(new Event('click'));
@@ -321,7 +321,7 @@ describe('REFACTOR.md Pattern Validation', () => {
       const handler = jest.fn();
 
       const model = new ElementBuilder('button')
-        .onClick(handler)
+        .on('click', handler)
         .build();
 
       model.element.dispatchEvent(new Event('click'));
@@ -411,7 +411,7 @@ describe('REFACTOR.md Pattern Validation', () => {
       const keyHandler = jest.fn();
 
       const model = new ElementBuilder()
-        .onKeydown(keyHandler)
+        .on('keydown', keyHandler)
         .build();
 
       const event = new KeyboardEvent('keydown', { key: 'Escape' });
@@ -717,12 +717,12 @@ describe('REFACTOR.md Pattern Validation', () => {
 
       const button = new ElementBuilder('button')
         .withText('Click')
-        .onClick(buttonClick)
+        .on('click', buttonClick)
         .build();
 
       const container = new ElementBuilder()
         .withChild(button.element)
-        .onClick(containerClick)
+        .on('click', containerClick)
         .build();
 
       button.element.dispatchEvent(new Event('click'));

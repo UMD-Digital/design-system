@@ -942,4 +942,383 @@ describe('ElementBuilder', () => {
       expect(styles).toContain('display: flex');
     });
   });
+
+  describe('.styled() Method', () => {
+    test('should apply style object with className property', () => {
+      const styleObject = {
+        className: 'test-styled-class',
+        element: {
+          color: 'blue',
+          padding: '10px',
+        },
+      };
+
+      const model = new ElementBuilder()
+        .styled(styleObject)
+        .build();
+
+      expect(model.element.classList.contains('test-styled-class')).toBe(true);
+      expect(model.styles).toContain('.test-styled-class');
+      expect(model.styles).toContain('color: blue');
+      expect(model.styles).toContain('padding: 10px');
+    });
+
+    test('should handle array of class names in styled object', () => {
+      const styleObject = {
+        className: ['class-one', 'class-two'],
+        element: {
+          fontSize: '16px',
+        },
+      };
+
+      const model = new ElementBuilder()
+        .styled(styleObject)
+        .build();
+
+      expect(model.element.classList.contains('class-one')).toBe(true);
+      expect(model.element.classList.contains('class-two')).toBe(true);
+    });
+
+    test('should apply styles with custom priority', () => {
+      const baseStyle = {
+        className: 'base',
+        element: { color: 'red' },
+      };
+
+      const overrideStyle = {
+        className: 'override',
+        element: { color: 'blue' },
+      };
+
+      const model = new ElementBuilder()
+        .styled(baseStyle, 0)
+        .styled(overrideStyle, 10)
+        .build();
+
+      expect(model.styles).toBeTruthy();
+      expect(model.element.classList.contains('base')).toBe(true);
+      expect(model.element.classList.contains('override')).toBe(true);
+    });
+
+    test('should handle ElementStyles structure', () => {
+      const styleObject = {
+        className: 'with-pseudo',
+        element: {
+          color: 'red',
+        },
+        pseudoBefore: {
+          content: '""',
+          display: 'block',
+        },
+      };
+
+      const model = new ElementBuilder()
+        .styled(styleObject)
+        .build();
+
+      expect(model.element.classList.contains('with-pseudo')).toBe(true);
+      expect(model.styles).toContain('.with-pseudo');
+    });
+
+    test('should chain styled calls', () => {
+      const style1 = {
+        className: 'style-one',
+        element: { padding: '5px' },
+      };
+
+      const style2 = {
+        className: 'style-two',
+        element: { margin: '10px' },
+      };
+
+      const model = new ElementBuilder()
+        .styled(style1)
+        .styled(style2)
+        .build();
+
+      expect(model.element.classList.contains('style-one')).toBe(true);
+      expect(model.element.classList.contains('style-two')).toBe(true);
+      expect(model.styles).toContain('padding: 5px');
+      expect(model.styles).toContain('margin: 10px');
+    });
+
+    test('should work without className property', () => {
+      const styleObject = {
+        element: {
+          display: 'flex',
+        },
+      };
+
+      const model = new ElementBuilder()
+        .withClassName('manual-class')
+        .styled(styleObject)
+        .build();
+
+      expect(model.element.classList.contains('manual-class')).toBe(true);
+      expect(model.styles).toContain('display: flex');
+    });
+  });
+
+  describe('.getElement() Method', () => {
+    test('should return element with classes applied without building', () => {
+      const builder = new ElementBuilder()
+        .withClassName('test-class')
+        .withClassName('another-class');
+
+      const element = builder.getElement();
+
+      expect(element.classList.contains('test-class')).toBe(true);
+      expect(element.classList.contains('another-class')).toBe(true);
+    });
+
+    test('should return element with attributes applied without building', () => {
+      const builder = new ElementBuilder()
+        .withAttribute('data-id', '123')
+        .withAttribute('data-test', 'value');
+
+      const element = builder.getElement();
+
+      expect(element.getAttribute('data-id')).toBe('123');
+      expect(element.getAttribute('data-test')).toBe('value');
+    });
+
+    test('should allow continued modification after getElement()', () => {
+      const builder = new ElementBuilder()
+        .withClassName('initial');
+
+      const element1 = builder.getElement();
+      expect(element1.classList.contains('initial')).toBe(true);
+
+      // Should still be able to modify builder
+      expect(() => {
+        builder.withClassName('added-later');
+      }).not.toThrow();
+
+      const element2 = builder.getElement();
+      expect(element2.classList.contains('initial')).toBe(true);
+      expect(element2.classList.contains('added-later')).toBe(true);
+    });
+
+    test('should not apply children or modifiers', () => {
+      const child = document.createElement('span');
+      const modifierCalled = jest.fn();
+
+      const builder = new ElementBuilder()
+        .withChild(child)
+        .withModifier(modifierCalled);
+
+      const element = builder.getElement();
+
+      // Children not added by getElement
+      expect(element.children.length).toBe(0);
+      // Modifiers not called by getElement
+      expect(modifierCalled).not.toHaveBeenCalled();
+    });
+
+    test('should work with data and aria attributes', () => {
+      const builder = new ElementBuilder()
+        .withData({ value: '456' })
+        .withAria({ label: 'Test Label' });
+
+      const element = builder.getElement();
+
+      expect(element.getAttribute('data-value')).toBe('456');
+      expect(element.getAttribute('aria-label')).toBe('Test Label');
+    });
+
+    test('should allow building after getElement()', () => {
+      const builder = new ElementBuilder()
+        .withClassName('pre-get')
+        .withAttribute('data-pre', 'value');
+
+      const preElement = builder.getElement();
+      expect(preElement.classList.contains('pre-get')).toBe(true);
+
+      builder.withClassName('post-get');
+
+      const model = builder.build();
+      expect(model.element.classList.contains('pre-get')).toBe(true);
+      expect(model.element.classList.contains('post-get')).toBe(true);
+    });
+
+    test('should return same element instance', () => {
+      const builder = new ElementBuilder();
+
+      const element1 = builder.getElement();
+      const element2 = builder.getElement();
+
+      expect(element1).toBe(element2);
+    });
+  });
+
+  describe('.withAnimation() Method', () => {
+    test('should add animation with default options', () => {
+      const model = new ElementBuilder()
+        .withClassName('animated')
+        .withAnimation('fadeIn')
+        .build();
+
+      expect(model.styles).toContain('animation:');
+      expect(model.styles).toContain('fadeIn');
+    });
+
+    test('should add animation with custom duration', () => {
+      const model = new ElementBuilder()
+        .withClassName('animated')
+        .withAnimation('slideIn', { duration: '500ms' })
+        .build();
+
+      expect(model.styles).toContain('animation:');
+      expect(model.styles).toContain('slideIn');
+      expect(model.styles).toContain('500ms');
+    });
+
+    test('should add animation with custom delay', () => {
+      const model = new ElementBuilder()
+        .withClassName('animated')
+        .withAnimation('fadeIn', { delay: '200ms' })
+        .build();
+
+      expect(model.styles).toContain('animation:');
+      expect(model.styles).toContain('200ms');
+    });
+
+    test('should add animation with all options', () => {
+      const model = new ElementBuilder()
+        .withClassName('complex-animation')
+        .withAnimation('slideOver', {
+          duration: '1s',
+          delay: '100ms',
+          easing: 'linear',
+          iterationCount: 'infinite',
+          direction: 'alternate',
+          fillMode: 'both',
+        })
+        .build();
+
+      const styles = model.styles;
+      expect(styles).toContain('animation:');
+      expect(styles).toContain('slideOver');
+      expect(styles).toContain('1s');
+      expect(styles).toContain('linear');
+      expect(styles).toContain('infinite');
+      expect(styles).toContain('alternate');
+      expect(styles).toContain('both');
+    });
+
+    test('should chain multiple animations', () => {
+      const model = new ElementBuilder()
+        .withClassName('multi-animated')
+        .withAnimation('fadeIn', { duration: '300ms' })
+        .withAnimation('slideIn', { duration: '500ms' })
+        .build();
+
+      expect(model.styles).toContain('animation:');
+    });
+
+    test('should work with other style methods', () => {
+      const model = new ElementBuilder()
+        .withClassName('styled-animated')
+        .withStyles({ element: { color: 'red' } })
+        .withAnimation('scale', { duration: '600ms' })
+        .build();
+
+      expect(model.styles).toContain('color: red');
+      expect(model.styles).toContain('animation:');
+      expect(model.styles).toContain('scale');
+    });
+
+    test('should handle numeric iteration count', () => {
+      const model = new ElementBuilder()
+        .withClassName('counted-animation')
+        .withAnimation('fadeOut', { iterationCount: 3 })
+        .build();
+
+      expect(model.styles).toContain('animation:');
+      expect(model.styles).toContain('3');
+    });
+  });
+
+  describe('.getClassNames() Method', () => {
+    test('should return empty array when no classes added', () => {
+      const builder = new ElementBuilder();
+      const classNames = builder.getClassNames();
+
+      expect(Array.isArray(classNames)).toBe(true);
+      expect(classNames.length).toBe(0);
+    });
+
+    test('should return array of class names', () => {
+      const builder = new ElementBuilder()
+        .withClassName('class-one')
+        .withClassName('class-two');
+
+      const classNames = builder.getClassNames();
+
+      expect(classNames).toEqual(['class-one', 'class-two']);
+    });
+
+    test('should return accumulated class names from multiple calls', () => {
+      const builder = new ElementBuilder()
+        .withClassName('a', 'b')
+        .withClassName('c');
+
+      const classNames = builder.getClassNames();
+
+      expect(classNames).toContain('a');
+      expect(classNames).toContain('b');
+      expect(classNames).toContain('c');
+      expect(classNames.length).toBe(3);
+    });
+
+    test('should not mark builder as built', () => {
+      const builder = new ElementBuilder()
+        .withClassName('test');
+
+      const classNames1 = builder.getClassNames();
+
+      // Should still be able to add more classes
+      expect(() => {
+        builder.withClassName('another');
+      }).not.toThrow();
+
+      const classNames2 = builder.getClassNames();
+      expect(classNames2).toContain('test');
+      expect(classNames2).toContain('another');
+    });
+  });
+
+  describe('.withRole() Method', () => {
+    test('should set role attribute', () => {
+      const model = new ElementBuilder()
+        .withRole('button')
+        .build();
+
+      expect(model.element.getAttribute('role')).toBe('button');
+    });
+
+    test('should chain with other methods', () => {
+      const model = new ElementBuilder()
+        .withRole('navigation')
+        .withAria({ label: 'Main Navigation' })
+        .withClassName('nav')
+        .build();
+
+      expect(model.element.getAttribute('role')).toBe('navigation');
+      expect(model.element.getAttribute('aria-label')).toBe('Main Navigation');
+      expect(model.element.classList.contains('nav')).toBe(true);
+    });
+
+    test('should support various ARIA roles', () => {
+      const roles = ['main', 'dialog', 'alert', 'tab', 'tabpanel'];
+
+      roles.forEach(role => {
+        const model = new ElementBuilder()
+          .withRole(role)
+          .build();
+
+        expect(model.element.getAttribute('role')).toBe(role);
+      });
+    });
+  });
 });

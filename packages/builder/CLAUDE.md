@@ -190,6 +190,7 @@ interface ElementModel<T extends HTMLElement = HTMLElement> {
   styles: string; // Generated CSS string
   update?: (props) => void; // Optional updater
   destroy?: () => void; // Cleanup function
+  events?: Record<string, Function>; // Optional custom events
 }
 ```
 
@@ -199,6 +200,7 @@ interface ElementModel<T extends HTMLElement = HTMLElement> {
 - Bundles element with its styles
 - Provides lifecycle methods
 - Enables style injection pattern
+- Supports custom events/methods via `.withEvents()`
 
 ## Common Usage Patterns
 
@@ -211,6 +213,26 @@ const container = new ElementBuilder()
   .build();
 
 document.body.appendChild(container.element);
+```
+
+### Pattern 1a: Non-Destructive Element Access
+
+Use `.getElement()` to access the element without finalizing the builder:
+
+```typescript
+const builder = new ElementBuilder('div')
+  .withClassName('container')
+  .withAttribute('data-id', '123');
+
+// Get element with classes and attributes applied (non-destructive)
+const element = builder.getElement();
+console.log(element.className); // 'container'
+
+// Builder can still be modified
+builder.withClassName('active').withChild(childElement);
+
+// Now finalize
+const model = builder.build();
 ```
 
 ### Pattern 2: Styled Element with UMD Design System
@@ -275,6 +297,29 @@ const list = new ElementBuilder('ul')
       .withAttribute('data-index', index),
   )
   .build();
+```
+
+### Pattern 6: Custom Events
+
+Attach custom methods to ElementModel for imperative control:
+
+```typescript
+const videoElement = document.createElement('video');
+
+const videoPlayer = new ElementBuilder()
+  .withClassName('video-player')
+  .withChild(videoElement)
+  .withEvents({
+    play: () => videoElement.play(),
+    pause: () => videoElement.pause(),
+    seek: (time: number) => videoElement.currentTime = time,
+  })
+  .build();
+
+// Use custom events
+videoPlayer.events.play();
+videoPlayer.events.pause();
+videoPlayer.events.seek(30);
 ```
 
 ## Testing Strategy

@@ -264,25 +264,30 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
 
   /**
    * Apply dark theme styling - applies white text/icon color style modifiers
-   * @param isDark - Whether to apply dark theme (true = apply white colors, false/undefined = no modification)
+   * @param isDark - Whether to apply dark theme (true/undefined = enable, false = disable)
    * @returns This builder for chaining
    * @example
    * ```typescript
-   * // Apply dark theme
+   * // Apply dark theme (explicit)
    * .withThemeDark(true)
    *
-   * // From props
+   * // From props - only enables if explicitly true
    * .withThemeDark(props.isThemeDark)
    *
-   * // Conditional
-   * .withThemeDark(someCondition)
+   * // Disable dark theme
+   * .withThemeDark(false)
    * ```
    */
   withThemeDark(isDark?: boolean): this {
     this.assertNotBuilt();
-    if (isDark) {
+    // Only enable dark theme if explicitly true
+    // This prevents undefined from accidentally enabling it
+    if (isDark === true) {
       this.options.isThemeDark = true;
+    } else if (isDark === false) {
+      this.options.isThemeDark = false;
     }
+    // If undefined, don't change the current state
     return this;
   }
 

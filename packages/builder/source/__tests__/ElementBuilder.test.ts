@@ -522,6 +522,20 @@ describe('ElementBuilder', () => {
       // Should keep original color
       expect(model.styles).toContain('color: black');
     });
+
+    test('should not apply theme modifiers when undefined', () => {
+      const div = document.createElement('div');
+      const isThemeDark = undefined;
+
+      const model = new ElementBuilder(div)
+        .withClassName('test-class')
+        .withStyles({ element: { color: 'black' } })
+        .withThemeDark(isThemeDark)
+        .build();
+
+      // Should keep original color when undefined
+      expect(model.styles).toContain('color: black');
+    });
   });
 
   describe('Ref Method', () => {

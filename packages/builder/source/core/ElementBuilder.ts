@@ -157,19 +157,6 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
   }
 
   /**
-   * Conditionally add class names
-   * @param condition - Whether to add the class names
-   * @param names - Class names to add if condition is true
-   * @returns This builder for chaining
-   */
-  withClassNameIf(condition: boolean, ...names: string[]): this {
-    if (condition) {
-      this.withClassName(...names);
-    }
-    return this;
-  }
-
-  /**
    * Add styles (JSS object, ElementStyles, or StyleDefinition from styles library)
    * Styles are accumulated and merged with proper priority
    *
@@ -305,24 +292,6 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
   }
 
   /**
-   * Conditionally add an attribute
-   * @param condition - Whether to add the attribute
-   * @param key - Attribute name
-   * @param value - Attribute value
-   * @returns This builder for chaining
-   */
-  withAttributeIf(
-    condition: boolean,
-    key: string,
-    value: string | number | boolean,
-  ): this {
-    if (condition) {
-      this.withAttribute(key, value);
-    }
-    return this;
-  }
-
-  /**
    * Set ARIA attributes for accessibility
    * @param attrs - ARIA attributes (with or without 'aria-' prefix)
    * @returns This builder for chaining
@@ -425,19 +394,6 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
     this.modifiers.push((el) => {
       el.textContent = text;
     });
-    return this;
-  }
-
-  /**
-   * Conditionally set text
-   * @param condition - Whether to set the text
-   * @param text - Text to set if condition is true
-   * @returns This builder for chaining
-   */
-  withTextIf(condition: boolean, text: string): this {
-    if (condition) {
-      this.withText(text);
-    }
     return this;
   }
 

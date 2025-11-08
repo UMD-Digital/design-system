@@ -69,14 +69,18 @@ const makeContactLink = ({
     const ariaLabel = element.getAttribute('aria-label');
     const href = element.getAttribute('href') || '';
 
-    return new ElementBuilder('a')
+    const linkBuilder = new ElementBuilder('a')
       .styled(Styles.layout.grid.inline.row)
       .withStyles(containerStyles)
       .withThemeDark(isThemeDark)
       .withChildren(iconSpan.element, textSpan.element)
-      .withAttribute('href', href)
-      .withAttributeIf(!!ariaLabel, 'aria-label', ariaLabel || '')
-      .build();
+      .withAttribute('href', href);
+
+    if (ariaLabel) {
+      linkBuilder.withAttribute('aria-label', ariaLabel);
+    }
+
+    return linkBuilder.build();
   }
 
   return new ElementBuilder()

@@ -203,7 +203,6 @@ export interface ElementBuilderInterface<T extends HTMLElement = HTMLElement> {
 
   // Content methods
   withText(text: string): this;
-  withTextIf(condition: boolean, text: string): this;
   withHTML(html: string): this;
 
   // Child methods

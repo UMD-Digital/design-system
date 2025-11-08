@@ -547,10 +547,7 @@ The core builder class provides a comprehensive fluent API:
 
 **Conditional Methods**:
 
-- `withClassNameIf(condition, ...names)`
 - `withStylesIf(condition, styles)`
-- `withAttributeIf(condition, key, value)`
-- `withTextIf(condition, text)`
 - `withChildIf(condition, child)`
 
 **ARIA Convenience Methods**:

@@ -50,10 +50,16 @@ describe('REFACTOR.md Pattern Validation', () => {
       const hasIcon = true;
       const isLarge = true;
 
-      const model = new ElementBuilder(link)
-        .withClassNameIf(hasIcon, 'has-icon')
-        .withClassNameIf(isLarge, 'large')
-        .build();
+      const builder = new ElementBuilder(link);
+
+      if (hasIcon) {
+        builder.withClassName('has-icon');
+      }
+      if (isLarge) {
+        builder.withClassName('large');
+      }
+
+      const model = builder.build();
 
       expect(model.element.classList.contains('has-icon')).toBe(true);
       expect(model.element.classList.contains('large')).toBe(true);

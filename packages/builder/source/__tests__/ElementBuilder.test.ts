@@ -421,22 +421,32 @@ describe('ElementBuilder', () => {
       expect(model.element.children.length).toBe(0);
     });
 
-    test('withTextIf should add text when condition is true', () => {
+    test('should add text conditionally using imperative approach', () => {
       const div = document.createElement('div');
+      const shouldAddText = true;
 
-      const model = new ElementBuilder(div)
-        .withTextIf(true, 'Conditional text')
-        .build();
+      const builder = new ElementBuilder(div);
+
+      if (shouldAddText) {
+        builder.withText('Conditional text');
+      }
+
+      const model = builder.build();
 
       expect(model.element.textContent).toBe('Conditional text');
     });
 
-    test('withTextIf should not add text when condition is false', () => {
+    test('should not add text when condition is false using imperative approach', () => {
       const div = document.createElement('div');
+      const shouldAddText = false;
 
-      const model = new ElementBuilder(div)
-        .withTextIf(false, 'Conditional text')
-        .build();
+      const builder = new ElementBuilder(div);
+
+      if (shouldAddText) {
+        builder.withText('Conditional text');
+      }
+
+      const model = builder.build();
 
       expect(model.element.textContent).toBe('');
     });

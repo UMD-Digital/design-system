@@ -300,12 +300,16 @@ const lockup = textLockup({
 ### Pattern 5: Conditional Building
 
 ```typescript
-const element = new ElementBuilder()
+const builder = new ElementBuilder()
   .withClassName('card')
   .withChildIf(showImage, imageElement)
-  .withTextIf(hasTitle, title)
-  .withStylesIf(isDark, darkThemeStyles)
-  .build();
+  .withStylesIf(isDark, darkThemeStyles);
+
+if (hasTitle) {
+  builder.withText(title);
+}
+
+const element = builder.build();
 ```
 
 ### Pattern 6: Array Mapping

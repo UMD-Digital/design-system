@@ -956,7 +956,7 @@ export const createModal = ({
     .withClassName(ELEMENT_CONTAINER)
     .withChild(background.element)
     .withData({ hidden: isHidden })
-    .role('dialog')
+    .withRole('dialog')
     .withAria({ label: 'Modal dialog', modal: 'true' })
     .withAttribute('tabindex', '-1')
     .withModifier((el) => {
@@ -1167,7 +1167,7 @@ const CreateNavDrawerElement = (props: TypeNavDrawerRequirements) =>
     model = new ElementBuilder()
       .withClassName(ELEMENT_NAV_DRAWER_CONTAINER)
       .withChild(children)
-      .role('navigation')
+      .withRole('navigation')
       .withAria({ label: 'Main navigation drawer' })
       .build();
 
@@ -1822,7 +1822,7 @@ element.setAttribute('tabindex', '0');
 **After**:
 ```typescript
 builder
-  .role('button')
+  .withRole('button')
   .withAria({ label: 'Close' })
   .withAttribute('tabindex', '0')
 ```

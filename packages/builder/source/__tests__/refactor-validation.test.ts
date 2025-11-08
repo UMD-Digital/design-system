@@ -340,7 +340,7 @@ describe('REFACTOR.md Pattern Validation', () => {
   describe('Pattern 6: Modal with Accessibility Features', () => {
     test('should apply ARIA attributes with convenience methods', () => {
       const model = new ElementBuilder()
-        .role('dialog')
+        .withRole('dialog')
         .withAria({ label: 'Modal dialog' })
         .withAttribute('tabindex', '-1')
         .build();
@@ -371,7 +371,7 @@ describe('REFACTOR.md Pattern Validation', () => {
       const modal = new ElementBuilder()
         .withClassName('modal-container')
         .withChild(background.element)
-        .role('dialog')
+        .withRole('dialog')
         .build();
 
       expect(modal.element.querySelector('.modal-background')).toBeTruthy();
@@ -399,7 +399,7 @@ describe('REFACTOR.md Pattern Validation', () => {
     test('should build navigation with ARIA attributes', () => {
       const model = new ElementBuilder()
         .withClassName('nav-drawer')
-        .role('navigation')
+        .withRole('navigation')
         .withAria({ label: 'Main navigation drawer' })
         .build();
 
@@ -681,7 +681,7 @@ describe('REFACTOR.md Pattern Validation', () => {
             .build().element
         )
         .withData({ theme: 'dark', items: items.length })
-        .role('region')
+        .withRole('region')
         .withAria({ label: 'Complex component' })
         .build();
 

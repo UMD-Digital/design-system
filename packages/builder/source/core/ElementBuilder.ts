@@ -317,7 +317,7 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
    * @param role - ARIA role (button, navigation, main, etc.)
    * @returns This builder for chaining
    */
-  role(role: string): this {
+  withRole(role: string): this {
     return this.withAttribute('role', role);
   }
 

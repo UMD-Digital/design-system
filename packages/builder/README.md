@@ -557,7 +557,7 @@ The core builder class provides a comprehensive fluent API:
 - `ariaExpanded(expanded)`
 - `ariaPressed(pressed)`
 - `ariaCurrent(current)`
-- `role(role)`
+- `withRole(role)`
 
 ### Preset Factories
 

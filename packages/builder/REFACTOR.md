@@ -957,8 +957,7 @@ export const createModal = ({
     .withChild(background.element)
     .withData({ hidden: isHidden })
     .role('dialog')
-    .ariaLabel('Modal dialog')
-    .ariaModal('true')
+    .withAria({ label: 'Modal dialog', modal: 'true' })
     .focusable(-1)
     .withModifier((el) => {
       if (isHidden) el.style.display = 'none';
@@ -1169,7 +1168,7 @@ const CreateNavDrawerElement = (props: TypeNavDrawerRequirements) =>
       .withClassName(ELEMENT_NAV_DRAWER_CONTAINER)
       .withChild(children)
       .role('navigation')
-      .ariaLabel('Main navigation drawer')
+      .withAria({ label: 'Main navigation drawer' })
       .build();
 
     return {
@@ -1824,7 +1823,7 @@ element.setAttribute('tabindex', '0');
 ```typescript
 builder
   .role('button')
-  .ariaLabel('Close')
+  .withAria({ label: 'Close' })
   .focusable(0)
 ```
 

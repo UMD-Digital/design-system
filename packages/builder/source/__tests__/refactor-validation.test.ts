@@ -341,7 +341,7 @@ describe('REFACTOR.md Pattern Validation', () => {
     test('should apply ARIA attributes with convenience methods', () => {
       const model = new ElementBuilder()
         .role('dialog')
-        .ariaLabel('Modal dialog')
+        .withAria({ label: 'Modal dialog' })
         .focusable(-1)
         .build();
 
@@ -400,7 +400,7 @@ describe('REFACTOR.md Pattern Validation', () => {
       const model = new ElementBuilder()
         .withClassName('nav-drawer')
         .role('navigation')
-        .ariaLabel('Main navigation drawer')
+        .withAria({ label: 'Main navigation drawer' })
         .build();
 
       expect(model.element.getAttribute('role')).toBe('navigation');
@@ -682,7 +682,7 @@ describe('REFACTOR.md Pattern Validation', () => {
         )
         .withData({ theme: 'dark', items: items.length })
         .role('region')
-        .ariaLabel('Complex component')
+        .withAria({ label: 'Complex component' })
         .build();
 
       expect(component.element.children.length).toBe(2); // header + body

@@ -320,53 +320,6 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
   }
 
   /**
-   * Set aria-label attribute
-   * @param label - Accessible label for screen readers
-   * @returns This builder for chaining
-   */
-  ariaLabel(label: string): this {
-    return this.withAria({ label });
-  }
-
-  /**
-   * Set aria-hidden attribute
-   * @param hidden - Whether element should be hidden from screen readers
-   * @returns This builder for chaining
-   */
-  ariaHidden(hidden: boolean = true): this {
-    return this.withAria({ hidden: String(hidden) });
-  }
-
-  /**
-   * Set aria-expanded attribute (for expandable elements)
-   * @param expanded - Whether element is expanded
-   * @returns This builder for chaining
-   */
-  ariaExpanded(expanded: boolean): this {
-    return this.withAria({ expanded: String(expanded) });
-  }
-
-  /**
-   * Set aria-pressed attribute (for toggle buttons)
-   * @param pressed - Whether button is pressed
-   * @returns This builder for chaining
-   */
-  ariaPressed(pressed: boolean): this {
-    return this.withAria({ pressed: String(pressed) });
-  }
-
-  /**
-   * Set aria-current attribute (for current page/step indicators)
-   * @param current - Type of current indication (page, step, location, date, time, true)
-   * @returns This builder for chaining
-   */
-  ariaCurrent(
-    current: 'page' | 'step' | 'location' | 'date' | 'time' | 'true',
-  ): this {
-    return this.withAria({ current });
-  }
-
-  /**
    * Set role attribute for ARIA semantics
    * @param role - ARIA role (button, navigation, main, etc.)
    * @returns This builder for chaining

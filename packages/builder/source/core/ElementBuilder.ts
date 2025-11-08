@@ -150,13 +150,6 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
   }
 
   /**
-   * Alias for withClassName
-   */
-  withClass(...names: string[]): this {
-    return this.withClassName(...names);
-  }
-
-  /**
    * Add styles (JSS object, ElementStyles, or StyleDefinition from styles library)
    * Styles are accumulated and merged with proper priority
    *

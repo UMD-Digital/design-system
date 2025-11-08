@@ -181,7 +181,6 @@ export interface ResourceCounts {
 export interface ElementBuilderInterface<T extends HTMLElement = HTMLElement> {
   // Class methods
   withClassName(...names: string[]): this;
-  withClass(...names: string[]): this;
 
   // Style methods
   withStyles(

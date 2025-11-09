@@ -115,11 +115,11 @@ export default (props: TypeMetaDisplay) => {
     );
   }
 
-  wrapper.build();
+  const wrapperModel = wrapper.build();
 
   return new ElementBuilder()
     .styled(elementStyles.event.meta.container)
     .withThemeDark(isThemeDark)
-    .withChild(wrapper)
+    .withChild(wrapperModel)
     .build();
 };

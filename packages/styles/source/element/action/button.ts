@@ -25,9 +25,10 @@ const classNamePrefix = 'umd-action-button';
  * ```
  * @since 1.1.0
  */
+const { className: _, ...sansMinStyles } = sans.min;
 export const fullScreen: JssObject = create.jss.objectWithClassName({
   className: `${classNamePrefix}-full-screen`,
-  ...sans.min,
+  ...sansMinStyles,
   position: 'absolute',
   top: '0',
   right: '0',

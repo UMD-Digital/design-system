@@ -9,7 +9,7 @@ describe('typography/serif', () => {
   describe('size objects', () => {
     it('should have correctly defined serif sizes', () => {
       // Test individual size exports
-      expect(serif.maxium).toMatchSnapshot();
+      expect(serif.maximum).toMatchSnapshot();
       expect(serif.extralarge).toMatchSnapshot();
       expect(serif.larger).toMatchSnapshot();
       expect(serif.large).toMatchSnapshot();
@@ -19,7 +19,7 @@ describe('typography/serif', () => {
     it('should use the serif font family for all sizes', () => {
       // All sizes should use serif font family
       [
-        serif.maxium,
+        serif.maximum,
         serif.extralarge,
         serif.larger,
         serif.large,

@@ -12,8 +12,9 @@ import { sans } from '../../typography';
  * @type {object}
  * @private
  */
+const { className: _, ...sansSmallStyles } = sans.small;
 export const baseInput = {
-  ...sans.small,
+  ...sansSmallStyles,
   backgroundColor: color.white,
   border: `1px solid ${color.gray.light}`,
   color: color.black,

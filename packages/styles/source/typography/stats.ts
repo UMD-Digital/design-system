@@ -3,8 +3,24 @@
  * Provides typography styles for statistics and numeric callouts with campaign font styling.
  */
 
-import { font, media } from '../token';
+import { color, font, media } from '../token';
 import { create } from '../utilities';
+import type { JssObject } from '../_types';
+
+/**
+ * Size types for stats typography
+ * @since 1.7.0
+ */
+export type StatsSize = 'large' | 'medium' | 'small';
+
+/**
+ * Options for composable stats typography
+ * @since 1.7.0
+ */
+export interface StatsComposeOptions {
+  /** Theme variant for color */
+  theme?: 'light' | 'dark';
+}
 
 /**
  * Breakpoint variables for responsive typography.
@@ -30,7 +46,7 @@ const breakpointDesktop = media.queries.desktop.min;
  * ```
  * @since 1.1.0
  */
-export const large = {
+const largeBase = {
   fontFamily: font.family['campaign'],
   fontSize: font.size['9xl'],
   fontWeight: font.weight['extraBold'],
@@ -58,7 +74,7 @@ export const large = {
  * ```
  * @since 1.1.0
  */
-export const medium = {
+const mediumBase = {
   fontFamily: font.family['campaign'],
   fontSize: font.size['7xl'],
   fontStyle: 'italic',
@@ -90,13 +106,88 @@ export const medium = {
  * ```
  * @since 1.1.0
  */
-export const small = {
+const smallBase = {
   fontFamily: font.family['campaign'],
   fontSize: font.size['7xl'],
   fontStyle: 'italic',
   fontWeight: font.weight['extraBold'],
   lineHeight: '0.87em',
 };
+
+/**
+ * Composable stats typography style selector
+ *
+ * Creates stats typography styles with configurable size and theme options.
+ *
+ * @param size - Typography size variant
+ * @param options - Configuration for theme
+ * @returns JSS object with composed styles and appropriate className
+ *
+ * @example
+ * ```typescript
+ * // Basic usage
+ * const stat = stats.compose('large');
+ *
+ * // With dark theme
+ * const darkStat = stats.compose('large', { theme: 'dark' });
+ *
+ * // In element builder with theme
+ * const styleElements = {
+ *   ...typography.stats.compose('medium', {
+ *     theme: isThemeDark ? 'dark' : 'light'
+ *   }),
+ * };
+ * ```
+ *
+ * @since 1.7.0
+ */
+export function compose(
+  size: StatsSize,
+  options?: StatsComposeOptions
+): JssObject {
+  const { theme = 'light' } = options || {};
+
+  const sizes: Record<StatsSize, any> = {
+    large: largeBase,
+    medium: mediumBase,
+    small: smallBase,
+  };
+
+  const base = sizes[size];
+
+  // Apply theme color
+  const composed = {
+    ...base,
+    color: theme === 'dark' ? color.white : color.black,
+  };
+
+  // Generate className
+  const classNameParts = ['umd-statistic-sans', size];
+  if (theme === 'dark') classNameParts.push('dark');
+
+  return create.jss.objectWithClassName({
+    ...composed,
+    className: classNameParts.join('-'),
+  });
+}
+
+/**
+ * Large statistic typography (static export).
+ * @since 1.1.0
+ */
+export const large: JssObject = compose('large');
+
+/**
+ * Medium statistic typography (static export).
+ * @since 1.1.0
+ */
+export const medium: JssObject = compose('medium');
+
+/**
+ * Small statistic typography (static export).
+ * @since 1.1.0
+ */
+export const small: JssObject = compose('small');
 
 /**
  * Ready-to-use statistics typography styles as JSS objects with class names.
@@ -113,18 +204,7 @@ export const small = {
  * @since 1.1.0
  */
 export const fonts = {
-  statLarge: create.jss.objectWithClassName({
-    className: 'umd-statistic-sans-large',
-    ...large,
-  }),
-
-  statMedium: create.jss.objectWithClassName({
-    className: 'umd-statistic-sans-medium',
-    ...medium,
-  }),
-
-  statSmall: create.jss.objectWithClassName({
-    className: 'umd-statistic-sans-small',
-    ...small,
-  }),
+  statLarge: compose('large'),
+  statMedium: compose('medium'),
+  statSmall: compose('small'),
 };

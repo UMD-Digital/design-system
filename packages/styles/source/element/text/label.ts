@@ -16,8 +16,9 @@ const classNamePrefix = 'umd-text-label';
  * @type {object}
  * @private
  */
+const { className: _, ...sansLargeStyles } = sans.large;
 export const label = {
-  ...sans.large,
+  ...sansLargeStyles,
   display: 'inline-block',
   position: 'relative',
   marginBottom: spacing.sm,

@@ -3,8 +3,34 @@
  * Provides sans-serif typography styles with various sizes and responsive scaling options.
  */
 
-import { font, media } from '../token';
+import { color, font, media } from '../token';
 import { create } from '../utilities';
+import type { JssObject } from '../_types';
+
+/**
+ * Size types for sans typography
+ * @since 1.7.0
+ */
+export type SansSize =
+  | 'largest'
+  | 'extralarge'
+  | 'larger'
+  | 'large'
+  | 'medium'
+  | 'small'
+  | 'smaller'
+  | 'min';
+
+/**
+ * Options for composable sans typography
+ * @since 1.7.0
+ */
+export interface SansComposeOptions {
+  /** Theme variant for color */
+  theme?: 'light' | 'dark';
+  /** Enable container-based scaling (only for 'larger' and 'min') */
+  scaling?: boolean;
+}
 
 /**
  * Breakpoint variables for responsive typography.
@@ -116,7 +142,7 @@ const sizeMin = {
  * ```
  * @since 1.1.0
  */
-export const largest = {
+const largestBase = {
   fontFamily: font.family['sans'],
   fontWeight: font.weight['bold'],
   textWrap: 'pretty',
@@ -143,7 +169,7 @@ export const largest = {
  * ```
  * @since 1.1.0
  */
-export const extraLarge = {
+const extraLargeBase = {
   fontFamily: font.family['sans'],
   textWrap: 'pretty',
   ...sizeLarge,
@@ -168,7 +194,7 @@ export const extraLarge = {
  * ```
  * @since 1.1.0
  */
-export const larger = {
+const largerBase = {
   fontFamily: font.family['sans'],
   ...sizeLarge,
   textWrap: 'pretty',
@@ -194,7 +220,7 @@ export const larger = {
  * ```
  * @since 1.1.0
  */
-export const scalingLarger = {
+const scalingLargerBase = {
   fontFamily: font.family['sans'],
   fontSize: font.size['lg'],
   lineHeight: `1.25em`,
@@ -220,7 +246,7 @@ export const scalingLarger = {
  * ```
  * @since 1.1.0
  */
-export const large = {
+const largeBase = {
   fontFamily: font.family['sans'],
   fontWeight: font.weight['bold'],
   ...sizeLarge,
@@ -237,7 +263,7 @@ export const large = {
  * ```
  * @since 1.1.0
  */
-export const medium = {
+const mediumBase = {
   fontFamily: font.family['sans'],
   ...sizeSmall,
 
@@ -262,7 +288,7 @@ export const medium = {
  * ```
  * @since 1.1.0
  */
-export const small = {
+const smallBase = {
   fontFamily: font.family['sans'],
   ...sizeSmall,
 
@@ -286,7 +312,7 @@ export const small = {
  * ```
  * @since 1.1.0
  */
-export const smaller = {
+const smallerBase = {
   fontFamily: font.family['sans'],
   ...sizeSmaller,
 
@@ -310,7 +336,7 @@ export const smaller = {
  * ```
  * @since 1.1.0
  */
-export const min = {
+const minBase = {
   fontFamily: font.family['sans'],
   ...sizeMin,
 };
@@ -326,18 +352,149 @@ export const min = {
  * ```
  * @since 1.1.0
  */
-export const scalingMin = {
-  ...min,
+const scalingMinBase = {
+  ...minBase,
 
   [`@container (min-width: ${scalingContainerMedium}px)`]: {
-    ...small,
+    ...smallBase,
   },
 };
 
 /**
+ * Composable sans typography style selector
+ *
+ * Creates sans-serif typography styles with configurable size, theme, and scaling options.
+ *
+ * @param size - Typography size variant
+ * @param options - Configuration for theme and scaling
+ * @returns JSS object with composed styles and appropriate className
+ *
+ * @example
+ * ```typescript
+ * // Basic usage
+ * const heading = sans.compose('large');
+ *
+ * // With dark theme
+ * const darkHeading = sans.compose('large', { theme: 'dark' });
+ *
+ * // With scaling
+ * const scaledHeading = sans.compose('larger', { scaling: true });
+ *
+ * // In element builder with theme
+ * const styleElements = {
+ *   ...typography.sans.compose('large', {
+ *     theme: isThemeDark ? 'dark' : 'light'
+ *   }),
+ *   ...animation.line.slideUnderBlack,
+ * };
+ * ```
+ *
+ * @since 1.7.0
+ */
+export function compose(
+  size: SansSize,
+  options?: SansComposeOptions,
+): JssObject {
+  const { theme = 'light', scaling = false } = options || {};
+
+  // Select base variant
+  let base: any;
+  if (scaling && (size === 'larger' || size === 'min')) {
+    base = size === 'larger' ? scalingLargerBase : scalingMinBase;
+  } else {
+    const sizes: Record<SansSize, any> = {
+      largest: largestBase,
+      extralarge: extraLargeBase,
+      larger: largerBase,
+      large: largeBase,
+      medium: mediumBase,
+      small: smallBase,
+      smaller: smallerBase,
+      min: minBase,
+    };
+    base = sizes[size];
+  }
+
+  // Apply theme color
+  const composed = {
+    ...base,
+    color: theme === 'dark' ? color.white : color.black,
+  };
+
+  // Generate className
+  const classNameParts = ['umd-sans', size];
+  if (scaling) classNameParts.push('scaling');
+  if (theme === 'dark') classNameParts.push('dark');
+
+  return create.jss.objectWithClassName({
+    ...composed,
+    className: classNameParts.join('-'),
+  });
+}
+
+/**
+ * Largest size sans-serif typography (static export).
+ * @since 1.1.0
+ */
+export const largest: JssObject = compose('largest');
+
+/**
+ * Extra large size sans-serif typography (static export).
+ * @since 1.1.0
+ */
+export const extraLarge: JssObject = compose('extralarge');
+
+/**
+ * Larger size sans-serif typography (static export).
+ * @since 1.1.0
+ */
+export const larger: JssObject = compose('larger');
+
+/**
+ * Large size sans-serif typography (static export).
+ * @since 1.1.0
+ */
+export const large: JssObject = compose('large');
+
+/**
+ * Medium size sans-serif typography (static export).
+ * @since 1.1.0
+ */
+export const medium: JssObject = compose('medium');
+
+/**
+ * Small size sans-serif typography (static export).
+ * @since 1.1.0
+ */
+export const small: JssObject = compose('small');
+
+/**
+ * Smaller size sans-serif typography (static export).
+ * @since 1.1.0
+ */
+export const smaller: JssObject = compose('smaller');
+
+/**
+ * Minimum size sans-serif typography (static export).
+ * @since 1.1.0
+ */
+export const min: JssObject = compose('min');
+
+/**
+ * Scaling larger size sans-serif typography (static export).
+ * @since 1.1.0
+ */
+export const scalingLarger: JssObject = compose('larger', { scaling: true });
+
+/**
+ * Scaling minimum size sans-serif typography (static export).
+ * @since 1.1.0
+ */
+export const scalingMin: JssObject = compose('min', { scaling: true });
+
+/**
  * Ready-to-use sans-serif typography styles as JSS objects with class names.
  * @type {Object<string, JssObject>}
- * @property {JssObject} maximum - JSS object for maximum size text
  * @property {JssObject} largest - JSS object for largest size text
  * @property {JssObject} extraLarge - JSS object for extra large size text
  * @property {JssObject} larger - JSS object for larger size text
@@ -355,45 +512,14 @@ export const scalingMin = {
  * @since 1.1.0
  */
 export const fonts = {
-  largest: create.jss.objectWithClassName({
-    className: 'umd-sans-largest',
-    ...largest,
-  }),
-
-  extraLarge: create.jss.objectWithClassName({
-    className: 'umd-sans-extralarge',
-    ...extraLarge,
-  }),
-
-  larger: create.jss.objectWithClassName({
-    className: 'umd-sans-larger',
-    ...larger,
-  }),
-
-  large: create.jss.objectWithClassName({
-    className: 'umd-sans-large',
-    ...large,
-  }),
-
-  medium: create.jss.objectWithClassName({
-    className: 'umd-sans-medium',
-    ...medium,
-  }),
-
-  small: create.jss.objectWithClassName({
-    className: 'umd-sans-small',
-    ...small,
-  }),
-
-  smaller: create.jss.objectWithClassName({
-    className: 'umd-sans-smaller',
-    ...smaller,
-  }),
-
-  min: create.jss.objectWithClassName({
-    className: 'umd-sans-min',
-    ...min,
-  }),
+  largest: compose('largest'),
+  extraLarge: compose('extralarge'),
+  larger: compose('larger'),
+  large: compose('large'),
+  medium: compose('medium'),
+  small: compose('small'),
+  smaller: compose('smaller'),
+  min: compose('min'),
 };
 
 /**
@@ -410,14 +536,8 @@ export const fonts = {
  * @since 1.1.0
  */
 export const scalingFonts = {
-  larger: create.jss.objectWithClassName({
-    ...scalingLarger,
-    className: 'umd-sans-scaling-larger',
-  }),
-  min: create.jss.objectWithClassName({
-    ...scalingMin,
-    className: 'umd-sans-scaling-min',
-  }),
+  larger: compose('larger', { scaling: true }),
+  min: compose('min', { scaling: true }),
 };
 
 /**
@@ -435,34 +555,40 @@ export const scalingFonts = {
  * ```
  * @since 1.1.0
  */
-export const transformations = {
-  largestUppercase: create.jss.objectWithClassName({
-    className: 'umd-sans-largest-uppercase',
-    ...largest,
+export const transformations = (() => {
+  const { className: _, ...largestStyles } = largest;
+  const { className: __, ...extraLargeStyles } = extraLarge;
+  const { className: ___, ...largerStyles } = larger;
 
-    fontWeight: font.weight['extraBold'],
-    textTransform: 'uppercase',
-  }),
+  return {
+    largestUppercase: create.jss.objectWithClassName({
+      className: 'umd-sans-largest-uppercase',
+      ...largestStyles,
 
-  extraLargeUppercase: create.jss.objectWithClassName({
-    className: 'umd-sans-extralarge-uppercase',
-    ...extraLarge,
+      fontWeight: font.weight['extraBold'],
+      textTransform: 'uppercase',
+    }),
 
-    fontWeight: font.weight['extraBold'],
-    textTransform: 'uppercase',
-  }),
+    extraLargeUppercase: create.jss.objectWithClassName({
+      className: 'umd-sans-extralarge-uppercase',
+      ...extraLargeStyles,
 
-  extraLargeBold: create.jss.objectWithClassName({
-    className: 'umd-sans-extralarge-bold',
-    ...extraLarge,
+      fontWeight: font.weight['extraBold'],
+      textTransform: 'uppercase',
+    }),
 
-    fontWeight: font.weight['bold'],
-  }),
+    extraLargeBold: create.jss.objectWithClassName({
+      className: 'umd-sans-extralarge-bold',
+      ...extraLargeStyles,
 
-  largerBold: create.jss.objectWithClassName({
-    className: 'umd-sans-larger-bold',
-    ...larger,
+      fontWeight: font.weight['bold'],
+    }),
 
-    fontWeight: font.weight['bold'],
-  }),
-};
+    largerBold: create.jss.objectWithClassName({
+      className: 'umd-sans-larger-bold',
+      ...largerStyles,
+
+      fontWeight: font.weight['bold'],
+    }),
+  };
+})();

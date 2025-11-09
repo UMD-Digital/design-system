@@ -7,6 +7,7 @@ exports[`typography/stats fonts objects should match snapshot for all fonts obje
       "fontSize": "112px",
     },
     "className": "umd-statistic-sans-large",
+    "color": "#000000",
     "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
     "fontSize": "80px",
     "fontStyle": "italic",
@@ -21,6 +22,7 @@ exports[`typography/stats fonts objects should match snapshot for all fonts obje
       "fontSize": "calc(64px + 1.33vw)",
     },
     "className": "umd-statistic-sans-medium",
+    "color": "#000000",
     "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
     "fontSize": "64px",
     "fontStyle": "italic",
@@ -29,6 +31,7 @@ exports[`typography/stats fonts objects should match snapshot for all fonts obje
   },
   "statSmall": {
     "className": "umd-statistic-sans-small",
+    "color": "#000000",
     "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
     "fontSize": "64px",
     "fontStyle": "italic",
@@ -40,12 +43,14 @@ exports[`typography/stats fonts objects should match snapshot for all fonts obje
 
 exports[`typography/stats should match snapshot 1`] = `
 {
+  "compose": [Function],
   "fonts": {
     "statLarge": {
       "@media (min-width: 1024px)": {
         "fontSize": "112px",
       },
       "className": "umd-statistic-sans-large",
+      "color": "#000000",
       "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
       "fontSize": "80px",
       "fontStyle": "italic",
@@ -60,6 +65,7 @@ exports[`typography/stats should match snapshot 1`] = `
         "fontSize": "calc(64px + 1.33vw)",
       },
       "className": "umd-statistic-sans-medium",
+      "color": "#000000",
       "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
       "fontSize": "64px",
       "fontStyle": "italic",
@@ -68,6 +74,7 @@ exports[`typography/stats should match snapshot 1`] = `
     },
     "statSmall": {
       "className": "umd-statistic-sans-small",
+      "color": "#000000",
       "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
       "fontSize": "64px",
       "fontStyle": "italic",
@@ -79,6 +86,8 @@ exports[`typography/stats should match snapshot 1`] = `
     "@media (min-width: 1024px)": {
       "fontSize": "112px",
     },
+    "className": "umd-statistic-sans-large",
+    "color": "#000000",
     "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
     "fontSize": "80px",
     "fontStyle": "italic",
@@ -92,6 +101,8 @@ exports[`typography/stats should match snapshot 1`] = `
     "@media (min-width: 650px)": {
       "fontSize": "calc(64px + 1.33vw)",
     },
+    "className": "umd-statistic-sans-medium",
+    "color": "#000000",
     "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
     "fontSize": "64px",
     "fontStyle": "italic",
@@ -99,6 +110,8 @@ exports[`typography/stats should match snapshot 1`] = `
     "lineHeight": "1",
   },
   "small": {
+    "className": "umd-statistic-sans-small",
+    "color": "#000000",
     "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
     "fontSize": "64px",
     "fontStyle": "italic",
@@ -113,6 +126,8 @@ exports[`typography/stats size objects should have correctly defined stat text s
   "@media (min-width: 1024px)": {
     "fontSize": "112px",
   },
+  "className": "umd-statistic-sans-large",
+  "color": "#000000",
   "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
   "fontSize": "80px",
   "fontStyle": "italic",
@@ -129,6 +144,8 @@ exports[`typography/stats size objects should have correctly defined stat text s
   "@media (min-width: 650px)": {
     "fontSize": "calc(64px + 1.33vw)",
   },
+  "className": "umd-statistic-sans-medium",
+  "color": "#000000",
   "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
   "fontSize": "64px",
   "fontStyle": "italic",
@@ -139,6 +156,8 @@ exports[`typography/stats size objects should have correctly defined stat text s
 
 exports[`typography/stats size objects should have correctly defined stat text sizes 3`] = `
 {
+  "className": "umd-statistic-sans-small",
+  "color": "#000000",
   "fontFamily": "'Barlow Condensed', Arial Narrow, sans-serif",
   "fontSize": "64px",
   "fontStyle": "italic",

@@ -3,8 +3,30 @@
  * Provides campaign typography styles with various sizes and responsive behavior.
  */
 
-import { font, media } from '../token';
+import { color, font, media } from '../token';
 import { create } from '../utilities';
+import type { JssObject } from '../_types';
+
+/**
+ * Size types for campaign typography
+ * @since 1.7.0
+ */
+export type CampaignSize =
+  | 'maximum'
+  | 'extralarge'
+  | 'large'
+  | 'medium'
+  | 'small'
+  | 'extrasmall';
+
+/**
+ * Options for composable campaign typography
+ * @since 1.7.0
+ */
+export interface CampaignComposeOptions {
+  /** Theme variant for color */
+  theme?: 'light' | 'dark';
+}
 
 /**
  * Breakpoint constants for responsive styles
@@ -47,7 +69,7 @@ const sizeSmall = {
  * Maximum size campaign typography
  * @private
  */
-export const maxium = {
+const maximumBase = {
   ...base,
   ...sizeSmall,
   textWrap: 'pretty',
@@ -66,7 +88,7 @@ export const maxium = {
  * Extra large size campaign typography
  * @private
  */
-export const extralarge = {
+const extralargeBase = {
   ...base,
   ...sizeSmall,
   textWrap: 'pretty',
@@ -85,7 +107,7 @@ export const extralarge = {
  * Large size campaign typography
  * @private
  */
-export const large = {
+const largeBase = {
   ...base,
   ...sizeSmall,
   textWrap: 'pretty',
@@ -104,7 +126,7 @@ export const large = {
  * Medium size campaign typography
  * @private
  */
-export const medium = {
+const mediumBase = {
   ...base,
   ...sizeSmall,
   textWrap: 'pretty',
@@ -124,7 +146,7 @@ export const medium = {
  * Small size campaign typography
  * @private
  */
-export const CampaignSmall = {
+const campaignSmallBase = {
   ...base,
   ...sizeExtraSmall,
 
@@ -141,10 +163,106 @@ export const CampaignSmall = {
  * Extra small size campaign typography
  * @private
  */
-export const extraSmall = {
+const extraSmallBase = {
   ...base,
   ...sizeExtraSmall,
 };
+
+/**
+ * Composable campaign typography style selector
+ *
+ * Creates campaign typography styles with configurable size and theme options.
+ *
+ * @param size - Typography size variant
+ * @param options - Configuration for theme
+ * @returns JSS object with composed styles and appropriate className
+ *
+ * @example
+ * ```typescript
+ * // Basic usage
+ * const heading = campaign.compose('large');
+ *
+ * // With dark theme
+ * const darkHeading = campaign.compose('large', { theme: 'dark' });
+ *
+ * // In element builder with theme
+ * const styleElements = {
+ *   ...typography.campaign.compose('extralarge', {
+ *     theme: isThemeDark ? 'dark' : 'light'
+ *   }),
+ * };
+ * ```
+ *
+ * @since 1.7.0
+ */
+export function compose(
+  size: CampaignSize,
+  options?: CampaignComposeOptions,
+): JssObject {
+  const { theme = 'light' } = options || {};
+
+  const sizes: Record<CampaignSize, any> = {
+    maximum: maximumBase,
+    extralarge: extralargeBase,
+    large: largeBase,
+    medium: mediumBase,
+    small: campaignSmallBase,
+    extrasmall: extraSmallBase,
+  };
+
+  const base = sizes[size];
+
+  // Apply theme color
+  const composed = {
+    ...base,
+    color: theme === 'dark' ? color.white : color.black,
+  };
+
+  // Generate className
+  const classNameParts = ['umd-campaign', size];
+  if (theme === 'dark') classNameParts.push('dark');
+
+  return create.jss.objectWithClassName({
+    ...composed,
+    className: classNameParts.join('-'),
+  });
+}
+
+/**
+ * Maximum size campaign typography (static export).
+ * @since 1.1.0
+ */
+export const maximum: JssObject = compose('maximum');
+
+/**
+ * Extra large size campaign typography (static export).
+ * @since 1.1.0
+ */
+export const extralarge: JssObject = compose('extralarge');
+
+/**
+ * Large size campaign typography (static export).
+ * @since 1.1.0
+ */
+export const large: JssObject = compose('large');
+
+/**
+ * Medium size campaign typography (static export).
+ * @since 1.1.0
+ */
+export const medium: JssObject = compose('medium');
+
+/**
+ * Small size campaign typography (static export).
+ * @since 1.1.0
+ */
+export const small: JssObject = compose('small');
+
+/**
+ * Extra small size campaign typography (static export).
+ * @since 1.1.0
+ */
+export const extraSmall: JssObject = compose('extrasmall');
 
 /**
  * Campaign typography styles with various responsive sizes.
@@ -172,10 +290,7 @@ export const fonts = {
    * ```
    * @since 1.1.0
    */
-  maximum: create.jss.objectWithClassName({
-    className: 'umd-campaign-maximum',
-    ...maxium,
-  }),
+  maximum: compose('maximum'),
 
   /**
    * Extra large size campaign typography.
@@ -191,10 +306,7 @@ export const fonts = {
    * ```
    * @since 1.1.0
    */
-  extraLarge: create.jss.objectWithClassName({
-    className: 'umd-campaign-extralarge',
-    ...extralarge,
-  }),
+  extraLarge: compose('extralarge'),
 
   /**
    * Large size campaign typography.
@@ -210,10 +322,7 @@ export const fonts = {
    * ```
    * @since 1.1.0
    */
-  large: create.jss.objectWithClassName({
-    className: 'umd-campaign-large',
-    ...large,
-  }),
+  large: compose('large'),
 
   /**
    * Medium size campaign typography.
@@ -229,10 +338,7 @@ export const fonts = {
    * ```
    * @since 1.1.0
    */
-  medium: create.jss.objectWithClassName({
-    className: 'umd-campaign-medium',
-    ...medium,
-  }),
+  medium: compose('medium'),
 
   /**
    * Small size campaign typography.
@@ -248,10 +354,7 @@ export const fonts = {
    * ```
    * @since 1.1.0
    */
-  small: create.jss.objectWithClassName({
-    className: 'umd-campaign-small',
-    ...CampaignSmall,
-  }),
+  small: compose('small'),
 
   /**
    * Extra small size campaign typography.
@@ -267,8 +370,5 @@ export const fonts = {
    * ```
    * @since 1.1.0
    */
-  extraSmall: create.jss.objectWithClassName({
-    className: 'umd-campaign-extrasmall',
-    ...extraSmall,
-  }),
+  extraSmall: compose('extrasmall'),
 };

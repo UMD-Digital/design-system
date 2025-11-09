@@ -3,8 +3,29 @@
  * Provides serif typography styles with various sizes and responsive scaling options.
  */
 
-import { font, media } from '../token';
+import { color, font, media } from '../token';
 import { create } from '../utilities';
+import type { JssObject } from '../_types';
+
+/**
+ * Size types for serif typography
+ * @since 1.7.0
+ */
+export type SerifSize =
+  | 'maximum'
+  | 'extralarge'
+  | 'larger'
+  | 'large'
+  | 'medium';
+
+/**
+ * Options for composable serif typography
+ * @since 1.7.0
+ */
+export interface SerifComposeOptions {
+  /** Theme variant for color */
+  theme?: 'light' | 'dark';
+}
 
 /**
  * Breakpoint variables for responsive typography.
@@ -67,7 +88,7 @@ const sizeMedium = {
  * ```
  * @since 1.1.0
  */
-export const maxium = {
+const maximumBase = {
   ...base,
   ...sizeLarger,
 
@@ -96,7 +117,7 @@ export const maxium = {
  * ```
  * @since 1.1.0
  */
-export const extralarge = {
+const extralargeBase = {
   ...base,
   ...sizeLarger,
 
@@ -124,7 +145,7 @@ export const extralarge = {
  * ```
  * @since 1.1.0
  */
-export const larger = {
+const largerBase = {
   ...base,
   ...sizeLarge,
 
@@ -151,7 +172,7 @@ export const larger = {
  * ```
  * @since 1.1.0
  */
-export const large = {
+const largeBase = {
   ...base,
   ...sizeMedium,
 
@@ -178,10 +199,99 @@ export const large = {
  * ```
  * @since 1.1.0
  */
-export const medium = {
+const mediumBase = {
   ...base,
   ...sizeMedium,
 };
+
+/**
+ * Composable serif typography style selector
+ *
+ * Creates serif typography styles with configurable size and theme options.
+ *
+ * @param size - Typography size variant
+ * @param options - Configuration for theme
+ * @returns JSS object with composed styles and appropriate className
+ *
+ * @example
+ * ```typescript
+ * // Basic usage
+ * const heading = serif.compose('large');
+ *
+ * // With dark theme
+ * const darkHeading = serif.compose('large', { theme: 'dark' });
+ *
+ * // In element builder with theme
+ * const styleElements = {
+ *   ...typography.serif.compose('larger', {
+ *     theme: isThemeDark ? 'dark' : 'light'
+ *   }),
+ * };
+ * ```
+ *
+ * @since 1.7.0
+ */
+export function compose(
+  size: SerifSize,
+  options?: SerifComposeOptions,
+): JssObject {
+  const { theme = 'light' } = options || {};
+
+  const sizes: Record<SerifSize, any> = {
+    maximum: maximumBase,
+    extralarge: extralargeBase,
+    larger: largerBase,
+    large: largeBase,
+    medium: mediumBase,
+  };
+
+  const base = sizes[size];
+
+  // Apply theme color
+  const composed = {
+    ...base,
+    color: theme === 'dark' ? color.white : color.black,
+  };
+
+  // Generate className
+  const classNameParts = ['umd-serif', size];
+  if (theme === 'dark') classNameParts.push('dark');
+
+  return create.jss.objectWithClassName({
+    ...composed,
+    className: classNameParts.join('-'),
+  });
+}
+
+/**
+ * Maximum size serif typography (static export).
+ * @since 1.1.0
+ */
+export const maximum: JssObject = compose('maximum');
+
+/**
+ * Extra large size serif typography (static export).
+ * @since 1.1.0
+ */
+export const extralarge: JssObject = compose('extralarge');
+
+/**
+ * Larger size serif typography (static export).
+ * @since 1.1.0
+ */
+export const larger: JssObject = compose('larger');
+
+/**
+ * Large size serif typography (static export).
+ * @since 1.1.0
+ */
+export const large: JssObject = compose('large');
+
+/**
+ * Medium size serif typography (static export).
+ * @since 1.1.0
+ */
+export const medium: JssObject = compose('medium');
 
 /**
  * Ready-to-use serif typography styles as JSS objects with class names.
@@ -200,28 +310,9 @@ export const medium = {
  * @since 1.1.0
  */
 export const fonts = {
-  maximum: create.jss.objectWithClassName({
-    className: 'umd-serif-maximum',
-    ...maxium,
-  }),
-
-  extraLarge: create.jss.objectWithClassName({
-    className: 'umd-serif-extralarge',
-    ...extralarge,
-  }),
-
-  larger: create.jss.objectWithClassName({
-    className: 'umd-serif-larger',
-    ...larger,
-  }),
-
-  large: create.jss.objectWithClassName({
-    className: 'umd-serif-large',
-    ...large,
-  }),
-
-  medium: create.jss.objectWithClassName({
-    className: 'umd-serif-medium',
-    ...medium,
-  }),
+  maximum: compose('maximum'),
+  extraLarge: compose('extralarge'),
+  larger: compose('larger'),
+  large: compose('large'),
+  medium: compose('medium'),
 };

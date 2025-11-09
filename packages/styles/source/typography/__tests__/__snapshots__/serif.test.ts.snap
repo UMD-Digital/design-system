@@ -11,6 +11,7 @@ exports[`typography/serif fonts objects should match snapshot for all fonts obje
       "fontSize": "calc(32px + 2vw)",
     },
     "className": "umd-serif-extralarge",
+    "color": "#000000",
     "fontFamily": "'Crimson Pro', Georgia, serif",
     "fontSize": "32px",
     "lineHeight": "1.18em",
@@ -24,6 +25,7 @@ exports[`typography/serif fonts objects should match snapshot for all fonts obje
       "fontSize": "calc(20px + 0.33vw)",
     },
     "className": "umd-serif-large",
+    "color": "#000000",
     "fontFamily": "'Crimson Pro', Georgia, serif",
     "fontSize": "20px",
     "lineHeight": "1.5em",
@@ -37,6 +39,7 @@ exports[`typography/serif fonts objects should match snapshot for all fonts obje
       "fontSize": "calc(24px + 0.66vw)",
     },
     "className": "umd-serif-larger",
+    "color": "#000000",
     "fontFamily": "'Crimson Pro', Georgia, serif",
     "fontSize": "24px",
     "lineHeight": "1em",
@@ -51,12 +54,14 @@ exports[`typography/serif fonts objects should match snapshot for all fonts obje
       "fontSize": "calc(32px + 4vw)",
     },
     "className": "umd-serif-maximum",
+    "color": "#000000",
     "fontFamily": "'Crimson Pro', Georgia, serif",
     "fontSize": "32px",
     "lineHeight": "1.18em",
   },
   "medium": {
     "className": "umd-serif-medium",
+    "color": "#000000",
     "fontFamily": "'Crimson Pro', Georgia, serif",
     "fontSize": "20px",
     "lineHeight": "1.5em",
@@ -66,6 +71,7 @@ exports[`typography/serif fonts objects should match snapshot for all fonts obje
 
 exports[`typography/serif should match snapshot 1`] = `
 {
+  "compose": [Function],
   "extralarge": {
     "@media (min-width: 1024px)": {
       "fontSize": "56px",
@@ -74,6 +80,8 @@ exports[`typography/serif should match snapshot 1`] = `
     "@media (min-width: 650px)": {
       "fontSize": "calc(32px + 2vw)",
     },
+    "className": "umd-serif-extralarge",
+    "color": "#000000",
     "fontFamily": "'Crimson Pro', Georgia, serif",
     "fontSize": "32px",
     "lineHeight": "1.18em",
@@ -88,6 +96,7 @@ exports[`typography/serif should match snapshot 1`] = `
         "fontSize": "calc(32px + 2vw)",
       },
       "className": "umd-serif-extralarge",
+      "color": "#000000",
       "fontFamily": "'Crimson Pro', Georgia, serif",
       "fontSize": "32px",
       "lineHeight": "1.18em",
@@ -101,6 +110,7 @@ exports[`typography/serif should match snapshot 1`] = `
         "fontSize": "calc(20px + 0.33vw)",
       },
       "className": "umd-serif-large",
+      "color": "#000000",
       "fontFamily": "'Crimson Pro', Georgia, serif",
       "fontSize": "20px",
       "lineHeight": "1.5em",
@@ -114,6 +124,7 @@ exports[`typography/serif should match snapshot 1`] = `
         "fontSize": "calc(24px + 0.66vw)",
       },
       "className": "umd-serif-larger",
+      "color": "#000000",
       "fontFamily": "'Crimson Pro', Georgia, serif",
       "fontSize": "24px",
       "lineHeight": "1em",
@@ -128,12 +139,14 @@ exports[`typography/serif should match snapshot 1`] = `
         "fontSize": "calc(32px + 4vw)",
       },
       "className": "umd-serif-maximum",
+      "color": "#000000",
       "fontFamily": "'Crimson Pro', Georgia, serif",
       "fontSize": "32px",
       "lineHeight": "1.18em",
     },
     "medium": {
       "className": "umd-serif-medium",
+      "color": "#000000",
       "fontFamily": "'Crimson Pro', Georgia, serif",
       "fontSize": "20px",
       "lineHeight": "1.5em",
@@ -147,6 +160,8 @@ exports[`typography/serif should match snapshot 1`] = `
     "@media (min-width: 650px)": {
       "fontSize": "calc(20px + 0.33vw)",
     },
+    "className": "umd-serif-large",
+    "color": "#000000",
     "fontFamily": "'Crimson Pro', Georgia, serif",
     "fontSize": "20px",
     "lineHeight": "1.5em",
@@ -159,11 +174,13 @@ exports[`typography/serif should match snapshot 1`] = `
     "@media (min-width: 650px)": {
       "fontSize": "calc(24px + 0.66vw)",
     },
+    "className": "umd-serif-larger",
+    "color": "#000000",
     "fontFamily": "'Crimson Pro', Georgia, serif",
     "fontSize": "24px",
     "lineHeight": "1em",
   },
-  "maxium": {
+  "maximum": {
     "@media (min-width: 1024px)": {
       "fontSize": "80px",
       "fontWeight": "300",
@@ -172,11 +189,15 @@ exports[`typography/serif should match snapshot 1`] = `
     "@media (min-width: 650px)": {
       "fontSize": "calc(32px + 4vw)",
     },
+    "className": "umd-serif-maximum",
+    "color": "#000000",
     "fontFamily": "'Crimson Pro', Georgia, serif",
     "fontSize": "32px",
     "lineHeight": "1.18em",
   },
   "medium": {
+    "className": "umd-serif-medium",
+    "color": "#000000",
     "fontFamily": "'Crimson Pro', Georgia, serif",
     "fontSize": "20px",
     "lineHeight": "1.5em",
@@ -194,6 +215,8 @@ exports[`typography/serif size objects should have correctly defined serif sizes
   "@media (min-width: 650px)": {
     "fontSize": "calc(32px + 4vw)",
   },
+  "className": "umd-serif-maximum",
+  "color": "#000000",
   "fontFamily": "'Crimson Pro', Georgia, serif",
   "fontSize": "32px",
   "lineHeight": "1.18em",
@@ -209,6 +232,8 @@ exports[`typography/serif size objects should have correctly defined serif sizes
   "@media (min-width: 650px)": {
     "fontSize": "calc(32px + 2vw)",
   },
+  "className": "umd-serif-extralarge",
+  "color": "#000000",
   "fontFamily": "'Crimson Pro', Georgia, serif",
   "fontSize": "32px",
   "lineHeight": "1.18em",
@@ -224,6 +249,8 @@ exports[`typography/serif size objects should have correctly defined serif sizes
   "@media (min-width: 650px)": {
     "fontSize": "calc(24px + 0.66vw)",
   },
+  "className": "umd-serif-larger",
+  "color": "#000000",
   "fontFamily": "'Crimson Pro', Georgia, serif",
   "fontSize": "24px",
   "lineHeight": "1em",
@@ -239,6 +266,8 @@ exports[`typography/serif size objects should have correctly defined serif sizes
   "@media (min-width: 650px)": {
     "fontSize": "calc(20px + 0.33vw)",
   },
+  "className": "umd-serif-large",
+  "color": "#000000",
   "fontFamily": "'Crimson Pro', Georgia, serif",
   "fontSize": "20px",
   "lineHeight": "1.5em",
@@ -247,6 +276,8 @@ exports[`typography/serif size objects should have correctly defined serif sizes
 
 exports[`typography/serif size objects should have correctly defined serif sizes 5`] = `
 {
+  "className": "umd-serif-medium",
+  "color": "#000000",
   "fontFamily": "'Crimson Pro', Georgia, serif",
   "fontSize": "20px",
   "lineHeight": "1.5em",

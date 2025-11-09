@@ -1,14 +1,15 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
 import {
   getLocalStorageInt,
   setLocalStorageTimestamp,
 } from '@universityofmaryland/web-utilities-library/storage';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { CreateAlertText as AlertText, AlertTextProps } from './elements/text';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import { type ElementVisual } from '../../_types';
-import { BREAKPOINTS } from './globals';
 import { CreateCloseButton } from './elements/closeButton';
+import { BREAKPOINTS } from './globals';
+import { type ElementModel } from '../../_types';
 
 export interface AlertSiteProps extends AlertTextProps {
   daysToHide?: string;
@@ -41,32 +42,28 @@ const shouldShow = (props: Pick<AlertSiteProps, 'daysToHide'>) => {
 
 const createLock = (
   props: Pick<AlertSiteProps, 'headline' | 'text' | 'actions' | 'isThemeDark'>,
-): ElementVisual => {
+) => {
+  const { isThemeDark } = props;
   const textModel = AlertText(props);
-
-  const model = new ElementBuilder()
-    .styled(layout.space.horizontal.larger)
-    .withChild(textModel)
-    .withStyles({
-      element: {
-        width: '100%',
-      },
-      subElement: {
-        color: token.color.black,
-        maxWidth: token.spacing.maxWidth.large,
-      },
-    })
-    .build();
-
   const className = layout.space.horizontal.larger.className;
   const classNameString = Array.isArray(className)
     ? className.join(' ')
     : className || 'alert-site-lock';
 
-  return {
-    ...model,
-    className: classNameString,
-  };
+  return new ElementBuilder()
+    .styled(layout.space.horizontal.larger)
+    .withChild(textModel)
+    .withClassName(classNameString)
+    .withStyles({
+      element: {
+        width: '100%',
+      },
+      subElement: {
+        color: theme.foreground(isThemeDark),
+        maxWidth: token.spacing.maxWidth.large,
+      },
+    })
+    .build();
 };
 
 const createCloseButton = () =>
@@ -86,9 +83,9 @@ const createContainer = (
   const closeButtonElement = createCloseButton();
   const children = [lockElement, closeButtonElement].filter(
     Boolean,
-  ) as ElementVisual[];
+  ) as ElementModel[];
 
-  const model = new ElementBuilder()
+  return new ElementBuilder()
     .withClassName('alert-site-container')
     .withChildren(...children)
     .withStyles({
@@ -107,15 +104,10 @@ const createContainer = (
       },
     })
     .build();
-
-  return {
-    ...model,
-    className: 'alert-site-container',
-  };
 };
 
-const createWrapper = (container: ElementVisual): ElementVisual => {
-  const model = new ElementBuilder()
+const createWrapper = (container: ElementModel) =>
+  new ElementBuilder()
     .withClassName('alert-site-declaration')
     .withChild(container)
     .withStyles({
@@ -124,12 +116,6 @@ const createWrapper = (container: ElementVisual): ElementVisual => {
       },
     })
     .build();
-
-  return {
-    ...model,
-    className: 'alert-site-declaration',
-  };
-};
 
 export default (props: AlertSiteProps) => {
   const containerModel = createContainer(props);

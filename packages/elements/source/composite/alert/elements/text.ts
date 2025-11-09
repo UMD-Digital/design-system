@@ -5,7 +5,7 @@ import * as typography from '@universityofmaryland/web-styles-library/typography
 import * as layout from '@universityofmaryland/web-styles-library/layout';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
-import type { ElementVisual } from '../../../_types';
+import type { ElementModel } from '../../../_types';
 
 export interface AlertTextProps {
   headline?: HTMLElement | null;
@@ -77,7 +77,7 @@ const createActions = (props: Pick<AlertTextProps, 'actions'>) => {
 
 export const CreateAlertText = (
   props: Pick<AlertTextProps, 'headline' | 'text' | 'actions' | 'isThemeDark'>,
-): ElementVisual => {
+) => {
   const { headline, text, actions, isThemeDark } = props;
 
   const headlineModel = createHeadline({ headline, isThemeDark });
@@ -86,9 +86,9 @@ export const CreateAlertText = (
 
   const childElements = [headlineModel, textModel, actionsModel].filter(
     Boolean,
-  ) as ElementVisual[];
+  ) as ElementModel[];
 
-  const model = new ElementBuilder()
+  return new ElementBuilder()
     .withClassName('wrapper')
     .withChildren(...childElements)
     .withStyles({
@@ -97,9 +97,4 @@ export const CreateAlertText = (
       },
     })
     .build();
-
-  return {
-    ...model,
-    className: 'wrapper',
-  };
 };

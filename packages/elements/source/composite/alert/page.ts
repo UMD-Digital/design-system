@@ -1,10 +1,11 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { warning as iconWarning } from '@universityofmaryland/web-icons-library/indicators';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { CreateAlertText as AlertText, AlertTextProps } from './elements/text';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import { type ElementVisual } from '../../_types';
-import { BREAKPOINTS } from './globals';
 import { CreateCloseButton } from './elements/closeButton';
+import { BREAKPOINTS } from './globals';
+import { type ElementModel } from '../../_types';
 
 export interface AlertPageProps extends AlertTextProps {
   isThemeLight?: boolean;
@@ -13,8 +14,8 @@ export interface AlertPageProps extends AlertTextProps {
 
 const { MEDIUM } = BREAKPOINTS;
 
-const createIcon = (iconMarkup: string): ElementVisual => {
-  const model = new ElementBuilder()
+const createIcon = (iconMarkup: string) =>
+  new ElementBuilder()
     .withClassName('alert-page-icon')
     .withHTML(iconMarkup)
     .withStyles({
@@ -30,12 +31,6 @@ const createIcon = (iconMarkup: string): ElementVisual => {
     })
     .build();
 
-  return {
-    ...model,
-    className: 'alert-page-icon',
-  };
-};
-
 const createContainer = (
   props: Pick<
     AlertPageProps,
@@ -46,12 +41,11 @@ const createContainer = (
     | 'text'
     | 'actions'
   >,
-): ElementVisual => {
+) => {
   const { isShowIcon = true, isThemeDark } = props;
 
   const textModel = AlertText(props);
   const iconModel = isShowIcon ? createIcon(iconWarning) : null;
-
   const closeButtonModel = CreateCloseButton({
     isThemeDark: !!isThemeDark,
     targetSelector: '.alert-page-declaration',
@@ -59,15 +53,15 @@ const createContainer = (
 
   const children = [iconModel, textModel, closeButtonModel].filter(
     Boolean,
-  ) as ElementVisual[];
+  ) as ElementModel[];
 
-  const model = new ElementBuilder()
+  return new ElementBuilder()
     .withClassName('alert-page-container')
     .withChildren(...children)
     .withThemeDark(isThemeDark)
     .withStyles({
       element: {
-        ...(isThemeDark && { color: token.color.white }),
+        color: theme.foreground(isThemeDark),
         display: 'flex',
         position: 'relative',
         padding: token.spacing.lg,
@@ -81,32 +75,15 @@ const createContainer = (
       },
     })
     .build();
-
-  return {
-    ...model,
-    className: 'alert-page-container',
-  };
 };
 
-const createWrapper = (containerElement: ElementVisual): ElementVisual => {
-  const model = new ElementBuilder()
+export default (props: AlertPageProps) =>
+  new ElementBuilder()
     .withClassName('alert-page-declaration')
-    .withChild(containerElement)
+    .withChild(createContainer(props))
     .withStyles({
       element: {
         containerType: 'inline-size',
       },
     })
     .build();
-
-  return {
-    ...model,
-    className: 'alert-page-declaration',
-  };
-};
-
-export default (props: AlertPageProps) => {
-  const containerModel = createContainer(props);
-
-  return createWrapper(containerModel);
-};

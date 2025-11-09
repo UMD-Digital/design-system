@@ -122,9 +122,11 @@ export default (props: Props) => {
 
   const asset = embedAsset({ element, isAspectStandard, isGifAllowed });
   const caption = createCaption(element, isShowCaption);
-  const styles = Styles.element.asset.image.composeWrapper({ scaled: isScaled });
+  const defaultStyles = Styles.element.asset.image.composeWrapper({
+    scaled: isScaled,
+  });
 
-  const composite = new ElementBuilder().styled(styles).withStyles({
+  const composite = new ElementBuilder().styled(defaultStyles).withStyles({
     element: {
       ...customStyles,
     },
@@ -135,12 +137,12 @@ export default (props: Props) => {
   }
 
   if (dateSign) {
-    const test = new ElementBuilder()
-      .styled(Styles.layout.background.box.white)
-      .withChild(dateSign)
-      .build();
-
-    composite.withChild(test);
+    composite.withChild(
+      new ElementBuilder()
+        .styled(Styles.layout.background.box.white)
+        .withChild(dateSign)
+        .build(),
+    );
   }
 
   if (asset) {

@@ -1,11 +1,11 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { truncateTextBasedOnSize } from '@universityofmaryland/web-utilities-library/string';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
+import { truncateTextBasedOnSize } from '@universityofmaryland/web-utilities-library/string';
 import { quote as iconQuote } from '@universityofmaryland/web-icons-library/brand';
-import { type UMDElement } from '../../../_types';
 import { actions, assets, textLockup } from 'atomic';
+import { type UMDElement } from '../../../_types';
 import { CardOverlayProps } from '../_types';
 
 export const classRef = 'card-overlay-image';
@@ -80,6 +80,7 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
         },
       },
     });
+
     children.push(imageContainer);
     imageContainerClass = imageContainer.element.className;
   }
@@ -96,7 +97,7 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
             marginTop: `${token.spacing.min}`,
           },
         })
-        .withChild(dateSign.element)
+        .withChild(dateSign)
         .build(),
     );
   }
@@ -199,7 +200,7 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
         },
       },
     })
-    .withChild(container.element)
+    .withChild(container)
     .build();
 
   return {

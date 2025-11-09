@@ -724,8 +724,15 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
    */
   build(): ElementModel<T> {
     if (this.isBuilt) {
+      const classNames = this.getClassNames();
+      const classInfo = classNames.length > 0
+        ? ` (className: ${classNames.join(' ')})`
+        : '';
+
       console.warn(
-        'ElementBuilder.build() called multiple times. Returning cached result.',
+        `ElementBuilder.build() called multiple times${classInfo}. ` +
+        'Returning cached result. This may indicate a logic error where ' +
+        'the builder is being reused instead of creating a new one.'
       );
       return {
         element: this.element,
@@ -860,8 +867,14 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
    */
   private assertNotBuilt(): void {
     if (this.isBuilt) {
+      const classNames = this.getClassNames();
+      const classInfo = classNames.length > 0
+        ? ` (className: ${classNames.join(' ')})`
+        : '';
+
       throw new Error(
-        'ElementBuilder: Cannot modify builder after build() has been called',
+        `ElementBuilder: Cannot modify builder after build() has been called${classInfo}. ` +
+        'Create a new builder instance instead of reusing a built one.'
       );
     }
   }

@@ -1335,4 +1335,111 @@ describe('ElementBuilder', () => {
       });
     });
   });
+
+  describe('Improved Error Messaging', () => {
+    describe('Multiple build() calls', () => {
+      test('should include className in warning when present', () => {
+        const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+
+        const builder = new ElementBuilder()
+          .withClassName('my-component', 'another-class');
+
+        builder.build();
+        builder.build();
+
+        expect(consoleSpy).toHaveBeenCalledWith(
+          expect.stringContaining('(className: my-component another-class)')
+        );
+        expect(consoleSpy).toHaveBeenCalledWith(
+          expect.stringContaining('Returning cached result')
+        );
+
+        consoleSpy.mockRestore();
+      });
+
+      test('should warn without className info when no classes exist', () => {
+        const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+
+        const builder = new ElementBuilder();
+
+        builder.build();
+        builder.build();
+
+        const warningMessage = consoleSpy.mock.calls[0][0];
+        expect(warningMessage).toContain('ElementBuilder.build() called multiple times');
+        expect(warningMessage).not.toContain('className:');
+        expect(warningMessage).toContain('logic error');
+
+        consoleSpy.mockRestore();
+      });
+
+      test('should provide helpful context in warning message', () => {
+        const consoleSpy = jest.spyOn(console, 'warn').mockImplementation();
+
+        const builder = new ElementBuilder()
+          .withClassName('test-class');
+
+        builder.build();
+        builder.build();
+
+        const warningMessage = consoleSpy.mock.calls[0][0];
+        expect(warningMessage).toContain('Returning cached result');
+        expect(warningMessage).toContain('logic error');
+        expect(warningMessage).toContain('creating a new one');
+
+        consoleSpy.mockRestore();
+      });
+    });
+
+    describe('Modification after build() error', () => {
+      test('should include className in error when modifying after build', () => {
+        const builder = new ElementBuilder()
+          .withClassName('locked-component');
+
+        builder.build();
+
+        expect(() => {
+          builder.withClassName('another-class');
+        }).toThrow(/Cannot modify builder after build.*className: locked-component/);
+      });
+
+      test('should include helpful message when modifying after build', () => {
+        const builder = new ElementBuilder()
+          .withClassName('my-builder');
+
+        builder.build();
+
+        expect(() => {
+          builder.withStyles({ element: { color: 'red' } });
+        }).toThrow(/Create a new builder instance/);
+      });
+
+      test('should show error without className when not present', () => {
+        const builder = new ElementBuilder();
+        builder.build();
+
+        expect(() => {
+          builder.withAttribute('data-test', 'value');
+        }).toThrow(/Cannot modify builder after build\(\)/);
+
+        // Should not contain className info
+        try {
+          builder.withAttribute('data-test', 'value');
+        } catch (error) {
+          expect((error as Error).message).not.toContain('className:');
+        }
+      });
+
+      test('should show error with all class names when multiple exist', () => {
+        const builder = new ElementBuilder()
+          .withClassName('class-one', 'class-two', 'class-three');
+
+        builder.build();
+
+        expect(() => {
+          builder.withChild(document.createElement('div'));
+        }).toThrow(/className: class-one class-two class-three/);
+      });
+    });
+  });
 });

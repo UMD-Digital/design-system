@@ -38,27 +38,24 @@ const createStat = ({
 
   return new ElementBuilder(statElement)
     .withClassName('stat-display')
+    .styled(
+      statsFont.compose(isSizeLarge ? 'large' : 'medium', {
+        theme: isThemeDark ? 'dark' : 'light',
+      }),
+    )
     .withStyles({
-      siblingAfter: { marginTop: token.spacing.min },
-
       element: {
-        ...statsFont.medium,
-        color: token.color.red,
         WebkitFontSmoothing: 'antialiased',
 
-        ...(isThemeDark && { color: token.color.gold }),
-        ...(isSizeLarge && { ...statsFont.large }),
-
         [`& *`]: {
-          ...statsFont.medium,
           color: 'currentColor',
           WebkitFontSmoothing: 'antialiased',
-
-          ...(isSizeLarge && statsFont.large),
         },
 
         [`& + *`]: { marginTop: token.spacing.min },
       },
+
+      siblingAfter: { marginTop: token.spacing.min },
     })
     .build();
 };
@@ -69,22 +66,20 @@ const createSubtext = (
   const { subText, isThemeDark, isSizeLarge } = props;
   if (!subText) return;
 
+  const fontStyle = isSizeLarge ? sansFonts.small : sansFonts.min;
+
   return new ElementBuilder(subText)
     .withClassName('stat-sub-text')
+    .styled(fontStyle)
     .withStyles({
       element: {
-        ...sansFonts.min,
         marginTop: token.spacing.min,
         color: token.color.gray.mediumAA,
 
-        ...(isSizeLarge && sansFonts.small),
         ...(isThemeDark && { color: token.color.gray.light }),
 
         ['& *']: {
-          ...sansFonts.min,
           color: 'currentColor',
-
-          ...(isSizeLarge && sansFonts.small),
         },
       },
     })

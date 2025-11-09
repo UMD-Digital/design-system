@@ -158,7 +158,7 @@ export function compose(
   // Apply theme color
   const composed = {
     ...base,
-    color: theme === 'dark' ? color.white : color.black,
+    color: theme === 'dark' ? color.gold : color.red,
   };
 
   // Generate className

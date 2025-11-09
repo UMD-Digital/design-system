@@ -80,7 +80,7 @@ const makeContactLink = ({
       .styled(layout.grid.inline.row)
       .withStyles(containerStyles)
       .withThemeDark(isThemeDark)
-      .withChildren(iconSpan.element, textSpan.element)
+      .withChildren(iconSpan, textSpan)
       .withAttribute('href', href);
 
     if (ariaLabel) {
@@ -94,7 +94,7 @@ const makeContactLink = ({
     .styled(layout.grid.inline.row)
     .withStyles(containerStyles)
     .withThemeDark(isThemeDark)
-    .withChildren(iconSpan.element, textSpan.element)
+    .withChildren(iconSpan, textSpan)
     .build();
 };
 
@@ -112,15 +112,13 @@ export default ({
       element: {
         marginTop: `${token.spacing.sm}`,
       },
-    })
-    .withThemeDark(isThemeDark);
+    });
 
   if (phone) {
     const phoneElement = new ElementBuilder()
       .withClassName('text-lockup-contact-phone')
       .withChild(
-        makeContactLink({ element: phone, icon: iconPhone, isThemeDark })
-          .element,
+        makeContactLink({ element: phone, icon: iconPhone, isThemeDark }),
       )
       .build();
 
@@ -131,8 +129,7 @@ export default ({
     const emailElement = new ElementBuilder()
       .withClassName('text-lockup-contact-email')
       .withChild(
-        makeContactLink({ element: email, icon: iconEmail, isThemeDark })
-          .element,
+        makeContactLink({ element: email, icon: iconEmail, isThemeDark }),
       )
       .build();
 
@@ -143,8 +140,11 @@ export default ({
     const linkedInElement = new ElementBuilder()
       .withClassName('text-lockup-contact-linkedin')
       .withChild(
-        makeContactLink({ element: linkendIn, icon: iconLinkedIn, isThemeDark })
-          .element,
+        makeContactLink({
+          element: linkendIn,
+          icon: iconLinkedIn,
+          isThemeDark,
+        }),
       )
       .build();
 
@@ -155,8 +155,7 @@ export default ({
     const addressElement = new ElementBuilder()
       .withClassName('text-lockup-contact-address')
       .withChild(
-        makeContactLink({ element: address, icon: iconPin, isThemeDark })
-          .element,
+        makeContactLink({ element: address, icon: iconPin, isThemeDark }),
       )
       .build();
 

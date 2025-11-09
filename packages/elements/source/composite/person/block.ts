@@ -1,11 +1,11 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { imageFromSvg } from '@universityofmaryland/web-utilities-library/media';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
 import { person as iconPerson } from '@universityofmaryland/web-icons-library/people';
-import { type ElementModel } from '../../_types';
 import { assets, textLockup } from 'atomic';
 import { PersonCard } from './_types';
+import { type ElementModel } from '../../_types';
 
 const mediumBreakpointStart = token.media.breakpointValues.medium.min;
 
@@ -60,8 +60,6 @@ export default (props: PersonCard): ElementModel<HTMLElement> => {
 
   return new ElementBuilder()
     .withClassName('person-block')
-    .withChild(imageContainer)
-    .withChild(textLockupElement)
-    .withChild(contactLockupElement)
+    .withChildren(imageContainer, textLockupElement, contactLockupElement)
     .build();
 };

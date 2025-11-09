@@ -1,11 +1,12 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { createElementWithRefs } from './_elementModel';
 import { createControlButton } from './controls';
-import { type UMDElement } from '../../../_types';
 import { assets } from 'atomic';
 import { type CarouselWideProps } from '../_types';
+import { type UMDElement } from '../../../_types';
 
 const ASPECT_RATIO = '16 / 9';
 
@@ -69,10 +70,16 @@ const createSlideContent = ({
   if (slide.headline) {
     children.push(
       new ElementBuilder(slide.headline)
-        .styled(Styles.typography.sans.large)
+        .styled(
+          Styles.typography.sans.compose('large', {
+            theme: theme.fontColor(isThemeDark),
+          }),
+        )
         .withStyles({
           element: {
-            color: `${token.color.black}`,
+            ...(!isThemeDark && {
+              color: `${token.color.black}`,
+            }),
           },
           siblingAfter: {
             marginTop: token.spacing.sm,
@@ -85,7 +92,11 @@ const createSlideContent = ({
   if (slide.text) {
     children.push(
       new ElementBuilder(slide.text)
-        .styled(Styles.element.text.rich.simple)
+        .styled(
+          Styles.element.text.rich.composeSimple({
+            theme: theme.fontColor(isThemeDark),
+          }),
+        )
         .build(),
     );
   }

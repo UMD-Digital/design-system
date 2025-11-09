@@ -1,9 +1,10 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as animation from '@universityofmaryland/web-styles-library/animation';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import type { ElementVisual } from '../../../_types';
 
 export interface AlertTextProps {
@@ -21,16 +22,15 @@ const createHeadline = (
 
   const styleElements = {
     ...typography.sans.compose('large', {
-      theme: isThemeDark ? 'dark' : 'light',
+      theme: theme.fontColor(isThemeDark),
     }),
     ...animation.line.composeSlideUnder({
-      color: isThemeDark ? 'white' : 'black',
+      color: theme.foreground(isThemeDark),
     }),
   };
 
   return new ElementBuilder(headline)
     .styled(styleElements)
-    .withThemeDark(isThemeDark)
     .withStyles({
       element: {
         paddingRight: token.spacing.md,
@@ -47,10 +47,9 @@ const createText = (props: Pick<AlertTextProps, 'text' | 'isThemeDark'>) => {
   return new ElementBuilder(text)
     .styled(
       elementStyles.text.rich.composeSimple({
-        theme: isThemeDark ? 'dark' : 'light',
+        theme: theme.fontColor(isThemeDark),
       }),
     )
-    .withThemeDark(isThemeDark)
     .withStyles({
       element: {
         fontWeight: 500,
@@ -95,7 +94,6 @@ export const CreateAlertText = (
     .withStyles({
       element: {
         maxWidth: token.spacing.maxWidth.small,
-        ...(isThemeDark && { color: token.color.white }),
       },
     })
     .build();

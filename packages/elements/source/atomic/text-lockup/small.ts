@@ -1,7 +1,9 @@
-import * as elementStyles from '@universityofmaryland/web-styles-library/element';
-import * as token from '@universityofmaryland/web-styles-library/token';
-import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as elementStyles from '@universityofmaryland/web-styles-library/element';
+import * as typography from '@universityofmaryland/web-styles-library/typography';
+import * as layout from '@universityofmaryland/web-styles-library/layout';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { type UMDElement } from '../../_types';
 
 type TypeTheme = {
@@ -101,20 +103,24 @@ export const dateStyles = {
 
 export const createEyebrow = ({ eyebrow, isThemeDark }: TypeEyebrow) =>
   new ElementBuilder(eyebrow)
-    .styled(Styles.typography.elements.fonts.eyebrow)
+    .styled(
+      typography.elements.compose('eyebrow', {
+        theme: theme.fontColor(isThemeDark),
+      }),
+    )
     .withStyles(eyebrowStyles)
     .withThemeDark(isThemeDark)
     .build();
 
 export const createRibbonEyebrow = ({ eyebrow }: TypeEyebrow) =>
   new ElementBuilder(eyebrow)
-    .styled(Styles.element.text.decoration.ribbon)
+    .styled(elementStyles.text.decoration.ribbon)
     .withStyles(ribbonStyles)
     .build();
 
 export const createActions = ({ actions }: TypeActions) =>
   new ElementBuilder(actions)
-    .styled(Styles.layout.grid.inline.tabletRows)
+    .styled(layout.grid.inline.tabletRows)
     .withStyles({
       element: {
         marginTop: token.spacing.sm,
@@ -148,7 +154,11 @@ export const createTextLockupSmall = ({
 
   if (headline) {
     const headlineElement = new ElementBuilder(headline)
-      .styled(Styles.typography.sans.fonts.larger)
+      .styled(
+        typography.sans.compose('larger', {
+          theme: theme.fontColor(isThemeDark),
+        }),
+      )
       .withStyles(headlineStyles)
       .withThemeDark(isThemeDark)
       .build();
@@ -162,7 +172,11 @@ export const createTextLockupSmall = ({
 
   if (text) {
     const textElement = new ElementBuilder(text)
-      .styled(Styles.element.text.rich.simple)
+      .styled(
+        elementStyles.text.rich.composeSimple({
+          theme: theme.fontColor(isThemeDark),
+        }),
+      )
       .withStyles(textStyles)
       .withThemeDark(isThemeDark)
       .build();
@@ -173,7 +187,11 @@ export const createTextLockupSmall = ({
   if (date) {
     const dateElement = new ElementBuilder('slot')
       .withClassName('umd-headline-sans-min')
-      .withStyles(Styles.typography.sans.fonts.min)
+      .styled(
+        typography.sans.compose('min', {
+          theme: theme.fontColor(isThemeDark),
+        }),
+      )
       .withAnimation('slideUnder')
       .withChild(date)
       .withStyles(dateStyles)

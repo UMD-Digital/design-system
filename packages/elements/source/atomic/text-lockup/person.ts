@@ -1,6 +1,8 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
-import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as typography from '@universityofmaryland/web-styles-library/typography';
+import * as layout from '@universityofmaryland/web-styles-library/layout';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { type PersonTextLockupProps } from '../_types';
 
 export default ({
@@ -29,7 +31,11 @@ export default ({
 
   if (name) {
     const nameElement = new ElementBuilder(name)
-      .styled(Styles.typography.sans.fonts.larger)
+      .styled(
+        typography.sans.compose('larger', {
+          theme: theme.fontColor(isThemeDark),
+        }),
+      )
       .withStyles({
         element: {
           fontWeight: '700',
@@ -51,7 +57,11 @@ export default ({
 
   if (job) {
     const jobElement = new ElementBuilder(job)
-      .styled(Styles.typography.sans.fonts.small)
+      .styled(
+        typography.sans.compose('small', {
+          theme: theme.fontColor(isThemeDark),
+        }),
+      )
       .withStyles({
         element: {
           lineHeight: `1.25em`,
@@ -68,7 +78,11 @@ export default ({
 
   if (association) {
     const associationElement = new ElementBuilder(association)
-      .styled(Styles.typography.sans.fonts.small)
+      .styled(
+        typography.sans.compose('small', {
+          theme: theme.fontColor(isThemeDark),
+        }),
+      )
       .withStyles({
         element: {
           lineHeight: '1.2em',
@@ -96,7 +110,11 @@ export default ({
   if (pronouns) {
     pronouns.innerHTML = `<i>${pronouns.innerHTML}</i>`;
     const pronounsElement = new ElementBuilder(pronouns)
-      .styled(Styles.typography.sans.fonts.small)
+      .styled(
+        typography.sans.compose('small', {
+          theme: theme.fontColor(isThemeDark),
+        }),
+      )
       .withStyles({
         element: {
           [`& + *`]: {
@@ -115,7 +133,11 @@ export default ({
 
   if (subText) {
     const subTextElement = new ElementBuilder(subText)
-      .styled(Styles.typography.sans.fonts.small)
+      .styled(
+        typography.sans.compose('small', {
+          theme: theme.fontColor(isThemeDark),
+        }),
+      )
       .withStyles({
         siblingAfter: {
           marginTop: '4px',
@@ -129,7 +151,7 @@ export default ({
 
   if (actions) {
     const actionsElement = new ElementBuilder(actions)
-      .styled(Styles.layout.grid.inline.tabletRows)
+      .styled(layout.grid.inline.tabletRows)
       .withStyles({
         element: {
           marginTop: token.spacing.sm,

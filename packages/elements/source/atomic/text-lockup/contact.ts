@@ -1,6 +1,9 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
-import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as typography from '@universityofmaryland/web-styles-library/typography';
+import * as layout from '@universityofmaryland/web-styles-library/layout';
+import * as elementStyles from '@universityofmaryland/web-styles-library/element';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import {
   email as iconEmail,
   phone as iconPhone,
@@ -18,7 +21,7 @@ const makeIcon = ({
 }) => {
   return new ElementBuilder('span')
     .withHTML(icon)
-    .styled(Styles.element.action.icon.small)
+    .styled(elementStyles.action.icon.small)
     .withThemeDark(isThemeDark)
     .build();
 };
@@ -32,7 +35,11 @@ const makeText = ({
 }) => {
   return new ElementBuilder('span')
     .withHTML(text)
-    .styled(Styles.typography.sans.fonts.smaller)
+    .styled(
+      typography.sans.compose('smaller', {
+        theme: theme.fontColor(isThemeDark),
+      }),
+    )
     .withStyles({
       element: {
         color: `${token.color.gray.dark}`,
@@ -70,7 +77,7 @@ const makeContactLink = ({
     const href = element.getAttribute('href') || '';
 
     const linkBuilder = new ElementBuilder('a')
-      .styled(Styles.layout.grid.inline.row)
+      .styled(layout.grid.inline.row)
       .withStyles(containerStyles)
       .withThemeDark(isThemeDark)
       .withChildren(iconSpan.element, textSpan.element)
@@ -84,7 +91,7 @@ const makeContactLink = ({
   }
 
   return new ElementBuilder()
-    .styled(Styles.layout.grid.inline.row)
+    .styled(layout.grid.inline.row)
     .withStyles(containerStyles)
     .withThemeDark(isThemeDark)
     .withChildren(iconSpan.element, textSpan.element)
@@ -158,7 +165,7 @@ export default ({
 
   if (actions) {
     const actionsElement = new ElementBuilder(actions)
-      .styled(Styles.layout.grid.inline.tabletRows)
+      .styled(layout.grid.inline.tabletRows)
       .withStyles({
         element: {
           marginTop: token.spacing.sm,

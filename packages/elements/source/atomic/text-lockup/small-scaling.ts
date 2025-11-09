@@ -1,5 +1,7 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import * as typography from '@universityofmaryland/web-styles-library/typography';
+import * as elementStyles from '@universityofmaryland/web-styles-library/element';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import {
   createEyebrow,
   createRibbonEyebrow,
@@ -56,7 +58,12 @@ export default ({
 
   if (headline) {
     const headlineElement = new ElementBuilder(headline)
-      .styled(Styles.typography.sans.scalingFonts.larger)
+      .styled(
+        typography.sans.compose('larger', {
+          theme: theme.fontColor(isThemeDark),
+          scaling: true,
+        }),
+      )
       .withStyles(headlineStyles)
       .withThemeDark(isThemeDark)
       .build();
@@ -70,7 +77,12 @@ export default ({
 
   if (text) {
     const textElement = new ElementBuilder(text)
-      .styled(Styles.element.text.rich.simpleScaling)
+      .styled(
+        elementStyles.text.rich.composeSimple({
+          theme: theme.fontColor(isThemeDark),
+          scaling: true,
+        }),
+      )
       .withStyles(textStyles)
       .withThemeDark(isThemeDark)
       .build();
@@ -80,7 +92,12 @@ export default ({
 
   if (date) {
     const dateElement = new ElementBuilder(date)
-      .styled(Styles.typography.sans.scalingFonts.min)
+      .styled(
+        typography.sans.compose('min', {
+          theme: theme.fontColor(isThemeDark),
+          scaling: true,
+        }),
+      )
       .withStyles(dateStyles)
       .withThemeDark(isThemeDark)
       .build();

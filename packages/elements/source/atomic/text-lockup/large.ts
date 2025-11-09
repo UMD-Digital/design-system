@@ -1,6 +1,9 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
-import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as typography from '@universityofmaryland/web-styles-library/typography';
+import * as layout from '@universityofmaryland/web-styles-library/layout';
+import * as elementStyles from '@universityofmaryland/web-styles-library/element';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { ElementModel } from '../../_types';
 
 interface TypeTextLockupLarge {
@@ -37,7 +40,11 @@ export default ({
 
   if (eyebrow) {
     const eyebrowElement = new ElementBuilder(eyebrow)
-      .styled(Styles.typography.sans.fonts.small)
+      .styled(
+        typography.sans.compose('small', {
+          theme: theme.fontColor(isThemeDark),
+        }),
+      )
       .withStyles({
         element: {
           textTransform: 'uppercase',
@@ -56,7 +63,7 @@ export default ({
 
   if (ribbon) {
     const ribbonElement = new ElementBuilder(ribbon)
-      .styled(Styles.element.text.decoration.ribbon)
+      .styled(elementStyles.text.decoration.ribbon)
       .withStyles({
         siblingAfter: {
           marginTop: token.spacing.sm,
@@ -73,7 +80,12 @@ export default ({
 
   if (text) {
     const textElement = new ElementBuilder(text)
-      .styled(Styles.element.text.rich.simpleLarge)
+      .styled(
+        elementStyles.text.rich.composeSimple({
+          size: 'large',
+          theme: theme.fontColor(isThemeDark),
+        }),
+      )
       .withStyles({
         siblingAfter: {
           marginTop: token.spacing.lg,
@@ -87,7 +99,12 @@ export default ({
 
   if (textLargest) {
     const textLargestElement = new ElementBuilder(textLargest)
-      .styled(Styles.element.text.rich.simpleLargest)
+      .styled(
+        elementStyles.text.rich.composeSimple({
+          size: 'largest',
+          theme: theme.fontColor(isThemeDark),
+        }),
+      )
       .withStyles({
         siblingAfter: {
           marginTop: token.spacing.lg,
@@ -101,7 +118,7 @@ export default ({
 
   if (actions) {
     const actionsElement = new ElementBuilder(actions)
-      .styled(Styles.layout.grid.stacked)
+      .styled(layout.grid.stacked)
       .build();
 
     container.withChild(actionsElement);

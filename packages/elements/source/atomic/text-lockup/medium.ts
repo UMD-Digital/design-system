@@ -1,6 +1,9 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
-import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as typography from '@universityofmaryland/web-styles-library/typography';
+import * as elementStyles from '@universityofmaryland/web-styles-library/element';
+import * as layout from '@universityofmaryland/web-styles-library/layout';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { ElementModel } from '../../_types';
 
 interface TypeTextLockupMedium {
@@ -45,7 +48,7 @@ export default ({
 
   if (ribbon) {
     const ribbonElement = new ElementBuilder(ribbon)
-      .styled(Styles.element.text.decoration.ribbon)
+      .styled(elementStyles.text.decoration.ribbon)
       .withStyles({
         siblingAfter: {
           marginTop: token.spacing.sm,
@@ -62,7 +65,11 @@ export default ({
 
   if (headline && !compositeHeadline) {
     const headlineElement = new ElementBuilder(headline)
-      .styled(Styles.typography.sans.fonts.largest)
+      .styled(
+        typography.sans.compose('largest', {
+          theme: theme.fontColor(finalIsThemeDark),
+        }),
+      )
       .withStyles({
         element: {
           color: `${token.color.black}`,
@@ -99,7 +106,11 @@ export default ({
 
   if (text) {
     const textElement = new ElementBuilder(text)
-      .styled(Styles.element.text.rich.advanced)
+      .styled(
+        elementStyles.text.rich.composeAdvanced({
+          theme: theme.fontColor(finalIsThemeDark),
+        }),
+      )
       .withStyles({
         siblingAfter: {
           marginTop: token.spacing.md,
@@ -117,7 +128,7 @@ export default ({
 
   if (actions) {
     const actionsElement = new ElementBuilder(actions)
-      .styled(Styles.layout.grid.stacked)
+      .styled(layout.grid.stacked)
       .withStyles({
         element: {
           marginTop: token.spacing.md,

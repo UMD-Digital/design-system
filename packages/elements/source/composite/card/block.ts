@@ -1,8 +1,8 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
-import { type UMDElement } from '../../_types';
 import { assets, layout, textLockup } from 'atomic';
 import { CardBlockProps } from './_types';
+import { type UMDElement } from '../../_types';
 
 const smallBreakpoint = token.media.breakpointValues.small.max;
 

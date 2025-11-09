@@ -5,8 +5,8 @@ import { createMediaQuery } from '@universityofmaryland/web-utilities-library/st
 import { truncateTextBasedOnSize } from '@universityofmaryland/web-utilities-library/string';
 import { quote as iconQuote } from '@universityofmaryland/web-icons-library/brand';
 import { actions, assets, textLockup } from 'atomic';
-import { type UMDElement } from '../../../_types';
 import { CardOverlayProps } from '../_types';
+import { type UMDElement } from '../../../_types';
 
 export const classRef = 'card-overlay-image';
 

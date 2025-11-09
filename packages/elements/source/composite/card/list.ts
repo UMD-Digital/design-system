@@ -1,9 +1,9 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
-import { type UMDElement } from '../../_types';
 import { textLockup, assets } from 'atomic';
 import { CardListProps } from './_types';
+import { type UMDElement } from '../../_types';
 
 const smallBreakpoint = token.media.breakpointValues.small.max;
 const mediumBreakpointStart = token.media.breakpointValues.medium.min;
@@ -26,7 +26,7 @@ const makeDateColumn = (dateSign: UMDElement) =>
         }),
       },
     })
-    .withChild(dateSign.element)
+    .withChild(dateSign)
     .build();
 
 const makeTextColumn = (props: CardListProps) => {
@@ -48,7 +48,7 @@ const makeTextColumn = (props: CardListProps) => {
         }),
       },
     })
-    .withChild(lockup.element)
+    .withChild(lockup)
     .build();
 };
 
@@ -103,7 +103,7 @@ const makeImageColumn = ({
         },
       },
     })
-    .withChild(backgroundImage.element)
+    .withChild(backgroundImage)
     .build();
 };
 
@@ -149,6 +149,6 @@ export default (props: CardListProps) => {
         }),
       },
     })
-    .withChild(wrapper.element)
+    .withChild(wrapper)
     .build();
 };

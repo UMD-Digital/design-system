@@ -1,9 +1,9 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import { type UMDElement } from '../../../_types';
 import { actions, textLockup } from 'atomic';
 import { CardOverlayProps } from '../_types';
+import { type UMDElement } from '../../../_types';
 
 export default (props: CardOverlayProps) => {
   const { isThemeDark, ctaIcon } = props;
@@ -39,7 +39,7 @@ export default (props: CardOverlayProps) => {
         },
       },
     })
-    .withChild(lockup.element)
+    .withChild(lockup)
     .build();
 
   children.push(wrapper);

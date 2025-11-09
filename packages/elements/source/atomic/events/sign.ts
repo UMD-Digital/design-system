@@ -1,5 +1,7 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as typography from '@universityofmaryland/web-styles-library/typography';
+import * as elementStyles from '@universityofmaryland/web-styles-library/element';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 
 const makeDateElement = ({
@@ -26,28 +28,38 @@ const makeDateElement = ({
 
   if (isDay && isLargeSize && !isMultiDay) {
     return new ElementBuilder(dateElement)
-      .styled(Styles.typography.sans.fonts.extraLarge)
-      .withThemeDark(isThemeDark)
+      .styled(
+        typography.sans.compose('extralarge', {
+          theme: theme.fontColor(isThemeDark),
+        }),
+      )
       .build();
   }
 
   if (isDay) {
     return new ElementBuilder(dateElement)
-      .styled(Styles.typography.sans.fonts.larger)
-      .withThemeDark(isThemeDark)
+      .styled(
+        typography.sans.compose('larger', {
+          theme: theme.fontColor(isThemeDark),
+        }),
+      )
       .build();
   }
 
   if (isMonth && isLargeSize && !isMultiDay) {
     return new ElementBuilder(dateElement)
-      .styled(Styles.typography.sans.fonts.small)
-      .withThemeDark(isThemeDark)
+      .styled(
+        typography.sans.compose('small', {
+          theme: theme.fontColor(isThemeDark),
+        }),
+      )
       .build();
   }
 
   return new ElementBuilder(dateElement)
-    .styled(Styles.typography.sans.fonts.min)
-    .withThemeDark(isThemeDark)
+    .styled(
+      typography.sans.compose('min', { theme: theme.fontColor(isThemeDark) }),
+    )
     .build();
 };
 
@@ -86,7 +98,7 @@ const makeStartDateBlock = ({
         color: token.color.black,
       },
     })
-    .withChildren(monthElement.element, dayElement.element)
+    .withChildren(monthElement, dayElement)
     .build();
 };
 
@@ -114,7 +126,7 @@ const makeEndDateBlock = ({
 
   return new ElementBuilder('p')
     .withClassName('event-sign-end')
-    .withChildren(monthElement.element, dayElement.element)
+    .withChildren(monthElement, dayElement)
     .build();
 };
 
@@ -147,8 +159,8 @@ export default (props: {
   });
 
   const container = new ElementBuilder()
-    .styled(Styles.element.event.sign.container)
-    .withChild(startBlock.element);
+    .styled(elementStyles.event.sign.container)
+    .withChild(startBlock);
 
   if (isMultiDay && !!endDay && !!endMonth) {
     const srOnly = new ElementBuilder('span')
@@ -175,9 +187,9 @@ export default (props: {
       isThemeDark,
     });
 
-    container.withChild(srOnly.element);
-    container.withChild(dash.element);
-    container.withChild(endBlock.element);
+    container.withChild(srOnly);
+    container.withChild(dash);
+    container.withChild(endBlock);
   }
 
   return container.build();

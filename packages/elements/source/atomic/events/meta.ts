@@ -23,6 +23,7 @@ type DateInformaitonType = {
 
 type DateDisplayType = DateInformaitonType & {
   isMultiDay?: boolean;
+  isThemeDark?: boolean;
 };
 
 type EventType = DateInformaitonType & {
@@ -45,8 +46,11 @@ const MakeDetailItem = (props: {
   const textElement = new ElementBuilder('span').withHTML(text).build();
 
   return new ElementBuilder('p')
-    .styled(elementStyles.event.meta.item)
-    .withThemeDark(isThemeDark)
+    .styled(
+      elementStyles.event.meta.composeItem({
+        theme: isThemeDark ? 'dark' : 'light',
+      }),
+    )
     .withChildren(iconElement, textElement)
     .build();
 };
@@ -59,6 +63,7 @@ const createDayText = ({
   endDay,
   endMonth,
   isMultiDay = false,
+  isThemeDark,
 }: DateDisplayType) => {
   let text = `${startDayOfWeek}. ${startMonth} ${startDay}`;
 
@@ -69,10 +74,15 @@ const createDayText = ({
   return MakeDetailItem({
     icon: iconCalendar,
     text,
+    isThemeDark,
   });
 };
 
-const createTimeText = ({ startTime, endTime }: DateDisplayType) => {
+const createTimeText = ({
+  startTime,
+  endTime,
+  isThemeDark,
+}: DateDisplayType) => {
   let text = startTime;
 
   if (startTime != endTime) {
@@ -82,6 +92,7 @@ const createTimeText = ({ startTime, endTime }: DateDisplayType) => {
   return MakeDetailItem({
     icon: iconClock,
     text,
+    isThemeDark,
   });
 };
 
@@ -106,7 +117,6 @@ export default (props: TypeMetaDisplay) => {
 
   const wrapper = new ElementBuilder()
     .styled(elementStyles.event.meta.wrapper)
-    .withThemeDark(isThemeDark)
     .withChild(dateRow);
 
   if (location && location.length > 0) {
@@ -119,7 +129,6 @@ export default (props: TypeMetaDisplay) => {
 
   return new ElementBuilder()
     .styled(elementStyles.event.meta.container)
-    .withThemeDark(isThemeDark)
     .withChild(wrapperModel)
     .build();
 };

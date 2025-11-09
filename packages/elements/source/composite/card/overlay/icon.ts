@@ -1,7 +1,7 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import { type UMDElement } from '../../../_types';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { textLockup } from 'atomic';
+import { type UMDElement } from '../../../_types';
 
 interface CardIconProps {
   headline: HTMLElement | null;

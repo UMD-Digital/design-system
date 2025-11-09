@@ -5,6 +5,7 @@
 
 import { color, font, media } from '../token';
 import { create } from '../utilities';
+import type { JssObject } from '../_types';
 
 /**
  * Common breakpoint variables for responsive typography.
@@ -146,6 +147,86 @@ export const interativeSmall = {
   letterSpacing: '-0.01em',
   lineHeight: `1.125em`,
 };
+
+/**
+ * Element types for typography
+ * @since 1.7.0
+ */
+export type ElementType =
+  | 'eyebrow'
+  | 'labelMedium'
+  | 'labelSmall'
+  | 'medium'
+  | 'small';
+
+/**
+ * Options for composable element typography
+ * @since 1.7.0
+ */
+export interface ElementComposeOptions {
+  /** Theme variant for color */
+  theme?: 'light' | 'dark';
+}
+
+/**
+ * Composable element typography style selector
+ *
+ * Creates element typography styles with configurable type and theme.
+ *
+ * @param type - Typography element type
+ * @param options - Configuration for theme
+ * @returns JSS object with composed styles and appropriate className
+ *
+ * @example
+ * ```typescript
+ * // Basic usage
+ * const eyebrowStyle = elements.compose('eyebrow');
+ *
+ * // With dark theme
+ * const darkEyebrow = elements.compose('eyebrow', { theme: 'dark' });
+ *
+ * // In element builder with theme
+ * const styleElements = {
+ *   ...typography.elements.compose('eyebrow', {
+ *     theme: isThemeDark ? 'dark' : 'light'
+ *   })
+ * };
+ * ```
+ *
+ * @since 1.7.0
+ */
+export function compose(
+  type: ElementType,
+  options?: ElementComposeOptions,
+): JssObject {
+  const { theme = 'light' } = options || {};
+
+  // Select base variant
+  const bases: Record<ElementType, any> = {
+    eyebrow: eyebrow,
+    labelMedium: labelMedium,
+    labelSmall: labelSmall,
+    medium: interativeMedium,
+    small: interativeSmall,
+  };
+
+  const base = bases[type];
+
+  // Apply theme color
+  const composed = {
+    ...base,
+    color: theme === 'dark' ? color.white : color.black,
+  };
+
+  // Generate className
+  const classNameParts = ['umd-element', type];
+  if (theme === 'dark') classNameParts.push('dark');
+
+  return create.jss.objectWithClassName({
+    ...composed,
+    className: classNameParts.join('-'),
+  });
+}
 
 /**
  * Ready-to-use typography styles as JSS objects with class names.

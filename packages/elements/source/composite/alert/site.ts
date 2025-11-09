@@ -45,15 +45,10 @@ const createLock = (
 ) => {
   const { isThemeDark } = props;
   const textModel = AlertText(props);
-  const className = layout.space.horizontal.larger.className;
-  const classNameString = Array.isArray(className)
-    ? className.join(' ')
-    : className || 'alert-site-lock';
 
   return new ElementBuilder()
     .styled(layout.space.horizontal.larger)
     .withChild(textModel)
-    .withClassName(classNameString)
     .withStyles({
       element: {
         width: '100%',

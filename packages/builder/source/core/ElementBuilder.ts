@@ -171,12 +171,12 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
    * If no className is present, styles will be skipped with a warning
    *
    * @param styles - Style definition or ElementStyles object
-   * @param priority - Optional priority for style ordering (higher = applied last)
+   * @param priority - Optional priority for style ordering (higher = applied last, default: 2)
    * @returns This builder for chaining
    */
   withStyles(
     styles: StyleDefinition | ElementStyles | Record<string, any>,
-    priority: number = 0,
+    priority: number = 2,
   ): this {
     this.assertNotBuilt();
     const className = this.getCurrentClassName();
@@ -198,13 +198,13 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
    * Conditionally add styles
    * @param condition - Whether to add the styles
    * @param styles - Styles to add if condition is true
-   * @param priority - Optional priority
+   * @param priority - Optional priority (default: 2)
    * @returns This builder for chaining
    */
   withStylesIf(
     condition: boolean,
     styles: StyleDefinition | ElementStyles | Record<string, any>,
-    priority: number = 0,
+    priority: number = 2,
   ): this {
     if (condition) {
       this.withStyles(styles, priority);
@@ -589,7 +589,7 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
         },
       },
       1,
-    ); // Higher priority so it can override base styles
+    ); // Priority 1 (same as .styled(), lower than custom .withStyles())
 
     return this;
   }

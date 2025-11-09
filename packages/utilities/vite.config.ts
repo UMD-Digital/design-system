@@ -20,6 +20,7 @@ export default defineConfig({
         storage: resolve(__dirname, 'source/storage/index.ts'),
         string: resolve(__dirname, 'source/string/index.ts'),
         styles: resolve(__dirname, 'source/styles/index.ts'),
+        theme: resolve(__dirname, 'source/theme/index.ts'),
         validation: resolve(__dirname, 'source/validation/index.ts'),
       },
       name: 'UniversityOfMarylandWebUtilitiesLibrary',

@@ -141,6 +141,16 @@
       "import": "./dist/styles/*.mjs",
       "require": "./dist/styles/*.js"
     },
+    "./theme": {
+      "types": "./dist/theme.d.ts",
+      "import": "./dist/theme.mjs",
+      "require": "./dist/theme.js"
+    },
+    "./theme/*": {
+      "types": "./dist/theme/*.d.ts",
+      "import": "./dist/theme/*.mjs",
+      "require": "./dist/theme/*.js"
+    },
     "./validation": {
       "types": "./dist/validation.d.ts",
       "import": "./dist/validation.mjs",

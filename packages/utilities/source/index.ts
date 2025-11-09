@@ -23,4 +23,5 @@ export * from './performance';
 export * from './storage';
 export * from './string';
 export * from './styles';
+export * from './theme';
 export * from './validation';

@@ -69,15 +69,13 @@ const createPlainText = ({
 }: Pick<OptionProps, 'isThemeDark' | 'isTypeSecondary' | 'plainText'>) => {
   if (!plainText) return null;
 
-  const textColor = isThemeDark
-    ? elementStyles.text.link.white
-    : elementStyles.text.link.red;
-
   return new ElementBuilder(plainText)
-    .styled(typography.sans.fonts.min)
+    .styled(
+      typography.sans.compose('min', { theme: isThemeDark ? 'dark' : 'light' }),
+    )
     .withStyles({
       element: {
-        ...textColor,
+        textDecoration: 'underline',
 
         ...(isTypeSecondary && {
           marginLeft: `${token.spacing.lg}`,
@@ -95,8 +93,7 @@ const createElement = (type: ElementType, props: ElementProps) => {
   let styleObject;
 
   if (type === 'primary') {
-    const color = props.isThemeDark ? 'white' : 'default';
-    styleObject = elementStyles.action.primary.composePrimary({ size, color });
+    styleObject = elementStyles.action.primary.composePrimary({ size });
   } else if (type === 'secondary') {
     let color: 'default' | 'white' | 'gold' = 'default';
     if (props.isThemeGold) {

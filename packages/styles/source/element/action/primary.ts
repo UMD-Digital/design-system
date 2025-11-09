@@ -85,9 +85,10 @@ export function composePrimary(options?: PrimaryOptions): JssObject {
     composed = {
       ...composed,
       ...primaryBase,
-      '& svg': size === 'large'
-        ? { ...iconBaseLarge, fill: color.white }
-        : { ...iconBase, fill: color.white },
+      '& svg':
+        size === 'large'
+          ? { ...iconBaseLarge, fill: color.white }
+          : { ...iconBase, fill: color.white },
     };
   } else if (buttonColor === 'white') {
     composed = {
@@ -108,9 +109,10 @@ export function composePrimary(options?: PrimaryOptions): JssObject {
         },
       },
 
-      '& svg': size === 'large'
-        ? { ...iconBaseLarge, fill: color.red }
-        : { ...iconBase, fill: color.red },
+      '& svg':
+        size === 'large'
+          ? { ...iconBaseLarge, fill: color.red }
+          : { ...iconBase, fill: color.red },
     };
   }
 
@@ -130,7 +132,10 @@ export function composePrimary(options?: PrimaryOptions): JssObject {
 
   return create.jss.objectWithClassName({
     ...composed,
-    className: deprecatedAliases.length > 0 ? [className, ...deprecatedAliases] : className,
+    className:
+      deprecatedAliases.length > 0
+        ? [className, ...deprecatedAliases]
+        : className,
   });
 }
 
@@ -170,20 +175,3 @@ export const normal: JssObject = composePrimary();
  * @since 1.1.0
  */
 export const large: JssObject = composePrimary({ size: 'large' });
-
-/**
- * White primary button style.
- * @returns {JssObject} The JSS object for the white primary button style.
- * @example
- * ```typescript
- * import * as Styles from '@universityofmaryland/web-styles-library';
- * Styles.element.action.primary.white
- * ```
- * @example
- * ```css
- * class="umd-action-primary-white"
- * ```
- *
- * @since 1.1.0
- */
-export const white: JssObject = composePrimary({ color: 'white' });

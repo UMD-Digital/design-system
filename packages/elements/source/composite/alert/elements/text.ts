@@ -20,8 +20,12 @@ const createHeadline = (
   if (!headline) return;
 
   const styleElements = {
-    ...typography.sans.fonts.large,
-    ...animation.line.slideUnderBlack,
+    ...typography.sans.compose('large', {
+      theme: isThemeDark ? 'dark' : 'light',
+    }),
+    ...animation.line.composeSlideUnder({
+      color: isThemeDark ? 'white' : 'black',
+    }),
   };
 
   return new ElementBuilder(headline)

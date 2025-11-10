@@ -145,9 +145,12 @@ const createAsset = ({
 };
 
 const createHeadline = (
-  props: Pick<HeroStandardProps, 'headline' | 'isHeightSmall' | 'isThemeDark'>,
+  props: Pick<
+    HeroStandardProps,
+    'headline' | 'isHeightSmall' | 'isThemeDark' | 'isTextCenter'
+  >,
 ): ElementModel<HTMLElement> | null => {
-  const { headline, isHeightSmall, isThemeDark } = props;
+  const { headline, isHeightSmall, isThemeDark, isTextCenter } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
   const isOverwriteHeadline = characterCount > 10 && isHeightSmall;
 
@@ -155,9 +158,9 @@ const createHeadline = (
 
   const tabletStyles = {
     maxWidth: '700px',
-    marginLeft: 'auto',
-    marginRight: 'auto',
     color: token.color.white,
+
+    ...(isTextCenter && { marginLeft: 'auto', marginRight: 'auto' }),
   };
 
   const desktopStyles = {
@@ -189,7 +192,6 @@ const createText = (props: HeroStandardProps) => {
     isTextCenter = false,
     isHeightSmall = false,
     includesAnimation,
-    isThemeDark,
   } = props;
 
   const text = textLockup.large({

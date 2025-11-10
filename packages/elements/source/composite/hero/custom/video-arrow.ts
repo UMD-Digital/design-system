@@ -1,12 +1,12 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
-import * as Styles from '@universityofmaryland/web-styles-library';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
-import { type ElementModel } from '../../../_types';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { animations, assets } from 'atomic';
 import { type HeroVideoArrowProps as BaseHeroVideoArrowProps } from '../_types';
+import { type ElementModel } from '../../../_types';
 
 interface HeroVideoArrowProps extends Omit<BaseHeroVideoArrowProps, 'video'> {
   video: HTMLVideoElement;
@@ -32,7 +32,7 @@ const createHeadline = (headline?: HTMLElement | null) => {
   if (!headline) return null;
 
   return new ElementBuilder(headline)
-    .styled(Styles.typography.campaign.fonts.extraLarge)
+    .styled(typography.campaign.extralarge)
     .withStyles({
       element: {
         textTransform: 'uppercase',
@@ -40,6 +40,7 @@ const createHeadline = (headline?: HTMLElement | null) => {
         transition: `opacity ${ANIMATION_CONFIG.TEXT_FADE.DURATION} ${ANIMATION_CONFIG.TEXT_FADE.EASING}`,
         transitionDelay: ANIMATION_CONFIG.TEXT_FADE.HEADLINE_DELAY,
         textWrap: 'balance',
+        color: token.color.white,
       },
       siblingAfter: {
         marginTop: token.spacing.md,
@@ -52,7 +53,7 @@ const createText = (text?: HTMLElement | null) => {
   if (!text) return null;
 
   return new ElementBuilder(text)
-    .styled(Styles.element.text.rich.simpleLargest)
+    .styled(elementStyles.text.rich.simpleLargest)
     .withStyles({
       element: {
         maxWidth: '720px',
@@ -61,6 +62,10 @@ const createText = (text?: HTMLElement | null) => {
         opacity: 0,
         transition: `opacity ${ANIMATION_CONFIG.TEXT_FADE.DURATION} ${ANIMATION_CONFIG.TEXT_FADE.EASING}`,
         transitionDelay: ANIMATION_CONFIG.TEXT_FADE.TEXT_DELAY,
+
+        ['& p']: {
+          color: token.color.white,
+        },
 
         [`@media (max-width: 649px)`]: {
           display: 'none',
@@ -106,10 +111,6 @@ const createTextContainer = (
         width: `calc(100% - 24px)`,
         maxWidth: '950px',
         padding: `${token.spacing.xl} ${token.spacing.md}`,
-
-        ['& *']: {
-          color: token.color.white,
-        },
       },
     })
     .build();
@@ -188,6 +189,9 @@ const createEventHandlers = (
 export default (props: HeroVideoArrowProps) => {
   const { video, isAnimationOnLoad } = props;
 
+  const videoElement = createVideo(video);
+  const textContainer = createTextContainer(props);
+
   const composite = new ElementBuilder('section')
     .withClassName('umd-element-hero-brand-video')
     .withStyles({
@@ -197,9 +201,6 @@ export default (props: HeroVideoArrowProps) => {
       },
     })
     .build();
-
-  const videoElement = createVideo(video);
-  const textContainer = createTextContainer(props);
 
   const wrapper = new ElementBuilder()
     .withClassName('hero-logo-brand-video-wrapper')

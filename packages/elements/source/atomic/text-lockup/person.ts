@@ -22,11 +22,10 @@ export default ({
         zIndex: '9',
         position: 'relative',
       },
-    })
-    .withThemeDark(isThemeDark);
+    });
 
   if (nameComposite && !name) {
-    container.withChild(nameComposite.element);
+    container.withChild(nameComposite);
   }
 
   if (name) {
@@ -49,7 +48,6 @@ export default ({
           color: 'currentColor',
         },
       })
-      .withThemeDark(isThemeDark)
       .build();
 
     container.withChild(nameElement);
@@ -70,7 +68,6 @@ export default ({
           color: 'currentColor',
         },
       })
-      .withThemeDark(isThemeDark)
       .build();
 
     container.withChild(jobElement);
@@ -87,7 +84,7 @@ export default ({
         element: {
           lineHeight: '1.2em',
           display: 'block',
-          color: `${token.color.gray.dark}`,
+          ...(!isThemeDark && { color: `${token.color.gray.dark}` }),
 
           [`& + *`]: {
             marginTop: '4px',
@@ -101,7 +98,6 @@ export default ({
           color: 'currentColor',
         },
       })
-      .withThemeDark(isThemeDark)
       .build();
 
     container.withChild(associationElement);
@@ -125,7 +121,6 @@ export default ({
           color: 'currentColor',
         },
       })
-      .withThemeDark(isThemeDark)
       .build();
 
     container.withChild(pronounsElement);
@@ -143,7 +138,6 @@ export default ({
           marginTop: '4px',
         },
       })
-      .withThemeDark(isThemeDark)
       .build();
 
     container.withChild(subTextElement);

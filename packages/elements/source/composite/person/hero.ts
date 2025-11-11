@@ -29,8 +29,9 @@ interface PersonHero extends PersonText, PersonInfo {
 const CreateImageBlock = (props: PersonInfo): ElementModel<HTMLElement> => {
   const { image, association, pronouns, isThemeDark } = props;
 
-  const wrapper = new ElementBuilder()
-    .withClassName('umd-person-hero-image-wrapper');
+  const wrapper = new ElementBuilder().withClassName(
+    'umd-person-hero-image-wrapper',
+  );
 
   const contactContainer = textLockup.contact({
     ...props,
@@ -85,22 +86,24 @@ const CreateImageBlock = (props: PersonInfo): ElementModel<HTMLElement> => {
   }
 
   if (pronouns) {
-    const italicStyle = document.createElement('i');
-    italicStyle.appendChild(pronouns);
-
     wrapper.withChild(
-      new ElementBuilder(italicStyle)
+      new ElementBuilder(document.createElement('i'))
         .withClassName('umd-person-hero-pronouns')
-        .withThemeDark(!isThemeDark)
         .withStyles({
           element: {
             display: 'block',
+            color: `${isThemeDark ? token.color.black : token.color.white}`,
+
+            ['*']: {
+              color: 'currentColor',
+            },
           },
           siblingAfter: {
             display: 'block',
             marginTop: token.spacing.min,
           },
         })
+        .withChild(pronouns)
         .build(),
     );
   }

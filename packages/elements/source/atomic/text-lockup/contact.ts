@@ -21,8 +21,11 @@ const makeIcon = ({
 }) => {
   return new ElementBuilder('span')
     .withHTML(icon)
-    .styled(elementStyles.action.icon.small)
-    .withThemeDark(isThemeDark)
+    .styled(
+      elementStyles.action.icon.composeIcon({
+        theme: theme.variant(isThemeDark),
+      }),
+    )
     .build();
 };
 
@@ -42,10 +45,9 @@ const makeText = ({
     )
     .withStyles({
       element: {
-        color: `${token.color.gray.dark}`,
+        ...(!isThemeDark && { color: `${token.color.gray.dark}` }),
       },
     })
-    .withThemeDark(isThemeDark)
     .build();
 };
 
@@ -79,7 +81,6 @@ const makeContactLink = ({
     const linkBuilder = new ElementBuilder('a')
       .styled(layout.grid.inline.row)
       .withStyles(containerStyles)
-      .withThemeDark(isThemeDark)
       .withChildren(iconSpan, textSpan)
       .withAttribute('href', href);
 
@@ -93,7 +94,6 @@ const makeContactLink = ({
   return new ElementBuilder()
     .styled(layout.grid.inline.row)
     .withStyles(containerStyles)
-    .withThemeDark(isThemeDark)
     .withChildren(iconSpan, textSpan)
     .build();
 };

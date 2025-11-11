@@ -2,6 +2,7 @@ import * as token from '@universityofmaryland/web-styles-library/token';
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { type ElementModel } from '../../../_types';
 import { assets, textLockup } from 'atomic';
 import { PersonBio } from '../_types';
@@ -9,20 +10,24 @@ import { PersonBio } from '../_types';
 const createTextContainer = (props: PersonBio): ElementModel<HTMLElement> => {
   const { isThemeDark, name, ...textProps } = props;
 
-  const builder = new ElementBuilder()
-    .styled(Styles.element.text.line.adjustentInset);
+  const builder = new ElementBuilder().styled(
+    Styles.element.text.line.adjustentInset,
+  );
 
   if (name) {
     builder.withChild(
       new ElementBuilder(name)
-        .styled(Styles.typography.sans.fonts.extraLarge)
-        .withThemeDark(isThemeDark)
+        .styled(
+          Styles.typography.sans.compose('extralarge', {
+            theme: theme.fontColor(isThemeDark),
+          }),
+        )
         .withStyles({
           element: {
-            color: `${token.color.black}`,
             textTransform: 'uppercase',
             fontWeight: '800',
             display: 'block',
+            ...(!isThemeDark && { color: `${token.color.black}` }),
           },
           siblingAfter: {
             marginTop: token.spacing.sm,
@@ -153,8 +158,12 @@ export default (props: PersonBio): ElementModel<HTMLElement> => {
   if (description) {
     builder.withChild(
       new ElementBuilder(description)
-        .styled(Styles.element.text.rich.simpleLarge)
-        .withThemeDark(isThemeDark)
+        .styled(
+          Styles.element.text.rich.composeSimple({
+            size: 'large',
+            theme: theme.fontColor(isThemeDark),
+          }),
+        )
         .withStyles({
           element: {
             marginTop: token.spacing.lg,

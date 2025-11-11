@@ -1,10 +1,11 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import { type ElementModel } from '../../../_types';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { assets, textLockup } from 'atomic';
 import { type PersonBio } from '../_types';
+import { type ElementModel } from '../../../_types';
 
 export default (props: PersonBio): ElementModel<HTMLElement> => {
   const { isThemeDark, image, actions, description } = props;
@@ -35,15 +36,19 @@ export default (props: PersonBio): ElementModel<HTMLElement> => {
   if (name) {
     builder.withChild(
       new ElementBuilder(name)
-        .styled(Styles.typography.sans.fonts.extraLarge)
-        .withThemeDark(isThemeDark)
+        .styled(
+          Styles.typography.sans.compose('extralarge', {
+            theme: theme.fontColor(isThemeDark),
+          }),
+        )
         .withStyles({
           element: {
             marginTop: token.spacing.lg,
-            color: `${token.color.black}`,
             textTransform: 'uppercase',
             fontWeight: '800',
             display: 'block',
+
+            ...(!isThemeDark && { color: `${token.color.black}` }),
           },
           siblingAfter: {
             marginTop: token.spacing.min,
@@ -59,8 +64,12 @@ export default (props: PersonBio): ElementModel<HTMLElement> => {
   if (description) {
     builder.withChild(
       new ElementBuilder(description)
-        .styled(Styles.element.text.rich.simpleLarge)
-        .withThemeDark(isThemeDark)
+        .styled(
+          Styles.element.text.rich.composeSimple({
+            size: 'large',
+            theme: theme.fontColor(isThemeDark),
+          }),
+        )
         .withStyles({
           element: {
             marginTop: token.spacing.lg,

@@ -24,8 +24,10 @@ export type CampaignSize =
  * @since 1.7.0
  */
 export interface CampaignComposeOptions {
-  /** Theme variant for color */
+  /** Theme variant for color (overridden by color if provided) */
   theme?: 'light' | 'dark';
+  /** Explicit color value (overrides theme) */
+  color?: string;
 }
 
 /**
@@ -174,7 +176,7 @@ const extraSmallBase = {
  * Creates campaign typography styles with configurable size and theme options.
  *
  * @param size - Typography size variant
- * @param options - Configuration for theme
+ * @param options - Configuration for theme and color
  * @returns JSS object with composed styles and appropriate className
  *
  * @example
@@ -185,12 +187,12 @@ const extraSmallBase = {
  * // With dark theme
  * const darkHeading = campaign.compose('large', { theme: 'dark' });
  *
- * // In element builder with theme
- * const styleElements = {
- *   ...typography.campaign.compose('extralarge', {
- *     theme: isThemeDark ? 'dark' : 'light'
- *   }),
- * };
+ * // With explicit color
+ * const grayHeading = campaign.compose('large', { color: token.color.gray.dark });
+ *
+ * // With theme-aware subdued color
+ * import { theme } from '@universityofmaryland/web-utilities-library/theme';
+ * const subtitle = campaign.compose('small', { color: theme.subdued(isThemeDark) });
  * ```
  *
  * @since 1.7.0
@@ -199,7 +201,7 @@ export function compose(
   size: CampaignSize,
   options?: CampaignComposeOptions,
 ): JssObject {
-  const { theme = 'light' } = options || {};
+  const { theme = 'light', color: explicitColor } = options || {};
 
   const sizes: Record<CampaignSize, any> = {
     maximum: maximumBase,
@@ -212,10 +214,13 @@ export function compose(
 
   const base = sizes[size];
 
-  // Apply theme color
+  // Determine final color (explicit color overrides theme)
+  const finalColor = explicitColor || (theme === 'dark' ? color.white : color.black);
+
+  // Apply color
   const composed = {
     ...base,
-    color: theme === 'dark' ? color.white : color.black,
+    color: finalColor,
   };
 
   // Generate className

@@ -24,6 +24,7 @@ const scalingContainerMedium = 650;
 export interface SimpleRichTextOptions {
   size?: 'base' | 'large' | 'largest';
   theme?: 'light' | 'dark';
+  color?: string;
   scaling?: boolean;
 }
 
@@ -33,6 +34,7 @@ export interface SimpleRichTextOptions {
  */
 export interface AdvancedRichTextOptions {
   theme?: 'light' | 'dark';
+  color?: string;
 }
 
 /**
@@ -154,7 +156,7 @@ const advancedBase = {
 /**
  * Composable simple rich text style selector
  *
- * Creates rich text styles with configurable size, theme, and scaling options.
+ * Creates rich text styles with configurable size, theme, color, and scaling options.
  * This function replaces the need for multiple separate exports like
  * simpleLarge, simpleDark, simpleLargeDark, etc.
  *
@@ -169,6 +171,13 @@ const advancedBase = {
  * // Large size with dark theme
  * const styles = composeSimple({ size: 'large', theme: 'dark' });
  *
+ * // With explicit gray color
+ * const styles = composeSimple({ color: token.color.gray.dark });
+ *
+ * // With theme-aware subdued color
+ * import { theme } from '@universityofmaryland/web-utilities-library/theme';
+ * const styles = composeSimple({ color: theme.subdued(isThemeDark) });
+ *
  * // Largest size with scaling
  * const styles = composeSimple({ size: 'largest', scaling: true });
  * ```
@@ -176,7 +185,7 @@ const advancedBase = {
  * @since 1.7.0
  */
 export function composeSimple(options?: SimpleRichTextOptions): JssObject {
-  const { size = 'base', theme = 'light', scaling = false } = options || {};
+  const { size = 'base', theme = 'light', color: explicitColor, scaling = false } = options || {};
   let composed: Record<string, any> = { ...simpleBase };
 
   if (size === 'large') {
@@ -226,12 +235,19 @@ export function composeSimple(options?: SimpleRichTextOptions): JssObject {
     };
   }
 
-  if (theme === 'dark') {
-    composed = {
-      ...composed,
-      ...themeDarkColors,
-    };
-  }
+  // Determine final color and apply appropriate styles
+  const finalColor = explicitColor || (theme === 'dark' ? color.white : color.black);
+  const useWhiteLinks = finalColor === color.white;
+
+  composed = {
+    ...composed,
+    color: finalColor,
+    '& *': {
+      color: finalColor,
+    },
+    // Apply white link styles if color is white
+    ...(useWhiteLinks ? animation.nestedElements.linksDark : {}),
+  };
 
   // Generate appropriate className
   const classNameParts = [classNamePrefix, 'simple'];
@@ -263,9 +279,9 @@ export function composeSimple(options?: SimpleRichTextOptions): JssObject {
  * Composable advanced rich text style selector
  *
  * Creates advanced rich text styles with support for lists, tables, code blocks,
- * and quotes. Supports theme configuration.
+ * and quotes. Supports theme and color configuration.
  *
- * @param options - Configuration object for theme variant
+ * @param options - Configuration object for theme and color variant
  * @returns JSS object with composed styles and appropriate className
  *
  * @example
@@ -275,12 +291,19 @@ export function composeSimple(options?: SimpleRichTextOptions): JssObject {
  *
  * // Dark theme
  * const styles = composeAdvanced({ theme: 'dark' });
+ *
+ * // With explicit gray color
+ * const styles = composeAdvanced({ color: token.color.gray.dark });
+ *
+ * // With theme-aware subdued color
+ * import { theme } from '@universityofmaryland/web-utilities-library/theme';
+ * const styles = composeAdvanced({ color: theme.subdued(isThemeDark) });
  * ```
  *
  * @since 1.7.0
  */
 export function composeAdvanced(options?: AdvancedRichTextOptions): JssObject {
-  const { theme = 'light' } = options || {};
+  const { theme = 'light', color: explicitColor } = options || {};
 
   let composed: Record<string, any> = {
     FontWeight: font.weight.normal,
@@ -301,10 +324,20 @@ export function composeAdvanced(options?: AdvancedRichTextOptions): JssObject {
     },
   };
 
-  if (theme === 'dark') {
-    composed = {
-      ...composed,
-      ...themeDarkColors,
+  // Determine final color and apply appropriate styles
+  const finalColor = explicitColor || (theme === 'dark' ? color.white : color.black);
+  const useWhiteLinks = finalColor === color.white;
+
+  composed = {
+    ...composed,
+    color: finalColor,
+    '& *': {
+      color: finalColor,
+    },
+    // Apply white link styles if color is white
+    ...(useWhiteLinks ? animation.nestedElements.linksDark : {}),
+    // Additional dark theme styles for tables and lists when using white color
+    ...(useWhiteLinks && {
       '& table': {
         ...table.inline,
         '& tr:nth-child(even)': {
@@ -323,8 +356,8 @@ export function composeAdvanced(options?: AdvancedRichTextOptions): JssObject {
           color: color.white,
         },
       },
-    };
-  }
+    }),
+  };
 
   // Generate className
   const className =

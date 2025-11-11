@@ -23,8 +23,10 @@ export type SerifSize =
  * @since 1.7.0
  */
 export interface SerifComposeOptions {
-  /** Theme variant for color */
+  /** Theme variant for color (overridden by color if provided) */
   theme?: 'light' | 'dark';
+  /** Explicit color value (overrides theme) */
+  color?: string;
 }
 
 /**
@@ -210,7 +212,7 @@ const mediumBase = {
  * Creates serif typography styles with configurable size and theme options.
  *
  * @param size - Typography size variant
- * @param options - Configuration for theme
+ * @param options - Configuration for theme and color
  * @returns JSS object with composed styles and appropriate className
  *
  * @example
@@ -221,12 +223,12 @@ const mediumBase = {
  * // With dark theme
  * const darkHeading = serif.compose('large', { theme: 'dark' });
  *
- * // In element builder with theme
- * const styleElements = {
- *   ...typography.serif.compose('larger', {
- *     theme: isThemeDark ? 'dark' : 'light'
- *   }),
- * };
+ * // With explicit color
+ * const grayHeading = serif.compose('large', { color: token.color.gray.dark });
+ *
+ * // With theme-aware subdued color
+ * import { theme } from '@universityofmaryland/web-utilities-library/theme';
+ * const subtitle = serif.compose('medium', { color: theme.subdued(isThemeDark) });
  * ```
  *
  * @since 1.7.0
@@ -235,7 +237,7 @@ export function compose(
   size: SerifSize,
   options?: SerifComposeOptions,
 ): JssObject {
-  const { theme = 'light' } = options || {};
+  const { theme = 'light', color: explicitColor } = options || {};
 
   const sizes: Record<SerifSize, any> = {
     maximum: maximumBase,
@@ -247,10 +249,13 @@ export function compose(
 
   const base = sizes[size];
 
-  // Apply theme color
+  // Determine final color (explicit color overrides theme)
+  const finalColor = explicitColor || (theme === 'dark' ? color.white : color.black);
+
+  // Apply color
   const composed = {
     ...base,
-    color: theme === 'dark' ? color.white : color.black,
+    color: finalColor,
   };
 
   // Generate className

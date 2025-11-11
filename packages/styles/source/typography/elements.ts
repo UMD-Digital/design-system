@@ -164,8 +164,10 @@ export type ElementType =
  * @since 1.7.0
  */
 export interface ElementComposeOptions {
-  /** Theme variant for color */
+  /** Theme variant for color (overridden by color if provided) */
   theme?: 'light' | 'dark';
+  /** Explicit color value (overrides theme) */
+  color?: string;
 }
 
 /**
@@ -174,7 +176,7 @@ export interface ElementComposeOptions {
  * Creates element typography styles with configurable type and theme.
  *
  * @param type - Typography element type
- * @param options - Configuration for theme
+ * @param options - Configuration for theme and color
  * @returns JSS object with composed styles and appropriate className
  *
  * @example
@@ -185,12 +187,12 @@ export interface ElementComposeOptions {
  * // With dark theme
  * const darkEyebrow = elements.compose('eyebrow', { theme: 'dark' });
  *
- * // In element builder with theme
- * const styleElements = {
- *   ...typography.elements.compose('eyebrow', {
- *     theme: isThemeDark ? 'dark' : 'light'
- *   })
- * };
+ * // With explicit color
+ * const grayLabel = elements.compose('labelSmall', { color: token.color.gray.dark });
+ *
+ * // With theme-aware subdued color
+ * import { theme } from '@universityofmaryland/web-utilities-library/theme';
+ * const caption = elements.compose('small', { color: theme.subdued(isThemeDark) });
  * ```
  *
  * @since 1.7.0
@@ -199,7 +201,7 @@ export function compose(
   type: ElementType,
   options?: ElementComposeOptions,
 ): JssObject {
-  const { theme = 'light' } = options || {};
+  const { theme = 'light', color: explicitColor } = options || {};
 
   // Select base variant
   const bases: Record<ElementType, any> = {
@@ -212,10 +214,13 @@ export function compose(
 
   const base = bases[type];
 
-  // Apply theme color
+  // Determine final color (explicit color overrides theme)
+  const finalColor = explicitColor || (theme === 'dark' ? color.white : color.black);
+
+  // Apply color
   const composed = {
     ...base,
-    color: theme === 'dark' ? color.white : color.black,
+    color: finalColor,
   };
 
   // Generate className

@@ -26,8 +26,10 @@ export type SansSize =
  * @since 1.7.0
  */
 export interface SansComposeOptions {
-  /** Theme variant for color */
+  /** Theme variant for color (overridden by color if provided) */
   theme?: 'light' | 'dark';
+  /** Explicit color value (overrides theme) */
+  color?: string;
   /** Enable container-based scaling (only for 'larger' and 'min') */
   scaling?: boolean;
 }
@@ -366,7 +368,7 @@ const scalingMinBase = {
  * Creates sans-serif typography styles with configurable size, theme, and scaling options.
  *
  * @param size - Typography size variant
- * @param options - Configuration for theme and scaling
+ * @param options - Configuration for theme, color, and scaling
  * @returns JSS object with composed styles and appropriate className
  *
  * @example
@@ -377,16 +379,15 @@ const scalingMinBase = {
  * // With dark theme
  * const darkHeading = sans.compose('large', { theme: 'dark' });
  *
+ * // With explicit color
+ * const grayHeading = sans.compose('large', { color: token.color.gray.dark });
+ *
+ * // With theme-aware subdued color
+ * import { theme } from '@universityofmaryland/web-utilities-library/theme';
+ * const caption = sans.compose('small', { color: theme.subdued(isThemeDark) });
+ *
  * // With scaling
  * const scaledHeading = sans.compose('larger', { scaling: true });
- *
- * // In element builder with theme
- * const styleElements = {
- *   ...typography.sans.compose('large', {
- *     theme: isThemeDark ? 'dark' : 'light'
- *   }),
- *   ...animation.line.slideUnderBlack,
- * };
  * ```
  *
  * @since 1.7.0
@@ -395,7 +396,7 @@ export function compose(
   size: SansSize,
   options?: SansComposeOptions,
 ): JssObject {
-  const { theme = 'light', scaling = false } = options || {};
+  const { theme = 'light', color: explicitColor, scaling = false } = options || {};
 
   // Select base variant
   let base: any;
@@ -415,10 +416,13 @@ export function compose(
     base = sizes[size];
   }
 
-  // Apply theme color
+  // Determine final color (explicit color overrides theme)
+  const finalColor = explicitColor || (theme === 'dark' ? color.white : color.black);
+
+  // Apply color
   const composed = {
     ...base,
-    color: theme === 'dark' ? color.white : color.black,
+    color: finalColor,
   };
 
   // Generate className

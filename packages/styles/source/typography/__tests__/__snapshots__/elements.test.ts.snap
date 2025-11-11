@@ -123,6 +123,7 @@ exports[`typography/elements fonts objects should match snapshot for all fonts o
 
 exports[`typography/elements should match snapshot 1`] = `
 {
+  "compose": [Function],
   "eyebrow": {
     "color": "#000000",
     "fontSize": "12px",

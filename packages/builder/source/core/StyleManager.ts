@@ -208,49 +208,98 @@ export class StyleManager {
   }
 
   /**
-   * Compile all queued styles into a CSS string
-   * Handles priority ordering and selector grouping
+   * Compile all queued styles into a CSS string using CSS cascade order
    *
-   * @returns Compiled CSS string
+   * Instead of merging styles at the object level, this generates separate CSS
+   * for each priority level and concatenates them. This preserves duplicate
+   * properties and lets CSS cascade determine which styles win.
+   *
+   * Priority order (lower priority first, higher priority last):
+   * - Priority 1: .withStyles() - custom inline styles
+   * - Priority 2: .styled() - design system presets
+   *
+   * Example output:
+   * ```css
+   * .test { color: black; }      // Priority 1
+   * .test { color: green; }      // Priority 2 (wins via cascade)
+   * ```
+   *
+   * @returns Compiled CSS string with styles in cascade order
    */
   compile(): string {
     if (this.styleQueue.length === 0) {
       return '';
     }
 
+    // Sort by priority (lower priority first, higher priority last)
     const sorted = [...this.styleQueue].sort((a, b) => a.priority - b.priority);
 
-    const grouped = new Map<string, Record<string, any>>();
-    sorted.forEach(({ selector, styles }) => {
-      if (!grouped.has(selector)) {
-        grouped.set(selector, {});
+    // Group by priority level
+    const byPriority = new Map<number, StyleEntry[]>();
+    sorted.forEach((entry) => {
+      if (!byPriority.has(entry.priority)) {
+        byPriority.set(entry.priority, []);
       }
-      Object.assign(grouped.get(selector)!, this.deepMerge(styles));
+      byPriority.get(entry.priority)!.push(entry);
     });
 
-    const cssRules: string[] = [];
-    grouped.forEach((styles, selector) => {
-      try {
-        const css = jssToCSS({
-          styleObj: { [selector]: styles },
+    // Generate CSS for each priority level separately
+    const cssByPriority: string[] = [];
+
+    // Process each priority level in order (ascending)
+    Array.from(byPriority.keys())
+      .sort((a, b) => a - b)
+      .forEach((priority) => {
+        const entries = byPriority.get(priority)!;
+
+        // Group entries by selector within this priority level
+        const grouped = new Map<string, Record<string, any>>();
+        entries.forEach(({ selector, styles }) => {
+          if (!grouped.has(selector)) {
+            grouped.set(selector, {});
+          }
+          const currentStyles = grouped.get(selector)!;
+          const mergedStyles = this.deepMerge(styles);
+          grouped.set(selector, this.intelligentMerge(currentStyles, mergedStyles));
         });
-        if (css && css.trim()) {
-          cssRules.push(css);
-        }
-      } catch (error) {
-        console.error(
-          `Error compiling styles for selector "${selector}":`,
-          error,
-        );
-      }
-    });
 
-    return cssRules.join('\n\n');
+        // Generate CSS for this priority level
+        const cssRules: string[] = [];
+        grouped.forEach((styles, selector) => {
+          try {
+            const css = jssToCSS({
+              styleObj: { [selector]: styles },
+            });
+            if (css && css.trim()) {
+              cssRules.push(css);
+            }
+          } catch (error) {
+            console.error(
+              `Error compiling styles for selector "${selector}":`,
+              error,
+            );
+          }
+        });
+
+        if (cssRules.length > 0) {
+          cssByPriority.push(cssRules.join('\n'));
+        }
+      });
+
+    // Concatenate all priority levels in order
+    // Later priorities appear last in CSS, winning via cascade
+    return cssByPriority.join('\n');
   }
 
   /**
    * Deep merge style objects
-   * Handles nested selectors and media queries
+   * Handles nested selectors, media queries, and container queries
+   *
+   * Special handling for:
+   * - @media queries: Merges properties within matching queries
+   * - @container queries: Merges properties within matching queries
+   * - @supports queries: Merges properties within matching queries
+   * - Nested selectors (&:hover, etc): Merges properties within matching selectors
    */
   private deepMerge(source: Record<string, any>): Record<string, any> {
     const result: Record<string, any> = {};
@@ -259,6 +308,53 @@ export class StyleManager {
       if (value && typeof value === 'object' && !Array.isArray(value)) {
         result[key] = this.deepMerge(value);
       } else {
+        result[key] = value;
+      }
+    });
+
+    return result;
+  }
+
+  /**
+   * Intelligently merge two style objects
+   * Recursively merges nested queries (@media, @container, etc.) and selectors
+   *
+   * @param target - The target object to merge into
+   * @param source - The source object to merge from
+   * @returns Merged object with intelligent query composition
+   */
+  private intelligentMerge(
+    target: Record<string, any>,
+    source: Record<string, any>,
+  ): Record<string, any> {
+    const result = { ...target };
+
+    Object.entries(source).forEach(([key, value]) => {
+      // Check if this is a nested query or selector that should be merged
+      const isNestedRule =
+        key.startsWith('@media') ||
+        key.startsWith('@container') ||
+        key.startsWith('@supports') ||
+        key.startsWith('&') ||
+        key.startsWith(':');
+
+      if (isNestedRule && typeof value === 'object' && !Array.isArray(value)) {
+        // If the key exists in target, merge the nested properties
+        if (result[key] && typeof result[key] === 'object' && !Array.isArray(result[key])) {
+          result[key] = this.intelligentMerge(result[key], value);
+        } else {
+          // Key doesn't exist, just assign
+          result[key] = value;
+        }
+      } else if (typeof value === 'object' && !Array.isArray(value)) {
+        // Regular nested object, use recursive merge
+        if (result[key] && typeof result[key] === 'object' && !Array.isArray(result[key])) {
+          result[key] = this.intelligentMerge(result[key], value);
+        } else {
+          result[key] = value;
+        }
+      } else {
+        // Primitive value, just assign (source wins)
         result[key] = value;
       }
     });

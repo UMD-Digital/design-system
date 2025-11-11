@@ -152,6 +152,230 @@ describe('StyleManager', () => {
     });
   });
 
+  describe('CSS Cascade Order', () => {
+    test('should output styles in cascade order with separate blocks per priority', () => {
+      // Priority 1 - base styles (output first)
+      const baseStyles = {
+        element: {
+          textTransform: 'uppercase',
+          '@media (min-width: 1024px)': {
+            maxWidth: '816px',
+            fontSize: '80px',
+          },
+        },
+      };
+
+      // Priority 2 - override styles (output last, wins via cascade)
+      const overrideStyles = {
+        element: {
+          fontSize: '16px',
+          '@media (min-width: 1024px)': {
+            fontSize: '96px',
+            lineHeight: '0.91em',
+          },
+        },
+      };
+
+      manager.add(baseStyles, 'test-class', 1);
+      manager.add(overrideStyles, 'test-class', 2);
+      const compiled = manager.compile();
+
+      // Should contain all properties from both priority levels
+      expect(compiled).toContain('text-transform: uppercase');
+      expect(compiled).toContain('max-width: 816px');
+      expect(compiled).toContain('line-height: 0.91em');
+
+      // Both font-size values appear (CSS cascade determines winner)
+      expect(compiled).toContain('font-size: 96px'); // Priority 2 (wins)
+      expect(compiled).toContain('font-size: 80px'); // Priority 1 (appears first)
+    });
+
+    test('should output container queries in cascade order', () => {
+      const baseStyles = {
+        element: {
+          '@container (min-width: 768px)': {
+            padding: '20px',
+            display: 'flex',
+          },
+        },
+      };
+
+      const overrideStyles = {
+        element: {
+          '@container (min-width: 768px)': {
+            gap: '10px',
+            display: 'grid', // Wins via cascade
+          },
+        },
+      };
+
+      manager.add(baseStyles, 'test-class', 1);
+      manager.add(overrideStyles, 'test-class', 2);
+      const compiled = manager.compile();
+
+      expect(compiled).toContain('padding: 20px');
+      expect(compiled).toContain('gap: 10px');
+
+      // Both display values appear (CSS cascade determines winner)
+      expect(compiled).toContain('display: grid'); // Priority 2 (wins)
+      expect(compiled).toContain('display: flex'); // Priority 1 (appears first)
+    });
+
+    test('should handle multiple different media queries', () => {
+      const presetStyles = {
+        element: {
+          '@media (min-width: 768px)': {
+            fontSize: '20px',
+          },
+          '@media (min-width: 1024px)': {
+            fontSize: '24px',
+          },
+        },
+      };
+
+      const inlineStyles = {
+        element: {
+          '@media (min-width: 768px)': {
+            color: 'blue',
+          },
+          '@media (min-width: 1280px)': {
+            color: 'red',
+          },
+        },
+      };
+
+      manager.add(presetStyles, 'test-class', 1);
+      manager.add(inlineStyles, 'test-class', 2);
+      const compiled = manager.compile();
+
+      // All queries should be present
+      expect(compiled).toContain('min-width: 768px');
+      expect(compiled).toContain('min-width: 1024px');
+      expect(compiled).toContain('min-width: 1280px');
+      expect(compiled).toContain('color: blue');
+      expect(compiled).toContain('color: red');
+    });
+
+    test('should merge nested pseudo-selectors within media queries', () => {
+      const presetStyles = {
+        element: {
+          '@media (min-width: 1024px)': {
+            '&:hover': {
+              color: 'blue',
+            },
+          },
+        },
+      };
+
+      const inlineStyles = {
+        element: {
+          '@media (min-width: 1024px)': {
+            '&:hover': {
+              backgroundColor: 'white',
+            },
+          },
+        },
+      };
+
+      manager.add(presetStyles, 'test-class', 1);
+      manager.add(inlineStyles, 'test-class', 2);
+      const compiled = manager.compile();
+
+      // Both hover properties should be present
+      expect(compiled).toContain('color: blue');
+      expect(compiled).toContain('background-color: white');
+    });
+
+    test('should handle @supports queries', () => {
+      const presetStyles = {
+        element: {
+          '@supports (display: grid)': {
+            display: 'grid',
+          },
+        },
+      };
+
+      const inlineStyles = {
+        element: {
+          '@supports (display: grid)': {
+            gap: '20px',
+          },
+        },
+      };
+
+      manager.add(presetStyles, 'test-class', 1);
+      manager.add(inlineStyles, 'test-class', 2);
+      const compiled = manager.compile();
+
+      expect(compiled).toContain('display: grid');
+      expect(compiled).toContain('gap: 20px');
+    });
+
+    test('should respect priority order in CSS cascade', () => {
+      manager.add(
+        {
+          element: {
+            '@media (min-width: 1024px)': { color: 'red' },
+          },
+        },
+        'test',
+        1,
+      );
+
+      manager.add(
+        {
+          element: {
+            '@media (min-width: 1024px)': { color: 'blue' },
+          },
+        },
+        'test',
+        2,
+      );
+
+      const compiled = manager.compile();
+
+      // Both colors appear in separate blocks
+      // Priority 2 (blue) appears last and wins via CSS cascade
+      expect(compiled).toContain('color: blue');
+      expect(compiled).toContain('color: red');
+
+      // Verify blue comes after red in the output
+      const redIndex = compiled.indexOf('color: red');
+      const blueIndex = compiled.indexOf('color: blue');
+      expect(blueIndex).toBeGreaterThan(redIndex);
+    });
+
+    test('should handle deeply nested structures', () => {
+      const presetStyles = {
+        element: {
+          '@media (min-width: 1024px)': {
+            '& > div': {
+              padding: '10px',
+            },
+          },
+        },
+      };
+
+      const inlineStyles = {
+        element: {
+          '@media (min-width: 1024px)': {
+            '& > div': {
+              margin: '5px',
+            },
+          },
+        },
+      };
+
+      manager.add(presetStyles, 'test-class', 1);
+      manager.add(inlineStyles, 'test-class', 2);
+      const compiled = manager.compile();
+
+      // Both nested properties should be merged
+      expect(compiled).toContain('padding: 10px');
+      expect(compiled).toContain('margin: 5px');
+    });
+  });
+
   describe('Performance', () => {
     test('should handle large number of styles efficiently', () => {
       const start = performance.now();

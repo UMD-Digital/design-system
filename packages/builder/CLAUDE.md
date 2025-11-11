@@ -127,6 +127,77 @@ Generates: `animation: slideUnder 300ms ease-in-out 100ms;`
 - `.withAnimationFor(child, ...)` for parent-child coordination
 - See PLAN.md for full Phase 2 specification
 
+## Style Priority System - CSS Cascade Order
+
+The Element Builder uses a **CSS cascade order** approach where styles from different priority levels are output as separate CSS blocks, allowing the browser's native cascade to determine which styles win.
+
+### Priority Levels
+
+**Priority 1** (Lower - Base Styles):
+- `.styled()` - Design system preset styles
+- `.withAnimation()` - Animation definitions
+- Outputted FIRST in CSS (base layer)
+
+**Priority 2** (Higher - Override Styles):
+- `.withStyles()` - Custom inline styles
+- `.withStylesIf()` - Conditional custom styles
+- Outputted LAST in CSS (wins conflicts via cascade)
+
+### CSS Cascade Behavior
+
+Instead of merging at the JavaScript object level, the system generates **separate CSS blocks** for each priority level:
+
+```typescript
+const headline = new ElementBuilder(h1)
+  .styled(Styles.typography.campaign.fonts.extraLarge)  // Priority 1 - base
+  .withStyles({                                         // Priority 2 - overrides
+    element: {
+      textTransform: 'uppercase',
+      '@media (min-width: 1024px)': {
+        maxWidth: '816px',
+        fontSize: '80px',  // Overrides preset via cascade
+      },
+    },
+  })
+  .build();
+
+// Generated CSS (cascade order):
+// Priority 1 block (preset - outputs first):
+// .class {
+//   font-size: 96px;
+//   line-height: 0.91em;
+// }
+// @media (min-width: 1024px) {
+//   .class { font-size: 96px; line-height: 0.91em; }
+// }
+//
+// Priority 2 block (custom - outputs last, wins via cascade):
+// .class {
+//   text-transform: uppercase;
+// }
+// @media (min-width: 1024px) {
+//   .class { max-width: 816px; font-size: 80px; }  ← fontSize wins!
+// }
+```
+
+### Key Benefits
+
+✅ **True CSS cascade** - browser determines which styles win
+✅ **All properties preserved** from both sources
+✅ **Predictable override behavior** - later rules win
+✅ **Flexible customization** - custom styles override presets naturally
+✅ **Works like native CSS** - no JavaScript object merging confusion
+
+### Intelligent Query Composition
+
+Within each priority level, matching media/container queries ARE merged:
+
+- Same `@media` query → properties combined within that priority level
+- Same `@container` query → properties combined within that priority level
+- Same `@supports` query → properties combined within that priority level
+
+**See PRIORITY-SYSTEM.md for comprehensive documentation and examples.**
+
 ## Module Structure
 
 ```
@@ -543,6 +614,7 @@ See PLAN.md for full specification. Summary:
 
 - **README.md** - User-facing documentation and examples
 - **PLAN.md** - Development roadmap and architecture decisions
+- **PRIORITY-SYSTEM.md** - Comprehensive guide to style priority and merging
 - **API.md** (Planned) - Complete API reference
 - **MIGRATION.md** (Planned) - V1 to V2 migration guide
 - **ANIMATIONS.md** (Planned) - Animation system cookbook

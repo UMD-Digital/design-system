@@ -161,14 +161,16 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
   // ============================================================================
 
   /**
-   * Add styles (JSS object, ElementStyles, or StyleDefinition from styles library)
-   * Styles are accumulated and merged with proper priority
+   * Add custom inline styles (JSS object, ElementStyles, or StyleDefinition)
+   *
+   * Custom styles have higher CSS cascade priority (outputted LAST in CSS),
+   * meaning they override preset styles from .styled() for conflicting properties.
    *
    * Note: Requires a className to be set via .withClassName() or .styled()
    * If no className is present, styles will be skipped with a warning
    *
    * @param styles - Style definition or ElementStyles object
-   * @param priority - Optional priority for style ordering (higher = applied last, default: 2)
+   * @param priority - Optional priority for CSS cascade order (higher = outputted last, default: 2)
    * @returns This builder for chaining
    */
   withStyles(
@@ -192,10 +194,10 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
   }
 
   /**
-   * Conditionally add styles
+   * Conditionally add custom inline styles
    * @param condition - Whether to add the styles
    * @param styles - Styles to add if condition is true
-   * @param priority - Optional priority (default: 2)
+   * @param priority - Optional priority (higher = outputted last in CSS, default: 2)
    * @returns This builder for chaining
    */
   withStylesIf(
@@ -210,14 +212,17 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
   }
 
   /**
-   * Apply a JSS style object from the styles library
+   * Apply design system preset styles from the styles library
    *
    * This is a convenience method that:
    * 1. Extracts the className from the style object
-   * 2. Applies the complete style object
+   * 2. Applies the complete style object as base/default styles
+   *
+   * Preset styles from .styled() have lower CSS cascade priority (outputted FIRST),
+   * meaning custom .withStyles() will override them for conflicting properties.
    *
    * @param styleObject - JSS StyleDefinition from @universityofmaryland/web-styles-library
-   * @param priority - Optional priority for style ordering (default: 1 to override base styles)
+   * @param priority - Optional priority for CSS cascade order (lower = outputted first, default: 1)
    * @returns This builder for chaining
    *
    * @example
@@ -225,14 +230,13 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
    * import * as Styles from '@universityofmaryland/web-styles-library';
    *
    * const headline = new ElementBuilder(headlineElement)
-   *   .styled(Styles.typography.sans.larger)
+   *   .styled(Styles.typography.sans.larger)    // Priority 1 - base
+   *   .withStyles({ element: { color: 'red' }}) // Priority 2 - overrides
    *   .build();
    *
-   * // Equivalent to:
-   * // new ElementBuilder(headlineElement)
-   * //   .withClassName('umd-headline-sans-larger')
-   * //   .withStyles(Styles.typography.sans.larger)
-   * //   .build();
+   * // CSS output (cascade order):
+   * // .class { ...preset styles... }
+   * // .class { color: red; } // custom overrides
    * ```
    */
   styled(
@@ -557,7 +561,7 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
         },
       },
       1,
-    ); // Priority 1 (same as .styled(), lower than custom .withStyles())
+    ); // Priority 1 (same as .styled(), base styles)
 
     return this;
   }
@@ -828,7 +832,7 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
 
       throw new Error(
         `ElementBuilder: Cannot modify builder after build() has been called${classInfo}. ` +
-        'Create a new builder instance instead of reusing a built one.'
+        `Create a new builder instance instead of reusing a built one.`
       );
     }
   }

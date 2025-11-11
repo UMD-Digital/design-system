@@ -1,10 +1,11 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
-import { type ElementModel } from '../../_types';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { layout } from 'atomic';
 import { PersonCard } from './_types';
+import { type ElementModel } from '../../_types';
 
 const smallBreakpoint = token.media.breakpointValues.small.max;
 
@@ -47,12 +48,17 @@ export default ({
 
   if (name) {
     const nameModel = new ElementBuilder(name)
-      .styled(Styles.typography.sans.fonts.large)
-      .withThemeDark(isThemeDark)
+      .styled(
+        Styles.typography.sans.compose('large', {
+          theme: theme.fontColor(isThemeDark),
+        }),
+      )
       .withStyles({
         element: {
           fontWeight: `${token.font.weight.bold}`,
-          color: `${token.color.black}`,
+          ...(!isThemeDark && {
+            color: `${token.color.black}`,
+          }),
 
           [`& + *`]: {
             marginTop: token.spacing.min,

@@ -1,9 +1,9 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import {
   animation,
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
 import createSocialCampaignColumns, {
   type SocialCampaignColumnsProps,

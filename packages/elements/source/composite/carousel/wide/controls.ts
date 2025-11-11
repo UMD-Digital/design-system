@@ -1,8 +1,8 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { arrow_left as iconArrowLeft } from '@universityofmaryland/web-icons-library/arrows';
-import { createElementWithRefs } from './_elementModel';
 import { animations } from 'atomic';
+import { createElementWithRefs } from './_elementModel';
 import { type CarouselWideProps } from '../_types';
 
 export const createControlButton = (

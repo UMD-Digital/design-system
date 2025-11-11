@@ -1,6 +1,6 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { type QuoteBaseProps, type QuoteVariantProps } from '../_types';
 
 interface QuoteActionProps

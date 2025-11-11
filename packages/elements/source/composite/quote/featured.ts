@@ -1,5 +1,5 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { imageFromSvg } from '@universityofmaryland/web-utilities-library/media';
 import InlineQuote from './inline';
 import { image as elementImage, action as elementAction } from './elements';

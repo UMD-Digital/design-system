@@ -2,9 +2,9 @@ import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
+import { assets } from 'atomic';
 import { createElementWithRefs } from './_elementModel';
 import { createControlButton } from './controls';
-import { assets } from 'atomic';
 import { type CarouselWideProps } from '../_types';
 import { type UMDElement } from '../../../_types';
 

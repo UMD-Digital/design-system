@@ -1,5 +1,5 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { external_link as iconExternalLink } from '@universityofmaryland/web-icons-library/controls';
 import { document as iconDocument } from '@universityofmaryland/web-icons-library/files';
 import { arrow_long as iconArrowLong } from '@universityofmaryland/web-icons-library/arrows';

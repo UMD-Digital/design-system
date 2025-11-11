@@ -1,11 +1,11 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
-import { type ElementModel } from '../../../_types';
 import { assets, textLockup } from 'atomic';
 import { PersonBio } from '../_types';
+import { type ElementModel } from '../../../_types';
 
 const createTextContainer = (props: PersonBio): ElementModel<HTMLElement> => {
   const { isThemeDark, name, ...textProps } = props;

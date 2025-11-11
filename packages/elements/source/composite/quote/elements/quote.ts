@@ -1,6 +1,6 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { default as elementIcon } from './icon';
 import { SMALL } from '../_constants';
 import { type QuoteTextProps } from '../_types';

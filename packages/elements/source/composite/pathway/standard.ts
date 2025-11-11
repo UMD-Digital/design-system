@@ -1,6 +1,6 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
 import { createTextLockupMedium, createAssetContent } from './_common';
 import { type PathwayStandardProps } from './_types';

@@ -3,7 +3,6 @@ import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
-import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { animations, assets } from 'atomic';
 import { type HeroVideoArrowProps as BaseHeroVideoArrowProps } from '../_types';
 import { type ElementModel } from '../../../_types';

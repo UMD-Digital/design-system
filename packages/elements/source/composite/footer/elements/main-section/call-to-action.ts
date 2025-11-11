@@ -1,6 +1,6 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { BREAKPOINTS } from '../../globals';
 import { BaseProps } from '../../_types';
 import { type UMDElement } from '../../../../_types';

@@ -1,5 +1,5 @@
-import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import { pin as iconPin } from '@universityofmaryland/web-icons-library/location';
 import {
   calendar as iconCalendar,

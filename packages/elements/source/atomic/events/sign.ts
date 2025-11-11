@@ -1,8 +1,8 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 
 const makeDateElement = ({
   element,

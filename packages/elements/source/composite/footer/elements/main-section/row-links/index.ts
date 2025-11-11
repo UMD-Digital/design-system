@@ -1,5 +1,5 @@
-import { layout, token } from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { layout, token } from '@universityofmaryland/web-styles-library';
 import createSocialCampaignColumns, {
   type SocialCampaignColumnsProps,
 } from '../social';

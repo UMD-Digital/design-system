@@ -1,8 +1,8 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import * as layoutStyles from '@universityofmaryland/web-styles-library/layout';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { parseSvgString } from '@universityofmaryland/web-utilities-library/media';
 import { extractIconElement } from '@universityofmaryland/web-utilities-library/dom';
 import { external_link as iconExternalLink } from '@universityofmaryland/web-icons-library/controls';

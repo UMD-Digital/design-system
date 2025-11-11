@@ -1,9 +1,9 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
 import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
-import { type ElementModel } from '../../../_types';
 import { assets } from 'atomic';
+import { type ElementModel } from '../../../_types';
 
 interface CardStackProps {
   featured: HTMLImageElement | HTMLVideoElement;

@@ -1,11 +1,11 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { default as elementAction } from './action';
 import { default as elementQuote } from './quote';
 import { SMALL } from '../_constants';
-import { type ElementModel } from '../../../_types';
 import { type QuoteTextProps } from '../_types';
+import { type ElementModel } from '../../../_types';
 
 interface ChildrenProps
   extends Pick<

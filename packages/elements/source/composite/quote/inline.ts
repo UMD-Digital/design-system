@@ -1,5 +1,5 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
 import { image as elementImage, text as elementText } from './elements';
 import { quoteAnimation } from './helper/animation';
 import { SMALL } from './_constants';

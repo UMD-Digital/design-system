@@ -1,5 +1,5 @@
-import { token, typography } from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { token, typography } from '@universityofmaryland/web-styles-library';
 import {
   facebook as iconFacebook,
   x as iconX,

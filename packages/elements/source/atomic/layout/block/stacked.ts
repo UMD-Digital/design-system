@@ -1,6 +1,6 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import { asset as assetElement } from '@universityofmaryland/web-styles-library/element';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import {
   createMediaQuery,
   createMediaQueryRange,

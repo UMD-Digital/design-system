@@ -179,4 +179,58 @@ export const theme = {
    */
   fontColor: (isDark?: boolean): 'light' | 'dark' =>
     isDark ? 'dark' : 'light',
+
+  /**
+   * Get subdued/secondary text color for theme
+   *
+   * Returns a less prominent text color appropriate for secondary text,
+   * captions, labels, or supporting content. Adapts to theme context.
+   *
+   * @param isDark - Boolean indicating whether dark theme is active
+   * @returns Light gray for dark themes, dark gray for light themes
+   *
+   * @example
+   * ```typescript
+   * // Secondary text that adapts to theme
+   * typography.sans.compose('small', {
+   *   color: theme.subdued(isThemeDark)
+   * })
+   *
+   * // Caption text
+   * .withStyles({
+   *   element: {
+   *     color: theme.subdued(isThemeDark)  // Gray variant for theme
+   *   }
+   * })
+   * ```
+   */
+  subdued: (isDark?: boolean): string =>
+    isDark ? token.color.gray.light : token.color.gray.dark,
+
+  /**
+   * Get muted/tertiary text color for theme
+   *
+   * Returns the most subtle text color appropriate for tertiary text,
+   * placeholder text, or disabled states. More muted than subdued().
+   *
+   * @param isDark - Boolean indicating whether dark theme is active
+   * @returns Lighter gray for dark themes, medium gray for light themes
+   *
+   * @example
+   * ```typescript
+   * // Placeholder or disabled text
+   * typography.sans.compose('small', {
+   *   color: theme.muted(isThemeDark)
+   * })
+   *
+   * // Tertiary supporting text
+   * .withStyles({
+   *   element: {
+   *     color: theme.muted(isThemeDark)  // Most subtle gray for theme
+   *   }
+   * })
+   * ```
+   */
+  muted: (isDark?: boolean): string =>
+    isDark ? token.color.gray.lighter : token.color.gray.medium,
 } as const;

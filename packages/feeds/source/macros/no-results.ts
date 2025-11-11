@@ -1,6 +1,7 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { Atomic } from '@universityofmaryland/web-elements-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { type ElementModel } from '../_types';
 
 interface NoResultsContentType {
@@ -20,8 +21,11 @@ export default ({
   isAlignedCenter = true,
 }: NoResultsContentType): ElementModel => {
   const headline = new ElementBuilder(document.createElement('p'))
-    .styled(Styles.typography.sans.fonts.extraLarge)
-    .withThemeDark(isThemeDark)
+    .styled(
+      Styles.typography.sans.compose('extralarge', {
+        theme: theme.fontColor(isThemeDark),
+      }),
+    )
     .withStyles({
       element: {
         textTransform: 'uppercase',
@@ -33,7 +37,6 @@ export default ({
 
   const composite = new ElementBuilder()
     .styled(Styles.layout.grid.stacked)
-    .withThemeDark(isThemeDark)
     .withChild(headline)
     .withStyles({
       element: {

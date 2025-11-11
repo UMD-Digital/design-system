@@ -496,48 +496,6 @@ describe('ElementBuilder', () => {
     });
   });
 
-  describe('Theme Support', () => {
-    test('should apply dark theme to styles', () => {
-      const div = document.createElement('div');
-
-      const model = new ElementBuilder(div)
-        .withClassName('test-class')
-        .withStyles({ element: { color: 'black' } })
-        .withThemeDark(true)
-        .build();
-
-      // Dark theme should convert black to white
-      expect(model.styles).toContain('color: white');
-    });
-
-    test('should not apply theme modifiers when false', () => {
-      const div = document.createElement('div');
-
-      const model = new ElementBuilder(div)
-        .withClassName('test-class')
-        .withStyles({ element: { color: 'black' } })
-        .withThemeDark(false)
-        .build();
-
-      // Should keep original color
-      expect(model.styles).toContain('color: black');
-    });
-
-    test('should not apply theme modifiers when undefined', () => {
-      const div = document.createElement('div');
-      const isThemeDark = undefined;
-
-      const model = new ElementBuilder(div)
-        .withClassName('test-class')
-        .withStyles({ element: { color: 'black' } })
-        .withThemeDark(isThemeDark)
-        .build();
-
-      // Should keep original color when undefined
-      expect(model.styles).toContain('color: black');
-    });
-  });
-
   describe('Ref Method', () => {
     test('should call ref callback with element', () => {
       const div = document.createElement('div');
@@ -618,7 +576,6 @@ describe('ElementBuilder', () => {
       const model = new ElementBuilder(div)
         .withClassName('container')
         .withAttribute('id', 'main')
-        .withThemeDark(true)
         .withChild(child)
         .withAria({ label: 'Container' })
         .withData({ value: '123' })
@@ -627,7 +584,6 @@ describe('ElementBuilder', () => {
 
       expect(model.element.classList.contains('container')).toBe(true);
       expect(model.element.getAttribute('id')).toBe('main');
-      // Dark theme applies style modifiers, not attributes
       expect(model.element.getAttribute('aria-label')).toBe('Container');
       expect(model.element.getAttribute('data-value')).toBe('123');
       expect(model.element.children.length).toBe(1);
@@ -861,22 +817,6 @@ describe('ElementBuilder', () => {
 
       expect(styles2).toContain('color: blue');
       expect(styles2).toContain('margin: 5px');
-    });
-
-    test('should apply theme modifiers when calling getStyles()', () => {
-      const builder = new ElementBuilder()
-        .withClassName('dark-test')
-        .withThemeDark(true)
-        .withStyles({
-          element: {
-            color: 'black',
-          },
-        });
-
-      const styles = builder.getStyles();
-
-      expect(styles).toBeDefined();
-      expect(typeof styles).toBe('string');
     });
 
     test('should return same styles as build() for styles property', () => {

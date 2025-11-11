@@ -2,7 +2,7 @@
  * @file StyleManager.ts
  * @description Manages style accumulation, deduplication, and CSS compilation
  *
- * Handles JSS-to-CSS conversion, style merging, priority ordering, and theme application
+ * Handles JSS-to-CSS conversion, style merging, and priority ordering
  * Specifically adapted for the UMD Design System's style patterns
  */
 
@@ -10,7 +10,6 @@ import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import type {
   ElementStyles,
   StyleDefinition,
-  ThemeType,
   StyleEntry,
   StyleType,
 } from './types';
@@ -22,7 +21,6 @@ import { isElementStyles, isStyleDefinition } from './types';
  * Features:
  * - Style deduplication by content hash
  * - Priority-based style ordering
- * - Theme variant support
  * - Multiple selector types (element, ::before, + *, > *)
  * - Style merging and conflict resolution
  * - Integration with UMD Design System style utilities
@@ -31,22 +29,18 @@ import { isElementStyles, isStyleDefinition } from './types';
  * ```typescript
  * const styles = new StyleManager();
  * styles.add(Styles.element.action.primary.normal, 'umd-action', 0);
- * styles.addTheme('dark');
  * const css = styles.compile();
  * ```
  */
 export class StyleManager {
   private styleQueue: StyleEntry[];
   private compiled: Map<string, string>;
-  private theme?: ThemeType;
-  private isThemeDark: boolean;
   private styleIds: Set<string>;
 
   constructor() {
     this.styleQueue = [];
     this.compiled = new Map();
     this.styleIds = new Set();
-    this.isThemeDark = false;
   }
 
   /**
@@ -214,24 +208,8 @@ export class StyleManager {
   }
 
   /**
-   * Add theme-specific modifiers
-   * This updates the theme state and will be applied during compilation
-   */
-  addTheme(theme: ThemeType): void {
-    this.theme = theme;
-  }
-
-  /**
-   * Set dark theme flag for style modifiers
-   * Applies white text/icon colors during compilation
-   */
-  setThemeDark(isDark: boolean): void {
-    this.isThemeDark = isDark;
-  }
-
-  /**
    * Compile all queued styles into a CSS string
-   * Handles priority ordering, selector grouping, and theme application
+   * Handles priority ordering and selector grouping
    *
    * @returns Compiled CSS string
    */
@@ -249,10 +227,6 @@ export class StyleManager {
       }
       Object.assign(grouped.get(selector)!, this.deepMerge(styles));
     });
-
-    if (this.isThemeDark) {
-      this.applyDarkThemeModifiers(grouped);
-    }
 
     const cssRules: string[] = [];
     grouped.forEach((styles, selector) => {
@@ -293,52 +267,6 @@ export class StyleManager {
   }
 
   /**
-   * Apply dark theme style modifiers
-   * Sets white color for text and icons (matching V1 behavior)
-   */
-  private applyDarkThemeModifiers(
-    grouped: Map<string, Record<string, any>>,
-  ): void {
-    grouped.forEach((styles) => {
-      // Apply white color to text elements
-      if (
-        styles.color &&
-        styles.color !== 'white' &&
-        styles.color !== '#fff' &&
-        styles.color !== '#ffffff'
-      ) {
-        styles.color = 'white';
-      }
-
-      // Apply white fill to icons/SVG
-      if (styles.fill && styles.fill !== 'white') {
-        styles.fill = 'white';
-      }
-
-      // Apply to nested selectors (& , ., svg, path, etc.)
-      Object.keys(styles).forEach((key) => {
-        if (
-          key.startsWith('&') ||
-          key.startsWith('.') ||
-          key === 'svg' ||
-          key === 'path' ||
-          key === '*'
-        ) {
-          const nested = styles[key];
-          if (nested && typeof nested === 'object') {
-            if (nested.color && nested.color !== 'white') {
-              nested.color = 'white';
-            }
-            if (nested.fill && nested.fill !== 'white') {
-              nested.fill = 'white';
-            }
-          }
-        }
-      });
-    });
-  }
-
-  /**
    * Clone the registry for immutable operations
    */
   clone(): StyleManager {
@@ -346,8 +274,6 @@ export class StyleManager {
     cloned.styleQueue = [...this.styleQueue];
     cloned.compiled = new Map(this.compiled);
     cloned.styleIds = new Set(this.styleIds);
-    cloned.theme = this.theme;
-    cloned.isThemeDark = this.isThemeDark;
     return cloned;
   }
 

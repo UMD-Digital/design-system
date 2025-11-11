@@ -158,14 +158,19 @@ This means passing the full `ElementModel` is correct - never extract just `.ele
 
 ## Common Patterns
 
-### Pattern: Simple Element with Campaign Font
+### Pattern: Simple Element with Typography and Theme
 
 ```typescript
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 
 const headline = new ElementBuilder(headlineElement)
-  .styled(Styles.typography.campaign.fonts.large)
+  .styled(
+    Styles.typography.campaign.compose('large', {
+      theme: theme.fontColor(isThemeDark),
+    }),
+  )
   .withStyles({
     element: {
       textTransform: 'uppercase',
@@ -398,6 +403,7 @@ export default (props: TypeMetaDisplay) => {
 ```typescript
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as Styles from '@universityofmaryland/web-styles-library';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 
 const MakeDetailItem = (props: {
   icon: string;
@@ -417,8 +423,11 @@ const MakeDetailItem = (props: {
 
   // Build container with children
   return new ElementBuilder('p')
-    .styled(Styles.element.event.metaItem)
-    .withThemeDark(isThemeDark)
+    .styled(
+      Styles.element.event.meta.composeItem({
+        theme: theme.fontColor(isThemeDark),
+      }),
+    )
     .withChildren(iconElement.element, textElement.element)
     .build();
 };
@@ -428,8 +437,7 @@ export default (props: TypeMetaDisplay) => {
 
   // Build wrapper with conditional children
   const wrapper = new ElementBuilder()
-    .styled(Styles.element.event.metaWrapper)
-    .withThemeDark(isThemeDark)
+    .styled(Styles.element.event.meta.wrapper)
     .withChildIf(
       location && location.length > 0,
       () => MakeDetailItem({ ...props, text: location[0].title }).element
@@ -438,8 +446,7 @@ export default (props: TypeMetaDisplay) => {
 
   // Build container
   return new ElementBuilder()
-    .styled(Styles.element.event.metaContainer)
-    .withThemeDark(isThemeDark)
+    .styled(Styles.element.event.meta.container)
     .withChild(wrapper.element)
     .build();
 };
@@ -657,8 +664,8 @@ export const createTextLockupSmall = ({
 
 ```typescript
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import { headlines } from '@universityofmaryland/web-builder-library/presets';
 import * as Styles from '@universityofmaryland/web-styles-library';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 
 export const createTextLockupSmall = ({
   eyebrow,
@@ -678,7 +685,6 @@ export const createTextLockupSmall = ({
         position: 'relative',
       }
     })
-    .withThemeDark(isThemeDark)
     // Conditional children using withChildIf
     .withChildIf(
       !!eyebrow,
@@ -687,26 +693,35 @@ export const createTextLockupSmall = ({
     .withChildIf(
       !!headline,
       () => new ElementBuilder(headline)
-        .styled(Styles.typography.sans.larger)
+        .styled(
+          Styles.typography.sans.compose('larger', {
+            theme: theme.fontColor(isThemeDark),
+          }),
+        )
         .withStyles(headlineStyles)
-        .withThemeDark(isThemeDark)
         .build().element
     )
     .withChildIf(!!eventMeta, eventMeta)
     .withChildIf(
       !!text,
       () => new ElementBuilder(text)
-        .styled(Styles.element.richText.simple)
+        .styled(
+          Styles.element.text.rich.composeSimple({
+            theme: theme.fontColor(isThemeDark),
+          }),
+        )
         .withStyles(textStyles)
-        .withThemeDark(isThemeDark)
         .build().element
     )
     .withChildIf(
       !!date,
-      () => headlines.sansMin()
-        .withChild(date)
+      () => new ElementBuilder(date)
+        .styled(
+          Styles.typography.sans.compose('min', {
+            theme: theme.fontColor(isThemeDark),
+          }),
+        )
         .withStyles(dateStyles)
-        .withThemeDark(isThemeDark)
         .build().element
     )
     .withChildIf(
@@ -1858,8 +1873,14 @@ ElementBuilder.create.element({
 
 **After**:
 ```typescript
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
+
 new ElementBuilder(element)
-  .withThemeDark(true)
+  .styled(
+    Styles.typography.sans.compose('large', {
+      theme: theme.fontColor(isThemeDark),
+    }),
+  )
   .build()
 ```
 
@@ -1946,9 +1967,10 @@ When migrating a component to V2 ElementBuilder:
 - [ ] Convert children arrays to `withChildIf()` chains
 - [ ] Convert `.map()` loops to `withChildrenFrom()`
 - [ ] Add ARIA attributes with convenience methods
-- [ ] Use `.withThemeDark(isThemeDark)` for dark theme styling
+- [ ] Import theme utility: `import { theme } from '@universityofmaryland/web-utilities-library/theme';`
+- [ ] Use compose functions with `theme: theme.fontColor(isThemeDark)` instead of `.withThemeDark()`
 - [ ] Use `withStylesIf()` for conditional styles
-- [ ] Use `styled()` method for JSS objects
+- [ ] Use `styled()` method for JSS objects with compose functions
 - [ ] Update closure references to use `model.element`
 - [ ] Concatenate child styles if needed
 - [ ] Use `.build().element` when only element is needed
@@ -1992,6 +2014,8 @@ return new ElementBuilder()
 
 **Example of Correct Pattern**:
 ```typescript
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
+
 // ✅ CORRECT - Build container, conditionally add children, build at end
 const container = new ElementBuilder()
   .withClassName('text-lockup-large')
@@ -2001,23 +2025,24 @@ const container = new ElementBuilder()
       position: 'relative',
       ...additionalStyles,
     },
-  })
-  .withThemeDark(isThemeDark);
+  });
 
 if (eyebrow) {
   const eyebrowElement = new ElementBuilder(eyebrow)
-    .styled(Styles.typography.sans.fonts.small)
+    .styled(
+      Styles.typography.sans.compose('small', {
+        theme: theme.fontColor(isThemeDark),
+      }),
+    )
     .withStyles({
       element: {
         textTransform: 'uppercase',
         fontWeight: 600,
-        color: token.color.black,
       },
       siblingAfter: {
         marginTop: token.spacing.sm,
       },
     })
-    .withThemeDark(isThemeDark)
     .build().element;
 
   container.withChild(eyebrowElement);
@@ -2307,11 +2332,17 @@ ElementBuilder.styled.headline.campaignExtraLarge({
   isThemeDark: true
 })
 
-// V2
+// V2 (Updated)
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
+
+const isThemeDark = true;
 new ElementBuilder(headline)
-  .styled(Styles.typography.campaign.fonts.extraLarge)
+  .styled(
+    Styles.typography.campaign.compose('extraLarge', {
+      theme: theme.fontColor(isThemeDark),
+    })
+  )
   .withStyles({ element: { textTransform: 'uppercase' } })
-  .withThemeDark(true)
   .build()
 ```
 
@@ -2364,22 +2395,26 @@ V2 import: `import * as Styles from '@universityofmaryland/web-styles-library';`
 
 **Theme Handling**:
 ```typescript
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
+
 // V1 - Theme handled automatically
 ElementBuilder.styled.richText.simple({
   element: textElement,
   isThemeDark: true
 })
 
-// V2 - Select style variant OR use .withThemeDark()
-// Option 1: Select dark variant directly
+// V2 - Use compose function with theme utility (RECOMMENDED)
 new ElementBuilder(textElement)
-  .styled(Styles.element.text.rich.simpleDark)
+  .styled(
+    Styles.element.text.rich.composeSimple({
+      theme: theme.fontColor(isThemeDark),
+    }),
+  )
   .build()
 
-// Option 2: Use theme method (if style supports it)
+// V2 Alternative - Select dark variant directly (legacy)
 new ElementBuilder(textElement)
-  .styled(Styles.element.text.rich.simple)
-  .withThemeDark(true)
+  .styled(Styles.element.text.rich.simpleDark)
   .build()
 ```
 
@@ -2538,18 +2573,62 @@ ElementBuilder.styled.headline.campaignLarge({ ... })
 
 **Step 3**: Apply V2 pattern
 ```typescript
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
+
 new ElementBuilder(element)
-  .styled(Styles.typography.campaign.fonts.large)
+  .styled(
+    Styles.typography.campaign.compose('large', {
+      theme: theme.fontColor(isThemeDark),
+    }),
+  )
   .withStyles({ /* custom styles */ })
-  .withThemeDark(isThemeDark)
   .build()
 ```
 
 ### Important Notes
 
-1. **Theme Handling**: V1 had `isThemeDark` parameter, V2 uses either:
-   - `.withThemeDark(boolean)` method
-   - Direct dark variant selection (e.g., `simpleDark` vs `simple`)
+1. **Theme Handling (Updated Pattern)**: V2 no longer uses `.withThemeDark()`. Instead, use compose functions with the theme utility:
+
+   **Import the theme utility**:
+   ```typescript
+   import { theme } from '@universityofmaryland/web-utilities-library/theme';
+   ```
+
+   **Use compose functions with theme parameter**:
+   ```typescript
+   // Typography
+   .styled(
+     Styles.typography.sans.compose('large', {
+       theme: theme.fontColor(isThemeDark),
+     }),
+   )
+
+   // Rich text
+   .styled(
+     Styles.element.text.rich.composeSimple({
+       theme: theme.fontColor(isThemeDark),
+     }),
+   )
+
+   // Event metadata
+   .styled(
+     Styles.element.event.meta.composeItem({
+       theme: theme.fontColor(isThemeDark),
+     }),
+   )
+   ```
+
+   **Why this pattern?**
+   - ✅ Theme is embedded in the style definition (single source of truth)
+   - ✅ More flexible - can use different theme values per element
+   - ✅ Eliminates need for `.withThemeDark()` method
+   - ✅ Works with all composable styles (typography, rich text, events, etc.)
+
+   **Reference files**:
+   - `/packages/elements/source/composite/person/bio/full.ts`
+   - `/packages/feeds/source/macros/no-results.ts`
+
+   **Legacy alternative**: Direct dark variant selection (e.g., `simpleDark` vs `simple`) still works but is not recommended for new code.
 
 2. **Conditional Styles**: V1 had built-in conditional logic (e.g., `isScaled`). V2 requires manual selection:
    ```typescript

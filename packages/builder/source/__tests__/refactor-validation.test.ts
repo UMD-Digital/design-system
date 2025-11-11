@@ -132,22 +132,6 @@ describe('REFACTOR.md Pattern Validation', () => {
       expect(container.element.children.length).toBe(1);
       expect(container.element.children[0].textContent).toBe('Location detail');
     });
-
-    test('should apply theme to nested elements', () => {
-      const wrapper = new ElementBuilder()
-        .withClassName('wrapper')
-        .withStyles({ element: { color: 'black' } })
-        .withThemeDark(true)
-        .withChild(
-          new ElementBuilder('span')
-            .withText('Themed content')
-            .build().element
-        )
-        .build();
-
-      // Dark theme should apply white color modifier
-      expect(wrapper.styles).toContain('color: white');
-    });
   });
 
   // ============================================================================
@@ -260,19 +244,6 @@ describe('REFACTOR.md Pattern Validation', () => {
 
       expect(evaluated).toBe(false);
       expect(container.element.children.length).toBe(0);
-    });
-
-    test('should apply theme to conditional elements', () => {
-      const isThemeDark = true;
-
-      const container = new ElementBuilder()
-        .withClassName('themed-container')
-        .withStyles({ element: { color: 'black' } })
-        .withThemeDark(isThemeDark)
-        .build();
-
-      // Dark theme should apply white color modifier to styles
-      expect(container.styles).toContain('color: white');
     });
   });
 
@@ -670,7 +641,6 @@ describe('REFACTOR.md Pattern Validation', () => {
 
       const component = new ElementBuilder()
         .withClassName('complex-component')
-        .withThemeDark(true)
         .withChildIf(hasHeader, () => {
           return new ElementBuilder('header')
             .withText('Component Header')

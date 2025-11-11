@@ -29,12 +29,10 @@ const create = ({
 
   const ctaButton = new ElementBuilder(button)
     .styled(Styles.element.action.outline.normal)
-    .withThemeDark(isThemeDark)
     .build();
 
   return new ElementBuilder()
     .styled(Styles.layout.alignment.block.center)
-    .withThemeDark(isThemeDark)
     .withChild(ctaButton)
     .withStyles({
       element: {

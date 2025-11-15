@@ -1,8 +1,9 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import { type ElementModel } from '../../_types';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { assets, textLockup } from 'atomic';
+import { type ElementModel } from '../../_types';
 import { type HeroMinimalProps } from './_types';
 
 const createImageAsset = (image: HTMLImageElement) => {
@@ -74,32 +75,33 @@ const createHeadline = (
   >,
 ): ElementModel<HTMLElement> | null => {
   const { headline, isThemeDark, isThemeMaryland } = props;
+  const finalIsThemeDark = isThemeDark || isThemeMaryland;
   const characterCount = headline?.textContent?.trim().length || 0;
   const isOverwriteHeadline = characterCount > 40;
 
   if (!headline) return null;
 
-  const desktopStyles = {
-    [`@container (${token.media.queries.desktop.min})`]: {
-      ...(isOverwriteHeadline && {
-        fontSize: '64px',
-      }),
-    },
-  };
-
   return new ElementBuilder(headline)
-    .styled(Styles.typography.campaign.fonts.large)
+    .styled(
+      Styles.typography.campaign.compose('large', {
+        theme: theme.fontColor(finalIsThemeDark),
+      }),
+    )
     .withStyles({
       element: {
         fontWeight: 800,
         textTransform: 'uppercase',
-        ...desktopStyles,
+
+        [`@container (${token.media.queries.desktop.min})`]: {
+          ...(isOverwriteHeadline && {
+            fontSize: '64px',
+          }),
+        },
       },
       siblingAfter: {
         marginTop: token.spacing.sm,
       },
     })
-    .withThemeDark(isThemeDark || isThemeMaryland || false)
     .build();
 };
 

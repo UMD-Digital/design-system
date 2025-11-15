@@ -1,10 +1,11 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import { type ElementModel } from '../../_types';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { assets, textLockup } from 'atomic';
 import { type HeroStandardProps } from './_types';
+import { type ElementModel } from '../../_types';
 
 const ANIMATION_CONFIG = {
   SLIDE_UP: {
@@ -150,31 +151,33 @@ const createHeadline = (
     'headline' | 'isHeightSmall' | 'isThemeDark' | 'isTextCenter'
   >,
 ): ElementModel<HTMLElement> | null => {
-  const { headline, isHeightSmall, isThemeDark, isTextCenter } = props;
+  const { headline, isHeightSmall, isTextCenter, isThemeDark } = props;
   const characterCount = headline?.textContent?.trim().length || 0;
   const isOverwriteHeadline = characterCount > 10 && isHeightSmall;
 
   if (!headline) return null;
 
-  const tabletStyles = {
-    maxWidth: '700px',
-    color: token.color.white,
-
-    ...(isTextCenter && { marginLeft: 'auto', marginRight: 'auto' }),
-  };
-
-  const desktopStyles = {
-    maxWidth: '816px',
-    ...(isOverwriteHeadline && { fontSize: '80px' }),
-  };
-
   return new ElementBuilder(headline)
-    .styled(Styles.typography.campaign.fonts.extraLarge)
+    .styled(
+      Styles.typography.campaign.compose('extralarge', {
+        theme: theme.fontColor(isThemeDark),
+      }),
+    )
     .withStyles({
       element: {
         textTransform: 'uppercase',
-        [`@media (${token.media.queries.tablet.min})`]: tabletStyles,
-        [`@media (${token.media.queries.desktop.min})`]: desktopStyles,
+
+        [`@media (${token.media.queries.tablet.min})`]: {
+          maxWidth: '700px',
+          color: token.color.white,
+
+          ...(isTextCenter && { marginLeft: 'auto', marginRight: 'auto' }),
+        },
+
+        [`@media (${token.media.queries.desktop.min})`]: {
+          maxWidth: '816px',
+          ...(isOverwriteHeadline && { fontSize: '80px' }),
+        },
       },
       subElement: {
         color: 'currentColor',
@@ -183,7 +186,6 @@ const createHeadline = (
         marginTop: token.spacing.sm,
       },
     })
-    .withThemeDark(isThemeDark || false)
     .build();
 };
 
@@ -210,6 +212,7 @@ const createText = (props: HeroStandardProps) => {
         display: 'flex',
         alignItems: 'flex-end',
         height: '100%',
+
         ...(isTextCenter && {
           textAlign: 'center',
           justifyContent: 'center',

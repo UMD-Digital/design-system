@@ -1,9 +1,9 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import { type ElementModel } from '../../_types';
 import { assets, textLockup } from 'atomic';
+import { type ElementModel } from '../../_types';
 import { type HeroOverlayProps } from './_types';
 
 const ANIMATION_CONFIG = {
@@ -134,27 +134,24 @@ const createHeadline = (
 
   if (!headline) return null;
 
-  const desktopStyles = {
-    [`@container (${token.media.queries.desktop.min})`]: {
-      ...(isOverwriteHeadline && {
-        fontSize: '80px',
-      }),
-    },
-  };
-
   return new ElementBuilder(headline)
     .styled(Styles.typography.campaign.fonts.extraLarge)
     .withStyles({
       element: {
         textTransform: 'uppercase',
         textWrap: 'pretty',
-        ...desktopStyles,
+        color: token.color.white,
+
+        [`@container (${token.media.queries.desktop.min})`]: {
+          ...(isOverwriteHeadline && {
+            fontSize: '80px',
+          }),
+        },
       },
       siblingAfter: {
         marginTop: token.spacing.md,
       },
     })
-    .withThemeDark(true)
     .build();
 };
 

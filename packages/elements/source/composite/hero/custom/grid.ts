@@ -1,10 +1,10 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
 import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
-import { type ContentElement, type ElementModel } from '../../../_types';
 import { assets, textLockup } from 'atomic';
+import { type ContentElement, type ElementModel } from '../../../_types';
 
 interface CornerProps {
   images: Array<HTMLImageElement>;
@@ -232,6 +232,7 @@ const createHeadline = (
     .styled(Styles.typography.campaign.fonts.extraLarge)
     .withStyles({
       element: {
+        color: token.color.white,
         textTransform: 'uppercase',
         textWrap: 'pretty',
         ...desktopStyles,
@@ -240,7 +241,6 @@ const createHeadline = (
         marginTop: token.spacing.md,
       },
     })
-    .withThemeDark(true)
     .build();
 };
 

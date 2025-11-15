@@ -1,10 +1,11 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import { type ElementModel } from '../../_types';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { assets, textLockup } from 'atomic';
 import { type HeroLogoProps } from './_types';
+import { type ElementModel } from '../../_types';
 
 const getBackgroundColor = (props: HeroLogoProps) => {
   const { isThemeDark, isThemeMaryland, isThemeLight } = props;
@@ -50,11 +51,16 @@ const createHeadline = (
   props: Pick<HeroLogoProps, 'headline' | 'isThemeDark' | 'isThemeMaryland'>,
 ): ElementModel<HTMLElement> | null => {
   const { headline, isThemeDark, isThemeMaryland } = props;
+  const finalIsThemeDark = isThemeDark || isThemeMaryland;
 
   if (!headline) return null;
 
   return new ElementBuilder(headline)
-    .styled(Styles.typography.campaign.fonts.large)
+    .styled(
+      Styles.typography.campaign.compose('large', {
+        theme: theme.fontColor(finalIsThemeDark),
+      }),
+    )
     .withStyles({
       element: {
         textTransform: 'uppercase',
@@ -63,7 +69,6 @@ const createHeadline = (
         marginTop: token.spacing.sm,
       },
     })
-    .withThemeDark(isThemeDark || isThemeMaryland || false)
     .build();
 };
 

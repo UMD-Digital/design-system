@@ -1,9 +1,10 @@
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import { type ElementModel } from '../../_types';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { assets, textLockup } from 'atomic';
 import { PersonContact } from './_types';
+import { type ElementModel } from '../../_types';
 
 interface Theme {
   isThemeDark?: boolean;
@@ -72,7 +73,6 @@ const CreateImageBlock = (props: PersonInfo): ElementModel<HTMLElement> => {
     wrapper.withChild(
       new ElementBuilder(association)
         .styled(Styles.typography.sans.fonts.large)
-        .withThemeDark(!isThemeDark)
         .withStyles({
           element: {
             display: 'block',
@@ -158,14 +158,16 @@ const CreateTextContainer = ({
   if (subText) {
     lineWrapper.withChild(
       new ElementBuilder(subText)
-        .styled(Styles.typography.sans.fonts.small)
-        .withThemeDark(isThemeDark)
+        .styled(
+          Styles.typography.sans.compose('small', {
+            theme: theme.fontColor(isThemeDark),
+          }),
+        )
         .withStyles({
           element: {
             display: 'block',
             textTransform: 'uppercase',
             fontWeight: '700',
-            color: `${token.color.black}`,
             maxWidth: '650px',
           },
           siblingAfter: {
@@ -183,14 +185,16 @@ const CreateTextContainer = ({
   if (name) {
     lineWrapper.withChild(
       new ElementBuilder(name)
-        .styled(Styles.typography.campaign.fonts.large)
-        .withThemeDark(isThemeDark)
+        .styled(
+          Styles.typography.campaign.compose('large', {
+            theme: theme.fontColor(isThemeDark),
+          }),
+        )
         .withStyles({
           element: {
             textTransform: 'uppercase',
             fontWeight: '700',
             display: 'block',
-            color: `${token.color.black}`,
           },
           siblingAfter: {
             marginTop: token.spacing.min,
@@ -207,8 +211,11 @@ const CreateTextContainer = ({
   if (job) {
     lineWrapper.withChild(
       new ElementBuilder(job)
-        .styled(Styles.typography.sans.fonts.medium)
-        .withThemeDark(isThemeDark)
+        .styled(
+          Styles.typography.sans.compose('medium', {
+            theme: theme.fontColor(isThemeDark),
+          }),
+        )
         .withStyles({
           element: {
             display: 'block',

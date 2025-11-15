@@ -35,8 +35,7 @@ export default ({
         position: 'relative',
         ...additionalStyles,
       },
-    })
-    .withThemeDark(isThemeDark);
+    });
 
   if (eyebrow) {
     const eyebrowElement = new ElementBuilder(eyebrow)
@@ -49,13 +48,12 @@ export default ({
         element: {
           textTransform: 'uppercase',
           fontWeight: 600,
-          color: token.color.black,
+          ...(!isThemeDark && { color: token.color.black }),
         },
         siblingAfter: {
           marginTop: token.spacing.sm,
         },
       })
-      .withThemeDark(isThemeDark)
       .build();
 
     container.withChild(eyebrowElement);
@@ -91,7 +89,6 @@ export default ({
           marginTop: token.spacing.lg,
         },
       })
-      .withThemeDark(isThemeDark)
       .build();
 
     container.withChild(textElement);
@@ -110,7 +107,6 @@ export default ({
           marginTop: token.spacing.lg,
         },
       })
-      .withThemeDark(isThemeDark)
       .build();
 
     container.withChild(textLargestElement);

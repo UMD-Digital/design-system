@@ -43,8 +43,7 @@ export default ({
         zIndex: '9',
         position: 'relative',
       },
-    })
-    .withThemeDark(finalIsThemeDark);
+    });
 
   if (ribbon) {
     const ribbonElement = new ElementBuilder(ribbon)
@@ -72,7 +71,6 @@ export default ({
       )
       .withStyles({
         element: {
-          color: `${token.color.black}`,
           fontWeight: 800,
           textTransform: 'uppercase',
           textWrap: 'balance',
@@ -116,7 +114,6 @@ export default ({
           marginTop: token.spacing.md,
         },
       })
-      .withThemeDark(finalIsThemeDark)
       .build();
 
     container.withChild(textElement);

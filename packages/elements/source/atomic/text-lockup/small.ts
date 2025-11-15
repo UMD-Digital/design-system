@@ -109,7 +109,6 @@ export const createEyebrow = ({ eyebrow, isThemeDark }: TypeEyebrow) =>
       }),
     )
     .withStyles(eyebrowStyles)
-    .withThemeDark(isThemeDark)
     .build();
 
 export const createRibbonEyebrow = ({ eyebrow }: TypeEyebrow) =>
@@ -144,8 +143,7 @@ export const createTextLockupSmall = ({
         zIndex: '9',
         position: 'relative',
       },
-    })
-    .withThemeDark(isThemeDark);
+    });
 
   if (eyebrow) {
     const eyebrowElement = createEyebrow({ eyebrow, isThemeDark });
@@ -160,7 +158,6 @@ export const createTextLockupSmall = ({
         }),
       )
       .withStyles(headlineStyles)
-      .withThemeDark(isThemeDark)
       .build();
 
     container.withChild(headlineElement);
@@ -178,7 +175,6 @@ export const createTextLockupSmall = ({
         }),
       )
       .withStyles(textStyles)
-      .withThemeDark(isThemeDark)
       .build();
 
     container.withChild(textElement);
@@ -195,7 +191,6 @@ export const createTextLockupSmall = ({
       .withAnimation('slideUnder')
       .withChild(date)
       .withStyles(dateStyles)
-      .withThemeDark(isThemeDark)
       .build();
 
     container.withChild(dateElement);

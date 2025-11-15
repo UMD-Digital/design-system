@@ -43,8 +43,7 @@ export default ({
         position: 'relative',
         ...customStyles,
       },
-    })
-    .withThemeDark(isThemeDark);
+    });
 
   if (eyebrow && !hasEyebrowRibbon) {
     const eyebrowElement = createEyebrow({ eyebrow, isThemeDark });
@@ -65,7 +64,6 @@ export default ({
         }),
       )
       .withStyles(headlineStyles)
-      .withThemeDark(isThemeDark)
       .build();
 
     container.withChild(headlineElement);
@@ -84,7 +82,6 @@ export default ({
         }),
       )
       .withStyles(textStyles)
-      .withThemeDark(isThemeDark)
       .build();
 
     container.withChild(textElement);
@@ -99,7 +96,6 @@ export default ({
         }),
       )
       .withStyles(dateStyles)
-      .withThemeDark(isThemeDark)
       .build();
 
     container.withChild(dateElement);

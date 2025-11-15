@@ -58,7 +58,6 @@ const createContainer = (
   return new ElementBuilder()
     .withClassName('alert-page-container')
     .withChildren(...children)
-    .withThemeDark(isThemeDark)
     .withStyles({
       element: {
         color: theme.foreground(isThemeDark),

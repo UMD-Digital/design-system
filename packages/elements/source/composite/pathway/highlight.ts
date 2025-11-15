@@ -1,6 +1,7 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as Styles from '@universityofmaryland/web-styles-library';
-import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { createTextLockupMedium } from './_common';
 import { PathwayHighlightProps } from './_types';
 import { type ElementModel } from '../../_types';
@@ -34,12 +35,10 @@ const createTextContent = (
 
         ...(props.isThemeDark && {
           backgroundColor: token.color.black,
-          color: token.color.white,
         }),
 
         ...(props.isThemeMaryland && {
           backgroundColor: token.color.red,
-          color: token.color.white,
         }),
 
         [`@container (max-width: ${mediumSize - 1}px)`]: {
@@ -100,11 +99,13 @@ const createHighlightColumn = ({
   if (quote) {
     wrapper.withChild(
       new ElementBuilder(quote)
-        .styled(Styles.typography.sans.fonts.larger)
-        .withThemeDark(isThemeDark)
+        .styled(
+          Styles.typography.sans.compose('larger', {
+            theme: theme.fontColor(isThemeDark),
+          }),
+        )
         .withStyles({
           element: {
-            color: token.color.black,
             fontWeight: '700',
           },
         })
@@ -115,8 +116,11 @@ const createHighlightColumn = ({
   if (attribution) {
     wrapper.withChild(
       new ElementBuilder(attribution)
-        .styled(Styles.typography.sans.fonts.medium)
-        .withThemeDark(isThemeDark)
+        .styled(
+          Styles.typography.sans.compose('medium', {
+            theme: theme.fontColor(isThemeDark),
+          }),
+        )
         .withStyles({
           element: {
             marginTop: token.spacing.sm,
@@ -147,10 +151,6 @@ const createHighlightColumn = ({
 
         ...(isThemeDark && {
           backgroundColor: token.color.gray.darker,
-
-          [`& *`]: {
-            color: token.color.white,
-          },
         }),
       },
     })

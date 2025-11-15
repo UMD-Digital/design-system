@@ -1,5 +1,6 @@
-import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import * as Atomic from 'atomic';
 import { type PathwayTextLockupProps, type PathwayAssetProps } from './_types';
 
@@ -16,29 +17,28 @@ export const createCompositeHeadline = ({
 
   if (!headline) return null;
 
-  const desktopStyles = {
-    [`@container (${Styles.token.media.queries.desktop.min})`]: {
-      ...(isOverwriteHeadline && {
-        fontSize: '40px',
-      }),
-    },
-  };
-
   return new ElementBuilder(headline)
-    .styled(Styles.typography.sans.fonts.largest)
+    .styled(
+      Styles.typography.sans.compose('largest', {
+        theme: theme.fontColor(isThemeDark || isThemeMaryland),
+      }),
+    )
     .withStyles({
       element: {
         fontWeight: 800,
         textTransform: 'uppercase',
         textWrap: 'balance',
-        color: Styles.token.color.black,
-        ...desktopStyles,
+
+        [`@container (${Styles.token.media.queries.desktop.min})`]: {
+          ...(isOverwriteHeadline && {
+            fontSize: '40px',
+          }),
+        },
       },
       siblingAfter: {
         marginTop: Styles.token.spacing.md,
       },
     })
-    .withThemeDark(isThemeDark || isThemeMaryland)
     .build();
 };
 

@@ -144,10 +144,10 @@ export const options = (props: OptionProps) => {
           element: {
             display: 'grid',
             gap: token.spacing.sm,
-            ...(!isTypeSecondary && { alignItems: 'center' }),
 
             ['& > *']: {
               marginBottom: '0 !important',
+              ...(!isTypeSecondary && { justifySelf: 'center' }),
             },
           },
         })

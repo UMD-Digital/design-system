@@ -62,7 +62,6 @@ export const ribbonStyles = {
 export const headlineStyles = {
   element: {
     fontWeight: '700',
-    color: `${token.color.black}`,
 
     [`& + *`]: {
       marginTop: token.spacing.sm,
@@ -88,10 +87,13 @@ export const textStyles = {
   },
 };
 
-export const dateStyles = {
+export const dateStyles = (isThemeDark?: boolean) => ({
   element: {
     display: 'block',
-    color: `${token.color.gray.mediumAA}`,
+
+    ...(!isThemeDark && {
+      color: `${token.color.gray.mediumAA}`,
+    }),
   },
   child: {
     color: 'currentColor',
@@ -99,7 +101,7 @@ export const dateStyles = {
   siblingAfter: {
     marginTop: token.spacing.min,
   },
-};
+});
 
 export const createEyebrow = ({ eyebrow, isThemeDark }: TypeEyebrow) =>
   new ElementBuilder(eyebrow)
@@ -190,7 +192,7 @@ export const createTextLockupSmall = ({
       )
       .withAnimation('slideUnder')
       .withChild(date)
-      .withStyles(dateStyles)
+      .withStyles(dateStyles(isThemeDark))
       .build();
 
     container.withChild(dateElement);

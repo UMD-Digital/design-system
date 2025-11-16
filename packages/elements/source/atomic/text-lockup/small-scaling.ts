@@ -95,7 +95,7 @@ export default ({
           scaling: true,
         }),
       )
-      .withStyles(dateStyles)
+      .withStyles(dateStyles(isThemeDark))
       .build();
 
     container.withChild(dateElement);

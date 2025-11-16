@@ -139,6 +139,10 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
         flexDirection: 'column',
         zIndex: 9,
         position: 'relative',
+
+        [' & * ']: {
+          color: `${token.color.white}`,
+        },
       },
     })
     .withChildren(...wrapperChildren)

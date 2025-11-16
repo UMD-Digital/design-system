@@ -78,14 +78,21 @@ export const headlineStyles = {
   },
 };
 
-export const textStyles = {
+export const textStyles = (isThemeDark?: boolean) => ({
   element: {
-    color: `${token.color.gray.dark}`,
+    ...(!isThemeDark && {
+      color: `${token.color.gray.dark}`,
+    }),
+  },
+  child: {
+    ...(!isThemeDark && {
+      color: `${token.color.gray.dark}`,
+    }),
   },
   siblingAfter: {
     marginTop: token.spacing.min,
   },
-};
+});
 
 export const dateStyles = (isThemeDark?: boolean) => ({
   element: {
@@ -176,7 +183,7 @@ export const createTextLockupSmall = ({
           theme: theme.fontColor(isThemeDark),
         }),
       )
-      .withStyles(textStyles)
+      .withStyles(textStyles(isThemeDark))
       .build();
 
     container.withChild(textElement);

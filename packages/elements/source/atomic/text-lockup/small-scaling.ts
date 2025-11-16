@@ -81,7 +81,7 @@ export default ({
           scaling: true,
         }),
       )
-      .withStyles(textStyles)
+      .withStyles(textStyles(isThemeDark))
       .build();
 
     container.withChild(textElement);

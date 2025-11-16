@@ -23,20 +23,19 @@ const makeGivingLink = (): HTMLAnchorElement => {
 const createLinkElement = (
   props: CallToActionProps,
   link: HTMLAnchorElement,
-): UMDElement => {
-  const { isThemeLight } = props;
-
-  return new ElementBuilder('slot')
+): UMDElement =>
+  new ElementBuilder('slot')
     .withClassName('umd-action-primary')
-    .withStyles(Styles.element.action.primary.normal)
-    .withChild(link)
-    .withStylesIf(!!isThemeLight, {
+    .styled(Styles.element.action.primary.normal)
+    .withStyles({
       element: {
-        color: `${token.color.white} !important`,
+        ['& a']: {
+          color: `${token.color.white} !important`,
+        },
       },
     })
+    .withChild(link)
     .build();
-};
 
 export default (props: CallToActionProps): UMDElement => {
   const { isTypeSimple, slotCta } = props;

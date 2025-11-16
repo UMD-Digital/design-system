@@ -1,6 +1,7 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as Styles from '@universityofmaryland/web-styles-library';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { type ElementModel } from '../../../_types';
 
 export interface SectionIntroWideProps {
@@ -12,13 +13,17 @@ export interface SectionIntroWideProps {
 const TABLET = 500;
 
 const createHeadline = (
-  props: Pick<SectionIntroWideProps, 'headline'>,
+  props: Pick<SectionIntroWideProps, 'headline' | 'isThemeDark'>,
 ): ElementModel<HTMLElement> | null => {
-  const { headline } = props;
+  const { headline, isThemeDark } = props;
   if (!headline) return null;
 
   return new ElementBuilder(headline)
-    .styled(Styles.typography.sans.fonts.largest)
+    .styled(
+      Styles.typography.sans.compose('largest', {
+        theme: theme.fontColor(isThemeDark),
+      }),
+    )
     .withStyles({
       element: {
         fontWeight: 800,
@@ -51,8 +56,9 @@ const createActions = (
 const createWrapper = (
   props: Pick<SectionIntroWideProps, 'headline' | 'actions' | 'isThemeDark'>,
 ): ElementModel<HTMLElement> => {
-  const headlineElement = createHeadline(props);
-  const actionsElement = createActions(props);
+  const { headline, actions, isThemeDark } = props;
+  const headlineElement = createHeadline({ headline, isThemeDark });
+  const actionsElement = createActions({ actions });
 
   const wrapper = new ElementBuilder()
     .withClassName('intro-wide-container-wrapper')
@@ -80,21 +86,11 @@ const createWrapper = (
 const createContainer = (
   props: Pick<SectionIntroWideProps, 'isThemeDark' | 'headline' | 'actions'>,
 ): ElementModel<HTMLElement> => {
-  const { isThemeDark } = props;
   const wrapperElement = createWrapper(props);
 
   return new ElementBuilder()
     .withClassName('intro-wide-container')
     .withChild(wrapperElement)
-    .withStyles({
-      element: {
-        [`& *`]: {
-          ...(isThemeDark && {
-            color: token.color.white,
-          }),
-        },
-      },
-    })
     .build();
 };
 

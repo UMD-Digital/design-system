@@ -2,6 +2,7 @@ import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import * as Styles from '@universityofmaryland/web-styles-library';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { type ElementModel } from '../../../_types';
 
 export interface SectionIntroProps {
@@ -41,13 +42,17 @@ const ANIMATION_CONFIGS = {
 };
 
 const createHeadline = (
-  props: Pick<SectionIntroProps, 'headline'>,
+  props: Pick<SectionIntroProps, 'headline' | 'isThemeDark'>,
 ): ElementModel<HTMLElement> | null => {
-  const { headline } = props;
+  const { headline, isThemeDark } = props;
   if (!headline) return null;
 
   return new ElementBuilder(headline)
-    .styled(Styles.typography.sans.fonts.largest)
+    .styled(
+      Styles.typography.sans.compose('largest', {
+        theme: theme.fontColor(isThemeDark),
+      }),
+    )
     .withStyles({
       element: {
         fontWeight: 800,
@@ -58,13 +63,18 @@ const createHeadline = (
 };
 
 const createText = (
-  props: Pick<SectionIntroProps, 'text'>,
+  props: Pick<SectionIntroProps, 'text' | 'isThemeDark'>,
 ): ElementModel<HTMLElement> | null => {
-  const { text } = props;
+  const { text, isThemeDark } = props;
   if (!text) return null;
 
   return new ElementBuilder(text)
-    .styled(Styles.element.text.rich.simpleLarge)
+    .styled(
+      Styles.element.text.rich.composeSimple({
+        size: 'large',
+        theme: theme.fontColor(isThemeDark),
+      }),
+    )
     .withStyles({
       element: {
         [`* + &`]: {
@@ -104,8 +114,8 @@ const createTextContainer = (
 ): ElementModel<HTMLElement> => {
   const { headline, text, actions, includesAnimation, isThemeDark } = props;
 
-  const headlineElement = createHeadline({ headline });
-  const textElement = createText({ text });
+  const headlineElement = createHeadline({ headline, isThemeDark });
+  const textElement = createText({ text, isThemeDark });
   const actionsElement = createActions({ actions });
 
   const container = new ElementBuilder()
@@ -219,12 +229,6 @@ const createContainer = (
         ['&.intro-default-animated:before']: {
           ...(includesAnimation && {
             animation: 'intro-line 1.2s forwards',
-          }),
-        },
-
-        [`& *`]: {
-          ...(isThemeDark && {
-            color: token.color.white,
           }),
         },
       },

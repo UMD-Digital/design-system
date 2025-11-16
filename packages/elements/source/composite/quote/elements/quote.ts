@@ -1,6 +1,7 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { default as elementIcon } from './icon';
 import { SMALL } from '../_constants';
 import { type QuoteTextProps } from '../_types';
@@ -24,7 +25,7 @@ const splitWords = (quote: HTMLElement) => {
   const words = text.trim().split(/\s+/);
 
   const wordElements = words.map((word, index) => {
-    const wordElement = document.createElement('div');
+    const wordElement = document.createElement('span');
     wordElement.classList.add('quote-text-split-word');
 
     Object.assign(wordElement.style, {
@@ -67,20 +68,21 @@ export default (props: QuoteProps) => {
     });
   }
 
+  const fontStyles = isSizeLarge
+    ? typography.sans.compose('extralarge', {
+        theme: theme.fontColor(shouldHaveWhiteText),
+      })
+    : typography.sans.compose('larger', {
+        theme: theme.fontColor(shouldHaveWhiteText),
+      });
+
   const builder = new ElementBuilder(quoteTextElement)
+    .styled(fontStyles)
     .withClassName('quote-container-quote')
     .withStyles({
       element: {
         position: 'relative',
         fontWeight: '700',
-        color: token.color.black,
-        ...typography.sans.larger,
-
-        ...(isSizeLarge && { ...typography.sans.extraLarge }),
-
-        ...(shouldHaveWhiteText && {
-          color: token.color.white,
-        }),
 
         [`&::before`]: {
           content: '""',
@@ -106,12 +108,6 @@ export default (props: QuoteProps) => {
               display: 'block',
             }),
           },
-        },
-
-        ['& *']: {
-          color: 'currentColor',
-          ...(!isSizeLarge && { ...typography.sans.larger }),
-          ...(isSizeLarge && { ...typography.sans.extraLarge }),
         },
       },
     });

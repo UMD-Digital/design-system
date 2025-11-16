@@ -1,6 +1,7 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { default as elementAction } from './action';
 import { default as elementQuote } from './quote';
 import { SMALL } from '../_constants';
@@ -32,6 +33,7 @@ const createChildren = (props: ChildrenProps): ElementModel<HTMLElement>[] => {
     hasImage,
     includesAnimation,
     isThemeDark,
+    isSizeLarge,
     quote,
     shouldHaveWhiteText,
   } = props;
@@ -39,12 +41,23 @@ const createChildren = (props: ChildrenProps): ElementModel<HTMLElement>[] => {
 
   if (quote) {
     wrapperChildren.push(
-      elementQuote({ ...props, shouldHaveWhiteText, quote, hasImage }),
+      elementQuote({
+        ...props,
+        shouldHaveWhiteText,
+        quote,
+        hasImage,
+        isSizeLarge,
+      }),
     );
   }
 
   if (attribution) {
     const attributionElement = new ElementBuilder(attribution)
+      .styled(
+        typography.sans.compose('medium', {
+          theme: theme.fontColor(shouldHaveWhiteText),
+        }),
+      )
       .withClassName('quote-container-attribution')
       .withStyles({
         element: {
@@ -73,12 +86,12 @@ const createChildren = (props: ChildrenProps): ElementModel<HTMLElement>[] => {
 
   if (attributionSubText) {
     const attributionSubTextElement = new ElementBuilder(attributionSubText)
+      .styled(typography.sans.small)
       .withClassName('quote-container-text-attribution-sub-text')
       .withStyles({
         element: {
           color: token.color.gray.dark,
           fontStyle: 'italic',
-          ...typography.sans.small,
 
           ...(includesAnimation && {
             opacity: '0',
@@ -152,7 +165,6 @@ export default (
     .withStyles({
       element: {
         width: '100%',
-        ...typography.sans.medium,
 
         [`@container (max-width: ${SMALL - 1}px)`]: {
           paddingLeft: token.spacing.md,
@@ -170,14 +182,6 @@ export default (
           paddingLeft: token.spacing['4xl'],
 
           ...(isHasImageAndNotFeatured && { paddingLeft: '0' }),
-        },
-
-        [`& *`]: {
-          ...typography.sans.medium,
-
-          ...(shouldHaveWhiteText && {
-            color: token.color.white,
-          }),
         },
       },
     })

@@ -55,6 +55,10 @@ const HeadlineStyles = `
       [`.${EVENT_DATE_CONTAINER}${IS_THEME_DARK} .${EVENT_HEADLINE} a`]: animation.line.slideUnderWhite,
     },
   })}
+
+  .${EVENT_DATE_CONTAINER}${IS_THEME_DARK} .${EVENT_HEADLINE} * { 
+    color: ${token.color.white};
+  }
 `;
 
 // prettier-ignore

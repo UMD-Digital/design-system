@@ -185,7 +185,12 @@ const advancedBase = {
  * @since 1.7.0
  */
 export function composeSimple(options?: SimpleRichTextOptions): JssObject {
-  const { size = 'base', theme = 'light', color: explicitColor, scaling = false } = options || {};
+  const {
+    size = 'base',
+    theme = 'light',
+    color: explicitColor,
+    scaling = false,
+  } = options || {};
   let composed: Record<string, any> = { ...simpleBase };
 
   if (size === 'large') {
@@ -236,7 +241,8 @@ export function composeSimple(options?: SimpleRichTextOptions): JssObject {
   }
 
   // Determine final color and apply appropriate styles
-  const finalColor = explicitColor || (theme === 'dark' ? color.white : color.black);
+  const finalColor =
+    explicitColor || (theme === 'dark' ? color.white : color.gray.dark);
   const useWhiteLinks = finalColor === color.white;
 
   composed = {
@@ -325,7 +331,8 @@ export function composeAdvanced(options?: AdvancedRichTextOptions): JssObject {
   };
 
   // Determine final color and apply appropriate styles
-  const finalColor = explicitColor || (theme === 'dark' ? color.white : color.black);
+  const finalColor =
+    explicitColor || (theme === 'dark' ? color.white : color.gray.dark);
   const useWhiteLinks = finalColor === color.white;
 
   composed = {

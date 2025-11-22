@@ -63,6 +63,8 @@ export default ({
       .withStyles({
         element: {
           lineHeight: `1.25em`,
+
+          ...(!isThemeDark && { color: `${token.color.gray.dark}` }),
         },
         subElement: {
           color: 'currentColor',
@@ -113,6 +115,8 @@ export default ({
       )
       .withStyles({
         element: {
+          ...(!isThemeDark && { color: `${token.color.gray.dark}` }),
+
           [`& + *`]: {
             marginTop: '4px',
           },
@@ -134,6 +138,9 @@ export default ({
         }),
       )
       .withStyles({
+        element: {
+          ...(!isThemeDark && { color: `${token.color.gray.dark}` }),
+        },
         siblingAfter: {
           marginTop: '4px',
         },

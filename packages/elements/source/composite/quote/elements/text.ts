@@ -69,13 +69,12 @@ const createChildren = (props: ChildrenProps): ElementModel<HTMLElement>[] => {
             transition: 'opacity 1s ease, transform 0.5s ease',
           }),
 
-          ...(isThemeDark && {
-            color: token.color.white,
+          ...(!shouldHaveWhiteText && {
+            color: token.color.gray.dark,
           }),
 
           [`& *`]: {
             color: 'currentColor',
-            ...typography.sans.medium,
           },
         },
       })

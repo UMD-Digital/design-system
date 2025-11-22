@@ -219,6 +219,10 @@ const CreateTextContainer = ({
         .withStyles({
           element: {
             display: 'block',
+
+            ...(!isThemeDark && {
+              color: token.color.gray.dark,
+            }),
           },
         })
         .build(),

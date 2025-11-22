@@ -2,9 +2,14 @@ import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import * as layoutStyles from '@universityofmaryland/web-styles-library/layout';
+import * as animation from '@universityofmaryland/web-styles-library/animation';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import { parseSvgString } from '@universityofmaryland/web-utilities-library/media';
-import { extractIconElement } from '@universityofmaryland/web-utilities-library/dom';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
+import {
+  extractIconElement,
+  wrapTextNodeInSpan,
+} from '@universityofmaryland/web-utilities-library/dom';
 import { external_link as iconExternalLink } from '@universityofmaryland/web-icons-library/controls';
 import { email as iconEmail } from '@universityofmaryland/web-icons-library/communication';
 import { document as iconDocument } from '@universityofmaryland/web-icons-library/files';
@@ -101,19 +106,29 @@ const createElement = (type: ElementType, props: ElementProps) => {
     } else if (props.isThemeDark) {
       color = 'white';
     }
-    styleObject = elementStyles.action.secondary.composeSecondary({
-      size,
-      color,
-    });
+    styleObject = {
+      ...elementStyles.action.secondary.composeSecondary({
+        size,
+        color,
+      }),
+      ...animation.line.slideUnderRed,
+    };
   } else if (type === 'outline') {
     const color = props.isThemeDark ? 'white' : 'default';
     styleObject = elementStyles.action.outline.composeOutline({ size, color });
   }
 
-  return new ElementBuilder(props.element)
+  const element = new ElementBuilder(props.element)
     .styled(styleObject!)
-    .withStylesIf(!!props.elementStyles, props.elementStyles || {})
-    .build();
+    .withStylesIf(!!props.elementStyles, props.elementStyles || {});
+
+  if (type === 'secondary') {
+    element.withModifier((el) => {
+      wrapTextNodeInSpan(el);
+    });
+  }
+
+  return element.build();
 };
 
 export const primary = (props: ElementProps) => createElement('primary', props);

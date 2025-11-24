@@ -3,6 +3,8 @@ import * as token from '@universityofmaryland/web-styles-library/token';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
+import * as animationStyles from '@universityofmaryland/web-styles-library/animation';
+import { wrapTextNodeInSpan } from '@universityofmaryland/web-utilities-library/dom';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { type UMDElement } from '../../_types';
 
@@ -160,13 +162,19 @@ export const createTextLockupSmall = ({
   }
 
   if (headline) {
+    const composeHeadlineStyles = {
+      ...typography.sans.compose('larger', {
+        theme: theme.fontColor(isThemeDark),
+      }),
+      ...animationStyles.line.composeSlideUnder({
+        color: theme.foreground(isThemeDark),
+      }),
+    };
+
     const headlineElement = new ElementBuilder(headline)
-      .styled(
-        typography.sans.compose('larger', {
-          theme: theme.fontColor(isThemeDark),
-        }),
-      )
+      .styled(composeHeadlineStyles)
       .withStyles(headlineStyles)
+      .withModifier((el) => wrapTextNodeInSpan(el))
       .build();
 
     container.withChild(headlineElement);

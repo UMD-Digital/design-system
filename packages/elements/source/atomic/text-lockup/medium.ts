@@ -3,7 +3,9 @@ import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
+import * as animationStyles from '@universityofmaryland/web-styles-library/animation';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
+import { wrapTextNodeInSpan } from '@universityofmaryland/web-utilities-library/dom';
 import { ElementModel } from '../../_types';
 
 interface TypeTextLockupMedium {
@@ -63,12 +65,17 @@ export default ({
   }
 
   if (headline && !compositeHeadline) {
+    const headlineStyles = {
+      ...typography.sans.compose('largest', {
+        theme: theme.fontColor(finalIsThemeDark),
+      }),
+      ...animationStyles.line.composeSlideUnder({
+        color: theme.foreground(finalIsThemeDark),
+      }),
+    };
+
     const headlineElement = new ElementBuilder(headline)
-      .styled(
-        typography.sans.compose('largest', {
-          theme: theme.fontColor(finalIsThemeDark),
-        }),
-      )
+      .styled(headlineStyles)
       .withStyles({
         element: {
           fontWeight: 800,
@@ -83,6 +90,7 @@ export default ({
           marginTop: token.spacing.sm,
         },
       })
+      .withModifier((el) => wrapTextNodeInSpan(el))
       .build();
 
     container.withChild(headlineElement);

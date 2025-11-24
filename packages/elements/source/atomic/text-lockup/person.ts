@@ -2,7 +2,9 @@ import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
+import * as animationStyles from '@universityofmaryland/web-styles-library/animation';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
+import { wrapTextNodeInSpan } from '@universityofmaryland/web-utilities-library/dom';
 import { type PersonTextLockupProps } from '../_types';
 
 export default ({
@@ -29,16 +31,20 @@ export default ({
   }
 
   if (name) {
+    const headlineStyles = {
+      ...typography.sans.compose('larger', {
+        theme: theme.fontColor(isThemeDark),
+      }),
+      ...animationStyles.line.composeSlideUnder({
+        color: theme.foreground(isThemeDark),
+      }),
+    };
+
     const nameElement = new ElementBuilder(name)
-      .styled(
-        typography.sans.compose('larger', {
-          theme: theme.fontColor(isThemeDark),
-        }),
-      )
+      .styled(headlineStyles)
       .withStyles({
         element: {
           fontWeight: '700',
-          color: `${token.color.black}`,
 
           [`& + *`]: {
             marginTop: '4px',
@@ -48,6 +54,7 @@ export default ({
           color: 'currentColor',
         },
       })
+      .withModifier((el) => wrapTextNodeInSpan(el))
       .build();
 
     container.withChild(nameElement);

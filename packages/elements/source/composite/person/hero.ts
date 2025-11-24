@@ -72,7 +72,11 @@ const CreateImageBlock = (props: PersonInfo): ElementModel<HTMLElement> => {
   if (association) {
     wrapper.withChild(
       new ElementBuilder(association)
-        .styled(Styles.typography.sans.fonts.large)
+        .styled(
+          Styles.typography.sans.compose('large', {
+            theme: theme.fontColor(!isThemeDark),
+          }),
+        )
         .withStyles({
           element: {
             display: 'block',

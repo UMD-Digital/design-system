@@ -70,6 +70,10 @@ const makeContactLink = ({
 
       [`&a:hover, &a:focus`]: {
         textDecoration: 'underline',
+
+        ...(isThemeDark && {
+          color: `${token.color.white}`,
+        }),
       },
     },
   };

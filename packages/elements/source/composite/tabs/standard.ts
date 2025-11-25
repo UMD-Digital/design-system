@@ -66,7 +66,7 @@ const DisplayLineStyles = `
     left: -2px;
     width: 2px;
     background-color: ${token.color.gray.light};
-    z-index: -1;
+    z-index: 9;
   }
 
   ${OVERWRITE_VERTICAL_LAYOUT_LINE} {
@@ -82,6 +82,7 @@ const DisplayLineStyles = `
     display: block;
     background-color: ${token.color.red};
     transform: translate(0);
+    z-index: 99;
   }
 `;
 

@@ -1,6 +1,6 @@
 import {
   type ContentElement,
-  type ElementVisual,
+  type UMDElement,
   type ThemeProps,
 } from '../_types';
 
@@ -28,7 +28,7 @@ export interface PersonTextLockupProps
   association?: ContentElement;
   job?: ContentElement;
   name?: ContentElement;
-  nameComposite?: ElementVisual | null;
+  nameComposite?: UMDElement | null;
   pronouns?: ContentElement;
   subText?: ContentElement;
 }

@@ -1,11 +1,13 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-styles-library/token';
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as typography from '@universityofmaryland/web-styles-library/typography';
+import * as animationStyles from '@universityofmaryland/web-styles-library/animation';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
+import { wrapTextNodeInSpan } from '@universityofmaryland/web-utilities-library/dom';
 import { layout } from 'atomic';
 import { PersonCard } from './_types';
-import { type ElementModel } from '../../_types';
+import { type UMDElement } from '../../_types';
 
 const smallBreakpoint = token.media.breakpointValues.small.max;
 
@@ -23,7 +25,7 @@ export default ({
   phone,
   pronouns,
   subText,
-}: PersonCard): ElementModel<HTMLElement> => {
+}: PersonCard): UMDElement => {
   const builder = new ElementBuilder()
     .withClassName('person-tabular-container')
     .withStyles({
@@ -47,18 +49,21 @@ export default ({
   }
 
   if (name) {
-    const nameModel = new ElementBuilder(name)
-      .styled(
-        Styles.typography.sans.compose('large', {
-          theme: theme.fontColor(isThemeDark),
-        }),
-      )
+    const nameStyles = {
+      ...typography.sans.compose('large', {
+        theme: theme.fontColor(isThemeDark),
+      }),
+      ...animationStyles.line.composeSlideUnder({
+        color: theme.foreground(isThemeDark),
+      }),
+    };
+
+    const nameComposite = new ElementBuilder(name)
+      .withClassName('person-tabular-name')
+      .styled(nameStyles)
       .withStyles({
         element: {
           fontWeight: `${token.font.weight.bold}`,
-          ...(!isThemeDark && {
-            color: `${token.color.black}`,
-          }),
 
           [`& + *`]: {
             marginTop: token.spacing.min,
@@ -68,12 +73,8 @@ export default ({
           color: 'currentColor',
         },
       })
+      .withModifier((el) => wrapTextNodeInSpan(el))
       .build();
-
-    const nameComposite = {
-      ...nameModel,
-      className: 'person-tabular-name',
-    };
 
     builder.withChild(
       layout.person.columns.details({

@@ -105,7 +105,10 @@ const applyGifToggle = (image: HTMLImageElement, container: HTMLElement) => {
     container.appendChild(canvas);
     container.appendChild(button);
     setButtonPlay();
-    sizeCanvas({ container });
+
+    setTimeout(() => {
+      sizeCanvas({ container });
+    }, 100);
   });
 
   window.addEventListener(

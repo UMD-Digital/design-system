@@ -5,31 +5,10 @@ import {
   typography,
 } from '@universityofmaryland/web-styles-library';
 import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
-import createSocialCampaignColumns, {
-  type SocialCampaignColumnsProps,
-} from '../social';
+import createSocialCampaignColumns from '../social';
 import { BREAKPOINTS } from '../../../globals';
-import { BaseProps } from '../../../_types';
+import { ContactProps } from '../../../_types';
 import { type UMDElement } from '../../../../../_types';
-
-interface HeadlineProps {
-  slotHeadline: HTMLSlotElement;
-}
-
-interface AddressProps {
-  slotAddress: HTMLSlotElement;
-}
-
-interface LinksProps {
-  slotContentLinks: HTMLSlotElement;
-}
-
-export interface ContactProps
-  extends BaseProps,
-    SocialCampaignColumnsProps,
-    AddressProps,
-    HeadlineProps,
-    LinksProps {}
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
 
@@ -56,7 +35,7 @@ const createContactListHeadline = ({
   element,
   children,
 }: {
-  props: ContactProps;
+  props: Pick<ContactProps, 'isThemeLight'>;
   element?: HTMLElement;
   children?: UMDElement[];
 }) => {
@@ -143,7 +122,7 @@ const createDefaultAddress = (): UMDElement => {
 };
 
 const linkWithSpan = (
-  props: ContactProps,
+  props: Pick<ContactProps, 'isThemeLight'>,
   {
     url,
     title,
@@ -201,16 +180,10 @@ const linkWithSpan = (
     .build();
 };
 
-const createContactLinksList = ({
-  element,
-  children,
-}: {
-  element?: HTMLElement;
-  children?: UMDElement[];
-}) => {
-  const builder = new ElementBuilder(
-    element ?? document.createElement('p'),
-  ).withClassName('umd-footer-contact-links-list');
+const createContactLinksList = ({ children }: { children?: UMDElement[] }) => {
+  const builder = new ElementBuilder(document.createElement('p')).withClassName(
+    'umd-footer-contact-links-list',
+  );
 
   if (children) {
     builder.withChildren(...children);
@@ -253,8 +226,21 @@ export default (props: ContactProps): UMDElement => {
       contactChildren.push(createAddress(slotAddress));
     }
     if (slotContentLinks) {
+      const contactLinksList: UMDElement[] = [];
+      const contactLinksElements = slotContentLinks.querySelectorAll('a');
+
+      contactLinksElements.forEach((link: HTMLAnchorElement) => {
+        const linkElement = linkWithSpan(props, {
+          url: link.href,
+          title: link.textContent,
+          label: link.ariaLabel ?? undefined,
+        });
+
+        contactLinksList.push(linkElement);
+      });
+
       contactChildren.push(
-        createContactLinksList({ element: slotContentLinks }),
+        createContactLinksList({ children: contactLinksList }),
       );
     }
   } else {

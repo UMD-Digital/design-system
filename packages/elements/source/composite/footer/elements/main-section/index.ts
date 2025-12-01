@@ -1,15 +1,8 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import createRowLogo, { type RowLogoProps } from './row-logo';
-import createRowLinks, { type RowLinksProps } from './row-links';
-import { BaseProps } from '../../_types';
+import createRowLogo from './row-logo';
+import createRowLinks from './row-links';
+import { MainSectionProps } from '../../_types';
 import { type UMDElement } from '../../../../_types';
-
-export interface MainSectionProps
-  extends BaseProps,
-    RowLinksProps,
-    RowLogoProps {
-  slotVisualImage: HTMLImageElement | null;
-}
 
 const createVisualContainer = (
   props: Pick<
@@ -97,12 +90,10 @@ const createVisualContainer = (
 
 export default (props: MainSectionProps): UMDElement => {
   const { isTypeMega, isTypeVisual } = props;
-
   const logoRow = createRowLogo(props);
   const visualContainerElement = createVisualContainer(props);
   const linksRowElement = (isTypeMega || isTypeVisual) && createRowLinks(props);
 
-  // Container-first pattern
   const container = new ElementBuilder().withClassName(
     'umd-footer-main-container',
   );

@@ -76,6 +76,10 @@ const deprecated = {
   wrappingText: createSlotFactory(SlotNames.deprecated.wrappingText),
   plainText: createSlotFactory(SlotNames.deprecated.plainText),
   stat: createSlotFactory(SlotNames.deprecated.stat),
+  backgroundImage: createSlotFactory(SlotNames.deprecated.backgroundImage),
+  contactHeadline: createSlotFactory(SlotNames.deprecated.contactHeadline),
+  contactAddress: createSlotFactory(SlotNames.deprecated.contactAddress),
+  callToAction: createSlotFactory(SlotNames.deprecated.callToAction),
 } as const;
 
 export default {

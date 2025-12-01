@@ -2,16 +2,16 @@ import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-token-library';
 import { imageFromSvg } from '@universityofmaryland/web-utilities-library/media';
 import * as Logos from '@universityofmaryland/web-icons-library/logos';
-import { BaseProps } from '../../_types';
+import { CampaignProps } from '../../_types';
 import { BREAKPOINTS } from '../../globals';
 import { type UMDElement } from '../../../../_types';
 
-export interface CampaignProps
-  extends Pick<BaseProps, 'isThemeLight' | 'isCampaignForward'> {}
-
 const { LARGE } = BREAKPOINTS;
 
-const createFearlesslyForwardCampaign = (isThemeLight: boolean) => {
+const createFearlesslyForwardCampaign = (
+  props: Pick<CampaignProps, 'isThemeLight'>,
+) => {
+  const { isThemeLight } = props;
   const SVG = (!isThemeLight && Logos.campaign.light) || Logos.campaign.dark;
   const img = imageFromSvg({ SVG });
   const link = document.createElement('a');
@@ -31,7 +31,9 @@ const createFearlesslyForwardCampaign = (isThemeLight: boolean) => {
   return link;
 };
 
-const createForwardCampaign = (isThemeLight: boolean) => {
+const createForwardCampaign = (props: Pick<CampaignProps, 'isThemeLight'>) => {
+  const { isThemeLight } = props;
+
   const SVG = (!isThemeLight && Logos.forward.light) || Logos.forward.dark;
   const img = imageFromSvg({ SVG });
   const link = document.createElement('a');
@@ -48,13 +50,14 @@ const createForwardCampaign = (isThemeLight: boolean) => {
   return link;
 };
 
-export default ({
-  isThemeLight,
-  isCampaignForward,
-}: CampaignProps): UMDElement => {
+export default (
+  props: Pick<CampaignProps, 'isThemeLight' | 'isCampaignForward'>,
+): UMDElement => {
+  const { isCampaignForward } = props;
+
   const link = isCampaignForward
-    ? createForwardCampaign(!!isThemeLight)
-    : createFearlesslyForwardCampaign(!!isThemeLight);
+    ? createForwardCampaign(props)
+    : createFearlesslyForwardCampaign(props);
 
   const linkElement = new ElementBuilder(link)
     .withClassName('campaign-column-link')

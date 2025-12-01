@@ -1,5 +1,9 @@
 import { footer } from '@universityofmaryland/web-elements-library/composite';
-import { Attributes, Register } from '@universityofmaryland/web-model-library';
+import {
+  Attributes,
+  Register,
+  Slots,
+} from '@universityofmaryland/web-model-library';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
@@ -13,11 +17,8 @@ const tagName = 'umd-element-footer';
  * @internal
  */
 export const SLOTS = {
-  BACKGROUND_IMAGE: 'background-image',
   CONTACT_HEADLINE: 'contact-headline',
   CONTACT_LINKS: 'contact-links',
-  CONTACT_ADDRESS: 'contact-address',
-  CTA: 'call-to-action',
   SOCIAL: 'social-links',
   UTILITY: 'utility-links',
   LINK_COLUMN_ONE: 'link-column-one',
@@ -31,7 +32,7 @@ export const SLOTS = {
  * @internal
  */
 const slots: SlotConfiguration = {
-  [`${SLOTS.BACKGROUND_IMAGE}`]: {
+  image: {
     allowedElements: ['img'],
   },
 };
@@ -94,27 +95,27 @@ const createComponent: CreateComponentFunction = (element) => {
     element.setAttribute('aria-label', 'site footer');
   }
 
-  return footer.options({
+  const footerProps = {
     isThemeLight: Attributes.isTheme.light({ element }),
     isTypeSimple,
     isTypeVisual,
     isTypeMega,
     isCampaignForward,
-    slotVisualImage: element.querySelector(
-      `[slot="${SLOTS.BACKGROUND_IMAGE}"]`,
-    ) as HTMLImageElement,
+    slotVisualImage:
+      (Slots.assets.image({ element }) as HTMLImageElement) ||
+      (Slots.deprecated.backgroundImage({ element }) as HTMLImageElement),
     slotUtilityLinks: element.querySelector(
       `[slot="${SLOTS.UTILITY}"]`,
-    ) as HTMLElement,
-    slotCta: element.querySelector(
-      `[slot="${SLOTS.CTA}"]`,
-    ) as HTMLAnchorElement,
+    ) as HTMLImageElement,
+    slotCta:
+      (Slots.actions.default({ element }) as HTMLAnchorElement) ||
+      (Slots.deprecated.callToAction({ element }) as HTMLAnchorElement),
     slotLogo: element.querySelector(`[slot="${SLOTS.LOGO}"]`) as
       | HTMLImageElement
       | HTMLAnchorElement,
-    slotAddress: element.querySelector(
-      `[slot="${SLOTS.CONTACT_ADDRESS}"]`,
-    ) as HTMLSlotElement,
+    slotAddress:
+      (Slots.contact.address({ element }) as HTMLSlotElement) ||
+      (Slots.deprecated.contactAddress({ element }) as HTMLSlotElement),
     slotContentLinks: element.querySelector(
       `[slot="${SLOTS.CONTACT_LINKS}"]`,
     ) as HTMLSlotElement,
@@ -125,7 +126,17 @@ const createComponent: CreateComponentFunction = (element) => {
       `[slot="${SLOTS.SOCIAL}"]`,
     ) as HTMLSlotElement,
     slotColumns: columns.length > 0 ? columns : undefined,
-  });
+  };
+
+  if (isTypeMega) {
+    return footer.mega(footerProps);
+  }
+
+  if (isTypeVisual) {
+    return footer.visual(footerProps);
+  }
+
+  return footer.simple(footerProps);
 };
 
 /**

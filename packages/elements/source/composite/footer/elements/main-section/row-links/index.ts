@@ -1,19 +1,12 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { layout, token } from '@universityofmaryland/web-styles-library';
-import createSocialCampaignColumns, {
-  type SocialCampaignColumnsProps,
-} from '../social';
-import createLinkColumns, { type slotColumnsProps } from './link-columns';
+import createSocialCampaignColumns from '../social';
+import createLinkColumns from './link-columns';
 import { BREAKPOINTS } from '../../../globals';
-import { BaseProps } from '../../../_types';
+import { RowLinksProps } from '../../../_types';
 import { type UMDElement } from '../../../../../_types';
 
 const { LARGE } = BREAKPOINTS;
-
-export interface RowLinksProps
-  extends SocialCampaignColumnsProps,
-    BaseProps,
-    slotColumnsProps {}
 
 export default (props: RowLinksProps): UMDElement => {
   const { isThemeLight } = props;

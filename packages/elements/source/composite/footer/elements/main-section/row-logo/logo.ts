@@ -1,22 +1,19 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-token-library';
 import * as Logos from '@universityofmaryland/web-icons-library/logos';
-import createCampaignRow, { type CampaignProps } from '../campaign';
-import createCallToAction, { type CallToActionProps } from '../call-to-action';
+import createCampaignRow from '../campaign';
+import createCallToAction from '../call-to-action';
 import { BREAKPOINTS } from '../../../globals';
-import { BaseProps } from '../../../_types';
+import { LogoProps } from '../../../_types';
 import { type UMDElement } from '../../../../../_types';
 
 const { LARGE } = BREAKPOINTS;
 
-export interface LogoProps extends BaseProps, CampaignProps, CallToActionProps {
-  slotLogo: HTMLImageElement | HTMLAnchorElement | null;
-}
-
 const createLogoLinkElement = (
-  isThemeLight?: boolean,
-  logo?: HTMLImageElement | HTMLAnchorElement | null,
+  props: Pick<LogoProps, 'isThemeLight' | 'slotLogo'>,
 ): UMDElement => {
+  const { slotLogo, isThemeLight } = props;
+
   const createDefaultLogoLink = () => {
     const logoLink = document.createElement('a');
     logoLink.setAttribute('href', 'https://umd.edu');
@@ -34,7 +31,7 @@ const createLogoLinkElement = (
     return logoLink;
   };
 
-  const logoLink = logo ?? createDefaultLogoLink();
+  const logoLink = slotLogo ?? createDefaultLogoLink();
 
   return new ElementBuilder(logoLink)
     .withClassName('umd-footer-logo-container_link')
@@ -63,6 +60,8 @@ const createContainer = (
     .withChildren(logoLinkElement, campaignElement, callToActionElement)
     .withStyles({
       element: {
+        marginTop: '5px',
+
         [`@container (max-width: ${LARGE - 1}px)`]: {
           [`& .umd-footer-call-to-action-container`]: {
             marginTop: token.spacing.md,
@@ -83,9 +82,7 @@ const createContainer = (
 };
 
 export default (props: LogoProps): UMDElement => {
-  const { isThemeLight, slotLogo } = props;
-
-  const logoLinkElement = createLogoLinkElement(isThemeLight, slotLogo);
+  const logoLinkElement = createLogoLinkElement(props);
   const campaignElement = createCampaignRow(props);
   const callToActionElement = createCallToAction(props);
 

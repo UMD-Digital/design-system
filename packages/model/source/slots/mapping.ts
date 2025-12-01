@@ -34,6 +34,10 @@ const deprecated = {
   plainText: 'plain-text',
   stat: 'stat',
   wrappingText: 'wrapping-text',
+  backgroundImage: 'background-image',
+  contactHeadline: 'contact-headline',
+  contactAddress: 'contact-address',
+  callToAction: 'call-to-action',
 };
 
 const eyebrows = {

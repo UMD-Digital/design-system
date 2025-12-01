@@ -11,14 +11,8 @@ import {
 } from '@universityofmaryland/web-icons-library/social';
 import createCampaignRow from './campaign';
 import { BREAKPOINTS } from '../../globals';
-import { BaseProps } from '../../_types';
+import { SocialProps, SocialCampaignColumnsProps } from '../../_types';
 import { type UMDElement } from '../../../../_types';
-
-interface SocialProps extends BaseProps {
-  slotSocialLinks?: HTMLSlotElement;
-}
-
-export interface SocialCampaignColumnsProps extends SocialProps {}
 
 const ATTRIBUTE_LAYOUT = 'layout';
 const LAYOUT_GRID = 'grid';
@@ -39,7 +33,9 @@ const GetSocialIcon = ({ link }: { link: HTMLAnchorElement }) => {
   return link;
 };
 
-const CreateSocialRow = (props: SocialProps): UMDElement => {
+const CreateSocialRow = (
+  props: Pick<SocialProps, 'isThemeLight' | 'slotSocialLinks'>,
+): UMDElement => {
   const { isThemeLight, slotSocialLinks } = props;
 
   let socialLinks: HTMLAnchorElement[] = [];

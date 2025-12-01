@@ -6,7 +6,7 @@ import {
 } from '@universityofmaryland/web-styles-library';
 import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
 import { BREAKPOINTS } from '../../../globals';
-import { BaseProps } from '../../../_types';
+import { slotColumnsProps } from '../../../_types';
 import { type UMDElement } from '../../../../../_types';
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
@@ -86,7 +86,10 @@ const COLUMN_THREE_DEFAULT_LINKS: ColumnRow[] = [
   },
 ];
 
-const createLinkColumn = (props: slotColumnsProps, children: UMDElement[]) => {
+const createLinkColumn = (
+  props: Pick<slotColumnsProps, 'isThemeLight'>,
+  children: UMDElement[],
+) => {
   const { isThemeLight } = props;
 
   return new ElementBuilder()
@@ -266,10 +269,6 @@ const createLinkColumnHeadline = (element: HTMLElement) => {
     })
     .build();
 };
-
-export interface slotColumnsProps extends BaseProps {
-  slotColumns?: HTMLSlotElement[];
-}
 
 export default (props: slotColumnsProps): UMDElement => {
   const { slotColumns } = props;

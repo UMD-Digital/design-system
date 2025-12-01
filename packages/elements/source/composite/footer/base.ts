@@ -1,20 +1,11 @@
 import * as token from '@universityofmaryland/web-token-library';
 import * as animation from '@universityofmaryland/web-styles-library/animation';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import createMain, { type MainSectionProps } from './elements/main-section';
-import createUtility, { type UtilityProps } from './elements/utility-section';
-import { BaseProps } from './_types';
+import { FooterProps } from './_types';
+import { ElementModel } from '_types';
 
-export interface FooterProps
-  extends BaseProps,
-    UtilityProps,
-    MainSectionProps {}
-
-export default (props: FooterProps) => {
+export default (props: FooterProps, childElements: Array<ElementModel>) => {
   const { isThemeLight } = props;
-
-  const main = createMain(props);
-  const utility = createUtility(props);
 
   return new ElementBuilder()
     .withClassName('umd-footer-element-wrapper')
@@ -44,6 +35,6 @@ export default (props: FooterProps) => {
         },
       },
     })
-    .withChildren(main, utility)
+    .withChildren(...childElements)
     .build();
 };

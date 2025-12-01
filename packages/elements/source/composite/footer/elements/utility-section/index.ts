@@ -7,12 +7,8 @@ import {
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
 import { BREAKPOINTS } from '../../globals';
-import { type BaseProps } from '../../_types';
+import { UtilityProps } from '../../_types';
 import { type UMDElement } from '../../../../_types';
-
-export interface UtilityProps extends Pick<BaseProps, 'isThemeLight'> {
-  slotUtilityLinks?: HTMLElement | null;
-}
 
 const { LARGE } = BREAKPOINTS;
 
@@ -55,7 +51,9 @@ const createSubLink = ({ title, url }: { title: string; url: string }) => {
     .build();
 };
 
-export default (props: UtilityProps) => {
+export default (
+  props: Pick<UtilityProps, 'isThemeLight' | 'slotUtilityLinks'>,
+) => {
   const { isThemeLight, slotUtilityLinks } = props;
   const linkElements: UMDElement[] = [];
 

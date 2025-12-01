@@ -1,25 +1,14 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { token, layout } from '@universityofmaryland/web-styles-library';
-import createSocialCampaignColumns, {
-  type SocialCampaignColumnsProps,
-} from '../social';
-import createCallToActionContainer, {
-  type CallToActionProps,
-} from '../call-to-action';
-import createContactContainer, { type ContactProps } from './contact';
-import createLogoContainer, { LogoProps } from './logo';
+import createSocialCampaignColumns from '../social';
+import createCallToActionContainer from '../call-to-action';
+import createContactContainer from './contact';
+import createLogoContainer from './logo';
 import { BREAKPOINTS } from '../../../globals';
-import { BaseProps } from '../../../_types';
+import { RowLogoProps } from '../../../_types';
 import { type UMDElement } from '../../../../../_types';
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
-
-export interface RowLogoProps
-  extends SocialCampaignColumnsProps,
-    BaseProps,
-    LogoProps,
-    CallToActionProps,
-    ContactProps {}
 
 export default (props: RowLogoProps): UMDElement => {
   const { isThemeLight, isTypeSimple } = props;

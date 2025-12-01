@@ -2,12 +2,8 @@ import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-token-library';
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { BREAKPOINTS } from '../../globals';
-import { BaseProps } from '../../_types';
+import { CallToActionProps } from '../../_types';
 import { type UMDElement } from '../../../../_types';
-
-export interface CallToActionProps extends BaseProps {
-  slotCta?: HTMLAnchorElement;
-}
 
 const { LARGE } = BREAKPOINTS;
 
@@ -20,11 +16,9 @@ const makeGivingLink = (): HTMLAnchorElement => {
   return defaultLink;
 };
 
-const createLinkElement = (
-  props: CallToActionProps,
-  link: HTMLAnchorElement,
-): UMDElement =>
-  new ElementBuilder('slot')
+const createLinkElement = (link: HTMLAnchorElement): UMDElement => {
+  const childLink = link.cloneNode(true) as HTMLAnchorElement;
+  return new ElementBuilder('div')
     .withClassName('umd-action-primary')
     .styled(Styles.element.action.primary.normal)
     .withStyles({
@@ -34,13 +28,16 @@ const createLinkElement = (
         },
       },
     })
-    .withChild(link)
+    .withChild(childLink)
     .build();
+};
 
-export default (props: CallToActionProps): UMDElement => {
+export default (
+  props: Pick<CallToActionProps, 'isTypeSimple' | 'slotCta'>,
+): UMDElement => {
   const { isTypeSimple, slotCta } = props;
   const baseLink = slotCta ?? makeGivingLink();
-  const styledLink = createLinkElement(props, baseLink);
+  const styledLink = createLinkElement(baseLink);
 
   return new ElementBuilder()
     .withClassName('umd-footer-call-to-action-container')

@@ -111,6 +111,7 @@ orderedBase = {
       borderRight: `1px solid ${color.red}`,
       paddingRight: spacing.min,
       right: `calc(100% - ${spacing.lg})`,
+      color: 'currentColor',
     },
   },
 

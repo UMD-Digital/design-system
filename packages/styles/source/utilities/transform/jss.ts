@@ -156,9 +156,13 @@ export const convertToCss = (
     }
 
     const transformedStyles: Record<string, any> = {};
+    const keyframes: Record<string, any> = {};
 
     Object.entries(processedStyles).forEach(([key, value]) => {
-      if (key.startsWith('@')) {
+      if (key.startsWith('@keyframes')) {
+        // Extract keyframes to root level
+        keyframes[key] = value;
+      } else if (key.startsWith('@')) {
         transformedStyles[key] = value;
       } else if (typeof value === 'object' && value !== null) {
         if (key.startsWith(':')) {
@@ -174,6 +178,7 @@ export const convertToCss = (
     });
 
     const wrapper = {
+      ...keyframes,
       [selector]: transformedStyles,
     };
 

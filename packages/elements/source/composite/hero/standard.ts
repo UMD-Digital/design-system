@@ -287,6 +287,12 @@ export default (props: HeroStandardProps) => {
           backgroundColor: token.color.black,
         }),
 
+        [`@container (${token.media.queries.large.max})`]: {
+          ...(isThemeDark && {
+            paddingBottom: `${token.spacing.md}`,
+          }),
+        },
+
         [`@container (${token.media.queries.tablet.min})`]: {
           ...(!isHeightSmall && {
             height: '75vh',

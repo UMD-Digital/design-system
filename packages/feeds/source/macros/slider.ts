@@ -88,16 +88,15 @@ export default ({
             endMonth: data.endMonth,
             isThemeDark,
           });
+
           const textLockup = elementTextLockup.date({
             headline,
             isThemeDark,
             dateSign,
           });
 
-          if (i === 0) {
-            slider.styles += textLockup.styles;
-            slider.styles += dateSign.styles;
-          }
+          slider.styles += textLockup.styles;
+          slider.styles += dateSign.styles;
 
           return textLockup;
         },

@@ -146,30 +146,29 @@ const createHeadline = (props: Pick<PathwayHeroProps, 'headline'>) => {
 
   if (!headline) return null;
 
-  const desktopStyles = {
-    [`@container (${token.media.queries.desktop.min})`]: {
-      ...(isOverwriteHeadline && {
-        fontSize: '80px',
-      }),
-    },
-  };
-
-  const elementStyles = {
-    element: {
-      color: token.color.black,
-      margin: '0 auto',
-      textTransform: 'uppercase',
-      marginTop: `${token.spacing.sm}`,
-      ...desktopStyles,
-    },
-    siblingAfter: {
-      marginTop: `${token.spacing.md}`,
-    },
-  };
-
   return new ElementBuilder(headline)
     .styled(Styles.typography.campaign.fonts.extraLarge)
-    .withStyles(elementStyles)
+    .withStyles({
+      element: {
+        color: token.color.black,
+        margin: '0 auto',
+        textTransform: 'uppercase',
+        marginTop: `${token.spacing.sm}`,
+
+        [`@container (${token.media.queries.desktop.min})`]: {
+          ...(isOverwriteHeadline && {
+            fontSize: '80px',
+          }),
+        },
+
+        ['& a:hover, & a:focus']: {
+          textDecoration: 'underline',
+        },
+      },
+      siblingAfter: {
+        marginTop: `${token.spacing.md}`,
+      },
+    })
     .build();
 };
 

@@ -1,6 +1,9 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import * as Styles from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-styles-library/token';
+import * as typography from '@universityofmaryland/web-styles-library/typography';
+import * as animationStyles from '@universityofmaryland/web-styles-library/animation';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
+import { wrapTextNodeInSpan } from '@universityofmaryland/web-utilities-library/dom';
 import * as Atomic from 'atomic';
 import { type PathwayTextLockupProps, type PathwayAssetProps } from './_types';
 
@@ -14,31 +17,38 @@ export const createCompositeHeadline = ({
 >) => {
   const characterCount = headline?.textContent?.trim().length || 0;
   const isOverwriteHeadline = characterCount > 30;
+  const finalIsThemeDark = isThemeDark || isThemeMaryland;
 
   if (!headline) return null;
 
+  const headlineStyles = {
+    ...typography.sans.compose('largest', {
+      theme: theme.fontColor(finalIsThemeDark),
+    }),
+    ...animationStyles.line.composeSlideUnder({
+      color: theme.foreground(finalIsThemeDark),
+    }),
+  };
+
   return new ElementBuilder(headline)
-    .styled(
-      Styles.typography.sans.compose('largest', {
-        theme: theme.fontColor(isThemeDark || isThemeMaryland),
-      }),
-    )
+    .styled(headlineStyles)
     .withStyles({
       element: {
         fontWeight: 800,
         textTransform: 'uppercase',
         textWrap: 'balance',
 
-        [`@container (${Styles.token.media.queries.desktop.min})`]: {
+        [`@container (${token.media.queries.desktop.min})`]: {
           ...(isOverwriteHeadline && {
             fontSize: '40px',
           }),
         },
       },
       siblingAfter: {
-        marginTop: Styles.token.spacing.md,
+        marginTop: token.spacing.md,
       },
     })
+    .withModifier((el) => wrapTextNodeInSpan(el))
     .build();
 };
 
@@ -53,24 +63,24 @@ export const createCompositeStat = ({
     .withClassName('text-lockup-medium-stats')
     .withStyles({
       element: {
-        marginTop: Styles.token.spacing.lg,
+        marginTop: token.spacing.lg,
 
         [`&:has(> *:nth-child(2))`]: {
           display: `grid`,
-          gridGap: `${Styles.token.spacing.md}`,
+          gridGap: `${token.spacing.md}`,
         },
 
         [`@container (max-width: ${mediumSize - 1}px)`]: {
-          marginTop: Styles.token.spacing.lg,
-          paddingTop: Styles.token.spacing.md,
-          borderTop: `1px solid ${Styles.token.color.gray.light}`,
+          marginTop: token.spacing.lg,
+          paddingTop: token.spacing.md,
+          borderTop: `1px solid ${token.color.gray.light}`,
         },
 
         [`@container (min-width: ${mediumSize}px)`]: {
-          marginTop: Styles.token.spacing['2xl'],
+          marginTop: token.spacing['2xl'],
 
           [`&:has(> *:nth-child(2))`]: {
-            gridGap: `${Styles.token.spacing.lg}`,
+            gridGap: `${token.spacing.lg}`,
             gridTemplateColumns: `repeat(2, 1fr)`,
           },
         },

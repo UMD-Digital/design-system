@@ -40,6 +40,7 @@ let orderedBase: Record<string, any> = {
       right: `calc(100% - ${spacing.md})`,
       unicodeBidi: 'isolate',
       whiteSpace: 'pre',
+      color: 'currentColor',
     },
   },
 

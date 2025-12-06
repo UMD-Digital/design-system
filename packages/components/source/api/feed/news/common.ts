@@ -1,4 +1,4 @@
-import { Attributes } from 'model';
+import { Attributes } from '@universityofmaryland/web-model-library';
 import { newsProps } from '../_types';
 
 export const CommonFeedNewsData = ({ element }: { element: HTMLElement }) => {

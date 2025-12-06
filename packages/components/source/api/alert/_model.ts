@@ -1,4 +1,4 @@
-import { Model, Register, Slots } from 'model';
+import { Model, Register, Slots } from '@universityofmaryland/web-model-library';
 import { ComponentRef } from '../../_types';
 
 interface AlertBaseProps {

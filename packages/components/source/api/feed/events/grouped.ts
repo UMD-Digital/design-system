@@ -1,5 +1,5 @@
 import { grouped } from '@universityofmaryland/web-feeds-library/events';
-import { Register } from 'model';
+import { Register } from '@universityofmaryland/web-model-library';
 import { CommonFeedEventsData } from './common';
 import {
   CreateComponentFunction,

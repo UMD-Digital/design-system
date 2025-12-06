@@ -1,6 +1,6 @@
 import { slider as academicSlider } from '@universityofmaryland/web-feeds-library/academic';
 import { slider as eventSlider } from '@universityofmaryland/web-feeds-library/events';
-import { Attributes, Register, Slots } from 'model';
+import { Attributes, Register, Slots } from '@universityofmaryland/web-model-library';
 import {
   CreateComponentFunction,
   ComponentRegistration,

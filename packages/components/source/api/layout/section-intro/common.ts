@@ -1,4 +1,4 @@
-import { Slots } from 'model';
+import { Slots } from '@universityofmaryland/web-model-library';
 
 export const CommonIntroData = ({
   element,

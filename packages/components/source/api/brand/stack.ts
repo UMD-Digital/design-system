@@ -1,5 +1,5 @@
 import { animations } from '@universityofmaryland/web-elements-library/atomic';
-import { Attributes, Lifecycle, Register } from 'model';
+import { Attributes, Lifecycle, Register } from '@universityofmaryland/web-model-library';
 import { CreateComponentFunction, ComponentRegistration } from '../../_types';
 
 const tagName = 'umd-element-brand-card-stack';

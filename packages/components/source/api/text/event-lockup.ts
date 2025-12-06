@@ -6,7 +6,7 @@ import {
   parseDateFromElement,
   createEventDetails,
 } from '@universityofmaryland/web-utilities-library/date';
-import { Attributes, Register, Slots, Lifecycle } from 'model';
+import { Attributes, Register, Slots, Lifecycle } from '@universityofmaryland/web-model-library';
 import { CreateComponentFunction, ComponentRegistration } from '../../_types';
 
 const tagName = 'umd-element-events-date';

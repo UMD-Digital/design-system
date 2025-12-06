@@ -54,7 +54,7 @@ export type {
   AttributeElementRef,
 } from './_types';
 
-export type { SlotProps, BaseProps, OptionalProps, SlotResult } from './model';
+export type { SlotProps, BaseProps, OptionalProps, SlotResult } from '@universityofmaryland/web-model-library';
 
 const allList = umdComponents as unknown as ComponentMap;
 

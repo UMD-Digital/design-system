@@ -9,8 +9,6 @@ module.exports = {
   testTimeout: 10000, // 10 seconds for CI environments
   moduleNameMapper: {
     ...rootConfig.moduleNameMapper,
-    '^model$': '<rootDir>/source/model',
-    '^model/(.*)$': '<rootDir>/source/model/$1',
     '^utilities$': '<rootDir>/source/utilities',
     '^utilities/(.*)$': '<rootDir>/source/utilities/$1',
     '^_types$': '<rootDir>/source/_types',

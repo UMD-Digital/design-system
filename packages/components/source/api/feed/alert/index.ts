@@ -1,5 +1,5 @@
 import { navigation } from '@universityofmaryland/web-elements-library/composite';
-import { Attributes, Register } from 'model';
+import { Attributes, Register } from '@universityofmaryland/web-model-library';
 import { CreateComponentFunction } from '../../../_types';
 
 const tagName = 'umd-element-navigation-utility';

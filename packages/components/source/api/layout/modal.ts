@@ -1,5 +1,5 @@
 import { layout } from '@universityofmaryland/web-elements-library/atomic';
-import { Attributes, Slots, Register } from 'model';
+import { Attributes, Slots, Register } from '@universityofmaryland/web-model-library';
 import { CreateComponentFunction, LayoutProps } from '../../_types';
 
 interface ModalProps extends LayoutProps {

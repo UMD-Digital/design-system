@@ -70,6 +70,7 @@
   "dependencies": {
     "@types/postcss-js": "^4.0.4",
     "@testing-library/jest-dom": "^6.1.5",
+    "@universityofmaryland/web-model-library": "^1.0.0",
     "postcss-js": "^4.0.1",
     "tw-to-css": "^0.0.12"
   },

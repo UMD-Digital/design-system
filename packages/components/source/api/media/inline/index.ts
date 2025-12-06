@@ -1,6 +1,6 @@
 import { media } from '@universityofmaryland/web-elements-library/composite';
 import * as validation from '@universityofmaryland/web-utilities-library/validation';
-import { Attributes, Slots, Register, Lifecycle } from 'model';
+import { Attributes, Slots, Register, Lifecycle } from '@universityofmaryland/web-model-library';
 import { CreateComponentFunction, SlotConfiguration } from '../../../_types';
 
 /**

@@ -1,6 +1,6 @@
 import { card } from '@universityofmaryland/web-elements-library/composite';
 import { createStyledSlotOrClone } from '@universityofmaryland/web-utilities-library/elements';
-import { Attributes, Slots, Register, Lifecycle } from 'model';
+import { Attributes, Slots, Register, Lifecycle } from '@universityofmaryland/web-model-library';
 import type {
   CreateComponentFunction,
   ComponentRegistration,

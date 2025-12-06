@@ -2,7 +2,7 @@ import { quote as quoteComponent } from '@universityofmaryland/web-elements-libr
 import { createStyledSlotOrClone } from '@universityofmaryland/web-utilities-library/elements';
 import { isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
 import { getLinkFromSlot } from '@universityofmaryland/web-utilities-library/dom';
-import { Attributes, Lifecycle, Register, Slots } from 'model';
+import { Attributes, Lifecycle, Register, Slots } from '@universityofmaryland/web-model-library';
 import {
   CreateComponentFunction,
   ComponentRegistration,

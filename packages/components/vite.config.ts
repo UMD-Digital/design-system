@@ -15,10 +15,10 @@ const EXTERNAL_DEPS = [
   '@universityofmaryland/web-styles-library',
   '@universityofmaryland/web-elements-library',
   '@universityofmaryland/web-feeds-library',
+  '@universityofmaryland/web-model-library',
 ];
 
 const PATH_ALIASES = {
-  model: resolve(SOURCE_DIR, 'model'),
   helpers: resolve(SOURCE_DIR, 'helpers'),
 };
 
@@ -191,12 +191,12 @@ export default defineConfig((configEnv) => {
             '@universityofmaryland/web-styles-library': 'UmdWebStyles',
             '@universityofmaryland/web-elements-library': 'UmdWebElements',
             '@universityofmaryland/web-feeds-library': 'UmdWebFeeds',
+            '@universityofmaryland/web-model-library': 'UmdWebModel',
           },
           preserveModules: false,
           exports: 'named',
           manualChunks: (id) => {
             if (id.includes('/utilities/')) return 'shared/utilities';
-            if (id.includes('/model/')) return 'shared/model';
             if (id.includes('/_types')) return 'shared/types';
           },
           chunkFileNames: (chunkInfo) => {

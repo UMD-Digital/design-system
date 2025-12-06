@@ -1,5 +1,5 @@
 import { actions } from '@universityofmaryland/web-elements-library/atomic';
-import { Attributes, Register, Slots } from 'model';
+import { Attributes, Register, Slots } from '@universityofmaryland/web-model-library';
 import {
   CreateComponentFunction,
   ComponentRegistration,

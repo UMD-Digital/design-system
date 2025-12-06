@@ -1,5 +1,5 @@
 import { grid } from '@universityofmaryland/web-feeds-library/news';
-import { Attributes, Register } from 'model';
+import { Attributes, Register } from '@universityofmaryland/web-model-library';
 import { CommonFeedNewsData } from './common';
 import {
   CreateComponentFunction,

@@ -1,6 +1,6 @@
 import { events } from '@universityofmaryland/web-elements-library/atomic';
 import * as date from '@universityofmaryland/web-utilities-library/date';
-import { Attributes, Slots } from 'model';
+import { Attributes, Slots } from '@universityofmaryland/web-model-library';
 
 /**
  * Configuration options for creating event components

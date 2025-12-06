@@ -1,6 +1,6 @@
 import { card } from '@universityofmaryland/web-elements-library/composite';
 import * as validation from '@universityofmaryland/web-utilities-library/validation';
-import { Attributes, Model, Register, Slots } from 'model';
+import { Attributes, Model, Register, Slots } from '@universityofmaryland/web-model-library';
 
 interface CardData {
   image: HTMLImageElement | null;

@@ -1,5 +1,5 @@
 import { carousel } from '@universityofmaryland/web-elements-library/composite';
-import { Attributes, Slots, Register, Lifecycle } from 'model';
+import { Attributes, Slots, Register, Lifecycle } from '@universityofmaryland/web-model-library';
 import type {
   CreateComponentFunction,
   ComponentRegistration,

@@ -1,6 +1,6 @@
 import { card } from '@universityofmaryland/web-elements-library/composite';
 import * as validation from '@universityofmaryland/web-utilities-library/validation';
-import { Attributes, Slots, Register } from 'model';
+import { Attributes, Slots, Register } from '@universityofmaryland/web-model-library';
 import type {
   CreateComponentFunction,
   ComponentRegistration,

@@ -1,6 +1,6 @@
 import * as validation from '@universityofmaryland/web-utilities-library/validation';
-import { Slots } from 'model';
-import slots from 'model/slots';
+import { Slots } from '@universityofmaryland/web-model-library';
+import slots from '@universityofmaryland/web-model-library/slots';
 
 export const CommonPersonData = ({
   element,

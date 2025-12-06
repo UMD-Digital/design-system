@@ -1,5 +1,5 @@
 import { media } from '@universityofmaryland/web-elements-library/composite';
-import { Slots, Register, Lifecycle } from 'model';
+import { Slots, Register, Lifecycle } from '@universityofmaryland/web-model-library';
 import { CreateComponentFunction, SlotConfiguration } from '../../_types';
 
 const tagName = 'umd-element-media-gif';

@@ -1,5 +1,5 @@
 import { animations } from '@universityofmaryland/web-elements-library/atomic';
-import { Register } from 'model';
+import { Register } from '@universityofmaryland/web-model-library';
 import { CreateComponentFunction, ComponentRegistration } from '../../_types';
 
 const tagName = 'umd-element-brand-logo-animation';

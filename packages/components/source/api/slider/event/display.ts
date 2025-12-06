@@ -1,5 +1,5 @@
 import { slider } from '@universityofmaryland/web-elements-library/composite';
-import { Attributes, Register, Slots, Lifecycle } from 'model';
+import { Attributes, Register, Slots, Lifecycle } from '@universityofmaryland/web-model-library';
 import {
   CreateComponentFunction,
   ComponentRegistration,

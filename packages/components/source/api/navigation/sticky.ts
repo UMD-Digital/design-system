@@ -1,6 +1,6 @@
 import { navigation } from '@universityofmaryland/web-elements-library/composite';
 import { createSlot } from '@universityofmaryland/web-utilities-library/elements';
-import { Register } from 'model';
+import { Register } from '@universityofmaryland/web-model-library';
 
 import { CreateComponentFunction, SlotConfiguration } from '../../_types';
 

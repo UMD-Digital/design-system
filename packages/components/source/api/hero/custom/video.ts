@@ -1,5 +1,5 @@
 import { hero } from '@universityofmaryland/web-elements-library/composite';
-import { Lifecycle, Slots, Register } from 'model';
+import { Lifecycle, Slots, Register } from '@universityofmaryland/web-model-library';
 import type {
   CreateComponentFunction,
   ComponentRegistration,

@@ -1,6 +1,6 @@
 import { card } from '@universityofmaryland/web-elements-library/composite';
 import { toUMDElement } from '@universityofmaryland/web-utilities-library/adapters';
-import { Attributes, Slots, Register } from 'model';
+import { Attributes, Slots, Register } from '@universityofmaryland/web-model-library';
 import { extractEventData } from '../_event';
 import type {
   CreateComponentFunction,

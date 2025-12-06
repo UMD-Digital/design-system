@@ -1,6 +1,6 @@
 import { pathway } from '@universityofmaryland/web-elements-library/composite';
 import { toElementVisual } from '@universityofmaryland/web-utilities-library/adapters';
-import { Attributes, Slots, Register, Lifecycle } from 'model';
+import { Attributes, Slots, Register, Lifecycle } from '@universityofmaryland/web-model-library';
 import { extractEventData } from '../_event';
 import { CreateComponentFunction } from '../../_types';
 

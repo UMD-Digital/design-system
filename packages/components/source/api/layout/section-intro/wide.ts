@@ -1,5 +1,5 @@
 import { layout } from '@universityofmaryland/web-elements-library/composite';
-import { Attributes, Register } from 'model';
+import { Attributes, Register } from '@universityofmaryland/web-model-library';
 import { CommonIntroData } from './common';
 import {
   CreateComponentFunction,

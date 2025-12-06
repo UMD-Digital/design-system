@@ -1,4 +1,4 @@
-import { Attributes } from 'model';
+import { Attributes } from '@universityofmaryland/web-model-library';
 import { eventProps } from '../_types';
 
 export const CommonFeedEventsData = ({ element }: { element: HTMLElement }) => {

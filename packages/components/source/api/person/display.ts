@@ -1,5 +1,5 @@
 import { person } from '@universityofmaryland/web-elements-library/composite';
-import { Attributes, Register, Slots } from 'model';
+import { Attributes, Register, Slots } from '@universityofmaryland/web-model-library';
 import { CommonPersonData } from './common';
 import {
   CreateComponentFunction,

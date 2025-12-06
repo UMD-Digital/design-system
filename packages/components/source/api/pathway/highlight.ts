@@ -1,6 +1,6 @@
 import { pathway } from '@universityofmaryland/web-elements-library/composite';
 import { createStyledSlotOrClone } from '@universityofmaryland/web-utilities-library/elements';
-import { Attributes, Slots, Register } from 'model';
+import { Attributes, Slots, Register } from '@universityofmaryland/web-model-library';
 import { CreateComponentFunction } from '../../_types';
 
 const tagName = 'umd-element-pathway-highlight';

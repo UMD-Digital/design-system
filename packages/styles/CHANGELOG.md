@@ -2,6 +2,26 @@
 
 All notable changes to the `@universityofmaryland/web-styles-library` package will be documented in this file.
 
+## [1.7.3] - 2025-12-06
+
+### Removed
+- **BREAKING**: Removed `./token` export and re-export module
+- Removed token directory entirely - design tokens now exclusively in `@universityofmaryland/web-token-library`
+
+### Migration Required
+- **All consumers** must update token imports:
+  - ❌ Old: `import * as token from '@universityofmaryland/web-styles-library/token'`
+  - ✅ New: `import * as token from '@universityofmaryland/web-token-library'`
+- Install `@universityofmaryland/web-token-library` as a direct dependency
+- See tokens package documentation for complete import patterns
+
+## [1.7.2] - 2025-12-06
+
+### Changed
+- **Internal**: Migrated design tokens to standalone `@universityofmaryland/web-token-library` package
+- Added `@universityofmaryland/web-token-library` as a dependency
+- Removed token source files (color.ts, font.ts, media.ts, spacing.ts) - migrated to tokens package
+
 ## [1.5.0] - Current
 
 ### Added

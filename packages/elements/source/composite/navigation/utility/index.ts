@@ -44,17 +44,21 @@ const ANIMATION_OUT_SPEED = 400;
 const ANIMATION_IN_SPEED = 800;
 
 const ATTRIBUTE_LOCK = 'lock';
+const WITH_ITEMS = 'data-items';
 const LOCK_FULL = 'full';
 
 const ELEMENT_NAME = 'umd-element-utility-header';
 
 const IS_LOCK_FULL = `[${ATTRIBUTE_LOCK}=${LOCK_FULL}]`;
+const IS_HAS_ITEMS = `[${WITH_ITEMS}="true"]`;
+const IS_WITHOUT_ITEMS = `[${WITH_ITEMS}="false"]`;
 
 const ELEMENT_UTILITY_DECLARATION = 'element-utility-declaration';
 const ELEMENT_UTILITY_CONTAINTER = 'element-utility-container';
 const ELEMENT_UTILITY_LOCK = 'umd-element-nav-utility-lock';
 const ELEMENT_UTILITY_WRAPPER = 'umd-element-nav-utility-wrapper';
 const ELEMENT_UTILITY_LOGO = 'umd-element-nav-utility-logo';
+const ELEMENT_UTILITY_LOGO_COLUMN = 'umd-element-nav-utility-logo-column';
 const ELEMENT_UTILITY_MENU = 'umd-element-nav-utility-menu';
 const ELEMENT_UTILITY_MOBILE_MENU = 'umd-element-nav-utility-mobile-menu';
 const ELEMENT_UTILITY_MOBILE_BUTTON = 'umd-element-nav-utility-mobile-button';
@@ -62,7 +66,14 @@ const ELEMENT_UTILITY_SEARCH_BUTTON = 'umd-element-nav-utility-search-button';
 
 const OVERWRITE_LOCK_FULL = `.${ELEMENT_UTILITY_CONTAINTER}${IS_LOCK_FULL} .${ELEMENT_UTILITY_LOCK}`;
 
+const OVERWRITE_CONTAINER_WITH_ITEMS = `.${ELEMENT_UTILITY_CONTAINTER}${IS_HAS_ITEMS}`;
+const OVERWRITE_CONTAINER_WITHOUT_ITEMS = `.${ELEMENT_UTILITY_CONTAINTER}${IS_WITHOUT_ITEMS}`;
+const OVERWRIE_WRAPPER_WITH_ITEMS = `${OVERWRITE_CONTAINER_WITH_ITEMS} .${ELEMENT_UTILITY_WRAPPER}`;
+const OVERWRIE_WRAPPER_WITHOUT_ITEMS = `${OVERWRITE_CONTAINER_WITHOUT_ITEMS} .${ELEMENT_UTILITY_WRAPPER}`;
+
 const isDesktop = () => window.innerWidth >= DESKTOP;
+
+const TOP_TWENTY_TEXT = `A Top 20 Public Research University`;
 
 // prettier-ignore
 const LockStyles = `
@@ -97,6 +108,12 @@ const WrapperStyles = `
   .${ELEMENT_UTILITY_WRAPPER} > a:hover,
   .${ELEMENT_UTILITY_WRAPPER} > a:focus {
     text-decoration: underline;
+  }
+
+  ${OVERWRIE_WRAPPER_WITHOUT_ITEMS} {
+    display: flex;
+    justify-content: center;
+    justify-self: center;
   }
 `;
 
@@ -315,13 +332,61 @@ const MobileButtonStyles = `
 
 // prettier-ignore
 const LogoStyles = `
-  .${ELEMENT_UTILITY_LOGO} {
-    font-size: 14px;
-    font-family: Crimson Text, Georgia, serif;
-    letter-spacing: 1px;
-    padding: 10px 0;
+  .${ELEMENT_UTILITY_LOGO_COLUMN} {
+    display: flex;
     opacity: 0;
     transition: opacity .3s ease-in;
+    padding: 10px 0;
+  }
+
+  @media (max-width: ${TABLET - 1}px) {
+    .${ELEMENT_UTILITY_LOGO_COLUMN} {
+      flex-direction: column;
+      gap: ${token.spacing.min};
+      text-align: center;
+    }
+  }
+
+  @media (min-width: ${TABLET}px) {
+    .${ELEMENT_UTILITY_LOGO_COLUMN} {
+      align-items: center;
+      gap: ${token.spacing.xs};
+    }
+  }
+
+  .${ELEMENT_UTILITY_LOGO_COLUMN} * {
+    color: ${token.color.white};
+    font-size: 14px;
+  }
+
+  .${ELEMENT_UTILITY_LOGO_COLUMN} > p {
+    display: block;
+  }
+
+  @media (max-width: ${TABLET - 1}px) {
+    ${OVERWRIE_WRAPPER_WITH_ITEMS} .${ELEMENT_UTILITY_LOGO_COLUMN} > p {
+      display: none;
+    }
+  }
+
+  @media (min-width: ${TABLET}px) {
+    .${ELEMENT_UTILITY_LOGO_COLUMN} > p {
+      position: relative;
+    }
+
+    .${ELEMENT_UTILITY_LOGO_COLUMN} > p:before {
+      content: '';
+      position: absolute;
+      left: -6px;
+      height: 100%;
+      width: 1px;
+      background-color: ${token.color.white};
+    }
+  }
+
+  .${ELEMENT_UTILITY_LOGO} {
+    font-family: Crimson Text, Georgia, serif;
+    letter-spacing: 1px;
   }
 `;
 
@@ -480,7 +545,7 @@ const CreateMobileMenuButton = ({
   return button;
 };
 
-const CreateLogoElement = () => {
+const createLogoElement = () => {
   const logo = document.createElement('a');
 
   logo.innerHTML = 'University of Maryland';
@@ -489,11 +554,25 @@ const CreateLogoElement = () => {
   logo.setAttribute('rel', 'noopener noreferrer');
   logo.classList.add(ELEMENT_UTILITY_LOGO);
 
-  setTimeout(() => {
-    logo.style.opacity = '1';
-  }, 200);
-
   return logo;
+};
+
+const createLogoColumn = () => {
+  const container = document.createElement('div');
+  const text = document.createElement('p');
+  const logo = createLogoElement();
+
+  text.innerHTML = TOP_TWENTY_TEXT;
+
+  container.appendChild(logo);
+  container.appendChild(text);
+  container.classList.add(ELEMENT_UTILITY_LOGO_COLUMN);
+
+  setTimeout(() => {
+    container.style.opacity = '1';
+  }, 400);
+
+  return container;
 };
 
 const CreateMenuItems = ({
@@ -632,12 +711,11 @@ const CreateNavigationUtility = (props: TypeUtilityRequirements) =>
       const container = document.createElement('div');
       const lock = document.createElement('div');
       const wrapper = document.createElement('div');
-      const logoElement = CreateLogoElement();
+      const logoColumn = createLogoColumn();
 
       const secondaryCta = elementStyles.action.secondary.normal;
 
-      let styles =
-        STYLES_NAVIGATION_UTILITY + jssEntryToCSS(secondaryCta);
+      let styles = STYLES_NAVIGATION_UTILITY + jssEntryToCSS(secondaryCta);
 
       const setLayout = () => {
         const menuItems = CreateMenuItems({ ...props });
@@ -654,9 +732,9 @@ const CreateNavigationUtility = (props: TypeUtilityRequirements) =>
           mobileMenu.appendChild(menuItems);
           wrapper.appendChild(mobileMenuButton);
           wrapper.appendChild(mobileMenu);
+          container.setAttribute(WITH_ITEMS, 'true');
         } else {
-          wrapper.style.display = 'flex';
-          wrapper.style.justifyContent = 'center';
+          container.setAttribute(WITH_ITEMS, 'false');
         }
       };
 
@@ -716,7 +794,7 @@ const CreateNavigationUtility = (props: TypeUtilityRequirements) =>
         }
       };
 
-      wrapper.appendChild(logoElement);
+      wrapper.appendChild(logoColumn);
       wrapper.classList.add(ELEMENT_UTILITY_WRAPPER);
 
       lock.appendChild(wrapper);

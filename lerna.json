@@ -1,5 +1,20 @@
 {
   "$schema": "node_modules/lerna/schemas/lerna-schema.json",
-  "version": "0.0.0",
-  "npmClient": "yarn"
+  "version": "independent",
+  "npmClient": "yarn",
+  "command": {
+    "version": {
+      "allowBranch": ["main", "release/*"],
+      "message": "chore(release): publish %s",
+      "conventionalCommits": true,
+      "changelogPreset": "angular",
+      "createRelease": "github",
+      "yes": false
+    },
+    "publish": {
+      "ignoreChanges": ["*.md", "**/__tests__/**", "**/test/**", "**/*.test.ts", "**/*.test.js"],
+      "message": "chore(release): publish %s",
+      "registry": "https://registry.npmjs.org/"
+    }
+  }
 }

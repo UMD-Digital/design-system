@@ -43,10 +43,14 @@
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "scripts": {
     "clean": "rm -rf dist build",
     "docs": "npx typedoc --options ./typedoc.json",
-    "prebuild": "node ../../source/update-badges.js",
+    "prebuild": "node ../../scripts/update-badges.js",
     "release": "npm run test && npm run build && npm publish --access public",
     "build": "vite build",
     "dev": "vite build --watch",

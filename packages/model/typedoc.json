@@ -1,0 +1,12 @@
+{
+  "entryPoints": ["source/index.ts"],
+  "out": "docs",
+  "exclude": ["**/*.test.ts", "**/__tests__/**"],
+  "excludePrivate": true,
+  "excludeProtected": false,
+  "excludeExternals": true,
+  "readme": "README.md",
+  "plugin": [],
+  "name": "@universityofmaryland/web-model-library",
+  "includeVersion": true
+}

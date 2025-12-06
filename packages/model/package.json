@@ -1,0 +1,66 @@
+{
+  "name": "@universityofmaryland/web-model-library",
+  "version": "1.0.0",
+  "description": "UMD Web Component Model - Base utilities for building web components",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./attributes": {
+      "types": "./dist/attributes.d.ts",
+      "import": "./dist/attributes.mjs",
+      "require": "./dist/attributes.js"
+    },
+    "./model": {
+      "types": "./dist/model.d.ts",
+      "import": "./dist/model.mjs",
+      "require": "./dist/model.js"
+    },
+    "./slots": {
+      "types": "./dist/slots.d.ts",
+      "import": "./dist/slots.mjs",
+      "require": "./dist/slots.js"
+    },
+    "./utilities": {
+      "types": "./dist/utilities.d.ts",
+      "import": "./dist/utilities.mjs",
+      "require": "./dist/utilities.js"
+    }
+  },
+  "license": "MIT",
+  "repository": "",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist build",
+    "docs": "npx typedoc --options ./typedoc.json",
+    "prebuild": "node ../../source/update-badges.js",
+    "release": "npm run test && npm run build && npm publish --access public",
+    "build": "vite build",
+    "dev": "vite build --watch",
+    "start": "npm run dev",
+    "pretest": "npm run pretest --prefix ../..",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
+  },
+  "dependencies": {
+    "postcss": "^8.4.31",
+    "postcss-discard-duplicates": "^5.1.0"
+  },
+  "peerDependencies": {
+    "@universityofmaryland/web-styles-library": "^1.0.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-legacy": "^7.2.1",
+    "vite": "^7.1.4",
+    "vite-plugin-checker": "^0.10.3",
+    "vite-plugin-dts": "^4.5.4"
+  }
+}

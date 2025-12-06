@@ -10,7 +10,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const packages = ['icons', 'components', 'elements', 'styles', 'feeds', 'utilities'];
+const packages = ['icons', 'components', 'elements', 'styles', 'feeds', 'utilities', 'model'];
 const rootDir = path.resolve(__dirname, '../packages/');
 const projectRoot = path.resolve(__dirname, '../');
 

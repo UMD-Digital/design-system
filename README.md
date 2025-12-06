@@ -4,6 +4,7 @@
 [![Elements Version](https://img.shields.io/badge/Elements-v1.5.3-blue)](https://www.npmjs.com/package/@universityofmaryland/web-elements-library)
 [![Feeds Version](https://img.shields.io/badge/Feeds-v1.2.3-blue)](https://www.npmjs.com/package/@universityofmaryland/web-feeds-library)
 [![Styles Version](https://img.shields.io/badge/Styles-v1.7.1-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)
+[![Model Version](https://img.shields.io/badge/Model-v1.0.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-model-library)
 [![Utilities Version](https://img.shields.io/badge/Utilities-v1.0.1-blue)](https://www.npmjs.com/package/@universityofmaryland/web-utilities-library)
 [![Icons Version](https://img.shields.io/badge/Icons-v1.0.1-blue)](https://www.npmjs.com/package/@universityofmaryland/web-icons-library)
 
@@ -34,6 +35,8 @@ Mid-level building blocks that combine foundation packages:
 ### Foundation Packages
 
 Low-level primitives for building custom implementations:
+
+- **[Model](packages/model/README.md)**: Web component model utilities for building custom elements. Provides attribute handling, slot management, component registration, lifecycle hooks, and the base model system for creating web components with Shadow DOM, validation, and error handling.
 
 - **[Builder](packages/builder/README.md)**: Element builder utilities for creating pre-styled components and custom elements. Provides `ElementBuilder.styled.*` for UMD design system elements and `ElementBuilder.create.*` for custom implementations.
 

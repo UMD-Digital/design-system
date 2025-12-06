@@ -42,7 +42,7 @@ import type {
   ComponentReadyDetail,
   ComponentErrorDetail,
   ElementRef
-} from '../../_types';
+} from '../_types';
 
 interface AttributeConfig {
   name: string;

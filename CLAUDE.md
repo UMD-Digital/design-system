@@ -14,6 +14,7 @@ packages/
 ├── icons/      - SVG icon and logo assets (v1.0.0)
 ├── utilities/  - Shared utility functions (v0.1.0)
 ├── styles/     - JSS objects, design tokens, CSS utilities (v1.6.9)
+├── model/      - Web component model utilities (v1.0.0)
 ├── elements/   - Foundational UI element builders (v1.4.8)
 ├── feeds/      - Dynamic content feed components (v1.1.1)
 └── components/ - Web Components (Custom Elements) (v1.15.0-beta.0)
@@ -26,9 +27,10 @@ The dependency graph determines build order:
 1. **icons** - No dependencies (standalone SVG assets)
 2. **utilities** - Depends on `styles` for JSS utilities
 3. **styles** - No UMD dependencies (has postcss deps)
-4. **elements** - Depends on `styles`, `icons`, `utilities`
-5. **feeds** - Depends on `elements`, `styles`, `utilities`
-6. **components** - Depends on all packages above
+4. **model** - Depends on `styles` (peer dependency for design tokens)
+5. **elements** - Depends on `styles`, `icons`, `utilities`
+6. **feeds** - Depends on `elements`, `styles`, `utilities`
+7. **components** - Depends on all packages above + `model`
 
 ### Build System Pattern
 

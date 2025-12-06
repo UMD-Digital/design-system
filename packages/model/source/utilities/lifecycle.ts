@@ -5,7 +5,7 @@
  * reused across multiple components.
  */
 
-import type { ComponentRef } from '../../_types';
+import type { ComponentRef } from '../_types';
 
 /**
  * Common lifecycle hooks for component initialization and state management
@@ -32,7 +32,3 @@ export const hooks = {
  * @deprecated Use hooks instead
  */
 export const CommonLifecycleHooks = hooks;
-
-export default {
-  hooks,
-};

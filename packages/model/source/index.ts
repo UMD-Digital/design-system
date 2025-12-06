@@ -71,5 +71,11 @@ import {
   type SlotResult,
 } from './slots/create';
 
+// Export type definitions
+export type * from './_types';
+
+// Export main modules
 export { Attributes, Model, Register, Slots, Lifecycle };
+
+// Export slot types
 export type { SlotProps, BaseProps, OptionalProps, SlotResult };

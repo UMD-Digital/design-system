@@ -32,11 +32,13 @@ export default defineConfig({
     rollupOptions: isCDN
       ? {
           output: {
+            exports: 'named',
             assetFileNames: 'cdn.[ext]',
           },
         }
       : {
           output: {
+            exports: 'named',
             preserveModules: true,
             preserveModulesRoot: 'source',
             assetFileNames: (assetInfo) => {

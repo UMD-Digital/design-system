@@ -2,6 +2,9 @@
 
 Element Builder for the University of Maryland Design System
 
+[![Builder Version](https://img.shields.io/badge/Builder-v1.0.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-builder-library)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
 ## Installation
 
 ```bash

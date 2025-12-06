@@ -1,0 +1,233 @@
+# .github/workflows/release-notification.yml
+name: Release Notifications
+
+# This workflow is triggered by other workflows
+on:
+  workflow_call:
+    inputs:
+      status:
+        description: 'Release status (success, failure, started)'
+        required: true
+        type: string
+      version_bump:
+        description: 'Version bump type'
+        required: false
+        type: string
+      packages_changed:
+        description: 'JSON array of changed packages'
+        required: false
+        type: string
+      error_message:
+        description: 'Error message if failed'
+        required: false
+        type: string
+    secrets:
+      SLACK_WEBHOOK_URL:
+        description: 'Slack webhook URL for notifications'
+        required: false
+      DISCORD_WEBHOOK_URL:
+        description: 'Discord webhook URL for notifications'
+        required: false
+
+jobs:
+  notify-slack:
+    name: Notify Slack
+    runs-on: ubuntu-latest
+    if: ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    steps:
+      - name: Send Slack notification (success)
+        if: ${{ inputs.status == 'success' }}
+        uses: slackapi/slack-github-action@v1.25.0
+        with:
+          payload: |
+            {
+              "text": "✅ Release ${{ inputs.version_bump }} completed successfully!",
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "✅ UMD Design System Release Success",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Version Bump:*\n${{ inputs.version_bump }}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Workflow:*\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Packages Published:*\n```${{ inputs.packages_changed }}```"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "📦 <https://www.npmjs.com/org/universityofmaryland|View on NPM> | 📰 <${{ github.server_url }}/${{ github.repository }}/releases|View Releases>"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+
+      - name: Send Slack notification (failure)
+        if: ${{ inputs.status == 'failure' }}
+        uses: slackapi/slack-github-action@v1.25.0
+        with:
+          payload: |
+            {
+              "text": "❌ Release ${{ inputs.version_bump }} failed!",
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "❌ UMD Design System Release Failed",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Version Bump:*\n${{ inputs.version_bump }}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Workflow:*\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Error:*\n```${{ inputs.error_message }}```"
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "🔍 Check the workflow logs for details."
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+
+      - name: Send Slack notification (started)
+        if: ${{ inputs.status == 'started' }}
+        uses: slackapi/slack-github-action@v1.25.0
+        with:
+          payload: |
+            {
+              "text": "🚀 Release ${{ inputs.version_bump }} started...",
+              "blocks": [
+                {
+                  "type": "header",
+                  "text": {
+                    "type": "plain_text",
+                    "text": "🚀 UMD Design System Release Started",
+                    "emoji": true
+                  }
+                },
+                {
+                  "type": "section",
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Version Bump:*\n${{ inputs.version_bump }}"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Triggered By:*\n${{ github.actor }}"
+                    }
+                  ]
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Progress>"
+                  }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
+
+  notify-discord:
+    name: Notify Discord
+    runs-on: ubuntu-latest
+    if: ${{ secrets.DISCORD_WEBHOOK_URL }}
+
+    steps:
+      - name: Send Discord notification (success)
+        if: ${{ inputs.status == 'success' }}
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          title: "✅ UMD Design System Release Success"
+          description: |
+            **Version Bump:** ${{ inputs.version_bump }}
+
+            **Packages Published:**
+            ```
+            ${{ inputs.packages_changed }}
+            ```
+
+            [View on NPM](https://www.npmjs.com/org/universityofmaryland) | [View Releases](${{ github.server_url }}/${{ github.repository }}/releases)
+          color: 0x00ff00
+          username: GitHub Actions
+
+      - name: Send Discord notification (failure)
+        if: ${{ inputs.status == 'failure' }}
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          title: "❌ UMD Design System Release Failed"
+          description: |
+            **Version Bump:** ${{ inputs.version_bump }}
+
+            **Error:**
+            ```
+            ${{ inputs.error_message }}
+            ```
+
+            [View Workflow Run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          color: 0xff0000
+          username: GitHub Actions
+
+      - name: Send Discord notification (started)
+        if: ${{ inputs.status == 'started' }}
+        uses: sarisia/actions-status-discord@v1
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          title: "🚀 UMD Design System Release Started"
+          description: |
+            **Version Bump:** ${{ inputs.version_bump }}
+            **Triggered By:** ${{ github.actor }}
+
+            [View Progress](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})
+          color: 0x0099ff
+          username: GitHub Actions

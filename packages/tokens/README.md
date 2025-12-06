@@ -2,7 +2,7 @@
 
 Design tokens for the University of Maryland Design System. This package provides the foundational design values (colors, typography, spacing, breakpoints) as a single source of truth.
 
-[![Version](https://img.shields.io/badge/Tokens-v1.0.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-token-library)
+[![Tokens Version](https://img.shields.io/badge/Tokens-v1.0.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-token-library)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 ## Overview

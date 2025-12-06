@@ -1,0 +1,209 @@
+# .github/workflows/release-package.yml
+name: Release Specific Package
+
+on:
+  workflow_dispatch:
+    inputs:
+      package:
+        description: 'Package to release'
+        required: true
+        type: choice
+        options:
+          - icons
+          - tokens
+          - utilities
+          - builder
+          - model
+          - styles
+          - elements
+          - feeds
+          - components
+      version_bump:
+        description: 'Version bump type'
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+          - prepatch
+          - preminor
+          - premajor
+          - prerelease
+      preid:
+        description: 'Pre-release identifier (alpha, beta, rc)'
+        required: false
+        type: string
+        default: 'beta'
+      dry_run:
+        description: 'Dry run (no publish)'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  packages: write
+  pull-requests: write
+
+jobs:
+  release-package:
+    name: Release ${{ inputs.package }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Generate style mocks
+        if: ${{ inputs.package == 'elements' || inputs.package == 'components' || inputs.package == 'feeds' }}
+        run: npm run generate:mocks
+
+      - name: Run tests for package
+        run: npx lerna run test --scope=@universityofmaryland/web-${{ inputs.package }}-library
+
+      - name: Build dependencies first
+        run: |
+          echo "Building dependencies for ${{ inputs.package }}..."
+
+          # Build based on package dependencies
+          case "${{ inputs.package }}" in
+            "icons"|"tokens")
+              echo "No dependencies to build"
+              ;;
+            "utilities"|"builder"|"model")
+              npx lerna run build --scope=@universityofmaryland/web-tokens-library
+              ;;
+            "styles")
+              npx lerna run build --scope=@universityofmaryland/web-tokens-library
+              ;;
+            "elements")
+              npx lerna run build --scope=@universityofmaryland/web-tokens-library
+              npx lerna run build --scope=@universityofmaryland/web-utilities-library
+              npx lerna run build --scope=@universityofmaryland/web-builder-library
+              npx lerna run build --scope=@universityofmaryland/web-styles-library
+              npx lerna run build --scope=@universityofmaryland/web-icons-library
+              ;;
+            "feeds")
+              npx lerna run build --scope=@universityofmaryland/web-tokens-library
+              npx lerna run build --scope=@universityofmaryland/web-utilities-library
+              npx lerna run build --scope=@universityofmaryland/web-builder-library
+              npx lerna run build --scope=@universityofmaryland/web-styles-library
+              npx lerna run build --scope=@universityofmaryland/web-icons-library
+              npx lerna run build --scope=@universityofmaryland/web-elements-library
+              ;;
+            "components")
+              echo "Building all dependencies..."
+              npx lerna run build --stream --scope=@universityofmaryland/web-icons-library
+              npx lerna run build --stream --scope=@universityofmaryland/web-tokens-library
+              npx lerna run build --stream --scope=@universityofmaryland/web-utilities-library
+              npx lerna run build --stream --scope=@universityofmaryland/web-builder-library
+              npx lerna run build --stream --scope=@universityofmaryland/web-model-library
+              npx lerna run build --stream --scope=@universityofmaryland/web-styles-library
+              npx lerna run build --stream --scope=@universityofmaryland/web-elements-library
+              npx lerna run build --stream --scope=@universityofmaryland/web-feeds-library
+              ;;
+          esac
+
+      - name: Build package
+        run: npx lerna run build --scope=@universityofmaryland/web-${{ inputs.package }}-library
+
+      - name: Update version badges
+        run: npm run update-badges
+
+      - name: Version package (pre-release)
+        if: ${{ contains(inputs.version_bump, 'pre') }}
+        run: |
+          npx lerna version ${{ inputs.version_bump }} \
+            --preid ${{ inputs.preid }} \
+            --scope=@universityofmaryland/web-${{ inputs.package }}-library \
+            --conventional-commits \
+            --create-release github \
+            --yes
+
+      - name: Version package (standard release)
+        if: ${{ !contains(inputs.version_bump, 'pre') }}
+        run: |
+          npx lerna version ${{ inputs.version_bump }} \
+            --scope=@universityofmaryland/web-${{ inputs.package }}-library \
+            --conventional-commits \
+            --create-release github \
+            --yes
+
+      - name: Publish to NPM (dry-run)
+        if: ${{ inputs.dry_run == 'true' }}
+        run: |
+          echo "Dry run enabled - skipping NPM publish"
+          npx lerna publish from-package \
+            --scope=@universityofmaryland/web-${{ inputs.package }}-library \
+            --yes \
+            --dry-run
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish to NPM
+        if: ${{ inputs.dry_run != 'true' }}
+        run: |
+          npx lerna publish from-package \
+            --scope=@universityofmaryland/web-${{ inputs.package }}-library \
+            --yes \
+            --dist-tag ${{ contains(inputs.version_bump, 'pre') && inputs.preid || 'latest' }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Push changes
+        if: ${{ inputs.dry_run != 'true' }}
+        run: |
+          git push --follow-tags origin ${{ github.ref_name }}
+
+      - name: Get package version
+        id: package_version
+        run: |
+          VERSION=$(node -p "require('./packages/${{ inputs.package }}/package.json').version")
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Summary
+        run: |
+          echo "## Package Release Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Package:** @universityofmaryland/web-${{ inputs.package }}-library" >> $GITHUB_STEP_SUMMARY
+          echo "**New Version:** ${{ steps.package_version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
+          echo "**Version Bump:** ${{ inputs.version_bump }}" >> $GITHUB_STEP_SUMMARY
+          if [[ "${{ inputs.version_bump }}" == *"pre"* ]]; then
+            echo "**Pre-release ID:** ${{ inputs.preid }}" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "**Dry Run:** ${{ inputs.dry_run }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 [View on NPM](https://www.npmjs.com/package/@universityofmaryland/web-${{ inputs.package }}-library)" >> $GITHUB_STEP_SUMMARY
+
+  notify:
+    name: Send Notifications
+    needs: release-package
+    if: always()
+    uses: ./.github/workflows/release-notification.yml
+    with:
+      status: ${{ needs.release-package.result == 'success' && 'success' || 'failure' }}
+      version_bump: ${{ inputs.version_bump }}
+      packages_changed: "@universityofmaryland/web-${{ inputs.package }}-library"
+      error_message: ${{ needs.release-package.result == 'failure' && 'Package release failed. Check workflow logs.' || '' }}
+    secrets:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}

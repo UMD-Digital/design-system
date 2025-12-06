@@ -25,6 +25,8 @@ Current package versions:
 ## [Unreleased]
 
 ### Added
+
+**Phase 1 & 2: Core Release Automation**
 - **Automated Release Workflow**: GitHub Actions workflow for publishing packages
   - Manual trigger with version bump selection
   - Support for pre-releases (alpha, beta, rc)
@@ -33,11 +35,43 @@ Current package versions:
   - Badge updates and changelog generation
   - GitHub release creation
 - **Release Documentation**:
-  - Comprehensive release process guide ([RELEASE.md](docs/RELEASE.md))
-  - Setup guide for NPM token and GitHub configuration ([RELEASE_SETUP.md](docs/RELEASE_SETUP.md))
+  - Consolidated release management guide ([.github/RELEASE_GUIDE.md](.github/RELEASE_GUIDE.md))
+  - Validation report with test results ([.github/VALIDATION_REPORT.md](.github/VALIDATION_REPORT.md))
 - Enhanced badge update script with dry-run and package-specific modes
 - This CHANGELOG file to track all package changes
 - PublishConfig to all package.json files for scoped package publishing
+- Version badges for all 9 packages (icons, tokens, builder, model, utilities, styles, elements, feeds, components)
+
+**Phase 3: Enhanced Features**
+- **Notification System**: Automated Slack and Discord notifications
+  - Release started, success, and failure notifications
+  - Rich message formatting with links to NPM and releases
+  - Configurable via GitHub Secrets (optional)
+  - Separate reusable workflow for notifications
+- **Release Template**: Standardized GitHub release notes template
+  - Sections for breaking changes, features, bug fixes
+  - Migration guide template
+  - Package version listing
+  - Links to documentation and NPM
+- **Workflow Integration**: Enhanced main release workflow
+  - Automatic notification on success/failure
+  - Package list collection and reporting
+  - Workflow output for downstream jobs
+
+**Phase 4: Advanced Features**
+- **Package-Specific Release Workflow**: Release individual packages
+  - Dedicated workflow for single-package releases
+  - Automatic dependency building in correct order
+  - Supports all version bump types and pre-releases
+  - Perfect for hotfixes and independent updates
+- **Consolidated Documentation**:
+  - Single comprehensive release management guide ([.github/RELEASE_GUIDE.md](.github/RELEASE_GUIDE.md))
+  - Covers setup, standard workflows, and advanced features
+  - Package-specific release instructions
+  - Notification setup guides (Slack & Discord)
+  - Release template usage guide
+  - Workflow integration patterns
+  - Troubleshooting for all scenarios
 
 ### Changed
 - Lerna configuration updated for independent versioning with conventional commits
@@ -46,6 +80,11 @@ Current package versions:
   - `test:all` - Run all tests with mocks
   - `build` and `build:ci` - Build all packages
   - `version:check` and `version:dry-run` - Version preview commands
+- **Documentation restructure**: Moved all release docs to `.github/` directory
+  - Consolidated 3 separate guides into single `RELEASE_GUIDE.md`
+  - Moved validation report to `.github/VALIDATION_REPORT.md`
+  - Keeps `docs/` directory for external user-facing documentation only
+  - All internal release process docs now in `.github/` with workflows
 
 ---
 

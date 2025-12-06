@@ -36,6 +36,8 @@ jobs:
   release:
     name: Release
     runs-on: ubuntu-latest
+    outputs:
+      packages: ${{ steps.packages.outputs.packages }}
 
     steps:
       - name: Checkout code
@@ -120,6 +122,12 @@ jobs:
         run: |
           git push --follow-tags origin ${{ github.ref_name }}
 
+      - name: Collect changed packages
+        id: packages
+        run: |
+          PACKAGES=$(npx lerna changed --json | jq -r '.[].name' | paste -sd "," - || echo "none")
+          echo "packages=$PACKAGES" >> $GITHUB_OUTPUT
+
       - name: Summary
         run: |
           echo "## Release Summary" >> $GITHUB_STEP_SUMMARY
@@ -132,3 +140,17 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Changed Packages" >> $GITHUB_STEP_SUMMARY
           npx lerna changed --json | jq -r '.[] | "- **\(.name)**: \(.version)"' >> $GITHUB_STEP_SUMMARY || echo "No changed packages" >> $GITHUB_STEP_SUMMARY
+
+  notify:
+    name: Send Notifications
+    needs: release
+    if: always() && github.event.inputs.dry_run != 'true'
+    uses: ./.github/workflows/release-notification.yml
+    with:
+      status: ${{ needs.release.result == 'success' && 'success' || 'failure' }}
+      version_bump: ${{ github.event.inputs.version_bump }}
+      packages_changed: ${{ needs.release.outputs.packages || 'none' }}
+      error_message: ${{ needs.release.result == 'failure' && 'Release workflow failed. Check logs for details.' || '' }}
+    secrets:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}

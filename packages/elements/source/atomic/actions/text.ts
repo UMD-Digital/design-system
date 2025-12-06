@@ -1,5 +1,5 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import * as layoutStyles from '@universityofmaryland/web-styles-library/layout';
 import * as animation from '@universityofmaryland/web-styles-library/animation';

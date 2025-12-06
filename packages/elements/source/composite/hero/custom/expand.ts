@@ -1,5 +1,5 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
 import { assets } from 'atomic';

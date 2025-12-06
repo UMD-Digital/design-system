@@ -1,4 +1,4 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 import { trapFocus } from '@universityofmaryland/web-utilities-library/accessibility';
 
 type TypeFixedFullScreenProps = {

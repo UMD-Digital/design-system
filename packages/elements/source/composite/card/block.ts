@@ -1,4 +1,4 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
 import { assets, layout, textLockup } from 'atomic';
 import { CardBlockProps } from './_types';

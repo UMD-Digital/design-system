@@ -1,4 +1,4 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { arrow_up as iconArrowUp } from '@universityofmaryland/web-icons-library/arrows';
 

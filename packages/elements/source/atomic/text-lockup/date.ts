@@ -1,5 +1,5 @@
 import * as animation from '@universityofmaryland/web-styles-library/animation';
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import { truncateText } from '@universityofmaryland/web-utilities-library/string';

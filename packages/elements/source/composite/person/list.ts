@@ -1,5 +1,5 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
 import { layout } from 'atomic';
 import { PersonCard } from './_types';

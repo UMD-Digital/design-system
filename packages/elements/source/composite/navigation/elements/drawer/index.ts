@@ -1,4 +1,4 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 import { handleKeyboardNavigation } from '@universityofmaryland/web-utilities-library/events';
 import { close_large as iconCloseLarge } from '@universityofmaryland/web-icons-library/controls';
 import { TypeMenuDisplayButtonRequirements } from '../menu-button';

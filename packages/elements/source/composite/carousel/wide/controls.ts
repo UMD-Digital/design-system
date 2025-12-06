@@ -1,5 +1,5 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 import { arrow_left as iconArrowLeft } from '@universityofmaryland/web-icons-library/arrows';
 import { animations } from 'atomic';
 import { createElementWithRefs } from './_elementModel';

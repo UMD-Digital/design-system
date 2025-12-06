@@ -1,5 +1,5 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 import { assets } from 'atomic';
 import { createContainer } from './container';
 import { type CarouselWideProps } from '../_types';

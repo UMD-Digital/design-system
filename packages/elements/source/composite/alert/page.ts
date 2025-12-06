@@ -1,5 +1,5 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 import { warning as iconWarning } from '@universityofmaryland/web-icons-library/indicators';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { CreateAlertText as AlertText, AlertTextProps } from './elements/text';

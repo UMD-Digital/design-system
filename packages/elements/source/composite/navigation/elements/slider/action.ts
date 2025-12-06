@@ -1,4 +1,4 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import { chevron_down as iconChevronDown } from '@universityofmaryland/web-icons-library/controls';

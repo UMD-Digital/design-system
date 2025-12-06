@@ -1,4 +1,4 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 import * as animation from '@universityofmaryland/web-styles-library/animation';
 import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';

@@ -1,4 +1,4 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { findParent } from '@universityofmaryland/web-utilities-library/dom';
 import Slides, { TypeSlideProps } from './slides';

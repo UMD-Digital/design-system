@@ -1,4 +1,4 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 
 type TypeUtilitySearchProps = {
   isSearchDomain?: boolean;

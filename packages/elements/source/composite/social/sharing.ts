@@ -1,4 +1,4 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { facebook as iconFacebook, x as iconX } from '@universityofmaryland/web-icons-library/social';
 import { email as iconEmail } from '@universityofmaryland/web-icons-library/communication';

@@ -1,5 +1,5 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 import { quote as iconQuote } from '@universityofmaryland/web-icons-library/brand';
 import { SMALL } from '../_constants';
 import { type QuoteBaseProps, type QuoteVariantProps } from '../_types';

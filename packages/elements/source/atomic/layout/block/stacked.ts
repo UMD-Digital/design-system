@@ -1,5 +1,5 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 import { asset as assetElement } from '@universityofmaryland/web-styles-library/element';
 import {
   createMediaQuery,

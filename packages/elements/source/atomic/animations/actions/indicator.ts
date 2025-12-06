@@ -1,4 +1,4 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 
 const ELEMENT_SLIDE_INDICATOR_CONTAINER = 'slide-indicator-container';

@@ -1,4 +1,4 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import { smoothScrollToElement } from '@universityofmaryland/web-utilities-library/animation';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';

@@ -1,4 +1,4 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 import * as animation from '@universityofmaryland/web-styles-library/animation';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import createMain, { type MainSectionProps } from './elements/main-section';

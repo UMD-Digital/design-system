@@ -1,5 +1,5 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 import { shrinkThenRemove } from '@universityofmaryland/web-utilities-library/animation';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { close as iconClose } from '@universityofmaryland/web-icons-library/controls';

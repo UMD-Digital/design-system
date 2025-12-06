@@ -1,4 +1,4 @@
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import * as carouselElements from '../elements';
 import { buttons } from 'atomic';

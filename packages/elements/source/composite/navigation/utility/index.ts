@@ -356,11 +356,12 @@ const LogoStyles = `
 
   .${ELEMENT_UTILITY_LOGO_COLUMN} * {
     color: ${token.color.white};
-    font-size: 14px;
+
   }
 
   .${ELEMENT_UTILITY_LOGO_COLUMN} > p {
     display: block;
+    font-size: 11px;
   }
 
   @media (max-width: ${TABLET - 1}px) {
@@ -372,12 +373,13 @@ const LogoStyles = `
   @media (min-width: ${TABLET}px) {
     .${ELEMENT_UTILITY_LOGO_COLUMN} > p {
       position: relative;
+      font-size: 13px;
     }
 
     .${ELEMENT_UTILITY_LOGO_COLUMN} > p:before {
       content: '';
       position: absolute;
-      left: -6px;
+      left: -4px;
       height: 100%;
       width: 1px;
       background-color: ${token.color.white};
@@ -387,6 +389,8 @@ const LogoStyles = `
   .${ELEMENT_UTILITY_LOGO} {
     font-family: Crimson Text, Georgia, serif;
     letter-spacing: 1px;
+    font-size: 14px;
+    text-transform: uppercase;
   }
 `;
 

@@ -1,0 +1,70 @@
+{
+  "name": "@universityofmaryland/web-token-library",
+  "version": "1.0.0",
+  "description": "Design tokens for the University of Maryland Design System - Foundation for Figma-to-code pipeline",
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./color": {
+      "types": "./dist/color.d.ts",
+      "import": "./dist/color.mjs",
+      "require": "./dist/color.js"
+    },
+    "./font": {
+      "types": "./dist/font.d.ts",
+      "import": "./dist/font.mjs",
+      "require": "./dist/font.js"
+    },
+    "./media": {
+      "types": "./dist/media.d.ts",
+      "import": "./dist/media.mjs",
+      "require": "./dist/media.js"
+    },
+    "./spacing": {
+      "types": "./dist/spacing.d.ts",
+      "import": "./dist/spacing.mjs",
+      "require": "./dist/spacing.js"
+    }
+  },
+  "license": "MIT",
+  "repository": "",
+  "private": false,
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "docs": "npx typedoc --options ./typedoc.json",
+    "prebuild": "node ../../source/update-badges.js",
+    "release": "npm run test && npm run build && npm publish --access public",
+    "build": "vite build && npm run build:cdn",
+    "build:cdn": "BUILD_CDN=true vite build --mode production",
+    "dev": "vite build --watch",
+    "start": "npm run dev",
+    "pretest": "npm run pretest --prefix ../..",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:snapshot": "jest --updateSnapshot"
+  },
+  "keywords": [
+    "design-tokens",
+    "design-system",
+    "umd",
+    "university-of-maryland",
+    "figma"
+  ],
+  "devDependencies": {
+    "@vitejs/plugin-legacy": "^7.2.1",
+    "typescript": "^5.8.2",
+    "vite": "^7.1.4",
+    "vite-plugin-checker": "^0.10.3",
+    "vite-plugin-dts": "^4.5.4"
+  }
+}

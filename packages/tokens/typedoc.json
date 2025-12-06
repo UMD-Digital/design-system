@@ -1,0 +1,11 @@
+{
+  "entryPoints": ["source/index.ts"],
+  "out": "../../docs/tokens",
+  "plugin": [],
+  "excludePrivate": true,
+  "excludeProtected": true,
+  "excludeExternals": true,
+  "readme": "README.md",
+  "name": "UMD Design System - Tokens",
+  "includeVersion": true
+}

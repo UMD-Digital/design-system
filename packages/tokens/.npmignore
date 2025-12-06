@@ -1,0 +1,9 @@
+source/
+*.test.ts
+**/__tests__/
+tsconfig.json
+vite.config.ts
+jest.config.js
+typedoc.json
+.DS_Store
+node_modules/

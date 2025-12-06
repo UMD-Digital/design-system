@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-feeds-library",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "description": "UMD Feed Elements",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -46,7 +46,8 @@
     "test:snapshot": "jest --updateSnapshot"
   },
   "dependencies": {
-    "@types/postcss-js": "^4.0.4"
+    "@types/postcss-js": "^4.0.4",
+    "@universityofmaryland/web-token-library": "^1.0.0"
   },
   "devDependencies": {
     "vite-plugin-checker": "^0.10.3",

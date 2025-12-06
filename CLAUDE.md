@@ -11,13 +11,15 @@ The University of Maryland Design System is a Lerna-managed monorepo containing 
 ### Monorepo Structure
 ```
 packages/
-├── icons/      - SVG icon and logo assets (v1.0.0)
-├── utilities/  - Shared utility functions (v0.1.0)
-├── styles/     - JSS objects, design tokens, CSS utilities (v1.6.9)
+├── icons/      - SVG icon and logo assets (v1.0.1)
+├── tokens/     - Design tokens (colors, spacing, typography, media) (v1.0.0)
+├── utilities/  - Shared utility functions (v1.0.2)
+├── styles/     - JSS objects, design tokens, CSS utilities (v1.7.2)
 ├── model/      - Web component model utilities (v1.0.0)
-├── elements/   - Foundational UI element builders (v1.4.8)
-├── feeds/      - Dynamic content feed components (v1.1.1)
-└── components/ - Web Components (Custom Elements) (v1.15.0-beta.0)
+├── builder/    - Element builder utilities (v1.0.0)
+├── elements/   - Foundational UI element builders (v1.5.4)
+├── feeds/      - Dynamic content feed components (v1.2.4)
+└── components/ - Web Components (Custom Elements) (v1.15.8)
 ```
 
 ### Package Dependencies & Build Order
@@ -25,12 +27,14 @@ packages/
 The dependency graph determines build order:
 
 1. **icons** - No dependencies (standalone SVG assets)
-2. **utilities** - Depends on `styles` for JSS utilities
-3. **styles** - No UMD dependencies (has postcss deps)
-4. **model** - Depends on `styles` (peer dependency for design tokens)
-5. **elements** - Depends on `styles`, `icons`, `utilities`
-6. **feeds** - Depends on `elements`, `styles`, `utilities`
-7. **components** - Depends on all packages above + `model`
+2. **tokens** - No dependencies (design token primitives)
+3. **utilities** - Depends on `tokens` for design token utilities
+4. **styles** - Depends on `tokens` (re-exports for backwards compatibility)
+5. **builder** - Depends on `tokens` for styled element creation
+6. **model** - Depends on `tokens` (peer dependency for design tokens)
+7. **elements** - Depends on `tokens`, `builder`, `utilities`, `styles` (peer), `icons` (peer)
+8. **feeds** - Depends on `tokens`, `elements`, `utilities`
+9. **components** - Depends on all packages above
 
 ### Build System Pattern
 
@@ -123,12 +127,14 @@ interface ElementModel {
 - Use slot-based content distribution
 - Extend base Web Element classes
 
-### 4. Design Tokens - Styles Package
-Centralized in `token/` module:
-- Colors: `token/color.ts`
-- Spacing: `token/spacing.ts`
-- Typography: `token/font.ts`
-- Media queries: `token/media.ts` (Mobile: 0-767px, Tablet: 768-1023px, Desktop: 1024px+)
+### 4. Design Tokens - Tokens Package
+Centralized in the `@universityofmaryland/web-token-library` package:
+- Colors: Brand colors (red, gold, black, white) and gray scale
+- Spacing: Responsive spacing scale (xs, sm, md, lg, xl, xxl)
+- Typography: Font families, weights, sizes, and line heights
+- Media queries: Breakpoints (Mobile: 0-767px, Tablet: 768-1023px, Desktop: 1024px+)
+
+The styles package re-exports tokens for backwards compatibility via `@universityofmaryland/web-styles-library/token`
 
 ## Testing Strategy
 
@@ -223,7 +229,8 @@ All packages support selective imports for optimal tree-shaking:
 ```typescript
 // Category imports
 import { addClass } from '@universityofmaryland/web-utilities-library/dom';
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
+import { color } from '@universityofmaryland/web-token-library/color';
 import { CHEVRON_SMALL } from '@universityofmaryland/web-icons-library/navigation';
 import { textLockup } from '@universityofmaryland/web-elements-library/atomic';
 
@@ -236,18 +243,22 @@ import { addClass } from '@universityofmaryland/web-utilities-library';
 
 ### Important Import Pattern
 
-**For styles library JSS modules, use namespace imports:**
+**For token library and styles library JSS modules, use namespace imports:**
 
 ```typescript
-// ✅ Correct - use namespace import
-import * as token from '@universityofmaryland/web-styles-library/token';
+// ✅ Correct - use namespace import for tokens
+import * as token from '@universityofmaryland/web-token-library';
+import * as media from '@universityofmaryland/web-token-library/media';
+
+// ✅ Correct - use namespace import for styles
 import * as layout from '@universityofmaryland/web-styles-library/layout';
 
 // ❌ Wrong - no default exports
-import token from '@universityofmaryland/web-styles-library/token';
+import token from '@universityofmaryland/web-token-library';
+import layout from '@universityofmaryland/web-styles-library/layout';
 ```
 
-This is because JSS modules export named exports like `{ color, spacing, media, font }`, not a default export.
+This is because JSS modules export named exports like `{ color, spacing, media, font }`, not a default export. Note that `color` and `spacing` are default exports in the tokens package.
 
 ## Planned Future Packages
 
@@ -287,27 +298,26 @@ The following packages are planned for future development:
 - Testing utilities for Web Components
 - Enable consumers to extend and customize components
 
-### 3. Tokens Package
-**Package Name**: `@universityofmaryland/web-tokens`
-**Purpose**: Design tokens synchronized from Figma
+### 3. Figma Token Sync (Future Enhancement)
+**Purpose**: Automate design token synchronization from Figma
 
-**Features**:
-- Automated token extraction from Figma
-- Token transformation to multiple formats (JS, CSS, SCSS)
-- Semantic token naming
-- Theme variants (light/dark, maryland/default)
-- Color, typography, spacing, and effect tokens
+**Planned Features**:
+- Automated token extraction from Figma API
+- Token transformation to JS/CSS/SCSS formats
+- Version control and change tracking
+- Theme variant generation (light/dark, maryland/default)
+- Semantic color, typography, spacing, and effect tokens
 
 **Implementation**:
-- GitHub Actions workflow to fetch tokens from Figma API
-- Token transformation scripts
-- Version control for token updates
-- Integration with styles package
+- GitHub Actions workflow for daily Figma API sync
+- Token transformation and validation scripts
+- Pull request automation for designer review
+- Integration with existing tokens package
 
 **Benefits**:
-- Single source of truth (Figma)
-- Designer-driven token updates
-- Automated synchronization
+- Figma as single source of truth for design decisions
+- Designer-driven token updates without developer intervention
+- Automated validation and backwards compatibility checks
 - Consistent design-to-code workflow
 
 ## Planned CI/CD Enhancements

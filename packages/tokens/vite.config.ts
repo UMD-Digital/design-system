@@ -26,7 +26,7 @@ export default defineConfig({
           formats: ['es', 'cjs'],
         },
     outDir: 'dist',
-    emptyOutDir: true,
+    emptyOutDir: !isCDN, // Only empty for module build, not CDN build
     sourcemap: true,
     minify: process.env.NODE_ENV === 'production' || isCDN,
     rollupOptions: isCDN

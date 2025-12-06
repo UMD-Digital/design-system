@@ -9,7 +9,7 @@
  * and eliminates repetitive ternary expressions throughout the design system packages.
  */
 
-import * as token from '@universityofmaryland/web-styles-library/token';
+import * as token from '@universityofmaryland/web-token-library';
 
 /**
  * Theme utility namespace

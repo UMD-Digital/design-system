@@ -1,5 +1,5 @@
 import * as sans from '../sans';
-import { font, media } from '../../token';
+import { font, media } from '@universityofmaryland/web-token-library';
 
 describe('typography/sans', () => {
   it('should match snapshot', () => {

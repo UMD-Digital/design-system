@@ -3,7 +3,7 @@
  * Provides rich text styles for formatted HTML content with various variants.
  */
 
-import { color, font, media, spacing } from '../../token';
+import { color, font, media, spacing } from '@universityofmaryland/web-token-library';
 import { sans } from '../../typography';
 import * as animation from '../../animation';
 import { create } from '../../utilities';

@@ -3,7 +3,7 @@
  * Provides styles for text with line decorations like underlines, dividers, and borders.
  */
 
-import { color, spacing, media } from '../../token';
+import { color, spacing, media } from '@universityofmaryland/web-token-library';
 import { elements } from '../../typography';
 import { create } from '../../utilities';
 import type { JssObject } from '../../_types';

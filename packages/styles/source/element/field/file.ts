@@ -3,7 +3,7 @@
  * Provides styles for file upload input fields.
  */
 
-import { color, spacing } from '../../token';
+import { color, spacing } from '@universityofmaryland/web-token-library';
 import { create } from '../../utilities';
 import type { JssObject } from '../../_types';
 import { valid, invalid } from './_state';

@@ -3,7 +3,7 @@
  * Provides block-level alignment utilities.
  */
 
-import { spacing } from '../../token';
+import { spacing } from '@universityofmaryland/web-token-library';
 import { create } from '../../utilities';
 import type { JssObject } from '../../_types';
 

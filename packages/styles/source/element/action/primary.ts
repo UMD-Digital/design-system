@@ -3,7 +3,7 @@
  * Provides primary action button styles with different sizes and color themes.
  */
 
-import { color } from '../../token';
+import { color } from '@universityofmaryland/web-token-library';
 import { create } from '../../utilities';
 import type { JssObject } from '../../_types';
 import { base, baseLarge, iconBase, iconBaseLarge } from './_base';

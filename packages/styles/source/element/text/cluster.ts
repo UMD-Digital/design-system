@@ -3,7 +3,7 @@
  * Provides styles for grouped text elements like tags and pills.
  */
 
-import { color, spacing } from '../../token';
+import { color, spacing } from '@universityofmaryland/web-token-library';
 import { sans } from '../../typography';
 import { create } from '../../utilities';
 import type { JssObject } from '../../_types';

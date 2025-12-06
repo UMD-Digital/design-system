@@ -3,7 +3,7 @@
  * Provides styles for event sign components that display date and time information.
  */
 
-import { color } from '../../token';
+import { color } from '@universityofmaryland/web-token-library';
 import { create } from '../../utilities';
 import type { JssObject } from '../../_types';
 

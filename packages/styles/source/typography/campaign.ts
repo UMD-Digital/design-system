@@ -3,7 +3,7 @@
  * Provides campaign typography styles with various sizes and responsive behavior.
  */
 
-import { color, font, media } from '../token';
+import { color, font, media } from '@universityofmaryland/web-token-library';
 import { create } from '../utilities';
 import type { JssObject } from '../_types';
 

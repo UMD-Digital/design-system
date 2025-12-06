@@ -3,7 +3,7 @@
  * Provides background styles that cover a quarter of the container.
  */
 
-import { color, media, spacing } from '../../token';
+import { color, media, spacing } from '@universityofmaryland/web-token-library';
 import { create } from '../../utilities';
 import type { JssObject } from '../../_types';
 import { padding } from './full';

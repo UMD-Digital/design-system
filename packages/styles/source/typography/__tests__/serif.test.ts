@@ -1,5 +1,5 @@
 import * as serif from '../serif';
-import { font, media } from '../../token';
+import { font, media } from '@universityofmaryland/web-token-library';
 
 describe('typography/serif', () => {
   it('should match snapshot', () => {

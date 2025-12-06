@@ -1,4 +1,4 @@
-import { color, media, spacing } from './token';
+import { color, media, spacing } from '@universityofmaryland/web-token-library';
 
 type ElementStyles = Record<string, any>;
 

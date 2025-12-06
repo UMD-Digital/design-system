@@ -3,7 +3,7 @@
  * Provides vertical spacing utilities for page layouts.
  */
 
-import { media, spacing } from '../../token';
+import { media, spacing } from '@universityofmaryland/web-token-library';
 import { create } from '../../utilities';
 import type { JssObject } from '../../_types';
 

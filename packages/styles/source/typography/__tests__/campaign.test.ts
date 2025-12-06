@@ -1,5 +1,5 @@
 import * as campaign from '../campaign';
-import { font, media } from '../../token';
+import { font, media } from '@universityofmaryland/web-token-library';
 
 describe('typography/campaign', () => {
   it('should match snapshot', () => {

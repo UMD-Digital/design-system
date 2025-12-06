@@ -3,7 +3,7 @@
  * Provides icon-based action button styles.
  */
 
-import { color } from '../../token';
+import { color } from '@universityofmaryland/web-token-library';
 import { create } from '../../utilities';
 import type { JssObject } from '../../_types';
 

@@ -3,7 +3,7 @@
  * Provides masonry grid layouts with staggered elements.
  */
 
-import { spacing, media } from '../../token';
+import { spacing, media } from '@universityofmaryland/web-token-library';
 import { create } from '../../utilities';
 import type { JssObject } from '../../_types';
 

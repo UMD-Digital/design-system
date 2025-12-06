@@ -3,7 +3,7 @@
  * Provides styles for event metadata displays including date, time, and location.
  */
 
-import { color, media, spacing } from '../../token';
+import { color, media, spacing } from '@universityofmaryland/web-token-library';
 import { sans } from '../../typography';
 import { create } from '../../utilities';
 import type { JssObject } from '../../_types';

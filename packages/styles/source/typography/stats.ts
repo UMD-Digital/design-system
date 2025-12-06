@@ -3,7 +3,7 @@
  * Provides typography styles for statistics and numeric callouts with campaign font styling.
  */
 
-import { color, font, media } from '../token';
+import { color, font, media } from '@universityofmaryland/web-token-library';
 import { create } from '../utilities';
 import type { JssObject } from '../_types';
 

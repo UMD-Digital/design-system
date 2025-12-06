@@ -1,5 +1,5 @@
 import * as stats from '../stats';
-import { font, media } from '../../token';
+import { font, media } from '@universityofmaryland/web-token-library';
 
 describe('typography/stats', () => {
   it('should match snapshot', () => {

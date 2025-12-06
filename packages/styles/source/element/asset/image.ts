@@ -3,7 +3,7 @@
  * Provides styles for image assets with various display options and animations.
  */
 
-import { color, media, spacing } from '../../token';
+import { color, media, spacing } from '@universityofmaryland/web-token-library';
 import { sans } from '../../typography';
 import { box } from '../../layout/background';
 import { create } from '../../utilities';

@@ -64,7 +64,6 @@ export default defineConfig(({ mode }) => {
         animation: path.resolve(__dirname, 'source/animation/index.ts'),
         element: path.resolve(__dirname, 'source/element/index.ts'),
         layout: path.resolve(__dirname, 'source/layout/index.ts'),
-        token: path.resolve(__dirname, 'source/token/index.ts'),
         typography: path.resolve(__dirname, 'source/typography/index.ts'),
         utilities: path.resolve(__dirname, 'source/utilities/index.ts'),
       },

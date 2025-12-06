@@ -3,7 +3,7 @@
  * Provides styles for grid child elements.
  */
 
-import { media } from '../../token';
+import { media } from '@universityofmaryland/web-token-library';
 import { create } from '../../utilities';
 import type { JssObject } from '../../_types';
 

@@ -3,7 +3,7 @@
  * Provides grid layouts with vertical offset between columns.
  */
 
-import { media, spacing } from '../../token';
+import { media, spacing } from '@universityofmaryland/web-token-library';
 import { create } from '../../utilities';
 import type { JssObject } from '../../_types';
 import { threeLarge } from './gap';

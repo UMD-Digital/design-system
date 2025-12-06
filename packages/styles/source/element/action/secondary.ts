@@ -3,7 +3,7 @@
  * Provides secondary action button styles.
  */
 
-import { color, media, spacing } from '../../token';
+import { color, media, spacing } from '@universityofmaryland/web-token-library';
 import { create } from '../../utilities';
 import type { JssObject } from '../../_types';
 import { base, baseLarge, iconBase, iconBaseLarge } from './_base';

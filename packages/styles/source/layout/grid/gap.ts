@@ -3,7 +3,7 @@
  * Provides grid layouts with different gap sizes and configurations.
  */
 
-import { media, spacing } from '../../token';
+import { media, spacing } from '@universityofmaryland/web-token-library';
 import { create } from '../../utilities';
 import type { JssObject } from '../../_types';
 import { base } from './base';

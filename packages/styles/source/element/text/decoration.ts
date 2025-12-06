@@ -3,7 +3,7 @@
  * Provides decorative text elements like watermarks and ribbons.
  */
 
-import { color, font, spacing, media } from '../../token';
+import { color, font, spacing, media } from '@universityofmaryland/web-token-library';
 import { transition } from '../../animation';
 import { elements } from '../../typography';
 import { create } from '../../utilities';

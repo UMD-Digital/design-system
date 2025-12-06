@@ -3,7 +3,7 @@
  * Provides form input field styles and wrappers.
  */
 
-import { color, spacing } from '../../token';
+import { color, spacing } from '@universityofmaryland/web-token-library';
 import { create, transform } from '../../utilities';
 import type { JssObject } from '../../_types';
 import { baseInput } from './_base';

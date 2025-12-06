@@ -3,7 +3,7 @@
  * Provides grid layouts with border styling.
  */
 
-import { color, media } from '../../token';
+import { color, media } from '@universityofmaryland/web-token-library';
 import { create } from '../../utilities';
 import type { JssObject } from '../../_types';
 import { base } from './base';

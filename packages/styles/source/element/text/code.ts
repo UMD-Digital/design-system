@@ -3,7 +3,7 @@
  * Provides styles for code and preformatted text elements.
  */
 
-import { color, font, spacing } from '../../token';
+import { color, font, spacing } from '@universityofmaryland/web-token-library';
 import { create } from '../../utilities';
 import type { JssObject } from '../../_types';
 

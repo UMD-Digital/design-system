@@ -4,7 +4,7 @@
  * @private
  */
 
-import { color, font, spacing } from '../../token';
+import { color, font, spacing } from '@universityofmaryland/web-token-library';
 import { sans } from '../../typography';
 
 /**

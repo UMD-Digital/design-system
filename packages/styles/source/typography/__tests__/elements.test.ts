@@ -1,5 +1,5 @@
 import * as elements from '../elements';
-import { font } from '../../token';
+import { font } from '@universityofmaryland/web-token-library';
 
 describe('typography/elements', () => {
   it('should match snapshot', () => {

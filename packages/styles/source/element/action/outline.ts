@@ -3,7 +3,7 @@
  * Provides outline button styles with various sizes and color schemes.
  */
 
-import { color } from '../../token';
+import { color } from '@universityofmaryland/web-token-library';
 import { create } from '../../utilities';
 import type { JssObject } from '../../_types';
 import { base, iconBase, baseLarge, iconBaseLarge } from './_base';

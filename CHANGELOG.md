@@ -25,13 +25,27 @@ Current package versions:
 ## [Unreleased]
 
 ### Added
-- Automated release workflow with GitHub Actions
+- **Automated Release Workflow**: GitHub Actions workflow for publishing packages
+  - Manual trigger with version bump selection
+  - Support for pre-releases (alpha, beta, rc)
+  - Dry-run mode for testing
+  - Automated testing, building, and publishing
+  - Badge updates and changelog generation
+  - GitHub release creation
+- **Release Documentation**:
+  - Comprehensive release process guide ([RELEASE.md](docs/RELEASE.md))
+  - Setup guide for NPM token and GitHub configuration ([RELEASE_SETUP.md](docs/RELEASE_SETUP.md))
 - Enhanced badge update script with dry-run and package-specific modes
 - This CHANGELOG file to track all package changes
+- PublishConfig to all package.json files for scoped package publishing
 
 ### Changed
 - Lerna configuration updated for independent versioning with conventional commits
 - Badge update script moved from `source/` to `scripts/` directory
+- Root package.json updated with CI/CD helper scripts:
+  - `test:all` - Run all tests with mocks
+  - `build` and `build:ci` - Build all packages
+  - `version:check` and `version:dry-run` - Version preview commands
 
 ---
 

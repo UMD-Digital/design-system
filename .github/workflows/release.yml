@@ -1,0 +1,134 @@
+# .github/workflows/release.yml
+name: Release Packages
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_bump:
+        description: 'Version bump type'
+        required: true
+        type: choice
+        options:
+          - patch
+          - minor
+          - major
+          - prepatch
+          - preminor
+          - premajor
+          - prerelease
+      preid:
+        description: 'Pre-release identifier (alpha, beta, rc)'
+        required: false
+        type: string
+        default: 'beta'
+      dry_run:
+        description: 'Dry run (no publish)'
+        required: false
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+  packages: write
+  pull-requests: write
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Generate style mocks
+        run: npm run generate:mocks
+
+      - name: Run tests
+        run: npx lerna run test --stream
+
+      - name: Build packages in dependency order
+        run: |
+          echo "Building packages in topological order..."
+          npx lerna run build --stream --scope=@universityofmaryland/web-icons-library
+          npx lerna run build --stream --scope=@universityofmaryland/web-token-library
+          npx lerna run build --stream --scope=@universityofmaryland/web-utilities-library
+          npx lerna run build --stream --scope=@universityofmaryland/web-builder-library
+          npx lerna run build --stream --scope=@universityofmaryland/web-model-library
+          npx lerna run build --stream --scope=@universityofmaryland/web-styles-library
+          npx lerna run build --stream --scope=@universityofmaryland/web-elements-library
+          npx lerna run build --stream --scope=@universityofmaryland/web-feeds-library
+          npx lerna run build --stream --scope=@universityofmaryland/web-components-library
+
+      - name: Update version badges
+        run: npm run update-badges
+
+      - name: Version packages (pre-release)
+        if: ${{ contains(github.event.inputs.version_bump, 'pre') }}
+        run: |
+          npx lerna version ${{ github.event.inputs.version_bump }} \
+            --preid ${{ github.event.inputs.preid }} \
+            --conventional-commits \
+            --create-release github \
+            --yes
+
+      - name: Version packages (standard release)
+        if: ${{ !contains(github.event.inputs.version_bump, 'pre') }}
+        run: |
+          npx lerna version ${{ github.event.inputs.version_bump }} \
+            --conventional-commits \
+            --create-release github \
+            --yes
+
+      - name: Publish to NPM (dry-run)
+        if: ${{ github.event.inputs.dry_run == 'true' }}
+        run: |
+          echo "Dry run enabled - skipping NPM publish"
+          npx lerna publish from-package --yes --dry-run
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish to NPM
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          npx lerna publish from-package \
+            --yes \
+            --dist-tag ${{ contains(github.event.inputs.version_bump, 'pre') && github.event.inputs.preid || 'latest' }}
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Push changes
+        if: ${{ github.event.inputs.dry_run != 'true' }}
+        run: |
+          git push --follow-tags origin ${{ github.ref_name }}
+
+      - name: Summary
+        run: |
+          echo "## Release Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "**Version Bump:** ${{ github.event.inputs.version_bump }}" >> $GITHUB_STEP_SUMMARY
+          if [[ "${{ github.event.inputs.version_bump }}" == *"pre"* ]]; then
+            echo "**Pre-release ID:** ${{ github.event.inputs.preid }}" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "**Dry Run:** ${{ github.event.inputs.dry_run }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Changed Packages" >> $GITHUB_STEP_SUMMARY
+          npx lerna changed --json | jq -r '.[] | "- **\(.name)**: \(.version)"' >> $GITHUB_STEP_SUMMARY || echo "No changed packages" >> $GITHUB_STEP_SUMMARY

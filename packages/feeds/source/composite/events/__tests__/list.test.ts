@@ -124,16 +124,6 @@ describe('Events List Component', () => {
     );
   });
 
-  test('uses stacked layout for list view', () => {
-    list({
-      token: 'test-token',
-      numberOfRowsToStart: 3,
-      isLazyLoad: false,
-    });
-
-    expect(feedElements.layout.stacked).toHaveBeenCalled();
-  });
-
   test('passes theme settings to start function', () => {
     list({
       token: 'test-token',

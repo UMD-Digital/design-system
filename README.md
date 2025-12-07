@@ -28,7 +28,7 @@ The University of Maryland's Design System is intended for use by university cam
 
 Mid-level building blocks that combine foundation packages:
 
-- **[Styles](packages/styles/README.md)**: JSS objects, design tokens, and style utilities consistent with UMD brand guidelines. Includes colors, typography, spacing, media queries, and layout patterns.
+- **[Styles](packages/styles/README.md)**: JSS (JavaScript Style Sheets) objects and style utilities consistent with UMD brand guidelines. Re-exports design tokens from the Tokens package for backwards compatibility. Includes layout patterns, typography styles, and CSS transformation utilities.
 
 - **[Elements](packages/elements/README.md)**: Foundational UI element builders that create consistent, accessible HTML structures. Includes atomic components (typography, actions, media) and composite components (cards, navigation, tabs, sliders).
 
@@ -42,7 +42,7 @@ Low-level primitives for building custom implementations:
 
 - **[Model](packages/model/README.md)**: Web component model utilities for building custom elements. Provides attribute handling, slot management, component registration, lifecycle hooks, and the base model system for creating web components with Shadow DOM, validation, and error handling.
 
-- **[Builder](packages/builder/README.md)**: Element builder utilities for creating pre-styled components and custom elements. Provides `ElementBuilder.styled.*` for UMD design system elements and `ElementBuilder.create.*` for custom implementations.
+- **[Builder](packages/builder/README.md)**: Fluent API for building DOM elements with integrated styling, lifecycle management, and animation support. Provides `ElementBuilder` class for chainable element construction, automatic style merging from child elements, and seamless integration with UMD Design System styles via `.styled()` method.
 
 - **[Icons](packages/icons/README.md)**: SVG icon and logo assets organized by category for optimal tree-shaking. Includes navigation, controls, social media, brand assets, and UMD logos.
 

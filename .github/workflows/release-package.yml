@@ -73,6 +73,9 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Bootstrap Lerna packages
+        run: npx lerna bootstrap --force-local
+
       - name: Generate style mocks
         if: ${{ inputs.package == 'elements' || inputs.package == 'components' || inputs.package == 'feeds' }}
         run: npm run generate:mocks

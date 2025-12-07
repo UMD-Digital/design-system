@@ -42,7 +42,7 @@ Low-level primitives for building custom implementations:
 
 - **[Model](packages/model/README.md)**: Web component model utilities for building custom elements. Provides attribute handling, slot management, component registration, lifecycle hooks, and the base model system for creating web components with Shadow DOM, validation, and error handling.
 
-- **[Builder](packages/builder/README.md)**: Fluent API for building DOM elements with integrated styling, lifecycle management, and animation support. Provides `ElementBuilder` class for chainable element construction, automatic style merging from child elements, and seamless integration with UMD Design System styles via `.styled()` method.
+- **[Builder](packages/builder/README.md)**: Fluent API for building DOM elements with integrated styling, lifecycle management, and animation support. Enables chainable element construction with automatic style merging from child elements and seamless integration with UMD Design System styles. Foundation for creating pre-styled components and custom elements.
 
 - **[Icons](packages/icons/README.md)**: SVG icon and logo assets organized by category for optimal tree-shaking. Includes navigation, controls, social media, brand assets, and UMD logos.
 

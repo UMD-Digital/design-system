@@ -79,9 +79,15 @@ Styles.postRenderCss.then((css) => {
 
 ### Design Tokens
 
+> **Note**: Design tokens have been extracted to a standalone package [`@universityofmaryland/web-token-library`](../tokens). The styles package re-exports these tokens for backwards compatibility. For new projects, consider importing directly from the tokens package for better tree-shaking.
+
 Official UMD brand values accessible as JavaScript objects:
 
 ```javascript
+// Recommended (direct from tokens package)
+import * as token from '@universityofmaryland/web-token-library';
+
+// Also supported (backwards compatibility)
 import { token } from '@universityofmaryland/web-styles-library';
 
 // Colors

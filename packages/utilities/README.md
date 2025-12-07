@@ -434,8 +434,9 @@ MIT © University of Maryland
 
 Part of the University of Maryland Design System:
 
+- [@universityofmaryland/web-token-library](https://www.npmjs.com/package/@universityofmaryland/web-token-library) - Design tokens (colors, spacing, typography)
 - [@universityofmaryland/web-icons-library](https://www.npmjs.com/package/@universityofmaryland/web-icons-library) - Icon and logo assets
-- [@universityofmaryland/web-styles-library](https://www.npmjs.com/package/@universityofmaryland/web-styles-library) - Design tokens and styles
+- [@universityofmaryland/web-styles-library](https://www.npmjs.com/package/@universityofmaryland/web-styles-library) - JSS objects and style utilities
 - [@universityofmaryland/web-elements-library](https://www.npmjs.com/package/@universityofmaryland/web-elements-library) - UI element builders
 - [@universityofmaryland/web-components-library](https://www.npmjs.com/package/@universityofmaryland/web-components-library) - Web Components
 - [@universityofmaryland/web-feeds-library](https://www.npmjs.com/package/@universityofmaryland/web-feeds-library) - Dynamic content feeds

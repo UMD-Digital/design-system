@@ -185,6 +185,7 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
+    "@universityofmaryland/web-styles-library": "^1.0.0",
     "@universityofmaryland/web-token-library": "^1.0.0",
     "postcss": "^8.4.49",
     "postcss-js": "^4.0.1",

@@ -72,10 +72,10 @@ jobs:
           echo "Building packages in topological order..."
           npx lerna run build --stream --scope=@universityofmaryland/web-icons-library
           npx lerna run build --stream --scope=@universityofmaryland/web-token-library
+          npx lerna run build --stream --scope=@universityofmaryland/web-styles-library
           npx lerna run build --stream --scope=@universityofmaryland/web-utilities-library
           npx lerna run build --stream --scope=@universityofmaryland/web-builder-library
           npx lerna run build --stream --scope=@universityofmaryland/web-model-library
-          npx lerna run build --stream --scope=@universityofmaryland/web-styles-library
           npx lerna run build --stream --scope=@universityofmaryland/web-elements-library
           npx lerna run build --stream --scope=@universityofmaryland/web-feeds-library
           npx lerna run build --stream --scope=@universityofmaryland/web-components-library

@@ -28,11 +28,11 @@ The dependency graph determines build order:
 
 1. **icons** - No dependencies (standalone SVG assets)
 2. **tokens** - No dependencies (design token primitives)
-3. **utilities** - Depends on `tokens` for design token utilities
-4. **styles** - Depends on `tokens` (re-exports for backwards compatibility)
-5. **builder** - Depends on `tokens` for styled element creation
-6. **model** - Depends on `tokens` (peer dependency for design tokens)
-7. **elements** - Depends on `tokens`, `builder`, `utilities`, `styles` (peer), `icons` (peer)
+3. **styles** - Depends on `tokens` (re-exports for backwards compatibility)
+4. **utilities** - Depends on `tokens` and `styles` for JSS utilities and design tokens
+5. **builder** - Depends on `utilities`, peer dependency on `styles`
+6. **model** - Peer dependency on `styles` for design tokens
+7. **elements** - Depends on `tokens`, `builder`, `utilities`, peer deps on `styles`, `icons`
 8. **feeds** - Depends on `tokens`, `elements`, `utilities`
 9. **components** - Depends on all packages above
 

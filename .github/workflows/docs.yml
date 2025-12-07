@@ -31,10 +31,10 @@ jobs:
         run: |
           yarn lerna run build --scope=@universityofmaryland/web-icons-library
           yarn lerna run build --scope=@universityofmaryland/web-token-library
+          yarn lerna run build --scope=@universityofmaryland/web-styles-library
           yarn lerna run build --scope=@universityofmaryland/web-utilities-library
           yarn lerna run build --scope=@universityofmaryland/web-builder-library
           yarn lerna run build --scope=@universityofmaryland/web-model-library
-          yarn lerna run build --scope=@universityofmaryland/web-styles-library
           yarn lerna run build --scope=@universityofmaryland/web-elements-library
           yarn lerna run build --scope=@universityofmaryland/web-feeds-library
           yarn lerna run build --scope=@universityofmaryland/web-components-library

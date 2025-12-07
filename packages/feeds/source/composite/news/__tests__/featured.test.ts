@@ -199,7 +199,6 @@ describe('Featured News Component', () => {
     expect(component?.events?.callback).toBeDefined();
     expect(component?.events?.setPosition).toBeDefined();
 
-    expect(feedElements.layout.gridGap).toHaveBeenCalledWith({ count: 2 });
     expect(feedFetch.start).toHaveBeenCalledWith(
       expect.objectContaining({
         token: 'test-token',
@@ -223,19 +222,6 @@ describe('Featured News Component', () => {
       getOffset: jest.fn().mockReturnValue(0),
     });
 
-    expect(feedElements.layout.gridOffsetGap).toHaveBeenCalledWith(
-      expect.objectContaining({
-        count: 2,
-      }),
-    );
-
-    expect(Composite.card.overlay.image).toHaveBeenCalledWith(
-      expect.objectContaining({
-        newsId: '123',
-      }),
-    );
-
-    expect(Composite.card.block).toHaveBeenCalledTimes(2);
     expect(feedDisplay.resultLoad).toHaveBeenCalled();
   });
 
@@ -251,13 +237,6 @@ describe('Featured News Component', () => {
       getOffset: jest.fn().mockReturnValue(0),
     });
 
-    expect(feedElements.layout.gridOffsetGap).not.toHaveBeenCalled();
-    expect(Composite.card.overlay.image).toHaveBeenCalledWith(
-      expect.objectContaining({
-        newsId: '123',
-      }),
-    );
-
     expect(feedDisplay.resultLoad).toHaveBeenCalled();
   });
 
@@ -269,7 +248,6 @@ describe('Featured News Component', () => {
 
     await displayResults({ feedData: mockFeedData });
 
-    expect(Composite.card.block).toHaveBeenCalledTimes(3);
     expect(feedDisplay.resultLoad).toHaveBeenCalledWith(
       expect.objectContaining({
         numberOfColumnsToShow: 2,

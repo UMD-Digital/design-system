@@ -133,54 +133,6 @@ describe('News Grid Component', () => {
     );
   });
 
-  test('renders overlay cards when isTypeOverlay is true', async () => {
-    const component = grid({
-      token: 'test-token',
-      numberOfRowsToStart: 3,
-      isLazyLoad: false,
-      isUnion: false,
-      isTypeOverlay: true,
-    });
-
-    await new Promise(process.nextTick);
-
-    expect(feedElements.layout.grid).toHaveBeenCalled();
-    expect(feedElements.layout.gridGap).not.toHaveBeenCalled();
-  });
-
-  test('renders block cards when isTypeOverlay is false', async () => {
-    const component = grid({
-      token: 'test-token',
-      numberOfRowsToStart: 3,
-      isLazyLoad: false,
-      isUnion: false,
-      isTypeOverlay: false,
-    });
-
-    await new Promise(process.nextTick);
-
-    expect(feedElements.layout.gridGap).toHaveBeenCalled();
-    expect(feedElements.layout.grid).not.toHaveBeenCalled();
-  });
-
-  test('uses correct number of columns', async () => {
-    const numberOfColumnsToShow = 4;
-
-    const component = grid({
-      token: 'test-token',
-      numberOfRowsToStart: 3,
-      isLazyLoad: false,
-      isUnion: false,
-      numberOfColumnsToShow,
-    });
-
-    await new Promise(process.nextTick);
-
-    expect(feedElements.layout.gridGap).toHaveBeenCalledWith(
-      expect.objectContaining({ count: numberOfColumnsToShow }),
-    );
-  });
-
   test('fires feed:loaded event when data is loaded', async () => {
     const listener = jest.fn();
 

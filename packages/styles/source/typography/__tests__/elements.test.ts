@@ -1,5 +1,4 @@
 import * as elements from '../elements';
-import { font } from '@universityofmaryland/web-token-library';
 
 describe('typography/elements', () => {
   it('should match snapshot', () => {
@@ -14,14 +13,6 @@ describe('typography/elements', () => {
       expect(elements.labelSmall).toBeDefined();
       expect(elements.interativeMedium).toBeDefined();
       expect(elements.interativeSmall).toBeDefined();
-    });
-
-    it('should use appropriate font styles for elements', () => {
-      // Elements should have appropriate font family
-      expect(elements.labelMedium.fontFamily).toBe(font.family.sans);
-      expect(elements.labelSmall.fontFamily).toBe(font.family.sans);
-      expect(elements.interativeMedium.fontFamily).toBe(font.family.sans);
-      expect(elements.interativeSmall.fontFamily).toBe(font.family.sans);
     });
 
     it('should match snapshots for element typography', () => {

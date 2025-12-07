@@ -13,6 +13,11 @@ const Attributes = {
     THEME: 'data-theme',
     SIZE: 'data-size',
     COLOR: 'data-color',
+    deprecated: {
+      layout: {
+        LAYOUT_STICKY_TOP: 'data-layout-sticky-top',
+      },
+    },
   },
   values: {
     theme: {
@@ -26,9 +31,27 @@ const Attributes = {
   handler: {
     observe: {
       resize: jest.fn(() => ({ observedAttributes: [] })),
+      visuallyPosition: jest.fn((config) => ({
+        observedAttributes: [],
+        connectedCallback: jest.fn(),
+        disconnectedCallback: jest.fn(),
+        attributeChangedCallback: jest.fn(),
+      })),
     },
     common: {
       resize: jest.fn((callback) => ({
+        observedAttributes: [],
+        connectedCallback: jest.fn(),
+        disconnectedCallback: jest.fn(),
+        attributeChangedCallback: jest.fn(),
+      })),
+      accordion: jest.fn(() => ({
+        observedAttributes: [],
+        connectedCallback: jest.fn(),
+        disconnectedCallback: jest.fn(),
+        attributeChangedCallback: jest.fn(),
+      })),
+      visualShowHide: jest.fn((config) => ({
         observedAttributes: [],
         connectedCallback: jest.fn(),
         disconnectedCallback: jest.fn(),
@@ -176,6 +199,10 @@ const Lifecycle = {
   onConnected: jest.fn(),
   onDisconnected: jest.fn(),
   onAttributeChanged: jest.fn(),
+  hooks: {
+    loadOnConnect: jest.fn(),
+    loadAnimation: jest.fn(),
+  },
 };
 
 module.exports = {

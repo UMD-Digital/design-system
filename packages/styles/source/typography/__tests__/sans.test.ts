@@ -1,5 +1,4 @@
 import * as sans from '../sans';
-import { font, media } from '@universityofmaryland/web-token-library';
 
 describe('typography/sans', () => {
   it('should match snapshot', () => {
@@ -17,22 +16,6 @@ describe('typography/sans', () => {
       expect(sans.small).toMatchSnapshot();
       expect(sans.smaller).toMatchSnapshot();
       expect(sans.min).toMatchSnapshot();
-    });
-
-    it('should use the correct font family for all sizes', () => {
-      // All sizes should use sans font family
-      [
-        sans.largest,
-        sans.extraLarge,
-        sans.larger,
-        sans.large,
-        sans.medium,
-        sans.small,
-        sans.smaller,
-        sans.min,
-      ].forEach((size) => {
-        expect(size.fontFamily).toBe(font.family.sans);
-      });
     });
   });
 
@@ -62,24 +45,13 @@ describe('typography/sans', () => {
 
   describe('transformations', () => {
     it('should have correctly defined transformations', () => {
-      expect(sans.transformations.largestUppercase.fontWeight).toBe(
-        font.weight.extraBold,
-      );
       expect(sans.transformations.largestUppercase.textTransform).toBe(
         'uppercase',
       );
 
-      expect(sans.transformations.extraLargeUppercase.fontWeight).toBe(
-        font.weight.extraBold,
-      );
       expect(sans.transformations.extraLargeUppercase.textTransform).toBe(
         'uppercase',
       );
-
-      expect(sans.transformations.extraLargeBold.fontWeight).toBe(
-        font.weight.bold,
-      );
-      expect(sans.transformations.largerBold.fontWeight).toBe(font.weight.bold);
     });
 
     it('should match snapshot for all transformations', () => {

@@ -1,5 +1,4 @@
 import * as stats from '../stats';
-import { font, media } from '@universityofmaryland/web-token-library';
 
 describe('typography/stats', () => {
   it('should match snapshot', () => {
@@ -12,15 +11,6 @@ describe('typography/stats', () => {
       expect(stats.large).toMatchSnapshot();
       expect(stats.medium).toMatchSnapshot();
       expect(stats.small).toMatchSnapshot();
-    });
-
-    it('should use the campaign font family for all stat text', () => {
-      // Stat text uses campaign font for emphasis
-      [stats.large, stats.medium, stats.small].forEach((size) => {
-        expect(size.fontFamily).toBe(font.family.campaign);
-        expect(size.fontStyle).toBe('italic');
-        expect(size.fontWeight).toBe(font.weight.extraBold);
-      });
     });
   });
 

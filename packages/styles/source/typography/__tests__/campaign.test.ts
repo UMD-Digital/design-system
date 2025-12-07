@@ -1,5 +1,4 @@
 import * as campaign from '../campaign';
-import { font, media } from '@universityofmaryland/web-token-library';
 
 describe('typography/campaign', () => {
   it('should match snapshot', () => {
@@ -15,20 +14,6 @@ describe('typography/campaign', () => {
       expect(campaign.medium).toMatchSnapshot();
       expect(campaign.small).toMatchSnapshot();
       expect(campaign.extraSmall).toMatchSnapshot();
-    });
-
-    it('should use the correct font family for campaign text', () => {
-      // Campaign text typically uses the campaign font family
-      [
-        campaign.maximum,
-        campaign.extralarge,
-        campaign.large,
-        campaign.medium,
-        campaign.small,
-        campaign.extraSmall,
-      ].forEach((size) => {
-        expect(size.fontFamily).toBe(font.family.campaign);
-      });
     });
   });
 

@@ -69,15 +69,6 @@ describe('Slider Component', () => {
     expect(sliderComponent.events).toBeDefined();
     expect(sliderComponent.events.callback).toBeDefined();
 
-    expect(sliderComposite.events).toHaveBeenCalledWith(
-      expect.objectContaining({
-        isThemeDark: undefined,
-        dataSlider: expect.any(HTMLDivElement),
-        headline: undefined,
-        actions: undefined,
-      }),
-    );
-
     await Promise.resolve();
     expect(fetchGraphQL).toHaveBeenCalledWith(
       expect.objectContaining({

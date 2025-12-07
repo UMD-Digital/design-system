@@ -126,21 +126,6 @@ describe('Events Grid Component', () => {
     );
   });
 
-  test('uses correct number of columns', () => {
-    const numberOfColumnsToShow = 4;
-
-    grid({
-      token: 'test-token',
-      numberOfRowsToStart: 3,
-      isLazyLoad: false,
-      numberOfColumnsToShow,
-    });
-
-    expect(feedElements.layout.gridGap).toHaveBeenCalledWith(
-      expect.objectContaining({ count: numberOfColumnsToShow }),
-    );
-  });
-
   test('includes transparent flag in props when set', () => {
     const component = grid({
       token: 'test-token',

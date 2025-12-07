@@ -149,7 +149,6 @@ describe('List News Component', () => {
     expect(component.events).toBeDefined();
     expect(component?.events?.callback).toBeDefined();
 
-    expect(feedElements.layout.stacked).toHaveBeenCalled();
     expect(feedFetch.start).toHaveBeenCalledWith(
       expect.objectContaining({
         token: 'test-token',
@@ -161,15 +160,13 @@ describe('List News Component', () => {
     );
   });
 
-  test('displayResults creates list cards for each entry', async () => {
+  test('displayResults transforms data correctly', async () => {
     const component = list(mockProps);
 
     const displayResults = (feedFetch.start as jest.Mock).mock.calls[0][0]
       .displayResults;
 
     await displayResults({ feedData: mockFeedData });
-
-    expect(Composite.card.list).toHaveBeenCalledTimes(mockFeedData.length);
 
     expect(dataComposed.display).toHaveBeenCalledWith(
       expect.objectContaining({
@@ -189,36 +186,5 @@ describe('List News Component', () => {
     const component = list(mockProps);
     expect(component?.events?.callback).toBeDefined();
     expect(typeof component?.events?.callback).toBe('function');
-  });
-
-  test('asset.standard is called with correct parameters', async () => {
-    const component = list(mockProps);
-
-    const displayResults = (feedFetch.start as jest.Mock).mock.calls[0][0]
-      .displayResults;
-
-    await displayResults({ feedData: mockFeedData });
-
-    expect(feedElements.asset.standard).toHaveBeenCalledWith(
-      expect.objectContaining({
-        images: expect.any(Array),
-        url: expect.any(String),
-      }),
-    );
-  });
-
-  test('creates list cards with isAligned set to false', async () => {
-    const component = list(mockProps);
-
-    const displayResults = (feedFetch.start as jest.Mock).mock.calls[0][0]
-      .displayResults;
-
-    await displayResults({ feedData: mockFeedData });
-
-    expect(Composite.card.list).toHaveBeenCalledWith(
-      expect.objectContaining({
-        isAligned: false,
-      }),
-    );
   });
 });

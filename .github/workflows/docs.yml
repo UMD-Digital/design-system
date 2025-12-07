@@ -25,11 +25,19 @@ jobs:
           cache: 'yarn'
 
       - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Bootstrap Lerna packages
+        run: npx lerna bootstrap --force-local
+
+      - name: Build packages in dependency order
         run: |
-          yarn install --frozen-lockfile
           yarn lerna run build --scope=@universityofmaryland/web-icons-library
-          yarn lerna run build --scope=@universityofmaryland/web-styles-library
+          yarn lerna run build --scope=@universityofmaryland/web-token-library
           yarn lerna run build --scope=@universityofmaryland/web-utilities-library
+          yarn lerna run build --scope=@universityofmaryland/web-builder-library
+          yarn lerna run build --scope=@universityofmaryland/web-model-library
+          yarn lerna run build --scope=@universityofmaryland/web-styles-library
           yarn lerna run build --scope=@universityofmaryland/web-elements-library
           yarn lerna run build --scope=@universityofmaryland/web-feeds-library
           yarn lerna run build --scope=@universityofmaryland/web-components-library

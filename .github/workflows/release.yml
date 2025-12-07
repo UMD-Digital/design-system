@@ -61,21 +61,16 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Run tests
-        run: npx lerna run test --stream
-
       - name: Build packages in dependency order
         run: |
           echo "Building packages in topological order..."
-          npx lerna run build --stream --scope=@universityofmaryland/web-icons-library
-          npx lerna run build --stream --scope=@universityofmaryland/web-token-library
-          npx lerna run build --stream --scope=@universityofmaryland/web-styles-library
-          npx lerna run build --stream --scope=@universityofmaryland/web-utilities-library
-          npx lerna run build --stream --scope=@universityofmaryland/web-builder-library
-          npx lerna run build --stream --scope=@universityofmaryland/web-model-library
-          npx lerna run build --stream --scope=@universityofmaryland/web-elements-library
-          npx lerna run build --stream --scope=@universityofmaryland/web-feeds-library
-          npx lerna run build --stream --scope=@universityofmaryland/web-components-library
+          npx lerna run build --stream
+
+      - name: Generate mocks for testing
+        run: npm run generate:mocks
+
+      - name: Run tests
+        run: npx lerna run test --stream
 
       - name: Update version badges
         run: npm run update-badges

@@ -73,10 +73,6 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Generate style mocks
-        if: ${{ inputs.package == 'elements' || inputs.package == 'components' || inputs.package == 'feeds' }}
-        run: npm run generate:mocks
-
       - name: Run tests for package
         run: npx lerna run test --scope=@universityofmaryland/web-${{ inputs.package }}-library
 
@@ -89,35 +85,39 @@ jobs:
             "icons"|"tokens")
               echo "No dependencies to build"
               ;;
-            "utilities"|"builder"|"model")
-              npx lerna run build --scope=@universityofmaryland/web-tokens-library
-              ;;
             "styles")
               npx lerna run build --scope=@universityofmaryland/web-tokens-library
               ;;
-            "elements")
+            "utilities")
               npx lerna run build --scope=@universityofmaryland/web-tokens-library
+              npx lerna run build --scope=@universityofmaryland/web-styles-library
+              ;;
+            "builder"|"model")
+              npx lerna run build --scope=@universityofmaryland/web-tokens-library
+              ;;
+            "elements")
+              npx lerna run build --scope=@universityofmaryland/web-icons-library
+              npx lerna run build --scope=@universityofmaryland/web-tokens-library
+              npx lerna run build --scope=@universityofmaryland/web-styles-library
               npx lerna run build --scope=@universityofmaryland/web-utilities-library
               npx lerna run build --scope=@universityofmaryland/web-builder-library
-              npx lerna run build --scope=@universityofmaryland/web-styles-library
-              npx lerna run build --scope=@universityofmaryland/web-icons-library
               ;;
             "feeds")
+              npx lerna run build --scope=@universityofmaryland/web-icons-library
               npx lerna run build --scope=@universityofmaryland/web-tokens-library
+              npx lerna run build --scope=@universityofmaryland/web-styles-library
               npx lerna run build --scope=@universityofmaryland/web-utilities-library
               npx lerna run build --scope=@universityofmaryland/web-builder-library
-              npx lerna run build --scope=@universityofmaryland/web-styles-library
-              npx lerna run build --scope=@universityofmaryland/web-icons-library
               npx lerna run build --scope=@universityofmaryland/web-elements-library
               ;;
             "components")
               echo "Building all dependencies..."
               npx lerna run build --stream --scope=@universityofmaryland/web-icons-library
               npx lerna run build --stream --scope=@universityofmaryland/web-tokens-library
+              npx lerna run build --stream --scope=@universityofmaryland/web-styles-library
               npx lerna run build --stream --scope=@universityofmaryland/web-utilities-library
               npx lerna run build --stream --scope=@universityofmaryland/web-builder-library
               npx lerna run build --stream --scope=@universityofmaryland/web-model-library
-              npx lerna run build --stream --scope=@universityofmaryland/web-styles-library
               npx lerna run build --stream --scope=@universityofmaryland/web-elements-library
               npx lerna run build --stream --scope=@universityofmaryland/web-feeds-library
               ;;
@@ -206,4 +206,3 @@ jobs:
       error_message: ${{ needs.release-package.result == 'failure' && 'Package release failed. Check workflow logs.' || '' }}
     secrets:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}

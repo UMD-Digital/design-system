@@ -61,9 +61,6 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Generate style mocks
-        run: npm run generate:mocks
-
       - name: Run tests
         run: npx lerna run test --stream
 

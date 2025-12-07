@@ -153,4 +153,3 @@ jobs:
       error_message: ${{ needs.release.result == 'failure' && 'Release workflow failed. Check logs for details.' || '' }}
     secrets:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-      DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}

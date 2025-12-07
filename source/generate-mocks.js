@@ -164,6 +164,15 @@ async function generateMock(packageConfig) {
       return { skipped: true, reason: 'not built' };
     }
 
+    // Check if existing mock is marked as manual
+    if (fs.existsSync(mockPath)) {
+      const existingContent = fs.readFileSync(mockPath, 'utf-8');
+      if (existingContent.includes('MANUAL MOCK') || existingContent.includes('This is a MANUAL mock')) {
+        console.warn(`⚠️  Skipping ${name}: Mock is marked as manual (not auto-generated)`);
+        return { skipped: true, reason: 'manual-mock' };
+      }
+    }
+
     // Clear require cache to ensure fresh load
     delete require.cache[require.resolve(fullDistPath)];
 

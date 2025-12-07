@@ -1,5 +1,9 @@
 // Mock for @universityofmaryland/web-model-library
 // Manual mock - Package requires browser APIs (HTMLElement, customElements)
+//
+// ⚠️ MANUAL MOCK - DO NOT AUTO-GENERATE ⚠️
+// This is a MANUAL mock that cannot be auto-generated because the model package
+// requires complex browser APIs and custom element registration logic.
 
 /**
  * Mock Attributes system

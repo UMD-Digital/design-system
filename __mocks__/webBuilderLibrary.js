@@ -1,9 +1,9 @@
 // Mock for: @universityofmaryland/web-builder-library
 // Description: Element builder utilities with fluent API
 //
-// IMPORTANT: This is a MANUAL mock (not auto-generated)
-// The ElementBuilder class requires a fluent API implementation that
-// cannot be auto-generated. Other exports may be auto-generated in the future.
+// ⚠️ MANUAL MOCK - DO NOT AUTO-GENERATE ⚠️
+// This is a MANUAL mock that cannot be auto-generated because ElementBuilder
+// requires a fluent API implementation with method chaining.
 
 /**
  * Mock ElementBuilder class with full fluent API support

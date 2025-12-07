@@ -33,7 +33,7 @@ jobs:
 
     steps:
       - name: Send Slack notification (success)
-        if: ${{ inputs.status == 'success' && secrets.SLACK_WEBHOOK_URL != '' }}
+        if: ${{ inputs.status == 'success' }}
         uses: slackapi/slack-github-action@v1.25.0
         with:
           payload: |
@@ -82,7 +82,7 @@ jobs:
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
 
       - name: Send Slack notification (failure)
-        if: ${{ inputs.status == 'failure' && secrets.SLACK_WEBHOOK_URL != '' }}
+        if: ${{ inputs.status == 'failure' }}
         uses: slackapi/slack-github-action@v1.25.0
         with:
           payload: |
@@ -131,7 +131,7 @@ jobs:
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
 
       - name: Send Slack notification (started)
-        if: ${{ inputs.status == 'started' && secrets.SLACK_WEBHOOK_URL != '' }}
+        if: ${{ inputs.status == 'started' }}
         uses: slackapi/slack-github-action@v1.25.0
         with:
           payload: |

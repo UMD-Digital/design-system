@@ -179,7 +179,6 @@
     "build": "vite build",
     "dev": "vite build --watch",
     "start": "npm run dev",
-    "pretest": "npm run pretest --prefix ../..",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage"

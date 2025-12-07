@@ -34,8 +34,7 @@
     "update-badges": "node scripts/update-badges.js",
     "version:check": "npx lerna changed",
     "version:dry-run": "npx lerna version --no-git-tag-version --no-push --yes",
-    "generate:mocks": "node source/generate-style-mocks.js",
-    "pretest": "npm run generate:mocks"
+    "generate:mocks": "node source/generate-style-mocks.js"
   },
   "workspaces": [
     "packages/*"

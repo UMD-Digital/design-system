@@ -23,10 +23,31 @@ const Attributes = {
     observe: {
       resize: jest.fn(() => ({ observedAttributes: [] })),
     },
+    common: {
+      resize: jest.fn((callback) => ({
+        observedAttributes: [],
+        connectedCallback: jest.fn(),
+        disconnectedCallback: jest.fn(),
+        attributeChangedCallback: jest.fn(),
+      })),
+    },
     combine: jest.fn((...handlers) => ({
       observedAttributes: [],
       attributeChangedCallback: jest.fn(),
     })),
+  },
+  isVisual: {
+    transparent: jest.fn(() => false),
+    aligned: jest.fn(() => false),
+    bordered: jest.fn(() => false),
+  },
+  isTheme: {
+    dark: jest.fn(() => false),
+    light: jest.fn(() => false),
+  },
+  isDisplay: {
+    list: jest.fn(() => false),
+    grid: jest.fn(() => false),
   },
 };
 
@@ -54,8 +75,30 @@ const Model = {
  * Mock Register system
  */
 const Register = {
+  webComponent: jest.fn((config) => {
+    // Mock component registration - returns a registration function
+    // ComponentRegistration type is: () => void
+    return jest.fn(() => {
+      // Mock the component registration (called when component is used)
+      if (typeof customElements !== 'undefined' && customElements.define) {
+        customElements.define(config?.tagName || 'umd-mock', class extends HTMLElement {
+          constructor() {
+            super();
+          }
+        });
+      }
+    });
+  }),
   registerWebComponent: jest.fn((config) => {
-    // Mock component registration
+    // Mock component registration (used by Card and Article components)
+    // This should also call customElements.define
+    if (typeof customElements !== 'undefined' && customElements.define) {
+      customElements.define(config?.name || 'umd-mock', config?.element || class extends HTMLElement {
+        constructor() {
+          super();
+        }
+      });
+    }
     return true;
   }),
 };
@@ -81,6 +124,44 @@ const Slots = {
   },
   mapping: {
     getSlotName: jest.fn((name) => name),
+  },
+  element: {
+    allowed: {
+      headline: { allowed: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'span'] },
+      subHeadline: { allowed: ['h2', 'h3', 'h4', 'h5', 'h6', 'p'] },
+      text: { allowed: ['p', 'div', 'span'] },
+      body: { allowed: ['p', 'div'] },
+      image: { allowed: ['img', 'picture'] },
+      video: { allowed: ['video', 'iframe'], attributes: { src: 'string' } },
+      actions: { allowed: ['a', 'button'] },
+      eyebrow: { allowed: ['span', 'p'] },
+      time: { allowed: ['time'] },
+      link: { allowed: ['a'] },
+      button: { allowed: ['button'] },
+      icon: { allowed: ['svg', 'img'] },
+      slot: { allowed: ['slot'] },
+    },
+  },
+  name: {
+    assets: {
+      image: 'image',
+      video: 'video',
+    },
+  },
+  eyebrow: {
+    default: jest.fn(() => null),
+  },
+  headline: {
+    default: jest.fn(() => null),
+  },
+  text: {
+    default: jest.fn(() => null),
+  },
+  date: {
+    default: jest.fn(() => null),
+  },
+  actions: {
+    default: jest.fn(() => null),
   },
 };
 

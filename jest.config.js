@@ -21,6 +21,10 @@ module.exports = {
       __dirname,
       './__mocks__/webStylesLibrary.js',
     ),
+    '^@universityofmaryland/web-builder-library$': path.resolve(
+      __dirname,
+      './__mocks__/webBuilderLibrary.js',
+    ),
     '^@universityofmaryland/web-elements-library/atomic$': path.resolve(
       __dirname,
       './__mocks__/@universityofmaryland/web-elements-library/atomic.js',

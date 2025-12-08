@@ -125,49 +125,51 @@ jobs:
         run: npx lerna run test --scope=@universityofmaryland/web-${{ inputs.package }}-library
 
       - name: Update version badges
-        run: npm run update-badges
+        run: npm run update-badges -- --package=${{ inputs.package }}
 
       - name: Version package (pre-release)
         if: ${{ contains(inputs.version_bump, 'pre') }}
         env:
           GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
-          npx lerna version ${{ inputs.version_bump }} \
-            --preid ${{ inputs.preid }} \
-            --force-publish=@universityofmaryland/web-${{ inputs.package }}-library \
-            --conventional-commits \
-            --create-release github \
-            --yes
+          cd packages/${{ inputs.package }}
+          npm version ${{ inputs.version_bump }} --preid=${{ inputs.preid }} --no-git-tag-version
+          cd ../..
+          git add packages/${{ inputs.package }}/package.json
+          NEW_VERSION=$(node -p "require('./packages/${{ inputs.package }}/package.json').version")
+          git commit -m "chore(release): @universityofmaryland/web-${{ inputs.package }}-library@${NEW_VERSION}"
+          git tag "@universityofmaryland/web-${{ inputs.package }}-library@${NEW_VERSION}"
+          gh release create "@universityofmaryland/web-${{ inputs.package }}-library@${NEW_VERSION}" --generate-notes
 
       - name: Version package (standard release)
         if: ${{ !contains(inputs.version_bump, 'pre') }}
         env:
           GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
-          npx lerna version ${{ inputs.version_bump }} \
-            --force-publish=@universityofmaryland/web-${{ inputs.package }}-library \
-            --conventional-commits \
-            --create-release github \
-            --yes
+          cd packages/${{ inputs.package }}
+          npm version ${{ inputs.version_bump }} --no-git-tag-version
+          cd ../..
+          git add packages/${{ inputs.package }}/package.json
+          NEW_VERSION=$(node -p "require('./packages/${{ inputs.package }}/package.json').version")
+          git commit -m "chore(release): @universityofmaryland/web-${{ inputs.package }}-library@${NEW_VERSION}"
+          git tag "@universityofmaryland/web-${{ inputs.package }}-library@${NEW_VERSION}"
+          gh release create "@universityofmaryland/web-${{ inputs.package }}-library@${NEW_VERSION}" --generate-notes
 
       - name: Publish to NPM (dry-run)
         if: ${{ inputs.dry_run == 'true' }}
         run: |
           echo "Dry run enabled - skipping NPM publish"
-          npx lerna publish from-package \
-            --scope=@universityofmaryland/web-${{ inputs.package }}-library \
-            --yes \
-            --dry-run
+          cd packages/${{ inputs.package }}
+          npm publish --dry-run
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish to NPM
         if: ${{ inputs.dry_run != 'true' }}
         run: |
-          npx lerna publish from-package \
-            --scope=@universityofmaryland/web-${{ inputs.package }}-library \
-            --yes \
-            --dist-tag ${{ contains(inputs.version_bump, 'pre') && inputs.preid || 'latest' }}
+          cd packages/${{ inputs.package }}
+          DIST_TAG="${{ contains(inputs.version_bump, 'pre') && inputs.preid || 'latest' }}"
+          npm publish --tag "$DIST_TAG"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

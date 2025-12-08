@@ -188,6 +188,7 @@ jobs:
         if: ${{ inputs.dry_run == 'true' }}
         run: |
           echo "Dry run enabled - skipping NPM publish"
+          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
           npm publish --dry-run ./packages/${{ inputs.package }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -195,6 +196,7 @@ jobs:
       - name: Publish to NPM
         if: ${{ inputs.dry_run != 'true' }}
         run: |
+          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
           DIST_TAG="${{ contains(inputs.version_bump, 'pre') && inputs.preid || 'latest' }}"
           npm publish ./packages/${{ inputs.package }} --tag "$DIST_TAG"
         env:

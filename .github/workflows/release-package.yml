@@ -125,10 +125,11 @@ jobs:
         run: npx lerna run test --scope=@universityofmaryland/web-${{ inputs.package }}-library
 
       - name: Update version badges
+        if: ${{ inputs.dry_run != true }}
         run: npm run update-badges -- --package=${{ inputs.package }}
 
       - name: Version package (pre-release)
-        if: ${{ contains(inputs.version_bump, 'pre') }}
+        if: ${{ contains(inputs.version_bump, 'pre') && inputs.dry_run != true }}
         env:
           GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
@@ -137,12 +138,26 @@ jobs:
           cd ../..
           git add packages/${{ inputs.package }}/package.json
           NEW_VERSION=$(node -p "require('./packages/${{ inputs.package }}/package.json').version")
-          git commit -m "chore(release): @universityofmaryland/web-${{ inputs.package }}-library@${NEW_VERSION}"
-          git tag "@universityofmaryland/web-${{ inputs.package }}-library@${NEW_VERSION}"
-          gh release create "@universityofmaryland/web-${{ inputs.package }}-library@${NEW_VERSION}" --generate-notes
+          TAG_NAME="@universityofmaryland/web-${{ inputs.package }}-library@${NEW_VERSION}"
+
+          # Check if tag already exists
+          if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
+            echo "❌ Error: Tag $TAG_NAME already exists locally"
+            exit 1
+          fi
+
+          if git ls-remote --tags origin | grep -q "refs/tags/$TAG_NAME$"; then
+            echo "❌ Error: Tag $TAG_NAME already exists on remote"
+            echo "This version has already been released. Use a different version bump."
+            exit 1
+          fi
+
+          git commit -m "chore(release): $TAG_NAME"
+          git tag "$TAG_NAME"
+          gh release create "$TAG_NAME" --generate-notes
 
       - name: Version package (standard release)
-        if: ${{ !contains(inputs.version_bump, 'pre') }}
+        if: ${{ !contains(inputs.version_bump, 'pre') && inputs.dry_run != true }}
         env:
           GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
@@ -151,9 +166,23 @@ jobs:
           cd ../..
           git add packages/${{ inputs.package }}/package.json
           NEW_VERSION=$(node -p "require('./packages/${{ inputs.package }}/package.json').version")
-          git commit -m "chore(release): @universityofmaryland/web-${{ inputs.package }}-library@${NEW_VERSION}"
-          git tag "@universityofmaryland/web-${{ inputs.package }}-library@${NEW_VERSION}"
-          gh release create "@universityofmaryland/web-${{ inputs.package }}-library@${NEW_VERSION}" --generate-notes
+          TAG_NAME="@universityofmaryland/web-${{ inputs.package }}-library@${NEW_VERSION}"
+
+          # Check if tag already exists
+          if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
+            echo "❌ Error: Tag $TAG_NAME already exists locally"
+            exit 1
+          fi
+
+          if git ls-remote --tags origin | grep -q "refs/tags/$TAG_NAME$"; then
+            echo "❌ Error: Tag $TAG_NAME already exists on remote"
+            echo "This version has already been released. Use a different version bump."
+            exit 1
+          fi
+
+          git commit -m "chore(release): $TAG_NAME"
+          git tag "$TAG_NAME"
+          gh release create "$TAG_NAME" --generate-notes
 
       - name: Publish to NPM (dry-run)
         if: ${{ inputs.dry_run == 'true' }}

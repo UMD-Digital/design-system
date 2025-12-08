@@ -41,7 +41,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PAT_TOKEN }}
 
       - name: Configure Git
         run: |
@@ -75,7 +75,7 @@ jobs:
       - name: Version packages (pre-release)
         if: ${{ contains(github.event.inputs.version_bump, 'pre') }}
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           npx lerna version ${{ github.event.inputs.version_bump }} \
             --preid ${{ github.event.inputs.preid }} \
@@ -86,7 +86,7 @@ jobs:
       - name: Version packages (standard release)
         if: ${{ !contains(github.event.inputs.version_bump, 'pre') }}
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           npx lerna version ${{ github.event.inputs.version_bump }} \
             --conventional-commits \

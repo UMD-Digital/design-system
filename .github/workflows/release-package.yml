@@ -134,7 +134,7 @@ jobs:
         run: |
           npx lerna version ${{ inputs.version_bump }} \
             --preid ${{ inputs.preid }} \
-            --scope=@universityofmaryland/web-${{ inputs.package }}-library \
+            --force-publish=@universityofmaryland/web-${{ inputs.package }}-library \
             --conventional-commits \
             --create-release github \
             --yes
@@ -145,7 +145,7 @@ jobs:
           GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           npx lerna version ${{ inputs.version_bump }} \
-            --scope=@universityofmaryland/web-${{ inputs.package }}-library \
+            --force-publish=@universityofmaryland/web-${{ inputs.package }}-library \
             --conventional-commits \
             --create-release github \
             --yes

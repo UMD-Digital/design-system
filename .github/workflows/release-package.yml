@@ -81,25 +81,25 @@ jobs:
               echo "No dependencies to build"
               ;;
             "styles")
-              npx lerna run build --scope=@universityofmaryland/web-tokens-library
+              npx lerna run build --scope=@universityofmaryland/web-token-library
               ;;
             "utilities")
-              npx lerna run build --scope=@universityofmaryland/web-tokens-library
+              npx lerna run build --scope=@universityofmaryland/web-token-library
               npx lerna run build --scope=@universityofmaryland/web-styles-library
               ;;
             "builder"|"model")
-              npx lerna run build --scope=@universityofmaryland/web-tokens-library
+              npx lerna run build --scope=@universityofmaryland/web-token-library
               ;;
             "elements")
               npx lerna run build --scope=@universityofmaryland/web-icons-library
-              npx lerna run build --scope=@universityofmaryland/web-tokens-library
+              npx lerna run build --scope=@universityofmaryland/web-token-library
               npx lerna run build --scope=@universityofmaryland/web-styles-library
               npx lerna run build --scope=@universityofmaryland/web-utilities-library
               npx lerna run build --scope=@universityofmaryland/web-builder-library
               ;;
             "feeds")
               npx lerna run build --scope=@universityofmaryland/web-icons-library
-              npx lerna run build --scope=@universityofmaryland/web-tokens-library
+              npx lerna run build --scope=@universityofmaryland/web-token-library
               npx lerna run build --scope=@universityofmaryland/web-styles-library
               npx lerna run build --scope=@universityofmaryland/web-utilities-library
               npx lerna run build --scope=@universityofmaryland/web-builder-library
@@ -108,7 +108,7 @@ jobs:
             "components")
               echo "Building all dependencies..."
               npx lerna run build --stream --scope=@universityofmaryland/web-icons-library
-              npx lerna run build --stream --scope=@universityofmaryland/web-tokens-library
+              npx lerna run build --stream --scope=@universityofmaryland/web-token-library
               npx lerna run build --stream --scope=@universityofmaryland/web-styles-library
               npx lerna run build --stream --scope=@universityofmaryland/web-utilities-library
               npx lerna run build --stream --scope=@universityofmaryland/web-builder-library

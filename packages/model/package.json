@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-model-library",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "UMD Web Component Model - Base utilities for building web components",
   "main": "dist/index.js",
   "module": "dist/index.mjs",

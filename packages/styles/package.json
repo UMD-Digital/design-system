@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-styles-library",
-  "version": "1.7.3",
+  "version": "1.8.0",
   "description": "Styles used for use in the University of Maryland Design System",
   "main": "dist/index.js",
   "author": "UMD Web Services <digital@umd.edu>",
@@ -68,7 +68,7 @@
     "test:snapshot": "jest --updateSnapshot"
   },
   "dependencies": {
-    "@universityofmaryland/web-token-library": "^1.0.0",
+    "@universityofmaryland/web-token-library": "^1.1.0",
     "postcss": "~8.4.21",
     "postcss-discard-duplicates": "~7.0.1",
     "postcss-js": "~4.0.1",

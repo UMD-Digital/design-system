@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-builder-library",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Element Builder for the University of Maryland Design System",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -64,7 +64,7 @@
     "@universityofmaryland/web-styles-library": "^1.0.0"
   },
   "dependencies": {
-    "@universityofmaryland/web-utilities-library": "^1.0.0"
+    "@universityofmaryland/web-utilities-library": "^1.1.0"
   },
   "devDependencies": {
     "@vitejs/plugin-legacy": "^7.2.1",

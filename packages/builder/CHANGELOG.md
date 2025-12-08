@@ -1,3 +1,12 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 1.1.0 (2025-12-08)
+
+**Note:** Version bump only for package @universityofmaryland/web-builder-library
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
@@ -10,6 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Breaking Changes
 
 **Factory Removal**
+
 - **REMOVED:** Entire `factories/` directory including presets and compose functionality
 - **REMOVED:** Factory exports from package.json (`./presets`, `./compose`, `./factories`)
 - **REMOVED:** `actions`, `headlines`, `text`, `layouts`, and `assets` preset builders
@@ -18,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Removed ~1,900 lines of code from the builder package
 
 **API Simplification**
+
 - **REMOVED:** `buildElement()` method - use `.build()` instead
 - **REMOVED:** Convenience ARIA methods (`ariaCurrent`, `ariaPressed`, `ariaExpanded`, `ariaHidden`, `ariaLabel`) - use `.withAria()` instead
 - **REMOVED:** Convenience event methods (`onClick`, `onKeyup`, `onKeydown`, `onSubmit`, `onChange`, `onInput`, `onFocus`, `onBlur`, `onMouseEnter`, `onMouseLeave`) - use `.on()` instead
@@ -26,12 +37,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **REMOVED:** Conditional methods (`withChildIf`, `withStylesIf`, `withThemeDarkIf`) - use standard JavaScript conditionals instead
 
 **Random ClassName Generation**
+
 - **CHANGED:** `getCurrentClassName()` no longer generates random classNames
 - **CHANGED:** `.withStyles()` now warns and skips when no className is set
 - **CHANGED:** StyleManager.add() now accepts `className: string | null`
 - **BEHAVIOR:** Developers must explicitly set classNames before applying styles for cleaner DOM and easier debugging
 
 **Method Renaming**
+
 - **RENAMED:** `role()` → `withRole()` for API consistency
 
 ### Added
@@ -64,12 +77,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Migration Guide
 
 **Before (Factory Pattern):**
+
 ```typescript
 import { actions } from '@universityofmaryland/web-builder-library/presets';
 const button = actions.primary().withText('Click Me').build();
 ```
 
 **After (Styles Package Composables):**
+
 ```typescript
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as Styles from '@universityofmaryland/web-styles-library';

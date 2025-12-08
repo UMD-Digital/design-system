@@ -1,3 +1,12 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 1.16.0 (2025-12-08)
+
+**Note:** Version bump only for package @universityofmaryland/web-components-library
+
 # Changelog - Components Package
 
 All notable changes to the `@universityofmaryland/web-components-library` package will be documented in this file.
@@ -5,9 +14,10 @@ All notable changes to the `@universityofmaryland/web-components-library` packag
 ## [1.13.0-beta.3] - Current Beta
 
 ### Recent Changes
+
 - **Hero Components**: Container inline type updates across all hero variants
   - Brand video
-  - Grid  
+  - Grid
   - Expand
   - Logo
   - Minimal
@@ -18,12 +28,14 @@ All notable changes to the `@universityofmaryland/web-components-library` packag
 ## [1.13.0-beta.2] - Previous Beta
 
 ### Changes
+
 - **Card**: Block variant image sizing improvements
 - **Card**: Inline size adjustments
 
 ## [1.10.11] - Previous Stable Release
 
 ### Features
+
 - High-level web components built on elements library
 - Shadow DOM for style encapsulation
 - Slot-based content distribution system
@@ -33,6 +45,7 @@ All notable changes to the `@universityofmaryland/web-components-library` packag
 ### Component Categories
 
 #### Core Components
+
 - **accordion** - Expandable content sections
 - **alert** - Notification messages
 - **banner** - Page headers and promotional content
@@ -56,12 +69,14 @@ All notable changes to the `@universityofmaryland/web-components-library` packag
 ### Architecture Highlights
 
 #### Component Structure
+
 - **API files** (`/api/[component]/`) - Custom element class definitions
 - **Model system** - Attributes, slots, and registration utilities
 - **Type system** - Modular types with clear separation of concerns
 - **Lifecycle hooks** - Standard hooks for component initialization
 
 #### Attribute System
+
 - **Configuration attributes** (`data-*`) - Initial state/configuration
 - **Observed attributes** - Reactive behavior triggers
   - `resize` - Component recalculation
@@ -70,12 +85,14 @@ All notable changes to the `@universityofmaryland/web-components-library` packag
   - `data-layout-position` - Position value
 
 ### Dependencies
+
 - Depends on `@universityofmaryland/web-elements-library`
 - Depends on `@universityofmaryland/web-styles-library`
 
 ## Migration Notes
 
 ### Deprecations (for v2.0)
+
 - Non-prefixed attributes (use `data-*` prefix)
 - Legacy slot names (see individual component documentation)
 

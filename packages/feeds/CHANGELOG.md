@@ -1,3 +1,12 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 1.3.0 (2025-12-08)
+
+**Note:** Version bump only for package @universityofmaryland/web-feeds-library
+
 # Changelog - Feeds Package
 
 All notable changes to the `@universityofmaryland/web-feeds-library` package will be documented in this file.
@@ -5,6 +14,7 @@ All notable changes to the `@universityofmaryland/web-feeds-library` package wil
 ## [1.0.7] - Current
 
 ### Recent Changes
+
 - **Loader Element**: Visual theme improvements
 - **Grouped Feeds**: Added offset for lazy load functionality
 - **Events**: Grouped event feed implementation
@@ -14,6 +24,7 @@ All notable changes to the `@universityofmaryland/web-feeds-library` package wil
 ## [1.0.4] - Previous Release
 
 ### Features
+
 - Dynamic content feed components for UMD digital properties
 - Support for multiple content types:
   - News feeds
@@ -26,6 +37,7 @@ All notable changes to the `@universityofmaryland/web-feeds-library` package wil
   - Grouped layout
 
 ### Architecture
+
 - **Component Factory Pattern**: All components return ElementModel
 - **Shadow DOM**: Style encapsulation for all feed components
 - **API Integration**: Built-in fetch utilities for UMD content APIs
@@ -33,6 +45,7 @@ All notable changes to the `@universityofmaryland/web-feeds-library` package wil
 - **Lazy Loading**: Performance optimization for large feeds
 
 ### Core Modules
+
 - **common/**
   - `fetch.ts` - API integration utilities
   - `data.ts` - Data transformation utilities
@@ -45,6 +58,7 @@ All notable changes to the `@universityofmaryland/web-feeds-library` package wil
   - Other feed-specific utilities
 
 ### Dependencies
+
 - Depends on `@universityofmaryland/web-elements-library`
 - Depends on `@universityofmaryland/web-styles-library`
 

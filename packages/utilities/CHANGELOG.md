@@ -1,3 +1,21 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 1.1.0 (2025-12-08)
+
+### Bug Fixes
+
+- **utilities:** Fix remaining test failures to achieve 100% pass rate ([482bc78](https://github.com/UMD-Digital/design-system/commit/482bc783deffab3201d0aef3cd23d1e2f68c5d02))
+
+### Features
+
+- **utilities:** Implement selective import pattern with small bundles ([4afe4af](https://github.com/UMD-Digital/design-system/commit/4afe4af4028c9881fb4b89cbac61057925755239))
+- **utilities:** Initialize utilities package with build and test infrastructure ([91c9e26](https://github.com/UMD-Digital/design-system/commit/91c9e26f9ed3a0e92060bf1fff7fe26a94d94d8a))
+- **utilities:** Migrate utility functions from components package ([2246dc9](https://github.com/UMD-Digital/design-system/commit/2246dc97e0a7c209662312e2a9ead26db0500226))
+- **utilities:** Migrate utility functions from elements package ([7bd2325](https://github.com/UMD-Digital/design-system/commit/7bd23251bc33106c54e327cf799b4db713ee0631))
+
 # Changelog
 
 All notable changes to this project will be documented in this file.
@@ -8,6 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] - 2025-09-29
 
 ### Added
+
 - Initial package setup with Vite build system
 - Jest testing infrastructure with TypeScript support
 - Basic package structure and configuration
@@ -16,6 +35,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive utility function analysis from components and elements packages
 
 #### Migrated from Components Package
+
 - **DOM utilities:** `isHTMLElement` - Type guard for HTMLElement validation
 - **Element creation:**
   - `createSlot` - Creates named slot elements for Shadow DOM
@@ -24,6 +44,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Validation utilities:** `imageHasAlt` - Validates image alt text for accessibility (WCAG compliant)
 
 #### Test Coverage
+
 - 100% code coverage across all migrated utilities
 - 133 comprehensive tests covering:
   - Happy path scenarios
@@ -34,6 +55,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Integration with Shadow DOM
 
 #### Migrated from Elements Package
+
 - **Accessibility utilities:** 4 functions for focus management, zoom detection, and motion preferences
   - `eventAccessibilityFocus` - Keyboard event handling for focus management (Escape, Tab, Arrow keys)
   - `eventAccessibilityFocusTrap` - Focus trap for modal dialogs (WCAG 2.1 compliant)
@@ -77,15 +99,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - `createRangeContainerQuery` - Creates ranged media queries (min and max width)
 
 #### Dependencies Added
+
 - `@universityofmaryland/web-styles-library@^1.4.2` - For JSS type definitions
 - `postcss@^8.4.49` - CSS transformation
 - `postcss-js@^4.0.1` - JSS to PostCSS conversion
 - `postcss-nesting@^13.0.1` - CSS nesting support
 
 #### Bug Fixes
+
 - Fixed `createRangeContainerQuery` - Added missing 'px' unit to max-width in media query
 
 #### Test Coverage for Elements Utilities
+
 - **827 passing tests with 100% pass rate** (40 test suites)
 - **99.72% overall code coverage** (99.15% branches, 100% functions, 100% lines)
 - Comprehensive test coverage added for all 35+ migrated utilities:

@@ -1,3 +1,12 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 1.1.0 (2025-12-08)
+
+**Note:** Version bump only for package @universityofmaryland/web-token-library
+
 # Changelog
 
 All notable changes to the Tokens package will be documented in this file.
@@ -8,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2025-12-06
 
 ### Added
+
 - **Initial release** of standalone tokens package
 - Extracted design tokens from `@universityofmaryland/web-styles-library`
 - Color tokens with UMD brand colors and gray scale
@@ -22,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Tree-shakable module exports
 
 ### Migration Notes
+
 - This package replaces token imports from `@universityofmaryland/web-styles-library/token`
 - For backward compatibility, styles package continues to re-export tokens
 - No breaking changes for existing consumers

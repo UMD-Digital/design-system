@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-elements-library",
-  "version": "1.5.4",
+  "version": "1.6.0",
   "description": "UMD Web Elements",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
@@ -51,13 +51,13 @@
   },
   "dependencies": {
     "@types/postcss-js": "^4.0.4",
-    "@universityofmaryland/web-builder-library": "^1.0.0",
-    "@universityofmaryland/web-token-library": "^1.0.0",
-    "@universityofmaryland/web-utilities-library": "^1.0.0"
+    "@universityofmaryland/web-builder-library": "^1.1.0",
+    "@universityofmaryland/web-token-library": "^1.1.0",
+    "@universityofmaryland/web-utilities-library": "^1.1.0"
   },
   "peerDependencies": {
-    "@universityofmaryland/web-styles-library": "^1.0.0",
-    "@universityofmaryland/web-icons-library": "^1.0.0"
+    "@universityofmaryland/web-icons-library": "^1.0.0",
+    "@universityofmaryland/web-styles-library": "^1.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-legacy": "^7.2.1",

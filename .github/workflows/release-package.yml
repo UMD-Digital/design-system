@@ -185,7 +185,7 @@ jobs:
           gh release create "$TAG_NAME" --generate-notes
 
       - name: Publish to NPM (dry-run)
-        if: ${{ inputs.dry_run == 'true' }}
+        if: ${{ inputs.dry_run == true }}
         run: |
           echo "Dry run enabled - skipping NPM publish"
           echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
@@ -194,7 +194,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish to NPM
-        if: ${{ inputs.dry_run != 'true' }}
+        if: ${{ inputs.dry_run != true }}
         run: |
           echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
           DIST_TAG="${{ contains(inputs.version_bump, 'pre') && inputs.preid || 'latest' }}"
@@ -203,8 +203,11 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Push changes
-        if: ${{ inputs.dry_run != 'true' }}
+        if: ${{ inputs.dry_run != true }}
+        env:
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
+          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git
           git push --follow-tags origin ${{ github.ref_name }}
 
       - name: Get package version

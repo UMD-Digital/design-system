@@ -12,15 +12,12 @@ on:
           - patch
           - minor
           - major
-          - prepatch
-          - preminor
-          - premajor
           - prerelease
       preid:
         description: 'Pre-release identifier (alpha, beta, rc)'
         required: false
         type: string
-        default: 'beta'
+        default: ''
       dry_run:
         description: 'Dry run (no publish)'
         required: false
@@ -77,6 +74,8 @@ jobs:
 
       - name: Version packages (pre-release)
         if: ${{ contains(github.event.inputs.version_bump, 'pre') }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npx lerna version ${{ github.event.inputs.version_bump }} \
             --preid ${{ github.event.inputs.preid }} \
@@ -86,6 +85,8 @@ jobs:
 
       - name: Version packages (standard release)
         if: ${{ !contains(github.event.inputs.version_bump, 'pre') }}
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           npx lerna version ${{ github.event.inputs.version_bump }} \
             --conventional-commits \

@@ -26,15 +26,12 @@ on:
           - patch
           - minor
           - major
-          - prepatch
-          - preminor
-          - premajor
           - prerelease
       preid:
         description: 'Pre-release identifier (alpha, beta, rc)'
         required: false
         type: string
-        default: 'beta'
+        default: ''
       dry_run:
         description: 'Dry run (no publish)'
         required: false
@@ -202,7 +199,7 @@ jobs:
     with:
       status: ${{ needs.release-package.result == 'success' && 'success' || 'failure' }}
       version_bump: ${{ inputs.version_bump }}
-      packages_changed: "@universityofmaryland/web-${{ inputs.package }}-library"
+      packages_changed: '@universityofmaryland/web-${{ inputs.package }}-library'
       error_message: ${{ needs.release-package.result == 'failure' && 'Package release failed. Check workflow logs.' || '' }}
     secrets:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

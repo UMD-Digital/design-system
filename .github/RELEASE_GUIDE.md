@@ -221,6 +221,33 @@ rm .npmrc
 
 **Note:** `npm access ls-packages` only works if you're an organization member on npmjs.com. As a package collaborator, you can publish but won't have org-level access.
 
+### Required: GitHub Personal Access Token (PAT)
+
+The automated release workflow needs a Personal Access Token to trigger workflow dispatches.
+
+#### 1. Generate Personal Access Token
+
+1. Go to GitHub **Settings** → **Developer settings** → **Personal access tokens** → **Tokens (classic)**
+2. Click **"Generate new token (classic)"**
+3. **Note**: `UMD Design System Automated Releases`
+4. **Expiration**: 90 days (or as per your org policy)
+5. **Select scopes**:
+   - ✅ `repo` - Full control of private repositories
+   - ✅ `workflow` - Update GitHub Action workflows
+6. Click **"Generate token"** and copy it immediately
+
+⚠️ **Important**: The `workflow` scope is required to trigger workflow dispatch events
+
+#### 2. Add to GitHub Secrets
+
+1. Go to repository **Settings** → **Secrets and variables** → **Actions**
+2. Click **"New repository secret"**
+3. Name: `PAT_TOKEN`
+4. Value: Paste the personal access token
+5. Click **"Add secret"**
+
+⚠️ **Set calendar reminder** to rotate token before expiration
+
 ### Optional: Branch Protection
 
 If your main branch has protection rules:
@@ -629,6 +656,20 @@ Use GitHub Actions dry-run mode:
 1. Generate new NPM token
 2. Update `NPM_TOKEN` secret in GitHub
 3. Re-run workflow
+
+### "HTTP 403: Resource not accessible by personal access token"
+
+**Cause:** `PAT_TOKEN` missing `workflow` scope (automated releases only)
+
+**Solution:**
+1. Go to GitHub Settings → Developer settings → Personal access tokens
+2. Edit or regenerate token with both scopes:
+   - ✅ `repo` - Full control of private repositories
+   - ✅ `workflow` - Update GitHub Action workflows
+3. Update `PAT_TOKEN` secret in repository settings
+4. Re-trigger release by pushing again to `npm-release` branch
+
+**Why this happens:** The automated release workflow uses GitHub CLI to trigger `release-package.yml` workflows. This requires the `workflow` scope in addition to `repo`.
 
 ### "Build failed"
 

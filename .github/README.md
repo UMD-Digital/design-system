@@ -165,11 +165,19 @@ node .github/scripts/detect-versions.js
 
 The automated release system requires these GitHub secrets:
 
-- `PAT_TOKEN`: Personal access token with repo scope
+- `PAT_TOKEN`: Personal access token with `repo` and `workflow` scopes
 - `NPM_TOKEN`: NPM automation token with publish permissions
 - `SLACK_WEBHOOK_URL`: Slack webhook for notifications
 
-These should already be configured in your repository settings.
+### Setting up PAT_TOKEN
+
+The PAT must have these scopes to trigger workflow dispatches:
+1. Go to GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
+2. Generate new token or edit existing token
+3. Select scopes:
+   - ✅ `repo` - Full control of private repositories
+   - ✅ `workflow` - Update GitHub Action workflows
+4. Copy the token and add it to repository secrets as `PAT_TOKEN`
 
 ## Branch Configuration
 
@@ -209,6 +217,10 @@ https://www.npmjs.com/org/universityofmaryland
 
 ## Troubleshooting
 
+### "HTTP 403: Resource not accessible by personal access token"
+**Cause**: PAT_TOKEN doesn't have `workflow` scope
+**Solution**: Regenerate PAT with both `repo` and `workflow` scopes (see "Required Secrets" section above)
+
 ### "No packages need releasing"
 **Cause**: No version changes detected
 **Solution**: Bump version in package.json
@@ -220,8 +232,6 @@ https://www.npmjs.com/org/universityofmaryland
 ### Workflow fails
 **Cause**: Various (build error, test failure, network issue)
 **Solution**: Check workflow logs, fix issue, re-trigger by pushing again
-
-See [AUTOMATED_RELEASE_GUIDE.md](./docs/AUTOMATED_RELEASE_GUIDE.md#troubleshooting) for detailed troubleshooting.
 
 ## Best Practices
 

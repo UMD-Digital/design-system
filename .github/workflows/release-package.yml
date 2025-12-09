@@ -21,13 +21,14 @@ on:
 
       version_bump:
         description: 'Version bump type'
-        required: true
+        required: false
         type: choice
         options:
           - patch
           - minor
           - major
           - prerelease
+        default: 'patch'
       preid:
         description: 'Pre-release identifier (alpha, beta, rc)'
         required: false
@@ -38,6 +39,45 @@ on:
         required: false
         type: boolean
         default: false
+      auto_detect_version:
+        description: 'Auto-detect version from package.json (skips versioning step)'
+        required: false
+        type: boolean
+        default: false
+
+  workflow_call:
+    inputs:
+      package:
+        description: 'Package to release'
+        required: true
+        type: string
+      version_bump:
+        description: 'Version bump type'
+        required: false
+        type: string
+        default: 'patch'
+      preid:
+        description: 'Pre-release identifier (alpha, beta, rc)'
+        required: false
+        type: string
+        default: ''
+      dry_run:
+        description: 'Dry run (no publish)'
+        required: false
+        type: boolean
+        default: false
+      auto_detect_version:
+        description: 'Auto-detect version from package.json (skips versioning step)'
+        required: false
+        type: boolean
+        default: false
+    outputs:
+      package_version:
+        description: 'Version of the released package'
+        value: ${{ jobs.release-package.outputs.package_version }}
+      success:
+        description: 'Whether the release succeeded'
+        value: ${{ jobs.release-package.outputs.success }}
 
 permissions:
   contents: write
@@ -50,6 +90,7 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       package_version: ${{ steps.package_version.outputs.version }}
+      success: ${{ steps.release_status.outputs.success }}
 
     steps:
       - name: Checkout code
@@ -127,11 +168,30 @@ jobs:
         run: npx lerna run test --scope=@universityofmaryland/web-${{ inputs.package }}-library
 
       - name: Update version badges
-        if: ${{ inputs.dry_run != true }}
+        if: ${{ inputs.dry_run != true && inputs.auto_detect_version != true }}
         run: npm run update-badges -- --package=${{ inputs.package }}
 
+      - name: Detect current version (auto-detect mode)
+        if: ${{ inputs.auto_detect_version == true }}
+        id: current_version
+        run: |
+          CURRENT_VERSION=$(node -p "require('./packages/${{ inputs.package }}/package.json').version")
+          echo "Current version in package.json: $CURRENT_VERSION"
+          echo "version=$CURRENT_VERSION" >> $GITHUB_OUTPUT
+
+          # Determine if it's a pre-release
+          if [[ "$CURRENT_VERSION" == *"-"* ]]; then
+            echo "is_prerelease=true" >> $GITHUB_OUTPUT
+            # Extract preid (alpha, beta, rc, etc.)
+            PREID=$(echo "$CURRENT_VERSION" | sed -n 's/.*-\([a-z]*\)\..*/\1/p')
+            echo "preid=$PREID" >> $GITHUB_OUTPUT
+          else
+            echo "is_prerelease=false" >> $GITHUB_OUTPUT
+            echo "preid=" >> $GITHUB_OUTPUT
+          fi
+
       - name: Version package (pre-release)
-        if: ${{ contains(inputs.version_bump, 'pre') && inputs.dry_run != true }}
+        if: ${{ contains(inputs.version_bump, 'pre') && inputs.dry_run != true && inputs.auto_detect_version != true }}
         env:
           GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
@@ -159,7 +219,7 @@ jobs:
           gh release create "$TAG_NAME" --generate-notes
 
       - name: Version package (standard release)
-        if: ${{ !contains(inputs.version_bump, 'pre') && inputs.dry_run != true }}
+        if: ${{ !contains(inputs.version_bump, 'pre') && inputs.dry_run != true && inputs.auto_detect_version != true }}
         env:
           GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
@@ -186,6 +246,25 @@ jobs:
           git tag "$TAG_NAME"
           gh release create "$TAG_NAME" --generate-notes
 
+      - name: Create GitHub release (auto-detect mode)
+        if: ${{ inputs.auto_detect_version == true && inputs.dry_run != true }}
+        env:
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          NEW_VERSION="${{ steps.current_version.outputs.version }}"
+          TAG_NAME="@universityofmaryland/web-${{ inputs.package }}-library@${NEW_VERSION}"
+
+          # Check if tag already exists
+          if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
+            echo "⚠️  Tag $TAG_NAME already exists locally, skipping tag creation"
+          elif git ls-remote --tags origin | grep -q "refs/tags/$TAG_NAME$"; then
+            echo "⚠️  Tag $TAG_NAME already exists on remote, skipping tag creation"
+          else
+            echo "Creating tag $TAG_NAME"
+            git tag "$TAG_NAME"
+            gh release create "$TAG_NAME" --generate-notes
+          fi
+
       - name: Publish to NPM (dry-run)
         if: ${{ inputs.dry_run == true }}
         run: |
@@ -199,7 +278,21 @@ jobs:
         if: ${{ inputs.dry_run != true }}
         run: |
           echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
-          DIST_TAG="${{ contains(inputs.version_bump, 'pre') && inputs.preid || 'latest' }}"
+
+          # Determine dist-tag
+          if [[ "${{ inputs.auto_detect_version }}" == "true" ]]; then
+            # Auto-detect mode: check if version is pre-release
+            if [[ "${{ steps.current_version.outputs.is_prerelease }}" == "true" ]]; then
+              DIST_TAG="${{ steps.current_version.outputs.preid }}"
+            else
+              DIST_TAG="latest"
+            fi
+          else
+            # Manual mode: use version_bump to determine tag
+            DIST_TAG="${{ contains(inputs.version_bump, 'pre') && inputs.preid || 'latest' }}"
+          fi
+
+          echo "Publishing with dist-tag: $DIST_TAG"
           npm publish ./packages/${{ inputs.package }} --tag "$DIST_TAG"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -218,16 +311,37 @@ jobs:
           VERSION=$(node -p "require('./packages/${{ inputs.package }}/package.json').version")
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
+      - name: Set release status
+        id: release_status
+        if: always()
+        run: |
+          if [[ "${{ job.status }}" == "success" ]]; then
+            echo "success=true" >> $GITHUB_OUTPUT
+          else
+            echo "success=false" >> $GITHUB_OUTPUT
+          fi
+
       - name: Summary
         run: |
           echo "## Package Release Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "**Package:** @universityofmaryland/web-${{ inputs.package }}-library" >> $GITHUB_STEP_SUMMARY
           echo "**New Version:** ${{ steps.package_version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Version Bump:** ${{ inputs.version_bump }}" >> $GITHUB_STEP_SUMMARY
-          if [[ "${{ inputs.version_bump }}" == *"pre"* ]]; then
-            echo "**Pre-release ID:** ${{ inputs.preid }}" >> $GITHUB_STEP_SUMMARY
+
+          if [[ "${{ inputs.auto_detect_version }}" == "true" ]]; then
+            echo "**Mode:** Auto-detected from package.json" >> $GITHUB_STEP_SUMMARY
+            if [[ "${{ steps.current_version.outputs.is_prerelease }}" == "true" ]]; then
+              echo "**Release Type:** Pre-release (${{ steps.current_version.outputs.preid }})" >> $GITHUB_STEP_SUMMARY
+            else
+              echo "**Release Type:** Stable" >> $GITHUB_STEP_SUMMARY
+            fi
+          else
+            echo "**Version Bump:** ${{ inputs.version_bump }}" >> $GITHUB_STEP_SUMMARY
+            if [[ "${{ inputs.version_bump }}" == *"pre"* ]]; then
+              echo "**Pre-release ID:** ${{ inputs.preid }}" >> $GITHUB_STEP_SUMMARY
+            fi
           fi
+
           echo "**Dry Run:** ${{ inputs.dry_run }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "🔗 [View on NPM](https://www.npmjs.com/package/@universityofmaryland/web-${{ inputs.package }}-library)" >> $GITHUB_STEP_SUMMARY

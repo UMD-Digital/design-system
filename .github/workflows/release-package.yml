@@ -48,6 +48,8 @@ jobs:
   release-package:
     name: Release ${{ inputs.package }}
     runs-on: ubuntu-latest
+    outputs:
+      package_version: ${{ steps.package_version.outputs.version }}
 
     steps:
       - name: Checkout code
@@ -239,6 +241,7 @@ jobs:
       status: ${{ needs.release-package.result == 'success' && 'success' || 'failure' }}
       version_bump: ${{ inputs.version_bump }}
       packages_changed: '@universityofmaryland/web-${{ inputs.package }}-library'
+      package_version: ${{ needs.release-package.outputs.package_version }}
       error_message: ${{ needs.release-package.result == 'failure' && 'Package release failed. Check workflow logs.' || '' }}
     secrets:
       SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

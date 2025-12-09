@@ -94,7 +94,7 @@ jobs:
             --yes
 
       - name: Publish to NPM (dry-run)
-        if: ${{ github.event.inputs.dry_run == 'true' }}
+        if: ${{ github.event.inputs.dry_run == true }}
         run: |
           echo "Dry run enabled - skipping NPM publish"
           npx lerna publish from-package --yes --dry-run
@@ -102,7 +102,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish to NPM
-        if: ${{ github.event.inputs.dry_run != 'true' }}
+        if: ${{ github.event.inputs.dry_run != true }}
         run: |
           npx lerna publish from-package \
             --yes \
@@ -111,7 +111,7 @@ jobs:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Push changes
-        if: ${{ github.event.inputs.dry_run != 'true' }}
+        if: ${{ github.event.inputs.dry_run != true }}
         run: |
           git push --follow-tags origin ${{ github.ref_name }}
 
@@ -137,7 +137,7 @@ jobs:
   notify:
     name: Send Notifications
     needs: release
-    if: always() && github.event.inputs.dry_run != 'true'
+    if: always() && github.event.inputs.dry_run != true
     uses: ./.github/workflows/release-notification.yml
     with:
       status: ${{ needs.release.result == 'success' && 'success' || 'failure' }}

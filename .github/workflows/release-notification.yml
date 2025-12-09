@@ -17,6 +17,10 @@ on:
         description: 'JSON array of changed packages'
         required: false
         type: string
+      package_version:
+        description: 'Version number of released package(s)'
+        required: false
+        type: string
       error_message:
         description: 'Error message if failed'
         required: false
@@ -57,16 +61,22 @@ jobs:
                     },
                     {
                       "type": "mrkdwn",
-                      "text": "*Workflow:*\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>"
+                      "text": "*Version:*\n${{ inputs.package_version || 'See packages below' }}"
                     }
                   ]
                 },
                 {
                   "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*Packages Published:*\n```${{ inputs.packages_changed }}```"
-                  }
+                  "fields": [
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Packages Published:*\n```${{ inputs.packages_changed }}```"
+                    },
+                    {
+                      "type": "mrkdwn",
+                      "text": "*Workflow:*\n<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Run>"
+                    }
+                  ]
                 },
                 {
                   "type": "section",

@@ -114,6 +114,22 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Map package name
+        id: package_name
+        run: |
+          # Map short name to actual package name
+          # Special case: "tokens" → "token" (singular)
+          PACKAGE_INPUT="${{ inputs.package }}"
+          if [ "$PACKAGE_INPUT" = "tokens" ]; then
+            PACKAGE_NAME="token"
+          else
+            PACKAGE_NAME="$PACKAGE_INPUT"
+          fi
+          echo "package_name=$PACKAGE_NAME" >> $GITHUB_ENV
+          echo "scoped_name=@universityofmaryland/web-${PACKAGE_NAME}-library" >> $GITHUB_ENV
+          echo "Package: ${{ inputs.package }} → $PACKAGE_NAME"
+          echo "Scoped: @universityofmaryland/web-${PACKAGE_NAME}-library"
+
       - name: Build dependencies first
         run: |
           echo "Building dependencies for ${{ inputs.package }}..."
@@ -162,10 +178,10 @@ jobs:
           esac
 
       - name: Build package
-        run: npx lerna run build --scope=@universityofmaryland/web-${{ inputs.package }}-library
+        run: npx lerna run build --scope=${{ env.scoped_name }}
 
       - name: Run tests for package
-        run: npx lerna run test --scope=@universityofmaryland/web-${{ inputs.package }}-library
+        run: npx lerna run test --scope=${{ env.scoped_name }}
 
       - name: Update version badges
         if: ${{ inputs.dry_run != true && inputs.auto_detect_version != true }}
@@ -200,7 +216,7 @@ jobs:
           cd ../..
           git add packages/${{ inputs.package }}/package.json
           NEW_VERSION=$(node -p "require('./packages/${{ inputs.package }}/package.json').version")
-          TAG_NAME="@universityofmaryland/web-${{ inputs.package }}-library@${NEW_VERSION}"
+          TAG_NAME="${{ env.scoped_name }}@${NEW_VERSION}"
 
           # Check if tag already exists
           if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
@@ -228,7 +244,7 @@ jobs:
           cd ../..
           git add packages/${{ inputs.package }}/package.json
           NEW_VERSION=$(node -p "require('./packages/${{ inputs.package }}/package.json').version")
-          TAG_NAME="@universityofmaryland/web-${{ inputs.package }}-library@${NEW_VERSION}"
+          TAG_NAME="${{ env.scoped_name }}@${NEW_VERSION}"
 
           # Check if tag already exists
           if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
@@ -252,7 +268,7 @@ jobs:
           GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
           NEW_VERSION="${{ steps.current_version.outputs.version }}"
-          TAG_NAME="@universityofmaryland/web-${{ inputs.package }}-library@${NEW_VERSION}"
+          TAG_NAME="${{ env.scoped_name }}@${NEW_VERSION}"
 
           # Check if tag already exists
           if git rev-parse "$TAG_NAME" >/dev/null 2>&1; then
@@ -325,7 +341,7 @@ jobs:
         run: |
           echo "## Package Release Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Package:** @universityofmaryland/web-${{ inputs.package }}-library" >> $GITHUB_STEP_SUMMARY
+          echo "**Package:** ${{ env.scoped_name }}" >> $GITHUB_STEP_SUMMARY
           echo "**New Version:** ${{ steps.package_version.outputs.version }}" >> $GITHUB_STEP_SUMMARY
 
           if [[ "${{ inputs.auto_detect_version }}" == "true" ]]; then
@@ -344,7 +360,7 @@ jobs:
 
           echo "**Dry Run:** ${{ inputs.dry_run }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          echo "🔗 [View on NPM](https://www.npmjs.com/package/@universityofmaryland/web-${{ inputs.package }}-library)" >> $GITHUB_STEP_SUMMARY
+          echo "🔗 [View on NPM](https://www.npmjs.com/package/${{ env.scoped_name }})" >> $GITHUB_STEP_SUMMARY
 
   notify:
     name: Send Notifications
@@ -354,7 +370,7 @@ jobs:
     with:
       status: ${{ needs.release-package.result == 'success' && 'success' || 'failure' }}
       version_bump: ${{ inputs.version_bump }}
-      packages_changed: '@universityofmaryland/web-${{ inputs.package }}-library'
+      packages_changed: '${{ env.scoped_name }}'
       package_version: ${{ needs.release-package.outputs.package_version }}
       error_message: ${{ needs.release-package.result == 'failure' && 'Package release failed. Check workflow logs.' || '' }}
     secrets:

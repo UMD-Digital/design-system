@@ -98,11 +98,14 @@ packages.forEach((packageName) => {
 
     const capitalizedName =
       packageName.charAt(0).toUpperCase() + packageName.slice(1);
+    // Match both single-hyphen (old) and double-hyphen (new) pre-release formats
     const badgeRegex = new RegExp(
-      `\\[\\!\\[${capitalizedName} Version\\]\\(https://img\\.shields\\.io/badge/${capitalizedName}-v[0-9.]+(-[a-zA-Z0-9.]+)?-blue\\)\\]`,
+      `\\[\\!\\[${capitalizedName} Version\\]\\(https://img\\.shields\\.io/badge/${capitalizedName}-v[0-9.]+(--?[a-zA-Z0-9.]+)?-blue\\)\\]`,
       'i',
     );
-    const newBadge = `[![${capitalizedName} Version](https://img.shields.io/badge/${capitalizedName}-v${version}-blue)]`;
+    // Strip pre-release identifiers (e.g., 1.16.0-beta.1 → 1.16.0) for badge display
+    const stableVersion = version.split('-')[0];
+    const newBadge = `[![${capitalizedName} Version](https://img.shields.io/badge/${capitalizedName}-v${stableVersion}-blue)]`;
 
     if (badgeRegex.test(readme)) {
       if (!isDryRun) {
@@ -138,11 +141,14 @@ if (fs.existsSync(rootReadmePath)) {
 
       const capitalizedName =
         packageName.charAt(0).toUpperCase() + packageName.slice(1);
+      // Match both single-hyphen (old) and double-hyphen (new) pre-release formats
       const badgeRegex = new RegExp(
-        `\\[\\!\\[${capitalizedName} Version\\]\\(https://img\\.shields\\.io/badge/${capitalizedName}-v[0-9.]+(-[a-zA-Z0-9.]+)?-blue\\)\\]`,
+        `\\[\\!\\[${capitalizedName} Version\\]\\(https://img\\.shields\\.io/badge/${capitalizedName}-v[0-9.]+(--?[a-zA-Z0-9.]+)?-blue\\)\\]`,
         'i',
       );
-      const newBadge = `[![${capitalizedName} Version](https://img.shields.io/badge/${capitalizedName}-v${version}-blue)]`;
+      // Strip pre-release identifiers (e.g., 1.16.0-beta.1 → 1.16.0) for badge display
+      const stableVersion = version.split('-')[0];
+      const newBadge = `[![${capitalizedName} Version](https://img.shields.io/badge/${capitalizedName}-v${stableVersion}-blue)]`;
 
       if (badgeRegex.test(rootReadme)) {
         if (!isDryRun) {

@@ -8,18 +8,133 @@ This guide covers the complete release process for the UMD Design System monorep
 
 ## Table of Contents
 
+- [Automated Release System](#automated-release-system)
 - [Quick Start](#quick-start)
 - [Initial Setup](#initial-setup)
 - [Release Workflows](#release-workflows)
   - [Standard Release](#standard-release)
   - [Pre-release](#pre-release)
   - [Package-Specific Release](#package-specific-release)
+  - [Automated Release (Push-Based)](#automated-release-push-based)
 - [Version Bump Types](#version-bump-types)
 - [Conventional Commits](#conventional-commits)
 - [Notifications](#notifications)
 - [Testing & Validation](#testing--validation)
 - [Troubleshooting](#troubleshooting)
 - [Advanced Topics](#advanced-topics)
+
+---
+
+## Automated Release System
+
+The UMD Design System includes an **automated release workflow** that detects version changes and publishes packages automatically when code is pushed to the `npm-release` branch.
+
+### How It Works
+
+```
+Push to release branch
+         ↓
+Version Detection (scripts/detect-versions.js)
+  • Compares package.json versions with NPM registry
+  • Identifies which packages need releasing
+         ↓
+Tiered Release Process
+  • Foundation Tier (parallel): icons, tokens, utilities, builder, model
+  • Core Tier (parallel): styles, elements, feeds
+  • Primary Tier (sequential): components
+         ↓
+Slack Notification
+```
+
+### Key Features
+
+- **Automatic Detection**: No manual workflow triggering - just bump versions and push
+- **Dependency-Aware**: Releases packages in the correct order based on dependencies
+- **Parallel Releases**: Packages within each tier release simultaneously for speed
+- **Safety Built-In**:
+  - Version downgrade protection
+  - Tag existence checking
+  - Pre-release support (alpha, beta, rc)
+  - Network retry logic
+- **Helper Scripts**: Use `scripts/bump-version.sh` to easily bump package versions
+
+### Quick Start (Automated)
+
+```bash
+# 1. Switch to npm-release branch
+git checkout npm-release
+git pull origin npm-release
+
+# 2. Bump version(s) using helper script
+./scripts/bump-version.sh patch components
+
+# Or manually edit package.json
+# vim packages/components/package.json
+
+# 3. Commit and push (triggers automated release)
+git add packages/components/package.json
+git commit -m "chore: release components v1.16.1"
+git push origin npm-release
+
+# 4. Monitor Slack for success notification
+```
+
+### Helper Scripts
+
+**Version Bumping (`scripts/bump-version.sh`)**:
+```bash
+# Single package
+./scripts/bump-version.sh patch components
+
+# Multiple packages
+./scripts/bump-version.sh minor components elements feeds
+
+# All packages
+./scripts/bump-version.sh patch all
+
+# Pre-release
+./scripts/bump-version.sh prerelease --preid=beta components
+
+# Dry-run (see what would happen)
+./scripts/bump-version.sh patch components --dry-run
+```
+
+**Version Detection (`scripts/detect-versions.js`)**:
+```bash
+# Check which packages need releasing
+node scripts/detect-versions.js
+```
+
+### When to Use Automated vs Manual
+
+**Use Automated Release** (Push to `npm-release` branch):
+- Regular release cycles
+- Multiple packages with version bumps
+- Coordinated releases across tiers
+- Pre-releases with proper versioning
+
+**Use Manual Workflow** (GitHub Actions UI):
+- Emergency hotfixes
+- Testing the release process
+- When you need explicit control over version bumps
+- First-time releases or testing
+
+### Branch Setup
+
+The `npm-release` branch must exist for automated releases:
+
+```bash
+# Create npm-release branch (one-time setup)
+git checkout -b npm-release
+git push origin npm-release
+```
+
+**Note:** This branch is separate from the `/release/*` branches used for version-specific releases.
+
+**Recommended Branch Protection**:
+- Require pull request reviews
+- Require status checks to pass
+- Restrict direct pushes to senior developers
 
 ---
 
@@ -246,6 +361,63 @@ elements       → tokens, utilities, builder, styles, icons
 feeds          → tokens, utilities, builder, styles, icons, elements
 components     → ALL (tokens, utilities, builder, model, styles, icons, elements, feeds)
 ```
+
+### Automated Release (Push-Based)
+
+Automatically release packages by pushing version changes to the `npm-release` branch.
+
+**Workflow:** "Automated Package Release"
+
+**When to Use:**
+- Regular release schedule
+- Multiple coordinated package releases
+- Pre-releases with proper version tags
+- When you want CI/CD automation
+
+**How It Works:**
+
+1. **Version Detection**: Compares package.json versions against NPM registry
+2. **Tiered Releases**: Releases packages in dependency order
+   - Foundation tier (parallel): `icons`, `tokens`, `utilities`, `builder`, `model`
+   - Core tier (parallel): `styles`, `elements`, `feeds`
+   - Primary tier: `components`
+3. **Notifications**: Slack alert with results
+
+**Steps:**
+
+```bash
+# 1. Switch to npm-release branch
+git checkout npm-release
+git pull origin npm-release
+
+# 2. Bump version(s)
+./scripts/bump-version.sh patch components elements
+
+# 3. Review changes
+git diff packages/*/package.json
+
+# 4. Commit and push (triggers automation)
+git add packages/*/package.json
+git commit -m "chore: release components v1.16.1 and elements v1.5.5"
+git push origin npm-release
+
+# 5. Monitor workflow in GitHub Actions
+# 6. Verify Slack notification
+```
+
+**Features:**
+- ✅ Automatic version detection
+- ✅ Dependency-aware ordering
+- ✅ Version downgrade protection
+- ✅ Pre-release support (alpha, beta, rc)
+- ✅ Parallel releases within tiers
+- ✅ Slack notifications
+
+**Safety Mechanisms:**
+- Only one automated release runs at a time (concurrency control)
+- Versions are validated before release
+- Git tags are checked for existence
+- Network failures trigger automatic retries
 
 ---
 

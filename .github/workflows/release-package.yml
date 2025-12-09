@@ -91,6 +91,7 @@ jobs:
     outputs:
       package_version: ${{ steps.package_version.outputs.version }}
       success: ${{ steps.release_status.outputs.success }}
+      scoped_name: ${{ steps.package_name.outputs.scoped_name }}
 
     steps:
       - name: Checkout code
@@ -125,10 +126,16 @@ jobs:
           else
             PACKAGE_NAME="$PACKAGE_INPUT"
           fi
+          SCOPED_NAME="@universityofmaryland/web-${PACKAGE_NAME}-library"
+
+          # Set as both env and output
           echo "package_name=$PACKAGE_NAME" >> $GITHUB_ENV
-          echo "scoped_name=@universityofmaryland/web-${PACKAGE_NAME}-library" >> $GITHUB_ENV
+          echo "scoped_name=$SCOPED_NAME" >> $GITHUB_ENV
+          echo "package_name=$PACKAGE_NAME" >> $GITHUB_OUTPUT
+          echo "scoped_name=$SCOPED_NAME" >> $GITHUB_OUTPUT
+
           echo "Package: ${{ inputs.package }} → $PACKAGE_NAME"
-          echo "Scoped: @universityofmaryland/web-${PACKAGE_NAME}-library"
+          echo "Scoped: $SCOPED_NAME"
 
       - name: Build dependencies first
         run: |
@@ -370,7 +377,7 @@ jobs:
     with:
       status: ${{ needs.release-package.result == 'success' && 'success' || 'failure' }}
       version_bump: ${{ inputs.version_bump }}
-      packages_changed: '${{ env.scoped_name }}'
+      packages_changed: '${{ needs.release-package.outputs.scoped_name }}'
       package_version: ${{ needs.release-package.outputs.package_version }}
       error_message: ${{ needs.release-package.result == 'failure' && 'Package release failed. Check workflow logs.' || '' }}
     secrets:

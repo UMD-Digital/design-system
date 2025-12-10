@@ -160,7 +160,10 @@ async function detectVersions() {
 
   for (const packageName of ALL_PACKAGES) {
     const packagePath = path.join(packagesDir, packageName);
-    const fullPackageName = `@universityofmaryland/web-${packageName}-library`;
+
+    // Map package name (special case: "tokens" → "token")
+    const actualPackageName = packageName === 'tokens' ? 'token' : packageName;
+    const fullPackageName = `@universityofmaryland/web-${actualPackageName}-library`;
 
     try {
       // Get versions

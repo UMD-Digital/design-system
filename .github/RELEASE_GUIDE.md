@@ -8,6 +8,8 @@ This guide covers the complete release process for the UMD Design System monorep
 
 ## Table of Contents
 
+- [Directory Structure](#directory-structure)
+- [Package Dependency Tiers](#package-dependency-tiers)
 - [Automated Release System](#automated-release-system)
 - [Quick Start](#quick-start)
 - [Initial Setup](#initial-setup)
@@ -22,6 +24,115 @@ This guide covers the complete release process for the UMD Design System monorep
 - [Testing & Validation](#testing--validation)
 - [Troubleshooting](#troubleshooting)
 - [Advanced Topics](#advanced-topics)
+- [Monitoring](#monitoring)
+- [Best Practices](#best-practices)
+
+---
+
+## Directory Structure
+
+This section provides an overview of the `.github` directory structure and related automation files.
+
+### .github/ Directory
+
+```
+.github/
+├── workflows/                            # GitHub Actions workflows
+│   ├── auto-release.yml                  # Automated package release
+│   ├── release-package.yml               # Single package release (manual/automated)
+│   ├── release-notification.yml          # Slack notifications
+│   ├── release.yml                       # Manual bulk release
+│   └── docs.yml                          # Documentation generation
+│
+├── RELEASE_GUIDE.md                      # This file - comprehensive release documentation
+├── RELEASE_TEMPLATE.md                   # GitHub release template
+└── VALIDATION_REPORT.md                  # NPM setup validation
+```
+
+### Related Scripts
+
+Automation scripts are located in `/scripts` directory at the repository root:
+
+- **`detect-versions.js`** - Version detection (compares package.json vs NPM)
+- **`trigger-releases.sh`** - Release orchestration via GitHub CLI
+- **`bump-version.sh`** - Version bump helper
+
+See `/scripts/README.md` for detailed script documentation.
+
+### Workflow Overview
+
+#### `auto-release.yml` - Main Automated Release Workflow
+**Trigger**: Push to `npm-release` branch
+**Purpose**: Automatically detects and publishes packages with version changes
+
+**Key Features**:
+- Automatic version detection
+- Dependency-aware tiered releases (foundation → core → primary)
+- Parallel releases within each tier
+- Slack notifications
+- Concurrency control
+
+**Flow**:
+1. Detect version changes (compare package.json with NPM)
+2. Release foundation tier packages (parallel)
+3. Release core tier packages (parallel)
+4. Release primary tier packages (sequential)
+5. Send Slack notification with results
+
+#### `release-package.yml` - Single Package Release
+**Trigger**: Manual (workflow_dispatch) OR workflow_call (automated)
+**Purpose**: Release a single package
+
+**Features**:
+- Manual or automated triggering
+- Auto-detects pre-release versions
+- Outputs for automation integration
+- Dependency-aware builds
+
+#### `release-notification.yml` - Slack Notifications
+**Trigger**: workflow_call (from other workflows)
+**Purpose**: Send Slack notifications for releases
+
+Works with both manual and automated workflows.
+
+#### `release.yml` - Bulk Package Release
+**Trigger**: Manual (workflow_dispatch)
+**Purpose**: Release all packages with changes using Lerna
+
+Retained for emergency bulk releases.
+
+---
+
+## Package Dependency Tiers
+
+The automated release system respects package dependencies by releasing in tiers:
+
+### Foundation Tier (no dependencies)
+- `icons` - SVG assets
+- `tokens` - Design tokens
+- `utilities` - Utility functions
+- `builder` - Element builder utilities
+- `model` - Web component model utilities
+
+**Release Strategy**: Parallel (all at once)
+
+### Core Tier (depends on foundation)
+- `styles` - JSS objects and CSS utilities (→ tokens)
+- `elements` - UI element builders (→ all foundation)
+- `feeds` - Dynamic content feeds (→ all foundation)
+
+**Release Strategy**: Parallel (all at once, after foundation tier completes)
+
+### Primary Tier (depends on all)
+- `components` - Web Components (→ all packages)
+
+**Release Strategy**: Sequential (after core tier completes)
+
+**Why Tiers?**
+- Ensures dependencies are published before dependents
+- Enables parallel releases for speed
+- Prevents NPM resolution errors
+- Maintains package integrity
 
 ---
 
@@ -888,6 +999,165 @@ Packages build in dependency (topological) order:
 
 ---
 
+## Monitoring
+
+Track releases and verify successful deployments across multiple platforms.
+
+### GitHub Actions
+
+View workflow runs and status:
+```
+https://github.com/umd-digital/design-system/actions
+```
+
+**What to Monitor**:
+- ✅ Workflow completion status
+- ⏱️ Build and test duration
+- 📦 Packages published
+- 🏷️ Git tags created
+- 📝 Release notes generated
+
+### Slack Notifications
+
+All releases send notifications to your configured Slack channel with:
+- ✅ Success notifications with package details
+- ❌ Failure notifications with error messages
+- 🔗 Links to NPM, releases, and workflow logs
+
+**Notification Content**:
+- Package names and versions
+- NPM package links
+- GitHub release links
+- Workflow run links
+- Error details (on failure)
+
+### NPM Packages
+
+Verify published packages:
+```
+https://www.npmjs.com/org/universityofmaryland
+```
+
+**What to Verify**:
+- Package version matches expected
+- Published timestamp is recent
+- README displays correctly
+- Package size is reasonable
+- Dependencies are correct
+
+### GitHub Releases
+
+Check release notes and tags:
+```
+https://github.com/umd-digital/design-system/releases
+```
+
+**What to Check**:
+- Release created with correct tag
+- Release notes are accurate
+- Assets are attached (if applicable)
+- Release marked as pre-release (if applicable)
+
+---
+
+## Best Practices
+
+Follow these best practices to ensure smooth and reliable releases.
+
+### 1. Always Test First
+Use the dry-run mode or test workflow before publishing:
+```bash
+# Test automated release locally
+node scripts/detect-versions.js
+
+# Or use GitHub Actions dry-run
+# Set "Dry Run" = true in workflow UI
+```
+
+### 2. Batch Related Changes
+Release multiple related packages together:
+```bash
+# Good: Related changes together
+./scripts/bump-version.sh patch elements feeds components
+
+# Avoid: Frequent small releases
+./scripts/bump-version.sh patch elements
+# ... later ...
+./scripts/bump-version.sh patch feeds
+```
+
+### 3. Use Conventional Commits
+Helps with automatic changelog generation:
+```bash
+# Good: Clear, conventional format
+git commit -m "feat(elements): add new text lockup variant"
+git commit -m "fix(components): resolve button focus state issue"
+
+# Avoid: Vague messages
+git commit -m "updates"
+git commit -m "fix stuff"
+```
+
+### 4. Monitor Notifications
+Watch Slack after pushing to release branch:
+- Verify success notification received
+- Check NPM links work
+- Confirm correct versions published
+- Review any warnings or errors
+
+### 5. Keep Release Branch Updated
+Regularly merge from main to avoid conflicts:
+```bash
+git checkout npm-release
+git pull origin npm-release
+git merge origin/main
+git push origin npm-release
+```
+
+### 6. Document Breaking Changes
+Use `BREAKING CHANGE:` in commits for major version bumps:
+```bash
+git commit -m "feat(tokens)!: redesign color token structure
+
+BREAKING CHANGE: Color token names changed from color.red to color.brand.primary"
+```
+
+### 7. Test Pre-releases First
+For major changes, publish pre-releases:
+```bash
+# Beta release for testing
+./scripts/bump-version.sh prerelease --preid=beta components
+
+# Then stable release
+./scripts/bump-version.sh patch components
+```
+
+### 8. Verify Dependencies
+Before releasing, ensure dependencies are up-to-date:
+```bash
+# Check for outdated dependencies
+npm outdated
+
+# Update if needed
+npm update
+```
+
+### 9. Review Workflow Logs
+Check logs even for successful releases:
+- Look for warnings
+- Verify all tests passed
+- Check build output
+- Confirm correct packages published
+
+### 10. Coordinate with Team
+Communicate releases to team:
+- Post in team channel before major releases
+- Document breaking changes
+- Update migration guides
+- Schedule releases during low-traffic times
+
+---
+
 ## Support
 
 **Issues:**
@@ -898,11 +1168,18 @@ Packages build in dependency (topological) order:
 **Resources:**
 - Validation Report: `.github/VALIDATION_REPORT.md`
 - Release Template: `.github/RELEASE_TEMPLATE.md`
+- Scripts Documentation: `/scripts/README.md`
 - NPM Organization: https://www.npmjs.com/org/universityofmaryland
 - GitHub Releases: https://github.com/umd-digital/design-system/releases
+- GitHub Actions: https://github.com/umd-digital/design-system/actions
+
+**Need Help?**
+- Post in design system Slack channel
+- Open GitHub issue with `[automated-release]` tag
+- Contact Design System maintainers
 
 ---
 
-**Document Version:** 2.0.0
-**Last Updated:** 2025-12-06
-**Covers:** Phases 1-4 of Release Automation
+**Document Version:** 2.1.0
+**Last Updated:** 2025-12-10
+**Covers:** Phases 1-4 of Release Automation + Directory Structure

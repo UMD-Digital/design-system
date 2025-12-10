@@ -2,7 +2,56 @@
 
 ## Overview
 
-The UMD Design System uses auto-generated Jest mocks to enable isolated package testing without circular dependencies. This document explains how the mock system works, how to generate mocks, and best practices for testing.
+The UMD Design System uses auto-generated Jest mocks to enable **isolated unit testing** of individual packages without circular dependencies or reliance on external package logic. This document explains how the mock system works, how to generate mocks, and best practices for writing focused unit tests.
+
+## Testing Philosophy
+
+### Focus: Unit Testing, Not Integration Testing
+
+The mock system is designed specifically for **unit testing** - testing individual package functionality in isolation:
+
+**✅ Unit Tests (Use Mocks):**
+- Test **your package's logic only**
+- Mock **all external dependencies** from other packages
+- Verify **interfaces and contracts**, not implementations
+- Run **fast and independently** without build dependencies
+- Focus on **single responsibility** of the package being tested
+
+**❌ Integration Tests (Don't Use Mocks):**
+- Test **interactions between real packages**
+- Use **actual built packages**, not mocks
+- Verify **end-to-end functionality** with real implementations
+- Run in **CI/CD environments** after all packages are built
+- Test **system behavior** and cross-package workflows
+
+### Key Principle: Minimize External Logic
+
+**Your tests should focus on YOUR code, not other packages' code.**
+
+When writing tests:
+1. **Mock external dependencies** - Don't test other packages' logic
+2. **Test your transformations** - Focus on what YOUR code does with inputs
+3. **Verify YOUR behavior** - Test your package's unique functionality
+4. **Trust interfaces** - Assume mocked dependencies work correctly
+
+**Example - Testing an Element Builder:**
+```typescript
+// ❌ BAD: Testing external package logic
+import { color } from '@universityofmaryland/web-token-library';
+
+it('validates token colors', () => {
+  expect(color.red).toBe('#E21833');  // Testing token package, not yours!
+});
+
+// ✅ GOOD: Testing YOUR package's usage of tokens
+import { createButton } from '../button';
+
+it('applies token colors to button styles', () => {
+  const button = createButton({ theme: 'primary' });
+  expect(button.styles).toContain('color:');  // Testing YOUR logic
+  expect(button.element.tagName).toBe('BUTTON');  // Testing YOUR output
+});
+```
 
 ## Purpose and Benefits
 
@@ -69,11 +118,136 @@ moduleNameMapper: {
 
 ## Mock Generation Script
 
-### Location
+### Script Location and Purpose
 
-`source/generate-mocks.js`
+**File:** `/source/generate-mocks.js`
 
-### Configuration
+The mock generation script is a Node.js utility that automatically creates Jest-compatible mock files by:
+
+1. **Loading built packages** from `dist/` directories
+2. **Analyzing exports** (functions, classes, objects, values)
+3. **Transforming to mocks** (functions → `jest.fn()`, values preserved)
+4. **Writing mock files** to `__mocks__/` directory
+5. **Preserving structure** to maintain import compatibility
+
+**Key Features:**
+- Automatically preserves design token values
+- Converts functions to `jest.fn()` for spying
+- Handles classes with mock implementations
+- Supports special handlers for complex functions
+- Generates clean, documented mock files
+
+### npm Script Commands
+
+The script is available via npm commands defined in the root `package.json`:
+
+```bash
+# Generate mocks only
+npm run generate:mocks
+
+# Build all packages, generate mocks, and run tests
+npm run test:all
+
+# CI/CD test workflow (sequential, with mocks)
+npm run test:ci
+```
+
+**When to Run:**
+- After building any package: `npm run generate:mocks`
+- Before running tests: `npm run test:all`
+- During CI/CD: `npm run test:ci`
+- After adding/removing package exports
+
+### How the Script Works
+
+#### 1. Package Discovery
+The script uses a configuration array (`PACKAGES_TO_MOCK`) that defines:
+- Package folder name (`tokens`, `styles`, etc.)
+- NPM package name (`@universityofmaryland/web-token-library`)
+- Output mock filename (`webTokenLibrary.js`)
+- Built package path (`packages/tokens/dist/index.js`)
+- Description for documentation
+- Special handlers for complex functions/classes
+
+#### 2. Package Loading
+```javascript
+// Clears require cache for fresh load
+delete require.cache[require.resolve(fullDistPath)];
+
+// Loads built package
+const packageExports = require(fullDistPath);
+```
+
+#### 3. Export Transformation
+The `mockifyValue()` function recursively transforms exports:
+
+**Functions:**
+```javascript
+// Original function
+export function addClass(element, className) { /* ... */ }
+
+// Transformed to mock
+addClass: jest.fn()
+```
+
+**Classes:**
+```javascript
+// Original class
+export class ElementBuilder { /* ... */ }
+
+// Transformed to mock with special handler
+ElementBuilder: jest.fn().mockImplementation(function(...args) {
+  return { __mockClass: 'ElementBuilder', args };
+})
+```
+
+**Objects with Values (preserved):**
+```javascript
+// Original object
+export const color = { red: '#E21833', gold: '#FFD200' };
+
+// Preserved in mock
+color: { red: '#E21833', gold: '#FFD200' }
+```
+
+**Arrays (preserved):**
+```javascript
+// Original array
+export const breakpoints = [320, 768, 1024];
+
+// Preserved in mock
+breakpoints: [320, 768, 1024]
+```
+
+#### 4. Mock File Generation
+The script generates a mock file with:
+- Auto-generated header with warnings
+- Package name and description
+- `module.exports` with transformed structure
+
+**Example Output:**
+```javascript
+// This file is auto-generated by source/generate-mocks.js
+// Do not edit manually. Run 'npm run generate:mocks' to regenerate.
+//
+// Mock for: @universityofmaryland/web-token-library
+// Description: Design tokens (colors, spacing, fonts, media queries)
+
+module.exports = {
+  color: { red: '#E21833', /* ... */ },
+  spacing: { md: '24px', /* ... */ },
+  font: { /* ... */ }
+};
+```
+
+#### 5. Error Handling
+The script handles various error scenarios:
+- **Package not built** - Warns and skips with build instructions
+- **Manual mocks** - Detects `MANUAL MOCK` comments and preserves them
+- **Browser APIs** - Skips packages requiring window/HTMLElement
+- **Require errors** - Provides detailed error messages
+
+### Script Configuration
 
 The script uses a configuration array to define which packages to mock:
 
@@ -444,45 +618,172 @@ Regenerate mocks when:
 
 ## Package Testing Strategy
 
-### Unit Tests (Use Mocks)
+### Unit Tests: Test YOUR Package Logic Only
 
-Test individual package functionality in isolation:
+**Purpose:** Verify that YOUR code works correctly with mocked dependencies
 
+**Location:** `packages/{package}/source/__tests__/`
+
+**What to Test:**
+1. **Your transformations** - How your code processes inputs
+2. **Your outputs** - What your functions/classes return
+3. **Your error handling** - How your code handles edge cases
+4. **Your interfaces** - That your public API works as expected
+
+**What NOT to Test:**
+1. ❌ Other packages' logic (token values, utility functions, etc.)
+2. ❌ Mocked function implementations (you control those)
+3. ❌ Integration between packages (that's integration testing)
+4. ❌ Browser APIs or DOM behavior (use JSDOM mocks)
+
+**Example: Elements Package Unit Test**
 ```typescript
 // packages/elements/source/__tests__/button.test.ts
-// Uses mocks for: @universityofmaryland/web-token-library
-//                 @universityofmaryland/web-styles-library
-//                 @universityofmaryland/web-utilities-library
+// Tests YOUR button creation logic, not external packages
 
 import { createButton } from '../button';
+import * as token from '@universityofmaryland/web-token-library';  // Mocked
+import { addClass } from '@universityofmaryland/web-utilities-library';  // Mocked
 
-describe('Button Element', () => {
-  it('creates button element', () => {
+describe('Button Element - Unit Tests', () => {
+  beforeEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it('creates button element with correct tag', () => {
+    // Testing YOUR logic: element creation
     const button = createButton({ text: 'Click' });
+
     expect(button.element).toBeDefined();
+    expect(button.element.tagName).toBe('BUTTON');  // YOUR code's output
+  });
+
+  it('applies text content to button', () => {
+    // Testing YOUR logic: text handling
+    const button = createButton({ text: 'Submit' });
+
+    expect(button.element.textContent).toBe('Submit');  // YOUR code's output
+  });
+
+  it('generates CSS styles', () => {
+    // Testing YOUR logic: style generation
+    const button = createButton({ text: 'Click' });
+
+    expect(button.styles).toBeDefined();
+    expect(typeof button.styles).toBe('string');  // YOUR code returns string
+    expect(button.styles.length).toBeGreaterThan(0);  // YOUR code generates styles
+  });
+
+  it('uses addClass utility for custom classes', () => {
+    // Testing YOUR logic: integration with utilities
+    const button = createButton({ text: 'Click', className: 'custom' });
+
+    expect(addClass).toHaveBeenCalled();  // YOUR code called it
+    expect(addClass).toHaveBeenCalledWith(
+      expect.any(Object),
+      'custom'
+    );
+  });
+
+  it('handles missing text gracefully', () => {
+    // Testing YOUR error handling
+    const button = createButton({ text: '' });
+
+    expect(button.element.textContent).toBe('');  // YOUR code's behavior
   });
 });
 ```
 
-### Integration Tests (Use Real Packages)
+**Example: Styles Package Unit Test**
+```typescript
+// packages/styles/source/element/action/__tests__/primary.test.ts
+// Tests YOUR composable function logic, not token values
 
-Test interactions between packages:
+import { composePrimary } from '../primary';
+import * as token from '@universityofmaryland/web-token-library';  // Mocked
 
+describe('Primary Action Composable - Unit Tests', () => {
+  it('returns JSS object with className', () => {
+    // Testing YOUR logic: composable function structure
+    const result = composePrimary();
+
+    expect(result).toHaveProperty('className');
+    expect(typeof result.className).toBe('string');
+  });
+
+  it('generates different classNames for different options', () => {
+    // Testing YOUR logic: option handling
+    const normal = composePrimary();
+    const large = composePrimary({ size: 'large' });
+    const white = composePrimary({ color: 'white' });
+
+    expect(normal.className).not.toBe(large.className);
+    expect(normal.className).not.toBe(white.className);
+  });
+
+  it('merges size and color options correctly', () => {
+    // Testing YOUR logic: option composition
+    const result = composePrimary({ size: 'large', color: 'white' });
+
+    expect(result.className).toContain('large');
+    expect(result.className).toContain('white');
+  });
+
+  it('uses default options when none provided', () => {
+    // Testing YOUR logic: default behavior
+    const withDefaults = composePrimary();
+    const withExplicitDefaults = composePrimary({ size: 'normal', color: 'default' });
+
+    expect(withDefaults.className).toBe(withExplicitDefaults.className);
+  });
+});
+```
+
+### Integration Tests: Test Package Interactions
+
+**Purpose:** Verify that real packages work together correctly
+
+**Location:** `__tests__/integration/` (repository root)
+
+**What to Test:**
+1. ✅ Real data flow between packages
+2. ✅ Actual token values applied to elements
+3. ✅ End-to-end component rendering
+4. ✅ Full style compilation pipeline
+
+**Example: Integration Test**
 ```typescript
 // __tests__/integration/button-integration.test.ts
-// Uses real packages built in CI
+// Uses REAL packages built in CI, not mocks
 
 import { createButton } from '@universityofmaryland/web-elements-library';
 import { color } from '@universityofmaryland/web-token-library';
 
-describe('Button Integration', () => {
-  it('uses real design tokens', () => {
+describe('Button Integration - Real Packages', () => {
+  it('applies real design tokens to button styles', () => {
     const button = createButton({ theme: 'primary' });
-    // Verify actual token values, not mocks
-    expect(button.styles).toContain(color.red);
+
+    // Verify ACTUAL token values are in output
+    expect(button.styles).toContain(color.red);  // Real value: #E21833
+    expect(button.styles).toContain('#E21833');
+  });
+
+  it('compiles JSS to valid CSS', () => {
+    const button = createButton({ text: 'Click' });
+
+    // Verify real CSS compilation
+    expect(button.styles).toMatch(/\.[\w-]+\s*\{[^}]+\}/);  // Valid CSS
   });
 });
 ```
+
+### Testing Matrix
+
+| Test Type | Location | Dependencies | Speed | Purpose |
+|-----------|----------|--------------|-------|---------|
+| **Unit** | `packages/*/source/__tests__/` | Mocked | Fast | Test package logic |
+| **Integration** | `__tests__/integration/` | Real | Slower | Test package interactions |
+| **E2E** | `__tests__/e2e/` | Real + Browser | Slowest | Test full workflows |
 
 ## Troubleshooting
 
@@ -643,15 +944,46 @@ it('tracks function calls', () => {
 
 ## Summary
 
+### The Mock System
+
 The UMD Design System mock generation system:
 
 1. **Auto-generates** mocks from built packages
 2. **Preserves** export structure and values
 3. **Converts** functions to `jest.fn()`
-4. **Enables** isolated package testing
+4. **Enables** isolated unit testing
 5. **Eliminates** circular dependencies
 6. **Integrates** with Jest via moduleNameMapper
 
 **Key Command**: `npm run generate:mocks`
 
 Always regenerate mocks after building packages to ensure tests use up-to-date code.
+
+### Testing Philosophy Recap
+
+**✅ DO - Unit Tests:**
+- Test YOUR package's logic only
+- Mock ALL external dependencies
+- Focus on transformations and outputs
+- Verify interfaces and error handling
+- Keep tests fast and independent
+
+**❌ DON'T - Unit Tests:**
+- Test other packages' logic
+- Rely on real package implementations
+- Test integration between packages
+- Verify specific token values or utility logic
+
+**Remember:** Your tests should break when YOUR code changes, not when external packages change. If changing another package breaks your tests, you're testing their logic, not yours.
+
+### Quick Reference
+
+| Scenario | Use Mocks? | Test Type | Location |
+|----------|------------|-----------|----------|
+| Testing my function logic | ✅ Yes | Unit | `packages/*/source/__tests__/` |
+| Testing my class creation | ✅ Yes | Unit | `packages/*/source/__tests__/` |
+| Testing token values | ❌ No | Integration | `__tests__/integration/` |
+| Testing package interaction | ❌ No | Integration | `__tests__/integration/` |
+| Testing full workflows | ❌ No | E2E | `__tests__/e2e/` |
+
+For detailed testing examples and best practices, see package-specific `TESTING.md` files in each `__tests__/` directory.

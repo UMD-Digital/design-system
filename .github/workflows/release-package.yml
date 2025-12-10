@@ -153,8 +153,14 @@ jobs:
               npx lerna run build --scope=@universityofmaryland/web-token-library
               npx lerna run build --scope=@universityofmaryland/web-styles-library
               ;;
-            "builder"|"model")
+            "builder")
               npx lerna run build --scope=@universityofmaryland/web-token-library
+              npx lerna run build --scope=@universityofmaryland/web-styles-library
+              npx lerna run build --scope=@universityofmaryland/web-utilities-library
+              ;;
+            "model")
+              npx lerna run build --scope=@universityofmaryland/web-token-library
+              npx lerna run build --scope=@universityofmaryland/web-styles-library
               ;;
             "elements")
               npx lerna run build --scope=@universityofmaryland/web-icons-library
@@ -239,6 +245,8 @@ jobs:
 
           git commit -m "chore(release): $TAG_NAME"
           git tag "$TAG_NAME"
+          git push origin HEAD:${{ github.ref_name }}
+          git push origin "$TAG_NAME"
           gh release create "$TAG_NAME" --generate-notes
 
       - name: Version package (standard release)
@@ -267,6 +275,8 @@ jobs:
 
           git commit -m "chore(release): $TAG_NAME"
           git tag "$TAG_NAME"
+          git push origin HEAD:${{ github.ref_name }}
+          git push origin "$TAG_NAME"
           gh release create "$TAG_NAME" --generate-notes
 
       - name: Create GitHub release (auto-detect mode)
@@ -285,6 +295,7 @@ jobs:
           else
             echo "Creating tag $TAG_NAME"
             git tag "$TAG_NAME"
+            git push origin "$TAG_NAME"
             gh release create "$TAG_NAME" --generate-notes
           fi
 

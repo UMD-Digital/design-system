@@ -379,7 +379,7 @@ const LogoStyles = `
     .${ELEMENT_UTILITY_LOGO_COLUMN} > p:before {
       content: '';
       position: absolute;
-      left: -4px;
+      left: -7px;
       height: 100%;
       width: 1px;
       background-color: ${token.color.white};

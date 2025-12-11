@@ -1,4 +1,4 @@
-import * as media from '../media';
+import * as media from '../source/media';
 
 describe('Media Tokens', () => {
   describe('Breakpoint Values', () => {

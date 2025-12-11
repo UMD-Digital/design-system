@@ -1,5 +1,5 @@
-import spacing from '../spacing';
-import { maxWidth } from '../spacing';
+import spacing from '../source/spacing';
+import { maxWidth } from '../source/spacing';
 
 describe('Spacing Tokens', () => {
   describe('Spacing Scale', () => {

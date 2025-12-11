@@ -1,4 +1,4 @@
-import * as token from '../index';
+import * as token from '../source/index';
 
 describe('Token Package Main Export', () => {
   describe('Exports Structure', () => {

@@ -1,4 +1,4 @@
-import color from '../color';
+import color from '../source/color';
 
 describe('Color Tokens', () => {
   describe('Brand Colors', () => {

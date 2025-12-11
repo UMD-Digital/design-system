@@ -1,4 +1,4 @@
-import * as font from '../font';
+import * as font from '../source/font';
 
 describe('Font Tokens', () => {
   describe('Font Sizes', () => {

@@ -12,7 +12,7 @@ import {
   processMediaQueryString,
   processQuery,
   processNestedSelector
-} from '../../../source/utilities/css';
+} from '../../../source/utilities/' + dirname + '/css';
 
 describe('transform/css utilities', () => {
   describe('isPlainObject', () => {

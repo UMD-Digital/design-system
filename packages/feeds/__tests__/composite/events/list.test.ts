@@ -1,6 +1,6 @@
-import grid from '../grid';
-import * as feedFetch from '../common/fetch';
-import * as feedDisplay from '../common/display';
+import list from '../../../source/composite/events/list';
+import * as feedFetch from '../../../source/composite/events/common/fetch';
+import * as feedDisplay from '../../../source/composite/events/common/display';
 import * as feedElements from 'elements';
 import * as Styles from '@universityofmaryland/web-styles-library';
 
@@ -62,7 +62,7 @@ const mockEventEntries = [
   },
 ];
 
-describe('Events Grid Component', () => {
+describe('Events List Component', () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
@@ -82,7 +82,7 @@ describe('Events Grid Component', () => {
       const container = props.getContainer();
 
       container.appendChild(layoutElement.element);
-      
+
       // Dispatch a custom event manually since Styles doesn't have an events utility
       const event = new CustomEvent('feed:loaded', {
         detail: { items: mockEventEntries }
@@ -101,8 +101,8 @@ describe('Events Grid Component', () => {
       .mockImplementation(() => Promise.resolve());
   });
 
-  test('renders the grid component with default options', () => {
-    const component = grid({
+  test('renders the list component with default options', () => {
+    const component = list({
       token: 'test-token',
       numberOfRowsToStart: 3,
       isLazyLoad: false,
@@ -114,10 +114,8 @@ describe('Events Grid Component', () => {
     expect(component.events).toBeDefined();
     expect(component?.events?.callback).toBeInstanceOf(Function);
 
-    const startSpy = feedFetch.start as any;
-
-    expect(startSpy).toHaveBeenCalledTimes(1);
-    expect(startSpy).toHaveBeenCalledWith(
+    expect(feedFetch.start).toHaveBeenCalledTimes(1);
+    expect(feedFetch.start).toHaveBeenCalledWith(
       expect.objectContaining({
         token: 'test-token',
         numberOfRowsToStart: 3,
@@ -126,19 +124,19 @@ describe('Events Grid Component', () => {
     );
   });
 
-  test('includes transparent flag in props when set', () => {
-    const component = grid({
+  test('passes theme settings to start function', () => {
+    list({
       token: 'test-token',
       numberOfRowsToStart: 3,
       isLazyLoad: false,
-      isTransparent: true,
+      isThemeDark: true,
     });
 
     const startSpy = feedFetch.start as any;
 
     expect(startSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        isTransparent: true,
+        isThemeDark: true,
       }),
     );
   });

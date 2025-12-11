@@ -1,7 +1,7 @@
-import slider from '../slider';
+import slider from '../../../source/composite/events/slider';
 import * as feedMacros from 'macros';
 
-describe('Academic Slider Component', () => {
+describe('Events Slider Component', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
@@ -23,7 +23,7 @@ describe('Academic Slider Component', () => {
       expect.objectContaining({
         token: 'test-token',
         query: expect.stringContaining('query getEvents'),
-        url: 'https://provost.umd.edu/graphql',
+        url: 'https://calendar.umd.edu/graphql',
       }),
     );
   });
@@ -69,8 +69,5 @@ describe('Academic Slider Component', () => {
 
     expect(sliderCallArgs.query).toContain('title');
     expect(sliderCallArgs.query).toContain('url');
-
-    expect(sliderCallArgs.query).toContain('calendarId: [4, 2]');
-    expect(sliderCallArgs.query).toContain('loadOccurrences: true');
   });
 });

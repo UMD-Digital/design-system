@@ -1,5 +1,5 @@
-import * as academicModule from '../index';
-import sliderImplementation from '../slider';
+import * as academicModule from '../../../source/composite/academic/index';
+import sliderImplementation from '../../../source/composite/academic/slider';
 
 describe('Academic Module', () => {
   test('exports the slider component', () => {

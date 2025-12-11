@@ -1,6 +1,8 @@
-import grouped from '../grouped';
-import * as feedFetch from '../common/fetch';
-import * as feedDisplay from '../common/display';
+import grid from '../../../source/composite/events/grid';
+import * as feedFetch from '../../../source/composite/events/common/fetch';
+import * as feedDisplay from '../../../source/composite/events/common/display';
+import * as feedElements from 'elements';
+import * as Styles from '@universityofmaryland/web-styles-library';
 
 // Mock data for tests
 const mockEventEntries = [
@@ -58,36 +60,9 @@ const mockEventEntries = [
       },
     ],
   },
-  {
-    id: 3,
-    title: 'Another Event Same Day',
-    url: 'https://example.com/event3',
-    startDayOfWeek: 'Friday',
-    startStamp: '2023-05-15T14:00:00',
-    startMonth: 'May',
-    startDay: '15',
-    startTime: '2:00 PM',
-    endDayOfWeek: 'Friday',
-    endMonth: 'May',
-    endDay: '15',
-    endTime: '4:00 PM',
-    allDay: false,
-    summary: 'Another event happening on the same day.',
-    image: [
-      {
-        url: 'https://example.com/image3.jpg',
-        altText: 'Another Event',
-      },
-    ],
-    location: [
-      {
-        title: 'Student Union',
-      },
-    ],
-  },
 ];
 
-describe('Events Grouped Component', () => {
+describe('Events Grid Component', () => {
   beforeEach(() => {
     jest.clearAllMocks();
 
@@ -126,8 +101,8 @@ describe('Events Grouped Component', () => {
       .mockImplementation(() => Promise.resolve());
   });
 
-  test('renders the grouped component with default options', () => {
-    const component = grouped({
+  test('renders the grid component with default options', () => {
+    const component = grid({
       token: 'test-token',
       numberOfRowsToStart: 3,
       isLazyLoad: false,
@@ -151,51 +126,19 @@ describe('Events Grouped Component', () => {
     );
   });
 
-  test('creates grouped layout with custom div structure', () => {
-    const component = grouped({
+  test('includes transparent flag in props when set', () => {
+    const component = grid({
       token: 'test-token',
       numberOfRowsToStart: 3,
       isLazyLoad: false,
-    });
-
-    // The grouped component uses its own groupLayout function, not feedElements.layout.stacked
-    // Verify the component structure instead
-    expect(component.element).toBeInstanceOf(HTMLDivElement);
-    expect(component.styles).toBeDefined();
-  });
-
-  test('includes theme dark flag in props when set', () => {
-    grouped({
-      token: 'test-token',
-      numberOfRowsToStart: 3,
-      isLazyLoad: false,
-      isThemeDark: true,
+      isTransparent: true,
     });
 
     const startSpy = feedFetch.start as any;
 
     expect(startSpy).toHaveBeenCalledWith(
       expect.objectContaining({
-        isThemeDark: true,
-      }),
-    );
-  });
-
-  test('handles categories correctly', () => {
-    const categories = ['sports', 'academic'];
-
-    grouped({
-      token: 'test-token',
-      numberOfRowsToStart: 3,
-      isLazyLoad: false,
-      categories,
-    });
-
-    const startSpy = feedFetch.start as any;
-
-    expect(startSpy).toHaveBeenCalledWith(
-      expect.objectContaining({
-        categories,
+        isTransparent: true,
       }),
     );
   });

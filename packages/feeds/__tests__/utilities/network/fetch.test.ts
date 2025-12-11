@@ -1,4 +1,4 @@
-import { graphql } from '../fetch';
+import { graphql } from '../../../source/utilities/network/fetch';
 
 global.fetch = jest.fn();
 global.console.error = jest.fn();

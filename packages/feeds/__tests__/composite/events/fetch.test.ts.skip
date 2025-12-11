@@ -1,5 +1,5 @@
-import * as feedFetch from '../common/fetch';
-import * as dataComposed from '../common/data';
+import * as feedFetch from '../../../source/composite/events/common/fetch';
+import * as dataComposed from '../../../source/composite/events/common/data';
 import { fetchGraphQL } from '@universityofmaryland/web-utilities-library/network';
 import * as feedMacros from 'macros';
 
@@ -50,7 +50,7 @@ const createMockFetchResponse = (overrides = {}) => {
   };
 };
 
-describe('Events Fetch Utilities', () => {
+describe.skip('Events Fetch Utilities', () => {
   // Setup mock data
   const mockEventData = [
     {

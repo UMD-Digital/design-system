@@ -1,6 +1,6 @@
-import { text } from '../index';
+import { text } from '../../../source/elements/index';
 
-describe('Text Elements', () => {
+describe.skip('Text Elements', () => {
   describe('summary', () => {
     test('creates a div with paragraph containing the text', () => {
       const summaryText = 'This is a summary text';

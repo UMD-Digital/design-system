@@ -14,8 +14,8 @@ import type {
   HeroAnimationProps,
   HeroSizingProps,
   HeroLayoutProps,
-} from '../../hero/_types';
-import type { ContentElement, ImageElement, VideoElement, ThemeProps } from '../../../_types';
+} from '../../../source/composite/hero/_types';
+import type { ContentElement, ImageElement, VideoElement, ThemeProps } from '../../../source/composite/../_types';
 
 describe('Hero Type Interfaces', () => {
   describe('HeroStandardProps', () => {

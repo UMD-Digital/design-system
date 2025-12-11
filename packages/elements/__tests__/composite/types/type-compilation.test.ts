@@ -8,7 +8,7 @@ import type {
   CardBlockProps,
   CardListProps,
   CardOverlayProps,
-} from '../../card/_types';
+} from '../../../source/composite/card/_types';
 
 import type {
   HeroStandardProps,
@@ -16,7 +16,7 @@ import type {
   HeroOverlayProps,
   HeroStackedProps,
   HeroLogoProps,
-} from '../../hero/_types';
+} from '../../../source/composite/hero/_types';
 
 describe('Type Compilation Tests', () => {
   describe('Card Types', () => {

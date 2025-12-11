@@ -2,7 +2,7 @@
  * Test utilities for element components
  */
 
-import type { ContentElement, ElementModel } from '../../../_types';
+import type { ContentElement, ElementModel } from '../../../source/composite/../_types';
 
 export interface TestElementConfig {
   element?: HTMLElement;

@@ -1,4 +1,4 @@
-import type { CardOverlayProps } from '../../card/_types';
+import type { CardOverlayProps } from '../../../source/composite/card/_types';
 import {
   createElement,
   createImageElement,

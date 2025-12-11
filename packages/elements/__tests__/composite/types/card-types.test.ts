@@ -9,13 +9,13 @@ import type {
   CardOverlayProps,
   CardMediaProps,
   CardEventProps,
-} from '../../card/_types';
+} from '../../../source/composite/card/_types';
 import type {
   ContentElement,
   ImageElement,
   LinkElement,
   ThemeProps,
-} from '../../../_types';
+} from '../../../source/composite/../_types';
 
 describe('Card Type Interfaces', () => {
   describe('CardBlockProps', () => {

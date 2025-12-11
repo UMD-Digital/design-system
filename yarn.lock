@@ -2436,7 +2436,7 @@
     tw-to-css "^0.0.12"
 
 "@universityofmaryland/web-elements-library@^1.0.0", "@universityofmaryland/web-elements-library@^1.5.4", "@universityofmaryland/web-elements-library@file:/Users/magnessjo/umd/design-system/packages/elements":
-  version "1.5.5"
+  version "1.5.6"
   resolved "file:packages/elements"
   dependencies:
     "@types/postcss-js" "^4.0.4"

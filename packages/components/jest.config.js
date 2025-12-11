@@ -5,7 +5,7 @@ module.exports = {
   ...rootConfig,
   testEnvironment: 'jsdom',
   rootDir: path.resolve(__dirname),
-  setupFilesAfterEnv: ['<rootDir>/source/api/__tests__/test-helpers/setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/__tests__/test-helpers/setup.ts'],
   testTimeout: 10000, // 10 seconds for CI environments
   moduleNameMapper: {
     ...rootConfig.moduleNameMapper,

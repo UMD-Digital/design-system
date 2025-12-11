@@ -4,8 +4,8 @@ import {
   convertToSelectorCSS,
   convertToClassSelectorCss,
   convertToCss,
-} from '../jss';
-import type { JssInputFormat, JssObject } from '../../../_types';
+} from '../../../source/utilities/jss';
+import type { JssInputFormat, JssObject } from '../../../source/_types';
 
 describe('transform/jss utilities', () => {
   describe('objectWithClassSelector', () => {

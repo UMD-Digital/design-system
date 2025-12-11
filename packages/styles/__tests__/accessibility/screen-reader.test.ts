@@ -1,4 +1,4 @@
-import { only } from '../screen-reader';
+import { only } from '../../source/accessibility/screen-reader';
 
 describe('accessibility/screen-reader', () => {
   describe('only', () => {

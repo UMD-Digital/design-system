@@ -1,4 +1,4 @@
-import * as campaign from '../campaign';
+import * as campaign from '../../source/typography/campaign';
 
 describe('typography/campaign', () => {
   it('should match snapshot', () => {

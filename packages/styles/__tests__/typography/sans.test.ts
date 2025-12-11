@@ -1,4 +1,4 @@
-import * as sans from '../sans';
+import * as sans from '../../source/typography/sans';
 
 describe('typography/sans', () => {
   it('should match snapshot', () => {

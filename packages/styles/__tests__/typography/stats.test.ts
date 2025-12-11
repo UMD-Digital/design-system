@@ -1,4 +1,4 @@
-import * as stats from '../stats';
+import * as stats from '../../source/typography/stats';
 
 describe('typography/stats', () => {
   it('should match snapshot', () => {

@@ -1,4 +1,4 @@
-import * as elements from '../elements';
+import * as elements from '../../source/typography/elements';
 
 describe('typography/elements', () => {
   it('should match snapshot', () => {

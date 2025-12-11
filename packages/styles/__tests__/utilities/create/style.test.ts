@@ -1,4 +1,4 @@
-import { toString } from '../style';
+import { toString } from '../../../source/utilities/style';
 
 // Mock the postcss module to return a usable CSS string for testing
 jest.mock('postcss', () => {

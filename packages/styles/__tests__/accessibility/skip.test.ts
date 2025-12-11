@@ -1,4 +1,4 @@
-import { content } from '../skip';
+import { content } from '../../source/accessibility/skip';
 
 describe('accessibility/skip', () => {
   describe('content', () => {

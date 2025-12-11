@@ -1,4 +1,4 @@
-import * as accessibility from '../index';
+import * as accessibility from '../../source/accessibility/index';
 
 describe('accessibility module', () => {
   it('should match snapshot', () => {

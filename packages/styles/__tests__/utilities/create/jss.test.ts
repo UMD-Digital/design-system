@@ -1,4 +1,4 @@
-import { objectWithClassName, objectFromString } from '../jss';
+import { objectWithClassName, objectFromString } from '../../../source/utilities/jss';
 
 describe('create/jss utilities', () => {
   describe('objectWithClassName', () => {

@@ -1,4 +1,4 @@
-import * as typography from '../index';
+import * as typography from '../../source/typography/index';
 
 describe('typography module', () => {
   it('should match snapshot', () => {

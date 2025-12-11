@@ -1,4 +1,4 @@
-import * as serif from '../serif';
+import * as serif from '../../source/typography/serif';
 
 describe('typography/serif', () => {
   it('should match snapshot', () => {

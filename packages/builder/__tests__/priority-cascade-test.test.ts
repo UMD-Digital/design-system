@@ -2,7 +2,7 @@
  * Test to understand current priority/cascade behavior
  */
 
-import { ElementBuilder } from '../core/ElementBuilder';
+import { ElementBuilder } from '../source/core/ElementBuilder';
 
 describe('Priority and CSS Cascade Analysis', () => {
   test('should show current behavior with conflicting properties', () => {

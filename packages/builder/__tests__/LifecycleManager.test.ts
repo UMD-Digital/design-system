@@ -3,7 +3,7 @@
  * @description Unit tests for LifecycleManager
  */
 
-import { LifecycleManager } from '../core/LifecycleManager';
+import { LifecycleManager } from '../source/core/LifecycleManager';
 
 describe('LifecycleManager', () => {
   let element: HTMLElement;

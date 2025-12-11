@@ -3,8 +3,8 @@
  * @description Unit tests for ElementBuilder
  */
 
-import { ElementBuilder } from '../core/ElementBuilder';
-import type { ElementModel } from '../core/types';
+import { ElementBuilder } from '../source/core/ElementBuilder';
+import type { ElementModel } from '../source/core/types';
 
 describe('ElementBuilder', () => {
   describe('Constructor and Basic Building', () => {

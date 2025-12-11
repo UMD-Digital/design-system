@@ -8,7 +8,7 @@
  * - Ensures all properties are preserved and merged correctly
  */
 
-import { ElementBuilder } from '../core/ElementBuilder';
+import { ElementBuilder } from '../source/core/ElementBuilder';
 
 describe('Hero Component Integration Test', () => {
   test('should merge campaign typography preset with inline hero styles', () => {

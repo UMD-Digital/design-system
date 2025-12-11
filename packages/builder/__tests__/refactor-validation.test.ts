@@ -6,8 +6,8 @@
  * produce equivalent functionality to the original V1 patterns.
  */
 
-import { ElementBuilder } from '../core/ElementBuilder';
-import type { ElementModel } from '../core/types';
+import { ElementBuilder } from '../source/core/ElementBuilder';
+import type { ElementModel } from '../source/core/types';
 
 describe('REFACTOR.md Pattern Validation', () => {
 

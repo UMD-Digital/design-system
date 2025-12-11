@@ -3,8 +3,8 @@
  * @description Unit tests for StyleManager
  */
 
-import { StyleManager } from '../core/StyleManager';
-import type { StyleDefinition, ElementStyles } from '../core/types';
+import { StyleManager } from '../source/core/StyleManager';
+import type { StyleDefinition, ElementStyles } from '../source/core/types';
 
 describe('StyleManager', () => {
   let manager: StyleManager;

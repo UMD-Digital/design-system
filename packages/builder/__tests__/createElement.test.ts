@@ -3,7 +3,7 @@
  * @description Unit tests for ElementBuilder constructor and createElement helper
  */
 
-import { ElementBuilder } from '../core/ElementBuilder';
+import { ElementBuilder } from '../source/core/ElementBuilder';
 
 describe('ElementBuilder Constructor', () => {
   describe('Default constructor (no arguments)', () => {

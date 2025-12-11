@@ -1,4 +1,4 @@
-import * as MediaIcons from '../media';
+import * as MediaIcons from '../source/media';
 
 describe('Media Icons', () => {
   it('should export gif icon', () => {

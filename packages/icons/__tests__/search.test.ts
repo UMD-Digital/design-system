@@ -1,4 +1,4 @@
-import * as SearchIcons from '../search';
+import * as SearchIcons from '../source/search';
 
 describe('Search Icons', () => {
   it('should export search icon', () => {

@@ -1,4 +1,4 @@
-import * as PeopleIcons from '../people';
+import * as PeopleIcons from '../source/people';
 
 describe('People Icons', () => {
   it('should export person icon', () => {

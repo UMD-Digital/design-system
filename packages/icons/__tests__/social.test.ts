@@ -1,4 +1,4 @@
-import * as SocialIcons from '../social';
+import * as SocialIcons from '../source/social';
 
 describe('Social Media Icons', () => {
   it('should export facebook icon', () => {

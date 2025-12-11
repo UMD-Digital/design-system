@@ -1,4 +1,4 @@
-import * as FileIcons from '../files';
+import * as FileIcons from '../source/files';
 
 describe('File Icons', () => {
   it('should export document icon', () => {

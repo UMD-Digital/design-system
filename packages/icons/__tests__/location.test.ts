@@ -1,4 +1,4 @@
-import * as LocationIcons from '../location';
+import * as LocationIcons from '../source/location';
 
 describe('Location Icons', () => {
   it('should export pin icon', () => {

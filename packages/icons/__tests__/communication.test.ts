@@ -1,4 +1,4 @@
-import * as CommunicationIcons from '../communication';
+import * as CommunicationIcons from '../source/communication';
 
 describe('Communication Icons', () => {
   it('should export email icon', () => {

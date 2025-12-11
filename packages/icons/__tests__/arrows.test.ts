@@ -1,4 +1,4 @@
-import * as ArrowIcons from '../arrows';
+import * as ArrowIcons from '../source/arrows';
 
 describe('Arrow Icons', () => {
   it('should export arrow_up icon', () => {

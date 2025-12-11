@@ -1,4 +1,4 @@
-import * as Icons from '../index';
+import * as Icons from '../source/index';
 
 describe('Main Icons Export', () => {
   it('should export arrow icons', () => {

@@ -1,4 +1,4 @@
-import * as ControlIcons from '../controls';
+import * as ControlIcons from '../source/controls';
 
 describe('Control Icons', () => {
   it('should export chevron_down icon', () => {

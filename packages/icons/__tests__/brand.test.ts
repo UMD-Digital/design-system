@@ -1,4 +1,4 @@
-import * as BrandIcons from '../brand';
+import * as BrandIcons from '../source/brand';
 
 describe('Brand Icons', () => {
   it('should export fearless icon', () => {

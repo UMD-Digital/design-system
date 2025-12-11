@@ -1,4 +1,4 @@
-import * as CalendarIcons from '../calendar';
+import * as CalendarIcons from '../source/calendar';
 
 describe('Calendar Icons', () => {
   it('should export calendar icon', () => {

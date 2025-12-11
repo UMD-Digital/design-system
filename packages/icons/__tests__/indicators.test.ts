@@ -1,4 +1,4 @@
-import * as IndicatorIcons from '../indicators';
+import * as IndicatorIcons from '../source/indicators';
 
 describe('Indicator Icons', () => {
   it('should export alert icon', () => {

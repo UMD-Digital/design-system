@@ -1,4 +1,4 @@
-import * as Logos from '../logos';
+import * as Logos from '../source/logos';
 
 describe('Logo Assets', () => {
   it('should export campaign namespace', () => {

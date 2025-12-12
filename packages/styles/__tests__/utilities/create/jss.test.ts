@@ -1,4 +1,4 @@
-import { objectWithClassName, objectFromString } from '../../../source/utilities/' + dirname + '/jss';
+import { objectWithClassName, objectFromString } from '../../../source/utilities/create/jss';
 
 describe('create/jss utilities', () => {
   describe('objectWithClassName', () => {

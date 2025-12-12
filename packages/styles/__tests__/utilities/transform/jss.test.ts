@@ -4,7 +4,7 @@ import {
   convertToSelectorCSS,
   convertToClassSelectorCss,
   convertToCss,
-} from '../../../source/utilities/' + dirname + '/jss';
+} from '../../../source/utilities/transform/jss';
 import type { JssInputFormat, JssObject } from '../../../source/_types';
 
 describe('transform/jss utilities', () => {

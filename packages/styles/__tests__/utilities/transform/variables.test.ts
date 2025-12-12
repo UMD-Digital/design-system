@@ -1,4 +1,4 @@
-import { from '../../../source/utilities/' + dirname + '/variables';
+import { fromTokens, toString, toCssObject, formatTokenKey } from '../../../source/utilities/transform/variables';
 
 describe('transform/variables utilities', () => {
   describe('formatTokenKey', () => {

@@ -1,4 +1,4 @@
-import { toString } from '../../../source/utilities/' + dirname + '/style';
+import { toString } from '../../../source/utilities/create/style';
 
 // Mock the postcss module to return a usable CSS string for testing
 jest.mock('postcss', () => {
@@ -10,7 +10,7 @@ jest.mock('postcss', () => {
 });
 
 // Mock the JSS transformation functions
-jest.mock('../../transform/jss', () => {
+jest.mock('../../../source/utilities/transform/jss', () => {
   return {
     convertToClassSelectorCss: jest.fn().mockImplementation((jssObject) => {
       if (!jssObject || !jssObject.className) return '';

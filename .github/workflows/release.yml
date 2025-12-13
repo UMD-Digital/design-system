@@ -72,6 +72,16 @@ jobs:
       - name: Update version badges
         run: npm run update-badges
 
+      - name: Commit badge updates
+        run: |
+          git add **/README.md
+          if ! git diff --cached --quiet; then
+            git commit -m "docs: update version badges [skip ci]"
+            echo "✅ Badge updates committed"
+          else
+            echo "ℹ️  No badge changes to commit"
+          fi
+
       - name: Version packages (pre-release)
         if: ${{ contains(github.event.inputs.version_bump, 'pre') }}
         env:

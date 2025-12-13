@@ -194,6 +194,17 @@ jobs:
         if: ${{ inputs.dry_run != true && inputs.auto_detect_version != true }}
         run: npm run update-badges -- --package=${{ inputs.package }}
 
+      - name: Commit badge updates
+        if: ${{ inputs.dry_run != true && inputs.auto_detect_version != true }}
+        run: |
+          git add packages/${{ inputs.package }}/README.md README.md
+          if ! git diff --cached --quiet; then
+            git commit -m "docs: update ${{ inputs.package }} version badge [skip ci]"
+            echo "✅ Badge updates committed"
+          else
+            echo "ℹ️  No badge changes to commit"
+          fi
+
       - name: Detect current version (auto-detect mode)
         if: ${{ inputs.auto_detect_version == true }}
         id: current_version

@@ -151,10 +151,64 @@ jobs:
             "${{ needs.detect-versions.outputs.primary-packages }}" \
             "Primary"
 
-  # Job 5: Aggregate results and notify
+  # Job 5: Update version badges for all released packages
+  update-badges:
+    name: Update Version Badges
+    needs: [detect-versions, release-foundation, release-core, release-primary]
+    if: |
+      always() &&
+      needs.detect-versions.outputs.has-releases == 'true' &&
+      (needs.release-primary.result == 'success' || needs.release-primary.result == 'skipped') &&
+      (needs.release-core.result == 'success' || needs.release-core.result == 'skipped') &&
+      (needs.release-foundation.result == 'success' || needs.release-foundation.result == 'skipped')
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.PAT_TOKEN }}
+
+      - name: Pull latest changes
+        run: |
+          git pull origin ${{ github.ref_name }}
+
+      - name: Configure Git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: Update all version badges
+        run: npm run update-badges
+
+      - name: Commit and push badge updates
+        env:
+          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+        run: |
+          git add **/README.md
+          if ! git diff --cached --quiet; then
+            git commit -m "docs: update version badges after automated release [skip ci]"
+            git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git
+            git push origin ${{ github.ref_name }}
+            echo "✅ Badge updates committed and pushed"
+          else
+            echo "ℹ️  No badge changes to commit"
+          fi
+
+  # Job 6: Aggregate results and notify
   notify-results:
     name: Notify Release Results
-    needs: [detect-versions, release-foundation, release-core, release-primary]
+    needs: [detect-versions, release-foundation, release-core, release-primary, update-badges]
     if: always() && needs.detect-versions.outputs.has-releases == 'true'
     runs-on: ubuntu-latest
 
@@ -200,6 +254,7 @@ jobs:
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "🔗 [View on NPM](https://www.npmjs.com/org/universityofmaryland)" >> $GITHUB_STEP_SUMMARY
           echo "🔗 [View Releases](https://github.com/${{ github.repository }}/releases)" >> $GITHUB_STEP_SUMMARY
+          echo "📝 [View Badge Updates](https://github.com/${{ github.repository }}/commit/${{ needs.update-badges.result == 'success' && github.sha || 'latest' }})" >> $GITHUB_STEP_SUMMARY
 
       - name: Send Slack notification
         uses: slackapi/slack-github-action@v1.25.0
@@ -262,7 +317,7 @@ jobs:
           SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
           SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
 
-  # Job 6: Handle no releases case
+  # Job 7: Handle no releases case
   no-releases:
     name: No Releases Needed
     needs: detect-versions

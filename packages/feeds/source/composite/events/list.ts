@@ -1,6 +1,8 @@
-import { Atomic, Composite } from '@universityofmaryland/web-elements-library';
+import { card } from '@universityofmaryland/web-elements-library/composite';
+import { events } from '@universityofmaryland/web-elements-library/atomic';
+import { stacked } from '@universityofmaryland/web-elements-library/layout';
 import { createImageOrLinkedImage } from '@universityofmaryland/web-utilities-library/elements';
-import * as feedElements from 'elements';
+
 import * as feedMacros from 'macros';
 import * as feedFetch from './common/fetch';
 import * as feedDisplay from './common/display';
@@ -49,9 +51,9 @@ export default (props: ListProps): ElementModel =>
         ...helperFunctions,
         displayResults,
         entries: feedData.map((entry) =>
-          Composite.card.list({
+          card.list({
             ...dataComposed.display({ entry, isThemeDark }),
-            dateSign: Atomic.events.sign({
+            dateSign: events.sign({
               ...entry,
               isThemeDark,
               isLargeSize: true,
@@ -83,7 +85,7 @@ export default (props: ListProps): ElementModel =>
       displayResults,
       displayResultStart: feedDisplay.resultStart,
       displayNoResults: feedDisplay.noResults,
-      layoutElement: feedElements.layout.stacked(isThemeDark),
+      layoutElement: stacked({ isThemeDark }),
     });
 
     return {

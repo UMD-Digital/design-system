@@ -1,4 +1,8 @@
-import * as feedElements from 'elements';
+import {
+  createTextContainer,
+  createTextWithLink,
+  createTimeElement,
+} from '@universityofmaryland/web-utilities-library/elements';
 import * as feedFetch from './fetch';
 import {
   CommonProps,
@@ -68,14 +72,14 @@ export const display = ({
   isTransparent?: boolean;
 }) => ({
   newsId: entry.id.toString(),
-  headline: feedElements.text.headline({
+  headline: createTextWithLink({
     text: entry.title,
     url: entry.url,
   }),
-  text: feedElements.text.summary({ text: entry.summary }),
-  date: feedElements.text.date({
-    date: entry.date,
-    dateFormatted: entry.dateFormatted,
+  text: createTextContainer({ text: entry.summary }),
+  date: createTimeElement({
+    datetime: entry.date,
+    displayText: entry.dateFormatted,
   }),
   isThemeDark,
 });

@@ -1,6 +1,9 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { card } from '@universityofmaryland/web-elements-library/composite';
+import {
+  grid,
+  gridGap,
+} from '@universityofmaryland/web-elements-library/layout';
 import { createImageOrLinkedImage } from '@universityofmaryland/web-utilities-library/elements';
-import * as feedElements from 'elements';
 import * as feedMacros from 'macros';
 import * as feedFetch from './common/fetch';
 import * as feedDisplay from './common/display';
@@ -47,7 +50,7 @@ export default (props: BlockProps): ElementModel =>
     const displayResults = async ({ feedData }: FeedDisplay) => {
       const entries = feedData.map((entry) => {
         if (isTypeOverlay) {
-          return Composite.card.overlay.image({
+          return card.overlay.image({
             ...dataComposed.display({ entry }),
             backgroundImage: createImageOrLinkedImage({
               imageUrl: entry.image[0].url,
@@ -58,7 +61,7 @@ export default (props: BlockProps): ElementModel =>
           });
         }
 
-        return Composite.card.block({
+        return card.block({
           ...dataComposed.display({ entry, isThemeDark }),
           image: createImageOrLinkedImage({
             imageUrl: entry.image[0].url,
@@ -87,8 +90,8 @@ export default (props: BlockProps): ElementModel =>
     };
 
     const layoutElement = isTypeOverlay
-      ? feedElements.layout.grid({ count: numberOfColumnsToShow })
-      : feedElements.layout.gridGap({ count: numberOfColumnsToShow });
+      ? grid({ columns: numberOfColumnsToShow as 2 | 3 | 4 })
+      : gridGap({ columns: numberOfColumnsToShow as 2 | 3 | 4 });
 
     container.appendChild(loader.element);
 

@@ -1,5 +1,8 @@
-import { Atomic } from '@universityofmaryland/web-elements-library';
-import * as feedElements from 'elements';
+import { events } from '@universityofmaryland/web-elements-library/atomic';
+import {
+  createTextWithLink,
+  createTextContainer,
+} from '@universityofmaryland/web-utilities-library/elements';
 import * as feedFetch from './fetch';
 import {
   CommonProps,
@@ -58,12 +61,12 @@ export const display = ({
   isThemeDark?: boolean;
   isTransparent?: boolean;
 }) => ({
-  headline: feedElements.text.headline({
+  headline: createTextWithLink({
     text: entry.title,
     url: entry.url,
   }),
-  text: feedElements.text.summary({ text: entry.summary }),
-  eventMeta: Atomic.events.meta({
+  text: createTextContainer({ text: entry.summary }),
+  eventMeta: events.meta({
     ...entry,
     isThemeDark,
   }),

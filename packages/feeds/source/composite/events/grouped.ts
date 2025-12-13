@@ -2,7 +2,6 @@ import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { Atomic, Composite } from '@universityofmaryland/web-elements-library';
 import { createImageOrLinkedImage } from '@universityofmaryland/web-utilities-library/elements';
-import * as feedElements from 'elements';
 import * as feedMacros from 'macros';
 import * as feedFetch from './common/fetch';
 import * as feedDisplay from './common/display';

@@ -1,4 +1,5 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
+import { createImageOrLinkedImage } from '@universityofmaryland/web-utilities-library/elements';
 import * as feedElements from 'elements';
 import * as feedMacros from 'macros';
 import * as feedFetch from './common/fetch';
@@ -50,10 +51,11 @@ export default (props: BlockProps): ElementModel =>
         entries: feedData.map((entry) =>
           Composite.card.block({
             ...dataComposed.display({ entry, isThemeDark }),
-            image: feedElements.asset.standard({
-              images: entry.image,
-              url: entry.url,
-              label: 'University of Maryland Event',
+            image: createImageOrLinkedImage({
+              imageUrl: entry.image[0].url,
+              altText: entry.image[0].altText || 'Event Image',
+              linkUrl: entry.url,
+              linkLabel: 'University of Maryland Event',
             }),
             isAligned: false,
             isTransparent,

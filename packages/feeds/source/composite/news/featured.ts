@@ -1,4 +1,5 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
+import { createImageOrLinkedImage } from '@universityofmaryland/web-utilities-library/elements';
 import * as feedElements from 'elements';
 import * as feedMacros from 'macros';
 import * as feedFetch from './common/fetch';
@@ -73,10 +74,11 @@ export default (props: FeaturedProps): ElementModel =>
         const firstEntry = feedData[0];
         const overlayCard = Composite.card.overlay.image({
           ...dataComposed.display({ entry: firstEntry }),
-          backgroundImage: feedElements.asset.standard({
-            images: firstEntry.image,
-            url: firstEntry.url,
-            label: 'Maryland Today Article with image',
+          backgroundImage: createImageOrLinkedImage({
+            imageUrl: firstEntry.image[0].url,
+            altText: firstEntry.image[0].altText || 'News Article Image',
+            linkUrl: firstEntry.url,
+            linkLabel: 'Maryland Today Article with image',
           }),
         });
 
@@ -89,10 +91,11 @@ export default (props: FeaturedProps): ElementModel =>
         entries = feedData.slice(1, 3).map((entry) =>
           Composite.card.block({
             ...dataComposed.display({ entry, isThemeDark }),
-            image: feedElements.asset.standard({
-              images: entry.image,
-              url: entry.url,
-              label: 'Maryland Today Article with image',
+            image: createImageOrLinkedImage({
+              imageUrl: entry.image[0].url,
+              altText: entry.image[0].altText || 'News Article Image',
+              linkUrl: entry.url,
+              linkLabel: 'Maryland Today Article with image',
             }),
             isAligned: true,
             isTransparent,
@@ -102,10 +105,11 @@ export default (props: FeaturedProps): ElementModel =>
         entries = feedData.map((entry) =>
           Composite.card.overlay.image({
             ...dataComposed.display({ entry, isThemeDark }),
-            backgroundImage: feedElements.asset.standard({
-              images: entry.image,
-              url: entry.url,
-              label: 'Maryland Today Article with image',
+            backgroundImage: createImageOrLinkedImage({
+              imageUrl: entry.image[0].url,
+              altText: entry.image[0].altText || 'News Article Image',
+              linkUrl: entry.url,
+              linkLabel: 'Maryland Today Article with image',
             }),
           }),
         );
@@ -133,10 +137,11 @@ export default (props: FeaturedProps): ElementModel =>
       const entries = feedData.map((entry) =>
         Composite.card.block({
           ...dataComposed.display({ entry, isThemeDark }),
-          image: feedElements.asset.standard({
-            images: entry.image,
-            url: entry.url,
-            label: 'Maryland Today Article with image',
+          image: createImageOrLinkedImage({
+            imageUrl: entry.image[0].url,
+            altText: entry.image[0].altText || 'News Article Image',
+            linkUrl: entry.url,
+            linkLabel: 'Maryland Today Article with image',
           }),
           isAligned: true,
           isTransparent,

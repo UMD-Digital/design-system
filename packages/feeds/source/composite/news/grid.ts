@@ -1,4 +1,5 @@
 import { Composite } from '@universityofmaryland/web-elements-library';
+import { createImageOrLinkedImage } from '@universityofmaryland/web-utilities-library/elements';
 import * as feedElements from 'elements';
 import * as feedMacros from 'macros';
 import * as feedFetch from './common/fetch';
@@ -48,20 +49,22 @@ export default (props: BlockProps): ElementModel =>
         if (isTypeOverlay) {
           return Composite.card.overlay.image({
             ...dataComposed.display({ entry }),
-            backgroundImage: feedElements.asset.standard({
-              images: entry.image,
-              url: entry.url,
-              label: 'Maryland Today Article with image',
+            backgroundImage: createImageOrLinkedImage({
+              imageUrl: entry.image[0].url,
+              altText: entry.image[0].altText || 'News Article Image',
+              linkUrl: entry.url,
+              linkLabel: 'Maryland Today Article with image',
             }),
           });
         }
 
         return Composite.card.block({
           ...dataComposed.display({ entry, isThemeDark }),
-          image: feedElements.asset.standard({
-            images: entry.image,
-            url: entry.url,
-            label: 'Maryland Today Article with image',
+          image: createImageOrLinkedImage({
+            imageUrl: entry.image[0].url,
+            altText: entry.image[0].altText || 'News Article Image',
+            linkUrl: entry.url,
+            linkLabel: 'Maryland Today Article with image',
           }),
           isAligned: true,
           isTransparent,

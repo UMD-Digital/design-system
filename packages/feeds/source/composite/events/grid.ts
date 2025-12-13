@@ -1,6 +1,6 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { card } from '@universityofmaryland/web-elements-library/composite';
+import { gridGap } from '@universityofmaryland/web-elements-library/layout';
 import { createImageOrLinkedImage } from '@universityofmaryland/web-utilities-library/elements';
-import * as feedElements from 'elements';
 import * as feedMacros from 'macros';
 import * as feedFetch from './common/fetch';
 import * as feedDisplay from './common/display';
@@ -49,7 +49,7 @@ export default (props: BlockProps): ElementModel =>
         ...helperFunctions,
         displayResults,
         entries: feedData.map((entry) =>
-          Composite.card.block({
+          card.block({
             ...dataComposed.display({ entry, isThemeDark }),
             image: createImageOrLinkedImage({
               imageUrl: entry.image[0].url,
@@ -71,8 +71,8 @@ export default (props: BlockProps): ElementModel =>
       }
     };
 
-    const layoutElement = feedElements.layout.gridGap({
-      count: numberOfColumnsToShow,
+    const layoutElement = gridGap({
+      columns: numberOfColumnsToShow as 2 | 3 | 4,
     });
     container.appendChild(loader.element);
 

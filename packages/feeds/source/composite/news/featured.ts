@@ -1,6 +1,9 @@
-import { Composite } from '@universityofmaryland/web-elements-library';
+import { card } from '@universityofmaryland/web-elements-library/composite';
+import {
+  gridGap,
+  gridOffset,
+} from '@universityofmaryland/web-elements-library/layout';
 import { createImageOrLinkedImage } from '@universityofmaryland/web-utilities-library/elements';
-import * as feedElements from 'elements';
 import * as feedMacros from 'macros';
 import * as feedFetch from './common/fetch';
 import * as feedDisplay from './common/display';
@@ -55,24 +58,24 @@ export default (props: FeaturedProps): ElementModel =>
     };
     const setPosition = (position: number) => {
       const overlayElement = container.querySelector(
-        `.${Composite.card.overlay.imageClassRef}`,
+        `.${card.overlay.imageClassRef}`,
       ) as HTMLElement;
       if (overlayElement) overlayElement.style.top = `${position}px`;
     };
 
-    const layoutElement = feedElements.layout.gridGap({ count: 2 });
+    const layoutElement = gridGap({ columns: 2 });
 
     const displayGridOffsetResults = async ({ feedData }: FeedDisplay) => {
       let entries = [];
 
       if (feedData.length >= 2) {
-        const offsetLayout = feedElements.layout.gridOffsetGap({
-          count: 2,
+        const offsetLayout = gridOffset({
+          columns: 2,
           isLayoutReversed,
-          overwriteStickyPosition,
+          stickyTopPosition: overwriteStickyPosition,
         });
         const firstEntry = feedData[0];
-        const overlayCard = Composite.card.overlay.image({
+        const overlayCard = card.overlay.image({
           ...dataComposed.display({ entry: firstEntry }),
           backgroundImage: createImageOrLinkedImage({
             imageUrl: firstEntry.image[0].url,
@@ -89,7 +92,7 @@ export default (props: FeaturedProps): ElementModel =>
         setStyles(overlayCard.styles);
 
         entries = feedData.slice(1, 3).map((entry) =>
-          Composite.card.block({
+          card.block({
             ...dataComposed.display({ entry, isThemeDark }),
             image: createImageOrLinkedImage({
               imageUrl: entry.image[0].url,
@@ -103,7 +106,7 @@ export default (props: FeaturedProps): ElementModel =>
         );
       } else {
         entries = feedData.map((entry) =>
-          Composite.card.overlay.image({
+          card.overlay.image({
             ...dataComposed.display({ entry, isThemeDark }),
             backgroundImage: createImageOrLinkedImage({
               imageUrl: entry.image[0].url,
@@ -135,7 +138,7 @@ export default (props: FeaturedProps): ElementModel =>
 
     const displayResults = async ({ feedData }: FeedDisplay) => {
       const entries = feedData.map((entry) =>
-        Composite.card.block({
+        card.block({
           ...dataComposed.display({ entry, isThemeDark }),
           image: createImageOrLinkedImage({
             imageUrl: entry.image[0].url,

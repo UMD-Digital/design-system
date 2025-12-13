@@ -18,7 +18,7 @@ export const image = ({
   isThemeDark,
 }: {
   customStyles?: Record<string, any>;
-  image: HTMLImageElement;
+  image: HTMLImageElement | HTMLAnchorElement;
   isThemeDark?: boolean;
 }) => {
   const backgroundImage = assets.image.background({

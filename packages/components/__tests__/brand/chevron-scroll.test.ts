@@ -3,7 +3,7 @@ import {
   createTestComponent,
   cleanupComponents,
   waitForComponentDefinition,
-} from '../../test-helpers/component';
+} from '../test-helpers/component';
 
 describe('Component: umd-element-brand-logo-animation', () => {
   const tagName = 'umd-element-brand-logo-animation';

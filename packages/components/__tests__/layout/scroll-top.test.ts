@@ -3,8 +3,8 @@ import {
   createTestComponent,
   cleanupComponents,
   waitForComponentDefinition,
-} from '../../test-helpers/component';
-import { getComponentAttributes } from '../../test-helpers/validation';
+} from '../test-helpers/component';
+import { getComponentAttributes } from '../test-helpers/validation';
 
 describe('Component: umd-element-scroll-top', () => {
   const tagName = 'umd-element-scroll-top';

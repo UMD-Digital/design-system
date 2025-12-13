@@ -1,4 +1,4 @@
-import carouselImageMultiple from '../../source/api/carousel/image/multiple';
+import carouselImageMultiple from '../../../source/api/carousel/image/multiple';
 import {
   createTestComponent,
   cleanupComponents,

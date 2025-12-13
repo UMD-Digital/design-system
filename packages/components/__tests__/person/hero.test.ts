@@ -5,12 +5,12 @@ import {
   waitForComponentDefinition,
   createSlotContent,
   captureWarningsAsync,
-} from '../../test-helpers/component';
+} from '../test-helpers/component';
 import {
   validateSlotConfiguration,
   getComponentAttributes,
   validateDeprecatedAttribute,
-} from '../../test-helpers/validation';
+} from '../test-helpers/validation';
 
 describe('Component: umd-element-person-hero', () => {
   const tagName = 'umd-element-person-hero';

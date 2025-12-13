@@ -2,8 +2,8 @@ import heroGrid from '../../source/api/hero/custom/grid';
 import {
   createTestComponent,
   cleanupComponents,
-} from '../../test-helpers/component';
-import { getComponentAttributes } from '../../test-helpers/validation';
+} from '../test-helpers/component';
+import { getComponentAttributes } from '../test-helpers/validation';
 
 describe('Component: umd-element-hero-grid', () => {
   const tagName = 'umd-element-hero-grid';

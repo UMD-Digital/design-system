@@ -1,4 +1,4 @@
-import feedNewsFeatured from '../../source/api/feed/news/featured';
+import feedNewsFeatured from '../../../source/api/feed/news/featured';
 import {
   createTestComponent,
   cleanupComponents,

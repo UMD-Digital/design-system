@@ -6,12 +6,12 @@ import {
   createSlotContent,
   setAttributeAndWait,
   captureWarningsAsync,
-} from '../../test-helpers/component';
+} from '../test-helpers/component';
 import {
   validateSlotConfiguration,
   getComponentAttributes,
   validateDeprecatedAttribute,
-} from '../../test-helpers/validation';
+} from '../test-helpers/validation';
 
 describe('Component: umd-element-events-date', () => {
   const tagName = 'umd-element-events-date';

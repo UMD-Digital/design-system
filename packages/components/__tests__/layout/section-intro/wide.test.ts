@@ -1,4 +1,4 @@
-import layoutSectionIntroWide from '../../source/api/layout/section-intro/wide';
+import layoutSectionIntroWide from '../../../source/api/layout/section-intro/wide';
 import {
   createTestComponent,
   cleanupComponents,

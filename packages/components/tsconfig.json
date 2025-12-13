@@ -2,10 +2,17 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDir": "source",
-    "baseUrl": "source",
+    "baseUrl": ".",
     "moduleResolution": "bundler",
     "paths": {
+      "../../source/*": ["./source/*"],
+      "../../../source/*": ["./source/*"],
+      "../../../../source/*": ["./source/*"],
+      "../../../_types": ["./source/_types.ts"],
+      "../../test-helpers": ["./__tests__/test-helpers/index.ts"],
+      "../../test-helpers/*": ["./__tests__/test-helpers/*"],
+      "../test-helpers": ["./__tests__/test-helpers/index.ts"],
+      "../test-helpers/*": ["./__tests__/test-helpers/*"],
       "@universityofmaryland/web-styles-library": ["../../styles/dist/index.d.ts"],
       "@universityofmaryland/web-styles-library/*": ["../../styles/dist/*"],
       "@universityofmaryland/web-utilities-library": ["../../utilities/dist/index.d.ts"],
@@ -19,6 +26,7 @@
     }
   },
   "include": [
-    "./source"
+    "./source",
+    "./__tests__"
   ]
  }

@@ -7,13 +7,13 @@ import {
   captureWarningsAsync,
   createSlotContent,
   setAttributeAndWait,
-} from '../../test-helpers/component';
+} from '../test-helpers/component';
 import {
   validateSlotConfiguration,
   isComponentRegistered,
   validateDeprecatedAttribute,
   getComponentAttributes,
-} from '../../test-helpers/validation';
+} from '../test-helpers/validation';
 
 describe('Component: umd-element-quote', () => {
   const tagName = 'umd-element-quote';

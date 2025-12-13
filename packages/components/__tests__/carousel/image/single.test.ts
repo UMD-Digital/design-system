@@ -1,4 +1,4 @@
-import carouselImageSingle from '../../source/api/carousel/image/single';
+import carouselImageSingle from '../../../source/api/carousel/image/single';
 import {
   createTestComponent,
   cleanupComponents,

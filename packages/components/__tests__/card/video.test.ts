@@ -4,11 +4,11 @@ import {
   cleanupComponents,
   waitForComponentDefinition,
   captureWarningsAsync,
-} from '../../test-helpers/component';
+} from '../test-helpers/component';
 import {
   validateSlotConfiguration,
   getComponentAttributes,
-} from '../../test-helpers/validation';
+} from '../test-helpers/validation';
 
 describe('Component: umd-element-card-video', () => {
   const tagName = 'umd-element-card-video';

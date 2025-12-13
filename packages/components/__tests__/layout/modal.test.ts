@@ -4,8 +4,8 @@ import {
   cleanupComponents,
   waitForComponentDefinition,
   setAttributeAndWait,
-} from '../../test-helpers/component';
-import { getComponentAttributes } from '../../test-helpers/validation';
+} from '../test-helpers/component';
+import { getComponentAttributes } from '../test-helpers/validation';
 
 describe('Component: umd-element-modal', () => {
   const tagName = 'umd-element-modal';

@@ -3,13 +3,13 @@ import {
   createTestComponent,
   cleanupComponents,
   waitForComponentDefinition,
-} from '../../test-helpers/component';
+} from '../test-helpers/component';
 import {
   validateSlotConfiguration,
   getComponentAttributes,
   validateDeprecatedAttribute,
-} from '../../test-helpers/validation';
-import { captureWarningsAsync } from '../../test-helpers/component';
+} from '../test-helpers/validation';
+import { captureWarningsAsync } from '../test-helpers/component';
 
 describe('Component: umd-element-breadcrumb', () => {
   const tagName = 'umd-element-breadcrumb';

@@ -5,12 +5,12 @@ import {
   waitForComponentDefinition,
   setAttributeAndWait,
   captureWarningsAsync,
-} from '../../test-helpers/component';
+} from '../test-helpers/component';
 import {
   validateSlotConfiguration,
   getComponentAttributes,
   validateDeprecatedAttribute,
-} from '../../test-helpers/validation';
+} from '../test-helpers/validation';
 
 describe('Component: umd-element-tabs', () => {
   const tagName = 'umd-element-tabs';

@@ -5,10 +5,10 @@ import {
   waitForComponentDefinition,
   createSlotContent,
   setAttributeAndWait,
-} from '../../test-helpers/component';
+} from '../test-helpers/component';
 import {
   validateSlotConfiguration,
-} from '../../test-helpers/validation';
+} from '../test-helpers/validation';
 
 describe('Component: umd-element-carousel-cards', () => {
   const tagName = 'umd-element-carousel-cards';

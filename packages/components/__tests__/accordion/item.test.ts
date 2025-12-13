@@ -7,14 +7,14 @@ import {
   captureWarningsAsync,
   createSlotContent,
   setAttributeAndWait,
-} from '../../test-helpers/component';
+} from '../test-helpers/component';
 import {
   validateSlotConfiguration,
   isComponentRegistered,
   validateDeprecatedSlot,
   validateDeprecatedAttribute,
   getComponentAttributes,
-} from '../../test-helpers/validation';
+} from '../test-helpers/validation';
 
 describe('Component: umd-element-accordion-item', () => {
   const tagName = 'umd-element-accordion-item';

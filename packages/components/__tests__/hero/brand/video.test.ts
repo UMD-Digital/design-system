@@ -1,4 +1,4 @@
-import heroBrandVideo from '../../source/api/hero/custom/video';
+import heroBrandVideo from '../../../source/api/hero/custom/video';
 import {
   createTestComponent,
   cleanupComponents,

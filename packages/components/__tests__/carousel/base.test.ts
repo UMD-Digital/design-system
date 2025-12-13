@@ -5,13 +5,13 @@ import {
   waitForComponentDefinition,
   createSlotContent,
   setAttributeAndWait,
-} from '../../test-helpers/component';
+} from '../test-helpers/component';
 import {
   validateSlotConfiguration,
   getComponentAttributes,
   validateDeprecatedAttribute,
-} from '../../test-helpers/validation';
-import { captureWarningsAsync } from '../../test-helpers/component';
+} from '../test-helpers/validation';
+import { captureWarningsAsync } from '../test-helpers/component';
 
 describe('Component: umd-element-carousel', () => {
   const tagName = 'umd-element-carousel';

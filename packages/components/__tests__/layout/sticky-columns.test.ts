@@ -6,9 +6,9 @@ import {
   validateSlots,
   createSlotContent,
   setAttributeAndWait,
-} from '../../test-helpers/component';
-import { getComponentAttributes, validateDeprecatedAttribute } from '../../test-helpers/validation';
-import { captureWarnings } from '../../test-helpers/component';
+} from '../test-helpers/component';
+import { getComponentAttributes, validateDeprecatedAttribute } from '../test-helpers/validation';
+import { captureWarnings } from '../test-helpers/component';
 
 describe('Component: umd-element-sticky-columns', () => {
   const tagName = 'umd-element-sticky-columns';

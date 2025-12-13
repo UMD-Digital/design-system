@@ -5,7 +5,7 @@ import {
   waitForComponentDefinition,
   validateSlots,
   createSlotContent,
-} from '../../test-helpers/component';
+} from '../test-helpers/component';
 
 describe('Component: umd-layout-image-expand', () => {
   const tagName = 'umd-layout-image-expand';

@@ -1,4 +1,4 @@
-import feedNewsList from '../../source/api/feed/news/list';
+import feedNewsList from '../../../source/api/feed/news/list';
 import {
   createTestComponent,
   cleanupComponents,

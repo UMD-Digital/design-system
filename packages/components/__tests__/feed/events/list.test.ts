@@ -1,4 +1,4 @@
-import feedEventsList from '../../source/api/feed/events/list';
+import feedEventsList from '../../../source/api/feed/events/list';
 import {
   createTestComponent,
   cleanupComponents,

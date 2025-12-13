@@ -1,4 +1,4 @@
-import layoutSectionIntroSmall from '../../source/api/layout/section-intro/small';
+import layoutSectionIntroSmall from '../../../source/api/layout/section-intro/small';
 import {
   createTestComponent,
   cleanupComponents,

@@ -1,11 +1,11 @@
 import { jest } from '@jest/globals';
-import { 
-  ComponentReadyDetail, 
-  ComponentErrorDetail, 
-  ComponentResizeDetail 
-} from '../../source/api/_types';
-import { waitForComponentEvent, captureComponentEvents } from '../../test-helpers/validation';
-import { createTestComponent, cleanupComponents } from '../../test-helpers/component';
+import {
+  ComponentReadyDetail,
+  ComponentErrorDetail,
+  ComponentResizeDetail
+} from '../../source/_types';
+import { waitForComponentEvent, captureComponentEvents } from '../test-helpers/validation';
+import { createTestComponent, cleanupComponents } from '../test-helpers/component';
 
 // Mock the components
 jest.mock('@universityofmaryland/web-components-library');

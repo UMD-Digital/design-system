@@ -5,8 +5,8 @@ import {
   waitForComponentDefinition,
   validateSlots,
   createSlotContent,
-} from '../../test-helpers/component';
-import { getComponentAttributes } from '../../test-helpers/validation';
+} from '../test-helpers/component';
+import { getComponentAttributes } from '../test-helpers/validation';
 
 describe('Component: umd-element-logo', () => {
   const tagName = 'umd-element-logo';

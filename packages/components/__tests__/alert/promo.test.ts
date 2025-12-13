@@ -6,13 +6,13 @@ import {
   captureWarnings,
   captureWarningsAsync,
   createSlotContent,
-} from '../../test-helpers/component';
+} from '../test-helpers/component';
 import {
   validateSlotConfiguration,
   validateDeprecatedSlot,
   validateDeprecatedAttribute,
   getComponentAttributes,
-} from '../../test-helpers/validation';
+} from '../test-helpers/validation';
 
 describe('Component: umd-element-banner-promo', () => {
   const tagName = 'umd-element-banner-promo';

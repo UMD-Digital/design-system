@@ -7,12 +7,12 @@ import {
   captureWarningsAsync,
   createSlotContent,
   setAttributeAndWait,
-} from '../../test-helpers/component';
+} from '../test-helpers/component';
 import {
   validateSlotConfiguration,
   validateDeprecatedSlot,
   getComponentAttributes,
-} from '../../test-helpers/validation';
+} from '../test-helpers/validation';
 
 describe('Component: umd-element-alert-site', () => {
   const tagName = 'umd-element-alert-site';

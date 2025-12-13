@@ -4,11 +4,11 @@ import {
   cleanupComponents,
   waitForComponentDefinition,
   captureWarningsAsync,
-} from '../../test-helpers/component';
+} from '../test-helpers/component';
 import {
   getComponentAttributes,
   validateDeprecatedAttribute,
-} from '../../test-helpers/validation';
+} from '../test-helpers/validation';
 
 describe('Component: umd-element-social-sharing', () => {
   const tagName = 'umd-element-social-sharing';

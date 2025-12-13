@@ -4,13 +4,13 @@ import {
   cleanupComponents,
   waitForComponentDefinition,
   createSlotContent,
-} from '../../test-helpers/component';
+} from '../test-helpers/component';
 import {
   validateSlotConfiguration,
   getComponentAttributes,
   validateDeprecatedAttribute,
-} from '../../test-helpers/validation';
-import { captureWarningsAsync } from '../../test-helpers/component';
+} from '../test-helpers/validation';
+import { captureWarningsAsync } from '../test-helpers/component';
 
 describe('Component: umd-element-card-overlay', () => {
   const tagName = 'umd-element-card-overlay';

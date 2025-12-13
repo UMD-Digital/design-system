@@ -12,5 +12,11 @@ module.exports = {
     '^utilities$': '<rootDir>/source/utilities',
     '^utilities/(.*)$': '<rootDir>/source/utilities/$1',
     '^_types$': '<rootDir>/source/_types',
+    '(.*)source/(.*)$': '<rootDir>/source/$2',
+    '(.*)test-helpers/component$': '<rootDir>/__tests__/test-helpers/component.ts',
+    '(.*)test-helpers/validation$': '<rootDir>/__tests__/test-helpers/validation.ts',
+    '(.*)test-helpers$': '<rootDir>/__tests__/test-helpers/index.ts',
   },
+  moduleDirectories: ['node_modules', '__tests__'],
+  modulePaths: ['<rootDir>'],
 };

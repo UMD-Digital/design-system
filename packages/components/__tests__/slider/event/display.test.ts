@@ -1,4 +1,4 @@
-import sliderEventDisplay from '../../source/api/slider/event/display';
+import sliderEventDisplay from '../../../source/api/slider/event/display';
 import {
   createTestComponent,
   cleanupComponents,

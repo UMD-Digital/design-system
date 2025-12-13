@@ -1,4 +1,4 @@
-import { ComponentRef } from '../../../_types';
+import { ComponentRef } from '../../source/_types';
 
 export interface TestComponent {
   element: HTMLElement;

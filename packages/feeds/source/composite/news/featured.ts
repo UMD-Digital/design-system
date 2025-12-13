@@ -76,6 +76,7 @@ export default (props: FeaturedProps): ElementModel =>
           backgroundImage: feedElements.asset.standard({
             images: firstEntry.image,
             url: firstEntry.url,
+            label: 'Maryland Today Article with image',
           }),
         });
 
@@ -91,6 +92,7 @@ export default (props: FeaturedProps): ElementModel =>
             image: feedElements.asset.standard({
               images: entry.image,
               url: entry.url,
+              label: 'Maryland Today Article with image',
             }),
             isAligned: true,
             isTransparent,
@@ -103,6 +105,7 @@ export default (props: FeaturedProps): ElementModel =>
             backgroundImage: feedElements.asset.standard({
               images: entry.image,
               url: entry.url,
+              label: 'Maryland Today Article with image',
             }),
           }),
         );
@@ -133,6 +136,7 @@ export default (props: FeaturedProps): ElementModel =>
           image: feedElements.asset.standard({
             images: entry.image,
             url: entry.url,
+            label: 'Maryland Today Article with image',
           }),
           isAligned: true,
           isTransparent,

@@ -6,9 +6,11 @@ type ImageType = {
 export const standard = ({
   images,
   url,
+  label,
 }: {
   images: ImageType;
   url?: string;
+  label: string;
 }) => {
   const image = images[0];
   if (image) {
@@ -20,10 +22,7 @@ export const standard = ({
       const link = document.createElement('a');
       link.setAttribute('target', '_blank');
       link.setAttribute('href', url);
-      link.setAttribute(
-        'aria-label',
-        `Maryland Today Article with image ${image.altText}`,
-      );
+      link.setAttribute('aria-label', `${label} ${image.altText}`);
 
       link.appendChild(imageElement);
 

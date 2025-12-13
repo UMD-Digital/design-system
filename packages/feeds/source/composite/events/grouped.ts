@@ -269,6 +269,7 @@ export default (props: ListProps): ElementModel =>
             image: feedElements.asset.standard({
               images: entry.image,
               url: entry.url,
+              label: 'University of Maryland Event',
             }),
             isAligned: false,
           }),

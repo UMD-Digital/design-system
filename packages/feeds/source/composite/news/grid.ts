@@ -51,6 +51,7 @@ export default (props: BlockProps): ElementModel =>
             backgroundImage: feedElements.asset.standard({
               images: entry.image,
               url: entry.url,
+              label: 'Maryland Today Article with image',
             }),
           });
         }
@@ -60,6 +61,7 @@ export default (props: BlockProps): ElementModel =>
           image: feedElements.asset.standard({
             images: entry.image,
             url: entry.url,
+            label: 'Maryland Today Article with image',
           }),
           isAligned: true,
           isTransparent,

@@ -4,7 +4,8 @@
  * @module elements
  */
 
+export { createImageOrLinkedImage } from './createImageOrLinkedImage';
+export { createLinkWithSpan } from './createLinkWithSpan';
 export { createSlot } from './createSlot';
 export { createStyledSlotOrClone } from './createStyledSlotOrClone';
-export { createLinkWithSpan } from './createLinkWithSpan';
 export { createStyleTemplate } from './createStyleTemplate';

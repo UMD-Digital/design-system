@@ -18,7 +18,7 @@ export * as academic from './feeds/academic';
  * ```
  * @since 1.9.0
  */
-export * as events from './composite/events';
+export * as events from './feeds/events';
 
 /**
  * News feed components for displaying news articles.
@@ -29,4 +29,4 @@ export * as events from './composite/events';
  * ```
  * @since 1.9.0
  */
-export * as news from './composite/news';
+export * as news from './feeds/news';

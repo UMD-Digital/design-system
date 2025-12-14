@@ -8,9 +8,9 @@ export default defineConfig({
     lib: {
       entry: {
         index: path.resolve(__dirname, 'source/index.ts'),
-        news: path.resolve(__dirname, 'source/composite/news/index.ts'),
         academic: path.resolve(__dirname, 'source/feeds/academic/index.ts'),
         events: path.resolve(__dirname, 'source/feeds/events/index.ts'),
+        news: path.resolve(__dirname, 'source/feeds/news/index.ts'),
       },
       name: 'UMDFeedsLibrary',
       formats: ['es', 'cjs']

@@ -1,13 +1,13 @@
 /**
  * Experts Display Strategy
  *
- * Strategy for displaying expert entries as cards.
- * Maps expert data to card elements with expertise information.
+ * Strategy for displaying expert entries using person elements.
+ * Maps expert data to person profile cards with biographical information.
  *
  * @module strategies/display/experts
  */
 
-import { card } from '@universityofmaryland/web-elements-library/composite';
+import { person } from '@universityofmaryland/web-elements-library/composite';
 import {
   createTextWithLink,
   createTextContainer,
@@ -21,35 +21,43 @@ import { ElementModel } from '../../_types';
  */
 export interface ExpertType {
   id: number | string;
-  name: string;
+  firstName: string;
+  middleName?: string | null;
+  lastName: string;
   url: string;
   title?: string;
-  department?: string;
-  expertise: string;
-  image: Array<{ url: string; altText?: string }>;
+  headshot?: Array<{ url: string }> | null;
+  summary?: {
+    plainText: string;
+  } | null;
+  organizations?: Array<{
+    id: string;
+    title: string;
+    url: string;
+    jobs: Array<{
+      id: string;
+      title: string;
+      url: string;
+    }>;
+  }>;
 }
 
 /**
  * Experts display strategy
  *
- * Maps expert entries to card elements with expertise metadata.
+ * Maps expert entries to person elements for profile display.
  * Optimized for displaying faculty and expert profiles.
  *
  * @example
  * ```typescript
  * const feed = createBaseFeed({
  *   displayStrategy: expertsDisplayStrategy,
- *   imageConfig: (entry) => ({
- *     imageUrl: entry.image[0].url,
- *     altText: entry.image[0].altText || entry.name,
- *     linkUrl: entry.url,
- *   }),
  *   // ...
  * });
  * ```
  */
 export const expertsDisplayStrategy: DisplayStrategy<ExpertType> = {
-  layoutType: 'grid',
+  layoutType: 'list',
 
   mapEntryToCard: (
     entry: ExpertType,
@@ -57,46 +65,61 @@ export const expertsDisplayStrategy: DisplayStrategy<ExpertType> = {
   ): ElementModel => {
     const {
       isThemeDark = false,
-      isTransparent = false,
-      isAligned = true,
-      imageConfig,
     } = options;
 
-    // Create headline (expert name)
-    const headline = createTextWithLink({
-      text: entry.name,
+    // Build full name
+    const fullName = entry.middleName
+      ? `${entry.firstName} ${entry.middleName} ${entry.lastName}`
+      : `${entry.firstName} ${entry.lastName}`;
+
+    // Create name (expert name with link)
+    const name = createTextWithLink({
+      text: fullName,
       url: entry.url,
     });
 
-    // Create subtitle (title and department)
-    const subtitle = entry.title
+    // Get primary job title and organization
+    const primaryOrg = entry.organizations?.[0];
+    const primaryJob = primaryOrg?.jobs?.[0];
+
+    // Create job title element
+    const job = primaryJob
       ? createTextContainer({
-          text: entry.department
-            ? `${entry.title}, ${entry.department}`
-            : entry.title,
+          text: primaryJob.title,
         })
-      : entry.department
-      ? createTextContainer({ text: entry.department })
       : undefined;
 
-    // Create expertise text
-    const text = createTextContainer({
-      text: entry.expertise,
-    });
-
-    // Create image (if imageConfig provided)
-    const image = imageConfig
-      ? createImageOrLinkedImage(imageConfig(entry))
+    // Create association (organization)
+    const association = primaryOrg
+      ? createTextContainer({
+          text: primaryOrg.title,
+        })
       : undefined;
 
-    // Create card
-    return card.block({
-      headline,
-      eyebrow: subtitle,
-      text,
+    // Create summary text
+    const subText = entry.summary?.plainText
+      ? createTextContainer({
+          text: entry.summary.plainText,
+        })
+      : undefined;
+
+    // Create image from headshot
+    const image = entry.headshot?.[0]?.url
+      ? createImageOrLinkedImage({
+          imageUrl: entry.headshot[0].url,
+          altText: fullName,
+          linkUrl: entry.url,
+          linkLabel: `View profile for ${fullName}`,
+        })
+      : undefined;
+
+    // Create person element
+    return person.block({
+      name,
+      job,
+      association,
+      subText,
       image,
-      isAligned,
-      isTransparent,
       isThemeDark,
     });
   },

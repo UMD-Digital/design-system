@@ -40,6 +40,7 @@ export {
   eventsFetchStrategy,
   eventsFetchStrategyRange,
   newsFetchStrategy,
+  expertsFetchStrategy,
 } from './fetch';
 
 export type { GraphQLFetchConfig } from './fetch';

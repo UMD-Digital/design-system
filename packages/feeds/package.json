@@ -21,6 +21,11 @@
       "import": "./dist/events.mjs",
       "require": "./dist/events.js"
     },
+    "./experts": {
+      "types": "./dist/experts.d.ts",
+      "import": "./dist/experts.mjs",
+      "require": "./dist/experts.js"
+    },
     "./news": {
       "types": "./dist/news.d.ts",
       "import": "./dist/news.mjs",

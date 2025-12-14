@@ -16,4 +16,7 @@ export { EVENTS_QUERY, EVENTS_COUNT_QUERY, EVENTS_SLIDER_QUERY } from './events'
 export { newsFetchStrategy } from './news';
 export { ARTICLES_QUERY } from './news';
 
+export { expertsFetchStrategy } from './experts';
+export { EXPERTS_QUERY } from './experts';
+
 export { ACADEMIC_SLIDER_QUERY } from './academic';

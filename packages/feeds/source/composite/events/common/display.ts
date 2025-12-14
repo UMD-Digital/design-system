@@ -1,5 +1,5 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
-import * as feedMacros from 'macros';
+import { EmptyState, Announcer, PaginationState, LoadingState } from 'states';
 import * as feedFetch from './fetch';
 import * as dataComposed from './data';
 import { events } from '../../../utilities';
@@ -43,21 +43,23 @@ export const noResults = ({
 }: NoResultsProps) => {
   const container = getContainer();
   const shadowRoot = getShadowRoot();
-  const noResultsContent = feedMacros.noResults({
+
+  // Use new class-based EmptyState API
+  const emptyState = new EmptyState({
     message,
     linkUrl,
     linkText,
     isThemeDark,
   });
-  const ariaLiveContent = feedMacros.ariaLive.create({
-    message,
-  });
+
+  // Use new class-based Announcer API
+  const announcer = new Announcer({ message });
 
   container.innerHTML = '';
 
-  container.appendChild(noResultsContent.element);
-  container.appendChild(ariaLiveContent);
-  setStyles(noResultsContent.styles);
+  emptyState.render(container);
+  container.appendChild(announcer.getElement());
+  setStyles(emptyState.styles);
 
   events.dispatch(container, events.eventNames.FEED_ERROR, {
     error: 'No results found',
@@ -82,8 +84,15 @@ export const resultLoad = async (props: DisplayLoadProps): Promise<void> => {
     `#${ID_GRID_LAYOUT_CONTAINER}`,
   ) as HTMLDivElement;
 
-  feedMacros.loader.remove({ container });
-  feedMacros.buttonLazyLoad.remove({ container });
+  // Remove existing loading and pagination states using new API
+  const existingLoader = container.querySelector('.umd-loader-container');
+  existingLoader?.remove();
+
+  const existingPagination = container.querySelector(
+    `.${Styles.layout.alignment.block.center.className}`
+  );
+  existingPagination?.remove();
+
   setOffset(entries.length);
 
   return new Promise<void>((resolve) => {
@@ -93,16 +102,17 @@ export const resultLoad = async (props: DisplayLoadProps): Promise<void> => {
     });
 
     const callback = () => feedFetch.load(props);
-    const lazyLoadButton = feedMacros.buttonLazyLoad.create(
-      dataComposed.lazyLoadVariables({
-        ...props,
-        callback,
-      }),
-    );
+    const lazyLoadVariables = dataComposed.lazyLoadVariables({
+      ...props,
+      callback,
+    });
 
-    if (lazyLoadButton) {
-      container.appendChild(lazyLoadButton.element);
-      setStyles(lazyLoadButton.styles);
+    // Use new class-based PaginationState API
+    const pagination = new PaginationState(lazyLoadVariables);
+    const paginationElement = pagination.render(container);
+
+    if (paginationElement) {
+      setStyles(paginationElement.styles);
     }
 
     resolve();
@@ -141,9 +151,8 @@ export const resultStart = (props: DisplayStartResultsProps) => {
   });
 
   displayResults({ feedData });
-  container.appendChild(
-    feedMacros.ariaLive.create({
-      message,
-    }),
-  );
+
+  // Use new class-based Announcer API
+  const announcer = new Announcer({ message });
+  container.appendChild(announcer.getElement());
 };

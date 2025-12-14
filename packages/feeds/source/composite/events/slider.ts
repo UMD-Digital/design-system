@@ -1,4 +1,4 @@
-import * as feedMacros from 'macros';
+import { slider } from 'widgets';
 import { type SliderProps } from './_types';
 import { type ElementModel } from '../../_types';
 
@@ -29,7 +29,7 @@ const query = `
 `;
 
 export default (props: SliderProps): ElementModel =>
-  feedMacros.slider({
+  slider({
     ...props,
     query,
     url: 'https://calendar.umd.edu/graphql',

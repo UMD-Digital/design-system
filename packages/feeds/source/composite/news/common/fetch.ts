@@ -1,5 +1,6 @@
 import { fetchGraphQL } from '@universityofmaryland/web-utilities-library/network';
-import * as feedMacros from 'macros';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { LoadingState, Announcer } from 'states';
 import { ARTICLES_QUERY } from './queries';
 import * as dataComposed from './data';
 import {
@@ -83,19 +84,33 @@ export const load = async (props: LoadMoreProps) => {
   const currentCount = getOffset();
   const totalEntries = getTotalEntries();
 
-  feedMacros.buttonLazyLoad.remove({ container });
-  feedMacros.loader.display({ container });
+  // Remove existing pagination using new API
+  const existingPagination = container.querySelector(
+    `.${Styles.layout.alignment.block.center.className}`
+  );
+  existingPagination?.remove();
+
+  // Show loading state using new class-based API
+  const loading = new LoadingState();
+  loading.show(container);
 
   getEntries(dataComposed.apiVariables(props)).then((feedData) => {
     if (feedData) {
+      loading.hide();
       displayResults({ feedData: feedData.entries });
 
-      feedMacros.ariaLive.update({
-        container,
-        message: `Showing ${
-          currentCount + feedData.entries.length
-        } of ${totalEntries} articles`,
-      });
+      // Update announcer with new count
+      const message = `Showing ${
+        currentCount + feedData.entries.length
+      } of ${totalEntries} articles`;
+
+      const existingAnnouncer = container.querySelector('[role="status"]') as HTMLElement;
+      if (existingAnnouncer) {
+        existingAnnouncer.textContent = message;
+      } else {
+        const announcer = new Announcer({ message });
+        container.appendChild(announcer.getElement());
+      }
     }
   });
 };

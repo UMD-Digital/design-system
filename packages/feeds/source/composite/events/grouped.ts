@@ -2,7 +2,7 @@ import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { Atomic, Composite } from '@universityofmaryland/web-elements-library';
 import { createImageOrLinkedImage } from '@universityofmaryland/web-utilities-library/elements';
-import * as feedMacros from 'macros';
+import { LoadingState } from 'states';
 import * as feedFetch from './common/fetch';
 import * as feedDisplay from './common/display';
 import * as dataComposed from './common/data';
@@ -195,7 +195,8 @@ const groupEventsByDate = (events: EventType[]): GroupedEvent[] => {
 export default (props: ListProps): ElementModel =>
   (() => {
     const { isThemeDark } = props;
-    const loader = feedMacros.loader.create({ isThemeDark });
+    // Use new class-based LoadingState API
+    const loading = new LoadingState({ isThemeDark });
     const container = document.createElement('div');
     const setTotalEntries = (count: number) => (totalEntries = count);
     const setOffset = (count: number) => (offset = offset + count);
@@ -208,7 +209,7 @@ export default (props: ListProps): ElementModel =>
     let totalEntries = 0;
     let offset = 0;
     let styles = `
-      ${loader.styles}
+      ${loading.styles}
     `;
     let shadowRoot: ShadowRoot | null = null;
     let lastDateHeadline: string | null = null;
@@ -332,7 +333,7 @@ export default (props: ListProps): ElementModel =>
       }
     };
 
-    container.appendChild(loader.element);
+    container.appendChild(loading.element);
 
     feedFetch.start({
       ...props,

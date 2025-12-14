@@ -37,15 +37,8 @@ import { type ElementModel } from '../../_types';
 export default (props: ListProps): ElementModel =>
   createBaseFeed({
     ...props,
-
-    // Use experts fetch strategy
+    cardType: 'list',
     fetchStrategy: expertsFetchStrategy,
-
-    // Use experts display strategy (uses person elements)
     displayStrategy: expertsDisplayStrategy,
-
-    // Use stacked layout for list view
     layoutStrategy: stackedLayout,
-
-    // No image config needed - experts display strategy handles headshots internally
   });

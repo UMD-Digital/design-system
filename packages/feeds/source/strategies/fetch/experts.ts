@@ -152,6 +152,7 @@ export const EXPERTS_QUERY = `
       offset: $offset
       type: "expertsContent"
       relatedTo: $relatedTo
+      orderBy: "expertsLastName"
     ) {
       ...EntriesNativeFields
       ... on expertsContent_Entry {

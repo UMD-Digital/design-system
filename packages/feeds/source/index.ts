@@ -7,7 +7,7 @@
  * ```
  * @since 1.9.0
  */
-export * as academic from './composite/academic';
+export * as academic from './feeds/academic';
 
 /**
  * Events feed components for displaying event listings.

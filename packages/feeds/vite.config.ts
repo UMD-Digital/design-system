@@ -8,8 +8,8 @@ export default defineConfig({
     lib: {
       entry: {
         index: path.resolve(__dirname, 'source/index.ts'),
-        academic: path.resolve(__dirname, 'source/composite/academic/index.ts'),
         news: path.resolve(__dirname, 'source/composite/news/index.ts'),
+        academic: path.resolve(__dirname, 'source/feeds/academic/index.ts'),
         events: path.resolve(__dirname, 'source/feeds/events/index.ts'),
       },
       name: 'UMDFeedsLibrary',
@@ -37,7 +37,7 @@ export default defineConfig({
       macros: path.resolve(__dirname, 'source/macros'),
       elements: path.resolve(__dirname, 'source/elements'),
       states: path.resolve(__dirname, 'source/states'),
-      widgets: path.resolve(__dirname, 'source/widgets')
+      widgets: path.resolve(__dirname, 'source/widgets'),
       factory: path.resolve(__dirname, 'source/factory'),
       strategies: path.resolve(__dirname, 'source/strategies')
     }

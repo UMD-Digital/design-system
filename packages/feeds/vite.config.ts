@@ -38,6 +38,7 @@ export default defineConfig({
       elements: path.resolve(__dirname, 'source/elements'),
       states: path.resolve(__dirname, 'source/states'),
       widgets: path.resolve(__dirname, 'source/widgets')
+      factory: path.resolve(__dirname, 'source/factory'),
     }
   },
   css: {

@@ -11,7 +11,7 @@
  * @example
  * ```typescript
  * import * as Feeds from '@universityofmaryland/web-feeds-library';
- * const featured = Feeds.news.featured({ 
+ * const featured = Feeds.news.featured({
  *   token: 'your-token',
  *   isLazyLoad: true
  * });
@@ -32,7 +32,7 @@ export { default as featured } from './featured';
  * @example
  * ```typescript
  * import * as Feeds from '@universityofmaryland/web-feeds-library';
- * const grid = Feeds.news.grid({ 
+ * const grid = Feeds.news.grid({
  *   token: 'your-token',
  *   numberOfColumnsToShow: 2
  * });
@@ -52,7 +52,7 @@ export { default as grid } from './grid';
  * @example
  * ```typescript
  * import * as Feeds from '@universityofmaryland/web-feeds-library';
- * const list = Feeds.news.list({ 
+ * const list = Feeds.news.list({
  *   token: 'your-token',
  *   isTransparent: true
  * });

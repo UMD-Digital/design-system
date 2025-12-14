@@ -4,7 +4,7 @@ import {
   gridGap,
 } from '@universityofmaryland/web-elements-library/layout';
 import { createImageOrLinkedImage } from '@universityofmaryland/web-utilities-library/elements';
-import * as feedMacros from 'macros';
+import { LoadingState } from 'states';
 import * as feedFetch from './common/fetch';
 import * as feedDisplay from './common/display';
 import * as dataComposed from './common/data';
@@ -15,7 +15,8 @@ export default (props: BlockProps): ElementModel =>
   (() => {
     const { isThemeDark, isTransparent, numberOfColumnsToShow, isTypeOverlay } =
       props;
-    const loader = feedMacros.loader.create({ isThemeDark });
+    // Use new class-based LoadingState API
+    const loading = new LoadingState({ isThemeDark });
     const container = document.createElement('div');
     const setTotalEntries = (count: number) => (totalEntries = count);
     const setOffset = (count: number) => (offset = offset + count);
@@ -28,7 +29,7 @@ export default (props: BlockProps): ElementModel =>
     let totalEntries = 0;
     let offset = 0;
     let styles = `
-      ${loader.styles}
+      ${loading.styles}
     `;
     let shadowRoot: ShadowRoot | null = null;
 
@@ -93,7 +94,7 @@ export default (props: BlockProps): ElementModel =>
       ? grid({ columns: numberOfColumnsToShow as 2 | 3 | 4 })
       : gridGap({ columns: numberOfColumnsToShow as 2 | 3 | 4 });
 
-    container.appendChild(loader.element);
+    container.appendChild(loading.element);
 
     feedFetch.start({
       ...props,

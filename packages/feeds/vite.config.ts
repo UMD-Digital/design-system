@@ -35,7 +35,9 @@ export default defineConfig({
     extensions: ['.ts', '.js', '.css'],
     alias: {
       macros: path.resolve(__dirname, 'source/macros'),
-      elements: path.resolve(__dirname, 'source/elements')
+      elements: path.resolve(__dirname, 'source/elements'),
+      states: path.resolve(__dirname, 'source/states'),
+      widgets: path.resolve(__dirname, 'source/widgets')
     }
   },
   css: {

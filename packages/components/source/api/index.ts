@@ -69,6 +69,7 @@ import carouselWide from './carousel/wide';
 import feedEventsGrid from './feed/events/grid';
 import feedEventsGrouped from './feed/events/grouped';
 import feedEventsList from './feed/events/list';
+import feedExpertsList from './feed/experts/list';
 import feedNewsFeatured from './feed/news/featured';
 import feedNewsGrid from './feed/news/grid';
 import feedNewsList from './feed/news/list';
@@ -77,6 +78,7 @@ import feedAlert from './feed/alert';
 /** @internal */ export { default as feedEventsGrid } from './feed/events/grid';
 /** @internal */ export { default as feedEventsGrouped } from './feed/events/grouped';
 /** @internal */ export { default as feedEventsList } from './feed/events/list';
+/** @internal */ export { default as feedExpertsList } from './feed/experts/list';
 /** @internal */ export { default as feedNewsFeatured } from './feed/news/featured';
 /** @internal */ export { default as feedNewsGrid } from './feed/news/grid';
 /** @internal */ export { default as feedNewsList } from './feed/news/list';
@@ -220,6 +222,7 @@ export const feed = {
   eventsGrid: feedEventsGrid,
   eventsGrouped: feedEventsGrouped,
   eventsList: feedEventsList,
+  expertsList: feedExpertsList,
   newsFeatured: feedNewsFeatured,
   newsGrid: feedNewsGrid,
   newsList: feedNewsList,

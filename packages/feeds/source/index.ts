@@ -10,6 +10,17 @@
 export * as academic from './feeds/academic';
 
 /**
+ * Experts feed components for displaying expert profiles.
+ * @example
+ * ```typescript
+ * import * as Feeds from '@universityofmaryland/web-feeds-library';
+ * const expertsList = Feeds.experts.list({ token: 'your-token' });
+ * ```
+ * @since 1.17.0
+ */
+export * as experts from './feeds/experts';
+
+/**
  * Events feed components for displaying event listings.
  * @example
  * ```typescript

@@ -10,6 +10,7 @@ export default defineConfig({
         index: path.resolve(__dirname, 'source/index.ts'),
         academic: path.resolve(__dirname, 'source/feeds/academic/index.ts'),
         events: path.resolve(__dirname, 'source/feeds/events/index.ts'),
+        experts: path.resolve(__dirname, 'source/feeds/experts/index.ts'),
         news: path.resolve(__dirname, 'source/feeds/news/index.ts'),
       },
       name: 'UMDFeedsLibrary',

@@ -19,6 +19,17 @@ module.exports = {
       element: document.createElement('div'),
       styles: '.mock-style-list-card',
     }),
+    overlay: {
+      color: jest.fn().mockReturnValue({
+        element: document.createElement('div'),
+        styles: '.mock-style-overlay-card-color',
+      }),
+      image: jest.fn().mockReturnValue({
+        element: document.createElement('div'),
+        styles: '.mock-style-overlay-card-image',
+      }),
+    },
+    imageClassRef: 'umd-element-card-overlay-image',
   },
   carousel: {
     cards: jest.fn().mockReturnValue({

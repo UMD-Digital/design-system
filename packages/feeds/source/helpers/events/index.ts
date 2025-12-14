@@ -6,6 +6,9 @@ export const eventNames = {
   /** Triggered when a feed has finished loading its content */
   FEED_LOADED: 'feed:loaded',
 
+  /** Triggered when a feed loads more content (lazy loading/pagination) */
+  FEED_LOADED_MORE: 'feed:loaded:more',
+
   /** Triggered when an error occurs during feed loading or processing */
   FEED_ERROR: 'feed:error',
 };

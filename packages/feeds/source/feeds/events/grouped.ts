@@ -18,7 +18,8 @@ import {
   createImageOrLinkedImage,
 } from '@universityofmaryland/web-utilities-library/elements';
 import { LoadingState, PaginationState, EmptyState, Announcer } from 'states';
-import { eventsFetchStrategyRange, EventType } from 'strategies';
+import { eventsFetchStrategyRange } from 'strategies';
+import { EventEntry } from 'types/data';
 import {
   grouping,
   events as eventUtilities,
@@ -82,7 +83,7 @@ export default (props: ListProps): ElementModel => {
   setStyles(layoutElement.styles);
 
   // Render grouped events
-  const renderGroupedEvents = async (events: EventType[]) => {
+  const renderGroupedEvents = async (events: EventEntry[]) => {
     const grid = container.querySelector(
       '#umd-feed-events-grouped-container',
     ) as HTMLElement;

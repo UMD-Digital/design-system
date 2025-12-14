@@ -7,7 +7,7 @@
  */
 
 import { createGraphQLFetchStrategy } from './graphql';
-import { EventType } from '../display/events';
+import { EventEntry } from 'types/data';
 
 /**
  * GraphQL queries for events
@@ -136,7 +136,7 @@ export const EVENTS_SLIDER_QUERY = `
  * });
  * ```
  */
-export const eventsFetchStrategy = createGraphQLFetchStrategy<EventType>({
+export const eventsFetchStrategy = createGraphQLFetchStrategy<EventEntry>({
   endpoint: 'https://calendar.umd.edu/graphql',
 
   queries: {
@@ -172,7 +172,7 @@ export const eventsFetchStrategy = createGraphQLFetchStrategy<EventType>({
  * Uses rangeStart filter instead of startsAfterOrAt.
  * Used for grouped event displays.
  */
-export const eventsFetchStrategyRange = createGraphQLFetchStrategy<EventType>({
+export const eventsFetchStrategyRange = createGraphQLFetchStrategy<EventEntry>({
   endpoint: 'https://calendar.umd.edu/graphql',
 
   queries: {

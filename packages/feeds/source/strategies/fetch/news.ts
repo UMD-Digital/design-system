@@ -7,7 +7,7 @@
  */
 
 import { createGraphQLFetchStrategy } from './graphql';
-import { NewsEntryType } from '../display/news';
+import { NewsEntry } from 'types/data';
 
 /**
  * GraphQL query for news articles
@@ -63,7 +63,7 @@ export const ARTICLES_QUERY = `
  * });
  * ```
  */
-export const newsFetchStrategy = createGraphQLFetchStrategy<NewsEntryType>({
+export const newsFetchStrategy = createGraphQLFetchStrategy<NewsEntry>({
   endpoint: 'https://today.umd.edu/graphql',
 
   queries: {

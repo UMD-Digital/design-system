@@ -32,7 +32,7 @@ export {
   expertsDisplayStrategy,
 } from './display';
 
-export type { EventType, NewsEntryType, ExpertType } from './display';
+export type { EventEntry, NewsEntry, ExpertEntry } from './display';
 
 // Fetch strategies
 export {

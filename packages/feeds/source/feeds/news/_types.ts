@@ -77,6 +77,13 @@ export interface BlockProps extends BaseProps {
   isTypeOverlay?: boolean;
 }
 
+/**
+ * Featured layout props
+ * Note: numberOfRowsToStart (from BaseProps) is ignored - featured layout always shows:
+ * - 1 overlay card (left column)
+ * - 2 block cards in 2-column grid (right column)
+ * - Total: 3 cards initially, then 2 cards per lazy-load
+ */
 export interface FeaturedProps extends BaseProps {
   isTransparent?: boolean;
   isLayoutReversed?: boolean;

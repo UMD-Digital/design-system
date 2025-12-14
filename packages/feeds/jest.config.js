@@ -6,5 +6,12 @@ module.exports = {
   displayName: 'feeds',
   testEnvironment: 'jsdom',
   rootDir: path.resolve(__dirname),
-  moduleNameMapper: rootConfig.moduleNameMapper,
+  moduleNameMapper: {
+    ...rootConfig.moduleNameMapper,
+    '^factory$': '<rootDir>/source/factory',
+    '^strategies$': '<rootDir>/source/strategies',
+    '^states$': '<rootDir>/source/states',
+    '^helpers$': '<rootDir>/source/helpers',
+    '^widgets$': '<rootDir>/source/widgets',
+  },
 };

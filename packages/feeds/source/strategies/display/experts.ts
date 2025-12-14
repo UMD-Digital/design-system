@@ -36,11 +36,10 @@ export const expertsDisplayStrategy: DisplayStrategy<ExpertEntry> = {
 
   mapEntryToCard: (
     entry: ExpertEntry,
-    options: CardMappingOptions
+    options: CardMappingOptions,
   ): ElementModel => {
-    const {
-      isThemeDark = false,
-    } = options;
+    const { isThemeDark = false, cardType = 'block' } = options;
+    const url = `https://umdrightnow.umd.edu/expert/${entry.slug}`;
 
     // Build full name
     const fullName = entry.middleName
@@ -50,7 +49,7 @@ export const expertsDisplayStrategy: DisplayStrategy<ExpertEntry> = {
     // Create name (expert name with link)
     const name = createTextWithLink({
       text: fullName,
-      url: entry.url,
+      url: url,
     });
 
     // Get primary job title and organization
@@ -83,19 +82,31 @@ export const expertsDisplayStrategy: DisplayStrategy<ExpertEntry> = {
       ? createImageOrLinkedImage({
           imageUrl: entry.headshot[0].url,
           altText: fullName,
-          linkUrl: entry.url,
+          linkUrl: url,
           linkLabel: `View profile for ${fullName}`,
         })
       : undefined;
 
-    // Create person element
-    return person.block({
+    // Common card properties
+    const commonProps = {
       name,
       job,
       association,
       subText,
       image,
       isThemeDark,
+    };
+
+    // Handle list card type
+    if (cardType === 'list') {
+      return person.list({
+        ...commonProps,
+      });
+    }
+
+    // Create person element
+    return person.block({
+      ...commonProps,
     });
   },
 };

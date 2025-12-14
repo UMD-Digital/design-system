@@ -37,20 +37,10 @@ import { type ElementModel } from '../../_types';
 export default (props: ListProps): ElementModel =>
   createBaseFeed({
     ...props,
-
-    // Use list card type for events
     cardType: 'list',
-
-    // Use events fetch strategy
     fetchStrategy: eventsFetchStrategy,
-
-    // Use events display strategy
     displayStrategy: eventsDisplayStrategy,
-
-    // Use stacked layout for list view
     layoutStrategy: stackedLayout,
-
-    // Configure images
     imageConfig: (entry) => ({
       imageUrl: entry.image[0].url,
       altText: entry.image[0].altText || 'Event Image',

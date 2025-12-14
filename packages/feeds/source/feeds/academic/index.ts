@@ -1,6 +1,3 @@
-import { type ElementModel } from '../../_types';
-import { type AcademicSliderProps } from './_types';
-
 /**
  * Creates a slider component for displaying academic events.
  *

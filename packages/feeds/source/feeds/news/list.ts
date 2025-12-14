@@ -37,22 +37,11 @@ import { type ElementModel } from '../../_types';
 export default (props: ListProps): ElementModel =>
   createBaseFeed({
     ...props,
-
-    // Use list card type for news
     cardType: 'list',
-    // News list uses non-aligned cards
     isAligned: false,
-
-    // Use news fetch strategy
     fetchStrategy: newsFetchStrategy,
-
-    // Use news display strategy
     displayStrategy: newsDisplayStrategy,
-
-    // Use stacked layout for list view
     layoutStrategy: stackedLayout,
-
-    // Configure images
     imageConfig: (entry) => ({
       imageUrl: entry.image[0].url,
       altText: entry.image[0].altText || 'News Article Image',

@@ -49,22 +49,11 @@ export default (props: BlockProps): ElementModel => {
 
   return createBaseFeed({
     ...props,
-
-    // Use overlay mode if requested
     isOverlay: isTypeOverlay,
-    // News grid uses aligned cards for block style
     isAligned: !isTypeOverlay,
-
-    // Use news fetch strategy
     fetchStrategy: newsFetchStrategy,
-
-    // Use news display strategy
     displayStrategy: newsDisplayStrategy,
-
-    // Use grid layout for overlay, gridGap for standard
     layoutStrategy: isTypeOverlay ? gridLayout : gridGapLayout,
-
-    // Configure images
     imageConfig: (entry) => ({
       imageUrl: entry.image[0].url,
       altText: entry.image[0].altText || 'News Article Image',

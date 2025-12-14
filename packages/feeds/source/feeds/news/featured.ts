@@ -16,12 +16,18 @@ import {
   gridGap,
   gridOffset,
 } from '@universityofmaryland/web-elements-library/layout';
-import { createImageOrLinkedImage } from '@universityofmaryland/web-utilities-library/elements';
-import * as Styles from '@universityofmaryland/web-styles-library';
-import { LoadingState, PaginationState, EmptyState, Announcer } from '../../states';
+import {
+  LoadingState,
+  PaginationState,
+  EmptyState,
+  Announcer,
+} from '../../states';
 import { newsFetchStrategy } from '../../strategies/fetch/news';
 import { newsDisplayStrategy } from '../../strategies/display/news';
-import { events as eventUtilities, styles as styleUtilities } from '../../helpers';
+import {
+  events as eventUtilities,
+  styles as styleUtilities,
+} from '../../helpers';
 import { type FeaturedProps } from './_types';
 import { type ElementModel } from '../../_types';
 import { NewsEntry } from 'types/data';

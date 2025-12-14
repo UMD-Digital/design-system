@@ -38,17 +38,9 @@ import { type ElementModel } from '../../_types';
 export default (props: BlockProps): ElementModel =>
   createBaseFeed({
     ...props,
-
-    // Use events fetch strategy
     fetchStrategy: eventsFetchStrategy,
-
-    // Use events display strategy
     displayStrategy: eventsDisplayStrategy,
-
-    // Use grid gap layout
     layoutStrategy: gridGapLayout,
-
-    // Configure images
     imageConfig: (entry) => ({
       imageUrl: entry.image[0].url,
       altText: entry.image[0].altText || 'Event Image',

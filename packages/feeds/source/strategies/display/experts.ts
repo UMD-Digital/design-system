@@ -15,32 +15,7 @@ import {
 } from '@universityofmaryland/web-utilities-library/elements';
 import { DisplayStrategy, CardMappingOptions } from '../../factory/core/types';
 import { ElementModel } from '../../_types';
-
-/**
- * Expert entry type
- */
-export interface ExpertType {
-  id: number | string;
-  firstName: string;
-  middleName?: string | null;
-  lastName: string;
-  url: string;
-  title?: string;
-  headshot?: Array<{ url: string }> | null;
-  summary?: {
-    plainText: string;
-  } | null;
-  organizations?: Array<{
-    id: string;
-    title: string;
-    url: string;
-    jobs: Array<{
-      id: string;
-      title: string;
-      url: string;
-    }>;
-  }>;
-}
+import { ExpertEntry } from 'types/data';
 
 /**
  * Experts display strategy
@@ -56,11 +31,11 @@ export interface ExpertType {
  * });
  * ```
  */
-export const expertsDisplayStrategy: DisplayStrategy<ExpertType> = {
+export const expertsDisplayStrategy: DisplayStrategy<ExpertEntry> = {
   layoutType: 'list',
 
   mapEntryToCard: (
-    entry: ExpertType,
+    entry: ExpertEntry,
     options: CardMappingOptions
   ): ElementModel => {
     const {

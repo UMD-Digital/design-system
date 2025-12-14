@@ -8,10 +8,8 @@
  */
 
 export { eventsDisplayStrategy } from './events';
-export type { EventType } from './events';
-
 export { newsDisplayStrategy } from './news';
-export type { NewsEntryType } from './news';
-
 export { expertsDisplayStrategy } from './experts';
-export type { ExpertType } from './experts';
+
+// Export centralized types (from types/data)
+export type { EventEntry, NewsEntry, ExpertEntry } from 'types/data';

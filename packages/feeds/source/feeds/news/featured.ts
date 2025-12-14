@@ -24,7 +24,7 @@ import { newsDisplayStrategy } from '../../strategies/display/news';
 import { events as eventUtilities, styles as styleUtilities } from '../../helpers';
 import { type FeaturedProps } from './_types';
 import { type ElementModel } from '../../_types';
-import { NewsEntryType } from '../../strategies/display/news';
+import { NewsEntry } from 'types/data';
 
 export default (props: FeaturedProps): ElementModel => {
   const {
@@ -34,10 +34,12 @@ export default (props: FeaturedProps): ElementModel => {
     isLayoutReversed = false,
     isTransparent = false,
     overwriteStickyPosition,
-    numberOfRowsToStart = 3,
     categories,
     isUnion = false,
   } = props;
+
+  // Featured layout is fixed: 1 overlay card + 2 block cards in 2-column grid = 3 items
+  const INITIAL_ITEMS = 3;
 
   // State management
   const container = document.createElement('div');
@@ -73,7 +75,7 @@ export default (props: FeaturedProps): ElementModel => {
   };
 
   // Render the featured layout (first load only)
-  const renderFeaturedLayout = async (entries: NewsEntryType[]) => {
+  const renderFeaturedLayout = async (entries: NewsEntry[]) => {
     if (entries.length < 2 || hasRenderedOffset) {
       // Fall back to simple grid if not enough entries or already rendered
       return renderStandardGrid(entries);
@@ -148,8 +150,8 @@ export default (props: FeaturedProps): ElementModel => {
 
     // Announcer
     const message = isLazyLoad
-      ? `Showing ${offset} of ${totalEntries} articles`
-      : `Showing ${offset} articles`;
+      ? `Showing ${INITIAL_ITEMS} of ${totalEntries} articles`
+      : `Showing ${INITIAL_ITEMS} articles`;
     const announcer = new Announcer({ message });
     container.appendChild(announcer.getElement());
 
@@ -157,7 +159,7 @@ export default (props: FeaturedProps): ElementModel => {
   };
 
   // Render standard grid (for lazy-loaded items or fallback)
-  const renderStandardGrid = async (entries: NewsEntryType[]) => {
+  const renderStandardGrid = async (entries: NewsEntry[]) => {
     let gridContainer = container.querySelector(
       '#umd-featured-news-grid-container',
     ) as HTMLElement;
@@ -195,11 +197,13 @@ export default (props: FeaturedProps): ElementModel => {
 
   // Load more (for lazy loading)
   const loadMore = async () => {
+    // Load 2 more items to fill a row in the 2-column grid
     const variables = newsFetchStrategy.composeApiVariables({
       token,
       categories,
       isUnion,
-      numberOfRowsToStart: 2, // Load 2 more at a time
+      numberOfRowsToStart: 2,
+      numberOfColumnsToShow: 1, // Fetch exactly 2 items (1 * 2 = 2)
       getOffset: () => offset,
     });
 
@@ -235,13 +239,15 @@ export default (props: FeaturedProps): ElementModel => {
 
   // Initialize feed
   const initialize = async () => {
-    container.appendChild(loading.element);
+    loading.show(container);
 
+    // Featured layout always fetches 3 items initially (1 overlay + 2 block cards)
     const variables = newsFetchStrategy.composeApiVariables({
       token,
       categories,
       isUnion,
-      numberOfRowsToStart,
+      numberOfRowsToStart: INITIAL_ITEMS,
+      numberOfColumnsToShow: 1, // Fetch exactly 3 items (1 * 3 = 3)
       getOffset: () => 0,
     });
 

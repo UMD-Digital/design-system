@@ -7,7 +7,7 @@
  */
 
 import { createGraphQLFetchStrategy } from './graphql';
-import { ExpertType } from '../display/experts';
+import { ExpertEntry } from 'types/data';
 
 /**
  * GraphQL fragments for expert data
@@ -190,7 +190,7 @@ export const EXPERTS_QUERY = `
  * });
  * ```
  */
-export const expertsFetchStrategy = createGraphQLFetchStrategy<ExpertType>({
+export const expertsFetchStrategy = createGraphQLFetchStrategy<ExpertEntry>({
   endpoint: 'https://umd-api.production.servd.dev/graphql',
 
   queries: {

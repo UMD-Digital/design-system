@@ -40,7 +40,8 @@ export default defineConfig({
       states: path.resolve(__dirname, 'source/states'),
       widgets: path.resolve(__dirname, 'source/widgets'),
       factory: path.resolve(__dirname, 'source/factory'),
-      strategies: path.resolve(__dirname, 'source/strategies')
+      strategies: path.resolve(__dirname, 'source/strategies'),
+      types: path.resolve(__dirname, 'source/types')
     }
   },
   css: {

@@ -16,19 +16,7 @@ import {
 } from '@universityofmaryland/web-utilities-library/elements';
 import { DisplayStrategy, CardMappingOptions } from '../../factory/core/types';
 import { ElementModel } from '../../_types';
-
-/**
- * News entry type
- */
-export interface NewsEntryType {
-  id: number | string;
-  title: string;
-  url: string;
-  summary: string;
-  image: Array<{ url: string; altText?: string }>;
-  date: string;
-  dateFormatted: string;
-}
+import { NewsEntry } from 'types/data';
 
 /**
  * News display strategy
@@ -49,11 +37,11 @@ export interface NewsEntryType {
  * });
  * ```
  */
-export const newsDisplayStrategy: DisplayStrategy<NewsEntryType> = {
+export const newsDisplayStrategy: DisplayStrategy<NewsEntry> = {
   layoutType: 'grid',
 
   mapEntryToCard: (
-    entry: NewsEntryType,
+    entry: NewsEntry,
     options: CardMappingOptions
   ): ElementModel => {
     const {

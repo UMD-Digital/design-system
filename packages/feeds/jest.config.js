@@ -13,5 +13,7 @@ module.exports = {
     '^states$': '<rootDir>/source/states',
     '^helpers$': '<rootDir>/source/helpers',
     '^widgets$': '<rootDir>/source/widgets',
+    '^types$': '<rootDir>/source/types',
+    '^types/(.*)$': '<rootDir>/source/types/$1',
   },
 };

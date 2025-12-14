@@ -16,29 +16,7 @@ import {
 } from '@universityofmaryland/web-utilities-library/elements';
 import { DisplayStrategy, CardMappingOptions } from '../../factory/core/types';
 import { ElementModel } from '../../_types';
-
-/**
- * Event entry type
- */
-export interface EventType {
-  id: number | string;
-  title: string;
-  url: string;
-  summary: string;
-  image: Array<{ url: string; altText?: string }>;
-  startMonth: string;
-  startDay: string;
-  endMonth?: string;
-  endDay?: string;
-  startStamp: string;
-  // Fields required for eventMeta
-  startDayOfWeek?: string;
-  startTime?: string;
-  endDayOfWeek?: string;
-  endTime?: string;
-  location?: Array<{ title: string }>;
-  allDay?: boolean;
-}
+import { EventEntry } from 'types/data';
 
 /**
  * Events display strategy
@@ -59,11 +37,11 @@ export interface EventType {
  * });
  * ```
  */
-export const eventsDisplayStrategy: DisplayStrategy<EventType> = {
+export const eventsDisplayStrategy: DisplayStrategy<EventEntry> = {
   layoutType: 'grid',
 
   mapEntryToCard: (
-    entry: EventType,
+    entry: EventEntry,
     options: CardMappingOptions,
   ): ElementModel => {
     const {

@@ -7,11 +7,11 @@
  * @module utilities/grouping/events
  */
 
-import { EventType } from '../../strategies/display';
+import { EventEntry } from 'types/data';
 
 export interface GroupedEvent {
   date: string;
-  events: EventType[];
+  events: EventEntry[];
 }
 
 const MONTH_MAP: Record<string, string> = {
@@ -122,14 +122,14 @@ export const parseLocalDate = (dateString: string): Date => {
 /**
  * Get the start date of an event
  */
-export const getEventStartDate = (event: EventType): Date => {
+export const getEventStartDate = (event: EventEntry): Date => {
   return parseLocalDate(event.startStamp.split('T')[0]);
 };
 
 /**
  * Check if an event spans multiple days
  */
-export const isMultiDayEvent = (event: EventType): boolean => {
+export const isMultiDayEvent = (event: EventEntry): boolean => {
   const startParts = event.startStamp.split('T')[0].split('-');
   const startMonth = startParts[1];
   const startDay = startParts[2];
@@ -142,7 +142,7 @@ export const isMultiDayEvent = (event: EventType): boolean => {
 /**
  * Check if an event starts on a specific date
  */
-export const eventStartsOnDate = (event: EventType, targetDate: Date): boolean => {
+export const eventStartsOnDate = (event: EventEntry, targetDate: Date): boolean => {
   const eventStartDate = getEventStartDate(event);
   return eventStartDate.getTime() === targetDate.getTime();
 };
@@ -155,7 +155,7 @@ export const eventStartsOnDate = (event: EventType, targetDate: Date): boolean =
  * 2. Single-day events
  * 3. Multi-day events that don't start on this date
  */
-export const getEventPriority = (event: EventType, groupDate: Date): number => {
+export const getEventPriority = (event: EventEntry, groupDate: Date): number => {
   const isMulti = isMultiDayEvent(event);
   const startsOnDate = eventStartsOnDate(event, groupDate);
 
@@ -168,9 +168,9 @@ export const getEventPriority = (event: EventType, groupDate: Date): number => {
  * Sort events by priority within a date group
  */
 export const sortEventsByPriority = (
-  events: EventType[],
+  events: EventEntry[],
   groupDate: Date,
-): EventType[] => {
+): EventEntry[] => {
   return [...events].sort((a, b) => {
     const aPriority = getEventPriority(a, groupDate);
     const bPriority = getEventPriority(b, groupDate);
@@ -184,7 +184,7 @@ export const sortEventsByPriority = (
  * Groups events by their start date, with past events grouped under today.
  * Each group is sorted by priority (multi-day events starting today first).
  */
-export const groupEventsByDate = (events: EventType[]): GroupedEvent[] => {
+export const groupEventsByDate = (events: EventEntry[]): GroupedEvent[] => {
   const currentDate = new Date();
   currentDate.setHours(0, 0, 0, 0);
 

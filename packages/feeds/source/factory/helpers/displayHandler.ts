@@ -9,7 +9,7 @@
 
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { PaginationState, EmptyState, Announcer } from '../../states';
-import { events } from '../../utilities';
+import { events } from '../../helpers';
 import {
   DisplayStrategy,
   FeedHelpers,

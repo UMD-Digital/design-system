@@ -1,4 +1,4 @@
-import * as events from '../../../source/utilities/events/index';
+import * as events from '../../../source/helpers/events/index';
 
 describe('Events Utility', () => {
   let element: HTMLElement;

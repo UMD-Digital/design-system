@@ -49,6 +49,10 @@ module.exports = {
       __dirname,
       './__mocks__/@universityofmaryland/web-elements-library/composite.js',
     ),
+    '^@universityofmaryland/web-elements-library/layout$': path.resolve(
+      __dirname,
+      './__mocks__/@universityofmaryland/web-elements-library/layout.js',
+    ),
     '^@universityofmaryland/web-elements-library$': path.resolve(
       __dirname,
       './__mocks__/webElementsLibrary.js',

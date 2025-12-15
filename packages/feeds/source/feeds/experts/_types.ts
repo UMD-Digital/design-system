@@ -8,6 +8,8 @@
 
 /**
  * Base props for all expert feed variants
+ *
+ * Common properties shared across all expert feed layouts.
  */
 export interface BaseProps {
   /** API authentication token */
@@ -16,18 +18,50 @@ export interface BaseProps {
   numberOfRowsToStart: number;
   /** Category IDs to filter by (areas of expertise, campus units, etc.) */
   categories?: string[];
-  /** Use dark theme styling */
+  /** Enable dark theme */
   isThemeDark?: boolean;
   /** Enable lazy loading with "Load more" button */
   isLazyLoad: boolean;
   /** IDs of entries to exclude from results */
   entriesToRemove?: string[];
+  /** Optional callback to receive generated CSS styles */
+  styleCallback?: (cssString: string) => void;
+}
+
+/**
+ * Props for grid layout expert feeds
+ *
+ * Grid layout displays experts in a multi-column responsive grid.
+ */
+export interface GridProps extends BaseProps {
+  /** Number of columns to display (2-4) */
+  numberOfColumnsToShow?: number;
+  /** Use transparent card backgrounds */
+  isTransparent?: boolean;
+  /** Use overlay card style (requires headshot image) */
+  isOverlay?: boolean;
+  /** Card type for display */
+  cardType?: 'block' | 'list' | 'tabular';
 }
 
 /**
  * Props for list layout expert feeds
+ *
+ * List layout displays experts in a single-column vertical list.
  */
 export interface ListProps extends BaseProps {
-  /** Number of rows to display initially */
-  numberOfColumns: number;
+  /** Card type for display (typically 'list' or 'tabular') */
+  cardType?: 'list' | 'tabular';
+}
+
+/**
+ * Props for single expert bio display
+ *
+ * Bio layout displays a single expert's full profile.
+ * Default uses 'small' layout with summary field.
+ * Set data-display="full" on element to use 'full' layout with bio field.
+ */
+export interface BioProps extends Omit<BaseProps, 'numberOfRowsToStart' | 'isLazyLoad' | 'categories' | 'entriesToRemove'> {
+  /** Expert ID to fetch and display */
+  expertId: string;
 }

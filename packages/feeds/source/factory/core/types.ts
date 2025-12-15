@@ -74,8 +74,8 @@ export interface CardMappingOptions {
   isOverlay?: boolean;
   /** Whether to align items */
   isAligned?: boolean;
-  /** Card type (block, list, overlay) */
-  cardType?: 'block' | 'list' | 'overlay';
+  /** Card type (block, list, tabular, overlay) */
+  cardType?: 'block' | 'list' | 'tabular' | 'overlay';
   /** Configuration for images */
   imageConfig?: (entry: any) => ImageConfig;
   /** Additional custom options */
@@ -173,7 +173,7 @@ export interface BaseFeedConfig<TData, TVariables = any> {
   /** Whether to align card content */
   isAligned?: boolean;
   /** Card type for display strategy */
-  cardType?: 'block' | 'list' | 'overlay';
+  cardType?: 'block' | 'list' | 'tabular' | 'overlay';
   /** Number of columns to show (for grid layouts) */
   numberOfColumnsToShow?: number;
   /** Number of rows to show initially */

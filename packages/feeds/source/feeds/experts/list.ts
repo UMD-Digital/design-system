@@ -37,7 +37,7 @@ import { type ElementModel } from '../../_types';
 export default (props: ListProps): ElementModel =>
   createBaseFeed({
     ...props,
-    cardType: 'list',
+    cardType: props.numberOfColumns === 2 ? 'list' : 'tabular',
     fetchStrategy: expertsFetchStrategy,
     displayStrategy: expertsDisplayStrategy,
     layoutStrategy: stackedLayout,

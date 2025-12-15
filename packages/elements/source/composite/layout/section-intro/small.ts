@@ -4,6 +4,7 @@ import * as typography from '@universityofmaryland/web-styles-library/typography
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { type ElementModel } from '../../../_types';
+import { SimpleRichTextOptions } from '../../../../../styles/dist/element/text/rich';
 
 export interface SectionIntroProps {
   headline?: HTMLElement | null;
@@ -63,22 +64,33 @@ const createHeadline = (
 };
 
 const createText = (
-  props: Pick<SectionIntroProps, 'text' | 'isThemeDark'>,
+  props: Pick<SectionIntroProps, 'text' | 'isThemeDark' | 'headline'>,
 ): ElementModel<HTMLElement> | null => {
-  const { text, isThemeDark } = props;
+  const { text, headline, isThemeDark } = props;
+  const simpleRichTextOptions: SimpleRichTextOptions = {
+    size: 'large',
+    theme: theme.fontColor(isThemeDark),
+  };
   if (!text) return null;
+  if (!headline) simpleRichTextOptions.size = 'largest';
 
   return new ElementBuilder(text)
-    .styled(
-      Styles.element.text.rich.composeSimple({
-        size: 'large',
-        theme: theme.fontColor(isThemeDark),
-      }),
-    )
+    .styled(Styles.element.text.rich.composeSimple(simpleRichTextOptions))
     .withStyles({
       element: {
         [`* + &`]: {
           marginTop: token.spacing.sm,
+        },
+
+        [`&, & > *`]: {
+          ...(!headline && {
+            ...typography.sans.transformations.largerBold,
+            color: token.color.black,
+
+            ...(isThemeDark && {
+              color: token.color.white,
+            }),
+          }),
         },
       },
     })
@@ -115,7 +127,7 @@ const createTextContainer = (
   const { headline, text, actions, includesAnimation, isThemeDark } = props;
 
   const headlineElement = createHeadline({ headline, isThemeDark });
-  const textElement = createText({ text, isThemeDark });
+  const textElement = createText({ text, headline, isThemeDark });
   const actionsElement = createActions({ actions });
 
   const container = new ElementBuilder()
@@ -125,17 +137,6 @@ const createTextContainer = (
         ...(includesAnimation && {
           opacity: 0,
         }),
-
-        ['& > *, p']: {
-          ...(!headline && {
-            ...typography.sans.transformations.largerBold,
-            color: token.color.black,
-
-            ...(isThemeDark && {
-              color: token.color.white,
-            }),
-          }),
-        },
 
         ['.intro-default-animated &']: {
           transform: 'translateY(100px)',

@@ -9,7 +9,7 @@ interface PersonDisplay extends PersonTheme {
 export interface PersonContact extends PersonTheme {
   phone?: HTMLElement | null;
   email?: HTMLElement | null;
-  linkendIn?: HTMLElement | null;
+  linkedin?: HTMLElement | null;
   address?: HTMLElement | null;
   additionalContact?: HTMLElement | null;
 }

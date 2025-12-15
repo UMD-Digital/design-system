@@ -17,7 +17,7 @@ export interface PersonContactProps
   additionalContact?: ContentElement;
   address?: ContentElement;
   email?: ContentElement;
-  linkendIn?: ContentElement;
+  linkedin?: ContentElement;
   phone?: ContentElement;
 }
 

@@ -107,7 +107,7 @@ const contactLockup = ({
   address,
   email,
   isThemeDark,
-  linkendIn,
+  linkedin,
   phone,
 }: PersonContactPropsWithStyles) =>
   textLockup.contact({
@@ -116,7 +116,7 @@ const contactLockup = ({
     address,
     email,
     isThemeDark,
-    linkendIn,
+    linkedin,
     phone,
   });
 
@@ -154,7 +154,7 @@ export const information = ({
   email,
   isThemeDark,
   job,
-  linkendIn,
+  linkedin,
   name,
   phone,
   pronouns,
@@ -175,7 +175,7 @@ export const information = ({
     address,
     email,
     isThemeDark,
-    linkendIn,
+    linkedin,
     phone,
   });
 

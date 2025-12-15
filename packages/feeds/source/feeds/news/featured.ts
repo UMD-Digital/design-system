@@ -55,6 +55,7 @@ export default (props: FeaturedProps): ElementModel => {
   let totalEntries = 0;
   let offset = 0;
   let hasRenderedOffset = false; // Track if offset layout was created
+  let pagination: PaginationState | null = null;
 
   // Helper to add styles
   const setStyles = (additionalStyles: string) => {
@@ -104,6 +105,7 @@ export default (props: FeaturedProps): ElementModel => {
     const firstEntry = entries[0];
     const overlayCard = newsDisplayStrategy.mapEntryToCard(firstEntry, {
       isOverlay: true,
+      isThemeDark,
       imageConfig: () => ({
         imageUrl: firstEntry.image[0]?.url,
         altText: firstEntry.image[0]?.altText || 'News Article Image',
@@ -112,7 +114,17 @@ export default (props: FeaturedProps): ElementModel => {
       }),
     });
 
-    setStyles(overlayCard.styles);
+    setStyles(`
+      ${overlayCard.styles}
+
+      .${card.overlay.imageClassRef} {
+        height: inherit;
+      }
+
+      .${card.overlay.imageClassRef} > * {
+        padding: 0;
+      }
+    `);
 
     // Next 2 items: block cards
     const remainingEntries = entries.slice(1, 3);
@@ -144,7 +156,7 @@ export default (props: FeaturedProps): ElementModel => {
 
     // Add pagination if needed
     if (isLazyLoad && totalEntries > offset) {
-      const pagination = new PaginationState({
+      pagination = new PaginationState({
         totalEntries,
         offset,
         isLazyLoad: true,
@@ -203,6 +215,14 @@ export default (props: FeaturedProps): ElementModel => {
 
   // Load more (for lazy loading)
   const loadMore = async () => {
+    // Remove pagination button
+    if (pagination) {
+      pagination.remove();
+    }
+
+    // Show loading indicator
+    loading.show(container);
+
     // Load 2 more items to fill a row in the 2-column grid
     const variables = newsFetchStrategy.composeApiVariables({
       token,
@@ -215,20 +235,30 @@ export default (props: FeaturedProps): ElementModel => {
 
     const entries = await newsFetchStrategy.fetchEntries(variables);
 
+    // Hide loading indicator
+    loading.hide();
+
     if (!entries || entries.length === 0) return;
 
     await renderStandardGrid(entries);
 
-    // Update pagination
-    if (isLazyLoad && totalEntries > offset) {
-      const pagination = new PaginationState({
-        totalEntries,
-        offset,
-        isLazyLoad: true,
-        callback: loadMore,
-      });
-      const paginationElement = pagination.render(container);
-      if (paginationElement) setStyles(paginationElement.styles);
+    // Update pagination state
+    if (pagination) {
+      pagination.updateState(offset, totalEntries);
+      // Add new button styles if one was created
+      if (pagination.styles) setStyles(pagination.styles);
+      // Update shadow root styles
+      await updateShadowStyles();
+    }
+
+    // Update announcer
+    const existingAnnouncer = container.querySelector(
+      '[role="status"]',
+    ) as HTMLElement;
+    if (existingAnnouncer) {
+      existingAnnouncer.textContent = isLazyLoad
+        ? `Showing ${offset} of ${totalEntries} articles`
+        : `Showing ${offset} articles`;
     }
 
     // Dispatch update event

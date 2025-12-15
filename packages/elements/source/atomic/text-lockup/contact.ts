@@ -107,7 +107,7 @@ export default ({
   address,
   email,
   isThemeDark,
-  linkendIn,
+  linkedin,
   phone,
 }: PersonContactProps) => {
   const container = new ElementBuilder()
@@ -140,12 +140,12 @@ export default ({
     container.withChild(emailElement);
   }
 
-  if (linkendIn) {
+  if (linkedin) {
     const linkedInElement = new ElementBuilder()
       .withClassName('text-lockup-contact-linkedin')
       .withChild(
         makeContactLink({
-          element: linkendIn,
+          element: linkedin,
           icon: iconLinkedIn,
           isThemeDark,
         }),

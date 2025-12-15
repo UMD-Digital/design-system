@@ -20,7 +20,7 @@ export default ({
   image,
   isThemeDark,
   job,
-  linkendIn,
+  linkedin,
   name,
   phone,
   pronouns,
@@ -90,7 +90,7 @@ export default ({
     );
   }
 
-  if (additionalContact || address || email || linkendIn || phone) {
+  if (additionalContact || address || email || linkedin || phone) {
     builder.withChild(
       layout.person.columns.contact({
         additionalContact,
@@ -98,7 +98,7 @@ export default ({
         customStyles: {},
         email,
         isThemeDark,
-        linkendIn,
+        linkedin,
         phone,
       }),
     );

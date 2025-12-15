@@ -210,6 +210,10 @@ const TextStyles = `
   ${CTA} {
     text-decoration: none;
   }
+
+  ${CTA} svg {
+    max-width: 20px;
+  }
 `
 
 // prettier-ignore

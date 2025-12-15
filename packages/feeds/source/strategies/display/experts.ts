@@ -1,14 +1,15 @@
 /**
  * Experts Display Strategy
  *
- * Strategy for displaying expert entries using person elements.
- * Maps expert data to person profile cards with biographical information,
+ * Strategy for displaying expert entries using person or card elements.
+ * Maps expert data to profile cards with biographical information,
  * including contact information and skills.
+ * Supports overlay cards when headshot images are available.
  *
  * @module strategies/display/experts
  */
 
-import { person } from '@universityofmaryland/web-elements-library/composite';
+import { person, card } from '@universityofmaryland/web-elements-library/composite';
 import {
   createTextWithLink,
   createTextContainer,
@@ -138,13 +139,48 @@ export const expertsDisplayStrategy: DisplayStrategy<ExpertEntry> = {
     entry: ExpertEntry,
     options: CardMappingOptions,
   ): ElementModel => {
-    const { isThemeDark = false, cardType = 'block' } = options;
+    const {
+      isThemeDark = false,
+      isTransparent = false,
+      isOverlay = false,
+      cardType = 'block',
+    } = options;
     const url = `https://umdrightnow.umd.edu/expert/${entry.slug}`;
 
     // Build full name
     const fullName = entry.middleName
       ? `${entry.firstName} ${entry.middleName} ${entry.lastName}`
       : `${entry.firstName} ${entry.lastName}`;
+
+    // Handle overlay card type (requires headshot)
+    if (isOverlay && entry.headshot?.[0]?.url) {
+      const headline = createTextWithLink({
+        text: fullName,
+        url: url,
+      });
+
+      const backgroundImage = createImageOrLinkedImage({
+        imageUrl: entry.headshot[0].url,
+        altText: fullName,
+        linkUrl: url,
+        linkLabel: `View profile for ${fullName}`,
+      });
+
+      // Get primary job title for subtext
+      const primaryJob = entry.organizations?.[0]?.jobs?.[0];
+      const text = primaryJob
+        ? createTextContainer({
+            text: primaryJob.title,
+          })
+        : undefined;
+
+      return card.overlay.image({
+        headline,
+        text,
+        backgroundImage,
+        isThemeDark,
+      });
+    }
 
     // Create name (expert name with link)
     const name = createTextWithLink({

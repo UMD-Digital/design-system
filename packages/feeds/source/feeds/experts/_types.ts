@@ -27,4 +27,7 @@ export interface BaseProps {
 /**
  * Props for list layout expert feeds
  */
-export interface ListProps extends BaseProps {}
+export interface ListProps extends BaseProps {
+  /** Number of rows to display initially */
+  numberOfColumns: number;
+}

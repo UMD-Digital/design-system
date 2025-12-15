@@ -20,7 +20,7 @@ const createComponent: CreateComponentFunction = (element) => {
   return list({
     token,
     numberOfRowsToStart: Math.min(Math.max(rowCount, 1), 10),
-    numberOfColumns: Math.min(Math.max(columnCount, 2), 3),
+    cardType: columnCount === 2 ? 'list' : 'tabular',
     isThemeDark: Attributes.isTheme.dark({ element }),
     isLazyLoad: Attributes.includesFeature.lazyLoad({ element }),
   });

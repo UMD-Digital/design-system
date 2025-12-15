@@ -9,6 +9,20 @@
 import { BaseEntry, Image } from '../core';
 
 /**
+ * Campus unit information
+ *
+ * Details about a campus unit associated with a job/position.
+ */
+export interface CampusUnit {
+  /** Campus unit name */
+  title: string;
+  /** External link to campus unit */
+  link?: {
+    url: string;
+  } | null;
+}
+
+/**
  * Expert job/position information
  *
  * Details about a specific job/position held by an expert.
@@ -22,6 +36,8 @@ export interface ExpertJob {
   url: string;
   /** Office/room number */
   roomNumber?: string;
+  /** Campus units associated with this job */
+  campusUnits?: CampusUnit[] | null;
 }
 
 /**
@@ -41,6 +57,34 @@ export interface ExpertOrganization {
 }
 
 /**
+ * Expert contact information
+ *
+ * Contact details for reaching the expert.
+ */
+export interface ExpertContact {
+  /** Expert's email address */
+  email?: string | null;
+  /** LinkedIn profile URL */
+  linkedin?: string | null;
+  /** Personal or professional website URL */
+  website?: string | null;
+  /** Twitter/X handle or profile URL */
+  twitter?: string | null;
+}
+
+/**
+ * Expert skills and capabilities
+ *
+ * Additional expertise and capabilities information.
+ */
+export interface ExpertSkills {
+  /** Languages spoken by the expert */
+  languages?: string[] | null;
+  /** Whether the expert is media trained */
+  mediaTrained?: boolean | null;
+}
+
+/**
  * Expert entry
  *
  * Complete data structure for an expert/faculty profile.
@@ -55,10 +99,22 @@ export interface ExpertEntry extends BaseEntry {
   lastName: string;
   /** Expert's headshot image */
   headshot?: Image[] | null;
-  /** Brief biography or description */
+  /** Brief summary of the expert */
   summary?: {
-    plainText: string;
+    html: string;
+  } | null;
+  /** Full biography of the expert */
+  bio?: {
+    html: string;
   } | null;
   /** Organizations and jobs the expert is affiliated with */
   organizations?: ExpertOrganization[];
+  /** Contact information */
+  email?: string | null;
+  linkedin?: string | null;
+  website?: string | null;
+  twitter?: string | null;
+  /** Skills and capabilities */
+  languages?: string[] | null;
+  mediaTrained?: boolean | null;
 }

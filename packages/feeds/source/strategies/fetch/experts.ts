@@ -42,6 +42,14 @@ const FRAGMENT_EXPERT_JOBS = `
     url
     title: expertsOrganizationJobTitle
     roomNumber: expertsOrganizationJobRoomNumber
+    campusUnits: expertsCategoryCampusUnit {
+      title
+      ... on expertsCampusUnits_Category {
+        link: externalLink {
+          url
+        }
+      }
+    }
   }
 `;
 
@@ -67,15 +75,9 @@ const FRAGMENT_EXPERT_BIOGRAPHY = `
   fragment Biography on expertsContent_Entry {
     summary: expertSummary {
       html
-      rawHtml
-      markdown
-      plainText
     }
     bio: expertBiography {
       html
-      rawHtml
-      markdown
-      plainText
     }
   }
 `;

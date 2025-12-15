@@ -2,7 +2,8 @@
  * Experts Display Strategy
  *
  * Strategy for displaying expert entries using person elements.
- * Maps expert data to person profile cards with biographical information.
+ * Maps expert data to person profile cards with biographical information,
+ * including contact information and skills.
  *
  * @module strategies/display/experts
  */
@@ -18,10 +19,109 @@ import { ElementModel } from '../../_types';
 import { ExpertEntry } from 'types/data';
 
 /**
+ * Contact configuration for rendering contact links
+ */
+interface ContactConfig {
+  key: keyof Pick<ExpertEntry, 'email' | 'website' | 'linkedin' | 'twitter'>;
+  label: (value: string) => string;
+  url: (value: string) => string;
+}
+
+/**
+ * Contact information configuration
+ *
+ * Defines how each contact type should be rendered as a link.
+ */
+const CONTACT_CONFIGS: ContactConfig[] = [
+  {
+    key: 'email',
+    label: () => 'Email',
+    url: (value) => `mailto:${value}`,
+  },
+  {
+    key: 'website',
+    label: (value) => value,
+    url: (value) => value,
+  },
+  {
+    key: 'linkedin',
+    label: (value) => value,
+    url: (value) => value,
+  },
+  {
+    key: 'twitter',
+    label: (value) => value,
+    url: (value) => value,
+  },
+];
+
+/**
+ * Create contact information elements
+ *
+ * Renders contact links (email, website, LinkedIn, Twitter) when available.
+ * Uses a data-driven approach to reduce repetition and improve maintainability.
+ *
+ * @param entry - Expert entry with contact information
+ * @returns Object with contact link elements keyed by contact type
+ */
+const createContactInfo = (
+  entry: ExpertEntry,
+): { [key: string]: HTMLElement } => {
+  return CONTACT_CONFIGS.reduce<{ [key: string]: HTMLElement }>(
+    (contacts, config) => {
+      const value = entry[config.key];
+
+      if (!value) return contacts;
+
+      const element = createTextWithLink({
+        text: config.label(value),
+        url: config.url(value),
+      });
+
+      if (element) contacts[config.key] = element;
+
+      return contacts;
+    },
+    {},
+  );
+};
+
+/**
+ * Create skills information element
+ *
+ * Renders languages and media training status when available.
+ */
+const createSkillsInfo = (entry: ExpertEntry): ElementModel | undefined => {
+  const skills: string[] = [];
+
+  if (entry.languages && entry.languages.length > 0) {
+    skills.push(`Languages: ${entry.languages.join(', ')}`);
+  }
+  if (entry.mediaTrained) {
+    skills.push('Media Trained');
+  }
+
+  if (skills.length === 0) return undefined;
+
+  const textElement = createTextContainer({
+    text: skills.join(' • '),
+  });
+
+  // Return null if element wasn't created
+  if (!textElement) return undefined;
+
+  return {
+    element: textElement,
+    styles: '',
+  };
+};
+
+/**
  * Experts display strategy
  *
  * Maps expert entries to person elements for profile display.
- * Optimized for displaying faculty and expert profiles.
+ * Optimized for displaying faculty and expert profiles with contact
+ * information and skills.
  *
  * @example
  * ```typescript
@@ -55,6 +155,8 @@ export const expertsDisplayStrategy: DisplayStrategy<ExpertEntry> = {
     // Get primary job title and organization
     const primaryOrg = entry.organizations?.[0];
     const primaryJob = primaryOrg?.jobs?.[0];
+    const primaryJobCampusUnit = primaryJob?.campusUnits?.[0];
+    const primaryJobCampusUnitUrl = primaryJobCampusUnit?.link?.url;
 
     // Create job title element
     const job = primaryJob
@@ -63,17 +165,24 @@ export const expertsDisplayStrategy: DisplayStrategy<ExpertEntry> = {
         })
       : undefined;
 
-    // Create association (organization)
-    const association = primaryOrg
-      ? createTextContainer({
-          text: primaryOrg.title,
-        })
-      : undefined;
+    // Create association (campus unit with optional link)
+    let association: HTMLElement | null | undefined = undefined;
+    if (primaryJobCampusUnit) {
+      association = primaryJobCampusUnitUrl
+        ? createTextWithLink({
+            text: primaryJobCampusUnit.title,
+            url: primaryJobCampusUnitUrl,
+          })
+        : createTextContainer({
+            text: primaryJobCampusUnit.title,
+          });
+    }
 
     // Create summary text
-    const subText = entry.summary?.plainText
+    const summary = entry.summary?.html
       ? createTextContainer({
-          text: entry.summary.plainText,
+          text: entry.summary.html,
+          allowHTML: true,
         })
       : undefined;
 
@@ -87,24 +196,34 @@ export const expertsDisplayStrategy: DisplayStrategy<ExpertEntry> = {
         })
       : undefined;
 
+    // Create contact information
+    const contactInfo = createContactInfo(entry);
+
+    // Create skills information
+    const skillsInfo = createSkillsInfo(entry);
+
     // Common card properties
     const commonProps = {
       name,
       job,
       association,
-      subText,
       image,
       isThemeDark,
     };
 
-    // Handle list card type
     if (cardType === 'list') {
       return person.list({
         ...commonProps,
       });
     }
 
-    // Create person element
+    if (cardType === 'tabular') {
+      return person.tabular({
+        ...commonProps,
+        ...contactInfo,
+      });
+    }
+
     return person.block({
       ...commonProps,
     });

@@ -2,7 +2,7 @@
  * Experts List Feed (Factory Pattern)
  *
  * List layout for expert profile entries using the feed factory pattern.
- * Uses person elements for displaying expert profiles.
+ * Uses person elements for displaying expert profiles in a single-column list.
  *
  * @module feeds/experts/list
  */
@@ -27,6 +27,7 @@ import { type ElementModel } from '../../_types';
  * const feed = expertsList({
  *   token: 'my-token',
  *   numberOfRowsToStart: 10,
+ *   cardType: 'list',
  *   isLazyLoad: true,
  *   categories: ['computer-science', 'engineering'],
  * });
@@ -37,7 +38,6 @@ import { type ElementModel } from '../../_types';
 export default (props: ListProps): ElementModel =>
   createBaseFeed({
     ...props,
-    cardType: props.numberOfColumns === 2 ? 'list' : 'tabular',
     fetchStrategy: expertsFetchStrategy,
     displayStrategy: expertsDisplayStrategy,
     layoutStrategy: stackedLayout,

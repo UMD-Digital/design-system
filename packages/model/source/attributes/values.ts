@@ -26,6 +26,9 @@ const display = {
   statement: 'statement',
   sticky: 'sticky',
   tabular: 'tabular',
+  mega: 'mega',
+  visual: 'visual',
+  simple: 'simple',
 };
 
 const layout = {

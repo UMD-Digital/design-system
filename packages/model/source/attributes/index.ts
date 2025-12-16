@@ -47,7 +47,6 @@ export {
   isSharing,
   includesSharing,
   isTheme,
-  isType,
   isVisual,
   getValue,
   type AttributeElementProps,

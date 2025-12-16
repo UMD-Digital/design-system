@@ -49,7 +49,16 @@ const baseElements = [
 );
 
 // Feed elements with simple display toggle
-const feedElements = ['events', 'news'].reduce(
+const feedElements = [
+  'expert-bio',
+  'experts-list',
+  'experts-grid',
+  'events',
+  'events-list',
+  'news',
+  'news-list',
+  'news-featured',
+].reduce(
   (acc, name) => ({
     ...acc,
     ...createElementStyles(`umd-feed-${name}`),

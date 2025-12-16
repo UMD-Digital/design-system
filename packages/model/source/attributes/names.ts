@@ -76,10 +76,6 @@ const theme = {
   default: 'data-theme',
 };
 
-const type = {
-  default: 'data-type',
-};
-
 const visual = {
   bordered: 'data-visual-bordered',
   campaign: 'data-visual-campaign',
@@ -138,6 +134,7 @@ const deprecated = {
   },
   type: {
     TYPE: 'type',
+    DATA_TYPE: 'data-type',
   },
   visual: {
     VISUAL_ALIGN: 'aligned',
@@ -162,7 +159,6 @@ const AttributeNames = {
   sharing,
   social,
   theme,
-  type,
   visual,
   deprecated,
 } as const;

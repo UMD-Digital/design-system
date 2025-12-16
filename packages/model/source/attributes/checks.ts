@@ -461,6 +461,60 @@ const isDisplay = {
       attributeName: AttributeNames.display.default,
       attributeValue: AttributesValues.display.tabular,
     }),
+  mega: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.type.DATA_TYPE,
+      attributeNameNew: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.mega,
+    }) ||
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.type.TYPE,
+      attributeNameNew: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.mega,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.mega,
+    }),
+  visual: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.type.DATA_TYPE,
+      attributeNameNew: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.visual,
+    }) ||
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.type.TYPE,
+      attributeNameNew: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.visual,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.visual,
+    }),
+  simple: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.type.DATA_TYPE,
+      attributeNameNew: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.simple,
+    }) ||
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.type.TYPE,
+      attributeNameNew: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.simple,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.display.default,
+      attributeValue: AttributesValues.display.simple,
+    }),
 } as const;
 
 // Information checks
@@ -826,46 +880,6 @@ const isVisual = {
     }),
 } as const;
 
-// Type checks
-const isType = {
-  mega: (props: AttributeElementProps): boolean =>
-    checkDeprecatedAttribute({
-      ...props,
-      attributeNameOld: AttributeNames.deprecated.type.TYPE,
-      attributeNameNew: AttributeNames.type.default,
-      attributeValue: AttributesValues.type.MEGA,
-    }) ||
-    isAttributeTrue({
-      ...props,
-      attributeName: AttributeNames.type.default,
-      attributeValue: AttributesValues.type.MEGA,
-    }),
-  visual: (props: AttributeElementProps): boolean =>
-    checkDeprecatedAttribute({
-      ...props,
-      attributeNameOld: AttributeNames.deprecated.type.TYPE,
-      attributeNameNew: AttributeNames.type.default,
-      attributeValue: AttributesValues.type.VISUAL,
-    }) ||
-    isAttributeTrue({
-      ...props,
-      attributeName: AttributeNames.type.default,
-      attributeValue: AttributesValues.type.VISUAL,
-    }),
-  simple: (props: AttributeElementProps): boolean =>
-    checkDeprecatedAttribute({
-      ...props,
-      attributeNameOld: AttributeNames.deprecated.type.TYPE,
-      attributeNameNew: AttributeNames.type.default,
-      attributeValue: AttributesValues.type.SIMPLE,
-    }) ||
-    isAttributeTrue({
-      ...props,
-      attributeName: AttributeNames.type.default,
-      attributeValue: AttributesValues.type.SIMPLE,
-    }),
-} as const;
-
 // Value getters
 const getValue = {
   alertUrl: createValueGetter({
@@ -935,7 +949,6 @@ export {
   isSharing,
   includesSharing,
   isTheme,
-  isType,
   isVisual,
   getValue,
 };

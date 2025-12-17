@@ -12,6 +12,7 @@ const createComponent: CreateComponentFunction = (element) => {
   const rowCount = Number(Attributes.getValue.layoutRowCount({ element })) || 5;
   const columnCount =
     Number(Attributes.getValue.layoutColumnCount({ element })) || 3;
+  const categoriesAttribute = Attributes.getValue.feedFilterIds({ element });
 
   if (!token) {
     return { element: document.createElement('div'), styles: '' };
@@ -23,6 +24,7 @@ const createComponent: CreateComponentFunction = (element) => {
     cardType: columnCount === 2 ? 'list' : 'tabular',
     isThemeDark: Attributes.isTheme.dark({ element }),
     isLazyLoad: Attributes.includesFeature.lazyLoad({ element }),
+    ...(categoriesAttribute && { categories: categoriesAttribute.split(',') }),
   });
 };
 

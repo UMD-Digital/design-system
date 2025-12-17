@@ -717,7 +717,10 @@ const CreateNavigationUtility = (props: TypeUtilityRequirements) =>
       const wrapper = document.createElement('div');
       const logoColumn = createLogoColumn();
 
-      const secondaryCta = elementStyles.action.secondary.normal;
+      const secondaryCta = {
+        ...elementStyles.action.secondary.normal,
+        className: `${ALERT_CONSTANTS.ELEMENTS.CTA}`,
+      };
 
       let styles = STYLES_NAVIGATION_UTILITY + jssEntryToCSS(secondaryCta);
 

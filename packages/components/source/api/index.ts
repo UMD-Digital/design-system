@@ -228,6 +228,7 @@ export const feed = {
   eventsList: feedEventsList,
   expertsBio: feedExpertsBio,
   expertsGrid: feedExpertsGrid,
+  expertsList: feedExpertsList,
   newsFeatured: feedNewsFeatured,
   newsGrid: feedNewsGrid,
   newsList: feedNewsList,

@@ -9,12 +9,15 @@
 
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { person } from '@universityofmaryland/web-elements-library/composite';
-import { LoadingState, EmptyState, Announcer } from '../../states';
+import { LoadingState, Announcer } from '../../states';
 import { expertsFetchStrategy } from '../../strategies/fetch/experts';
-import { mapExpertToBioProps, buildFullName } from '../../strategies/display/experts';
+import {
+  mapExpertToBioProps,
+  buildFullName,
+} from '../../strategies/display/experts';
 import { styles as styleUtilities } from '../../helpers';
-import { type BioProps } from './_types';
 import { type ExpertEntry } from 'types/data';
+import { type BioProps } from './_types';
 import { type ElementModel } from '../../_types';
 
 // ============================================================================
@@ -45,20 +48,6 @@ const createSuccessAnnouncer = (expert: ExpertEntry): Announcer => {
   const fullName = buildFullName(expert);
   const message = `Loaded profile for ${fullName}`;
   return new Announcer({ message });
-};
-
-/**
- * Create empty state element
- *
- * @param message - Error message to display
- * @param isThemeDark - Dark theme flag
- * @returns Empty state instance
- */
-const createEmptyState = (
-  message: string,
-  isThemeDark: boolean,
-): EmptyState => {
-  return new EmptyState({ message, isThemeDark });
 };
 
 // ============================================================================
@@ -165,24 +154,43 @@ const renderSuccess = async (
 };
 
 /**
- * Render error state
- *
- * @param container - Container element to render into
- * @param message - Error message to display
- * @param state - State manager instance
- * @param isThemeDark - Dark theme flag
- * @returns Promise that resolves when rendering is complete
+ * Error types for expert bio feed
  */
-const renderError = async (
-  container: HTMLElement,
-  message: string,
-  state: BioFeedState,
-  isThemeDark: boolean,
-): Promise<void> => {
-  const emptyState = createEmptyState(message, isThemeDark);
-  emptyState.render(container);
-  state.addStyles(emptyState.styles);
-  await state.updateShadowStyles();
+type BioErrorType = 'not_found' | 'graphql_error' | 'invalid_request';
+
+/**
+ * Log error to console with specific warning message
+ *
+ * @param errorType - Type of error that occurred
+ * @param expertId - Expert ID that was requested
+ * @param error - Optional error object for GraphQL errors
+ */
+const logError = (
+  errorType: BioErrorType,
+  expertId: string,
+  error?: any,
+): void => {
+  switch (errorType) {
+    case 'not_found':
+      console.warn(
+        `[Expert Bio Feed] No expert found with ID "${expertId}". ` +
+          `Please verify the expert ID is correct and the expert exists in the system.`,
+      );
+      break;
+    case 'graphql_error':
+      console.warn(
+        `[Expert Bio Feed] GraphQL error occurred while fetching expert "${expertId}". ` +
+          `Check network connection and API availability.`,
+        error,
+      );
+      break;
+    case 'invalid_request':
+      console.warn(
+        `[Expert Bio Feed] Invalid request for expert "${expertId}". ` +
+          `Ensure both data-token and data-id attributes are provided.`,
+      );
+      break;
+  }
 };
 
 // ============================================================================
@@ -245,20 +253,14 @@ export default (props: BioProps): ElementModel => {
       loading.hide();
 
       if (!entries || entries.length === 0) {
-        await renderError(container, 'Expert not found', state, isThemeDark);
+        logError('not_found', expertId);
         return;
       }
 
       await renderSuccess(container, entries[0], state, isThemeDark);
     } catch (error) {
-      console.error('Error fetching expert bio:', error);
       loading.hide();
-      await renderError(
-        container,
-        'Failed to load expert bio',
-        state,
-        isThemeDark,
-      );
+      logError('graphql_error', expertId, error);
     }
   };
 

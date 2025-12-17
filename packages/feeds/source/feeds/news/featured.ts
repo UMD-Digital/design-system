@@ -1,16 +1,17 @@
 /**
- * News Featured Feed (Migrated - Specialized Implementation)
+ * News Featured Feed (Refactored with Element Builder)
  *
  * Displays news articles with a featured layout:
  * - First article: Large overlay card with sticky positioning
  * - Next 2 articles: Block cards in grid layout
  * - Additional articles: Lazy-loaded block cards
  *
- * Uses specialized implementation with strategies and utilities.
+ * Uses Element Builder pattern for clean, declarative construction.
  *
- * @module composite/news/featured-new
+ * @module feeds/news/featured
  */
 
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { card } from '@universityofmaryland/web-elements-library/composite';
 import {
   gridGap,
@@ -30,192 +31,488 @@ import {
 } from '../../helpers';
 import { type FeaturedProps } from './_types';
 import { type ElementModel } from '../../_types';
-import { NewsEntry } from 'types/data';
+import { type NewsEntry } from 'types/data';
 
-export default (props: FeaturedProps): ElementModel => {
-  const {
-    token,
-    isThemeDark = false,
-    isLazyLoad = false,
-    isLayoutReversed = false,
-    isTransparent = false,
-    overwriteStickyPosition,
-    categories,
-    isUnion = false,
-  } = props;
+// ============================================================================
+// CONSTANTS
+// ============================================================================
 
-  // Featured layout is fixed: 1 overlay card + 2 block cards in 2-column grid = 3 items
-  const INITIAL_ITEMS = 3;
+/** Featured layout displays 3 items initially: 1 overlay + 2 block cards */
+const INITIAL_ITEMS = 3;
 
-  // State management
-  const container = document.createElement('div');
-  const loading = new LoadingState({ isThemeDark });
-  let styles = loading.styles;
-  let shadowRoot: ShadowRoot | null = null;
-  let totalEntries = 0;
-  let offset = 0;
-  let hasRenderedOffset = false; // Track if offset layout was created
-  let pagination: PaginationState | null = null;
+/** Lazy loading adds 2 items at a time to fill a row in the 2-column grid */
+const LOAD_MORE_ITEMS = 2;
 
-  // Helper to add styles
-  const setStyles = (additionalStyles: string) => {
-    styles += additionalStyles;
-  };
+// ============================================================================
+// PURE HELPER FUNCTIONS
+// ============================================================================
 
-  // Shadow root callback
-  const callback = (shadow: ShadowRoot) => {
-    shadowRoot = shadow;
-  };
+/**
+ * Create base props for fetch strategy
+ *
+ * @param props - Feed props
+ * @param offset - Current offset
+ * @returns Base props object for strategy's composeApiVariables
+ */
+const createFetchProps = (
+  props: Pick<FeaturedProps, 'token' | 'categories' | 'isUnion'>,
+  offset: number,
+) => ({
+  token: props.token,
+  categories: props.categories,
+  isUnion: props.isUnion,
+  numberOfRowsToStart: offset === 0 ? INITIAL_ITEMS : LOAD_MORE_ITEMS,
+  numberOfColumnsToShow: 1,
+  getOffset: () => offset,
+});
 
-  // Custom event: allow external control of sticky position
-  const setPosition = (position: number) => {
-    const overlayElement = container.querySelector(
-      `.${card.overlay.imageClassRef}`,
-    ) as HTMLElement;
-    if (overlayElement) overlayElement.style.top = `${position}px`;
-  };
+/**
+ * Create image configuration for news entry
+ *
+ * @param entry - News entry
+ * @returns Image config object
+ */
+const createImageConfig = (entry: NewsEntry) => ({
+  imageUrl: entry.image[0]?.url,
+  altText: entry.image[0]?.altText || 'News Article Image',
+  linkUrl: entry.url,
+  linkLabel: 'Maryland Today Article with image',
+});
 
-  // Update shadow root styles
-  const updateShadowStyles = async () => {
-    if (!shadowRoot) return;
-    await styleUtilities.setShadowStyles({ shadowRoot, styles });
-  };
+/**
+ * Create announcer message
+ *
+ * @param offset - Current offset
+ * @param total - Total entries
+ * @param isLazyLoad - Lazy load enabled
+ * @returns Announcer message
+ */
+const createAnnouncerMessage = (
+  offset: number,
+  total: number,
+  isLazyLoad: boolean,
+): string => {
+  return isLazyLoad
+    ? `Showing ${offset} of ${total} articles`
+    : `Showing ${offset} articles`;
+};
 
-  // Render the featured layout (first load only)
-  const renderFeaturedLayout = async (entries: NewsEntry[]) => {
-    if (entries.length < 2 || hasRenderedOffset) {
-      // Fall back to simple grid if not enough entries or already rendered
-      return renderStandardGrid(entries);
+// ============================================================================
+// STATE MANAGER CLASS
+// ============================================================================
+
+/**
+ * Manages featured feed state and shadow DOM synchronization
+ *
+ * Encapsulates all mutable state including pagination, offset,
+ * and shadow DOM management.
+ */
+class FeaturedFeedState {
+  private stylesArray: string[] = [];
+  private shadowRoot: ShadowRoot | null = null;
+  private totalEntries: number = 0;
+  private offset: number = 0;
+  private hasRenderedOffset: boolean = false;
+  private pagination: PaginationState | null = null;
+
+  /**
+   * Initialize state with initial styles
+   *
+   * @param initialStyles - Initial CSS styles
+   */
+  constructor(initialStyles: string) {
+    this.stylesArray.push(initialStyles);
+  }
+
+  /**
+   * Add styles to the accumulated styles
+   *
+   * @param styles - CSS styles to add
+   */
+  addStyles(styles: string): void {
+    this.stylesArray.push(styles);
+  }
+
+  /**
+   * Set shadow root reference for style updates
+   *
+   * @param shadow - Shadow root element
+   */
+  setShadowRoot(shadow: ShadowRoot): void {
+    this.shadowRoot = shadow;
+  }
+
+  /**
+   * Update shadow DOM styles
+   *
+   * @returns Promise that resolves when styles are updated
+   */
+  async updateShadowStyles(): Promise<void> {
+    if (!this.shadowRoot) return;
+    await styleUtilities.setShadowStyles({
+      shadowRoot: this.shadowRoot,
+      styles: this.getStyles(),
+    });
+  }
+
+  /**
+   * Get accumulated styles as single string
+   *
+   * @returns Combined CSS styles
+   */
+  getStyles(): string {
+    return this.stylesArray.join('\n');
+  }
+
+  /**
+   * Get shadow root callback for events
+   *
+   * @returns Callback function for shadow root
+   */
+  getShadowCallback(): (shadow: ShadowRoot) => void {
+    return (shadow) => this.setShadowRoot(shadow);
+  }
+
+  /**
+   * Get current offset
+   *
+   * @returns Current offset
+   */
+  getOffset(): number {
+    return this.offset;
+  }
+
+  /**
+   * Set offset to specific value
+   *
+   * @param value - New offset value
+   */
+  setOffset(value: number): void {
+    this.offset = value;
+  }
+
+  /**
+   * Increment offset by count
+   *
+   * @param count - Number to increment by
+   */
+  incrementOffset(count: number): void {
+    this.offset += count;
+  }
+
+  /**
+   * Get total entries
+   *
+   * @returns Total entries
+   */
+  getTotalEntries(): number {
+    return this.totalEntries;
+  }
+
+  /**
+   * Set total entries
+   *
+   * @param total - Total entries
+   */
+  setTotalEntries(total: number): void {
+    this.totalEntries = total;
+  }
+
+  /**
+   * Check if offset layout has been rendered
+   *
+   * @returns True if offset layout rendered
+   */
+  hasOffset(): boolean {
+    return this.hasRenderedOffset;
+  }
+
+  /**
+   * Mark offset layout as rendered
+   */
+  markOffsetRendered(): void {
+    this.hasRenderedOffset = true;
+  }
+
+  /**
+   * Get pagination state
+   *
+   * @returns Pagination state or null
+   */
+  getPagination(): PaginationState | null {
+    return this.pagination;
+  }
+
+  /**
+   * Set pagination state
+   *
+   * @param pagination - Pagination state
+   */
+  setPagination(pagination: PaginationState | null): void {
+    this.pagination = pagination;
+  }
+}
+
+// ============================================================================
+// RENDERING FUNCTIONS
+// ============================================================================
+
+/**
+ * Create overlay card for featured entry
+ *
+ * @param entry - News entry
+ * @param state - State manager
+ * @param isThemeDark - Dark theme flag
+ * @returns Overlay card element model
+ */
+const createOverlayCard = (
+  entry: NewsEntry,
+  state: FeaturedFeedState,
+  isThemeDark: boolean,
+): ElementModel => {
+  const overlayCard = newsDisplayStrategy.mapEntryToCard(entry, {
+    isOverlay: true,
+    isThemeDark,
+    imageConfig: () => createImageConfig(entry),
+  });
+
+  // Add custom overlay styles
+  state.addStyles(`
+    ${overlayCard.styles}
+
+    .${card.overlay.imageClassRef} {
+      height: inherit;
     }
 
-    hasRenderedOffset = true;
+    .${card.overlay.imageClassRef} > * {
+      padding: 0;
+    }
+  `);
 
-    // Create offset layout
-    const offsetLayout = gridOffset({
-      columns: 2,
-      isLayoutReversed,
-      stickyTopPosition: overwriteStickyPosition,
+  return overlayCard;
+};
+
+/**
+ * Create block cards for entries
+ *
+ * @param entries - News entries
+ * @param state - State manager
+ * @param options - Card options
+ * @returns Array of block card element models
+ */
+const createBlockCards = (
+  entries: NewsEntry[],
+  state: FeaturedFeedState,
+  options: { isThemeDark: boolean; isTransparent: boolean },
+): ElementModel[] => {
+  return entries.map((entry) => {
+    const blockCard = newsDisplayStrategy.mapEntryToCard(entry, {
+      isThemeDark: options.isThemeDark,
+      isTransparent: options.isTransparent,
+      isAligned: true,
+      imageConfig: () => createImageConfig(entry),
     });
 
-    // Create grid for remaining items
+    state.addStyles(blockCard.styles);
+    return blockCard;
+  });
+};
+
+/**
+ * Render featured layout (initial load only)
+ *
+ * @param container - Container element
+ * @param entries - News entries
+ * @param state - State manager
+ * @param props - Feed props
+ * @param loadMore - Load more callback
+ * @returns Promise that resolves when rendering is complete
+ */
+const renderFeaturedLayout = async (
+  container: HTMLElement,
+  entries: NewsEntry[],
+  state: FeaturedFeedState,
+  props: FeaturedProps,
+  loadMore: () => Promise<void>,
+): Promise<void> => {
+  const { isThemeDark = false, isTransparent = false, isLayoutReversed = false, overwriteStickyPosition, isLazyLoad = false } = props;
+
+  // Fall back to standard grid if not enough entries or already rendered
+  if (entries.length < 2 || state.hasOffset()) {
+    return renderStandardGrid(container, entries, state, { isThemeDark, isTransparent });
+  }
+
+  state.markOffsetRendered();
+
+  // Create offset layout
+  const offsetLayout = gridOffset({
+    columns: 2,
+    isLayoutReversed,
+    stickyTopPosition: overwriteStickyPosition,
+  });
+
+  // Create grid for remaining items
+  const gridLayout = gridGap({ columns: 2 });
+  gridLayout.element.setAttribute('id', 'umd-featured-news-grid-container');
+
+  // First item: overlay card
+  const overlayCard = createOverlayCard(entries[0], state, isThemeDark);
+
+  // Next 2 items: block cards
+  const blockCards = createBlockCards(
+    entries.slice(1, 3),
+    state,
+    { isThemeDark, isTransparent },
+  );
+
+  // Append block cards to grid
+  blockCards.forEach((card) => {
+    gridLayout.element.appendChild(card.element);
+  });
+
+  // Assemble offset layout
+  offsetLayout.element.appendChild(overlayCard.element);
+  offsetLayout.element.appendChild(gridLayout.element);
+  container.appendChild(offsetLayout.element);
+
+  state.addStyles(offsetLayout.styles);
+  state.addStyles(gridLayout.styles);
+  state.setOffset(3); // We've shown 3 items
+
+  // Add pagination if needed
+  if (isLazyLoad && state.getTotalEntries() > state.getOffset()) {
+    const pagination = new PaginationState({
+      totalEntries: state.getTotalEntries(),
+      offset: state.getOffset(),
+      isLazyLoad: true,
+      callback: loadMore,
+    });
+
+    const paginationElement = pagination.render(container);
+    if (paginationElement) state.addStyles(paginationElement.styles);
+    state.setPagination(pagination);
+  }
+
+  // Announcer
+  const message = createAnnouncerMessage(INITIAL_ITEMS, state.getTotalEntries(), isLazyLoad);
+  const announcer = new Announcer({ message });
+  container.appendChild(announcer.getElement());
+
+  await state.updateShadowStyles();
+};
+
+/**
+ * Render standard grid (for lazy-loaded items or fallback)
+ *
+ * @param container - Container element
+ * @param entries - News entries
+ * @param state - State manager
+ * @param options - Rendering options
+ * @returns Promise that resolves when rendering is complete
+ */
+const renderStandardGrid = async (
+  container: HTMLElement,
+  entries: NewsEntry[],
+  state: FeaturedFeedState,
+  options: { isThemeDark: boolean; isTransparent: boolean },
+): Promise<void> => {
+  let gridContainer = container.querySelector(
+    '#umd-featured-news-grid-container',
+  ) as HTMLElement;
+
+  // Create grid if it doesn't exist
+  if (!gridContainer) {
     const gridLayout = gridGap({ columns: 2 });
     gridLayout.element.setAttribute('id', 'umd-featured-news-grid-container');
+    container.appendChild(gridLayout.element);
+    state.addStyles(gridLayout.styles);
+    gridContainer = gridLayout.element;
+  }
 
-    // First item: overlay card
-    const firstEntry = entries[0];
-    const overlayCard = newsDisplayStrategy.mapEntryToCard(firstEntry, {
-      isOverlay: true,
-      isThemeDark,
-      imageConfig: () => ({
-        imageUrl: firstEntry.image[0]?.url,
-        altText: firstEntry.image[0]?.altText || 'News Article Image',
-        linkUrl: firstEntry.url,
-        linkLabel: 'Maryland Today Article with image',
-      }),
-    });
+  // Create and append block cards
+  const blockCards = createBlockCards(entries, state, options);
+  blockCards.forEach((card) => {
+    gridContainer.appendChild(card.element);
+  });
 
-    setStyles(`
-      ${overlayCard.styles}
+  state.incrementOffset(entries.length);
 
-      .${card.overlay.imageClassRef} {
-        height: inherit;
-      }
+  await state.updateShadowStyles();
+};
 
-      .${card.overlay.imageClassRef} > * {
-        padding: 0;
-      }
-    `);
+/**
+ * Render error state
+ *
+ * @param container - Container element
+ * @param message - Error message
+ * @param state - State manager
+ * @param isThemeDark - Dark theme flag
+ * @returns Promise that resolves when rendering is complete
+ */
+const renderError = async (
+  container: HTMLElement,
+  message: string,
+  state: FeaturedFeedState,
+  isThemeDark: boolean,
+): Promise<void> => {
+  const emptyState = new EmptyState({ message, isThemeDark });
+  emptyState.render(container);
+  state.addStyles(emptyState.styles);
+  await state.updateShadowStyles();
+};
 
-    // Next 2 items: block cards
-    const remainingEntries = entries.slice(1, 3);
-    remainingEntries.forEach((entry) => {
-      const blockCard = newsDisplayStrategy.mapEntryToCard(entry, {
-        isThemeDark,
-        isTransparent,
-        isAligned: true,
-        imageConfig: () => ({
-          imageUrl: entry.image[0]?.url,
-          altText: entry.image[0]?.altText || 'News Article Image',
-          linkUrl: entry.url,
-          linkLabel: 'Maryland Today Article with image',
-        }),
-      });
-      gridLayout.element.appendChild(blockCard.element);
-      setStyles(blockCard.styles);
-    });
+// ============================================================================
+// MAIN EXPORT
+// ============================================================================
 
-    // Assemble offset layout
-    offsetLayout.element.appendChild(overlayCard.element);
-    offsetLayout.element.appendChild(gridLayout.element);
-    container.appendChild(offsetLayout.element);
+/**
+ * Create a featured news feed
+ *
+ * Displays news with featured layout: overlay card + grid.
+ * Uses Element Builder pattern for clean construction.
+ *
+ * @param props - Feed configuration
+ * @returns ElementModel with feed element, styles, and events
+ *
+ * @example
+ * ```typescript
+ * const feed = newsFeatured({
+ *   token: 'my-token',
+ *   isLazyLoad: true,
+ * });
+ * ```
+ *
+ * @example
+ * ```typescript
+ * // With custom sticky position
+ * const feed = newsFeatured({
+ *   token: 'my-token',
+ *   overwriteStickyPosition: 100,
+ *   isLayoutReversed: true,
+ * });
+ * ```
+ */
+export default (props: FeaturedProps): ElementModel => {
+  const { token, categories, isUnion, isThemeDark = false, isLazyLoad = false, isTransparent = false } = props;
 
-    setStyles(offsetLayout.styles);
-    setStyles(gridLayout.styles);
+  // Create container using ElementBuilder
+  const containerBuilder = new ElementBuilder('div').withClassName(
+    'featured-news-feed',
+  );
 
-    offset = 3; // We've shown 3 items
+  // Get element for manipulation (non-destructive)
+  const container = containerBuilder.getElement();
 
-    // Add pagination if needed
-    if (isLazyLoad && totalEntries > offset) {
-      pagination = new PaginationState({
-        totalEntries,
-        offset,
-        isLazyLoad: true,
-        callback: loadMore,
-      });
-      const paginationElement = pagination.render(container);
-      if (paginationElement) setStyles(paginationElement.styles);
-    }
+  // Initialize state management
+  const loading = new LoadingState({ isThemeDark });
+  const state = new FeaturedFeedState(loading.styles);
 
-    // Announcer
-    const message = isLazyLoad
-      ? `Showing ${INITIAL_ITEMS} of ${totalEntries} articles`
-      : `Showing ${INITIAL_ITEMS} articles`;
-    const announcer = new Announcer({ message });
-    container.appendChild(announcer.getElement());
-
-    await updateShadowStyles();
-  };
-
-  // Render standard grid (for lazy-loaded items or fallback)
-  const renderStandardGrid = async (entries: NewsEntry[]) => {
-    let gridContainer = container.querySelector(
-      '#umd-featured-news-grid-container',
-    ) as HTMLElement;
-
-    // Create grid if it doesn't exist
-    if (!gridContainer) {
-      const gridLayout = gridGap({ columns: 2 });
-      gridLayout.element.setAttribute('id', 'umd-featured-news-grid-container');
-      container.appendChild(gridLayout.element);
-      setStyles(gridLayout.styles);
-      gridContainer = gridLayout.element;
-    }
-
-    // Add entries to grid
-    entries.forEach((entry) => {
-      const blockCard = newsDisplayStrategy.mapEntryToCard(entry, {
-        isThemeDark,
-        isTransparent,
-        isAligned: true,
-        imageConfig: () => ({
-          imageUrl: entry.image[0]?.url,
-          altText: entry.image[0]?.altText || 'News Article Image',
-          linkUrl: entry.url,
-          linkLabel: 'Maryland Today Article with image',
-        }),
-      });
-      gridContainer.appendChild(blockCard.element);
-      setStyles(blockCard.styles);
-    });
-
-    offset += entries.length;
-
-    await updateShadowStyles();
-  };
-
-  // Load more (for lazy loading)
-  const loadMore = async () => {
+  /**
+   * Load more articles (for lazy loading)
+   */
+  const loadMore = async (): Promise<void> => {
     // Remove pagination button
+    const pagination = state.getPagination();
     if (pagination) {
       pagination.remove();
     }
@@ -223,15 +520,12 @@ export default (props: FeaturedProps): ElementModel => {
     // Show loading indicator
     loading.show(container);
 
-    // Load 2 more items to fill a row in the 2-column grid
-    const variables = newsFetchStrategy.composeApiVariables({
-      token,
-      categories,
-      isUnion,
-      numberOfRowsToStart: 2,
-      numberOfColumnsToShow: 1, // Fetch exactly 2 items (1 * 2 = 2)
-      getOffset: () => offset,
-    });
+    // Load more items
+    const fetchProps = createFetchProps(
+      { token, categories, isUnion },
+      state.getOffset(),
+    );
+    const variables = newsFetchStrategy.composeApiVariables(fetchProps);
 
     const entries = await newsFetchStrategy.fetchEntries(variables);
 
@@ -240,15 +534,16 @@ export default (props: FeaturedProps): ElementModel => {
 
     if (!entries || entries.length === 0) return;
 
-    await renderStandardGrid(entries);
+    await renderStandardGrid(container, entries, state, {
+      isThemeDark,
+      isTransparent,
+    });
 
     // Update pagination state
     if (pagination) {
-      pagination.updateState(offset, totalEntries);
-      // Add new button styles if one was created
-      if (pagination.styles) setStyles(pagination.styles);
-      // Update shadow root styles
-      await updateShadowStyles();
+      pagination.updateState(state.getOffset(), state.getTotalEntries());
+      if (pagination.styles) state.addStyles(pagination.styles);
+      await state.updateShadowStyles();
     }
 
     // Update announcer
@@ -256,9 +551,11 @@ export default (props: FeaturedProps): ElementModel => {
       '[role="status"]',
     ) as HTMLElement;
     if (existingAnnouncer) {
-      existingAnnouncer.textContent = isLazyLoad
-        ? `Showing ${offset} of ${totalEntries} articles`
-        : `Showing ${offset} articles`;
+      existingAnnouncer.textContent = createAnnouncerMessage(
+        state.getOffset(),
+        state.getTotalEntries(),
+        isLazyLoad,
+      );
     }
 
     // Dispatch update event
@@ -268,24 +565,20 @@ export default (props: FeaturedProps): ElementModel => {
       {
         items: entries,
         count: entries.length,
-        total: totalEntries,
+        total: state.getTotalEntries(),
       },
     );
   };
 
-  // Initialize feed
-  const initialize = async () => {
+  /**
+   * Initialize feed
+   */
+  const initialize = async (): Promise<void> => {
     loading.show(container);
 
-    // Featured layout always fetches 3 items initially (1 overlay + 2 block cards)
-    const variables = newsFetchStrategy.composeApiVariables({
-      token,
-      categories,
-      isUnion,
-      numberOfRowsToStart: INITIAL_ITEMS,
-      numberOfColumnsToShow: 1, // Fetch exactly 3 items (1 * 3 = 3)
-      getOffset: () => 0,
-    });
+    // Fetch initial items
+    const fetchProps = createFetchProps({ token, categories, isUnion }, 0);
+    const variables = newsFetchStrategy.composeApiVariables(fetchProps);
 
     const [count, entries] = await Promise.all([
       newsFetchStrategy.fetchCount(variables),
@@ -294,39 +587,46 @@ export default (props: FeaturedProps): ElementModel => {
 
     loading.hide();
 
+    // Handle no results
     if (!entries || entries.length === 0) {
-      const emptyState = new EmptyState({
-        message: 'No news articles found',
-        isThemeDark,
-      });
-      emptyState.render(container);
-      setStyles(emptyState.styles);
-      await updateShadowStyles();
+      await renderError(container, 'No news articles found', state, isThemeDark);
       return;
     }
 
-    totalEntries = count || entries.length;
+    state.setTotalEntries(count || entries.length);
 
     // Dispatch loaded event
     eventUtilities.dispatch(container, eventUtilities.eventNames.FEED_LOADED, {
       items: entries,
       count: entries.length,
-      total: totalEntries,
+      total: state.getTotalEntries(),
     });
 
     // Render featured layout
-    await renderFeaturedLayout(entries);
+    await renderFeaturedLayout(container, entries, state, props, loadMore);
   };
 
+  // Start initialization
   initialize();
 
+  // Build and return element model
+  const model = containerBuilder.build();
+
+  // Custom event: allow external control of sticky position
+  const setPosition = (position: number) => {
+    const overlayElement = container.querySelector(
+      `.${card.overlay.imageClassRef}`,
+    ) as HTMLElement;
+    if (overlayElement) overlayElement.style.top = `${position}px`;
+  };
+
   return {
-    element: container,
+    element: model.element,
     get styles() {
-      return styles;
+      return state.getStyles();
     },
     events: {
-      callback,
+      callback: state.getShadowCallback(),
       setPosition, // Custom event for sticky position control
     },
   };

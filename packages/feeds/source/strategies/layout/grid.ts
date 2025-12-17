@@ -66,7 +66,7 @@ export const gridBorderLayout: LayoutStrategy = {
 export const stackedLayout: LayoutStrategy = {
   create: (options: LayoutOptions) => {
     const { isThemeDark, showDividers = true } = options;
-    return stacked({ isThemeDark, showDividers });
+    return stacked({ isThemeDark, showDividers, gap: '0' });
   },
   getId: () => 'umd-stacked-layout-container',
 };

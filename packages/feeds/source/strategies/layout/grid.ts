@@ -9,6 +9,7 @@
 import {
   grid,
   gridGap,
+  gridBorder,
   gridOffset,
   stacked,
 } from '@universityofmaryland/web-elements-library/layout';
@@ -40,6 +41,20 @@ export const gridGapLayout: LayoutStrategy = {
     return gridGap({ columns: columns as 2 | 3 | 4 });
   },
   getId: () => 'umd-grid-gap-layout-container',
+};
+
+/**
+ * Grid border layout strategy
+ *
+ * Creates a responsive grid layout with borders between items.
+ * Supports light and dark theme variants.
+ */
+export const gridBorderLayout: LayoutStrategy = {
+  create: (options: LayoutOptions) => {
+    const { columns = 3, isThemeDark = false } = options;
+    return gridBorder({ columns: columns as 2 | 3 | 4, isThemeDark });
+  },
+  getId: () => 'umd-grid-border-layout-container',
 };
 
 /**

@@ -13,7 +13,7 @@ import {
   expertsFetchStrategy,
   expertsDisplayStrategy,
   gridLayout,
-  gridGapLayout,
+  gridBorderLayout,
 } from 'strategies';
 import { type GridProps } from './_types';
 import { type ElementModel } from '../../_types';
@@ -26,7 +26,7 @@ import { type ElementModel } from '../../_types';
  *
  * @example
  * ```typescript
- * // Standard grid with gap
+ * // Standard grid with borders
  * const feed = expertsGrid({
  *   token: 'my-token',
  *   numberOfColumnsToShow: 3,
@@ -55,7 +55,7 @@ export default (props: GridProps): ElementModel => {
     isAligned: !isOverlay,
     fetchStrategy: expertsFetchStrategy,
     displayStrategy: expertsDisplayStrategy,
-    layoutStrategy: isOverlay ? gridLayout : gridGapLayout,
+    layoutStrategy: isOverlay ? gridLayout : gridBorderLayout,
     imageConfig: (entry) => ({
       imageUrl: entry.headshot?.[0]?.url || '',
       altText: entry.middleName

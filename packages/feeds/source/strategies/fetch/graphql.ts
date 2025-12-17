@@ -7,7 +7,10 @@
  * @module strategies/fetch/graphql
  */
 
-import { fetchGraphQL, GraphQLVariables } from '@universityofmaryland/web-utilities-library/network';
+import {
+  fetchGraphQL,
+  GraphQLVariables,
+} from '@universityofmaryland/web-utilities-library/network';
 import { FetchStrategy } from '../../factory/core/types';
 
 /**
@@ -67,9 +70,9 @@ export interface GraphQLFetchConfig<TData, TResponse = any> {
 export function createGraphQLFetchStrategy<
   TData,
   TResponse = any,
-  TVariables = any
+  TVariables = any,
 >(
-  config: GraphQLFetchConfig<TData, TResponse>
+  config: GraphQLFetchConfig<TData, TResponse>,
 ): FetchStrategy<TData, TVariables> {
   const {
     endpoint,
@@ -88,12 +91,16 @@ export function createGraphQLFetchStrategy<
         // Use count query if provided, otherwise use entries query
         const query = queries.count || queries.entries;
 
+        console.log(variables);
+
         const response = await fetchGraphQL({
           url: endpoint,
           query,
           token: (variables as any).token,
           variables: variables as GraphQLVariables,
         });
+
+        console.log(response);
 
         // Check for errors
         if (!response || !response.data || response.message) {
@@ -147,18 +154,30 @@ export function createGraphQLFetchStrategy<
         numberOfColumnsToShow = 1,
         numberOfRowsToStart,
         getOffset,
+        entriesToRemove,
+        id,
       } = props;
 
-      // Base variables
+      // Base variables - pass all props through
       const baseVariables: any = {
         token,
         limit: numberOfColumnsToShow * numberOfRowsToStart,
         offset: getOffset ? getOffset() : 0,
       };
 
-      // Add categories if provided
+      // Pass categories through (let composeVariables decide how to map it)
       if (categories) {
-        baseVariables.related = categories;
+        baseVariables.categories = categories;
+      }
+
+      // Pass entriesToRemove through
+      if (entriesToRemove) {
+        baseVariables.entriesToRemove = entriesToRemove;
+      }
+
+      // Pass id through
+      if (id) {
+        baseVariables.id = id;
       }
 
       // Allow custom variable composition
@@ -166,7 +185,16 @@ export function createGraphQLFetchStrategy<
         return composeVariables(baseVariables);
       }
 
-      return baseVariables as TVariables;
+      // Default mapping (for strategies without custom composeVariables)
+      const defaultVariables: any = { ...baseVariables };
+
+      // Default: map categories to 'related' if not customized
+      if (categories) {
+        defaultVariables.related = categories;
+        delete defaultVariables.categories;
+      }
+
+      return defaultVariables as TVariables;
     },
   };
 }

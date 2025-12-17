@@ -153,20 +153,13 @@ const renderSuccess = async (
   state: BioFeedState,
   isThemeDark: boolean,
 ): Promise<void> => {
-  // Create bio element
   const bioProps = mapExpertToBioProps(expert, 'small', isThemeDark);
   const bioElement = person.bio.small(bioProps);
-
-  // Create announcer
   const announcer = createSuccessAnnouncer(expert);
-
-  // Build children array
   const children = [bioElement.element, announcer.getElement()];
 
-  // Append all children at once
   children.forEach((child) => container.appendChild(child));
 
-  // Update styles
   state.addStyles(bioElement.styles);
   await state.updateShadowStyles();
 };
@@ -245,20 +238,17 @@ export default (props: BioProps): ElementModel => {
     loading.show(container);
 
     try {
-      // Fetch expert data
       const fetchProps = createFetchProps(token, expertId);
       const variables = expertsFetchStrategy.composeApiVariables(fetchProps);
       const entries = await expertsFetchStrategy.fetchEntries(variables);
 
       loading.hide();
 
-      // Check results
       if (!entries || entries.length === 0) {
         await renderError(container, 'Expert not found', state, isThemeDark);
         return;
       }
 
-      // Render success
       await renderSuccess(container, entries[0], state, isThemeDark);
     } catch (error) {
       console.error('Error fetching expert bio:', error);

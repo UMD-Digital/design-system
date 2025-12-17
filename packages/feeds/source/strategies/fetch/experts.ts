@@ -230,13 +230,9 @@ export const expertsFetchStrategy = createGraphQLFetchStrategy<ExpertEntry>({
       variables.id = Array.isArray(id) ? id : [id];
     }
 
-    // Handle categories via relatedTo
     if (categories) {
       variables.relatedTo = categories;
     }
-
-    // Note: Entry exclusion not supported in experts API
-    // If needed in the future, would need backend API changes
 
     return variables;
   },

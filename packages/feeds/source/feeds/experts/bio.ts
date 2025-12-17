@@ -1,249 +1,290 @@
 /**
- * Expert Bio Feed (Specialized Implementation)
+ * Expert Bio Feed (Refactored with Element Builder)
  *
- * Single expert bio display using person bio elements.
- * Fetches a single expert by ID and displays their full profile.
+ * Displays a single expert's profile with summary.
+ * Uses element builder pattern for clean, declarative construction.
  *
  * @module feeds/experts/bio
  */
 
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { person } from '@universityofmaryland/web-elements-library/composite';
-import {
-  createTextWithLink,
-  createTextContainer,
-  createImageOrLinkedImage,
-} from '@universityofmaryland/web-utilities-library/elements';
-import { expertsFetchStrategy } from 'strategies';
+import { LoadingState, EmptyState, Announcer } from '../../states';
+import { expertsFetchStrategy } from '../../strategies/fetch/experts';
+import { mapExpertToBioProps, buildFullName } from '../../strategies/display/experts';
+import { styles as styleUtilities } from '../../helpers';
 import { type BioProps } from './_types';
 import { type ExpertEntry } from 'types/data';
 import { type ElementModel } from '../../_types';
 
-/**
- * Contact configuration for rendering contact links
- */
-interface ContactConfig {
-  key: keyof Pick<ExpertEntry, 'email' | 'website' | 'linkedin' | 'twitter'>;
-  label: (value: string) => string;
-  url: (value: string) => string;
-}
+// ============================================================================
+// PURE HELPER FUNCTIONS
+// ============================================================================
 
 /**
- * Contact information configuration
+ * Create base props for fetch strategy
+ *
+ * @param token - API authentication token
+ * @param expertId - Expert ID to fetch
+ * @returns Base props object for strategy's composeApiVariables
  */
-const CONTACT_CONFIGS: ContactConfig[] = [
-  {
-    key: 'email',
-    label: () => 'Email',
-    url: (value) => `mailto:${value}`,
-  },
-  {
-    key: 'website',
-    label: (value) => value,
-    url: (value) => value,
-  },
-  {
-    key: 'linkedin',
-    label: (value) => value,
-    url: (value) => value,
-  },
-  {
-    key: 'twitter',
-    label: (value) => value,
-    url: (value) => value,
-  },
-];
+const createFetchProps = (token: string, expertId: string) => ({
+  token,
+  limit: 1,
+  offset: 0,
+  id: expertId,
+});
 
 /**
- * Map expert entry to PersonBio props
+ * Create accessibility announcer for loaded expert
+ *
+ * @param expert - Expert entry
+ * @returns Announcer element model
  */
-const mapExpertToBioProps = (
-  entry: ExpertEntry,
-  displayType: 'small' | 'full',
-  isThemeDark: boolean = false,
-) => {
-  const url = `https://umdrightnow.umd.edu/expert/${entry.slug}`;
+const createSuccessAnnouncer = (expert: ExpertEntry): Announcer => {
+  const fullName = buildFullName(expert);
+  const message = `Loaded profile for ${fullName}`;
+  return new Announcer({ message });
+};
 
-  // Build full name
-  const fullName = entry.middleName
-    ? `${entry.firstName} ${entry.middleName} ${entry.lastName}`
-    : `${entry.firstName} ${entry.lastName}`;
+/**
+ * Create empty state element
+ *
+ * @param message - Error message to display
+ * @param isThemeDark - Dark theme flag
+ * @returns Empty state instance
+ */
+const createEmptyState = (
+  message: string,
+  isThemeDark: boolean,
+): EmptyState => {
+  return new EmptyState({ message, isThemeDark });
+};
 
-  // Create name element
-  const name = createTextWithLink({
-    text: fullName,
-    url: url,
-    containerTag: 'h1',
-  });
+// ============================================================================
+// STATE MANAGER CLASS
+// ============================================================================
 
-  // Get primary job and organization
-  const primaryOrg = entry.organizations?.[0];
-  const primaryJob = primaryOrg?.jobs?.[0];
-  const primaryJobCampusUnit = primaryJob?.campusUnits?.[0];
-  const primaryJobCampusUnitUrl = primaryJobCampusUnit?.link?.url;
+/**
+ * Manages bio feed state and shadow DOM synchronization
+ *
+ * Encapsulates style accumulation and shadow DOM updates.
+ * Provides immutable-style API for adding styles.
+ */
+class BioFeedState {
+  private stylesArray: string[] = [];
+  private shadowRoot: ShadowRoot | null = null;
 
-  // Create job title
-  const job = primaryJob
-    ? createTextContainer({
-        text: primaryJob.title,
-      })
-    : null;
-
-  // Create association (campus unit with optional link)
-  let association: HTMLElement | null = null;
-  if (primaryJobCampusUnit) {
-    association = primaryJobCampusUnitUrl
-      ? createTextWithLink({
-          text: primaryJobCampusUnit.title,
-          url: primaryJobCampusUnitUrl,
-        })
-      : createTextContainer({
-          text: primaryJobCampusUnit.title,
-        });
+  /**
+   * Initialize state with initial styles
+   *
+   * @param initialStyles - Initial CSS styles
+   */
+  constructor(initialStyles: string) {
+    this.stylesArray.push(initialStyles);
   }
 
-  // Create contact elements
-  const contactElements = CONTACT_CONFIGS.reduce<{
-    [key: string]: HTMLElement | null;
-  }>((contacts, config) => {
-    const value = entry[config.key];
-    if (!value) return contacts;
+  /**
+   * Add styles to the accumulated styles
+   *
+   * @param styles - CSS styles to add
+   */
+  addStyles(styles: string): void {
+    this.stylesArray.push(styles);
+  }
 
-    const element = createTextWithLink({
-      text: config.label(value),
-      url: config.url(value),
+  /**
+   * Set shadow root reference for style updates
+   *
+   * @param shadow - Shadow root element
+   */
+  setShadowRoot(shadow: ShadowRoot): void {
+    this.shadowRoot = shadow;
+  }
+
+  /**
+   * Update shadow DOM styles
+   *
+   * @returns Promise that resolves when styles are updated
+   */
+  async updateShadowStyles(): Promise<void> {
+    if (!this.shadowRoot) return;
+    await styleUtilities.setShadowStyles({
+      shadowRoot: this.shadowRoot,
+      styles: this.getStyles(),
     });
+  }
 
-    if (element) contacts[config.key] = element;
-    return contacts;
-  }, {});
+  /**
+   * Get accumulated styles as single string
+   *
+   * @returns Combined CSS styles
+   */
+  getStyles(): string {
+    return this.stylesArray.join('\n');
+  }
 
-  // Create image from headshot
-  const image = entry.headshot?.[0]?.url
-    ? createImageOrLinkedImage({
-        imageUrl: entry.headshot[0].url,
-        altText: fullName,
-        linkUrl: url,
-        linkLabel: `View profile for ${fullName}`,
-      })
-    : null;
+  /**
+   * Get shadow root callback for events
+   *
+   * @returns Callback function for shadow root
+   */
+  getShadowCallback(): (shadow: ShadowRoot) => void {
+    return (shadow) => this.setShadowRoot(shadow);
+  }
+}
 
-  // Create description based on display type
-  const description =
-    displayType === 'full' && entry.bio?.html
-      ? createTextContainer({
-          text: entry.bio.html,
-          allowHTML: true,
-        })
-      : displayType === 'small' && entry.summary?.html
-        ? createTextContainer({
-            text: entry.summary.html,
-            allowHTML: true,
-          })
-        : null;
+// ============================================================================
+// RENDERING FUNCTIONS
+// ============================================================================
 
-  return {
-    name,
-    job,
-    association,
-    email: contactElements.email || null,
-    linkedin: contactElements.linkedin || null,
-    phone: null,
-    address: null,
-    additionalContact: null,
-    image,
-    description,
-    isThemeDark,
-  };
+/**
+ * Render successful bio with expert data
+ *
+ * @param container - Container element to render into
+ * @param expert - Expert entry data
+ * @param state - State manager instance
+ * @param isThemeDark - Dark theme flag
+ * @returns Promise that resolves when rendering is complete
+ */
+const renderSuccess = async (
+  container: HTMLElement,
+  expert: ExpertEntry,
+  state: BioFeedState,
+  isThemeDark: boolean,
+): Promise<void> => {
+  // Create bio element
+  const bioProps = mapExpertToBioProps(expert, 'small', isThemeDark);
+  const bioElement = person.bio.small(bioProps);
+
+  // Create announcer
+  const announcer = createSuccessAnnouncer(expert);
+
+  // Build children array
+  const children = [bioElement.element, announcer.getElement()];
+
+  // Append all children at once
+  children.forEach((child) => container.appendChild(child));
+
+  // Update styles
+  state.addStyles(bioElement.styles);
+  await state.updateShadowStyles();
 };
+
+/**
+ * Render error state
+ *
+ * @param container - Container element to render into
+ * @param message - Error message to display
+ * @param state - State manager instance
+ * @param isThemeDark - Dark theme flag
+ * @returns Promise that resolves when rendering is complete
+ */
+const renderError = async (
+  container: HTMLElement,
+  message: string,
+  state: BioFeedState,
+  isThemeDark: boolean,
+): Promise<void> => {
+  const emptyState = createEmptyState(message, isThemeDark);
+  emptyState.render(container);
+  state.addStyles(emptyState.styles);
+  await state.updateShadowStyles();
+};
+
+// ============================================================================
+// MAIN EXPORT
+// ============================================================================
 
 /**
  * Create an expert bio feed
  *
- * Fetches and displays a single expert's bio.
- * Default display uses 'small' layout with summary.
- * Set data-display="full" to use 'full' layout with bio.
+ * Fetches and displays a single expert's bio with summary.
+ * Uses element builder pattern for clean construction.
  *
  * @param props - Feed configuration
- * @returns ElementModel with bio element and styles
+ * @returns ElementModel with bio element, styles, and events
  *
  * @example
  * ```typescript
- * // Small bio with summary
  * const bio = expertBio({
  *   token: 'my-token',
  *   expertId: 'john-doe',
  * });
+ * ```
  *
- * // Full bio with biography
- * const fullBio = expertBio({
+ * @example
+ * ```typescript
+ * // With dark theme
+ * const bio = expertBio({
  *   token: 'my-token',
- *   expertId: 'john-doe',
+ *   expertId: 'jane-smith',
+ *   isThemeDark: true,
  * });
- * fullBio.element.setAttribute('data-display', 'full');
  * ```
  */
 export default (props: BioProps): ElementModel => {
   const { token, expertId, isThemeDark = false } = props;
-  const container = document.createElement('div');
-  container.className = 'expert-bio-feed';
-  let styles = '';
 
-  // Determine display type from data-display attribute
-  const getDisplayType = (): 'small' | 'full' => {
-    const displayAttr = container.getAttribute('data-display');
-    return displayAttr === 'full' ? 'full' : 'small';
-  };
+  // Create container using ElementBuilder
+  const containerBuilder = new ElementBuilder('div').withClassName(
+    'expert-bio-feed',
+  );
 
-  // Fetch and render expert bio
-  const initialize = async () => {
+  // Get element for manipulation (non-destructive)
+  const container = containerBuilder.getElement();
+
+  // Initialize state management
+  const loading = new LoadingState({ isThemeDark });
+  const state = new BioFeedState(loading.styles);
+
+  /**
+   * Fetch expert data and render
+   */
+  const initialize = async (): Promise<void> => {
+    loading.show(container);
+
     try {
-      // Fetch single expert by ID using relatedTo
-      const variables = expertsFetchStrategy.composeApiVariables({
-        token,
-        limit: 1,
-        offset: 0,
-        relatedTo: [expertId],
-      });
-
+      // Fetch expert data
+      const fetchProps = createFetchProps(token, expertId);
+      const variables = expertsFetchStrategy.composeApiVariables(fetchProps);
       const entries = await expertsFetchStrategy.fetchEntries(variables);
 
+      loading.hide();
+
+      // Check results
       if (!entries || entries.length === 0) {
-        // Show error state
-        const error = document.createElement('p');
-        error.textContent = 'Expert not found';
-        container.appendChild(error);
+        await renderError(container, 'Expert not found', state, isThemeDark);
         return;
       }
 
-      const expert = entries[0];
-      const displayType = getDisplayType();
-
-      // Map expert to bio props
-      const bioProps = mapExpertToBioProps(expert, displayType, isThemeDark);
-
-      // Create bio element
-      const bioElement =
-        displayType === 'full'
-          ? person.bio.full(bioProps)
-          : person.bio.small(bioProps);
-
-      container.appendChild(bioElement.element);
-      styles += bioElement.styles;
+      // Render success
+      await renderSuccess(container, entries[0], state, isThemeDark);
     } catch (error) {
       console.error('Error fetching expert bio:', error);
-      const errorEl = document.createElement('p');
-      errorEl.textContent = 'Failed to load expert bio';
-      container.appendChild(errorEl);
+      loading.hide();
+      await renderError(
+        container,
+        'Failed to load expert bio',
+        state,
+        isThemeDark,
+      );
     }
   };
 
-  // Initialize on creation
+  // Start initialization
   initialize();
 
+  // Build and return element model
+  const model = containerBuilder.build();
+
   return {
-    element: container,
+    element: model.element,
     get styles() {
-      return styles;
+      return state.getStyles();
+    },
+    events: {
+      callback: state.getShadowCallback(),
     },
   };
 };

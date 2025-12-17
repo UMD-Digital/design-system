@@ -9,7 +9,7 @@ const tagName = 'umd-feed-expert-bio';
 
 const createComponent: CreateComponentFunction = (element) => {
   const token = Attributes.getValue.feedToken({ element });
-  const expertId = element.getAttribute('data-expert-id') || '';
+  const expertId = element.getAttribute('data-id') || '';
 
   if (!token || !expertId) {
     return { element: document.createElement('div'), styles: '' };
@@ -21,50 +21,30 @@ const createComponent: CreateComponentFunction = (element) => {
     isThemeDark: Attributes.isTheme.dark({ element }),
   });
 
-  // Set data-display attribute if present
-  const displayType = element.getAttribute('data-display');
-  if (displayType === 'full') {
-    bioElement.element.setAttribute('data-display', 'full');
-  }
-
   return bioElement;
 };
 
 /**
  * Expert Bio Feed Component
  *
- * Displays a single expert's biography with contact information.
- * Defaults to 'small' layout showing summary.
- * Use data-display="full" to show complete biography.
+ * Displays a single expert's profile with summary and contact information.
+ * Always uses the small layout format.
  *
  * ## Custom Element
  * `<umd-feed-expert-bio>`
  *
  * ## Attributes
  * - `data-token` - API authentication token (required)
- * - `data-expert-id` - Expert ID to display (required)
- * - `data-display` - Display mode:
- *   - `small` (default) - Shows summary
- *   - `full` - Shows complete biography
+ * - `data-id` - Expert ID to display (required)
  * - `data-theme` - Theme options:
  *   - `dark` - Dark theme styling
  *
  * @example
  * ```html
- * <!-- Basic expert bio (small/summary) -->
+ * <!-- Basic expert bio -->
  * <umd-feed-expert-bio
  *   data-token="your-api-token"
- *   data-expert-id="john-doe">
- * </umd-feed-expert-bio>
- * ```
- *
- * @example
- * ```html
- * <!-- Full expert bio -->
- * <umd-feed-expert-bio
- *   data-token="your-api-token"
- *   data-expert-id="jane-smith"
- *   data-display="full">
+ *   data-id="john-doe">
  * </umd-feed-expert-bio>
  * ```
  *
@@ -73,7 +53,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * <!-- Dark theme bio -->
  * <umd-feed-expert-bio
  *   data-token="your-api-token"
- *   data-expert-id="john-doe"
+ *   data-id="john-doe"
  *   data-theme="dark">
  * </umd-feed-expert-bio>
  * ```

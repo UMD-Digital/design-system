@@ -91,12 +91,18 @@ export interface ExpertSkills {
  * Uses name fields instead of generic title field.
  */
 export interface ExpertEntry extends BaseEntry {
+  /** Expert's name prefix (e.g., Dr., Prof.) */
+  prefix?: string | null;
   /** Expert's first name */
   firstName: string;
   /** Expert's middle name (optional) */
   middleName?: string | null;
   /** Expert's last name */
   lastName: string;
+  /** Expert's name suffix (e.g., Jr., PhD, MD) */
+  suffix?: string | null;
+  /** Expert's pronouns (e.g., he/him, she/her, they/them) */
+  pronouns?: string | null;
   /** Expert's headshot image */
   headshot?: Image[] | null;
   /** Brief summary of the expert */

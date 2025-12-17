@@ -42,9 +42,9 @@ const FRAGMENT_EXPERT_JOBS = `
     url
     title: expertsOrganizationJobTitle
     roomNumber: expertsOrganizationJobRoomNumber
-    campusUnits: expertsCategoryCampusUnit {
+    campusUnits: categoryCampusUnit {
       title
-      ... on expertsCampusUnits_Category {
+      ... on campusUnits_Category {
         link: externalLink {
           url
         }
@@ -55,9 +55,12 @@ const FRAGMENT_EXPERT_JOBS = `
 
 const FRAGMENT_EXPERT_NAME = `
   fragment Name on expertsContent_Entry {
-    firstName: expertsFirstName
-    middleName: expertsMiddleName
-    lastName: expertsLastName
+    prefix: expertsNamePrefix
+    firstName: expertsNameFirst
+    middleName: expertsNameMiddle
+    lastName: expertsNameLast
+    suffix: expertsNameSuffix
+    pronouns: expertsNamePronouns
   }
 `;
 
@@ -73,10 +76,10 @@ const FRAGMENT_EXPERT_IMAGERY = `
 
 const FRAGMENT_EXPERT_BIOGRAPHY = `
   fragment Biography on expertsContent_Entry {
-    summary: expertSummary {
+    summary: expertsSummary {
       html
     }
-    bio: expertBiography {
+    bio: expertsBiography {
       html
     }
   }
@@ -127,7 +130,7 @@ const FRAGMENT_EXPERT_CATEGORIES = `
     areasOfExpertise: expertsCategoryAreaOfExpertise {
       ...CategoryFields
     }
-    campusUnits: expertsCategoryCampusUnit {
+    campusUnits: categoryCampusUnit {
       ...CategoryFields
     }
     tags: expertsCategoryTags {
@@ -138,14 +141,16 @@ const FRAGMENT_EXPERT_CATEGORIES = `
 
 /**
  * GraphQL query for experts
+ * Supports filtering by ID, relatedTo, or fetching all experts
  */
 export const EXPERTS_QUERY = `
-  query getExpertsContent($limit: Int, $offset: Int, $relatedTo: [QueryArgument]) {
+  query getExpertsContent($limit: Int, $offset: Int, $id: [QueryArgument], $relatedTo: [QueryArgument]) {
     entryCount(
       section: "experts"
       limit: $limit
       offset: $offset
       type: "expertsContent"
+      id: $id
       relatedTo: $relatedTo
     )
     entries(
@@ -153,8 +158,9 @@ export const EXPERTS_QUERY = `
       limit: $limit
       offset: $offset
       type: "expertsContent"
+      id: $id
       relatedTo: $relatedTo
-      orderBy: "expertsLastName"
+      orderBy: "expertsNameLast"
     ) {
       ...EntriesNativeFields
       ... on expertsContent_Entry {
@@ -215,9 +221,14 @@ export const expertsFetchStrategy = createGraphQLFetchStrategy<ExpertEntry>({
   },
 
   composeVariables: (baseVariables) => {
-    const { categories, entriesToRemove, ...rest } = baseVariables;
+    const { categories, entriesToRemove, id, ...rest } = baseVariables;
 
     const variables: any = { ...rest };
+
+    // Handle fetching by ID (for single expert bio)
+    if (id) {
+      variables.id = Array.isArray(id) ? id : [id];
+    }
 
     // Handle categories via relatedTo
     if (categories) {

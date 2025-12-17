@@ -133,6 +133,7 @@ export function createDisplayHandlers<TData>(
     events.dispatch(container, events.eventNames.FEED_ERROR, {
       error: 'No results found',
       message,
+      isThemeDark,
     });
 
     setTimeout(() => {

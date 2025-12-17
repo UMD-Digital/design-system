@@ -32,14 +32,11 @@ export function createEmptyElement(config: EmptyStateConfig = {}): ElementModel 
   } = config;
 
   const headline = new ElementBuilder(document.createElement('p'))
-    .styled(
-      Styles.typography.sans.compose('extralarge', {
-        theme: theme.fontColor(isThemeDark),
-      })
-    )
+    .styled(Styles.typography.sans.compose('extralarge'))
     .withStyles({
       element: {
         textTransform: 'uppercase',
+        color: theme.foreground(isThemeDark),
       },
     })
     .build();

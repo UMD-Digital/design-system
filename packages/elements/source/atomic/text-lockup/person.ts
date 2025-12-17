@@ -127,9 +127,10 @@ export default ({
           [`& + *`]: {
             marginTop: '4px',
           },
-        },
-        subElement: {
-          color: 'currentColor',
+
+          [`&  *`]: {
+            color: 'currentColor',
+          },
         },
       })
       .build();

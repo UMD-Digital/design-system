@@ -57,9 +57,7 @@ export interface ListProps extends BaseProps {
 /**
  * Props for single expert bio display
  *
- * Bio layout displays a single expert's full profile.
- * Default uses 'small' layout with summary field.
- * Set data-display="full" on element to use 'full' layout with bio field.
+ * Bio layout displays a single expert's profile using the small layout with summary field.
  */
 export interface BioProps extends Omit<BaseProps, 'numberOfRowsToStart' | 'isLazyLoad' | 'categories' | 'entriesToRemove'> {
   /** Expert ID to fetch and display */

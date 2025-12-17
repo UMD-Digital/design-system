@@ -6,6 +6,7 @@ import { type ElementModel } from '../_types';
 export interface StackedLayoutProps {
   isThemeDark?: boolean;
   gap?: string;
+  spacing?: string;
   showDividers?: boolean;
   dividerColor?: string;
 }
@@ -38,6 +39,7 @@ export interface StackedLayoutProps {
 export default function stacked({
   isThemeDark = false,
   gap = token.spacing.md,
+  spacing = token.spacing.md,
   showDividers = true,
   dividerColor,
 }: StackedLayoutProps = {}): ElementModel {
@@ -50,8 +52,8 @@ export default function stacked({
   const dividerStyles = showDividers
     ? {
         [` > *:not(:last-child)`]: {
-          paddingBottom: gap,
-          marginBottom: gap,
+          paddingBottom: spacing,
+          marginBottom: spacing,
           borderBottom: `1px solid ${borderColor}`,
         },
       }
@@ -62,9 +64,7 @@ export default function stacked({
     .withStyles({
       element: {
         gridGap: gap,
-        [` > *`]: {
-          containerType: 'inline-size',
-        },
+
         ...dividerStyles,
       },
     })

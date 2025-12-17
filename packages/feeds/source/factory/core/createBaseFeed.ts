@@ -13,11 +13,7 @@ import {
   createDisplayHandlers,
   createFetchHandlers,
 } from '../helpers';
-import {
-  BaseFeedConfig,
-  FeedFactoryResult,
-  CardMappingOptions,
-} from './types';
+import { BaseFeedConfig, FeedFactoryResult, CardMappingOptions } from './types';
 
 /**
  * Create a base feed using the factory pattern
@@ -59,7 +55,7 @@ import {
  * ```
  */
 export function createBaseFeed<TData, TVariables = any>(
-  config: BaseFeedConfig<TData, TVariables>
+  config: BaseFeedConfig<TData, TVariables>,
 ): FeedFactoryResult {
   const {
     token,
@@ -80,11 +76,8 @@ export function createBaseFeed<TData, TVariables = any>(
     imageConfig,
   } = config;
 
-  // Create container and loading state
   const container = document.createElement('div');
   const loading = new LoadingState({ isThemeDark });
-
-  // Initialize styles with loading styles
   let styles = loading.styles;
 
   // Create helpers for state management
@@ -104,11 +97,10 @@ export function createBaseFeed<TData, TVariables = any>(
   let shadowRoot: ShadowRoot | null = null;
   const shadowRootCallback = (shadow: ShadowRoot) => {
     shadowRoot = shadow;
-    // Update helpers so displayResults can access the shadow root
+
     helpers.setShadowRoot(shadow);
   };
 
-  // Card mapping options for display strategy
   const cardMappingOptions: CardMappingOptions = {
     isThemeDark,
     isTransparent,
@@ -118,14 +110,12 @@ export function createBaseFeed<TData, TVariables = any>(
     ...(cardType && { cardType }),
   };
 
-  // Create layout element
   const layoutElement = layoutStrategy.create({
     columns: numberOfColumnsToShow as 2 | 3 | 4,
     isThemeDark,
   });
   helpers.setStyles(layoutElement.styles);
 
-  // Base props for API calls
   const baseProps = {
     token,
     categories,
@@ -138,7 +128,9 @@ export function createBaseFeed<TData, TVariables = any>(
 
   // Create a mutable reference for lazy load callback
   // This allows us to set it after fetchHandlers are created
-  const lazyLoadCallbackRef = { current: undefined as (() => Promise<void>) | undefined };
+  const lazyLoadCallbackRef = {
+    current: undefined as (() => Promise<void>) | undefined,
+  };
 
   // Create display handlers with callback reference
   const displayHandlers = createDisplayHandlers({
@@ -149,13 +141,18 @@ export function createBaseFeed<TData, TVariables = any>(
     isLazyLoad,
     numberOfColumnsToShow,
     numberOfRowsToStart,
-    noResultsConfig,
+    noResultsConfig: {
+      ...noResultsConfig,
+      isThemeDark, // Ensure theme is passed to EmptyState
+    },
     // Pass a function that calls the current callback
-    lazyLoadCallback: isLazyLoad ? async () => {
-      if (lazyLoadCallbackRef.current) {
-        await lazyLoadCallbackRef.current();
-      }
-    } : undefined,
+    lazyLoadCallback: isLazyLoad
+      ? async () => {
+          if (lazyLoadCallbackRef.current) {
+            await lazyLoadCallbackRef.current();
+          }
+        }
+      : undefined,
   });
 
   // Create fetch handlers

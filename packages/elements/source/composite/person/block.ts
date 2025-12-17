@@ -49,6 +49,7 @@ export default (props: PersonCard): ElementModel<HTMLElement> => {
           width: '100%',
           objectFit: 'contain',
           height: '140px !important',
+          transform: `none !important`,
 
           ...createMediaQuery('min-width', mediumBreakpointStart, {
             height: '200px !important',

@@ -79,7 +79,9 @@ export default function gridBorder({
     stretch: 'stretch',
   };
 
-  const alignmentStyles = alignItems ? { alignSelf: alignmentMap[alignItems] } : {};
+  const alignmentStyles = alignItems
+    ? { alignSelf: alignmentMap[alignItems] }
+    : {};
 
   return new ElementBuilder()
     .styled(gridStyle)
@@ -87,7 +89,7 @@ export default function gridBorder({
       element: {
         [` > *`]: {
           ...alignmentStyles,
-          padding: token.spacing.md,
+          padding: token.spacing.xl,
           ...containerQueryStyles,
         },
       },

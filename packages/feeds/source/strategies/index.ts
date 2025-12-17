@@ -49,6 +49,7 @@ export type { GraphQLFetchConfig } from './fetch';
 export {
   gridLayout,
   gridGapLayout,
+  gridBorderLayout,
   stackedLayout,
   gridOffsetLayout,
   createFeaturedLayoutStrategy,

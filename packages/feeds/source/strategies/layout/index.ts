@@ -10,6 +10,7 @@
 export {
   gridLayout,
   gridGapLayout,
+  gridBorderLayout,
   stackedLayout,
   gridOffsetLayout,
 } from './grid';

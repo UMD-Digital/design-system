@@ -5,4 +5,5 @@ export { default as Image } from './image';
 export { default as stacked } from './stacked';
 export { default as grid } from './grid';
 export { default as gridGap } from './grid-gap';
+export { default as gridBorder } from './grid-border';
 export { default as gridOffset } from './grid-offset';

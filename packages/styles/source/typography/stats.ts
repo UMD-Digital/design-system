@@ -143,9 +143,9 @@ const smallBase = {
  */
 export function compose(
   size: StatsSize,
-  options?: StatsComposeOptions
+  options?: StatsComposeOptions,
 ): JssObject {
-  const { theme = 'light' } = options || {};
+  const { theme } = options || {};
 
   const sizes: Record<StatsSize, any> = {
     large: largeBase,
@@ -158,7 +158,9 @@ export function compose(
   // Apply theme color
   const composed = {
     ...base,
-    color: theme === 'dark' ? color.gold : color.red,
+    ...(theme && {
+      color: theme === 'dark' ? color.gold : color.red,
+    }),
   };
 
   // Generate className

@@ -201,7 +201,7 @@ export function compose(
   type: ElementType,
   options?: ElementComposeOptions,
 ): JssObject {
-  const { theme = 'light', color: explicitColor } = options || {};
+  const { theme, color: explicitColor } = options || {};
 
   // Select base variant
   const bases: Record<ElementType, any> = {
@@ -215,12 +215,15 @@ export function compose(
   const base = bases[type];
 
   // Determine final color (explicit color overrides theme)
-  const finalColor = explicitColor || (theme === 'dark' ? color.white : color.black);
+  const finalColor =
+    explicitColor || (theme === 'dark' ? color.white : color.black);
 
   // Apply color
   const composed = {
     ...base,
-    color: finalColor,
+    ...(theme && {
+      color: finalColor,
+    }),
   };
 
   // Generate className

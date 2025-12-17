@@ -17,6 +17,7 @@ const createComponent: CreateComponentFunction = (element) => {
   const columnCount =
     Number(Attributes.getValue.layoutColumnCount({ element })) || 3;
   const rowCount = Number(Attributes.getValue.layoutRowCount({ element })) || 1;
+  const categoriesAttribute = Attributes.getValue.feedFilterIds({ element });
 
   return grid({
     token,
@@ -26,6 +27,7 @@ const createComponent: CreateComponentFunction = (element) => {
     isLazyLoad: Attributes.includesFeature.lazyLoad({ element }),
     isTransparent: Attributes.isVisual.transparent({ element }),
     isOverlay: Attributes.isDisplay.overlay({ element }),
+    ...(categoriesAttribute && { categories: categoriesAttribute.split(',') }),
   });
 };
 
@@ -43,7 +45,6 @@ const createComponent: CreateComponentFunction = (element) => {
  * - `data-filter-group-ids` - Comma-separated category IDs to filter experts
  * - `data-layout-column-count` - Number of columns (default: 3)
  * - `data-layout-row-count` - Initial rows to display (default: 1)
- * - `data-entry-remove-ids` - Comma-separated entry IDs to exclude
  * - `data-theme` - Theme options:
  *   - `dark` - Dark theme styling
  * - `data-lazy-load` - Enable lazy loading of additional experts
@@ -77,7 +78,6 @@ const createComponent: CreateComponentFunction = (element) => {
  * <!-- Experts grid excluding specific profiles -->
  * <umd-feed-experts-grid
  *   data-token="your-api-token"
- *   data-entry-remove-ids="john-doe,jane-smith"
  *   data-theme="dark"
  *   data-visual-transparent>
  * </umd-feed-experts-grid>

@@ -52,7 +52,7 @@ export default function grid({
 
   const minHeightStyles = minHeight
     ? {
-        [`@media (${token.media.queries.large.min})`]: {
+        [`@media (${token.media.queries.tablet.min})`]: {
           minHeight: `${minHeight} !important`,
         },
       }

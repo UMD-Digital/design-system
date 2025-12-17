@@ -396,7 +396,7 @@ export function compose(
   size: SansSize,
   options?: SansComposeOptions,
 ): JssObject {
-  const { theme = 'light', color: explicitColor, scaling = false } = options || {};
+  const { theme, color: explicitColor, scaling = false } = options || {};
 
   // Select base variant
   let base: any;
@@ -417,12 +417,15 @@ export function compose(
   }
 
   // Determine final color (explicit color overrides theme)
-  const finalColor = explicitColor || (theme === 'dark' ? color.white : color.black);
+  const finalColor =
+    explicitColor || (theme === 'dark' ? color.white : color.black);
 
   // Apply color
   const composed = {
     ...base,
-    color: finalColor,
+    ...(theme && {
+      color: finalColor,
+    }),
   };
 
   // Generate className

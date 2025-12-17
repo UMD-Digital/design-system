@@ -237,7 +237,7 @@ export function compose(
   size: SerifSize,
   options?: SerifComposeOptions,
 ): JssObject {
-  const { theme = 'light', color: explicitColor } = options || {};
+  const { theme, color: explicitColor } = options || {};
 
   const sizes: Record<SerifSize, any> = {
     maximum: maximumBase,
@@ -250,12 +250,15 @@ export function compose(
   const base = sizes[size];
 
   // Determine final color (explicit color overrides theme)
-  const finalColor = explicitColor || (theme === 'dark' ? color.white : color.black);
+  const finalColor =
+    explicitColor || (theme === 'dark' ? color.white : color.black);
 
   // Apply color
   const composed = {
     ...base,
-    color: finalColor,
+    ...(theme && {
+      color: finalColor,
+    }),
   };
 
   // Generate className

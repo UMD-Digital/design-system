@@ -24,7 +24,7 @@ import { LayoutStrategy, LayoutOptions } from '../../factory/core/types';
 export const gridLayout: LayoutStrategy = {
   create: (options: LayoutOptions) => {
     const { columns = 3 } = options;
-    return grid({ columns: columns as 2 | 3 | 4 });
+    return grid({ columns: columns as 2 | 3 | 4, minHeight: '560px' });
   },
   getId: () => 'umd-grid-layout-container',
 };

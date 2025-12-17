@@ -90,17 +90,12 @@ export function createGraphQLFetchStrategy<
       try {
         // Use count query if provided, otherwise use entries query
         const query = queries.count || queries.entries;
-
-        console.log(variables);
-
         const response = await fetchGraphQL({
           url: endpoint,
           query,
           token: (variables as any).token,
           variables: variables as GraphQLVariables,
         });
-
-        console.log(response);
 
         // Check for errors
         if (!response || !response.data || response.message) {

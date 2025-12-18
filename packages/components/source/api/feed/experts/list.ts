@@ -10,8 +10,7 @@ const tagName = 'umd-feed-experts-list';
 const createComponent: CreateComponentFunction = (element) => {
   const token = Attributes.getValue.feedToken({ element });
   const rowCount = Number(Attributes.getValue.layoutRowCount({ element })) || 5;
-  const columnCount =
-    Number(Attributes.getValue.layoutColumnCount({ element })) || 3;
+  const isDisplayList = Attributes.isDisplay.list({ element });
   const categoriesAttribute = Attributes.getValue.feedFilterIds({ element });
 
   if (!token) {
@@ -21,7 +20,7 @@ const createComponent: CreateComponentFunction = (element) => {
   return list({
     token,
     numberOfRowsToStart: Math.min(Math.max(rowCount, 1), 10),
-    cardType: columnCount === 2 ? 'list' : 'tabular',
+    cardType: isDisplayList ? 'list' : 'tabular',
     isThemeDark: Attributes.isTheme.dark({ element }),
     isLazyLoad: Attributes.includesFeature.lazyLoad({ element }),
     ...(categoriesAttribute && { categories: categoriesAttribute.split(',') }),

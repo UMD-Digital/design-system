@@ -2460,7 +2460,7 @@
   resolved "file:packages/icons"
 
 "@universityofmaryland/web-model-library@^1.0.0", "@universityofmaryland/web-model-library@file:/Users/magnessjo/umd/design-system/packages/model":
-  version "1.0.0"
+  version "1.0.1"
   resolved "file:packages/model"
   dependencies:
     postcss "^8.4.31"

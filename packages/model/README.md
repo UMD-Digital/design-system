@@ -1,6 +1,6 @@
 # @universityofmaryland/web-model-library
 
-[![Model Version](https://img.shields.io/badge/Model-v1.0.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-model-library)
+[![Model Version](https://img.shields.io/badge/Model-v1.0.1-blue)](https://www.npmjs.com/package/@universityofmaryland/web-model-library)
 
 Core utilities for building web components in the UMD design system. Provides the foundational tools for attribute handling, slot management, component registration, and custom element creation.
 

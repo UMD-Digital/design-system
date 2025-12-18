@@ -20,6 +20,7 @@ export default ({
     .withStyles({
       element: {
         marginTop: token.spacing.sm,
+        display: 'block',
 
         ...(!isTypeFeatured && {
           ...layout.grid.inline.tabletRows,

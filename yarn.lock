@@ -2420,7 +2420,7 @@
     "@universityofmaryland/web-utilities-library" "^1.0.0"
 
 "@universityofmaryland/web-components-library@file:/Users/magnessjo/umd/design-system/packages/components":
-  version "1.16.3"
+  version "1.16.4"
   resolved "file:packages/components"
   dependencies:
     "@testing-library/jest-dom" "^6.1.5"
@@ -2436,7 +2436,7 @@
     tw-to-css "^0.0.12"
 
 "@universityofmaryland/web-elements-library@^1.0.0", "@universityofmaryland/web-elements-library@^1.5.4", "@universityofmaryland/web-elements-library@file:/Users/magnessjo/umd/design-system/packages/elements":
-  version "1.5.8"
+  version "1.5.9"
   resolved "file:packages/elements"
   dependencies:
     "@types/postcss-js" "^4.0.4"

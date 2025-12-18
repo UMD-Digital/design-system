@@ -46,6 +46,7 @@ export const image = ({
         ...createMediaQuery('min-width', mediumBreakpointStart, {
           display: 'block',
           width: '96px',
+          minWidth: '96px',
           paddingRight: `${token.spacing.md}`,
           alignSelf: 'flex-start',
         }),
@@ -56,6 +57,7 @@ export const image = ({
           ...createMediaQuery('max-width', smallBreakpoint, {
             height: 'auto !important',
             width: '140px',
+            minWidth: '140px',
           }),
         },
       },

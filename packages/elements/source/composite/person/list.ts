@@ -43,12 +43,14 @@ export default ({
           ...createMediaQuery('min-width', mediumBreakpointStart, {
             display: 'block',
             width: '160px',
+            minWidth: '160px',
             paddingRight: `${token.spacing.md}`,
             alignSelf: 'flex-start',
           }),
 
           ...createMediaQuery('min-width', mediumBreakpoint, {
             width: '208px',
+            minWidth: '208px',
           }),
         },
         image,

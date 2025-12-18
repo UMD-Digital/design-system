@@ -36,7 +36,8 @@
     "version:check": "npx lerna changed",
     "version:dry-run": "npx lerna version --no-git-tag-version --no-push --yes",
     "generate:mocks": "node source/generate-mocks.js",
-    "package:version": "node scripts/version-bump.js"
+    "package:version": "node scripts/version-bump.js",
+    "postpackage:version": "npm run update-badges"
   },
   "workspaces": [
     "packages/*"

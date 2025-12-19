@@ -31,6 +31,8 @@ interface FetchHandlerConfig<TData, TVariables> {
   layoutElement: any;
   /** Whether theme is dark */
   isThemeDark?: boolean;
+  /** Whether to enable category fallback (show all results when no category results found) */
+  enableCategoryFallback?: boolean;
 }
 
 /**
@@ -71,6 +73,7 @@ export function createFetchHandlers<TData, TVariables>(
     displayHandlers,
     layoutElement,
     isThemeDark,
+    enableCategoryFallback = false,
   } = config;
 
   /**
@@ -138,7 +141,8 @@ export function createFetchHandlers<TData, TVariables>(
     const count = await fetchStrategy.fetchCount(variables);
 
     if (count === 0) {
-      if (baseProps.categories && baseProps.categories.length > 0) {
+      // Only attempt category fallback if explicitly enabled (for events feeds)
+      if (enableCategoryFallback && baseProps.categories && baseProps.categories.length > 0) {
         const fallbackVariables = fetchStrategy.composeApiVariables({
           ...baseProps,
           categories: undefined,

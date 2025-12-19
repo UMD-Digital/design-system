@@ -67,6 +67,7 @@ export function createBaseFeed<TData, TVariables = any>(
     numberOfColumnsToShow = 1,
     numberOfRowsToStart,
     isLazyLoad = false,
+    enableCategoryFallback = false,
     categories,
     entriesToRemove,
     fetchStrategy,
@@ -163,6 +164,7 @@ export function createBaseFeed<TData, TVariables = any>(
     displayHandlers,
     layoutElement,
     isThemeDark,
+    enableCategoryFallback,
   });
 
   // Set the lazy load callback reference now that fetch handlers exist

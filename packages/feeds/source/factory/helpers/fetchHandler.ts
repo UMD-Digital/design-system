@@ -23,7 +23,7 @@ interface FetchHandlerConfig<TData, TVariables> {
   baseProps: any;
   /** Display handlers */
   displayHandlers: {
-    displayResultStart: (props: any) => void;
+    displayResultStart: (props: any) => Promise<void>;
     displayResults: (props: { feedData: TData[] }) => Promise<void>;
     displayNoResults: (props: any) => void;
   };
@@ -62,7 +62,7 @@ interface FetchHandlerConfig<TData, TVariables> {
  * ```
  */
 export function createFetchHandlers<TData, TVariables>(
-  config: FetchHandlerConfig<TData, TVariables>
+  config: FetchHandlerConfig<TData, TVariables>,
 ) {
   const {
     fetchStrategy,
@@ -83,7 +83,7 @@ export function createFetchHandlers<TData, TVariables>(
 
     // Remove existing pagination
     const existingPagination = container.querySelector(
-      `.${Styles.layout.alignment.block.center.className}`
+      `.${Styles.layout.alignment.block.center.className}`,
     );
     existingPagination?.remove();
 
@@ -110,7 +110,7 @@ export function createFetchHandlers<TData, TVariables>(
       } of ${totalEntries} articles`;
 
       const existingAnnouncer = container.querySelector(
-        '[role="status"]'
+        '[role="status"]',
       ) as HTMLElement;
       if (existingAnnouncer) {
         existingAnnouncer.textContent = message;
@@ -130,16 +130,58 @@ export function createFetchHandlers<TData, TVariables>(
    * Handle initial fetch (with count)
    */
   const start = async (): Promise<void> => {
-    // Compose API variables
     const variables = fetchStrategy.composeApiVariables({
       ...baseProps,
       getOffset: helpers.getOffset,
     });
 
-    // Fetch count
     const count = await fetchStrategy.fetchCount(variables);
 
     if (count === 0) {
+      if (baseProps.categories && baseProps.categories.length > 0) {
+        const fallbackVariables = fetchStrategy.composeApiVariables({
+          ...baseProps,
+          categories: undefined,
+          getOffset: helpers.getOffset,
+        });
+
+        const fallbackCount = await fetchStrategy.fetchCount(fallbackVariables);
+
+        if (fallbackCount && fallbackCount > 0) {
+          helpers.setTotalEntries(fallbackCount);
+
+          const fallbackData = await fetchStrategy.fetchEntries(
+            fallbackVariables,
+          );
+
+          if (fallbackData && fallbackData.length > 0) {
+            // Fetch category names from API
+            let categoryNames = await fetchStrategy.fetchCategoryNames?.(
+              baseProps.categories,
+              baseProps.token,
+            );
+
+            // If fetch fails, format IDs as fallback
+            if (!categoryNames || categoryNames.length === 0) {
+              categoryNames = baseProps.categories.map((id: string) =>
+                id
+                  .split('-')
+                  .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                  .join(' '),
+              );
+            }
+
+            await displayHandlers.displayResultStart({
+              feedData: fallbackData,
+              layoutElement,
+              isFallback: true,
+              categoryNames,
+            });
+            return;
+          }
+        }
+      }
+
       displayHandlers.displayNoResults({});
       return;
     }
@@ -159,7 +201,7 @@ export function createFetchHandlers<TData, TVariables>(
     const feedData = await fetchStrategy.fetchEntries(variables);
 
     if (feedData && feedData.length > 0) {
-      displayHandlers.displayResultStart({
+      await displayHandlers.displayResultStart({
         feedData,
         layoutElement,
       });

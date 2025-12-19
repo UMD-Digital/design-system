@@ -7,7 +7,10 @@
  * @module factory/helpers/displayHandler
  */
 
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as Styles from '@universityofmaryland/web-styles-library';
+import * as typography from '@universityofmaryland/web-styles-library/typography';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { PaginationState, EmptyState, Announcer } from '../../states';
 import { events } from '../../helpers';
 import {
@@ -63,6 +66,46 @@ export async function setShadowStyles({
 }
 
 /**
+ * Create fallback message for category-filtered feeds with no results
+ */
+function createFallbackMessage(
+  categoryNames: string[],
+  isThemeDark: boolean = false,
+): ElementModel {
+  const formattedNames = categoryNames.join(', ');
+  const message = `No events found for "${formattedNames}" <span> Other upcoming events:</span>`;
+
+  const messageElement = new ElementBuilder(document.createElement('p'))
+    .styled(
+      typography.sans.compose('extralarge', {
+        theme: theme.fontColor(isThemeDark),
+      }),
+    )
+    .withStyles({
+      textAlign: 'center',
+      margin: '0 auto',
+
+      ['& span']: {
+        display: 'block',
+      },
+    })
+    .withHTML(message);
+
+  const container = new ElementBuilder(document.createElement('div'))
+    .withClassName('feed-events-fallback-message')
+    .withChild(messageElement)
+    .withStyles({
+      element: {
+        marginBottom: Styles.token.spacing.lg,
+        padding: `${Styles.token.spacing.md} ${Styles.token.spacing.lg}`,
+      },
+    })
+    .build();
+
+  return container;
+}
+
+/**
  * Create display handlers for a feed
  *
  * Returns handlers for:
@@ -91,7 +134,7 @@ export async function setShadowStyles({
  * ```
  */
 export function createDisplayHandlers<TData>(
-  config: DisplayHandlerConfig<TData>
+  config: DisplayHandlerConfig<TData>,
 ) {
   const {
     displayStrategy,
@@ -148,12 +191,12 @@ export function createDisplayHandlers<TData>(
    * Handle displaying lazy-loaded results
    */
   const displayResults = async (
-    props: DisplayResultsProps<TData>
+    props: DisplayResultsProps<TData>,
   ): Promise<void> => {
     const { feedData } = props;
     const container = helpers.getContainer();
     const grid = container.querySelector(
-      `#${layoutStrategy.getId()}`
+      `#${layoutStrategy.getId()}`,
     ) as HTMLDivElement;
 
     // Remove existing loading and pagination states
@@ -161,7 +204,7 @@ export function createDisplayHandlers<TData>(
     existingLoader?.remove();
 
     const existingPagination = container.querySelector(
-      `.${Styles.layout.alignment.block.center.className}`
+      `.${Styles.layout.alignment.block.center.className}`,
     );
     existingPagination?.remove();
 
@@ -169,7 +212,7 @@ export function createDisplayHandlers<TData>(
 
     // Map entries to cards using display strategy
     const entries = feedData.map((entry) =>
-      displayStrategy.mapEntryToCard(entry, cardMappingOptions)
+      displayStrategy.mapEntryToCard(entry, cardMappingOptions),
     );
 
     // Append entries to grid
@@ -206,17 +249,38 @@ export function createDisplayHandlers<TData>(
   /**
    * Handle displaying initial results
    */
-  const displayResultStart = (props: {
+  const displayResultStart = async (props: {
     feedData: TData[];
     layoutElement: ElementModel;
-  }) => {
-    const { feedData, layoutElement } = props;
+    isFallback?: boolean;
+    categoryNames?: string[];
+  }): Promise<void> => {
+    const { feedData, layoutElement, isFallback, categoryNames } = props;
     const container = helpers.getContainer();
     const totalEntries = helpers.getTotalEntries();
     const showAmount = numberOfColumnsToShow * numberOfRowsToStart;
     const message = isLazyLoad
       ? `Showing ${showAmount} of ${totalEntries} articles`
       : `Showing ${showAmount} articles`;
+
+    // If this is a fallback, add a message about the category FIRST
+    if (isFallback && categoryNames && categoryNames.length > 0) {
+      const fallbackMessage = createFallbackMessage(
+        categoryNames,
+        cardMappingOptions.isThemeDark || false,
+      );
+      container.appendChild(fallbackMessage.element);
+      helpers.setStyles(fallbackMessage.styles);
+
+      // Inject fallback message styles into shadow DOM immediately
+      const shadowRoot = helpers.getShadowRoot();
+      if (shadowRoot) {
+        await setShadowStyles({
+          shadowRoot,
+          styles: helpers.getStyles(),
+        });
+      }
+    }
 
     // Set layout ID and append to container
     layoutElement.element.setAttribute('id', layoutStrategy.getId());
@@ -228,10 +292,12 @@ export function createDisplayHandlers<TData>(
       items: feedData,
       count: feedData.length,
       total: totalEntries || feedData.length,
+      isFallback,
+      categoryNames,
     });
 
     // Display the results
-    displayResults({ feedData });
+    await displayResults({ feedData });
 
     // Add announcer
     const announcer = new Announcer({ message });

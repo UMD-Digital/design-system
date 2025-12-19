@@ -58,6 +58,15 @@ export interface FetchStrategy<TData, TVariables = any> {
    * Handles offset, limit, categories, etc.
    */
   composeApiVariables: (props: any) => TVariables;
+
+  /**
+   * Fetch category names by their IDs
+   * Optional method for category fallback functionality
+   */
+  fetchCategoryNames?: (
+    categoryIds: string[],
+    token?: string,
+  ) => Promise<string[] | null>;
 }
 
 /**

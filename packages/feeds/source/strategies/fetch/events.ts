@@ -8,6 +8,7 @@
 
 import { createGraphQLFetchStrategy } from './graphql';
 import { EventEntry } from 'types/data';
+import { fetchGraphQL } from '@universityofmaryland/web-utilities-library/network';
 
 /**
  * Calendar types available in the UMD Calendar system
@@ -50,6 +51,13 @@ function generateFragments() {
         title
       }
     }
+
+    fragment EventCategoryFields_${cal} on ${cal}_Event {
+      categories: categoriesEventAudienceMultiple {
+        id
+        title
+      }
+    }
   `,
   ).join('\n');
 }
@@ -65,6 +73,7 @@ function generateInlineSpreads() {
           ...EventBasicFields_${cal}
           ...EventDateFields_${cal}
           ...EventContentFields_${cal}
+          ...EventCategoryFields_${cal}
         }
   `,
   ).join('\n');
@@ -145,6 +154,19 @@ export const EVENTS_COUNT_QUERY = buildEventsCountQuery();
 export const EVENTS_QUERY = buildEventsQuery();
 
 /**
+ * Query for fetching category names by IDs
+ * Queries the categories table directly
+ */
+export const CATEGORY_NAMES_QUERY = `
+  query getCategoryNames($ids: [QueryArgument]!) {
+    categories(id: $ids) {
+      id
+      title
+    }
+  }
+`;
+
+/**
  * Slider-specific query with minimal fields
  * Used by events slider for carousel displays
  */
@@ -179,7 +201,7 @@ export const EVENTS_SLIDER_QUERY = `
  * });
  * ```
  */
-export const eventsFetchStrategy = createGraphQLFetchStrategy<EventEntry>({
+const baseFetchStrategy = createGraphQLFetchStrategy<EventEntry>({
   endpoint: 'https://calendar.umd.edu/graphql',
 
   queries: {
@@ -213,12 +235,43 @@ export const eventsFetchStrategy = createGraphQLFetchStrategy<EventEntry>({
 });
 
 /**
+ * Fetch category names by their IDs
+ */
+async function fetchCategoryNames(
+  categoryIds: string[],
+  token?: string,
+): Promise<string[] | null> {
+  try {
+    const response = await fetchGraphQL({
+      url: 'https://calendar.umd.edu/graphql',
+      query: CATEGORY_NAMES_QUERY,
+      token: token || '',
+      variables: { ids: categoryIds },
+    });
+
+    if (!response || !response.data || !response.data.categories) {
+      return null;
+    }
+
+    return response.data.categories.map((category: any) => category.title);
+  } catch (error) {
+    console.error('Fetch category names error:', error);
+    return null;
+  }
+}
+
+export const eventsFetchStrategy = {
+  ...baseFetchStrategy,
+  fetchCategoryNames,
+};
+
+/**
  * Events fetch strategy for range queries
  *
  * Uses rangeStart filter instead of startsAfterOrAt.
  * Used for grouped event displays.
  */
-export const eventsFetchStrategyRange = createGraphQLFetchStrategy<EventEntry>({
+const baseFetchStrategyRange = createGraphQLFetchStrategy<EventEntry>({
   endpoint: 'https://calendar.umd.edu/graphql',
 
   queries: {
@@ -250,3 +303,8 @@ export const eventsFetchStrategyRange = createGraphQLFetchStrategy<EventEntry>({
     };
   },
 });
+
+export const eventsFetchStrategyRange = {
+  ...baseFetchStrategyRange,
+  fetchCategoryNames,
+};

@@ -15,32 +15,37 @@ export interface GridOffsetLayoutProps {
 }
 
 /**
- * Creates a grid layout with offset sticky positioning for the first item
+ * Creates a grid layout with offset sticky positioning
  *
- * Creates a grid where the first item can be sticky-positioned and offset
- * from the rest of the grid. Useful for featured layouts with a prominent
- * first item that stays visible while scrolling.
+ * Creates a grid where the first visual column is sticky-positioned.
+ * The sticky column changes based on layout direction:
+ * - isLayoutReversed: false → first child (left column) is sticky
+ * - isLayoutReversed: true → second child (right column DOM, left column visually) is sticky
+ *
+ * Useful for featured layouts with a prominent item that stays visible while scrolling.
  *
  * @param props - Configuration for grid offset layout
  * @returns ElementModel with grid offset layout container and styles
  *
  * @example
  * ```typescript
+ * // Standard layout: first child sticky on left
  * const offsetGridLayout = gridOffset({
  *   columns: 2,
  *   isLayoutReversed: false,
  *   stickyTopPosition: 100,
- *   overlayCardClass: 'card-overlay'
  * });
+ * offsetGridLayout.element.appendChild(featuredItem); // Sticky, left column
+ * offsetGridLayout.element.appendChild(gridOfItems);  // Right column
  *
- * // First item will be sticky, remaining items flow normally
- * offsetGridLayout.element.appendChild(featuredItem);
- * offsetGridLayout.element.appendChild(item1);
- * offsetGridLayout.element.appendChild(item2);
- *
- * // Inject into DOM
- * document.body.appendChild(offsetGridLayout.element);
- * document.head.appendChild(createStyleElement(offsetGridLayout.styles));
+ * // Reversed layout: second child sticky on left (visually)
+ * const reversedLayout = gridOffset({
+ *   columns: 2,
+ *   isLayoutReversed: true,
+ *   stickyTopPosition: 100,
+ * });
+ * reversedLayout.element.appendChild(featuredItem);  // Right column
+ * reversedLayout.element.appendChild(gridOfItems);   // Sticky, left column
  * ```
  */
 export default function gridOffset({
@@ -48,7 +53,7 @@ export default function gridOffset({
   isLayoutReversed = false,
   stickyTopPosition = 0,
   stickyMinHeight = '560px',
-  enableContainerQueries = true,
+  enableContainerQueries = false,
   alignItems = 'start',
   overlayCardClass,
   overlayTextColor = token.color.white,
@@ -70,14 +75,37 @@ export default function gridOffset({
     stretch: 'stretch',
   };
 
-  // Optional overlay card styling if class name is provided
+  // Build child-specific styles based on layout direction
+  // Scoped to .umd-layout-grid-offset to prevent affecting nested grids
+  // When not reversed: first child gets order -1 AND sticky positioning
+  // When reversed: first child gets order 2, second child gets sticky positioning
+  const stickyMediaQuery = {
+    [`@media (${token.media.queries.large.min})`]: {
+      position: 'sticky',
+      top: `${stickyTopPosition}px`,
+      minHeight: stickyMinHeight,
+    },
+  };
+
+  const childStyles = isLayoutReversed
+    ? {
+        [`&.umd-layout-grid-offset > *:first-child`]: {
+          order: 2,
+        },
+        [`&.umd-layout-grid-offset > *:nth-child(2)`]: stickyMediaQuery,
+      }
+    : {
+        [`&.umd-layout-grid-offset > *:first-child`]: {
+          order: -1,
+          ...stickyMediaQuery,
+        },
+      };
+
   const overlayCardStyles = overlayCardClass
     ? {
         [`& .${overlayCardClass}`]: {
           [`@media (${token.media.queries.large.min})`]: {
             height: 'inherit',
-            position: 'sticky',
-            top: `${stickyTopPosition}px`,
           },
           [`*`]: {
             color: overlayTextColor,
@@ -93,15 +121,14 @@ export default function gridOffset({
 
   return new ElementBuilder()
     .styled(gridStyle)
+    .withClassName('umd-layout-grid-offset')
     .withStyles({
       element: {
         [` > *`]: {
           alignSelf: alignmentMap[alignItems],
           ...containerQueryStyles,
         },
-        [` > *:first-child`]: {
-          order: isLayoutReversed ? 2 : -1,
-        },
+        ...childStyles,
         ...overlayCardStyles,
       },
     })

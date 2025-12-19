@@ -37,6 +37,7 @@ import { type ElementModel } from '../../_types';
 export default (props: ListProps): ElementModel =>
   createBaseFeed({
     ...props,
+    enableCategoryFallback: true,
     cardType: 'list',
     fetchStrategy: eventsFetchStrategy,
     displayStrategy: eventsDisplayStrategy,

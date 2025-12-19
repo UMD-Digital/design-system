@@ -38,6 +38,7 @@ import { type ElementModel } from '../../_types';
 export default (props: BlockProps): ElementModel =>
   createBaseFeed({
     ...props,
+    enableCategoryFallback: true,
     fetchStrategy: eventsFetchStrategy,
     displayStrategy: eventsDisplayStrategy,
     layoutStrategy: gridGapLayout,

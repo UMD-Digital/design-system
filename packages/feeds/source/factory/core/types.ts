@@ -191,6 +191,8 @@ export interface BaseFeedConfig<TData, TVariables = any> {
   // Features
   /** Whether to enable lazy loading */
   isLazyLoad?: boolean;
+  /** Whether to enable category fallback (show all results when no category results found) */
+  enableCategoryFallback?: boolean;
 
   // Categories/Filtering
   /** Categories to filter by */

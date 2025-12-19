@@ -512,7 +512,7 @@ export default (props: ListProps): ElementModel => {
    * Initialize feed
    */
   const initialize = async (): Promise<void> => {
-    container.appendChild(loading.element);
+    loading.show(container);
 
     const fetchProps = createFetchProps(
       { token, categories, numberOfRowsToStart },

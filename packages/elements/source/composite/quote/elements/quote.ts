@@ -84,6 +84,10 @@ export default (props: QuoteProps) => {
         position: 'relative',
         fontWeight: '700',
 
+        ['& *']: {
+          color: 'currentColor',
+        },
+
         [`&::before`]: {
           content: '""',
           position: 'absolute',

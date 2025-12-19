@@ -284,8 +284,8 @@ const createOverlayCard = (
       height: inherit;
     }
 
-    .${card.overlay.imageClassRef} > * {
-      padding: 0;
+    .${card.overlay.imageClassRef} .umd-asset-image-wrapper-scaled {
+      position: absolute;
     }
   `);
 
@@ -335,11 +335,20 @@ const renderFeaturedLayout = async (
   props: FeaturedProps,
   loadMore: () => Promise<void>,
 ): Promise<void> => {
-  const { isThemeDark = false, isTransparent = false, isLayoutReversed = false, overwriteStickyPosition, isLazyLoad = false } = props;
+  const {
+    isThemeDark = false,
+    isTransparent = false,
+    isLayoutReversed = false,
+    overwriteStickyPosition,
+    isLazyLoad = false,
+  } = props;
 
   // Fall back to standard grid if not enough entries or already rendered
   if (entries.length < 2 || state.hasOffset()) {
-    return renderStandardGrid(container, entries, state, { isThemeDark, isTransparent });
+    return renderStandardGrid(container, entries, state, {
+      isThemeDark,
+      isTransparent,
+    });
   }
 
   state.markOffsetRendered();
@@ -359,11 +368,10 @@ const renderFeaturedLayout = async (
   const overlayCard = createOverlayCard(entries[0], state, isThemeDark);
 
   // Next 2 items: block cards
-  const blockCards = createBlockCards(
-    entries.slice(1, 3),
-    state,
-    { isThemeDark, isTransparent },
-  );
+  const blockCards = createBlockCards(entries.slice(1, 3), state, {
+    isThemeDark,
+    isTransparent,
+  });
 
   // Append block cards to grid
   blockCards.forEach((card) => {
@@ -394,7 +402,11 @@ const renderFeaturedLayout = async (
   }
 
   // Announcer
-  const message = createAnnouncerMessage(INITIAL_ITEMS, state.getTotalEntries(), isLazyLoad);
+  const message = createAnnouncerMessage(
+    INITIAL_ITEMS,
+    state.getTotalEntries(),
+    isLazyLoad,
+  );
   const announcer = new Announcer({ message });
   container.appendChild(announcer.getElement());
 
@@ -493,7 +505,14 @@ const renderError = async (
  * ```
  */
 export default (props: FeaturedProps): ElementModel => {
-  const { token, categories, isUnion, isThemeDark = false, isLazyLoad = false, isTransparent = false } = props;
+  const {
+    token,
+    categories,
+    isUnion,
+    isThemeDark = false,
+    isLazyLoad = false,
+    isTransparent = false,
+  } = props;
 
   // Create container using ElementBuilder
   const containerBuilder = new ElementBuilder('div').withClassName(
@@ -589,7 +608,12 @@ export default (props: FeaturedProps): ElementModel => {
 
     // Handle no results
     if (!entries || entries.length === 0) {
-      await renderError(container, 'No news articles found', state, isThemeDark);
+      await renderError(
+        container,
+        'No news articles found',
+        state,
+        isThemeDark,
+      );
       return;
     }
 

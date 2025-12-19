@@ -304,8 +304,8 @@ export default (props: TypeCarouselCardsRequirements) =>
     const container = document.createElement('div');
     const wrapper = document.createElement('div');
 
-    if (slide) slide.style.minHeight = '450px';
-    if (shadowRef) shadowRef.style.minHeight = '450px';
+    if (slide) slide.style.minHeight = '360px';
+    if (shadowRef) shadowRef.style.minHeight = '360px';
 
     const carouselContainer = carouselElements.blocks.CreateElement({
       ...props,

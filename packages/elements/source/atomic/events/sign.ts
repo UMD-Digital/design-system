@@ -93,11 +93,7 @@ const makeStartDateBlock = ({
 
   return new ElementBuilder('p')
     .withClassName('event-sign-start')
-    .withStyles({
-      subElement: {
-        color: token.color.black,
-      },
-    })
+    .withStyles({})
     .withChildren(monthElement, dayElement)
     .build();
 };

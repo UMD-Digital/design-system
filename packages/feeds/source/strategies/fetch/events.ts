@@ -202,8 +202,11 @@ export const eventsFetchStrategy = createGraphQLFetchStrategy<EventEntry>({
   },
 
   composeVariables: (baseVariables) => {
+    const { categories, ...rest } = baseVariables;
+
     return {
-      ...baseVariables,
+      ...rest,
+      related: categories,
       startDate: new Date().toDateString(),
     };
   },
@@ -238,8 +241,11 @@ export const eventsFetchStrategyRange = createGraphQLFetchStrategy<EventEntry>({
   },
 
   composeVariables: (baseVariables) => {
+    const { categories, ...rest } = baseVariables;
+
     return {
-      ...baseVariables,
+      ...rest,
+      related: categories,
       startDate: new Date().toDateString(),
     };
   },

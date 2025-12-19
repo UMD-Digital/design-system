@@ -10,11 +10,51 @@ import { createGraphQLFetchStrategy } from './graphql';
 import { NewsEntry } from 'types/data';
 
 /**
+ * GraphQL fragments for news article data
+ */
+const FRAGMENT_ARTICLE_BASIC = `
+  fragment ArticleBasicFields on articles_today_Entry {
+    id
+    title
+    url
+  }
+`;
+
+const FRAGMENT_ARTICLE_DATES = `
+  fragment ArticleDateFields on articles_today_Entry {
+    date: postDate
+    dateFormatted: postDate @formatDateTime(format: "M d, Y")
+  }
+`;
+
+const FRAGMENT_ARTICLE_CONTENT = `
+  fragment ArticleContentFields on articles_today_Entry {
+    summary: genericText
+    image: articlesHeroImage {
+      url
+      ... on hero_Asset {
+        id
+        altText: genericText
+      }
+    }
+  }
+`;
+
+const FRAGMENT_ARTICLE_CATEGORIES = `
+  fragment ArticleCategoryFields on articles_today_Entry {
+    categories: categoryTodaySectionMultiple {
+      title
+      url
+    }
+  }
+`;
+
+/**
  * GraphQL query for news articles
  */
 export const ARTICLES_QUERY = `
   query getArticles($related: [QueryArgument], $relatedToAll: [QueryArgument], $limit: Int, $offset: Int, $not: [QueryArgument]) {
-    entryCount(section: "articles", relatedTo: $related,relatedToAll: $relatedToAll)
+    entryCount(section: "articles", relatedTo: $related, relatedToAll: $relatedToAll)
     entries(
       section: "articles",
       relatedTo: $related,
@@ -24,26 +64,17 @@ export const ARTICLES_QUERY = `
       id: $not
     ) {
       ... on articles_today_Entry {
-        id
-        title
-        date: postDate
-        dateFormatted: postDate @formatDateTime(format: "M d, Y")
-        summary: genericText
-        url
-        image:articlesHeroImage {
-          url
-          ... on hero_Asset {
-            id
-            altText: genericText
-          }
-        }
-        categories:categoryTodaySectionMultiple {
-          title
-          url
-        }
+        ...ArticleBasicFields
+        ...ArticleDateFields
+        ...ArticleContentFields
+        ...ArticleCategoryFields
       }
     }
   }
+  ${FRAGMENT_ARTICLE_BASIC}
+  ${FRAGMENT_ARTICLE_DATES}
+  ${FRAGMENT_ARTICLE_CONTENT}
+  ${FRAGMENT_ARTICLE_CATEGORIES}
 `;
 
 /**

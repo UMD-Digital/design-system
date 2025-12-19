@@ -10,86 +10,135 @@ import { createGraphQLFetchStrategy } from './graphql';
 import { EventEntry } from 'types/data';
 
 /**
+ * Calendar types available in the UMD Calendar system
+ */
+const CALENDARS = ['communications', 'submission'] as const;
+
+/**
+ * Generate GraphQL fragments for all calendar types
+ * Creates type-specific fragments to avoid interface limitations
+ */
+function generateFragments() {
+  return CALENDARS.map(
+    (cal) => `
+    fragment EventBasicFields_${cal} on ${cal}_Event {
+      id
+      title
+      url
+    }
+
+    fragment EventDateFields_${cal} on ${cal}_Event {
+      startDayOfWeek: startDate @formatDateTime(format: "D")
+      startMonth: startDate @formatDateTime(format: "M")
+      startDay: startDate @formatDateTime(format: "d")
+      startStamp: startDate @formatDateTime(format: "Y-m-d")
+      startTime: startDate @formatDateTime(format: "g:ia")
+      endDayOfWeek: endDate @formatDateTime(format: "D")
+      endMonth: endDate @formatDateTime(format: "M")
+      endDay: endDate @formatDateTime(format: "d")
+      endTime: endDate @formatDateTime(format: "g:ia")
+      allDay
+    }
+
+    fragment EventContentFields_${cal} on ${cal}_Event {
+      summary: commonRichTextTwo
+      image: commonAssetHeroImageSingle {
+        url
+        altText: commonPlainTextTwo
+      }
+      location: categoriesCampusBuildingSingle {
+        title
+      }
+    }
+  `,
+  ).join('\n');
+}
+
+/**
+ * Generate inline fragment spreads for all calendar types
+ * Used in the main query to apply fragments to each calendar type
+ */
+function generateInlineSpreads() {
+  return CALENDARS.map(
+    (cal) => `
+        ... on ${cal}_Event {
+          ...EventBasicFields_${cal}
+          ...EventDateFields_${cal}
+          ...EventContentFields_${cal}
+        }
+  `,
+  ).join('\n');
+}
+
+/**
+ * Generate inline fragment spreads for slider queries
+ * Minimal fields for carousel displays
+ */
+function generateSliderSpreads() {
+  return CALENDARS.map(
+    (cal) => `
+        ... on ${cal}_Event {
+          ...EventSliderFields_${cal}
+        }
+  `,
+  ).join('\n');
+}
+
+/**
+ * Generate slider-specific fragments
+ */
+function generateSliderFragments() {
+  return CALENDARS.map(
+    (cal) => `
+    fragment EventSliderFields_${cal} on ${cal}_Event {
+      title
+      url
+      startMonth: startDate @formatDateTime(format: "M")
+      startDay: startDate @formatDateTime(format: "d")
+      endMonth: endDate @formatDateTime(format: "M")
+      endDay: endDate @formatDateTime(format: "d")
+    }
+  `,
+  ).join('\n');
+}
+
+/**
  * GraphQL queries for events
  */
 const buildEventsCountQuery = (
   dateFilter: 'startsAfterOrAt' | 'rangeStart' = 'startsAfterOrAt',
 ) => `
-query getEventsCount($startDate: String!, $related: [QueryArgument]) {
-  count: solspace_calendar {
-    events(relatedTo: $related, loadOccurrences: true, ${dateFilter}: $startDate) {
-      ... on communications_Event {
-        id
-      }
-      ... on submission_Event {
-        id
+  query getEventsCount($startDate: String!, $related: [QueryArgument]) {
+    count: solspace_calendar {
+      events(relatedTo: $related, loadOccurrences: true, ${dateFilter}: $startDate) {
+        ... on communications_Event {
+          id
+        }
+        ... on submission_Event {
+          id
+        }
       }
     }
   }
-}
 `;
 
 const buildEventsQuery = (
   dateFilter: 'startsAfterOrAt' | 'rangeStart' = 'startsAfterOrAt',
 ) => `
-query getEvents($startDate: String!, $related: [QueryArgument], $limit: Int, $offset: Int) {
-  entries: solspace_calendar {
-    events(
-      relatedTo: $related
-      loadOccurrences: true
-      ${dateFilter}: $startDate
-      limit: $limit
-      offset: $offset
-    ) {
-      ... on communications_Event {
-        id
-        title
-        url
-        startDayOfWeek: startDate @formatDateTime(format: "D")
-        startMonth: startDate @formatDateTime(format: "M")
-        startDay: startDate @formatDateTime(format: "d")
-        startStamp: startDate @formatDateTime(format: "Y-m-d")
-        startTime: startDate @formatDateTime(format: "g:ia")
-        endDayOfWeek: endDate @formatDateTime(format: "D")
-        endMonth: endDate @formatDateTime(format: "M")
-        endDay: endDate @formatDateTime(format: "d")
-        endTime: endDate @formatDateTime(format: "g:ia")
-        allDay
-        summary: commonRichTextTwo
-        image: commonAssetHeroImageSingle {
-          url
-          altText: commonPlainTextTwo
-        }
-        location: categoriesCampusBuildingSingle {
-          title
-        }
-      }
-      ... on submission_Event {
-        id
-        title
-        url
-        startDayOfWeek: startDate @formatDateTime(format: "D")
-        startMonth: startDate @formatDateTime(format: "M")
-        startDay: startDate @formatDateTime(format: "d")
-        startStamp: startDate @formatDateTime(format: "Y-m-d")
-        startTime: startDate @formatDateTime(format: "g:ia")
-        endDayOfWeek: endDate @formatDateTime(format: "D")
-        endMonth: endDate @formatDateTime(format: "M")
-        endDay: endDate @formatDateTime(format: "d")
-        endTime: endDate @formatDateTime(format: "g:ia")
-        allDay
-        summary: commonRichTextTwo
-        image: commonAssetHeroImageSingle {
-          url
-          altText: commonPlainTextTwo
-        }
-        location: categoriesCampusBuildingSingle {
-          title
-        }
+  query getEvents($startDate: String!, $related: [QueryArgument], $limit: Int, $offset: Int) {
+    entries: solspace_calendar {
+      events(
+        relatedTo: $related
+        loadOccurrences: true
+        ${dateFilter}: $startDate
+        limit: $limit
+        offset: $offset
+      ) {
+       ${generateInlineSpreads()}
       }
     }
   }
-}
+  ${generateFragments()}
 `;
 
 export const EVENTS_COUNT_QUERY = buildEventsCountQuery();
@@ -108,17 +157,11 @@ export const EVENTS_SLIDER_QUERY = `
         startsAfterOrAt: $startDate
         limit: 12
       ) {
-        ... on submission_Event {
-          title
-          url
-          startMonth: startDate @formatDateTime(format: "M")
-          startDay: startDate @formatDateTime(format: "d")
-          endMonth: endDate @formatDateTime(format: "M")
-          endDay: endDate @formatDateTime(format: "d")
-        }
+       ${generateSliderSpreads()}
       }
     }
   }
+  ${generateSliderFragments()}
 `;
 
 /**

@@ -14,7 +14,7 @@ export default defineConfig({
         utilities: resolve(__dirname, 'source/utilities/index.ts'),
       },
       name: 'UniversityOfMarylandWebModelLibrary',
-      formats: ['es', 'cjs'],
+      formats: ['es'],
     },
     outDir: 'dist',
     emptyOutDir: true,

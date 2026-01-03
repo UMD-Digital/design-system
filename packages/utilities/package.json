@@ -2,164 +2,134 @@
   "name": "@universityofmaryland/web-utilities-library",
   "version": "1.0.2",
   "description": "UMD Design System Utilities - Shared utility functions for all design system packages",
+  "type": "module",
   "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js"
     },
     "./accessibility": {
       "types": "./dist/accessibility.d.ts",
-      "import": "./dist/accessibility.mjs",
-      "require": "./dist/accessibility.js"
+      "import": "./dist/accessibility.js"
     },
     "./accessibility/*": {
       "types": "./dist/accessibility/*.d.ts",
-      "import": "./dist/accessibility/*.mjs",
-      "require": "./dist/accessibility/*.js"
+      "import": "./dist/accessibility/*.js"
     },
     "./animation": {
       "types": "./dist/animation.d.ts",
-      "import": "./dist/animation.mjs",
-      "require": "./dist/animation.js"
+      "import": "./dist/animation.js"
     },
     "./animation/*": {
       "types": "./dist/animation/*.d.ts",
-      "import": "./dist/animation/*.mjs",
-      "require": "./dist/animation/*.js"
+      "import": "./dist/animation/*.js"
     },
     "./adapters": {
       "types": "./dist/adapters.d.ts",
-      "import": "./dist/adapters.mjs",
-      "require": "./dist/adapters.js"
+      "import": "./dist/adapters.js"
     },
     "./adapters/*": {
       "types": "./dist/adapters/*.d.ts",
-      "import": "./dist/adapters/*.mjs",
-      "require": "./dist/adapters/*.js"
+      "import": "./dist/adapters/*.js"
     },
     "./date": {
       "types": "./dist/date.d.ts",
-      "import": "./dist/date.mjs",
-      "require": "./dist/date.js"
+      "import": "./dist/date.js"
     },
     "./date/*": {
       "types": "./dist/date/*.d.ts",
-      "import": "./dist/date/*.mjs",
-      "require": "./dist/date/*.js"
+      "import": "./dist/date/*.js"
     },
     "./dom": {
       "types": "./dist/dom.d.ts",
-      "import": "./dist/dom.mjs",
-      "require": "./dist/dom.js"
+      "import": "./dist/dom.js"
     },
     "./dom/*": {
       "types": "./dist/dom/*.d.ts",
-      "import": "./dist/dom/*.mjs",
-      "require": "./dist/dom/*.js"
+      "import": "./dist/dom/*.js"
     },
     "./elements": {
       "types": "./dist/elements.d.ts",
-      "import": "./dist/elements.mjs",
-      "require": "./dist/elements.js"
+      "import": "./dist/elements.js"
     },
     "./elements/*": {
       "types": "./dist/elements/*.d.ts",
-      "import": "./dist/elements/*.mjs",
-      "require": "./dist/elements/*.js"
+      "import": "./dist/elements/*.js"
     },
     "./events": {
       "types": "./dist/events.d.ts",
-      "import": "./dist/events.mjs",
-      "require": "./dist/events.js"
+      "import": "./dist/events.js"
     },
     "./events/*": {
       "types": "./dist/events/*.d.ts",
-      "import": "./dist/events/*.mjs",
-      "require": "./dist/events/*.js"
+      "import": "./dist/events/*.js"
     },
     "./media": {
       "types": "./dist/media.d.ts",
-      "import": "./dist/media.mjs",
-      "require": "./dist/media.js"
+      "import": "./dist/media.js"
     },
     "./media/*": {
       "types": "./dist/media/*.d.ts",
-      "import": "./dist/media/*.mjs",
-      "require": "./dist/media/*.js"
+      "import": "./dist/media/*.js"
     },
     "./network": {
       "types": "./dist/network.d.ts",
-      "import": "./dist/network.mjs",
-      "require": "./dist/network.js"
+      "import": "./dist/network.js"
     },
     "./network/*": {
       "types": "./dist/network/*.d.ts",
-      "import": "./dist/network/*.mjs",
-      "require": "./dist/network/*.js"
+      "import": "./dist/network/*.js"
     },
     "./performance": {
       "types": "./dist/performance.d.ts",
-      "import": "./dist/performance.mjs",
-      "require": "./dist/performance.js"
+      "import": "./dist/performance.js"
     },
     "./performance/*": {
       "types": "./dist/performance/*.d.ts",
-      "import": "./dist/performance/*.mjs",
-      "require": "./dist/performance/*.js"
+      "import": "./dist/performance/*.js"
     },
     "./storage": {
       "types": "./dist/storage.d.ts",
-      "import": "./dist/storage.mjs",
-      "require": "./dist/storage.js"
+      "import": "./dist/storage.js"
     },
     "./storage/*": {
       "types": "./dist/storage/*.d.ts",
-      "import": "./dist/storage/*.mjs",
-      "require": "./dist/storage/*.js"
+      "import": "./dist/storage/*.js"
     },
     "./string": {
       "types": "./dist/string.d.ts",
-      "import": "./dist/string.mjs",
-      "require": "./dist/string.js"
+      "import": "./dist/string.js"
     },
     "./string/*": {
       "types": "./dist/string/*.d.ts",
-      "import": "./dist/string/*.mjs",
-      "require": "./dist/string/*.js"
+      "import": "./dist/string/*.js"
     },
     "./styles": {
       "types": "./dist/styles.d.ts",
-      "import": "./dist/styles.mjs",
-      "require": "./dist/styles.js"
+      "import": "./dist/styles.js"
     },
     "./styles/*": {
       "types": "./dist/styles/*.d.ts",
-      "import": "./dist/styles/*.mjs",
-      "require": "./dist/styles/*.js"
+      "import": "./dist/styles/*.js"
     },
     "./theme": {
       "types": "./dist/theme.d.ts",
-      "import": "./dist/theme.mjs",
-      "require": "./dist/theme.js"
+      "import": "./dist/theme.js"
     },
     "./theme/*": {
       "types": "./dist/theme/*.d.ts",
-      "import": "./dist/theme/*.mjs",
-      "require": "./dist/theme/*.js"
+      "import": "./dist/theme/*.js"
     },
     "./validation": {
       "types": "./dist/validation.d.ts",
-      "import": "./dist/validation.mjs",
-      "require": "./dist/validation.js"
+      "import": "./dist/validation.js"
     },
     "./validation/*": {
       "types": "./dist/validation/*.d.ts",
-      "import": "./dist/validation/*.mjs",
-      "require": "./dist/validation/*.js"
+      "import": "./dist/validation/*.js"
     }
   },
   "license": "MIT",

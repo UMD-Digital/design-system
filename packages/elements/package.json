@@ -2,29 +2,26 @@
   "name": "@universityofmaryland/web-elements-library",
   "version": "1.6.0-beta.0",
   "description": "UMD Web Elements",
+  "type": "module",
   "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js"
     },
     "./atomic": {
       "types": "./dist/atomic.d.ts",
-      "import": "./dist/atomic.mjs",
-      "require": "./dist/atomic.js"
+      "import": "./dist/atomic.js"
     },
     "./composite": {
       "types": "./dist/composite.d.ts",
-      "import": "./dist/composite.mjs",
-      "require": "./dist/composite.js"
+      "import": "./dist/composite.js"
     },
     "./layout": {
       "types": "./dist/layout.d.ts",
-      "import": "./dist/layout.mjs",
-      "require": "./dist/layout.js"
+      "import": "./dist/layout.js"
     }
   },
   "license": "MIT",

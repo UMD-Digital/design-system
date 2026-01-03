@@ -21,7 +21,7 @@ export default defineConfig({
         'core/types': resolve(__dirname, 'source/core/types.ts'),
       },
       name: 'UniversityOfMarylandWebBuilderLibrary',
-      formats: ['es', 'cjs'],
+      formats: ['es'],
     },
     outDir: 'dist',
     emptyOutDir: true,

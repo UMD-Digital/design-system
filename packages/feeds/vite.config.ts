@@ -14,7 +14,7 @@ export default defineConfig({
         news: path.resolve(__dirname, 'source/feeds/news/index.ts'),
       },
       name: 'UMDFeedsLibrary',
-      formats: ['es', 'cjs']
+      formats: ['es']
     },
     rollupOptions: {
       external: (id) => id.startsWith('@universityofmaryland/'),

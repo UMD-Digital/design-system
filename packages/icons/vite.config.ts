@@ -23,7 +23,7 @@ export default defineConfig({
         logos: resolve(__dirname, 'source/logos/index.ts'),
       },
       name: 'UniversityOfMarylandWebIconsLibrary',
-      formats: ['es', 'cjs'],
+      formats: ['es'],
     },
     outDir: 'dist',
     emptyOutDir: true,

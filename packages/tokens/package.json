@@ -2,34 +2,30 @@
   "name": "@universityofmaryland/web-token-library",
   "version": "1.0.0",
   "description": "Design tokens for the University of Maryland Design System - Foundation for Figma-to-code pipeline",
+  "type": "module",
   "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js"
     },
     "./color": {
       "types": "./dist/color.d.ts",
-      "import": "./dist/color.mjs",
-      "require": "./dist/color.js"
+      "import": "./dist/color.js"
     },
     "./font": {
       "types": "./dist/font.d.ts",
-      "import": "./dist/font.mjs",
-      "require": "./dist/font.js"
+      "import": "./dist/font.js"
     },
     "./media": {
       "types": "./dist/media.d.ts",
-      "import": "./dist/media.mjs",
-      "require": "./dist/media.js"
+      "import": "./dist/media.js"
     },
     "./spacing": {
       "types": "./dist/spacing.d.ts",
-      "import": "./dist/spacing.mjs",
-      "require": "./dist/spacing.js"
+      "import": "./dist/spacing.js"
     }
   },
   "license": "MIT",

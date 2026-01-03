@@ -13,7 +13,7 @@ export default defineConfig({
         layout: resolve(__dirname, 'source/layout/index.ts'),
       },
       name: 'UniversityOfMarylandWebElementsLibrary',
-      formats: ['es', 'cjs'],
+      formats: ['es'],
     },
     outDir: 'dist',
     emptyOutDir: true,

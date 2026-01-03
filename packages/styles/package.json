@@ -2,45 +2,39 @@
   "name": "@universityofmaryland/web-styles-library",
   "version": "1.7.5",
   "description": "Styles used for use in the University of Maryland Design System",
+  "type": "module",
   "main": "dist/index.js",
   "author": "UMD Web Services <digital@umd.edu>",
-  "module": "dist/index.mjs",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js"
     },
     "./accessibility": {
       "types": "./dist/accessibility.d.ts",
-      "import": "./dist/accessibility.mjs",
-      "require": "./dist/accessibility.js"
+      "import": "./dist/accessibility.js"
     },
     "./animation": {
       "types": "./dist/animation.d.ts",
-      "import": "./dist/animation.mjs",
-      "require": "./dist/animation.js"
+      "import": "./dist/animation.js"
     },
     "./element": {
       "types": "./dist/element.d.ts",
-      "import": "./dist/element.mjs",
-      "require": "./dist/element.js"
+      "import": "./dist/element.js"
     },
     "./layout": {
       "types": "./dist/layout.d.ts",
-      "import": "./dist/layout.mjs",
-      "require": "./dist/layout.js"
+      "import": "./dist/layout.js"
     },
     "./typography": {
       "types": "./dist/typography.d.ts",
-      "import": "./dist/typography.mjs",
-      "require": "./dist/typography.js"
+      "import": "./dist/typography.js"
     },
     "./utilities": {
       "types": "./dist/utilities.d.ts",
-      "import": "./dist/utilities.mjs",
-      "require": "./dist/utilities.js"
+      "import": "./dist/utilities.js"
     }
   },
   "license": "MIT",

@@ -23,7 +23,7 @@ export default defineConfig({
             spacing: resolve(__dirname, 'source/spacing.ts'),
           },
           name: 'UniversityOfMarylandWebTokenLibrary',
-          formats: ['es', 'cjs'],
+          formats: ['es'],
         },
     outDir: 'dist',
     emptyOutDir: !isCDN, // Only empty for module build, not CDN build

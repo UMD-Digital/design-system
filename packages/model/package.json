@@ -2,34 +2,30 @@
   "name": "@universityofmaryland/web-model-library",
   "version": "1.0.1",
   "description": "UMD Web Component Model - Base utilities for building web components",
+  "type": "module",
   "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js"
     },
     "./attributes": {
       "types": "./dist/attributes.d.ts",
-      "import": "./dist/attributes.mjs",
-      "require": "./dist/attributes.js"
+      "import": "./dist/attributes.js"
     },
     "./model": {
       "types": "./dist/model.d.ts",
-      "import": "./dist/model.mjs",
-      "require": "./dist/model.js"
+      "import": "./dist/model.js"
     },
     "./slots": {
       "types": "./dist/slots.d.ts",
-      "import": "./dist/slots.mjs",
-      "require": "./dist/slots.js"
+      "import": "./dist/slots.js"
     },
     "./utilities": {
       "types": "./dist/utilities.d.ts",
-      "import": "./dist/utilities.mjs",
-      "require": "./dist/utilities.js"
+      "import": "./dist/utilities.js"
     }
   },
   "license": "MIT",

@@ -24,7 +24,7 @@ export default defineConfig({
         validation: resolve(__dirname, 'source/validation/index.ts'),
       },
       name: 'UniversityOfMarylandWebUtilitiesLibrary',
-      formats: ['es', 'cjs'],
+      formats: ['es'],
     },
     outDir: 'dist',
     emptyOutDir: true,

@@ -2,39 +2,34 @@
   "name": "@universityofmaryland/web-builder-library",
   "version": "1.0.0",
   "description": "Element Builder for the University of Maryland Design System",
+  "type": "module",
   "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js"
     },
     "./core": {
       "types": "./dist/core/index.d.ts",
-      "import": "./dist/core/index.mjs",
-      "require": "./dist/core/index.js"
+      "import": "./dist/core/index.js"
     },
     "./core/ElementBuilder": {
       "types": "./dist/core/ElementBuilder.d.ts",
-      "import": "./dist/core/ElementBuilder.mjs",
-      "require": "./dist/core/ElementBuilder.js"
+      "import": "./dist/core/ElementBuilder.js"
     },
     "./core/StyleManager": {
       "types": "./dist/core/StyleManager.d.ts",
-      "import": "./dist/core/StyleManager.mjs",
-      "require": "./dist/core/StyleManager.js"
+      "import": "./dist/core/StyleManager.js"
     },
     "./core/LifecycleManager": {
       "types": "./dist/core/LifecycleManager.d.ts",
-      "import": "./dist/core/LifecycleManager.mjs",
-      "require": "./dist/core/LifecycleManager.js"
+      "import": "./dist/core/LifecycleManager.js"
     },
     "./core/types": {
       "types": "./dist/core/types.d.ts",
-      "import": "./dist/core/types.mjs",
-      "require": "./dist/core/types.js"
+      "import": "./dist/core/types.js"
     }
   },
   "license": "MIT",

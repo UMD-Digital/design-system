@@ -2,79 +2,66 @@
   "name": "@universityofmaryland/web-icons-library",
   "version": "1.0.1",
   "description": "Icon and logo assets for the University of Maryland Design System",
+  "type": "module",
   "main": "dist/index.js",
-  "module": "dist/index.mjs",
+  "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js"
     },
     "./arrows": {
       "types": "./dist/arrows.d.ts",
-      "import": "./dist/arrows.mjs",
-      "require": "./dist/arrows.js"
+      "import": "./dist/arrows.js"
     },
     "./brand": {
       "types": "./dist/brand.d.ts",
-      "import": "./dist/brand.mjs",
-      "require": "./dist/brand.js"
+      "import": "./dist/brand.js"
     },
     "./calendar": {
       "types": "./dist/calendar.d.ts",
-      "import": "./dist/calendar.mjs",
-      "require": "./dist/calendar.js"
+      "import": "./dist/calendar.js"
     },
     "./communication": {
       "types": "./dist/communication.d.ts",
-      "import": "./dist/communication.mjs",
-      "require": "./dist/communication.js"
+      "import": "./dist/communication.js"
     },
     "./controls": {
       "types": "./dist/controls.d.ts",
-      "import": "./dist/controls.mjs",
-      "require": "./dist/controls.js"
+      "import": "./dist/controls.js"
     },
     "./files": {
       "types": "./dist/files.d.ts",
-      "import": "./dist/files.mjs",
-      "require": "./dist/files.js"
+      "import": "./dist/files.js"
     },
     "./indicators": {
       "types": "./dist/indicators.d.ts",
-      "import": "./dist/indicators.mjs",
-      "require": "./dist/indicators.js"
+      "import": "./dist/indicators.js"
     },
     "./location": {
       "types": "./dist/location.d.ts",
-      "import": "./dist/location.mjs",
-      "require": "./dist/location.js"
+      "import": "./dist/location.js"
     },
     "./logos": {
       "types": "./dist/logos.d.ts",
-      "import": "./dist/logos.mjs",
-      "require": "./dist/logos.js"
+      "import": "./dist/logos.js"
     },
     "./media": {
       "types": "./dist/media.d.ts",
-      "import": "./dist/media.mjs",
-      "require": "./dist/media.js"
+      "import": "./dist/media.js"
     },
     "./people": {
       "types": "./dist/people.d.ts",
-      "import": "./dist/people.mjs",
-      "require": "./dist/people.js"
+      "import": "./dist/people.js"
     },
     "./search": {
       "types": "./dist/search.d.ts",
-      "import": "./dist/search.mjs",
-      "require": "./dist/search.js"
+      "import": "./dist/search.js"
     },
     "./social": {
       "types": "./dist/social.d.ts",
-      "import": "./dist/social.mjs",
-      "require": "./dist/social.js"
+      "import": "./dist/social.js"
     }
   },
   "license": "MIT",

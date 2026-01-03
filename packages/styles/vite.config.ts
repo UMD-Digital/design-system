@@ -68,7 +68,7 @@ export default defineConfig(({ mode }) => {
         utilities: path.resolve(__dirname, 'source/utilities/index.ts'),
       },
       name: 'Styles',
-      formats: ['es', 'cjs'],
+      formats: ['es'],
     },
     outDir: 'dist',
     emptyOutDir: true,

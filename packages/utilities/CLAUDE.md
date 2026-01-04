@@ -12,7 +12,8 @@ The **Utilities Package** (`@universityofmaryland/web-utilities-library`) provid
 ### Vite Configuration
 
 - **Builder**: Vite with TypeScript
-- **Output Formats**: ES Modules (`.mjs`) and CommonJS (`.js`)
+- **Output Formats**: ES Modules only (`.js`) - No CommonJS support
+- **Export Style**: Named exports only - No default exports
 - **External Dependencies**: All `@universityofmaryland/*` packages, postcss libraries
 - **Type Declarations**: Generated with `vite-plugin-dts`
 - **Module Preservation**: `preserveModules: true` for granular imports
@@ -73,20 +74,21 @@ Dual-level exports for flexibility:
 
 ```json
 {
+  "type": "module",
   "exports": {
     "./dom": {
       "types": "./dist/dom.d.ts",
-      "import": "./dist/dom.mjs",
-      "require": "./dist/dom.js"
+      "import": "./dist/dom.js"
     },
     "./dom/*": {
       "types": "./dist/dom/*.d.ts",
-      "import": "./dist/dom/*.mjs",
-      "require": "./dist/dom/*.js"
+      "import": "./dist/dom/*.js"
     }
   }
 }
 ```
+
+**Note**: CommonJS (`require`) is not supported. Use ES module `import` only.
 
 ## Utility Function Pattern
 
@@ -144,9 +146,9 @@ export const utilityName = (param1: Type): ReturnType => {
 
 ## Build Output
 
-- `dist/index.{js,mjs,d.ts}` - Main export
-- `dist/{category}.{js,mjs,d.ts}` - Category barrels
-- `dist/{category}/{function}.{js,mjs,d.ts}` - Individual functions
+- `dist/index.{js,d.ts}` - Main export (ES module only)
+- `dist/{category}.{js,d.ts}` - Category barrels
+- `dist/{category}/{function}.{js,d.ts}` - Individual functions
 - Source maps for all builds
 
 ## Notes

@@ -14,7 +14,7 @@ import { fromTokens, formatTokenKey } from '../transform/variables';
  * @returns Object containing apply, update, and remove methods
  * @since 1.3.0
  */
-export default (
+export const createTokens = (
   tokens: Record<string, any>,
   options: {
     prefix?: string;

@@ -4,4 +4,4 @@
  * @since 1.3.0
  */
 
-export { default as tokens } from './tokens';
+export { createTokens as tokens } from './tokens';

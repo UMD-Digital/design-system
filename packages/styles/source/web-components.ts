@@ -399,7 +399,7 @@ const tabs = createElementStyles(tabsTag, {
   },
 });
 
-export default {
+export const webComponentStyles = {
   ...elements,
   ...feedElements,
   ...breadcrumb,

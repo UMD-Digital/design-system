@@ -5,7 +5,7 @@ import * as elementNamespace from './element';
 import * as layoutNamespace from './layout';
 import * as tokenNamespace from '@universityofmaryland/web-token-library';
 import * as typographyNamespace from './typography';
-import { default as webComponentsNamespace } from './web-components';
+import { webComponentStyles } from './web-components';
 import * as utilitiesNamespace from './utilities';
 
 export type { JssEntry, JssObject } from './_types';
@@ -13,7 +13,7 @@ export type { JssEntry, JssObject } from './_types';
 const preRender = {
   ...root,
   ...reset,
-  ...webComponentsNamespace,
+  ...webComponentStyles,
 };
 
 const preRenderCss = utilitiesNamespace.create.style.toString(preRender);
@@ -36,36 +36,13 @@ const outputStyles = {
   ...postRender,
 };
 
-const styles = {
-  accessibility: accessibilityNamespace,
-  animation: animationsNamespace,
-  element: elementNamespace,
-  layout: layoutNamespace,
-  typography: typographyNamespace,
-  token: tokenNamespace,
-  webComponents: webComponentsNamespace,
-  utilities: utilitiesNamespace,
-  root,
-  reset,
-  variables,
-  preRender,
-  preRenderCss,
-  postRender,
-  postRenderCss,
-  outputStyles,
-};
-
-export const {
-  accessibility,
-  animation,
-  element,
-  layout,
-  typography,
-  token,
-  webComponents,
-  utilities,
-} = styles;
+export const accessibility = accessibilityNamespace;
+export const animation = animationsNamespace;
+export const element = elementNamespace;
+export const layout = layoutNamespace;
+export const typography = typographyNamespace;
+export const token = tokenNamespace;
+export const webComponents = webComponentStyles;
+export const utilities = utilitiesNamespace;
 
 export { root, reset, variables, preRender, preRenderCss, postRender, postRenderCss, outputStyles };
-
-export default styles;

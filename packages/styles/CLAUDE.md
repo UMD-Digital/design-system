@@ -12,7 +12,8 @@ The **Styles Package** (`@universityofmaryland/web-styles-library`) provides JSS
 ### Vite Configuration
 
 - **Builder**: Vite with TypeScript
-- **Output Formats**: ES Modules (`.mjs`) and CommonJS (`.js`)
+- **Output Formats**: ES Modules only (`.js`) - No CommonJS support
+- **Export Style**: Named exports only - No default exports
 - **External Dependencies**: All `@universityofmaryland/*` packages
 - **Special Build**: CDN bundle (IIFE format) via `build:cdn` script
 - **Type Declarations**: Generated with `vite-plugin-dts`
@@ -32,7 +33,7 @@ npm test          # Run all tests
 
 The styles package creates TWO builds:
 
-1. **Module Build** (`npm run build`): Code-split ES/CJS modules
+1. **Module Build** (`npm run build`): Code-split ES modules only (no CommonJS)
 2. **CDN Build** (`BUILD_CDN=true`): Single-file IIFE bundle for `<script>` tags
 
 ## Package Structure
@@ -72,21 +73,22 @@ const myStyles = {
 
 ```json
 {
+  "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js"
     },
     "./token": {
       "types": "./dist/token.d.ts",
-      "import": "./dist/token.mjs",
-      "require": "./dist/token.js"
+      "import": "./dist/token.js"
     }
     // ... other categories
   }
 }
 ```
+
+**Note**: CommonJS (`require`) is not supported. Use ES module `import` only.
 
 ## JSS Pattern
 
@@ -351,9 +353,9 @@ The CDN build bundles everything into a single IIFE file:
 ## Build Output
 
 ### Module Build
-- `dist/index.{js,mjs,d.ts}` - Main export
-- `dist/{category}.{js,mjs,d.ts}` - Category exports
-- `dist/{category}/{module}.{js,mjs,d.ts}` - Individual modules
+- `dist/index.{js,d.ts}` - Main export (ES module only)
+- `dist/{category}.{js,d.ts}` - Category exports
+- `dist/{category}/{module}.{js,d.ts}` - Individual modules
 
 ### CDN Build
 - `dist/cdn.js` - Single IIFE bundle (no externals)

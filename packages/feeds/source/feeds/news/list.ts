@@ -34,7 +34,7 @@ import { type ElementModel } from '../../_types';
  * document.body.appendChild(feed.element);
  * ```
  */
-export default (props: ListProps): ElementModel =>
+export const newsList = (props: ListProps): ElementModel =>
   createBaseFeed({
     ...props,
     cardType: 'list',

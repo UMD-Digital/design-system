@@ -34,7 +34,7 @@ import { type ElementModel } from '../../_types';
  * document.body.appendChild(feed.element);
  * ```
  */
-export default (props: ListProps): ElementModel =>
+export const eventsList = (props: ListProps): ElementModel =>
   createBaseFeed({
     ...props,
     enableCategoryFallback: true,

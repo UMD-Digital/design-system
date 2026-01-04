@@ -1,5 +1,3 @@
-import { type ElementModel } from '../_types';
-
 /**
  * Configuration for loading state
  */
@@ -57,29 +55,4 @@ export interface FeedState {
   show?: (container: HTMLElement) => void;
   hide?: () => void;
   destroy?: () => void;
-}
-
-/**
- * Legacy loader API (backwards compatible)
- */
-export interface LoaderLegacyAPI {
-  create: (config: LoadingStateConfig) => ElementModel;
-  display: (props: { container: HTMLElement; isThemeDark?: boolean }) => void;
-  remove: (props: { container: HTMLElement }) => void;
-}
-
-/**
- * Legacy announcer API (backwards compatible)
- */
-export interface AnnouncerLegacyAPI {
-  create: (config: AnnouncerConfig) => HTMLElement;
-  update: (props: { container: HTMLElement; message: string }) => void;
-}
-
-/**
- * Legacy pagination API (backwards compatible)
- */
-export interface PaginationLegacyAPI {
-  create: (config: PaginationStateConfig) => ElementModel | undefined;
-  remove: (props: { container: HTMLElement }) => void;
 }

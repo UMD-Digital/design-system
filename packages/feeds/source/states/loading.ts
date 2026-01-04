@@ -2,11 +2,7 @@ import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { token } from '@universityofmaryland/web-styles-library';
 
 import { type ElementModel } from '../_types';
-import {
-  type LoadingStateConfig,
-  type LoaderLegacyAPI,
-  FeedStateEvent,
-} from './_types';
+import { type LoadingStateConfig, FeedStateEvent } from './_types';
 
 const ID_UMD_LOADER = 'umd-loader-container';
 
@@ -225,45 +221,3 @@ export class LoadingState {
   }
 }
 
-// =============================================================================
-// Backwards Compatible Exports (Legacy API)
-// =============================================================================
-
-/**
- * @deprecated Use LoadingState class instead
- */
-const create = (config: LoadingStateConfig = {}): ElementModel => {
-  return createLoadingElement(config);
-};
-
-/**
- * @deprecated Use LoadingState.show() instead
- */
-const display = ({
-  container,
-  isThemeDark,
-}: {
-  container: HTMLElement;
-  isThemeDark?: boolean;
-}): void => {
-  const loading = createLoadingElement({ isThemeDark });
-  container.appendChild(loading.element);
-};
-
-/**
- * @deprecated Use LoadingState.hide() instead
- */
-const remove = ({ container }: { container: HTMLElement }): void => {
-  const loader = container.querySelector(`.${ID_UMD_LOADER}`) as HTMLDivElement;
-  if (loader) loader.remove();
-};
-
-/**
- * Legacy API for backwards compatibility
- * @deprecated Use LoadingState class instead
- */
-export default {
-  create,
-  display,
-  remove,
-} as LoaderLegacyAPI;

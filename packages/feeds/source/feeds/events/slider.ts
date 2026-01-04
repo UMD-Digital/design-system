@@ -27,7 +27,7 @@ import { type ElementModel } from '../../_types';
  * });
  * ```
  */
-export default (props: SliderProps): ElementModel =>
+export const eventsSlider = (props: SliderProps): ElementModel =>
   slider({
     ...props,
     query: EVENTS_SLIDER_QUERY,

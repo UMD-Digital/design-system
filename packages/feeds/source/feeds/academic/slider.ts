@@ -27,7 +27,7 @@ import { type ElementModel } from '../../_types';
  * });
  * ```
  */
-export default (props: AcademicSliderProps): ElementModel =>
+export const academicSlider = (props: AcademicSliderProps): ElementModel =>
   slider({
     ...props,
     query: ACADEMIC_SLIDER_QUERY,

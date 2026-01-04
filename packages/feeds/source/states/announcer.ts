@@ -1,4 +1,4 @@
-import { type AnnouncerConfig, type AnnouncerLegacyAPI, FeedStateEvent } from './_types';
+import { type AnnouncerConfig, FeedStateEvent } from './_types';
 
 /**
  * Creates an ARIA live region for screen reader announcements
@@ -126,40 +126,3 @@ export class Announcer {
   }
 }
 
-// =============================================================================
-// Backwards Compatible Exports (Legacy API)
-// =============================================================================
-
-/**
- * @deprecated Use Announcer class or createAnnouncerElement instead
- */
-const create = (config: AnnouncerConfig): HTMLElement => {
-  return createAnnouncerElement(config);
-};
-
-/**
- * @deprecated Use Announcer.announce() instead
- */
-const update = ({
-  container,
-  message,
-}: {
-  container: HTMLElement;
-  message: string;
-}): void => {
-  const element = container.querySelector(`[aria-live]`) as HTMLDivElement;
-  const textElement = element?.querySelector('p');
-
-  if (textElement) {
-    textElement.textContent = message; // Use textContent for security
-  }
-};
-
-/**
- * Legacy API for backwards compatibility
- * @deprecated Use Announcer class instead
- */
-export default {
-  create,
-  update,
-} as AnnouncerLegacyAPI;

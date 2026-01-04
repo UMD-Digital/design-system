@@ -157,15 +157,3 @@ export class EmptyState {
   }
 }
 
-// =============================================================================
-// Backwards Compatible Export (Legacy API)
-// =============================================================================
-
-/**
- * Create empty state element (legacy function API)
- *
- * @deprecated Use EmptyState class or createEmptyElement function instead
- */
-export default (config: EmptyStateConfig = {}): ElementModel => {
-  return createEmptyElement(config);
-};

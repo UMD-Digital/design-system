@@ -35,7 +35,7 @@ import { type ElementModel } from '../../_types';
  * document.body.appendChild(feed.element);
  * ```
  */
-export default (props: BlockProps): ElementModel =>
+export const eventsGrid = (props: BlockProps): ElementModel =>
   createBaseFeed({
     ...props,
     enableCategoryFallback: true,

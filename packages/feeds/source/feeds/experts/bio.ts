@@ -224,7 +224,7 @@ const logError = (
  * });
  * ```
  */
-export default (props: BioProps): ElementModel => {
+export const expertsBio = (props: BioProps): ElementModel => {
   const { token, expertId, isThemeDark = false } = props;
 
   // Create container using ElementBuilder

@@ -16,7 +16,8 @@ The **Feeds Package** (`@universityofmaryland/web-feeds-library`) provides dynam
 ### Vite Configuration
 
 - **Builder**: Vite with TypeScript
-- **Output Formats**: ES Modules (`.mjs`) and CommonJS (`.js`)
+- **Output Formats**: ES Modules only (`.js`) - No CommonJS support
+- **Export Style**: Named exports only - No default exports
 - **External Dependencies**: All `@universityofmaryland/*` packages
 - **Type Declarations**: Generated with `vite-plugin-dts`
 - **Module Preservation**: `preserveModules: true`
@@ -123,30 +124,29 @@ old/                        # Legacy implementations (archived)
 
 ```json
 {
+  "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js"
     },
     "./events": {
       "types": "./dist/events.d.ts",
-      "import": "./dist/events.mjs",
-      "require": "./dist/events.js"
+      "import": "./dist/events.js"
     },
     "./news": {
       "types": "./dist/news.d.ts",
-      "import": "./dist/news.mjs",
-      "require": "./dist/news.js"
+      "import": "./dist/news.js"
     },
     "./academic": {
       "types": "./dist/academic.d.ts",
-      "import": "./dist/academic.mjs",
-      "require": "./dist/academic.js"
+      "import": "./dist/academic.js"
     }
   }
 }
 ```
+
+**Note**: CommonJS (`require`) is not supported. Use ES module `import` only.
 
 ## Feed Types
 

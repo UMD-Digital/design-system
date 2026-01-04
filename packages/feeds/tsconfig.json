@@ -7,8 +7,10 @@
     "isolatedModules": true,
     "moduleResolution": "bundler",
     "paths": {
-      "@universityofmaryland/web-utilities-library": ["../utilities/source/index.ts"],
-      "@universityofmaryland/web-utilities-library/*": ["../utilities/source/*"],
+      "@universityofmaryland/web-token-library": ["../tokens/dist/index.d.ts"],
+      "@universityofmaryland/web-token-library/*": ["../tokens/dist/*"],
+      "@universityofmaryland/web-utilities-library": ["../utilities/dist/index.d.ts"],
+      "@universityofmaryland/web-utilities-library/*": ["../utilities/dist/*"],
       "@universityofmaryland/web-builder-library": ["../builder/dist/index.d.ts"],
       "@universityofmaryland/web-builder-library/*": ["../builder/dist/*"],
       "@universityofmaryland/web-elements-library": ["../elements/dist/index.d.ts"],
@@ -20,4 +22,4 @@
   "include": [
     "./source"
   ]
- }
+}

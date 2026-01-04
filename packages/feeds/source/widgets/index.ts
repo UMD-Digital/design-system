@@ -6,4 +6,4 @@
  * @module widgets
  */
 
-export { default as slider } from './slider';
+export { createSliderWidget as slider } from './slider';

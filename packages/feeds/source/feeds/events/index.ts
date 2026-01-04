@@ -14,7 +14,7 @@
  * ```
  * @since 1.9.0
  */
-export { default as grid } from './grid';
+export { eventsGrid as grid } from './grid';
 
 /**
  * Creates a list layout component for displaying events.
@@ -32,7 +32,7 @@ export { default as grid } from './grid';
  * ```
  * @since 1.9.0
  */
-export { default as list } from './list';
+export { eventsList as list } from './list';
 
 /**
  * Creates a slider component for displaying calendar events.
@@ -49,7 +49,7 @@ export { default as list } from './list';
  * ```
  * @since 1.9.0
  */
-export { default as slider } from './slider';
+export { eventsSlider as slider } from './slider';
 
 /**
  * Creates a grouped layout component for displaying events organized by date.
@@ -67,4 +67,4 @@ export { default as slider } from './slider';
  * ```
  * @since 1.13.0
  */
-export { default as grouped } from './grouped';
+export { eventsGrouped as grouped } from './grouped';

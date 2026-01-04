@@ -504,7 +504,7 @@ const renderError = async (
  * });
  * ```
  */
-export default (props: FeaturedProps): ElementModel => {
+export const newsFeatured = (props: FeaturedProps): ElementModel => {
   const {
     token,
     categories,

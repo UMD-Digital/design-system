@@ -2,11 +2,7 @@ import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 
 import { type ElementModel } from '../_types';
-import {
-  type PaginationStateConfig,
-  type PaginationLegacyAPI,
-  FeedStateEvent,
-} from './_types';
+import { type PaginationStateConfig, FeedStateEvent } from './_types';
 
 /**
  * Creates a pagination "Load more" button element
@@ -176,33 +172,3 @@ export class PaginationState {
   }
 }
 
-// =============================================================================
-// Backwards Compatible Exports (Legacy API)
-// =============================================================================
-
-/**
- * @deprecated Use PaginationState class or createPaginationElement instead
- */
-const create = (config: PaginationStateConfig): ElementModel | undefined => {
-  return createPaginationElement(config);
-};
-
-/**
- * @deprecated Use PaginationState.remove() instead
- */
-const remove = ({ container }: { container: HTMLElement }): void => {
-  const button = container.querySelector(
-    `.${Styles.layout.alignment.block.center.className}`
-  ) as HTMLDivElement;
-
-  if (button) button.remove();
-};
-
-/**
- * Legacy API for backwards compatibility
- * @deprecated Use PaginationState class instead
- */
-export default {
-  remove,
-  create,
-} as PaginationLegacyAPI;

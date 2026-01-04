@@ -35,7 +35,7 @@ import { type ElementModel } from '../../_types';
  * document.body.appendChild(feed.element);
  * ```
  */
-export default (props: ListProps): ElementModel =>
+export const expertsList = (props: ListProps): ElementModel =>
   createBaseFeed({
     ...props,
     fetchStrategy: expertsFetchStrategy,

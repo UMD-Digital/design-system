@@ -458,7 +458,7 @@ const renderError = async (
  * });
  * ```
  */
-export default (props: ListProps): ElementModel => {
+export const eventsGrouped = (props: ListProps): ElementModel => {
   const {
     token,
     isThemeDark = false,

@@ -36,6 +36,8 @@ Current package versions:
   - tokens: `color` and `spacing` are now named exports
   - styles: `webComponentStyles` and `createTokens` are now named exports
   - model: `Slots`, `AttributeNames`, `AttributeValues`, `handler` are now named exports
+  - feeds: All feed functions converted to named exports (`eventsGrid`, `eventsList`, `eventsSlider`, `eventsGrouped`, `newsGrid`, `newsList`, `newsFeatured`, `expertsGrid`, `expertsList`, `expertsBio`, `academicSlider`, `createSliderWidget`)
+  - feeds/states: Removed legacy APIs (`loader`, `noResults`, `buttonLazyLoad`, `ariaLive`). Use class-based APIs instead (`LoadingState`, `EmptyState`, `PaginationState`, `Announcer`)
   - All packages follow consistent named export pattern for optimal tree-shaking
 - Updated vite.config.ts files to use ES module imports instead of `require()`
 

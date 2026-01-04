@@ -46,7 +46,7 @@ import { type ElementModel } from '../../_types';
  * document.body.appendChild(feed.element);
  * ```
  */
-export default (props: GridProps): ElementModel => {
+export const expertsGrid = (props: GridProps): ElementModel => {
   const { isOverlay = false } = props;
 
   return createBaseFeed({

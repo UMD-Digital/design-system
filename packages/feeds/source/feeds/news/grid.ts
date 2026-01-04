@@ -44,7 +44,7 @@ import { type ElementModel } from '../../_types';
  * document.body.appendChild(feed.element);
  * ```
  */
-export default (props: BlockProps): ElementModel => {
+export const newsGrid = (props: BlockProps): ElementModel => {
   const { isTypeOverlay = false } = props;
 
   return createBaseFeed({

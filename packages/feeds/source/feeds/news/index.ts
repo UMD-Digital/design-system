@@ -19,7 +19,7 @@
  * ```
  * @since 1.9.0
  */
-export { default as featured } from './featured';
+export { newsFeatured as featured } from './featured';
 
 /**
  * Creates a grid layout component for displaying news articles.
@@ -40,7 +40,7 @@ export { default as featured } from './featured';
  * ```
  * @since 1.9.0
  */
-export { default as grid } from './grid';
+export { newsGrid as grid } from './grid';
 
 /**
  * Creates a list layout component for displaying news articles.
@@ -60,4 +60,4 @@ export { default as grid } from './grid';
  * ```
  * @since 1.9.0
  */
-export { default as list } from './list';
+export { newsList as list } from './list';

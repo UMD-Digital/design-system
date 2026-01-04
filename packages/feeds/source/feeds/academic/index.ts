@@ -14,4 +14,4 @@
  * ```
  * @since 1.9.0
  */
-export { default as slider } from './slider';
+export { academicSlider as slider } from './slider';

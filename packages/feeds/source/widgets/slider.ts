@@ -14,7 +14,7 @@ type TypeSlideFeedResponse = {
   endDay?: string;
 };
 
-export default ({
+export const createSliderWidget = ({
   token,
   query,
   url,

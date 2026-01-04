@@ -464,9 +464,10 @@ test('should add class names and build element', () => {
 
 **Outputs**:
 
-- ESM: `.mjs` files
-- CJS: `.js` files
+- ESM: `.js` files only (no CommonJS)
 - Types: `.d.ts` files
+
+**Note**: CommonJS (`require`) is not supported. Use ES module `import` only.
 
 **Key Settings**:
 

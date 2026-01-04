@@ -1,4 +1,4 @@
-import tabDisplay from '../../source/api/tab/display';
+import { display as tabDisplay } from '../../source/web-components/tab/display';
 import {
   createTestComponent,
   cleanupComponents,

@@ -1,4 +1,4 @@
-import navigationBreadcrumb from '../../source/api/navigation/breadcrumb';
+import { breadcrumb as navigationBreadcrumb } from '../../source/web-components/navigation/breadcrumb';
 import {
   createTestComponent,
   cleanupComponents,

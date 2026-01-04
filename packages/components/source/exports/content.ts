@@ -10,33 +10,29 @@
  * - Structural components (page structure/layout)
  */
 
-import * as components from '../api';
+import * as brand from '../web-components/brand';
+import * as card from '../web-components/card';
+import * as layout from '../web-components/layout';
+import * as media from '../web-components/media';
+import * as person from '../web-components/person';
+import * as quote from '../web-components/quote';
+import * as stat from '../web-components/stat';
+import * as text from '../web-components/text';
 import { loadComponentClass, ComponentMap } from './loader';
-import { feedComponents } from './feed';
-import { interactiveComponents } from './interactive';
-import { structuralComponents } from './structural';
 
-const excludedKeys = new Set([
-  ...Object.keys(feedComponents),
-  ...Object.keys(interactiveComponents),
-  ...Object.keys(structuralComponents),
-]);
-
-export const contentComponents: ComponentMap = Object.entries(components)
-  .filter(([key, value]) => {
-    // Only include component groups (objects with sub-components)
-    // Exclude individual functions and already categorized components
-    return (
-      typeof value === 'object' && value !== null && !excludedKeys.has(key)
-    );
-  })
-  .reduce((acc, [key, value]) => {
-    acc[key] = value as ComponentMap[string];
-    return acc;
-  }, {} as ComponentMap);
+export const contentComponents: ComponentMap = {
+  brand,
+  card,
+  layout,
+  media,
+  person,
+  quote,
+  stat,
+  text,
+};
 
 export const LoadContentComponents = () => {
   loadComponentClass(contentComponents);
 };
 
-export default LoadContentComponents;
+export { brand, card, layout, media, person, quote, stat, text };

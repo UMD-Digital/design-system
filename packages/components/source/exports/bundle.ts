@@ -2,7 +2,7 @@
  * Bundle export that includes all components and external library resources.
  * Includes all dependencies from web-elements-library, web-styles-library, web-feeds-library, web-utilities-library, web-icons-library, web-model-library, and web-token-library.
  */
-import * as Components from '../api';
+import * as Components from '../web-components';
 import { loadComponentClass } from './loader';
 import * as Utilities from '@universityofmaryland/web-utilities-library';
 import * as Icons from '@universityofmaryland/web-icons-library';
@@ -15,12 +15,15 @@ import * as Tokens from '@universityofmaryland/web-token-library';
 /**
  * Initializes all UMD web components and sets up utilities.
  */
-const initializeBundle = () => {
+export const initializeBundle = () => {
   loadComponentClass(Components as any);
   Utilities.observeGridAnimations();
 };
 
-const UmdBundle = {
+/**
+ * Complete UMD Bundle with all libraries and components.
+ */
+export const UmdBundle = {
   init: initializeBundle,
   Components,
   Utilities,
@@ -43,7 +46,6 @@ const UmdBundle = {
 };
 
 export {
-  initializeBundle,
   Components,
   Utilities,
   Icons,
@@ -53,5 +55,3 @@ export {
   Model,
   Feeds,
 };
-
-export default UmdBundle;

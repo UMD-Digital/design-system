@@ -1,4 +1,4 @@
-import cardStandard from '../../source/api/card/standard';
+import { standard as cardStandard } from '../../source/web-components/card/standard';
 import {
   createTestComponent,
   cleanupComponents,

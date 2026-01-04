@@ -1,4 +1,4 @@
-import alertPage from '../../source/api/alert/page';
+import { page as alertPage } from '../../source/web-components/alert/page';
 import {
   createTestComponent,
   cleanupComponents,

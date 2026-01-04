@@ -1,4 +1,4 @@
-import personDisplay from '../../source/api/person/display';
+import { display as personDisplay } from '../../source/web-components/person/display';
 import {
   createTestComponent,
   cleanupComponents,

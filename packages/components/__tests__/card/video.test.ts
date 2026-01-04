@@ -1,4 +1,4 @@
-import cardVideo from '../../source/api/card/video';
+import { video as cardVideo } from '../../source/web-components/card/video';
 import {
   createTestComponent,
   cleanupComponents,

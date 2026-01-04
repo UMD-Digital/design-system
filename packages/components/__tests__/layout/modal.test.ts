@@ -1,4 +1,4 @@
-import layoutModal from '../../source/api/layout/modal';
+import { modal as layoutModal } from '../../source/web-components/layout/modal';
 import {
   createTestComponent,
   cleanupComponents,

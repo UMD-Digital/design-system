@@ -1,4 +1,4 @@
-import cardIcon from '../../source/api/card/icon';
+import { icon as cardIcon } from '../../source/web-components/card/icon';
 import {
   createTestComponent,
   cleanupComponents,

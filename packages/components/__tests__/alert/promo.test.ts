@@ -1,4 +1,4 @@
-import alertPromo from '../../source/api/alert/promo';
+import { promo as alertPromo } from '../../source/web-components/alert/promo';
 import {
   createTestComponent,
   cleanupComponents,

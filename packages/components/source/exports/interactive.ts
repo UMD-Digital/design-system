@@ -5,7 +5,11 @@
  * These components add interactivity and dynamic behavior to the page.
  */
 
-import { accordion, carousel, footer, social, tab } from '../api';
+import * as accordion from '../web-components/accordion';
+import * as carousel from '../web-components/carousel';
+import * as footer from '../web-components/footer';
+import * as social from '../web-components/social';
+import * as tab from '../web-components/tab';
 import { loadComponentClass, ComponentMap } from './loader';
 
 export const interactiveComponents: ComponentMap = {
@@ -20,4 +24,4 @@ export const LoadInteractiveComponents = () => {
   loadComponentClass(interactiveComponents);
 };
 
-export default LoadInteractiveComponents;
+export { accordion, carousel, footer, social, tab };

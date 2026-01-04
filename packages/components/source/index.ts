@@ -7,10 +7,10 @@
  *
  * Register all components at once:
  * ```typescript
- * import LoadUmdComponents from '@universityofmaryland/web-components-library';
+ * import { initializeBundle } from '@universityofmaryland/web-components-library/bundle';
  *
  * // Register all components
- * LoadUmdComponents();
+ * initializeBundle();
  * ```
  *
  * Or import specific components:
@@ -22,15 +22,22 @@
  * Components.hero.base();
  * ```
  *
+ * Or import individual components for optimal tree-shaking:
+ * ```typescript
+ * import { CardStandard, HeroBase } from '@universityofmaryland/web-components-library';
+ *
+ * CardStandard();
+ * HeroBase();
+ * ```
+ *
  * ## Exports
  *
- * - **Components** - All web component registration functions
- * - **Elements** - Base element classes and primitives from web-elements-library
- * - **LoadUmdComponents** - Function to register all components at once
+ * - **Components** - All web component registration functions (namespace)
+ * - **Individual exports** - Direct component imports for tree-shaking
+ * - **LoadUmdComponents** - Deprecated: Use initializeBundle from /bundle instead
  */
-import * as umdComponents from './api';
-import { loadComponentClass, ComponentMap } from './exports/loader';
 
+// Type exports
 export type {
   ElementRef,
   ComponentRef,
@@ -54,26 +61,15 @@ export type {
   AttributeElementRef,
 } from './_types';
 
-export type { SlotProps, BaseProps, OptionalProps, SlotResult } from '@universityofmaryland/web-model-library';
+export type {
+  SlotProps,
+  BaseProps,
+  OptionalProps,
+  SlotResult,
+} from '@universityofmaryland/web-model-library';
 
-const allList = umdComponents as unknown as ComponentMap;
-
-/**
- * @deprecated This function is deprecated and will be removed in version 2.0.
- * Use the bundle export instead:
- * ```typescript
- * import { initializeBundle } from '@universityofmaryland/web-components-library/bundle';
- * initializeBundle();
- * ```
- */
-const LoadUmdComponents = () => {
-  console.error(
-    '[DEPRECATED] LoadUmdComponents is deprecated.\n' +
-      'Use: import { initializeBundle } from "@universityofmaryland/web-components-library/bundle"',
-  );
-
-  loadComponentClass(allList);
-};
+// Component namespace export
+import * as umdComponents from './web-components';
 
 /**
  * All web component registration functions organized by category.
@@ -90,4 +86,9 @@ const LoadUmdComponents = () => {
  */
 export const Components = umdComponents;
 
-export default LoadUmdComponents;
+// Re-export all named components for direct imports
+export * from './web-components';
+
+// Loader utilities
+export { loadComponentClass, LoadUmdComponents } from './exports/loader';
+export type { ComponentMap } from './exports/loader';

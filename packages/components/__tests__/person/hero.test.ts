@@ -1,4 +1,4 @@
-import personHero from '../../source/api/person/hero';
+import { hero as personHero } from '../../source/web-components/person/hero';
 import {
   createTestComponent,
   cleanupComponents,

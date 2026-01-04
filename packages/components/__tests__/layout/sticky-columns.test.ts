@@ -1,4 +1,4 @@
-import layoutStickyColumns from '../../source/api/layout/sticky-columns';
+import { stickyColumns as layoutStickyColumns } from '../../source/web-components/layout/sticky-columns';
 import {
   createTestComponent,
   cleanupComponents,

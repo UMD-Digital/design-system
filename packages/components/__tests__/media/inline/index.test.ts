@@ -1,4 +1,4 @@
-import mediaInline from '../../../source/api/media/inline/index';
+import { inline as mediaInline } from '../../../source/web-components/media/inline/index';
 import {
   createTestComponent,
   cleanupComponents,

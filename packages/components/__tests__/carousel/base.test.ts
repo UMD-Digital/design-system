@@ -1,4 +1,4 @@
-import carouselBase from '../../source/api/carousel/base';
+import { base as carouselBase } from '../../source/web-components/carousel/base';
 import {
   createTestComponent,
   cleanupComponents,

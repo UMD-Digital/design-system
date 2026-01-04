@@ -1,4 +1,4 @@
-import brandChevronScroll from '../../source/api/brand/chevron-scroll';
+import { chevronScroll as brandChevronScroll } from '../../source/web-components/brand/chevron-scroll';
 import {
   createTestComponent,
   cleanupComponents,

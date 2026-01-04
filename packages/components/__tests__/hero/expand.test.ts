@@ -1,4 +1,4 @@
-import heroExpand from '../../source/api/hero/custom/expand';
+import { expand as heroExpand } from '../../source/web-components/hero/custom/expand';
 import {
   createTestComponent,
   cleanupComponents,

@@ -1,4 +1,4 @@
-import socialSharing from '../../source/api/social/sharing';
+import { sharing as socialSharing } from '../../source/web-components/social/sharing';
 import {
   createTestComponent,
   cleanupComponents,

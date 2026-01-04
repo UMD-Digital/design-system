@@ -1,4 +1,4 @@
-import heroBase from '../../source/api/hero/base';
+import { base as heroBase } from '../../source/web-components/hero/base';
 import {
   createTestComponent,
   cleanupComponents,

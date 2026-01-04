@@ -1,4 +1,4 @@
-import pathwayImage from '../../source/api/pathway/image';
+import { image as pathwayImage } from '../../source/web-components/pathway/image';
 import {
   createTestComponent,
   cleanupComponents,

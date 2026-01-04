@@ -1,4 +1,4 @@
-import cardArticle from '../../source/api/card/article';
+import { article as cardArticle } from '../../source/web-components/card/article';
 import {
   createTestComponent,
   cleanupComponents,

@@ -1,4 +1,4 @@
-import quoteDisplay from '../../source/api/quote/display';
+import { display as quoteDisplay } from '../../source/web-components/quote/display';
 import {
   createTestComponent,
   cleanupComponents,

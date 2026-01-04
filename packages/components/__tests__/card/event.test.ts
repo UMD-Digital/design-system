@@ -1,4 +1,4 @@
-import cardEvent from '../../source/api/card/event';
+import { event as cardEvent } from '../../source/web-components/card/event';
 import {
   createTestComponent,
   cleanupComponents,

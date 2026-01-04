@@ -1,4 +1,4 @@
-import cardOverlay from '../../source/api/card/overlay';
+import { overlay as cardOverlay } from '../../source/web-components/card/overlay';
 import {
   createTestComponent,
   cleanupComponents,

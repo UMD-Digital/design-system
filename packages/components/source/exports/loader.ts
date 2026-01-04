@@ -2,6 +2,7 @@
  * Shared component loading utilities
  * Extracted to avoid circular dependencies
  */
+import * as umdComponents from '../web-components';
 
 /**
  * Type definition for a map of component registration functions.
@@ -29,4 +30,23 @@ export const loadComponentClass = (componentMap: ComponentMap) => {
       }
     }
   }
+};
+
+const allList = umdComponents as unknown as ComponentMap;
+
+/**
+ * @deprecated This function is deprecated and will be removed in version 2.0.
+ * Use the bundle export instead:
+ * ```typescript
+ * import { initializeBundle } from '@universityofmaryland/web-components-library/bundle';
+ * initializeBundle();
+ * ```
+ */
+export const LoadUmdComponents = () => {
+  console.error(
+    '[DEPRECATED] LoadUmdComponents is deprecated.\n' +
+      'Use: import { initializeBundle } from "@universityofmaryland/web-components-library/bundle"',
+  );
+
+  loadComponentClass(allList);
 };

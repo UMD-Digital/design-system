@@ -5,7 +5,9 @@
  * These components typically load content from external sources or display collections.
  */
 
-import { alert, feed, slider } from '../api';
+import * as alert from '../web-components/alert';
+import * as feed from '../web-components/feed';
+import * as slider from '../web-components/slider';
 import { loadComponentClass, ComponentMap } from './loader';
 
 export const feedComponents: ComponentMap = {
@@ -18,4 +20,4 @@ export const LoadFeedComponents = () => {
   loadComponentClass(feedComponents);
 };
 
-export default LoadFeedComponents;
+export { alert, feed, slider };

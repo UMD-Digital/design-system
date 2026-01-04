@@ -1,4 +1,4 @@
-import feedEventsGrid from '../../../source/api/feed/events/grid';
+import { eventsGrid as feedEventsGrid } from '../../../source/web-components/feed/events/grid';
 import {
   createTestComponent,
   cleanupComponents,

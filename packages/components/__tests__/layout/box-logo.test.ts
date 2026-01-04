@@ -1,4 +1,4 @@
-import layoutBoxLogo from '../../source/api/layout/box-logo';
+import { boxLogo as layoutBoxLogo } from '../../source/web-components/layout/box-logo';
 import {
   createTestComponent,
   cleanupComponents,

@@ -1,4 +1,4 @@
-import feedNewsFeatured from '../../../source/api/feed/news/featured';
+import { newsFeatured as feedNewsFeatured } from '../../../source/web-components/feed/news/featured';
 import {
   createTestComponent,
   cleanupComponents,

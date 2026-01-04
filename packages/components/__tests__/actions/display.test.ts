@@ -1,4 +1,4 @@
-import actionsDisplay from '../../source/api/actions/display';
+import { display as actionsDisplay } from '../../source/web-components/actions/display';
 import {
   createTestComponent,
   cleanupComponents,

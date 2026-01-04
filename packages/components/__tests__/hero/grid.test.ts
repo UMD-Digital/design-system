@@ -1,4 +1,4 @@
-import heroGrid from '../../source/api/hero/custom/grid';
+import { grid as heroGrid } from '../../source/web-components/hero/custom/grid';
 import {
   createTestComponent,
   cleanupComponents,

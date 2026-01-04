@@ -1,4 +1,4 @@
-import carouselCards from '../../source/api/carousel/cards';
+import { cards as carouselCards } from '../../source/web-components/carousel/cards';
 import {
   createTestComponent,
   cleanupComponents,

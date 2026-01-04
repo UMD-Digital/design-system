@@ -1,4 +1,4 @@
-import heroMinimal from '../../source/api/hero/minimal';
+import { minimal as heroMinimal } from '../../source/web-components/hero/minimal';
 import {
   createTestComponent,
   cleanupComponents,

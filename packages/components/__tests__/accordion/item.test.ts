@@ -1,4 +1,4 @@
-import accordionItem from '../../source/api/accordion/item';
+import { item as accordionItem } from '../../source/web-components/accordion/item';
 import {
   createTestComponent,
   cleanupComponents,

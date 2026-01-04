@@ -44,7 +44,7 @@ const DTS_COMMON_OPTIONS = {
 
 // Generate entries for individual components
 const generateComponentEntries = () => {
-  const apiDir = resolve(SOURCE_DIR, 'api');
+  const apiDir = resolve(SOURCE_DIR, 'web-components');
   const entries: Record<string, string> = {};
 
   readdirSync(apiDir).forEach((item) => {
@@ -120,7 +120,7 @@ const getBundleBuildConfig = () => {
       if (fs.existsSync(sourcePath)) {
         let content = fs.readFileSync(sourcePath, 'utf-8');
         content = content
-          .replace(/from '\.\.\/api'/g, "from './api'")
+          .replace(/from '\.\.\/web-components'/g, "from './web-components'")
           .replace(/from '\.\.\/utilities'/g, "from './utilities'");
         fs.writeFileSync(destPath, content);
 

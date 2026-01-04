@@ -1,6 +1,6 @@
 // Note: The grouped events feed component is currently disabled/commented out
 // When re-enabled, uncomment this import:
-// import feedEventsGrouped from '../../../source/api/feed/events/grouped';
+// import { grouped as feedEventsGrouped } from '../../../source/web-components/feed/events/grouped';
 
 // For now, we create a stub that returns undefined to match the commented implementation
 const feedEventsGrouped = () => undefined;

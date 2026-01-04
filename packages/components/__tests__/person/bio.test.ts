@@ -1,4 +1,4 @@
-import personBio from '../../source/api/person/bio';
+import { bio as personBio } from '../../source/web-components/person/bio';
 import {
   createTestComponent,
   cleanupComponents,

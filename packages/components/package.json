@@ -2,49 +2,42 @@
   "name": "@universityofmaryland/web-components-library",
   "version": "1.17.0-beta.0",
   "description": "UMD Web Components",
+  "type": "module",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "types": "dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js"
     },
     "./bundle": {
       "types": "./dist/bundle.d.ts",
-      "import": "./dist/bundle.js",
-      "require": "./dist/bundle.js"
+      "import": "./dist/bundle.js"
     },
     "./cdn": {
       "types": "./dist/cdn.d.ts",
-      "import": "./dist/cdn.js",
-      "require": "./dist/cdn.js"
+      "import": "./dist/cdn.js"
     },
     "./structural": {
       "types": "./dist/structural.d.ts",
-      "import": "./dist/structural.js",
-      "require": "./dist/structural.js"
+      "import": "./dist/structural.js"
     },
     "./interactive": {
       "types": "./dist/interactive.d.ts",
-      "import": "./dist/interactive.js",
-      "require": "./dist/interactive.js"
+      "import": "./dist/interactive.js"
     },
     "./feed": {
       "types": "./dist/feed.d.ts",
-      "import": "./dist/feed.js",
-      "require": "./dist/feed.js"
+      "import": "./dist/feed.js"
     },
     "./content": {
       "types": "./dist/content.d.ts",
-      "import": "./dist/content.js",
-      "require": "./dist/content.js"
+      "import": "./dist/content.js"
     },
     "./components/*": {
       "types": "./dist/components/*.d.ts",
-      "import": "./dist/components/*.js",
-      "require": "./dist/components/*.js"
+      "import": "./dist/components/*.js"
     }
   },
   "license": "MIT",

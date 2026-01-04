@@ -1,4 +1,4 @@
-import feedNewsGrid from '../../../source/api/feed/news/grid';
+import { newsGrid as feedNewsGrid } from '../../../source/web-components/feed/news/grid';
 import {
   createTestComponent,
   cleanupComponents,

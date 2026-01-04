@@ -1,4 +1,4 @@
-import carouselThumbnail from '../../source/api/carousel/thumbnail';
+import { thumbnail as carouselThumbnail } from '../../source/web-components/carousel/thumbnail';
 import {
   createTestComponent,
   cleanupComponents,

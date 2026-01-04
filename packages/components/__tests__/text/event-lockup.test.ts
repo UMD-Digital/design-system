@@ -1,4 +1,4 @@
-import textEventLockup from '../../source/api/text/event-lockup';
+import { eventLockup as textEventLockup } from '../../source/web-components/text/event-lockup';
 import {
   createTestComponent,
   cleanupComponents,

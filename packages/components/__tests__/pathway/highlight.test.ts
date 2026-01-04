@@ -1,4 +1,4 @@
-import pathwayHighlight from '../../source/api/pathway/highlight';
+import { highlight as pathwayHighlight } from '../../source/web-components/pathway/highlight';
 import {
   createTestComponent,
   cleanupComponents,

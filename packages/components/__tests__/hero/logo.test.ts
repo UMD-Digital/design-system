@@ -1,4 +1,4 @@
-import heroLogo from '../../source/api/hero/logo';
+import { logo as heroLogo } from '../../source/web-components/hero/logo';
 import {
   createTestComponent,
   cleanupComponents,

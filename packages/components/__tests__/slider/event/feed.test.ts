@@ -1,4 +1,4 @@
-import sliderEventFeed from '../../../source/api/slider/event/feed';
+import { eventFeed as sliderEventFeed } from '../../../source/web-components/slider/event/feed';
 import {
   createTestComponent,
   cleanupComponents,

@@ -1,4 +1,4 @@
-import statDisplay from '../../source/api/stat/display';
+import { display as statDisplay } from '../../source/web-components/stat/display';
 import {
   createTestComponent,
   cleanupComponents,

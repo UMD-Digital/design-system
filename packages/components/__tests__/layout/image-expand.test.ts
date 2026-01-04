@@ -1,4 +1,4 @@
-import layoutImageExpand from '../../source/api/layout/image-expand';
+import { imageExpand as layoutImageExpand } from '../../source/web-components/layout/image-expand';
 import {
   createTestComponent,
   cleanupComponents,

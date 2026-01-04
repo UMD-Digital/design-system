@@ -1,4 +1,4 @@
-import footerOptions from '../../source/api/footer/options';
+import { options as footerOptions } from '../../source/web-components/footer/options';
 import {
   createTestComponent,
   cleanupComponents,

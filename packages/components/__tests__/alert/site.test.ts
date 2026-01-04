@@ -1,4 +1,4 @@
-import alertSite from '../../source/api/alert/site';
+import { site as alertSite } from '../../source/web-components/alert/site';
 import {
   createTestComponent,
   cleanupComponents,

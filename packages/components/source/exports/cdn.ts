@@ -1,5 +1,5 @@
 import { observeGridAnimations } from '@universityofmaryland/web-utilities-library/animation';
-import * as Components from '../api';
+import * as Components from '../web-components';
 import { loadComponentClass } from './loader';
 
 const LoadUmdComponents = () => {

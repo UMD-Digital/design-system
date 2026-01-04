@@ -1,4 +1,4 @@
-import layoutScrollTop from '../../source/api/layout/scroll-top';
+import { scrollTop as layoutScrollTop } from '../../source/web-components/layout/scroll-top';
 import {
   createTestComponent,
   cleanupComponents,

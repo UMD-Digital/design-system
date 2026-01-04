@@ -68,7 +68,7 @@ const baseColors = {
  * ```
  * @since 1.0.0
  */
-export default {
+export const color = {
   red: colorScale.red[500],
   blue: colorScale.blue[500],
   green: colorScale.green[500],
@@ -85,4 +85,4 @@ export default {
     lighter: colorScale.gray[100],
     lightest: colorScale.gray[50],
   },
-};
+} as const;

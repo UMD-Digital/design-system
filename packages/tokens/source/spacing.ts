@@ -64,7 +64,7 @@ export const maxWidth = {
  * ```
  * @since 1.0.0
  */
-export default {
+export const spacing = {
   min: '8px',
   xs: '12px',
   sm: '16px',
@@ -82,4 +82,4 @@ export default {
   maxWidth: {
     ...maxWidth,
   },
-};
+} as const;

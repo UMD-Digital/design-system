@@ -28,7 +28,8 @@ See [plan.md](plan.md) for complete Figma integration roadmap.
 The tokens package uses **two build modes**:
 
 1. **Module Build** (`npm run build`):
-   - Formats: ES Modules (`.mjs`) and CommonJS (`.js`)
+   - Formats: ES Modules only (`.js`) - No CommonJS support
+   - Export Style: Named exports only - No default exports
    - Code-split by token category
    - Preserves module structure
    - Type declarations via `vite-plugin-dts`
@@ -42,7 +43,7 @@ The tokens package uses **two build modes**:
 ### Build Commands
 
 ```bash
-npm run build          # Module build (ES + CJS)
+npm run build          # Module build (ES only)
 npm run build:cdn      # CDN build (UMD)
 npm run dev            # Watch mode
 npm run clean          # Remove dist
@@ -66,17 +67,17 @@ source/
 
 ### Export Pattern
 
-All tokens use **named exports** with namespace aggregation:
+All tokens use **named exports only** (no default exports):
 
 ```typescript
 // index.ts pattern
-import color from './color';
-import spacing from './spacing';
+import { color } from './color';
+import { spacing } from './spacing';
 
 export * as media from './media';  // Namespace export
 export * as font from './font';    // Namespace export
-export { color };                  // Default export re-export
-export { spacing };                // Default export re-export
+export { color };                  // Named export
+export { spacing };                // Named export
 ```
 
 ## Token Organization
@@ -86,7 +87,7 @@ export { spacing };                // Default export re-export
 ```typescript
 const colorScale = { /* shade variations */ };
 const baseColors = { white, black };
-export default { red, blue, gold, gray: {...}, ... };
+export const color = { red, blue, gold, gray: {...}, ... } as const;
 ```
 
 **Key Exports:**
@@ -100,7 +101,7 @@ export default { red, blue, gold, gray: {...}, ... };
 ```typescript
 const spacingScale = { 0, 1, 2, 3, 4, 6, 8, ... };
 export const maxWidth = { smallest, small, normal, large, larger };
-export default { min, xs, sm, md, lg, xl, ..., maxWidth };
+export const spacing = { min, xs, sm, md, lg, xl, ..., maxWidth } as const;
 ```
 
 **Key Exports:**
@@ -225,19 +226,24 @@ describe('Color Tokens', () => {
 
 ```json
 {
+  "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js"
     },
-    "./color": { /* category-specific exports */ },
+    "./color": {
+      "types": "./dist/color.d.ts",
+      "import": "./dist/color.js"
+    },
     "./font": { /* ... */ },
     "./media": { /* ... */ },
     "./spacing": { /* ... */ }
   }
 }
 ```
+
+**Note**: CommonJS (`require`) is not supported. Use ES module `import` only.
 
 ## Best Practices
 

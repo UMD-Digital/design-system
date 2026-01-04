@@ -22,8 +22,8 @@
  * @since 1.0.0
  */
 
-import color from './color';
-import spacing from './spacing';
+import { color } from './color';
+import { spacing } from './spacing';
 
 /**
  * Media query breakpoints and utilities.

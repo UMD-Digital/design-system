@@ -33,6 +33,30 @@ module.exports = {
       __dirname,
       './__mocks__/@universityofmaryland/web-utilities-library/network.js',
     ),
+    '^@universityofmaryland/web-utilities-library/elements$': path.resolve(
+      __dirname,
+      './__mocks__/@universityofmaryland/web-utilities-library/elements.js',
+    ),
+    '^@universityofmaryland/web-utilities-library/validation$': path.resolve(
+      __dirname,
+      './__mocks__/@universityofmaryland/web-utilities-library/validation.js',
+    ),
+    '^@universityofmaryland/web-utilities-library/accessibility$': path.resolve(
+      __dirname,
+      './__mocks__/@universityofmaryland/web-utilities-library/accessibility.js',
+    ),
+    '^@universityofmaryland/web-utilities-library/adapters$': path.resolve(
+      __dirname,
+      './__mocks__/@universityofmaryland/web-utilities-library/adapters.js',
+    ),
+    '^@universityofmaryland/web-utilities-library/dom$': path.resolve(
+      __dirname,
+      './__mocks__/@universityofmaryland/web-utilities-library/dom.js',
+    ),
+    '^@universityofmaryland/web-utilities-library/date$': path.resolve(
+      __dirname,
+      './__mocks__/@universityofmaryland/web-utilities-library/date.js',
+    ),
     '^@universityofmaryland/web-builder-library$': path.resolve(
       __dirname,
       './__mocks__/webBuilderLibrary.js',
@@ -60,6 +84,18 @@ module.exports = {
     '^@universityofmaryland/web-feeds-library$': path.resolve(
       __dirname,
       './__mocks__/webFeedsLibrary.js',
+    ),
+    '^@universityofmaryland/web-feeds-library/events$': path.resolve(
+      __dirname,
+      './__mocks__/@universityofmaryland/web-feeds-library/events.js',
+    ),
+    '^@universityofmaryland/web-feeds-library/news$': path.resolve(
+      __dirname,
+      './__mocks__/@universityofmaryland/web-feeds-library/news.js',
+    ),
+    '^@universityofmaryland/web-feeds-library/academic$': path.resolve(
+      __dirname,
+      './__mocks__/@universityofmaryland/web-feeds-library/academic.js',
     ),
     '^@universityofmaryland/web-components-library$': path.resolve(
       __dirname,

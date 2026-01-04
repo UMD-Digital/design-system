@@ -82,7 +82,7 @@ const deprecated = {
   callToAction: createSlotFactory(SlotNames.deprecated.callToAction),
 } as const;
 
-export default {
+export const Slots = {
   actions,
   assets,
   contact,
@@ -97,5 +97,6 @@ export default {
   social,
   text,
   ...element,
-};
+} as const;
+
 export type { SlotName };

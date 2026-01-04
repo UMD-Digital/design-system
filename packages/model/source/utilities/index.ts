@@ -7,4 +7,4 @@
 
 export { registerWebComponent, webComponent, type WebComponentConfig } from './register';
 export { hooks, CommonLifecycleHooks } from './lifecycle';
-export { default as StylesTemplate } from './styles';
+export { stylesTemplate as StylesTemplate } from './styles';

@@ -27,7 +27,8 @@ This package abstracts the component model logic that was previously embedded in
 ### Vite Configuration
 
 - **Builder**: Vite with TypeScript
-- **Output Formats**: ES Modules (`.mjs`) and CommonJS (`.js`)
+- **Output Formats**: ES Modules only (`.js`) - No CommonJS support
+- **Export Style**: Named exports only - No default exports
 - **External Dependencies**: All `@universityofmaryland/*` packages
 - **Type Declarations**: Generated with `vite-plugin-dts`
 - **Module Preservation**: `preserveModules: true` for granular imports
@@ -74,6 +75,8 @@ source/
 
 ## Export Pattern
 
+All exports are **named exports only** (no default exports):
+
 ```typescript
 // Main export
 import { Attributes, Model, Register, Slots, Lifecycle } from '@universityofmaryland/web-model-library';
@@ -81,7 +84,7 @@ import { Attributes, Model, Register, Slots, Lifecycle } from '@universityofmary
 // Category imports
 import * as Model from '@universityofmaryland/web-model-library/model';
 import * as Attributes from '@universityofmaryland/web-model-library/attributes';
-import Slots from '@universityofmaryland/web-model-library/slots';
+import { Slots } from '@universityofmaryland/web-model-library/slots';
 import * as Utilities from '@universityofmaryland/web-model-library/utilities';
 ```
 
@@ -89,35 +92,33 @@ import * as Utilities from '@universityofmaryland/web-model-library/utilities';
 
 ```json
 {
+  "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js"
     },
     "./attributes": {
       "types": "./dist/attributes.d.ts",
-      "import": "./dist/attributes.mjs",
-      "require": "./dist/attributes.js"
+      "import": "./dist/attributes.js"
     },
     "./model": {
       "types": "./dist/model.d.ts",
-      "import": "./dist/model.mjs",
-      "require": "./dist/model.js"
+      "import": "./dist/model.js"
     },
     "./slots": {
       "types": "./dist/slots.d.ts",
-      "import": "./dist/slots.mjs",
-      "require": "./dist/slots.js"
+      "import": "./dist/slots.js"
     },
     "./utilities": {
       "types": "./dist/utilities.d.ts",
-      "import": "./dist/utilities.mjs",
-      "require": "./dist/utilities.js"
+      "import": "./dist/utilities.js"
     }
   }
 }
 ```
+
+**Note**: CommonJS (`require`) is not supported. Use ES module `import` only.
 
 ## Key Concepts
 
@@ -195,11 +196,11 @@ All type definitions are centralized in `_types.ts`:
 
 ## Build Output
 
-- `dist/index.{js,mjs,d.ts}` - Main export with all utilities
-- `dist/attributes.{js,mjs,d.ts}` - Attribute system
-- `dist/model.{js,mjs,d.ts}` - Model system
-- `dist/slots.{js,mjs,d.ts}` - Slot system
-- `dist/utilities.{js,mjs,d.ts}` - Registration and lifecycle utilities
+- `dist/index.{js,d.ts}` - Main export with all utilities (ES module only)
+- `dist/attributes.{js,d.ts}` - Attribute system
+- `dist/model.{js,d.ts}` - Model system
+- `dist/slots.{js,d.ts}` - Slot system
+- `dist/utilities.{js,d.ts}` - Registration and lifecycle utilities
 - Preserved module structure for granular imports
 
 ## Notes

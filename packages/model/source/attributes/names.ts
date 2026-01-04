@@ -149,7 +149,7 @@ const deprecated = {
   },
 };
 
-const AttributeNames = {
+export const AttributeNames = {
   decoration,
   display,
   feature,
@@ -162,5 +162,3 @@ const AttributeNames = {
   visual,
   deprecated,
 } as const;
-
-export default AttributeNames;

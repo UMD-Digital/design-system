@@ -32,9 +32,9 @@
  *
  * @module Attributes
  */
-import handler from './handler';
-import names from './names';
-import values from './values';
+import { handler } from './handler';
+import { AttributeNames as names } from './names';
+import { AttributeValues as values } from './values';
 
 export {
   hasInfo,

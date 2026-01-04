@@ -24,6 +24,21 @@ Current package versions:
 
 ## [Unreleased]
 
+### Changed
+
+**Build System Modernization**
+- **ES Modules Only**: Removed CommonJS output from all packages
+  - All packages now use `formats: ['es']` in Vite config
+  - All package.json files now include `"type": "module"`
+  - Removed `require` entries from package.json exports
+  - Output files changed from `.mjs` to `.js`
+- **Named Exports Only**: Converted all default exports to named exports
+  - tokens: `color` and `spacing` are now named exports
+  - styles: `webComponentStyles` and `createTokens` are now named exports
+  - model: `Slots`, `AttributeNames`, `AttributeValues`, `handler` are now named exports
+  - All packages follow consistent named export pattern for optimal tree-shaking
+- Updated vite.config.ts files to use ES module imports instead of `require()`
+
 ### Added
 
 **Phase 1 & 2: Core Release Automation**

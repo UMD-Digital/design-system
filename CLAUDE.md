@@ -40,11 +40,17 @@ The dependency graph determines build order:
 
 All packages follow a **consistent Vite build pattern**:
 
-- **Output Formats**: ES Modules (`.mjs`) and CommonJS (`.js`)
+- **Output Formats**: ES Modules only (`.js`) - No CommonJS support
+- **Export Style**: Named exports only - No default exports
 - **Type Declarations**: Generated with `vite-plugin-dts`
 - **External Dependencies**: All `@universityofmaryland/*` packages are externalized
 - **Module Preservation**: `preserveModules: true` for granular imports
 - **Code Splitting**: Category-based entry points
+
+**Important Build Conventions:**
+- All packages use `"type": "module"` in package.json
+- All exports must be named exports (no `export default`)
+- CommonJS (`require()`) is not supported - use ES module `import` only
 
 **External Configuration** (all packages):
 ```typescript
@@ -243,22 +249,24 @@ import { addClass } from '@universityofmaryland/web-utilities-library';
 
 ### Important Import Pattern
 
-**For token library and styles library JSS modules, use namespace imports:**
+**All packages use named exports only. Use namespace or named imports:**
 
 ```typescript
-// ✅ Correct - use namespace import for tokens
+// ✅ Correct - namespace imports
 import * as token from '@universityofmaryland/web-token-library';
 import * as media from '@universityofmaryland/web-token-library/media';
-
-// ✅ Correct - use namespace import for styles
 import * as layout from '@universityofmaryland/web-styles-library/layout';
 
-// ❌ Wrong - no default exports
+// ✅ Correct - named imports
+import { color, spacing } from '@universityofmaryland/web-token-library';
+import { Attributes, Model, Slots } from '@universityofmaryland/web-model-library';
+
+// ❌ Wrong - no default exports exist
 import token from '@universityofmaryland/web-token-library';
 import layout from '@universityofmaryland/web-styles-library/layout';
 ```
 
-This is because JSS modules export named exports like `{ color, spacing, media, font }`, not a default export. Note that `color` and `spacing` are default exports in the tokens package.
+All packages export named exports only. Default exports are not supported anywhere in the design system to ensure consistent bundling behavior and optimal tree-shaking.
 
 ## Planned Future Packages
 
@@ -454,14 +462,16 @@ cd packages/components && npm start
 
 ## Key Principles
 
-1. **Consistent Build Pattern**: All packages use same Vite configuration pattern
-2. **External Dependencies**: Workspace packages are always externalized for optimal tree-shaking
-3. **Type Safety**: Full TypeScript support with generated declarations
-4. **Code Splitting**: Category-based entry points for selective imports
-5. **CDN Support**: Special IIFE builds for non-build-tool environments
-6. **Testing**: Comprehensive testing at all levels (unit, integration, E2E, visual)
-7. **Automation**: CI/CD for testing, releasing, and token synchronization
-8. **Documentation**: Each package has its own CLAUDE.md with specific guidance
+1. **ES Modules Only**: All packages output ES modules only - no CommonJS support
+2. **Named Exports Only**: All exports must be named exports - no default exports
+3. **Consistent Build Pattern**: All packages use same Vite configuration pattern
+4. **External Dependencies**: Workspace packages are always externalized for optimal tree-shaking
+5. **Type Safety**: Full TypeScript support with generated declarations
+6. **Code Splitting**: Category-based entry points for selective imports
+7. **CDN Support**: Special IIFE builds for non-build-tool environments
+8. **Testing**: Comprehensive testing at all levels (unit, integration, E2E, visual)
+9. **Automation**: CI/CD for testing, releasing, and token synchronization
+10. **Documentation**: Each package has its own CLAUDE.md with specific guidance
 
 ## Notes
 

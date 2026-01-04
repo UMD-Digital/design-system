@@ -78,7 +78,7 @@ const type = {
   SIMPLE: 'simple',
 };
 
-const AttributeValues = {
+export const AttributeValues = {
   campaign,
   data,
   display,
@@ -88,6 +88,4 @@ const AttributeValues = {
   state,
   theme,
   type,
-};
-
-export default AttributeValues;
+} as const;

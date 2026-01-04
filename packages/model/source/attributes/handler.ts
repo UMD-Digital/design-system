@@ -1,5 +1,5 @@
-import AttributeNames from './names';
-import AttributeValues from './values';
+import { AttributeNames } from './names';
+import { AttributeValues } from './values';
 
 /**
  * Attribute Handler System
@@ -382,5 +382,4 @@ const common = {
  */
 export const CommonAttributeHandlers = common;
 
-export default { combine, observe, common };
-// Types are now exported directly, not through namespace
+export const handler = { combine, observe, common };

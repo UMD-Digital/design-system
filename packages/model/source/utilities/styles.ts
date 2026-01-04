@@ -71,11 +71,9 @@ const reset = `
   }
 `;
 
-const stylesTemplate = ({ styles }: { styles: string }) => {
+export const stylesTemplate = ({ styles }: { styles: string }) => {
   const template = document.createElement('template');
   template.innerHTML = `<style>${reset}${CreateStyleString(styles)}</style>`;
 
   return template;
 };
-
-export default stylesTemplate;

@@ -115,7 +115,7 @@ const STYLES_CAROUSEL_IMAGE_MULTIPLE_ELEMENT = `
   ${OverwriteThemeDark}
 `;
 
-export default (props: TypeCarouselMultipleProps) =>
+export const createCompositeCarouselImageMultiple = (props: TypeCarouselMultipleProps) =>
   (() => {
     const { images, isThemeDark, isFullScreenOption } = props;
     const elementDeclaration = document.createElement('div');

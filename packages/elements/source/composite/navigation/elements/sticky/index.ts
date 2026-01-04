@@ -23,7 +23,7 @@ const STYLES_NAV_STICKY_ELEMENT = `
   }
 `;
 
-export default ({
+const CreateStickyElement = ({
   content,
   component,
 }: {
@@ -97,3 +97,5 @@ export default ({
 
     return { element: elementContainer, styles: STYLES_NAV_STICKY_ELEMENT };
   })();
+
+export const createCompositeNavigationSticky = CreateStickyElement;

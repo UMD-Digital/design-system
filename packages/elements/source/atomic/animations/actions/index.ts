@@ -1,1 +1,1 @@
-export { default as indicator } from './indicator';
+export { createAnimationIndicator as indicator } from './indicator';

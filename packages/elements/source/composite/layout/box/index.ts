@@ -1,1 +1,1 @@
-export { default as logo } from './logo';
+export { createCompositeLayoutBoxLogo as logo } from './logo';

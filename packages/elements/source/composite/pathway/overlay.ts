@@ -323,7 +323,7 @@ const createLock = (props: PathwayOverlayProps) => {
     .build();
 };
 
-export default (props: PathwayOverlayProps) => {
+const CreatePathwayOverlayElement = (props: PathwayOverlayProps) => {
   const wrapper = new ElementBuilder()
     .withClassName('pathway-overlay-container-wrapper')
     .withChild(createLock(props))
@@ -357,3 +357,5 @@ export default (props: PathwayOverlayProps) => {
     },
   };
 };
+
+export const createCompositePathwayOverlay = CreatePathwayOverlayElement;

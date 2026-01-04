@@ -66,7 +66,7 @@ const STYLES_STICKY_COLUMNS_ELEMENT = `
   ${OverwriteStickyLast}
 `;
 
-export default (element: TypeStickyProps) => {
+const CreateStickyColumnsElement = (element: TypeStickyProps) => {
   const { stickyColumn, staticColumn, isStickyLast, topPosition } = element;
   const container = document.createElement('div');
   const wrapper = document.createElement('div');
@@ -109,3 +109,5 @@ export default (element: TypeStickyProps) => {
     },
   };
 };
+
+export const createCompositeLayoutStickyColumns = CreateStickyColumnsElement;

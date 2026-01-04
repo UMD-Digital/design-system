@@ -1,7 +1,7 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { assets } from 'atomic';
 
-export default ({ image }: { image: HTMLImageElement }) => {
+const CreateGifElement = ({ image }: { image: HTMLImageElement }) => {
   const container = document.createElement('div');
 
   const calculateHeight = () => {
@@ -78,3 +78,5 @@ export default ({ image }: { image: HTMLImageElement }) => {
     },
   };
 };
+
+export const createCompositeMediaGif = CreateGifElement;

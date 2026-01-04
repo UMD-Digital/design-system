@@ -45,7 +45,7 @@ export interface GridBorderLayoutProps {
  * document.head.appendChild(createStyleElement(borderGridLayout.styles));
  * ```
  */
-export default function gridBorder({
+export function createLayoutGridBorder({
   columns = 2,
   isThemeDark = false,
   enableContainerQueries = false,

@@ -1,8 +1,8 @@
 import * as token from '@universityofmaryland/web-token-library';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
-import Slides from './slides';
-import SlideAction, { TypeActionProps } from './action';
+import { createCompositeNavigationSlides as Slides } from './slides';
+import { createCompositeNavigationSliderAction as SlideAction, TypeActionProps } from './action';
 
 export type TypeFirstSlideProps = TypeActionProps & {
   ATTRIBUTE_ACTIVE_SLIDE: string;
@@ -167,7 +167,7 @@ const CreateSlideFirstElement = (props: TypeFirstSlide) => {
   return sliderContainer;
 };
 
-export default {
+export const createCompositeNavigationSliderFirst = {
   CreateElement: CreateSlideFirstElement,
   Styles: STYLES_SLIDE_FIRST_ELEMENT,
   Elements: {

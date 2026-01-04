@@ -1,5 +1,5 @@
-import DomStrcuture from './dom-structure';
+import { createCompositeTabsDomStructure as DomStrcuture } from './dom-structure';
 
-export default {
+export const createCompositeTabsElements = {
   DomStrcuture,
 };

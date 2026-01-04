@@ -1,1 +1,1 @@
-export { default as stat } from './stat';
+export { createStat as stat } from './stat';

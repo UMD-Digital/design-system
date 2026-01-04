@@ -127,7 +127,7 @@ const makeLock = (props: HeroLogoProps) => {
   return builder.build();
 };
 
-export default (props: HeroLogoProps) => {
+export const createCompositeHeroLogo = (props: HeroLogoProps) => {
   const { isThemeDark } = props;
 
   const container = new ElementBuilder()

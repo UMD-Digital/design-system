@@ -5,7 +5,7 @@ import { actions, textLockup } from 'atomic';
 import { CardOverlayProps } from '../_types';
 import { type UMDElement } from '../../../_types';
 
-export default (props: CardOverlayProps) => {
+export const createCompositeCardOverlayColor = (props: CardOverlayProps) => {
   const { isThemeDark, ctaIcon } = props;
 
   const children: UMDElement[] = [];

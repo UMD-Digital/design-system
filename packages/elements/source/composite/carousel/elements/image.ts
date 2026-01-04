@@ -224,7 +224,7 @@ const SlideUpcomingSlide = ({
   }, ANIMATION_DURATION + 100);
 };
 
-export default (props: TypeCarouselImageProps) =>
+export const createCompositeCarouselImage = (props: TypeCarouselImageProps) =>
   (() => {
     const { slides, callback, maxHeight } = props;
     const container = document.createElement('div');

@@ -2,7 +2,7 @@ import * as token from '@universityofmaryland/web-token-library';
 import { handleKeyboardNavigation } from '@universityofmaryland/web-utilities-library/events';
 import { close_large as iconCloseLarge } from '@universityofmaryland/web-icons-library/controls';
 import { TypeMenuDisplayButtonRequirements } from '../menu-button';
-import NavDrawerSlider, { TypeNavSliderRequirements } from '../slider';
+import { createCompositeNavigationSlider as NavDrawerSlider, TypeNavSliderRequirements } from '../slider';
 
 export type TypeNavDrawerRequirements = TypeNavSliderRequirements & {
   context?: HTMLElement;
@@ -216,7 +216,7 @@ const CreateNavDrawerElement = (props: TypeNavDrawerRequirements) =>
     };
   })();
 
-export default {
+export const createCompositeNavigationDrawer = {
   CreateElement: CreateNavDrawerElement,
   Styles: STYLES_NAV_DRAWER_ELEMENT,
 };

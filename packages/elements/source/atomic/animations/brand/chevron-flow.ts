@@ -251,7 +251,7 @@ const AnimationSequence = (props: TypeAnimationProps) => {
   AnimateFollowingArrows(props);
 };
 
-export default ({
+export const createAnimationChevronFlow = ({
   sizedContainer,
   completedCallback,
   isAnimationOnLoad = true,

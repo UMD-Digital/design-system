@@ -180,7 +180,7 @@ const createLock = (props: PathwayHighlightProps) => {
     .build();
 };
 
-export default (props: PathwayHighlightProps) =>
+const CreatePathwayHighlightElement = (props: PathwayHighlightProps) =>
   new ElementBuilder()
     .withClassName('pathway-highlight-container')
     .withChild(createLock(props))
@@ -190,3 +190,5 @@ export default (props: PathwayHighlightProps) =>
       },
     })
     .build();
+
+export const createCompositePathwayHighlight = CreatePathwayHighlightElement;

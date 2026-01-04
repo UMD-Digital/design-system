@@ -61,7 +61,7 @@ const CreateMenuDisplayButton = (props: TypeMenuDisplayButtonRequirements) => {
   return button;
 };
 
-export default {
+export const createCompositeNavigationMenuButton = {
   CreateElement: CreateMenuDisplayButton,
   Styles: STYLES_MENU_DISPLAY_BUTTON,
 };

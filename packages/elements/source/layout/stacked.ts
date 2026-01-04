@@ -36,7 +36,7 @@ export interface StackedLayoutProps {
  * document.head.appendChild(createStyleElement(stackedLayout.styles));
  * ```
  */
-export default function stacked({
+export function createLayoutStacked({
   isThemeDark = false,
   gap = token.spacing.md,
   spacing = token.spacing.md,

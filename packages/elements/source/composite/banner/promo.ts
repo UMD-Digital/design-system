@@ -217,7 +217,7 @@ const createContainer = (
     .build();
 };
 
-export default (props: TypeBannerPromoProps) => {
+export const createCompositeBannerPromo = (props: TypeBannerPromoProps) => {
   const wrapper = createWrapper(props);
   const container = createContainer({
     ...props,

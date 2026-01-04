@@ -78,7 +78,7 @@ const ComponentStyles = `
   ${HeadlineStyles}
 `;
 
-export default (props: TypeEventLockupDate) => {
+export const createTextLockupDate = (props: TypeEventLockupDate) => {
   const { headline, dateSign, isThemeDark } = props;
   const container = document.createElement('div');
   let styles = ComponentStyles;

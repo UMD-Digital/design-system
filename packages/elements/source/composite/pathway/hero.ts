@@ -297,7 +297,7 @@ const createWrapper = (props: PathwayHeroProps) => {
   return builder.build();
 };
 
-export default (props: PathwayHeroProps) => {
+const CreatePathwayHeroElement = (props: PathwayHeroProps) => {
   const composite = new ElementBuilder()
     .withClassName('pathway-hero-container')
     .withChild(createWrapper(props))
@@ -314,3 +314,5 @@ export default (props: PathwayHeroProps) => {
 
   return composite;
 };
+
+export const createCompositePathwayHero = CreatePathwayHeroElement;

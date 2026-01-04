@@ -1,6 +1,6 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import createRowLogo from './row-logo';
-import createRowLinks from './row-links';
+import { createCompositeFooterRowLogo as createRowLogo } from './row-logo';
+import { createCompositeFooterRowLinks as createRowLinks } from './row-links';
 import { MainSectionProps } from '../../_types';
 import { type UMDElement } from '../../../../_types';
 
@@ -88,7 +88,7 @@ const createVisualContainer = (
     .build();
 };
 
-export default (props: MainSectionProps): UMDElement => {
+const CreateMainSectionElement = (props: MainSectionProps): UMDElement => {
   const { isTypeMega, isTypeVisual } = props;
   const logoRow = createRowLogo(props);
   const visualContainerElement = createVisualContainer(props);
@@ -110,3 +110,5 @@ export default (props: MainSectionProps): UMDElement => {
 
   return container.build();
 };
+
+export const createCompositeFooterMainSection = CreateMainSectionElement;

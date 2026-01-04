@@ -9,7 +9,7 @@ interface QuoteActionProps
   action: HTMLAnchorElement;
 }
 
-export default ({
+const CreateQuoteActionElement = ({
   action,
   image,
   includesAnimation,
@@ -35,3 +35,5 @@ export default ({
       },
     })
     .build();
+
+export const createCompositeQuoteAction = CreateQuoteActionElement;

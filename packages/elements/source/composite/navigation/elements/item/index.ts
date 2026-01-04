@@ -477,7 +477,7 @@ const CreateNavItemElement = (props: TypeNavItem) =>
     return elementContainer;
   })();
 
-export default {
+export const createCompositeNavigationItem = {
   CreateElement: CreateNavItemElement,
   Styles: STYLES_NAV_ITEM_ELEMENT,
 };

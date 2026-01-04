@@ -1,1 +1,1 @@
-export { default as item } from './item';
+export { createCompositeAccordionItem as item } from './item';

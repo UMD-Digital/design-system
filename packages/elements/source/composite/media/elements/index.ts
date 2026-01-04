@@ -1,2 +1,2 @@
-export { default as caption } from './caption';
-export { default as gif } from './gif';
+export { createCompositeMediaCaption as caption } from './caption';
+export { createCompositeMediaGif as gif } from './gif';

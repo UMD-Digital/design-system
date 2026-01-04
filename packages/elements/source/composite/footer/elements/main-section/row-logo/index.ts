@@ -1,16 +1,16 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { token, layout } from '@universityofmaryland/web-styles-library';
-import createSocialCampaignColumns from '../social';
-import createCallToActionContainer from '../call-to-action';
-import createContactContainer from './contact';
-import createLogoContainer from './logo';
+import { createCompositeFooterSocial as createSocialCampaignColumns } from '../social';
+import { createCompositeFooterCallToAction as createCallToActionContainer } from '../call-to-action';
+import { createCompositeFooterContact as createContactContainer } from './contact';
+import { createCompositeFooterLogo as createLogoContainer } from './logo';
 import { BREAKPOINTS } from '../../../globals';
 import { RowLogoProps } from '../../../_types';
 import { type UMDElement } from '../../../../../_types';
 
 const { MEDIUM, LARGE } = BREAKPOINTS;
 
-export default (props: RowLogoProps): UMDElement => {
+const CreateRowLogoElement = (props: RowLogoProps): UMDElement => {
   const { isThemeLight, isTypeSimple } = props;
 
   const logoElement = createLogoContainer(props);
@@ -77,3 +77,5 @@ export default (props: RowLogoProps): UMDElement => {
     .withChild(lock)
     .build();
 };
+
+export const createCompositeFooterRowLogo = CreateRowLogoElement;

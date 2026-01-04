@@ -1,3 +1,3 @@
-export { default as grid } from './grid';
-export { default as expand } from './expand';
-export { default as videoArrow } from './video-arrow';
+export { createCompositeHeroGrid as grid } from './grid';
+export { createCompositeHeroExpand as expand } from './expand';
+export { createCompositeHeroVideoArrow as videoArrow } from './video-arrow';

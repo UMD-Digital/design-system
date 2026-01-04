@@ -1,1 +1,1 @@
-export { default as events } from './events';
+export { createCompositeSliderEvents as events } from './events';

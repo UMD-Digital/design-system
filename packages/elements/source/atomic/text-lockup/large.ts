@@ -17,7 +17,7 @@ interface TypeTextLockupLarge {
   additionalStyles?: Record<string, unknown>;
 }
 
-export default ({
+export const createTextLockupLarge = ({
   eyebrow,
   ribbon,
   headlineComposite,

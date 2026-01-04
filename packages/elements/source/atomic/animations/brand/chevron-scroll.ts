@@ -150,7 +150,7 @@ const STYLES_ANIMATION_BRAND_LOGO = `
   ${ThirdChevronStyles} 
 `;
 
-export default () =>
+export const createAnimationChevronScroll = () =>
   (() => {
     const container = document.createElement('div');
     const first = document.createElement('div');

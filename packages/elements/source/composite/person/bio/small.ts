@@ -147,7 +147,7 @@ const makeContainer = (props: PersonBio): ElementModel<HTMLElement> => {
   return builder.build();
 };
 
-export default (props: PersonBio): ElementModel<HTMLElement> => {
+const CreatePersonBioSmallElement = (props: PersonBio): ElementModel<HTMLElement> => {
   const { isThemeDark, description } = props;
   const container = makeContainer(props);
 
@@ -176,3 +176,5 @@ export default (props: PersonBio): ElementModel<HTMLElement> => {
 
   return builder.build();
 };
+
+export const createCompositePersonBioSmall = CreatePersonBioSmallElement;

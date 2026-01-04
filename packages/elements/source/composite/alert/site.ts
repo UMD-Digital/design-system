@@ -112,7 +112,7 @@ const createWrapper = (container: ElementModel) =>
     })
     .build();
 
-export default (props: AlertSiteProps) => {
+export const createCompositeAlertSite = (props: AlertSiteProps) => {
   const containerModel = createContainer(props);
   const declarationModel = createWrapper(containerModel);
 

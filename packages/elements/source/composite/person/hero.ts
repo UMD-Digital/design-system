@@ -274,7 +274,7 @@ const CreateTextContainer = ({
     .build();
 };
 
-export default (props: PersonHero): ElementModel<HTMLElement> => {
+const CreatePersonHeroElement = (props: PersonHero): ElementModel<HTMLElement> => {
   const { breadcrumbMobile, breadcrumbDesktop } = props;
   const textContainer = CreateTextContainer(props);
 
@@ -366,3 +366,5 @@ export default (props: PersonHero): ElementModel<HTMLElement> => {
     })
     .build();
 };
+
+export const createCompositePersonHero = CreatePersonHeroElement;

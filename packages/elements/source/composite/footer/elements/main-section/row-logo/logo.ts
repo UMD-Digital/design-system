@@ -1,8 +1,8 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-token-library';
 import * as Logos from '@universityofmaryland/web-icons-library/logos';
-import createCampaignRow from '../campaign';
-import createCallToAction from '../call-to-action';
+import { createCompositeFooterCampaign as createCampaignRow } from '../campaign';
+import { createCompositeFooterCallToAction as createCallToAction } from '../call-to-action';
 import { BREAKPOINTS } from '../../../globals';
 import { LogoProps } from '../../../_types';
 import { type UMDElement } from '../../../../../_types';
@@ -81,10 +81,12 @@ const createContainer = (
     .build();
 };
 
-export default (props: LogoProps): UMDElement => {
+const CreateLogoElement = (props: LogoProps): UMDElement => {
   const logoLinkElement = createLogoLinkElement(props);
   const campaignElement = createCampaignRow(props);
   const callToActionElement = createCallToAction(props);
 
   return createContainer(logoLinkElement, campaignElement, callToActionElement);
 };
+
+export const createCompositeFooterLogo = CreateLogoElement;

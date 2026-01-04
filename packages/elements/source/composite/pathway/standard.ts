@@ -241,7 +241,7 @@ const createLock = (props: PathwayStandardProps) => {
     .build();
 };
 
-export default (props: PathwayStandardProps) => {
+const CreatePathwayStandardElement = (props: PathwayStandardProps) => {
   const wrapper = new ElementBuilder()
     .withClassName('pathway-container-wrapper')
     .withChild(createLock(props))
@@ -282,3 +282,5 @@ export default (props: PathwayStandardProps) => {
     },
   };
 };
+
+export const createCompositePathwayStandard = CreatePathwayStandardElement;

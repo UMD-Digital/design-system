@@ -9,7 +9,7 @@ interface ActionIconProps {
   isThemeLight?: boolean;
 }
 
-export default ({ ctaIcon, isThemeLight }: ActionIconProps) => {
+export const createActionIcon = ({ ctaIcon, isThemeLight }: ActionIconProps) => {
   const href = ctaIcon.getAttribute('href');
   const message = `Open Link to ${href}`;
   const hasIcon = ctaIcon.querySelector('svg');

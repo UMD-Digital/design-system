@@ -42,7 +42,7 @@ const CreateOverlaySlide = ({ images }: { images: HTMLImageElement[] }) =>
     return slide;
   });
 
-export default ({ images }: { images: HTMLImageElement[] }) =>
+export const createCompositeCarouselOverlay = ({ images }: { images: HTMLImageElement[] }) =>
   (() => {
     let styles = STYLES_CAROUSEL_OVERLAY_ELEMENT;
 

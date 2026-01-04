@@ -290,7 +290,7 @@ const CreateTextContainer = ({ content }: TypeLayoutImageExpandProps) => {
   return textAnimation;
 };
 
-export default (props: TypeLayoutImageExpandProps) => {
+const CreateImageExpandElement = (props: TypeLayoutImageExpandProps) => {
   const declaration = document.createElement('div');
   const container = document.createElement('div');
   const imageContainer = CreateImageContainer(props);
@@ -327,3 +327,5 @@ export default (props: TypeLayoutImageExpandProps) => {
 
   return { element: declaration, styles: STYLES_LAYOUT_IMAGE_EXPAND };
 };
+
+export const createCompositeLayoutImageExpand = CreateImageExpandElement;

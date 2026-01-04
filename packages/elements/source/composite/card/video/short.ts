@@ -4,7 +4,7 @@ interface CardVideoShortProps {
   video: HTMLVideoElement;
 }
 
-export default (props: CardVideoShortProps) => {
+export const createCompositeCardVideoShort = (props: CardVideoShortProps) => {
   const { video } = props;
 
   const setPlay = () => {

@@ -259,7 +259,7 @@ const SetDisplay = ({
   SetContentPosition();
 };
 
-export default (props: TypeTabsProps) =>
+const CreateTabsStandardElement = (props: TypeTabsProps) =>
   (() => {
     const { isThemeDark, tabsContainer, shadowContent, topPosition } = props;
     const declaration = document.createElement('div');
@@ -385,3 +385,5 @@ export default (props: TypeTabsProps) =>
       },
     };
   })();
+
+export const createCompositeTabsStandard = CreateTabsStandardElement;

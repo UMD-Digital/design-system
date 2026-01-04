@@ -19,6 +19,6 @@ const create = ({
       .build();
   })();
 
-export default {
+export const fullscreen = {
   create,
 };

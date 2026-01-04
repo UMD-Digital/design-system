@@ -63,7 +63,7 @@ const STYLES_INDICATOR = `
 
 `;
 
-export default ({
+export const createAnimationIndicator = ({
   count,
   overlayColor,
   isThemeDark,

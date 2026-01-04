@@ -25,7 +25,7 @@ const BREAKPOINTS = {
   large: `@container (min-width: 600px)`,
 };
 
-export default ({
+export const createTextLockupMedium = ({
   actions,
   eventDetails,
   compositeHeadline,

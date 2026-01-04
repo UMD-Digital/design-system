@@ -1,8 +1,8 @@
-import { default as caption } from './caption';
-import { default as standard } from './standard';
-import { default as wrapped } from './wrapped';
+import { createCompositeMediaInlineCaption as caption } from './caption';
+import { createCompositeMediaInlineStandard as standard } from './standard';
+import { createCompositeMediaInlineWrapped as wrapped } from './wrapped';
 
-export default {
+export const createCompositeMediaInline = {
   caption,
   standard,
   wrapped,

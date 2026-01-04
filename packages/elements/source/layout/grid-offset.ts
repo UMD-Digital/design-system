@@ -48,7 +48,7 @@ export interface GridOffsetLayoutProps {
  * reversedLayout.element.appendChild(gridOfItems);   // Sticky, left column
  * ```
  */
-export default function gridOffset({
+export function createLayoutGridOffset({
   columns = 2,
   isLayoutReversed = false,
   stickyTopPosition = 0,

@@ -1,11 +1,13 @@
-import createMain from './elements/main-section';
-import createUtility from './elements/utility-section';
+import { createCompositeFooterMainSection as createMain } from './elements/main-section';
+import { createCompositeFooterUtilitySection as createUtility } from './elements/utility-section';
 import { FooterProps } from './_types';
-import buildFooter from './base';
+import { createCompositeFooterBase as buildFooter } from './base';
 
-export default (props: FooterProps) => {
+const CreateFooterVisualElement = (props: FooterProps) => {
   const main = createMain(props);
   const utility = createUtility(props);
 
   return buildFooter(props, [main, utility]);
 };
+
+export const createCompositeFooterVisual = CreateFooterVisualElement;

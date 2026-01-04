@@ -1,14 +1,14 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { layout, token } from '@universityofmaryland/web-styles-library';
-import createSocialCampaignColumns from '../social';
-import createLinkColumns from './link-columns';
+import { createCompositeFooterSocial as createSocialCampaignColumns } from '../social';
+import { createCompositeFooterLinkColumns as createLinkColumns } from './link-columns';
 import { BREAKPOINTS } from '../../../globals';
 import { RowLinksProps } from '../../../_types';
 import { type UMDElement } from '../../../../../_types';
 
 const { LARGE } = BREAKPOINTS;
 
-export default (props: RowLinksProps): UMDElement => {
+const CreateRowLinksElement = (props: RowLinksProps): UMDElement => {
   const { isThemeLight } = props;
   const socialColumnWrapper = createSocialCampaignColumns(props);
   const linkColumnWrapper = createLinkColumns(props);
@@ -61,3 +61,5 @@ export default (props: RowLinksProps): UMDElement => {
     .withChild(lockElement)
     .build();
 };
+
+export const createCompositeFooterRowLinks = CreateRowLinksElement;

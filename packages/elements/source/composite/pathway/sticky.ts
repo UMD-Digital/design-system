@@ -178,7 +178,7 @@ const createLock = (props: PathwayStickyProps) => {
     .build();
 };
 
-export default (props: PathwayStickyProps) => {
+const CreatePathwayStickyElement = (props: PathwayStickyProps) => {
   const wrapper = new ElementBuilder()
     .withClassName('pathway-sticky-container-wrapper')
     .withChild(createLock(props))
@@ -195,3 +195,5 @@ export default (props: PathwayStickyProps) => {
     })
     .build();
 };
+
+export const createCompositePathwaySticky = CreatePathwayStickyElement;

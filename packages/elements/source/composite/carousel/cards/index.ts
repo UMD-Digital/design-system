@@ -297,7 +297,7 @@ const CreateIntro = (props: TypeCarouselCardsRequirements) => {
   return introContainer;
 };
 
-export default (props: TypeCarouselCardsRequirements) =>
+export const createCompositeCarouselCards = (props: TypeCarouselCardsRequirements) =>
   (() => {
     const { slide, shadowRef } = props;
     const declaration = document.createElement('div');

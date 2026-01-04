@@ -2,8 +2,8 @@ import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-token-library';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
-import { default as elementAction } from './action';
-import { default as elementQuote } from './quote';
+import { createCompositeQuoteAction as elementAction } from './action';
+import { createCompositeQuote as elementQuote } from './quote';
 import { SMALL } from '../_constants';
 import { type QuoteTextProps } from '../_types';
 import { type ElementModel } from '../../../_types';
@@ -120,7 +120,7 @@ const createChildren = (props: ChildrenProps): ElementModel<HTMLElement>[] => {
   return wrapperChildren;
 };
 
-export default (
+const CreateQuoteTextElement = (
   props: Pick<
     QuoteTextProps,
     | 'isThemeDark'
@@ -186,3 +186,5 @@ export default (
     })
     .build();
 };
+
+export const createCompositeQuoteText = CreateQuoteTextElement;

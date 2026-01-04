@@ -617,7 +617,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
     };
   })();
 
-export default {
+export const createCompositeCarouselBlocks = {
   CreateElement: CreateCarouselCardsElement,
   Styles: STYLES_CAROUSEL_CARDS_ELEMENT,
   Elements: {

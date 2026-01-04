@@ -38,4 +38,4 @@ const CreateMediaInline = (props: TypeMediaInlineRequirements) =>
     };
   })();
 
-export default CreateMediaInline;
+export const createCompositeMediaInlineStandard = CreateMediaInline;

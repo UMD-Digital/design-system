@@ -111,7 +111,7 @@ const createDateRow = (props: TypeMetaDisplay) => {
   return element.build();
 };
 
-export default (props: TypeMetaDisplay) => {
+export const createEventMeta = (props: TypeMetaDisplay) => {
   const { location, isThemeDark } = props;
   const dateRow = createDateRow(props);
 

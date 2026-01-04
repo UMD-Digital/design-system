@@ -1,6 +1,6 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-token-library';
-import { default as elementIcon } from './icon';
+import { createCompositeQuoteIcon as elementIcon } from './icon';
 import { SMALL } from '../_constants';
 import {
   type QuoteBaseProps,
@@ -15,7 +15,7 @@ interface QuoteImageProps
   image: HTMLImageElement;
 }
 
-export default ({
+const CreateQuoteImageElement = ({
   image,
   isSizeLarge,
   isThemeMaryland,
@@ -74,3 +74,5 @@ export default ({
 
   return container.build();
 };
+
+export const createCompositeQuoteImage = CreateQuoteImageElement;

@@ -172,7 +172,7 @@ const createText = (props: HeroMinimalProps, hasAsset: boolean) => {
     .build();
 };
 
-export default (props: HeroMinimalProps) => {
+export const createCompositeHeroMinimal = (props: HeroMinimalProps) => {
   const asset = createAsset(props);
   const text = createText(props, !!asset);
 

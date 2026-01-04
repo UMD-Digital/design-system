@@ -32,7 +32,7 @@ const createLinkElement = (link: HTMLAnchorElement): UMDElement => {
     .build();
 };
 
-export default (
+const CreateCallToActionElement = (
   props: Pick<CallToActionProps, 'isTypeSimple' | 'slotCta'>,
 ): UMDElement => {
   const { isTypeSimple, slotCta } = props;
@@ -59,3 +59,5 @@ export default (
     })
     .build();
 };
+
+export const createCompositeFooterCallToAction = CreateCallToActionElement;

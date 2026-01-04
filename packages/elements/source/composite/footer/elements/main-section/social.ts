@@ -9,7 +9,7 @@ import {
   instagram as iconInstagram,
   threads as iconThreads,
 } from '@universityofmaryland/web-icons-library/social';
-import createCampaignRow from './campaign';
+import { createCompositeFooterCampaign as createCampaignRow } from './campaign';
 import { BREAKPOINTS } from '../../globals';
 import { SocialProps, SocialCampaignColumnsProps } from '../../_types';
 import { type UMDElement } from '../../../../_types';
@@ -182,7 +182,7 @@ const CreateSocialRow = (
     .build();
 };
 
-export default (props: SocialCampaignColumnsProps): UMDElement => {
+const CreateSocialElement = (props: SocialCampaignColumnsProps): UMDElement => {
   const socialContainer = CreateSocialRow(props);
   const campaignContainer = createCampaignRow(props);
   const { isTypeSimple } = props;
@@ -215,3 +215,5 @@ export default (props: SocialCampaignColumnsProps): UMDElement => {
     .withChildren(socialContainer, campaignContainer)
     .build();
 };
+
+export const createCompositeFooterSocial = CreateSocialElement;

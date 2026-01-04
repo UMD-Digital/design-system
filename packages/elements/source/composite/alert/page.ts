@@ -76,7 +76,7 @@ const createContainer = (
     .build();
 };
 
-export default (props: AlertPageProps) =>
+export const createCompositeAlertPage = (props: AlertPageProps) =>
   new ElementBuilder()
     .withClassName('alert-page-declaration')
     .withChild(createContainer(props))

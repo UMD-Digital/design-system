@@ -50,7 +50,7 @@ const createForwardCampaign = (props: Pick<CampaignProps, 'isThemeLight'>) => {
   return link;
 };
 
-export default (
+const CreateCampaignElement = (
   props: Pick<CampaignProps, 'isThemeLight' | 'isCampaignForward'>,
 ): UMDElement => {
   const { isCampaignForward } = props;
@@ -99,3 +99,5 @@ export default (
     .withChild(linkElement)
     .build();
 };
+
+export const createCompositeFooterCampaign = CreateCampaignElement;

@@ -102,7 +102,7 @@ const CreatePerson = ({ block }: { block: HTMLElement }) => {
   return container;
 };
 
-export default (props: TypeCarouselThumbnailProps) =>
+export const createCompositeCarouselThumbnail = (props: TypeCarouselThumbnailProps) =>
   (() => {
     const { blocks, isThemeDark } = props;
     const elementDeclaration = document.createElement('div');

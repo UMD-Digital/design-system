@@ -126,7 +126,7 @@ const makeEndDateBlock = ({
     .build();
 };
 
-export default (props: {
+export const createEventSign = (props: {
   startMonth: string | HTMLElement;
   startDay: string | HTMLElement;
   endDay?: string | HTMLElement;

@@ -10,7 +10,7 @@ interface QuoteIconProps
   hasImage?: boolean;
 }
 
-export default ({
+const CreateQuoteIconElement = ({
   hasImage = false,
   isThemeMaryland,
   isTypeFeatured = false,
@@ -70,3 +70,5 @@ export default ({
 
   return iconSpan;
 };
+
+export const createCompositeQuoteIcon = CreateQuoteIconElement;

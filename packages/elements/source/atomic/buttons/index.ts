@@ -1,1 +1,1 @@
-export { default as fullscreen } from './fullscreen';
+export { fullscreen } from './fullscreen';

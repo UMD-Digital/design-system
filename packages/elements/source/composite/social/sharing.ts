@@ -325,4 +325,4 @@ const CreateSocialSharingElement = (props: SocialSharingProps) => {
   return model;
 };
 
-export default CreateSocialSharingElement;
+export const createCompositeSocialSharing = CreateSocialSharingElement;

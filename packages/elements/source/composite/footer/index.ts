@@ -1,3 +1,3 @@
-export { default as mega } from './mega';
-export { default as simple } from './simple';
-export { default as visual } from './visual';
+export { createCompositeFooterMega as mega } from './mega';
+export { createCompositeFooterSimple as simple } from './simple';
+export { createCompositeFooterVisual as visual } from './visual';

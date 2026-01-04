@@ -1,7 +1,7 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-token-library';
 import { imageFromSvg } from '@universityofmaryland/web-utilities-library/media';
-import InlineQuote from './inline';
+import { createCompositeQuoteInline as InlineQuote } from './inline';
 import { image as elementImage, action as elementAction } from './elements';
 import { quoteAnimation } from './helper/animation';
 import { MEDIUM, SMALL } from './_constants';
@@ -126,7 +126,7 @@ const createTextureContainer = ({
   return container;
 };
 
-export default (props: QuoteFeaturedProps) => {
+const CreateQuoteFeaturedElement = (props: QuoteFeaturedProps) => {
   const { isThemeDark, isThemeMaryland, image, isTransparent } = props;
 
   const inlineQuote = InlineQuote({ ...props, isTypeFeatured: true });
@@ -230,3 +230,5 @@ export default (props: QuoteFeaturedProps) => {
     },
   };
 };
+
+export const createCompositeQuoteFeatured = CreateQuoteFeaturedElement;

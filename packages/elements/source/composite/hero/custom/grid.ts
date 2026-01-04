@@ -410,7 +410,7 @@ const createGridLayout = (
     .build();
 };
 
-export default (props: HeroGridProps) => {
+export const createCompositeHeroGrid = (props: HeroGridProps) => {
   const validated = validateGridProps(props);
   if (!validated) return null;
 

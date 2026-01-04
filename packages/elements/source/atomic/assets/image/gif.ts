@@ -119,7 +119,7 @@ const applyGifToggle = (image: HTMLImageElement, container: HTMLElement) => {
   );
 };
 
-export default ({
+export const createImageGif = ({
   element,
 }: {
   element: HTMLImageElement | HTMLAnchorElement;

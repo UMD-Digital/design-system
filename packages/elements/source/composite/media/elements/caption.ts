@@ -60,7 +60,7 @@ const CreateMediaInline = ({
   return caption;
 };
 
-export default {
+export const createCompositeMediaCaption = {
   CreateElement: CreateMediaInline,
   Styles: STYLES_MEDIA_CAPTIONS_ELEMENT,
   Elements: {

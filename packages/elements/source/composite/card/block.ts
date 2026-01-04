@@ -6,7 +6,7 @@ import { type UMDElement } from '../../_types';
 
 const smallBreakpoint = token.media.breakpointValues.small.max;
 
-export default (props: CardBlockProps) => {
+export const createCompositeCardBlock = (props: CardBlockProps) => {
   const {
     dateSign,
     hasBorder,

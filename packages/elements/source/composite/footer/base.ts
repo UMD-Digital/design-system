@@ -4,7 +4,7 @@ import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { FooterProps } from './_types';
 import { ElementModel } from '_types';
 
-export default (props: FooterProps, childElements: Array<ElementModel>) => {
+const CreateFooterBaseElement = (props: FooterProps, childElements: Array<ElementModel>) => {
   const { isThemeLight } = props;
 
   return new ElementBuilder()
@@ -38,3 +38,5 @@ export default (props: FooterProps, childElements: Array<ElementModel>) => {
     .withChildren(...childElements)
     .build();
 };
+
+export const createCompositeFooterBase = CreateFooterBaseElement;

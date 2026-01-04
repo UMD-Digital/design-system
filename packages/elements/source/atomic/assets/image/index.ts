@@ -1,3 +1,3 @@
-export { default as background } from './background';
-export { default as gif } from './gif';
-export { default as placeholder } from './placeholder';
+export { createImageBackground as background } from './background';
+export { createImageGif as gif } from './gif';
+export { imagePlaceholder as placeholder } from './placeholder';

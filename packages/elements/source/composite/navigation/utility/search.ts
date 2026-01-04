@@ -168,7 +168,7 @@ const CreateNavUtilitySearch = ({ isSearchDomain }: TypeUtilitySearchProps) =>
     return form;
   })();
 
-export default {
+export const createCompositeNavigationSearch = {
   CreateElement: CreateNavUtilitySearch,
   Styles: STYLES_NAV_UTILITY_SEARCH,
   Elements: {

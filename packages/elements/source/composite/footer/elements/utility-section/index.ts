@@ -51,7 +51,7 @@ const createSubLink = ({ title, url }: { title: string; url: string }) => {
     .build();
 };
 
-export default (
+const CreateUtilitySectionElement = (
   props: Pick<UtilityProps, 'isThemeLight' | 'slotUtilityLinks'>,
 ) => {
   const { isThemeLight, slotUtilityLinks } = props;
@@ -155,3 +155,5 @@ export default (
     .withChild(wrapper)
     .build();
 };
+
+export const createCompositeFooterUtilitySection = CreateUtilitySectionElement;

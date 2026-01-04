@@ -5,7 +5,7 @@ interface CardVideoShortProps {
   isAutoplay?: boolean;
 }
 
-export default (props: CardVideoShortProps) =>
+export const createCompositeCardVideoBlock = (props: CardVideoShortProps) =>
   (() =>
     assets.video.observedAutoPlay({
       ...props,

@@ -1,5 +1,5 @@
 export * as bio from './bio';
-export { default as block } from './block';
-export { default as hero } from './hero';
-export { default as list } from './list';
-export { default as tabular } from './tabular';
+export { createCompositePersonBlock as block } from './block';
+export { createCompositePersonHero as hero } from './hero';
+export { createCompositePersonList as list } from './list';
+export { createCompositePersonTabular as tabular } from './tabular';

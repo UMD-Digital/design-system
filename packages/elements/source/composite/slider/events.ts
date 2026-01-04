@@ -671,7 +671,7 @@ const OnLoadStyles = ({ dataSlider }: { dataSlider: HTMLElement }) => {
   dataSlider.style.left = '0';
 };
 
-export default (props: TypeSliderEventProps) =>
+export const createCompositeSliderEvents = (props: TypeSliderEventProps) =>
   (() => {
     const { isThemeDark, dataSlider } = props;
     const declaration = document.createElement('div');

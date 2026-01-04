@@ -12,7 +12,7 @@ interface VideoProps {
   callback?: (isPlaying: boolean) => void;
 }
 
-export default (props: VideoProps) =>
+export const createVideoToggle = (props: VideoProps) =>
   (() => {
     const {
       video,

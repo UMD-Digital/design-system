@@ -1,1 +1,1 @@
-export { default as sharing } from './sharing';
+export { createCompositeSocialSharing as sharing } from './sharing';

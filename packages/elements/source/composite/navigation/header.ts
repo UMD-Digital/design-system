@@ -3,8 +3,8 @@ import * as typography from '@universityofmaryland/web-styles-library/typography
 import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import { isExternalUrl } from '@universityofmaryland/web-utilities-library/network';
 import { search as iconSearch } from '@universityofmaryland/web-icons-library/search';
-import MenuButton from './elements/menu-button';
-import NavigationItem from './elements/item';
+import { createCompositeNavigationMenuButton as MenuButton } from './elements/menu-button';
+import { createCompositeNavigationItem as NavigationItem } from './elements/item';
 
 type TypeLogoRequirments = {
   logo?: HTMLElement | null;
@@ -383,7 +383,7 @@ const CreateNavigationHeader = (props: TypeHeaderRequirements) => {
   };
 };
 
-export default {
+export const createCompositeNavigationHeader = {
   CreateElement: CreateNavigationHeader,
   Styles: STYLES_NAVIGATION_HEADER,
 };

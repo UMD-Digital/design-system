@@ -5,7 +5,7 @@ import {
   typography,
 } from '@universityofmaryland/web-styles-library';
 import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
-import createSocialCampaignColumns from '../social';
+import { createCompositeFooterSocial as createSocialCampaignColumns } from '../social';
 import { BREAKPOINTS } from '../../../globals';
 import { ContactProps } from '../../../_types';
 import { type UMDElement } from '../../../../../_types';
@@ -208,7 +208,7 @@ const createDefaultLinks = (props: ContactProps): UMDElement => {
   return createContactLinksList({ children: [email, phone] });
 };
 
-export default (props: ContactProps): UMDElement => {
+const CreateContactElement = (props: ContactProps): UMDElement => {
   const { slotAddress, slotHeadline, slotContentLinks } = props;
   const socialContainer = createSocialCampaignColumns(props);
   const hasSlot = slotAddress || slotHeadline || slotContentLinks;
@@ -275,3 +275,5 @@ export default (props: ContactProps): UMDElement => {
     })
     .build();
 };
+
+export const createCompositeFooterContact = CreateContactElement;

@@ -100,7 +100,7 @@ const CreateImageContainer = ({
   return container;
 };
 
-export default {
+export const layoutImage = {
   CreateElement: CreateImageContainer,
   Styles: STYLES_IMAGE_CONTAINER,
   Elements: {

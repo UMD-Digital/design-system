@@ -1,2 +1,2 @@
 export { primary, secondary, outline, options } from './text';
-export { default as icon } from './icon';
+export { createActionIcon as icon } from './icon';

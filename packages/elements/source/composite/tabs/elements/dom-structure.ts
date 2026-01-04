@@ -54,6 +54,6 @@ const ModifyTabsDomStrcuture = ({
   return container;
 };
 
-export default {
+export const createCompositeTabsDomStructure = {
   ModifyElement: ModifyTabsDomStrcuture,
 };

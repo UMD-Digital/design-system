@@ -1,3 +1,3 @@
 export * as elements from './elements';
-export { default as header } from './header';
-export { default as utility } from './utility';
+export { createCompositeNavigationHeader as header } from './header';
+export { createCompositeNavigationUtility as utility } from './utility';

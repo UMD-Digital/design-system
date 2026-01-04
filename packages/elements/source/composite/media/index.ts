@@ -1,2 +1,2 @@
 export * as elements from './elements';
-export { default as inline } from './inline';
+export { createCompositeMediaInline as inline } from './inline';

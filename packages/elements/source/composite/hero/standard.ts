@@ -269,7 +269,7 @@ const createText = (props: HeroStandardProps) => {
     .build();
 };
 
-export default (props: HeroStandardProps) => {
+export const createCompositeHeroStandard = (props: HeroStandardProps) => {
   const { isHeightSmall, isThemeDark } = props;
   const asset = createAsset(props);
   const text = createText(props);

@@ -1,5 +1,5 @@
 import { isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
-import { default as toggle } from './toggle';
+import { createVideoToggle } from './toggle';
 
 interface CardVideoShortProps {
   video: HTMLVideoElement;
@@ -8,7 +8,7 @@ interface CardVideoShortProps {
   additionalElementStyles?: Record<string, any>;
 }
 
-export default ({
+export const createVideoObservedAutoPlay = ({
   video,
   isAutoplay = false,
   isScaled = false,
@@ -55,7 +55,7 @@ export default ({
     video.setAttribute('muted', '');
     video.setAttribute('loop', '');
 
-    const composite = toggle({
+    const composite = createVideoToggle({
       video,
       additionalElementStyles,
       isScaled,

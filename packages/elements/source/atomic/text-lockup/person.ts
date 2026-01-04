@@ -7,7 +7,7 @@ import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { wrapTextNodeInSpan } from '@universityofmaryland/web-utilities-library/dom';
 import { type PersonTextLockupProps } from '../_types';
 
-export default ({
+export const createTextLockupPerson = ({
   actions,
   association,
   isThemeDark,

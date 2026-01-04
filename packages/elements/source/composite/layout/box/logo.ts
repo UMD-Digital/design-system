@@ -110,7 +110,7 @@ const STYLES_LOGO_BLOCK_ELEMENT = `
   ${VariantThemeStyles}
 `;
 
-export default (element: TypeLogoRequirements) => {
+const CreateBoxLogoElement = (element: TypeLogoRequirements) => {
   const { isThemeDark, image, text, isBordered = false } = element;
 
   const elementContainer = document.createElement('div');
@@ -131,3 +131,5 @@ export default (element: TypeLogoRequirements) => {
 
   return { element: elementContainer, styles: STYLES_LOGO_BLOCK_ELEMENT };
 };
+
+export const createCompositeLayoutBoxLogo = CreateBoxLogoElement;

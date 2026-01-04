@@ -35,7 +35,7 @@ export interface GridGapLayoutProps {
  * document.head.appendChild(createStyleElement(gapGridLayout.styles));
  * ```
  */
-export default function gridGap({
+export function createLayoutGridGap({
   columns = 2,
   enableContainerQueries = true,
   alignItems = 'start',

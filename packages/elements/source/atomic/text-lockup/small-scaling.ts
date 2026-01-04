@@ -26,7 +26,7 @@ export type TypeTextLockupSmallScaling = {
   text?: HTMLElement | null;
 };
 
-export default ({
+export const createTextLockupSmallScaling = ({
   actions,
   customStyles = {},
   date,

@@ -322,7 +322,7 @@ const ActionAnimation = ({
   }, 100 + ANIMATION_TIME);
 };
 
-export default (props: TypeAccordionProps) =>
+export const createCompositeAccordionItem = (props: TypeAccordionProps) =>
   (() => {
     const { isThemeDark, isThemeLight, isStateOpen = false } = props;
     const declaration = document.createElement('div');

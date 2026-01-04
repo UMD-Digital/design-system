@@ -265,7 +265,7 @@ const setupAnimation = (
   observer.observe(container);
 };
 
-export default (props: SectionIntroProps) => {
+const CreateSectionIntroSmallElement = (props: SectionIntroProps) => {
   const containerElement = createContainer(props);
 
   const loadAnimation = () =>
@@ -284,3 +284,5 @@ export default (props: SectionIntroProps) => {
     events: { loadAnimation },
   };
 };
+
+export const createCompositeLayoutSectionIntroSmall = CreateSectionIntroSmallElement;

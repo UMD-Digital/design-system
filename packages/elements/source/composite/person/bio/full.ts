@@ -7,7 +7,7 @@ import { assets, textLockup } from 'atomic';
 import { type PersonBio } from '../_types';
 import { type ElementModel } from '../../../_types';
 
-export default (props: PersonBio): ElementModel<HTMLElement> => {
+const CreatePersonBioFullElement = (props: PersonBio): ElementModel<HTMLElement> => {
   const { isThemeDark, image, actions, description } = props;
   const { name, ...textProps } = props;
 
@@ -95,3 +95,5 @@ export default (props: PersonBio): ElementModel<HTMLElement> => {
 
   return builder.build();
 };
+
+export const createCompositePersonBioFull = CreatePersonBioFullElement;

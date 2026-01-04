@@ -185,7 +185,7 @@ const createEventHandlers = (
   return { load: eventLoad };
 };
 
-export default (props: HeroVideoArrowProps) => {
+export const createCompositeHeroVideoArrow = (props: HeroVideoArrowProps) => {
   const { video, isAnimationOnLoad } = props;
 
   const videoElement = createVideo(video);

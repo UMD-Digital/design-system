@@ -3,8 +3,8 @@ import * as typography from '@universityofmaryland/web-styles-library/typography
 import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import { cloneElementWithoutAttributes } from '@universityofmaryland/web-utilities-library/dom';
 import { chevron_down as iconChevronDown } from '@universityofmaryland/web-icons-library/controls';
-import FirstSlide, { TypeFirstSlideProps, TypeFirstSlide } from './slide-first';
-import SlideAction, { TypeActionProps } from './action';
+import { createCompositeNavigationSliderFirst as FirstSlide, TypeFirstSlideProps, TypeFirstSlide } from './slide-first';
+import { createCompositeNavigationSliderAction as SlideAction, TypeActionProps } from './action';
 
 export type TypeSlideProps = TypeActionProps &
   TypeFirstSlideProps & {
@@ -261,7 +261,7 @@ const CreateNavSlides = (props: TypeDrawerChildSlide) => {
   });
 };
 
-export default {
+export const createCompositeNavigationSlides = {
   CreateElement: CreateNavSlides,
   Styles: STYLES_NAV_SLIDES,
   Elements: {

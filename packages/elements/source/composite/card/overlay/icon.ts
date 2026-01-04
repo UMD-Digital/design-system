@@ -10,7 +10,7 @@ interface CardIconProps {
   isThemeDark?: boolean;
 }
 
-export default (props: CardIconProps) => {
+export const createCompositeCardOverlayIcon = (props: CardIconProps) => {
   const children: UMDElement[] = [];
 
   if (props.image) {

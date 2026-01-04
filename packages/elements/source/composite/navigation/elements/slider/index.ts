@@ -1,9 +1,9 @@
 import * as token from '@universityofmaryland/web-token-library';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { findParent } from '@universityofmaryland/web-utilities-library/dom';
-import Slides, { TypeSlideProps } from './slides';
-import SlideFirst from './slide-first';
-import SlideAction from './action';
+import { createCompositeNavigationSlides as Slides, TypeSlideProps } from './slides';
+import { createCompositeNavigationSliderFirst as SlideFirst } from './slide-first';
+import { createCompositeNavigationSliderAction as SlideAction } from './action';
 
 type TypeSubElements = TypeSlideProps;
 
@@ -342,7 +342,7 @@ const CreateNavSliderElement = (props: TypeNavSliderRequirements) =>
     };
   })();
 
-export default {
+export const createCompositeNavigationSlider = {
   CreateElement: CreateNavSliderElement,
   Styles: STYLES_NAV_SLIDER_ELEMENT,
   Elements: {

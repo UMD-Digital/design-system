@@ -9,7 +9,7 @@ const smallBreakpoint = token.media.breakpointValues.small.max;
 const mediumBreakpointStart = token.media.breakpointValues.medium.min;
 const mediumBreakpoint = token.media.breakpointValues.large.min;
 
-export default ({
+const CreatePersonListElement = ({
   actions,
   address,
   association,
@@ -80,3 +80,5 @@ export default ({
 
   return builder.build();
 };
+
+export const createCompositePersonList = CreatePersonListElement;

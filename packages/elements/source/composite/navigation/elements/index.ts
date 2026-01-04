@@ -1,6 +1,6 @@
-export { default as breadcrumb } from './breadcrumb';
-export { default as drawer } from './drawer';
-export { default as menuButton } from './menu-button';
-export { default as item } from './item';
-export { default as slider } from './slider';
-export { default as sticky } from './sticky';
+export { createCompositeNavigationBreadcrumb as breadcrumb } from './breadcrumb';
+export { createCompositeNavigationDrawer as drawer } from './drawer';
+export { createCompositeNavigationMenuButton as menuButton } from './menu-button';
+export { createCompositeNavigationItem as item } from './item';
+export { createCompositeNavigationSlider as slider } from './slider';
+export { createCompositeNavigationSticky as sticky } from './sticky';

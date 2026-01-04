@@ -2,7 +2,7 @@ import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-token-library';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
-import { default as elementIcon } from './icon';
+import { createCompositeQuoteIcon as elementIcon } from './icon';
 import { SMALL } from '../_constants';
 import { type QuoteTextProps } from '../_types';
 
@@ -44,7 +44,7 @@ const splitWords = (quote: HTMLElement) => {
   return wordElements;
 };
 
-export default (props: QuoteProps) => {
+const CreateQuoteElement = (props: QuoteProps) => {
   const {
     hasImage = false,
     includesAnimation = false,
@@ -122,3 +122,5 @@ export default (props: QuoteProps) => {
 
   return builder.build();
 };
+
+export const createCompositeQuote = CreateQuoteElement;

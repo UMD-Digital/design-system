@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-token-library';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
-import CaptionContainer from '../elements/caption';
+import { createCompositeMediaCaption as CaptionContainer } from '../elements/caption';
 import { Image as LayoutImage } from 'layout';
 
 export type TypeMediaInlineRequirements = {
@@ -124,4 +124,4 @@ const CreateMediaWithCaption = (props: TypeMediaInlineRequirements) =>
     };
   })();
 
-export default CreateMediaWithCaption;
+export const createCompositeMediaInlineCaption = CreateMediaWithCaption;

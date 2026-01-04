@@ -231,7 +231,7 @@ const createText = (
     .build();
 };
 
-export default (props: HeroOverlayProps) => {
+export const createCompositeHeroOverlay = (props: HeroOverlayProps) => {
   const text = createText(props);
   const asset = createAsset(props);
 

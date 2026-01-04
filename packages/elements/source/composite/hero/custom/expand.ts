@@ -387,7 +387,7 @@ const createSticky = (props: HeroExpandProps) => {
     .build();
 };
 
-export default (props: HeroExpandProps) => {
+export const createCompositeHeroExpand = (props: HeroExpandProps) => {
   const sticky = createSticky(props);
 
   const composite = new ElementBuilder()

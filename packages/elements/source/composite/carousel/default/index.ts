@@ -121,7 +121,7 @@ const STYLES_CAROUSEL_ELEMENT = `
   ${OverwriteThemeDark}
 `;
 
-export default (props: TypeCarouselRequirements) =>
+export const createCompositeCarouselDefault = (props: TypeCarouselRequirements) =>
   (() => {
     const {
       isThemeDark,

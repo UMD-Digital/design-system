@@ -5,7 +5,7 @@ import { quoteAnimation } from './helper/animation';
 import { SMALL } from './_constants';
 import { type QuoteInlineProps } from './_types';
 
-export default (props: QuoteInlineProps) => {
+const CreateQuoteInlineElement = (props: QuoteInlineProps) => {
   const { isSizeLarge, image, isTypeFeatured = false } = props;
   const textContainer = elementText(props);
   const imageContainer = image
@@ -61,3 +61,5 @@ export default (props: QuoteInlineProps) => {
     },
   };
 };
+
+export const createCompositeQuoteInline = CreateQuoteInlineElement;

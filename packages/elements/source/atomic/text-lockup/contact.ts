@@ -102,7 +102,7 @@ const makeContactLink = ({
     .build();
 };
 
-export default ({
+export const createTextLockupContact = ({
   actions,
   address,
   email,

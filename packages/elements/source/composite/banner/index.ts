@@ -1,1 +1,1 @@
-export { default as promo } from './promo';
+export { createCompositeBannerPromo as promo } from './promo';

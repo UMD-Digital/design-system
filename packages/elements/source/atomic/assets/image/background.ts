@@ -1,6 +1,6 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import { default as gifToggle } from './gif';
+import { createImageGif } from './gif';
 import { type UMDElement } from '../../../_types';
 
 const ATTRIBUTE_CAPTION = 'data-caption';
@@ -79,7 +79,7 @@ const embedAsset = ({
   const isTypeGif = checkIsGif(element);
 
   if (isGifAllowed && isTypeGif) {
-    return gifToggle({ element });
+    return createImageGif({ element });
   }
 
   if (!isGifAllowed && isTypeGif) {
@@ -109,7 +109,7 @@ const embedAsset = ({
     .build();
 };
 
-export default (props: Props) => {
+export const createImageBackground = (props: Props) => {
   const {
     customStyles,
     dateSign,

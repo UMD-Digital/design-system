@@ -11,7 +11,7 @@ import { type UMDElement } from '../../_types';
 
 const smallBreakpoint = token.media.breakpointValues.small.max;
 
-export default ({
+const CreatePersonTabularElement = ({
   actions,
   additionalContact,
   address,
@@ -106,3 +106,5 @@ export default ({
 
   return builder.build();
 };
+
+export const createCompositePersonTabular = CreatePersonTabularElement;

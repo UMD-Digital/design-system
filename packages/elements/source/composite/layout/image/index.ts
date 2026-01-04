@@ -1,1 +1,1 @@
-export { default as expand } from './expand';
+export { createCompositeLayoutImageExpand as expand } from './expand';

@@ -99,7 +99,7 @@ const ContainerStyles = `
   })}
 `;
 
-export default ({ isThemeDark, linkListSlot }: BreadcrumbProps) => {
+const CreateBreadcrumbElement = ({ isThemeDark, linkListSlot }: BreadcrumbProps) => {
   const links = linkListSlot.querySelectorAll('a') as NodeListOf<HTMLElement>;
   let styles = `
     ${ContainerStyles}
@@ -123,3 +123,5 @@ export default ({ isThemeDark, linkListSlot }: BreadcrumbProps) => {
 
   return { element: linkListSlot, styles };
 };
+
+export const createCompositeNavigationBreadcrumb = CreateBreadcrumbElement;

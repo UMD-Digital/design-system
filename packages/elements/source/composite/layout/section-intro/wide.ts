@@ -94,4 +94,6 @@ const createContainer = (
     .build();
 };
 
-export default (props: SectionIntroWideProps) => createContainer(props);
+const CreateSectionIntroWideElement = (props: SectionIntroWideProps) => createContainer(props);
+
+export const createCompositeLayoutSectionIntroWide = CreateSectionIntroWideElement;

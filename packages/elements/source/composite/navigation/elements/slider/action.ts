@@ -120,7 +120,7 @@ const CreateSliderActionElement = (props: TypeAction) => {
   return actionContainer;
 };
 
-export default {
+export const createCompositeNavigationSliderAction = {
   CreateElement: CreateSliderActionElement,
   Styles: STYLES_SLIDER_ACTION_ELEMENT,
   Elements: {

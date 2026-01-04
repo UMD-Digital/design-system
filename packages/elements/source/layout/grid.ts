@@ -35,7 +35,7 @@ export interface GridLayoutProps {
  * document.head.appendChild(createStyleElement(gridLayout.styles));
  * ```
  */
-export default function grid({
+export function createLayoutGrid({
   columns = 2,
   minHeight,
   enableContainerQueries = true,

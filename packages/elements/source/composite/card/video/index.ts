@@ -1,2 +1,2 @@
-export { default as block } from './block';
-export { default as short } from './short';
+export { createCompositeCardVideoBlock as block } from './block';
+export { createCompositeCardVideoShort as short } from './short';

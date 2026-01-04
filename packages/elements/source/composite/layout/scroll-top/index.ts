@@ -42,7 +42,7 @@ const STYLES_SCROLL_TOP_ELEMENT = `
 //   }
 // }
 
-export default (props: TypeScrollTopProps) =>
+const CreateScrollTopElement = (props: TypeScrollTopProps) =>
   (() => {
     const { isFixed = false } = props;
     const declaration = document.createElement('div');
@@ -145,3 +145,5 @@ export default (props: TypeScrollTopProps) =>
       },
     };
   })();
+
+export const createCompositeLayoutScrollTop = CreateScrollTopElement;

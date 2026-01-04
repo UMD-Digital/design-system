@@ -1,2 +1,2 @@
-export { default as elements } from './elements';
-export { default as standard } from './standard';
+export { createCompositeTabsElements as elements } from './elements';
+export { createCompositeTabsStandard as standard } from './standard';

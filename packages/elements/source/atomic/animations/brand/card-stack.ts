@@ -962,7 +962,7 @@ const createSticky = (props: CardStackProps) => {
     .build();
 };
 
-export default (props: CardStackProps) => {
+export const createAnimationCardStack = (props: CardStackProps) => {
   const sticky = createSticky(props);
 
   const composite = new ElementBuilder()

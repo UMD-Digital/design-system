@@ -32,7 +32,7 @@ const STYLES_FIXED_FULL_SCREEN = `
   }
 `;
 
-export default ({ content, callback }: TypeFixedFullScreenProps) => {
+export const createCompositeCarouselFullScreen = ({ content, callback }: TypeFixedFullScreenProps) => {
   const modal = layout.overlay.modal({ content, callback });
   const closeButton = document.createElement('button');
   let styles = STYLES_FIXED_FULL_SCREEN;

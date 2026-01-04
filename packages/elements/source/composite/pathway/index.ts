@@ -1,5 +1,5 @@
-export { default as hero } from './hero';
-export { default as highlight } from './highlight';
-export { default as overlay } from './overlay';
-export { default as standard } from './standard';
-export { default as sticky } from './sticky';
+export { createCompositePathwayHero as hero } from './hero';
+export { createCompositePathwayHighlight as highlight } from './highlight';
+export { createCompositePathwayOverlay as overlay } from './overlay';
+export { createCompositePathwayStandard as standard } from './standard';
+export { createCompositePathwaySticky as sticky } from './sticky';

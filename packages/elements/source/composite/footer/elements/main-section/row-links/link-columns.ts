@@ -270,7 +270,7 @@ const createLinkColumnHeadline = (element: HTMLElement) => {
     .build();
 };
 
-export default (props: slotColumnsProps): UMDElement => {
+const CreateLinkColumnsElement = (props: slotColumnsProps): UMDElement => {
   const { slotColumns } = props;
 
   let children: UMDElement[];
@@ -331,3 +331,5 @@ export default (props: slotColumnsProps): UMDElement => {
     })
     .build();
 };
+
+export const createCompositeFooterLinkColumns = CreateLinkColumnsElement;

@@ -1,5 +1,5 @@
-export { default as image } from './image';
-export { default as text } from './text';
-export { default as icon } from './icon';
-export { default as action } from './action';
-export { default as quote } from './quote';
+export { createCompositeQuoteImage as image } from './image';
+export { createCompositeQuoteText as text } from './text';
+export { createCompositeQuoteIcon as icon } from './icon';
+export { createCompositeQuoteAction as action } from './action';
+export { createCompositeQuote as quote } from './quote';

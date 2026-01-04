@@ -265,7 +265,7 @@ const setupSliderControls = (refs: CarouselRefs, state: CarouselState) => {
 };
 
 // Main component
-export default (props: CarouselWideProps) => {
+export const createCompositeCarouselWide = (props: CarouselWideProps) => {
   const { title } = props;
 
   // Initialize state early

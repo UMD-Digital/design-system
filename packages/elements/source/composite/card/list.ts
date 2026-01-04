@@ -107,7 +107,7 @@ const makeImageColumn = ({
     .build();
 };
 
-export default (props: CardListProps) => {
+export const createCompositeCardList = (props: CardListProps) => {
   const { image, isAligned, isThemeDark, dateSign } = props;
   let children: UMDElement[] = [];
 

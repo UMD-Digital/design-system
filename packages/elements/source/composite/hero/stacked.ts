@@ -316,7 +316,7 @@ const createText = (
     .build();
 };
 
-export default (props: HeroStackedProps) => {
+export const createCompositeHeroStacked = (props: HeroStackedProps) => {
   const asset = createAsset(props);
   const hasAsset = asset !== null;
   const shouldAnimateText = hasAsset && props.includesAnimation;

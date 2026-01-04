@@ -14,7 +14,7 @@ import {
   ALERT_CONSTANTS,
   TypeAlertProps,
 } from './alert';
-import UtilitySearch from './search';
+import { createCompositeNavigationSearch as UtilitySearch } from './search';
 
 type TypeMenuItemsRequirements = {
   alertUrl?: string | null;
@@ -828,4 +828,4 @@ const CreateNavigationUtility = (props: TypeUtilityRequirements) =>
     }
   })();
 
-export default CreateNavigationUtility;
+export const createCompositeNavigationUtility = CreateNavigationUtility;

@@ -2,6 +2,8 @@ import { defineConfig } from 'vite';
 import path from 'path';
 import dts from 'vite-plugin-dts';
 import checker from 'vite-plugin-checker';
+import postcssNesting from 'postcss-nesting';
+import postcssDiscardDuplicates from 'postcss-discard-duplicates';
 
 const getCdnBuildConfig = () => {
   return {
@@ -39,10 +41,7 @@ const getCdnBuildConfig = () => {
     plugins: [],
     css: {
       postcss: {
-        plugins: [
-          require('postcss-nesting'),
-          require('postcss-discard-duplicates')
-        ]
+        plugins: [postcssNesting(), postcssDiscardDuplicates()]
       }
     }
   };
@@ -110,10 +109,7 @@ export default defineConfig(({ mode }) => {
   ],
   css: {
     postcss: {
-      plugins: [
-        require('postcss-nesting'),
-        require('postcss-discard-duplicates')
-      ]
+      plugins: [postcssNesting(), postcssDiscardDuplicates()]
     }
   }
   };

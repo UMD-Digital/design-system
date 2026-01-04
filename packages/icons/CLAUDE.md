@@ -12,7 +12,8 @@ The **Icons Package** (`@universityofmaryland/web-icons-library`) provides SVG i
 ### Vite Configuration
 
 - **Builder**: Vite with TypeScript
-- **Output Formats**: ES Modules (`.mjs`) and CommonJS (`.js`)
+- **Output Formats**: ES Modules only (`.js`) - No CommonJS support
+- **Export Style**: Named exports only - No default exports
 - **Type Declarations**: Generated with `vite-plugin-dts`
 - **Build Artifacts**: `dist/` directory with code-split category files
 
@@ -65,21 +66,22 @@ The package provides selective exports for each category:
 
 ```json
 {
+  "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js"
     },
     "./navigation": {
       "types": "./dist/navigation.d.ts",
-      "import": "./dist/navigation.mjs",
-      "require": "./dist/navigation.js"
+      "import": "./dist/navigation.js"
     }
     // ... other categories
   }
 }
 ```
+
+**Note**: CommonJS (`require`) is not supported. Use ES module `import` only.
 
 ## Icon Format
 
@@ -105,8 +107,8 @@ export const CHEVRON_SMALL = '<svg>...</svg>';
 ## Build Output
 
 Each build produces:
-- `dist/index.{js,mjs,d.ts}` - Main entry with all icons
-- `dist/{category}.{js,mjs,d.ts}` - Individual category exports
+- `dist/index.{js,d.ts}` - Main entry with all icons (ES module only)
+- `dist/{category}.{js,d.ts}` - Individual category exports
 - Source maps for debugging
 
 ## Notes

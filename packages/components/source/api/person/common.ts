@@ -1,6 +1,5 @@
 import * as validation from '@universityofmaryland/web-utilities-library/validation';
 import { Slots } from '@universityofmaryland/web-model-library';
-import slots from '@universityofmaryland/web-model-library/slots';
 
 export const CommonPersonData = ({
   element,
@@ -12,7 +11,7 @@ export const CommonPersonData = ({
   address: Slots.contact.address({ element }),
   association: Slots.person.association({ element }),
   name: Slots.person.name({ element }),
-  email: slots.contact.email({ element }),
+  email: Slots.contact.email({ element }),
   job: Slots.person.jobTitle({ element }),
   pronouns: Slots.person.pronouns({ element }),
   phone: Slots.contact.phone({ element }),

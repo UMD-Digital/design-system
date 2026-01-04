@@ -4,7 +4,13 @@
     "outDir": "dist",
     "rootDir": "source",
     "baseUrl": "source",
-    "moduleResolution": "bundler"
+    "moduleResolution": "bundler",
+    "paths": {
+      "@universityofmaryland/web-token-library": ["../tokens/dist/index.d.ts"],
+      "@universityofmaryland/web-token-library/*": ["../tokens/dist/*"],
+      "@universityofmaryland/web-styles-library": ["../styles/dist/index.d.ts"],
+      "@universityofmaryland/web-styles-library/*": ["../styles/dist/*"]
+    }
   },
   "include": [
     "./source"

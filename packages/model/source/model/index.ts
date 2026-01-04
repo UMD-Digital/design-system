@@ -35,7 +35,7 @@
  * });
  * ```
  */
-import StylesTemplate from '../utilities/styles';
+import { stylesTemplate } from '../utilities/styles';
 import type {
   SlotConfig,
   ComponentEventDetail,
@@ -160,7 +160,7 @@ class BaseComponent extends HTMLElement {
 
   protected setupShadowDom(component: ElementRef): void {
     this.shadow.appendChild(
-      StylesTemplate({ styles: component.styles || '' }).content.cloneNode(true),
+      stylesTemplate({ styles: component.styles || '' }).content.cloneNode(true),
     );
     this.shadow.appendChild(component.element);
   }

@@ -15,7 +15,8 @@ The **Elements Package** (`@universityofmaryland/web-elements-library`) provides
 ### Vite Configuration
 
 - **Builder**: Vite with TypeScript
-- **Output Formats**: ES Modules (`.mjs`) and CommonJS (`.js`)
+- **Output Formats**: ES Modules only (`.js`) - No CommonJS support
+- **Export Style**: Named exports only - No default exports
 - **External Dependencies**: All `@universityofmaryland/*` packages
 - **Type Declarations**: Generated with `vite-plugin-dts`
 - **Module Preservation**: `preserveModules: true` for granular imports
@@ -105,25 +106,25 @@ document.head.appendChild(styleEl);
 
 ```json
 {
+  "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.js"
+      "import": "./dist/index.js"
     },
     "./atomic": {
       "types": "./dist/atomic.d.ts",
-      "import": "./dist/atomic.mjs",
-      "require": "./dist/atomic.js"
+      "import": "./dist/atomic.js"
     },
     "./composite": {
       "types": "./dist/composite.d.ts",
-      "import": "./dist/composite.mjs",
-      "require": "./dist/composite.js"
+      "import": "./dist/composite.js"
     }
   }
 }
 ```
+
+**Note**: CommonJS (`require`) is not supported. Use ES module `import` only.
 
 ## Key Concepts
 
@@ -216,11 +217,11 @@ import { type BaseProps } from '../../_types';
 
 ## Build Output
 
-- `dist/index.{js,mjs,d.ts}` - Main export with all elements
-- `dist/atomic.{js,mjs,d.ts}` - Atomic elements
-- `dist/composite.{js,mjs,d.ts}` - Composite elements
-- `dist/layout.{js,mjs,d.ts}` - Layout utilities
-- `dist/model.{js,mjs,d.ts}` - Element models
+- `dist/index.{js,d.ts}` - Main export with all elements (ES module only)
+- `dist/atomic.{js,d.ts}` - Atomic elements
+- `dist/composite.{js,d.ts}` - Composite elements
+- `dist/layout.{js,d.ts}` - Layout utilities
+- `dist/model.{js,d.ts}` - Element models
 - Preserved module structure for granular imports
 
 ## Notes

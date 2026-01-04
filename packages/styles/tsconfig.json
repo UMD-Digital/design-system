@@ -8,8 +8,10 @@
     "rootDir": "source",
     "moduleResolution": "bundler",
     "paths": {
-      "@universityofmaryland/web-utilities-library": ["../utilities/source/index.ts"],
-      "@universityofmaryland/web-utilities-library/*": ["../utilities/source/*"]
+      "@universityofmaryland/web-token-library": ["../tokens/dist/index.d.ts"],
+      "@universityofmaryland/web-token-library/*": ["../tokens/dist/*"],
+      "@universityofmaryland/web-utilities-library": ["../utilities/dist/index.d.ts"],
+      "@universityofmaryland/web-utilities-library/*": ["../utilities/dist/*"]
     }
   },
   "include": ["source"],

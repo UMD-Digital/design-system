@@ -17,7 +17,8 @@ The **Components Package** (`@universityofmaryland/web-components-library`) prov
 ### Vite Configuration
 
 - **Builder**: Vite with TypeScript
-- **Output Formats**: ES Modules only (`.js`)
+- **Output Formats**: ES Modules only (`.js`) - No CommonJS support
+- **Export Style**: Named exports only - No default exports
 - **External Dependencies**: All `@universityofmaryland/*` packages (except in special builds)
 - **Type Declarations**: Generated with `vite-plugin-dts`
 - **Code Splitting**: Manual chunks for shared code
@@ -111,6 +112,7 @@ import '@universityofmaryland/web-components-library/components/hero';
 
 ```json
 {
+  "type": "module",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -131,6 +133,8 @@ import '@universityofmaryland/web-components-library/components/hero';
   }
 }
 ```
+
+**Note**: CommonJS (`require`) is not supported. Use ES module `import` only.
 
 ## Web Component Pattern
 

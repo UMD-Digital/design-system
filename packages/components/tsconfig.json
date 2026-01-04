@@ -13,6 +13,8 @@
       "../../test-helpers/*": ["./__tests__/test-helpers/*"],
       "../test-helpers": ["./__tests__/test-helpers/index.ts"],
       "../test-helpers/*": ["./__tests__/test-helpers/*"],
+      "@universityofmaryland/web-token-library": ["../../tokens/dist/index.d.ts"],
+      "@universityofmaryland/web-token-library/*": ["../../tokens/dist/*"],
       "@universityofmaryland/web-styles-library": ["../../styles/dist/index.d.ts"],
       "@universityofmaryland/web-styles-library/*": ["../../styles/dist/*"],
       "@universityofmaryland/web-utilities-library": ["../../utilities/dist/index.d.ts"],
@@ -29,4 +31,4 @@
     "./source",
     "./__tests__"
   ]
- }
+}

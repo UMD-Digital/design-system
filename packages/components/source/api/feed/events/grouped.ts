@@ -1,5 +1,5 @@
 import { grouped } from '@universityofmaryland/web-feeds-library/events';
-import { Register } from '@universityofmaryland/web-model-library';
+import { Attributes, Register } from '@universityofmaryland/web-model-library';
 import { CommonFeedEventsData } from './common';
 import {
   CreateComponentFunction,
@@ -16,10 +16,13 @@ const createComponent: CreateComponentFunction = (element) => {
     return { element: document.createElement('div'), styles: '' };
   }
 
+  const rowCount =
+    Number(Attributes.getValue.layoutRowCount({ element })) || 10;
+
   return grouped({
     ...data,
     isLazyLoad: true,
-    numberOfRowsToStart: 10,
+    numberOfRowsToStart: rowCount,
   });
 };
 

@@ -4,8 +4,8 @@
 
 The **Utilities Package** (`@universityofmaryland/web-utilities-library`) provides shared utility functions for all UMD Design System packages. It consolidates common functionality with selective import capabilities.
 
-**Version**: 0.1.0
-**Dependencies**: `@universityofmaryland/web-styles-library`, `postcss`, `postcss-js`, `postcss-nesting`
+**Version**: 1.0.2
+**Dependencies**: `@universityofmaryland/web-token-library`, `@universityofmaryland/web-styles-library`, `postcss`, `postcss-js`, `postcss-nesting`
 
 ## Build System
 

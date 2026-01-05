@@ -4,13 +4,15 @@
 
 The **Components Package** (`@universityofmaryland/web-components-library`) provides Web Components (Custom Elements) that wrap the elements package for declarative, HTML-based usage. This is the primary consumer-facing package.
 
-**Version**: 1.15.0-beta.0
+**Version**: 1.16.4
 **Dependencies**:
 - `@universityofmaryland/web-elements-library`
 - `@universityofmaryland/web-feeds-library`
 - `@universityofmaryland/web-styles-library`
 - `@universityofmaryland/web-icons-library`
 - `@universityofmaryland/web-utilities-library`
+- `@universityofmaryland/web-model-library`
+- `@universityofmaryland/web-token-library`
 
 ## Build System
 

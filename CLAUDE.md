@@ -15,11 +15,11 @@ packages/
 ├── tokens/     - Design tokens (colors, spacing, typography, media) (v1.0.0)
 ├── utilities/  - Shared utility functions (v1.0.2)
 ├── styles/     - JSS objects, design tokens, CSS utilities (v1.7.2)
-├── model/      - Web component model utilities (v1.0.0)
+├── model/      - Web component model utilities (v1.0.1)
 ├── builder/    - Element builder utilities (v1.0.0)
-├── elements/   - Foundational UI element builders (v1.5.4)
-├── feeds/      - Dynamic content feed components (v1.2.4)
-└── components/ - Web Components (Custom Elements) (v1.15.8)
+├── elements/   - Foundational UI element builders (v1.5.5)
+├── feeds/      - Dynamic content feed components (v1.2.5)
+└── components/ - Web Components (Custom Elements) (v1.16.4)
 ```
 
 ### Package Dependencies & Build Order
@@ -268,65 +268,59 @@ import layout from '@universityofmaryland/web-styles-library/layout';
 
 All packages export named exports only. Default exports are not supported anywhere in the design system to ensure consistent bundling behavior and optimal tree-shaking.
 
-## Planned Future Packages
+## Planned Improvements
 
-The following packages are planned for future development:
+See [PLAN.md](PLAN.md) for detailed roadmap and implementation plans.
 
-### 1. Element Model Package
-**Package Name**: `@universityofmaryland/web-element-model`
-**Purpose**: Abstract the Element Model pattern from the elements package
+### Priority 1: Static CSS Exports (Styles Package)
+**Goal**: Generate pre-compiled CSS at build time for better performance.
 
-**Features**:
-- Element Model interface and base classes
-- Helper functions for creating Element Models
-- Documentation and examples for custom element builders
-- Enable consumers to create their own element variations
+**Current**: JSS objects converted to CSS at runtime.
+**Target**: Static CSS files importable directly or via CDN.
 
 **Benefits**:
-- Better documentation of the Element Model pattern
-- Reusable utilities for custom implementations
-- Testing utilities for Element Model validation
-- Separation of concerns (model vs implementation)
+- Faster initial page load (no runtime JSS compilation)
+- Better SSR compatibility
+- Improved Core Web Vitals
 
-### 2. Component Model Package
-**Package Name**: `@universityofmaryland/web-component-model`
-**Purpose**: Abstract Web Component utilities from the components package
+### Priority 2: ElementBuilder Migration (Elements Package)
+**Goal**: Refactor all elements to use the ElementBuilder pattern consistently.
 
-**Features**:
-- Base Web Component classes with common functionality
-- Shadow DOM utilities and helpers
-- Attribute/property synchronization utilities
-- Slot management helpers
-- Event emitter utilities
-- Lifecycle helpers
+**Current**: Mixed patterns - some direct DOM manipulation, some ElementBuilder.
+**Target**: All elements use the fluent ElementBuilder API.
 
 **Benefits**:
-- Consistent Web Component patterns
-- Reduced boilerplate in component definitions
-- Testing utilities for Web Components
-- Enable consumers to extend and customize components
+- Consistent API across all elements
+- Automatic lifecycle management
+- Built-in style priority system
 
-### 3. Figma Token Sync (Future Enhancement)
-**Purpose**: Automate design token synchronization from Figma
+### Priority 3: Model Modernization (Lit-Inspired)
+**Goal**: Adopt Lit-inspired patterns for reactive properties and render lifecycle.
+
+**Planned Features**:
+- Reactive property decorators (`@property`, `@state`)
+- Batched update scheduling
+- Render method with template support
+- Lifecycle hooks (willUpdate, updated, firstUpdated)
+
+**Benefits**:
+- Better developer experience
+- Familiar patterns for Lit users
+- Reduced boilerplate
+
+### Future: Figma Token Sync
+**Purpose**: Automate design token synchronization from Figma.
 
 **Planned Features**:
 - Automated token extraction from Figma API
-- Token transformation to JS/CSS/SCSS formats
-- Version control and change tracking
-- Theme variant generation (light/dark, maryland/default)
-- Semantic color, typography, spacing, and effect tokens
-
-**Implementation**:
-- GitHub Actions workflow for daily Figma API sync
-- Token transformation and validation scripts
+- Token transformation to JS/CSS formats
+- GitHub Actions workflow for sync
 - Pull request automation for designer review
-- Integration with existing tokens package
 
 **Benefits**:
-- Figma as single source of truth for design decisions
-- Designer-driven token updates without developer intervention
-- Automated validation and backwards compatibility checks
-- Consistent design-to-code workflow
+- Figma as single source of truth
+- Designer-driven token updates
+- Automated validation and compatibility checks
 
 ## Planned CI/CD Enhancements
 

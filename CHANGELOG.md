@@ -107,35 +107,122 @@ Current package versions:
 
 ## Historical Releases
 
-### Components v1.16.0-beta.1 (2025-12-06)
+---
 
-**Beta Release - Component Library Enhancements**
+## [1.16] - 2025-01-05
 
-#### Added
-- Enhanced component exports and build configuration
-- Improved TypeScript declarations
+### Summary
+Major release introducing three new foundational packages (Tokens, Model, and Builder), migrating elements to a standardized ElementBuilder pattern, and establishing automated CI/CD workflows for package management.
 
-### Components v1.15.8 (Previous Release)
+### New Packages
+- **Tokens v1.0.0**: Design token primitives extracted from styles package
+  - Color palettes, spacing scales, typography, and media query tokens
+  - Zero runtime dependencies
+  - ES, CJS, and UMD build outputs
 
-**Stable Release**
+- **Model v1.0.0**: Web component model utilities
+  - Attribute handling system with centralized names and values
+  - Slot management with validation and deprecation warnings
+  - Component registration with duplicate prevention
+  - Lifecycle management utilities
 
-### Elements v1.5.4 (Previous Release)
+- **Builder v1.0.0**: Chainable element builder with lifecycle management
+  - Fluent API for constructing DOM elements
+  - StyleManager for JSS-to-CSS compilation
+  - LifecycleManager for event listener and observer cleanup
+  - CSS cascade-based priority system for style merging
 
-**Bug Fixes and Improvements**
+### Added
+- **Utility Navigation**: Support for 20+ languages
+- **Events Grouped Component**: Date-grouped events with filtering
+- **Automated Release Workflow**: GitHub Actions for package publishing
+  - Manual trigger with version bump selection
+  - Support for pre-releases (alpha, beta, rc)
+  - Badge updates and changelog generation
+- **Composable Style Functions**: Throughout styles package for flexible variant generation
 
-### Feeds v1.2.4 (Previous Release)
+### Changed
+- **ElementBuilder Migration**: Converted composite and atomic elements to builder pattern
+  - Person, Hero, Cards, Footer, Alert components converted
+  - Standardized API across all elements
+- **Theme System**: Expanded theme options with compose functions
+- **CI/CD**: Individual package release automation with dependency graph support
 
-**Feed Component Updates**
+### Fixed
+- Theme color inconsistencies in Person Hero and Card components
+- Hero Standard alignment issues with centered text
+- Carousel theme styling
+- CI/CD package naming and Lerna bootstrap compatibility
 
-### Styles v1.7.2 (Previous Release)
+---
 
-**Style System Enhancements**
+## [1.15] - 2024-12
 
-### Utilities v1.0.2 (Previous Release)
+### Summary
+Introduced new Icons and Utilities packages, enhanced monorepo architecture, and converted Quote and Footer elements to Element Model pattern.
 
-**Initial Stable Release**
+### New Packages
+- **Icons v1.0.0**: Standalone SVG assets library
+  - Category-based organization (alerts, brand, communication, navigation, social, etc.)
+  - Tree-shakeable named exports
+  - Zero runtime dependencies
 
-### Tokens v1.0.0 (2024)
+- **Utilities v0.1.0**: Shared utility functions
+  - DOM manipulation (addClass, removeClass, toggleClass)
+  - Style conversion (JSS to CSS)
+  - Performance utilities (debounce, throttle)
+  - Network utilities (GraphQL, fetch wrappers)
+
+### Added
+- **Quote Element**: Element Model conversion with animation lifecycle
+- **Footer Element**: Element Model conversion with social icon mobile display
+- **GIF Support**: Extended to Pathway and Hero elements
+- **Granular Exports**: Implemented across packages for smaller bundle sizes
+
+### Changed
+- **Monorepo Architecture**: Enhanced through utility package extraction
+- **Vite Resolution**: Improved for local dependencies
+
+### Fixed
+- CDN build compatibility issues
+- Banner Promo SVG-to-IMG conversion
+- Hero grid Firefox reduce-motion support
+- Card Stack and media GIF sizing problems
+
+---
+
+## [1.14] - 2024-11
+
+### Summary
+Converted Pathway components to Element Model pattern, added Event Details and Media GIF elements, and migrated all packages to Vite bundler for optimized payloads.
+
+### Added
+- **Event Details Element**: New element for displaying event metadata
+- **Media GIF Element**: Support for animated GIF with link support
+- **Stats Element**: Atomic stats display component
+- **Text Lockup**: Atomic text composition elements
+- **Pathway Components**: Converted to Element Model pattern
+  - Pathway Overlay
+  - Pathway Highlight
+  - Pathway Sticky
+- **Jest Testing Library**: Added to Components Package
+
+### Changed
+- **Vite Build System**: All packages transitioned to Vite for reduced bundle sizes
+- **Code Splitting**: Enhanced with granular exports directory structure
+- **GIF Support**: Extended to Hero Stacked and Pathway variants
+
+### Fixed
+- Layout shift issues with categories during loading
+- Pathway highlighting color and sizing concerns
+- Hero dark theme support across variants
+- Circular dependency issues in Styles package
+
+---
+
+## Foundation Packages
+
+### Tokens v1.0.0 (2024-12)
 
 **Initial Release - Design Token Library**
 
@@ -145,32 +232,39 @@ Current package versions:
 - Spacing tokens (responsive scale)
 - Typography tokens (fonts, weights, sizes)
 - Media query tokens (breakpoints)
+- CDN build for browser usage
 
-### Model v1.0.0 (2024)
+### Model v1.0.0 (2024-12)
 
 **Initial Release - Web Component Model**
 
 #### Added
 - Element Model pattern utilities
 - Base classes for web components
-- Attribute and slot management helpers
+- Attribute system with centralized names/values
+- Slot management helpers with validation
+- Component registration utilities
 
-### Builder v1.0.0 (2024)
+### Builder v1.0.0 (2024-12)
 
 **Initial Release - Element Builder**
 
 #### Added
-- Element builder utilities for styled elements
-- Integration with token system
+- Fluent builder API for element construction
+- StyleManager for JSS compilation
+- LifecycleManager for resource tracking
+- CSS cascade priority system
+- Integration with UMD Design System styles
 
-### Icons v1.0.1 (2024)
+### Icons v1.0.1 (2024-11)
 
 **Initial Release - Icon Library**
 
 #### Added
-- Complete SVG icon set
+- Complete SVG icon set (14 categories)
 - UMD logo assets
 - Category-based organization
+- Tree-shakeable exports
 
 ---
 

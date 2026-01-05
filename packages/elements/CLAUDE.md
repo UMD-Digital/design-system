@@ -4,11 +4,49 @@
 
 The **Elements Package** (`@universityofmaryland/web-elements-library`) provides foundational UI element builders using the Element Model pattern. Elements return JavaScript objects containing DOM nodes and their associated styles.
 
-**Version**: 1.4.8
-**Dependencies**: 
+**Version**: 1.5.5
+**Dependencies**:
+- `@universityofmaryland/web-token-library`
+- `@universityofmaryland/web-builder-library`
+- `@universityofmaryland/web-utilities-library`
 - `@universityofmaryland/web-styles-library` (peer)
 - `@universityofmaryland/web-icons-library` (peer)
-- `@universityofmaryland/web-utilities-library`
+
+## Planned: ElementBuilder Migration
+
+**Status**: In Progress (v1.17+)
+
+All elements are being migrated to use the ElementBuilder pattern for consistency:
+
+```typescript
+// Before (direct manipulation)
+export const createTextLockup = (props: TextLockupProps): ElementModel => {
+  const container = document.createElement('div');
+  container.classList.add('umd-text-lockup');
+  // ... manual DOM construction
+  return { element: container, styles };
+};
+
+// After (ElementBuilder)
+export const createTextLockup = (props: TextLockupProps): ElementModel => {
+  return new ElementBuilder('div')
+    .withClassName('umd-text-lockup')
+    .styled(textLockupStyles)
+    .withChildIf(props.eyebrow, eyebrowElement)
+    .withChild(headlineElement)
+    .withChildIf(props.text, textElement)
+    .build();
+};
+```
+
+**Migration Order**:
+1. Atomic elements (text-lockup, buttons, actions) - In Progress
+2. Assets (images, videos, gifs)
+3. Events (meta, sign)
+4. Composite elements (cards, heroes, navigation)
+5. Complex composites (carousel, pathway, footer)
+
+See [PLAN.md](/PLAN.md) for implementation roadmap.
 
 ## Build System
 

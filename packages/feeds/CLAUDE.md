@@ -10,6 +10,7 @@ The **Feeds Package** (`@universityofmaryland/web-feeds-library`) provides dynam
 - `@universityofmaryland/web-styles-library` - Design tokens and styles
 - `@universityofmaryland/web-utilities-library` - Shared utilities
 - `@universityofmaryland/web-builder-library` - Element builder
+- `@universityofmaryland/web-token-library` - Design tokens
 
 ## Build System
 

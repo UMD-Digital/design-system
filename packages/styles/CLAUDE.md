@@ -4,8 +4,30 @@
 
 The **Styles Package** (`@universityofmaryland/web-styles-library`) provides JSS (JavaScript Style Sheets) objects, design tokens, and CSS utilities for the UMD Design System. All styles are JavaScript objects that can be transformed to CSS.
 
-**Version**: 1.6.9
+**Version**: 1.7.2
 **Dependencies**: `postcss`, `postcss-discard-duplicates`, `postcss-js`, `postcss-nesting`
+
+## Planned: Static CSS Exports
+
+**Status**: Planned for v1.18+
+
+A future enhancement will add static CSS exports generated at build time:
+
+```typescript
+// Current (runtime compilation)
+import * as typography from '@universityofmaryland/web-styles-library/typography';
+const css = convertJSSObjectToStyles(typography.sans.larger);
+
+// Future (static import)
+import '@universityofmaryland/web-styles-library/css/typography/sans.css';
+```
+
+**Benefits**:
+- Faster initial page load
+- Better SSR compatibility
+- Improved Core Web Vitals
+
+See [PLAN.md](/PLAN.md) for implementation roadmap.
 
 ## Build System
 

@@ -2,70 +2,235 @@
 
 ## Executive Summary
 
-This document outlines the strategic restructuring of the UMD Design System from its current four-package architecture to a seven-package architecture with clear separation between foundational TypeScript packages and higher-level implementation packages.
+This document outlines the strategic development roadmap for the UMD Design System. It covers the current nine-package architecture with clear separation between foundational TypeScript packages and higher-level implementation packages, along with planned improvements for static style exports, element builder adoption, and model modernization.
 
-## Current State (v1.x)
+## Current State (v1.17+)
 
 ### Package Structure
-- **styles** (v1.5.0) - Mixed responsibilities: JSS objects, design tokens, CSS utilities
-- **elements** (v1.3.7) - Foundational UI elements using element model
-- **components** (v1.13.0-beta.3) - High-level web components
-- **feeds** (v1.0.7) - Dynamic content feed components
+- **icons** (v1.0.1) - SVG icon and logo assets
+- **tokens** (v1.0.0) - Design token primitives (colors, spacing, typography, media)
+- **utilities** (v1.0.2) - Shared utility functions for DOM, styles, performance
+- **styles** (v1.7.2) - JSS objects, CSS utilities, design tokens (re-exports)
+- **model** (v1.0.1) - Web component model utilities (attributes, slots, registration)
+- **builder** (v1.0.0) - Fluent element builder with lifecycle management
+- **elements** (v1.5.5) - Foundational UI element builders
+- **feeds** (v1.2.5) - Dynamic content feed components
+- **components** (v1.16.4) - Web Components (Custom Elements)
 
 ### Current Dependency Flow
 ```
-styles (no UMD dependencies)
-  ├── elements (depends on styles)
-  │   ├── components (depends on elements, styles)
-  │   └── feeds (depends on elements, styles)
+icons (no dependencies)
+tokens (no dependencies)
+  ├── styles (depends on tokens)
+  │   └── utilities (depends on tokens, styles)
+  │       └── builder (depends on utilities, peer: styles)
+  │           └── elements (depends on tokens, builder, utilities, peer: styles, icons)
+  │               └── feeds (depends on tokens, elements, utilities)
+  │                   └── components (depends on all above)
+model (peer: styles)
 ```
+
+## Upcoming Work (v1.17 - v2.x)
+
+### Priority 1: Static Build-Time Exports from Styles Package
+
+**Goal**: Generate pre-compiled CSS at build time for better performance and reduced runtime overhead.
+
+**Current State**: JSS objects are converted to CSS at runtime, requiring JavaScript execution.
+
+**Target State**: Provide static CSS files that can be imported directly or loaded via CDN.
+
+**Implementation**:
+```typescript
+// Current (runtime compilation)
+import * as typography from '@universityofmaryland/web-styles-library/typography';
+const css = convertJSSObjectToStyles(typography.sans.larger);
+
+// Target (static import)
+import '@universityofmaryland/web-styles-library/css/typography/sans.css';
+// or
+<link rel="stylesheet" href="/styles/typography/sans.css">
+```
+
+**Benefits**:
+- Faster initial page load (no runtime JSS compilation)
+- Better SSR compatibility
+- Reduced JavaScript bundle size
+- Improved Core Web Vitals
+
+**Tasks**:
+- [ ] Add PostCSS build step to styles package
+- [ ] Generate static CSS files during build
+- [ ] Create CSS entry points in package.json exports
+- [ ] Update CDN build to include pre-compiled CSS
+- [ ] Document static import patterns
+
+---
+
+### Priority 2: Elements Package Migration to Element Builder
+
+**Goal**: Refactor all elements to use the ElementBuilder pattern for consistency and maintainability.
+
+**Current State**: Mixed patterns - some elements use direct DOM manipulation, others use ElementBuilder.
+
+**Target State**: All elements consistently use ElementBuilder with the fluent API.
+
+**Implementation**:
+```typescript
+// Before (direct manipulation)
+export const createTextLockup = (props: TextLockupProps): ElementModel => {
+  const container = document.createElement('div');
+  container.classList.add('umd-text-lockup');
+  // ... manual DOM construction
+  return { element: container, styles };
+};
+
+// After (ElementBuilder)
+export const createTextLockup = (props: TextLockupProps): ElementModel => {
+  return new ElementBuilder('div')
+    .withClassName('umd-text-lockup')
+    .styled(textLockupStyles)
+    .withChildIf(props.eyebrow, eyebrowElement)
+    .withChild(headlineElement)
+    .withChildIf(props.text, textElement)
+    .build();
+};
+```
+
+**Benefits**:
+- Consistent API across all elements
+- Automatic lifecycle management
+- Built-in style priority system
+- Better developer experience
+
+**Migration Order**:
+1. [ ] Atomic elements (text-lockup, buttons, actions)
+2. [ ] Assets (images, videos, gifs)
+3. [ ] Events (meta, sign)
+4. [ ] Composite elements (cards, heroes, navigation)
+5. [ ] Complex composites (carousel, pathway, footer)
+
+---
+
+### Priority 3: Model Package Modernization (Lit-Inspired)
+
+**Goal**: Modernize the component model to adopt patterns from Lit for better developer experience.
+
+**Current State**: Custom model implementation with basic attribute handling and slot management.
+
+**Target State**: Modern reactive model with Lit-inspired patterns for properties, state, and rendering.
+
+**Key Improvements**:
+
+#### Reactive Properties
+```typescript
+// Current
+static get observedAttributes() { return ['theme', 'size']; }
+attributeChangedCallback(name, oldVal, newVal) {
+  if (name === 'theme') this.handleThemeChange(newVal);
+}
+
+// Target (Lit-inspired)
+@property({ type: String }) theme = 'light';
+@property({ type: String, reflect: true }) size = 'medium';
+
+// Auto-triggers re-render on property change
+```
+
+#### Render Lifecycle
+```typescript
+// Current
+connectedCallback() {
+  this.render();
+}
+
+// Target (Lit-inspired)
+connectedCallback() {
+  super.connectedCallback();
+  this.scheduleUpdate();
+}
+
+render() {
+  return html`<div class=${this.theme}>${this.content}</div>`;
+}
+```
+
+#### State Management
+```typescript
+// Target
+@state() private _expanded = false;
+
+toggle() {
+  this._expanded = !this._expanded;
+  // Automatically triggers re-render
+}
+```
+
+**Implementation Plan**:
+- [ ] Add reactive property decorator system
+- [ ] Implement batched update scheduling
+- [ ] Add render method with template support
+- [ ] Create lifecycle hooks (willUpdate, updated, firstUpdated)
+- [ ] Add CSS-in-JS support with adoptedStyleSheets
+- [ ] Maintain backward compatibility with existing components
+
+**Compatibility Note**: Changes will be additive - existing components continue to work, new patterns available for gradual adoption.
+
+---
 
 ## Target Architecture (v2.x)
 
-### Seven-Package Architecture Overview
+### Nine-Package Architecture Overview
 
 ```mermaid
 graph TD
+    icons["@umd/icons<br/>SVG Assets"]
     tokens["@umd/tokens<br/>Design Tokens<br/>(Figma-integrated)"]
-    element["@umd/element-model<br/>Base Element Abstraction"]
-    component["@umd/component-model<br/>Component Composition"]
-    
-    styles["@umd/styles<br/>CSS & Layout Framework"]
+    utilities["@umd/utilities<br/>Shared Utilities"]
+    model["@umd/model<br/>Component Model<br/>(Lit-inspired)"]
+    builder["@umd/builder<br/>Element Builder"]
+
+    styles["@umd/styles<br/>CSS & JSS Framework<br/>(Static + Runtime)"]
     elements["@umd/elements<br/>Framework-agnostic Elements"]
-    components["@umd/components<br/>Web Components Library"]
     feeds["@umd/feeds<br/>Dynamic Content Components"]
-    
-    tokens --> element
+    components["@umd/components<br/>Web Components Library"]
+
     tokens --> styles
-    element --> component
-    element --> elements
-    component --> components
+    tokens --> utilities
+    styles --> utilities
+    utilities --> builder
+    builder --> elements
+    tokens --> elements
+    icons --> elements
     elements --> feeds
-    styles --> elements
+    model --> components
+    elements --> components
+    feeds --> components
     styles --> components
-    styles --> feeds
-    
+
     classDef foundation fill:#e1f5fe,stroke:#01579b,stroke-width:2px
     classDef implementation fill:#fff3e0,stroke:#e65100,stroke-width:2px
-    
-    class tokens,element,component foundation
-    class styles,elements,components,feeds implementation
+
+    class icons,tokens,utilities,model,builder foundation
+    class styles,elements,feeds,components implementation
 ```
 
 ### Package Categories
 
-#### Lower-Level TypeScript Foundation Packages
+#### Foundation Packages (Zero/Minimal Dependencies)
 
-1. **@umd/tokens** - Pure Design Tokens
-2. **@umd/element-model** - Base Element Abstraction Layer
-3. **@umd/component-model** - Component Composition Patterns
+1. **@umd/icons** - SVG icon assets
+2. **@umd/tokens** - Pure design tokens (Figma-integrated future)
+3. **@umd/utilities** - Shared utility functions
+4. **@umd/model** - Web component model (Lit-inspired)
+5. **@umd/builder** - Element construction utilities
 
-#### Higher-Level Implementation Packages
+#### Implementation Packages (Consumer-Facing)
 
-4. **@umd/components** - No-code Web Components
-5. **@umd/elements** - Pro-code Framework-agnostic Elements
-6. **@umd/styles** - CSS Classes and JSS Objects
-7. **@umd/feeds** - AJAX-powered API Integration
+6. **@umd/styles** - CSS classes, JSS objects, static CSS exports
+7. **@umd/elements** - Pro-code framework-agnostic elements
+8. **@umd/feeds** - AJAX-powered API integration
+9. **@umd/components** - No-code Web Components
 
 ## Detailed Package Specifications
 
@@ -406,41 +571,65 @@ interface ComponentContract {
 
 ## Implementation Roadmap
 
-### Q1 2025
-- Set up monorepo infrastructure
-- Extract tokens package
-- Begin element-model development
+### Completed (v1.14 - v1.16)
+- ✅ Vite build system across all packages
+- ✅ Icons package (v1.0.0) - standalone SVG assets
+- ✅ Tokens package (v1.0.0) - design token primitives
+- ✅ Utilities package (v1.0.0) - shared utility functions
+- ✅ Model package (v1.0.0) - component model utilities
+- ✅ Builder package (v1.0.0) - element construction utilities
+- ✅ ES Modules only output (removed CommonJS)
+- ✅ Named exports only pattern
+- ✅ Automated CI/CD release workflow
+- ✅ Element Model conversions (Quote, Footer, Alert, Hero, Cards)
 
-### Q2 2025
-- Complete model packages
-- Start migration of existing packages
-- Beta release of new architecture
+### Q1 2025 (v1.17)
+- [ ] Complete ElementBuilder migration in elements package (atomic elements)
+- [ ] Static CSS exports from styles package (initial implementation)
+- [ ] Experts Feed implementation
+- [ ] Events/News slider migration to factory pattern
 
-### Q3 2025
-- Complete migration
-- Optimization phase
-- Documentation and training
+### Q2 2025 (v1.18)
+- [ ] Complete ElementBuilder migration (composite elements)
+- [ ] Model package modernization (reactive properties)
+- [ ] Static CSS exports (complete implementation)
+- [ ] Figma token sync (Phase 2 planning)
 
-### Q4 2025
-- General availability release
-- Deprecation of legacy APIs
-- Performance optimization
+### Q3 2025 (v1.19 / v2.0-beta)
+- [ ] Model package Lit-inspired patterns (render lifecycle, state)
+- [ ] Framework adapters for elements (React, Vue)
+- [ ] Performance optimization phase
+- [ ] Beta release of v2.0 architecture
+
+### Q4 2025 (v2.0)
+- [ ] General availability release
+- [ ] Complete documentation update
+- [ ] Migration guides for v1.x to v2.x
+- [ ] Deprecation of legacy patterns
 
 ## Appendix
 
-### Current Session Info
+### Current Status
 
-**Branch**: feature/add-changelogs  
-**Date**: 2025-08-09  
-**Current Focus**: Architecture planning and documentation
+**Latest Release**: v1.16.4 (Components)
+**Branch**: release/1.17
+**Date**: 2025-01-05
+**Current Focus**: Named exports migration, ElementBuilder adoption
 
-### Completed Tasks
-- ✅ Created feature branch for changelog work
-- ✅ Created CHANGELOG.md for all packages
-- ✅ Updated PLAN.md with seven-package architecture
+### Recently Completed
+- ✅ Named exports migration across all packages
+- ✅ Feeds factory pattern implementation
+- ✅ Composable style functions in styles package
+- ✅ Theme system enhancements
+- ✅ CI/CD automation with GitHub Actions
+
+### In Progress
+- [ ] ElementBuilder adoption in elements package
+- [ ] Static CSS exports planning
+- [ ] Model package modernization research
 
 ### Next Steps
-- [ ] Review architecture plan with stakeholders
-- [ ] Create proof-of-concept for tokens package
-- [ ] Draft RFC for community feedback
-- [ ] Set up prototype monorepo structure
+- [ ] Complete v1.17 release with named exports
+- [ ] Begin static CSS export implementation
+- [ ] Research Lit patterns for model package
+- [ ] Plan Figma integration Phase 2

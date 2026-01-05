@@ -4,13 +4,66 @@
 
 The **Model Package** (`@universityofmaryland/web-model-library`) provides core utilities for building web components in the UMD design system. This package was extracted from the components package to create a standalone, reusable foundation for web component development.
 
-**Version**: 1.0.0
+**Version**: 1.0.1
 **Dependencies**:
 - `postcss` (for style processing)
 - `postcss-discard-duplicates` (for CSS optimization)
 
 **Peer Dependencies**:
 - `@universityofmaryland/web-styles-library` (for design tokens)
+
+## Planned: Lit-Inspired Modernization
+
+**Status**: Planned for v1.18+ (Q2 2025)
+
+The model package will adopt Lit-inspired patterns for better developer experience:
+
+### Reactive Properties
+```typescript
+// Current
+static get observedAttributes() { return ['theme', 'size']; }
+attributeChangedCallback(name, oldVal, newVal) {
+  if (name === 'theme') this.handleThemeChange(newVal);
+}
+
+// Target (Lit-inspired)
+@property({ type: String }) theme = 'light';
+@property({ type: String, reflect: true }) size = 'medium';
+// Auto-triggers re-render on property change
+```
+
+### State Management
+```typescript
+// Target
+@state() private _expanded = false;
+
+toggle() {
+  this._expanded = !this._expanded;
+  // Automatically triggers re-render
+}
+```
+
+### Render Lifecycle
+```typescript
+// Target (Lit-inspired)
+connectedCallback() {
+  super.connectedCallback();
+  this.scheduleUpdate();
+}
+
+render() {
+  return html`<div class=${this.theme}>${this.content}</div>`;
+}
+```
+
+**Implementation Plan**:
+- Reactive property decorator system
+- Batched update scheduling
+- Render method with template support
+- Lifecycle hooks (willUpdate, updated, firstUpdated)
+- Backward compatibility with existing components
+
+See [PLAN.md](/PLAN.md) for implementation roadmap.
 
 ## Package Purpose
 

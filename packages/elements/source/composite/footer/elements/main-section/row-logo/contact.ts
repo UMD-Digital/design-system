@@ -232,7 +232,7 @@ const CreateContactElement = (props: ContactProps): UMDElement => {
       contactLinksElements.forEach((link: HTMLAnchorElement) => {
         const linkElement = linkWithSpan(props, {
           url: link.href,
-          title: link.textContent ?? '',
+          title: link.textContent.trim() ?? '',
           label: link.ariaLabel ?? undefined,
         });
 

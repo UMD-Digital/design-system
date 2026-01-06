@@ -1,8 +1,13 @@
 import postcss from 'postcss';
 import { token } from '@universityofmaryland/web-styles-library';
 import postcssDuplicates from 'postcss-discard-duplicates';
-const CreateStyleString = (styles: string) =>
-  postcss([postcssDuplicates]).process(styles, {}).css;
+
+const CreateStyleString = (styles: string): string => {
+  const processor = postcss([postcssDuplicates]);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = (processor.process as any)(styles, { from: undefined });
+  return result.css;
+};
 
 const reset = `
   :host {

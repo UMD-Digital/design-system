@@ -70,7 +70,10 @@ export const reset = `
   }
 `;
 
-export const jssToCSS = ({ styleObj }: { styleObj: any }) => {
+export const jssToCSS = ({ styleObj }: { styleObj: any }): string => {
   const root = postcssJs.parse(styleObj);
-  return postcss(postcssNesting).process(root as any).css;
+  const processor = postcss(postcssNesting);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const result = (processor.process as any)(root, { from: undefined });
+  return result.css;
 };

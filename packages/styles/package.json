@@ -10,31 +10,38 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./accessibility": {
       "types": "./dist/accessibility.d.ts",
-      "import": "./dist/accessibility.js"
+      "import": "./dist/accessibility.js",
+      "default": "./dist/accessibility.js"
     },
     "./animation": {
       "types": "./dist/animation.d.ts",
-      "import": "./dist/animation.js"
+      "import": "./dist/animation.js",
+      "default": "./dist/animation.js"
     },
     "./element": {
       "types": "./dist/element.d.ts",
-      "import": "./dist/element.js"
+      "import": "./dist/element.js",
+      "default": "./dist/element.js"
     },
     "./layout": {
       "types": "./dist/layout.d.ts",
-      "import": "./dist/layout.js"
+      "import": "./dist/layout.js",
+      "default": "./dist/layout.js"
     },
     "./typography": {
       "types": "./dist/typography.d.ts",
-      "import": "./dist/typography.js"
+      "import": "./dist/typography.js",
+      "default": "./dist/typography.js"
     },
     "./utilities": {
       "types": "./dist/utilities.d.ts",
-      "import": "./dist/utilities.js"
+      "import": "./dist/utilities.js",
+      "default": "./dist/utilities.js"
     }
   },
   "license": "MIT",

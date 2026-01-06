@@ -9,127 +9,158 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./accessibility": {
       "types": "./dist/accessibility.d.ts",
-      "import": "./dist/accessibility.js"
+      "import": "./dist/accessibility.js",
+      "default": "./dist/accessibility.js"
     },
     "./accessibility/*": {
       "types": "./dist/accessibility/*.d.ts",
-      "import": "./dist/accessibility/*.js"
+      "import": "./dist/accessibility/*.js",
+      "default": "./dist/accessibility/*.js"
     },
     "./animation": {
       "types": "./dist/animation.d.ts",
-      "import": "./dist/animation.js"
+      "import": "./dist/animation.js",
+      "default": "./dist/animation.js"
     },
     "./animation/*": {
       "types": "./dist/animation/*.d.ts",
-      "import": "./dist/animation/*.js"
+      "import": "./dist/animation/*.js",
+      "default": "./dist/animation/*.js"
     },
     "./adapters": {
       "types": "./dist/adapters.d.ts",
-      "import": "./dist/adapters.js"
+      "import": "./dist/adapters.js",
+      "default": "./dist/adapters.js"
     },
     "./adapters/*": {
       "types": "./dist/adapters/*.d.ts",
-      "import": "./dist/adapters/*.js"
+      "import": "./dist/adapters/*.js",
+      "default": "./dist/adapters/*.js"
     },
     "./date": {
       "types": "./dist/date.d.ts",
-      "import": "./dist/date.js"
+      "import": "./dist/date.js",
+      "default": "./dist/date.js"
     },
     "./date/*": {
       "types": "./dist/date/*.d.ts",
-      "import": "./dist/date/*.js"
+      "import": "./dist/date/*.js",
+      "default": "./dist/date/*.js"
     },
     "./dom": {
       "types": "./dist/dom.d.ts",
-      "import": "./dist/dom.js"
+      "import": "./dist/dom.js",
+      "default": "./dist/dom.js"
     },
     "./dom/*": {
       "types": "./dist/dom/*.d.ts",
-      "import": "./dist/dom/*.js"
+      "import": "./dist/dom/*.js",
+      "default": "./dist/dom/*.js"
     },
     "./elements": {
       "types": "./dist/elements.d.ts",
-      "import": "./dist/elements.js"
+      "import": "./dist/elements.js",
+      "default": "./dist/elements.js"
     },
     "./elements/*": {
       "types": "./dist/elements/*.d.ts",
-      "import": "./dist/elements/*.js"
+      "import": "./dist/elements/*.js",
+      "default": "./dist/elements/*.js"
     },
     "./events": {
       "types": "./dist/events.d.ts",
-      "import": "./dist/events.js"
+      "import": "./dist/events.js",
+      "default": "./dist/events.js"
     },
     "./events/*": {
       "types": "./dist/events/*.d.ts",
-      "import": "./dist/events/*.js"
+      "import": "./dist/events/*.js",
+      "default": "./dist/events/*.js"
     },
     "./media": {
       "types": "./dist/media.d.ts",
-      "import": "./dist/media.js"
+      "import": "./dist/media.js",
+      "default": "./dist/media.js"
     },
     "./media/*": {
       "types": "./dist/media/*.d.ts",
-      "import": "./dist/media/*.js"
+      "import": "./dist/media/*.js",
+      "default": "./dist/media/*.js"
     },
     "./network": {
       "types": "./dist/network.d.ts",
-      "import": "./dist/network.js"
+      "import": "./dist/network.js",
+      "default": "./dist/network.js"
     },
     "./network/*": {
       "types": "./dist/network/*.d.ts",
-      "import": "./dist/network/*.js"
+      "import": "./dist/network/*.js",
+      "default": "./dist/network/*.js"
     },
     "./performance": {
       "types": "./dist/performance.d.ts",
-      "import": "./dist/performance.js"
+      "import": "./dist/performance.js",
+      "default": "./dist/performance.js"
     },
     "./performance/*": {
       "types": "./dist/performance/*.d.ts",
-      "import": "./dist/performance/*.js"
+      "import": "./dist/performance/*.js",
+      "default": "./dist/performance/*.js"
     },
     "./storage": {
       "types": "./dist/storage.d.ts",
-      "import": "./dist/storage.js"
+      "import": "./dist/storage.js",
+      "default": "./dist/storage.js"
     },
     "./storage/*": {
       "types": "./dist/storage/*.d.ts",
-      "import": "./dist/storage/*.js"
+      "import": "./dist/storage/*.js",
+      "default": "./dist/storage/*.js"
     },
     "./string": {
       "types": "./dist/string.d.ts",
-      "import": "./dist/string.js"
+      "import": "./dist/string.js",
+      "default": "./dist/string.js"
     },
     "./string/*": {
       "types": "./dist/string/*.d.ts",
-      "import": "./dist/string/*.js"
+      "import": "./dist/string/*.js",
+      "default": "./dist/string/*.js"
     },
     "./styles": {
       "types": "./dist/styles.d.ts",
-      "import": "./dist/styles.js"
+      "import": "./dist/styles.js",
+      "default": "./dist/styles.js"
     },
     "./styles/*": {
       "types": "./dist/styles/*.d.ts",
-      "import": "./dist/styles/*.js"
+      "import": "./dist/styles/*.js",
+      "default": "./dist/styles/*.js"
     },
     "./theme": {
       "types": "./dist/theme.d.ts",
-      "import": "./dist/theme.js"
+      "import": "./dist/theme.js",
+      "default": "./dist/theme.js"
     },
     "./theme/*": {
       "types": "./dist/theme/*.d.ts",
-      "import": "./dist/theme/*.js"
+      "import": "./dist/theme/*.js",
+      "default": "./dist/theme/*.js"
     },
     "./validation": {
       "types": "./dist/validation.d.ts",
-      "import": "./dist/validation.js"
+      "import": "./dist/validation.js",
+      "default": "./dist/validation.js"
     },
     "./validation/*": {
       "types": "./dist/validation/*.d.ts",
-      "import": "./dist/validation/*.js"
+      "import": "./dist/validation/*.js",
+      "default": "./dist/validation/*.js"
     }
   },
   "license": "MIT",

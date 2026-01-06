@@ -9,23 +9,28 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./attributes": {
       "types": "./dist/attributes.d.ts",
-      "import": "./dist/attributes.js"
+      "import": "./dist/attributes.js",
+      "default": "./dist/attributes.js"
     },
     "./model": {
       "types": "./dist/model.d.ts",
-      "import": "./dist/model.js"
+      "import": "./dist/model.js",
+      "default": "./dist/model.js"
     },
     "./slots": {
       "types": "./dist/slots.d.ts",
-      "import": "./dist/slots.js"
+      "import": "./dist/slots.js",
+      "default": "./dist/slots.js"
     },
     "./utilities": {
       "types": "./dist/utilities.d.ts",
-      "import": "./dist/utilities.js"
+      "import": "./dist/utilities.js",
+      "default": "./dist/utilities.js"
     }
   },
   "license": "MIT",

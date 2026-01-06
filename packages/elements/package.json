@@ -9,19 +9,23 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./atomic": {
       "types": "./dist/atomic.d.ts",
-      "import": "./dist/atomic.js"
+      "import": "./dist/atomic.js",
+      "default": "./dist/atomic.js"
     },
     "./composite": {
       "types": "./dist/composite.d.ts",
-      "import": "./dist/composite.js"
+      "import": "./dist/composite.js",
+      "default": "./dist/composite.js"
     },
     "./layout": {
       "types": "./dist/layout.d.ts",
-      "import": "./dist/layout.js"
+      "import": "./dist/layout.js",
+      "default": "./dist/layout.js"
     }
   },
   "license": "MIT",

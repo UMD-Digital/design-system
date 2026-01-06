@@ -9,28 +9,32 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./color": {
       "types": "./dist/color.d.ts",
-      "import": "./dist/color.js"
+      "import": "./dist/color.js",
+      "default": "./dist/color.js"
     },
     "./font": {
       "types": "./dist/font.d.ts",
-      "import": "./dist/font.js"
+      "import": "./dist/font.js",
+      "default": "./dist/font.js"
     },
     "./media": {
       "types": "./dist/media.d.ts",
-      "import": "./dist/media.js"
+      "import": "./dist/media.js",
+      "default": "./dist/media.js"
     },
     "./spacing": {
       "types": "./dist/spacing.d.ts",
-      "import": "./dist/spacing.js"
+      "import": "./dist/spacing.js",
+      "default": "./dist/spacing.js"
     }
   },
   "license": "MIT",
   "repository": "",
-  "private": false,
   "files": [
     "dist"
   ],

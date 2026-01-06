@@ -9,59 +9,73 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./arrows": {
       "types": "./dist/arrows.d.ts",
-      "import": "./dist/arrows.js"
+      "import": "./dist/arrows.js",
+      "default": "./dist/arrows.js"
     },
     "./brand": {
       "types": "./dist/brand.d.ts",
-      "import": "./dist/brand.js"
+      "import": "./dist/brand.js",
+      "default": "./dist/brand.js"
     },
     "./calendar": {
       "types": "./dist/calendar.d.ts",
-      "import": "./dist/calendar.js"
+      "import": "./dist/calendar.js",
+      "default": "./dist/calendar.js"
     },
     "./communication": {
       "types": "./dist/communication.d.ts",
-      "import": "./dist/communication.js"
+      "import": "./dist/communication.js",
+      "default": "./dist/communication.js"
     },
     "./controls": {
       "types": "./dist/controls.d.ts",
-      "import": "./dist/controls.js"
+      "import": "./dist/controls.js",
+      "default": "./dist/controls.js"
     },
     "./files": {
       "types": "./dist/files.d.ts",
-      "import": "./dist/files.js"
+      "import": "./dist/files.js",
+      "default": "./dist/files.js"
     },
     "./indicators": {
       "types": "./dist/indicators.d.ts",
-      "import": "./dist/indicators.js"
+      "import": "./dist/indicators.js",
+      "default": "./dist/indicators.js"
     },
     "./location": {
       "types": "./dist/location.d.ts",
-      "import": "./dist/location.js"
+      "import": "./dist/location.js",
+      "default": "./dist/location.js"
     },
     "./logos": {
       "types": "./dist/logos.d.ts",
-      "import": "./dist/logos.js"
+      "import": "./dist/logos.js",
+      "default": "./dist/logos.js"
     },
     "./media": {
       "types": "./dist/media.d.ts",
-      "import": "./dist/media.js"
+      "import": "./dist/media.js",
+      "default": "./dist/media.js"
     },
     "./people": {
       "types": "./dist/people.d.ts",
-      "import": "./dist/people.js"
+      "import": "./dist/people.js",
+      "default": "./dist/people.js"
     },
     "./search": {
       "types": "./dist/search.d.ts",
-      "import": "./dist/search.js"
+      "import": "./dist/search.js",
+      "default": "./dist/search.js"
     },
     "./social": {
       "types": "./dist/social.d.ts",
-      "import": "./dist/social.js"
+      "import": "./dist/social.js",
+      "default": "./dist/social.js"
     }
   },
   "license": "MIT",

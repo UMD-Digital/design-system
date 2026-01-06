@@ -9,23 +9,28 @@
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
     },
     "./academic": {
       "types": "./dist/academic.d.ts",
-      "import": "./dist/academic.js"
+      "import": "./dist/academic.js",
+      "default": "./dist/academic.js"
     },
     "./events": {
       "types": "./dist/events.d.ts",
-      "import": "./dist/events.js"
+      "import": "./dist/events.js",
+      "default": "./dist/events.js"
     },
     "./experts": {
       "types": "./dist/experts.d.ts",
-      "import": "./dist/experts.js"
+      "import": "./dist/experts.js",
+      "default": "./dist/experts.js"
     },
     "./news": {
       "types": "./dist/news.d.ts",
-      "import": "./dist/news.js"
+      "import": "./dist/news.js",
+      "default": "./dist/news.js"
     }
   },
   "license": "MIT",

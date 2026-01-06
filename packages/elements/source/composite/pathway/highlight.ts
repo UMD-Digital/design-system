@@ -107,6 +107,10 @@ const createHighlightColumn = ({
         .withStyles({
           element: {
             fontWeight: '700',
+
+            ['& *']: {
+              color: 'currentColor',
+            },
           },
         })
         .build(),

@@ -52,10 +52,10 @@
   },
   "dependencies": {
     "@types/postcss-js": "^4.0.4",
-    "@universityofmaryland/web-token-library": "^1.0.0",
-    "@universityofmaryland/web-styles-library": "^1.0.0",
     "@universityofmaryland/web-builder-library": "^1.0.0",
     "@universityofmaryland/web-elements-library": "^1.0.0",
+    "@universityofmaryland/web-styles-library": "^1.0.0",
+    "@universityofmaryland/web-token-library": "^1.0.0",
     "@universityofmaryland/web-utilities-library": "^1.0.0"
   },
   "devDependencies": {

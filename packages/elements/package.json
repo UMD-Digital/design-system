@@ -53,8 +53,8 @@
     "@universityofmaryland/web-utilities-library": "^1.0.0"
   },
   "peerDependencies": {
-    "@universityofmaryland/web-styles-library": "^1.0.0",
-    "@universityofmaryland/web-icons-library": "^1.0.0"
+    "@universityofmaryland/web-icons-library": "^1.0.0",
+    "@universityofmaryland/web-styles-library": "^1.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-legacy": "^7.2.1",

@@ -34,7 +34,6 @@
   },
   "license": "MIT",
   "repository": "",
-  "private": false,
   "files": [
     "dist"
   ],

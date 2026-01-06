@@ -78,5 +78,16 @@
     "lerna": "^7.4.1",
     "postcss-discard-duplicates": "^7.0.1",
     "tailwindcss": "^3.3.5"
+  },
+  "resolutions": {
+    "@universityofmaryland/web-styles-library": "workspace:*",
+    "@universityofmaryland/web-token-library": "workspace:*",
+    "@universityofmaryland/web-utilities-library": "workspace:*",
+    "@universityofmaryland/web-builder-library": "workspace:*",
+    "@universityofmaryland/web-model-library": "workspace:*",
+    "@universityofmaryland/web-icons-library": "workspace:*",
+    "@universityofmaryland/web-elements-library": "workspace:*",
+    "@universityofmaryland/web-feeds-library": "workspace:*",
+    "@universityofmaryland/web-components-library": "workspace:*"
   }
 }

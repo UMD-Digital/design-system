@@ -7,16 +7,16 @@
     "isolatedModules": true,
     "moduleResolution": "bundler",
     "paths": {
-      "@universityofmaryland/web-token-library": ["../tokens/dist/index.d.ts"],
-      "@universityofmaryland/web-token-library/*": ["../tokens/dist/*"],
-      "@universityofmaryland/web-utilities-library": ["../utilities/dist/index.d.ts"],
-      "@universityofmaryland/web-utilities-library/*": ["../utilities/dist/*"],
-      "@universityofmaryland/web-builder-library": ["../builder/dist/index.d.ts"],
-      "@universityofmaryland/web-builder-library/*": ["../builder/dist/*"],
-      "@universityofmaryland/web-elements-library": ["../elements/dist/index.d.ts"],
-      "@universityofmaryland/web-elements-library/*": ["../elements/dist/*"],
-      "@universityofmaryland/web-styles-library": ["../styles/dist/index.d.ts"],
-      "@universityofmaryland/web-styles-library/*": ["../styles/dist/*"]
+      "@universityofmaryland/web-token-library": ["../../tokens/dist/index.d.ts"],
+      "@universityofmaryland/web-token-library/*": ["../../tokens/dist/*"],
+      "@universityofmaryland/web-utilities-library": ["../../utilities/dist/index.d.ts"],
+      "@universityofmaryland/web-utilities-library/*": ["../../utilities/dist/*"],
+      "@universityofmaryland/web-builder-library": ["../../builder/dist/index.d.ts"],
+      "@universityofmaryland/web-builder-library/*": ["../../builder/dist/*"],
+      "@universityofmaryland/web-elements-library": ["../../elements/dist/index.d.ts"],
+      "@universityofmaryland/web-elements-library/*": ["../../elements/dist/*"],
+      "@universityofmaryland/web-styles-library": ["../../styles/dist/index.d.ts"],
+      "@universityofmaryland/web-styles-library/*": ["../../styles/dist/*"]
     }
   },
   "include": [

@@ -6,3 +6,8 @@ dist
 *.log
 /design-system-ui
 coverage
+
+# Yarn 4
+.yarn/install-state.gz
+.yarn/cache
+.pnp.*

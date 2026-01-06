@@ -10,17 +10,89 @@ const DIST_DIR = 'dist';
 const BUILD_TARGET = 'es2020';
 const DEV_TARGET = 'esnext';
 
-const EXTERNAL_DEPS = [
-  '@universityofmaryland/web-utilities-library',
-  '@universityofmaryland/web-styles-library',
-  '@universityofmaryland/web-elements-library',
-  '@universityofmaryland/web-feeds-library',
-  '@universityofmaryland/web-model-library',
-];
-
 const PATH_ALIASES = {
   helpers: resolve(SOURCE_DIR, 'helpers'),
 };
+
+const WORKSPACE_ALIASES: Array<{ find: string | RegExp; replacement: string }> =
+  [
+    {
+      find: '@universityofmaryland/web-feeds-library/events',
+      replacement: resolve(__dirname, '../feeds/dist/events.js'),
+    },
+    {
+      find: '@universityofmaryland/web-feeds-library/news',
+      replacement: resolve(__dirname, '../feeds/dist/news.js'),
+    },
+    {
+      find: '@universityofmaryland/web-feeds-library/experts',
+      replacement: resolve(__dirname, '../feeds/dist/experts.js'),
+    },
+    {
+      find: '@universityofmaryland/web-feeds-library/academic',
+      replacement: resolve(__dirname, '../feeds/dist/academic.js'),
+    },
+    {
+      find: '@universityofmaryland/web-feeds-library',
+      replacement: resolve(__dirname, '../feeds/dist/index.js'),
+    },
+    {
+      find: '@universityofmaryland/web-elements-library/atomic',
+      replacement: resolve(__dirname, '../elements/dist/atomic.js'),
+    },
+    {
+      find: '@universityofmaryland/web-elements-library/composite',
+      replacement: resolve(__dirname, '../elements/dist/composite.js'),
+    },
+    {
+      find: '@universityofmaryland/web-elements-library/layout',
+      replacement: resolve(__dirname, '../elements/dist/layout.js'),
+    },
+    {
+      find: '@universityofmaryland/web-elements-library',
+      replacement: resolve(__dirname, '../elements/dist/index.js'),
+    },
+    {
+      find: /^@universityofmaryland\/web-styles-library\/(.*)$/,
+      replacement: resolve(__dirname, '../styles/dist/$1.js'),
+    },
+    {
+      find: '@universityofmaryland/web-styles-library',
+      replacement: resolve(__dirname, '../styles/dist/index.js'),
+    },
+    {
+      find: /^@universityofmaryland\/web-utilities-library\/(.*)$/,
+      replacement: resolve(__dirname, '../utilities/dist/$1.js'),
+    },
+    {
+      find: '@universityofmaryland/web-utilities-library',
+      replacement: resolve(__dirname, '../utilities/dist/index.js'),
+    },
+    {
+      find: /^@universityofmaryland\/web-model-library\/(.*)$/,
+      replacement: resolve(__dirname, '../model/dist/$1.js'),
+    },
+    {
+      find: '@universityofmaryland/web-model-library',
+      replacement: resolve(__dirname, '../model/dist/index.js'),
+    },
+    {
+      find: /^@universityofmaryland\/web-icons-library\/(.*)$/,
+      replacement: resolve(__dirname, '../icons/dist/$1.js'),
+    },
+    {
+      find: '@universityofmaryland/web-icons-library',
+      replacement: resolve(__dirname, '../icons/dist/index.js'),
+    },
+    {
+      find: /^@universityofmaryland\/web-token-library\/(.*)$/,
+      replacement: resolve(__dirname, '../tokens/dist/$1.js'),
+    },
+    {
+      find: '@universityofmaryland/web-token-library',
+      replacement: resolve(__dirname, '../tokens/dist/index.js'),
+    },
+  ];
 
 const DTS_COMMON_OPTIONS = {
   outDir: DIST_DIR,
@@ -91,7 +163,11 @@ const createSpecialBuildConfig = (
   },
   resolve: {
     extensions: ['.ts', '.js', '.css'],
-    alias: PATH_ALIASES,
+    alias: [
+      { find: 'helpers', replacement: resolve(SOURCE_DIR, 'helpers') },
+      ...WORKSPACE_ALIASES,
+    ],
+    preserveSymlinks: false,
   },
   plugins,
 });
@@ -215,6 +291,7 @@ export default defineConfig((configEnv) => {
     resolve: {
       extensions: ['.ts', '.js', '.css'],
       alias: PATH_ALIASES,
+      preserveSymlinks: false,
     },
     css: {
       modules: false,

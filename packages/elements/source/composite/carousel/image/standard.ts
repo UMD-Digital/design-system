@@ -220,7 +220,9 @@ const STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT = `
   ${OverwriteThemeDark}
 `;
 
-export const createCompositeCarouselImageStandard = (props: TypeCarouselImageStandardProps) =>
+export const createCompositeCarouselImageStandard = (
+  props: TypeCarouselImageStandardProps,
+) =>
   (() => {
     const { images, isThemeDark, isFullScreenOption } = props;
     const elementDeclaration = document.createElement('div');
@@ -346,7 +348,9 @@ export const createCompositeCarouselImageStandard = (props: TypeCarouselImageSta
       count: images.length || 0,
       callback: carousel.events.EventMoveTo,
       isThemeDark,
-      isThemeLight: !isThemeDark,
+      ...(!isThemeDark && {
+        overlayColor: token.color.gray.lightest,
+      }),
     });
 
     styles += indicator.styles;

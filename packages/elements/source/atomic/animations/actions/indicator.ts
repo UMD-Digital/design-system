@@ -1,113 +1,154 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-token-library';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
+import { type AnimationIndicatorProps } from './_types';
+import { type ElementModel } from '_types';
 
-const ELEMENT_SLIDE_INDICATOR_CONTAINER = 'slide-indicator-container';
-const ELEMENT_SLIDE_INDICATOR_LINE = 'slide-indicator-line';
-const ELEMENT_SLIDE_INDICATOR_BUTTON_WRAPPER = 'slide-indicator-button-wrapper';
-
-// prettier-ignore
-const LineStyles = `
-  .${ELEMENT_SLIDE_INDICATOR_LINE} {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 24px;
-    width: 80px;
-    transition: left 500ms;
-    background-color: ${token.color.red};
-    z-index: 99;
-  }
-`
-
-// prettier-ignore
-const ButtonStyles = `
-  .${ELEMENT_SLIDE_INDICATOR_BUTTON_WRAPPER} {
-    width: 80px;
-    height: 100%;
-    background-color: ${token.color.gray.light};
-    position: relative;
-  }
-
-  .${ELEMENT_SLIDE_INDICATOR_BUTTON_WRAPPER} > span {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 22px;
-    display: block;
-    background-color: ${token.color.gray.lightest};
-    z-index: 99;
-  }
-`
-
-const STYLES_INDICATOR = `
-  .${ELEMENT_SLIDE_INDICATOR_CONTAINER} {
-    position: relative;
-    height: 24px;
-    display: flex;
-    align-items: flex-start;
-    max-width: 100%;
-    overflow: hidden;
-  }
-
-  .${ELEMENT_SLIDE_INDICATOR_CONTAINER} > span {
-    display: block;
-    width: ${token.spacing.sm};
-    height:  22px;
-    z-index: 999;
-    position: relative;
-  }
-  
-  ${LineStyles}
-  ${ButtonStyles}
-
-`;
-
-export const createAnimationIndicator = ({
-  count,
-  overlayColor,
-  isThemeDark,
-  isThemeLight,
-  callback,
-}: {
-  count: number;
-  overlayColor?: string;
-  isThemeDark?: boolean;
-  isThemeLight?: boolean;
-  callback: (arg: number) => void;
-}) =>
+export const createAnimationIndicator = (props: AnimationIndicatorProps) =>
   (() => {
-    const container = document.createElement('div');
-    const line = document.createElement('div');
-    let styles = STYLES_INDICATOR;
+    const { count, overlayColor, isThemeDark, callback } = props;
 
-    const buttons = Array.from({ length: count }).map((count, i) => {
-      const button = document.createElement('button');
+    const createButton = (index: number) => {
+      const overlay = new ElementBuilder('span')
+        .withClassName('slide-overlay')
+        .withStyles({
+          element: {
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            width: '100%',
+            height: '22px',
+            display: 'block',
+            backgroundColor: token.color.white,
+            zIndex: 99,
 
-      button.classList.add(ELEMENT_SLIDE_INDICATOR_BUTTON_WRAPPER);
-      button.addEventListener('click', () => callback(i));
-      button.setAttribute('aria-label', `Slide ${i + 1}`);
+            ...(overlayColor && {
+              backgroundColor: overlayColor,
+            }),
 
-      return button;
-    });
+            ...(!overlayColor && {
+              ...(isThemeDark && {
+                backgroundColor: token.color.black,
+              }),
+            }),
+          },
+        })
+        .build();
+
+      return new ElementBuilder('button')
+        .withClassName('slide-indicator-button-wrapper')
+        .withStyles({
+          element: {
+            width: '80px',
+            height: '100%',
+            backgroundColor: token.color.gray.light,
+            position: 'relative',
+          },
+        })
+        .withChild(overlay)
+        .withAttribute('aria-label', `Slide ${index + 1}`)
+        .withModifier((element: HTMLElement) => {
+          element.addEventListener('click', () => callback(index));
+        })
+        .build();
+    };
+
+    const createButtonsAndSpacers = () => {
+      const buttonsAndSpacers: ElementModel<HTMLElement>[] = [];
+
+      for (let index = 0; index < count; index++) {
+        buttonsAndSpacers.push(buttons[index]);
+        buttonsAndSpacers.push(spacers[index]);
+      }
+
+      return buttonsAndSpacers;
+    };
+
+    const buttons: ElementModel<HTMLElement>[] = Array.from({
+      length: count * 2,
+    }).map((_, index) => createButton(index));
+
+    const spacers: ElementModel<HTMLElement>[] = Array.from(
+      { length: count },
+      () => {
+        return new ElementBuilder('span')
+          .withClassName('slide-spacer')
+          .withStyles({
+            element: {
+              display: 'block',
+              width: token.spacing.sm,
+              height: '22px',
+              zIndex: 999,
+              position: 'relative',
+              backgroundColor: token.color.white,
+
+              ...(overlayColor && {
+                backgroundColor: overlayColor,
+              }),
+
+              ...(!overlayColor && {
+                ...(isThemeDark && {
+                  backgroundColor: token.color.black,
+                }),
+              }),
+            },
+          })
+          .build();
+      },
+    );
+
+    const line = new ElementBuilder('div')
+      .withClassName('slide-indicator-line')
+      .withStyles({
+        element: {
+          position: 'absolute',
+          left: 0,
+          top: 0,
+          height: '24px',
+          width: '80px',
+          transition: 'left 500ms',
+          backgroundColor: token.color.red,
+          zIndex: 99,
+        },
+      })
+      .build();
+
+    const buttonsAndSpacers = createButtonsAndSpacers();
+
+    const container = new ElementBuilder('div')
+      .withClassName('slide-indicator-container')
+      .withStyles({
+        element: {
+          position: 'relative',
+          height: '24px',
+          display: 'flex',
+          alignItems: 'flex-start',
+          maxWidth: '100%',
+          overflow: 'hidden',
+        },
+      })
+      .withChild(line)
+      .withChildren(...buttonsAndSpacers)
+      .build();
 
     const positionLine = (index: number) => {
       const button = buttons[index];
-      const buttonSize = button.clientWidth;
-      const buttonPosition = button.offsetLeft;
+      const buttonSize = button.element.clientWidth;
+      const buttonPosition = button.element.offsetLeft;
 
-      line.style.width = `${buttonSize}px`;
-      line.style.left = `${buttonPosition}px`;
+      line.element.style.width = `${buttonSize}px`;
+      line.element.style.left = `${buttonPosition}px`;
     };
+
     const sizeButtons = () => {
       const maxWidth = 80;
-      const containerSize = container.clientWidth;
+      const containerSize = container.element.clientWidth;
       let buttonSize = containerSize / count;
 
       if (buttonSize > maxWidth) buttonSize = maxWidth;
 
       buttons.forEach((button) => {
-        button.style.width = `${buttonSize}px`;
+        button.element.style.width = `${buttonSize}px`;
       });
     };
 
@@ -124,56 +165,29 @@ export const createAnimationIndicator = ({
     const load = () => {
       const reload = () => {
         setTimeout(() => {
-          const isLoaded = container.clientWidth > 0;
+          const isLoaded = container.element.clientWidth > 0;
           if (!isLoaded) {
             reload();
           } else {
             sizeButtons();
             positionLine(position);
-            line.style.display = 'block';
+            line.element.style.display = 'block';
           }
         }, 500);
       };
 
-      line.style.display = 'none';
+      line.element.style.display = 'none';
       reload();
     };
 
     let position = 0;
-
-    line.classList.add(ELEMENT_SLIDE_INDICATOR_LINE);
-
-    container.classList.add(ELEMENT_SLIDE_INDICATOR_CONTAINER);
-    container.appendChild(line);
-    buttons.forEach((button) => {
-      const spacer = document.createElement('span');
-      const overlay = document.createElement('span');
-      let spacerColor: string = token.color.white;
-
-      if (isThemeDark && !overlayColor) {
-        spacerColor = token.color.black;
-      }
-
-      if (isThemeLight && !overlayColor) {
-        spacerColor = token.color.gray.lightest;
-      }
-
-      spacer.style.backgroundColor = spacerColor;
-      overlay.style.backgroundColor = spacerColor;
-
-      button.appendChild(overlay);
-      container.appendChild(button);
-      container.appendChild(spacer);
-    });
 
     load();
 
     window.addEventListener('resize', debounce(eventResize, 20));
 
     return {
-      element: container,
-      className: ELEMENT_SLIDE_INDICATOR_CONTAINER,
-      styles,
+      ...container,
       position: eventPosition,
     };
   })();

@@ -18,6 +18,7 @@ const createComponent: CreateComponentFunction = (element) => {
     Number(Attributes.getValue.layoutColumnCount({ element })) || 3;
   const rowCount = Number(Attributes.getValue.layoutRowCount({ element })) || 1;
   const categoriesAttribute = Attributes.getValue.feedFilterIds({ element });
+  const attributeMediaTrained = Attributes.getValue.mediaTrained({ element });
 
   return grid({
     token,
@@ -28,6 +29,9 @@ const createComponent: CreateComponentFunction = (element) => {
     isTransparent: Attributes.isVisual.transparent({ element }),
     isOverlay: Attributes.isDisplay.overlay({ element }),
     ...(categoriesAttribute && { categories: categoriesAttribute.split(',') }),
+    ...(attributeMediaTrained !== null && {
+      isMediaTrained: attributeMediaTrained === 'true',
+    }),
   });
 };
 

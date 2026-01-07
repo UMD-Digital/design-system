@@ -915,6 +915,9 @@ const getValue = {
     currentName: AttributeNames.layout.rowCount,
     deprecatedName: AttributeNames.deprecated.feed.FEED_ROW_COUNT,
   }),
+  mediaTrained: createValueGetter({
+    currentName: AttributeNames.information.mediaTrained,
+  }),
   title: createValueGetter({
     currentName: AttributeNames.information.title,
   }),

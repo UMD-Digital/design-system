@@ -12,6 +12,7 @@ const createComponent: CreateComponentFunction = (element) => {
   const rowCount = Number(Attributes.getValue.layoutRowCount({ element })) || 5;
   const isDisplayList = Attributes.isDisplay.list({ element });
   const categoriesAttribute = Attributes.getValue.feedFilterIds({ element });
+  const attributeMediaTrained = Attributes.getValue.mediaTrained({ element });
 
   if (!token) {
     return { element: document.createElement('div'), styles: '' };
@@ -24,6 +25,9 @@ const createComponent: CreateComponentFunction = (element) => {
     isThemeDark: Attributes.isTheme.dark({ element }),
     isLazyLoad: Attributes.includesFeature.lazyLoad({ element }),
     ...(categoriesAttribute && { categories: categoriesAttribute.split(',') }),
+    ...(attributeMediaTrained !== null && {
+      isMediaTrained: attributeMediaTrained === 'true',
+    }),
   });
 };
 

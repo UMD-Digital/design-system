@@ -63,6 +63,7 @@ export function createBaseFeed<TData, TVariables = any>(
     isTransparent = false,
     isOverlay = false,
     isAligned = false,
+    isMediaTrained = null,
     cardType,
     numberOfColumnsToShow = 1,
     numberOfRowsToStart,
@@ -124,6 +125,7 @@ export function createBaseFeed<TData, TVariables = any>(
     numberOfColumnsToShow,
     numberOfRowsToStart,
     isLazyLoad,
+    isMediaTrained,
     getOffset: helpers.getOffset,
   };
 

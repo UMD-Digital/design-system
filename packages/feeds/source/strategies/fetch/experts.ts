@@ -144,7 +144,7 @@ const FRAGMENT_EXPERT_CATEGORIES = `
  * Supports filtering by ID, relatedTo, or fetching all experts
  */
 export const EXPERTS_QUERY = `
-  query getExpertsContent($limit: Int, $offset: Int, $id: [QueryArgument], $relatedTo: [QueryArgument]) {
+  query getExpertsContent($limit: Int, $offset: Int, $id: [QueryArgument], $relatedTo: [QueryArgument], $isMediaTrained:Boolean) {
     entryCount(
       section: "experts"
       limit: $limit
@@ -152,6 +152,7 @@ export const EXPERTS_QUERY = `
       type: "expertsContent"
       id: $id
       relatedTo: $relatedTo
+      expertsMediaTrained: $isMediaTrained
     )
     entries(
       section: "experts"
@@ -160,6 +161,7 @@ export const EXPERTS_QUERY = `
       type: "expertsContent"
       id: $id
       relatedTo: $relatedTo
+      expertsMediaTrained: $isMediaTrained
       orderBy: "expertsNameLast"
     ) {
       ...EntriesNativeFields
@@ -221,7 +223,8 @@ export const expertsFetchStrategy = createGraphQLFetchStrategy<ExpertEntry>({
   },
 
   composeVariables: (baseVariables) => {
-    const { categories, entriesToRemove, id, ...rest } = baseVariables;
+    const { categories, entriesToRemove, id, isMediaTrained, ...rest } =
+      baseVariables;
 
     const variables: any = { ...rest };
 
@@ -232,6 +235,10 @@ export const expertsFetchStrategy = createGraphQLFetchStrategy<ExpertEntry>({
 
     if (categories) {
       variables.relatedTo = categories;
+    }
+
+    if (isMediaTrained) {
+      variables.isMediaTrained = isMediaTrained;
     }
 
     return variables;

@@ -151,6 +151,7 @@ export function createGraphQLFetchStrategy<
         getOffset,
         entriesToRemove,
         id,
+        isMediaTrained,
       } = props;
 
       // Base variables - pass all props through
@@ -173,6 +174,11 @@ export function createGraphQLFetchStrategy<
       // Pass id through
       if (id) {
         baseVariables.id = id;
+      }
+
+      // Pass isMediaTrained through (can be true, false, or null)
+      if (isMediaTrained !== undefined) {
+        baseVariables.isMediaTrained = isMediaTrained;
       }
 
       // Allow custom variable composition

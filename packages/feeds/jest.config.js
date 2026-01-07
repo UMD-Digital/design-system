@@ -1,11 +1,18 @@
-const path = require('path');
-const rootConfig = require('../../jest.config');
+import { createRequire } from 'module';
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
 
-module.exports = {
+const require = createRequire(import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const rootConfig = require('../../jest.config.cjs');
+
+export default {
   ...rootConfig,
   displayName: 'feeds',
   testEnvironment: 'jsdom',
-  rootDir: path.resolve(__dirname),
+  rootDir: resolve(__dirname),
   moduleNameMapper: {
     ...rootConfig.moduleNameMapper,
     '^factory$': '<rootDir>/source/factory',

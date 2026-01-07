@@ -20,6 +20,8 @@ export interface BaseProps {
   categories?: string[];
   /** Enable dark theme */
   isThemeDark?: boolean;
+  /** Filter experts who are media trained */
+  isMediaTrained?: boolean;
   /** Enable lazy loading with "Load more" button */
   isLazyLoad: boolean;
   /** IDs of entries to exclude from results */
@@ -59,7 +61,15 @@ export interface ListProps extends BaseProps {
  *
  * Bio layout displays a single expert's profile using the small layout with summary field.
  */
-export interface BioProps extends Omit<BaseProps, 'numberOfRowsToStart' | 'isLazyLoad' | 'categories' | 'entriesToRemove'> {
+export interface BioProps
+  extends Omit<
+    BaseProps,
+    | 'numberOfRowsToStart'
+    | 'isLazyLoad'
+    | 'categories'
+    | 'entriesToRemove'
+    | 'isMediaTrained'
+  > {
   /** Expert ID to fetch and display */
   expertId: string;
 }

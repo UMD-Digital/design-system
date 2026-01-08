@@ -4,7 +4,7 @@
  * @group feeds/academic
  */
 
-import academicSlider from '../../../source/feeds/academic/slider';
+import { academicSlider } from '../../../source/feeds/academic/slider';
 
 // Note: All dependencies are mocked via Jest's moduleNameMapper
 

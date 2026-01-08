@@ -25,6 +25,10 @@ module.exports = {
       __dirname,
       './__mocks__/webStylesLibrary.js',
     ),
+    '^@universityofmaryland/web-styles-library/typography$': path.resolve(
+      __dirname,
+      './__mocks__/@universityofmaryland/web-styles-library/typography.js',
+    ),
     '^@universityofmaryland/web-utilities-library$': path.resolve(
       __dirname,
       './__mocks__/webUtilitiesLibrary.js',
@@ -56,6 +60,10 @@ module.exports = {
     '^@universityofmaryland/web-utilities-library/date$': path.resolve(
       __dirname,
       './__mocks__/@universityofmaryland/web-utilities-library/date.js',
+    ),
+    '^@universityofmaryland/web-utilities-library/theme$': path.resolve(
+      __dirname,
+      './__mocks__/@universityofmaryland/web-utilities-library/theme.js',
     ),
     '^@universityofmaryland/web-builder-library$': path.resolve(
       __dirname,

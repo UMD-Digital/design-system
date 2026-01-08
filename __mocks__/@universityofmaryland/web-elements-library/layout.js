@@ -9,6 +9,10 @@ module.exports = {
     element: document.createElement('div'),
     styles: `.mock-style-grid-gap { display: grid; grid-template-columns: repeat(${columns}, 1fr); gap: 1rem; }`,
   })),
+  gridBorder: jest.fn().mockImplementation(({ columns = 2 } = {}) => ({
+    element: document.createElement('div'),
+    styles: `.mock-style-grid-border { display: grid; grid-template-columns: repeat(${columns}, 1fr); gap: 1rem; }`,
+  })),
   gridOffset: jest.fn().mockImplementation(({ columns = 2, isLayoutReversed = false, stickyTopPosition } = {}) => ({
     element: document.createElement('div'),
     styles: `.mock-style-grid-offset { display: grid; grid-template-columns: repeat(${columns}, 1fr); gap: 1rem; }`,

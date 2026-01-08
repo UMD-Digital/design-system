@@ -4,7 +4,7 @@
  * @group feeds/events
  */
 
-import eventsList from '../../../source/feeds/events/list';
+import { eventsList } from '../../../source/feeds/events/list';
 
 // Note: All dependencies are mocked via Jest's moduleNameMapper
 

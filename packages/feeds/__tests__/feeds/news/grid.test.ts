@@ -4,7 +4,7 @@
  * @group feeds/news
  */
 
-import newsGrid from '../../../source/feeds/news/grid';
+import { newsGrid } from '../../../source/feeds/news/grid';
 
 // Note: All dependencies are mocked via Jest's moduleNameMapper
 

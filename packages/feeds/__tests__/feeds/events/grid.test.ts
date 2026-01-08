@@ -4,7 +4,7 @@
  * @group feeds/events
  */
 
-import eventsGrid from '../../../source/feeds/events/grid';
+import { eventsGrid } from '../../../source/feeds/events/grid';
 
 // Note: All dependencies are mocked via Jest's moduleNameMapper
 

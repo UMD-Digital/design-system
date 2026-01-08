@@ -4,7 +4,7 @@
  * @group feeds/news
  */
 
-import newsFeatured from '../../../source/feeds/news/featured';
+import { newsFeatured } from '../../../source/feeds/news/featured';
 
 // Note: All dependencies are mocked via Jest's moduleNameMapper
 

@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-builder-library",
-  "version": "1.0.1-beta.0",
+  "version": "1.0.1-beta.1",
   "description": "Element Builder for the University of Maryland Design System",
   "type": "module",
   "main": "dist/index.js",
@@ -61,9 +61,7 @@
     "test:snapshot": "jest --updateSnapshot"
   },
   "peerDependencies": {
-    "@universityofmaryland/web-styles-library": "^1.0.0"
-  },
-  "dependencies": {
+    "@universityofmaryland/web-styles-library": "^1.0.0",
     "@universityofmaryland/web-utilities-library": "^1.0.0"
   },
   "devDependencies": {

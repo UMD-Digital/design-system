@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-feeds-library",
-  "version": "1.3.0-beta.1",
+  "version": "1.3.0-beta.2",
   "description": "UMD Feed Elements",
   "type": "module",
   "main": "dist/index.js",
@@ -57,10 +57,12 @@
   },
   "dependencies": {
     "@types/postcss-js": "^4.0.4",
+    "@universityofmaryland/web-token-library": "^1.0.0"
+  },
+  "peerDependencies": {
     "@universityofmaryland/web-builder-library": "^1.0.0",
     "@universityofmaryland/web-elements-library": "^1.0.0",
     "@universityofmaryland/web-styles-library": "^1.0.0",
-    "@universityofmaryland/web-token-library": "^1.0.0",
     "@universityofmaryland/web-utilities-library": "^1.0.0"
   },
   "devDependencies": {

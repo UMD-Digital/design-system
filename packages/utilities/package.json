@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-utilities-library",
-  "version": "1.0.3-beta.0",
+  "version": "1.0.3-beta.1",
   "description": "UMD Design System Utilities - Shared utility functions for all design system packages",
   "type": "module",
   "main": "dist/index.js",
@@ -185,11 +185,13 @@
     "test:coverage": "jest --coverage"
   },
   "dependencies": {
-    "@universityofmaryland/web-styles-library": "^1.0.0",
     "@universityofmaryland/web-token-library": "^1.0.0",
     "postcss": "^8.4.49",
     "postcss-js": "^4.0.1",
     "postcss-nesting": "^13.0.1"
+  },
+  "peerDependencies": {
+    "@universityofmaryland/web-styles-library": "^1.0.0"
   },
   "devDependencies": {
     "vite": "^7.1.4",

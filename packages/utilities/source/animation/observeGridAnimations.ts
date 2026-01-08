@@ -33,9 +33,13 @@ export const observeGridAnimations = () => {
     const styleElement = document.createElement('style');
 
     // Convert JSS animation object to CSS string
+    // Filters out JSS-specific properties and nested @ rules
     const jssToCSS = (obj: Record<string, any>): string => {
       let css = '';
       for (const [key, value] of Object.entries(obj)) {
+        if (key === 'className') continue;
+        if (key.startsWith('@')) continue;
+
         if (typeof value === 'object' && !Array.isArray(value)) {
           const nestedCSS = jssToCSS(value);
           css += `${key} { ${nestedCSS} } `;

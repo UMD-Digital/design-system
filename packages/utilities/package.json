@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-utilities-library",
-  "version": "1.0.2",
+  "version": "1.0.3-beta.0",
   "description": "UMD Design System Utilities - Shared utility functions for all design system packages",
   "type": "module",
   "main": "dist/index.js",

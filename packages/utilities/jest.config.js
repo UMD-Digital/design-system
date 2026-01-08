@@ -1,12 +1,18 @@
-const path = require('path');
+import { createRequire } from 'module';
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
 
-module.exports = {
-  preset: 'ts-jest',
+const require = createRequire(import.meta.url);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+
+const rootConfig = require('../../jest.config.cjs');
+
+export default {
+  ...rootConfig,
+  displayName: 'utilities',
   testEnvironment: 'jsdom',
-  testMatch: ['**/__tests__/**/*.test.ts'],
-  moduleFileExtensions: ['ts', 'js'],
-  collectCoverage: true,
-  coverageDirectory: 'coverage',
+  rootDir: resolve(__dirname),
   collectCoverageFrom: [
     'source/**/*.ts',
     '!**/node_modules/**',
@@ -14,11 +20,7 @@ module.exports = {
     '!**/__tests__/**',
     '!**/index.ts', // Exclude barrel exports from coverage
   ],
-  transform: {
-    '^.+\\.ts$': ['ts-jest', { tsconfig: 'tsconfig.json' }],
-  },
   transformIgnorePatterns: [
     'node_modules/(?!(web-utilities-library)/)',
   ],
-  extensionsToTreatAsEsm: ['.ts'],
 };

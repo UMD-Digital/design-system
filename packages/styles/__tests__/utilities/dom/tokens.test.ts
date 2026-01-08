@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import { default as tokenRef } from '../../../source/utilities/dom/tokens';
+import { createTokens as tokenRef } from '../../../source/utilities/dom/tokens';
 
 describe('dom/tokens utilities', () => {
   describe('applyJSSTokensToDOM', () => {

@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-token-library",
-  "version": "1.0.0",
+  "version": "1.0.1-beta.0",
   "description": "Design tokens for the University of Maryland Design System - Foundation for Figma-to-code pipeline",
   "type": "module",
   "main": "dist/index.js",

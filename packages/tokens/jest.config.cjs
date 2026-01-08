@@ -1,14 +1,12 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  roots: ['<rootDir>/__tests__', '<rootDir>/source', '<rootDir>/scripts'],
+  roots: ['<rootDir>/__tests__', '<rootDir>/source'],
   testMatch: ['**/__tests__/**/*.test.ts'],
   collectCoverageFrom: [
     'source/**/*.ts',
-    'scripts/figma-sync/**/*.ts',
     '!source/**/*.test.ts',
     '!source/**/__tests__/**',
-    '!scripts/**/__tests__/**',
   ],
   coverageThreshold: {
     global: {

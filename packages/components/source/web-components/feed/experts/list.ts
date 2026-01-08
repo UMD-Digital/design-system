@@ -9,14 +9,16 @@ const tagName = 'umd-feed-experts-list';
 
 const createComponent: CreateComponentFunction = (element) => {
   const token = Attributes.getValue.feedToken({ element });
-  const rowCount = Number(Attributes.getValue.layoutRowCount({ element })) || 5;
-  const isDisplayList = Attributes.isDisplay.list({ element });
-  const categoriesAttribute = Attributes.getValue.feedFilterIds({ element });
-  const attributeMediaTrained = Attributes.getValue.mediaTrained({ element });
 
   if (!token) {
     return { element: document.createElement('div'), styles: '' };
   }
+
+  const rowCount = Number(Attributes.getValue.layoutRowCount({ element })) || 5;
+  const isDisplayList = Attributes.isDisplay.list({ element });
+  const categoriesAttribute = Attributes.getValue.feedFilterIds({ element });
+  const attributeMediaTrained = Attributes.getValue.mediaTrained({ element });
+  const expertIds = Attributes.getValue.ids({ element }) || '';
 
   return list({
     token,
@@ -28,6 +30,7 @@ const createComponent: CreateComponentFunction = (element) => {
     ...(attributeMediaTrained !== null && {
       isMediaTrained: attributeMediaTrained === 'true',
     }),
+    ...(expertIds && { ids: expertIds.split(',') }),
   });
 };
 

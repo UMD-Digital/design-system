@@ -904,6 +904,12 @@ const getValue = {
   giftUrl: createValueGetter({
     currentName: AttributeNames.information.gift,
   }),
+  id: createValueGetter({
+    currentName: AttributeNames.information.id,
+  }),
+  ids: createValueGetter({
+    currentName: AttributeNames.information.ids,
+  }),
   layoutColumnCount: createValueGetter({
     currentName: AttributeNames.layout.columnCount,
     deprecatedName: AttributeNames.deprecated.feed.FEED_COLUMN_COUNT,

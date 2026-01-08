@@ -70,6 +70,7 @@ export function createBaseFeed<TData, TVariables = any>(
     isLazyLoad = false,
     enableCategoryFallback = false,
     categories,
+    ids,
     entriesToRemove,
     fetchStrategy,
     displayStrategy,
@@ -121,6 +122,7 @@ export function createBaseFeed<TData, TVariables = any>(
   const baseProps = {
     token,
     categories,
+    ids,
     entriesToRemove,
     numberOfColumnsToShow,
     numberOfRowsToStart,

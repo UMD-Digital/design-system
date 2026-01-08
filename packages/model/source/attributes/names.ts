@@ -34,6 +34,8 @@ const information = {
   events: 'data-events',
   filterIds: 'data-filter-group-ids',
   gift: 'data-gift',
+  id: 'data-id',
+  ids: 'data-ids',
   mediaTrained: 'data-media-trained',
   news: 'data-news',
   removeIds: 'data-remove-entry-ids',

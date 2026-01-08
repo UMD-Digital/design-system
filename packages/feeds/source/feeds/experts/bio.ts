@@ -35,7 +35,7 @@ const createFetchProps = (token: string, expertId: string) => ({
   token,
   limit: 1,
   offset: 0,
-  id: expertId,
+  ids: [expertId],
 });
 
 /**

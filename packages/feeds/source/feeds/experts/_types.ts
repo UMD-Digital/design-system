@@ -20,12 +20,14 @@ export interface BaseProps {
   categories?: string[];
   /** Enable dark theme */
   isThemeDark?: boolean;
-  /** Filter experts who are media trained */
-  isMediaTrained?: boolean;
   /** Enable lazy loading with "Load more" button */
   isLazyLoad: boolean;
   /** IDs of entries to exclude from results */
   entriesToRemove?: string[];
+  /** Specific expert IDs to fetch and display */
+  ids?: string[];
+  /** Filter experts who are media trained */
+  isMediaTrained?: boolean;
   /** Optional callback to receive generated CSS styles */
   styleCallback?: (cssString: string) => void;
 }
@@ -68,8 +70,9 @@ export interface BioProps
     | 'isLazyLoad'
     | 'categories'
     | 'entriesToRemove'
+    | 'ids'
     | 'isMediaTrained'
   > {
   /** Expert ID to fetch and display */
-  expertId: string;
+  expertId?: string;
 }

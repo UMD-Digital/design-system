@@ -9,7 +9,7 @@ const tagName = 'umd-feed-expert-bio';
 
 const createComponent: CreateComponentFunction = (element) => {
   const token = Attributes.getValue.feedToken({ element });
-  const expertId = element.getAttribute('data-id') || '';
+  const expertId = Attributes.getValue.id({ element }) || '';
 
   if (!token || !expertId) {
     return { element: document.createElement('div'), styles: '' };

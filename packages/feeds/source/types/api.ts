@@ -70,6 +70,8 @@ export interface CategoryApiVariables extends BaseApiVariables {
   relatedToAll?: string[];
   /** Related to (generic - CraftCMS relatedTo) */
   relatedTo?: string[];
+  /** Specific entry IDs to include */
+  ids?: string[];
 }
 
 /**
@@ -90,9 +92,9 @@ export interface ExclusionApiVariables extends BaseApiVariables {
  * Combines all common API variable types for feed requests.
  * This is the most common variable type used across feeds.
  */
-export interface FeedApiVariables extends
-  CategoryApiVariables,
-  ExclusionApiVariables {
+export interface FeedApiVariables
+  extends CategoryApiVariables,
+    ExclusionApiVariables {
   /** Date filters for time-based queries */
   startDate?: string;
   rangeStart?: string;

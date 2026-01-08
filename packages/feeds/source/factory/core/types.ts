@@ -199,6 +199,8 @@ export interface BaseFeedConfig<TData, TVariables = any> {
   // Categories/Filtering
   /** Categories to filter by */
   categories?: string[];
+  /** Specific entry IDs to fetch and display */
+  ids?: string[];
   /** Whether to exclude certain entries */
   entriesToRemove?: Array<string | number>;
 

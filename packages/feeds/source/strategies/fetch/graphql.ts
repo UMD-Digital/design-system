@@ -150,7 +150,7 @@ export function createGraphQLFetchStrategy<
         numberOfRowsToStart,
         getOffset,
         entriesToRemove,
-        id,
+        ids,
         isMediaTrained,
       } = props;
 
@@ -172,8 +172,8 @@ export function createGraphQLFetchStrategy<
       }
 
       // Pass id through
-      if (id) {
-        baseVariables.id = id;
+      if (ids) {
+        baseVariables.ids = ids;
       }
 
       // Pass isMediaTrained through (can be true, false, or null)

@@ -19,6 +19,7 @@ const createComponent: CreateComponentFunction = (element) => {
   const rowCount = Number(Attributes.getValue.layoutRowCount({ element })) || 1;
   const categoriesAttribute = Attributes.getValue.feedFilterIds({ element });
   const attributeMediaTrained = Attributes.getValue.mediaTrained({ element });
+  const expertIds = Attributes.getValue.ids({ element }) || '';
 
   return grid({
     token,
@@ -32,6 +33,7 @@ const createComponent: CreateComponentFunction = (element) => {
     ...(attributeMediaTrained !== null && {
       isMediaTrained: attributeMediaTrained === 'true',
     }),
+    ...(expertIds && { ids: expertIds.split(',') }),
   });
 };
 

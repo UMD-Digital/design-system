@@ -142,9 +142,10 @@ const FRAGMENT_EXPERT_CATEGORIES = `
 /**
  * GraphQL query for experts
  * Supports filtering by ID, relatedTo, or fetching all experts
+ * When IDs are provided, orderBy defaults to "id" to preserve requested order
  */
 export const EXPERTS_QUERY = `
-  query getExpertsContent($limit: Int, $offset: Int, $ids: [QueryArgument], $relatedTo: [QueryArgument], $isMediaTrained:Boolean) {
+  query getExpertsContent($limit: Int, $offset: Int, $ids: [QueryArgument], $relatedTo: [QueryArgument], $isMediaTrained: Boolean, $orderBy: String) {
     entryCount(
       section: "experts"
       limit: $limit
@@ -162,7 +163,7 @@ export const EXPERTS_QUERY = `
       id: $ids
       relatedTo: $relatedTo
       expertsMediaTrained: $isMediaTrained
-      orderBy: "expertsNameLast"
+      orderBy: $orderBy
     ) {
       ...EntriesNativeFields
       ... on expertsContent_Entry {
@@ -230,6 +231,11 @@ export const expertsFetchStrategy = createGraphQLFetchStrategy<ExpertEntry>({
 
     if (ids) {
       variables.ids = Array.isArray(ids) ? ids : [ids];
+      // Order by ID when specific IDs are requested to preserve order
+      variables.orderBy = 'id';
+    } else {
+      // Default to ordering by last name
+      variables.orderBy = 'expertsNameLast';
     }
 
     if (categories) {

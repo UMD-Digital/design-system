@@ -65,6 +65,10 @@ module.exports = {
       __dirname,
       './__mocks__/@universityofmaryland/web-utilities-library/theme.js',
     ),
+    '^@universityofmaryland/web-utilities-library/styles$': path.resolve(
+      __dirname,
+      './__mocks__/@universityofmaryland/web-utilities-library/styles.js',
+    ),
     '^@universityofmaryland/web-builder-library$': path.resolve(
       __dirname,
       './__mocks__/webBuilderLibrary.js',

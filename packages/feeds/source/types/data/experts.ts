@@ -85,6 +85,20 @@ export interface ExpertSkills {
 }
 
 /**
+ * Category reference
+ *
+ * Basic category information from the API.
+ */
+export interface ExpertCategory {
+  /** Unique identifier for the category */
+  id: string;
+  /** Category name */
+  title: string;
+  /** URL to category page */
+  url?: string | null;
+}
+
+/**
  * Expert entry
  *
  * Complete data structure for an expert/faculty profile.
@@ -115,6 +129,12 @@ export interface ExpertEntry extends BaseEntry {
   } | null;
   /** Organizations and jobs the expert is affiliated with */
   organizations?: ExpertOrganization[];
+  /** Areas of expertise categories */
+  areasOfExpertise?: ExpertCategory[] | null;
+  /** Campus unit categories */
+  campusUnits?: ExpertCategory[] | null;
+  /** Tag categories */
+  tags?: ExpertCategory[] | null;
   /** Contact information */
   email?: string | null;
   linkedin?: string | null;

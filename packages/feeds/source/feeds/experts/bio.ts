@@ -235,6 +235,20 @@ export const expertsBio = (props: BioProps): ElementModel => {
   // Get element for manipulation (non-destructive)
   const container = containerBuilder.getElement();
 
+  // Validate required expertId
+  if (!expertId) {
+    logError('invalid_request', 'unknown');
+    const model = containerBuilder.build();
+    return {
+      element: model.element,
+      styles: '',
+      events: {},
+    };
+  }
+
+  // Store validated expertId for use in async function
+  const validExpertId = expertId;
+
   // Initialize state management
   const loading = new LoadingState({ isThemeDark });
   const state = new BioFeedState(loading.styles);
@@ -246,21 +260,21 @@ export const expertsBio = (props: BioProps): ElementModel => {
     loading.show(container);
 
     try {
-      const fetchProps = createFetchProps(token, expertId);
+      const fetchProps = createFetchProps(token, validExpertId);
       const variables = expertsFetchStrategy.composeApiVariables(fetchProps);
       const entries = await expertsFetchStrategy.fetchEntries(variables);
 
       loading.hide();
 
       if (!entries || entries.length === 0) {
-        logError('not_found', expertId);
+        logError('not_found', validExpertId);
         return;
       }
 
       await renderSuccess(container, entries[0], state, isThemeDark);
     } catch (error) {
       loading.hide();
-      logError('graphql_error', expertId, error);
+      logError('graphql_error', validExpertId, error);
     }
   };
 

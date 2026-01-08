@@ -216,6 +216,38 @@ const extractPronouns = (entry: ExpertEntry): string | null => {
   return entry.pronouns || null;
 };
 
+/**
+ * Extract areas of expertise as comma-separated string
+ *
+ * Extracts the titles from the areasOfExpertise categories
+ * and joins them with commas for display as subText.
+ *
+ * @param entry - Expert entry
+ * @returns Comma-separated string of expertise areas or null
+ *
+ * @example
+ * ```typescript
+ * const entry = {
+ *   areasOfExpertise: [
+ *     { id: '1', title: 'Climate Change' },
+ *     { id: '2', title: 'Environmental Policy' },
+ *     { id: '3', title: 'Sustainability' }
+ *   ]
+ * };
+ * extractAreasOfExpertise(entry);
+ * // Returns: "Climate Change, Environmental Policy, Sustainability"
+ * ```
+ */
+export const extractAreasOfExpertise = (entry: ExpertEntry): string | null => {
+  const areas = entry.areasOfExpertise;
+
+  if (!areas || areas.length === 0) {
+    return null;
+  }
+
+  return areas.map((area) => area.title).join(', ');
+};
+
 // ============================================================================
 // ELEMENT CREATION FUNCTIONS
 // ============================================================================
@@ -320,6 +352,19 @@ const createPronounsElement = (pronouns: string | null): HTMLElement | null => {
 };
 
 /**
+ * Create pronouns element
+ *
+ * @param pronouns - Pronouns text
+ * @returns Pronouns element or null
+ */
+const createExpertiseElement = (
+  expertise: string | null,
+): HTMLElement | null => {
+  if (!expertise) return null;
+  return createTextContainer({ text: expertise });
+};
+
+/**
  * Create contact elements from contact data
  *
  * @param contactData - Contact data object
@@ -369,19 +414,25 @@ const createBlockCardProps = (
   const association = extractPrimaryAssociation(entry);
   const imageData = extractImageData(entry, fullName);
   const pronouns = extractPronouns(entry);
+  const expertise = extractAreasOfExpertise(entry);
 
   // Create elements
   const name = createNameElement(fullName, profileUrl);
   const job = createJobElement(jobTitle);
   const associationElement = createAssociationElement(association);
-  const image = createImageElement(imageData, profileUrl, `View profile for ${fullName}`);
+  const image = createImageElement(
+    imageData,
+    profileUrl,
+    `View profile for ${fullName}`,
+  );
   const pronounsElement = createPronounsElement(pronouns);
+  const expertiseElement = createExpertiseElement(expertise);
 
   return person.block({
     name,
     pronouns: pronounsElement,
-    job,
     association: associationElement,
+    subText: expertiseElement,
     image,
     isThemeDark,
   });
@@ -407,19 +458,25 @@ const createListCardProps = (
   const association = extractPrimaryAssociation(entry);
   const imageData = extractImageData(entry, fullName);
   const pronouns = extractPronouns(entry);
+  const expertise = extractAreasOfExpertise(entry);
 
   // Create elements
   const name = createNameElement(fullName, profileUrl);
   const job = createJobElement(jobTitle);
   const associationElement = createAssociationElement(association);
-  const image = createImageElement(imageData, profileUrl, `View profile for ${fullName}`);
+  const image = createImageElement(
+    imageData,
+    profileUrl,
+    `View profile for ${fullName}`,
+  );
   const pronounsElement = createPronounsElement(pronouns);
+  const expertiseElement = createExpertiseElement(expertise);
 
   return person.list({
     name,
     pronouns: pronounsElement,
-    job,
     association: associationElement,
+    subText: expertiseElement,
     image,
     isThemeDark,
   });
@@ -446,20 +503,26 @@ const createTabularCardProps = (
   const imageData = extractImageData(entry, fullName);
   const contactData = extractContactData(entry);
   const pronouns = extractPronouns(entry);
+  const expertise = extractAreasOfExpertise(entry);
 
   // Create elements
   const name = createNameElement(fullName, profileUrl);
   const job = createJobElement(jobTitle);
   const associationElement = createAssociationElement(association);
-  const image = createImageElement(imageData, profileUrl, `View profile for ${fullName}`);
+  const image = createImageElement(
+    imageData,
+    profileUrl,
+    `View profile for ${fullName}`,
+  );
   const contactElements = createContactElements(contactData);
   const pronounsElement = createPronounsElement(pronouns);
+  const expertiseElement = createExpertiseElement(expertise);
 
   return person.tabular({
     name,
     pronouns: pronounsElement,
-    job,
     association: associationElement,
+    subText: expertiseElement,
     image,
     ...contactElements,
     isThemeDark,
@@ -533,21 +596,23 @@ export const mapExpertToBioProps = (
   const contactData = extractContactData(entry);
   const description = extractDescription(entry, displayType);
   const pronouns = extractPronouns(entry);
+  const expertise = extractAreasOfExpertise(entry);
 
   // Create elements
   const name = createNameElement(fullName, profileUrl, 'h1');
   const job = createJobElement(jobTitle);
   const associationElement = createAssociationElement(association);
-  const image = createImageElement(imageData); // No link for bio display
+  const image = createImageElement(imageData);
   const descriptionElement = createDescriptionElement(description);
   const contactElements = createContactElements(contactData);
   const pronounsElement = createPronounsElement(pronouns);
+  const expertiseElement = createExpertiseElement(expertise);
 
   return {
     name,
     pronouns: pronounsElement,
-    job,
     association: associationElement,
+    subText: expertiseElement,
     email: contactElements.email || null,
     linkedin: contactElements.linkedin || null,
     phone: null,

@@ -26,15 +26,12 @@ const baseElements = [
   'alert-page',
   'alert-site',
   'banner-promo',
-  'carousel-cards',
-  'carousel-image',
-  'carousel-multiple-image',
-  'carousel-people',
-  'carousel-thumbnail',
-  'carousel',
+  'events-date',
   'logo',
+  'nav-slider',
   'media-inline',
   'media-gif',
+  'modal',
   'pathway-highlight',
   'person-bio',
   'person-hero',
@@ -42,6 +39,7 @@ const baseElements = [
   'slider-events-feed',
   'slider-events',
   'stat',
+  'sticky-columns',
 ].reduce(
   (acc, name) => ({
     ...acc,
@@ -55,8 +53,12 @@ const feedElements = [
   'expert-bio',
   'experts-list',
   'experts-grid',
+  'expert-in-the-news',
   'events',
+  'events-grouped',
   'events-list',
+  'in-the-news-grid',
+  'in-the-news-list',
   'news',
   'news-list',
   'news-featured',
@@ -200,6 +202,48 @@ const breadcrumb = createElementStyles('umd-element-breadcrumb', {
   },
 });
 
+// Brand Cards
+const brandCards = createElementStyles('umd-element-brand-card-stack', {
+  notDefined: {
+    minHeight: `100vh`,
+    display: 'block',
+    opacity: '0',
+  },
+  defined: {
+    containerType: 'inline-size',
+    display: 'block',
+    opacity: '1',
+  },
+});
+
+// Carousels
+const carousels = [
+  'carousel',
+  'carousel-cards',
+  'carousel-image',
+  'carousel-image-wide',
+  'carousel-multiple-image',
+  'carousel-people',
+  'carousel-thumbnail',
+].reduce(
+  (acc, element) => ({
+    ...acc,
+    ...createElementStyles(element, {
+      notDefined: {
+        minHeight: `80vh`,
+        display: 'block',
+        opacity: '0',
+      },
+      defined: {
+        containerType: 'inline-size',
+        display: 'block',
+        opacity: '1',
+      },
+    }),
+  }),
+  {},
+);
+
 // Footer with specific styling
 const footer = createElementStyles('umd-element-footer', {
   notDefined: {
@@ -213,7 +257,6 @@ const footer = createElementStyles('umd-element-footer', {
 // Hero with specific styling
 const hero = [
   'umd-element-hero',
-  'umd-element-hero-brand-video',
   'umd-element-hero-expand',
   'umd-element-hero-logo',
 ].reduce(
@@ -222,6 +265,29 @@ const hero = [
     ...createElementStyles(element, {
       notDefined: {
         minHeight: `50vh`,
+        display: 'block',
+        opacity: '0',
+      },
+      defined: {
+        containerType: 'inline-size',
+        display: 'block',
+        opacity: '1',
+      },
+    }),
+  }),
+  {},
+);
+
+// Hero with specific styling
+const heroLarge = [
+  'umd-element-hero-brand-video',
+  'umd-element-hero-grid',
+].reduce(
+  (acc, element) => ({
+    ...acc,
+    ...createElementStyles(element, {
+      notDefined: {
+        minHeight: `100vh`,
         display: 'block',
         opacity: '0',
       },
@@ -420,10 +486,13 @@ const tabs = createElementStyles(tabsTag, {
 export const webComponentStyles = {
   ...elements,
   ...feedElements,
-  ...breadcrumb,
   ...action,
+  ...breadcrumb,
+  ...brandCards,
+  ...carousels,
   ...footer,
   ...hero,
+  ...heroLarge,
   ...heroMinimal,
   ...layoutExpand,
   ...pathway,

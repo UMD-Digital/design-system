@@ -7,11 +7,13 @@ const createElementStyles = (
   additionalStyles: ElementStyles = {},
 ) => ({
   [`${elementName}:not(:defined)`]: {
-    display: 'none',
+    opacity: '0',
+    minHeight: '10vh',
     ...additionalStyles.notDefined,
   },
   [`${elementName}:defined`]: {
-    display: 'block',
+    opacity: '1',
+    transition: 'opacity 0.2s ease-in-out',
     containerType: 'inline-size',
     ...additionalStyles.defined,
   },
@@ -203,6 +205,7 @@ const footer = createElementStyles('umd-element-footer', {
   notDefined: {
     backgroundColor: color.black,
     height: `calc(${spacing.md} * 20)`,
+    minHeight: '30vh',
     '& > *': { display: 'none' },
   },
 });
@@ -242,6 +245,19 @@ const heroMinimal = createElementStyles('umd-element-hero-minimal', {
   defined: {
     containerType: 'inline-size',
     display: 'block',
+    opacity: '1',
+    transition: 'opacity 0.2s ease-in-out',
+  },
+});
+
+// Layout Expand with specific styling
+const layoutExpand = createElementStyles('umd-layout-image-expand', {
+  notDefined: {
+    minHeight: `100vh`,
+    opacity: '0',
+  },
+  defined: {
+    containerType: 'inline-size',
     opacity: '1',
     transition: 'opacity 0.2s ease-in-out',
   },
@@ -309,6 +325,8 @@ const navigationAlertUtility = {
       ...createElementStyles(`umd-element-${name}`, {
         notDefined: {
           display: 'block !important',
+          opacity: '1 !important',
+          minHeight: '44px',
           '& > *': { display: 'none' },
         },
         defined: {
@@ -407,6 +425,7 @@ export const webComponentStyles = {
   ...footer,
   ...hero,
   ...heroMinimal,
+  ...layoutExpand,
   ...pathway,
   ...navigation,
   ...navigationSticky,

@@ -12,6 +12,7 @@
  */
 
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import * as token from '@universityofmaryland/web-token-library';
 import { card } from '@universityofmaryland/web-elements-library/composite';
 import {
   gridGap,
@@ -282,6 +283,12 @@ const createOverlayCard = (
 
     .${card.overlay.imageClassRef} {
       height: inherit;
+    }
+
+    @media (${token.media.queries.tablet.min}) {
+      .${card.overlay.imageClassRef} .card-overlay-image-container {
+        min-height: 560px;
+      }
     }
 
     .${card.overlay.imageClassRef} .umd-asset-image-wrapper-scaled {

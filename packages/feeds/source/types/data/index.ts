@@ -16,3 +16,4 @@ export * from './events';
 export * from './news';
 export * from './experts';
 export * from './academic';
+export * from './inTheNews';

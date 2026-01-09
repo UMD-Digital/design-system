@@ -68,6 +68,8 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
+      _types: resolve(__dirname, 'source/_types'),
+      helpers: resolve(__dirname, 'source/helpers'),
       atomic: resolve(__dirname, 'source/atomic'),
       composite: resolve(__dirname, 'source/composite'),
       layout: resolve(__dirname, 'source/layout'),

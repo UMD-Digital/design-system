@@ -10,6 +10,7 @@ export { FeedEventsList, eventsList } from './events/list';
 export { FeedExpertsBio, expertsBio } from './experts/bio';
 export { FeedExpertsGrid, expertsGrid } from './experts/grid';
 export { FeedExpertsList, expertsList } from './experts/list';
+export { FeedExpertInTheNews, expertsInTheNews } from './experts/in-the-news';
 export { FeedNewsFeatured, newsFeatured } from './news/featured';
 export { FeedNewsGrid, newsGrid } from './news/grid';
 export { FeedNewsList, newsList } from './news/list';

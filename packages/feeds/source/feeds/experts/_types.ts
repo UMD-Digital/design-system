@@ -76,3 +76,27 @@ export interface BioProps
   /** Expert ID to fetch and display */
   expertId?: string;
 }
+
+/**
+ * Props for expert "In The News" feed
+ *
+ * Displays an expert with their related news coverage in a two-column layout.
+ * Left column shows the expert's overlay card, right column shows news articles.
+ */
+export interface InTheNewsProps
+  extends Omit<
+    BaseProps,
+    | 'categories'
+    | 'entriesToRemove'
+    | 'ids'
+    | 'isMediaTrained'
+    | 'numberOfRowsToStart'
+    | 'isLazyLoad'
+  > {
+  /** Expert ID to fetch and display (required) */
+  expertId: string;
+  /** Number of news rows to start (2-10, default 5) */
+  numberOfRowsToStart?: number;
+  /** Enable lazy loading for news articles (default false) */
+  isLazyLoad?: boolean;
+}

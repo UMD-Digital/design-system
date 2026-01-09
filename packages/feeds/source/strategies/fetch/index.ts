@@ -19,4 +19,7 @@ export { ARTICLES_QUERY } from './news';
 export { expertsFetchStrategy } from './experts';
 export { EXPERTS_QUERY } from './experts';
 
+export { inTheNewsFetchStrategy } from './inTheNews';
+export { IN_THE_NEWS_QUERY } from './inTheNews';
+
 export { ACADEMIC_SLIDER_QUERY } from './academic';

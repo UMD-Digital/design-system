@@ -181,6 +181,11 @@ export function createGraphQLFetchStrategy<
         baseVariables.isMediaTrained = isMediaTrained;
       }
 
+      // Pass expertId through (for inTheNews strategy)
+      if (props.expertId) {
+        baseVariables.expertId = props.expertId;
+      }
+
       // Allow custom variable composition
       if (composeVariables) {
         return composeVariables(baseVariables);

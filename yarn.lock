@@ -1907,15 +1907,15 @@ __metadata:
   linkType: hard
 
 "@gerrit0/mini-shiki@npm:^3.17.0":
-  version: 3.20.0
-  resolution: "@gerrit0/mini-shiki@npm:3.20.0"
+  version: 3.21.0
+  resolution: "@gerrit0/mini-shiki@npm:3.21.0"
   dependencies:
-    "@shikijs/engine-oniguruma": "npm:^3.20.0"
-    "@shikijs/langs": "npm:^3.20.0"
-    "@shikijs/themes": "npm:^3.20.0"
-    "@shikijs/types": "npm:^3.20.0"
+    "@shikijs/engine-oniguruma": "npm:^3.21.0"
+    "@shikijs/langs": "npm:^3.21.0"
+    "@shikijs/themes": "npm:^3.21.0"
+    "@shikijs/types": "npm:^3.21.0"
     "@shikijs/vscode-textmate": "npm:^10.0.2"
-  checksum: 10c0/d362ea7c20709ddfaa651003d8013d58aa6e63ff1ec49f20461ce49708ad5963c2aec3c3b4c322bb4646b9c8c761ccbf5acfe7a29d8507930de163ba3591d4af
+  checksum: 10c0/4045d19854abfa4515381a04af07096c1de07471b029ee090375652d0199ed3fed6165a22bd9f8e8250c609124d8c05f5d4604eb6de87cf13513aa89cfb8d14e
   languageName: node
   linkType: hard
 
@@ -3097,41 +3097,41 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@shikijs/engine-oniguruma@npm:^3.20.0":
-  version: 3.20.0
-  resolution: "@shikijs/engine-oniguruma@npm:3.20.0"
+"@shikijs/engine-oniguruma@npm:^3.21.0":
+  version: 3.21.0
+  resolution: "@shikijs/engine-oniguruma@npm:3.21.0"
   dependencies:
-    "@shikijs/types": "npm:3.20.0"
+    "@shikijs/types": "npm:3.21.0"
     "@shikijs/vscode-textmate": "npm:^10.0.2"
-  checksum: 10c0/4a5a8f316a8482e799cd836c8e3f8ba83274b3631b2d66ec82ad839b0ee1dd3df50a08480f791d59f22e42bf6b707032f043a9f651445efc04e59b7ec9e669c9
+  checksum: 10c0/cb17c034b04e1333f90f267081b7fac0b53e56031f7d067723363a72cdbdf79e567dea216bbcae38a6d4b910570c2dd60a953ca941f4834768c0bb721131af5f
   languageName: node
   linkType: hard
 
-"@shikijs/langs@npm:^3.20.0":
-  version: 3.20.0
-  resolution: "@shikijs/langs@npm:3.20.0"
+"@shikijs/langs@npm:^3.21.0":
+  version: 3.21.0
+  resolution: "@shikijs/langs@npm:3.21.0"
   dependencies:
-    "@shikijs/types": "npm:3.20.0"
-  checksum: 10c0/6830460025d0df4c527ffeacf0a78cd4331ffde1cfcd1e8028aa9814be8a4cea84367dd938528a9b55de72b163c58ad3576915ea08c3d0a29ef1dc80e120116c
+    "@shikijs/types": "npm:3.21.0"
+  checksum: 10c0/79cfc2b8ac1f5c938bfb18db6233f86ca96948970068c2cc94559e30abac2036c35a2ae52015d07f72b6decfd6b2ae86321f9547ae0f994b6131e362781fbf1f
   languageName: node
   linkType: hard
 
-"@shikijs/themes@npm:^3.20.0":
-  version: 3.20.0
-  resolution: "@shikijs/themes@npm:3.20.0"
+"@shikijs/themes@npm:^3.21.0":
+  version: 3.21.0
+  resolution: "@shikijs/themes@npm:3.21.0"
   dependencies:
-    "@shikijs/types": "npm:3.20.0"
-  checksum: 10c0/d6fc059c51c3c0694e026cc1f80eed927d9b91adaeda0fb3fd5725eabc6d066aaf022919def435245446ae91e3da541ed6d88d875cf59a35bfbabb6920efb6da
+    "@shikijs/types": "npm:3.21.0"
+  checksum: 10c0/f128a874231d84d93e16f347557e844c2b6493b41196b52e36a79874598abe2dbf3ee981dfe52dd09f8d7e21ed4ff41ab03c28de7a21313d9a0b691fbd3690c0
   languageName: node
   linkType: hard
 
-"@shikijs/types@npm:3.20.0, @shikijs/types@npm:^3.20.0":
-  version: 3.20.0
-  resolution: "@shikijs/types@npm:3.20.0"
+"@shikijs/types@npm:3.21.0, @shikijs/types@npm:^3.21.0":
+  version: 3.21.0
+  resolution: "@shikijs/types@npm:3.21.0"
   dependencies:
     "@shikijs/vscode-textmate": "npm:^10.0.2"
     "@types/hast": "npm:^3.0.4"
-  checksum: 10c0/7faea130362a6cdf3d66fcb47d6b609a8e0209e76ba86688f56a65411b6ae400a37414cd1a3a2fe1ee3fe39f18e274585d3972129c7e79244aaa0c15bc8f1c21
+  checksum: 10c0/a86038c7ad10bb8104ea07cfa0dddf1e0646cf3b70a382978939c6144b21e5891395f5e705b7393476320f6196d86c6d8cd7ad6b3e1b356eb6a7e40c298c98f3
   languageName: node
   linkType: hard
 
@@ -3520,11 +3520,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@universityofmaryland/web-builder-library@workspace:*, @universityofmaryland/web-builder-library@workspace:packages/builder":
+"@universityofmaryland/web-builder-library@workspace:packages/builder":
   version: 0.0.0-use.local
   resolution: "@universityofmaryland/web-builder-library@workspace:packages/builder"
   dependencies:
-    "@universityofmaryland/web-utilities-library": "npm:^1.0.0"
     "@vitejs/plugin-legacy": "npm:^7.2.1"
     typescript: "npm:^5.8.2"
     vite: "npm:^7.1.4"
@@ -3532,6 +3531,7 @@ __metadata:
     vite-plugin-dts: "npm:^4.5.4"
   peerDependencies:
     "@universityofmaryland/web-styles-library": ^1.0.0
+    "@universityofmaryland/web-utilities-library": ^1.0.0
   languageName: unknown
   linkType: soft
 
@@ -3540,53 +3540,56 @@ __metadata:
   resolution: "@universityofmaryland/web-components-library@workspace:packages/components"
   dependencies:
     "@types/postcss-js": "npm:^4.0.4"
-    "@universityofmaryland/web-elements-library": "npm:^1.5.4"
-    "@universityofmaryland/web-feeds-library": "npm:^1.2.4"
-    "@universityofmaryland/web-icons-library": "npm:^1.0.1"
-    "@universityofmaryland/web-model-library": "npm:^1.0.0"
-    "@universityofmaryland/web-styles-library": "npm:^1.7.3"
     "@universityofmaryland/web-token-library": "npm:^1.0.0"
-    "@universityofmaryland/web-utilities-library": "npm:^1.0.2"
     postcss-js: "npm:^4.0.1"
     tw-to-css: "npm:^0.0.12"
     vite-plugin-dts: "npm:^4.5.4"
+  peerDependencies:
+    "@universityofmaryland/web-builder-library": ^1.0.0
+    "@universityofmaryland/web-elements-library": ^1.0.0
+    "@universityofmaryland/web-feeds-library": ^1.0.0
+    "@universityofmaryland/web-icons-library": ^1.0.0
+    "@universityofmaryland/web-model-library": ^1.0.0
+    "@universityofmaryland/web-styles-library": ^1.0.0
+    "@universityofmaryland/web-utilities-library": ^1.0.0
   languageName: unknown
   linkType: soft
 
-"@universityofmaryland/web-elements-library@workspace:*, @universityofmaryland/web-elements-library@workspace:packages/elements":
+"@universityofmaryland/web-elements-library@workspace:packages/elements":
   version: 0.0.0-use.local
   resolution: "@universityofmaryland/web-elements-library@workspace:packages/elements"
   dependencies:
     "@types/postcss-js": "npm:^4.0.4"
-    "@universityofmaryland/web-builder-library": "npm:^1.0.0"
     "@universityofmaryland/web-token-library": "npm:^1.0.0"
-    "@universityofmaryland/web-utilities-library": "npm:^1.0.0"
     "@vitejs/plugin-legacy": "npm:^7.2.1"
     vite: "npm:^7.1.4"
     vite-plugin-checker: "npm:^0.10.3"
     vite-plugin-dts: "npm:^4.5.4"
   peerDependencies:
+    "@universityofmaryland/web-builder-library": ^1.0.0
     "@universityofmaryland/web-icons-library": ^1.0.0
     "@universityofmaryland/web-styles-library": ^1.0.0
+    "@universityofmaryland/web-utilities-library": ^1.0.0
   languageName: unknown
   linkType: soft
 
-"@universityofmaryland/web-feeds-library@workspace:*, @universityofmaryland/web-feeds-library@workspace:packages/feeds":
+"@universityofmaryland/web-feeds-library@workspace:packages/feeds":
   version: 0.0.0-use.local
   resolution: "@universityofmaryland/web-feeds-library@workspace:packages/feeds"
   dependencies:
     "@types/postcss-js": "npm:^4.0.4"
-    "@universityofmaryland/web-builder-library": "npm:^1.0.0"
-    "@universityofmaryland/web-elements-library": "npm:^1.0.0"
-    "@universityofmaryland/web-styles-library": "npm:^1.0.0"
     "@universityofmaryland/web-token-library": "npm:^1.0.0"
-    "@universityofmaryland/web-utilities-library": "npm:^1.0.0"
     vite-plugin-checker: "npm:^0.10.3"
     vite-plugin-dts: "npm:^4.5.4"
+  peerDependencies:
+    "@universityofmaryland/web-builder-library": ^1.0.0
+    "@universityofmaryland/web-elements-library": ^1.0.0
+    "@universityofmaryland/web-styles-library": ^1.0.0
+    "@universityofmaryland/web-utilities-library": ^1.0.0
   languageName: unknown
   linkType: soft
 
-"@universityofmaryland/web-icons-library@workspace:*, @universityofmaryland/web-icons-library@workspace:packages/icons":
+"@universityofmaryland/web-icons-library@workspace:packages/icons":
   version: 0.0.0-use.local
   resolution: "@universityofmaryland/web-icons-library@workspace:packages/icons"
   dependencies:
@@ -3598,7 +3601,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@universityofmaryland/web-model-library@workspace:*, @universityofmaryland/web-model-library@workspace:packages/model":
+"@universityofmaryland/web-model-library@workspace:packages/model":
   version: 0.0.0-use.local
   resolution: "@universityofmaryland/web-model-library@workspace:packages/model"
   dependencies:
@@ -3613,7 +3616,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@universityofmaryland/web-styles-library@workspace:*, @universityofmaryland/web-styles-library@workspace:packages/styles":
+"@universityofmaryland/web-styles-library@workspace:packages/styles":
   version: 0.0.0-use.local
   resolution: "@universityofmaryland/web-styles-library@workspace:packages/styles"
   dependencies:
@@ -3635,7 +3638,6 @@ __metadata:
   resolution: "@universityofmaryland/web-token-library@workspace:packages/tokens"
   dependencies:
     "@vitejs/plugin-legacy": "npm:^7.2.1"
-    tsx: "npm:^4.7.0"
     typescript: "npm:^5.8.2"
     vite: "npm:^7.1.4"
     vite-plugin-checker: "npm:^0.10.3"
@@ -3643,11 +3645,10 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@universityofmaryland/web-utilities-library@workspace:*, @universityofmaryland/web-utilities-library@workspace:packages/utilities":
+"@universityofmaryland/web-utilities-library@workspace:packages/utilities":
   version: 0.0.0-use.local
   resolution: "@universityofmaryland/web-utilities-library@workspace:packages/utilities"
   dependencies:
-    "@universityofmaryland/web-styles-library": "npm:^1.0.0"
     "@universityofmaryland/web-token-library": "npm:^1.0.0"
     postcss: "npm:^8.4.49"
     postcss-js: "npm:^4.0.1"
@@ -3655,6 +3656,8 @@ __metadata:
     vite: "npm:^7.1.4"
     vite-plugin-checker: "npm:^0.10.3"
     vite-plugin-dts: "npm:^4.5.4"
+  peerDependencies:
+    "@universityofmaryland/web-styles-library": ^1.0.0
   languageName: unknown
   linkType: soft
 
@@ -4655,11 +4658,11 @@ __metadata:
   linkType: hard
 
 "baseline-browser-mapping@npm:^2.9.0":
-  version: 2.9.11
-  resolution: "baseline-browser-mapping@npm:2.9.11"
+  version: 2.9.14
+  resolution: "baseline-browser-mapping@npm:2.9.14"
   bin:
     baseline-browser-mapping: dist/cli.js
-  checksum: 10c0/eba49fcc1b33ab994aeeb73a4848f2670e06a0886dd5b903689ae6f60d47e7f1bea9262dbb2548c48179e858f7eda2b82ddf941ae783b862f4dcc51085a246f2
+  checksum: 10c0/c9bf03c65e9a6690e4abbe60c269ad14ce5578cac09fed51ff1ed6e899e049afb094c2b173365cb2397d48012a83747500db6e79dca2761faf548aee10574d3d
   languageName: node
   linkType: hard
 
@@ -4924,9 +4927,9 @@ __metadata:
   linkType: hard
 
 "caniuse-lite@npm:^1.0.30001759, caniuse-lite@npm:^1.0.30001760":
-  version: 1.0.30001762
-  resolution: "caniuse-lite@npm:1.0.30001762"
-  checksum: 10c0/93707eac5b0240af3f2ce6e2d7ab504a6fefcf9c2f9cd8fb9d488e496a333c61e557dab0472c1b00c17bc386a5dbb792aa4c778cda2d768e17f986617d7aec53
+  version: 1.0.30001763
+  resolution: "caniuse-lite@npm:1.0.30001763"
+  checksum: 10c0/4524f6ae15a18c8510849e43baed01441940c50cab29687cba62dde6354a49549d5bcb7f79b864dadf3f0c8c342038c63131cdb64af382a501593106b1d0028b
   languageName: node
   linkType: hard
 
@@ -6020,7 +6023,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.27.0, esbuild@npm:~0.27.0":
+"esbuild@npm:^0.27.0":
   version: 0.27.2
   resolution: "esbuild@npm:0.27.2"
   dependencies:
@@ -6659,15 +6662,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"get-tsconfig@npm:^4.7.5":
-  version: 4.13.0
-  resolution: "get-tsconfig@npm:4.13.0"
-  dependencies:
-    resolve-pkg-maps: "npm:^1.0.0"
-  checksum: 10c0/2c49ef8d3907047a107f229fd610386fe3b7fe9e42dfd6b42e7406499493cdda8c62e83e57e8d7a98125610774b9f604d3a0ff308d7f9de5c7ac6d1b07cb6036
-  languageName: node
-  linkType: hard
-
 "git-raw-commits@npm:^3.0.0":
   version: 3.0.0
   resolution: "git-raw-commits@npm:3.0.0"
@@ -7090,11 +7084,11 @@ __metadata:
   linkType: hard
 
 "iconv-lite@npm:^0.7.0":
-  version: 0.7.1
-  resolution: "iconv-lite@npm:0.7.1"
+  version: 0.7.2
+  resolution: "iconv-lite@npm:0.7.2"
   dependencies:
     safer-buffer: "npm:>= 2.1.2 < 3.0.0"
-  checksum: 10c0/f5c9e2bddd7101a71b07a381ace44ebdc65ca76a10be0e9e64d372b511132acc4ee41b830962f438840d492cd6f9e08c237289f760d6a7fed754e61cffcb6757
+  checksum: 10c0/3c228920f3bd307f56bf8363706a776f4a060eb042f131cd23855ceca962951b264d0997ab38a1ad340e1c5df8499ed26e1f4f0db6b2a2ad9befaff22f14b722
   languageName: node
   linkType: hard
 
@@ -11223,13 +11217,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"resolve-pkg-maps@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "resolve-pkg-maps@npm:1.0.0"
-  checksum: 10c0/fb8f7bbe2ca281a73b7ef423a1cbc786fb244bd7a95cbe5c3fba25b27d327150beca8ba02f622baea65919a57e061eb5005204daa5f93ed590d9b77463a567ab
-  languageName: node
-  linkType: hard
-
 "resolve.exports@npm:^2.0.0":
   version: 2.0.3
   resolution: "resolve.exports@npm:2.0.3"
@@ -12413,22 +12400,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tsx@npm:^4.7.0":
-  version: 4.21.0
-  resolution: "tsx@npm:4.21.0"
-  dependencies:
-    esbuild: "npm:~0.27.0"
-    fsevents: "npm:~2.3.3"
-    get-tsconfig: "npm:^4.7.5"
-  dependenciesMeta:
-    fsevents:
-      optional: true
-  bin:
-    tsx: dist/cli.mjs
-  checksum: 10c0/f5072923cd8459a1f9a26df87823a2ab5754641739d69df2a20b415f61814322b751fa6be85db7c6ec73cf68ba8fac2fd1cfc76bdb0aa86ded984d84d5d2126b
-  languageName: node
-  linkType: hard
-
 "tuf-js@npm:^1.1.7":
   version: 1.1.7
   resolution: "tuf-js@npm:1.1.7"
@@ -12922,8 +12893,8 @@ __metadata:
   linkType: hard
 
 "vite@npm:^7.1.4":
-  version: 7.3.0
-  resolution: "vite@npm:7.3.0"
+  version: 7.3.1
+  resolution: "vite@npm:7.3.1"
   dependencies:
     esbuild: "npm:^0.27.0"
     fdir: "npm:^6.5.0"
@@ -12972,7 +12943,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: 10c0/0457c196cdd5761ec351c0f353945430fbad330e615b9eeab729c8ae163334f18acdc1d9cd7d9d673dbf111f07f6e4f0b25d4ac32360e65b4a6df9991046f3ff
+  checksum: 10c0/5c7548f5f43a23533e53324304db4ad85f1896b1bfd3ee32ae9b866bac2933782c77b350eb2b52a02c625c8ad1ddd4c000df077419410650c982cd97fde8d014
   languageName: node
   linkType: hard
 

@@ -69,10 +69,10 @@
   },
   "dependencies": {
     "@universityofmaryland/web-token-library": "^1.0.0",
-    "postcss": "~8.4.21",
-    "postcss-discard-duplicates": "~7.0.1",
-    "postcss-js": "~4.0.1",
-    "postcss-nesting": "~13.0.1"
+    "postcss": "^8.5.6",
+    "postcss-discard-duplicates": "^7.0.1",
+    "postcss-js": "^4.0.1",
+    "postcss-nesting": "^13.0.1"
   },
   "devDependencies": {
     "@vitejs/plugin-legacy": "^7.2.1",

@@ -57,7 +57,7 @@ export const toString = async (
   if (options.prettify) {
     return cssString;
   } else {
-    const result = await postcss().process(cssString, { from: undefined });
+    const result = await (postcss() as any).process(cssString, { from: undefined });
 
     return removeDuplicates(
       result.css

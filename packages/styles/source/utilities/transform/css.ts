@@ -407,7 +407,7 @@ export function processNestedSelector(
  */
 
 export const removeDuplicates = async (css: string) => {
-  const result = await postcss([discardDuplicates()]).process(css, {
+  const result = await (postcss([discardDuplicates()]) as any).process(css, {
     from: undefined,
   });
   return result.css;

@@ -27,6 +27,11 @@
       "import": "./dist/experts.js",
       "default": "./dist/experts.js"
     },
+    "./in-the-news": {
+      "types": "./dist/in-the-news.d.ts",
+      "import": "./dist/in-the-news.js",
+      "default": "./dist/in-the-news.js"
+    },
     "./news": {
       "types": "./dist/news.d.ts",
       "import": "./dist/news.js",

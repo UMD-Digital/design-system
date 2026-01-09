@@ -45,6 +45,15 @@ export const IN_THE_NEWS_QUERY = `
           link
         }
         attribution: inTheNewsAttribution
+        author: inTheNewsAuthor
+        expert: inTheNewsLinkExpert {
+          title
+          ... on expertsContent_Entry {
+            firstName: expertsNameFirst
+            middleName: expertsNameMiddle
+            lastName: expertsNameLast
+          }
+        }
       }
     }
   }

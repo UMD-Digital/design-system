@@ -11,6 +11,13 @@ export interface InTheNewsExternalLink {
   link?: string;
 }
 
+export interface InTheNewsExpert {
+  title?: string;
+  firstName?: string;
+  middleName?: string;
+  lastName?: string;
+}
+
 export interface InTheNewsEntry extends BaseEntry {
   uid?: string;
   status?: string;
@@ -23,4 +30,6 @@ export interface InTheNewsEntry extends BaseEntry {
   summary?: InTheNewsSummary;
   externalLink?: InTheNewsExternalLink;
   attribution?: string;
+  author?: string;
+  expert?: InTheNewsExpert[];
 }

@@ -42,9 +42,35 @@ const createSummaryElement = (entry: InTheNewsEntry): HTMLElement | null => {
   return createTextContainer({ text: summary, allowHTML: true });
 };
 
-const createAttributionElement = (entry: InTheNewsEntry): HTMLElement | null => {
-  if (!entry.attribution) return null;
-  return createTextContainer({ text: entry.attribution });
+const formatExpertName = (entry: InTheNewsEntry): string | null => {
+  const expert = entry.expert?.[0];
+  if (!expert) return null;
+
+  const nameParts = [
+    expert.firstName,
+    expert.middleName,
+    expert.lastName,
+  ].filter(Boolean);
+
+  return nameParts.length > 0 ? nameParts.join(' ') : expert.title || null;
+};
+
+const getAttributionText = (entry: InTheNewsEntry): string | null => {
+  // Priority: expert name > author > attribution
+  const expertName = formatExpertName(entry);
+  if (expertName) return expertName;
+
+  if (entry.author) return entry.author;
+
+  return entry.attribution || null;
+};
+
+const createAttributionElement = (
+  entry: InTheNewsEntry,
+): HTMLElement | null => {
+  const attributionText = getAttributionText(entry);
+  if (!attributionText) return null;
+  return createTextContainer({ text: attributionText });
 };
 
 const createDateElement = (entry: InTheNewsEntry): HTMLElement | null => {
@@ -54,25 +80,52 @@ const createDateElement = (entry: InTheNewsEntry): HTMLElement | null => {
   const formattedDate = formatDate(dateString);
   if (!formattedDate) return null;
 
-  return createTimeElement({ datetime: dateString, displayText: formattedDate });
+  return createTimeElement({
+    datetime: dateString,
+    displayText: formattedDate,
+  });
 };
 
 export const inTheNewsDisplayStrategy: DisplayStrategy<InTheNewsEntry> = {
-  layoutType: 'list',
+  layoutType: 'grid',
 
   mapEntryToCard: (
     entry: InTheNewsEntry,
     options: CardMappingOptions,
   ): ElementModel => {
-    const { isThemeDark = false } = options;
+    const {
+      isThemeDark = false,
+      isTransparent = false,
+      isAligned = true,
+      cardType = 'block',
+    } = options;
 
-    return card.list({
+    const commonProps = {
       headline: createHeadlineElement(entry),
       text: createSummaryElement(entry),
       date: createDateElement(entry),
       eyebrow: createAttributionElement(entry),
       isThemeDark,
-      isAligned: false,
+    };
+
+    console.log(
+      card.list({
+        ...commonProps,
+        isAligned: false,
+      }),
+    );
+
+    if (cardType === 'list') {
+      return card.list({
+        ...commonProps,
+        isAligned: false,
+      });
+    }
+
+    return card.block({
+      ...commonProps,
+      isAligned,
+      isTransparent,
     });
   },
 };

@@ -49,6 +49,10 @@ const metaClass: string = (() => {
 export const eyebrowStyles = {
   element: {
     display: 'block',
+
+    ['*']: {
+      color: 'currentColor',
+    },
   },
   siblingAfter: {
     marginTop: token.spacing.min,

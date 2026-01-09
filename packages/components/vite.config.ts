@@ -29,6 +29,10 @@ const WORKSPACE_ALIASES: Array<{ find: string | RegExp; replacement: string }> =
       replacement: resolve(__dirname, '../feeds/dist/experts.js'),
     },
     {
+      find: '@universityofmaryland/web-feeds-library/in-the-news',
+      replacement: resolve(__dirname, '../feeds/dist/in-the-news.js'),
+    },
+    {
       find: '@universityofmaryland/web-feeds-library/academic',
       replacement: resolve(__dirname, '../feeds/dist/academic.js'),
     },

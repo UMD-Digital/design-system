@@ -21,6 +21,17 @@ export * as academic from './feeds/academic';
 export * as experts from './feeds/experts';
 
 /**
+ * In The News feed components for displaying news mentions.
+ * @example
+ * ```typescript
+ * import * as Feeds from '@universityofmaryland/web-feeds-library';
+ * const inTheNewsGrid = Feeds.inTheNews.grid({ token: 'your-token' });
+ * ```
+ * @since 1.17.0
+ */
+export * as inTheNews from './feeds/in-the-news';
+
+/**
  * Events feed components for displaying event listings.
  * @example
  * ```typescript

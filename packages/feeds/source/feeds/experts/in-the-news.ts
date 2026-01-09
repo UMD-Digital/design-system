@@ -1,7 +1,7 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-token-library';
 import { card } from '@universityofmaryland/web-elements-library/composite';
-import { gridOffset } from '@universityofmaryland/web-elements-library/layout';
+import { gridOffset, stacked } from '@universityofmaryland/web-elements-library/layout';
 import {
   LoadingState,
   PaginationState,
@@ -136,21 +136,20 @@ const createNewsListContainer = (
   state: InTheNewsFeedState,
   isThemeDark: boolean,
 ): HTMLElement => {
-  const listContainer = document.createElement('div');
-  listContainer.id = 'umd-expert-in-the-news-list';
-  listContainer.style.display = 'flex';
-  listContainer.style.flexDirection = 'column';
-  listContainer.style.gap = '16px';
+  const stackedLayout = stacked({ isThemeDark, showDividers: true, gap: '0' });
+  stackedLayout.element.id = 'umd-expert-in-the-news-list';
+  state.addStyles(stackedLayout.styles);
 
   entries.forEach((entry) => {
     const newsCard = inTheNewsDisplayStrategy.mapEntryToCard(entry, {
       isThemeDark,
+      cardType: 'list',
     });
-    listContainer.appendChild(newsCard.element);
+    stackedLayout.element.appendChild(newsCard.element);
     state.addStyles(newsCard.styles);
   });
 
-  return listContainer;
+  return stackedLayout.element;
 };
 
 const appendNewsEntries = (
@@ -168,6 +167,7 @@ const appendNewsEntries = (
   entries.forEach((entry) => {
     const newsCard = inTheNewsDisplayStrategy.mapEntryToCard(entry, {
       isThemeDark,
+      cardType: 'list',
     });
     listContainer.appendChild(newsCard.element);
     state.addStyles(newsCard.styles);

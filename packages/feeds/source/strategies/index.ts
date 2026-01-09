@@ -30,9 +30,10 @@ export {
   eventsDisplayStrategy,
   newsDisplayStrategy,
   expertsDisplayStrategy,
+  inTheNewsDisplayStrategy,
 } from './display';
 
-export type { EventEntry, NewsEntry, ExpertEntry } from './display';
+export type { EventEntry, NewsEntry, ExpertEntry, InTheNewsEntry } from './display';
 
 // Fetch strategies
 export {
@@ -41,6 +42,7 @@ export {
   eventsFetchStrategyRange,
   newsFetchStrategy,
   expertsFetchStrategy,
+  inTheNewsFetchStrategy,
 } from './fetch';
 
 export type { GraphQLFetchConfig } from './fetch';

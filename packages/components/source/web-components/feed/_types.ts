@@ -15,3 +15,10 @@ export interface newsProps extends baseFeedProps {
   isLayoutReversed?: boolean;
   entriesToRemove?: string[];
 }
+
+export interface inTheNewsProps {
+  token: string;
+  isThemeDark?: boolean;
+  isLazyLoad: boolean;
+  entriesToRemove?: string[];
+}

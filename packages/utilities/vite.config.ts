@@ -22,6 +22,7 @@ export default defineConfig({
         styles: resolve(__dirname, 'source/styles/index.ts'),
         theme: resolve(__dirname, 'source/theme/index.ts'),
         validation: resolve(__dirname, 'source/validation/index.ts'),
+        'resource-hints': resolve(__dirname, 'source/resource-hints/index.ts'),
       },
       name: 'UniversityOfMarylandWebUtilitiesLibrary',
       formats: ['es'],

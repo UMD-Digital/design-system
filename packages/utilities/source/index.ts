@@ -25,3 +25,4 @@ export * from './string';
 export * from './styles';
 export * from './theme';
 export * from './validation';
+export * from './resource-hints';

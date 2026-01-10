@@ -222,6 +222,13 @@ export interface AnimationProps {
   animationType?: 'fade' | 'slide' | 'scale' | 'none';
 }
 
+// ===== Loading Props =====
+
+export interface LoadingProps {
+  imageLoading?: 'eager' | 'lazy';
+  imageFetchPriority?: 'high' | 'low' | 'auto';
+}
+
 // ===== Function Types =====
 
 export type ElementCreatorFn<T = any> = (props: T) => ElementModel;

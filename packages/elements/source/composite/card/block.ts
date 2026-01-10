@@ -12,6 +12,7 @@ export const createCompositeCardBlock = (props: CardBlockProps) => {
     hasBorder,
     hasEyebrowRibbon,
     image,
+    imageLoading = 'lazy',
     isAligned,
     isThemeDark,
     isTransparent,
@@ -34,7 +35,7 @@ export const createCompositeCardBlock = (props: CardBlockProps) => {
             isScaled: true,
             isAspectStandard: isAligned,
             dateSign,
-            imageLoading: 'lazy',
+            imageLoading,
           }),
         ],
         customStyles: {

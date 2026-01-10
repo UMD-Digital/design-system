@@ -28,20 +28,29 @@ const slots: SlotConfiguration = {
  * Extracts overlay content from element slots
  * @internal
  */
-const MakeOverlayContent = ({ element }: { element: HTMLElement }) => ({
-  eyebrow: Slots.eyebrow.default({ element }),
-  headline: Slots.headline.default({ element }),
-  text: Slots.text.default({ element }),
-  date: Slots.date.default({ element }),
-  actions: Slots.actions.default({ element }),
-  ctaIcon: createStyledSlotOrClone({
-    element,
-    slotRef: Slots.name.CTA_ICON,
-  }),
-  isQuote: Attributes.isVisual.quote({ element }),
-  isThemeDark: Attributes.isTheme.dark({ element }),
-  isThemeLight: Attributes.isTheme.light({ element }),
-});
+const MakeOverlayContent = ({ element }: { element: HTMLElement }) => {
+  const loadingPriority = Attributes.getValue.loadingPriority({ element });
+  const imageLoading =
+    loadingPriority === 'eager' || loadingPriority === 'lazy'
+      ? loadingPriority
+      : 'lazy';
+
+  return {
+    eyebrow: Slots.eyebrow.default({ element }),
+    headline: Slots.headline.default({ element }),
+    text: Slots.text.default({ element }),
+    date: Slots.date.default({ element }),
+    actions: Slots.actions.default({ element }),
+    ctaIcon: createStyledSlotOrClone({
+      element,
+      slotRef: Slots.name.CTA_ICON,
+    }),
+    isQuote: Attributes.isVisual.quote({ element }),
+    isThemeDark: Attributes.isTheme.dark({ element }),
+    isThemeLight: Attributes.isTheme.light({ element }),
+    imageLoading,
+  };
+};
 
 /**
  * Creates an overlay card component with image or color background

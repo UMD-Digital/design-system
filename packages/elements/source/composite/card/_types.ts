@@ -4,6 +4,7 @@ import {
   type LinkElement,
   type ThemeProps,
   type UMDElement,
+  type LoadingProps,
 } from '../../_types';
 
 /**
@@ -42,6 +43,7 @@ export interface CardEventProps {
 export interface CardBlockProps
   extends CardMediaProps,
     CardEventProps,
+    LoadingProps,
     Pick<ThemeProps, 'isThemeDark'> {
   headline: ContentElement;
   text?: ContentElement;
@@ -60,6 +62,7 @@ export interface CardBlockProps
 export interface CardListProps
   extends CardMediaProps,
     CardEventProps,
+    LoadingProps,
     Pick<ThemeProps, 'isThemeDark'> {
   headline: ContentElement;
   text?: ContentElement;
@@ -73,6 +76,7 @@ export interface CardListProps
  */
 export interface CardOverlayProps
   extends CardEventProps,
+    LoadingProps,
     Partial<Pick<ThemeProps, 'isThemeDark' | 'isThemeLight'>> {
   headline: ContentElement;
   text?: ContentElement;

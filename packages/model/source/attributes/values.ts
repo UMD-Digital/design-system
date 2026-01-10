@@ -78,11 +78,17 @@ const type = {
   SIMPLE: 'simple',
 };
 
+const loading = {
+  EAGER: 'eager',
+  LAZY: 'lazy',
+};
+
 export const AttributeValues = {
   campaign,
   data,
   display,
   layout,
+  loading,
   search,
   size,
   state,

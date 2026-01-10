@@ -24,6 +24,10 @@ const feature = {
   imageExpand: 'data-image-expand',
 };
 
+const loading = {
+  priority: 'data-loading-priority',
+};
+
 const feed = {
   type: 'data-feed-type',
 };
@@ -159,6 +163,7 @@ export const AttributeNames = {
   feed,
   information,
   layout,
+  loading,
   sharing,
   social,
   theme,

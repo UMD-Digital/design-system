@@ -13,6 +13,7 @@ interface CardData {
   isThemeDark: boolean;
   isAligned?: boolean;
   isBordered?: boolean;
+  imageLoading?: 'eager' | 'lazy';
 }
 
 interface CardConfig {
@@ -28,19 +29,28 @@ const createCardComponent = ({ tagName }: CardConfig) => {
     body: Slots.element.allowed.text,
   };
 
-  const createComponentData = (element: HTMLElement): CardData => ({
-    image: validation.getValidatedSlotImage({
-      element,
-      slotName: Slots.name.assets.image,
-    }),
-    eyebrow: Slots.eyebrow.default({ element }),
-    headline: Slots.headline.default({ element }),
-    text: Slots.text.default({ element }),
-    date: Slots.date.default({ element }),
-    actions: Slots.actions.default({ element }),
-    isTransparent: Attributes.isVisual.transparent({ element }),
-    isThemeDark: Attributes.isTheme.dark({ element }),
-  });
+  const createComponentData = (element: HTMLElement): CardData => {
+    const loadingPriority = Attributes.getValue.loadingPriority({ element });
+    const imageLoading =
+      loadingPriority === 'eager' || loadingPriority === 'lazy'
+        ? loadingPriority
+        : 'lazy';
+
+    return {
+      image: validation.getValidatedSlotImage({
+        element,
+        slotName: Slots.name.assets.image,
+      }),
+      eyebrow: Slots.eyebrow.default({ element }),
+      headline: Slots.headline.default({ element }),
+      text: Slots.text.default({ element }),
+      date: Slots.date.default({ element }),
+      actions: Slots.actions.default({ element }),
+      isTransparent: Attributes.isVisual.transparent({ element }),
+      isThemeDark: Attributes.isTheme.dark({ element }),
+      imageLoading,
+    };
+  };
 
   const createComponent = (element: HTMLElement) => {
     const isAligned = Attributes.isVisual.aligned({ element });

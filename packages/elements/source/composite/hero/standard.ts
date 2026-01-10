@@ -3,7 +3,6 @@ import * as token from '@universityofmaryland/web-token-library';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
-import { preloadImage } from '@universityofmaryland/web-utilities-library/resource-hints';
 import { assets, textLockup } from 'atomic';
 import { type HeroStandardProps } from './_types';
 import { type ElementModel } from '../../_types';

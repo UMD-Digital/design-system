@@ -885,6 +885,9 @@ const getValue = {
   alertUrl: createValueGetter({
     currentName: AttributeNames.information.alertUrl,
   }),
+  loadingPriority: createValueGetter({
+    currentName: AttributeNames.loading.priority,
+  }),
   daysToHide: createValueGetter({
     currentName: AttributeNames.visual.hiddenDays,
     deprecatedName: AttributeNames.deprecated.visual.VISUAL_DAYS_TO_HIDE,

@@ -11,7 +11,14 @@ import { type UMDElement } from '../../../_types';
 export const classRef = 'card-overlay-image';
 
 export const createCardOverlayImage = (props: CardOverlayProps) => {
-  const { isQuote, ctaIcon, dateSign, backgroundImage, text } = props;
+  const {
+    isQuote,
+    ctaIcon,
+    dateSign,
+    backgroundImage,
+    text,
+    imageLoading = 'lazy',
+  } = props;
   const children: UMDElement[] = [];
   const wrapperChildren: UMDElement[] = [];
   const load = () => {
@@ -49,7 +56,7 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
       element: backgroundImage,
       isScaled: true,
       isGifAllowed: true,
-      imageLoading: 'lazy',
+      imageLoading,
       customStyles: {
         position: 'absolute',
         top: 0,

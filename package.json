@@ -37,7 +37,10 @@
     "version:dry-run": "npx lerna version --no-git-tag-version --no-push --yes",
     "generate:mocks": "node source/generate-mocks.js",
     "package:version": "node scripts/version-bump.js",
-    "postpackage:version": "npm run update-badges"
+    "postpackage:version": "npm run update-badges",
+    "perf": "tsx scripts/performance/fcp-analyzer.ts",
+    "perf:audit": "tsx scripts/performance/asset-audit.ts",
+    "perf:report": "tsx scripts/performance/report.ts"
   },
   "workspaces": [
     "packages/*"
@@ -63,6 +66,7 @@
     "to-string-loader": "^1.2.0",
     "ts-jest": "^29.3.1",
     "ts-loader": "^9.5.0",
+    "tsx": "^4.7.0",
     "typedoc": "^0.28.1",
     "typedoc-github-wiki-theme": "^2.1.0",
     "typedoc-plugin-markdown": "^4.6.1",

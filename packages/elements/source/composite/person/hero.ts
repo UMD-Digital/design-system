@@ -44,6 +44,7 @@ const CreateImageBlock = (props: PersonInfo): ElementModel<HTMLElement> => {
       element: image,
       isScaled: false,
       imageLoading: 'eager',
+      imageFetchPriority: 'high',
     });
 
     const imageContainer = new ElementBuilder()

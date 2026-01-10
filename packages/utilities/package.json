@@ -161,16 +161,6 @@
       "types": "./dist/validation/*.d.ts",
       "import": "./dist/validation/*.js",
       "default": "./dist/validation/*.js"
-    },
-    "./resource-hints": {
-      "types": "./dist/resource-hints.d.ts",
-      "import": "./dist/resource-hints.js",
-      "default": "./dist/resource-hints.js"
-    },
-    "./resource-hints/*": {
-      "types": "./dist/resource-hints/*.d.ts",
-      "import": "./dist/resource-hints/*.js",
-      "default": "./dist/resource-hints/*.js"
     }
   },
   "license": "MIT",

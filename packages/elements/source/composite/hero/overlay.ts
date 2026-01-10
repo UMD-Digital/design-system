@@ -51,6 +51,8 @@ const createVideoAsset = (video: HTMLVideoElement) => {
   return assets.video.observedAutoPlay({
     video,
     isScaled: true,
+    videoPreload: 'auto',
+    videoFetchPriority: 'high',
   });
 };
 
@@ -60,6 +62,8 @@ const createImageAsset = (image: HTMLImageElement) => {
     isScaled: true,
     isGifAllowed: true,
     isShowCaption: true,
+    imageLoading: 'eager',
+    imageFetchPriority: 'high',
   });
 };
 

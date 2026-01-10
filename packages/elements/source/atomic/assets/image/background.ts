@@ -11,6 +11,10 @@ interface Asset {
   isAspectStandard?: boolean;
   isScaled?: boolean;
   isGifAllowed?: boolean;
+  /** Control image loading behavior. Defaults to 'lazy' */
+  imageLoading?: 'lazy' | 'eager' | 'auto';
+  /** Control fetch priority for the image. Defaults to 'auto' */
+  imageFetchPriority?: 'high' | 'low' | 'auto';
 }
 
 interface Props extends Asset {
@@ -47,6 +51,24 @@ const checkIsGif = (element: HTMLImageElement | HTMLAnchorElement): boolean => {
   return false;
 };
 
+const applyLoadingAttributes = (
+  element: HTMLImageElement | HTMLAnchorElement,
+  loading: 'lazy' | 'eager' | 'auto' = 'lazy',
+  fetchPriority: 'high' | 'low' | 'auto' = 'auto',
+) => {
+  const img = isImageElement(element) ? element : element.querySelector('img');
+  if (img) {
+    // Only set loading attribute if not 'auto' (browser default)
+    if (loading !== 'auto') {
+      img.setAttribute('loading', loading);
+    }
+    // Set fetchpriority if specified and not 'auto'
+    if (fetchPriority !== 'auto') {
+      img.setAttribute('fetchpriority', fetchPriority);
+    }
+  }
+};
+
 const createCaption = (
   element: HTMLImageElement | HTMLAnchorElement,
   isShowCaption: boolean,
@@ -75,8 +97,20 @@ const embedAsset = ({
   element,
   isAspectStandard,
   isGifAllowed,
-}: Pick<Asset, 'element' | 'isAspectStandard' | 'isGifAllowed'>) => {
+  imageLoading = 'lazy',
+  imageFetchPriority = 'auto',
+}: Pick<
+  Asset,
+  | 'element'
+  | 'isAspectStandard'
+  | 'isGifAllowed'
+  | 'imageLoading'
+  | 'imageFetchPriority'
+>) => {
   const isTypeGif = checkIsGif(element);
+
+  // Apply loading attributes before any other processing
+  applyLoadingAttributes(element, imageLoading, imageFetchPriority);
 
   if (isGifAllowed && isTypeGif) {
     return createImageGif({ element });
@@ -118,9 +152,17 @@ export const createImageBackground = (props: Props) => {
     isScaled,
     isShowCaption = false,
     isGifAllowed = false,
+    imageLoading = 'lazy',
+    imageFetchPriority = 'auto',
   } = props;
 
-  const asset = embedAsset({ element, isAspectStandard, isGifAllowed });
+  const asset = embedAsset({
+    element,
+    isAspectStandard,
+    isGifAllowed,
+    imageLoading,
+    imageFetchPriority,
+  });
   const caption = createCaption(element, isShowCaption);
   const defaultStyles = Styles.element.asset.image.composeWrapper({
     scaled: isScaled,

@@ -28,6 +28,7 @@ const CreatePersonBlockElement = (props: PersonCard): ElementModel<HTMLElement> 
       assets.image.background({
         element: image,
         isScaled: false,
+        imageLoading: 'lazy',
         customStyles: {
           height: 'auto',
         },

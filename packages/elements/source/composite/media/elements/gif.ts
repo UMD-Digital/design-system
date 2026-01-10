@@ -49,6 +49,7 @@ const CreateGifElement = ({ image }: { image: HTMLImageElement }) => {
     isShowCaption: true,
     isScaled: false,
     isGifAllowed: true,
+    imageLoading: 'lazy',
     customStyles: {
       width: 'auto',
       height: '100%',

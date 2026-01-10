@@ -12,6 +12,8 @@ const createImageAsset = (image: HTMLImageElement) => {
     isScaled: true,
     isGifAllowed: true,
     isShowCaption: true,
+    imageLoading: 'eager',
+    imageFetchPriority: 'high',
   });
 };
 

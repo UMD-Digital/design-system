@@ -137,6 +137,8 @@ const createVideo = (video: HTMLVideoElement) => {
   return assets.video.observedAutoPlay({
     video,
     isScaled: true,
+    videoPreload: 'auto',
+    videoFetchPriority: 'high',
     additionalElementStyles: {
       width: '100%',
       height: '100%',

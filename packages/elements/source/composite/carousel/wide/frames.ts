@@ -159,6 +159,7 @@ const createMainFrameSlide = (
     assets.image.background({
       element: slide.image,
       isScaled: true,
+      imageLoading: 'lazy',
     }),
   );
 

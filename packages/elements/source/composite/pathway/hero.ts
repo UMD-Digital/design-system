@@ -116,6 +116,8 @@ const createAssetColumn = ({
       assets.video.observedAutoPlay({
         video,
         isScaled: true,
+        videoPreload: 'auto',
+        videoFetchPriority: 'high',
         additionalElementStyles: {
           display: 'flex',
           justifyContent: 'center',
@@ -132,6 +134,8 @@ const createAssetColumn = ({
         isScaled: true,
         isShowCaption: true,
         isGifAllowed: true,
+        imageLoading: 'eager',
+        imageFetchPriority: 'high',
       }),
     );
   }

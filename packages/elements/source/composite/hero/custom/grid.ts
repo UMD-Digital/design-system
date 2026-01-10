@@ -112,12 +112,16 @@ const createImageWrapper = (image: HTMLImageElement) =>
     isScaled: true,
     isGifAllowed: true,
     isShowCaption: true,
+    imageLoading: 'eager',
+    imageFetchPriority: 'high',
   });
 
 const createVideoWrapper = (video: HTMLVideoElement) =>
   assets.video.observedAutoPlay({
     video,
     isAutoplay: true,
+    videoPreload: 'auto',
+    videoFetchPriority: 'high',
     additionalElementStyles: {
       additionalElementStyles: {
         width: '100%',

@@ -49,6 +49,7 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
       element: backgroundImage,
       isScaled: true,
       isGifAllowed: true,
+      imageLoading: 'lazy',
       customStyles: {
         position: 'absolute',
         top: 0,

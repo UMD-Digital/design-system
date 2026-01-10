@@ -24,6 +24,7 @@ export const image = ({
   const backgroundImage = assets.image.background({
     element: image,
     isScaled: false,
+    imageLoading: 'lazy',
   });
 
   return new ElementBuilder()

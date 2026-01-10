@@ -736,6 +736,7 @@ const createGridElement = (
     const backgroundImage = assets.image.background({
       element: element as HTMLImageElement,
       isScaled: true,
+      imageLoading: 'lazy',
     });
     builder.withChild(backgroundImage);
   }
@@ -879,6 +880,7 @@ const createFeatured = (
     const backgroundImage = assets.image.background({
       element: element as HTMLImageElement,
       isScaled: true,
+      imageLoading: 'lazy',
     });
     builder.withChild(backgroundImage);
   }

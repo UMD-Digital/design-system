@@ -43,6 +43,7 @@ const CreateImageBlock = (props: PersonInfo): ElementModel<HTMLElement> => {
     const imageBlock = assets.image.background({
       element: image,
       isScaled: false,
+      imageLoading: 'eager',
     });
 
     const imageContainer = new ElementBuilder()

@@ -34,6 +34,7 @@ export const createCompositeCardBlock = (props: CardBlockProps) => {
             isScaled: true,
             isAspectStandard: isAligned,
             dateSign,
+            imageLoading: 'lazy',
           }),
         ],
         customStyles: {

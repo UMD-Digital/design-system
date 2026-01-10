@@ -84,6 +84,7 @@ const createPreviewElement = (
   const preview = assets.image.background({
     element: imageCopy,
     isScaled: true,
+    imageLoading: 'lazy',
   });
 
   preview.element.style.transition = `transform ${PREVIEW_ANIMATION_TIME}ms ease-in-out`;

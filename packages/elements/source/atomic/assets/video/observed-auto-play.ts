@@ -6,6 +6,10 @@ interface CardVideoShortProps {
   isAutoplay?: boolean;
   isScaled?: boolean;
   additionalElementStyles?: Record<string, any>;
+  /** Control video preload strategy. Defaults to 'metadata' */
+  videoPreload?: 'none' | 'metadata' | 'auto';
+  /** Control fetch priority for the video. Defaults to 'auto' */
+  videoFetchPriority?: 'high' | 'low' | 'auto';
 }
 
 export const createVideoObservedAutoPlay = ({
@@ -13,6 +17,8 @@ export const createVideoObservedAutoPlay = ({
   isAutoplay = false,
   isScaled = false,
   additionalElementStyles,
+  videoPreload = 'metadata',
+  videoFetchPriority = 'auto',
 }: CardVideoShortProps) =>
   (() => {
     const observer = new IntersectionObserver(
@@ -50,7 +56,10 @@ export const createVideoObservedAutoPlay = ({
     };
 
     video.removeAttribute('controls');
-    video.setAttribute('preload', 'true');
+    video.setAttribute('preload', videoPreload);
+    if (videoFetchPriority !== 'auto') {
+      video.setAttribute('fetchpriority', videoFetchPriority);
+    }
     video.setAttribute('playsinline', '');
     video.setAttribute('muted', '');
     video.setAttribute('loop', '');

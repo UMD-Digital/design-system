@@ -6,6 +6,15 @@ import {
   play as iconPlay,
 } from '@universityofmaryland/web-icons-library/controls';
 
+/**
+ * GIF loading state interface
+ */
+interface GifState {
+  isLoaded: boolean;
+  isPlaying: boolean;
+  originalSrc: string;
+}
+
 const extractImageElement = (
   element: HTMLImageElement | HTMLAnchorElement,
 ): HTMLImageElement | null => {
@@ -20,101 +29,194 @@ const extractImageElement = (
   return null;
 };
 
-const applyGifToggle = (image: HTMLImageElement, container: HTMLElement) => {
+/**
+ * Renders the first frame of the GIF to the canvas
+ */
+const renderFirstFrame = (
+  image: HTMLImageElement,
+  canvas: HTMLCanvasElement,
+  container: HTMLElement,
+) => {
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  const containerWidth = container.clientWidth;
+  const containerHeight = container.clientHeight;
+
+  canvas.width = containerWidth;
+  canvas.height = containerHeight;
+
+  // Calculate dimensions to maintain aspect ratio while covering
+  const imgRatio = image.naturalWidth / image.naturalHeight;
+  const containerRatio = containerWidth / containerHeight;
+
+  let drawWidth: number;
+  let drawHeight: number;
+  let offsetX = 0;
+  let offsetY = 0;
+
+  if (imgRatio > containerRatio) {
+    drawHeight = containerHeight;
+    drawWidth = image.naturalWidth * (containerHeight / image.naturalHeight);
+    offsetX = (containerWidth - drawWidth) / 2;
+  } else {
+    drawWidth = containerWidth;
+    drawHeight = image.naturalHeight * (containerWidth / image.naturalWidth);
+    offsetY = (containerHeight - drawHeight) / 2;
+  }
+
+  ctx.clearRect(0, 0, containerWidth, containerHeight);
+  ctx.imageSmoothingEnabled = true;
+  ctx.drawImage(image, offsetX, offsetY, drawWidth, drawHeight);
+};
+
+/**
+ * Sets up the IntersectionObserver for lazy loading the GIF
+ */
+const setupLazyLoading = (
+  container: HTMLElement,
+  image: HTMLImageElement,
+  canvas: HTMLCanvasElement,
+  button: HTMLButtonElement,
+  state: GifState,
+  onLoad: () => void,
+) => {
+  // Handle non-browser environments
+  if (typeof IntersectionObserver === 'undefined') {
+    // Load immediately if IntersectionObserver is not available
+    state.isLoaded = true;
+    button.style.display = 'flex';
+    onLoad();
+    return null;
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !state.isLoaded) {
+          state.isLoaded = true;
+
+          // Restore the original src to load the animated GIF
+          image.src = state.originalSrc;
+
+          // Show the button once loaded
+          image.addEventListener(
+            'load',
+            () => {
+              button.style.display = 'flex';
+              onLoad();
+            },
+            { once: true },
+          );
+
+          observer.disconnect();
+        }
+      });
+    },
+    {
+      threshold: 0.1,
+      rootMargin: '50px', // Start loading slightly before visible
+    },
+  );
+
+  observer.observe(container);
+
+  return observer;
+};
+
+const applyGifToggle = (
+  image: HTMLImageElement,
+  container: HTMLElement,
+  state: GifState,
+) => {
   const canvas = document.createElement('canvas');
   const button = document.createElement('button');
+
   const setButtonPlay = () => {
     button.setAttribute('aria-label', 'Pause');
     button.innerHTML = iconPause;
     canvas.style.opacity = '0';
     image.style.opacity = '1';
+    state.isPlaying = true;
   };
+
   const setButtonPause = () => {
     button.setAttribute('aria-label', 'Play');
     button.innerHTML = iconPlay;
     canvas.style.opacity = '1';
     image.style.opacity = '0';
+    state.isPlaying = false;
   };
-  const sizeCanvas = ({ container }: { container: HTMLElement | null }) => {
+
+  const sizeCanvas = () => {
     if (!container) return;
-    const image = container.querySelector('img');
-    const canvas = container.querySelector('canvas') as HTMLCanvasElement;
+    const img = container.querySelector('img');
+    const canvasEl = container.querySelector('canvas') as HTMLCanvasElement;
 
-    if (!container || !canvas || !image) return;
-
-    const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
-
-    // Get container dimensions
-    const containerWidth = container.clientWidth;
-    const containerHeight = container.clientHeight;
+    if (!canvasEl || !img) return;
 
     // Set canvas display dimensions to match container
-    canvas.style.width = '100%';
-    canvas.style.height = `${image.clientHeight}px`;
-    canvas.style.position = 'absolute';
-    canvas.style.top = '0';
-    canvas.style.left = '0';
+    canvasEl.style.width = '100%';
+    canvasEl.style.height = `${img.clientHeight}px`;
+    canvasEl.style.position = 'absolute';
+    canvasEl.style.top = '0';
+    canvasEl.style.left = '0';
 
-    // Set canvas actual dimensions
-    canvas.width = containerWidth;
-    canvas.height = containerHeight;
-
-    // Calculate dimensions to maintain aspect ratio while covering
-    const imgRatio = image.naturalWidth / image.naturalHeight;
-    const containerRatio = containerWidth / containerHeight;
-
-    let drawWidth,
-      drawHeight,
-      offsetX = 0,
-      offsetY = 0;
-
-    if (imgRatio > containerRatio) {
-      // Image is wider than container relative to height
-      drawHeight = containerHeight;
-      drawWidth = image.naturalWidth * (containerHeight / image.naturalHeight);
-      offsetX = (containerWidth - drawWidth) / 2;
-    } else {
-      // Image is taller than container relative to width
-      drawWidth = containerWidth;
-      drawHeight = image.naturalHeight * (containerWidth / image.naturalWidth);
-      offsetY = (containerHeight - drawHeight) / 2;
+    if (state.isLoaded && img.complete && img.naturalWidth > 0) {
+      renderFirstFrame(img, canvasEl, container);
     }
-
-    // Clear the canvas and draw the image with cover behavior
-    ctx.clearRect(0, 0, containerWidth, containerHeight);
-    ctx.imageSmoothingEnabled = true;
-    ctx.drawImage(image, offsetX, offsetY, drawWidth, drawHeight);
   };
-  let isPlaying = true;
 
+  // Initialize button but hide until GIF is loaded
   button.setAttribute('type', 'button');
+  button.style.display = 'none';
+
   button.addEventListener('click', (event) => {
     event.preventDefault();
     event.stopPropagation();
 
-    if (isPlaying) {
+    if (state.isPlaying) {
       setButtonPause();
-      isPlaying = false;
     } else {
       setButtonPlay();
-      isPlaying = true;
     }
   });
 
-  image.addEventListener('load', () => {
-    container.appendChild(canvas);
-    container.appendChild(button);
-    setButtonPlay();
+  // Add canvas immediately for placeholder
+  container.appendChild(canvas);
+  container.appendChild(button);
 
-    setTimeout(() => {
-      sizeCanvas({ container });
-    }, 100);
+  // Initially hide the animated image (show canvas placeholder)
+  image.style.opacity = '0';
+  image.style.transition = 'opacity 0.2s ease-in-out';
+  canvas.style.opacity = '1';
+  canvas.style.transition = 'opacity 0.2s ease-in-out';
+
+  // Handle initial image load for first frame capture
+  const captureFirstFrame = () => {
+    sizeCanvas();
+    renderFirstFrame(image, canvas, container);
+  };
+
+  // If image is already loaded (from cache), capture first frame immediately
+  if (image.complete && image.naturalWidth > 0) {
+    captureFirstFrame();
+  } else {
+    image.addEventListener('load', captureFirstFrame, { once: true });
+  }
+
+  // Set up lazy loading observer
+  setupLazyLoading(container, image, canvas, button, state, () => {
+    // Once loaded, render the first frame properly and set to play
+    sizeCanvas();
+    setButtonPlay();
   });
 
+  // Handle resize
   window.addEventListener(
     'resize',
     debounce(() => {
-      sizeCanvas({ container });
+      sizeCanvas();
     }, 50),
   );
 };
@@ -130,6 +232,13 @@ export const createImageGif = ({
     throw new Error('No valid image element found');
   }
 
+  // Store original src and create state
+  const state: GifState = {
+    isLoaded: false,
+    isPlaying: false,
+    originalSrc: image.src,
+  };
+
   const isAnchor = element instanceof HTMLAnchorElement;
   const container = isAnchor ? element : document.createElement('div');
 
@@ -139,7 +248,7 @@ export const createImageGif = ({
       if (!isAnchor) {
         el.appendChild(element);
       }
-      applyGifToggle(image, el);
+      applyGifToggle(image, el, state);
     })
     .build();
 

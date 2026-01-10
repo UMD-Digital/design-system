@@ -124,6 +124,8 @@ const createAssetElement = ({
       isScaled: true,
       isGifAllowed: true,
       isShowCaption: true,
+      imageLoading: 'eager',
+      imageFetchPriority: 'high',
     });
   }
 

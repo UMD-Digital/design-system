@@ -25,6 +25,8 @@ const createAsset = ({ image }: Pick<HeroLogoProps, 'image'>) => {
       assets.image.background({
         element: image,
         isScaled: false,
+        imageLoading: 'eager',
+        imageFetchPriority: 'high',
       }),
     )
     .withStyles({

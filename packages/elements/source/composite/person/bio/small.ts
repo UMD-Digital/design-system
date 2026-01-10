@@ -116,6 +116,7 @@ const makeContainer = (props: PersonBio): ElementModel<HTMLElement> => {
       assets.image.background({
         element: image,
         isScaled: false,
+        imageLoading: 'lazy',
         customStyles: {
           element: {
             ...createMediaQuery(

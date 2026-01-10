@@ -63,6 +63,7 @@ const makeImageColumn = ({
     element: image,
     isScaled: isAligned,
     isGifAllowed: false,
+    imageLoading: 'lazy',
   });
 
   return new ElementBuilder()

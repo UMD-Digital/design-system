@@ -146,6 +146,7 @@ export const createAssetContent = (
         isScaled: isImageScaled,
         isShowCaption: true,
         isGifAllowed: true,
+        imageLoading: 'lazy',
         dateSign,
       }),
     );

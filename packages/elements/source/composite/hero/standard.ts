@@ -3,6 +3,7 @@ import * as token from '@universityofmaryland/web-token-library';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
+import { preloadImage } from '@universityofmaryland/web-utilities-library/resource-hints';
 import { assets, textLockup } from 'atomic';
 import { type HeroStandardProps } from './_types';
 import { type ElementModel } from '../../_types';
@@ -56,6 +57,8 @@ const createVideoAsset = (video: HTMLVideoElement) => {
   return assets.video.observedAutoPlay({
     video,
     isScaled: true,
+    videoPreload: 'auto',
+    videoFetchPriority: 'high',
   });
 };
 
@@ -65,6 +68,8 @@ const createImageAsset = (image: HTMLImageElement) => {
     isScaled: true,
     isGifAllowed: true,
     isShowCaption: true,
+    imageLoading: 'eager',
+    imageFetchPriority: 'high',
   });
 };
 

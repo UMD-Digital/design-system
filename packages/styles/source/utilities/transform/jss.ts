@@ -113,6 +113,7 @@ export const convertFontToCss = (fontObject: Record<string, any>): string => {
       src: fontObject.src,
       ...(fontObject.fontWeight ? { fontWeight: fontObject.fontWeight } : {}),
       ...(fontObject.fontStyle ? { fontStyle: fontObject.fontStyle } : {}),
+      ...(fontObject.fontDisplay ? { fontDisplay: fontObject.fontDisplay } : {}),
     },
   };
 

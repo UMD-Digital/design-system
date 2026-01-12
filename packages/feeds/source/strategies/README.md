@@ -43,12 +43,19 @@ import { eventsDisplayStrategy } from './strategies';
 
 const feed = createBaseFeed({
   displayStrategy: eventsDisplayStrategy,
-  imageConfig: (entry) => ({
-    imageUrl: entry.image[0].url,
-    altText: entry.image[0].altText || 'Event Image',
-    linkUrl: entry.url,
-    linkLabel: 'University of Maryland Event',
-  }),
+  imageConfig: (entry) => {
+    const imageUrl = entry.image?.[0]?.url;
+    const altText = entry.image?.[0]?.altText;
+
+    if (!imageUrl || !altText) return null;
+
+    return {
+      imageUrl: imageUrl,
+      altText: altText,
+      linkUrl: entry.url,
+      linkLabel: 'University of Maryland Event',
+    };
+  },
   // ...
 });
 ```
@@ -68,11 +75,18 @@ import { newsDisplayStrategy } from './strategies';
 
 const feed = createBaseFeed({
   displayStrategy: newsDisplayStrategy,
-  imageConfig: (entry) => ({
-    imageUrl: entry.image[0].url,
-    altText: entry.image[0].altText || 'News Article',
-    linkUrl: entry.url,
-  }),
+  imageConfig: (entry) => {
+    const imageUrl = entry.image?.[0]?.url;
+    const altText = entry.image?.[0]?.altText;
+
+    if (!imageUrl || !altText) return null;
+
+    return {
+      imageUrl: imageUrl,
+      altText: altText,
+      linkUrl: entry.url,
+    };
+  },
   // ...
 });
 ```
@@ -92,11 +106,18 @@ import { expertsDisplayStrategy } from './strategies';
 
 const feed = createBaseFeed({
   displayStrategy: expertsDisplayStrategy,
-  imageConfig: (entry) => ({
-    imageUrl: entry.image[0].url,
-    altText: entry.name,
-    linkUrl: entry.url,
-  }),
+  imageConfig: (entry) => {
+    const imageUrl = entry.image?.[0]?.url;
+    const altText = entry.name;
+
+    if (!imageUrl || !altText) return null;
+
+    return {
+      imageUrl: imageUrl,
+      altText: altText,
+      linkUrl: entry.url,
+    };
+  },
   // ...
 });
 ```
@@ -119,7 +140,7 @@ interface CardMappingOptions {
   isOverlay?: boolean;         // Overlay style (news only)
   isFeatured?: boolean;        // Featured style
   cardType?: 'block' | 'list'; // Card type
-  imageConfig?: (entry) => ImageConfig; // Image configuration
+  imageConfig?: (entry) => ImageConfig | null; // Image configuration
 }
 ```
 
@@ -386,11 +407,18 @@ const eventGrid = createBaseFeed({
   displayStrategy: eventsDisplayStrategy,
   layoutStrategy: gridGapLayout,
 
-  imageConfig: (entry) => ({
-    imageUrl: entry.image[0].url,
-    altText: entry.image[0].altText || 'Event Image',
-    linkUrl: entry.url,
-  }),
+  imageConfig: (entry) => {
+    const imageUrl = entry.image?.[0]?.url;
+    const altText = entry.image?.[0]?.altText;
+
+    if (!imageUrl || !altText) return null;
+
+    return {
+      imageUrl: imageUrl,
+      altText: altText,
+      linkUrl: entry.url,
+    };
+  },
 });
 ```
 
@@ -407,11 +435,18 @@ const newsList = createBaseFeed({
   displayStrategy: newsDisplayStrategy,
   layoutStrategy: stackedLayout,
 
-  imageConfig: (entry) => ({
-    imageUrl: entry.image[0].url,
-    altText: entry.image[0].altText || 'News Image',
-    linkUrl: entry.url,
-  }),
+  imageConfig: (entry) => {
+    const imageUrl = entry.image?.[0]?.url;
+    const altText = entry.image?.[0]?.altText;
+
+    if (!imageUrl || !altText) return null;
+
+    return {
+      imageUrl: imageUrl,
+      altText: altText,
+      linkUrl: entry.url,
+    };
+  },
 });
 ```
 
@@ -428,11 +463,18 @@ const expertsGrid = createBaseFeed({
   displayStrategy: expertsDisplayStrategy,
   layoutStrategy: gridGapLayout,
 
-  imageConfig: (entry) => ({
-    imageUrl: entry.image[0].url,
-    altText: entry.name,
-    linkUrl: entry.url,
-  }),
+  imageConfig: (entry) => {
+    const imageUrl = entry.image?.[0]?.url;
+    const altText = entry.name;
+
+    if (!imageUrl || !altText) return null;
+
+    return {
+      imageUrl: imageUrl,
+      altText: altText,
+      linkUrl: entry.url,
+    };
+  },
 });
 ```
 

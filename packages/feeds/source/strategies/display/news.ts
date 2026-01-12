@@ -28,11 +28,18 @@ import { NewsEntry } from 'types/data';
  * ```typescript
  * const feed = createBaseFeed({
  *   displayStrategy: newsDisplayStrategy,
- *   imageConfig: (entry) => ({
- *     imageUrl: entry.image[0].url,
- *     altText: entry.image[0].altText || 'News Article Image',
- *     linkUrl: entry.url,
- *   }),
+ *   imageConfig: (entry) => {
+ *     const imageUrl = entry.image?.[0]?.url;
+ *     const altText = entry.image?.[0]?.altText;
+ *
+ *     if (!imageUrl || !altText) return null;
+ *
+ *     return {
+ *       imageUrl: imageUrl,
+ *       altText: altText,
+ *       linkUrl: entry.url,
+ *     };
+ *   },
  *   // ...
  * });
  * ```

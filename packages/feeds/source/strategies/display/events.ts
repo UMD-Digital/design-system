@@ -28,11 +28,18 @@ import { EventEntry } from 'types/data';
  * ```typescript
  * const feed = createBaseFeed({
  *   displayStrategy: eventsDisplayStrategy,
- *   imageConfig: (entry) => ({
- *     imageUrl: entry.image[0].url,
- *     altText: entry.image[0].altText || 'Event Image',
- *     linkUrl: entry.url,
- *   }),
+ *   imageConfig: (entry) => {
+ *     const imageUrl = entry.image?.[0]?.url;
+ *     const altText = entry.image?.[0]?.altText;
+ *
+ *     if (!imageUrl || !altText) return null;
+ *
+ *     return {
+ *       imageUrl: imageUrl,
+ *       altText: altText,
+ *       linkUrl: entry.url,
+ *     };
+ *   },
  *   // ...
  * });
  * ```
@@ -72,9 +79,11 @@ export const eventsDisplayStrategy: DisplayStrategy<EventEntry> = {
     } as any);
 
     // Create image (if imageConfig provided)
-    const image = imageConfig
-      ? createImageOrLinkedImage(imageConfig(entry))
-      : undefined;
+    const imageData = imageConfig ? imageConfig(entry) : null;
+    const image =
+      imageData && imageData.imageUrl && imageData.altText
+        ? createImageOrLinkedImage(imageData)
+        : null;
 
     // Create date sign for list layout
     const dateSign =

@@ -55,12 +55,21 @@ const createFetchProps = (
  * @param entry - Event entry
  * @returns Image config object
  */
-const createImageConfig = (entry: EventEntry) => ({
-  imageUrl: entry.image[0].url,
-  altText: entry.image[0].altText || 'Event Image',
-  linkUrl: entry.url,
-  linkLabel: 'University of Maryland Event',
-});
+const createImageConfig = (entry: EventEntry) => {
+  const imageUrl = entry.image?.[0]?.url;
+  const altText = entry.image?.[0]?.altText;
+
+  if (!imageUrl || !altText) {
+    return null;
+  }
+
+  return {
+    imageUrl: imageUrl,
+    altText: altText,
+    linkUrl: entry.url,
+    linkLabel: 'University of Maryland Event',
+  };
+};
 
 /**
  * Create announcer message
@@ -252,6 +261,12 @@ const createEventCard = (
   entry: EventEntry,
   isThemeDark: boolean,
 ): ElementModel => {
+  const imageData = createImageConfig(entry);
+  const image =
+    imageData && imageData.imageUrl && imageData.altText
+      ? createImageOrLinkedImage(imageData)
+      : null;
+
   return card.list({
     headline: createTextWithLink({ text: entry.title, url: entry.url }),
     text: createTextContainer({ text: entry.summary, allowHTML: true }),
@@ -267,7 +282,7 @@ const createEventCard = (
       ...entry,
       isThemeDark,
     } as any),
-    image: createImageOrLinkedImage(createImageConfig(entry)),
+    image: image,
     isAligned: false,
     isThemeDark,
   });

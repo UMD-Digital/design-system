@@ -73,12 +73,19 @@ const createFetchProps = (
  * @param entry - News entry
  * @returns Image config object
  */
-const createImageConfig = (entry: NewsEntry) => ({
-  imageUrl: entry.image[0]?.url,
-  altText: entry.image[0]?.altText || 'News Article Image',
-  linkUrl: entry.url,
-  linkLabel: 'Maryland Today Article with image',
-});
+const createImageConfig = (entry: NewsEntry) => {
+  const imageUrl = entry.image?.[0]?.url;
+  const altText = entry.image?.[0]?.altText;
+
+  if (!imageUrl || !altText) return null;
+
+  return {
+    imageUrl: imageUrl,
+    altText: altText,
+    linkUrl: entry.url,
+    linkLabel: 'Maryland Today Article with image',
+  };
+};
 
 /**
  * Create announcer message

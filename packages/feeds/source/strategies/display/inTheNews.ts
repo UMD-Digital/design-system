@@ -51,7 +51,9 @@ const createSummaryElement = (entry: InTheNewsEntry): HTMLElement | null => {
   const hasName = author || expertName;
 
   if (hasName && summary) {
-    const combinedSummary = `${expertName ? expertName : author} | ${summary}`;
+    const combinedSummary = `<b>${
+      expertName ? expertName : author
+    } |</b> ${summary}`;
     return createTextContainer({ text: combinedSummary, allowHTML: true });
   }
 

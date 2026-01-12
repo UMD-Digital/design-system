@@ -2,13 +2,7 @@ import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-token-library';
 import { quote as iconQuote } from '@universityofmaryland/web-icons-library/brand';
 import { SMALL } from '../_constants';
-import { type QuoteBaseProps, type QuoteVariantProps } from '../_types';
-
-interface QuoteIconProps
-  extends QuoteVariantProps,
-    Pick<QuoteBaseProps, 'isThemeMaryland'> {
-  hasImage?: boolean;
-}
+import { type QuoteStatementProps, type QuoteIconProps } from '../_types';
 
 const CreateQuoteIconElement = ({
   hasImage = false,
@@ -71,4 +65,26 @@ const CreateQuoteIconElement = ({
   return iconSpan;
 };
 
+const CreateQuoteStatementIconElement = ({
+  isThemeGold,
+}: Pick<QuoteStatementProps, 'isThemeGold'>) => {
+  return new ElementBuilder()
+    .withClassName('statement-quote-icon')
+    .withStyles({
+      element: {
+        ['& svg']: {
+          fill: token.color.red,
+          width: '24px',
+          marginBottom: token.spacing.md,
+          ...(isThemeGold && {
+            fill: token.color.gold,
+          }),
+        },
+      },
+    })
+    .withHTML(iconQuote)
+    .build();
+};
+
 export const createCompositeQuoteIcon = CreateQuoteIconElement;
+export const createStatementQuoteIcon = CreateQuoteStatementIconElement;

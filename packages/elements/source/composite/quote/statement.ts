@@ -1,7 +1,7 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { type QuoteStatementProps } from './_types';
 
-export const CreateQuoteStatementElement = (element: QuoteStatementProps) => {
+const CreateCompositeQuoteStatement = (element: QuoteStatementProps) => {
   const container = new ElementBuilder()
     .withClassName('quote-statement')
     .withStyles({
@@ -13,3 +13,5 @@ export const CreateQuoteStatementElement = (element: QuoteStatementProps) => {
 
   return container;
 };
+
+export const createCompositeQuoteStatement = CreateCompositeQuoteStatement;

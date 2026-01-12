@@ -59,12 +59,12 @@ export const createTextLockupSmallScaling = ({
 
   if (headline) {
     const composeHeadlineStyles = {
+      ...animationStyles.line.composeSlideUnder({
+        color: theme.foreground(isThemeDark),
+      }),
       ...typography.sans.compose('larger', {
         theme: theme.fontColor(isThemeDark),
         scaling: true,
-      }),
-      ...animationStyles.line.composeSlideUnder({
-        color: theme.foreground(isThemeDark),
       }),
     };
 

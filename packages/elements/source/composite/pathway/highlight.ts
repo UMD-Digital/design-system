@@ -93,6 +93,10 @@ const createHighlightColumn = ({
             height: '100%',
           },
         },
+
+        ['& *']: {
+          color: 'currentColor',
+        },
       },
     });
 

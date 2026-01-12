@@ -2,7 +2,12 @@ import { quote as quoteComponent } from '@universityofmaryland/web-elements-libr
 import { createStyledSlotOrClone } from '@universityofmaryland/web-utilities-library/elements';
 import { isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
 import { getLinkFromSlot } from '@universityofmaryland/web-utilities-library/dom';
-import { Attributes, Lifecycle, Register, Slots } from '@universityofmaryland/web-model-library';
+import {
+  Attributes,
+  Lifecycle,
+  Register,
+  Slots,
+} from '@universityofmaryland/web-model-library';
 import {
   CreateComponentFunction,
   ComponentRegistration,
@@ -29,8 +34,10 @@ const getAction = ({
 const createComponent: CreateComponentFunction = (element) => {
   const isSizeLarge = Attributes.isVisual.sizeLarge({ element });
   const isTypeFeatured = Attributes.isDisplay.featured({ element });
+  const isTypeStatement = Attributes.isDisplay.statement({ element });
   const isThemeDark = Attributes.isTheme.dark({ element });
   const isThemeMaryland = Attributes.isTheme.maryland({ element });
+  const isThemeGold = Attributes.isTheme.gold({ element });
   const isTransparent = Attributes.isVisual.transparent({ element });
   const action = getAction({ element });
   const quote = createStyledSlotOrClone({
@@ -53,25 +60,16 @@ const createComponent: CreateComponentFunction = (element) => {
     Attributes.includesFeature.animation({ element }) &&
     !isPreferredReducedMotion();
 
-  if (isTypeFeatured) {
-    return quoteComponent.featured({
-      isSizeLarge,
-      isThemeDark,
-      isThemeMaryland,
-      isTransparent,
-      includesAnimation,
-      action,
-      quote,
-      image,
-      attribution,
-      attributionSubText,
-    });
-  }
+  const headline = createStyledSlotOrClone({
+    element,
+    slotRef: Slots.name.headline.default,
+  });
 
-  return quoteComponent.inline({
+  const quoteProps = {
     isSizeLarge,
     isThemeDark,
     isThemeMaryland,
+    isThemeGold,
     isTransparent,
     includesAnimation,
     action,
@@ -79,7 +77,18 @@ const createComponent: CreateComponentFunction = (element) => {
     image,
     attribution,
     attributionSubText,
-  });
+    headline,
+  };
+
+  if (isTypeFeatured) {
+    return quoteComponent.featured(quoteProps);
+  }
+
+  if (isTypeStatement) {
+    return quoteComponent.statement(quoteProps);
+  }
+
+  return quoteComponent.inline(quoteProps);
 };
 
 /**

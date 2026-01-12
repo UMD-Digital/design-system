@@ -141,11 +141,15 @@ const FRAGMENT_EXPERT_CATEGORIES = `
 
 /**
  * GraphQL query for experts
- * Supports filtering by ID, relatedTo, or fetching all experts
- * When IDs are provided, orderBy defaults to "id" to preserve requested order
+ * Supports filtering by ID, relatedTo (categories), or fetching all experts
+ *
+ * @param ids - Specific entry IDs to fetch (use with fixedOrder for preserved order)
+ * @param relatedTo - Category IDs to filter by (narrows results to related entries)
+ * @param fixedOrder - When true, returns results in the order specified by ids argument
+ * @param orderBy - Field to order results by (ignored when fixedOrder is true)
  */
 export const EXPERTS_QUERY = `
-  query getExpertsContent($limit: Int, $offset: Int, $ids: [QueryArgument], $relatedTo: [QueryArgument], $isMediaTrained: Boolean, $orderBy: String) {
+  query getExpertsContent($limit: Int, $offset: Int, $ids: [QueryArgument], $relatedTo: [QueryArgument], $isMediaTrained: Boolean, $orderBy: String, $fixedOrder: Boolean) {
     entryCount(
       section: "experts"
       limit: $limit
@@ -164,6 +168,7 @@ export const EXPERTS_QUERY = `
       relatedTo: $relatedTo
       expertsMediaTrained: $isMediaTrained
       orderBy: $orderBy
+      fixedOrder: $fixedOrder
     ) {
       ...EntriesNativeFields
       ... on expertsContent_Entry {
@@ -189,16 +194,28 @@ export const EXPERTS_QUERY = `
  * Experts fetch strategy
  *
  * Fetches expert profile data from the UMD Experts GraphQL API.
- * Handles category filtering via relatedTo parameter, pagination,
- * and entry exclusion.
+ *
+ * Parameter handling:
+ * - `ids` - Specific entry IDs to fetch. When provided, uses `fixedOrder: true`
+ *   to return results in the exact order specified by the IDs array.
+ * - `categories` - Category IDs passed to `relatedTo` to narrow results to
+ *   entries related to those categories.
+ * - `isMediaTrained` - Filter for media-trained experts only.
  *
  * @example
  * ```typescript
+ * // Fetch by categories (uses relatedTo)
  * const feed = createBaseFeed({
  *   token: 'my-token',
  *   fetchStrategy: expertsFetchStrategy,
  *   categories: ['computer-science', 'engineering'],
- *   // ...
+ * });
+ *
+ * // Fetch specific IDs in order (uses fixedOrder)
+ * const feed = createBaseFeed({
+ *   token: 'my-token',
+ *   fetchStrategy: expertsFetchStrategy,
+ *   ids: ['123', '456', '789'], // Results returned in this order
  * });
  * ```
  */
@@ -231,10 +248,8 @@ export const expertsFetchStrategy = createGraphQLFetchStrategy<ExpertEntry>({
 
     if (ids) {
       variables.ids = Array.isArray(ids) ? ids : [ids];
-      // Order by ID when specific IDs are requested to preserve order
-      variables.orderBy = 'id';
+      variables.fixedOrder = true;
     } else {
-      // Default to ordering by last name
       variables.orderBy = 'expertsNameLast';
     }
 

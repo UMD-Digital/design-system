@@ -413,10 +413,18 @@ const isDisplay = {
       attributeName: AttributeNames.deprecated.type.TYPE,
       attributeValue: AttributeValues.layout.defaultInteriorCentered,
     }),
-  statement: createAttributeCheck(
-    AttributeNames.deprecated.display.DISPLAY,
-    AttributeValues.display.statement,
-  ),
+  statement: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.display.DISPLAY,
+      attributeNameNew: AttributeNames.display.default,
+      attributeValue: AttributeValues.display.statement,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.display.default,
+      attributeValue: AttributeValues.display.statement,
+    }),
   sticky: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,

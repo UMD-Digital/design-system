@@ -5,27 +5,16 @@ import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { createCompositeQuoteAction as elementAction } from './action';
 import { createCompositeQuote as elementQuote } from './quote';
 import { SMALL } from '../_constants';
-import { type QuoteTextProps } from '../_types';
+import {
+  type QuoteStatementProps,
+  type QuoteTextChildrenProps,
+  type QuoteTextProps,
+} from '../_types';
 import { type ElementModel } from '../../../_types';
 
-interface ChildrenProps
-  extends Pick<
-    QuoteTextProps,
-    | 'quote'
-    | 'image'
-    | 'attribution'
-    | 'attributionSubText'
-    | 'action'
-    | 'isThemeDark'
-    | 'isSizeLarge'
-    | 'isTypeFeatured'
-    | 'includesAnimation'
-  > {
-  shouldHaveWhiteText?: boolean;
-  hasImage: boolean;
-}
-
-const createChildren = (props: ChildrenProps): ElementModel<HTMLElement>[] => {
+const createChildren = (
+  props: QuoteTextChildrenProps,
+): ElementModel<HTMLElement>[] => {
   const {
     action,
     attribution,
@@ -120,6 +109,74 @@ const createChildren = (props: ChildrenProps): ElementModel<HTMLElement>[] => {
   return wrapperChildren;
 };
 
+const CreateStatementQuoteHeadline = ({
+  headline,
+}: Pick<QuoteStatementProps, 'headline'>): ElementModel<HTMLElement> | null => {
+  if (!headline) return null;
+  return new ElementBuilder(headline)
+    .withClassName('statement-headline')
+    .withStyles({
+      element: {
+        color: token.color.black,
+        fontSize: token.font.size.base,
+        textTransform: 'uppercase',
+        marginBottom: token.spacing.sm,
+        letterSpacing: '2px',
+        fontWeight: token.font.weight.light,
+      },
+    })
+    .build();
+};
+
+const CreateStatementQuoteAttribution = ({
+  attribution,
+  attributionSubText,
+}: Pick<
+  QuoteStatementProps,
+  'attribution' | 'attributionSubText'
+>): ElementModel<HTMLElement> | null => {
+  if (!attribution && !attributionSubText) return null;
+
+  const container = new ElementBuilder()
+    .withClassName('statement-attribution-container')
+    .withStyles({
+      element: {
+        margin: token.spacing.lg,
+      },
+    });
+
+  if (attribution) {
+    const attributionElement = new ElementBuilder(attribution)
+      .withClassName('statement-attribution')
+      .withStyles({
+        element: {
+          fontWeight: token.font.weight.bold,
+          color: token.color.black,
+          fontSize: token.font.size.xl,
+          marginBottom: token.spacing.xs,
+        },
+      })
+      .build();
+
+    container.withChild(attributionElement);
+  }
+
+  if (attributionSubText) {
+    const subTextElement = new ElementBuilder(attributionSubText)
+      .withClassName('statement-attribution-subtext')
+      .withStyles({
+        element: {
+          color: token.color.gray.dark,
+          fontSize: token.font.size.sm,
+        },
+      })
+      .build();
+    container.withChild(subTextElement);
+  }
+
+  return container.build();
+};
+
 const CreateQuoteTextElement = (
   props: Pick<
     QuoteTextProps,
@@ -188,3 +245,5 @@ const CreateQuoteTextElement = (
 };
 
 export const createCompositeQuoteText = CreateQuoteTextElement;
+export const createStatementQuoteHeadline = CreateStatementQuoteHeadline;
+export const createStatementQuoteAttribution = CreateStatementQuoteAttribution;

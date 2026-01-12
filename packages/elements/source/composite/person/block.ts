@@ -9,9 +9,13 @@ import { type ElementModel } from '../../_types';
 
 const mediumBreakpointStart = token.media.breakpointValues.medium.min;
 
-const CreatePersonBlockElement = (props: PersonCard): ElementModel<HTMLElement> => {
+const CreatePersonBlockElement = (
+  props: PersonCard,
+): ElementModel<HTMLElement> => {
   const { image: personImage, isThemeDark } = props;
-  const textLockupElement = textLockup.person(props);
+  const textLockupElement = textLockup.person({
+    ...props,
+  });
   const contactLockupElement = textLockup.contact(props);
 
   let image = personImage;

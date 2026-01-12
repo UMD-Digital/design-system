@@ -37,7 +37,15 @@ const createTextContainer = (props: PersonBio): ElementModel<HTMLElement> => {
     );
   }
 
-  builder.withChild(textLockup.person({ ...textProps, isThemeDark }));
+  builder.withChild(
+    textLockup.person({
+      isThemeDark,
+      slotOne: textProps.slotOne,
+      slotTwo: textProps.slotTwo,
+      slotThreeItalic: textProps.slotThreeItalic,
+      slotFour: textProps.slotFour,
+    }),
+  );
 
   return builder.build();
 };
@@ -148,7 +156,9 @@ const makeContainer = (props: PersonBio): ElementModel<HTMLElement> => {
   return builder.build();
 };
 
-const CreatePersonBioSmallElement = (props: PersonBio): ElementModel<HTMLElement> => {
+const CreatePersonBioSmallElement = (
+  props: PersonBio,
+): ElementModel<HTMLElement> => {
   const { isThemeDark, description } = props;
   const container = makeContainer(props);
 

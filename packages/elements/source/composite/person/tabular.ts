@@ -15,16 +15,16 @@ const CreatePersonTabularElement = ({
   actions,
   additionalContact,
   address,
-  association,
+  slotTwo,
   email,
   image,
   isThemeDark,
-  job,
+  slotOne,
   linkedin,
   name,
   phone,
-  pronouns,
-  subText,
+  slotThreeItalic,
+  slotFour,
 }: PersonCard): UMDElement => {
   const builder = new ElementBuilder()
     .withClassName('person-tabular-container')
@@ -79,13 +79,13 @@ const CreatePersonTabularElement = ({
     builder.withChild(
       layout.person.columns.details({
         actions,
-        association,
+        slotTwo,
         isThemeDark,
         customStyles: {},
-        job,
+        slotOne,
         nameComposite,
-        pronouns,
-        subText,
+        slotThreeItalic,
+        slotFour,
       }),
     );
   }

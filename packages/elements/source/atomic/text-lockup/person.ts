@@ -9,13 +9,13 @@ import { type PersonTextLockupProps } from '../_types';
 
 export const createTextLockupPerson = ({
   actions,
-  association,
+  slotTwo,
   isThemeDark,
-  job,
+  slotOne,
   name,
   nameComposite,
-  pronouns,
-  subText,
+  slotThreeItalic,
+  slotFour,
 }: PersonTextLockupProps) => {
   const container = new ElementBuilder()
     .withClassName('text-lockup-person-container')
@@ -41,6 +41,7 @@ export const createTextLockupPerson = ({
     };
 
     const nameElement = new ElementBuilder(name)
+      .withClassName('person-name')
       .styled(headlineStyles)
       .withStyles({
         element: {
@@ -60,8 +61,9 @@ export const createTextLockupPerson = ({
     container.withChild(nameElement);
   }
 
-  if (job) {
-    const jobElement = new ElementBuilder(job)
+  if (slotOne) {
+    const slotOneElement = new ElementBuilder(slotOne)
+      .withClassName('slot-one')
       .styled(
         typography.sans.compose('small', {
           theme: theme.fontColor(isThemeDark),
@@ -79,11 +81,12 @@ export const createTextLockupPerson = ({
       })
       .build();
 
-    container.withChild(jobElement);
+    container.withChild(slotOneElement);
   }
 
-  if (association) {
-    const associationElement = new ElementBuilder(association)
+  if (slotTwo) {
+    const slotTwoElement = new ElementBuilder(slotTwo)
+      .withClassName('slot-two')
       .styled(
         typography.sans.compose('small', {
           theme: theme.fontColor(isThemeDark),
@@ -109,12 +112,13 @@ export const createTextLockupPerson = ({
       })
       .build();
 
-    container.withChild(associationElement);
+    container.withChild(slotTwoElement);
   }
 
-  if (pronouns) {
-    pronouns.innerHTML = `<i>${pronouns.innerHTML}</i>`;
-    const pronounsElement = new ElementBuilder(pronouns)
+  if (slotThreeItalic) {
+    slotThreeItalic.innerHTML = `<i>${slotThreeItalic.innerHTML}</i>`;
+    const slotThreeItalicElement = new ElementBuilder(slotThreeItalic)
+      .withClassName('slot-three-italic')
       .styled(
         typography.sans.compose('small', {
           theme: theme.fontColor(isThemeDark),
@@ -135,11 +139,12 @@ export const createTextLockupPerson = ({
       })
       .build();
 
-    container.withChild(pronounsElement);
+    container.withChild(slotThreeItalicElement);
   }
 
-  if (subText) {
-    const subTextElement = new ElementBuilder(subText)
+  if (slotFour) {
+    const slotFourElement = new ElementBuilder(slotFour)
+      .withClassName('slot-four')
       .styled(
         typography.sans.compose('small', {
           theme: theme.fontColor(isThemeDark),
@@ -155,7 +160,7 @@ export const createTextLockupPerson = ({
       })
       .build();
 
-    container.withChild(subTextElement);
+    container.withChild(slotFourElement);
   }
 
   if (actions) {

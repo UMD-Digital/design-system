@@ -7,7 +7,9 @@ import { assets, textLockup } from 'atomic';
 import { type PersonBio } from '../_types';
 import { type ElementModel } from '../../../_types';
 
-const CreatePersonBioFullElement = (props: PersonBio): ElementModel<HTMLElement> => {
+const CreatePersonBioFullElement = (
+  props: PersonBio,
+): ElementModel<HTMLElement> => {
   const { isThemeDark, image, actions, description } = props;
   const { name, ...textProps } = props;
 
@@ -59,7 +61,15 @@ const CreatePersonBioFullElement = (props: PersonBio): ElementModel<HTMLElement>
     );
   }
 
-  builder.withChild(textLockup.person(textProps));
+  builder.withChild(
+    textLockup.person({
+      isThemeDark,
+      slotOne: textProps.slotOne,
+      slotTwo: textProps.slotTwo,
+      slotThreeItalic: textProps.slotThreeItalic,
+      slotFour: textProps.slotFour,
+    }),
+  );
   builder.withChild(textLockup.contact(props));
 
   if (description) {

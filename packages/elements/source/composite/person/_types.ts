@@ -16,10 +16,10 @@ export interface PersonContact extends PersonTheme {
 
 export interface Person extends PersonContact, PersonDisplay {
   name: HTMLElement | null;
-  job?: HTMLElement | null;
-  association?: HTMLElement | null;
-  pronouns?: HTMLElement | null;
-  subText?: HTMLElement | null;
+  slotOne?: HTMLElement | null;
+  slotTwo?: HTMLElement | null;
+  slotThreeItalic?: HTMLElement | null;
+  slotFour?: HTMLElement | null;
   actions?: HTMLElement | null;
 }
 

@@ -430,9 +430,9 @@ const createBlockCardProps = (
 
   return person.block({
     name,
-    pronouns: pronounsElement,
-    association: associationElement,
-    subText: expertiseElement,
+    slotOne: expertiseElement,
+    slotTwo: associationElement,
+    slotThreeItalic: pronounsElement,
     image,
     isThemeDark,
   });
@@ -474,9 +474,9 @@ const createListCardProps = (
 
   return person.list({
     name,
-    pronouns: pronounsElement,
-    association: associationElement,
-    subText: expertiseElement,
+    slotOne: expertiseElement,
+    slotThreeItalic: pronounsElement,
+    slotTwo: associationElement,
     image,
     isThemeDark,
   });
@@ -520,9 +520,9 @@ const createTabularCardProps = (
 
   return person.tabular({
     name,
-    pronouns: pronounsElement,
-    association: associationElement,
-    subText: expertiseElement,
+    slotOne: expertiseElement,
+    slotThreeItalic: pronounsElement,
+    slotTwo: associationElement,
     image,
     ...contactElements,
     isThemeDark,
@@ -610,9 +610,9 @@ export const mapExpertToBioProps = (
 
   return {
     name,
-    pronouns: pronounsElement,
-    association: associationElement,
-    subText: expertiseElement,
+    slotTwoItalic: pronounsElement,
+    slotTwo: associationElement,
+    slotOne: expertiseElement,
     email: contactElements.email || null,
     linkedin: contactElements.linkedin || null,
     phone: null,

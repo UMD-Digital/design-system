@@ -12,16 +12,16 @@ const mediumBreakpoint = token.media.breakpointValues.large.min;
 const CreatePersonListElement = ({
   actions,
   address,
-  association,
+  slotOne,
   email,
   image,
   isThemeDark,
-  job,
+  slotTwo,
   linkedin,
   name,
   phone,
-  pronouns,
-  subText,
+  slotThreeItalic,
+  slotFour,
 }: PersonCard): ElementModel<HTMLElement> => {
   const builder = new ElementBuilder()
     .withClassName('person-list-container')
@@ -64,16 +64,16 @@ const CreatePersonListElement = ({
       layout.person.columns.information({
         actions,
         address,
-        association,
+        slotTwo,
         customStyles: {},
         email,
         isThemeDark,
-        job,
+        slotOne,
         linkedin,
         name,
         phone,
-        pronouns,
-        subText,
+        slotThreeItalic,
+        slotFour,
       }),
     );
   }

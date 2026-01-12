@@ -15,6 +15,7 @@ const createElementStyles = (
     opacity: '1',
     transition: 'opacity 0.2s ease-in-out',
     containerType: 'inline-size',
+    display: 'block',
     ...additionalStyles.defined,
   },
 

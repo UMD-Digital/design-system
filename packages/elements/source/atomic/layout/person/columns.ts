@@ -69,22 +69,22 @@ export const image = ({
 
 const personLockup = ({
   actions,
-  association,
+  slotTwo,
   isThemeDark,
-  job,
+  slotOne,
   name,
   nameComposite,
-  pronouns,
-  subText,
+  slotThreeItalic,
+  slotFour,
 }: PersonTextLockupPropsWithStyles) =>
   textLockup.person({
     actions,
     name,
     nameComposite,
-    job,
-    association,
-    pronouns,
-    subText,
+    slotOne,
+    slotTwo,
+    slotThreeItalic,
+    slotFour,
     isThemeDark,
   });
 
@@ -152,24 +152,24 @@ export const information = ({
   actions,
   additionalContact,
   address,
-  association,
+  slotTwo,
   customStyles = {},
   email,
   isThemeDark,
-  job,
+  slotOne,
   linkedin,
   name,
   phone,
-  pronouns,
-  subText,
+  slotThreeItalic,
+  slotFour,
 }: PersonFullProps) => {
   const person = personLockup({
-    association,
+    slotTwo,
     isThemeDark,
-    job,
+    slotOne,
     name,
-    pronouns,
-    subText,
+    slotThreeItalic,
+    slotFour,
   });
 
   const contact = contactLockup({

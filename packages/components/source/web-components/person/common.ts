@@ -9,11 +9,11 @@ export const CommonPersonData = ({
   isThemeDark?: boolean;
 }) => ({
   address: Slots.contact.address({ element }),
-  association: Slots.person.association({ element }),
+  slotTwo: Slots.person.association({ element }),
   name: Slots.person.name({ element }),
   email: Slots.contact.email({ element }),
-  job: Slots.person.jobTitle({ element }),
-  pronouns: Slots.person.pronouns({ element }),
+  slotOne: Slots.person.jobTitle({ element }),
+  slotThreeItalic: Slots.person.pronouns({ element }),
   phone: Slots.contact.phone({ element }),
   linkedin: Slots.social.linkedin({ element }),
   image: validation.getValidatedSlotImage({
@@ -21,7 +21,7 @@ export const CommonPersonData = ({
     slotName: Slots.name.assets.image,
   }),
   additionalContact: Slots.contact.additional({ element }),
-  subText: Slots.text.subText({ element }),
+  slotFour: Slots.text.subText({ element }),
   actions: Slots.actions.default({ element }),
   isThemeDark,
 });

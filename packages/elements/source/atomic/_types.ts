@@ -25,12 +25,12 @@ export interface PersonContactProps
 export interface PersonTextLockupProps
   extends PersonCtaProps,
     Pick<ThemeProps, 'isThemeDark'> {
-  association?: ContentElement;
-  job?: ContentElement;
+  slotTwo?: ContentElement;
+  slotOne?: ContentElement;
   name?: ContentElement;
   nameComposite?: UMDElement | null;
-  pronouns?: ContentElement;
-  subText?: ContentElement;
+  slotThreeItalic?: ContentElement;
+  slotFour?: ContentElement;
 }
 
 // For layout components that need custom styles

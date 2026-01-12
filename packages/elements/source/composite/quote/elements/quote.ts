@@ -4,21 +4,7 @@ import * as typography from '@universityofmaryland/web-styles-library/typography
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { createCompositeQuoteIcon as elementIcon } from './icon';
 import { SMALL } from '../_constants';
-import { type QuoteTextProps } from '../_types';
-
-interface QuoteProps
-  extends Pick<
-    QuoteTextProps,
-    | 'quote'
-    | 'isThemeMaryland'
-    | 'isSizeLarge'
-    | 'isTypeFeatured'
-    | 'includesAnimation'
-  > {
-  hasImage?: boolean;
-  shouldHaveWhiteText?: boolean;
-  quote: HTMLElement;
-}
+import { type QuoteProps, type QuoteStatementQuoteProps } from '../_types';
 
 const splitWords = (quote: HTMLElement) => {
   const text = quote.textContent ?? '';
@@ -123,4 +109,18 @@ const CreateQuoteElement = (props: QuoteProps) => {
   return builder.build();
 };
 
+const CreateStatementQuoteElement = ({ quote }: QuoteStatementQuoteProps) =>
+  new ElementBuilder(quote)
+    .withClassName('statement-quote')
+    .withStyles({
+      element: {
+        color: token.color.gray.dark,
+        lineHeight: token.spacing.md,
+        fontSize: token.font.size.base,
+        textAlign: 'left',
+      },
+    })
+    .build();
+
 export const createCompositeQuote = CreateQuoteElement;
+export const createStatementQuote = CreateStatementQuoteElement;

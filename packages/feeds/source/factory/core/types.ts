@@ -86,7 +86,7 @@ export interface CardMappingOptions {
   /** Card type (block, list, tabular, overlay) */
   cardType?: 'block' | 'list' | 'tabular' | 'overlay';
   /** Configuration for images */
-  imageConfig?: (entry: any) => ImageConfig;
+  imageConfig?: (entry: any) => ImageConfig | null;
   /** Additional custom options */
   [key: string]: any;
 }
@@ -216,7 +216,7 @@ export interface BaseFeedConfig<TData, TVariables = any> {
   /** Custom no results configuration */
   noResultsConfig?: NoResultsConfig;
   /** Custom image configuration function */
-  imageConfig?: (entry: TData) => ImageConfig;
+  imageConfig?: (entry: TData) => ImageConfig | null;
 
   // Internal helpers (passed from common functions)
   getOffset?: () => number;

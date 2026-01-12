@@ -228,8 +228,8 @@ export default (props) => createBaseFeed({
 
   // Configure images
   imageConfig: (entry) => ({
-    imageUrl: entry.image[0].url,
-    altText: entry.image[0].altText,
+    imageUrl: entry.image?.[0]?.url,
+    altText: entry.image?.[0]?.altText,
     linkUrl: entry.url,
   }),
 });

@@ -91,12 +91,19 @@ const eventsFeed = createBaseFeed({
   layoutStrategy: gridGapLayout,
 
   // Image configuration
-  imageConfig: (entry) => ({
-    imageUrl: entry.image[0].url,
-    altText: entry.image[0].altText || 'Event Image',
-    linkUrl: entry.url,
-    linkLabel: 'University of Maryland Event',
-  }),
+  imageConfig: (entry) => {
+    const imageUrl = entry.image?.[0]?.url;
+    const altText = entry.image?.[0]?.altText;
+
+    if (!imageUrl || !altText) return null;
+
+    return {
+      imageUrl: imageUrl,
+      altText: altText,
+      linkUrl: entry.url,
+      linkLabel: 'University of Maryland Event',
+    };
+  },
 });
 
 // Use the feed
@@ -181,7 +188,7 @@ interface BaseFeedConfig<TData, TVariables> {
 
   // Optional Overrides
   noResultsConfig?: NoResultsConfig;
-  imageConfig?: (entry: TData) => ImageConfig;
+  imageConfig?: (entry: TData) => ImageConfig | null;
 }
 ```
 
@@ -256,11 +263,18 @@ const eventsFeed = createBaseFeed({
   fetchStrategy: eventsFetchStrategy,
   displayStrategy: eventsDisplayStrategy,
   layoutStrategy: gridGapLayout,
-  imageConfig: (entry) => ({
-    imageUrl: entry.image[0].url,
-    altText: entry.image[0].altText,
-    linkUrl: entry.url,
-  }),
+  imageConfig: (entry) => {
+    const imageUrl = entry.image?.[0]?.url;
+    const altText = entry.image?.[0]?.altText;
+
+    if (!imageUrl || !altText) return null;
+
+    return {
+      imageUrl: imageUrl,
+      altText: altText,
+      linkUrl: entry.url,
+    };
+  },
 });
 ```
 
@@ -275,10 +289,17 @@ const newsFeed = createBaseFeed({
   fetchStrategy: newsFetchStrategy,
   displayStrategy: newsDisplayStrategy,
   layoutStrategy: stackedLayout,
-  imageConfig: (entry) => ({
-    imageUrl: entry.image[0].url,
-    altText: entry.image[0].altText,
-  }),
+  imageConfig: (entry) => {
+    const imageUrl = entry.image?.[0]?.url;
+    const altText = entry.image?.[0]?.altText;
+
+    if (!imageUrl || !altText) return null;
+
+    return {
+      imageUrl: imageUrl,
+      altText: altText,
+    };
+  },
 });
 ```
 
@@ -417,12 +438,19 @@ export default (props: BlockProps): ElementModel =>
     fetchStrategy: eventsFetchStrategy,
     displayStrategy: eventsDisplayStrategy,
     layoutStrategy: gridGapLayout,
-    imageConfig: (entry) => ({
-      imageUrl: entry.image[0].url,
-      altText: entry.image[0].altText || 'Event Image',
-      linkUrl: entry.url,
-      linkLabel: 'University of Maryland Event',
-    }),
+    imageConfig: (entry) => {
+      const imageUrl = entry.image?.[0]?.url;
+      const altText = entry.image?.[0]?.altText;
+
+      if (!imageUrl || !altText) return null;
+
+      return {
+        imageUrl: imageUrl,
+        altText: altText,
+        linkUrl: entry.url,
+        linkLabel: 'University of Maryland Event',
+      };
+    },
   });
 ```
 

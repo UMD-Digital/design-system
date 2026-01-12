@@ -60,9 +60,9 @@ export const IN_THE_NEWS_QUERY = `
   ${FRAGMENT_ENTRIES_NATIVE_FIELDS}
 `;
 
-export const inTheNewsFetchStrategy = createGraphQLFetchStrategy<InTheNewsEntry>(
-  {
-    endpoint: 'https://umd-api.production.servd.dev/graphql',
+export const inTheNewsFetchStrategy =
+  createGraphQLFetchStrategy<InTheNewsEntry>({
+    endpoint: 'https://content-api.umd.edu/graphql',
 
     queries: {
       entries: IN_THE_NEWS_QUERY,
@@ -88,5 +88,4 @@ export const inTheNewsFetchStrategy = createGraphQLFetchStrategy<InTheNewsEntry>
 
       return variables;
     },
-  },
-);
+  });

@@ -16,6 +16,14 @@ const extractSummaryText = (entry: InTheNewsEntry): string | null => {
   return entry.summary.plainText || entry.summary.html || null;
 };
 
+const getAttributionText = (entry: InTheNewsEntry): string | null => {
+  return entry.attribution || null;
+};
+
+const getAuthorText = (entry: InTheNewsEntry): string | null => {
+  return entry.author || null;
+};
+
 const formatDate = (dateString?: string): string => {
   if (!dateString) return '';
   try {
@@ -38,8 +46,20 @@ const createHeadlineElement = (entry: InTheNewsEntry): HTMLElement | null =>
 
 const createSummaryElement = (entry: InTheNewsEntry): HTMLElement | null => {
   const summary = extractSummaryText(entry);
-  if (!summary) return null;
-  return createTextContainer({ text: summary, allowHTML: true });
+  const author = getAuthorText(entry);
+  const expertName = formatExpertName(entry);
+  const hasName = author || expertName;
+
+  if (hasName && summary) {
+    const combinedSummary = `${expertName ? expertName : author} | ${summary}`;
+    return createTextContainer({ text: combinedSummary, allowHTML: true });
+  }
+
+  if (summary && !expertName) {
+    return createTextContainer({ text: summary, allowHTML: true });
+  }
+
+  return null;
 };
 
 const formatExpertName = (entry: InTheNewsEntry): string | null => {
@@ -53,16 +73,6 @@ const formatExpertName = (entry: InTheNewsEntry): string | null => {
   ].filter(Boolean);
 
   return nameParts.length > 0 ? nameParts.join(' ') : expert.title || null;
-};
-
-const getAttributionText = (entry: InTheNewsEntry): string | null => {
-  // Priority: expert name > author > attribution
-  const expertName = formatExpertName(entry);
-  if (expertName) return expertName;
-
-  if (entry.author) return entry.author;
-
-  return entry.attribution || null;
 };
 
 const createAttributionElement = (
@@ -107,13 +117,6 @@ export const inTheNewsDisplayStrategy: DisplayStrategy<InTheNewsEntry> = {
       eyebrow: createAttributionElement(entry),
       isThemeDark,
     };
-
-    console.log(
-      card.list({
-        ...commonProps,
-        isAligned: false,
-      }),
-    );
 
     if (cardType === 'list') {
       return card.list({

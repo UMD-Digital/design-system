@@ -130,9 +130,6 @@ const FRAGMENT_EXPERT_CATEGORIES = `
     areasOfExpertise: expertsCategoryAreaOfExpertise {
       ...CategoryFields
     }
-    campusUnits: categoryCampusUnit {
-      ...CategoryFields
-    }
     tags: expertsCategoryTags {
       ...CategoryFields
     }

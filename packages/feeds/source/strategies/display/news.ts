@@ -88,16 +88,20 @@ export const newsDisplayStrategy: DisplayStrategy<NewsEntry> = {
 
     // Handle overlay card type
     if (isOverlay && imageConfig) {
-      const backgroundImage = createImageOrLinkedImage(imageConfig(entry));
-      return card.overlay.image({
-        ...commonProps,
-        backgroundImage,
-      });
+      const config = imageConfig(entry);
+      if (config) {
+        const backgroundImage = createImageOrLinkedImage(config);
+        return card.overlay.image({
+          ...commonProps,
+          backgroundImage,
+        });
+      }
     }
 
     // Create image (if imageConfig provided)
-    const image = imageConfig
-      ? createImageOrLinkedImage(imageConfig(entry))
+    const imageResult = imageConfig ? imageConfig(entry) : null;
+    const image = imageResult
+      ? createImageOrLinkedImage(imageResult)
       : undefined;
 
     // Handle list card type

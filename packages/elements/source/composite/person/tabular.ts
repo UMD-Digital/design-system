@@ -50,11 +50,11 @@ const CreatePersonTabularElement = ({
 
   if (name) {
     const nameStyles = {
-      ...typography.sans.compose('large', {
-        theme: theme.fontColor(isThemeDark),
-      }),
       ...animationStyles.line.composeSlideUnder({
         color: theme.foreground(isThemeDark),
+      }),
+      ...typography.sans.compose('large', {
+        theme: theme.fontColor(isThemeDark),
       }),
     };
 

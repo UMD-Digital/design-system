@@ -32,11 +32,11 @@ export const createTextLockupPerson = ({
 
   if (name) {
     const headlineStyles = {
-      ...typography.sans.compose('larger', {
-        theme: theme.fontColor(isThemeDark),
-      }),
       ...animationStyles.line.composeSlideUnder({
         color: theme.foreground(isThemeDark),
+      }),
+      ...typography.sans.compose('larger', {
+        theme: theme.fontColor(isThemeDark),
       }),
     };
 

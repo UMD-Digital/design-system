@@ -12,35 +12,7 @@ export interface SectionIntroProps {
   text?: HTMLElement | null;
   hasSeparator?: boolean;
   isThemeDark?: boolean;
-  includesAnimation?: boolean;
 }
-
-const ANIMATION_CONFIGS = {
-  line: `
-    @keyframes intro-line {
-      from {
-        height: 0;
-        transform: translateY(${token.spacing.lg});
-      }
-      to {
-        height: ${token.spacing['4xl']};
-        transform: translateY(0);
-      }
-    }
-  `,
-  fadeIn: `
-    @keyframes intro-fade-in {
-      from {
-        opacity: 0;
-        transform: translateY(100px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  `,
-};
 
 const createHeadline = (
   props: Pick<SectionIntroProps, 'headline' | 'isThemeDark'>,
@@ -121,37 +93,18 @@ const createActions = (
 const createTextContainer = (
   props: Pick<
     SectionIntroProps,
-    'headline' | 'text' | 'actions' | 'isThemeDark' | 'includesAnimation'
+    'headline' | 'text' | 'actions' | 'isThemeDark'
   >,
 ): ElementModel<HTMLElement> => {
-  const { headline, text, actions, includesAnimation, isThemeDark } = props;
+  const { headline, text, actions, isThemeDark } = props;
 
   const headlineElement = createHeadline({ headline, isThemeDark });
   const textElement = createText({ text, headline, isThemeDark });
   const actionsElement = createActions({ actions });
 
-  const container = new ElementBuilder()
-    .withClassName('intro-default-container-text')
-    .withStyles({
-      element: {
-        ...(includesAnimation && {
-          opacity: 0,
-        }),
-
-        ['.intro-default-animated &']: {
-          transform: 'translateY(100px)',
-          animation: 'intro-fade-in 1s forwards',
-          animationDelay: '0.2s',
-        },
-
-        [`&:before`]: {
-          ...(includesAnimation && {
-            height: 0,
-            transform: `translateY(${token.spacing.lg})`,
-          }),
-        },
-      },
-    });
+  const container = new ElementBuilder().withClassName(
+    'intro-default-container-text',
+  );
 
   if (headlineElement) {
     container.withChild(headlineElement);
@@ -190,15 +143,10 @@ const createWrapper = (
 const createContainer = (
   props: Pick<
     SectionIntroProps,
-    | 'isThemeDark'
-    | 'hasSeparator'
-    | 'headline'
-    | 'text'
-    | 'actions'
-    | 'includesAnimation'
+    'isThemeDark' | 'hasSeparator' | 'headline' | 'text' | 'actions'
   >,
 ): ElementModel<HTMLElement> => {
-  const { isThemeDark, hasSeparator, includesAnimation } = props;
+  const { hasSeparator } = props;
 
   const wrapperElement = createWrapper(props);
 
@@ -226,63 +174,11 @@ const createContainer = (
             top: 0,
           }),
         },
-
-        ['&.intro-default-animated:before']: {
-          ...(includesAnimation && {
-            animation: 'intro-line 1.2s forwards',
-          }),
-        },
       },
     })
     .build();
 };
 
-const setupAnimation = (
-  props: Pick<SectionIntroProps, 'includesAnimation'> & {
-    container: HTMLElement;
-  },
-) => {
-  const { includesAnimation, container } = props;
-  if (!includesAnimation) return;
-
-  const animation: IntersectionObserverCallback = (entries, observer) => {
-    entries.map((entry) => {
-      const target = entry.target as HTMLElement;
-
-      if (entry.isIntersecting) {
-        target.classList.add('intro-default-animated');
-        observer.unobserve(target);
-      }
-    });
-  };
-
-  const observer = new IntersectionObserver(animation, {
-    root: null,
-    rootMargin: '0px',
-    threshold: [0.35],
-  });
-
-  observer.observe(container);
-};
-
-const CreateSectionIntroSmallElement = (props: SectionIntroProps) => {
-  const containerElement = createContainer(props);
-
-  const loadAnimation = () =>
-    setupAnimation({
-      includesAnimation: props.includesAnimation,
-      container: containerElement.element,
-    });
-
-  if (props.includesAnimation) {
-    containerElement.styles += ANIMATION_CONFIGS.line;
-    containerElement.styles += ANIMATION_CONFIGS.fadeIn;
-  }
-
-  return {
-    ...containerElement,
-    events: { loadAnimation },
-  };
-};
-
-export const createCompositeLayoutSectionIntroSmall = CreateSectionIntroSmallElement;
+export const createCompositeLayoutSectionIntroSmall = (
+  props: SectionIntroProps,
+) => createContainer(props);

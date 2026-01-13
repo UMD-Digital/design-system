@@ -30,7 +30,7 @@ const slots: SlotConfiguration = {
  */
 const MakeOverlayContent = ({ element }: { element: HTMLElement }) => {
   const loadingPriority = Attributes.getValue.loadingPriority({ element });
-  const imageLoading =
+  const imageLoading: 'eager' | 'lazy' =
     loadingPriority === 'eager' || loadingPriority === 'lazy'
       ? loadingPriority
       : 'lazy';

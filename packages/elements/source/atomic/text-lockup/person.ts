@@ -73,7 +73,7 @@ export const createTextLockupPerson = ({
         element: {
           lineHeight: `1.25em`,
 
-          ...(!isThemeDark && { color: `${token.color.gray.dark}` }),
+          ...(!isThemeDark && { color: `${token.color.gray.dark} !important` }),
         },
         subElement: {
           color: 'currentColor',
@@ -96,7 +96,7 @@ export const createTextLockupPerson = ({
         element: {
           lineHeight: '1.2em',
           display: 'block',
-          ...(!isThemeDark && { color: `${token.color.gray.dark}` }),
+          ...(!isThemeDark && { color: `${token.color.gray.dark} !important` }),
 
           [`& + *`]: {
             marginTop: '4px',
@@ -116,7 +116,11 @@ export const createTextLockupPerson = ({
   }
 
   if (slotThreeItalic) {
-    slotThreeItalic.innerHTML = `<i>${slotThreeItalic.innerHTML}</i>`;
+    const italicElement = document.createElement('i');
+    while (slotThreeItalic.firstChild) {
+      italicElement.appendChild(slotThreeItalic.firstChild);
+    }
+    slotThreeItalic.appendChild(italicElement);
     const slotThreeItalicElement = new ElementBuilder(slotThreeItalic)
       .withClassName('slot-three-italic')
       .styled(
@@ -126,7 +130,7 @@ export const createTextLockupPerson = ({
       )
       .withStyles({
         element: {
-          ...(!isThemeDark && { color: `${token.color.gray.dark}` }),
+          ...(!isThemeDark && { color: `${token.color.gray.dark} !important` }),
 
           [`& + *`]: {
             marginTop: '4px',

@@ -37,6 +37,7 @@ const createComponent: CreateComponentFunction = (element) => {
   const isTypeStatement = Attributes.isDisplay.statement({ element });
   const isThemeDark = Attributes.isTheme.dark({ element });
   const isThemeMaryland = Attributes.isTheme.maryland({ element });
+  const isThemeGold = Attributes.isTheme.gold({ element });
   const isTransparent = Attributes.isVisual.transparent({ element });
   const action = getAction({ element });
   const quote = createStyledSlotOrClone({
@@ -59,10 +60,16 @@ const createComponent: CreateComponentFunction = (element) => {
     Attributes.includesFeature.animation({ element }) &&
     !isPreferredReducedMotion();
 
+  const headline = createStyledSlotOrClone({
+    element,
+    slotRef: Slots.name.headline.default,
+  });
+
   const quoteProps = {
     isSizeLarge,
     isThemeDark,
     isThemeMaryland,
+    isThemeGold,
     isTransparent,
     includesAnimation,
     action,
@@ -70,6 +77,7 @@ const createComponent: CreateComponentFunction = (element) => {
     image,
     attribution,
     attributionSubText,
+    headline,
   };
 
   if (isTypeFeatured) {

@@ -1,11 +1,4 @@
-import { type QuoteBaseProps, type QuoteVariantProps } from '../_types';
-import { type ElementModel } from '../../../_types';
-
-interface QuoteAnimationProps
-  extends QuoteVariantProps,
-    Pick<QuoteBaseProps, 'quote' | 'includesAnimation' | 'image'> {
-  quoteElement: ElementModel<HTMLElement>;
-}
+import { type QuoteAnimationProps } from '../_types';
 
 export const quoteAnimation = ({
   image,

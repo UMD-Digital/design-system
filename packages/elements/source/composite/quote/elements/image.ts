@@ -2,18 +2,7 @@ import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-token-library';
 import { createCompositeQuoteIcon as elementIcon } from './icon';
 import { SMALL } from '../_constants';
-import {
-  type QuoteBaseProps,
-  type QuoteVariantProps,
-  type QuoteSizeProps,
-} from '../_types';
-
-interface QuoteImageProps
-  extends QuoteVariantProps,
-    QuoteSizeProps,
-    Pick<QuoteBaseProps, 'isThemeMaryland'> {
-  image: HTMLImageElement;
-}
+import { type QuoteImageProps, type QuoteStatementImageProps } from '../_types';
 
 const CreateQuoteImageElement = ({
   image,
@@ -75,4 +64,29 @@ const CreateQuoteImageElement = ({
   return container.build();
 };
 
+const CreateStatementImageElement = ({
+  image,
+  isThemeGold,
+}: QuoteStatementImageProps) =>
+  new ElementBuilder(image)
+    .withClassName('statement-image')
+    .styled({
+      element: {
+        position: 'absolute',
+        transform: 'translate(-50%, -50%)',
+        left: '50%',
+        top: 0,
+        objectFit: 'cover',
+        aspectRatio: '1 / 1',
+        border: `4px solid ${token.color.red}`,
+        width: '100px',
+        boxShadow:
+          '0 2px 4px rgba(0, 0, 0, 0.06), 0 8px 16px rgba(0, 0, 0, 0.08), 0 24px 40px rgba(0, 0, 0, 0.10)',
+        ...(isThemeGold && {
+          border: `4px solid ${token.color.gold}`,
+        }),
+      },
+    })
+    .build();
 export const createCompositeQuoteImage = CreateQuoteImageElement;
+export const createStatementQuoteImage = CreateStatementImageElement;

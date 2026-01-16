@@ -10,6 +10,8 @@ import {
   createStatementQuoteHeadline,
   createStatementQuoteAttribution,
 } from './elements/text';
+import * as Style from '@universityofmaryland/web-styles-library';
+import { createMediaQuery } from '@universityofmaryland/web-utilities-library';
 
 const CreateCompositeQuoteStatement = (props: QuoteStatementProps) => {
   const {
@@ -65,9 +67,16 @@ const CreateCompositeQuoteStatement = (props: QuoteStatementProps) => {
         textAlign: 'center',
         boxShadow:
           '0 2px 4px rgba(0, 0, 0, 0.06), 0 8px 16px rgba(0, 0, 0, 0.08), 0 24px 40px rgba(0, 0, 0, 0.10)',
-        margin: `${token.spacing['2xl']} 0`,
-        padding: `${token.spacing['8xl']} ${token.spacing['3xl']}`,
-        maxWidth: '600px',
+        marginTop: `${token.spacing['2xl']}`,
+        padding: `${token.spacing['6xl']} ${token.spacing.lg} ${token.spacing.xl}`,
+
+        ...createMediaQuery(
+          'min-width',
+          token.media.breakpointValues.desktop.min,
+          {
+            padding: `${token.spacing['8xl']} ${token.spacing['3xl']} ${token.spacing['6xl']}`,
+          },
+        ),
 
         ...(isThemeGold && {
           borderTop: `4px solid ${token.color.gold}`,

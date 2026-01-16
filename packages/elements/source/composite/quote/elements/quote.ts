@@ -116,6 +116,8 @@ const CreateStatementQuoteElement = ({ quote }: QuoteStatementQuoteProps) =>
       element: {
         color: token.color.gray.dark,
         lineHeight: token.spacing.md,
+        fontSize: token.font.size.base,
+        textAlign: 'left',
       },
     })
     .build();

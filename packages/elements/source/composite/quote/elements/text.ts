@@ -118,7 +118,7 @@ const CreateStatementQuoteHeadline = ({
     .withStyles({
       element: {
         color: token.color.black,
-        fontSize: token.font.size.lg,
+        fontSize: token.font.size.base,
         textTransform: 'uppercase',
         marginBottom: token.spacing.sm,
         letterSpacing: '2px',
@@ -162,7 +162,15 @@ const CreateStatementQuoteAttribution = ({
   }
 
   if (attributionSubText) {
-    const subTextElement = new ElementBuilder(attributionSubText).build();
+    const subTextElement = new ElementBuilder(attributionSubText)
+      .withClassName('statement-attribution-subtext')
+      .withStyles({
+        element: {
+          color: token.color.gray.dark,
+          fontSize: token.font.size.sm,
+        },
+      })
+      .build();
     container.withChild(subTextElement);
   }
 

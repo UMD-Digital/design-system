@@ -1,6 +1,10 @@
 import { person } from '@universityofmaryland/web-elements-library/composite';
 import { createSlot } from '@universityofmaryland/web-utilities-library/elements';
-import { Attributes, Register, Slots } from '@universityofmaryland/web-model-library';
+import {
+  Attributes,
+  Register,
+  Slots,
+} from '@universityofmaryland/web-model-library';
 import { CommonPersonData } from './common';
 import {
   CreateComponentFunction,
@@ -31,6 +35,7 @@ const createComponent: CreateComponentFunction = (element) => {
     element,
   });
   const breadcrumbSlot = createSlot(Slots.name.BREADCRUMB);
+  const commonData = CommonPersonData({ element, isThemeDark });
 
   if (breadcrumbSlot) {
     const breadcrumb = element.querySelector(
@@ -45,7 +50,8 @@ const createComponent: CreateComponentFunction = (element) => {
   }
 
   return person.hero({
-    ...CommonPersonData({ element, isThemeDark }),
+    ...commonData,
+    pronouns: commonData.slotThreeItalic,
     breadcrumbDesktop: createSlot(Slots.name.BREADCRUMB),
     breadcrumbMobile: createSlot(Slots.name.BREADCRUMB_COPY),
   });

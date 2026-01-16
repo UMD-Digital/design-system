@@ -116,7 +116,7 @@ export const createTextLockupPerson = ({
   }
 
   if (slotThreeItalic) {
-    const italicElement = document.createElement('i');
+    const italicElement = document.createElement('span');
     while (slotThreeItalic.firstChild) {
       italicElement.appendChild(slotThreeItalic.firstChild);
     }
@@ -131,6 +131,7 @@ export const createTextLockupPerson = ({
       .withStyles({
         element: {
           ...(!isThemeDark && { color: `${token.color.gray.dark} !important` }),
+          fontStyle: 'italic',
 
           [`& + *`]: {
             marginTop: '4px',

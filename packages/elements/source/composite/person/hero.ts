@@ -93,12 +93,12 @@ const CreateImageBlock = (props: PersonInfo): ElementModel<HTMLElement> => {
 
   if (pronouns) {
     wrapper.withChild(
-      new ElementBuilder(document.createElement('i'))
+      new ElementBuilder(document.createElement('div'))
         .withClassName('umd-person-hero-pronouns')
         .withStyles({
           element: {
-            display: 'block',
             color: `${isThemeDark ? token.color.black : token.color.white}`,
+            fontStyle: 'italic',
 
             ['*']: {
               color: 'currentColor',

@@ -40,7 +40,6 @@ const baseElements = [
   'slider-events-feed',
   'slider-events',
   'stat',
-  'sticky-columns',
 ].reduce(
   (acc, name) => ({
     ...acc,
@@ -252,9 +251,12 @@ const footer = createElementStyles('umd-element-footer', {
   notDefined: {
     contentVisibility: 'hidden',
     backgroundColor: color.black,
-    containIntrinsicSize: 'auto 30vh',
-    minHeight: '30vh',
-    '& > *': { display: 'none' },
+    containIntrinsicSize: 'auto 50vh',
+    minHeight: '50vh',
+    display: 'none',
+  },
+  defined: {
+    display: 'block',
   },
 });
 
@@ -352,16 +354,15 @@ const pathway = createElementStyles('umd-element-pathway', {
 
 // Navigation components
 const navigation = {
-  ...['nav-item', 'navigation-header'].reduce(
+  ...['navigation-header'].reduce(
     (acc, name) => ({
       ...acc,
       ...createElementStyles(`umd-element-${name}`, {
         notDefined: {
           contentVisibility: 'hidden',
-          containIntrinsicSize: '44px 100px',
+          containIntrinsicSize: 'auto 44px',
           backgroundColor: color.white,
-          height: '100px',
-          width: '44px',
+          height: '60px',
           '& > *': { display: 'none' },
         },
         defined: {
@@ -371,6 +372,15 @@ const navigation = {
     }),
     {},
   ),
+  ...createElementStyles('umd-element-nav-item', {
+    notDefined: {
+      display: 'none',
+    },
+    defined: {
+      containerType: 'normal',
+      display: 'block',
+    },
+  }),
   ...createElementStyles('umd-element-nav-drawer', {
     notDefined: {
       contentVisibility: 'hidden',
@@ -492,6 +502,23 @@ const socialSharing = createElementStyles(socialSharingTag, {
   },
 });
 
+const stickyColumns = {
+  ...['sticky-columns'].reduce(
+    (acc, name) => ({
+      ...acc,
+      ...createElementStyles(`umd-element-${name}`, {
+        notDefined: {
+          display: 'none',
+        },
+        defined: {
+          display: 'block',
+        },
+      }),
+    }),
+    {},
+  ),
+};
+
 const tabsTag = 'umd-element-tabs';
 const tabs = createElementStyles(tabsTag, {
   custom: {
@@ -518,5 +545,6 @@ export const webComponentStyles = {
   ...scrollTop,
   ...sectionIntro,
   ...socialSharing,
+  ...stickyColumns,
   ...tabs,
 };

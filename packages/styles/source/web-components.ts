@@ -251,8 +251,8 @@ const carousels = [
 const footer = createElementStyles('umd-element-footer', {
   notDefined: {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 30vh',
     backgroundColor: color.black,
+    containIntrinsicSize: 'auto 30vh',
     minHeight: '30vh',
     '& > *': { display: 'none' },
   },
@@ -356,6 +356,14 @@ const navigation = {
     (acc, name) => ({
       ...acc,
       ...createElementStyles(`umd-element-${name}`, {
+        notDefined: {
+          contentVisibility: 'hidden',
+          containIntrinsicSize: '44px 100px',
+          backgroundColor: color.white,
+          height: '100px',
+          width: '44px',
+          '& > *': { display: 'none' },
+        },
         defined: {
           containerType: 'normal',
         },
@@ -399,8 +407,8 @@ const navigationAlertUtility = {
       ...createElementStyles(`umd-element-${name}`, {
         notDefined: {
           display: 'block !important',
-          opacity: '1 !important',
-          minHeight: '44px',
+          minHeight: '44px !important',
+          containIntrinsicSize: 'auto !important',
           '& > *': { display: 'none' },
         },
         defined: {

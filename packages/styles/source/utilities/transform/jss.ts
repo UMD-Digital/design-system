@@ -272,3 +272,128 @@ export const convertToClassSelectorCss = (jssObject: JssObject): string => {
 
   return convertToCss(styles, selector);
 };
+
+/**
+ * Process nested JSS objects and convert to CSS.
+ * Recursively finds objects with `className` or `selector` properties
+ * and converts them to CSS strings.
+ * @param {any} obj The nested JSS object to process
+ * @returns {string} CSS string with all converted styles
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * const css = Styles.utilities.transform.jss.processNestedJssObjects({
+ *   buttons: {
+ *     primary: { className: 'btn-primary', color: 'red' }
+ *   }
+ * });
+ * ```
+ * @since 1.8.0
+ */
+export function processNestedJssObjects(obj: any): string {
+  const cssBlocks: string[] = [];
+
+  function process(value: any) {
+    if (!value || typeof value !== 'object' || value === null) return;
+
+    if ('className' in value) {
+      const css = convertToClassSelectorCss(value);
+      if (css) cssBlocks.push(css);
+    } else if ('selector' in value) {
+      const { selector, ...styles } = value;
+      const css = convertToSelectorCSS(styles, selector);
+      if (css) cssBlocks.push(css);
+    } else {
+      Object.values(value).forEach(process);
+    }
+  }
+
+  process(obj);
+  return cssBlocks.join('\n\n');
+}
+
+/**
+ * Process web component styles where keys are CSS selectors.
+ * @param {Record<string, any>} obj Object with selectors as keys and style objects as values
+ * @returns {string} CSS string
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * const css = Styles.utilities.transform.jss.processWebComponentStyles({
+ *   ':host': { display: 'block' },
+ *   '.container': { padding: '16px' }
+ * });
+ * ```
+ * @since 1.8.0
+ */
+export function processWebComponentStyles(obj: Record<string, any>): string {
+  const cssBlocks: string[] = [];
+
+  for (const [selector, styles] of Object.entries(obj)) {
+    if (typeof styles === 'object' && styles !== null) {
+      const css = convertToSelectorCSS(styles, selector);
+      if (css) cssBlocks.push(css);
+    }
+  }
+
+  return cssBlocks.join('\n\n');
+}
+
+/**
+ * Generate CSS for root and reset styles.
+ * Processes a root JSS object (containing :root styles) and a reset JSS object
+ * (containing CSS reset rules) into a combined CSS string.
+ * @param {Record<string, any>} root The root styles object (with :root key)
+ * @param {Record<string, any>} reset The CSS reset styles object
+ * @returns {string} CSS string with root and reset styles
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * const css = Styles.utilities.transform.jss.generateBaseCSS(
+ *   { ':root': { '--color-primary': '#E21833', fontFamily: 'sans-serif' } },
+ *   { '*': { boxSizing: 'border-box' }, body: { margin: 0 } }
+ * );
+ * ```
+ * @since 1.8.0
+ */
+export function generateBaseCSS(
+  root: Record<string, any>,
+  reset: Record<string, any>,
+): string {
+  const cssBlocks: string[] = [];
+
+  // Process :root styles
+  if (root[':root']) {
+    const rootStyles = root[':root'];
+    const vars: string[] = [];
+    const otherStyles: Record<string, any> = {};
+
+    for (const [key, value] of Object.entries(rootStyles)) {
+      if (key.startsWith('--') || key.startsWith('@media')) {
+        if (typeof value === 'object') {
+          // Handle media queries in :root - skip for now
+          continue;
+        }
+        vars.push(`${key}: ${value};`);
+      } else if (['font-family', 'font-size', 'line-height'].includes(key)) {
+        otherStyles[key] = value;
+      }
+    }
+
+    const otherStylesStr = Object.entries(otherStyles)
+      .map(([k, v]) => `${k}: ${v};`)
+      .join(' ');
+
+    cssBlocks.push(`:root { ${vars.join(' ')} ${otherStylesStr} }`);
+  }
+
+  // Process reset styles
+  for (const [selector, styles] of Object.entries(reset)) {
+    if (typeof styles === 'object' && styles !== null) {
+      const css = convertToSelectorCSS(styles as Record<string, any>, selector);
+      if (css) cssBlocks.push(css);
+    }
+  }
+
+  return cssBlocks.join('\n\n');
+}

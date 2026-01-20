@@ -11,7 +11,8 @@ import {
   isValidQueryCondition,
   processMediaQueryString,
   processQuery,
-  processNestedSelector
+  processNestedSelector,
+  minifyCSS
 } from '../../../source/utilities/transform/css';
 
 describe('transform/css utilities', () => {
@@ -367,6 +368,59 @@ describe('transform/css utilities', () => {
       expect(result).toContain('@media (min-width: 768px) and (max-width: 1200px) {');
       expect(result).toContain('.test {');
       expect(result).toContain('color: blue;');
+    });
+  });
+
+  describe('minifyCSS', () => {
+    it('should remove unnecessary whitespace', () => {
+      const css = `.test {
+        color: red;
+        font-size: 16px;
+      }`;
+      const result = minifyCSS(css);
+      expect(result).toBe('.test{color:red;font-size:16px;}');
+    });
+
+    it('should remove CSS comments', () => {
+      const css = `/* This is a comment */
+      .test {
+        color: red;
+      }
+      /* Another comment */`;
+      const result = minifyCSS(css);
+      expect(result).toBe('.test{color:red;}');
+    });
+
+    it('should handle multiple selectors', () => {
+      const css = `.class1 { color: red; }
+      .class2 { color: blue; }`;
+      const result = minifyCSS(css);
+      expect(result).toBe('.class1{color:red;}.class2{color:blue;}');
+    });
+
+    it('should preserve spaces in values where needed', () => {
+      const css = `.test { font-family: Arial, sans-serif; }`;
+      const result = minifyCSS(css);
+      expect(result).toBe('.test{font-family:Arial,sans-serif;}');
+    });
+
+    it('should handle media queries', () => {
+      const css = `@media (min-width: 768px) {
+        .test {
+          color: red;
+        }
+      }`;
+      const result = minifyCSS(css);
+      expect(result).toBe('@media(min-width:768px){.test{color:red;}}');
+    });
+
+    it('should handle empty input', () => {
+      expect(minifyCSS('')).toBe('');
+    });
+
+    it('should handle already minified CSS', () => {
+      const css = '.test{color:red;}';
+      expect(minifyCSS(css)).toBe('.test{color:red;}');
     });
   });
 });

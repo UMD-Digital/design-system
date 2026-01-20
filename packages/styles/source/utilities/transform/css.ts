@@ -412,3 +412,32 @@ export const removeDuplicates = async (css: string) => {
   });
   return result.css;
 };
+
+/**
+ * Minifies CSS by removing unnecessary whitespace and comments.
+ * @param {string} css The CSS string to minify
+ * @returns {string} Minified CSS
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * const minified = Styles.utilities.transform.css.minifyCSS('.foo { color: red; }');
+ * // Result: '.foo{color:red;}'
+ * ```
+ * @since 1.8.0
+ */
+export function minifyCSS(css: string): string {
+  return css
+    .replace(/\/\*[\s\S]*?\*\//g, '') // Remove comments
+    .replace(/\s*{\s*/g, '{')
+    .replace(/\s*}\s*/g, '}')
+    .replace(/\s*;\s*/g, ';')
+    .replace(/\s*:\s*/g, ':')
+    .replace(/,\s+/g, ',')
+    .replace(/\s+\(/g, '(')
+    .replace(/\(\s+/g, '(')
+    .replace(/\s+\)/g, ')')
+    .replace(/\)\s+/g, ')')
+    .replace(/[\r\n]+/g, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}

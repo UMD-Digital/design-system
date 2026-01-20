@@ -4,6 +4,9 @@ import {
   convertToSelectorCSS,
   convertToClassSelectorCss,
   convertToCss,
+  processNestedJssObjects,
+  processWebComponentStyles,
+  generateBaseCSS,
 } from '../../../source/utilities/transform/jss';
 import type { JssInputFormat, JssObject } from '../../../source/_types';
 
@@ -502,6 +505,311 @@ describe('transform/jss utilities', () => {
       expect(hasLegacyA || hasIsA).toBe(true);
 
       expect(result).toContain('color: blue;');
+    });
+  });
+
+  describe('processNestedJssObjects', () => {
+    it('should process flat objects with className', () => {
+      const input = {
+        button: { className: 'btn', color: 'red', padding: '8px' },
+      };
+
+      const result = processNestedJssObjects(input);
+
+      expect(result).toContain('.btn');
+      expect(result).toContain('color: red');
+      expect(result).toContain('padding: 8px');
+    });
+
+    it('should process deeply nested objects with className', () => {
+      const input = {
+        buttons: {
+          primary: { className: 'btn-primary', color: 'blue' },
+          secondary: { className: 'btn-secondary', color: 'gray' },
+        },
+      };
+
+      const result = processNestedJssObjects(input);
+
+      expect(result).toContain('.btn-primary');
+      expect(result).toContain('color: blue');
+      expect(result).toContain('.btn-secondary');
+      expect(result).toContain('color: gray');
+    });
+
+    it('should process objects with selector property', () => {
+      const input = {
+        root: {
+          selector: ':root',
+          '--primary-color': 'red',
+          '--spacing': '8px',
+        },
+      };
+
+      const result = processNestedJssObjects(input);
+
+      expect(result).toContain(':root');
+      expect(result).toContain('--primary-color: red');
+      expect(result).toContain('--spacing: 8px');
+    });
+
+    it('should process mixed className and selector objects', () => {
+      const input = {
+        variables: {
+          selector: ':root',
+          '--color': 'blue',
+        },
+        components: {
+          button: { className: 'btn', display: 'inline-block' },
+        },
+      };
+
+      const result = processNestedJssObjects(input);
+
+      expect(result).toContain(':root');
+      expect(result).toContain('--color: blue');
+      expect(result).toContain('.btn');
+      expect(result).toContain('display: inline-block');
+    });
+
+    it('should handle empty or invalid inputs', () => {
+      expect(processNestedJssObjects({})).toBe('');
+      expect(processNestedJssObjects(null)).toBe('');
+      expect(processNestedJssObjects(undefined)).toBe('');
+      expect(processNestedJssObjects({ foo: 'bar' })).toBe('');
+    });
+
+    it('should join multiple CSS blocks with double newlines', () => {
+      const input = {
+        first: { className: 'first', color: 'red' },
+        second: { className: 'second', color: 'blue' },
+      };
+
+      const result = processNestedJssObjects(input);
+
+      expect(result).toContain('\n\n');
+    });
+  });
+
+  describe('processWebComponentStyles', () => {
+    it('should process styles with CSS selectors as keys', () => {
+      const input = {
+        ':host': { display: 'block', padding: '16px' },
+        '.container': { maxWidth: '1200px', margin: '0 auto' },
+      };
+
+      const result = processWebComponentStyles(input);
+
+      expect(result).toContain(':host');
+      expect(result).toContain('display: block');
+      expect(result).toContain('padding: 16px');
+      expect(result).toContain('.container');
+      expect(result).toContain('max-width: 1200px');
+      expect(result).toContain('margin: 0 auto');
+    });
+
+    it('should handle pseudo-selectors', () => {
+      const input = {
+        ':host': { color: 'black' },
+        ':host(:hover)': { color: 'blue' },
+        '::slotted(*)': { margin: '0' },
+      };
+
+      const result = processWebComponentStyles(input);
+
+      expect(result).toContain(':host');
+      expect(result).toContain(':host(:hover)');
+      expect(result).toContain('::slotted(*)');
+    });
+
+    it('should handle complex selectors', () => {
+      const input = {
+        '.card': { borderRadius: '8px' },
+        '.card:hover .title': { color: 'blue' },
+      };
+
+      const result = processWebComponentStyles(input);
+
+      expect(result).toContain('.card');
+      expect(result).toContain('border-radius: 8px');
+      expect(result).toContain('.card:hover .title');
+    });
+
+    it('should skip non-object values', () => {
+      const input = {
+        '.valid': { color: 'red' },
+        invalidString: 'not an object' as any,
+        invalidNull: null as any,
+      };
+
+      const result = processWebComponentStyles(input);
+
+      expect(result).toContain('.valid');
+      expect(result).toContain('color: red');
+      expect(result).not.toContain('invalidString');
+    });
+
+    it('should handle empty input', () => {
+      expect(processWebComponentStyles({})).toBe('');
+    });
+
+    it('should join multiple CSS blocks with double newlines', () => {
+      const input = {
+        '.first': { color: 'red' },
+        '.second': { color: 'blue' },
+      };
+
+      const result = processWebComponentStyles(input);
+
+      expect(result).toContain('\n\n');
+    });
+  });
+
+  describe('generateBaseCSS', () => {
+    it('should generate CSS from :root styles with CSS variables', () => {
+      const root = {
+        ':root': {
+          '--color-primary': '#E21833',
+          '--color-secondary': '#FFD200',
+        },
+      };
+      const reset = {};
+
+      const result = generateBaseCSS(root, reset);
+
+      expect(result).toContain(':root {');
+      expect(result).toContain('--color-primary: #E21833;');
+      expect(result).toContain('--color-secondary: #FFD200;');
+    });
+
+    it('should generate CSS from :root styles with font properties', () => {
+      const root = {
+        ':root': {
+          'font-family': 'sans-serif',
+          'font-size': '16px',
+          'line-height': '1.5',
+        },
+      };
+      const reset = {};
+
+      const result = generateBaseCSS(root, reset);
+
+      expect(result).toContain(':root {');
+      expect(result).toContain('font-family: sans-serif;');
+      expect(result).toContain('font-size: 16px;');
+      expect(result).toContain('line-height: 1.5;');
+    });
+
+    it('should generate CSS from reset styles', () => {
+      const root = {};
+      const reset = {
+        '*': { boxSizing: 'border-box' },
+        body: { margin: 0, padding: 0 },
+      };
+
+      const result = generateBaseCSS(root, reset);
+
+      expect(result).toContain('* {');
+      expect(result).toContain('box-sizing: border-box');
+      expect(result).toContain('body {');
+      expect(result).toContain('margin: 0');
+      expect(result).toContain('padding: 0');
+    });
+
+    it('should combine :root and reset styles', () => {
+      const root = {
+        ':root': {
+          '--spacing': '8px',
+          'font-family': 'Arial, sans-serif',
+        },
+      };
+      const reset = {
+        '*': { boxSizing: 'border-box' },
+        'h1, h2, h3': { marginTop: 0 },
+      };
+
+      const result = generateBaseCSS(root, reset);
+
+      expect(result).toContain(':root {');
+      expect(result).toContain('--spacing: 8px;');
+      expect(result).toContain('font-family: Arial, sans-serif;');
+      expect(result).toContain('* {');
+      expect(result).toContain('box-sizing: border-box');
+      expect(result).toContain('h1, h2, h3 {');
+      expect(result).toContain('margin-top: 0');
+    });
+
+    it('should skip @media queries in :root (object values)', () => {
+      const root = {
+        ':root': {
+          '--color': 'red',
+          '@media (min-width: 768px)': {
+            '--color': 'blue',
+          },
+        },
+      };
+      const reset = {};
+
+      const result = generateBaseCSS(root, reset);
+
+      expect(result).toContain('--color: red;');
+      // Should not contain the media query object
+      expect(result).not.toContain('@media');
+    });
+
+    it('should handle empty inputs', () => {
+      const result = generateBaseCSS({}, {});
+
+      expect(result).toBe('');
+    });
+
+    it('should handle missing :root key', () => {
+      const root = {
+        someOtherKey: {
+          '--color': 'red',
+        },
+      };
+      const reset = {
+        body: { margin: 0 },
+      };
+
+      const result = generateBaseCSS(root, reset);
+
+      // Should not have :root block, but should have reset styles
+      expect(result).not.toContain(':root {');
+      expect(result).toContain('body {');
+      expect(result).toContain('margin: 0');
+    });
+
+    it('should skip non-object values in reset', () => {
+      const root = {};
+      const reset = {
+        'div': { color: 'blue' },
+        'invalidString': 'not an object' as any,
+        'invalidNull': null as any,
+      };
+
+      const result = generateBaseCSS(root, reset);
+
+      expect(result).toContain('div {');
+      expect(result).toContain('color: blue');
+      expect(result).not.toContain('invalidString');
+    });
+
+    it('should join multiple CSS blocks with double newlines', () => {
+      const root = {
+        ':root': {
+          '--color': 'red',
+        },
+      };
+      const reset = {
+        body: { margin: 0 },
+        html: { padding: 0 },
+      };
+
+      const result = generateBaseCSS(root, reset);
+
+      expect(result).toContain('\n\n');
     });
   });
 });

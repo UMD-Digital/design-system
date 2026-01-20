@@ -143,3 +143,85 @@ export function toString(cssVarsObj: Record<string, any>): string {
 
   return `${rules}`;
 }
+
+/**
+ * Generate CSS custom properties from token values.
+ * Creates a :root block with all tokens as CSS variables.
+ * @param {Record<string, any>} color Color token object
+ * @param {Record<string, any>} spacing Spacing token object
+ * @param {{ size: Record<string, string>; family: Record<string, string> }} font Font tokens
+ * @param {{ conditionals: Record<string, any> }} media Media query conditionals
+ * @returns {string} CSS string with :root block and media queries
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * import * as token from '@universityofmaryland/web-token-library';
+ * const css = Styles.utilities.transform.variables.generateTokensCSS(
+ *   token.color,
+ *   token.spacing,
+ *   token.font,
+ *   token.media
+ * );
+ * ```
+ * @since 1.8.0
+ */
+export function generateTokensCSS(
+  color: Record<string, any>,
+  spacing: Record<string, any>,
+  font: { size: Record<string, string>; family: Record<string, string> },
+  media: { conditionals: Record<string, any> },
+): string {
+  const cssVars: string[] = [];
+
+  const flattenTokens = (obj: Record<string, any>, prefix: string): string[] => {
+    const vars: string[] = [];
+    for (const [key, value] of Object.entries(obj)) {
+      if (typeof value === 'object' && value !== null) {
+        vars.push(...flattenTokens(value, `${prefix}-${key}`));
+      } else {
+        const kebabKey = toKebabCase(key);
+        vars.push(`--${prefix}-${kebabKey}: ${value};`);
+      }
+    }
+    return vars;
+  };
+
+  cssVars.push('/* Color Tokens */');
+  cssVars.push(...flattenTokens(color, 'umd-color'));
+
+  cssVars.push('\n/* Spacing Tokens */');
+  for (const [key, value] of Object.entries(spacing)) {
+    if (typeof value === 'string') {
+      cssVars.push(`--umd-space-${key}: ${value};`);
+    } else if (key === 'maxWidth' && typeof value === 'object') {
+      for (const [mwKey, mwValue] of Object.entries(value as Record<string, string>)) {
+        cssVars.push(`--umd-space-max-width-${mwKey}: ${mwValue};`);
+      }
+    }
+  }
+
+  cssVars.push('\n/* Font Size Tokens */');
+  for (const [key, value] of Object.entries(font.size)) {
+    cssVars.push(`--umd-font-size-${key}: ${value};`);
+  }
+
+  cssVars.push('\n/* Font Family Tokens */');
+  cssVars.push(`--umd-font-serif: ${font.family.serif};`);
+  cssVars.push(`--umd-font-sans: ${font.family.sans};`);
+  cssVars.push(`--umd-font-campaign: ${font.family.campaign};`);
+  cssVars.push(`--umd-font-mono: ${font.family.mono};`);
+
+  const rootBlock = `:root {\n  ${cssVars.join('\n  ')}\n}`;
+
+  const mediaBlocks: string[] = [];
+  for (const [key, value] of Object.entries(media.conditionals)) {
+    if (key.startsWith('@media')) {
+      const innerVars = Object.entries(value as Record<string, any>)
+        .map(([k, v]) => `${k}: ${v};`)
+        .join(' ');
+      mediaBlocks.push(`${key} { :root { ${innerVars} } }`);
+    }
+  }
+
+  return `${rootBlock}\n\n${mediaBlocks.join('\n')}`;
+}

@@ -7,27 +7,60 @@ The **Styles Package** (`@universityofmaryland/web-styles-library`) provides JSS
 **Version**: 1.7.2
 **Dependencies**: `postcss`, `postcss-discard-duplicates`, `postcss-js`, `postcss-nesting`
 
-## Planned: Static CSS Exports
+## Static CSS Exports
 
-**Status**: Planned for v1.18+
+**Status**: Implemented in v1.8.0+
 
-A future enhancement will add static CSS exports generated at build time:
+The styles package now provides pre-compiled CSS files generated at build time. This eliminates the need for runtime CSS compilation and improves performance.
+
+### Usage
 
 ```typescript
-// Current (runtime compilation)
-import * as typography from '@universityofmaryland/web-styles-library/typography';
-const css = convertJSSObjectToStyles(typography.sans.larger);
+// Full bundle (includes tokens + all styles)
+import '@universityofmaryland/web-styles-library/css/styles.min.css';
 
-// Future (static import)
-import '@universityofmaryland/web-styles-library/css/typography/sans.css';
+// Or import only what you need (tokens required first)
+import '@universityofmaryland/web-styles-library/css/tokens.min.css';
+import '@universityofmaryland/web-styles-library/css/typography.min.css';
+import '@universityofmaryland/web-styles-library/css/layout.min.css';
 ```
 
-**Benefits**:
-- Faster initial page load
-- Better SSR compatibility
-- Improved Core Web Vitals
+### Available CSS Files
 
-See [PLAN.md](/PLAN.md) for implementation roadmap.
+| File | Description | Requires Tokens |
+|------|-------------|-----------------|
+| `styles.min.css` | Full bundle (includes tokens) | No |
+| `tokens.min.css` | CSS custom properties for design tokens | - |
+| `base.min.css` | Root and reset styles | Yes |
+| `typography.min.css` | Typography utility classes | Yes |
+| `layout.min.css` | Layout and grid utility classes | Yes |
+| `element.min.css` | Element styles (buttons, forms, etc.) | Yes |
+| `animation.min.css` | Animation utility classes | Yes |
+| `accessibility.min.css` | Screen reader and a11y utilities | Yes |
+| `web-components.min.css` | Web component styles | Yes |
+
+### Benefits
+
+- **Faster initial page load**: No runtime JSS compilation
+- **Better SSR compatibility**: CSS loads immediately without JavaScript
+- **Improved Core Web Vitals**: Reduced JavaScript execution time
+- **Category-based loading**: Import only what you need
+
+### CSS Custom Properties
+
+The `tokens.min.css` file defines CSS custom properties for all design tokens:
+
+```css
+:root {
+  --umd-color-red: #E21833;
+  --umd-color-gold: #FFD200;
+  --umd-space-md: 24px;
+  --umd-font-size-base: 16px;
+  /* ... all tokens */
+}
+```
+
+These variables enable runtime theming and are required by category CSS files.
 
 ## Build System
 
@@ -44,8 +77,9 @@ See [PLAN.md](/PLAN.md) for implementation roadmap.
 ### Build Commands
 
 ```bash
-npm run build      # Main build + CDN build
+npm run build      # Main build + CDN build + CSS generation
 npm run build:cdn  # CDN-only build (IIFE format)
+npm run build:css  # Generate static CSS files from JSS
 npm run dev        # Watch mode
 npm run clean      # Remove dist
 npm test          # Run all tests
@@ -53,10 +87,16 @@ npm test          # Run all tests
 
 ### Special Builds
 
-The styles package creates TWO builds:
+The styles package creates THREE builds:
 
-1. **Module Build** (`npm run build`): Code-split ES modules only (no CommonJS)
-2. **CDN Build** (`BUILD_CDN=true`): Single-file IIFE bundle for `<script>` tags
+1. **Module Build** (`vite build`): Code-split ES modules only (no CommonJS)
+2. **CDN Build** (`BUILD_CDN=true vite build`): Single-file IIFE bundle for `<script>` tags
+3. **CSS Build** (`npm run build:css`): Static CSS files generated from JSS modules
+
+The CSS build runs after the module build and uses the `scripts/generate-css.ts` script to:
+- Import the built JS modules
+- Convert JSS objects to CSS using existing utilities
+- Generate minified CSS files in `dist/css/`
 
 ## Package Structure
 
@@ -381,6 +421,17 @@ The CDN build bundles everything into a single IIFE file:
 
 ### CDN Build
 - `dist/cdn.js` - Single IIFE bundle (no externals)
+
+### CSS Build
+- `dist/css/tokens.min.css` - CSS custom properties for design tokens
+- `dist/css/styles.min.css` - Full bundle (includes tokens + all styles)
+- `dist/css/base.min.css` - Root and reset styles
+- `dist/css/typography.min.css` - Typography utility classes
+- `dist/css/layout.min.css` - Layout and grid utility classes
+- `dist/css/element.min.css` - Element styles (buttons, forms, etc.)
+- `dist/css/animation.min.css` - Animation utility classes
+- `dist/css/accessibility.min.css` - Screen reader and a11y utilities
+- `dist/css/web-components.min.css` - Web component styles
 
 ## Utilities Integration
 

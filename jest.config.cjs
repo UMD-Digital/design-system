@@ -21,6 +21,14 @@ module.exports = {
       __dirname,
       './__mocks__/webTokenLibrary.js',
     ),
+    '^@universityofmaryland/web-token-library/font$': path.resolve(
+      __dirname,
+      './__mocks__/@universityofmaryland/web-token-library/font.js',
+    ),
+    '^@universityofmaryland/web-token-library/media$': path.resolve(
+      __dirname,
+      './__mocks__/@universityofmaryland/web-token-library/media.js',
+    ),
     '^@universityofmaryland/web-styles-library$': path.resolve(
       __dirname,
       './__mocks__/webStylesLibrary.js',

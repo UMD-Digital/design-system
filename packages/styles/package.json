@@ -58,6 +58,55 @@
       "import": "./dist/tailwind-theme.css",
       "default": "./dist/tailwind-theme.css"
     },
+    "./css/styles.min.css": {
+      "style": "./dist/css/styles.min.css",
+      "import": "./dist/css/styles.min.css",
+      "default": "./dist/css/styles.min.css"
+    },
+    "./css/tokens.min.css": {
+      "style": "./dist/css/tokens.min.css",
+      "import": "./dist/css/tokens.min.css",
+      "default": "./dist/css/tokens.min.css"
+    },
+    "./css/base.min.css": {
+      "style": "./dist/css/base.min.css",
+      "import": "./dist/css/base.min.css",
+      "default": "./dist/css/base.min.css"
+    },
+    "./css/typography.min.css": {
+      "style": "./dist/css/typography.min.css",
+      "import": "./dist/css/typography.min.css",
+      "default": "./dist/css/typography.min.css"
+    },
+    "./css/layout.min.css": {
+      "style": "./dist/css/layout.min.css",
+      "import": "./dist/css/layout.min.css",
+      "default": "./dist/css/layout.min.css"
+    },
+    "./css/element.min.css": {
+      "style": "./dist/css/element.min.css",
+      "import": "./dist/css/element.min.css",
+      "default": "./dist/css/element.min.css"
+    },
+    "./css/animation.min.css": {
+      "style": "./dist/css/animation.min.css",
+      "import": "./dist/css/animation.min.css",
+      "default": "./dist/css/animation.min.css"
+    },
+    "./css/accessibility.min.css": {
+      "style": "./dist/css/accessibility.min.css",
+      "import": "./dist/css/accessibility.min.css",
+      "default": "./dist/css/accessibility.min.css"
+    },
+    "./css/web-components.min.css": {
+      "style": "./dist/css/web-components.min.css",
+      "import": "./dist/css/web-components.min.css",
+      "default": "./dist/css/web-components.min.css"
+    },
+    "./exports/generate": {
+      "types": "./dist/exports/generate.d.ts",
+      "import": "./dist/exports/generate.js",
+      "default": "./dist/exports/generate.js"
     }
   },
   "license": "MIT",
@@ -74,8 +123,9 @@
     "clean": "rm -rf dist",
     "prebuild": "node ../../scripts/update-badges.js",
     "release": "npm run test && npm run build && npm publish --access public",
-    "build": "vite build && npm run build:cdn",
+    "build": "vite build && npm run build:cdn && npm run build:css",
     "build:cdn": "BUILD_CDN=true vite build --mode production",
+    "build:css": "tsx scripts/generate-css.ts",
     "build:tailwind": "tsx scripts/generate-tailwind.ts",
     "dev": "vite build --watch",
     "start": "npm run dev",

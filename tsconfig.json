@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "strict": true,
+    "skipLibCheck": true,
     "module": "ESNext",
     "esModuleInterop": true,
     "lib": ["es6", "dom", "dom.iterable"],

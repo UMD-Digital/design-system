@@ -1,4 +1,9 @@
-import { color, font, media, spacing } from '@universityofmaryland/web-token-library';
+import {
+  color,
+  font,
+  media,
+  spacing,
+} from '@universityofmaryland/web-token-library';
 import { sans } from './typography';
 import { transform } from './utilities';
 import { input } from './element/field/input';
@@ -82,6 +87,10 @@ export const reset = {
 
   select: {
     ...select,
+  },
+
+  '.umd-layout-space-vertical-landing': {
+    marginBottom: spacing.max,
   },
 };
 

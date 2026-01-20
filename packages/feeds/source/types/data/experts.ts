@@ -131,6 +131,8 @@ export interface ExpertEntry extends BaseEntry {
   organizations?: ExpertOrganization[];
   /** Areas of expertise categories */
   areasOfExpertise?: ExpertCategory[] | null;
+  /** Topic categories */
+  topics?: ExpertCategory[] | null;
   /** Campus unit categories */
   campusUnits?: ExpertCategory[] | null;
   /** Tag categories */

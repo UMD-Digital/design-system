@@ -251,6 +251,43 @@ export const extractAreasOfExpertise = (entry: ExpertEntry): string | null => {
     .join(', ');
 };
 
+/**
+ * Extract topics as comma-separated string
+ *
+ * Extracts the titles from the topics categories
+ * and joins them with commas for display.
+ * Limited to a maximum of 3 topics.
+ *
+ * @param entry - Expert entry
+ * @returns Comma-separated string of topics or null
+ *
+ * @example
+ * ```typescript
+ * const entry = {
+ *   topics: [
+ *     { id: '1', title: 'Artificial Intelligence' },
+ *     { id: '2', title: 'Machine Learning' },
+ *     { id: '3', title: 'Data Science' },
+ *     { id: '4', title: 'Robotics' }
+ *   ]
+ * };
+ * extractTopics(entry);
+ * // Returns: "Artificial Intelligence, Machine Learning, Data Science"
+ * ```
+ */
+export const extractTopics = (entry: ExpertEntry): string | null => {
+  const topics = entry.topics;
+
+  if (!topics || topics.length === 0) {
+    return null;
+  }
+
+  return topics
+    .slice(0, 3)
+    .map((topic) => topic.title)
+    .join(', ');
+};
+
 // ============================================================================
 // ELEMENT CREATION FUNCTIONS
 // ============================================================================
@@ -417,7 +454,7 @@ const createBlockCardProps = (
   const association = extractPrimaryAssociation(entry);
   const imageData = extractImageData(entry, fullName);
   const pronouns = extractPronouns(entry);
-  const expertise = extractAreasOfExpertise(entry);
+  const topics = extractTopics(entry);
 
   // Create elements
   const name = createNameElement(fullName, profileUrl);
@@ -429,11 +466,11 @@ const createBlockCardProps = (
     `View profile for ${fullName}`,
   );
   const pronounsElement = createPronounsElement(pronouns);
-  const expertiseElement = createExpertiseElement(expertise);
+  const topicsElement = createExpertiseElement(topics);
 
   return person.block({
     name,
-    slotOne: expertiseElement,
+    slotOne: topicsElement,
     slotTwo: associationElement,
     slotThreeItalic: pronounsElement,
     image,
@@ -461,7 +498,7 @@ const createListCardProps = (
   const association = extractPrimaryAssociation(entry);
   const imageData = extractImageData(entry, fullName);
   const pronouns = extractPronouns(entry);
-  const expertise = extractAreasOfExpertise(entry);
+  const topics = extractTopics(entry);
 
   // Create elements
   const name = createNameElement(fullName, profileUrl);
@@ -473,11 +510,11 @@ const createListCardProps = (
     `View profile for ${fullName}`,
   );
   const pronounsElement = createPronounsElement(pronouns);
-  const expertiseElement = createExpertiseElement(expertise);
+  const topicsElement = createExpertiseElement(topics);
 
   return person.list({
     name,
-    slotOne: expertiseElement,
+    slotOne: topicsElement,
     slotThreeItalic: pronounsElement,
     slotTwo: associationElement,
     image,
@@ -506,7 +543,7 @@ const createTabularCardProps = (
   const imageData = extractImageData(entry, fullName);
   const contactData = extractContactData(entry);
   const pronouns = extractPronouns(entry);
-  const expertise = extractAreasOfExpertise(entry);
+  const topics = extractTopics(entry);
 
   // Create elements
   const name = createNameElement(fullName, profileUrl);
@@ -519,11 +556,11 @@ const createTabularCardProps = (
   );
   const contactElements = createContactElements(contactData);
   const pronounsElement = createPronounsElement(pronouns);
-  const expertiseElement = createExpertiseElement(expertise);
+  const topicsElement = createExpertiseElement(topics);
 
   return person.tabular({
     name,
-    slotOne: expertiseElement,
+    slotOne: topicsElement,
     slotThreeItalic: pronounsElement,
     slotTwo: associationElement,
     image,
@@ -599,7 +636,7 @@ export const mapExpertToBioProps = (
   const contactData = extractContactData(entry);
   const description = extractDescription(entry, displayType);
   const pronouns = extractPronouns(entry);
-  const expertise = extractAreasOfExpertise(entry);
+  const topics = extractTopics(entry);
 
   // Create elements
   const name = createNameElement(fullName, profileUrl, 'h1');
@@ -609,13 +646,13 @@ export const mapExpertToBioProps = (
   const descriptionElement = createDescriptionElement(description);
   const contactElements = createContactElements(contactData);
   const pronounsElement = createPronounsElement(pronouns);
-  const expertiseElement = createExpertiseElement(expertise);
+  const topicsElement = createExpertiseElement(topics);
 
   return {
     name,
     slotTwoItalic: pronounsElement,
     slotTwo: associationElement,
-    slotOne: expertiseElement,
+    slotOne: topicsElement,
     email: contactElements.email || null,
     linkedin: contactElements.linkedin || null,
     phone: null,

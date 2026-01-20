@@ -245,7 +245,10 @@ export const extractAreasOfExpertise = (entry: ExpertEntry): string | null => {
     return null;
   }
 
-  return areas.map((area) => area.title).join(', ');
+  return areas
+    .slice(0, 3)
+    .map((area) => area.title)
+    .join(', ');
 };
 
 // ============================================================================

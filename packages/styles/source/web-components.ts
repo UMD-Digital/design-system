@@ -7,13 +7,13 @@ const createElementStyles = (
   additionalStyles: ElementStyles = {},
 ) => ({
   [`${elementName}:not(:defined)`]: {
-    opacity: '0',
+    contentVisibility: 'hidden',
+    containIntrinsicSize: 'auto 10vh',
     minHeight: '10vh',
     ...additionalStyles.notDefined,
   },
   [`${elementName}:defined`]: {
-    opacity: '1',
-    transition: 'opacity 0.2s ease-in-out',
+    contentVisibility: 'visible',
     containerType: 'inline-size',
     display: 'block',
     ...additionalStyles.defined,
@@ -206,14 +206,15 @@ const breadcrumb = createElementStyles('umd-element-breadcrumb', {
 // Brand Cards
 const brandCards = createElementStyles('umd-element-brand-card-stack', {
   notDefined: {
+    contentVisibility: 'hidden',
+    containIntrinsicSize: 'auto 100vh',
     minHeight: `100vh`,
     display: 'block',
-    opacity: '0',
   },
   defined: {
+    contentVisibility: 'visible',
     containerType: 'inline-size',
     display: 'block',
-    opacity: '1',
   },
 });
 
@@ -231,14 +232,15 @@ const carousels = [
     ...acc,
     ...createElementStyles(element, {
       notDefined: {
+        contentVisibility: 'hidden',
+        containIntrinsicSize: 'auto 80vh',
         minHeight: `80vh`,
         display: 'block',
-        opacity: '0',
       },
       defined: {
+        contentVisibility: 'visible',
         containerType: 'inline-size',
         display: 'block',
-        opacity: '1',
       },
     }),
   }),
@@ -248,8 +250,9 @@ const carousels = [
 // Footer with specific styling
 const footer = createElementStyles('umd-element-footer', {
   notDefined: {
+    contentVisibility: 'hidden',
+    containIntrinsicSize: 'auto 30vh',
     backgroundColor: color.black,
-    height: `calc(${spacing.md} * 20)`,
     minHeight: '30vh',
     '& > *': { display: 'none' },
   },
@@ -265,21 +268,22 @@ const hero = [
     ...acc,
     ...createElementStyles(element, {
       notDefined: {
+        contentVisibility: 'hidden',
+        containIntrinsicSize: 'auto 50vh',
         minHeight: `50vh`,
         display: 'block',
-        opacity: '0',
       },
       defined: {
+        contentVisibility: 'visible',
         containerType: 'inline-size',
         display: 'block',
-        opacity: '1',
       },
     }),
   }),
   {},
 );
 
-// Hero with specific styling
+// Hero Large with specific styling
 const heroLarge = [
   'umd-element-hero-brand-video',
   'umd-element-hero-grid',
@@ -288,14 +292,15 @@ const heroLarge = [
     ...acc,
     ...createElementStyles(element, {
       notDefined: {
+        contentVisibility: 'hidden',
+        containIntrinsicSize: 'auto 100vh',
         minHeight: `100vh`,
         display: 'block',
-        opacity: '0',
       },
       defined: {
+        contentVisibility: 'visible',
         containerType: 'inline-size',
         display: 'block',
-        opacity: '1',
       },
     }),
   }),
@@ -305,43 +310,43 @@ const heroLarge = [
 // Hero Minimal with specific styling
 const heroMinimal = createElementStyles('umd-element-hero-minimal', {
   notDefined: {
+    contentVisibility: 'hidden',
+    containIntrinsicSize: 'auto 30vh',
     minHeight: `30vh`,
     display: 'block',
-    opacity: '0',
   },
   defined: {
+    contentVisibility: 'visible',
     containerType: 'inline-size',
     display: 'block',
-    opacity: '1',
-    transition: 'opacity 0.2s ease-in-out',
   },
 });
 
 // Layout Expand with specific styling
 const layoutExpand = createElementStyles('umd-layout-image-expand', {
   notDefined: {
+    contentVisibility: 'hidden',
+    containIntrinsicSize: 'auto 100vh',
     minHeight: `100vh`,
-    opacity: '0',
   },
   defined: {
+    contentVisibility: 'visible',
     containerType: 'inline-size',
-    opacity: '1',
-    transition: 'opacity 0.2s ease-in-out',
   },
 });
 
 // Pathway with specific styling
 const pathway = createElementStyles('umd-element-pathway', {
   notDefined: {
+    contentVisibility: 'hidden',
+    containIntrinsicSize: 'auto 40vh',
     minHeight: `40vh`,
     display: 'block',
-    opacity: '0',
   },
   defined: {
+    contentVisibility: 'visible',
     containerType: 'inline-size',
     display: 'block',
-    opacity: '1',
-    transition: 'opacity 0.2s ease-in-out',
   },
 });
 
@@ -360,6 +365,8 @@ const navigation = {
   ),
   ...createElementStyles('umd-element-nav-drawer', {
     notDefined: {
+      contentVisibility: 'hidden',
+      containIntrinsicSize: '44px 44px',
       backgroundColor: color.white,
       height: '44px',
       width: '44px',

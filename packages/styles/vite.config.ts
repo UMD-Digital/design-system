@@ -108,6 +108,7 @@ export default defineConfig(({ mode }) => {
         tailwind: path.resolve(__dirname, 'source/tailwind/index.ts'),
         'exports/index': path.resolve(__dirname, 'source/exports/index.ts'),
         'exports/generate': path.resolve(__dirname, 'source/exports/generate.ts'),
+        'exports/tailwind': path.resolve(__dirname, 'source/exports/tailwind.ts'),
         'exports/cdn': path.resolve(__dirname, 'source/exports/cdn.ts'),
       },
       name: 'Styles',

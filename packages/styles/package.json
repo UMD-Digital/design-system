@@ -42,6 +42,22 @@
       "types": "./dist/utilities.d.ts",
       "import": "./dist/utilities.js",
       "default": "./dist/utilities.js"
+    },
+    "./tailwind": {
+      "types": "./dist/tailwind.d.ts",
+      "import": "./dist/tailwind.js",
+      "default": "./dist/tailwind.js"
+    },
+    "./tailwind.css": {
+      "style": "./dist/tailwind.css",
+      "import": "./dist/tailwind.css",
+      "default": "./dist/tailwind.css"
+    },
+    "./tailwind-theme.css": {
+      "style": "./dist/tailwind-theme.css",
+      "import": "./dist/tailwind-theme.css",
+      "default": "./dist/tailwind-theme.css"
+    },
     }
   },
   "license": "MIT",
@@ -60,6 +76,7 @@
     "release": "npm run test && npm run build && npm publish --access public",
     "build": "vite build && npm run build:cdn",
     "build:cdn": "BUILD_CDN=true vite build --mode production",
+    "build:tailwind": "tsx scripts/generate-tailwind.ts",
     "dev": "vite build --watch",
     "start": "npm run dev",
     "test": "jest",

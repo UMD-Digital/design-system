@@ -21,6 +21,8 @@
 // Re-export all utilities
 export * from '../utilities';
 
+// Re-export Tailwind generators
+export * from '../tailwind';
 
 // Re-export CSS generation helpers
 export * from './generate';

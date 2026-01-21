@@ -35,7 +35,6 @@ const baseElements = [
   'modal',
   'pathway-highlight',
   'person-bio',
-  'person-hero',
   'quote',
   'slider-events-feed',
   'slider-events',
@@ -265,6 +264,7 @@ const hero = [
   'umd-element-hero',
   'umd-element-hero-expand',
   'umd-element-hero-logo',
+  'umd-element-person-hero',
 ].reduce(
   (acc, element) => ({
     ...acc,

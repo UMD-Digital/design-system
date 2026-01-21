@@ -12,8 +12,8 @@ interface Theme {
 
 interface PersonText extends Theme {
   name: HTMLElement | null;
-  job?: HTMLElement | null;
-  subText?: HTMLElement | null;
+  slotOne?: HTMLElement | null;
+  slotFour?: HTMLElement | null;
 }
 
 interface PersonInfo extends PersonContact, Theme {
@@ -149,8 +149,8 @@ const CreateImageBlock = (props: PersonInfo): ElementModel<HTMLElement> => {
 
 const CreateTextContainer = ({
   name,
-  job,
-  subText,
+  slotOne,
+  slotFour,
   isThemeDark,
 }: PersonText): ElementModel<HTMLElement> => {
   const lineWrapper = new ElementBuilder()
@@ -161,9 +161,9 @@ const CreateTextContainer = ({
       },
     });
 
-  if (subText) {
+  if (slotFour) {
     lineWrapper.withChild(
-      new ElementBuilder(subText)
+      new ElementBuilder(slotFour)
         .styled(
           Styles.typography.sans.compose('small', {
             theme: theme.fontColor(isThemeDark),
@@ -214,9 +214,9 @@ const CreateTextContainer = ({
     );
   }
 
-  if (job) {
+  if (slotOne) {
     lineWrapper.withChild(
-      new ElementBuilder(job)
+      new ElementBuilder(slotOne)
         .styled(
           Styles.typography.sans.compose('medium', {
             theme: theme.fontColor(isThemeDark),

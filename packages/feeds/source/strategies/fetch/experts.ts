@@ -131,9 +131,6 @@ const FRAGMENT_EXPERT_CATEGORIES = `
       ...CategoryFields
     }
     topics: expertsCategoryTopics {
-    ...CategoryFields
-    }
-    tags: expertsCategoryTags {
       ...CategoryFields
     }
   }

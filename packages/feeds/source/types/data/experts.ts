@@ -135,8 +135,6 @@ export interface ExpertEntry extends BaseEntry {
   topics?: ExpertCategory[] | null;
   /** Campus unit categories */
   campusUnits?: ExpertCategory[] | null;
-  /** Tag categories */
-  tags?: ExpertCategory[] | null;
   /** Contact information */
   email?: string | null;
   linkedin?: string | null;

@@ -202,7 +202,7 @@ export const createTextLockupSmall = ({
   }
 
   if (date) {
-    const dateElement = new ElementBuilder('slot')
+    const dateElement = new ElementBuilder(date)
       .withClassName('umd-headline-sans-min')
       .styled(
         typography.sans.compose('min', {
@@ -210,7 +210,6 @@ export const createTextLockupSmall = ({
         }),
       )
       .withAnimation('slideUnder')
-      .withChild(date)
       .withStyles(dateStyles(isThemeDark))
       .build();
 

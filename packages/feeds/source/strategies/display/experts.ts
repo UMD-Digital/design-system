@@ -142,9 +142,7 @@ const extractPrimaryJobTitle = (entry: ExpertEntry): string | null => {
  * @param entry - Expert entry
  * @returns Association data or null
  */
-const extractPrimaryAssociation = (
-  entry: ExpertEntry,
-): AssociationData | null => {
+const extractCampusUnit = (entry: ExpertEntry): AssociationData | null => {
   const campusUnit = entry.organizations?.[0]?.jobs?.[0]?.campusUnits?.[0];
   if (!campusUnit) return null;
 
@@ -451,7 +449,7 @@ const createBlockCardProps = (
   const fullName = buildFullName(entry);
   const profileUrl = buildProfileUrl(entry);
   const jobTitle = extractPrimaryJobTitle(entry);
-  const association = extractPrimaryAssociation(entry);
+  const campusUnit = extractCampusUnit(entry);
   const imageData = extractImageData(entry, fullName);
   const pronouns = extractPronouns(entry);
   const topics = extractTopics(entry);
@@ -459,7 +457,7 @@ const createBlockCardProps = (
   // Create elements
   const name = createNameElement(fullName, profileUrl);
   const job = createJobElement(jobTitle);
-  const associationElement = createAssociationElement(association);
+  const campusUnitElement = createAssociationElement(campusUnit);
   const image = createImageElement(
     imageData,
     profileUrl,
@@ -471,7 +469,7 @@ const createBlockCardProps = (
   return person.block({
     name,
     slotOne: topicsElement,
-    slotTwo: associationElement,
+    slotTwo: campusUnitElement,
     slotThreeItalic: pronounsElement,
     image,
     isThemeDark,
@@ -495,7 +493,7 @@ const createListCardProps = (
   const fullName = buildFullName(entry);
   const profileUrl = buildProfileUrl(entry);
   const jobTitle = extractPrimaryJobTitle(entry);
-  const association = extractPrimaryAssociation(entry);
+  const campusUnit = extractCampusUnit(entry);
   const imageData = extractImageData(entry, fullName);
   const pronouns = extractPronouns(entry);
   const topics = extractTopics(entry);
@@ -503,7 +501,7 @@ const createListCardProps = (
   // Create elements
   const name = createNameElement(fullName, profileUrl);
   const job = createJobElement(jobTitle);
-  const associationElement = createAssociationElement(association);
+  const campusUnitElement = createAssociationElement(campusUnit);
   const image = createImageElement(
     imageData,
     profileUrl,
@@ -516,7 +514,7 @@ const createListCardProps = (
     name,
     slotOne: topicsElement,
     slotThreeItalic: pronounsElement,
-    slotTwo: associationElement,
+    slotTwo: campusUnitElement,
     image,
     isThemeDark,
   });
@@ -539,7 +537,7 @@ const createTabularCardProps = (
   const fullName = buildFullName(entry);
   const profileUrl = buildProfileUrl(entry);
   const jobTitle = extractPrimaryJobTitle(entry);
-  const association = extractPrimaryAssociation(entry);
+  const campusUnit = extractCampusUnit(entry);
   const imageData = extractImageData(entry, fullName);
   const contactData = extractContactData(entry);
   const pronouns = extractPronouns(entry);
@@ -548,7 +546,7 @@ const createTabularCardProps = (
   // Create elements
   const name = createNameElement(fullName, profileUrl);
   const job = createJobElement(jobTitle);
-  const associationElement = createAssociationElement(association);
+  const campusUnitElement = createAssociationElement(campusUnit);
   const image = createImageElement(
     imageData,
     profileUrl,
@@ -562,7 +560,7 @@ const createTabularCardProps = (
     name,
     slotOne: topicsElement,
     slotThreeItalic: pronounsElement,
-    slotTwo: associationElement,
+    slotTwo: campusUnitElement,
     image,
     ...contactElements,
     isThemeDark,
@@ -586,16 +584,23 @@ const createOverlayCardProps = (
   const fullName = buildFullName(entry);
   const profileUrl = buildProfileUrl(entry);
   const jobTitle = extractPrimaryJobTitle(entry);
+  const campusUnit = extractCampusUnit(entry);
+  const topics = extractTopics(entry);
   const imageData = extractImageData(entry, fullName);
 
   // Create elements
   const headline = createNameElement(fullName, profileUrl);
-  const text = createJobElement(jobTitle);
+  const topicsElement = createExpertiseElement(topics);
+  const campusUnitElement = createAssociationElement(campusUnit);
+  const text = document.createElement('div');
   const backgroundImage = createImageElement(
     imageData,
     profileUrl,
     `View profile for ${fullName}`,
   );
+
+  if (topicsElement) text.appendChild(topicsElement);
+  if (campusUnitElement) text.appendChild(campusUnitElement);
 
   return card.overlay.image({
     headline,
@@ -631,7 +636,7 @@ export const mapExpertToBioProps = (
   const fullName = buildFullName(entry);
   const profileUrl = buildProfileUrl(entry);
   const jobTitle = extractPrimaryJobTitle(entry);
-  const association = extractPrimaryAssociation(entry);
+  const association = extractCampusUnit(entry);
   const imageData = extractImageData(entry, fullName);
   const contactData = extractContactData(entry);
   const description = extractDescription(entry, displayType);

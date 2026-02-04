@@ -16,6 +16,8 @@ export const CommonPersonData = ({
   slotThreeItalic: Slots.person.pronouns({ element }),
   phone: Slots.contact.phone({ element }),
   linkedin: Slots.social.linkedin({ element }),
+  bluesky: Slots.social.bluesky({ element }),
+  substack: Slots.social.substack({ element }),
   image: validation.getValidatedSlotImage({
     element,
     slotName: Slots.name.assets.image,

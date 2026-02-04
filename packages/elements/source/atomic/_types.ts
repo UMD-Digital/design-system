@@ -18,6 +18,8 @@ export interface PersonContactProps
   address?: ContentElement;
   email?: ContentElement;
   linkedin?: ContentElement;
+  substack?: ContentElement;
+  bluesky?: ContentElement;
   phone?: ContentElement;
 }
 

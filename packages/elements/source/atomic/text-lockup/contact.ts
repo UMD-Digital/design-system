@@ -9,7 +9,11 @@ import {
   phone as iconPhone,
 } from '@universityofmaryland/web-icons-library/communication';
 import { pin as iconPin } from '@universityofmaryland/web-icons-library/location';
-import { linkedin as iconLinkedIn } from '@universityofmaryland/web-icons-library/social';
+import {
+  linkedin as iconLinkedIn,
+  bluesky as iconBluesky,
+  substack as iconSubstack,
+} from '@universityofmaryland/web-icons-library/social';
 import { type PersonContactProps } from '../_types';
 
 const makeIcon = ({
@@ -108,6 +112,8 @@ export const createTextLockupContact = ({
   email,
   isThemeDark,
   linkedin,
+  bluesky,
+  substack,
   phone,
 }: PersonContactProps) => {
   const container = new ElementBuilder()
@@ -153,6 +159,36 @@ export const createTextLockupContact = ({
       .build();
 
     container.withChild(linkedInElement);
+  }
+
+  if (bluesky) {
+    const blueSkyElement = new ElementBuilder()
+      .withClassName('text-lockup-contact-bluesky')
+      .withChild(
+        makeContactLink({
+          element: bluesky,
+          icon: iconBluesky,
+          isThemeDark,
+        }),
+      )
+      .build();
+
+    container.withChild(blueSkyElement);
+  }
+
+  if (substack) {
+    const substackElement = new ElementBuilder()
+      .withClassName('text-lockup-contact-substack')
+      .withChild(
+        makeContactLink({
+          element: substack,
+          icon: iconSubstack,
+          isThemeDark,
+        }),
+      )
+      .build();
+
+    container.withChild(substackElement);
   }
 
   if (address) {

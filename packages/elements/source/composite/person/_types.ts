@@ -10,6 +10,8 @@ export interface PersonContact extends PersonTheme {
   phone?: HTMLElement | null;
   email?: HTMLElement | null;
   linkedin?: HTMLElement | null;
+  bluesky?: HTMLElement | null;
+  substack?: HTMLElement | null;
   address?: HTMLElement | null;
   additionalContact?: HTMLElement | null;
 }

@@ -57,7 +57,9 @@ const person = {
 } as const;
 
 const social = {
+  bluesky: createSlotFactory(SlotNames.social.bluesky),
   linkedin: createSlotFactory(SlotNames.social.linkedin),
+  substack: createSlotFactory(SlotNames.social.substack),
 } as const;
 
 const text = {

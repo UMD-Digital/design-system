@@ -102,6 +102,14 @@ const FRAGMENT_EXPERT_CONTACT = `
     linkedin: expertsContactLinkedin
     website: expertsContactWebsite
     twitter: expertsContactTwitter
+    blueSky: expertsContactBluesky {
+      id
+      url
+    }
+    substack: expertsContactSubstack {
+      id
+      url
+    }
   }
 `;
 

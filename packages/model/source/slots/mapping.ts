@@ -64,7 +64,9 @@ const text = {
 };
 
 const social = {
+  bluesky: 'bluesky',
   linkedin: 'linkedin',
+  substack: 'substack',
 };
 
 const NEEDS_CLEANUP = {

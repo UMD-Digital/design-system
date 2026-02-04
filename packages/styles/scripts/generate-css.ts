@@ -45,6 +45,7 @@ async function generateAllCSS(outputDir: string): Promise<GenerateCSSResult> {
     // Write each CSS file
     const fileMap = {
       'tokens.min.css': cssStrings.tokens,
+      'font-faces.min.css': cssStrings.fontFaces,
       'typography.min.css': cssStrings.typography,
       'layout.min.css': cssStrings.layout,
       'element.min.css': cssStrings.element,

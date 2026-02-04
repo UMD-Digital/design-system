@@ -109,6 +109,8 @@ export {
 export interface GenerateCSSStringsResult {
   /** CSS custom properties for design tokens */
   tokens: string;
+  /** @font-face rules for all font families */
+  fontFaces: string;
   /** Typography utility classes */
   typography: string;
   /** Layout and grid utility classes */
@@ -164,37 +166,41 @@ export async function generateCSSStrings(): Promise<GenerateCSSStringsResult> {
     token.media,
   );
 
-  // 2. Generate typography CSS
+  // 2. Generate font faces CSS (@font-face rules)
+  const fontFacesCSS = typography.fontFace.base64fonts;
+
+  // 3. Generate typography CSS
   const typographyCSS = processNestedJssObjects(typography);
   const typographyCSSClean = await removeDuplicates(typographyCSS);
 
-  // 3. Generate layout CSS
+  // 4. Generate layout CSS
   const layoutCSS = processNestedJssObjects(layout);
   const layoutCSSClean = await removeDuplicates(layoutCSS);
 
-  // 4. Generate element CSS
+  // 5. Generate element CSS
   const elementCSS = processNestedJssObjects(element);
   const elementCSSClean = await removeDuplicates(elementCSS);
 
-  // 5. Generate animation CSS
+  // 6. Generate animation CSS
   const animationCSS = processNestedJssObjects(animation);
   const animationCSSClean = await removeDuplicates(animationCSS);
 
-  // 6. Generate accessibility CSS
+  // 7. Generate accessibility CSS
   const accessibilityCSS = processNestedJssObjects(accessibility);
   const accessibilityCSSClean = await removeDuplicates(accessibilityCSS);
 
-  // 7. Generate web-components CSS
+  // 8. Generate web-components CSS
   const webComponentsCSS = processWebComponentStyles(webComponentStyles);
   const webComponentsCSSClean = await removeDuplicates(webComponentsCSS);
 
-  // 8. Generate base CSS (root + reset styles)
+  // 9. Generate base CSS (root + reset styles)
   const baseCSS = generateBaseCSS(root, reset);
   const baseCSSClean = await removeDuplicates(baseCSS);
 
-  // 9. Generate full styles bundle
+  // 10. Generate full styles bundle
   const fullBundle = [
     tokensCSS,
+    fontFacesCSS,
     baseCSS,
     typographyCSS,
     layoutCSS,
@@ -206,6 +212,7 @@ export async function generateCSSStrings(): Promise<GenerateCSSStringsResult> {
 
   return {
     tokens: minifyCSS(tokensCSS),
+    fontFaces: minifyCSS(fontFacesCSS),
     typography: minifyCSS(typographyCSSClean),
     layout: minifyCSS(layoutCSSClean),
     element: minifyCSS(elementCSSClean),

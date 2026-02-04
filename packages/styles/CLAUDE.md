@@ -31,6 +31,7 @@ import '@universityofmaryland/web-styles-library/css/layout.min.css';
 |------|-------------|-----------------|
 | `styles.min.css` | Full bundle (includes tokens) | No |
 | `tokens.min.css` | CSS custom properties for design tokens | - |
+| `font-faces.min.css` | @font-face rules for all font families | No |
 | `base.min.css` | Root and reset styles | Yes |
 | `typography.min.css` | Typography utility classes | Yes |
 | `layout.min.css` | Layout and grid utility classes | Yes |
@@ -424,6 +425,7 @@ The CDN build bundles everything into a single IIFE file:
 
 ### CSS Build
 - `dist/css/tokens.min.css` - CSS custom properties for design tokens
+- `dist/css/font-faces.min.css` - @font-face rules for all font families
 - `dist/css/styles.min.css` - Full bundle (includes tokens + all styles)
 - `dist/css/base.min.css` - Root and reset styles
 - `dist/css/typography.min.css` - Typography utility classes

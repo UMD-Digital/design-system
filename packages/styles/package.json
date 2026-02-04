@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-styles-library",
-  "version": "1.8.1",
+  "version": "1.8.2",
   "description": "Styles used for use in the University of Maryland Design System",
   "type": "module",
   "main": "dist/index.js",
@@ -67,6 +67,11 @@
       "style": "./dist/css/tokens.min.css",
       "import": "./dist/css/tokens.min.css",
       "default": "./dist/css/tokens.min.css"
+    },
+    "./css/font-faces.min.css": {
+      "style": "./dist/css/font-faces.min.css",
+      "import": "./dist/css/font-faces.min.css",
+      "default": "./dist/css/font-faces.min.css"
     },
     "./css/base.min.css": {
       "style": "./dist/css/base.min.css",

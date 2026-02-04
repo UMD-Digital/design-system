@@ -55,10 +55,12 @@ import '@universityofmaryland/web-styles-library/css/styles.min.css';
 Import only what you need for smaller bundle sizes:
 
 ```typescript
-// Tokens required first (provides CSS custom properties)
+// Critical CSS (load first to prevent FOUT/FOUC)
+import '@universityofmaryland/web-styles-library/css/font-faces.min.css';
 import '@universityofmaryland/web-styles-library/css/tokens.min.css';
+import '@universityofmaryland/web-styles-library/css/base.min.css';
 import '@universityofmaryland/web-styles-library/css/typography.min.css';
-import '@universityofmaryland/web-styles-library/css/layout.min.css';
+import '@universityofmaryland/web-styles-library/css/web-components.min.css';
 ```
 
 #### Available CSS Files
@@ -67,6 +69,7 @@ import '@universityofmaryland/web-styles-library/css/layout.min.css';
 |------|-------------|-----------------|
 | `styles.min.css` | Full bundle (includes tokens) | No |
 | `tokens.min.css` | CSS custom properties for design tokens | - |
+| `font-faces.min.css` | @font-face rules for all font families | No |
 | `base.min.css` | Root and reset styles | Yes |
 | `typography.min.css` | Typography utility classes | Yes |
 | `layout.min.css` | Layout and grid utility classes | Yes |
@@ -98,7 +101,9 @@ For optimal performance, load critical styles as render-blocking in the `<head>`
 ```html
 <head>
   <!-- Critical: Render-blocking CSS (prevents FOUT/FOUC) -->
+  <link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/font-faces.min.css" blocking="render">
   <link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/tokens.min.css" blocking="render">
+  <link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/base.min.css" blocking="render">
   <link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/typography.min.css" blocking="render">
   <link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/web-components.min.css" blocking="render">
 
@@ -110,7 +115,8 @@ For optimal performance, load critical styles as render-blocking in the `<head>`
 
 **Why this matters:**
 - `blocking="render"` ensures styles load before first paint
-- Typography CSS prevents Flash of Unstyled Text (FOUT)
+- Font-faces CSS loads custom fonts to prevent Flash of Unstyled Text (FOUT)
+- Typography CSS applies font styles consistently
 - Web-components CSS prevents Flash of Unstyled Content (FOUC) for custom elements
 - Non-critical CSS uses the `media="print"` trick to load asynchronously without blocking render
 
@@ -192,7 +198,7 @@ For production applications, split CSS into critical (render-blocking) and non-c
 
 | Category | Files | Purpose |
 |----------|-------|---------|
-| **Critical** | tokens, base, typography, web-components | Must load before first paint |
+| **Critical** | font-faces, tokens, base, typography, web-components | Must load before first paint |
 | **Non-Critical** | accessibility, layout, element | Can load after first paint |
 
 ### Project Structure
@@ -210,6 +216,7 @@ src/
 
 ```css
 /* Critical CSS - Render blocking */
+@import '@universityofmaryland/web-styles-library/css/font-faces.min.css';
 @import '@universityofmaryland/web-styles-library/css/tokens.min.css';
 @import '@universityofmaryland/web-styles-library/css/base.min.css';
 @import '@universityofmaryland/web-styles-library/css/typography.min.css';
@@ -447,6 +454,7 @@ cp node_modules/@universityofmaryland/web-styles-library/dist/css/typography.min
 
 | File | Description |
 |------|-------------|
+| `dist/css/font-faces.min.css` | @font-face rules for all font families |
 | `dist/css/tokens.min.css` | CSS custom properties for design tokens |
 | `dist/css/typography.min.css` | Typography utility classes |
 | `dist/css/styles.min.css` | Full bundle (all CSS combined) |

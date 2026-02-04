@@ -140,6 +140,8 @@ export interface ExpertEntry extends BaseEntry {
   linkedin?: string | null;
   website?: string | null;
   twitter?: string | null;
+  bluesky?: string | null;
+  substack?: string | null;
   /** Skills and capabilities */
   languages?: string[] | null;
   mediaTrained?: boolean | null;

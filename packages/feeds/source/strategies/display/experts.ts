@@ -29,7 +29,10 @@ import { ExpertEntry } from 'types/data';
  * Contact field configuration
  */
 interface ContactConfig {
-  key: keyof Pick<ExpertEntry, 'email' | 'website' | 'linkedin' | 'twitter'>;
+  key: keyof Pick<
+    ExpertEntry,
+    'email' | 'website' | 'linkedin' | 'twitter' | 'bluesky' | 'substack'
+  >;
   label: (value: string) => string;
   url: (value: string) => string;
 }
@@ -58,6 +61,8 @@ interface ContactData {
   website?: string | null;
   linkedin?: string | null;
   twitter?: string | null;
+  bluesky?: string | null;
+  substack?: string | null;
 }
 
 // ============================================================================
@@ -87,6 +92,16 @@ const CONTACT_CONFIGS: ContactConfig[] = [
   },
   {
     key: 'twitter',
+    label: (value) => value,
+    url: (value) => value,
+  },
+  {
+    key: 'bluesky',
+    label: (value) => value,
+    url: (value) => value,
+  },
+  {
+    key: 'substack',
     label: (value) => value,
     url: (value) => value,
   },
@@ -184,6 +199,8 @@ const extractContactData = (entry: ExpertEntry): ContactData => {
     website: entry.website || null,
     linkedin: entry.linkedin || null,
     twitter: entry.twitter || null,
+    bluesky: entry.bluesky || null,
+    substack: entry.substack || null,
   };
 };
 

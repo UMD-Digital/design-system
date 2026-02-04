@@ -592,19 +592,16 @@ const createOverlayCardProps = (
   const headline = createNameElement(fullName, profileUrl);
   const topicsElement = createExpertiseElement(topics);
   const campusUnitElement = createAssociationElement(campusUnit);
-  const text = document.createElement('div');
   const backgroundImage = createImageElement(
     imageData,
     profileUrl,
     `View profile for ${fullName}`,
   );
 
-  if (topicsElement) text.appendChild(topicsElement);
-  if (campusUnitElement) text.appendChild(campusUnitElement);
-
   return card.overlay.image({
+    eyebrow: campusUnitElement,
     headline,
-    text,
+    text: topicsElement,
     backgroundImage,
     isThemeDark,
   });

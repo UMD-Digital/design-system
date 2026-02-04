@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-icons-library",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Icon and logo assets for the University of Maryland Design System",
   "type": "module",
   "main": "dist/index.js",

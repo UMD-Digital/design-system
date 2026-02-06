@@ -1,6 +1,6 @@
 # University of Maryland Styles Library
 
-[![Styles Version](https://img.shields.io/badge/Styles-v1.8.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)
+[![Styles Version](https://img.shields.io/badge/Styles-v1.8.2-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)
 
 The foundation of the UMD Design System, providing design tokens, CSS utilities, and styling patterns that ensure consistent, accessible, and brand-compliant University of Maryland digital experiences.
 

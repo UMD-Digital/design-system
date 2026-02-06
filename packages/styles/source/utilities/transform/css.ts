@@ -436,7 +436,7 @@ export function minifyCSS(css: string): string {
     .replace(/\s+\(/g, '(')
     .replace(/\(\s+/g, '(')
     .replace(/\s+\)/g, ')')
-    .replace(/\)\s+(?!format\()/g, ')') // Preserve space before format()
+    .replace(/\)\s+(?=[,)])/g, ')') // Only collapse space after ) before , or )
     .replace(/[\r\n]+/g, '')
     .replace(/\s+/g, ' ')
     .trim();

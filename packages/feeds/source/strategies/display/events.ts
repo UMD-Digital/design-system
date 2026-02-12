@@ -59,10 +59,14 @@ export const eventsDisplayStrategy: DisplayStrategy<EventEntry> = {
       cardType = 'block',
     } = options;
 
-    // Create headline
+    // Open in new tab by default; keep in same tab on calendar.umd.edu
+    const openInNewTab =
+      window.location.hostname !== 'calendar.umd.edu';
+
     const headline = createTextWithLink({
       text: entry.title,
       url: entry.url,
+      openInNewTab,
     });
 
     // Create summary text

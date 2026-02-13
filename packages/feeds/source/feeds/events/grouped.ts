@@ -305,19 +305,23 @@ const createGroupContainer = (
     .withClassName('umd-feed-events-grouped-entries')
     .withStyles({
       element: {
-        [` > *:not(:last-child)`]: {
+        [`&:not(:last-of-type)`]: {
           paddingBottom: Styles.token.spacing.md,
-          marginBottom: Styles.token.spacing.md,
           borderBottom: `1px solid ${
             isThemeDark
               ? Styles.token.color.gray.dark
               : Styles.token.color.gray.light
           }`,
         },
-        [`+ .umd-feed-events-grouped-entries`]: {
+        [`& + .umd-feed-events-grouped-entries`]: {
           paddingTop: Styles.token.spacing.md,
           marginTop: Styles.token.spacing.md,
-          borderTop: `1px solid ${
+          borderTop: `none`,
+        },
+        [`& > *:not(:last-child)`]: {
+          paddingBottom: Styles.token.spacing.md,
+          marginBottom: Styles.token.spacing.md,
+          borderBottom: `1px solid ${
             isThemeDark
               ? Styles.token.color.gray.dark
               : Styles.token.color.gray.light

@@ -11,7 +11,7 @@ This document outlines the strategic development roadmap for the UMD Design Syst
 - **tokens** (v1.0.0) - Design token primitives (colors, spacing, typography, media)
 - **utilities** (v1.0.2) - Shared utility functions for DOM, styles, performance
 - **styles** (v1.7.2) - JSS objects, CSS utilities, design tokens (re-exports)
-- **model** (v1.0.1) - Web component model utilities (attributes, slots, registration)
+- **model** (v1.0.3) - Web component model utilities (attributes, slots, registration)
 - **builder** (v1.0.0) - Fluent element builder with lifecycle management
 - **elements** (v1.5.5) - Foundational UI element builders
 - **feeds** (v1.3.4) - Dynamic content feed components
@@ -112,69 +112,99 @@ export const createTextLockup = (props: TextLockupProps): ElementModel => {
 
 ---
 
-### Priority 3: Model Package Modernization (Lit-Inspired)
+### Priority 3: Model Package Refactoring (v1.1.0)
 
-**Goal**: Modernize the component model to adopt patterns from Lit for better developer experience.
+**Goal**: Enhance the model package with testing utilities, improved event/slot handling, type-safe attributes, and a reactive update cycle — all backwards compatible and opt-in.
 
-**Current State**: Custom model implementation with basic attribute handling and slot management.
+**Current State**: v1.0.3 with attribute checks, slot factories, and `createCustomElement` factory.
 
-**Target State**: Modern reactive model with Lit-inspired patterns for properties, state, and rendering.
+**Target State**: 5 new modules layered on top of existing APIs.
 
-**Key Improvements**:
+#### Module 1: Testing (`./testing` export)
 
-#### Reactive Properties
+Test fixture and helper utilities for component authors:
+
 ```typescript
-// Current
-static get observedAttributes() { return ['theme', 'size']; }
-attributeChangedCallback(name, oldVal, newVal) {
-  if (name === 'theme') this.handleThemeChange(newVal);
-}
+import { createFixture, queryShadow, simulateEvent } from '@universityofmaryland/web-model-library/testing';
 
-// Target (Lit-inspired)
-@property({ type: String }) theme = 'light';
-@property({ type: String, reflect: true }) size = 'medium';
-
-// Auto-triggers re-render on property change
+const el = await createFixture('<umd-card data-theme="dark"></umd-card>');
+const heading = queryShadow(el, 'h3');
+simulateEvent(el, 'click');
 ```
 
-#### Render Lifecycle
+- [ ] `createFixture` / `cleanupFixtures` — mount components in JSDOM
+- [ ] `queryShadow` / `queryShadowAll` — shadow DOM traversal
+- [ ] `simulateEvent` / `waitForEvent` — event simulation
+- [ ] `createSlotContent` / `assertSlot` — slot test helpers
+
+#### Module 2: Utilities Enhancements
+
 ```typescript
-// Current
-connectedCallback() {
-  this.render();
-}
+import { createLogger, isDev } from '@universityofmaryland/web-model-library/utilities';
+import { createCustomEvent, delegate } from '@universityofmaryland/web-model-library/utilities';
 
-// Target (Lit-inspired)
-connectedCallback() {
-  super.connectedCallback();
-  this.scheduleUpdate();
-}
+const log = createLogger('umd-card');
+log.warn('Deprecated attribute used');
 
-render() {
-  return html`<div class=${this.theme}>${this.content}</div>`;
+delegate(container, 'click', '.action-btn', handler);
+```
+
+- [ ] `debug.ts` — `isDev`, `createLogger` with namespaced output
+- [ ] `events.ts` — `createCustomEvent`, `dispatchCustomEvent`, `defineEvents`, `createEventListener`, `delegate`
+
+#### Module 3: Slots Enhancements
+
+```typescript
+import { createSlotchangeHandler, SlotCache } from '@universityofmaryland/web-model-library/slots';
+
+const cache = new SlotCache(shadowRoot);
+const handler = createSlotchangeHandler((nodes) => { /* react to slot changes */ });
+```
+
+- [ ] `slot-validation.ts` — `SlotConfig` interface for declarative slot definitions
+- [ ] `slot-query.ts` — enhanced query helpers for slot content
+- [ ] `slot-events.ts` — `createSlotchangeHandler`, `SlotCache`, `SlotchangeController`
+
+#### Module 4: Attributes Enhancements
+
+```typescript
+import { AttributeConverter, AttributeConfig } from '@universityofmaryland/web-model-library/attributes';
+
+const config: AttributeConfig = {
+  theme: { type: String, reflect: true, default: 'light' },
+  count: { type: Number, default: 0 },
+};
+```
+
+- [ ] `converters.ts` — `AttributeConverter` (String, Number, Boolean, JSON, custom)
+- [ ] `config.ts` — `AttributeConfig` declarative definitions
+- [ ] `change-detection.ts` — `ChangeDetectors` for efficient dirty checking
+- [ ] `errors.ts` — `AttributeTypeError`, `AttributeValidationError`
+
+#### Module 5: Model Enhancements
+
+```typescript
+// Extended lifecycle hooks
+firstConnected() { /* runs once on first connection */ }
+willFirstUpdate() { /* runs before first render */ }
+
+// Batched updates
+this.requestUpdate();
+await this.updateComplete;
+
+// Reactive controllers
+class FocusController implements ReactiveController {
+  hostConnected() { /* attach listeners */ }
+  hostDisconnected() { /* cleanup */ }
 }
 ```
 
-#### State Management
-```typescript
-// Target
-@state() private _expanded = false;
+- [ ] `base-component.ts` — `firstConnected`, `willFirstUpdate` lifecycle hooks
+- [ ] `update-cycle.ts` — `requestUpdate`, `updateComplete` promise
+- [ ] `controllers.ts` — `ReactiveController` interface
+- [ ] `registration.ts` — `registerComponent` with validation
 
-toggle() {
-  this._expanded = !this._expanded;
-  // Automatically triggers re-render
-}
-```
-
-**Implementation Plan**:
-- [ ] Add reactive property decorator system
-- [ ] Implement batched update scheduling
-- [ ] Add render method with template support
-- [ ] Create lifecycle hooks (willUpdate, updated, firstUpdated)
-- [ ] Add CSS-in-JS support with adoptedStyleSheets
-- [ ] Maintain backward compatibility with existing components
-
-**Compatibility Note**: Changes will be additive - existing components continue to work, new patterns available for gradual adoption.
+**Compatibility Note**: All changes are additive. Existing components continue to work unchanged. New patterns are available for gradual adoption.
 
 ---
 
@@ -592,12 +622,12 @@ interface ComponentContract {
 
 ### Q2 2025 (v1.18)
 - [ ] Complete ElementBuilder migration (composite elements)
-- [ ] Model package modernization (reactive properties)
+- [ ] Model package v1.1.0 refactoring (Testing, Utilities, Slots modules)
 - [ ] Static CSS exports (complete implementation)
 - [ ] Figma token sync (Phase 2 planning)
 
 ### Q3 2025 (v1.19 / v2.0-beta)
-- [ ] Model package Lit-inspired patterns (render lifecycle, state)
+- [ ] Model package v1.1.0 completion (Attributes, Model modules)
 - [ ] Framework adapters for elements (React, Vue)
 - [ ] Performance optimization phase
 - [ ] Beta release of v2.0 architecture
@@ -629,10 +659,11 @@ interface ComponentContract {
 ### In Progress
 - [ ] ElementBuilder adoption in elements package
 - [ ] Static CSS exports planning
-- [ ] Model package modernization research
+- [ ] Model package v1.1.0 refactoring (5-module plan)
 
 ### Next Steps
 - [ ] Begin static CSS export implementation
-- [ ] Research Lit patterns for model package
+- [ ] Implement model testing module (`./testing` export)
+- [ ] Implement model utilities enhancements (debug, events)
+- [ ] Implement model slots enhancements (validation, slotchange)
 - [ ] Plan Figma integration Phase 2
-- [ ] Add test coverage for experts and in-the-news feeds

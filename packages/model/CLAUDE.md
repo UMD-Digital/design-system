@@ -4,7 +4,7 @@
 
 The **Model Package** (`@universityofmaryland/web-model-library`) provides core utilities for building web components in the UMD design system. This package was extracted from the components package to create a standalone, reusable foundation for web component development.
 
-**Version**: 1.0.1
+**Version**: 1.0.3
 **Dependencies**:
 - `postcss` (for style processing)
 - `postcss-discard-duplicates` (for CSS optimization)
@@ -12,56 +12,40 @@ The **Model Package** (`@universityofmaryland/web-model-library`) provides core 
 **Peer Dependencies**:
 - `@universityofmaryland/web-styles-library` (for design tokens)
 
-## Planned: Lit-Inspired Modernization
+## Refactoring Plan (v1.1.0)
 
-**Status**: Planned for v1.18+ (Q2 2025)
+**Status**: In progress — backwards compatible, opt-in additions
 
-The model package will adopt Lit-inspired patterns for better developer experience:
+The model package is being enhanced in 5 modules, each building on the previous. All changes are additive; existing APIs remain unchanged.
 
-### Reactive Properties
-```typescript
-// Current
-static get observedAttributes() { return ['theme', 'size']; }
-attributeChangedCallback(name, oldVal, newVal) {
-  if (name === 'theme') this.handleThemeChange(newVal);
-}
+### Module Order
 
-// Target (Lit-inspired)
-@property({ type: String }) theme = 'light';
-@property({ type: String, reflect: true }) size = 'medium';
-// Auto-triggers re-render on property change
-```
+1. **Testing** — Test fixture and helper utilities (`./testing` export)
+   - `fixture.ts` — `createFixture`, `cleanupFixtures`
+   - `shadow.ts` — `queryShadow`, `queryShadowAll`
+   - `events.ts` — `simulateEvent`, `waitForEvent`
+   - `slots.ts` — `createSlotContent`, `assertSlot`
 
-### State Management
-```typescript
-// Target
-@state() private _expanded = false;
+2. **Utilities** — Debug and event helpers
+   - `debug.ts` — `isDev`, `createLogger`
+   - `events.ts` — `createCustomEvent`, `dispatchCustomEvent`, `defineEvents`, `createEventListener`, `delegate`
 
-toggle() {
-  this._expanded = !this._expanded;
-  // Automatically triggers re-render
-}
-```
+3. **Slots** — Validation, querying, and change detection
+   - `slot-validation.ts` — `SlotConfig` interface
+   - `slot-query.ts` — query helpers for slot content
+   - `slot-events.ts` — `createSlotchangeHandler`, `SlotCache`, `SlotchangeController`
 
-### Render Lifecycle
-```typescript
-// Target (Lit-inspired)
-connectedCallback() {
-  super.connectedCallback();
-  this.scheduleUpdate();
-}
+4. **Attributes** — Type converters, config, change detection, errors
+   - `converters.ts` — `AttributeConverter` for type-safe attribute parsing
+   - `config.ts` — `AttributeConfig` declarative attribute definitions
+   - `change-detection.ts` — `ChangeDetectors` for efficient dirty checking
+   - `errors.ts` — `AttributeTypeError`, `AttributeValidationError`
 
-render() {
-  return html`<div class=${this.theme}>${this.content}</div>`;
-}
-```
-
-**Implementation Plan**:
-- Reactive property decorator system
-- Batched update scheduling
-- Render method with template support
-- Lifecycle hooks (willUpdate, updated, firstUpdated)
-- Backward compatibility with existing components
+5. **Model** — Base component, update cycle, controllers, registration
+   - `base-component.ts` — `firstConnected`, `willFirstUpdate` lifecycle hooks
+   - `update-cycle.ts` — `requestUpdate`, `updateComplete` promise
+   - `controllers.ts` — `ReactiveController` interface
+   - `registration.ts` — `registerComponent` with validation
 
 See [PLAN.md](/PLAN.md) for implementation roadmap.
 
@@ -102,26 +86,45 @@ npm test           # Run all tests
 ```
 source/
 ├── attributes/   # Attribute handling system
-│   ├── checks.ts     # Attribute state checking utilities
-│   ├── handler.ts    # Attribute change observers
-│   ├── names.ts      # Centralized attribute name constants
-│   ├── values.ts     # Predefined attribute values
-│   └── index.ts      # Main export
+│   ├── checks.ts           # Attribute state checking utilities
+│   ├── handler.ts          # Attribute change observers
+│   ├── names.ts            # Centralized attribute name constants
+│   ├── values.ts           # Predefined attribute values
+│   ├── converters.ts       # Type converters (v1.1.0)
+│   ├── config.ts           # Declarative attribute config (v1.1.0)
+│   ├── change-detection.ts # Dirty checking (v1.1.0)
+│   ├── errors.ts           # Attribute error types (v1.1.0)
+│   └── index.ts            # Main export
 ├── model/        # Core model system
-│   └── index.ts      # Custom element factory and base class
+│   ├── index.ts             # Custom element factory and base class
+│   ├── base-component.ts    # Extended lifecycle hooks (v1.1.0)
+│   ├── update-cycle.ts      # Batched update scheduling (v1.1.0)
+│   ├── controllers.ts       # ReactiveController interface (v1.1.0)
+│   └── registration.ts      # registerComponent helper (v1.1.0)
 ├── slots/        # Slot management
-│   ├── create.ts     # Slot creation utilities
-│   ├── element.ts    # Common slot configurations
-│   ├── extract.ts    # Slot extraction from DOM
-│   ├── mapping.ts    # Slot name mappings
-│   ├── query.ts      # Slot query utilities
-│   ├── validate.ts   # Slot validation
-│   └── index.ts      # Main export
+│   ├── create.ts            # Slot creation utilities
+│   ├── element.ts           # Common slot configurations
+│   ├── extract.ts           # Slot extraction from DOM
+│   ├── mapping.ts           # Slot name mappings
+│   ├── query.ts             # Slot query utilities
+│   ├── validate.ts          # Slot validation
+│   ├── slot-validation.ts   # SlotConfig interface (v1.1.0)
+│   ├── slot-query.ts        # Enhanced queries (v1.1.0)
+│   ├── slot-events.ts       # Slotchange handling (v1.1.0)
+│   └── index.ts             # Main export
+├── testing/      # Test utilities (v1.1.0)
+│   ├── fixture.ts           # Test fixture helpers
+│   ├── shadow.ts            # Shadow DOM query helpers
+│   ├── events.ts            # Event simulation
+│   ├── slots.ts             # Slot test utilities
+│   └── index.ts             # Main export
 ├── utilities/    # Helper utilities
-│   ├── lifecycle.ts  # Common lifecycle hooks
-│   ├── register.ts   # Component registration
-│   ├── styles.ts     # Style template generation
-│   └── index.ts      # Main export
+│   ├── lifecycle.ts         # Common lifecycle hooks
+│   ├── register.ts          # Component registration
+│   ├── styles.ts            # Style template generation
+│   ├── debug.ts             # Dev-mode logging (v1.1.0)
+│   ├── events.ts            # Custom event helpers (v1.1.0)
+│   └── index.ts             # Main export
 ├── _types.ts     # Type definitions
 └── index.ts      # Package main export
 ```
@@ -139,6 +142,9 @@ import * as Model from '@universityofmaryland/web-model-library/model';
 import * as Attributes from '@universityofmaryland/web-model-library/attributes';
 import { Slots } from '@universityofmaryland/web-model-library/slots';
 import * as Utilities from '@universityofmaryland/web-model-library/utilities';
+
+// Testing utilities (v1.1.0)
+import { createFixture, queryShadow, simulateEvent } from '@universityofmaryland/web-model-library/testing';
 ```
 
 ## package.json Exports
@@ -166,6 +172,10 @@ import * as Utilities from '@universityofmaryland/web-model-library/utilities';
     "./utilities": {
       "types": "./dist/utilities.d.ts",
       "import": "./dist/utilities.js"
+    },
+    "./testing": {
+      "types": "./dist/testing.d.ts",
+      "import": "./dist/testing.js"
     }
   }
 }
@@ -206,6 +216,33 @@ Component registration with:
 - Automatic duplicate prevention
 - WebComponents global registry
 - Helper functions for standard patterns
+
+### Reactive Update Cycle (v1.1.0)
+
+Batched update scheduling inspired by Lit:
+- `requestUpdate()` to schedule a microtask-batched re-render
+- `updateComplete` promise for awaiting render completion
+- `firstConnected` / `willFirstUpdate` lifecycle hooks
+
+### Controller Pattern (v1.1.0)
+
+`ReactiveController` interface for reusable cross-cutting concerns:
+- Attach/detach lifecycle tied to host component
+- Enables composition over inheritance for behaviors like focus management, media queries, intersection observers
+
+### Type Converters (v1.1.0)
+
+`AttributeConverter` for safe string-to-type conversion:
+- Built-in converters: `String`, `Number`, `Boolean`, `JSON`
+- Custom converter support via `fromAttribute` / `toAttribute`
+
+### Testing Utilities (v1.1.0)
+
+Dedicated `./testing` export for component test authoring:
+- `createFixture` / `cleanupFixtures` — mount components in isolation
+- `queryShadow` / `queryShadowAll` — traverse shadow DOM
+- `simulateEvent` / `waitForEvent` — event testing
+- `createSlotContent` / `assertSlot` — slot validation in tests
 
 ## Testing
 
@@ -254,6 +291,7 @@ All type definitions are centralized in `_types.ts`:
 - `dist/model.{js,d.ts}` - Model system
 - `dist/slots.{js,d.ts}` - Slot system
 - `dist/utilities.{js,d.ts}` - Registration and lifecycle utilities
+- `dist/testing.{js,d.ts}` - Test fixture and helper utilities (v1.1.0)
 - Preserved module structure for granular imports
 
 ## Notes
@@ -263,6 +301,7 @@ All type definitions are centralized in `_types.ts`:
 - Zero breaking changes - maintains 100% API compatibility with extracted code
 - Enables other packages to leverage model patterns without depending on components package
 - Sets foundation for future model-driven component development
+- The `./testing` export is intended for dev/test environments only; not included in production bundles
 
 ## Migration from Components Package
 

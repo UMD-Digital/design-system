@@ -65,6 +65,7 @@ import * as Model from './model';
 import * as Register from './utilities/register';
 import { Slots, type SlotProps } from './slots';
 import * as Lifecycle from './utilities/lifecycle';
+import * as Testing from './testing';
 import {
   type BaseProps,
   type OptionalProps,
@@ -75,7 +76,7 @@ import {
 export type * from './_types';
 
 // Export main modules
-export { Attributes, Model, Register, Slots, Lifecycle };
+export { Attributes, Model, Register, Slots, Lifecycle, Testing };
 
 // Export slot types
 export type { SlotProps, BaseProps, OptionalProps, SlotResult };

@@ -12,6 +12,7 @@ export default defineConfig({
         model: resolve(__dirname, 'source/model/index.ts'),
         slots: resolve(__dirname, 'source/slots/index.ts'),
         utilities: resolve(__dirname, 'source/utilities/index.ts'),
+        testing: resolve(__dirname, 'source/testing/index.ts'),
       },
       name: 'UniversityOfMarylandWebModelLibrary',
       formats: ['es'],

@@ -31,6 +31,11 @@
       "types": "./dist/utilities.d.ts",
       "import": "./dist/utilities.js",
       "default": "./dist/utilities.js"
+    },
+    "./testing": {
+      "types": "./dist/testing.d.ts",
+      "import": "./dist/testing.js",
+      "default": "./dist/testing.js"
     }
   },
   "license": "MIT",

@@ -6,6 +6,7 @@ dist
 *.log
 /design-system-ui
 coverage
+**/.claude/context-bundles
 
 # TypeScript
 *.tsbuildinfo

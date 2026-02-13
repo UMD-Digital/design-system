@@ -14,7 +14,7 @@ This document outlines the strategic development roadmap for the UMD Design Syst
 - **model** (v1.0.1) - Web component model utilities (attributes, slots, registration)
 - **builder** (v1.0.0) - Fluent element builder with lifecycle management
 - **elements** (v1.5.5) - Foundational UI element builders
-- **feeds** (v1.2.5) - Dynamic content feed components
+- **feeds** (v1.3.4) - Dynamic content feed components
 - **components** (v1.16.4) - Web Components (Custom Elements)
 
 ### Current Dependency Flow
@@ -586,8 +586,9 @@ interface ComponentContract {
 ### Q1 2025 (v1.17)
 - [ ] Complete ElementBuilder migration in elements package (atomic elements)
 - [ ] Static CSS exports from styles package (initial implementation)
-- [ ] Experts Feed implementation
-- [ ] Events/News slider migration to factory pattern
+- [x] Experts Feed implementation (grid, list, bio, in-the-news)
+- [x] In-The-News Feed implementation (grid, list)
+- [x] Events/Academic slider migration to widget pattern
 
 ### Q2 2025 (v1.18)
 - [ ] Complete ElementBuilder migration (composite elements)
@@ -611,14 +612,16 @@ interface ComponentContract {
 
 ### Current Status
 
-**Latest Release**: v1.16.4 (Components)
-**Branch**: release/1.17
-**Date**: 2025-01-05
-**Current Focus**: Named exports migration, ElementBuilder adoption
+**Latest Release**: v1.17.5 (Components)
+**Branch**: patch/1.17
+**Date**: 2026-02-13
+**Current Focus**: ElementBuilder adoption, feeds experts/in-the-news stabilization
 
 ### Recently Completed
 - ✅ Named exports migration across all packages
 - ✅ Feeds factory pattern implementation
+- ✅ Feeds experts and in-the-news feeds (v1.3.0+)
+- ✅ Events/Academic slider migration to widget pattern
 - ✅ Composable style functions in styles package
 - ✅ Theme system enhancements
 - ✅ CI/CD automation with GitHub Actions
@@ -629,7 +632,7 @@ interface ComponentContract {
 - [ ] Model package modernization research
 
 ### Next Steps
-- [ ] Complete v1.17 release with named exports
 - [ ] Begin static CSS export implementation
 - [ ] Research Lit patterns for model package
 - [ ] Plan Figma integration Phase 2
+- [ ] Add test coverage for experts and in-the-news feeds

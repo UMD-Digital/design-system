@@ -2,9 +2,9 @@
 
 ## Package Overview
 
-The **Feeds Package** (`@universityofmaryland/web-feeds-library`) provides dynamic content feed components for academic programs, news, and events. Feeds fetch and display data from UMD APIs using a composable factory pattern with reusable strategies.
+The **Feeds Package** (`@universityofmaryland/web-feeds-library`) provides dynamic content feed components for academic programs, news, events, experts, and in-the-news mentions. Feeds fetch and display data from UMD APIs using a composable factory pattern with reusable strategies.
 
-**Version**: 1.2.5
+**Version**: 1.3.4
 **Dependencies**:
 - `@universityofmaryland/web-elements-library` - UI components
 - `@universityofmaryland/web-styles-library` - Design tokens and styles
@@ -40,22 +40,34 @@ npm test           # Run all tests (171 tests)
 source/
 ├── feeds/                  # Feed implementations
 │   ├── academic/
+│   │   ├── _types.ts       # Academic type definitions
 │   │   ├── index.ts        # Public API
-│   │   └── slider.ts       # Academic program carousel (old - needs migration)
+│   │   └── slider.ts       # Academic program carousel (widget pattern)
 │   ├── events/
 │   │   ├── _types.ts       # Event type definitions
 │   │   ├── index.ts        # Public API
 │   │   ├── grid.ts         # ✅ Grid layout (factory pattern)
 │   │   ├── list.ts         # ✅ List layout (factory pattern)
 │   │   ├── grouped.ts      # ✅ Date-grouped layout (specialized)
-│   │   └── slider.ts       # Carousel (old - needs migration)
-│   ├── news/
-│   │   ├── _types.ts       # News type definitions
+│   │   └── slider.ts       # ✅ Carousel (widget pattern)
+│   ├── experts/
+│   │   ├── _types.ts       # Expert type definitions
+│   │   ├── index.ts        # Public API
+│   │   ├── bio.ts          # ✅ Expert biography (specialized)
+│   │   ├── grid.ts         # ✅ Grid layout (factory pattern)
+│   │   ├── in-the-news.ts  # ✅ Expert news coverage (specialized)
+│   │   └── list.ts         # ✅ List layout (factory pattern)
+│   ├── in-the-news/
+│   │   ├── _types.ts       # In-the-news type definitions
 │   │   ├── index.ts        # Public API
 │   │   ├── grid.ts         # ✅ Grid layout (factory pattern)
-│   │   ├── list.ts         # ✅ List layout (factory pattern)
-│   │   └── featured.ts     # ✅ Featured layout (specialized)
-│   └── experts/            # Planned - expert feeds
+│   │   └── list.ts         # ✅ List layout (factory pattern)
+│   └── news/
+│       ├── _types.ts       # News type definitions
+│       ├── index.ts        # Public API
+│       ├── featured.ts     # ✅ Featured layout (specialized)
+│       ├── grid.ts         # ✅ Grid layout (factory pattern)
+│       └── list.ts         # ✅ List layout (factory pattern)
 ├── factory/                # Factory pattern implementation
 │   ├── core/
 │   │   ├── types.ts        # TypeScript interfaces for factory
@@ -69,18 +81,21 @@ source/
 ├── strategies/             # Reusable strategy patterns
 │   ├── display/            # How entries are displayed
 │   │   ├── events.ts       # Event display strategy
+│   │   ├── experts.ts      # Expert display strategy
+│   │   ├── inTheNews.ts    # In-the-news display strategy
 │   │   ├── news.ts         # News display strategy
-│   │   ├── experts.ts      # Expert display strategy (planned)
 │   │   └── index.ts        # Exports
 │   ├── fetch/              # How data is fetched
 │   │   ├── graphql.ts      # Base GraphQL fetch strategy
-│   │   ├── events.ts       # Events GraphQL queries/fetch
-│   │   ├── news.ts         # News GraphQL queries/fetch
 │   │   ├── academic.ts     # Academic GraphQL queries/fetch
+│   │   ├── events.ts       # Events GraphQL queries/fetch
+│   │   ├── experts.ts      # Experts GraphQL queries/fetch
+│   │   ├── inTheNews.ts    # In-the-news GraphQL queries/fetch
+│   │   ├── news.ts         # News GraphQL queries/fetch
 │   │   └── index.ts        # Exports
 │   ├── layout/             # How feed is laid out
-│   │   ├── grid.ts         # Grid gap layout
-│   │   ├── featured.ts     # Featured layout
+│   │   ├── grid.ts         # Grid layout strategies (5 variants)
+│   │   ├── featured.ts     # Featured layout strategy factory
 │   │   └── index.ts        # Exports
 │   └── index.ts            # All strategy exports
 ├── states/                 # State management classes
@@ -96,30 +111,50 @@ source/
 │   ├── grouping/           # Data grouping helpers
 │   ├── styles/             # Style helpers (shadow DOM)
 │   └── index.ts            # Exports
+├── types/                  # Centralized type definitions
+│   ├── core.ts             # Core types (ElementModel, strategies)
+│   ├── api.ts              # API response types
+│   ├── feeds.ts            # Feed configuration types
+│   ├── data/               # Data model types per feed
+│   │   ├── academic.ts
+│   │   ├── events.ts
+│   │   ├── experts.ts
+│   │   ├── inTheNews.ts
+│   │   ├── news.ts
+│   │   └── index.ts
+│   └── index.ts            # Exports
 ├── widgets/                # Interactive widgets
 │   ├── slider.ts           # Carousel/slider widget
 │   └── index.ts            # Exports
 └── _types.ts               # Global type definitions
 
-__tests__/                  # Test files
+__tests__/                  # Test files (16 suites, 171 tests)
 ├── feeds/
+│   ├── academic/
+│   │   ├── index.test.ts
+│   │   └── slider.test.ts
 │   ├── events/
-│   │   ├── grid.test.ts    # Grid feed tests
-│   │   ├── list.test.ts    # List feed tests
-│   │   ├── grouped.test.ts # Grouped feed tests
-│   │   └── slider.test.ts  # Slider feed tests
+│   │   ├── grid.test.ts
+│   │   ├── list.test.ts
+│   │   ├── grouped.test.ts
+│   │   └── slider.test.ts
 │   └── news/
-│       ├── grid.test.ts    # News grid tests
-│       ├── list.test.ts    # News list tests
-│       └── featured.test.ts # Featured tests
-├── states/                 # State class tests
-└── helpers/                # Helper function tests
-
-old/                        # Legacy implementations (archived)
-├── feeds/                  # Old feed implementations (was composite/)
-├── documentation/          # Migration documentation
-└── tests/                  # Old test files
+│       ├── grid.test.ts
+│       ├── list.test.ts
+│       └── featured.test.ts
+├── factory/
+│   └── createBaseFeed.test.ts
+├── helpers/
+│   ├── events/
+│   ├── network/
+│   └── styles/
+└── strategies/
+    ├── display/
+    ├── fetch/
+    └── layout/
 ```
+
+**Note**: Experts and in-the-news feeds currently lack dedicated test files. The 16 test suites / 171 tests cover events, news, academic, factory, strategies, helpers, and states.
 
 ## Package Exports
 
@@ -131,17 +166,25 @@ old/                        # Legacy implementations (archived)
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js"
     },
+    "./academic": {
+      "types": "./dist/academic.d.ts",
+      "import": "./dist/academic.js"
+    },
     "./events": {
       "types": "./dist/events.d.ts",
       "import": "./dist/events.js"
     },
+    "./experts": {
+      "types": "./dist/experts.d.ts",
+      "import": "./dist/experts.js"
+    },
+    "./in-the-news": {
+      "types": "./dist/in-the-news.d.ts",
+      "import": "./dist/in-the-news.js"
+    },
     "./news": {
       "types": "./dist/news.d.ts",
       "import": "./dist/news.js"
-    },
-    "./academic": {
-      "types": "./dist/academic.d.ts",
-      "import": "./dist/academic.js"
     }
   }
 }
@@ -152,21 +195,28 @@ old/                        # Legacy implementations (archived)
 ## Feed Types
 
 ### Events Feeds
-- **Grid** (`grid.ts`) ✅: Event grid display - factory pattern (40% code reduction)
-- **List** (`list.ts`) ✅: Event list display - factory pattern (35% code reduction)
-- **Grouped** (`grouped.ts`) ✅: Events grouped by date - specialized (14% code reduction)
-- **Slider** (`slider.ts`) ⏳: Carousel display - needs migration
+- **Grid** (`grid.ts`) ✅: Event grid display — factory pattern
+- **List** (`list.ts`) ✅: Event list display — factory pattern
+- **Grouped** (`grouped.ts`) ✅: Events grouped by date — specialized
+- **Slider** (`slider.ts`) ✅: Carousel display — widget pattern
 
 ### News Feeds
-- **Grid** (`grid.ts`) ✅: News grid display - factory pattern (31% code reduction)
-- **List** (`list.ts`) ✅: News list display - factory pattern (32% code reduction)
-- **Featured** (`featured.ts`) ✅: Highlighted news item - specialized
+- **Grid** (`grid.ts`) ✅: News grid display — factory pattern
+- **List** (`list.ts`) ✅: News list display — factory pattern
+- **Featured** (`featured.ts`) ✅: Highlighted news item — specialized
 
 ### Academic Feeds
-- **Slider** (`slider.ts`) ⏳: Academic program carousel - needs migration
+- **Slider** (`slider.ts`) ✅: Academic program carousel — widget pattern
 
 ### Experts Feeds
-- **Grid/List** 🔮: Planned - not yet implemented
+- **Grid** (`grid.ts`) ✅: Expert profiles grid — factory pattern
+- **List** (`list.ts`) ✅: Expert profiles list — factory pattern
+- **Bio** (`bio.ts`) ✅: Single expert biography — specialized
+- **In The News** (`in-the-news.ts`) ✅: Expert + news coverage — specialized
+
+### In-The-News Feeds
+- **Grid** (`grid.ts`) ✅: News mentions grid — factory pattern
+- **List** (`list.ts`) ✅: News mentions list — factory pattern
 
 ## Architecture Overview
 
@@ -346,6 +396,8 @@ export const eventsFetchStrategy = createGraphQLFetchStrategy<EventType>({
 - `eventsFetchStrategy` - Events with startsAfterOrAt filter
 - `eventsFetchStrategyRange` - Events with rangeStart filter (for grouped)
 - `newsFetchStrategy` - News articles
+- `expertsFetchStrategy` - Expert profiles
+- `inTheNewsFetchStrategy` - In-the-news mentions
 - `academicFetchStrategy` - Academic programs
 
 ### Display Strategy
@@ -404,7 +456,8 @@ export const eventsDisplayStrategy: DisplayStrategy<EventType> = {
 **Available Display Strategies:**
 - `eventsDisplayStrategy` - Event cards with metadata
 - `newsDisplayStrategy` - News article cards
-- `expertsDisplayStrategy` - Expert profile cards (planned)
+- `expertsDisplayStrategy` - Expert profile cards
+- `inTheNewsDisplayStrategy` - In-the-news mention cards
 
 **Card Mapping Options:**
 
@@ -446,8 +499,12 @@ export const gridGapLayout: LayoutStrategy = {
 ```
 
 **Available Layout Strategies:**
-- `gridGapLayout` - Responsive grid with gap
-- (More layouts can be added as needed)
+- `gridLayout` - Standard responsive grid
+- `gridGapLayout` - Responsive grid with visual gaps
+- `gridBorderLayout` - Grid with borders between items (supports dark theme)
+- `stackedLayout` - Vertical stack with optional dividers
+- `gridOffsetLayout` - Grid with sticky offset positioning for first item
+- `createFeaturedLayoutStrategy()` - Factory for dynamic featured layouts (offset/grid based on entry count)
 
 ## Helper System
 
@@ -824,11 +881,18 @@ if (feed.events?.callback) {
 ```
 __tests__/
 ├── feeds/              # Feed implementation tests
+│   ├── academic/
+│   │   ├── index.test.ts
+│   │   └── slider.test.ts
 │   ├── events/
-│   │   ├── grid.test.ts      # Tests for grid feed
-│   │   └── list.test.ts      # Tests for list feed
+│   │   ├── grid.test.ts
+│   │   ├── list.test.ts
+│   │   ├── grouped.test.ts
+│   │   └── slider.test.ts
 │   └── news/
-│       └── grid.test.ts      # Tests for news grid
+│       ├── grid.test.ts
+│       ├── list.test.ts
+│       └── featured.test.ts
 ├── factory/            # Factory pattern tests
 ├── strategies/         # Strategy tests
 ├── states/            # State class tests
@@ -962,22 +1026,20 @@ const entries = await fetchStrategy.fetchEntries(variables);
 
 ### Completed ✅
 
-1. **Events Grid** - Factory pattern (40% code reduction)
-2. **Events List** - Factory pattern (35% code reduction)
-3. **Events Grouped** - Specialized (14% code reduction)
-4. **News Grid** - Factory pattern (31% code reduction)
-5. **News List** - Factory pattern (32% code reduction)
-6. **News Featured** - Specialized (+34% for added features)
-
-### Remaining ⏳
-
-7. **Events Slider** - Widget-based (in `old/feeds/events/slider-old.ts`)
-8. **Academic Slider** - Widget-based (in `old/feeds/academic/slider-old.ts`)
-
-### Planned 🔮
-
+1. **Events Grid** - Factory pattern
+2. **Events List** - Factory pattern
+3. **Events Grouped** - Specialized
+4. **Events Slider** - Widget pattern
+5. **News Grid** - Factory pattern
+6. **News List** - Factory pattern
+7. **News Featured** - Specialized
+8. **Academic Slider** - Widget pattern
 9. **Experts Grid** - Factory pattern
 10. **Experts List** - Factory pattern
+11. **Experts Bio** - Specialized
+12. **Experts In The News** - Specialized
+13. **In-The-News Grid** - Factory pattern
+14. **In-The-News List** - Factory pattern
 
 ## Common Issues
 
@@ -1062,8 +1124,9 @@ customElements.define('umd-events-feed', EventsFeedElement);
 
 - All feeds require an API token for authentication
 - Feeds automatically handle loading states and errors
-- Use factory pattern for 30-40% code reduction
+- Use factory pattern for standard grid/list feeds
 - Strategies are reusable across different feed types
 - Shadow DOM support is built-in
 - All implementations are fully typed with TypeScript
-- 171 tests ensure reliability and correctness
+- 16 test suites / 171 tests cover events, news, academic, factory, strategies, helpers, and states
+- Experts and in-the-news feeds do not yet have dedicated test files

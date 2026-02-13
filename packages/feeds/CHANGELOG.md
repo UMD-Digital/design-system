@@ -2,52 +2,71 @@
 
 All notable changes to the `@universityofmaryland/web-feeds-library` package will be documented in this file.
 
-## [1.0.7] - Current
+## [1.3.4] - Current
 
-### Recent Changes
-- **Loader Element**: Visual theme improvements
-- **Grouped Feeds**: Added offset for lazy load functionality
-- **Events**: Grouped event feed implementation
-- **Featured News**: Grid height adjustments
-- **Featured Layout**: Added overlay image support
+### Changes
+- Events: conditional target blank for links
+- Experts: support for Bluesky and Substack social profiles
 
-## [1.0.4] - Previous Release
+## [1.3.2]
+
+### Changes
+- Bug fixes and refinements
+
+## [1.3.0] - Release 1.17.1
 
 ### Features
-- Dynamic content feed components for UMD digital properties
-- Support for multiple content types:
-  - News feeds
-  - Events feeds
-  - Academic content feeds
-- Multiple display layouts:
-  - Grid layout
-  - List layout
-  - Featured layout with overlay
-  - Grouped layout
+- **In-The-News feeds**: Grid and list layouts via factory pattern
+- Experts: filter by IDs support
+- Experts: media trained filter
 
-### Architecture
-- **Component Factory Pattern**: All components return ElementModel
-- **Shadow DOM**: Style encapsulation for all feed components
-- **API Integration**: Built-in fetch utilities for UMD content APIs
-- **Data Transformation**: Standardized data processing pipeline
-- **Lazy Loading**: Performance optimization for large feeds
+## [1.2.5 - 1.2.9]
 
-### Core Modules
-- **common/**
-  - `fetch.ts` - API integration utilities
-  - `data.ts` - Data transformation utilities
-  - `display.ts` - Shared display components
-  - `queries.ts` - API query configuration
-- **news/** - News feed components
-- **events/** - Event feed components
-- **utilities/**
-  - `events/` - Custom event management
-  - Other feed-specific utilities
+### Features
+- **Experts feeds**: Grid and list layouts via factory pattern
+- **Experts bio**: Single expert biography (specialized)
+- **Experts in-the-news**: Expert + news coverage (specialized)
+- Expert list base factory implementation
+- Beta releases for expert feeds testing
+
+### Changes
+- Peer dependency structure updates
+- Package export default fallbacks
+- CommonJS exports removed (ES Modules only)
+
+## [1.1.0 - 1.2.4]
+
+### Features
+- **Factory pattern**: Composable `createBaseFeed` with strategy system
+- **Strategy system**: Reusable fetch, display, and layout strategies
+- **Events grid/list**: Migrated to factory pattern
+- **News grid/list**: Migrated to factory pattern
+- **News featured**: Specialized featured layout
+- **Events grouped**: Date-grouped event layout
+- **Layout strategies**: `gridLayout`, `gridGapLayout`, `gridBorderLayout`, `stackedLayout`, `gridOffsetLayout`, `createFeaturedLayoutStrategy`
+
+### Changes
+- Vite build with multiple entry points for reduced bundle size
+- Token package integration
+- Grouped list border separators
+- Events grouped headlines
+- Events without image support
+
+## [1.0.4 - 1.0.9]
+
+### Features
+- Initial dynamic content feed components
+- Events feeds (grid, list, grouped, slider)
+- News feeds (grid, list, featured)
+- Academic feeds (slider)
+- Shadow DOM style encapsulation
+- API integration with UMD content APIs
+- Lazy loading / pagination support
+- Loading, empty, and announcer state classes
 
 ### Dependencies
-- Depends on `@universityofmaryland/web-elements-library`
-- Depends on `@universityofmaryland/web-styles-library`
-
-## Notes
-
-This package provides specialized components for displaying dynamic content from UMD's content management systems. All components follow the element model pattern and use Shadow DOM for encapsulation.
+- `@universityofmaryland/web-elements-library`
+- `@universityofmaryland/web-styles-library`
+- `@universityofmaryland/web-utilities-library`
+- `@universityofmaryland/web-builder-library`
+- `@universityofmaryland/web-token-library`

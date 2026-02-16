@@ -10,3 +10,11 @@ export { hooks, CommonLifecycleHooks } from './lifecycle';
 export { stylesTemplate as StylesTemplate } from './styles';
 export { isDev, createLogger, withLifecycleDebug } from './debug';
 export type { Logger } from './debug';
+export {
+  createCustomEvent,
+  dispatchCustomEvent,
+  defineEvents,
+  createEventListener,
+  delegate,
+} from './events';
+export type { CustomEventOptions, DefineEvents } from './events';

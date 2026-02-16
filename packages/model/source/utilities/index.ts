@@ -8,3 +8,5 @@
 export { registerWebComponent, webComponent, type WebComponentConfig } from './register';
 export { hooks, CommonLifecycleHooks } from './lifecycle';
 export { stylesTemplate as StylesTemplate } from './styles';
+export { isDev, createLogger, withLifecycleDebug } from './debug';
+export type { Logger } from './debug';

@@ -164,6 +164,7 @@ export interface ComponentConfiguration {
     converter?: { fromAttribute: (value: string | null, name: string) => unknown; toAttribute: (value: unknown) => string | null };
     defaultValue?: unknown;
     validate?: (value: unknown) => string | void;
+    onChange?: (host: HTMLElement, newValue: unknown, oldValue: unknown) => void;
   }>;
   /** Hook called before shadow DOM connection */
   beforeConnect?: (ref: ComponentRef, shadow: ShadowRoot) => void;

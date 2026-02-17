@@ -397,4 +397,128 @@ describe('Reactive attributes integration', () => {
       document.body.removeChild(el);
     });
   });
+
+  describeInstance('onChange callback', () => {
+    it('fires when property set programmatically', () => {
+      const onChangeSpy = jest.fn();
+      const { el } = defineAndCreate({
+        tagName: uniqueTag(),
+        reactiveAttributes: {
+          count: { type: 'number', defaultValue: 0, onChange: onChangeSpy },
+        },
+        createComponent,
+      });
+
+      el.count = 42;
+      expect(onChangeSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('fires when attribute changes externally', () => {
+      const onChangeSpy = jest.fn();
+      const { el } = defineAndCreate({
+        tagName: uniqueTag(),
+        reactiveAttributes: {
+          theme: { type: 'string', defaultValue: 'light', onChange: onChangeSpy },
+        },
+        createComponent,
+      });
+
+      el.attributeChangedCallback('theme', 'light', 'dark');
+      expect(onChangeSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('receives correct old and new values', () => {
+      const onChangeSpy = jest.fn();
+      const { el } = defineAndCreate({
+        tagName: uniqueTag(),
+        reactiveAttributes: {
+          count: { type: 'number', defaultValue: 0, onChange: onChangeSpy },
+        },
+        createComponent,
+      });
+
+      el.count = 42;
+      expect(onChangeSpy).toHaveBeenCalledWith(el, 42, 0);
+    });
+
+    it('receives host element as first argument', () => {
+      const onChangeSpy = jest.fn();
+      const { el } = defineAndCreate({
+        tagName: uniqueTag(),
+        reactiveAttributes: {
+          count: { type: 'number', defaultValue: 0, onChange: onChangeSpy },
+        },
+        createComponent,
+      });
+
+      el.count = 1;
+      expect(onChangeSpy.mock.calls[0][0]).toBe(el);
+    });
+
+    it('does NOT fire during initial seeding', () => {
+      const onChangeSpy = jest.fn();
+      defineAndCreate({
+        tagName: uniqueTag(),
+        reactiveAttributes: {
+          theme: { type: 'string', defaultValue: 'light', onChange: onChangeSpy },
+        },
+        createComponent,
+      });
+
+      expect(onChangeSpy).not.toHaveBeenCalled();
+    });
+
+    it('does NOT fire when value unchanged', () => {
+      const onChangeSpy = jest.fn();
+      const { el } = defineAndCreate({
+        tagName: uniqueTag(),
+        reactiveAttributes: {
+          count: { type: 'number', defaultValue: 0, onChange: onChangeSpy },
+        },
+        createComponent,
+      });
+
+      el.count = 0;
+      expect(onChangeSpy).not.toHaveBeenCalled();
+    });
+
+    it('fires AFTER reflection', () => {
+      let attrValueDuringCallback: string | null = null;
+      const onChange = (host: HTMLElement) => {
+        attrValueDuringCallback = host.getAttribute('theme');
+      };
+      const { el } = defineAndCreate({
+        tagName: uniqueTag(),
+        reactiveAttributes: {
+          theme: { type: 'string', reflect: true, defaultValue: 'light', onChange },
+        },
+        createComponent,
+      });
+
+      el.theme = 'dark';
+      expect(attrValueDuringCallback).toBe('dark');
+    });
+
+    it('coexists with handler system', () => {
+      const handlerSpy = jest.fn();
+      const onChangeSpy = jest.fn();
+      const tag = uniqueTag();
+      const { el } = defineAndCreate({
+        tagName: tag,
+        attributes: [{ name: 'theme', handler: handlerSpy }],
+        reactiveAttributes: {
+          theme: { type: 'string', defaultValue: 'light', onChange: onChangeSpy },
+        },
+        createComponent,
+      });
+
+      document.body.appendChild(el);
+
+      el.attributeChangedCallback('theme', 'light', 'dark');
+      expect(handlerSpy).toHaveBeenCalled();
+      expect(onChangeSpy).toHaveBeenCalled();
+
+      document.body.removeChild(el);
+    });
+  });
 });

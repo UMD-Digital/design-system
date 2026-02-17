@@ -259,9 +259,16 @@ class BaseComponent extends HTMLElement {
           }
         }
 
+        // Capture old value before write
+        const oldValue = this._reactiveValues.get(resolved.propertyName);
+        const changed = this._changeDetector.set(resolved.propertyName, value);
+
         // Write directly to avoid reflection loop
         this._reactiveValues.set(resolved.propertyName, value);
-        this._changeDetector.set(resolved.propertyName, value);
+
+        if (changed && resolved.onChange) {
+          resolved.onChange(this, value, oldValue);
+        }
       }
     }
   }
@@ -310,6 +317,7 @@ class BaseComponent extends HTMLElement {
             }
           }
 
+          const oldValue = this._reactiveValues.get(propertyName);
           const changed = this._changeDetector.set(propertyName, value);
           if (!changed) return;
 
@@ -328,6 +336,10 @@ class BaseComponent extends HTMLElement {
             } finally {
               this._isReflecting = false;
             }
+          }
+
+          if (resolved.onChange) {
+            resolved.onChange(this, value, oldValue);
           }
         },
         configurable: true,

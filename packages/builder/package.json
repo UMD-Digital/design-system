@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-builder-library",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Element Builder for the University of Maryland Design System",
   "type": "module",
   "main": "dist/index.js",

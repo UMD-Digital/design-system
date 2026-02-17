@@ -117,6 +117,56 @@ describe('Converters.object', () => {
   });
 });
 
+describe('Converters.array', () => {
+  const c = Converters.array;
+
+  it('parses valid JSON array', () => {
+    expect(c.fromAttribute('[1,2,3]', 'items')).toEqual([1, 2, 3]);
+  });
+
+  it('parses empty JSON array', () => {
+    expect(c.fromAttribute('[]', 'items')).toEqual([]);
+  });
+
+  it('parses array of strings', () => {
+    expect(c.fromAttribute('["a","b"]', 'tags')).toEqual(['a', 'b']);
+  });
+
+  it('returns undefined for null', () => {
+    expect(c.fromAttribute(null, 'items')).toBeUndefined();
+  });
+
+  it('throws AttributeTypeError for non-array JSON (object)', () => {
+    expect(() => c.fromAttribute('{"a":1}', 'items')).toThrow(
+      AttributeTypeError,
+    );
+  });
+
+  it('throws AttributeTypeError for non-array JSON (string)', () => {
+    expect(() => c.fromAttribute('"hello"', 'items')).toThrow(
+      AttributeTypeError,
+    );
+  });
+
+  it('throws AttributeTypeError for non-array JSON (number)', () => {
+    expect(() => c.fromAttribute('42', 'items')).toThrow(AttributeTypeError);
+  });
+
+  it('throws AttributeTypeError for invalid JSON', () => {
+    expect(() => c.fromAttribute('{bad}', 'items')).toThrow(
+      AttributeTypeError,
+    );
+  });
+
+  it('toAttribute returns JSON string', () => {
+    expect(c.toAttribute([1, 2])).toBe('[1,2]');
+  });
+
+  it('toAttribute handles empty array', () => {
+    expect(c.toAttribute([])).toBe('[]');
+  });
+});
+
 describe('resolveConverter', () => {
   it('resolves "string" to string converter', () => {
     const c = resolveConverter('string');
@@ -136,6 +186,11 @@ describe('resolveConverter', () => {
   it('resolves "object" to object converter', () => {
     const c = resolveConverter('object');
     expect(c.fromAttribute('{}', 'test')).toEqual({});
+  });
+
+  it('resolves "array" to array converter', () => {
+    const c = resolveConverter('array');
+    expect(c.fromAttribute('[1]', 'test')).toEqual([1]);
   });
 
   it('passes through a custom converter as-is', () => {

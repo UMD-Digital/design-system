@@ -159,7 +159,7 @@ export interface ComponentConfiguration {
   /** Reactive attribute map for declarative type-safe attributes */
   reactiveAttributes?: Record<string, {
     attribute?: string | false;
-    type?: 'string' | 'number' | 'boolean' | 'object';
+    type?: 'string' | 'number' | 'boolean' | 'object' | 'array';
     reflect?: boolean;
     converter?: { fromAttribute: (value: string | null, name: string) => unknown; toAttribute: (value: unknown) => string | null };
     defaultValue?: unknown;

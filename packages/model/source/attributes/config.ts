@@ -25,6 +25,8 @@ export interface ReactiveAttributeConfig<T = unknown> {
   defaultValue?: T;
   /** Return an error message string to reject the value. */
   validate?: (value: T) => string | void;
+  /** Called when the property value changes (not during initial seeding). */
+  onChange?: (host: HTMLElement, newValue: T | undefined, oldValue: T | undefined) => void;
 }
 
 export type ReactiveAttributeMap = Record<string, ReactiveAttributeConfig>;
@@ -36,6 +38,7 @@ export interface ResolvedAttributeConfig {
   reflect: boolean;
   defaultValue: unknown;
   validate?: (value: unknown) => string | void;
+  onChange?: (host: HTMLElement, newValue: unknown, oldValue: unknown) => void;
 }
 
 /**
@@ -123,6 +126,7 @@ export function resolveAttributeConfigs(
       reflect: cfg.reflect ?? false,
       defaultValue: cfg.defaultValue,
       validate: cfg.validate,
+      onChange: cfg.onChange as ResolvedAttributeConfig['onChange'],
     };
   });
 }

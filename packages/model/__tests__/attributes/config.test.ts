@@ -199,4 +199,21 @@ describe('resolveAttributeConfigs', () => {
     const resolved = resolveAttributeConfigs(map);
     expect(resolved[0].converter.fromAttribute('5', 'count')).toBe(5);
   });
+
+  it('preserves onChange callback', () => {
+    const onChange = jest.fn();
+    const map: ReactiveAttributeMap = {
+      count: { type: 'number', onChange },
+    };
+    const resolved = resolveAttributeConfigs(map);
+    expect(resolved[0].onChange).toBe(onChange);
+  });
+
+  it('sets onChange to undefined when not provided', () => {
+    const map: ReactiveAttributeMap = {
+      count: { type: 'number' },
+    };
+    const resolved = resolveAttributeConfigs(map);
+    expect(resolved[0].onChange).toBeUndefined();
+  });
 });

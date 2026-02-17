@@ -36,6 +36,14 @@
  * ```
  */
 import { stylesTemplate } from '../utilities/styles';
+import {
+  resolveAttributeConfigs,
+  defineObservedAttributes,
+  type ReactiveAttributeMap,
+  type ResolvedAttributeConfig,
+} from '../attributes/config';
+import { ChangeDetector } from '../attributes/change-detection';
+import { AttributeValidationError } from '../attributes/errors';
 import type {
   SlotConfig,
   ComponentEventDetail,
@@ -65,6 +73,7 @@ interface ComponentLifecycle {
 interface ComponentConfig extends ComponentLifecycle {
   tagName: string;
   attributes?: AttributeConfig[];
+  reactiveAttributes?: ReactiveAttributeMap;
   slots?: Record<string, SlotConfig>;
   createComponent: (host: HTMLElement) => ElementRef;
 }
@@ -92,6 +101,11 @@ class BaseComponent extends HTMLElement {
   protected elementRef: ElementRef | null = null;
   protected config: ComponentConfig;
 
+  protected _resolvedReactiveAttrs: ResolvedAttributeConfig[] = [];
+  protected _changeDetector: ChangeDetector = new ChangeDetector();
+  protected _reactiveValues: Map<string, unknown> = new Map();
+  private _isReflecting = false;
+
   constructor() {
     super();
 
@@ -106,10 +120,16 @@ class BaseComponent extends HTMLElement {
 
     this.shadow = this.attachShadow({ mode: 'open' });
     this.validateConfig();
+    this.setupReactiveAttributes();
   }
 
   static get observedAttributes(): string[] {
-    return this.componentConfig?.attributes?.map((attr) => attr.name) || [];
+    const handlerNames =
+      this.componentConfig?.attributes?.map((attr) => attr.name) || [];
+    const reactiveNames = this.componentConfig?.reactiveAttributes
+      ? defineObservedAttributes(this.componentConfig.reactiveAttributes)
+      : [];
+    return [...new Set([...handlerNames, ...reactiveNames])];
   }
 
   connectedCallback(): void {
@@ -208,14 +228,111 @@ class BaseComponent extends HTMLElement {
     oldValue: string,
     newValue: string,
   ): void {
-    if (!this.elementRef) return;
+    // Existing handler system
+    if (this.elementRef) {
+      const handler = this.config.attributes?.find(
+        (attr) => attr.name === name,
+      )?.handler;
 
-    const handler = this.config.attributes?.find(
-      (attr) => attr.name === name,
-    )?.handler;
+      if (handler) {
+        handler(this.elementRef, oldValue, newValue);
+      }
+    }
 
-    if (handler) {
-      handler(this.elementRef, oldValue, newValue);
+    // Reactive attribute system — update property from attribute
+    if (!this._isReflecting) {
+      const resolved = this._resolvedReactiveAttrs.find(
+        (r) => r.attributeName === name,
+      );
+      if (resolved) {
+        const converted = resolved.converter.fromAttribute(
+          newValue,
+          name,
+        );
+        const value =
+          converted !== undefined ? converted : resolved.defaultValue;
+
+        if (value !== undefined && resolved.validate) {
+          const error = resolved.validate(value);
+          if (error) {
+            throw new AttributeValidationError(name, error);
+          }
+        }
+
+        // Write directly to avoid reflection loop
+        this._reactiveValues.set(resolved.propertyName, value);
+        this._changeDetector.set(resolved.propertyName, value);
+      }
+    }
+  }
+
+  protected setupReactiveAttributes(): void {
+    if (!this.config.reactiveAttributes) return;
+
+    this._resolvedReactiveAttrs = resolveAttributeConfigs(
+      this.config.reactiveAttributes,
+    );
+
+    for (const resolved of this._resolvedReactiveAttrs) {
+      const { propertyName, defaultValue } = resolved;
+
+      // Seed the initial value from the attribute (if present) or default
+      if (resolved.attributeName !== false) {
+        const raw = this.getAttribute(resolved.attributeName);
+        if (raw !== null) {
+          const converted = resolved.converter.fromAttribute(
+            raw,
+            resolved.attributeName,
+          );
+          this._reactiveValues.set(
+            propertyName,
+            converted !== undefined ? converted : defaultValue,
+          );
+        } else if (defaultValue !== undefined) {
+          this._reactiveValues.set(propertyName, defaultValue);
+        }
+      } else if (defaultValue !== undefined) {
+        this._reactiveValues.set(propertyName, defaultValue);
+      }
+
+      // Install property accessor on the instance
+      Object.defineProperty(this, propertyName, {
+        get: () => this._reactiveValues.get(propertyName),
+        set: (value: unknown) => {
+          if (value !== undefined && resolved.validate) {
+            const error = resolved.validate(value);
+            if (error) {
+              const attrName =
+                resolved.attributeName !== false
+                  ? resolved.attributeName
+                  : propertyName;
+              throw new AttributeValidationError(attrName, error);
+            }
+          }
+
+          const changed = this._changeDetector.set(propertyName, value);
+          if (!changed) return;
+
+          this._reactiveValues.set(propertyName, value);
+
+          // Reflect to attribute if configured
+          if (resolved.reflect && resolved.attributeName !== false) {
+            this._isReflecting = true;
+            try {
+              const attrValue = resolved.converter.toAttribute(value);
+              if (attrValue === null) {
+                this.removeAttribute(resolved.attributeName);
+              } else {
+                this.setAttribute(resolved.attributeName, attrValue);
+              }
+            } finally {
+              this._isReflecting = false;
+            }
+          }
+        },
+        configurable: true,
+        enumerable: true,
+      });
     }
   }
 

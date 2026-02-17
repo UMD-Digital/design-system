@@ -58,3 +58,27 @@ export type {
   AttributeHandlerConfig,
   AttributeHandlerProps,
 } from './handler';
+
+// Reactive attribute system (v1.1.0)
+export { AttributeTypeError, AttributeValidationError } from './errors';
+export {
+  Converters,
+  resolveConverter,
+  type AttributeConverter,
+  type AttributeType,
+} from './converters';
+export {
+  toAttributeName,
+  defineObservedAttributes,
+  readAttributes,
+  resolveAttributeConfigs,
+  type ReactiveAttributeConfig,
+  type ReactiveAttributeMap,
+  type ResolvedAttributeConfig,
+} from './config';
+export {
+  defaultEquality,
+  jsonEquality,
+  ChangeDetector,
+  type EqualityFn,
+} from './change-detection';

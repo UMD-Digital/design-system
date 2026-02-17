@@ -261,7 +261,10 @@ class BaseComponent extends HTMLElement {
 
         // Capture old value before write
         const oldValue = this._reactiveValues.get(resolved.propertyName);
-        const changed = this._changeDetector.set(resolved.propertyName, value);
+        const equalityOverride = resolved.hasChanged
+          ? (prev: unknown, next: unknown) => !resolved.hasChanged!(next, prev)
+          : undefined;
+        const changed = this._changeDetector.set(resolved.propertyName, value, equalityOverride);
 
         // Write directly to avoid reflection loop
         this._reactiveValues.set(resolved.propertyName, value);
@@ -318,7 +321,10 @@ class BaseComponent extends HTMLElement {
           }
 
           const oldValue = this._reactiveValues.get(propertyName);
-          const changed = this._changeDetector.set(propertyName, value);
+          const equalityOverride = resolved.hasChanged
+            ? (prev: unknown, next: unknown) => !resolved.hasChanged!(next, prev)
+            : undefined;
+          const changed = this._changeDetector.set(propertyName, value, equalityOverride);
           if (!changed) return;
 
           this._reactiveValues.set(propertyName, value);

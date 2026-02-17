@@ -165,6 +165,7 @@ export interface ComponentConfiguration {
     defaultValue?: unknown;
     validate?: (value: unknown) => string | void;
     onChange?: (host: HTMLElement, newValue: unknown, oldValue: unknown) => void;
+    hasChanged?: (newValue: unknown, oldValue: unknown) => boolean;
   }>;
   /** Hook called before shadow DOM connection */
   beforeConnect?: (ref: ComponentRef, shadow: ShadowRoot) => void;

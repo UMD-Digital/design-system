@@ -216,4 +216,21 @@ describe('resolveAttributeConfigs', () => {
     const resolved = resolveAttributeConfigs(map);
     expect(resolved[0].onChange).toBeUndefined();
   });
+
+  it('preserves hasChanged callback', () => {
+    const hasChanged = jest.fn();
+    const map: ReactiveAttributeMap = {
+      count: { type: 'number', hasChanged },
+    };
+    const resolved = resolveAttributeConfigs(map);
+    expect(resolved[0].hasChanged).toBe(hasChanged);
+  });
+
+  it('sets hasChanged to undefined when not provided', () => {
+    const map: ReactiveAttributeMap = {
+      count: { type: 'number' },
+    };
+    const resolved = resolveAttributeConfigs(map);
+    expect(resolved[0].hasChanged).toBeUndefined();
+  });
 });

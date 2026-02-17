@@ -2,6 +2,7 @@ import {
   defaultEquality,
   jsonEquality,
   ChangeDetector,
+  ChangeDetectors,
 } from '../../source/attributes/change-detection';
 
 describe('defaultEquality', () => {
@@ -126,5 +127,85 @@ describe('ChangeDetector', () => {
     const cd = new ChangeDetector();
     cd.set('n', NaN);
     expect(cd.set('n', NaN)).toBe(false);
+  });
+
+  it('accepts per-call equality override', () => {
+    const cd = new ChangeDetector();
+    cd.set('a', { x: 1 });
+    // Default Object.is would see a new ref as changed, but jsonEquality treats it as equal
+    expect(cd.set('a', { x: 1 }, jsonEquality)).toBe(false);
+    // Different structure — should still detect change
+    expect(cd.set('a', { x: 2 }, jsonEquality)).toBe(true);
+  });
+
+  it('per-call override does not affect other keys', () => {
+    const cd = new ChangeDetector();
+    cd.set('a', { x: 1 });
+    cd.set('b', { x: 1 });
+    // Override only applies to this call
+    cd.set('a', { x: 1 }, jsonEquality);
+    // Key 'b' still uses default equality (Object.is) — new ref = changed
+    expect(cd.set('b', { x: 1 })).toBe(true);
+  });
+});
+
+describe('ChangeDetectors', () => {
+  it('always returns true for same value', () => {
+    expect(ChangeDetectors.always(1, 1)).toBe(true);
+  });
+
+  it('always returns true for different values', () => {
+    expect(ChangeDetectors.always(1, 2)).toBe(true);
+  });
+
+  it('never returns false for different values', () => {
+    expect(ChangeDetectors.never(1, 2)).toBe(false);
+  });
+
+  it('never returns false for same value', () => {
+    expect(ChangeDetectors.never(1, 1)).toBe(false);
+  });
+
+  it('deep returns false for structurally equal objects', () => {
+    expect(ChangeDetectors.deep({ a: 1 }, { a: 1 })).toBe(false);
+  });
+
+  it('deep returns true for different objects', () => {
+    expect(ChangeDetectors.deep({ a: 1 }, { a: 2 })).toBe(true);
+  });
+
+  it('shallow returns false for shallow-equal objects', () => {
+    const inner = { nested: true };
+    expect(ChangeDetectors.shallow({ a: 1, b: inner }, { a: 1, b: inner })).toBe(false);
+  });
+
+  it('shallow returns true for different nested refs', () => {
+    expect(ChangeDetectors.shallow({ a: { nested: true } }, { a: { nested: true } })).toBe(true);
+  });
+
+  it('shallow falls back to Object.is for primitives', () => {
+    expect(ChangeDetectors.shallow(1, 1)).toBe(false);
+    expect(ChangeDetectors.shallow(1, 2)).toBe(true);
+  });
+
+  it('shallow returns true when key counts differ', () => {
+    expect(ChangeDetectors.shallow({ a: 1 }, { a: 1, b: 2 })).toBe(true);
+  });
+
+  it('shallow returns true for null vs object', () => {
+    expect(ChangeDetectors.shallow(null, { a: 1 })).toBe(true);
+    expect(ChangeDetectors.shallow({ a: 1 }, null)).toBe(true);
+  });
+
+  it('threshold returns false within epsilon', () => {
+    expect(ChangeDetectors.threshold(0.5)(0.1, 0)).toBe(false);
+  });
+
+  it('threshold returns true beyond epsilon', () => {
+    expect(ChangeDetectors.threshold(0.5)(0.6, 0)).toBe(true);
+  });
+
+  it('threshold returns false at exact epsilon boundary', () => {
+    expect(ChangeDetectors.threshold(0.5)(0.5, 0)).toBe(false);
   });
 });

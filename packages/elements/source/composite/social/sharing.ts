@@ -23,18 +23,16 @@ const createFacebookButton = (): ElementModel<HTMLButtonElement> => {
       },
     })
     .withAria({ label: 'share this page on facebook' })
-    .withEvents({
-      click: () => {
-        const shareURL = `http://www.facebook.com/share.php?u=${encodeURIComponent(
-          window.location.toString(),
-        )}`;
+    .on('click', () => {
+      const shareURL = `http://www.facebook.com/share.php?u=${encodeURIComponent(
+        window.location.toString(),
+      )}`;
 
-        window.open(
-          shareURL,
-          'Facebook',
-          'toolbar=0,status=0,width=626,height=436',
-        );
-      },
+      window.open(
+        shareURL,
+        'Facebook',
+        'toolbar=0,status=0,width=626,height=436',
+      );
     })
     .build();
 
@@ -51,16 +49,14 @@ const createTwitterButton = ({
   const model = new ElementBuilder<HTMLButtonElement>('button')
     .withHTML(iconX)
     .withAria({ label: 'share this page on twitter' })
-    .withEvents({
-      click: () => {
-        const shareURL = `http://twitter.com/share?url=${url}&text=${title}`;
+    .on('click', () => {
+      const shareURL = `http://twitter.com/share?url=${url}&text=${title}`;
 
-        window.open(
-          shareURL,
-          'sharer',
-          'toolbar=0,status=0,width=626,height=436',
-        );
-      },
+      window.open(
+        shareURL,
+        'sharer',
+        'toolbar=0,status=0,width=626,height=436',
+      );
     })
     .build();
 
@@ -96,9 +92,7 @@ const createPrintButton = (): ElementModel<HTMLButtonElement> => {
   const model = new ElementBuilder<HTMLButtonElement>('button')
     .withHTML(iconPrint)
     .withAria({ label: 'print this page' })
-    .withEvents({
-      click: () => window.print(),
-    })
+    .on('click', () => window.print())
     .build();
 
   return model;

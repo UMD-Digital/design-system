@@ -492,6 +492,42 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
    */
   withEvents(events: Record<string, Function>): this {
     this.assertNotBuilt();
+
+    const domEvents = [
+      'click',
+      'dblclick',
+      'mousedown',
+      'mouseup',
+      'mouseover',
+      'mouseout',
+      'mouseenter',
+      'mouseleave',
+      'keydown',
+      'keyup',
+      'keypress',
+      'focus',
+      'blur',
+      'input',
+      'change',
+      'submit',
+      'scroll',
+      'resize',
+      'touchstart',
+      'touchend',
+      'touchmove',
+      'pointerdown',
+      'pointerup',
+      'pointermove',
+    ];
+
+    Object.keys(events).forEach((key) => {
+      if (domEvents.includes(key.toLowerCase())) {
+        console.warn(
+          `ElementBuilder: "${key}" is a DOM event and should use .on('${key}', handler) instead of .withEvents(). withEvents() stores custom methods on model.events and does NOT attach DOM listeners.`,
+        );
+      }
+    });
+
     this.customEvents = { ...this.customEvents, ...events };
     return this;
   }

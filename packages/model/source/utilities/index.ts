@@ -18,3 +18,26 @@ export {
   delegate,
 } from './events';
 export type { CustomEventOptions, DefineEvents } from './events';
+export {
+  isElement,
+  isHTMLElement,
+  isCustomElement,
+  isShadowRoot,
+  isSlotElement,
+  isTemplateElement,
+  assertElement,
+  assertHTMLElement,
+  assertShadowRoot,
+} from './types';
+export {
+  createMutationObserver,
+  createResizeObserver,
+  createIntersectionObserver,
+  querySlotted,
+  closestAcrossShadow,
+} from './dom';
+export type {
+  MutationObserverOptions,
+  ResizeObserverOptionsConfig,
+  IntersectionObserverOptions,
+} from './dom';

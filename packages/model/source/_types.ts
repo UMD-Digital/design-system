@@ -156,6 +156,15 @@ export interface ComponentConfiguration {
   createComponent: CreateComponentFunction;
   /** Attribute handlers - using any to avoid circular dependency */
   attributes?: any | any[];
+  /** Reactive attribute map for declarative type-safe attributes */
+  reactiveAttributes?: Record<string, {
+    attribute?: string | false;
+    type?: 'string' | 'number' | 'boolean' | 'object';
+    reflect?: boolean;
+    converter?: { fromAttribute: (value: string | null, name: string) => unknown; toAttribute: (value: unknown) => string | null };
+    defaultValue?: unknown;
+    validate?: (value: unknown) => string | void;
+  }>;
   /** Hook called before shadow DOM connection */
   beforeConnect?: (ref: ComponentRef, shadow: ShadowRoot) => void;
   /** Hook called after shadow DOM connection */

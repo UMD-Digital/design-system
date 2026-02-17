@@ -1,4 +1,5 @@
 import { Model } from '../../source';
+import { ChangeDetectors } from '../../source/attributes/change-detection';
 import type { ComponentRef } from '../../source/_types';
 
 // Unique tag counter to avoid collisions
@@ -393,6 +394,164 @@ describe('Reactive attributes integration', () => {
         'light',
         'dark',
       );
+
+      document.body.removeChild(el);
+    });
+  });
+
+  describeInstance('hasChanged callback', () => {
+    it('uses custom hasChanged to determine change', () => {
+      const onChangeSpy = jest.fn();
+      const { el } = defineAndCreate({
+        tagName: uniqueTag(),
+        reactiveAttributes: {
+          data: {
+            attribute: false,
+            defaultValue: { x: 1 },
+            onChange: onChangeSpy,
+            // Treat structurally equal objects as unchanged
+            hasChanged: (newVal: unknown, oldVal: unknown) =>
+              JSON.stringify(newVal) !== JSON.stringify(oldVal),
+          },
+        },
+        createComponent,
+      });
+
+      // Same structure → hasChanged returns false → no update
+      el.data = { x: 1 };
+      expect(onChangeSpy).not.toHaveBeenCalled();
+    });
+
+    it('default Object.is when no hasChanged — different refs trigger update', () => {
+      const onChangeSpy = jest.fn();
+      const { el } = defineAndCreate({
+        tagName: uniqueTag(),
+        reactiveAttributes: {
+          data: {
+            attribute: false,
+            defaultValue: { x: 1 },
+            onChange: onChangeSpy,
+          },
+        },
+        createComponent,
+      });
+
+      // New ref with same structure → Object.is sees them as different → update fires
+      el.data = { x: 1 };
+      expect(onChangeSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('ChangeDetectors.deep prevents update for equal objects', () => {
+      const onChangeSpy = jest.fn();
+      const { el } = defineAndCreate({
+        tagName: uniqueTag(),
+        reactiveAttributes: {
+          config: {
+            attribute: false,
+            defaultValue: { a: 1, b: [2, 3] },
+            onChange: onChangeSpy,
+            hasChanged: ChangeDetectors.deep,
+          },
+        },
+        createComponent,
+      });
+
+      el.config = { a: 1, b: [2, 3] };
+      expect(onChangeSpy).not.toHaveBeenCalled();
+
+      el.config = { a: 1, b: [2, 4] };
+      expect(onChangeSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('ChangeDetectors.threshold ignores small changes', () => {
+      const onChangeSpy = jest.fn();
+      const { el } = defineAndCreate({
+        tagName: uniqueTag(),
+        reactiveAttributes: {
+          position: {
+            type: 'number',
+            defaultValue: 0,
+            onChange: onChangeSpy,
+            hasChanged: ChangeDetectors.threshold(0.5),
+          },
+        },
+        createComponent,
+      });
+
+      el.position = 0.3;
+      expect(onChangeSpy).not.toHaveBeenCalled();
+
+      el.position = 1.0;
+      expect(onChangeSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('ChangeDetectors.always forces update on same value', () => {
+      const onChangeSpy = jest.fn();
+      const { el } = defineAndCreate({
+        tagName: uniqueTag(),
+        reactiveAttributes: {
+          count: {
+            type: 'number',
+            defaultValue: 5,
+            onChange: onChangeSpy,
+            hasChanged: ChangeDetectors.always,
+          },
+        },
+        createComponent,
+      });
+
+      el.count = 5;
+      expect(onChangeSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('works via attributeChangedCallback', () => {
+      const onChangeSpy = jest.fn();
+      const { el } = defineAndCreate({
+        tagName: uniqueTag(),
+        reactiveAttributes: {
+          theme: {
+            type: 'string',
+            defaultValue: 'light',
+            onChange: onChangeSpy,
+            // Only changed if values are truly different (same as default, but explicit)
+            hasChanged: (newVal: unknown, oldVal: unknown) => newVal !== oldVal,
+          },
+        },
+        createComponent,
+      });
+
+      // Same value via attribute → hasChanged returns false
+      el.attributeChangedCallback('theme', null, 'light');
+      expect(onChangeSpy).not.toHaveBeenCalled();
+
+      // Different value → hasChanged returns true
+      el.attributeChangedCallback('theme', 'light', 'dark');
+      expect(onChangeSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it('coexists with onChange and handler system', () => {
+      const handlerSpy = jest.fn();
+      const onChangeSpy = jest.fn();
+      const tag = uniqueTag();
+      const { el } = defineAndCreate({
+        tagName: tag,
+        attributes: [{ name: 'count', handler: handlerSpy }],
+        reactiveAttributes: {
+          count: {
+            type: 'number',
+            defaultValue: 0,
+            onChange: onChangeSpy,
+            hasChanged: ChangeDetectors.always,
+          },
+        },
+        createComponent,
+      });
+
+      document.body.appendChild(el);
+
+      el.attributeChangedCallback('count', '0', '42');
+      expect(handlerSpy).toHaveBeenCalled();
+      expect(onChangeSpy).toHaveBeenCalled();
 
       document.body.removeChild(el);
     });

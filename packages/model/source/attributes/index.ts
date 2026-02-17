@@ -80,5 +80,7 @@ export {
   defaultEquality,
   jsonEquality,
   ChangeDetector,
+  ChangeDetectors,
   type EqualityFn,
+  type HasChangedFn,
 } from './change-detection';

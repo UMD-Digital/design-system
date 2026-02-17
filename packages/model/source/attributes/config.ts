@@ -11,6 +11,7 @@ import {
   type AttributeType,
 } from './converters';
 import { AttributeValidationError } from './errors';
+import type { HasChangedFn } from './change-detection';
 
 export interface ReactiveAttributeConfig<T = unknown> {
   /** Custom attribute name, or `false` to skip attribute observation. */
@@ -27,6 +28,8 @@ export interface ReactiveAttributeConfig<T = unknown> {
   validate?: (value: T) => string | void;
   /** Called when the property value changes (not during initial seeding). */
   onChange?: (host: HTMLElement, newValue: T | undefined, oldValue: T | undefined) => void;
+  /** Custom change detection — return `true` if the value has changed and should trigger an update. */
+  hasChanged?: (newValue: T, oldValue: T) => boolean;
 }
 
 export type ReactiveAttributeMap = Record<string, ReactiveAttributeConfig>;
@@ -39,6 +42,7 @@ export interface ResolvedAttributeConfig {
   defaultValue: unknown;
   validate?: (value: unknown) => string | void;
   onChange?: (host: HTMLElement, newValue: unknown, oldValue: unknown) => void;
+  hasChanged?: HasChangedFn;
 }
 
 /**
@@ -127,6 +131,7 @@ export function resolveAttributeConfigs(
       defaultValue: cfg.defaultValue,
       validate: cfg.validate,
       onChange: cfg.onChange as ResolvedAttributeConfig['onChange'],
+      hasChanged: cfg.hasChanged as ResolvedAttributeConfig['hasChanged'],
     };
   });
 }

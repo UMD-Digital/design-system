@@ -194,6 +194,7 @@
     "@universityofmaryland/web-styles-library": "^1.0.0"
   },
   "devDependencies": {
+    "typescript": "^5.8.2",
     "vite": "^7.1.4",
     "vite-plugin-checker": "^0.10.3",
     "vite-plugin-dts": "^4.5.4"

@@ -92,6 +92,7 @@
     "@universityofmaryland/web-icons-library": "workspace:*",
     "@universityofmaryland/web-elements-library": "workspace:*",
     "@universityofmaryland/web-feeds-library": "workspace:*",
-    "@universityofmaryland/web-components-library": "workspace:*"
+    "@universityofmaryland/web-components-library": "workspace:*",
+    "@microsoft/api-extractor": "7.55.2"
   }
 }

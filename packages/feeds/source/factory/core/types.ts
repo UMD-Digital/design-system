@@ -193,9 +193,6 @@ export interface BaseFeedConfig<TData, TVariables = any> {
   isLazyLoad?: boolean;
   /** Whether to enable category fallback (show all results when no category results found) */
   enableCategoryFallback?: boolean;
-  /** Filter for media trained experts */
-  isMediaTrained?: boolean | null;
-
   // Categories/Filtering
   /** Categories to filter by */
   categories?: string[];
@@ -220,6 +217,9 @@ export interface BaseFeedConfig<TData, TVariables = any> {
 
   // Internal helpers (passed from common functions)
   getOffset?: () => number;
+
+  /** Additional strategy-specific props forwarded to composeApiVariables */
+  [key: string]: any;
 }
 
 /**

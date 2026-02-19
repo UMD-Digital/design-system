@@ -70,7 +70,6 @@ export function createBaseFeed<TData, TVariables = any>(
     isTransparent = false,
     isOverlay = false,
     isAligned = false,
-    isMediaTrained = null,
     cardType,
     numberOfColumnsToShow = 1,
     numberOfRowsToStart,
@@ -84,6 +83,8 @@ export function createBaseFeed<TData, TVariables = any>(
     layoutStrategy,
     noResultsConfig,
     imageConfig,
+    // Collect strategy-specific props (e.g. isUnion, isMediaTrained)
+    ...strategyProps
   } = config;
 
   const container = document.createElement('div');
@@ -134,8 +135,8 @@ export function createBaseFeed<TData, TVariables = any>(
     numberOfColumnsToShow,
     numberOfRowsToStart,
     isLazyLoad,
-    isMediaTrained,
     getOffset: helpers.getOffset,
+    ...strategyProps,
   };
 
   // Create a mutable reference for lazy load callback

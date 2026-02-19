@@ -151,40 +151,31 @@ export function createGraphQLFetchStrategy<
         getOffset,
         entriesToRemove,
         ids,
-        isMediaTrained,
+        isLazyLoad,
+        ...extraProps
       } = props;
 
-      // Base variables - pass all props through
+      // Base variables shared by all strategies
       const baseVariables: any = {
         token,
         limit: numberOfColumnsToShow * numberOfRowsToStart,
         offset: getOffset ? getOffset() : 0,
       };
 
-      // Pass categories through (let composeVariables decide how to map it)
       if (categories) {
         baseVariables.categories = categories;
       }
 
-      // Pass entriesToRemove through
       if (entriesToRemove) {
         baseVariables.entriesToRemove = entriesToRemove;
       }
 
-      // Pass id through
       if (ids) {
         baseVariables.ids = ids;
       }
 
-      // Pass isMediaTrained through (can be true, false, or null)
-      if (isMediaTrained !== undefined) {
-        baseVariables.isMediaTrained = isMediaTrained;
-      }
-
-      // Pass expertId through (for inTheNews strategy)
-      if (props.expertId) {
-        baseVariables.expertId = props.expertId;
-      }
+      // Forward strategy-specific props (e.g. isMediaTrained, isUnion, expertId)
+      Object.assign(baseVariables, extraProps);
 
       // Allow custom variable composition
       if (composeVariables) {

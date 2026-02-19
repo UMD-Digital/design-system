@@ -206,22 +206,22 @@
             <div class="code-example">
               <pre><code class="language-javascript">// Structural Components - Page layout and navigation
 // Typically loaded first for above-the-fold content
-import LoadStructuralComponents from '@universityofmaryland/web-components-library/structural';
+import { LoadStructuralComponents } from '@universityofmaryland/web-components-library/structural';
 LoadStructuralComponents(); // Loads: actions, hero, navigation
 
 // Content Components - Display components for information
 // Load after structural components for main content
-import LoadContentComponents from '@universityofmaryland/web-components-library/content';
+import { LoadContentComponents } from '@universityofmaryland/web-components-library/content';
 LoadContentComponents(); // Loads: card, text, media, stats, etc.
 
 // Interactive Components - User interaction components
 // Can be deferred until user interaction
-import LoadInteractiveComponents from '@universityofmaryland/web-components-library/interactive';
+import { LoadInteractiveComponents } from '@universityofmaryland/web-components-library/interactive';
 LoadInteractiveComponents(); // Loads: accordion, carousel, footer, social, tab
 
 // Feed Components - Dynamic content feeds
 // Load on-demand for pages with feeds
-import LoadFeedComponents from '@universityofmaryland/web-components-library/feed';
+import { LoadFeedComponents } from '@universityofmaryland/web-components-library/feed';
 LoadFeedComponents(); // Loads: events, news, people feeds</code></pre>
             </div>
 
@@ -335,7 +335,7 @@ Components.navigation.primary();
                 and individual imports for specific components used sparingly:
               </p>
               <pre><code class="language-javascript">// Load structural components as a group
-import LoadStructuralComponents from '.../structural';
+import { LoadStructuralComponents } from '@universityofmaryland/web-components-library/structural';
 LoadStructuralComponents();
 
 // Import specific components individually
@@ -500,30 +500,30 @@ import './styles.ts';
 
 // Component loaders with dynamic imports for code splitting
 const loadStructuralComponents = async () => {
-  const LoadStructuralComponents = (
-    await import('@universityofmaryland/web-components-library/structural')
-  ).default;
+  const { LoadStructuralComponents } = await import(
+    '@universityofmaryland/web-components-library/structural'
+  );
   return LoadStructuralComponents();
 };
 
 const loadContentComponents = async () => {
-  const LoadContentComponents = (
-    await import('@universityofmaryland/web-components-library/content')
-  ).default;
+  const { LoadContentComponents } = await import(
+    '@universityofmaryland/web-components-library/content'
+  );
   return LoadContentComponents();
 };
 
 const loadInteractiveComponents = async () => {
-  const LoadInteractiveComponents = (
-    await import('@universityofmaryland/web-components-library/interactive')
-  ).default;
+  const { LoadInteractiveComponents } = await import(
+    '@universityofmaryland/web-components-library/interactive'
+  );
   return LoadInteractiveComponents();
 };
 
 const loadFeedComponents = async () => {
-  const LoadFeedComponents = (
-    await import('@universityofmaryland/web-components-library/feed')
-  ).default;
+  const { LoadFeedComponents } = await import(
+    '@universityofmaryland/web-components-library/feed'
+  );
   return LoadFeedComponents();
 };
 
@@ -615,10 +615,12 @@ const observeAndLoadComponents = () => {
     loadedGroups.add(groupName);
 
     // Load the optimized chunk for this component group
+    // Named exports: LoadStructuralComponents, LoadContentComponents, etc.
+    const loaderName = `Load${groupName.charAt(0).toUpperCase() + groupName.slice(1)}Components`;
     const module = await import(
       `@universityofmaryland/web-components-library/${groupName}`
     );
-    if (module.default) module.default();
+    if (module[loaderName]) module[loaderName]();
   };
 
   const observer = new IntersectionObserver((entries) => {
@@ -878,20 +880,20 @@ import './styles/critical.css';
 
 // Load structural components immediately
 import('@universityofmaryland/web-components-library/structural')
-  .then(m => m.default());
+  .then(m => m.LoadStructuralComponents());
 
 // Load content when DOM is ready
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     import('@universityofmaryland/web-components-library/content')
-      .then(m => m.default());
+      .then(m => m.LoadContentComponents());
   });
 }
 
 // Defer interactive components
 requestIdleCallback(() => {
   import('@universityofmaryland/web-components-library/interactive')
-    .then(m => m.default());
+    .then(m => m.LoadInteractiveComponents());
 }, { timeout: 2000 });</code></pre>
             </div>
           </section>

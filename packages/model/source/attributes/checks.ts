@@ -252,11 +252,19 @@ const isData = {
         attributeValue: AttributeValues.data.type.academic,
       }),
   },
-  union: createAttributeCheck(
-    AttributeNames.deprecated.feed.FEED_UNION,
-    AttributeValues.state.FALSE,
-    true,
-  ),
+  union: (props: AttributeElementProps): boolean =>
+    checkDeprecatedAttribute({
+      ...props,
+      attributeNameOld: AttributeNames.deprecated.feed.FEED_UNION,
+      attributeNameNew: AttributeNames.feed.union,
+      attributeValue: AttributeValues.state.FALSE,
+    }) ||
+    isAttributeTrue({
+      ...props,
+      attributeName: AttributeNames.feed.union,
+      attributeValue: AttributeValues.state.FALSE,
+      defaultValue: true,
+    }),
 } as const;
 
 // Display checks

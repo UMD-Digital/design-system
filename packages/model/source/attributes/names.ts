@@ -30,6 +30,7 @@ const loading = {
 
 const feed = {
   type: 'data-feed-type',
+  union: 'data-union',
 };
 
 const information = {

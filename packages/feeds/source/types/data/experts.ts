@@ -36,6 +36,8 @@ export interface ExpertJob {
   url: string;
   /** Office/room number */
   roomNumber?: string;
+  /** College/school associated with this job */
+  collegeSchools?: CampusUnit[] | null;
   /** Campus units associated with this job */
   campusUnits?: CampusUnit[] | null;
 }

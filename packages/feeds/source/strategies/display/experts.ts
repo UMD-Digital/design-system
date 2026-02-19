@@ -152,19 +152,34 @@ const extractPrimaryJobTitle = (entry: ExpertEntry): string | null => {
 };
 
 /**
- * Extract primary association (campus unit)
+ * Extract primary association (college/school and campus unit)
+ *
+ * Combines collegeSchools and campusUnits into a comma-separated string,
+ * with college/school listed first.
  *
  * @param entry - Expert entry
  * @returns Association data or null
  */
-const extractCampusUnit = (entry: ExpertEntry): AssociationData | null => {
-  const campusUnit = entry.organizations?.[0]?.jobs?.[0]?.campusUnits?.[0];
-  if (!campusUnit) return null;
+const extractCampusUnit = (entry: ExpertEntry): AssociationData[] | null => {
+  const job = entry.organizations?.[0]?.jobs?.[0];
+  if (!job) return null;
 
-  return {
-    title: campusUnit.title,
-    url: campusUnit.link?.url,
-  };
+  const associations: AssociationData[] = [];
+
+  const collegeSchool = job.collegeSchools?.[0];
+  if (collegeSchool) {
+    associations.push({
+      title: collegeSchool.title,
+      url: collegeSchool.link?.url,
+    });
+  }
+
+  const campusUnit = job.campusUnits?.[0];
+  if (campusUnit) {
+    associations.push({ title: campusUnit.title, url: campusUnit.link?.url });
+  }
+
+  return associations.length > 0 ? associations : null;
 };
 
 /**
@@ -339,24 +354,47 @@ const createJobElement = (jobTitle: string | null): HTMLElement | null => {
 };
 
 /**
- * Create association element (with optional link)
+ * Create association element (with optional links)
  *
- * @param association - Association data
+ * Builds a container with individually-linked items separated by commas.
+ *
+ * @param associations - Array of association data
  * @returns Association element or null
  */
 const createAssociationElement = (
-  association: AssociationData | null,
+  associations: AssociationData[] | null,
 ): HTMLElement | null => {
-  if (!association) return null;
+  if (!associations || associations.length === 0) return null;
 
-  if (association.url) {
-    return createTextWithLink({
-      text: association.title,
-      url: association.url,
-    });
+  if (associations.length === 1) {
+    const association = associations[0];
+    if (association.url) {
+      return createTextWithLink({
+        text: association.title,
+        url: association.url,
+      });
+    }
+    return createTextContainer({ text: association.title });
   }
 
-  return createTextContainer({ text: association.title });
+  const container = document.createElement('p');
+
+  associations.forEach((association, index) => {
+    if (association.url) {
+      const link = document.createElement('a');
+      link.href = association.url;
+      link.textContent = association.title;
+      container.appendChild(link);
+    } else {
+      container.appendChild(document.createTextNode(association.title));
+    }
+
+    if (index < associations.length - 1) {
+      container.appendChild(document.createTextNode(', '));
+    }
+  });
+
+  return container;
 };
 
 /**
@@ -650,9 +688,8 @@ export const mapExpertToBioProps = (
   const fullName = buildFullName(entry);
   const profileUrl = buildProfileUrl(entry);
   const jobTitle = extractPrimaryJobTitle(entry);
-  const association = extractCampusUnit(entry);
+  const campusUnit = extractCampusUnit(entry);
   const imageData = extractImageData(entry, fullName);
-  const contactData = extractContactData(entry);
   const description = extractDescription(entry, displayType);
   const pronouns = extractPronouns(entry);
   const topics = extractTopics(entry);
@@ -660,20 +697,17 @@ export const mapExpertToBioProps = (
   // Create elements
   const name = createNameElement(fullName, profileUrl, 'h1');
   const job = createJobElement(jobTitle);
-  const associationElement = createAssociationElement(association);
+  const campusUnitElement = createAssociationElement(campusUnit);
   const image = createImageElement(imageData);
   const descriptionElement = createDescriptionElement(description);
-  const contactElements = createContactElements(contactData);
   const pronounsElement = createPronounsElement(pronouns);
   const topicsElement = createExpertiseElement(topics);
 
   return {
     name,
     slotTwoItalic: pronounsElement,
-    slotTwo: associationElement,
+    slotFour: campusUnitElement,
     slotOne: topicsElement,
-    email: contactElements.email || null,
-    linkedin: contactElements.linkedin || null,
     phone: null,
     address: null,
     additionalContact: null,

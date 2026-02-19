@@ -149,7 +149,14 @@ const renderSuccess = async (
 
   children.forEach((child) => container.appendChild(child));
 
-  state.addStyles(bioElement.styles);
+  state.addStyles(
+    `
+      a:hover, a:focus {
+        text-decoration: underline;
+      }
+      ${bioElement.styles}
+    `,
+  );
   await state.updateShadowStyles();
 };
 

@@ -42,6 +42,14 @@ const FRAGMENT_EXPERT_JOBS = `
     url
     title: expertsOrganizationJobTitle
     roomNumber: expertsOrganizationJobRoomNumber
+    collegeSchools: categoryCollegeSchools {
+      title
+      ... on collegeSchools_Category {
+        link: externalLink {
+          url
+        }
+      }
+    }
     campusUnits: categoryCampusUnit {
       title
       ... on campusUnits_Category {

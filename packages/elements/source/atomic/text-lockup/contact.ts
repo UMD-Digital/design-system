@@ -30,6 +30,11 @@ const makeIcon = ({
         theme: theme.variant(isThemeDark),
       }),
     )
+    .withStyles({
+      element: {
+        alignSelf: 'flex-start',
+      },
+    })
     .build();
 };
 

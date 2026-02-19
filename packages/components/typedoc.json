@@ -2,9 +2,9 @@
   "$schema": "https://typedoc.org/schema.json",
   "name": "UMD Web Components Library",
   "entryPoints": [
-    "./source/api/_types.ts",
-    "./source/api",
-    "./source/model"
+    "./source/_types.ts",
+    "./source/web-components",
+    "./source/helpers"
   ],
   "entryPointStrategy": "resolve",
   "excludeExternals": true,

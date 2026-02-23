@@ -257,13 +257,13 @@ const isData = {
       ...props,
       attributeNameOld: AttributeNames.deprecated.feed.FEED_UNION,
       attributeNameNew: AttributeNames.feed.union,
-      attributeValue: AttributeValues.state.FALSE,
+      attributeValue: AttributeValues.state.TRUE,
     }) ||
     isAttributeTrue({
       ...props,
       attributeName: AttributeNames.feed.union,
-      attributeValue: AttributeValues.state.FALSE,
-      defaultValue: true,
+      attributeValue: AttributeValues.state.TRUE,
+      defaultValue: false,
     }),
 } as const;
 

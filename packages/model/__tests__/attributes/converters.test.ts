@@ -48,6 +48,17 @@ describe('Converters.number', () => {
     expect(() => c.fromAttribute('abc', 'count')).toThrow(AttributeTypeError);
   });
 
+  it('thrown error has correct properties', () => {
+    try {
+      c.fromAttribute('abc', 'count');
+      fail('Expected error');
+    } catch (err: any) {
+      expect(err.attributeName).toBe('count');
+      expect(err.expectedType).toBe('number');
+      expect(err.actualValue).toBe('abc');
+    }
+  });
+
   it('throws for empty string (NaN)', () => {
     expect(() => c.fromAttribute('', 'count')).toThrow(AttributeTypeError);
   });
@@ -108,6 +119,17 @@ describe('Converters.object', () => {
     expect(() => c.fromAttribute('{bad}', 'data')).toThrow(AttributeTypeError);
   });
 
+  it('thrown error has correct properties', () => {
+    try {
+      c.fromAttribute('{bad}', 'data');
+      fail('Expected error');
+    } catch (err: any) {
+      expect(err.attributeName).toBe('data');
+      expect(err.expectedType).toBe('object');
+      expect(err.actualValue).toBe('{bad}');
+    }
+  });
+
   it('toAttribute returns JSON string', () => {
     expect(c.toAttribute({ x: 1 })).toBe('{"x":1}');
   });
@@ -156,6 +178,17 @@ describe('Converters.array', () => {
     expect(() => c.fromAttribute('{bad}', 'items')).toThrow(
       AttributeTypeError,
     );
+  });
+
+  it('thrown error for non-array has correct properties', () => {
+    try {
+      c.fromAttribute('{"a":1}', 'items');
+      fail('Expected error');
+    } catch (err: any) {
+      expect(err.attributeName).toBe('items');
+      expect(err.expectedType).toBe('array');
+      expect(err.actualValue).toBe('{"a":1}');
+    }
   });
 
   it('toAttribute returns JSON string', () => {

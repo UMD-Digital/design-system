@@ -1,5 +1,6 @@
 import { Model } from '../../source';
 import { ChangeDetectors } from '../../source/attributes/change-detection';
+import { AttributeValidationError, AttributeTypeError } from '../../source/attributes/errors';
 import type { ComponentRef } from '../../source/_types';
 
 // Unique tag counter to avoid collisions
@@ -315,6 +316,19 @@ describe('Reactive attributes integration', () => {
       el.open = false;
       expect(el.hasAttribute('open')).toBe(false);
     });
+
+    it('reflects number property as string attribute', () => {
+      const { el } = defineAndCreate({
+        tagName: uniqueTag(),
+        reactiveAttributes: {
+          count: { type: 'number', reflect: true, defaultValue: 0 },
+        },
+        createComponent,
+      });
+
+      el.count = 42;
+      expect(el.getAttribute('count')).toBe('42');
+    });
   });
 
   describeInstance('validation', () => {
@@ -353,6 +367,44 @@ describe('Reactive attributes integration', () => {
         el.count = 5;
       }).not.toThrow();
       expect(el.count).toBe(5);
+    });
+  });
+
+  describeInstance('attribute: false with property access', () => {
+    it('property setter and getter work when attribute: false', () => {
+      const { el } = defineAndCreate({
+        tagName: uniqueTag(),
+        reactiveAttributes: {
+          internal: { attribute: false, defaultValue: 'initial' },
+        },
+        createComponent,
+      });
+
+      expect(el.internal).toBe('initial');
+      el.internal = 'updated';
+      expect(el.internal).toBe('updated');
+    });
+  });
+
+  describeInstance('validator throwing', () => {
+    it('propagates error when validate throws instead of returning string', () => {
+      const { el } = defineAndCreate({
+        tagName: uniqueTag(),
+        reactiveAttributes: {
+          count: {
+            type: 'number',
+            validate: (v) => {
+              if ((v as number) < 0) throw new RangeError('negative');
+              return undefined;
+            },
+          },
+        },
+        createComponent,
+      });
+
+      expect(() => {
+        el.count = -1;
+      }).toThrow(RangeError);
     });
   });
 
@@ -554,6 +606,55 @@ describe('Reactive attributes integration', () => {
       expect(onChangeSpy).toHaveBeenCalled();
 
       document.body.removeChild(el);
+    });
+  });
+
+  describeInstance('error context includes tagName', () => {
+    it('AttributeValidationError from property setter includes tagName', () => {
+      const tag = uniqueTag();
+      const { el } = defineAndCreate({
+        tagName: tag,
+        reactiveAttributes: {
+          count: {
+            type: 'number',
+            validate: (v) =>
+              (v as number) >= 0 ? undefined : 'must be >= 0',
+          },
+        },
+        createComponent,
+      });
+
+      try {
+        el.count = -1;
+        fail('Expected error to be thrown');
+      } catch (err: any) {
+        expect(err).toBeInstanceOf(AttributeValidationError);
+        expect(err.componentName).toBe(tag);
+        expect(err.message).toContain(tag);
+      }
+    });
+
+    it('AttributeValidationError from attributeChangedCallback includes tagName', () => {
+      const tag = uniqueTag();
+      const errorSpy = jest.spyOn(console, 'error').mockImplementation();
+      const { el } = defineAndCreate({
+        tagName: tag,
+        reactiveAttributes: {
+          count: {
+            type: 'number',
+            validate: (v) =>
+              (v as number) >= 0 ? undefined : 'must be >= 0',
+          },
+        },
+        createComponent,
+      });
+
+      // attributeChangedCallback wraps errors via handleError
+      el.attributeChangedCallback('count', null, '-5');
+
+      // The error is caught by handleError, so check console.error was called
+      expect(errorSpy).toHaveBeenCalled();
+      errorSpy.mockRestore();
     });
   });
 

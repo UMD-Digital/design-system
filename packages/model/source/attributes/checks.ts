@@ -26,6 +26,7 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { AttributeNames } from './names';
 import { AttributeValues } from './values';
+import { devWarning } from './errors';
 
 // Types
 /**
@@ -96,7 +97,7 @@ const isAttributeNotNull = ({
   return value !== null;
 };
 
-const depcreationWarning = ({
+const deprecationWarning = ({
   element,
   attributeNameOld,
   attributeNameNew,
@@ -105,7 +106,7 @@ const depcreationWarning = ({
   attributeNameOld: string;
   attributeNameNew: string;
 }) => {
-  console.warn(
+  devWarning(
     `UMD Web Component: ${element.nodeName} - Attribute "${attributeNameOld}" is deprecated. ` +
       `Use "${attributeNameNew}" instead. This attribute will be removed in version 2.0.`,
   );
@@ -127,7 +128,7 @@ const checkDeprecatedAttribute = (props: DeprecatedAttributeProps): boolean => {
   });
 
   if (isDeprecatedUsed) {
-    depcreationWarning(props);
+    deprecationWarning(props);
     return true;
   }
 
@@ -152,7 +153,7 @@ const createValueGetter = ({
     if (deprecatedName) {
       const deprecatedValue = element.getAttribute(deprecatedName);
       if (deprecatedValue !== null) {
-        depcreationWarning({
+        deprecationWarning({
           element,
           attributeNameOld: deprecatedName,
           attributeNameNew: currentName,

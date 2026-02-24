@@ -47,22 +47,21 @@ import { ChangeDetector } from '../attributes/change-detection';
 import { AttributeTypeError, AttributeValidationError } from '../attributes/errors';
 import type {
   SlotConfig,
+  SlotValidationError,
+  SlotValidationResult,
   ComponentEventDetail,
   ComponentReadyDetail,
   ComponentErrorDetail,
   ElementRef
 } from '../_types';
+import {
+  validateAllSlots,
+  validateSlotElements,
+} from '../slots/slot-validation';
 
 interface AttributeConfig {
   name: string;
   handler: (element: ElementRef, oldValue: string, newValue: string) => void;
-}
-
-interface SlotValidationError {
-  slot: string;
-  error: 'missing' | 'deprecated' | 'invalid-elements';
-  message: string;
-  invalidElements?: Element[];
 }
 
 interface ComponentLifecycle {
@@ -175,6 +174,7 @@ class BaseComponent extends HTMLElement {
 
       this.elementRef = componentRef;
       this.setupShadowDom(componentRef);
+      this.setupSlotObservers();
       this.afterInit();
     } catch (error) {
       this.handleError('Failed to initialize component', error);
@@ -364,7 +364,11 @@ class BaseComponent extends HTMLElement {
     }
   }
 
+  private _slotCleanups: (() => void)[] = [];
+
   protected cleanup(): void {
+    for (const fn of this._slotCleanups) fn();
+    this._slotCleanups = [];
     this.elementRef = null;
   }
 
@@ -411,70 +415,57 @@ class BaseComponent extends HTMLElement {
   private validateSlots(): void {
     if (!this.config.slots) return;
 
-    const errors: SlotValidationError[] = [];
+    const result = validateAllSlots(this, this.config.slots);
+    this.reportSlotErrors(result);
+  }
 
-    Object.entries(this.config.slots).forEach(([name, config]) => {
-      const type = name
+  private reportSlotErrors(result: SlotValidationResult): void {
+    if (result.isValid) return;
+
+    this.handleError('Slot validation failed', result.errors);
+
+    if (result.errors.length === 1) {
+      this._logger.warn(result.errors[0].message);
+    } else {
+      this._logger.group(`${result.errors.length} slot validation warnings`);
+      for (const error of result.errors) {
+        this._logger.warn(error.message);
+      }
+      this._logger.groupEnd();
+    }
+  }
+
+  private setupSlotObservers(): void {
+    if (!this.config.slots) return;
+
+    const slots = this.shadow.querySelectorAll('slot');
+    if (slots.length === 0) return;
+
+    const configKeys = Object.keys(this.config.slots);
+    const kebabToConfig = new Map<string, { key: string; config: SlotConfig }>();
+    for (const key of configKeys) {
+      const kebab = key
         .replace(/[A-Z]/g, (letter) => `-${letter.toLowerCase()}`)
         .replace(/^-/, '');
-
-      if (config.required) {
-        const slotElement = this.querySelector(`[slot="${type}"]`);
-        if (!slotElement) {
-          errors.push({
-            slot: name,
-            error: 'missing',
-            message: `Required slot "${type}" is missing`,
-          });
-        }
-      }
-
-      if (config.deprecated) {
-        const slotElement = this.querySelector(`[slot="${type}"]`);
-        if (slotElement) {
-          errors.push({
-            slot: name,
-            error: 'deprecated',
-            message: `Slot "${type}" is deprecated. ${config.deprecated}`,
-          });
-        }
-      }
-
-      if (config.allowedElements) {
-        const slotElements = Array.from(
-          this.querySelectorAll(`[slot="${type}"]`),
-        );
-        const invalidElements = slotElements.filter(
-          (element) =>
-            !config.allowedElements!.includes(element.tagName.toLowerCase()),
-        );
-
-        if (invalidElements.length > 0) {
-          errors.push({
-            slot: name,
-            error: 'invalid-elements',
-            message: `Slot "${type}" contains invalid elements. Allowed: ${config.allowedElements.join(
-              ', ',
-            )}`,
-            invalidElements,
-          });
-        }
-      }
-    });
-
-    if (errors.length > 0) {
-      this.handleError('Slot validation failed', errors);
-
-      if (errors.length === 1) {
-        this._logger.warn(errors[0].message);
-      } else {
-        this._logger.group(`${errors.length} slot validation warnings`);
-        for (const error of errors) {
-          this._logger.warn(error.message);
-        }
-        this._logger.groupEnd();
-      }
+      kebabToConfig.set(kebab, { key, config: this.config.slots[key] });
     }
+
+    slots.forEach((slotEl) => {
+      const slotName = slotEl.getAttribute('name') || '';
+      const entry = kebabToConfig.get(slotName);
+      if (!entry) return;
+
+      const handler = () => {
+        const assigned = slotEl.assignedElements({ flatten: true });
+        const result = validateSlotElements(entry.key, assigned, entry.config);
+        this.reportSlotErrors(result);
+      };
+
+      slotEl.addEventListener('slotchange', handler);
+      this._slotCleanups.push(() =>
+        slotEl.removeEventListener('slotchange', handler),
+      );
+    });
   }
 
   private async executeLifecycleCallbacks(): Promise<void> {

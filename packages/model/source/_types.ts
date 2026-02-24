@@ -69,12 +69,45 @@ export interface SlotConfig {
   deprecated?: string;
   /** Replacement slot name if deprecated */
   replacement?: string;
+  /** Disallowed HTML elements for this slot */
+  disallowedElements?: string[];
+  /** Custom validation function — return true to pass, false or string message to fail */
+  validate?: (elements: Element[]) => boolean | string;
+  /** Minimum number of slotted elements */
+  minItems?: number;
+  /** Maximum number of slotted elements */
+  maxItems?: number;
 }
 
 /**
  * Complete slot configuration for a component
  */
 export type SlotConfiguration = Record<string, SlotConfig>;
+
+// ============================================================================
+// SLOT VALIDATION TYPES
+// ============================================================================
+
+export type SlotErrorType =
+  | 'missing'
+  | 'deprecated'
+  | 'invalid-elements'
+  | 'disallowed-elements'
+  | 'min-items'
+  | 'max-items'
+  | 'custom-validation';
+
+export interface SlotValidationError {
+  slot: string;
+  error: SlotErrorType;
+  message: string;
+  invalidElements?: Element[];
+}
+
+export interface SlotValidationResult {
+  isValid: boolean;
+  errors: SlotValidationError[];
+}
 
 // ============================================================================
 // EVENT DETAIL TYPES

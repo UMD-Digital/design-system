@@ -102,3 +102,14 @@ export const Slots = {
 } as const;
 
 export type { SlotName };
+
+export {
+  validateSlot,
+  validateAllSlots,
+  validateSlotElements,
+} from './slot-validation';
+export type {
+  SlotValidationError,
+  SlotValidationResult,
+  SlotErrorType,
+} from '../_types';

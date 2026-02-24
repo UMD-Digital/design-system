@@ -131,6 +131,8 @@ export type {
   SlotchangeEvent,
   SlotchangeOptions,
   SlotchangeHandler,
+} from './slot-events';
+export type {
   ReactiveController,
   ReactiveControllerHost,
-} from './slot-events';
+} from '../_types';

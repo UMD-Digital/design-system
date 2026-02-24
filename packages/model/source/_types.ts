@@ -200,6 +200,10 @@ export interface ComponentConfiguration {
     onChange?: (host: HTMLElement, newValue: unknown, oldValue: unknown) => void;
     hasChanged?: (newValue: unknown, oldValue: unknown) => boolean;
   }>;
+  /** Hook called once on first connection, before component DOM is created */
+  firstConnected?: (host: HTMLElement, shadow: ShadowRoot) => void;
+  /** Hook called once before the first createComponent call */
+  willFirstUpdate?: (host: HTMLElement, shadow: ShadowRoot) => void;
   /** Hook called before shadow DOM connection */
   beforeConnect?: (ref: ComponentRef, shadow: ShadowRoot) => void;
   /** Hook called after shadow DOM connection */

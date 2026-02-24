@@ -122,3 +122,15 @@ export {
   hasSlottedElement,
   SlotCache,
 } from './slot-query';
+
+export {
+  createSlotchangeHandler,
+  SlotchangeController,
+} from './slot-events';
+export type {
+  SlotchangeEvent,
+  SlotchangeOptions,
+  SlotchangeHandler,
+  ReactiveController,
+  ReactiveControllerHost,
+} from './slot-events';

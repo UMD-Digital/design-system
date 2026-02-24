@@ -2,6 +2,8 @@ import { defineConfig } from 'vite';
 import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
 
+const logLevel = (process.env.VITE_LOG_LEVEL as 'info' | 'warn' | 'error' | 'silent') || 'error';
+
 export default defineConfig({
   build: {
     lib: {
@@ -50,7 +52,7 @@ export default defineConfig({
     },
     minify: false,
   },
-  logLevel: 'error',
+  logLevel,
   plugins: [
     dts({
       insertTypesEntry: true,

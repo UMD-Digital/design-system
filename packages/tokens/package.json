@@ -50,7 +50,7 @@
     "build": "vite build && npm run build:cdn",
     "build:cdn": "BUILD_CDN=true vite build --mode production",
     "dev": "vite build --watch",
-    "start": "npm run dev",
+    "start": "npm run dev --silent",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",

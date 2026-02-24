@@ -5,6 +5,9 @@ import { readdirSync, statSync } from 'fs';
 import dts from 'vite-plugin-dts';
 import checker from 'vite-plugin-checker';
 
+const logLevel = (process.env.VITE_LOG_LEVEL as 'info' | 'warn' | 'error' | 'silent') || 'error';
+const enableChecker = process.env.VITE_CHECKER === 'true';
+
 const SOURCE_DIR = resolve(__dirname, 'source');
 const DIST_DIR = 'dist';
 const BUILD_TARGET = 'es2020';
@@ -291,7 +294,7 @@ export default defineConfig((configEnv) => {
       cssCodeSplit: true,
       cssMinify: true,
     },
-    logLevel: 'warn',
+    logLevel,
     resolve: {
       extensions: ['.ts', '.js', '.css'],
       alias: PATH_ALIASES,
@@ -302,12 +305,16 @@ export default defineConfig((configEnv) => {
       postcss: { plugins: [] },
     },
     plugins: [
-      checker({
-        typescript: true,
-        overlay: { initialIsOpen: false, position: 'br' },
-        terminal: true,
-        enableBuild: true,
-      }),
+      ...(enableChecker
+        ? [
+            checker({
+              typescript: true,
+              overlay: { initialIsOpen: false, position: 'br' },
+              terminal: true,
+              enableBuild: true,
+            }),
+          ]
+        : []),
       dts({
         ...DTS_COMMON_OPTIONS,
         insertTypesEntry: true,

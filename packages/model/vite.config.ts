@@ -3,6 +3,9 @@ import { resolve } from 'path';
 import dts from 'vite-plugin-dts';
 import checker from 'vite-plugin-checker';
 
+const logLevel = (process.env.VITE_LOG_LEVEL as 'info' | 'warn' | 'error' | 'silent') || 'error';
+const enableChecker = process.env.VITE_CHECKER === 'true';
+
 export default defineConfig({
   build: {
     lib: {
@@ -37,17 +40,21 @@ export default defineConfig({
     },
     minify: false,
   },
-  logLevel: 'warn',
+  logLevel,
   plugins: [
-    checker({
-      typescript: true,
-      overlay: {
-        initialIsOpen: false,
-        position: 'br',
-      },
-      terminal: true,
-      enableBuild: true,
-    }),
+    ...(enableChecker
+      ? [
+          checker({
+            typescript: true,
+            overlay: {
+              initialIsOpen: false,
+              position: 'br',
+            },
+            terminal: true,
+            enableBuild: true,
+          }),
+        ]
+      : []),
     dts({
       insertTypesEntry: true,
       include: ['source/**/*.ts'],

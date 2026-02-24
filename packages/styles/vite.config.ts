@@ -8,6 +8,8 @@ import postcssNesting from 'postcss-nesting';
 import postcssDiscardDuplicates from 'postcss-discard-duplicates';
 
 const execAsync = promisify(exec);
+const logLevel = (process.env.VITE_LOG_LEVEL as 'info' | 'warn' | 'error' | 'silent') || 'error';
+const enableChecker = process.env.VITE_CHECKER === 'true';
 
 /**
  * Vite plugin that generates CSS files after each build.
@@ -131,7 +133,7 @@ export default defineConfig(({ mode }) => {
       }
     }
   },
-  logLevel: 'warn',
+  logLevel,
   resolve: {
     alias: {
       '@': path.resolve(__dirname, 'source')
@@ -139,11 +141,15 @@ export default defineConfig(({ mode }) => {
     extensions: ['.ts', '.js', '.css']
   },
   plugins: [
-    checker({
-      typescript: {
-        tsconfigPath: './tsconfig.json'
-      }
-    }),
+    ...(enableChecker
+      ? [
+          checker({
+            typescript: {
+              tsconfigPath: './tsconfig.json'
+            }
+          }),
+        ]
+      : []),
     dts({
       insertTypesEntry: true,
       outDir: 'dist',

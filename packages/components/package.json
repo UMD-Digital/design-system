@@ -58,7 +58,7 @@
     "build:bundle": "BUILD_BUNDLE=true vite build --mode production",
     "build:cdn": "BUILD_CDN=true vite build --mode production",
     "vite": "vite build --mode development --watch",
-    "start": "npm run vite",
+    "start": "npm run vite --silent",
     "preview": "vite preview",
     "test": "jest",
     "test:watch": "jest --watch",

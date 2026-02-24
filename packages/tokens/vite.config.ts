@@ -4,6 +4,8 @@ import dts from 'vite-plugin-dts';
 import checker from 'vite-plugin-checker';
 
 const isCDN = process.env.BUILD_CDN === 'true';
+const logLevel = (process.env.VITE_LOG_LEVEL as 'info' | 'warn' | 'error' | 'silent') || 'error';
+const enableChecker = process.env.VITE_CHECKER === 'true';
 
 export default defineConfig({
   build: {
@@ -48,19 +50,23 @@ export default defineConfig({
           },
         },
   },
-  logLevel: 'warn',
+  logLevel,
   plugins: isCDN
     ? []
     : [
-        checker({
-          typescript: true,
-          overlay: {
-            initialIsOpen: false,
-            position: 'br',
-          },
-          terminal: true,
-          enableBuild: true,
-        }),
+        ...(enableChecker
+          ? [
+              checker({
+                typescript: true,
+                overlay: {
+                  initialIsOpen: false,
+                  position: 'br',
+                },
+                terminal: true,
+                enableBuild: true,
+              }),
+            ]
+          : []),
         dts({
           insertTypesEntry: true,
           include: ['source/**/*.ts'],

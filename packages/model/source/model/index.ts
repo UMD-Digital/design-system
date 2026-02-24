@@ -45,6 +45,7 @@ import {
 } from '../attributes/config';
 import { ChangeDetector } from '../attributes/change-detection';
 import { AttributeTypeError, AttributeValidationError } from '../attributes/errors';
+import { UpdateScheduler } from './update-cycle';
 import type {
   SlotConfig,
   SlotValidationError,
@@ -53,6 +54,7 @@ import type {
   ComponentReadyDetail,
   ComponentErrorDetail,
   ElementRef,
+  PropertyValues,
   ReactiveController,
 } from '../_types';
 import {
@@ -80,6 +82,9 @@ interface ComponentLifecycle {
   beforeConnect?: (ref: ElementRef, shadow: ShadowRoot) => void;
   afterConnect?: (ref: ElementRef, shadow: ShadowRoot) => void;
   onReady?: (ref: ElementRef, shadow: ShadowRoot) => void;
+  willUpdate?: (host: HTMLElement, changedProperties: PropertyValues) => void;
+  update?: (host: HTMLElement, changedProperties: PropertyValues) => void;
+  updated?: (host: HTMLElement, changedProperties: PropertyValues) => void;
 }
 
 interface ComponentConfig extends ComponentLifecycle {
@@ -120,6 +125,9 @@ class BaseComponent extends HTMLElement {
   private _isReflecting = false;
   private _hasConnected = false;
   private _hasFirstUpdated = false;
+  private _updateScheduler: UpdateScheduler;
+  private _changedProperties: PropertyValues = new Map();
+  private _isUpdating = false;
 
   constructor() {
     super();
@@ -134,6 +142,7 @@ class BaseComponent extends HTMLElement {
     }
 
     this._logger = createLogger(this.config.tagName);
+    this._updateScheduler = new UpdateScheduler(() => this._performUpdate());
     this.shadow = this.attachShadow({ mode: 'open' });
     this.validateConfig();
     this.setupReactiveAttributes();
@@ -199,6 +208,11 @@ class BaseComponent extends HTMLElement {
       this.setupShadowDom(componentRef);
       this.setupSlotObservers();
       this.notifyControllers('hostConnected');
+
+      if (this._changedProperties.size > 0) {
+        this._updateScheduler.schedule();
+      }
+
       this.afterInit();
     } catch (error) {
       this.handleError('Failed to initialize component', error);
@@ -303,8 +317,11 @@ class BaseComponent extends HTMLElement {
         // Write directly to avoid reflection loop
         this._reactiveValues.set(resolved.propertyName, value);
 
-        if (changed && resolved.onChange) {
-          resolved.onChange(this, value, oldValue);
+        if (changed) {
+          if (resolved.onChange) {
+            resolved.onChange(this, value, oldValue);
+          }
+          this.requestUpdate(resolved.propertyName, oldValue);
         }
       }
     }
@@ -381,6 +398,8 @@ class BaseComponent extends HTMLElement {
           if (resolved.onChange) {
             resolved.onChange(this, value, oldValue);
           }
+
+          this.requestUpdate(propertyName, oldValue);
         },
         configurable: true,
         enumerable: true,
@@ -395,6 +414,60 @@ class BaseComponent extends HTMLElement {
     this._controllers.add(controller);
     if (this.isConnected && this.elementRef) {
       controller.hostConnected?.();
+    }
+  }
+
+  removeController(controller: ReactiveController): void {
+    this._controllers.delete(controller);
+  }
+
+  requestUpdate(name?: string, oldValue?: unknown): void {
+    if (name !== undefined && !this._changedProperties.has(name)) {
+      this._changedProperties.set(name, oldValue);
+    }
+    if (!this._hasConnected) return;
+    this._updateScheduler.schedule();
+  }
+
+  get updateComplete(): Promise<boolean> {
+    return this._updateScheduler.updateComplete;
+  }
+
+  protected willUpdate(_changedProperties: PropertyValues): void {
+    this.config.willUpdate?.(this, _changedProperties);
+  }
+
+  protected update(_changedProperties: PropertyValues): void {
+    this.config.update?.(this, _changedProperties);
+  }
+
+  protected updated(_changedProperties: PropertyValues): void {
+    this.config.updated?.(this, _changedProperties);
+  }
+
+  private _performUpdate(): boolean {
+    if (this._isUpdating) return true;
+    this._isUpdating = true;
+
+    const changedProperties = this._changedProperties;
+    this._changedProperties = new Map();
+
+    try {
+      for (const controller of this._controllers) {
+        controller.hostUpdate?.();
+      }
+      this.willUpdate(changedProperties);
+      this.update(changedProperties);
+      this.updated(changedProperties);
+      for (const controller of this._controllers) {
+        controller.hostUpdated?.();
+      }
+      return true;
+    } catch (error) {
+      this.handleError('Error during update cycle', error);
+      return false;
+    } finally {
+      this._isUpdating = false;
     }
   }
 

@@ -235,11 +235,18 @@ export interface AttributeElementRef {
 // CONTROLLER INTERFACES
 // ============================================================================
 
+export type PropertyValues<T = any> = Map<keyof T & string, unknown>;
+
 export interface ReactiveController {
   hostConnected?(): void;
   hostDisconnected?(): void;
+  hostUpdate?(): void;
+  hostUpdated?(): void;
 }
 
 export interface ReactiveControllerHost extends HTMLElement {
   addController(controller: ReactiveController): void;
+  removeController(controller: ReactiveController): void;
+  requestUpdate(name?: string, oldValue?: unknown): void;
+  readonly updateComplete: Promise<boolean>;
 }

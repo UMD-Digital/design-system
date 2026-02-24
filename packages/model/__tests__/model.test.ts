@@ -306,4 +306,276 @@ describe('Model', () => {
       expect(El.componentConfig.slots!.headline.required).toBe(true);
     });
   });
+
+  describe('lifecycle hooks', () => {
+    it('firstConnected called on first connection with (host, shadow) args', () => {
+      if (!hasNativeCustomElements) return;
+
+      const tag = uniqueTag('test-lc');
+      const firstConnected = jest.fn();
+
+      const { el } = defineAndCreate({
+        tagName: tag,
+        createComponent,
+        firstConnected,
+      });
+
+      document.body.appendChild(el);
+
+      expect(firstConnected).toHaveBeenCalledTimes(1);
+      expect(firstConnected).toHaveBeenCalledWith(el, el.getShadowRoot());
+
+      document.body.removeChild(el);
+    });
+
+    it('firstConnected NOT called on reconnection', () => {
+      if (!hasNativeCustomElements) return;
+
+      const tag = uniqueTag('test-lc');
+      const firstConnected = jest.fn();
+
+      const { el } = defineAndCreate({
+        tagName: tag,
+        createComponent,
+        firstConnected,
+      });
+
+      document.body.appendChild(el);
+      document.body.removeChild(el);
+      document.body.appendChild(el);
+
+      expect(firstConnected).toHaveBeenCalledTimes(1);
+
+      document.body.removeChild(el);
+    });
+
+    it('firstConnected runs before createComponent', () => {
+      if (!hasNativeCustomElements) return;
+
+      const tag = uniqueTag('test-lc');
+      const order: string[] = [];
+
+      const { el } = defineAndCreate({
+        tagName: tag,
+        firstConnected: () => order.push('firstConnected'),
+        createComponent: () => {
+          order.push('createComponent');
+          return createComponent();
+        },
+      });
+
+      document.body.appendChild(el);
+
+      expect(order[0]).toBe('firstConnected');
+      expect(order[1]).toBe('createComponent');
+
+      document.body.removeChild(el);
+    });
+
+    it('willFirstUpdate called before createComponent on first init', () => {
+      if (!hasNativeCustomElements) return;
+
+      const tag = uniqueTag('test-lc');
+      const order: string[] = [];
+
+      const { el } = defineAndCreate({
+        tagName: tag,
+        willFirstUpdate: () => order.push('willFirstUpdate'),
+        createComponent: () => {
+          order.push('createComponent');
+          return createComponent();
+        },
+      });
+
+      document.body.appendChild(el);
+
+      expect(order.indexOf('willFirstUpdate')).toBeLessThan(
+        order.indexOf('createComponent'),
+      );
+
+      document.body.removeChild(el);
+    });
+
+    it('willFirstUpdate NOT called on reconnection', () => {
+      if (!hasNativeCustomElements) return;
+
+      const tag = uniqueTag('test-lc');
+      const willFirstUpdate = jest.fn();
+
+      const { el } = defineAndCreate({
+        tagName: tag,
+        createComponent,
+        willFirstUpdate,
+      });
+
+      document.body.appendChild(el);
+      document.body.removeChild(el);
+      document.body.appendChild(el);
+
+      expect(willFirstUpdate).toHaveBeenCalledTimes(1);
+
+      document.body.removeChild(el);
+    });
+
+    it('willFirstUpdate receives (host, shadow) args', () => {
+      if (!hasNativeCustomElements) return;
+
+      const tag = uniqueTag('test-lc');
+      const willFirstUpdate = jest.fn();
+
+      const { el } = defineAndCreate({
+        tagName: tag,
+        createComponent,
+        willFirstUpdate,
+      });
+
+      document.body.appendChild(el);
+
+      expect(willFirstUpdate).toHaveBeenCalledWith(el, el.getShadowRoot());
+
+      document.body.removeChild(el);
+    });
+
+    it('full lifecycle order: firstConnected → willFirstUpdate → createComponent → beforeConnect → afterConnect → onReady', async () => {
+      if (!hasNativeCustomElements) return;
+
+      const tag = uniqueTag('test-lc');
+      const order: string[] = [];
+
+      const { el } = defineAndCreate({
+        tagName: tag,
+        firstConnected: () => order.push('firstConnected'),
+        willFirstUpdate: () => order.push('willFirstUpdate'),
+        createComponent: () => {
+          order.push('createComponent');
+          return createComponent();
+        },
+        beforeConnect: () => order.push('beforeConnect'),
+        afterConnect: () => order.push('afterConnect'),
+        onReady: () => order.push('onReady'),
+      });
+
+      document.body.appendChild(el);
+
+      // Wait for async lifecycle callbacks
+      await new Promise((r) => setTimeout(r, 0));
+
+      expect(order).toEqual([
+        'firstConnected',
+        'willFirstUpdate',
+        'createComponent',
+        'beforeConnect',
+        'afterConnect',
+        'onReady',
+      ]);
+
+      document.body.removeChild(el);
+    });
+
+    it('error in firstConnected caught gracefully, does not prevent initialization', () => {
+      if (!hasNativeCustomElements) return;
+
+      const tag = uniqueTag('test-lc');
+      const createComponentFn = jest.fn(createComponent);
+
+      const { el } = defineAndCreate({
+        tagName: tag,
+        firstConnected: () => {
+          throw new Error('firstConnected error');
+        },
+        createComponent: createComponentFn,
+      });
+
+      expect(() => {
+        document.body.appendChild(el);
+      }).not.toThrow();
+
+      expect(createComponentFn).toHaveBeenCalled();
+
+      document.body.removeChild(el);
+    });
+
+    it('error in willFirstUpdate caught gracefully, does not prevent component creation', () => {
+      if (!hasNativeCustomElements) return;
+
+      const tag = uniqueTag('test-lc');
+      const createComponentFn = jest.fn(createComponent);
+
+      const { el } = defineAndCreate({
+        tagName: tag,
+        willFirstUpdate: () => {
+          throw new Error('willFirstUpdate error');
+        },
+        createComponent: createComponentFn,
+      });
+
+      expect(() => {
+        document.body.appendChild(el);
+      }).not.toThrow();
+
+      expect(createComponentFn).toHaveBeenCalled();
+
+      document.body.removeChild(el);
+    });
+
+    it('getShadowRoot() returns the shadow root', () => {
+      if (!hasNativeCustomElements) return;
+
+      const tag = uniqueTag('test-lc');
+      const { el } = defineAndCreate({
+        tagName: tag,
+        createComponent,
+      });
+
+      document.body.appendChild(el);
+
+      const sr = el.getShadowRoot();
+      expect(sr).toBeInstanceOf(ShadowRoot);
+      expect(sr).toBe(el.shadowRoot);
+
+      document.body.removeChild(el);
+    });
+
+    it('getShadowRoot exists on class prototype', () => {
+      const El = Model.createCustomElement({
+        tagName: uniqueTag('test-lc'),
+        createComponent,
+      });
+
+      expect(typeof El.prototype.getShadowRoot).toBe('function');
+    });
+
+    it('works without hooks (backwards compatibility)', () => {
+      if (!hasNativeCustomElements) return;
+
+      const tag = uniqueTag('test-lc');
+      const { el } = defineAndCreate({
+        tagName: tag,
+        createComponent,
+      });
+
+      expect(() => {
+        document.body.appendChild(el);
+      }).not.toThrow();
+
+      expect(el.getRef()).not.toBeNull();
+
+      document.body.removeChild(el);
+    });
+
+    it('config stores hooks on componentConfig', () => {
+      const firstConnected = jest.fn();
+      const willFirstUpdate = jest.fn();
+
+      const El = Model.createCustomElement({
+        tagName: uniqueTag('test-lc'),
+        createComponent,
+        firstConnected,
+        willFirstUpdate,
+      });
+
+      expect(El.componentConfig.firstConnected).toBe(firstConnected);
+      expect(El.componentConfig.willFirstUpdate).toBe(willFirstUpdate);
+    });
+  });
 });

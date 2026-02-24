@@ -75,6 +75,8 @@ interface AttributeConfig {
 }
 
 interface ComponentLifecycle {
+  firstConnected?: (host: HTMLElement, shadow: ShadowRoot) => void;
+  willFirstUpdate?: (host: HTMLElement, shadow: ShadowRoot) => void;
   beforeConnect?: (ref: ElementRef, shadow: ShadowRoot) => void;
   afterConnect?: (ref: ElementRef, shadow: ShadowRoot) => void;
   onReady?: (ref: ElementRef, shadow: ShadowRoot) => void;
@@ -116,6 +118,8 @@ class BaseComponent extends HTMLElement {
   protected _changeDetector: ChangeDetector = new ChangeDetector();
   protected _reactiveValues: Map<string, unknown> = new Map();
   private _isReflecting = false;
+  private _hasConnected = false;
+  private _hasFirstUpdated = false;
 
   constructor() {
     super();
@@ -146,6 +150,10 @@ class BaseComponent extends HTMLElement {
 
   connectedCallback(): void {
     try {
+      if (!this._hasConnected) {
+        this._hasConnected = true;
+        this.executeFirstConnected();
+      }
       this.initializeComponent();
     } catch (error) {
       this.handleError('Failed to initialize component', error);
@@ -173,6 +181,11 @@ class BaseComponent extends HTMLElement {
   protected initializeComponent(): void {
     try {
       this.validateSlots();
+
+      if (!this._hasFirstUpdated) {
+        this._hasFirstUpdated = true;
+        this.executeWillFirstUpdate();
+      }
 
       const componentRef = this.config.createComponent(this);
 
@@ -521,7 +534,7 @@ class BaseComponent extends HTMLElement {
     }
   }
 
-  private async executeCallback(name: keyof ComponentLifecycle): Promise<void> {
+  private async executeCallback(name: 'beforeConnect' | 'afterConnect' | 'onReady'): Promise<void> {
     const callback = this.config[name];
 
     if (!callback) {
@@ -537,6 +550,40 @@ class BaseComponent extends HTMLElement {
 
   public getRef(): ElementRef | null {
     return this.elementRef;
+  }
+
+  public getShadowRoot(): ShadowRoot {
+    return this.shadow;
+  }
+
+  private executeFirstConnected(): void {
+    try {
+      if (this.config.firstConnected) {
+        this.config.firstConnected(this, this.shadow);
+      }
+      this.firstConnected();
+    } catch (error) {
+      this.handleError('Failed to execute firstConnected hook', error);
+    }
+  }
+
+  protected firstConnected(): void {
+    // No-op. Override in subclasses.
+  }
+
+  private executeWillFirstUpdate(): void {
+    try {
+      if (this.config.willFirstUpdate) {
+        this.config.willFirstUpdate(this, this.shadow);
+      }
+      this.willFirstUpdate();
+    } catch (error) {
+      this.handleError('Failed to execute willFirstUpdate hook', error);
+    }
+  }
+
+  protected willFirstUpdate(): void {
+    // No-op. Override in subclasses.
   }
 }
 

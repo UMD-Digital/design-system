@@ -113,3 +113,12 @@ export type {
   SlotValidationResult,
   SlotErrorType,
 } from '../_types';
+
+export {
+  querySlottedElements,
+  querySlottedNodes,
+  querySlottedElement,
+  hasSlottedContent,
+  hasSlottedElement,
+  SlotCache,
+} from './slot-query';

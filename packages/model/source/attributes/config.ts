@@ -37,6 +37,7 @@ export type ReactiveAttributeMap = Record<string, ReactiveAttributeConfig>;
 export interface ResolvedAttributeConfig {
   propertyName: string;
   attributeName: string | false;
+  type?: AttributeType;
   converter: AttributeConverter;
   reflect: boolean;
   defaultValue: unknown;
@@ -126,6 +127,7 @@ export function resolveAttributeConfigs(
     return {
       propertyName: prop,
       attributeName,
+      type: cfg.type,
       converter,
       reflect: cfg.reflect ?? false,
       defaultValue: cfg.defaultValue,

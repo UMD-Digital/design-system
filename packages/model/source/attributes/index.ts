@@ -60,7 +60,7 @@ export type {
 } from './handler';
 
 // Reactive attribute system (v1.1.0)
-export { AttributeTypeError, AttributeValidationError } from './errors';
+export { AttributeTypeError, AttributeValidationError, devWarning, reportAttributeErrors } from './errors';
 export {
   Converters,
   resolveConverter,

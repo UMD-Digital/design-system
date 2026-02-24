@@ -36,6 +36,7 @@
  * ```
  */
 import { stylesTemplate } from '../utilities/styles';
+import { createLogger, type Logger } from '../utilities/debug';
 import {
   resolveAttributeConfigs,
   defineObservedAttributes,
@@ -43,7 +44,7 @@ import {
   type ResolvedAttributeConfig,
 } from '../attributes/config';
 import { ChangeDetector } from '../attributes/change-detection';
-import { AttributeValidationError } from '../attributes/errors';
+import { AttributeTypeError, AttributeValidationError } from '../attributes/errors';
 import type {
   SlotConfig,
   ComponentEventDetail,
@@ -100,6 +101,7 @@ class BaseComponent extends HTMLElement {
   protected shadow: ShadowRoot;
   protected elementRef: ElementRef | null = null;
   protected config: ComponentConfig;
+  protected _logger: Logger;
 
   protected _resolvedReactiveAttrs: ResolvedAttributeConfig[] = [];
   protected _changeDetector: ChangeDetector = new ChangeDetector();
@@ -118,6 +120,7 @@ class BaseComponent extends HTMLElement {
       );
     }
 
+    this._logger = createLogger(this.config.tagName);
     this.shadow = this.attachShadow({ mode: 'open' });
     this.validateConfig();
     this.setupReactiveAttributes();
@@ -245,17 +248,24 @@ class BaseComponent extends HTMLElement {
         (r) => r.attributeName === name,
       );
       if (resolved) {
-        const converted = resolved.converter.fromAttribute(
-          newValue,
-          name,
-        );
+        let converted: unknown;
+        try {
+          converted = resolved.converter.fromAttribute(newValue, name);
+        } catch (err) {
+          throw new AttributeTypeError(
+            name,
+            resolved.type ?? 'unknown',
+            newValue,
+            this.config.tagName,
+          );
+        }
         const value =
           converted !== undefined ? converted : resolved.defaultValue;
 
         if (value !== undefined && resolved.validate) {
           const error = resolved.validate(value);
           if (error) {
-            throw new AttributeValidationError(name, error);
+            throw new AttributeValidationError(name, error, this.config.tagName);
           }
         }
 
@@ -316,7 +326,7 @@ class BaseComponent extends HTMLElement {
                 resolved.attributeName !== false
                   ? resolved.attributeName
                   : propertyName;
-              throw new AttributeValidationError(attrName, error);
+              throw new AttributeValidationError(attrName, error, this.config.tagName);
             }
           }
 
@@ -382,7 +392,7 @@ class BaseComponent extends HTMLElement {
   }
 
   protected handleError(message: string, error: unknown): void {
-    console.error(`[${this.config.tagName}]`, message, error);
+    this._logger.error(message, error);
 
     // Determine error type based on component state and message
     const errorType = this.elementRef
@@ -455,9 +465,15 @@ class BaseComponent extends HTMLElement {
     if (errors.length > 0) {
       this.handleError('Slot validation failed', errors);
 
-      errors.forEach((error) => {
-        console.warn(`[${this.config.tagName}]`, error.message, error);
-      });
+      if (errors.length === 1) {
+        this._logger.warn(errors[0].message);
+      } else {
+        this._logger.group(`${errors.length} slot validation warnings`);
+        for (const error of errors) {
+          this._logger.warn(error.message);
+        }
+        this._logger.groupEnd();
+      }
     }
   }
 

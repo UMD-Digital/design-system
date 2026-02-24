@@ -52,12 +52,22 @@ import type {
   ComponentEventDetail,
   ComponentReadyDetail,
   ComponentErrorDetail,
-  ElementRef
+  ElementRef,
+  ReactiveController,
 } from '../_types';
 import {
   validateAllSlots,
   validateSlotElements,
 } from '../slots/slot-validation';
+import {
+  createSlotchangeHandler,
+  type SlotchangeEvent,
+} from '../slots/slot-events';
+import {
+  querySlottedElements,
+  querySlottedElement,
+  hasSlottedContent,
+} from '../slots/slot-query';
 
 interface AttributeConfig {
   name: string;
@@ -175,6 +185,7 @@ class BaseComponent extends HTMLElement {
       this.elementRef = componentRef;
       this.setupShadowDom(componentRef);
       this.setupSlotObservers();
+      this.notifyControllers('hostConnected');
       this.afterInit();
     } catch (error) {
       this.handleError('Failed to initialize component', error);
@@ -365,8 +376,42 @@ class BaseComponent extends HTMLElement {
   }
 
   private _slotCleanups: (() => void)[] = [];
+  private _controllers: Set<ReactiveController> = new Set();
+
+  addController(controller: ReactiveController): void {
+    this._controllers.add(controller);
+    if (this.isConnected && this.elementRef) {
+      controller.hostConnected?.();
+    }
+  }
+
+  private notifyControllers(method: 'hostConnected' | 'hostDisconnected'): void {
+    for (const controller of this._controllers) {
+      try {
+        controller[method]?.();
+      } catch (error) {
+        this.handleError(`Controller ${method} failed`, error);
+      }
+    }
+  }
+
+  querySlot(slotName?: string, selector?: string): Element[] {
+    return querySlottedElements(this, slotName, { selector, flatten: true });
+  }
+
+  querySlotElement<T extends Element = Element>(
+    slotName?: string,
+    selector?: string,
+  ): T | null {
+    return querySlottedElement<T>(this, slotName, selector);
+  }
+
+  hasSlotContent(slotName?: string): boolean {
+    return hasSlottedContent(this, slotName);
+  }
 
   protected cleanup(): void {
+    this.notifyControllers('hostDisconnected');
     for (const fn of this._slotCleanups) fn();
     this._slotCleanups = [];
     this.elementRef = null;
@@ -438,9 +483,6 @@ class BaseComponent extends HTMLElement {
   private setupSlotObservers(): void {
     if (!this.config.slots) return;
 
-    const slots = this.shadow.querySelectorAll('slot');
-    if (slots.length === 0) return;
-
     const configKeys = Object.keys(this.config.slots);
     const kebabToConfig = new Map<string, { key: string; config: SlotConfig }>();
     for (const key of configKeys) {
@@ -450,22 +492,21 @@ class BaseComponent extends HTMLElement {
       kebabToConfig.set(kebab, { key, config: this.config.slots[key] });
     }
 
-    slots.forEach((slotEl) => {
-      const slotName = slotEl.getAttribute('name') || '';
-      const entry = kebabToConfig.get(slotName);
-      if (!entry) return;
+    const handler = createSlotchangeHandler(
+      this,
+      (event: SlotchangeEvent) => {
+        const slotName = event.slotName ?? '';
+        const entry = kebabToConfig.get(slotName);
+        if (!entry) return;
 
-      const handler = () => {
-        const assigned = slotEl.assignedElements({ flatten: true });
-        const result = validateSlotElements(entry.key, assigned, entry.config);
+        const result = validateSlotElements(entry.key, event.elements, entry.config);
         this.reportSlotErrors(result);
-      };
+      },
+      { flatten: true },
+    );
 
-      slotEl.addEventListener('slotchange', handler);
-      this._slotCleanups.push(() =>
-        slotEl.removeEventListener('slotchange', handler),
-      );
-    });
+    handler.connect();
+    this._slotCleanups.push(() => handler.disconnect());
   }
 
   private async executeLifecycleCallbacks(): Promise<void> {

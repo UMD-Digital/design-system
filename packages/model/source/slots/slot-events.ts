@@ -21,14 +21,8 @@ export interface SlotchangeHandler {
   disconnect(): void;
 }
 
-export interface ReactiveControllerHost extends HTMLElement {
-  addController(controller: ReactiveController): void;
-}
-
-export interface ReactiveController {
-  hostConnected?(): void;
-  hostDisconnected?(): void;
-}
+export type { ReactiveController, ReactiveControllerHost } from '../_types';
+import type { ReactiveController, ReactiveControllerHost } from '../_types';
 
 export function createSlotchangeHandler(
   host: HTMLElement,

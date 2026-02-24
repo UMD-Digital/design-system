@@ -226,3 +226,16 @@ export interface AttributeElementRef {
     [key: string]: any;
   };
 }
+
+// ============================================================================
+// CONTROLLER INTERFACES
+// ============================================================================
+
+export interface ReactiveController {
+  hostConnected?(): void;
+  hostDisconnected?(): void;
+}
+
+export interface ReactiveControllerHost extends HTMLElement {
+  addController(controller: ReactiveController): void;
+}

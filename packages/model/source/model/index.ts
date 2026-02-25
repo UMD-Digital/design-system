@@ -56,6 +56,7 @@ import type {
   ElementRef,
   PropertyValues,
   ReactiveController,
+  ReactiveControllerHost,
 } from '../_types';
 import {
   validateAllSlots,
@@ -111,7 +112,7 @@ const ComponentConfig = (config: ComponentConfig) => {
  * @internal This class is not meant to be extended directly.
  * Use `createCustomElement` to create components.
  */
-class BaseComponent extends HTMLElement {
+class BaseComponent extends HTMLElement implements ReactiveControllerHost {
   static componentConfig: ComponentConfig;
 
   protected shadow: ShadowRoot;
@@ -698,3 +699,6 @@ export {
   type ComponentConfig,
   type AttributeConfig,
 };
+
+export { IntersectionController, MediaQueryController } from './controllers';
+export type { ReactiveController, ReactiveControllerHost } from '../_types';

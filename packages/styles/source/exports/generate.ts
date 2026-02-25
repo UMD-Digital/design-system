@@ -207,6 +207,7 @@ export async function generateCSSStrings(): Promise<GenerateCSSStringsResult> {
     elementCSS,
     animationCSS,
     accessibilityCSS,
+    webComponentsCSS,
   ].join('\n\n');
   const fullBundleClean = await removeDuplicates(fullBundle);
 

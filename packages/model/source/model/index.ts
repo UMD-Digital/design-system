@@ -129,6 +129,7 @@ class BaseComponent extends HTMLElement implements ReactiveControllerHost {
   private _updateScheduler: UpdateScheduler;
   private _changedProperties: PropertyValues = new Map();
   private _isUpdating = false;
+  private _pendingPreUpgrade: Map<string, unknown> | null = null;
 
   constructor() {
     super();
@@ -160,6 +161,7 @@ class BaseComponent extends HTMLElement implements ReactiveControllerHost {
 
   connectedCallback(): void {
     try {
+      this.applyPreUpgradeProperties();
       if (!this._hasConnected) {
         this._hasConnected = true;
         this.executeFirstConnected();
@@ -328,6 +330,34 @@ class BaseComponent extends HTMLElement implements ReactiveControllerHost {
     }
   }
 
+  /**
+   * Capture a property value set on the instance before upgrade.
+   * Deletes the instance property so the class accessor takes precedence,
+   * then returns the captured value for re-application.
+   */
+  private capturePreUpgradeProperty(propertyName: string): { value: unknown; captured: boolean } {
+    if (this.hasOwnProperty(propertyName)) {
+      const value = (this as any)[propertyName];
+      delete (this as any)[propertyName];
+      return { value, captured: true };
+    }
+    return { value: undefined, captured: false };
+  }
+
+  /**
+   * Apply pre-upgrade property values through reactive setters.
+   * Called in connectedCallback after all attributeChangedCallback
+   * calls have completed during upgrade.
+   */
+  private applyPreUpgradeProperties(): void {
+    if (!this._pendingPreUpgrade) return;
+    const pending = this._pendingPreUpgrade;
+    this._pendingPreUpgrade = null;
+    for (const [propertyName, value] of pending) {
+      (this as any)[propertyName] = value;
+    }
+  }
+
   protected setupReactiveAttributes(): void {
     if (!this.config.reactiveAttributes) return;
 
@@ -337,6 +367,9 @@ class BaseComponent extends HTMLElement implements ReactiveControllerHost {
 
     for (const resolved of this._resolvedReactiveAttrs) {
       const { propertyName, defaultValue } = resolved;
+
+      // Capture pre-upgrade instance property before defining accessor
+      const preUpgrade = this.capturePreUpgradeProperty(propertyName);
 
       // Seed the initial value from the attribute (if present) or default
       if (resolved.attributeName !== false) {
@@ -405,6 +438,15 @@ class BaseComponent extends HTMLElement implements ReactiveControllerHost {
         configurable: true,
         enumerable: true,
       });
+
+      // Defer pre-upgrade value re-application to connectedCallback
+      // so it runs after attributeChangedCallback during upgrade
+      if (preUpgrade.captured) {
+        if (!this._pendingPreUpgrade) {
+          this._pendingPreUpgrade = new Map();
+        }
+        this._pendingPreUpgrade.set(propertyName, preUpgrade.value);
+      }
     }
   }
 
@@ -702,3 +744,13 @@ export {
 
 export { IntersectionController, MediaQueryController } from './controllers';
 export type { ReactiveController, ReactiveControllerHost } from '../_types';
+
+export {
+  registerComponent,
+  registerComponents,
+  isComponentRegistered,
+  whenComponentDefined,
+  getComponentConstructor,
+  type RegisterOptions,
+} from './registration';
+export { ComponentRegistrationError, BatchRegistrationError } from './errors';

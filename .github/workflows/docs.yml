@@ -52,6 +52,9 @@ jobs:
           yarn run feed:docs
           yarn run components:docs
 
+      - name: Remove .gitignore files from docs subdirectories
+        run: find docs -mindepth 2 -name ".gitignore" -delete
+
       - name: Upload generated docs as artifact
         if: ${{ !env.ACT }}
         uses: actions/upload-artifact@v4

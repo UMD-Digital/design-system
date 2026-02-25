@@ -1,5 +1,8 @@
 import '@testing-library/jest-dom';
 
+// Save native customElements for tests that need real custom element support
+(window as any).__nativeCustomElements = window.customElements;
+
 // Mock window.customElements
 Object.defineProperty(window, 'customElements', {
   value: {

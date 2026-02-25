@@ -21,6 +21,7 @@
     "utilities:test": "npx lerna run test --scope=@universityofmaryland/web-utilities-library",
     "icons": "npx lerna run start --scope=@universityofmaryland/web-icons-library",
     "icons:docs": "npx lerna run docs --scope=@universityofmaryland/web-icons-library",
+    "tokens:docs": "npx lerna run docs --scope=@universityofmaryland/web-token-library",
     "icons:test": "npx lerna run test --scope=@universityofmaryland/web-icons-library",
     "model": "npx lerna run start --scope=@universityofmaryland/web-model-library",
     "model:docs": "npx lerna run docs --scope=@universityofmaryland/web-model-library",

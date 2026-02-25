@@ -1,11 +1,19 @@
 {
+  "$schema": "https://typedoc.org/schema.json",
+  "name": "UMD Design System - Tokens",
   "entryPoints": ["source/index.ts"],
+  "entryPointStrategy": "resolve",
   "out": "../../docs/tokens",
   "plugin": [],
   "excludePrivate": true,
   "excludeProtected": true,
   "excludeExternals": true,
   "readme": "README.md",
-  "name": "UMD Design System - Tokens",
-  "includeVersion": true
+  "includeVersion": true,
+  "cleanOutputDir": false,
+  "searchInDocuments": true,
+  "githubPages": true,
+  "hideGenerator": true,
+  "skipErrorChecking": true,
+  "logLevel": "Error"
 }

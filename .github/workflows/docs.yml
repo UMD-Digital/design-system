@@ -44,8 +44,10 @@ jobs:
       - name: Generate package documentation
         run: |
           yarn run icons:docs
+          yarn run tokens:docs
           yarn run utilities:docs
           yarn run styles:docs
+          yarn run model:docs
           yarn run elements:docs
           yarn run feed:docs
           yarn run components:docs

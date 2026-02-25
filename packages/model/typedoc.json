@@ -1,12 +1,20 @@
 {
+  "$schema": "https://typedoc.org/schema.json",
+  "name": "@universityofmaryland/web-model-library",
   "entryPoints": ["source/index.ts"],
-  "out": "docs",
+  "entryPointStrategy": "resolve",
+  "out": "../../docs/model",
   "exclude": ["**/*.test.ts", "**/__tests__/**"],
   "excludePrivate": true,
   "excludeProtected": false,
   "excludeExternals": true,
   "readme": "README.md",
   "plugin": [],
-  "name": "@universityofmaryland/web-model-library",
-  "includeVersion": true
+  "includeVersion": true,
+  "cleanOutputDir": false,
+  "searchInDocuments": true,
+  "githubPages": true,
+  "hideGenerator": true,
+  "skipErrorChecking": true,
+  "logLevel": "Error"
 }

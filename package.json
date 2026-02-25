@@ -5,6 +5,7 @@
   "license": "MIT",
   "repository": "",
   "private": true,
+  "packageManager": "yarn@1.22.22",
   "scripts": {
     "clean": "npx lerna run clean",
     "components": "npx lerna run start --scope=@universityofmaryland/web-components-library",

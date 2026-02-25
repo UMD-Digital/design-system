@@ -237,6 +237,10 @@ export interface AttributeElementRef {
 
 export type PropertyValues<T = any> = Map<keyof T & string, unknown>;
 
+/**
+ * A reactive controller that can hook into a host component's lifecycle.
+ * Modeled after Lit's ReactiveController pattern.
+ */
 export interface ReactiveController {
   hostConnected?(): void;
   hostDisconnected?(): void;
@@ -244,6 +248,10 @@ export interface ReactiveController {
   hostUpdated?(): void;
 }
 
+/**
+ * An element that can host reactive controllers.
+ * Provides controller management and update scheduling.
+ */
 export interface ReactiveControllerHost extends HTMLElement {
   addController(controller: ReactiveController): void;
   removeController(controller: ReactiveController): void;

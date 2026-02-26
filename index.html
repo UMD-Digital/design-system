@@ -1,615 +1,399 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>UMD Design System Documentation</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <style>
-      .header {
-        background-color: #e21833;
-        color: white;
-        padding: 3rem 0;
-      }
-      .nav-link {
-        color: #000;
-      }
-      .nav-link:hover {
-        color: #e21833;
-      }
-      .card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        height: 100%;
-      }
-      .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      }
-      .package-section {
-        background-color: #f8f9fa;
-        border-radius: 8px;
-        padding: 2rem;
-        margin-bottom: 2rem;
-      }
-      .package-icon {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-      }
-      .resource-card {
-        border: 1px solid #dee2e6;
-        border-radius: 8px;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-        background-color: #fff;
-      }
-      .resource-card h5 {
-        color: #e21833;
-        margin-bottom: 1rem;
-      }
-      .quick-links {
-        background-color: #fff3cd;
-        border: 1px solid #ffeaa7;
-        border-radius: 8px;
-        padding: 1.5rem;
-        margin-bottom: 2rem;
-      }
-      .btn-umd {
-        background-color: #e21833;
-        color: white;
-        border: none;
-      }
-      .btn-umd:hover {
-        background-color: #c71629;
-        color: white;
-      }
-      .list-features {
-        list-style: none;
-        padding-left: 0;
-      }
-      .list-features li {
-        padding: 0.5rem 0;
-        padding-left: 1.5rem;
-        position: relative;
-      }
-      .list-features li:before {
-        content: '✓';
-        position: absolute;
-        left: 0;
-        color: #28a745;
-        font-weight: bold;
-      }
-      .package-level-badge {
-        display: inline-block;
-        padding: 0.25rem 0.75rem;
-        font-size: 0.875rem;
-        font-weight: 600;
-        border-radius: 20px;
-        margin-left: 0.5rem;
-      }
-      .badge-high-level {
-        background-color: #28a745;
-        color: white;
-      }
-      .badge-low-level {
-        background-color: #6c757d;
-        color: white;
-      }
-      .section-divider {
-        border-top: 3px solid #e21833;
-        margin: 3rem 0;
-        padding-top: 2rem;
-      }
-    </style>
-  </head>
-  <body>
-    <header class="header">
-      <div class="container">
-        <h1 class="display-4">University of Maryland Design System</h1>
-        <p class="lead">
-          Build consistent, accessible, and beautiful UMD digital experiences
-        </p>
-      </div>
-    </header>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UMD Design System — Documentation</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    .content-section { background-color: #f8f9fa; border-radius: 8px; padding: 2rem; margin-bottom: 2rem; }
+    .code-example { background-color: #ffffff; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
+    pre { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; margin-bottom: 0; }
+    code { color: #e83e8c; }
+    .btn-umd { background-color: #e21833; color: white; border: none; }
+    .btn-umd:hover { background-color: #c71629; color: white; }
+    .cm-callout { background-color: #e3f2fd; border: 1px solid #90caf9; border-radius: 8px; padding: 1rem 1.5rem; margin-bottom: 2rem; }
 
-    <div class="container py-5">
-      <!-- Introduction Section -->
-      <div class="row mb-5">
-        <div class="col-md-12">
-          <h2 class="mb-4">Welcome to the UMD Design System</h2>
-          <p class="lead">
-            The UMD Design System is a comprehensive collection of design
-            tokens, utilities, components, and patterns that help developers and
-            designers create consistent, accessible, and on-brand digital
-            experiences for the University of Maryland.
-          </p>
+    .hero-section {
+      background-color: #e21833;
+      color: #ffffff;
+      padding: 4rem 0;
+    }
+    .hero-section .btn-outline-light:hover {
+      color: #e21833;
+    }
+    .tier-foundation { background-color: #e3f2fd; border: 1px solid #90caf9; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; }
+    .tier-infrastructure { background-color: #fff9c4; border: 1px solid #fff176; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; }
+    .tier-application { background-color: #e8f5e9; border: 1px solid #a5d6a7; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; }
+    .pkg-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 1.25rem; height: 100%; background: #fff; }
+    .pkg-card h6 { margin-bottom: 0.25rem; }
+    .pkg-card .pkg-npm { font-size: 0.8rem; color: #6c757d; }
+    .pkg-card .pkg-desc { font-size: 0.9rem; margin: 0.5rem 0; }
+    .pkg-card .pkg-links { font-size: 0.85rem; }
+  </style>
+</head>
+<body>
 
-          <div class="quick-links">
-            <h4>🚀 Quick Links</h4>
-            <div class="row">
-              <div class="col-md-4">
-                <a href="getting-started.html" class="btn btn-umd w-100 mb-2"
-                  >Get Started</a
-                >
-              </div>
-              <div class="col-md-4">
-                <a
-                  href="http://playground.designsystem.umd.edu"
-                  target="_blank"
-                  class="btn btn-outline-danger w-100 mb-2"
-                  >Component Playground</a
-                >
-              </div>
-              <div class="col-md-4">
-                <a
-                  href="https://designsystem.umd.edu"
-                  target="_blank"
-                  class="btn btn-outline-dark w-100 mb-2"
-                  >Design System Website</a
-                >
-              </div>
-            </div>
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #e21833;">
+  <div class="container">
+    <a class="navbar-brand fw-bold" href="index.html">UMD Design System</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="architecture.html">Architecture</a></li>
+        <li class="nav-item"><a class="nav-link" href="getting-started.html">Getting Started</a></li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Packages</a>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="components/usage.html">Components</a></li>
+            <li><a class="dropdown-item" href="styles/static-css.html">Styles</a></li>
+            <li><a class="dropdown-item" href="feeds/use-cases.html">Feeds</a></li>
+            <li><a class="dropdown-item" href="elements/use-cases.html">Elements</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="tokens/use-cases.html">Tokens</a></li>
+            <li><a class="dropdown-item" href="icons/use-cases.html">Icons</a></li>
+            <li><a class="dropdown-item" href="utilities/use-cases.html">Utilities</a></li>
+            <li><a class="dropdown-item" href="infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
+          </ul>
+        </li>
+        <li class="nav-item"><a class="nav-link" href="http://playground.designsystem.umd.edu" target="_blank">Playground</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero-section">
+  <div class="container text-center">
+    <h1 class="display-4 fw-bold mb-3">University of Maryland Design System</h1>
+    <p class="lead mb-4">9 composable packages for building consistent, accessible UMD digital experiences.</p>
+    <div class="d-flex justify-content-center gap-3 flex-wrap">
+      <a href="getting-started.html#cdn" class="btn btn-light btn-lg fw-semibold">Quick Start (CDN)</a>
+      <a href="getting-started.html#npm" class="btn btn-outline-light btn-lg fw-semibold">Install via npm</a>
+      <a href="architecture.html" class="btn btn-outline-light btn-lg fw-semibold">Explore Architecture</a>
+    </div>
+  </div>
+</section>
+
+<div class="container py-5">
+
+  <!-- Audience Cards -->
+  <section class="mb-5">
+    <h2 class="h3 fw-bold mb-4 text-center">Choose Your Path</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="content-section h-100">
+          <h5 class="fw-bold">Content Managers / No-Code</h5>
+          <p>Build UMD pages with HTML tags and CSS classes. No build tools required.</p>
+          <ul class="list-unstyled small">
+            <li><a href="getting-started.html#cdn">CDN Quick Start</a></li>
+          </ul>
+          <div class="cm-callout mt-3">
+            <strong>Visual examples:</strong> Visit <a href="https://designsystem.umd.edu">designsystem.umd.edu</a> for design guidance and live demos.
           </div>
         </div>
       </div>
-
-      <!-- Common Packages Section -->
-      <h2 class="mb-4">
-        Common Implementation<span class="package-level-badge badge-high-level"
-          >No code solutions</span
-        >
-      </h2>
-      <p class="mb-4">
-        These packages provide ready-to-use solutions for most web development
-        needs. They offer pre-built components and utilities that can be quickly
-        integrated with minimal configuration.
-      </p>
-
-      <!-- Components Package -->
-      <div class="package-section">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="text-center package-icon">🧩</div>
-            <h3 class="text-center mb-4">Components Package</h3>
-            <p class="text-center mb-4">
-              <code>@universityofmaryland/web-components-library</code>
-            </p>
-            <p>
-              Feature-rich
-              <a
-                href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components"
-                target="_blank"
-                >Web Components</a
-              >
-              built with Shadow DOM encapsulation that automatically enforces
-              UMD brand standards and accessibility compliance. These high-level
-              components are built on top of the Elements package and implement
-              UMD design patterns, ready to use in any web application with full
-              WCAG 2.1 AA support built-in. Perfect for developers who want to
-              quickly build UMD-branded interfaces without custom development,
-              while ensuring consistent styling and accessibility across all
-              implementations.
-            </p>
-
-            <div class="row mt-4">
-              <div class="col-md-6">
-                <h5>Component Categories</h5>
-                <ul class="list-features">
-                  <li>Navigation (headers, menus, breadcrumbs)</li>
-                  <li>Content (cards, heroes, quotes)</li>
-                  <li>Layout (intros, columns , footers)</li>
-                  <li>Interactive (accordions, tabs, modals)</li>
-                  <li>Media (carousels, galleries, video)</li>
-                </ul>
-              </div>
-              <div class="col-md-6">
-                <h5>Resources</h5>
-                <div class="list-group">
-                  <a
-                    href="components/index.html"
-                    class="list-group-item list-group-item-action"
-                  >
-                    📖 Component Reference
-                  </a>
-                  <a
-                    href="components/usage.html"
-                    class="list-group-item list-group-item-action"
-                  >
-                    💻 Usage Examples
-                  </a>
-                  <a
-                    href="components/advanced-usage.html"
-                    class="list-group-item list-group-item-action"
-                  >
-                    🔧 Advanced Guide
-                  </a>
-                </div>
-              </div>
-            </div>
-
-            <h5 class="mt-4">Popular Components</h5>
-            <div class="row">
-              <div class="col-md-4">
-                <ul class="list-unstyled">
-                  <li><a href="components/variables/web-components.HeroBase.html">Hero</a></li>
-                  <li><a href="components/variables/web-components.CardStandard.html">Card</a></li>
-                  <li>
-                    <a href="components/functions/web-components.NavigationHeader.html"
-                      >Navigation</a
-                    >
-                  </li>
-                  <li>
-                    <a href="components/variables/web-components.FooterOptions.html">Footer</a>
-                  </li>
-                </ul>
-              </div>
-              <div class="col-md-4">
-                <ul class="list-unstyled">
-                  <li>
-                    <a href="components/variables/web-components.AccordionItem.html"
-                      >Accordion</a
-                    >
-                  </li>
-                  <li>
-                    <a href="components/variables/web-components.CarouselBase.html">Carousel</a>
-                  </li>
-                  <li><a href="components/variables/web-components.TabDisplay.html">Tab</a></li>
-                  <li><a href="components/variables/web-components.LayoutModal.html">Modal</a></li>
-                </ul>
-              </div>
-              <div class="col-md-4">
-                <ul class="list-unstyled">
-                  <li>
-                    <a href="components/variables/web-components.PersonDisplay.html">Person</a>
-                  </li>
-                  <li><a href="components/variables/web-components.QuoteDisplay.html">Quote</a></li>
-                  <li><a href="components/variables/web-components.StatDisplay.html">Stat</a></li>
-                  <li><a href="components/modules/web-components.html">View All →</a></li>
-                </ul>
-              </div>
-            </div>
-          </div>
+      <div class="col-md-4">
+        <div class="content-section h-100">
+          <h5 class="fw-bold">Web Developers</h5>
+          <p>Install via npm, import components, integrate with your framework.</p>
+          <ul class="list-unstyled small">
+            <li><a href="getting-started.html#npm">npm Installation</a></li>
+            <li><a href="styles/static-css.html">Static CSS</a></li>
+            <li><a href="styles/tailwind.html">Tailwind Integration</a></li>
+          </ul>
         </div>
       </div>
-
-      <!-- Styles Package -->
-      <div class="package-section">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="text-center package-icon">🎨</div>
-            <h3 class="text-center mb-4">Styles Package</h3>
-            <p class="text-center mb-4">
-              <code>@universityofmaryland/web-styles-library</code>
-            </p>
-            <p>
-              The foundation of the design system, providing design tokens, CSS
-              utilities, and layout systems. This package contains all the
-              visual building blocks including colors, typography, spacing, and
-              grid systems. Ideal for projects that need consistent UMD styling
-              without the overhead of full components.
-            </p>
-
-            <div class="row mt-4">
-              <div class="col-md-6">
-                <h5>Key Features</h5>
-                <ul class="list-features">
-                  <li>Design tokens (colors, spacing, typography)</li>
-                  <li>CSS utility classes</li>
-                  <li>Layout and grid systems</li>
-                  <li>Responsive breakpoints</li>
-                  <li>Animation utilities</li>
-                </ul>
-              </div>
-              <div class="col-md-6">
-                <h5>Resources</h5>
-                <div class="list-group">
-                  <a
-                    href="styles/index.html"
-                    class="list-group-item list-group-item-action"
-                  >
-                    📚 Full Documentation
-                  </a>
-                  <a
-                    href="styles/use-cases.html"
-                    class="list-group-item list-group-item-action"
-                  >
-                    💡 Use Cases & Examples
-                  </a>
-                  <a
-                    href="styles/tailwind.html"
-                    class="list-group-item list-group-item-action"
-                  >
-                    🌊 Tailwind Integration
-                  </a>
-                  <a
-                    href="styles/modules/token.html"
-                    class="list-group-item list-group-item-action"
-                  >
-                    🎯 Design Tokens
-                  </a>
-                  <a
-                    href="styles/modules/layout.html"
-                    class="list-group-item list-group-item-action"
-                  >
-                    📐 Layout System
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+      <div class="col-md-4">
+        <div class="content-section h-100">
+          <h5 class="fw-bold">Senior Developers / Architects</h5>
+          <p>Compose at any layer — tokens, styles, elements, or build custom web components.</p>
+          <ul class="list-unstyled small">
+            <li><a href="architecture.html">Architecture Overview</a></li>
+            <li><a href="elements/use-cases.html">Elements</a></li>
+            <li><a href="infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
+          </ul>
         </div>
       </div>
+    </div>
+  </section>
 
-      <!-- Advanced Implementation Packages Section -->
-      <div class="section-divider">
-        <h2 class="mb-4">
-          Advanced Implementation
-          <span class="package-level-badge badge-low-level"
-            >Pro-Code solutions</span
-          >
-        </h2>
-        <p class="mb-4">
-          These packages provide lower level access for advanced
-          implementations. They offer maximum flexibility for developers who
-          want to integrate with TypeScript for advanced UI development or
-          intergration into existing frameworks.
-        </p>
-      </div>
+  <!-- Composable Architecture Diagram -->
+  <section class="mb-5">
+    <h2 class="h3 fw-bold mb-4 text-center">Composable Architecture</h2>
+    <p class="text-center text-muted mb-4">Each tier builds on the one below. Enter at the level that fits your needs.</p>
 
-      <!-- Elements Package -->
-      <div class="package-section">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="text-center package-icon">🧱</div>
-            <h3 class="text-center mb-4">Elements Package</h3>
-            <p class="text-center mb-4">
-              <code>@universityofmaryland/web-elements-library</code>
-            </p>
-            <p>
-              Foundational UI elements built as atomic building blocks. These
-              are the smallest units used to construct more complex components.
-              Elements are unstyled by default and rely on the styles package
-              for visual appearance. Perfect for developers building custom
-              component libraries or needing precise control over UI
-              construction.
-            </p>
-
-            <div class="row mt-4">
-              <div class="col-md-6">
-                <h5>What's Included</h5>
-                <ul class="list-features">
-                  <li>Base UI elements (buttons, inputs, etc.)</li>
-                  <li>Layout primitives</li>
-                  <li>Typography components</li>
-                  <li>Media elements</li>
-                  <li>Form controls</li>
-                </ul>
-              </div>
-              <div class="col-md-6">
-                <h5>Resources</h5>
-                <div class="list-group">
-                  <a
-                    href="elements/index.html"
-                    class="list-group-item list-group-item-action"
-                  >
-                    📋 Element Documentation
-                  </a>
-                  <a
-                    href="#"
-                    class="list-group-item list-group-item-action disabled"
-                  >
-                    💡 Use Cases & Examples
-                    <span class="text-muted">(Coming Soon)</span>
-                  </a>
-                  <a
-                    href="elements/modules.html"
-                    class="list-group-item list-group-item-action"
-                  >
-                    🔧 API Reference
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
+    <div class="tier-application">
+      <div class="d-flex justify-content-between align-items-center flex-wrap">
+        <div>
+          <h5 class="fw-bold mb-1">Application Layer</h5>
+          <span class="text-muted">Components, Feeds</span>
         </div>
-      </div>
-
-      <!-- Feeds Package -->
-      <div class="package-section">
-        <div class="row">
-          <div class="col-md-12">
-            <div class="text-center package-icon">📰</div>
-            <h3 class="text-center mb-4">Feeds Package</h3>
-            <p class="text-center mb-4">
-              <code>@universityofmaryland/web-feeds-library</code>
-            </p>
-            <p>
-              Specialized components for displaying dynamic content feeds
-              including news, events, and academic information. These components
-              are designed to integrate with UMD data sources and APIs. Ideal
-              for developers who need programmatic control over content display
-              and custom feed implementations.
-            </p>
-
-            <div class="row mt-4">
-              <div class="col-md-6">
-                <h5>Feed Types</h5>
-                <ul class="list-features">
-                  <li>News feeds with filtering</li>
-                  <li>Event calendars and lists</li>
-                  <li>Academic program displays</li>
-                  <li>Dynamic content grids</li>
-                  <li>Social media integrations</li>
-                </ul>
-              </div>
-              <div class="col-md-6">
-                <h5>Resources</h5>
-                <div class="list-group">
-                  <a
-                    href="feeds/index.html"
-                    class="list-group-item list-group-item-action"
-                  >
-                    📋 Feed Documentation
-                  </a>
-                  <a
-                    href="feeds/use-cases.html"
-                    class="list-group-item list-group-item-action"
-                  >
-                    💡 Use Cases & Examples
-                  </a>
-                  <a
-                    href="feeds/modules/composite_news.html"
-                    class="list-group-item list-group-item-action"
-                  >
-                    📰 News Feed
-                  </a>
-                  <a
-                    href="feeds/modules/composite_events.html"
-                    class="list-group-item list-group-item-action"
-                  >
-                    📅 Events Feed
-                  </a>
-                  <a
-                    href="feeds/modules/composite_academic.html"
-                    class="list-group-item list-group-item-action"
-                  >
-                    🎓 Academic Feed
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- When to Use Each Package -->
-      <div class="alert alert-primary mt-5">
-        <h5>🤔 Which Package Should I Use?</h5>
-        <div class="row mt-3">
-          <div class="col-md-6">
-            <h6>Use High-Level Packages When:</h6>
-            <ul>
-              <li>Building standard UMD websites quickly</li>
-              <li>Need ready-to-use components</li>
-              <li>Want minimal configuration</li>
-              <li>Following standard UMD patterns</li>
-              <li>Prototyping or rapid development</li>
-            </ul>
-          </div>
-          <div class="col-md-6">
-            <h6>Use Low-Level Packages When:</h6>
-            <ul>
-              <li>Building custom component libraries</li>
-              <li>Need fine-grained control</li>
-              <li>Integrating with existing frameworks</li>
-              <li>Creating unique UI patterns</li>
-              <li>Performance optimization is critical</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Additional Resources -->
-      <h2 class="mb-4 mt-5">Additional Resources</h2>
-
-      <div class="row">
-        <div class="col-md-4">
-          <div class="resource-card">
-            <h5>🔧 Developer Tools</h5>
-            <ul class="list-unstyled">
-              <li>
-                <a href="https://umd-digital.github.io/design-system/"
-                  >TypeDoc API Reference</a
-                >
-              </li>
-              <li>
-                <a href="https://www.npmjs.com/org/universityofmaryland"
-                  >NPM Packages</a
-                >
-              </li>
-              <li>
-                <a href="https://github.com/UMD-Digital/design-system"
-                  >Source Code</a
-                >
-              </li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="resource-card">
-            <h5>📚 Learning Resources</h5>
-            <ul class="list-unstyled">
-              <li><a href="getting-started.html">Getting Started Guide</a></li>
-              <li><a href="components/usage.html">Component Examples</a></li>
-              <li><a href="styles/tailwind.html">Tailwind Integration</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="resource-card">
-            <h5>🌐 External Links</h5>
-            <ul class="list-unstyled">
-              <li>
-                <a href="https://designsystem.umd.edu">Design System Website</a>
-              </li>
-              <li>
-                <a href="http://playground.designsystem.umd.edu"
-                  >Interactive Playground</a
-                >
-              </li>
-              <li><a href="https://brand.umd.edu">UMD Brand Guidelines</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-
-      <!-- Getting Help -->
-      <div class="alert alert-info mt-5">
-        <h5>🤝 Need Help?</h5>
-        <p class="mb-0">
-          <strong>Documentation:</strong> Start with our
-          <a href="getting-started.html" class="alert-link"
-            >Getting Started Guide</a
-          ><br />
-          <strong>Examples:</strong> Explore the
-          <a
-            href="http://playground.designsystem.umd.edu"
-            class="alert-link"
-            target="_blank"
-            >Interactive Playground</a
-          ><br />
-          <strong>Issues:</strong> Report bugs or request features on
-          <a
-            href="https://github.com/UMD-Digital/design-system/issues"
-            class="alert-link"
-            target="_blank"
-            >GitHub</a
-          ><br />
-          <strong>Contact:</strong> Reach out to the Web Services Unit for
-          additional support
-        </p>
+        <span class="badge bg-success fs-6">Enter here for ready-to-use web components</span>
       </div>
     </div>
 
-    <footer class="bg-light py-4 mt-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <p class="mb-0">
-              &copy; University of Maryland. All rights reserved.
-            </p>
-            <p class="text-muted">
-              <a href="https://umd.edu">umd.edu</a> |
-              <a href="https://brand.umd.edu">Brand Guidelines</a> |
-              <a href="https://designsystem.umd.edu">Design System</a>
-            </p>
+    <div class="tier-infrastructure">
+      <div class="d-flex justify-content-between align-items-center flex-wrap">
+        <div>
+          <h5 class="fw-bold mb-1">Infrastructure Layer</h5>
+          <span class="text-muted">Styles, Elements, Model, Builder</span>
+        </div>
+        <span class="badge bg-warning text-dark fs-6">Enter here for CSS utilities, imperative elements, or custom components</span>
+      </div>
+    </div>
+
+    <div class="tier-foundation">
+      <div class="d-flex justify-content-between align-items-center flex-wrap">
+        <div>
+          <h5 class="fw-bold mb-1">Foundation Layer</h5>
+          <span class="text-muted">Tokens, Icons, Utilities</span>
+        </div>
+        <span class="badge bg-primary fs-6">Enter here for raw design values and helpers</span>
+      </div>
+    </div>
+
+    <div class="text-center mt-3">
+      <a href="architecture.html" class="btn btn-umd">Full Architecture Overview</a>
+    </div>
+  </section>
+
+  <!-- Package Quick Reference Grid -->
+  <section class="mb-5">
+    <h2 class="h3 fw-bold mb-4 text-center">Package Quick Reference</h2>
+
+    <!-- Foundation Row -->
+    <h6 class="text-uppercase text-primary fw-bold mb-3">Foundation</h6>
+    <div class="row g-3 mb-4">
+      <div class="col-md-4">
+        <div class="pkg-card">
+          <h6 class="fw-bold">Tokens</h6>
+          <div class="pkg-npm"><code>@universityofmaryland/web-token-library</code></div>
+          <p class="pkg-desc">Design primitives: color, spacing, media queries, and font definitions.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="pkg-links">
+              <a href="tokens/use-cases.html">Docs</a> |
+              <a href="tokens/index.html">API</a> |
+              <a href="https://www.npmjs.com/package/@universityofmaryland/web-token-library" target="_blank">npm</a>
+            </div>
+            <span class="badge bg-secondary">v1.0.1</span>
           </div>
         </div>
       </div>
-    </footer>
-  </body>
+      <div class="col-md-4">
+        <div class="pkg-card">
+          <h6 class="fw-bold">Icons</h6>
+          <div class="pkg-npm"><code>@universityofmaryland/web-icons-library</code></div>
+          <p class="pkg-desc">SVG icon and logo assets across 13 categories.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="pkg-links">
+              <a href="icons/use-cases.html">Docs</a> |
+              <a href="icons/index.html">API</a> |
+              <a href="https://www.npmjs.com/package/@universityofmaryland/web-icons-library" target="_blank">npm</a>
+            </div>
+            <span class="badge bg-secondary">v1.0.3</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="pkg-card">
+          <h6 class="fw-bold">Utilities</h6>
+          <div class="pkg-npm"><code>@universityofmaryland/web-utilities-library</code></div>
+          <p class="pkg-desc">Shared helper functions across 15 categories: DOM, events, animation, and more.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="pkg-links">
+              <a href="utilities/use-cases.html">Docs</a> |
+              <a href="utilities/index.html">API</a> |
+              <a href="https://www.npmjs.com/package/@universityofmaryland/web-utilities-library" target="_blank">npm</a>
+            </div>
+            <span class="badge bg-secondary">v1.0.3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Infrastructure Row -->
+    <h6 class="text-uppercase text-warning fw-bold mb-3">Infrastructure</h6>
+    <div class="row g-3 mb-4">
+      <div class="col-md-4">
+        <div class="pkg-card">
+          <h6 class="fw-bold">Styles</h6>
+          <div class="pkg-npm"><code>@universityofmaryland/web-styles-library</code></div>
+          <p class="pkg-desc">Static CSS files, Tailwind integration, and design token stylesheets.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="pkg-links">
+              <a href="styles/static-css.html">Docs</a> |
+              <a href="styles/index.html">API</a> |
+              <a href="https://www.npmjs.com/package/@universityofmaryland/web-styles-library" target="_blank">npm</a>
+            </div>
+            <span class="badge bg-secondary">v1.8.3</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="pkg-card">
+          <h6 class="fw-bold">Model</h6>
+          <div class="pkg-npm"><code>@universityofmaryland/web-model-library</code></div>
+          <p class="pkg-desc">Web component model: Attributes, Register, Slots, and Lifecycle utilities.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="pkg-links">
+              <a href="infrastructure/model-and-builder.html">Docs</a> |
+              <a href="infrastructure/index.html">API</a> |
+              <a href="https://www.npmjs.com/package/@universityofmaryland/web-model-library" target="_blank">npm</a>
+            </div>
+            <span class="badge bg-secondary">v1.0.6</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="pkg-card">
+          <h6 class="fw-bold">Builder</h6>
+          <div class="pkg-npm"><code>@universityofmaryland/web-builder-library</code></div>
+          <p class="pkg-desc">ElementBuilder: fluent API for constructing UI elements with lifecycle management.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="pkg-links">
+              <a href="infrastructure/model-and-builder.html">Docs</a> |
+              <a href="infrastructure/index.html">API</a> |
+              <a href="https://www.npmjs.com/package/@universityofmaryland/web-builder-library" target="_blank">npm</a>
+            </div>
+            <span class="badge bg-secondary">v1.0.2</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Application Row -->
+    <h6 class="text-uppercase text-success fw-bold mb-3">Application</h6>
+    <div class="row g-3 mb-4">
+      <div class="col-md-4">
+        <div class="pkg-card">
+          <h6 class="fw-bold">Elements</h6>
+          <div class="pkg-npm"><code>@universityofmaryland/web-elements-library</code></div>
+          <p class="pkg-desc">Foundational UI element builders: Atomic, Composite, and Layout.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="pkg-links">
+              <a href="elements/use-cases.html">Docs</a> |
+              <a href="elements/index.html">API</a> |
+              <a href="https://www.npmjs.com/package/@universityofmaryland/web-elements-library" target="_blank">npm</a>
+            </div>
+            <span class="badge bg-secondary">v1.6.7</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="pkg-card">
+          <h6 class="fw-bold">Feeds</h6>
+          <div class="pkg-npm"><code>@universityofmaryland/web-feeds-library</code></div>
+          <p class="pkg-desc">Dynamic content feeds: academic, experts, news, events, and inTheNews.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="pkg-links">
+              <a href="feeds/use-cases.html">Docs</a> |
+              <a href="feeds/index.html">API</a> |
+              <a href="https://www.npmjs.com/package/@universityofmaryland/web-feeds-library" target="_blank">npm</a>
+            </div>
+            <span class="badge bg-secondary">v1.3.6</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="pkg-card">
+          <h6 class="fw-bold">Components</h6>
+          <div class="pkg-npm"><code>@universityofmaryland/web-components-library</code></div>
+          <p class="pkg-desc">Full web components (Custom Elements) with Shadow DOM encapsulation.</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="pkg-links">
+              <a href="components/usage.html">Docs</a> |
+              <a href="components/index.html">API</a> |
+              <a href="https://www.npmjs.com/package/@universityofmaryland/web-components-library" target="_blank">npm</a>
+            </div>
+            <span class="badge bg-secondary">v1.17.14</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Manager Callout -->
+  <section class="mb-5">
+    <div class="cm-callout">
+      <h5 class="fw-bold mb-2">For Content Managers</h5>
+      <p class="mb-0">For visual examples and design guidance, visit <a href="https://designsystem.umd.edu"><strong>designsystem.umd.edu</strong></a>.</p>
+    </div>
+  </section>
+
+  <!-- External Resources -->
+  <section class="mb-5">
+    <h2 class="h3 fw-bold mb-4 text-center">Resources</h2>
+    <div class="row g-4">
+      <div class="col-md-4">
+        <div class="content-section h-100">
+          <h5 class="fw-bold">Developer Tools</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="https://umd-digital.github.io/design-system/">TypeDoc API Reference</a></li>
+            <li class="mb-2"><a href="https://www.npmjs.com/org/universityofmaryland">@universityofmaryland on npm</a></li>
+            <li class="mb-2"><a href="https://github.com/UMD-Digital/design-system">GitHub Repository</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="content-section h-100">
+          <h5 class="fw-bold">Learning</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="getting-started.html">Getting Started Guide</a></li>
+            <li class="mb-2"><a href="architecture.html">Architecture Overview</a></li>
+            <li class="mb-2"><a href="http://playground.designsystem.umd.edu" target="_blank">Component Playground</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="content-section h-100">
+          <h5 class="fw-bold">UMD Links</h5>
+          <ul class="list-unstyled">
+            <li class="mb-2"><a href="https://designsystem.umd.edu">designsystem.umd.edu</a></li>
+            <li class="mb-2"><a href="https://brand.umd.edu">brand.umd.edu</a></li>
+            <li class="mb-2"><a href="https://umd.edu">umd.edu</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- Footer -->
+<footer class="bg-dark text-light py-4 mt-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4">
+        <h6>UMD Design System</h6>
+        <p class="small text-muted">9 composable packages for consistent, accessible UMD digital experiences.</p>
+      </div>
+      <div class="col-md-4">
+        <h6>Resources</h6>
+        <ul class="list-unstyled small">
+          <li><a href="https://designsystem.umd.edu" class="text-muted">designsystem.umd.edu</a></li>
+          <li><a href="http://playground.designsystem.umd.edu" class="text-muted">Component Playground</a></li>
+          <li><a href="https://github.com/UMD-Digital/design-system" class="text-muted">GitHub</a></li>
+        </ul>
+      </div>
+      <div class="col-md-4">
+        <h6>npm Packages</h6>
+        <ul class="list-unstyled small">
+          <li><a href="https://www.npmjs.com/org/universityofmaryland" class="text-muted">@universityofmaryland on npm</a></li>
+        </ul>
+      </div>
+    </div>
+    <hr class="my-3 border-secondary">
+    <p class="text-center text-muted small mb-0">&copy; University of Maryland. All rights reserved. | <a href="https://umd.edu" class="text-muted">umd.edu</a> | <a href="https://brand.umd.edu" class="text-muted">Brand Guidelines</a></p>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>

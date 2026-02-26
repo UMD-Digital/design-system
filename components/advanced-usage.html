@@ -18,12 +18,6 @@
         color: white;
         padding: 2rem 0;
       }
-      .nav-link {
-        color: #000;
-      }
-      .nav-link:hover {
-        color: #e21833;
-      }
       .content-section {
         background-color: #f8f9fa;
         border-radius: 8px;
@@ -94,6 +88,39 @@
     </style>
   </head>
   <body data-bs-spy="scroll" data-bs-target="#toc" data-bs-offset="20">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #e21833;">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="../index.html">UMD Design System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="../architecture.html">Architecture</a></li>
+            <li class="nav-item"><a class="nav-link" href="../getting-started.html">Getting Started</a></li>
+          </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Packages</a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="../components/usage.html">Components</a></li>
+                <li><a class="dropdown-item" href="../styles/static-css.html">Styles</a></li>
+                <li><a class="dropdown-item" href="../feeds/use-cases.html">Feeds</a></li>
+                <li><a class="dropdown-item" href="../elements/use-cases.html">Elements</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="../tokens/use-cases.html">Tokens</a></li>
+                <li><a class="dropdown-item" href="../icons/use-cases.html">Icons</a></li>
+                <li><a class="dropdown-item" href="../utilities/use-cases.html">Utilities</a></li>
+                <li><a class="dropdown-item" href="../infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="http://playground.designsystem.umd.edu" target="_blank">Playground</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
     <header class="header">
       <div class="container">
         <h1>Advanced Component Usage</h1>
@@ -110,6 +137,11 @@
         </ol>
       </nav>
 
+      <div style="background-color: #e8f5e9; border-left: 4px solid #4caf50; padding: 1rem 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
+        <strong>Where This Package Fits:</strong> Components sits at the top of the <strong>Application</strong> layer. It depends on all lower packages and provides ready-to-use web components.
+        <a href="../architecture.html">See full architecture</a>.
+      </div>
+
       <div class="row">
         <!-- Table of Contents -->
         <div class="col-md-3">
@@ -119,6 +151,7 @@
             <a class="toc-link" href="#events">Event Handling</a>
             <a class="toc-link" href="#reactive">Reactive Components</a>
             <a class="toc-link" href="#testing">Testing Components</a>
+            <a class="toc-link" href="#frameworks">Framework Integration</a>
             <a class="toc-link" href="#custom">Custom Components</a>
             <a class="toc-link" href="#performance">Performance</a>
           </nav>
@@ -136,7 +169,7 @@
 
             <h3>Type Imports</h3>
             <div class="code-example">
-              <pre><code class="language-typescript">import { 
+              <pre><code class="language-typescript">import {
   Components,
   ComponentRef,
   SlotConfiguration,
@@ -146,10 +179,10 @@
 } from '@universityofmaryland/web-components-library';
 
 // Component-specific types
-import type { 
+import type {
   HeroProps,
   CardProps,
-  NavigationConfig 
+  NavigationConfig
 } from '@universityofmaryland/web-components-library/types';</code></pre>
             </div>
 
@@ -163,7 +196,7 @@ if (hero) {
   hero.addEventListener('component:ready', (event) =&gt; {
     console.log('Hero component initialized', event.detail);
   });
-  
+
   // Set attributes with type safety
   hero.setAttribute('data-theme', 'dark'); // Valid
   // hero.setAttribute('data-theme', 'invalid'); // TypeScript error
@@ -183,10 +216,10 @@ const createTypedHero = (): HTMLElement =&gt; {
     setTheme: (theme: 'light' | 'dark') =&gt; void;
     updateContent: (content: HeroContent) =&gt; void;
   };
-  
+
   hero.setAttribute('data-theme', 'dark');
   hero.setAttribute('data-display', 'overlay');
-  
+
   return hero;
 };</code></pre>
             </div>
@@ -313,26 +346,26 @@ describe('UMD Components', () =&gt; {
     document.body.innerHTML = '';
     Components.card.standard();
   });
-  
+
   test('creates card component', () =&gt; {
     const card = document.createElement('umd-element-card');
     card.innerHTML = `
-      <h3 slot="headline">Test Headline</h3>
-      <p slot="text">Test content</p>
+      &lt;h3 slot="headline"&gt;Test Headline&lt;/h3&gt;
+      &lt;p slot="text"&gt;Test content&lt;/p&gt;
     `;
-    
+
     document.body.appendChild(card);
-    
+
     expect(card.shadowRoot).toBeTruthy();
     expect(card.querySelector('[slot="headline"]').textContent)
       .toBe('Test Headline');
   });
-  
+
   test('handles missing required slots', () =&gt; {
     const card = document.createElement('umd-element-card');
     // Missing headline slot
-    card.innerHTML = '<p slot="text">Test content</p>';
-    
+    card.innerHTML = '&lt;p slot="text"&gt;Test content&lt;/p&gt;';
+
     // Component should still render
     document.body.appendChild(card);
     expect(card.shadowRoot).toBeTruthy();
@@ -341,26 +374,91 @@ describe('UMD Components', () =&gt; {
             </div>
           </section>
 
+          <!-- Framework Integration -->
+          <section id="frameworks" class="content-section">
+            <h2>Framework Integration</h2>
+            <p>Web components work natively in any framework. Here are common integration patterns.</p>
+
+            <h3>React</h3>
+            <div class="code-example">
+              <pre><code class="language-typescript">import { useEffect, useRef } from 'react';
+
+// Initialize components once at app root
+import { LoadStructuralComponents } from '@universityofmaryland/web-components-library/structural';
+LoadStructuralComponents();
+
+function UmdHero({ title, image, children }) {
+  return (
+    &lt;umd-element-hero data-display="overlay"&gt;
+      &lt;img slot="image" src={image} alt="" /&gt;
+      &lt;h1 slot="headline"&gt;{title}&lt;/h1&gt;
+      &lt;div slot="text"&gt;{children}&lt;/div&gt;
+    &lt;/umd-element-hero&gt;
+  );
+}</code></pre>
+            </div>
+
+            <h3>Vue</h3>
+            <div class="code-example">
+              <pre><code class="language-javascript">// main.js — tell Vue to ignore umd-* tags
+app.config.compilerOptions.isCustomElement = (tag) =&gt; tag.startsWith('umd-');
+
+// In vite.config.js
+export default defineConfig({
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) =&gt; tag.startsWith('umd-'),
+        },
+      },
+    }),
+  ],
+});</code></pre>
+            </div>
+
+            <h3>Angular</h3>
+            <div class="code-example">
+              <pre><code class="language-typescript">// app.module.ts
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+
+@NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+})
+export class AppModule {}</code></pre>
+            </div>
+          </section>
+
           <!-- Custom Components -->
           <section id="custom" class="content-section">
             <h2>Building Custom Components</h2>
-            <p>Extend the component library with your own custom components.</p>
+            <p>
+              Extend the component library with your own custom components using
+              the Model package.
+            </p>
 
             <h3>Custom Component Template</h3>
             <div class="code-example">
-              <pre><code class="language-typescript">import { 
-  Register, 
-  Slots, 
+              <pre><code class="language-typescript">import {
   Attributes,
-  CommonSlots
-} from '@universityofmaryland/web-components-library/core';
+  Model,
+  Register,
+  Slots,
+  Lifecycle
+} from '@universityofmaryland/web-model-library';
 
 // Define your component
 const tagName = 'umd-custom-feature';
 
 const slots = {
-  headline: CommonSlots.headline,
-  text: CommonSlots.text,
+  headline: {
+    allowedElements: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+    required: true
+  },
+  text: {
+    allowedElements: ['p', 'div'],
+    required: false
+  },
   media: {
     allowedElements: ['img', 'video', 'iframe'],
     required: false
@@ -371,10 +469,10 @@ const createComponent = (element) =&gt; {
   const headline = Slots.headline.default({ element });
   const text = Slots.text.default({ element });
   const media = element.querySelector('[slot="media"]');
-  
+
   // Create shadow DOM structure
   const template = `
-    <style>
+    &lt;style&gt;
       :host {
         display: block;
         padding: 2rem;
@@ -383,14 +481,14 @@ const createComponent = (element) =&gt; {
         max-width: 800px;
         margin: 0 auto;
       }
-    </style>
-    <div class="feature-content">
-      ${headline ? `<h2>${headline.outerHTML}</h2>` : ''}
-      ${media ? `<div class="media">${media.outerHTML}</div>` : ''}
-      ${text ? `<div class="text">${text.outerHTML}</div>` : ''}
-    </div>
+    &lt;/style&gt;
+    &lt;div class="feature-content"&gt;
+      ${headline ? `&lt;h2&gt;${headline.outerHTML}&lt;/h2&gt;` : ''}
+      ${media ? `&lt;div class="media"&gt;${media.outerHTML}&lt;/div&gt;` : ''}
+      ${text ? `&lt;div class="text"&gt;${text.outerHTML}&lt;/div&gt;` : ''}
+    &lt;/div&gt;
   `;
-  
+
   return {
     element: element,
     template: template
@@ -398,11 +496,17 @@ const createComponent = (element) =&gt; {
 };
 
 // Register the component
-export default Register.webComponent({
+export const CustomFeature = Register.webComponent({
   tagName,
   slots,
   createComponent
 });</code></pre>
+            </div>
+
+            <div class="alert alert-pro-tip">
+              <strong>Full Custom Component Guide:</strong> For a comprehensive guide to building custom
+              components with the Model and Builder packages, see the
+              <a href="../infrastructure/model-and-builder.html">Model &amp; Builder documentation</a>.
             </div>
           </section>
 
@@ -416,7 +520,7 @@ export default Register.webComponent({
             <h3>Lazy Loading Components</h3>
             <div class="code-example">
               <pre><code class="language-javascript">// Load components only when needed
-const loadHeroComponents = () =&gt; 
+const loadHeroComponents = () =&gt;
   import('@universityofmaryland/web-components-library').then(({ Components }) =&gt; {
     Components.hero.base();
     Components.hero.expand();
@@ -475,7 +579,7 @@ export default {
             </div>
 
             <div class="alert alert-pro-tip">
-              <h5 class="alert-heading">💡 Performance Tips</h5>
+              <h5 class="alert-heading">Performance Tips</h5>
               <ul>
                 <li>Load only the components you use</li>
                 <li>Use dynamic imports for below-the-fold components</li>
@@ -494,20 +598,15 @@ export default {
             <h3>Additional Resources</h3>
             <ul>
               <li>
-                <a href="https://github.com/UMD-Digital/design-system"
-                  >GitHub Repository</a
-                >
+                <a href="https://github.com/UMD-Digital/design-system">GitHub Repository</a>
               </li>
               <li>
-                <a href="https://umd-digital.github.io/design-system/"
-                  >TypeDoc API Reference</a
-                >
+                <a href="https://umd-digital.github.io/design-system/">TypeDoc API Reference</a>
               </li>
               <li>
-                <a href="http://playground.designsystem.umd.edu"
-                  >Component Playground</a
-                >
+                <a href="http://playground.designsystem.umd.edu">Component Playground</a>
               </li>
+              <li><a href="../infrastructure/model-and-builder.html">Model &amp; Builder Documentation</a></li>
               <li><a href="../index.html">Back to Documentation Home</a></li>
             </ul>
           </div>
@@ -515,23 +614,41 @@ export default {
       </div>
     </div>
 
-    <footer class="bg-light py-4 mt-5">
+    <footer class="bg-dark text-light py-4 mt-5">
       <div class="container">
         <div class="row">
-          <div class="col-md-12 text-center">
-            <p>&copy; University of Maryland. All rights reserved.</p>
+          <div class="col-md-4">
+            <h6>UMD Design System</h6>
+            <p class="small text-muted">9 composable packages for consistent, accessible UMD digital experiences.</p>
+          </div>
+          <div class="col-md-4">
+            <h6>Resources</h6>
+            <ul class="list-unstyled small">
+              <li><a href="https://designsystem.umd.edu" class="text-muted">designsystem.umd.edu</a></li>
+              <li><a href="http://playground.designsystem.umd.edu" class="text-muted">Component Playground</a></li>
+              <li><a href="https://github.com/UMD-Digital/design-system" class="text-muted">GitHub</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h6>npm Packages</h6>
+            <ul class="list-unstyled small">
+              <li><a href="https://www.npmjs.com/org/universityofmaryland" class="text-muted">@universityofmaryland on npm</a></li>
+            </ul>
           </div>
         </div>
+        <hr class="my-3 border-secondary">
+        <p class="text-center text-muted small mb-0">&copy; University of Maryland. All rights reserved. | <a href="https://umd.edu" class="text-muted">umd.edu</a> | <a href="https://brand.umd.edu" class="text-muted">Brand Guidelines</a></p>
       </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
     <script>
       // Smooth scrolling for TOC links
-      document.querySelectorAll('.toc-link').forEach(link =&gt; {
-        link.addEventListener('click', (e) =&gt; {
+      document.querySelectorAll('.toc-link').forEach(link => {
+        link.addEventListener('click', (e) => {
           e.preventDefault();
           const target = document.querySelector(link.getAttribute('href'));
           if (target) {
@@ -544,17 +661,17 @@ export default {
       const sections = document.querySelectorAll('section[id]');
       const tocLinks = document.querySelectorAll('.toc-link');
 
-      window.addEventListener('scroll', () =&gt; {
+      window.addEventListener('scroll', () => {
         let current = '';
-        sections.forEach(section =&gt; {
+        sections.forEach(section => {
           const sectionTop = section.offsetTop;
           const sectionHeight = section.clientHeight;
-          if (scrollY &gt;= sectionTop - 100) {
+          if (scrollY >= sectionTop - 100) {
             current = section.getAttribute('id');
           }
         });
 
-        tocLinks.forEach(link =&gt; {
+        tocLinks.forEach(link => {
           link.classList.remove('active');
           if (link.getAttribute('href') === `#${current}`) {
             link.classList.add('active');

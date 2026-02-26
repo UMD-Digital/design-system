@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Utilities Use Cases - UMD Design System</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .header {
+        background-color: #e21833;
+        color: white;
+        padding: 2rem 0;
+      }
+      pre[class*="language-"] {
+        background-color: #f8f9fa;
+        border-radius: 4px;
+        padding: 1rem;
+        overflow-x: auto;
+      }
+      code {
+        color: #e83e8c;
+      }
+      .use-case-card {
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        background-color: #fff;
+      }
+      .use-case-card h4 {
+        color: #e21833;
+        margin-bottom: 1rem;
+      }
+      .category-table {
+        width: 100%;
+        margin: 1rem 0;
+      }
+      .category-table th {
+        background-color: #f8f9fa;
+        padding: 0.75rem;
+        text-align: left;
+        border-bottom: 2px solid #dee2e6;
+      }
+      .category-table td {
+        padding: 0.75rem;
+        border-bottom: 1px solid #dee2e6;
+      }
+      .category-table code {
+        background-color: #f8f9fa;
+        padding: 0.2rem 0.4rem;
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #e21833;">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="../index.html">UMD Design System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="../architecture.html">Architecture</a></li>
+            <li class="nav-item"><a class="nav-link" href="../getting-started.html">Getting Started</a></li>
+          </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Packages</a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="../components/usage.html">Components</a></li>
+                <li><a class="dropdown-item" href="../styles/static-css.html">Styles</a></li>
+                <li><a class="dropdown-item" href="../feeds/use-cases.html">Feeds</a></li>
+                <li><a class="dropdown-item" href="../elements/use-cases.html">Elements</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="../tokens/use-cases.html">Tokens</a></li>
+                <li><a class="dropdown-item" href="../icons/use-cases.html">Icons</a></li>
+                <li><a class="dropdown-item active" href="../utilities/use-cases.html">Utilities</a></li>
+                <li><a class="dropdown-item" href="../infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="http://playground.designsystem.umd.edu" target="_blank">Playground</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header class="header">
+      <div class="container">
+        <h1>Utilities Use Cases</h1>
+        <p class="lead">Helper functions for DOM, animation, accessibility, and more</p>
+      </div>
+    </header>
+
+    <div class="container py-5">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">Utilities</li>
+          <li class="breadcrumb-item active">Use Cases</li>
+        </ol>
+      </nav>
+
+      <div style="background-color: #f0f4ff; border-left: 4px solid #4a90d9; padding: 1rem 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
+        <strong>Where This Package Fits:</strong> Utilities sits in the <strong>Foundation</strong> layer. It depends on <strong>Tokens</strong> and <strong>Styles</strong> and provides helper functions used by <strong>Elements</strong>, <strong>Feeds</strong>, and <strong>Components</strong>.
+        <a href="../architecture.html">See full architecture</a>.
+      </div>
+
+      <!-- Section 1: Category Reference Table -->
+      <div class="use-case-card">
+        <h4>1. Category Reference</h4>
+        <p>The Utilities package is organized into focused categories, each importable independently.</p>
+
+        <table class="category-table">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Import Path</th>
+              <th>Key Functions</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>accessibility</code></td>
+              <td><code>./accessibility</code></td>
+              <td><code>trapFocus</code>, <code>restoreFocus</code></td>
+              <td>Focus management and screen reader helpers</td>
+            </tr>
+            <tr>
+              <td><code>adapters</code></td>
+              <td><code>./adapters</code></td>
+              <td>--</td>
+              <td>External service adapters</td>
+            </tr>
+            <tr>
+              <td><code>animation</code></td>
+              <td><code>./animation</code></td>
+              <td><code>fadeIn</code>, <code>fadeOut</code>, <code>slideToggle</code></td>
+              <td>Animation utilities</td>
+            </tr>
+            <tr>
+              <td><code>date</code></td>
+              <td><code>./date</code></td>
+              <td><code>formatDate</code>, <code>parseDate</code></td>
+              <td>Date formatting</td>
+            </tr>
+            <tr>
+              <td><code>dom</code></td>
+              <td><code>./dom</code></td>
+              <td><code>addClass</code>, <code>removeClass</code>, <code>createElement</code></td>
+              <td>DOM manipulation</td>
+            </tr>
+            <tr>
+              <td><code>elements</code></td>
+              <td><code>./elements</code></td>
+              <td>--</td>
+              <td>Element creation helpers</td>
+            </tr>
+            <tr>
+              <td><code>events</code></td>
+              <td><code>./events</code></td>
+              <td><code>debounce</code>, <code>throttle</code></td>
+              <td>Event handling</td>
+            </tr>
+            <tr>
+              <td><code>media</code></td>
+              <td><code>./media</code></td>
+              <td><code>matchMedia</code></td>
+              <td>Media query helpers</td>
+            </tr>
+            <tr>
+              <td><code>network</code></td>
+              <td><code>./network</code></td>
+              <td><code>fetchData</code></td>
+              <td>Network request utilities</td>
+            </tr>
+            <tr>
+              <td><code>performance</code></td>
+              <td><code>./performance</code></td>
+              <td><code>lazyLoad</code></td>
+              <td>Performance optimization</td>
+            </tr>
+            <tr>
+              <td><code>storage</code></td>
+              <td><code>./storage</code></td>
+              <td><code>getItem</code>, <code>setItem</code></td>
+              <td>Local storage helpers</td>
+            </tr>
+            <tr>
+              <td><code>string</code></td>
+              <td><code>./string</code></td>
+              <td><code>truncate</code>, <code>slugify</code></td>
+              <td>String manipulation</td>
+            </tr>
+            <tr>
+              <td><code>styles</code></td>
+              <td><code>./styles</code></td>
+              <td><code>jssToCSS</code></td>
+              <td>JSS to CSS conversion</td>
+            </tr>
+            <tr>
+              <td><code>theme</code></td>
+              <td><code>./theme</code></td>
+              <td>--</td>
+              <td>Theme management</td>
+            </tr>
+            <tr>
+              <td><code>validation</code></td>
+              <td><code>./validation</code></td>
+              <td><code>isValidEmail</code></td>
+              <td>Input validation</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Section 2: Import Patterns -->
+      <div class="use-case-card">
+        <h4>2. Import Patterns</h4>
+
+        <h5>Category Import</h5>
+        <pre><code class="language-typescript">import * as dom from '@universityofmaryland/web-utilities-library/dom';
+
+dom.addClass(element, 'active');</code></pre>
+
+        <h5 class="mt-3">Individual Function Import</h5>
+        <pre><code class="language-typescript">import { addClass } from '@universityofmaryland/web-utilities-library/dom/addClass';</code></pre>
+
+        <h5 class="mt-3">Namespace Import</h5>
+        <pre><code class="language-typescript">import * as Utilities from '@universityofmaryland/web-utilities-library';
+
+Utilities.dom.addClass(element, 'active');</code></pre>
+
+        <div class="alert alert-info mt-3">
+          <strong>Tree-shaking Tip:</strong> Category imports and individual function imports both tree-shake well. Use individual imports when you only need a single function from a large category.
+        </div>
+      </div>
+
+      <!-- Section 3: Most-Used Utilities -->
+      <div class="use-case-card">
+        <h4>3. Most-Used Utilities</h4>
+
+        <h5>DOM: addClass / removeClass</h5>
+        <p>Add or remove CSS classes from elements:</p>
+        <pre><code class="language-typescript">import * as dom from '@universityofmaryland/web-utilities-library/dom';
+
+const card = document.querySelector('.card');
+dom.addClass(card, 'active');
+dom.removeClass(card, 'hidden');</code></pre>
+
+        <h5 class="mt-4">Events: debounce</h5>
+        <p>Debounce high-frequency events like scroll and resize:</p>
+        <pre><code class="language-typescript">import * as events from '@universityofmaryland/web-utilities-library/events';
+
+const handleResize = events.debounce(() => {
+  // Recalculate layout
+  updateGridColumns();
+}, 250);
+
+window.addEventListener('resize', handleResize);</code></pre>
+
+        <h5 class="mt-4">Accessibility: trapFocus</h5>
+        <p>Trap keyboard focus within a modal or dialog:</p>
+        <pre><code class="language-typescript">import * as a11y from '@universityofmaryland/web-utilities-library/accessibility';
+
+const modal = document.querySelector('.modal');
+
+// Trap focus inside the modal when it opens
+a11y.trapFocus(modal);
+
+// Restore focus to the trigger element when it closes
+a11y.restoreFocus();</code></pre>
+
+        <h5 class="mt-4">Animation: fadeIn</h5>
+        <p>Animate element visibility transitions:</p>
+        <pre><code class="language-typescript">import * as animation from '@universityofmaryland/web-utilities-library/animation';
+
+const panel = document.querySelector('.info-panel');
+
+// Fade in with default duration
+animation.fadeIn(panel);
+
+// Fade out when closing
+animation.fadeOut(panel);</code></pre>
+
+        <h5 class="mt-4">Styles: jssToCSS</h5>
+        <p>Convert JSS (JavaScript Style Sheets) objects to CSS strings:</p>
+        <pre><code class="language-typescript">import * as styles from '@universityofmaryland/web-utilities-library/styles';
+
+const jssObject = {
+  '.card': {
+    padding: '1rem',
+    backgroundColor: '#fff',
+    '&:hover': {
+      boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+    },
+  },
+};
+
+const cssString = styles.jssToCSS(jssObject);
+// Output: .card { padding: 1rem; background-color: #fff; }
+//         .card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }</code></pre>
+      </div>
+
+      <!-- Related Resources -->
+      <div class="mt-5">
+        <h3>Related Resources</h3>
+        <ul>
+          <li><a href="../architecture.html">System Architecture</a></li>
+          <li><a href="../tokens/use-cases.html">Tokens Use Cases</a></li>
+          <li><a href="../styles/use-cases.html">Styles Use Cases</a></li>
+          <li><a href="../elements/use-cases.html">Elements Use Cases</a></li>
+          <li><a href="../components/usage.html">Components Usage Guide</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <footer class="bg-dark text-light py-4 mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h6>UMD Design System</h6>
+            <p class="small text-muted">9 composable packages for consistent, accessible UMD digital experiences.</p>
+          </div>
+          <div class="col-md-4">
+            <h6>Resources</h6>
+            <ul class="list-unstyled small">
+              <li><a href="https://designsystem.umd.edu" class="text-muted">designsystem.umd.edu</a></li>
+              <li><a href="http://playground.designsystem.umd.edu" class="text-muted">Component Playground</a></li>
+              <li><a href="https://github.com/UMD-Digital/design-system" class="text-muted">GitHub</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h6>npm Packages</h6>
+            <ul class="list-unstyled small">
+              <li><a href="https://www.npmjs.com/org/universityofmaryland" class="text-muted">@universityofmaryland on npm</a></li>
+            </ul>
+          </div>
+        </div>
+        <hr class="my-3 border-secondary">
+        <p class="text-center text-muted small mb-0">&copy; University of Maryland. All rights reserved. | <a href="https://umd.edu" class="text-muted">umd.edu</a> | <a href="https://brand.umd.edu" class="text-muted">Brand Guidelines</a></p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-typescript.min.js"></script>
+  </body>
+</html>

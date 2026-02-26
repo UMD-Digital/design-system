@@ -8,6 +8,10 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
+      rel="stylesheet"
+    />
     <style>
       .header {
         background-color: #e21833;
@@ -69,6 +73,39 @@
     </style>
   </head>
   <body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #e21833;">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="../index.html">UMD Design System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="../architecture.html">Architecture</a></li>
+            <li class="nav-item"><a class="nav-link" href="../getting-started.html">Getting Started</a></li>
+          </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Packages</a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="../components/usage.html">Components</a></li>
+                <li><a class="dropdown-item" href="../styles/static-css.html">Styles</a></li>
+                <li><a class="dropdown-item" href="../feeds/use-cases.html">Feeds</a></li>
+                <li><a class="dropdown-item" href="../elements/use-cases.html">Elements</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="../tokens/use-cases.html">Tokens</a></li>
+                <li><a class="dropdown-item" href="../icons/use-cases.html">Icons</a></li>
+                <li><a class="dropdown-item" href="../utilities/use-cases.html">Utilities</a></li>
+                <li><a class="dropdown-item" href="../infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="http://playground.designsystem.umd.edu" target="_blank">Playground</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
     <header class="header">
       <div class="container">
         <h1>Feeds Package Use Cases</h1>
@@ -85,6 +122,11 @@
         </ol>
       </nav>
 
+      <div style="background-color: #e8f5e9; border-left: 4px solid #4caf50; padding: 1rem 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
+        <strong>Where This Package Fits:</strong> Feeds sits in the <strong>Application</strong> layer. It depends on <strong>Tokens</strong>, <strong>Elements</strong>, and <strong>Utilities</strong>. It provides dynamic content feed components.
+        <a href="../architecture.html">See full architecture</a>.
+      </div>
+
       <div class="alert alert-info mb-4">
         <h5 class="alert-heading">About This Guide</h5>
         <p class="mb-0">
@@ -94,18 +136,22 @@
         </p>
       </div>
 
+      <div style="background-color: #e3f2fd; border: 1px solid #90caf9; border-radius: 8px; padding: 1rem 1.5rem; margin-bottom: 2rem;">
+        <strong>For Content Managers</strong> -- Feeds display dynamic UMD content like news and events. For feed configuration help and visual examples, visit <a href="https://designsystem.umd.edu">designsystem.umd.edu</a>.
+      </div>
+
       <h2 class="mb-4">Web Component Use Cases</h2>
 
       <!-- Use Case 1: News Feeds -->
       <div class="use-case-card">
-        <h4>📰 Use Case 1: News Feed Components</h4>
+        <h4>Use Case 1: News Feed Components</h4>
         <p>
           Display news content using web components with various layout options
           and configurations.
         </p>
 
         <h5>Simple News Block</h5>
-        <pre><code>&lt;!-- Basic 3-column news grid --&gt;
+        <pre><code class="language-html">&lt;!-- Basic 3-column news grid --&gt;
 &lt;umd-feed-news
   data-token="your-api-token"&gt;
 &lt;/umd-feed-news&gt;
@@ -127,7 +173,7 @@
 &lt;/umd-feed-news&gt;</code></pre>
 
         <h5>Featured News Layout</h5>
-        <pre><code>&lt;!-- Featured news with sticky positioning --&gt;
+        <pre><code class="language-html">&lt;!-- Featured news with sticky positioning --&gt;
 &lt;umd-feed-news-featured
   data-token="your-api-token"&gt;
 &lt;/umd-feed-news-featured&gt;
@@ -196,14 +242,14 @@
 
       <!-- Use Case 2: Events Feeds -->
       <div class="use-case-card">
-        <h4>📅 Use Case 2: Events Feed Components</h4>
+        <h4>Use Case 2: Events Feed Components</h4>
         <p>
           Display university events using web components with filtering and
           display options.
         </p>
 
         <h5>Events Grid Layout</h5>
-        <pre><code>&lt;!-- Basic events grid --&gt;
+        <pre><code class="language-html">&lt;!-- Basic events grid --&gt;
 &lt;umd-feed-events
   data-token="your-api-token"&gt;
 &lt;/umd-feed-events&gt;
@@ -226,7 +272,7 @@
 &lt;/umd-feed-events&gt;</code></pre>
 
         <h5>Events List Layout</h5>
-        <pre><code>&lt;!-- Basic events list --&gt;
+        <pre><code class="language-html">&lt;!-- Basic events list --&gt;
 &lt;umd-feed-events-list
   data-token="your-api-token"&gt;
 &lt;/umd-feed-events-list&gt;
@@ -265,15 +311,15 @@
 
       <!-- Use Case 3: Academic Feed Components -->
       <div class="use-case-card">
-        <h4>🎓 Use Case 3: Academic Feed Components</h4>
+        <h4>Use Case 3: Academic Feed Components</h4>
         <p>
           Display academic calendar events using the slider web component with
           the academic feed type.
         </p>
 
         <h5>Academic Calendar Slider</h5>
-        <pre><code>&lt;!-- Basic academic calendar slider --&gt;
-&lt;umd-element-slider-events-feed 
+        <pre><code class="language-html">&lt;!-- Basic academic calendar slider --&gt;
+&lt;umd-element-slider-events-feed
   data-token="your-api-token"
   data-feed-type="academic"&gt;
   &lt;div slot="headline"&gt;
@@ -285,7 +331,7 @@
 &lt;/umd-element-slider-events-feed&gt;
 
 &lt;!-- Academic calendar with dark theme --&gt;
-&lt;umd-element-slider-events-feed 
+&lt;umd-element-slider-events-feed
   data-token="your-api-token"
   data-feed-type="academic"
   data-theme="dark"&gt;
@@ -294,7 +340,7 @@
 &lt;/umd-element-slider-events-feed&gt;
 
 &lt;!-- Academic calendar with custom styling --&gt;
-&lt;umd-element-slider-events-feed 
+&lt;umd-element-slider-events-feed
   data-token="your-api-token"
   data-feed-type="academic"&gt;
   &lt;h2 slot="headline"&gt;Important Academic Dates&lt;/h2&gt;
@@ -346,18 +392,46 @@
         </div>
       </div>
 
+      <!-- Union Feeds -->
+      <div class="use-case-card">
+        <h4>Union Feeds</h4>
+        <p>Use the <code>data-union</code> attribute to aggregate content from multiple UMD sources into a single feed.</p>
+
+        <h5>Usage</h5>
+        <pre><code class="language-html">&lt;!-- Aggregate news from multiple units --&gt;
+&lt;umd-feed-news
+  data-token="your-api-token"
+  data-union&gt;
+&lt;/umd-feed-news&gt;
+
+&lt;!-- Union events feed --&gt;
+&lt;umd-feed-events
+  data-token="your-api-token"
+  data-union
+  data-layout-column-count="3"&gt;
+&lt;/umd-feed-events&gt;</code></pre>
+
+        <h5>Union Attribute</h5>
+        <table class="option-table">
+          <thead><tr><th>Attribute</th><th>Description</th><th>Values</th></tr></thead>
+          <tbody>
+            <tr><td><code>data-union</code></td><td>Aggregate content from multiple UMD sources</td><td>Present or absent (boolean attribute)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
       <h2 class="mb-4 mt-5">Advanced TypeScript Implementation</h2>
 
       <!-- Use Case 4: TypeScript Integration -->
       <div class="use-case-card">
-        <h4>📝 Use Case 4: TypeScript Integration</h4>
+        <h4>Use Case 4: TypeScript Integration</h4>
         <p>
           Use feeds programmatically in TypeScript applications with full type
           safety.
         </p>
 
         <h5>Basic TypeScript Usage</h5>
-        <pre><code>import { news, events, academic } from '@universityofmaryland/web-feeds-library';
+        <pre><code class="language-typescript">import { news, events, academic, experts, inTheNews } from '@universityofmaryland/web-feeds-library';
 
 // Create news feed with configuration
 const newsProps = {
@@ -378,10 +452,32 @@ document.querySelector('#news-container')?.appendChild(newsFeed.element);
 // Inject the styles into the document head
 const styleElement = document.createElement('style');
 styleElement.textContent = newsFeed.styles;
-document.head.appendChild(styleElement);</code></pre>
+document.head.appendChild(styleElement);
+
+// Create experts feed
+const expertsFeed = experts.grid({
+  token: 'your-api-token',
+  numberOfColumnsToShow: 3,
+  numberOfRowsToStart: 1,
+  isThemeDark: false,
+  isLazyLoad: false,
+});
+
+document.querySelector('#experts-container')?.appendChild(expertsFeed.element);
+
+// Create in-the-news feed
+const inTheNewsFeed = inTheNews.grid({
+  token: 'your-api-token',
+  numberOfColumnsToShow: 2,
+  numberOfRowsToStart: 1,
+  isThemeDark: false,
+  isLazyLoad: true,
+});
+
+document.querySelector('#in-the-news-container')?.appendChild(inTheNewsFeed.element);</code></pre>
 
         <h5>Type Definitions</h5>
-        <pre><code>// News feed properties
+        <pre><code class="language-typescript">// News feed properties
 interface BaseProps {
   token: string;
   numberOfRowsToStart: number;
@@ -404,17 +500,55 @@ interface FeaturedProps extends BaseProps {
   overwriteStickyPosition?: number;
 }
 </code></pre>
+
+        <h5>Available Feed Modules</h5>
+        <table class="option-table">
+          <thead>
+            <tr>
+              <th>Module</th>
+              <th>Import Path</th>
+              <th>Layouts</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>academic</code></td>
+              <td><code>@universityofmaryland/web-feeds-library/academic</code></td>
+              <td>slider</td>
+            </tr>
+            <tr>
+              <td><code>events</code></td>
+              <td><code>@universityofmaryland/web-feeds-library/events</code></td>
+              <td>grid, list, grouped, slider</td>
+            </tr>
+            <tr>
+              <td><code>experts</code></td>
+              <td><code>@universityofmaryland/web-feeds-library/experts</code></td>
+              <td>grid, list, bio, inTheNews</td>
+            </tr>
+            <tr>
+              <td><code>inTheNews</code></td>
+              <td><code>@universityofmaryland/web-feeds-library/in-the-news</code></td>
+              <td>grid, list</td>
+            </tr>
+            <tr>
+              <td><code>news</code></td>
+              <td><code>@universityofmaryland/web-feeds-library/news</code></td>
+              <td>grid, list, featured</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
       <!-- Use Case 5: Event Bubbling -->
       <div class="use-case-card">
-        <h4>🔄 Use Case 5: Event Bubbling and Style Callbacks</h4>
+        <h4>Use Case 5: Event Bubbling and Style Callbacks</h4>
         <p>
           Feed components dispatch DOM events when content is loaded or errors occur, and provide callbacks for style injection.
         </p>
-        
+
         <h5>Feed Events</h5>
-        <pre><code>// Listen for feed loaded event
+        <pre><code class="language-javascript">// Listen for feed loaded event
 const feedElement = document.querySelector('umd-feed-news');
 
 feedElement.addEventListener('feed:loaded', (event) => {
@@ -427,7 +561,7 @@ feedElement.addEventListener('feed:loaded', (event) => {
 feedElement.addEventListener('feed:error', (event) => {
   console.error('Feed error:', event.detail.error);
   // Show fallback content
-  feedElement.innerHTML = '<p>Unable to load feed content</p>';
+  feedElement.innerHTML = '&lt;p&gt;Unable to load feed content&lt;/p&gt;';
 });
 
 // Event bubbling allows listening at parent levels
@@ -438,7 +572,7 @@ document.addEventListener('feed:loaded', (event) => {
 });</code></pre>
 
         <h5>Style Callback</h5>
-        <pre><code>// Using styleCallback with TypeScript API
+        <pre><code class="language-typescript">// Using styleCallback with TypeScript API
 import { news } from '@universityofmaryland/web-feeds-library';
 
 const newsFeed = news.grid({
@@ -447,7 +581,7 @@ const newsFeed = news.grid({
   numberOfRowsToStart: 2,
   isThemeDark: false,
   isLazyLoad: true,
-  
+
   // Style callback to handle CSS injection
   styleCallback: (cssString) => {
     // Custom style injection logic
@@ -460,17 +594,17 @@ const newsFeed = news.grid({
 document.querySelector('#news-container')?.appendChild(newsFeed.element);</code></pre>
 
         <h5>Integration with Shadow DOM</h5>
-        <pre><code>// When feeds are inside web components with Shadow DOM
+        <pre><code class="language-typescript">// When feeds are inside web components with Shadow DOM
 class CustomFeedWrapper extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
   }
-  
+
   connectedCallback() {
     const feed = document.createElement('umd-feed-events');
     feed.setAttribute('data-token', 'your-api-token');
-    
+
     // Events bubble from the feed to the shadow host
     feed.addEventListener('feed:loaded', (event) => {
       // Dispatch to light DOM if needed
@@ -479,7 +613,7 @@ class CustomFeedWrapper extends HTMLElement {
         bubbles: true
       }));
     });
-    
+
     this.shadowRoot.appendChild(feed);
   }
 }</code></pre>
@@ -491,7 +625,7 @@ class CustomFeedWrapper extends HTMLElement {
 
       <!-- Best Practices -->
       <div class="alert alert-success mt-5">
-        <h5 class="alert-heading">✅ Best Practices</h5>
+        <h5 class="alert-heading">Best Practices</h5>
         <ul class="mb-0">
           <li>
             Always provide a valid API token via
@@ -515,7 +649,7 @@ class CustomFeedWrapper extends HTMLElement {
 
       <!-- Performance Tips -->
       <div class="alert alert-warning mt-4">
-        <h5 class="alert-heading">⚡ Performance Tips</h5>
+        <h5 class="alert-heading">Performance Tips</h5>
         <ul class="mb-0">
           <li>
             Limit initial rows with <code>data-layout-row-count="1"</code>
@@ -544,14 +678,36 @@ class CustomFeedWrapper extends HTMLElement {
       </div>
     </div>
 
-    <footer class="bg-light py-4 mt-5">
+    <footer class="bg-dark text-light py-4 mt-5">
       <div class="container">
         <div class="row">
-          <div class="col-md-12 text-center">
-            <p>&copy; University of Maryland. All rights reserved.</p>
+          <div class="col-md-4">
+            <h6>UMD Design System</h6>
+            <p class="small text-muted">9 composable packages for consistent, accessible UMD digital experiences.</p>
+          </div>
+          <div class="col-md-4">
+            <h6>Resources</h6>
+            <ul class="list-unstyled small">
+              <li><a href="https://designsystem.umd.edu" class="text-muted">designsystem.umd.edu</a></li>
+              <li><a href="http://playground.designsystem.umd.edu" class="text-muted">Component Playground</a></li>
+              <li><a href="https://github.com/UMD-Digital/design-system" class="text-muted">GitHub</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h6>npm Packages</h6>
+            <ul class="list-unstyled small">
+              <li><a href="https://www.npmjs.com/org/universityofmaryland" class="text-muted">@universityofmaryland on npm</a></li>
+            </ul>
           </div>
         </div>
+        <hr class="my-3 border-secondary">
+        <p class="text-center text-muted small mb-0">&copy; University of Maryland. All rights reserved. | <a href="https://umd.edu" class="text-muted">umd.edu</a> | <a href="https://brand.umd.edu" class="text-muted">Brand Guidelines</a></p>
       </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
   </body>
 </html>

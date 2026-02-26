@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Model &amp; Builder - UMD Design System</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      .header {
+        background-color: #e21833;
+        color: white;
+        padding: 2rem 0;
+      }
+      .nav-link {
+        color: #000;
+      }
+      .nav-link:hover {
+        color: #e21833;
+      }
+      .content-section {
+        background-color: #f8f9fa;
+        border-radius: 8px;
+        padding: 2rem;
+        margin-bottom: 2rem;
+      }
+      .code-example {
+        background-color: #ffffff;
+        border: 1px solid #dee2e6;
+        border-radius: 4px;
+        padding: 1rem;
+        margin: 1rem 0;
+      }
+      pre {
+        background-color: #f8f9fa;
+        border-radius: 4px;
+        padding: 1rem;
+        overflow-x: auto;
+        margin-bottom: 0;
+      }
+      code {
+        color: #e83e8c;
+      }
+      .toc {
+        position: sticky;
+        top: 20px;
+        background-color: white;
+        border-radius: 8px;
+        padding: 1.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .toc-link {
+        display: block;
+        padding: 0.5rem 0;
+        color: #495057;
+        text-decoration: none;
+        border-left: 3px solid transparent;
+        padding-left: 1rem;
+      }
+      .toc-link:hover,
+      .toc-link.active {
+        color: #e21833;
+        border-left-color: #e21833;
+      }
+      .type-card {
+        background-color: #f8f9fa;
+        border-left: 4px solid #e21833;
+        padding: 1rem;
+        margin-bottom: 1rem;
+      }
+      .type-card code {
+        color: #0066cc;
+      }
+      .module-table {
+        width: 100%;
+        margin: 1rem 0;
+      }
+      .module-table th {
+        background-color: #f8f9fa;
+        padding: 0.75rem;
+        text-align: left;
+        border-bottom: 2px solid #dee2e6;
+      }
+      .module-table td {
+        padding: 0.75rem;
+        border-bottom: 1px solid #dee2e6;
+      }
+      .module-table code {
+        background-color: #f8f9fa;
+        padding: 0.2rem 0.4rem;
+        border-radius: 3px;
+      }
+    </style>
+  </head>
+  <body data-bs-spy="scroll" data-bs-target="#toc" data-bs-offset="20">
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #e21833;">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="../index.html">UMD Design System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="../architecture.html">Architecture</a></li>
+            <li class="nav-item"><a class="nav-link" href="../getting-started.html">Getting Started</a></li>
+          </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Packages</a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="../components/usage.html">Components</a></li>
+                <li><a class="dropdown-item" href="../styles/static-css.html">Styles</a></li>
+                <li><a class="dropdown-item" href="../feeds/use-cases.html">Feeds</a></li>
+                <li><a class="dropdown-item" href="../elements/use-cases.html">Elements</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="../tokens/use-cases.html">Tokens</a></li>
+                <li><a class="dropdown-item" href="../icons/use-cases.html">Icons</a></li>
+                <li><a class="dropdown-item" href="../utilities/use-cases.html">Utilities</a></li>
+                <li><a class="dropdown-item" href="../infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="http://playground.designsystem.umd.edu" target="_blank">Playground</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header class="header">
+      <div class="container">
+        <h1>Model &amp; Builder</h1>
+        <p class="lead">Build custom web components with UMD patterns</p>
+      </div>
+    </header>
+
+    <div class="container py-5">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+          <li class="breadcrumb-item">Infrastructure</li>
+          <li class="breadcrumb-item active">Model &amp; Builder</li>
+        </ol>
+      </nav>
+
+      <div style="background-color: #fff4e6; border-left: 4px solid #e8a838; padding: 1rem 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
+        <strong>Where These Packages Fit:</strong> Model and Builder sit in the <strong>Infrastructure</strong> layer. Model provides the web component lifecycle system. Builder provides fluent DOM construction. Together they power the Components package.
+        <a href="../architecture.html">See full architecture</a>.
+      </div>
+
+      <div class="row">
+        <!-- Table of Contents -->
+        <div class="col-md-3">
+          <nav id="toc" class="toc">
+            <h5>On This Page</h5>
+            <a class="toc-link" href="#when-to-use">When to Use</a>
+            <a class="toc-link" href="#model-overview">Model Overview</a>
+            <a class="toc-link" href="#custom-component">Custom Component</a>
+            <a class="toc-link" href="#builder-overview">Builder Overview</a>
+            <a class="toc-link" href="#builder-usage">Using ElementBuilder</a>
+            <a class="toc-link" href="#composing-styles">Composing with Styles</a>
+            <a class="toc-link" href="#integration">Integration</a>
+          </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col-md-9">
+          <!-- When to Use -->
+          <section id="when-to-use" class="content-section">
+            <h2>When to Use</h2>
+
+            <h4>Model</h4>
+            <p>
+              <code>@universityofmaryland/web-model-library</code> -- Use when building custom web components that follow UMD patterns. Provides attribute parsing, slot management, registration, and lifecycle hooks.
+            </p>
+
+            <h4>Builder</h4>
+            <p>
+              <code>@universityofmaryland/web-builder-library</code> -- Use when constructing DOM elements with a fluent API. Provides <code>ElementBuilder</code> for building complex element trees with automatic style management.
+            </p>
+          </section>
+
+          <!-- Model Overview -->
+          <section id="model-overview" class="content-section">
+            <h2>Model Package Overview</h2>
+            <p>The model package exports 5 main modules:</p>
+
+            <div class="code-example">
+              <pre><code class="language-typescript">import { Attributes, Model, Register, Slots, Lifecycle } from '@universityofmaryland/web-model-library';</code></pre>
+            </div>
+
+            <table class="module-table">
+              <thead>
+                <tr>
+                  <th>Module</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>Attributes</code></td>
+                  <td>Parse and validate HTML attributes (data-*, boolean, enum)</td>
+                </tr>
+                <tr>
+                  <td><code>Model</code></td>
+                  <td>Core web component model with Shadow DOM management</td>
+                </tr>
+                <tr>
+                  <td><code>Register</code></td>
+                  <td>Register custom elements with the browser</td>
+                </tr>
+                <tr>
+                  <td><code>Slots</code></td>
+                  <td>Manage slot content distribution and validation</td>
+                </tr>
+                <tr>
+                  <td><code>Lifecycle</code></td>
+                  <td>Connected/disconnected callbacks, attribute change handling</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <div class="type-card">
+              <strong>Types Exported:</strong>
+              <code>SlotProps</code>, <code>BaseProps</code>, <code>OptionalProps</code>, <code>SlotResult</code>
+            </div>
+          </section>
+
+          <!-- Custom Component -->
+          <section id="custom-component" class="content-section">
+            <h2>Building a Custom Web Component</h2>
+            <p>Full example showing how to create a custom component using the Model package:</p>
+
+            <div class="code-example">
+              <pre><code class="language-typescript">import { Attributes, Model, Register, Slots, Lifecycle } from '@universityofmaryland/web-model-library';
+import { Composite } from '@universityofmaryland/web-elements-library/composite';
+
+const ELEMENT_TAG = 'umd-custom-feature-card';
+
+const SLOTS = {
+  headline: { required: true },
+  text: { required: false },
+  image: { required: false },
+};
+
+const ATTRIBUTES = {
+  THEME: 'data-theme',
+  DISPLAY: 'data-display',
+};
+
+const createComponent = (element: HTMLElement) => {
+  // Parse attributes
+  const theme = Attributes.getValue(element, ATTRIBUTES.THEME) || 'light';
+  const isThemeDark = theme === 'dark';
+
+  // Get slot content
+  const headline = Slots.getSlot(element, 'headline');
+  const text = Slots.getSlot(element, 'text');
+  const image = Slots.getSlot(element, 'image');
+
+  // Use elements library to build the UI
+  const card = Composite.card.standard({
+    headline: headline?.textContent || '',
+    text: text?.textContent,
+    isThemeDark,
+  });
+
+  return card; // Returns { element, styles }
+};
+
+// Register the web component
+const registration = () => {
+  Register.define(ELEMENT_TAG, {
+    slots: SLOTS,
+    createComponent,
+  });
+};
+
+export { registration };</code></pre>
+            </div>
+
+            <h3>Usage in HTML</h3>
+            <div class="code-example">
+              <pre><code class="language-html">&lt;umd-custom-feature-card data-theme="dark"&gt;
+  &lt;h2 slot="headline"&gt;Custom Feature&lt;/h2&gt;
+  &lt;p slot="text"&gt;Built with the model and elements packages.&lt;/p&gt;
+&lt;/umd-custom-feature-card&gt;</code></pre>
+            </div>
+          </section>
+
+          <!-- Builder Overview -->
+          <section id="builder-overview" class="content-section">
+            <h2>Builder Package Overview</h2>
+            <p>The Builder package provides a fluent API for constructing DOM elements with automatic style management.</p>
+
+            <div class="code-example">
+              <pre><code class="language-typescript">import { ElementBuilder } from '@universityofmaryland/web-builder-library';</code></pre>
+            </div>
+
+            <p>
+              The <code>ElementBuilder</code> provides a chainable interface for creating DOM elements, attaching styles, nesting children, and producing the standard <code>{ element, styles }</code> result that the rest of the design system expects.
+            </p>
+          </section>
+
+          <!-- Builder Usage -->
+          <section id="builder-usage" class="content-section">
+            <h2>Using ElementBuilder</h2>
+
+            <div class="code-example">
+              <pre><code class="language-typescript">import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+
+const card = new ElementBuilder('div')
+  .withClassName('feature-card')
+  .styled(`
+    .feature-card {
+      padding: 1.5rem;
+      border: 1px solid #dee2e6;
+      border-radius: 8px;
+    }
+    .feature-card__title {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+  `)
+  .withChild(
+    new ElementBuilder('h3')
+      .withClassName('feature-card__title')
+      .withText('Card Title')
+  )
+  .withChild(
+    new ElementBuilder('p')
+      .withText('Card description goes here.')
+  )
+  .build(); // Returns { element, styles }</code></pre>
+            </div>
+
+            <div class="type-card">
+              <strong>Return Value:</strong> <code>build()</code> returns an <code>ElementModel</code> with <code>element</code> (HTMLElement) and <code>styles</code> (string) properties, matching the standard interface used throughout the design system.
+            </div>
+          </section>
+
+          <!-- Composing with Styles -->
+          <section id="composing-styles" class="content-section">
+            <h2>Composing with Styles</h2>
+            <p>Combine the Styles library tokens and utilities with the Builder for consistent theming:</p>
+
+            <div class="code-example">
+              <pre><code class="language-typescript">import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+
+// Use styles library tokens and utilities alongside builder
+const styledElement = new ElementBuilder('section')
+  .withClassName('custom-section')
+  .styled(`
+    .custom-section {
+      padding: ${Styles.token.spacing.lg};
+      background-color: ${Styles.token.color.grayLighter};
+    }
+  `)
+  .build();</code></pre>
+            </div>
+
+            <p>
+              Because the Builder produces standard CSS strings, you can reference any token or utility from the Styles package directly inside template literals. This keeps your custom components visually aligned with the rest of the design system without hard-coding values.
+            </p>
+          </section>
+
+          <!-- Integration -->
+          <section id="integration" class="content-section">
+            <h2>Integration with Components</h2>
+            <p>Register custom components alongside official ones so they coexist on the same page:</p>
+
+            <div class="code-example">
+              <pre><code class="language-typescript">import { LoadStructuralComponents } from '@universityofmaryland/web-components-library/structural';
+import { registration as customFeatureCard } from './custom-feature-card';
+
+// Register official components
+LoadStructuralComponents();
+
+// Register custom components
+customFeatureCard();</code></pre>
+            </div>
+
+            <p>
+              Both official and custom components share the same Shadow DOM, slot, and attribute patterns provided by the Model package. This means your custom components will behave identically to the built-in ones -- same lifecycle, same style encapsulation, same attribute handling.
+            </p>
+
+            <div class="type-card">
+              <strong>Next Steps:</strong> See <a href="../components/advanced-usage.html">Advanced Component Usage</a> for more patterns including TypeScript integration, event handling, and testing strategies.
+            </div>
+          </section>
+
+          <!-- Additional Resources -->
+          <div class="mt-5">
+            <h3>Additional Resources</h3>
+            <ul>
+              <li><a href="../components/advanced-usage.html">Advanced Component Usage</a></li>
+              <li><a href="../architecture.html">Architecture Overview</a></li>
+              <li><a href="https://github.com/UMD-Digital/design-system">GitHub Repository</a></li>
+              <li><a href="https://umd-digital.github.io/design-system/">TypeDoc API Reference</a></li>
+              <li><a href="http://playground.designsystem.umd.edu">Component Playground</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="bg-dark text-light py-4 mt-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-4">
+            <h6>UMD Design System</h6>
+            <p class="small text-muted">9 composable packages for consistent, accessible UMD digital experiences.</p>
+          </div>
+          <div class="col-md-4">
+            <h6>Resources</h6>
+            <ul class="list-unstyled small">
+              <li><a href="https://designsystem.umd.edu" class="text-muted">designsystem.umd.edu</a></li>
+              <li><a href="http://playground.designsystem.umd.edu" class="text-muted">Component Playground</a></li>
+              <li><a href="https://github.com/UMD-Digital/design-system" class="text-muted">GitHub</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h6>npm Packages</h6>
+            <ul class="list-unstyled small">
+              <li><a href="https://www.npmjs.com/org/universityofmaryland" class="text-muted">@universityofmaryland on npm</a></li>
+            </ul>
+          </div>
+        </div>
+        <hr class="my-3 border-secondary">
+        <p class="text-center text-muted small mb-0">&copy; University of Maryland. All rights reserved. | <a href="https://umd.edu" class="text-muted">umd.edu</a> | <a href="https://brand.umd.edu" class="text-muted">Brand Guidelines</a></p>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script>
+      // Smooth scrolling for TOC links
+      document.querySelectorAll('.toc-link').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = document.querySelector(link.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        });
+      });
+
+      // Update active TOC link on scroll
+      const sections = document.querySelectorAll('section[id]');
+      const tocLinks = document.querySelectorAll('.toc-link');
+
+      window.addEventListener('scroll', () => {
+        let current = '';
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (scrollY >= sectionTop - 100) {
+            current = section.getAttribute('id');
+          }
+        });
+
+        tocLinks.forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

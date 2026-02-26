@@ -8,17 +8,15 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
+      rel="stylesheet"
+    />
     <style>
       .header {
         background-color: #e21833;
         color: white;
         padding: 2rem 0;
-      }
-      .nav-link {
-        color: #000;
-      }
-      .nav-link:hover {
-        color: #e21833;
       }
       pre {
         background-color: #f8f9fa;
@@ -28,6 +26,9 @@
       }
       code {
         color: #e83e8c;
+      }
+      pre code {
+        color: inherit;
       }
       .integration-card {
         border: 1px solid #dee2e6;
@@ -57,7 +58,7 @@
         position: relative;
       }
       .feature-list li:before {
-        content: '✓';
+        content: '\2713';
         position: absolute;
         left: 0;
         color: #28a745;
@@ -66,6 +67,39 @@
     </style>
   </head>
   <body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #e21833;">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="../index.html">UMD Design System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="../architecture.html">Architecture</a></li>
+            <li class="nav-item"><a class="nav-link" href="../getting-started.html">Getting Started</a></li>
+          </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Packages</a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="../components/usage.html">Components</a></li>
+                <li><a class="dropdown-item" href="../styles/static-css.html">Styles</a></li>
+                <li><a class="dropdown-item" href="../feeds/use-cases.html">Feeds</a></li>
+                <li><a class="dropdown-item" href="../elements/use-cases.html">Elements</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="../tokens/use-cases.html">Tokens</a></li>
+                <li><a class="dropdown-item" href="../icons/use-cases.html">Icons</a></li>
+                <li><a class="dropdown-item" href="../utilities/use-cases.html">Utilities</a></li>
+                <li><a class="dropdown-item" href="../infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="http://playground.designsystem.umd.edu" target="_blank">Playground</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
     <header class="header">
       <div class="container">
         <h1>Tailwind Integration</h1>
@@ -84,6 +118,13 @@
               </li>
             </ol>
           </nav>
+
+          <div style="background-color: #fff4e6; border-left: 4px solid #e8a838; padding: 1rem 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
+            <strong>Where This Package Fits:</strong> Styles sits in the <strong>Infrastructure</strong> layer. It depends on <strong>Tokens</strong> and is used by <strong>Elements</strong>, <strong>Components</strong>, and your custom CSS.
+            <a href="../architecture.html">See full architecture</a>.
+          </div>
+
+          <p class="mb-4">Not using Tailwind? See the <a href="static-css.html">Static CSS Guide</a> for a simpler approach using pre-compiled CSS files.</p>
 
           <div class="alert alert-info mb-4">
             <h5 class="alert-heading">About This Integration</h5>
@@ -106,7 +147,7 @@
 
             <h4 class="mt-4">Quick Start</h4>
             <p>Just import the UMD Tailwind CSS file in your main stylesheet:</p>
-            <pre><code>/* main.css */
+            <pre><code class="language-css">/* main.css */
 @import '@universityofmaryland/web-styles-library/tailwind.css';
 
 /* Your custom styles */</code></pre>
@@ -155,7 +196,7 @@
 
             <h4 class="mt-4">CSS Variables</h4>
             <p>All tokens are also available as CSS custom properties:</p>
-            <pre><code>.my-element {
+            <pre><code class="language-css">.my-element {
   color: var(--color-red);
   padding: var(--spacing-md);
   font-family: var(--font-sans);
@@ -164,12 +205,15 @@
 
             <h4 class="mt-4">Theme-Only Option</h4>
             <p>If you don't need Tailwind utilities, import just the theme variables:</p>
-            <pre><code>/* For projects not using Tailwind */
+            <pre><code class="language-css">/* For projects not using Tailwind */
 @import '@universityofmaryland/web-styles-library/tailwind-theme.css';</code></pre>
+            <div class="alert alert-info mt-3 mb-0">
+              <strong>Note:</strong> The <code>tailwind-theme.css</code> file can also be used as a standalone CSS custom properties file outside of Tailwind. It provides all UMD design tokens as CSS variables without requiring the Tailwind framework.
+            </div>
 
             <h4 class="mt-4">UMD Custom Utilities</h4>
             <p>The integration also includes UMD-specific utility classes:</p>
-            <pre><code>&lt;!-- Container utilities with UMD max-widths --&gt;
+            <pre><code class="language-html">&lt;!-- Container utilities with UMD max-widths --&gt;
 &lt;div class="umd-container-normal"&gt;...&lt;/div&gt;  &lt;!-- 1280px --&gt;
 &lt;div class="umd-container-large"&gt;...&lt;/div&gt;   &lt;!-- 1400px --&gt;
 &lt;div class="umd-container-small"&gt;...&lt;/div&gt;   &lt;!-- 992px --&gt;
@@ -199,7 +243,7 @@
           <h2 class="mt-5">Getting Started</h2>
 
           <div class="integration-card">
-            <h4>📚 Prerequisites</h4>
+            <h4>Prerequisites</h4>
             <p>
               Before integrating with the UMD Design System, ensure you're
               familiar with:
@@ -236,9 +280,9 @@
           </div>
 
           <div class="integration-card">
-            <h4>📦 Installation</h4>
+            <h4>Installation</h4>
             <p>Install the UMD Styles Library from NPM:</p>
-            <pre><code>npm install @universityofmaryland/web-styles-library
+            <pre><code class="language-bash">npm install @universityofmaryland/web-styles-library
 
 # Or with yarn
 yarn add @universityofmaryland/web-styles-library</code></pre>
@@ -268,7 +312,7 @@ yarn add @universityofmaryland/web-styles-library</code></pre>
               Create or update your <code>tailwind.config.js</code> file with
               the following configuration:
             </p>
-            <pre><code>/** @type {import('tailwindcss').Config} */
+            <pre><code class="language-javascript">/** @type {import('tailwindcss').Config} */
 
 import * as Styles from '@universityofmaryland/web-styles-library';
 import plugin from 'tailwindcss/plugin';
@@ -310,7 +354,7 @@ export { content, theme, plugins };</code></pre>
           </div>
 
           <div class="integration-card">
-            <h4>🎯 What This Configuration Does</h4>
+            <h4>What This Configuration Does</h4>
             <div class="row">
               <div class="col-md-6">
                 <h5 class="h6">Design Tokens</h5>
@@ -329,7 +373,7 @@ export { content, theme, plugins };</code></pre>
                 </ul>
               </div>
               <div class="col-md-6">
-                <h5 class="h6">Utilities & Components</h5>
+                <h5 class="h6">Utilities &amp; Components</h5>
                 <ul>
                   <li>
                     <strong>Layout utilities:</strong> Grid systems and spacing
@@ -352,12 +396,12 @@ export { content, theme, plugins };</code></pre>
           <h2 class="mt-5">Usage Examples</h2>
 
           <div class="integration-card">
-            <h4>🎨 Using UMD Colors</h4>
+            <h4>Using UMD Colors</h4>
             <p>
               With the configuration above, you can use UMD colors as Tailwind
               utilities:
             </p>
-            <pre><code>&lt;!-- UMD Red background --&gt;
+            <pre><code class="language-html">&lt;!-- UMD Red background --&gt;
 &lt;div class="bg-red text-white p-4"&gt;
   UMD Red Background
 &lt;/div&gt;
@@ -372,12 +416,12 @@ export { content, theme, plugins };</code></pre>
           </div>
 
           <div class="integration-card">
-            <h4>📐 Using UMD Spacing & Layout</h4>
+            <h4>Using UMD Spacing &amp; Layout</h4>
             <p>
               The integration provides UMD-specific spacing and layout
               utilities:
             </p>
-            <pre><code>&lt;!-- UMD Layout spacing utilities --&gt;
+            <pre><code class="language-html">&lt;!-- UMD Layout spacing utilities --&gt;
 &lt;div class="umd-layout-space-vertical-landing"&gt;
   &lt;h1&gt;Landing Page Section&lt;/h1&gt;
 &lt;/div&gt;
@@ -396,9 +440,9 @@ export { content, theme, plugins };</code></pre>
           </div>
 
           <div class="integration-card">
-            <h4>🔤 Typography with UMD Fonts</h4>
+            <h4>Typography with UMD Fonts</h4>
             <p>Use UMD's typography system within Tailwind:</p>
-            <pre><code>&lt;!-- UMD Sans font utilities --&gt;
+            <pre><code class="language-html">&lt;!-- UMD Sans font utilities --&gt;
 &lt;h1 class="umd-sans-largest-uppercase"&gt;
   Page Title
 &lt;/h1&gt;
@@ -418,12 +462,12 @@ export { content, theme, plugins };</code></pre>
           <h2 class="mt-5">Advanced Usage</h2>
 
           <div class="integration-card">
-            <h4>⚡ Custom Plugin Extension</h4>
+            <h4>Custom Plugin Extension</h4>
             <p>
               You can extend the plugin to add your own custom utilities while
               maintaining UMD standards:
             </p>
-            <pre><code>import * as Styles from '@universityofmaryland/web-styles-library';
+            <pre><code class="language-javascript">import * as Styles from '@universityofmaryland/web-styles-library';
 import plugin from 'tailwindcss/plugin';
 
 const customPlugin = plugin(function ({ addUtilities, theme }) {
@@ -435,7 +479,7 @@ const customPlugin = plugin(function ({ addUtilities, theme }) {
       boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
     },
   };
-  
+
   addUtilities(newUtilities);
 });
 
@@ -447,14 +491,14 @@ const plugins = [
           </div>
 
           <div class="integration-card">
-            <h4>🎯 Responsive Design Patterns</h4>
+            <h4>Responsive Design Patterns</h4>
             <p>Use UMD's breakpoints for responsive design:</p>
-            <pre><code>&lt;!-- UMD breakpoints: mobile (0-767px), tablet (768-1023px), desktop (1024px+) --&gt;
+            <pre><code class="language-html">&lt;!-- UMD breakpoints: mobile (0-767px), tablet (768-1023px), desktop (1024px+) --&gt;
 &lt;div class="p-4 md:p-6 lg:p-8"&gt;
   &lt;h2 class="text-xl md:text-2xl lg:text-3xl"&gt;
     Responsive Heading
   &lt;/h2&gt;
-  
+
   &lt;div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4"&gt;
     &lt;!-- Grid items --&gt;
   &lt;/div&gt;
@@ -465,7 +509,7 @@ const plugins = [
           <h2 class="mt-5">Best Practices</h2>
 
           <div class="alert alert-success">
-            <h5 class="alert-heading">✅ Do's</h5>
+            <h5 class="alert-heading">Do's</h5>
             <ul class="mb-0">
               <li>Use UMD color tokens for brand consistency</li>
               <li>Leverage UMD spacing utilities for consistent layouts</li>
@@ -477,7 +521,7 @@ const plugins = [
           </div>
 
           <div class="alert alert-warning mt-3">
-            <h5 class="alert-heading">❌ Don'ts</h5>
+            <h5 class="alert-heading">Don'ts</h5>
             <ul class="mb-0">
               <li>Don't override UMD brand colors</li>
               <li>
@@ -498,19 +542,16 @@ const plugins = [
                   <h5 class="card-title">Learn More</h5>
                   <ul class="list-unstyled mb-0">
                     <li>
-                      <a href="index.html"
-                        >📚 Styles Package Documentation</a
-                      >
+                      <a href="static-css.html">Static CSS Guide</a>
                     </li>
                     <li>
-                      <a href="../components/usage.html"
-                        >🧩 Component Integration</a
-                      >
+                      <a href="use-cases.html">Styles Use Cases</a>
                     </li>
                     <li>
-                      <a href="../getting-started.html"
-                        >🚀 Getting Started Guide</a
-                      >
+                      <a href="../components/usage.html">Component Integration</a>
+                    </li>
+                    <li>
+                      <a href="../getting-started.html">Getting Started Guide</a>
                     </li>
                   </ul>
                 </div>
@@ -526,7 +567,7 @@ const plugins = [
                         href="https://tailwindcss.com/docs"
                         target="_blank"
                         rel="noopener"
-                        >📖 Tailwind Documentation</a
+                        >Tailwind Documentation</a
                       >
                     </li>
                     <li>
@@ -534,7 +575,7 @@ const plugins = [
                         href="https://play.tailwindcss.com/"
                         target="_blank"
                         rel="noopener"
-                        >🎮 Tailwind Play</a
+                        >Tailwind Play</a
                       >
                     </li>
                     <li>
@@ -542,7 +583,7 @@ const plugins = [
                         href="https://github.com/umd-digital/design-system"
                         target="_blank"
                         rel="noopener"
-                        >💻 GitHub Repository</a
+                        >GitHub Repository</a
                       >
                     </li>
                   </ul>
@@ -554,14 +595,38 @@ const plugins = [
       </div>
     </div>
 
-    <footer class="bg-light py-4 mt-5">
+    <footer class="bg-dark text-light py-4 mt-5">
       <div class="container">
         <div class="row">
-          <div class="col-md-12 text-center">
-            <p>&copy; University of Maryland. All rights reserved.</p>
+          <div class="col-md-4">
+            <h6>UMD Design System</h6>
+            <p class="small text-muted">9 composable packages for consistent, accessible UMD digital experiences.</p>
+          </div>
+          <div class="col-md-4">
+            <h6>Resources</h6>
+            <ul class="list-unstyled small">
+              <li><a href="https://designsystem.umd.edu" class="text-muted">designsystem.umd.edu</a></li>
+              <li><a href="http://playground.designsystem.umd.edu" class="text-muted">Component Playground</a></li>
+              <li><a href="https://github.com/UMD-Digital/design-system" class="text-muted">GitHub</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h6>npm Packages</h6>
+            <ul class="list-unstyled small">
+              <li><a href="https://www.npmjs.com/org/universityofmaryland" class="text-muted">@universityofmaryland on npm</a></li>
+            </ul>
           </div>
         </div>
+        <hr class="my-3 border-secondary">
+        <p class="text-center text-muted small mb-0">&copy; University of Maryland. All rights reserved. | <a href="https://umd.edu" class="text-muted">umd.edu</a> | <a href="https://brand.umd.edu" class="text-muted">Brand Guidelines</a></p>
       </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
   </body>
 </html>

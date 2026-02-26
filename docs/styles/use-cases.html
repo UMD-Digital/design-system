@@ -8,17 +8,15 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
+      rel="stylesheet"
+    />
     <style>
       .header {
         background-color: #e21833;
         color: white;
         padding: 2rem 0;
-      }
-      .nav-link {
-        color: #000;
-      }
-      .nav-link:hover {
-        color: #e21833;
       }
       pre {
         background-color: #f8f9fa;
@@ -28,6 +26,9 @@
       }
       code {
         color: #e83e8c;
+      }
+      pre code {
+        color: inherit;
       }
       .use-case-card {
         border: 1px solid #dee2e6;
@@ -66,9 +67,49 @@
         padding: 0.2rem 0.4rem;
         border-radius: 3px;
       }
+      .cm-callout {
+        background-color: #e7f3fe;
+        border-left: 4px solid #2196f3;
+        padding: 1rem 1.5rem;
+        border-radius: 0 8px 8px 0;
+        margin: 2rem 0;
+      }
     </style>
   </head>
   <body>
+    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #e21833;">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="../index.html">UMD Design System</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="../architecture.html">Architecture</a></li>
+            <li class="nav-item"><a class="nav-link" href="../getting-started.html">Getting Started</a></li>
+          </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Packages</a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="../components/usage.html">Components</a></li>
+                <li><a class="dropdown-item" href="../styles/static-css.html">Styles</a></li>
+                <li><a class="dropdown-item" href="../feeds/use-cases.html">Feeds</a></li>
+                <li><a class="dropdown-item" href="../elements/use-cases.html">Elements</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="../tokens/use-cases.html">Tokens</a></li>
+                <li><a class="dropdown-item" href="../icons/use-cases.html">Icons</a></li>
+                <li><a class="dropdown-item" href="../utilities/use-cases.html">Utilities</a></li>
+                <li><a class="dropdown-item" href="../infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
+              </ul>
+            </li>
+            <li class="nav-item"><a class="nav-link" href="http://playground.designsystem.umd.edu" target="_blank">Playground</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
     <header class="header">
       <div class="container">
         <h1>Styles Package Use Cases</h1>
@@ -80,66 +121,182 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
           <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
-          <li class="breadcrumb-item"><a href="index.html">Styles</a></li>
+          <li class="breadcrumb-item"><a href="use-cases.html">Styles</a></li>
           <li class="breadcrumb-item active">Use Cases</li>
         </ol>
       </nav>
+
+      <div style="background-color: #fff4e6; border-left: 4px solid #e8a838; padding: 1rem 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
+        <strong>Where This Package Fits:</strong> Styles sits in the <strong>Infrastructure</strong> layer. It depends on <strong>Tokens</strong> and is used by <strong>Elements</strong>, <strong>Components</strong>, and your custom CSS.
+        <a href="../architecture.html">See full architecture</a>.
+      </div>
 
       <div class="alert alert-info mb-4">
         <h5 class="alert-heading">About This Guide</h5>
         <p class="mb-0">
           This guide demonstrates practical implementations of the UMD Styles Library for creating consistent, accessible designs.
+          For setup instructions, see the <a href="static-css.html">Static CSS Guide</a> or <a href="../getting-started.html">Getting Started</a>.
         </p>
       </div>
 
       <h2 class="mb-4">Common Use Cases</h2>
 
-      <!-- Use Case 1: Quick Start -->
+      <!-- Typography Classes -->
       <div class="use-case-card">
-        <h4>🚀 Use Case 1: Quick Start - Setting Up Styles</h4>
-        <p>Initialize the UMD Styles Library in your project with all utilities.</p>
-        
-        <h5>Implementation</h5>
-        <pre><code>// styles-init.js
-import { typography, reset, reset as resetStyles } from '@universityofmaryland/web-styles-library';
+        <h4>Use Case 1: Typography Utility Classes</h4>
+        <p>The UMD Styles Library provides a complete set of typography utility classes for <strong>sans-serif</strong>, <strong>serif</strong>, and <strong>campaign</strong> font families, plus rich text helpers.</p>
 
-async function initializeStyles() {
-  // Load UMD fonts
-  const fontStyles = document.createElement('style');
-  fontStyles.innerHTML = typography.fontFace.base64fonts;
-  document.head.appendChild(fontStyles);
-  
-  // Apply reset styles
-  const resetElement = document.createElement('style');
-  resetElement.innerHTML = await resetStyles.toString();
-  document.head.appendChild(resetElement);
-  
-  // Pre-render critical CSS (optional)
-  const { preRenderCss } = await import('@universityofmaryland/web-styles-library');
-  const criticalCss = await preRenderCss();
-  
-  const criticalElement = document.createElement('style');
-  criticalElement.innerHTML = criticalCss;
-  document.head.appendChild(criticalElement);
-}
+        <h5>Sans-Serif Classes</h5>
+        <table class="option-table">
+          <thead>
+            <tr>
+              <th>Class Name</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>umd-sans-smallest</code></td>
+              <td>Smallest sans-serif text size</td>
+            </tr>
+            <tr>
+              <td><code>umd-sans-small</code></td>
+              <td>Small sans-serif text</td>
+            </tr>
+            <tr>
+              <td><code>umd-sans-medium</code></td>
+              <td>Medium (default body) sans-serif text</td>
+            </tr>
+            <tr>
+              <td><code>umd-sans-large</code></td>
+              <td>Large sans-serif text</td>
+            </tr>
+            <tr>
+              <td><code>umd-sans-larger</code></td>
+              <td>Larger sans-serif text</td>
+            </tr>
+            <tr>
+              <td><code>umd-sans-largest</code></td>
+              <td>Largest sans-serif text</td>
+            </tr>
+            <tr>
+              <td><code>umd-sans-largest-uppercase</code></td>
+              <td>Largest sans-serif text, uppercased</td>
+            </tr>
+          </tbody>
+        </table>
 
-// Initialize on import
-initializeStyles();</code></pre>
+        <h5>Serif Classes</h5>
+        <table class="option-table">
+          <thead>
+            <tr>
+              <th>Class Name</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>umd-serif-small</code></td>
+              <td>Small serif text</td>
+            </tr>
+            <tr>
+              <td><code>umd-serif-medium</code></td>
+              <td>Medium serif text</td>
+            </tr>
+            <tr>
+              <td><code>umd-serif-large</code></td>
+              <td>Large serif text</td>
+            </tr>
+            <tr>
+              <td><code>umd-serif-larger</code></td>
+              <td>Larger serif text</td>
+            </tr>
+            <tr>
+              <td><code>umd-serif-largest</code></td>
+              <td>Largest serif text</td>
+            </tr>
+          </tbody>
+        </table>
 
-        <h5>Result</h5>
-        <div class="example-output">
-          <p>✓ UMD fonts loaded (Interstate, Crimson Pro, Barlow Condensed)</p>
-          <p>✓ CSS variables available (--color-red, --spacing-md, etc.)</p>
-          <p>✓ Reset styles applied</p>
-          <p>✓ Utility classes ready to use</p>
-        </div>
+        <h5>Campaign Font Classes</h5>
+        <table class="option-table">
+          <thead>
+            <tr>
+              <th>Class Name</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>umd-campaign-small</code></td>
+              <td>Small campaign (Barlow Condensed) text</td>
+            </tr>
+            <tr>
+              <td><code>umd-campaign-medium</code></td>
+              <td>Medium campaign text</td>
+            </tr>
+            <tr>
+              <td><code>umd-campaign-large</code></td>
+              <td>Large campaign text</td>
+            </tr>
+            <tr>
+              <td><code>umd-campaign-larger</code></td>
+              <td>Larger campaign text</td>
+            </tr>
+            <tr>
+              <td><code>umd-campaign-largest</code></td>
+              <td>Largest campaign text</td>
+            </tr>
+            <tr>
+              <td><code>umd-campaign-largest-uppercase</code></td>
+              <td>Largest campaign text, uppercased</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h5>Rich Text Classes</h5>
+        <table class="option-table">
+          <thead>
+            <tr>
+              <th>Class Name</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>umd-text-rich-simple</code></td>
+              <td>Base rich text styling for body content</td>
+            </tr>
+            <tr>
+              <td><code>umd-text-rich-simple-large</code></td>
+              <td>Larger rich text styling for featured content</td>
+            </tr>
+            <tr>
+              <td><code>umd-text-rich-simple-small</code></td>
+              <td>Smaller rich text styling for compact areas</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h5>Usage Example</h5>
+        <pre><code class="language-html">&lt;h1 class="umd-campaign-largest-uppercase"&gt;Campaign Headline&lt;/h1&gt;
+&lt;h2 class="umd-sans-larger"&gt;Section Title&lt;/h2&gt;
+&lt;p class="umd-serif-medium"&gt;Body text in Crimson Pro serif.&lt;/p&gt;
+
+&lt;!-- Rich text block with proper spacing and sizing --&gt;
+&lt;div class="umd-text-rich-simple"&gt;
+  &lt;p&gt;Paragraphs, lists, and links receive consistent styling.&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Styled list items&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
       </div>
 
-      <!-- Use Case 2: Using the Grid -->
+      <!-- Grid System -->
       <div class="use-case-card">
-        <h4>📐 Use Case 2: Grid System Classes</h4>
+        <h4>Use Case 2: Grid System Classes</h4>
         <p>The UMD Styles Library provides two types of grid systems: <strong>Grid with Gaps</strong> (for spacing between items) and <strong>Grid with Borders</strong> (for table-like layouts).</p>
-        
+
         <h5>Available Grid Gap Classes</h5>
         <table class="option-table">
           <thead>
@@ -230,7 +387,7 @@ initializeStyles();</code></pre>
         </div>
 
         <h5>Usage Example</h5>
-        <pre><code>&lt;!-- Standard three-column grid --&gt;
+        <pre><code class="language-html">&lt;!-- Standard three-column grid --&gt;
 &lt;div class="umd-layout-grid-gap-three"&gt;
   &lt;div&gt;Item 1&lt;/div&gt;
   &lt;div&gt;Item 2&lt;/div&gt;
@@ -238,11 +395,11 @@ initializeStyles();</code></pre>
 &lt;/div&gt;</code></pre>
       </div>
 
-      <!-- Use Case 3: Horizontal and Vertical Spacing -->
+      <!-- Spacing Utilities -->
       <div class="use-case-card">
-        <h4>📏 Use Case 3: Spacing Utility Classes</h4>
+        <h4>Use Case 3: Spacing Utility Classes</h4>
         <p>The library provides comprehensive spacing utilities for both <strong>horizontal containers</strong> (max-width with padding) and <strong>vertical spacing</strong> (margin-bottom).</p>
-        
+
         <h5>Horizontal Container Classes</h5>
         <table class="option-table">
           <thead>
@@ -351,18 +508,18 @@ initializeStyles();</code></pre>
         </table>
 
         <h5>Usage Example</h5>
-        <pre><code>&lt;!-- Container with reading width --&gt;
+        <pre><code class="language-html">&lt;!-- Container with reading width --&gt;
 &lt;div class="umd-layout-space-horizontal-normal"&gt;
   &lt;h1 class="umd-layout-space-vertical-headline-large"&gt;Page Title&lt;/h1&gt;
   &lt;p&gt;Content with optimal reading width and proper spacing.&lt;/p&gt;
 &lt;/div&gt;</code></pre>
       </div>
 
-      <!-- Use Case 4: Form Implementation -->
+      <!-- Form Fields -->
       <div class="use-case-card">
-        <h4>📝 Use Case 4: Form Field Classes</h4>
+        <h4>Use Case 4: Form Field Classes</h4>
         <p>The library provides a complete set of form field classes for creating accessible, consistent forms.</p>
-        
+
         <h5>Available Form Classes</h5>
         <table class="option-table">
           <thead>
@@ -463,7 +620,7 @@ initializeStyles();</code></pre>
         </div>
 
         <h5>Usage Example</h5>
-        <pre><code>&lt;!-- Text input with validation --&gt;
+        <pre><code class="language-html">&lt;!-- Text input with validation --&gt;
 &lt;div class="umd-field-set-item"&gt;
   &lt;label for="email"&gt;Email&lt;/label&gt;
   &lt;input type="email" id="email" class="umd-field-input" aria-invalid="false"&gt;
@@ -475,11 +632,11 @@ initializeStyles();</code></pre>
 &lt;/div&gt;</code></pre>
       </div>
 
-      <!-- Use Case 5: Web Components Default Styling -->
+      <!-- Web Components Default Styling -->
       <div class="use-case-card">
-        <h4>🎨 Use Case 5: Automatic Web Component Styling</h4>
-        <p>All UMD web components receive automatic base styling from the styles package. No additional configuration needed!</p>
-        
+        <h4>Use Case 5: Automatic Web Component Styling</h4>
+        <p>All UMD web components receive automatic base styling from the styles package. No additional configuration needed.</p>
+
         <h5>How Automatic Styling Works</h5>
         <table class="option-table">
           <thead>
@@ -569,7 +726,7 @@ initializeStyles();</code></pre>
         </div>
 
         <h5>Benefits</h5>
-        <pre><code>&lt;!-- Just use the component - styling is automatic! --&gt;
+        <pre><code class="language-html">&lt;!-- Just use the component - styling is automatic! --&gt;
 &lt;umd-element-hero data-theme="dark"&gt;
   &lt;!-- Component is hidden until JavaScript loads --&gt;
   &lt;!-- Then displays as block with container queries enabled --&gt;
@@ -578,7 +735,7 @@ initializeStyles();</code></pre>
 
       <!-- Best Practices -->
       <div class="alert alert-success mt-5">
-        <h5 class="alert-heading">✅ Best Practices</h5>
+        <h5 class="alert-heading">Best Practices</h5>
         <ul class="mb-0">
           <li>Always load fonts first for consistent typography</li>
           <li>Use semantic HTML with UMD utility classes</li>
@@ -593,36 +750,65 @@ initializeStyles();</code></pre>
 
       <!-- Performance Tips -->
       <div class="alert alert-warning mt-4">
-        <h5 class="alert-heading">⚡ Performance Tips</h5>
+        <h5 class="alert-heading">Performance Tips</h5>
         <ul class="mb-0">
-          <li>Load only the CSS you need using tree-shaking</li>
-          <li>Use the preRenderCss function for critical styles</li>
-          <li>Lazy load fonts if not immediately visible</li>
+          <li>Load only the CSS you need using selective imports</li>
+          <li>Use the critical CSS pattern for above-the-fold content</li>
+          <li>Lazy load non-critical stylesheets with the async pattern</li>
           <li>Combine utility classes instead of custom CSS</li>
           <li>Use CSS custom properties for dynamic theming</li>
         </ul>
+      </div>
+
+      <!-- Content Manager Callout -->
+      <div class="cm-callout">
+        <strong>For Content Managers</strong> -- For visual examples and design guidance, visit <a href="https://designsystem.umd.edu">designsystem.umd.edu</a>.
       </div>
 
       <!-- Related Resources -->
       <div class="mt-5">
         <h3>Related Resources</h3>
         <ul>
-          <li><a href="index.html">Styles Package Documentation</a></li>
-          <li><a href="../components/usage.html">Component Integration Guide</a></li>
-          <li><a href="https://designsystem.umd.edu">Design System Website</a></li>
+          <li><a href="static-css.html">Static CSS Guide</a></li>
           <li><a href="tailwind.html">Tailwind Integration</a></li>
+          <li><a href="../components/usage.html">Component Integration Guide</a></li>
+          <li><a href="../getting-started.html">Getting Started Guide</a></li>
+          <li><a href="https://designsystem.umd.edu">Design System Website</a></li>
         </ul>
       </div>
     </div>
 
-    <footer class="bg-light py-4 mt-5">
+    <footer class="bg-dark text-light py-4 mt-5">
       <div class="container">
         <div class="row">
-          <div class="col-md-12 text-center">
-            <p>&copy; University of Maryland. All rights reserved.</p>
+          <div class="col-md-4">
+            <h6>UMD Design System</h6>
+            <p class="small text-muted">9 composable packages for consistent, accessible UMD digital experiences.</p>
+          </div>
+          <div class="col-md-4">
+            <h6>Resources</h6>
+            <ul class="list-unstyled small">
+              <li><a href="https://designsystem.umd.edu" class="text-muted">designsystem.umd.edu</a></li>
+              <li><a href="http://playground.designsystem.umd.edu" class="text-muted">Component Playground</a></li>
+              <li><a href="https://github.com/UMD-Digital/design-system" class="text-muted">GitHub</a></li>
+            </ul>
+          </div>
+          <div class="col-md-4">
+            <h6>npm Packages</h6>
+            <ul class="list-unstyled small">
+              <li><a href="https://www.npmjs.com/org/universityofmaryland" class="text-muted">@universityofmaryland on npm</a></li>
+            </ul>
           </div>
         </div>
+        <hr class="my-3 border-secondary">
+        <p class="text-center text-muted small mb-0">&copy; University of Maryland. All rights reserved. | <a href="https://umd.edu" class="text-muted">umd.edu</a> | <a href="https://brand.umd.edu" class="text-muted">Brand Guidelines</a></p>
       </div>
     </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
   </body>
 </html>

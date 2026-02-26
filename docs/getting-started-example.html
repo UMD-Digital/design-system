@@ -5,25 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My UMD Project</title>
 
-    <!-- Load UMD Components (includes elements and feeds libraries) -->
+    <!-- Load UMD Static CSS (replaces JavaScript-based style injection) -->
+    <link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/styles.min.css" />
+
+    <!-- Load UMD Components (auto-registers all web components) -->
     <script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/cdn.js"></script>
-
-    <!-- Load Companion UMD Styles -->
-    <script src="https://unpkg.com/@universityofmaryland/web-styles-library/dist/cdn.js"></script>
-
-    <script>
-      // Styles library pre-render CSS
-      window.addEventListener('DOMContentLoaded', () => {
-        if (window.Styles && window.Styles.preRenderCss) {
-          window.Styles.preRenderCss.then((css) => {
-            const styleSheet = document.createElement('style');
-            const fonts = window.Styles.typography.fontFace.base64fonts;
-            styleSheet.innerHTML = `${fonts} ${css}`;
-            document.head.appendChild(styleSheet);
-          });
-        }
-      });
-    </script>
   </head>
   <body>
     <!-- Hero Section with Overlay Display -->
@@ -123,18 +109,5 @@
         </div>
       </div>
     </section>
-
-    <!-- Styles library post-render CSS -->
-    <script>
-      window.addEventListener('DOMContentLoaded', () => {
-        if (window.Styles && window.Styles.postRenderCss) {
-          window.Styles.postRenderCss.then((css) => {
-            const styleSheet = document.createElement('style');
-            styleSheet.innerHTML = css;
-            document.body.appendChild(styleSheet);
-          });
-        }
-      });
-    </script>
   </body>
 </html>

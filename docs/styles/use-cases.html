@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Styles Package Use Cases - UMD Design System</title>
+<<<<<<< Updated upstream
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -138,10 +139,121 @@
           For setup instructions, see the <a href="static-css.html">Static CSS Guide</a> or <a href="../getting-started.html">Getting Started</a>.
         </p>
       </div>
+=======
+    <link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/styles.min.css" />
+    <script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/cdn.js"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      pre[class*="language-"] { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+      pre { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; }
+      code { color: #e21833; }
+      pre code { color: inherit; }
+      table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+      th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
+      td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
+      td code, th code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
+      .content-section { background-color: #f8f9fa; border-radius: 8px; padding: 2rem; margin-bottom: 2rem; }
+      .code-example { background-color: #fff; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
 
-      <h2 class="mb-4">Common Use Cases</h2>
+      .use-case-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; background-color: #fff; }
+      .use-case-card h4 { color: #e21833; margin-bottom: 1rem; }
+      .example-output { background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
+      .option-table { width: 100%; margin: 1rem 0; }
+      .option-table th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
+      .option-table td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
+      .option-table code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="umd-layout-space-horizontal-full">
+        <umd-element-navigation-header sticky>
+          <a slot="logo" href="../index.html">
+            <span class="umd-sans-larger-bold">Design System Docs</span>
+          </a>
+          <div slot="main-navigation">
+            <umd-element-nav-item>
+              <a slot="primary-link" href="../index.html">Home</a>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="../architecture.html">Architecture</a>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="../getting-started.html">Getting Started</a>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="#">Packages</a>
+              <nav slot="dropdown-links">
+                <ul>
+                  <li><a href="../components/usage.html">Components</a></li>
+                  <li><a href="static-css.html">Styles</a></li>
+                  <li><a href="../elements/use-cases.html">Elements</a></li>
+                  <li><a href="../feeds/use-cases.html">Feeds</a></li>
+                  <li><a href="../tokens/use-cases.html">Tokens</a></li>
+                  <li><a href="../icons/use-cases.html">Icons</a></li>
+                  <li><a href="../utilities/use-cases.html">Utilities</a></li>
+                  <li><a href="../infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
+                </ul>
+              </nav>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="http://playground.designsystem.umd.edu" target="_blank">Playground</a>
+            </umd-element-nav-item>
+          </div>
+          <div slot="primary-slide-links">
+            <a href="../index.html"><span>Home</span></a>
+            <a href="../architecture.html"><span>Architecture</span></a>
+            <a href="../getting-started.html"><span>Getting Started</span></a>
+            <a href="#" data-child-ref="slide-packages"><span>Packages</span></a>
+            <a href="http://playground.designsystem.umd.edu" target="_blank"><span>Playground</span></a>
+          </div>
+          <div slot="children-slides">
+            <div data-parent-ref="slide-packages">
+              <a href="../components/usage.html"><span>Components</span></a>
+              <a href="static-css.html"><span>Styles</span></a>
+              <a href="../elements/use-cases.html"><span>Elements</span></a>
+              <a href="../feeds/use-cases.html"><span>Feeds</span></a>
+              <a href="../tokens/use-cases.html"><span>Tokens</span></a>
+              <a href="../icons/use-cases.html"><span>Icons</span></a>
+              <a href="../utilities/use-cases.html"><span>Utilities</span></a>
+              <a href="../infrastructure/model-and-builder.html"><span>Model &amp; Builder</span></a>
+            </div>
+          </div>
+        </umd-element-navigation-header>
+      </div>
+    </header>
 
-      <!-- Typography Classes -->
+    <main>
+      <div class="umd-layout-space-vertical-interior">
+        <umd-element-hero-minimal data-theme="light">
+          <h1 slot="headline">Styles Package Use Cases</h1>
+          <div slot="text"><p>Real-world examples of using the UMD Styles Library</p></div>
+        </umd-element-hero-minimal>
+        <div class="umd-layout-space-horizontal-larger">
+          <umd-element-breadcrumb>
+            <div slot="paths">
+              <a href="../index.html">Home</a>
+              <a href="static-css.html">Styles</a>
+              <p>Use Cases</p>
+            </div>
+          </umd-element-breadcrumb>
+        </div>
+      </div>
+
+      <section class="umd-layout-space-vertical-interior">
+        <div class="umd-layout-space-horizontal-larger">
+>>>>>>> Stashed changes
+
+          <div style="background-color: #fff4e6; border-left: 4px solid #e8a838; padding: 1rem 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
+            <strong>Where This Package Fits:</strong> Styles sits in the <strong>Infrastructure</strong> layer. It depends on <strong>Tokens</strong> and is used by <strong>Elements</strong>, <strong>Components</strong>, and your custom CSS.
+            <a href="../architecture.html">See full architecture</a>.
+          </div>
+
+<<<<<<< Updated upstream
+      <!-- Use Case 1: Quick Start -->
       <div class="use-case-card">
         <h4>Use Case 1: Typography Utility Classes</h4>
         <p>The UMD Styles Library provides a complete set of typography utility classes for <strong>sans-serif</strong>, <strong>serif</strong>, and <strong>campaign</strong> font families, plus rich text helpers.</p>
@@ -346,56 +458,279 @@
             </tr>
           </tbody>
         </table>
+=======
+          <umd-element-alert-page>
+            <h5 slot="headline">About This Guide</h5>
+            <p slot="text">
+              This guide demonstrates practical implementations of the UMD Styles Library for creating consistent, accessible designs.
+              For setup instructions, see the <a href="static-css.html">Static CSS Guide</a> or <a href="../getting-started.html">Getting Started</a>.
+            </p>
+          </umd-element-alert-page>
 
-        <h5>Available Grid Border Classes</h5>
-        <table class="option-table">
-          <thead>
-            <tr>
-              <th>Class Name</th>
-              <th>Columns</th>
-              <th>Description</th>
-              <th>Border Style</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>umd-layout-grid-border-two</code></td>
-              <td>2</td>
-              <td>Two-column grid with borders</td>
-              <td>1px solid #E0E0E0</td>
-            </tr>
-            <tr>
-              <td><code>umd-layout-grid-border-three</code></td>
-              <td>3</td>
-              <td>Three-column grid with borders</td>
-              <td>1px solid #E0E0E0</td>
-            </tr>
-            <tr>
-              <td><code>umd-layout-grid-border-four</code></td>
-              <td>4</td>
-              <td>Four-column grid with borders</td>
-              <td>1px solid #E0E0E0</td>
-            </tr>
-          </tbody>
-        </table>
+          <h2 style="margin-bottom: 1.5rem;">Common Use Cases</h2>
 
-        <h5>Gap Values</h5>
-        <div class="example-output">
-          <p><strong>Standard Gap:</strong> 16px (mobile), 24px (tablet), 32px (desktop)</p>
-          <p><strong>Large Gap:</strong> 16px (mobile), 24px (tablet), 48px (desktop), 64px (high-def)</p>
-          <p><strong>Stacked Gap:</strong> 32px vertical spacing between items</p>
-        </div>
+          <!-- Typography Classes -->
+          <div class="use-case-card">
+            <h4>Use Case 1: Typography Utility Classes</h4>
+            <p>The UMD Styles Library provides a complete set of typography utility classes for <strong>sans-serif</strong>, <strong>serif</strong>, and <strong>campaign</strong> font families, plus rich text helpers.</p>
 
+            <h5>Sans-Serif Classes</h5>
+            <table class="option-table">
+              <thead>
+                <tr>
+                  <th>Class Name</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>umd-sans-smallest</code></td>
+                  <td>Smallest sans-serif text size</td>
+                </tr>
+                <tr>
+                  <td><code>umd-sans-small</code></td>
+                  <td>Small sans-serif text</td>
+                </tr>
+                <tr>
+                  <td><code>umd-sans-medium</code></td>
+                  <td>Medium (default body) sans-serif text</td>
+                </tr>
+                <tr>
+                  <td><code>umd-sans-large</code></td>
+                  <td>Large sans-serif text</td>
+                </tr>
+                <tr>
+                  <td><code>umd-sans-larger</code></td>
+                  <td>Larger sans-serif text</td>
+                </tr>
+                <tr>
+                  <td><code>umd-sans-largest</code></td>
+                  <td>Largest sans-serif text</td>
+                </tr>
+                <tr>
+                  <td><code>umd-sans-largest-uppercase</code></td>
+                  <td>Largest sans-serif text, uppercased</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h5>Serif Classes</h5>
+            <table class="option-table">
+              <thead>
+                <tr>
+                  <th>Class Name</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>umd-serif-small</code></td>
+                  <td>Small serif text</td>
+                </tr>
+                <tr>
+                  <td><code>umd-serif-medium</code></td>
+                  <td>Medium serif text</td>
+                </tr>
+                <tr>
+                  <td><code>umd-serif-large</code></td>
+                  <td>Large serif text</td>
+                </tr>
+                <tr>
+                  <td><code>umd-serif-larger</code></td>
+                  <td>Larger serif text</td>
+                </tr>
+                <tr>
+                  <td><code>umd-serif-largest</code></td>
+                  <td>Largest serif text</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h5>Campaign Font Classes</h5>
+            <table class="option-table">
+              <thead>
+                <tr>
+                  <th>Class Name</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>umd-campaign-small</code></td>
+                  <td>Small campaign (Barlow Condensed) text</td>
+                </tr>
+                <tr>
+                  <td><code>umd-campaign-medium</code></td>
+                  <td>Medium campaign text</td>
+                </tr>
+                <tr>
+                  <td><code>umd-campaign-large</code></td>
+                  <td>Large campaign text</td>
+                </tr>
+                <tr>
+                  <td><code>umd-campaign-larger</code></td>
+                  <td>Larger campaign text</td>
+                </tr>
+                <tr>
+                  <td><code>umd-campaign-largest</code></td>
+                  <td>Largest campaign text</td>
+                </tr>
+                <tr>
+                  <td><code>umd-campaign-largest-uppercase</code></td>
+                  <td>Largest campaign text, uppercased</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h5>Rich Text Classes</h5>
+            <table class="option-table">
+              <thead>
+                <tr>
+                  <th>Class Name</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>umd-text-rich-simple</code></td>
+                  <td>Base rich text styling for body content</td>
+                </tr>
+                <tr>
+                  <td><code>umd-text-rich-simple-large</code></td>
+                  <td>Larger rich text styling for featured content</td>
+                </tr>
+                <tr>
+                  <td><code>umd-text-rich-simple-small</code></td>
+                  <td>Smaller rich text styling for compact areas</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h5>Usage Example</h5>
+            <pre><code class="language-html">&lt;h1 class="umd-campaign-largest-uppercase"&gt;Campaign Headline&lt;/h1&gt;
+&lt;h2 class="umd-sans-larger"&gt;Section Title&lt;/h2&gt;
+&lt;p class="umd-serif-medium"&gt;Body text in Crimson Pro serif.&lt;/p&gt;
+
+&lt;!-- Rich text block with proper spacing and sizing --&gt;
+&lt;div class="umd-text-rich-simple"&gt;
+  &lt;p&gt;Paragraphs, lists, and links receive consistent styling.&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;Styled list items&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+          </div>
+
+          <!-- Grid System -->
+          <div class="use-case-card">
+            <h4>Use Case 2: Grid System Classes</h4>
+            <p>The UMD Styles Library provides two types of grid systems: <strong>Grid with Gaps</strong> (for spacing between items) and <strong>Grid with Borders</strong> (for table-like layouts).</p>
+
+            <h5>Available Grid Gap Classes</h5>
+            <table class="option-table">
+              <thead>
+                <tr>
+                  <th>Class Name</th>
+                  <th>Columns</th>
+                  <th>Description</th>
+                  <th>Responsive Behavior</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>umd-layout-grid-gap-two</code></td>
+                  <td>2</td>
+                  <td>Two-column grid with standard gaps</td>
+                  <td>Stacks to 1 column on mobile</td>
+                </tr>
+                <tr>
+                  <td><code>umd-layout-grid-gap-three</code></td>
+                  <td>3</td>
+                  <td>Three-column grid with standard gaps</td>
+                  <td>Mobile: 1 col, Tablet: 2 cols</td>
+                </tr>
+                <tr>
+                  <td><code>umd-layout-grid-gap-three-large</code></td>
+                  <td>3</td>
+                  <td>Three-column grid with larger gaps on desktop</td>
+                  <td>Mobile: 1 col, Tablet: 2 cols, Desktop: larger gaps</td>
+                </tr>
+                <tr>
+                  <td><code>umd-layout-grid-gap-four</code></td>
+                  <td>4</td>
+                  <td>Four-column grid with standard gaps</td>
+                  <td>Mobile: 1 col, Tablet: 2 cols</td>
+                </tr>
+                <tr>
+                  <td><code>umd-layout-grid-gap-four-centered</code></td>
+                  <td>4</td>
+                  <td>Four-column grid where first item spans 2 columns</td>
+                  <td>Mobile: 1 col, Tablet: 2 cols</td>
+                </tr>
+                <tr>
+                  <td><code>umd-layout-grid-gap-stacked</code></td>
+                  <td>1</td>
+                  <td>Single column with consistent vertical spacing</td>
+                  <td>Always single column</td>
+                </tr>
+              </tbody>
+            </table>
+>>>>>>> Stashed changes
+
+            <h5>Available Grid Border Classes</h5>
+            <table class="option-table">
+              <thead>
+                <tr>
+                  <th>Class Name</th>
+                  <th>Columns</th>
+                  <th>Description</th>
+                  <th>Border Style</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>umd-layout-grid-border-two</code></td>
+                  <td>2</td>
+                  <td>Two-column grid with borders</td>
+                  <td>1px solid #E0E0E0</td>
+                </tr>
+                <tr>
+                  <td><code>umd-layout-grid-border-three</code></td>
+                  <td>3</td>
+                  <td>Three-column grid with borders</td>
+                  <td>1px solid #E0E0E0</td>
+                </tr>
+                <tr>
+                  <td><code>umd-layout-grid-border-four</code></td>
+                  <td>4</td>
+                  <td>Four-column grid with borders</td>
+                  <td>1px solid #E0E0E0</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h5>Gap Values</h5>
+            <div class="example-output">
+              <p><strong>Standard Gap:</strong> 16px (mobile), 24px (tablet), 32px (desktop)</p>
+              <p><strong>Large Gap:</strong> 16px (mobile), 24px (tablet), 48px (desktop), 64px (high-def)</p>
+              <p><strong>Stacked Gap:</strong> 32px vertical spacing between items</p>
+            </div>
+
+<<<<<<< Updated upstream
         <h5>Usage Example</h5>
-        <pre><code class="language-html">&lt;!-- Standard three-column grid --&gt;
+        <pre><code>&lt;!-- Standard three-column grid --&gt;
+=======
+            <h5>Usage Example</h5>
+            <pre><code class="language-html">&lt;!-- Standard three-column grid --&gt;
+>>>>>>> Stashed changes
 &lt;div class="umd-layout-grid-gap-three"&gt;
   &lt;div&gt;Item 1&lt;/div&gt;
   &lt;div&gt;Item 2&lt;/div&gt;
   &lt;div&gt;Item 3&lt;/div&gt;
 &lt;/div&gt;</code></pre>
-      </div>
+          </div>
 
-      <!-- Spacing Utilities -->
+<<<<<<< Updated upstream
+      <!-- Use Case 3: Horizontal and Vertical Spacing -->
       <div class="use-case-card">
         <h4>Use Case 3: Spacing Utility Classes</h4>
         <p>The library provides comprehensive spacing utilities for both <strong>horizontal containers</strong> (max-width with padding) and <strong>vertical spacing</strong> (margin-bottom).</p>
@@ -449,73 +784,135 @@
             </tr>
           </tbody>
         </table>
+=======
+          <!-- Spacing Utilities -->
+          <div class="use-case-card">
+            <h4>Use Case 3: Spacing Utility Classes</h4>
+            <p>The library provides comprehensive spacing utilities for both <strong>horizontal containers</strong> (max-width with padding) and <strong>vertical spacing</strong> (margin-bottom).</p>
 
-        <h5>Vertical Spacing Classes</h5>
-        <table class="option-table">
-          <thead>
-            <tr>
-              <th>Class Name</th>
-              <th>Mobile Margin</th>
-              <th>Tablet Margin</th>
-              <th>Desktop Margin</th>
-              <th>Use Case</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>umd-layout-space-vertical-landing</code></td>
-              <td>48px</td>
-              <td>96px</td>
-              <td>120px</td>
-              <td>Major landing page sections</td>
-            </tr>
-            <tr>
-              <td><code>umd-layout-space-vertical-landing-child</code></td>
-              <td>24px</td>
-              <td>32px</td>
-              <td>40px</td>
-              <td>Elements within landing sections</td>
-            </tr>
-            <tr>
-              <td><code>umd-layout-space-vertical-interior</code></td>
-              <td>48px</td>
-              <td>48px</td>
-              <td>96px</td>
-              <td>Interior page sections</td>
-            </tr>
-            <tr>
-              <td><code>umd-layout-space-vertical-interior-child</code></td>
-              <td>24px</td>
-              <td>24px</td>
-              <td>24px</td>
-              <td>Elements within interior sections</td>
-            </tr>
-            <tr>
-              <td><code>umd-layout-space-vertical-headline-large</code></td>
-              <td>8px</td>
-              <td>8px</td>
-              <td>16px</td>
-              <td>After large headlines</td>
-            </tr>
-            <tr>
-              <td><code>umd-layout-space-vertical-headline-medium</code></td>
-              <td>8px</td>
-              <td>8px</td>
-              <td>8px</td>
-              <td>After medium headlines</td>
-            </tr>
-          </tbody>
-        </table>
+            <h5>Horizontal Container Classes</h5>
+            <table class="option-table">
+              <thead>
+                <tr>
+                  <th>Class Name</th>
+                  <th>Max Width</th>
+                  <th>Padding</th>
+                  <th>Use Case</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>umd-layout-space-horizontal-full</code></td>
+                  <td>100%</td>
+                  <td>16px (mobile), 40px (tablet), 64px (desktop)</td>
+                  <td>Full-width sections</td>
+                </tr>
+                <tr>
+                  <td><code>umd-layout-space-horizontal-larger</code></td>
+                  <td>1400px</td>
+                  <td>Same as above</td>
+                  <td>Wide content areas</td>
+                </tr>
+                <tr>
+                  <td><code>umd-layout-space-horizontal-large</code></td>
+                  <td>1200px</td>
+                  <td>Same as above</td>
+                  <td>Standard content width</td>
+                </tr>
+                <tr>
+                  <td><code>umd-layout-space-horizontal-normal</code></td>
+                  <td>1000px</td>
+                  <td>Same as above</td>
+                  <td>Reading width</td>
+                </tr>
+                <tr>
+                  <td><code>umd-layout-space-horizontal-small</code></td>
+                  <td>800px</td>
+                  <td>Same as above</td>
+                  <td>Narrow content/forms</td>
+                </tr>
+                <tr>
+                  <td><code>umd-layout-space-horizontal-smallest</code></td>
+                  <td>600px</td>
+                  <td>Same as above</td>
+                  <td>Very narrow content</td>
+                </tr>
+              </tbody>
+            </table>
+>>>>>>> Stashed changes
 
+            <h5>Vertical Spacing Classes</h5>
+            <table class="option-table">
+              <thead>
+                <tr>
+                  <th>Class Name</th>
+                  <th>Mobile Margin</th>
+                  <th>Tablet Margin</th>
+                  <th>Desktop Margin</th>
+                  <th>Use Case</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>umd-layout-space-vertical-landing</code></td>
+                  <td>48px</td>
+                  <td>96px</td>
+                  <td>120px</td>
+                  <td>Major landing page sections</td>
+                </tr>
+                <tr>
+                  <td><code>umd-layout-space-vertical-landing-child</code></td>
+                  <td>24px</td>
+                  <td>32px</td>
+                  <td>40px</td>
+                  <td>Elements within landing sections</td>
+                </tr>
+                <tr>
+                  <td><code>umd-layout-space-vertical-interior</code></td>
+                  <td>48px</td>
+                  <td>48px</td>
+                  <td>96px</td>
+                  <td>Interior page sections</td>
+                </tr>
+                <tr>
+                  <td><code>umd-layout-space-vertical-interior-child</code></td>
+                  <td>24px</td>
+                  <td>24px</td>
+                  <td>24px</td>
+                  <td>Elements within interior sections</td>
+                </tr>
+                <tr>
+                  <td><code>umd-layout-space-vertical-headline-large</code></td>
+                  <td>8px</td>
+                  <td>8px</td>
+                  <td>16px</td>
+                  <td>After large headlines</td>
+                </tr>
+                <tr>
+                  <td><code>umd-layout-space-vertical-headline-medium</code></td>
+                  <td>8px</td>
+                  <td>8px</td>
+                  <td>8px</td>
+                  <td>After medium headlines</td>
+                </tr>
+              </tbody>
+            </table>
+
+<<<<<<< Updated upstream
         <h5>Usage Example</h5>
-        <pre><code class="language-html">&lt;!-- Container with reading width --&gt;
+        <pre><code>&lt;!-- Container with reading width --&gt;
+=======
+            <h5>Usage Example</h5>
+            <pre><code class="language-html">&lt;!-- Container with reading width --&gt;
+>>>>>>> Stashed changes
 &lt;div class="umd-layout-space-horizontal-normal"&gt;
   &lt;h1 class="umd-layout-space-vertical-headline-large"&gt;Page Title&lt;/h1&gt;
   &lt;p&gt;Content with optimal reading width and proper spacing.&lt;/p&gt;
 &lt;/div&gt;</code></pre>
-      </div>
+          </div>
 
-      <!-- Form Fields -->
+<<<<<<< Updated upstream
+      <!-- Use Case 4: Form Implementation -->
       <div class="use-case-card">
         <h4>Use Case 4: Form Field Classes</h4>
         <p>The library provides a complete set of form field classes for creating accessible, consistent forms.</p>
@@ -611,16 +1008,119 @@
             </tr>
           </tbody>
         </table>
+=======
+          <!-- Form Fields -->
+          <div class="use-case-card">
+            <h4>Use Case 4: Form Field Classes</h4>
+            <p>The library provides a complete set of form field classes for creating accessible, consistent forms.</p>
 
-        <h5>Validation States</h5>
-        <div class="example-output">
-          <p><strong>Valid State:</strong> Add <code>aria-invalid="false"</code> to show green border</p>
-          <p><strong>Invalid State:</strong> Add <code>aria-invalid="true"</code> to show red border</p>
-          <p><strong>Disabled State:</strong> Add <code>disabled</code> attribute for disabled styling</p>
-        </div>
+            <h5>Available Form Classes</h5>
+            <table class="option-table">
+              <thead>
+                <tr>
+                  <th>Class Name</th>
+                  <th>Element Type</th>
+                  <th>Description</th>
+                  <th>Special Features</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>umd-field-input</code></td>
+                  <td>input</td>
+                  <td>Base input field styling</td>
+                  <td>Supports aria-invalid for validation states</td>
+                </tr>
+                <tr>
+                  <td><code>umd-field-input-date-wrapper</code></td>
+                  <td>div (wrapper)</td>
+                  <td>Wrapper for date inputs</td>
+                  <td>Custom calendar icon</td>
+                </tr>
+                <tr>
+                  <td><code>umd-field-input-time-wrapper</code></td>
+                  <td>div (wrapper)</td>
+                  <td>Wrapper for time inputs</td>
+                  <td>Custom clock icon</td>
+                </tr>
+                <tr>
+                  <td><code>umd-field-select-wrapper</code></td>
+                  <td>div (wrapper)</td>
+                  <td>Wrapper for select dropdowns</td>
+                  <td>Custom dropdown arrow</td>
+                </tr>
+                <tr>
+                  <td><code>umd-field-select</code></td>
+                  <td>select</td>
+                  <td>Styled select dropdown</td>
+                  <td>Consistent cross-browser styling</td>
+                </tr>
+                <tr>
+                  <td><code>umd-field-textarea</code></td>
+                  <td>textarea</td>
+                  <td>Styled textarea</td>
+                  <td>Auto-resize option</td>
+                </tr>
+                <tr>
+                  <td><code>umd-field-checkbox-wrapper</code></td>
+                  <td>div (wrapper)</td>
+                  <td>Wrapper for checkbox + label</td>
+                  <td>Custom checkbox styling</td>
+                </tr>
+                <tr>
+                  <td><code>umd-field-radio-wrapper</code></td>
+                  <td>div (wrapper)</td>
+                  <td>Wrapper for radio + label</td>
+                  <td>Custom radio styling</td>
+                </tr>
+                <tr>
+                  <td><code>umd-field-file-wrapper</code></td>
+                  <td>div (wrapper)</td>
+                  <td>Wrapper for file inputs</td>
+                  <td>Custom file button</td>
+                </tr>
+                <tr>
+                  <td><code>umd-field-file</code></td>
+                  <td>input[type="file"]</td>
+                  <td>Hidden file input</td>
+                  <td>Visually hidden, label styled</td>
+                </tr>
+                <tr>
+                  <td><code>umd-field-file-label</code></td>
+                  <td>span</td>
+                  <td>Visual file button</td>
+                  <td>Shows selected filename</td>
+                </tr>
+                <tr>
+                  <td><code>umd-field-set</code></td>
+                  <td>fieldset</td>
+                  <td>Groups related form fields</td>
+                  <td>Proper spacing and borders</td>
+                </tr>
+                <tr>
+                  <td><code>umd-field-set-item</code></td>
+                  <td>div</td>
+                  <td>Individual field container</td>
+                  <td>Consistent spacing between fields</td>
+                </tr>
+              </tbody>
+            </table>
+>>>>>>> Stashed changes
 
+            <h5>Validation States</h5>
+            <div class="example-output">
+              <p><strong>Valid State:</strong> Add <code>aria-invalid="false"</code> to show green border</p>
+              <p><strong>Invalid State:</strong> Add <code>aria-invalid="true"</code> to show red border</p>
+              <p><strong>Disabled State:</strong> Add <code>disabled</code> attribute for disabled styling</p>
+            </div>
+
+<<<<<<< Updated upstream
         <h5>Usage Example</h5>
-        <pre><code class="language-html">&lt;!-- Text input with validation --&gt;
+        <pre><code>&lt;!-- Text input with validation --&gt;
+=======
+            <h5>Usage Example</h5>
+            <pre><code class="language-html">&lt;!-- Text input with validation --&gt;
+>>>>>>> Stashed changes
 &lt;div class="umd-field-set-item"&gt;
   &lt;label for="email"&gt;Email&lt;/label&gt;
   &lt;input type="email" id="email" class="umd-field-input" aria-invalid="false"&gt;
@@ -630,9 +1130,10 @@
 &lt;div class="umd-field-input-date-wrapper"&gt;
   &lt;input type="date" class="umd-field-input-date"&gt;
 &lt;/div&gt;</code></pre>
-      </div>
+          </div>
 
-      <!-- Web Components Default Styling -->
+<<<<<<< Updated upstream
+      <!-- Use Case 5: Web Components Default Styling -->
       <div class="use-case-card">
         <h4>Use Case 5: Automatic Web Component Styling</h4>
         <p>All UMD web components receive automatic base styling from the styles package. No additional configuration needed.</p>
@@ -664,73 +1165,113 @@
             </tr>
           </tbody>
         </table>
+=======
+          <!-- Web Components Default Styling -->
+          <div class="use-case-card">
+            <h4>Use Case 5: Automatic Web Component Styling</h4>
+            <p>All UMD web components receive automatic base styling from the styles package. No additional configuration needed.</p>
 
-        <h5>Components with Special Styling</h5>
-        <table class="option-table">
-          <thead>
-            <tr>
-              <th>Component</th>
-              <th>Special Styling</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>umd-element-accordion-item</code></td>
-              <td>Auto spacing: <code>margin-top: 4px</code></td>
-              <td>Consistent spacing between accordion items</td>
-            </tr>
-            <tr>
-              <td><code>umd-element-brand-logo-animation</code></td>
-              <td>Absolute positioning, z-index: 9</td>
-              <td>Proper logo animation placement</td>
-            </tr>
-            <tr>
-              <td><code>umd-element-card[data-display="list"]</code></td>
-              <td>Auto spacing: <code>margin-top: 16px</code></td>
-              <td>Consistent list card spacing</td>
-            </tr>
-            <tr>
-              <td><code>umd-element-navigation-sticky</code></td>
-              <td>z-index: 9999</td>
-              <td>Ensures navigation stays on top</td>
-            </tr>
-            <tr>
-              <td><code>umd-element-scroll-top[data-layout-fixed="true"]</code></td>
-              <td>Fixed positioning, responsive sizing</td>
-              <td>Scroll to top button placement</td>
-            </tr>
-            <tr>
-              <td><code>umd-element-social-sharing[data-layout-fixed="true"]</code></td>
-              <td>Fixed positioning on desktop</td>
-              <td>Social sharing sidebar</td>
-            </tr>
-          </tbody>
-        </table>
+            <h5>How Automatic Styling Works</h5>
+            <table class="option-table">
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th>CSS Applied</th>
+                  <th>Purpose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Hidden Until Defined</td>
+                  <td><code>:not(:defined) { display: none; }</code></td>
+                  <td>Prevents flash of unstyled content</td>
+                </tr>
+                <tr>
+                  <td>Block Display</td>
+                  <td><code>:defined { display: block; }</code></td>
+                  <td>Standard block-level behavior</td>
+                </tr>
+                <tr>
+                  <td>Container Queries</td>
+                  <td><code>:defined { container-type: inline-size; }</code></td>
+                  <td>Enables responsive component design</td>
+                </tr>
+              </tbody>
+            </table>
+>>>>>>> Stashed changes
 
-        <h5>Component List</h5>
-        <div class="example-output">
-          <p><strong>Base Components (automatic show/hide):</strong></p>
-          <ul>
-            <li>alert-page, alert-site, banner-promo</li>
-            <li>All carousel variants (cards, image, multiple-image, people, thumbnail)</li>
-            <li>All hero variants (brand-video, expand, logo, minimal)</li>
-            <li>media-inline, media-gif, quote</li>
-            <li>pathway, pathway-highlight</li>
-            <li>person-bio, person-hero</li>
-            <li>slider-events, slider-events-feed</li>
-          </ul>
-          <p><strong>Feed Components:</strong> umd-feed-events, umd-feed-news</p>
-          <p><strong>Navigation Components:</strong> nav-item, nav-drawer, navigation-header, navigation-sticky</p>
-          <p><strong>Layout Components:</strong> footer, breadcrumb, call-to-action, tabs, section-intro</p>
-        </div>
+            <h5>Components with Special Styling</h5>
+            <table class="option-table">
+              <thead>
+                <tr>
+                  <th>Component</th>
+                  <th>Special Styling</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>umd-element-accordion-item</code></td>
+                  <td>Auto spacing: <code>margin-top: 4px</code></td>
+                  <td>Consistent spacing between accordion items</td>
+                </tr>
+                <tr>
+                  <td><code>umd-element-brand-logo-animation</code></td>
+                  <td>Absolute positioning, z-index: 9</td>
+                  <td>Proper logo animation placement</td>
+                </tr>
+                <tr>
+                  <td><code>umd-element-card[data-display="list"]</code></td>
+                  <td>Auto spacing: <code>margin-top: 16px</code></td>
+                  <td>Consistent list card spacing</td>
+                </tr>
+                <tr>
+                  <td><code>umd-element-navigation-sticky</code></td>
+                  <td>z-index: 9999</td>
+                  <td>Ensures navigation stays on top</td>
+                </tr>
+                <tr>
+                  <td><code>umd-element-scroll-top[data-layout-fixed="true"]</code></td>
+                  <td>Fixed positioning, responsive sizing</td>
+                  <td>Scroll to top button placement</td>
+                </tr>
+                <tr>
+                  <td><code>umd-element-social-sharing[data-layout-fixed="true"]</code></td>
+                  <td>Fixed positioning on desktop</td>
+                  <td>Social sharing sidebar</td>
+                </tr>
+              </tbody>
+            </table>
 
+            <h5>Component List</h5>
+            <div class="example-output">
+              <p><strong>Base Components (automatic show/hide):</strong></p>
+              <ul>
+                <li>alert-page, alert-site, banner-promo</li>
+                <li>All carousel variants (cards, image, multiple-image, people, thumbnail)</li>
+                <li>All hero variants (brand-video, expand, logo, minimal)</li>
+                <li>media-inline, media-gif, quote</li>
+                <li>pathway, pathway-highlight</li>
+                <li>person-bio, person-hero</li>
+                <li>slider-events, slider-events-feed</li>
+              </ul>
+              <p><strong>Feed Components:</strong> umd-feed-events, umd-feed-news</p>
+              <p><strong>Navigation Components:</strong> nav-item, nav-drawer, navigation-header, navigation-sticky</p>
+              <p><strong>Layout Components:</strong> footer, breadcrumb, call-to-action, tabs, section-intro</p>
+            </div>
+
+<<<<<<< Updated upstream
         <h5>Benefits</h5>
-        <pre><code class="language-html">&lt;!-- Just use the component - styling is automatic! --&gt;
+        <pre><code>&lt;!-- Just use the component - styling is automatic! --&gt;
+=======
+            <h5>Benefits</h5>
+            <pre><code class="language-html">&lt;!-- Just use the component - styling is automatic! --&gt;
+>>>>>>> Stashed changes
 &lt;umd-element-hero data-theme="dark"&gt;
   &lt;!-- Component is hidden until JavaScript loads --&gt;
   &lt;!-- Then displays as block with container queries enabled --&gt;
 &lt;/umd-element-hero&gt;</code></pre>
+<<<<<<< Updated upstream
       </div>
 
       <!-- Best Practices -->
@@ -804,11 +1345,88 @@
         <p class="text-center text-muted small mb-0">&copy; University of Maryland. All rights reserved. | <a href="https://umd.edu" class="text-muted">umd.edu</a> | <a href="https://brand.umd.edu" class="text-muted">Brand Guidelines</a></p>
       </div>
     </footer>
+=======
+          </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+          <!-- Best Practices -->
+          <umd-element-alert-page>
+            <h5 slot="headline">Best Practices</h5>
+            <div slot="text"><ul>
+              <li>Always load fonts first for consistent typography</li>
+              <li>Use semantic HTML with UMD utility classes</li>
+              <li>Choose the appropriate grid system (gaps for cards, borders for data)</li>
+              <li>Select container widths based on content type (reading vs. full-width)</li>
+              <li>Apply proper vertical spacing for visual hierarchy</li>
+              <li>Use form field wrappers for enhanced styling</li>
+              <li>Let web components inherit their default styling</li>
+              <li>Test across different screen sizes and browsers</li>
+            </ul></div>
+          </umd-element-alert-page>
+
+          <!-- Performance Tips -->
+          <umd-element-alert-page>
+            <h5 slot="headline">Performance Tips</h5>
+            <div slot="text"><ul>
+              <li>Load only the CSS you need using selective imports</li>
+              <li>Use the critical CSS pattern for above-the-fold content</li>
+              <li>Lazy load non-critical stylesheets with the async pattern</li>
+              <li>Combine utility classes instead of custom CSS</li>
+              <li>Use CSS custom properties for dynamic theming</li>
+            </ul></div>
+          </umd-element-alert-page>
+
+          <!-- Content Manager Callout -->
+          <umd-element-alert-page>
+            <p slot="headline">For Content Managers</p>
+            <p slot="text">For visual examples and design guidance, visit <a href="https://designsystem.umd.edu">designsystem.umd.edu</a>.</p>
+          </umd-element-alert-page>
+
+          <!-- Related Resources -->
+          <div style="margin-top: 3rem;">
+            <h3>Related Resources</h3>
+            <ul>
+              <li><a href="static-css.html">Static CSS Guide</a></li>
+              <li><a href="tailwind.html">Tailwind Integration</a></li>
+              <li><a href="../components/usage.html">Component Integration Guide</a></li>
+              <li><a href="../getting-started.html">Getting Started Guide</a></li>
+              <li><a href="https://designsystem.umd.edu">Design System Website</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <umd-element-footer data-display="mega" data-theme="dark">
+      <div slot="link-column-one">
+        <h3>Developer Tools</h3>
+        <ul>
+          <li><a href="https://umd-digital.github.io/design-system/">TypeDoc API Reference</a></li>
+          <li><a href="https://www.npmjs.com/org/universityofmaryland">@universityofmaryland on npm</a></li>
+          <li><a href="https://github.com/UMD-Digital/design-system">GitHub Repository</a></li>
+        </ul>
+      </div>
+      <div slot="link-column-two">
+        <h3>Learning</h3>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started Guide</a></li>
+          <li><a href="../architecture.html">Architecture Overview</a></li>
+          <li><a href="http://playground.designsystem.umd.edu" target="_blank">Component Playground</a></li>
+        </ul>
+      </div>
+      <div slot="link-column-three">
+        <h3>UMD Links</h3>
+        <ul>
+          <li><a href="https://designsystem.umd.edu">designsystem.umd.edu</a></li>
+          <li><a href="https://brand.umd.edu">brand.umd.edu</a></li>
+          <li><a href="https://umd.edu">umd.edu</a></li>
+        </ul>
+      </div>
+    </umd-element-footer>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-css.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-markup.min.js"></script>
+>>>>>>> Stashed changes
   </body>
 </html>

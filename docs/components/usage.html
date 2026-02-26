@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Component Usage Guide - UMD Design System</title>
+<<<<<<< Updated upstream
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -41,6 +42,27 @@
       code {
         color: #e83e8c;
       }
+=======
+    <link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/styles.min.css" />
+    <script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/cdn.js"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      pre[class*="language-"] { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+      pre { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; }
+      code { color: #e21833; }
+      pre code { color: inherit; }
+      table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+      th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
+      td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
+      td code, th code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
+      .content-section { background-color: #f8f9fa; border-radius: 8px; padding: 2rem; margin-bottom: 2rem; }
+      .code-example { background-color: #fff; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
+      .use-case-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; background-color: #fff; }
+      .use-case-card h4 { color: #e21833; margin-bottom: 1rem; }
+>>>>>>> Stashed changes
       .feature-list {
         list-style: none;
         padding-left: 0;
@@ -57,19 +79,6 @@
         color: #28a745;
         font-weight: bold;
       }
-      .btn-umd {
-        background-color: #e21833;
-        color: white;
-        border: none;
-        padding: 0.5rem 1.5rem;
-        border-radius: 4px;
-        text-decoration: none;
-        display: inline-block;
-      }
-      .btn-umd:hover {
-        background-color: #c71629;
-        color: white;
-      }
       .quick-nav {
         background-color: #fff3cd;
         border: 1px solid #ffeaa7;
@@ -77,34 +86,29 @@
         padding: 1.5rem;
         margin-bottom: 2rem;
       }
+<<<<<<< Updated upstream
+      .example-output {
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        padding: 1rem;
+=======
+      .quick-nav-links {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 0.5rem;
+>>>>>>> Stashed changes
+        margin-top: 1rem;
+      }
       .alert-custom {
         background-color: #e3f2fd;
         border: 1px solid #90caf9;
         color: #0d47a1;
-      }
-      .slot-table thead {
-        background-color: #e21833;
-        color: white;
-      }
-      .slot-table td,
-      .slot-table th {
-        padding: 0.75rem 1rem;
-        border: 1px solid #dee2e6;
-      }
-      .slot-table {
-        background-color: white;
+        padding: 1.5rem;
         border-radius: 8px;
-        overflow: hidden;
-        margin: 1rem 0 2rem;
-        width: 100%;
+        margin-bottom: 2rem;
       }
-      .content-manager-callout {
-        background-color: #fff8e1;
-        border-left: 4px solid #ffc107;
-        padding: 1rem 1.5rem;
-        border-radius: 0 8px 8px 0;
-        margin-top: 2rem;
-      }
+<<<<<<< Updated upstream
     </style>
   </head>
   <body>
@@ -190,15 +194,179 @@
           HTML usage patterns for UMD Web Components.
         </p>
       </section>
+=======
+      .slot-table thead {
+        background-color: #e21833;
+        color: white;
+      }
+      .slot-table td,
+      .slot-table th {
+        padding: 0.75rem 1rem;
+        border: 1px solid #dee2e6;
+      }
+      .slot-table {
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 1rem 0 2rem;
+        width: 100%;
+      }
+      .content-manager-callout {
+        background-color: #fff8e1;
+        border-left: 4px solid #ffc107;
+        padding: 1rem 1.5rem;
+        border-radius: 0 8px 8px 0;
+        margin-top: 2rem;
+      }
+      .next-steps-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+      .next-step-card {
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 1.5rem;
+        background-color: #fff;
+      }
+      .next-step-card h5 {
+        margin-bottom: 0.75rem;
+      }
+      .next-step-card p {
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="umd-layout-space-horizontal-full">
+        <umd-element-navigation-header sticky>
+          <a slot="logo" href="../index.html">
+            <span class="umd-sans-larger-bold">Design System Docs</span>
+          </a>
+          <div slot="main-navigation">
+            <umd-element-nav-item>
+              <a slot="primary-link" href="../index.html">Home</a>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="../architecture.html">Architecture</a>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="../getting-started.html">Getting Started</a>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="#">Packages</a>
+              <nav slot="dropdown-links">
+                <ul>
+                  <li><a href="usage.html">Components</a></li>
+                  <li><a href="../styles/static-css.html">Styles</a></li>
+                  <li><a href="../elements/use-cases.html">Elements</a></li>
+                  <li><a href="../feeds/use-cases.html">Feeds</a></li>
+                  <li><a href="../tokens/use-cases.html">Tokens</a></li>
+                  <li><a href="../icons/use-cases.html">Icons</a></li>
+                  <li><a href="../utilities/use-cases.html">Utilities</a></li>
+                  <li><a href="../infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
+                </ul>
+              </nav>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="http://playground.designsystem.umd.edu" target="_blank">Playground</a>
+            </umd-element-nav-item>
+          </div>
+          <div slot="primary-slide-links">
+            <a href="../index.html"><span>Home</span></a>
+            <a href="../architecture.html"><span>Architecture</span></a>
+            <a href="../getting-started.html"><span>Getting Started</span></a>
+            <a href="#" data-child-ref="slide-packages"><span>Packages</span></a>
+            <a href="http://playground.designsystem.umd.edu" target="_blank"><span>Playground</span></a>
+          </div>
+          <div slot="children-slides">
+            <div data-parent-ref="slide-packages">
+              <a href="usage.html"><span>Components</span></a>
+              <a href="../styles/static-css.html"><span>Styles</span></a>
+              <a href="../elements/use-cases.html"><span>Elements</span></a>
+              <a href="../feeds/use-cases.html"><span>Feeds</span></a>
+              <a href="../tokens/use-cases.html"><span>Tokens</span></a>
+              <a href="../icons/use-cases.html"><span>Icons</span></a>
+              <a href="../utilities/use-cases.html"><span>Utilities</span></a>
+              <a href="../infrastructure/model-and-builder.html"><span>Model &amp; Builder</span></a>
+            </div>
+          </div>
+        </umd-element-navigation-header>
+      </div>
+    </header>
 
-      <!-- Basic Usage Section -->
-      <section id="basic-usage" class="content-section">
-        <h2>Basic Usage Examples</h2>
+    <main>
+      <div class="umd-layout-space-vertical-interior">
+        <umd-element-hero-minimal data-theme="light">
+          <h1 slot="headline">Component Usage Guide</h1>
+          <div slot="text"><p>Learn how to implement UMD Web Components</p></div>
+        </umd-element-hero-minimal>
+        <div class="umd-layout-space-horizontal-larger">
+          <umd-element-breadcrumb>
+            <div slot="paths">
+              <a href="../index.html">Home</a>
+              <a href="usage.html">Components</a>
+              <p>Usage Guide</p>
+            </div>
+          </umd-element-breadcrumb>
+        </div>
+      </div>
 
+      <section class="umd-layout-space-vertical-interior">
+        <div class="umd-layout-space-horizontal-larger">
+>>>>>>> Stashed changes
+
+          <div style="background-color: #e8f5e9; border-left: 4px solid #4caf50; padding: 1rem 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
+            <strong>Where This Package Fits:</strong> Components sits at the top of the <strong>Application</strong> layer. It depends on all lower packages and provides ready-to-use web components.
+            <a href="../architecture.html">See full architecture</a>.
+          </div>
+
+<<<<<<< Updated upstream
         <h3>Hero Component</h3>
         <p>Create engaging hero sections with built-in responsive behavior:</p>
         <div class="code-example">
-          <pre><code class="language-html">&lt;umd-element-hero data-theme="dark" data-display="overlay"&gt;
+          <pre><code>&lt;umd-element-hero data-theme="dark" data-display="overlay"&gt;
+=======
+          <!-- Quick Navigation -->
+          <div class="quick-nav">
+            <h4>Quick Navigation</h4>
+            <div class="quick-nav-links">
+              <umd-element-call-to-action>
+                <a href="#basic-usage">Basic Usage</a>
+              </umd-element-call-to-action>
+              <umd-element-call-to-action>
+                <a href="#styles-integration">Styles Integration</a>
+              </umd-element-call-to-action>
+              <umd-element-call-to-action>
+                <a href="#common-patterns">Common Patterns</a>
+              </umd-element-call-to-action>
+              <umd-element-call-to-action>
+                <a href="#best-practices">Best Practices</a>
+              </umd-element-call-to-action>
+            </div>
+          </div>
+
+          <!-- Getting Started Note -->
+          <section id="getting-started" class="content-section">
+            <h2>Getting Started</h2>
+            <p>
+              For installation and initial setup instructions, see the
+              <a href="../getting-started.html">Getting Started Guide</a>. This page focuses on
+              HTML usage patterns for UMD Web Components.
+            </p>
+          </section>
+
+          <!-- Basic Usage Section -->
+          <section id="basic-usage" class="content-section">
+            <h2>Basic Usage Examples</h2>
+
+            <h3>Hero Component</h3>
+            <p>Create engaging hero sections with built-in responsive behavior:</p>
+            <div class="code-example">
+              <pre><code class="language-html">&lt;umd-element-hero data-theme="dark" data-display="overlay"&gt;
+>>>>>>> Stashed changes
   &lt;img slot="image" src="hero.jpg" alt="Campus view"&gt;
   &lt;p slot="eyebrow"&gt;Welcome to Maryland&lt;/p&gt;
   &lt;h1 slot="headline"&gt;Fearless Ideas Start Here&lt;/h1&gt;
@@ -211,56 +379,63 @@
     &lt;/umd-element-call-to-action&gt;
   &lt;/div&gt;
 &lt;/umd-element-hero&gt;</code></pre>
-        </div>
+            </div>
 
-        <h4>Hero Slot Reference</h4>
-        <table class="slot-table">
-          <thead>
-            <tr>
-              <th>Slot Name</th>
-              <th>Required</th>
-              <th>Allowed Elements</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>image</code></td>
-              <td>No</td>
-              <td><code>img</code></td>
-              <td>Background image</td>
-            </tr>
-            <tr>
-              <td><code>eyebrow</code></td>
-              <td>No</td>
-              <td><code>p</code>, <code>span</code></td>
-              <td>Small text above headline</td>
-            </tr>
-            <tr>
-              <td><code>headline</code></td>
-              <td>Yes</td>
-              <td><code>h1</code>&ndash;<code>h6</code></td>
-              <td>Main heading</td>
-            </tr>
-            <tr>
-              <td><code>text</code></td>
-              <td>No</td>
-              <td><code>div</code></td>
-              <td>Supporting copy</td>
-            </tr>
-            <tr>
-              <td><code>actions</code></td>
-              <td>No</td>
-              <td><code>div</code></td>
-              <td>CTA buttons</td>
-            </tr>
-          </tbody>
-        </table>
-
+<<<<<<< Updated upstream
         <h3>Card Component</h3>
         <p>Display content in flexible card layouts:</p>
         <div class="code-example">
-          <pre><code class="language-html">&lt;umd-element-card data-theme="light"&gt;
+          <pre><code>&lt;umd-element-card data-theme="light"&gt;
+=======
+            <h4>Hero Slot Reference</h4>
+            <table class="slot-table">
+              <thead>
+                <tr>
+                  <th>Slot Name</th>
+                  <th>Required</th>
+                  <th>Allowed Elements</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>image</code></td>
+                  <td>No</td>
+                  <td><code>img</code></td>
+                  <td>Background image</td>
+                </tr>
+                <tr>
+                  <td><code>eyebrow</code></td>
+                  <td>No</td>
+                  <td><code>p</code>, <code>span</code></td>
+                  <td>Small text above headline</td>
+                </tr>
+                <tr>
+                  <td><code>headline</code></td>
+                  <td>Yes</td>
+                  <td><code>h1</code>&ndash;<code>h6</code></td>
+                  <td>Main heading</td>
+                </tr>
+                <tr>
+                  <td><code>text</code></td>
+                  <td>No</td>
+                  <td><code>div</code></td>
+                  <td>Supporting copy</td>
+                </tr>
+                <tr>
+                  <td><code>actions</code></td>
+                  <td>No</td>
+                  <td><code>div</code></td>
+                  <td>CTA buttons</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Card Component</h3>
+            <p>Display content in flexible card layouts:</p>
+            <div class="code-example">
+              <pre><code class="language-html">&lt;umd-element-card data-theme="light"&gt;
+>>>>>>> Stashed changes
   &lt;a slot="image" href="/article"&gt;
     &lt;img src="news.jpg" alt="News image"&gt;
   &lt;/a&gt;
@@ -276,56 +451,63 @@
       &lt;a href="/apply"&gt;Apply Now&lt;/a&gt;
     &lt;/umd-element-call-to-action&gt;
 &lt;/umd-element-card&gt;</code></pre>
-        </div>
+            </div>
 
-        <h4>Card Slot Reference</h4>
-        <table class="slot-table">
-          <thead>
-            <tr>
-              <th>Slot Name</th>
-              <th>Required</th>
-              <th>Allowed Elements</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>image</code></td>
-              <td>No</td>
-              <td><code>a &gt; img</code></td>
-              <td>Card image (wrap in link for click)</td>
-            </tr>
-            <tr>
-              <td><code>eyebrow</code></td>
-              <td>No</td>
-              <td><code>p</code>, <code>span</code></td>
-              <td>Category label</td>
-            </tr>
-            <tr>
-              <td><code>headline</code></td>
-              <td>Yes</td>
-              <td><code>h1</code>&ndash;<code>h6</code> (with optional <code>a</code>)</td>
-              <td>Card title</td>
-            </tr>
-            <tr>
-              <td><code>text</code></td>
-              <td>No</td>
-              <td><code>p</code>, <code>div</code></td>
-              <td>Card body text</td>
-            </tr>
-            <tr>
-              <td><code>actions</code></td>
-              <td>No</td>
-              <td><code>umd-element-call-to-action</code></td>
-              <td>Action buttons</td>
-            </tr>
-          </tbody>
-        </table>
-
+<<<<<<< Updated upstream
         <h3>Navigation Component</h3>
         <p>Implement accessible navigation with mobile support:</p>
         <div class="code-example">
-          <pre><code class="language-html">&lt;umd-element-navigation-primary&gt;
+          <pre><code>&lt;umd-element-navigation-primary&gt;
+=======
+            <h4>Card Slot Reference</h4>
+            <table class="slot-table">
+              <thead>
+                <tr>
+                  <th>Slot Name</th>
+                  <th>Required</th>
+                  <th>Allowed Elements</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>image</code></td>
+                  <td>No</td>
+                  <td><code>a &gt; img</code></td>
+                  <td>Card image (wrap in link for click)</td>
+                </tr>
+                <tr>
+                  <td><code>eyebrow</code></td>
+                  <td>No</td>
+                  <td><code>p</code>, <code>span</code></td>
+                  <td>Category label</td>
+                </tr>
+                <tr>
+                  <td><code>headline</code></td>
+                  <td>Yes</td>
+                  <td><code>h1</code>&ndash;<code>h6</code> (with optional <code>a</code>)</td>
+                  <td>Card title</td>
+                </tr>
+                <tr>
+                  <td><code>text</code></td>
+                  <td>No</td>
+                  <td><code>p</code>, <code>div</code></td>
+                  <td>Card body text</td>
+                </tr>
+                <tr>
+                  <td><code>actions</code></td>
+                  <td>No</td>
+                  <td><code>umd-element-call-to-action</code></td>
+                  <td>Action buttons</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3>Navigation Component</h3>
+            <p>Implement accessible navigation with mobile support:</p>
+            <div class="code-example">
+              <pre><code class="language-html">&lt;umd-element-navigation-primary&gt;
+>>>>>>> Stashed changes
   &lt;div slot="logo"&gt;
     &lt;a href="/"&gt;
       &lt;img src="umd-logo.svg" alt="University of Maryland"&gt;
@@ -343,6 +525,7 @@
     &lt;a href="/search"&gt;Search&lt;/a&gt;
   &lt;/div&gt;
 &lt;/umd-element-navigation-primary&gt;</code></pre>
+<<<<<<< Updated upstream
         </div>
 
         <h4>Navigation Slot Reference</h4>
@@ -390,20 +573,70 @@
         <h3>Option A: Static CSS (Simplest)</h3>
         <p>Load pre-compiled CSS directly via CDN or a local copy:</p>
         <div class="code-example">
-          <pre><code class="language-html">&lt;!-- Static CSS via CDN --&gt;
+          <pre><code>&lt;!-- Apply consistent vertical spacing between sections --&gt;
+=======
+            </div>
+
+            <h4>Navigation Slot Reference</h4>
+            <table class="slot-table">
+              <thead>
+                <tr>
+                  <th>Slot Name</th>
+                  <th>Required</th>
+                  <th>Allowed Elements</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>logo</code></td>
+                  <td>Yes</td>
+                  <td><code>div &gt; a &gt; img</code></td>
+                  <td>Site logo</td>
+                </tr>
+                <tr>
+                  <td><code>primary</code></td>
+                  <td>Yes</td>
+                  <td><code>nav &gt; ul &gt; li &gt; a</code></td>
+                  <td>Main navigation links</td>
+                </tr>
+                <tr>
+                  <td><code>utility</code></td>
+                  <td>No</td>
+                  <td><code>div</code></td>
+                  <td>Utility links (search, etc.)</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <!-- Styles Integration Section -->
+          <section id="styles-integration" class="content-section">
+            <h2>Styles Integration</h2>
+            <p>
+              Components work seamlessly with the UMD Styles package for consistent
+              spacing, grids, and utilities. You can load styles via static CSS files
+              or through npm imports.
+            </p>
+
+            <h3>Option A: Static CSS (Simplest)</h3>
+            <p>Load pre-compiled CSS directly via CDN or a local copy:</p>
+            <div class="code-example">
+              <pre><code class="language-html">&lt;!-- Static CSS via CDN --&gt;
 &lt;link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/styles.min.css"&gt;</code></pre>
-        </div>
+            </div>
 
-        <h3>Option B: npm Import</h3>
-        <p>Import CSS in your JavaScript entry file when using a bundler:</p>
-        <div class="code-example">
-          <pre><code class="language-javascript">import '@universityofmaryland/web-styles-library/css/styles.min.css';</code></pre>
-        </div>
+            <h3>Option B: npm Import</h3>
+            <p>Import CSS in your JavaScript entry file when using a bundler:</p>
+            <div class="code-example">
+              <pre><code class="language-javascript">import '@universityofmaryland/web-styles-library/css/styles.min.css';</code></pre>
+            </div>
 
-        <h3>Using CSS Utility Classes</h3>
-        <p>Once styles are loaded, use CSS utility classes in your HTML alongside web components:</p>
-        <div class="code-example">
-          <pre><code class="language-html">&lt;!-- Apply consistent vertical spacing between sections --&gt;
+            <h3>Using CSS Utility Classes</h3>
+            <p>Once styles are loaded, use CSS utility classes in your HTML alongside web components:</p>
+            <div class="code-example">
+              <pre><code class="language-html">&lt;!-- Apply consistent vertical spacing between sections --&gt;
+>>>>>>> Stashed changes
 &lt;div class="umd-layout-space-vertical-landing"&gt;
   &lt;umd-element-hero&gt;...&lt;/umd-element-hero&gt;
 &lt;/div&gt;
@@ -412,16 +645,22 @@
   &lt;h2 class="umd-sans-larger"&gt;Featured Programs&lt;/h2&gt;
   &lt;!-- Card grid below --&gt;
 &lt;/div&gt;</code></pre>
-        </div>
-      </section>
+            </div>
+          </section>
 
-      <!-- Common Patterns Section -->
-      <section id="common-patterns" class="content-section">
-        <h2>Common Implementation Patterns</h2>
+          <!-- Common Patterns Section -->
+          <section id="common-patterns" class="content-section">
+            <h2>Common Implementation Patterns</h2>
 
+<<<<<<< Updated upstream
         <h3>Landing Page Hero Section</h3>
         <div class="code-example">
-          <pre><code class="language-html">&lt;!-- Full-width hero with overlay text --&gt;
+          <pre><code>&lt;!-- Full-width hero with overlay text --&gt;
+=======
+            <h3>Landing Page Hero Section</h3>
+            <div class="code-example">
+              <pre><code class="language-html">&lt;!-- Full-width hero with overlay text --&gt;
+>>>>>>> Stashed changes
 &lt;section class="umd-layout-space-vertical-landing"&gt;
   &lt;umd-element-hero data-display="overlay" data-theme="dark"&gt;
     &lt;img slot="image" src="campus-aerial.jpg" alt="Aerial view of campus"&gt;
@@ -441,11 +680,17 @@
     &lt;/div&gt;
   &lt;/umd-element-hero&gt;
 &lt;/section&gt;</code></pre>
-        </div>
+            </div>
 
+<<<<<<< Updated upstream
         <h3>News Grid Section</h3>
         <div class="code-example">
-          <pre><code class="language-html">&lt;section class="umd-layout-space-vertical-landing"&gt;
+          <pre><code>&lt;section class="umd-layout-space-vertical-landing"&gt;
+=======
+            <h3>News Grid Section</h3>
+            <div class="code-example">
+              <pre><code class="language-html">&lt;section class="umd-layout-space-vertical-landing"&gt;
+>>>>>>> Stashed changes
   &lt;div class="umd-layout-space-horizontal-larger"&gt;
     &lt;h2 class="umd-sans-larger"&gt;Latest News&lt;/h2&gt;
 
@@ -470,11 +715,17 @@
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/section&gt;</code></pre>
-        </div>
+            </div>
 
+<<<<<<< Updated upstream
         <h3>Accordion FAQ Section</h3>
         <div class="code-example">
-          <pre><code class="language-html">&lt;section class="umd-layout-space-vertical"&gt;
+          <pre><code>&lt;section class="umd-layout-space-vertical"&gt;
+=======
+            <h3>Accordion FAQ Section</h3>
+            <div class="code-example">
+              <pre><code class="language-html">&lt;section class="umd-layout-space-vertical"&gt;
+>>>>>>> Stashed changes
   &lt;div class="umd-layout-space-horizontal-small"&gt;
     &lt;h2 class="umd-sans-larger"&gt;
       Frequently Asked Questions
@@ -507,9 +758,10 @@
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/section&gt;</code></pre>
-        </div>
-      </section>
+            </div>
+          </section>
 
+<<<<<<< Updated upstream
       <!-- Best Practices -->
       <div id="best-practices" class="alert alert-custom">
         <h5 class="alert-heading">Best Practices</h5>
@@ -547,30 +799,74 @@
           <div class="col-md-4">
             <div class="card">
               <div class="card-body">
-                <h5 class="card-title">Performance</h5>
-                <p class="card-text">
+                <h5 class="card-title">Live Examples</h5>
+                <p class="card-text">Interactive component playground.</p>
+                <a
+                  href="http://playground.designsystem.umd.edu"
+                  target="_blank"
+                  class="btn btn-umd"
+                  >Open Playground</a
+                >
+=======
+          <!-- Best Practices -->
+          <div id="best-practices" class="alert-custom">
+            <h5>Best Practices</h5>
+            <ul class="feature-list">
+              <li>Always use semantic HTML within slots</li>
+              <li>Include descriptive alt text for images</li>
+              <li>Test keyboard navigation for interactive components</li>
+              <li>Use the Styles package for consistent spacing</li>
+              <li>Load only the components you need for better performance</li>
+              <li>Follow the slot requirements for each component</li>
+            </ul>
+          </div>
+
+          <!-- Content Manager Callout -->
+          <div class="content-manager-callout">
+            <strong>For Content Managers</strong> &mdash; See visual examples and component configuration at
+            <a href="https://designsystem.umd.edu" target="_blank">designsystem.umd.edu</a>.
+          </div>
+
+          <!-- Next Steps -->
+          <div style="margin-top: 3rem;">
+            <h3>Next Steps</h3>
+            <div class="next-steps-grid">
+              <div class="next-step-card">
+                <h5>Advanced Usage</h5>
+                <p>
+                  TypeScript, framework integration, testing, and custom component development.
+                </p>
+                <umd-element-call-to-action>
+                  <a href="advanced-usage.html">Advanced Guide</a>
+                </umd-element-call-to-action>
+              </div>
+              <div class="next-step-card">
+                <h5>Performance</h5>
+                <p>
                   Bundle optimization, code splitting, and loading strategies.
                 </p>
-                <a href="advanced-bundling.html" class="btn btn-umd">Performance Guide</a>
+                <umd-element-call-to-action>
+                  <a href="advanced-bundling.html">Performance Guide</a>
+                </umd-element-call-to-action>
               </div>
-            </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Static CSS</h5>
-                <p class="card-text">
+              <div class="next-step-card">
+                <h5>Static CSS</h5>
+                <p>
                   Pre-compiled CSS files from the Styles package for simpler integration.
                 </p>
-                <a href="../styles/static-css.html" class="btn btn-umd">Static CSS Guide</a>
+                <umd-element-call-to-action>
+                  <a href="../styles/static-css.html">Static CSS Guide</a>
+                </umd-element-call-to-action>
+>>>>>>> Stashed changes
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
 
-    <footer class="bg-dark text-light py-4 mt-5">
+<<<<<<< Updated upstream
+    <footer class="bg-light py-4 mt-5">
       <div class="container">
         <div class="row">
           <div class="col-md-4">
@@ -596,10 +892,37 @@
         <p class="text-center text-muted small mb-0">&copy; University of Maryland. All rights reserved. | <a href="https://umd.edu" class="text-muted">umd.edu</a> | <a href="https://brand.umd.edu" class="text-muted">Brand Guidelines</a></p>
       </div>
     </footer>
+=======
+    <umd-element-footer data-display="mega" data-theme="dark">
+      <div slot="link-column-one">
+        <h3>Developer Tools</h3>
+        <ul>
+          <li><a href="https://umd-digital.github.io/design-system/">TypeDoc API Reference</a></li>
+          <li><a href="https://www.npmjs.com/org/universityofmaryland">@universityofmaryland on npm</a></li>
+          <li><a href="https://github.com/UMD-Digital/design-system">GitHub Repository</a></li>
+        </ul>
+      </div>
+      <div slot="link-column-two">
+        <h3>Learning</h3>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started Guide</a></li>
+          <li><a href="../architecture.html">Architecture Overview</a></li>
+          <li><a href="http://playground.designsystem.umd.edu" target="_blank">Component Playground</a></li>
+        </ul>
+      </div>
+      <div slot="link-column-three">
+        <h3>UMD Links</h3>
+        <ul>
+          <li><a href="https://designsystem.umd.edu">designsystem.umd.edu</a></li>
+          <li><a href="https://brand.umd.edu">brand.umd.edu</a></li>
+          <li><a href="https://umd.edu">umd.edu</a></li>
+        </ul>
+      </div>
+    </umd-element-footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+>>>>>>> Stashed changes
   </body>
 </html>

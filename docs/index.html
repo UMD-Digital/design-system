@@ -1,295 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< Updated upstream
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>UMD Design System Documentation</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <style>
-      .header {
-        background-color: #e21833;
-        color: white;
-        padding: 3rem 0;
-      }
-      .nav-link {
-        color: #000;
-      }
-      .nav-link:hover {
-        color: #e21833;
-      }
-      .card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        height: 100%;
-      }
-      .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-      }
-      .package-section {
-        background-color: #f8f9fa;
-        border-radius: 8px;
-        padding: 2rem;
-        margin-bottom: 2rem;
-      }
-      .package-icon {
-        font-size: 2.5rem;
-        margin-bottom: 1rem;
-      }
-      .resource-card {
-        border: 1px solid #dee2e6;
-        border-radius: 8px;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-        background-color: #fff;
-      }
-      .resource-card h5 {
-        color: #e21833;
-        margin-bottom: 1rem;
-      }
-      .quick-links {
-        background-color: #fff3cd;
-        border: 1px solid #ffeaa7;
-        border-radius: 8px;
-        padding: 1.5rem;
-        margin-bottom: 2rem;
-      }
-      .btn-umd {
-        background-color: #e21833;
-        color: white;
-        border: none;
-      }
-      .btn-umd:hover {
-        background-color: #c71629;
-        color: white;
-      }
-      .list-features {
-        list-style: none;
-        padding-left: 0;
-      }
-      .list-features li {
-        padding: 0.5rem 0;
-        padding-left: 1.5rem;
-        position: relative;
-      }
-      .list-features li:before {
-        content: '✓';
-        position: absolute;
-        left: 0;
-        color: #28a745;
-        font-weight: bold;
-      }
-      .package-level-badge {
-        display: inline-block;
-        padding: 0.25rem 0.75rem;
-        font-size: 0.875rem;
-        font-weight: 600;
-        border-radius: 20px;
-        margin-left: 0.5rem;
-      }
-      .badge-high-level {
-        background-color: #28a745;
-        color: white;
-      }
-      .badge-low-level {
-        background-color: #6c757d;
-        color: white;
-      }
-      .section-divider {
-        border-top: 3px solid #e21833;
-        margin: 3rem 0;
-        padding-top: 2rem;
-      }
-    </style>
-  </head>
-  <body>
-    <header class="header">
-      <div class="container">
-        <h1 class="display-4">University of Maryland Design System</h1>
-        <p class="lead">
-          Build consistent, accessible, and beautiful UMD digital experiences
-        </p>
-      </div>
-    </header>
-
-    .hero-section {
-      background-color: #e21833;
-      color: #ffffff;
-      padding: 4rem 0;
-    }
-    .hero-section .btn-outline-light:hover {
-      color: #e21833;
-    }
-    .tier-foundation { background-color: #e3f2fd; border: 1px solid #90caf9; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; }
-    .tier-infrastructure { background-color: #fff9c4; border: 1px solid #fff176; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; }
-    .tier-application { background-color: #e8f5e9; border: 1px solid #a5d6a7; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; }
-    .pkg-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 1.25rem; height: 100%; background: #fff; }
-    .pkg-card h6 { margin-bottom: 0.25rem; }
-    .pkg-card .pkg-npm { font-size: 0.8rem; color: #6c757d; }
-    .pkg-card .pkg-desc { font-size: 0.9rem; margin: 0.5rem 0; }
-    .pkg-card .pkg-links { font-size: 0.85rem; }
-  </style>
-</head>
-<body>
-
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #e21833;">
-  <div class="container">
-    <a class="navbar-brand fw-bold" href="index.html">UMD Design System</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="mainNav">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="architecture.html">Architecture</a></li>
-        <li class="nav-item"><a class="nav-link" href="getting-started.html">Getting Started</a></li>
-      </ul>
-      <ul class="navbar-nav">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Packages</a>
-          <ul class="dropdown-menu dropdown-menu-end">
-            <li><a class="dropdown-item" href="components/usage.html">Components</a></li>
-            <li><a class="dropdown-item" href="styles/static-css.html">Styles</a></li>
-            <li><a class="dropdown-item" href="feeds/use-cases.html">Feeds</a></li>
-            <li><a class="dropdown-item" href="elements/use-cases.html">Elements</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="tokens/use-cases.html">Tokens</a></li>
-            <li><a class="dropdown-item" href="icons/use-cases.html">Icons</a></li>
-            <li><a class="dropdown-item" href="utilities/use-cases.html">Utilities</a></li>
-            <li><a class="dropdown-item" href="infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
-          </ul>
-        </li>
-        <li class="nav-item"><a class="nav-link" href="http://playground.designsystem.umd.edu" target="_blank">Playground</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<!-- Hero Section -->
-<section class="hero-section">
-  <div class="container text-center">
-    <h1 class="display-4 fw-bold mb-3">University of Maryland Design System</h1>
-    <p class="lead mb-4">9 composable packages for building consistent, accessible UMD digital experiences.</p>
-    <div class="d-flex justify-content-center gap-3 flex-wrap">
-      <a href="getting-started.html#cdn" class="btn btn-light btn-lg fw-semibold">Quick Start (CDN)</a>
-      <a href="getting-started.html#npm" class="btn btn-outline-light btn-lg fw-semibold">Install via npm</a>
-      <a href="architecture.html" class="btn btn-outline-light btn-lg fw-semibold">Explore Architecture</a>
-    </div>
-  </div>
-</section>
-
-<div class="container py-5">
-
-  <!-- Audience Cards -->
-  <section class="mb-5">
-    <h2 class="h3 fw-bold mb-4 text-center">Choose Your Path</h2>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="content-section h-100">
-          <h5 class="fw-bold">Content Managers / No-Code</h5>
-          <p>Build UMD pages with HTML tags and CSS classes. No build tools required.</p>
-          <ul class="list-unstyled small">
-            <li><a href="getting-started.html#cdn">CDN Quick Start</a></li>
-          </ul>
-          <div class="cm-callout mt-3">
-            <strong>Visual examples:</strong> Visit <a href="https://designsystem.umd.edu">designsystem.umd.edu</a> for design guidance and live demos.
-          </div>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="content-section h-100">
-          <h5 class="fw-bold">Web Developers</h5>
-          <p>Install via npm, import components, integrate with your framework.</p>
-          <ul class="list-unstyled small">
-            <li><a href="getting-started.html#npm">npm Installation</a></li>
-            <li><a href="styles/static-css.html">Static CSS</a></li>
-            <li><a href="styles/tailwind.html">Tailwind Integration</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="content-section h-100">
-          <h5 class="fw-bold">Senior Developers / Architects</h5>
-          <p>Compose at any layer — tokens, styles, elements, or build custom web components.</p>
-          <ul class="list-unstyled small">
-            <li><a href="architecture.html">Architecture Overview</a></li>
-            <li><a href="elements/use-cases.html">Elements</a></li>
-            <li><a href="infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Composable Architecture Diagram -->
-  <section class="mb-5">
-    <h2 class="h3 fw-bold mb-4 text-center">Composable Architecture</h2>
-    <p class="text-center text-muted mb-4">Each tier builds on the one below. Enter at the level that fits your needs.</p>
-
-    <div class="tier-application">
-      <div class="d-flex justify-content-between align-items-center flex-wrap">
-        <div>
-          <h5 class="fw-bold mb-1">Application Layer</h5>
-          <span class="text-muted">Components, Feeds</span>
-        </div>
-        <span class="badge bg-success fs-6">Enter here for ready-to-use web components</span>
-      </div>
-    </div>
-
-    <div class="tier-infrastructure">
-      <div class="d-flex justify-content-between align-items-center flex-wrap">
-        <div>
-          <h5 class="fw-bold mb-1">Infrastructure Layer</h5>
-          <span class="text-muted">Styles, Elements, Model, Builder</span>
-        </div>
-        <span class="badge bg-warning text-dark fs-6">Enter here for CSS utilities, imperative elements, or custom components</span>
-      </div>
-    </div>
-
-    <div class="tier-foundation">
-      <div class="d-flex justify-content-between align-items-center flex-wrap">
-        <div>
-          <h5 class="fw-bold mb-1">Foundation Layer</h5>
-          <span class="text-muted">Tokens, Icons, Utilities</span>
-        </div>
-        <span class="badge bg-primary fs-6">Enter here for raw design values and helpers</span>
-      </div>
-    </div>
-
-    <div class="text-center mt-3">
-      <a href="architecture.html" class="btn btn-umd">Full Architecture Overview</a>
-    </div>
-  </section>
-
-  <!-- Package Quick Reference Grid -->
-  <section class="mb-5">
-    <h2 class="h3 fw-bold mb-4 text-center">Package Quick Reference</h2>
-
-    <!-- Foundation Row -->
-    <h6 class="text-uppercase text-primary fw-bold mb-3">Foundation</h6>
-    <div class="row g-3 mb-4">
-      <div class="col-md-4">
-        <div class="pkg-card">
-          <h6 class="fw-bold">Tokens</h6>
-          <div class="pkg-npm"><code>@universityofmaryland/web-token-library</code></div>
-          <p class="pkg-desc">Design primitives: color, spacing, media queries, and font definitions.</p>
-          <div class="d-flex justify-content-between align-items-center">
-            <div class="pkg-links">
-              <a href="tokens/use-cases.html">Docs</a> |
-              <a href="tokens/index.html">API</a> |
-              <a href="https://www.npmjs.com/package/@universityofmaryland/web-token-library" target="_blank">npm</a>
-            </div>
-            <span class="badge bg-secondary">v1.0.1</span>
-          </div>
-        </div>
-      </div>
-    </footer>
-  </body>
-=======
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -319,6 +29,8 @@
     .tier-heading-amber { color: #e6a100; }
     .tier-heading-green { color: #2e7d32; }
     .arch-cta { text-align: center; margin-top: 1.5rem; }
+    h3 { margin-top: 3rem; margin-bottom: 1rem; }
+    h5 { font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; }
   </style>
 </head>
 <body>
@@ -434,7 +146,7 @@
 
     <!-- 1: Content Managers — image right (default) -->
     <umd-element-pathway class="umd-layout-space-vertical-landing" data-display="overlay" data-theme="dark" data-animation="true">
-      <img slot="image" src="https://picsum.photos/seed/cms/1200/800" alt="Content management" loading="lazy" />
+      <img slot="image" src="https://umd-design.transforms.svdcdn.com/production/images/components_2024-09-18-191025_twwy.jpg?w=942&h=846&auto=compress%2Cformat&fit=crop&dm=1726686663&s=e0dc76c5fd00b33d81a1103b3c779084" alt="Content management" loading="lazy" />
       <span slot="eyebrow">No-Code</span>
       <h3 slot="headline"><a href="getting-started.html#cdn">Content Managers</a></h3>
       <div slot="text">
@@ -448,7 +160,7 @@
 
     <!-- 2: Web Developers — image left -->
     <umd-element-pathway class="umd-layout-space-vertical-landing" data-display="overlay" data-theme="dark" data-animation="true" data-layout-image-position="left">
-      <img slot="image" src="https://picsum.photos/seed/devtools/1200/800" alt="Web development" loading="lazy" />
+      <img slot="image" src="https://umd-design.transforms.svdcdn.com/production/images/dev1.png?w=1324&h=1323&auto=compress%2Cformat&fit=crop&dm=1723644662&s=4edafebc578fbc0ad9eb45dcd8874935" alt="Web development" loading="lazy" />
       <span slot="eyebrow">npm + Frameworks</span>
       <h3 slot="headline"><a href="getting-started.html#npm">Web Developers</a></h3>
       <div slot="text">
@@ -462,7 +174,7 @@
 
     <!-- 3: Architects — image right (default) -->
     <umd-element-pathway class="umd-layout-space-vertical-landing" data-display="overlay" data-theme="dark" data-animation="true">
-      <img slot="image" src="https://picsum.photos/seed/architecture/1200/800" alt="System architecture" loading="lazy" />
+      <img slot="image" src="https://umd-design.transforms.svdcdn.com/production/images/dev3.jpg?w=1323&h=1323&auto=compress%2Cformat&fit=crop&dm=1723644823&s=21f2defb4e716e4dc986839b04ef61a0" alt="System architecture" loading="lazy" />
       <span slot="eyebrow">Advanced</span>
       <h3 slot="headline"><a href="architecture.html">Senior Developers / Architects</a></h3>
       <div slot="text">
@@ -483,33 +195,29 @@
         <p>Each tier builds on the one below. Enter at the level that fits your needs.</p>
       </div>
     </umd-element-section-intro>
-    <div class="umd-layout-space-horizontal-larger">
-      <div class="tier-application">
-        <div class="tier-row">
-          <div>
-            <h4 class="tier-label">Application Layer</h4>
-            <span class="tier-sub">Components, Feeds</span>
-          </div>
-          <span class="tier-badge tier-badge-green">Enter here for ready-to-use web components</span>
-        </div>
-      </div>
-      <div class="tier-infrastructure">
-        <div class="tier-row">
-          <div>
-            <h4 class="tier-label">Infrastructure Layer</h4>
-            <span class="tier-sub">Styles, Elements, Model, Builder</span>
-          </div>
-          <span class="tier-badge tier-badge-amber">Enter here for CSS utilities or custom components</span>
-        </div>
-      </div>
-      <div class="tier-foundation">
-        <div class="tier-row">
-          <div>
-            <h4 class="tier-label">Foundation Layer</h4>
-            <span class="tier-sub">Tokens, Icons, Utilities</span>
-          </div>
-          <span class="tier-badge tier-badge-blue">Enter here for raw design values and helpers</span>
-        </div>
+    <div class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-larger">
+      <div class="umd-layout-grid-gap-three">
+        <umd-element-card data-visual-bordered="true">
+          <h3 slot="headline"><a href="components/usage.html">Application Layer</a></h3>
+          <p slot="text">Ready-to-use web components and dynamic feeds. Components, Feeds.</p>
+          <umd-element-call-to-action slot="actions" data-display="secondary">
+            <a href="components/usage.html">Learn More</a>
+          </umd-element-call-to-action>
+        </umd-element-card>
+        <umd-element-card data-visual-bordered="true">
+          <h3 slot="headline"><a href="elements/use-cases.html">Infrastructure Layer</a></h3>
+          <p slot="text">CSS utilities, element builders, and custom component tools. Styles, Elements, Model, Builder.</p>
+          <umd-element-call-to-action slot="actions" data-display="secondary">
+            <a href="elements/use-cases.html">Learn More</a>
+          </umd-element-call-to-action>
+        </umd-element-card>
+        <umd-element-card data-visual-bordered="true">
+          <h3 slot="headline"><a href="tokens/use-cases.html">Foundation Layer</a></h3>
+          <p slot="text">Raw design values, icons, and shared helpers. Tokens, Icons, Utilities.</p>
+          <umd-element-call-to-action slot="actions" data-display="secondary">
+            <a href="tokens/use-cases.html">Learn More</a>
+          </umd-element-call-to-action>
+        </umd-element-card>
       </div>
       <div class="arch-cta">
         <umd-element-call-to-action data-display="primary">
@@ -524,7 +232,7 @@
     <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
       <h2 slot="headline">Package Quick Reference</h2>
     </umd-element-section-intro>
-    <div class="umd-layout-space-horizontal-larger">
+    <div class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-larger">
 
       <!-- Foundation Row -->
       <p class="tier-heading tier-heading-blue">Foundation</p>
@@ -654,5 +362,4 @@
 </umd-element-footer>
 
 </body>
->>>>>>> Stashed changes
 </html>

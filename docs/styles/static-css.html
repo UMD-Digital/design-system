@@ -15,18 +15,21 @@
       pre { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; }
       code { color: #e21833; }
       pre code { color: inherit; }
-      table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+      table { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; }
       th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
       td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
       td code, th code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
-      .content-section { background-color: #f8f9fa; border-radius: 8px; padding: 2rem; margin-bottom: 2rem; }
       .code-example { background-color: #fff; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
-      .use-case-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; background-color: #fff; }
+      .use-case-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 1.5rem; margin-bottom: 2.5rem; background-color: #fff; }
       .use-case-card h4 { color: #e21833; margin-bottom: 1rem; }
+      .use-case-card ul { padding-left: 1.5rem; }
       .option-table { width: 100%; margin: 1rem 0; }
       .option-table th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
       .option-table td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
       .option-table code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
+      h3 { margin-top: 3rem; margin-bottom: 1rem; }
+      h5 { font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+      section > h3:first-child, .use-case-card > h4:first-child { margin-top: 0; }
     </style>
   </head>
   <body>
@@ -89,12 +92,12 @@
     </header>
 
     <main>
-      <div class="umd-layout-space-vertical-interior">
+      <div class="umd-layout-space-vertical-landing">
         <umd-element-hero-minimal data-theme="light">
           <h1 slot="headline">Static CSS Guide</h1>
           <div slot="text"><p>Pre-compiled CSS files for zero-JavaScript styling</p></div>
         </umd-element-hero-minimal>
-        <div class="umd-layout-space-horizontal-larger">
+        <div class="umd-layout-space-horizontal-normal">
           <umd-element-breadcrumb>
             <div slot="paths">
               <a href="../index.html">Home</a>
@@ -105,13 +108,18 @@
         </div>
       </div>
 
-      <section class="umd-layout-space-vertical-interior">
-        <div class="umd-layout-space-horizontal-larger">
+      <section class="umd-layout-space-vertical-landing">
+        <div class="umd-layout-space-horizontal-normal">
 
-          <div style="background-color: #fff4e6; border-left: 4px solid #e8a838; padding: 1rem 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
-            <strong>Where This Package Fits:</strong> Styles sits in the <strong>Infrastructure</strong> layer. It depends on <strong>Tokens</strong> and is used by <strong>Elements</strong>, <strong>Components</strong>, and your custom CSS.
-            <a href="../architecture.html">See full architecture</a>.
-          </div>
+          <section id="getting-started">
+            <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
+              <h2 slot="headline">Getting Started</h2>
+              <div slot="text"><p>
+                <strong>Where This Package Fits:</strong> Styles sits in the <strong>Infrastructure</strong> layer. It depends on <strong>Tokens</strong> and is used by <strong>Elements</strong>, <strong>Components</strong>, and your custom CSS.
+                <a href="../architecture.html">See full architecture</a>.
+              </p></div>
+            </umd-element-section-intro>
+          </section>
 
           <!-- Section 1: Available Files -->
           <div class="use-case-card">
@@ -291,14 +299,30 @@ import '@universityofmaryland/web-styles-library/css/layout.min.css';</code></pr
 
           <!-- Related Resources -->
           <div style="margin-top: 3rem;">
-            <h3>Related Resources</h3>
-            <ul>
-              <li><a href="use-cases.html">Styles Use Cases</a></li>
-              <li><a href="tailwind.html">Tailwind Integration</a></li>
-              <li><a href="../components/usage.html">Component Integration Guide</a></li>
-              <li><a href="../getting-started.html">Getting Started Guide</a></li>
-              <li><a href="https://designsystem.umd.edu">Design System Website</a></li>
-            </ul>
+            <h3 class="umd-sans-larger">Related Resources</h3>
+            <div class="umd-layout-grid-gap-three">
+              <umd-element-card data-visual-bordered="true">
+                <h3 slot="headline"><a href="index.html">Styles API Reference</a></h3>
+                <p slot="text">Complete API documentation for all styles exports.</p>
+                <umd-element-call-to-action slot="actions" data-display="secondary">
+                  <a href="index.html">View API</a>
+                </umd-element-call-to-action>
+              </umd-element-card>
+              <umd-element-card data-visual-bordered="true">
+                <h3 slot="headline"><a href="use-cases.html">Styles Use Cases</a></h3>
+                <p slot="text">Common patterns for applying design system styles.</p>
+                <umd-element-call-to-action slot="actions" data-display="secondary">
+                  <a href="use-cases.html">View Use Cases</a>
+                </umd-element-call-to-action>
+              </umd-element-card>
+              <umd-element-card data-visual-bordered="true">
+                <h3 slot="headline"><a href="tailwind.html">Tailwind Integration</a></h3>
+                <p slot="text">Integrate UMD design tokens with Tailwind CSS.</p>
+                <umd-element-call-to-action slot="actions" data-display="secondary">
+                  <a href="tailwind.html">View Guide</a>
+                </umd-element-call-to-action>
+              </umd-element-card>
+            </div>
           </div>
         </div>
       </section>

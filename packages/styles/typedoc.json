@@ -14,6 +14,7 @@
   ],
   "entryPointStrategy": "resolve",
   "hideGenerator": true,
+  "skipErrorChecking": true,
   "cleanOutputDir": false,
   "searchInDocuments": true,
   "out": "../../docs/styles",

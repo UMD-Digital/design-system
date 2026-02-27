@@ -12,11 +12,10 @@
     pre { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; }
     code { color: #e21833; }
     pre code { color: inherit; }
-    table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; }
     th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
     td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
     td code, th code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
-    .content-section { background-color: #f8f9fa; border-radius: 8px; padding: 2rem; margin-bottom: 2rem; }
     .code-example { background-color: #fff; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
     .tier-foundation { background-color: #e3f2fd; border: 1px solid #90caf9; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; }
     .tier-infrastructure { background-color: #fff9c4; border: 1px solid #fff176; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; }
@@ -25,14 +24,19 @@
     .tier-foundation .tier-label { color: #1565c0; }
     .tier-infrastructure .tier-label { color: #f9a825; }
     .tier-application .tier-label { color: #2e7d32; }
-    .pkg-inline { display: flex; flex-wrap: wrap; gap: 1rem; }
-    .pkg-inline-item { flex: 1; min-width: 200px; }
-    .pkg-inline-item strong { display: block; }
-    .pkg-inline-item code { font-size: 0.8rem; }
+    .pkg-inline { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem; }
+    .pkg-inline-item { background-color: rgba(255, 255, 255, 0.6); border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 6px; padding: 1rem; }
+    .pkg-inline-item strong { display: block; margin-bottom: 0.25rem; }
+    .pkg-inline-item code { font-size: 0.8rem; display: block; margin-bottom: 0.5rem; }
+    .pkg-inline-item span { font-size: 0.9rem; color: #333; }
+    @media (max-width: 767px) { .pkg-inline { grid-template-columns: 1fr; } }
     .decision-table td, .decision-table th { vertical-align: middle; }
     .tier-badge-foundation { background-color: #1565c0; color: #fff; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; }
     .tier-badge-infrastructure { background-color: #f9a825; color: #333; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; }
     .tier-badge-application { background-color: #2e7d32; color: #fff; padding: 0.2rem 0.6rem; border-radius: 3px; font-size: 0.8rem; }
+    h3 { margin-top: 3rem; margin-bottom: 1rem; }
+    h5 { font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+    section > h3:first-child { margin-top: 0; }
   </style>
 </head>
 <body>
@@ -97,12 +101,12 @@
 </header>
 
 <main>
-  <div class="umd-layout-space-vertical-interior">
+  <div class="umd-layout-space-vertical-landing">
     <umd-element-hero-minimal data-theme="light">
       <h1 slot="headline">Architecture Overview</h1>
       <div slot="text"><p>Understanding the composable package pyramid</p></div>
     </umd-element-hero-minimal>
-    <div class="umd-layout-space-horizontal-larger">
+    <div class="umd-layout-space-horizontal-normal">
       <umd-element-breadcrumb>
         <div slot="paths">
           <a href="index.html">Home</a>
@@ -112,12 +116,12 @@
     </div>
   </div>
 
-  <section class="umd-layout-space-vertical-interior">
-    <div class="umd-layout-space-horizontal-larger">
-
-      <!-- The Composable Pyramid -->
-      <h2>The Composable Pyramid</h2>
-      <p>The UMD Design System is organized into three tiers. Each tier builds on the one below, and you can enter at whichever level matches your needs.</p>
+  <section class="umd-layout-space-vertical-landing">
+    <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
+      <h2 slot="headline">The Composable Pyramid</h2>
+      <div slot="text"><p>The UMD Design System is organized into three tiers. Each tier builds on the one below, and you can enter at whichever level matches your needs.</p></div>
+    </umd-element-section-intro>
+    <div class="umd-layout-space-horizontal-normal">
 
       <div class="tier-application">
         <div class="tier-label">Application Layer</div>
@@ -189,10 +193,11 @@
   </section>
 
   <!-- Package Dependency Table -->
-  <section class="umd-layout-space-vertical-interior">
-    <div class="umd-layout-space-horizontal-larger">
-
-      <h2>Package Dependency Table</h2>
+  <section class="umd-layout-space-vertical-landing">
+    <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
+      <h2 slot="headline">Package Dependency Table</h2>
+    </umd-element-section-intro>
+    <div class="umd-layout-space-horizontal-normal">
       <table>
         <thead>
           <tr>
@@ -274,14 +279,15 @@
   </section>
 
   <!-- The ElementModel Pattern -->
-  <section class="umd-layout-space-vertical-interior">
-    <div class="umd-layout-space-horizontal-larger">
+  <section class="umd-layout-space-vertical-landing">
+    <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
+      <h2 slot="headline">The ElementModel Pattern</h2>
+      <div slot="text"><p>Every element creation function in the design system returns an <code>ElementModel</code> -- a DOM node paired with its scoped CSS. This consistent contract is used by Elements, Feeds, and Builder throughout the system.</p></div>
+    </umd-element-section-intro>
+    <div class="umd-layout-space-horizontal-normal">
 
-      <h2>The ElementModel Pattern</h2>
-      <p>Every element creation function in the design system returns an <code>ElementModel</code> -- a DOM node paired with its scoped CSS. This consistent contract is used by Elements, Feeds, and Builder throughout the system.</p>
-
-      <div class="content-section">
-        <h5>Interface</h5>
+      <div>
+        <h5 class="umd-sans-medium">Interface</h5>
         <div class="code-example">
           <pre><code class="language-typescript">interface ElementModel {
   element: HTMLElement | DocumentFragment;
@@ -299,8 +305,8 @@
         </ul>
       </div>
 
-      <div class="content-section">
-        <h5>Two-Step Usage Pattern</h5>
+      <div>
+        <h5 class="umd-sans-medium">Two-Step Usage Pattern</h5>
         <p>Creating and mounting an element follows a consistent two-step pattern:</p>
         <div class="code-example">
           <pre><code class="language-typescript">import { textLockup } from '@universityofmaryland/web-elements-library/composite';
@@ -333,11 +339,12 @@ model.destroy?.();</code></pre>
   </section>
 
   <!-- Choosing Your Entry Point -->
-  <section class="umd-layout-space-vertical-interior">
-    <div class="umd-layout-space-horizontal-larger">
-
-      <h2>Choosing Your Entry Point</h2>
-      <p>Use the decision tree below to find the right starting package for your use case.</p>
+  <section class="umd-layout-space-vertical-landing">
+    <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
+      <h2 slot="headline">Choosing Your Entry Point</h2>
+      <div slot="text"><p>Use the decision tree below to find the right starting package for your use case.</p></div>
+    </umd-element-section-intro>
+    <div class="umd-layout-space-horizontal-normal">
 
       <table class="decision-table">
         <thead>
@@ -395,8 +402,8 @@ model.destroy?.();</code></pre>
   </section>
 
   <!-- Content Manager Callout -->
-  <section class="umd-layout-space-vertical-interior">
-    <div class="umd-layout-space-horizontal-larger">
+  <section class="umd-layout-space-vertical-landing">
+    <div class="umd-layout-space-horizontal-normal">
       <umd-element-alert-page>
         <h5 slot="headline">Not a developer?</h5>
         <p slot="text">Visit <a href="https://designsystem.umd.edu"><strong>designsystem.umd.edu</strong></a> for visual examples and design guidance.</p>

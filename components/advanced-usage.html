@@ -4,46 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Advanced Component Usage - UMD Design System</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/styles.min.css" />
+    <script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/cdn.js"></script>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
       rel="stylesheet"
     />
     <style>
-      .header {
-        background-color: #e21833;
-        color: white;
-        padding: 2rem 0;
-      }
-      .content-section {
-        background-color: #f8f9fa;
-        border-radius: 8px;
-        padding: 2rem;
-        margin-bottom: 2rem;
-      }
-      .code-example {
-        background-color: #ffffff;
-        border: 1px solid #dee2e6;
-        border-radius: 4px;
-        padding: 1rem;
-        margin: 1rem 0;
-      }
-      pre {
-        background-color: #f8f9fa;
-        border-radius: 4px;
-        padding: 1rem;
-        overflow-x: auto;
-        margin-bottom: 0;
-      }
-      code {
-        color: #e83e8c;
-      }
+      pre[class*="language-"] { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+      pre { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; }
+      code { color: #e21833; }
+      pre code { color: inherit; }
+      table { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; }
+      th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
+      td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
+      td code, th code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
+      .code-example { background-color: #fff; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
+      .use-case-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 1.5rem; margin-bottom: 2.5rem; background-color: #fff; }
+      .use-case-card h4 { color: #e21833; margin-bottom: 1rem; }
+      .use-case-card ul { padding-left: 1.5rem; }
       .toc {
         position: sticky;
-        top: 20px;
+        top: 80px;
         background-color: white;
         border-radius: 8px;
         padding: 1.5rem;
@@ -75,6 +57,9 @@
         background-color: #e3f2fd;
         border: 1px solid #90caf9;
         color: #0d47a1;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
       }
       .feature-badge {
         display: inline-block;
@@ -85,91 +70,139 @@
         border-radius: 4px;
         margin-left: 0.5rem;
       }
+      .two-column-layout {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        gap: 2rem;
+      }
+      @media (max-width: 767px) {
+        .two-column-layout {
+          grid-template-columns: 1fr;
+        }
+        .toc {
+          position: static;
+        }
+      }
+      h3 { margin-top: 3rem; margin-bottom: 1rem; }
+      h5 { font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+      section > h3:first-child, .use-case-card > h4:first-child { margin-top: 0; }
     </style>
   </head>
-  <body data-bs-spy="scroll" data-bs-target="#toc" data-bs-offset="20">
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #e21833;">
-      <div class="container">
-        <a class="navbar-brand fw-bold" href="../index.html">UMD Design System</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="mainNav">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="../architecture.html">Architecture</a></li>
-            <li class="nav-item"><a class="nav-link" href="../getting-started.html">Getting Started</a></li>
-          </ul>
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Packages</a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="../components/usage.html">Components</a></li>
-                <li><a class="dropdown-item" href="../styles/static-css.html">Styles</a></li>
-                <li><a class="dropdown-item" href="../feeds/use-cases.html">Feeds</a></li>
-                <li><a class="dropdown-item" href="../elements/use-cases.html">Elements</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="../tokens/use-cases.html">Tokens</a></li>
-                <li><a class="dropdown-item" href="../icons/use-cases.html">Icons</a></li>
-                <li><a class="dropdown-item" href="../utilities/use-cases.html">Utilities</a></li>
-                <li><a class="dropdown-item" href="../infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
-              </ul>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="http://playground.designsystem.umd.edu" target="_blank">Playground</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <header class="header">
-      <div class="container">
-        <h1>Advanced Component Usage</h1>
-        <p class="lead">TypeScript, testing, and custom development patterns</p>
+  <body>
+    <header>
+      <div class="umd-layout-space-horizontal-full">
+        <umd-element-navigation-header sticky>
+          <a slot="logo" href="../index.html">
+            <span class="umd-sans-larger-bold">Design System Docs</span>
+          </a>
+          <div slot="main-navigation">
+            <umd-element-nav-item>
+              <a slot="primary-link" href="../index.html">Home</a>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="../architecture.html">Architecture</a>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="../getting-started.html">Getting Started</a>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="#">Packages</a>
+              <nav slot="dropdown-links">
+                <ul>
+                  <li><a href="usage.html">Components</a></li>
+                  <li><a href="../styles/static-css.html">Styles</a></li>
+                  <li><a href="../elements/use-cases.html">Elements</a></li>
+                  <li><a href="../feeds/use-cases.html">Feeds</a></li>
+                  <li><a href="../tokens/use-cases.html">Tokens</a></li>
+                  <li><a href="../icons/use-cases.html">Icons</a></li>
+                  <li><a href="../utilities/use-cases.html">Utilities</a></li>
+                  <li><a href="../infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
+                </ul>
+              </nav>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="http://playground.designsystem.umd.edu" target="_blank">Playground</a>
+            </umd-element-nav-item>
+          </div>
+          <div slot="primary-slide-links">
+            <a href="../index.html"><span>Home</span></a>
+            <a href="../architecture.html"><span>Architecture</span></a>
+            <a href="../getting-started.html"><span>Getting Started</span></a>
+            <a href="#" data-child-ref="slide-packages"><span>Packages</span></a>
+            <a href="http://playground.designsystem.umd.edu" target="_blank"><span>Playground</span></a>
+          </div>
+          <div slot="children-slides">
+            <div data-parent-ref="slide-packages">
+              <a href="usage.html"><span>Components</span></a>
+              <a href="../styles/static-css.html"><span>Styles</span></a>
+              <a href="../elements/use-cases.html"><span>Elements</span></a>
+              <a href="../feeds/use-cases.html"><span>Feeds</span></a>
+              <a href="../tokens/use-cases.html"><span>Tokens</span></a>
+              <a href="../icons/use-cases.html"><span>Icons</span></a>
+              <a href="../utilities/use-cases.html"><span>Utilities</span></a>
+              <a href="../infrastructure/model-and-builder.html"><span>Model &amp; Builder</span></a>
+            </div>
+          </div>
+        </umd-element-navigation-header>
       </div>
     </header>
 
-    <div class="container py-5">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
-          <li class="breadcrumb-item"><a href="index.html">Components</a></li>
-          <li class="breadcrumb-item active">Advanced Usage</li>
-        </ol>
-      </nav>
-
-      <div style="background-color: #e8f5e9; border-left: 4px solid #4caf50; padding: 1rem 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
-        <strong>Where This Package Fits:</strong> Components sits at the top of the <strong>Application</strong> layer. It depends on all lower packages and provides ready-to-use web components.
-        <a href="../architecture.html">See full architecture</a>.
+    <main>
+      <div class="umd-layout-space-vertical-interior">
+        <umd-element-hero-minimal data-theme="light">
+          <h1 slot="headline">Advanced Component Usage</h1>
+          <div slot="text"><p>TypeScript, testing, and custom development patterns</p></div>
+        </umd-element-hero-minimal>
+        <div class="umd-layout-space-horizontal-larger umd-lock">
+          <umd-element-breadcrumb>
+            <div slot="paths">
+              <a href="../index.html">Home</a>
+              <a href="usage.html">Components</a>
+              <p>Advanced Usage</p>
+            </div>
+          </umd-element-breadcrumb>
+        </div>
       </div>
 
-      <div class="row">
-        <!-- Table of Contents -->
-        <div class="col-md-3">
-          <nav id="toc" class="toc">
-            <h5>On This Page</h5>
-            <a class="toc-link" href="#typescript">TypeScript Integration</a>
-            <a class="toc-link" href="#events">Event Handling</a>
-            <a class="toc-link" href="#reactive">Reactive Components</a>
-            <a class="toc-link" href="#testing">Testing Components</a>
-            <a class="toc-link" href="#frameworks">Framework Integration</a>
-            <a class="toc-link" href="#custom">Custom Components</a>
-            <a class="toc-link" href="#performance">Performance</a>
-          </nav>
-        </div>
+      <section class="umd-layout-space-vertical-interior">
+        <div class="umd-layout-space-horizontal-normal">
 
-        <!-- Main Content -->
-        <div class="col-md-9">
-          <!-- TypeScript Integration -->
-          <section id="typescript" class="content-section">
-            <h2>TypeScript Integration</h2>
-            <p>
-              The components library provides comprehensive TypeScript support
-              with full type definitions.
-            </p>
+          <section id="getting-started">
+            <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+              <h2 slot="headline">Getting Started</h2>
+              <div slot="text"><p>
+                <strong>Where This Package Fits:</strong> Components sits at the top of the <strong>Application</strong> layer. It depends on all lower packages and provides ready-to-use web components.
+                <a href="../architecture.html">See full architecture</a>.
+              </p></div>
+            </umd-element-section-intro>
+          </section>
 
-            <h3>Type Imports</h3>
-            <div class="code-example">
-              <pre><code class="language-typescript">import {
+          <div class="two-column-layout">
+            <!-- Table of Contents -->
+            <div>
+              <nav id="toc" class="toc">
+                <h5>On This Page</h5>
+                <a class="toc-link" href="#typescript">TypeScript Integration</a>
+                <a class="toc-link" href="#events">Event Handling</a>
+                <a class="toc-link" href="#reactive">Reactive Components</a>
+                <a class="toc-link" href="#testing">Testing Components</a>
+                <a class="toc-link" href="#frameworks">Framework Integration</a>
+                <a class="toc-link" href="#custom">Custom Components</a>
+                <a class="toc-link" href="#performance">Performance</a>
+              </nav>
+            </div>
+
+            <!-- Main Content -->
+            <div>
+              <!-- TypeScript Integration -->
+              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+                <h2 slot="headline">TypeScript Integration</h2>
+                <div slot="text"><p>The components library provides comprehensive TypeScript support with full type definitions.</p></div>
+              </umd-element-section-intro>
+              <section id="typescript" class="umd-layout-space-vertical-interior">
+                <h3 class="umd-sans-larger">Type Imports</h3>
+                <div class="code-example">
+                  <pre><code class="language-typescript">import {
   Components,
   ComponentRef,
   SlotConfiguration,
@@ -184,11 +217,11 @@ import type {
   CardProps,
   NavigationConfig
 } from '@universityofmaryland/web-components-library/types';</code></pre>
-            </div>
+                </div>
 
-            <h3>Typed Component References</h3>
-            <div class="code-example">
-              <pre><code class="language-typescript">// Get typed component reference
+                <h3 class="umd-sans-larger">Typed Component References</h3>
+                <div class="code-example">
+                  <pre><code class="language-typescript">// Get typed component reference
 const hero = document.querySelector&lt;HTMLElement &amp; ComponentEvents&gt;('umd-element-hero');
 
 if (hero) {
@@ -201,11 +234,11 @@ if (hero) {
   hero.setAttribute('data-theme', 'dark'); // Valid
   // hero.setAttribute('data-theme', 'invalid'); // TypeScript error
 }</code></pre>
-            </div>
+                </div>
 
-            <h3>Creating Components Programmatically</h3>
-            <div class="code-example">
-              <pre><code class="language-typescript">import { Components } from '@universityofmaryland/web-components-library';
+                <h3 class="umd-sans-larger">Creating Components Programmatically</h3>
+                <div class="code-example">
+                  <pre><code class="language-typescript">import { Components } from '@universityofmaryland/web-components-library';
 
 // Initialize components
 Components.hero.base();
@@ -222,42 +255,40 @@ const createTypedHero = (): HTMLElement =&gt; {
 
   return hero;
 };</code></pre>
-            </div>
+                </div>
 
-            <div class="type-card">
-              <strong>Key Types:</strong>
-              <ul>
-                <li>
-                  <code>ComponentRef</code> - Base reference returned by
-                  component factories
-                </li>
-                <li>
-                  <code>SlotConfiguration</code> - Defines allowed slots and
-                  their constraints
-                </li>
-                <li>
-                  <code>ComponentEvents</code> - Interface for component event
-                  handling
-                </li>
-                <li>
-                  <code>CreateComponentFunction</code> - Standard signature for
-                  component creation
-                </li>
-              </ul>
-            </div>
-          </section>
+                <div class="type-card">
+                  <strong>Key Types:</strong>
+                  <ul>
+                    <li>
+                      <code>ComponentRef</code> - Base reference returned by
+                      component factories
+                    </li>
+                    <li>
+                      <code>SlotConfiguration</code> - Defines allowed slots and
+                      their constraints
+                    </li>
+                    <li>
+                      <code>ComponentEvents</code> - Interface for component event
+                      handling
+                    </li>
+                    <li>
+                      <code>CreateComponentFunction</code> - Standard signature for
+                      component creation
+                    </li>
+                  </ul>
+                </div>
+              </section>
 
-          <!-- Event Handling -->
-          <section id="events" class="content-section">
-            <h2>Event Handling</h2>
-            <p>
-              Components emit custom events for lifecycle and interaction
-              handling.
-            </p>
-
-            <h3>Component Lifecycle Events</h3>
-            <div class="code-example">
-              <pre><code class="language-javascript">const card = document.querySelector('umd-element-card');
+              <!-- Event Handling -->
+              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+                <h2 slot="headline">Event Handling</h2>
+                <div slot="text"><p>Components emit custom events for lifecycle and interaction handling.</p></div>
+              </umd-element-section-intro>
+              <section id="events" class="umd-layout-space-vertical-interior">
+                <h3 class="umd-sans-larger">Component Lifecycle Events</h3>
+                <div class="code-example">
+                  <pre><code class="language-javascript">const card = document.querySelector('umd-element-card');
 
 // Component initialization
 card.addEventListener('component:ready', (event) =&gt; {
@@ -273,19 +304,18 @@ card.addEventListener('component:updated', (event) =&gt; {
 card.addEventListener('component:destroy', (event) =&gt; {
   console.log('Component being removed');
 });</code></pre>
-            </div>
-          </section>
+                </div>
+              </section>
 
-          <!-- Reactive Components -->
-          <section id="reactive" class="content-section">
-            <h2>Reactive Components</h2>
-            <p>
-              Components support reactive updates through observed attributes.
-            </p>
-
-            <h3>Observed Attributes</h3>
-            <div class="code-example">
-              <pre><code class="language-javascript">// Visual state changes
+              <!-- Reactive Components -->
+              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+                <h2 slot="headline">Reactive Components</h2>
+                <div slot="text"><p>Components support reactive updates through observed attributes.</p></div>
+              </umd-element-section-intro>
+              <section id="reactive" class="umd-layout-space-vertical-interior">
+                <h3 class="umd-sans-larger">Observed Attributes</h3>
+                <div class="code-example">
+                  <pre><code class="language-javascript">// Visual state changes
 const drawer = document.querySelector('umd-element-navigation-drawer');
 
 // Open drawer programmatically
@@ -305,11 +335,11 @@ const observer = new MutationObserver((mutations) =&gt; {
 });
 
 observer.observe(drawer, { attributes: true });</code></pre>
-            </div>
+                </div>
 
-            <h3>Responsive Behavior</h3>
-            <div class="code-example">
-              <pre><code class="language-javascript">// Trigger component resize calculations
+                <h3 class="umd-sans-larger">Responsive Behavior</h3>
+                <div class="code-example">
+                  <pre><code class="language-javascript">// Trigger component resize calculations
 const hero = document.querySelector('umd-element-hero');
 
 // Manual resize trigger
@@ -328,17 +358,18 @@ const resizeObserver = new ResizeObserver((entries) =&gt; {
 document.querySelectorAll('[class*="umd-element-"]').forEach((element) =&gt; {
   resizeObserver.observe(element);
 });</code></pre>
-            </div>
-          </section>
+                </div>
+              </section>
 
-          <!-- Testing Components -->
-          <section id="testing" class="content-section">
-            <h2>Testing Components</h2>
-            <p>Best practices for testing components in your application.</p>
-
-            <h3>Jest Testing Setup</h3>
-            <div class="code-example">
-              <pre><code class="language-javascript">// __tests__/components.test.js
+              <!-- Testing Components -->
+              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+                <h2 slot="headline">Testing Components</h2>
+                <div slot="text"><p>Best practices for testing components in your application.</p></div>
+              </umd-element-section-intro>
+              <section id="testing" class="umd-layout-space-vertical-interior">
+                <h3 class="umd-sans-larger">Jest Testing Setup</h3>
+                <div class="code-example">
+                  <pre><code class="language-javascript">// __tests__/components.test.js
 import { Components } from '@universityofmaryland/web-components-library';
 
 describe('UMD Components', () =&gt; {
@@ -371,17 +402,18 @@ describe('UMD Components', () =&gt; {
     expect(card.shadowRoot).toBeTruthy();
   });
 });</code></pre>
-            </div>
-          </section>
+                </div>
+              </section>
 
-          <!-- Framework Integration -->
-          <section id="frameworks" class="content-section">
-            <h2>Framework Integration</h2>
-            <p>Web components work natively in any framework. Here are common integration patterns.</p>
-
-            <h3>React</h3>
-            <div class="code-example">
-              <pre><code class="language-typescript">import { useEffect, useRef } from 'react';
+              <!-- Framework Integration -->
+              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+                <h2 slot="headline">Framework Integration</h2>
+                <div slot="text"><p>Web components work natively in any framework. Here are common integration patterns.</p></div>
+              </umd-element-section-intro>
+              <section id="frameworks" class="umd-layout-space-vertical-interior">
+                <h3 class="umd-sans-larger">React</h3>
+                <div class="code-example">
+                  <pre><code class="language-typescript">import { useEffect, useRef } from 'react';
 
 // Initialize components once at app root
 import { LoadStructuralComponents } from '@universityofmaryland/web-components-library/structural';
@@ -396,11 +428,11 @@ function UmdHero({ title, image, children }) {
     &lt;/umd-element-hero&gt;
   );
 }</code></pre>
-            </div>
+                </div>
 
-            <h3>Vue</h3>
-            <div class="code-example">
-              <pre><code class="language-javascript">// main.js — tell Vue to ignore umd-* tags
+                <h3 class="umd-sans-larger">Vue</h3>
+                <div class="code-example">
+                  <pre><code class="language-javascript">// main.js — tell Vue to ignore umd-* tags
 app.config.compilerOptions.isCustomElement = (tag) =&gt; tag.startsWith('umd-');
 
 // In vite.config.js
@@ -415,31 +447,29 @@ export default defineConfig({
     }),
   ],
 });</code></pre>
-            </div>
+                </div>
 
-            <h3>Angular</h3>
-            <div class="code-example">
-              <pre><code class="language-typescript">// app.module.ts
+                <h3 class="umd-sans-larger">Angular</h3>
+                <div class="code-example">
+                  <pre><code class="language-typescript">// app.module.ts
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule {}</code></pre>
-            </div>
-          </section>
+                </div>
+              </section>
 
-          <!-- Custom Components -->
-          <section id="custom" class="content-section">
-            <h2>Building Custom Components</h2>
-            <p>
-              Extend the component library with your own custom components using
-              the Model package.
-            </p>
-
-            <h3>Custom Component Template</h3>
-            <div class="code-example">
-              <pre><code class="language-typescript">import {
+              <!-- Custom Components -->
+              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+                <h2 slot="headline">Building Custom Components</h2>
+                <div slot="text"><p>Extend the component library with your own custom components using the Model package.</p></div>
+              </umd-element-section-intro>
+              <section id="custom" class="umd-layout-space-vertical-interior">
+                <h3 class="umd-sans-larger">Custom Component Template</h3>
+                <div class="code-example">
+                  <pre><code class="language-typescript">import {
   Attributes,
   Model,
   Register,
@@ -501,25 +531,24 @@ export const CustomFeature = Register.webComponent({
   slots,
   createComponent
 });</code></pre>
-            </div>
+                </div>
 
-            <div class="alert alert-pro-tip">
-              <strong>Full Custom Component Guide:</strong> For a comprehensive guide to building custom
-              components with the Model and Builder packages, see the
-              <a href="../infrastructure/model-and-builder.html">Model &amp; Builder documentation</a>.
-            </div>
-          </section>
+                <div class="alert-pro-tip">
+                  <strong>Full Custom Component Guide:</strong> For a comprehensive guide to building custom
+                  components with the Model and Builder packages, see the
+                  <a href="../infrastructure/model-and-builder.html">Model &amp; Builder documentation</a>.
+                </div>
+              </section>
 
-          <!-- Performance -->
-          <section id="performance" class="content-section">
-            <h2>Performance Optimization</h2>
-            <p>
-              Techniques for optimizing component performance in production.
-            </p>
-
-            <h3>Lazy Loading Components</h3>
-            <div class="code-example">
-              <pre><code class="language-javascript">// Load components only when needed
+              <!-- Performance -->
+              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+                <h2 slot="headline">Performance Optimization</h2>
+                <div slot="text"><p>Techniques for optimizing component performance in production.</p></div>
+              </umd-element-section-intro>
+              <section id="performance" class="umd-layout-space-vertical-interior">
+                <h3 class="umd-sans-larger">Lazy Loading Components</h3>
+                <div class="code-example">
+                  <pre><code class="language-javascript">// Load components only when needed
 const loadHeroComponents = () =&gt;
   import('@universityofmaryland/web-components-library').then(({ Components }) =&gt; {
     Components.hero.base();
@@ -543,11 +572,11 @@ const heroSection = document.querySelector('.hero-section');
 if (heroSection) {
   heroObserver.observe(heroSection);
 }</code></pre>
-            </div>
+                </div>
 
-            <h3>Bundle Optimization</h3>
-            <div class="code-example">
-              <pre><code class="language-javascript">// webpack.config.js
+                <h3 class="umd-sans-larger">Bundle Optimization</h3>
+                <div class="code-example">
+                  <pre><code class="language-javascript">// webpack.config.js
 module.exports = {
   optimization: {
     splitChunks: {
@@ -576,70 +605,82 @@ export default {
     }
   }
 };</code></pre>
-            </div>
+                </div>
 
-            <div class="alert alert-pro-tip">
-              <h5 class="alert-heading">Performance Tips</h5>
-              <ul>
-                <li>Load only the components you use</li>
-                <li>Use dynamic imports for below-the-fold components</li>
-                <li>Enable production mode for smaller bundles</li>
-                <li>Consider server-side rendering for SEO-critical content</li>
-                <li>
-                  Use the <code>loading="lazy"</code> attribute on images within
-                  components
-                </li>
-              </ul>
-            </div>
-          </section>
+                <div class="alert-pro-tip">
+                  <h5>Performance Tips</h5>
+                  <ul>
+                    <li>Load only the components you use</li>
+                    <li>Use dynamic imports for below-the-fold components</li>
+                    <li>Enable production mode for smaller bundles</li>
+                    <li>Consider server-side rendering for SEO-critical content</li>
+                    <li>
+                      Use the <code>loading="lazy"</code> attribute on images within
+                      components
+                    </li>
+                  </ul>
+                </div>
+              </section>
 
-          <!-- Next Steps -->
-          <div class="mt-5">
-            <h3>Additional Resources</h3>
-            <ul>
-              <li>
-                <a href="https://github.com/UMD-Digital/design-system">GitHub Repository</a>
-              </li>
-              <li>
-                <a href="https://umd-digital.github.io/design-system/">TypeDoc API Reference</a>
-              </li>
-              <li>
-                <a href="http://playground.designsystem.umd.edu">Component Playground</a>
-              </li>
-              <li><a href="../infrastructure/model-and-builder.html">Model &amp; Builder Documentation</a></li>
-              <li><a href="../index.html">Back to Documentation Home</a></li>
-            </ul>
+              <!-- Related Resources -->
+              <div style="margin-top: 3rem;">
+                <h3 class="umd-sans-larger">Related Resources</h3>
+                <div class="umd-layout-grid-gap-three">
+                  <umd-element-card data-visual-bordered="true">
+                    <h3 slot="headline"><a href="index.html">Components API Reference</a></h3>
+                    <p slot="text">Complete API documentation for all component exports.</p>
+                    <umd-element-call-to-action slot="actions" data-display="secondary">
+                      <a href="index.html">View API</a>
+                    </umd-element-call-to-action>
+                  </umd-element-card>
+                  <umd-element-card data-visual-bordered="true">
+                    <h3 slot="headline"><a href="usage.html">Component Usage Guide</a></h3>
+                    <p slot="text">Slot-based markup patterns for every component.</p>
+                    <umd-element-call-to-action slot="actions" data-display="secondary">
+                      <a href="usage.html">View Guide</a>
+                    </umd-element-call-to-action>
+                  </umd-element-card>
+                  <umd-element-card data-visual-bordered="true">
+                    <h3 slot="headline"><a href="../infrastructure/model-and-builder.html">Model &amp; Builder</a></h3>
+                    <p slot="text">Underlying model and builder patterns for custom components.</p>
+                    <umd-element-call-to-action slot="actions" data-display="secondary">
+                      <a href="../infrastructure/model-and-builder.html">View Docs</a>
+                    </umd-element-call-to-action>
+                  </umd-element-card>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
 
-    <footer class="bg-dark text-light py-4 mt-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <h6>UMD Design System</h6>
-            <p class="small text-muted">9 composable packages for consistent, accessible UMD digital experiences.</p>
-          </div>
-          <div class="col-md-4">
-            <h6>Resources</h6>
-            <ul class="list-unstyled small">
-              <li><a href="https://designsystem.umd.edu" class="text-muted">designsystem.umd.edu</a></li>
-              <li><a href="http://playground.designsystem.umd.edu" class="text-muted">Component Playground</a></li>
-              <li><a href="https://github.com/UMD-Digital/design-system" class="text-muted">GitHub</a></li>
-            </ul>
-          </div>
-          <div class="col-md-4">
-            <h6>npm Packages</h6>
-            <ul class="list-unstyled small">
-              <li><a href="https://www.npmjs.com/org/universityofmaryland" class="text-muted">@universityofmaryland on npm</a></li>
-            </ul>
-          </div>
-        </div>
-        <hr class="my-3 border-secondary">
-        <p class="text-center text-muted small mb-0">&copy; University of Maryland. All rights reserved. | <a href="https://umd.edu" class="text-muted">umd.edu</a> | <a href="https://brand.umd.edu" class="text-muted">Brand Guidelines</a></p>
+    <umd-element-footer data-display="mega" data-theme="dark">
+      <div slot="link-column-one">
+        <h3>Developer Tools</h3>
+        <ul>
+          <li><a href="https://umd-digital.github.io/design-system/">TypeDoc API Reference</a></li>
+          <li><a href="https://www.npmjs.com/org/universityofmaryland">@universityofmaryland on npm</a></li>
+          <li><a href="https://github.com/UMD-Digital/design-system">GitHub Repository</a></li>
+        </ul>
       </div>
-    </footer>
+      <div slot="link-column-two">
+        <h3>Learning</h3>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started Guide</a></li>
+          <li><a href="../architecture.html">Architecture Overview</a></li>
+          <li><a href="http://playground.designsystem.umd.edu" target="_blank">Component Playground</a></li>
+        </ul>
+      </div>
+      <div slot="link-column-three">
+        <h3>UMD Links</h3>
+        <ul>
+          <li><a href="https://designsystem.umd.edu">designsystem.umd.edu</a></li>
+          <li><a href="https://brand.umd.edu">brand.umd.edu</a></li>
+          <li><a href="https://umd.edu">umd.edu</a></li>
+        </ul>
+      </div>
+    </umd-element-footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>

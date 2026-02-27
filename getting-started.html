@@ -1,135 +1,171 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Getting Started - UMD Design System Documentation</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <style>
-      .content-section { background-color: #f8f9fa; border-radius: 8px; padding: 2rem; margin-bottom: 2rem; }
-      .code-example { background-color: #ffffff; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
-      pre { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; margin-bottom: 0; }
-      code { color: #e83e8c; }
-      .btn-umd { background-color: #e21833; color: white; border: none; }
-      .btn-umd:hover { background-color: #c71629; color: white; }
-      .cm-callout { background-color: #e3f2fd; border: 1px solid #90caf9; border-radius: 8px; padding: 1rem 1.5rem; margin-bottom: 2rem; }
-    </style>
-  </head>
-  <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #e21833;">
-      <div class="container">
-        <a class="navbar-brand fw-bold" href="index.html">UMD Design System</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="mainNav">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="architecture.html">Architecture</a></li>
-            <li class="nav-item"><a class="nav-link active" href="getting-started.html">Getting Started</a></li>
-          </ul>
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Packages</a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="components/usage.html">Components</a></li>
-                <li><a class="dropdown-item" href="styles/static-css.html">Styles</a></li>
-                <li><a class="dropdown-item" href="feeds/use-cases.html">Feeds</a></li>
-                <li><a class="dropdown-item" href="elements/use-cases.html">Elements</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="tokens/use-cases.html">Tokens</a></li>
-                <li><a class="dropdown-item" href="icons/use-cases.html">Icons</a></li>
-                <li><a class="dropdown-item" href="utilities/use-cases.html">Utilities</a></li>
-                <li><a class="dropdown-item" href="infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
-              </ul>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="http://playground.designsystem.umd.edu" target="_blank">Playground</a></li>
-          </ul>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Getting Started - UMD Design System Documentation</title>
+  <link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/styles.min.css" />
+  <script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/cdn.js"></script>
+  <style>
+    pre[class*="language-"] { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+    pre { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; }
+    code { color: #e21833; }
+    pre code { color: inherit; }
+    table { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; }
+    th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
+    td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
+    td code, th code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
+    .code-example { background-color: #fff; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
+    h3 { margin-top: 3rem; margin-bottom: 1rem; }
+    h5 { font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<header>
+  <div class="umd-layout-space-horizontal-full">
+    <umd-element-navigation-header sticky>
+      <a slot="logo" href="index.html">
+        <span class="umd-sans-larger-bold">Design System Docs</span>
+      </a>
+      <div slot="main-navigation">
+        <umd-element-nav-item>
+          <a slot="primary-link" href="index.html">Home</a>
+        </umd-element-nav-item>
+        <umd-element-nav-item>
+          <a slot="primary-link" href="architecture.html">Architecture</a>
+        </umd-element-nav-item>
+        <umd-element-nav-item>
+          <a slot="primary-link" href="getting-started.html">Getting Started</a>
+        </umd-element-nav-item>
+        <umd-element-nav-item>
+          <a slot="primary-link" href="#">Packages</a>
+          <nav slot="dropdown-links">
+            <ul>
+              <li><a href="components/usage.html">Components</a></li>
+              <li><a href="styles/static-css.html">Styles</a></li>
+              <li><a href="elements/use-cases.html">Elements</a></li>
+              <li><a href="feeds/use-cases.html">Feeds</a></li>
+              <li><a href="tokens/use-cases.html">Tokens</a></li>
+              <li><a href="icons/use-cases.html">Icons</a></li>
+              <li><a href="utilities/use-cases.html">Utilities</a></li>
+              <li><a href="infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
+            </ul>
+          </nav>
+        </umd-element-nav-item>
+        <umd-element-nav-item>
+          <a slot="primary-link" href="http://playground.designsystem.umd.edu" target="_blank">Playground</a>
+        </umd-element-nav-item>
+      </div>
+      <div slot="primary-slide-links">
+        <a href="index.html"><span>Home</span></a>
+        <a href="architecture.html"><span>Architecture</span></a>
+        <a href="getting-started.html"><span>Getting Started</span></a>
+        <a href="#" data-child-ref="slide-packages"><span>Packages</span></a>
+        <a href="http://playground.designsystem.umd.edu" target="_blank"><span>Playground</span></a>
+      </div>
+      <div slot="children-slides">
+        <div data-parent-ref="slide-packages">
+          <a href="components/usage.html"><span>Components</span></a>
+          <a href="styles/static-css.html"><span>Styles</span></a>
+          <a href="elements/use-cases.html"><span>Elements</span></a>
+          <a href="feeds/use-cases.html"><span>Feeds</span></a>
+          <a href="tokens/use-cases.html"><span>Tokens</span></a>
+          <a href="icons/use-cases.html"><span>Icons</span></a>
+          <a href="utilities/use-cases.html"><span>Utilities</span></a>
+          <a href="infrastructure/model-and-builder.html"><span>Model &amp; Builder</span></a>
         </div>
       </div>
-    </nav>
+    </umd-element-navigation-header>
+  </div>
+</header>
 
-    <!-- Header -->
-    <header class="bg-dark text-white py-5">
-      <div class="container">
-        <h1 class="display-5 fw-bold">Getting Started</h1>
-        <p class="lead mb-0">Choose your approach: CDN for quick starts, npm for production</p>
-      </div>
-    </header>
+<main>
+  <div class="umd-layout-space-vertical-landing">
+    <umd-element-hero-minimal data-theme="light">
+      <h1 slot="headline">Getting Started</h1>
+      <div slot="text"><p>Choose your approach: CDN for quick starts, npm for production</p></div>
+    </umd-element-hero-minimal>
+    <div class="umd-layout-space-horizontal-larger umd-lock">
+      <umd-element-breadcrumb>
+        <div slot="paths">
+          <a href="index.html">Home</a>
+          <p>Getting Started</p>
+        </div>
+      </umd-element-breadcrumb>
+    </div>
+  </div>
 
-    <div class="container py-5">
-      <!-- Breadcrumb -->
-      <nav aria-label="breadcrumb" class="mb-4">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Getting Started</li>
-        </ol>
-      </nav>
+  <section class="umd-layout-space-vertical-landing">
+    <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
+      <h2 slot="headline">Decision Matrix</h2>
+      <div slot="text"><p>Compare the three approaches to find the right fit for your project.</p></div>
+    </umd-element-section-intro>
+    <div class="umd-layout-space-horizontal-normal">
 
-      <!-- Decision Matrix -->
-      <h2 class="mb-3">Decision Matrix</h2>
-      <p>Compare the three approaches to find the right fit for your project.</p>
-      <div class="table-responsive mb-5">
-        <table class="table table-bordered table-striped align-middle">
-          <thead class="table-dark">
-            <tr>
-              <th>Approach</th>
-              <th>Setup Time</th>
-              <th>Bundle Size</th>
-              <th>Tree-shaking</th>
-              <th>Best For</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><a href="#cdn"><strong>CDN</strong></a></td>
-              <td>~2 min</td>
-              <td>Full download</td>
-              <td>No</td>
-              <td>Prototyping and simple sites</td>
-            </tr>
-            <tr>
-              <td><a href="#npm"><strong>npm (grouped imports)</strong></a></td>
-              <td>~15 min</td>
-              <td>Moderate</td>
-              <td>Good</td>
-              <td>Standard production apps</td>
-            </tr>
-            <tr>
-              <td><a href="#npm"><strong>npm (individual imports)</strong></a></td>
-              <td>~30 min</td>
-              <td>Smallest</td>
-              <td>Maximum</td>
-              <td>Performance-critical apps</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Approach</th>
+            <th>Setup Time</th>
+            <th>Bundle Size</th>
+            <th>Tree-shaking</th>
+            <th>Best For</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><a href="#cdn"><strong>CDN</strong></a></td>
+            <td>~2 min</td>
+            <td>Full download</td>
+            <td>No</td>
+            <td>Prototyping and simple sites</td>
+          </tr>
+          <tr>
+            <td><a href="#npm"><strong>npm (grouped imports)</strong></a></td>
+            <td>~15 min</td>
+            <td>Moderate</td>
+            <td>Good</td>
+            <td>Standard production apps</td>
+          </tr>
+          <tr>
+            <td><a href="#npm"><strong>npm (individual imports)</strong></a></td>
+            <td>~30 min</td>
+            <td>Smallest</td>
+            <td>Maximum</td>
+            <td>Performance-critical apps</td>
+          </tr>
+        </tbody>
+      </table>
 
-      <!-- ================================================================ -->
-      <!-- Track A: CDN / No Build Tools -->
-      <!-- ================================================================ -->
-      <h2 class="mb-3" id="cdn">Track A: CDN / No Build Tools</h2>
-      <div class="content-section">
+    </div>
+  </section>
+
+  <!-- ================================================================ -->
+  <!-- Track A: CDN / No Build Tools -->
+  <!-- ================================================================ -->
+  <section class="umd-layout-space-vertical-landing">
+    <umd-element-section-intro id="cdn" class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
+      <h2 slot="headline">Track A: CDN / No Build Tools</h2>
+    </umd-element-section-intro>
+    <div class="umd-layout-space-horizontal-normal">
+      <div>
         <p>The fastest way to start using UMD components -- no build tools, no package manager, just HTML.</p>
 
-        <h4>Step 1 -- Add the Components CDN Script</h4>
+        <h4 class="umd-sans-medium">Step 1 -- Add the Components CDN Script</h4>
         <p>This single script auto-registers every <code>&lt;umd-element-*&gt;</code> web component.</p>
         <div class="code-example">
           <pre><code>&lt;script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/cdn.js"&gt;&lt;/script&gt;</code></pre>
         </div>
 
-        <h4 class="mt-4">Step 2 -- Add the Static CSS Stylesheet</h4>
+        <h4 class="umd-sans-medium">Step 2 -- Add the Static CSS Stylesheet</h4>
         <p>A pre-compiled CSS file that provides typography, layout utilities, spacing classes, and design tokens as CSS custom properties. This replaces the older JavaScript-based style injection approach.</p>
         <div class="code-example">
           <pre><code>&lt;link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/styles.min.css"&gt;</code></pre>
         </div>
 
-        <h4 class="mt-4">Step 3 -- Write HTML</h4>
+        <h4 class="umd-sans-medium">Step 3 -- Write HTML</h4>
         <p>Use <code>&lt;umd-element-*&gt;</code> custom element tags and UMD CSS utility classes in your markup.</p>
         <div class="code-example">
           <pre><code>&lt;umd-element-hero data-display="overlay" class="umd-layout-space-vertical-landing"&gt;
@@ -138,7 +174,7 @@
 &lt;/umd-element-hero&gt;
 
 &lt;section class="umd-layout-space-vertical-landing"&gt;
-  &lt;div class="umd-layout-space-horizontal-larger"&gt;
+  &lt;div class="umd-layout-space-horizontal-normal"&gt;
     &lt;div class="umd-grid-gap-three"&gt;
       &lt;umd-element-card&gt;
         &lt;h2 slot="headline"&gt;&lt;a href="#"&gt;Card Title&lt;/a&gt;&lt;/h2&gt;
@@ -149,7 +185,7 @@
 &lt;/section&gt;</code></pre>
         </div>
 
-        <h4 class="mt-4">Full Working Example</h4>
+        <h4 class="umd-sans-medium">Full Working Example</h4>
         <p>A complete, self-contained HTML document you can copy, save, and open in any browser.</p>
         <div class="code-example">
           <pre><code>&lt;!DOCTYPE html&gt;
@@ -182,7 +218,7 @@
     &lt;/umd-element-hero&gt;
 
     &lt;section class="umd-layout-space-vertical-landing"&gt;
-        &lt;div class="umd-layout-space-horizontal-larger"&gt;
+        &lt;div class="umd-layout-space-horizontal-normal"&gt;
             &lt;div class="umd-grid-gap-three"&gt;
                 &lt;umd-element-card&gt;
                     &lt;a slot="image" href="#"&gt;
@@ -232,38 +268,42 @@
 &lt;/html&gt;</code></pre>
         </div>
 
-        <div class="text-center mt-4 mb-3">
-          <a href="getting-started-example.html" target="_blank" class="btn btn-umd btn-lg">
-            View Live Example
-          </a>
-          <p class="small text-muted mt-2">Opens in a new window</p>
+        <div style="text-align: center; margin: 2rem 0 1.5rem;">
+          <umd-element-call-to-action data-display="primary">
+            <a href="getting-started-example.html" target="_blank">View Live Example</a>
+          </umd-element-call-to-action>
+          <p style="font-size: 0.875rem; color: #6c757d; margin-top: 0.5rem;">Opens in a new window</p>
         </div>
 
-        <div class="cm-callout">
-          <strong>Production CDN usage:</strong> Pin to a specific version to avoid unexpected breaking changes:<br>
-          <code>@universityofmaryland/web-components-library@1.17.14</code><br>
-          <code>@universityofmaryland/web-styles-library@1.7.2</code>
-        </div>
-
-        <div class="cm-callout">
-          <strong>Note:</strong> The CDN loads all components in a single bundle. If you need smaller bundles and tree-shaking, use the npm approach below.
-        </div>
+        <umd-element-alert-page>
+          <p slot="headline">Production CDN usage</p>
+          <div slot="text">
+            <p>Pin to a specific version to avoid unexpected breaking changes: <code>@universityofmaryland/web-components-library@1.17.14</code> and <code>@universityofmaryland/web-styles-library@1.7.2</code>. Note that the CDN loads all components in a single bundle — if you need smaller bundles and tree-shaking, use the npm approach below.</p>
+          </div>
+        </umd-element-alert-page>
       </div>
 
-      <!-- ================================================================ -->
-      <!-- Track B: npm / Build Tools -->
-      <!-- ================================================================ -->
-      <h2 class="mb-3" id="npm">Track B: npm / Build Tools</h2>
-      <div class="content-section">
+    </div>
+  </section>
+
+  <!-- ================================================================ -->
+  <!-- Track B: npm / Build Tools -->
+  <!-- ================================================================ -->
+  <section class="umd-layout-space-vertical-landing">
+    <umd-element-section-intro id="npm" class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
+      <h2 slot="headline">Track B: npm / Build Tools</h2>
+    </umd-element-section-intro>
+    <div class="umd-layout-space-horizontal-normal">
+      <div>
         <p>For production applications where bundle size and tree-shaking matter.</p>
 
-        <h4>Step 1 -- Install Packages</h4>
+        <h4 class="umd-sans-medium">Step 1 -- Install Packages</h4>
         <div class="code-example">
           <pre><code>npm install @universityofmaryland/web-components-library
 npm install @universityofmaryland/web-styles-library</code></pre>
         </div>
 
-        <h4 class="mt-4">Step 2 -- Import and Initialize Components</h4>
+        <h4 class="umd-sans-medium">Step 2 -- Import and Initialize Components</h4>
         <p>Use grouped imports to register only the component categories your application needs.</p>
         <div class="code-example">
           <pre><code>// Grouped imports (recommended)
@@ -274,7 +314,7 @@ LoadStructuralComponents();
 LoadContentComponents();</code></pre>
         </div>
 
-        <h4 class="mt-4">Step 3 -- Import Static CSS</h4>
+        <h4 class="umd-sans-medium">Step 3 -- Import Static CSS</h4>
         <p>Import pre-compiled CSS directly into your build pipeline. Choose the full bundle or pick individual modules for the smallest possible output.</p>
         <div class="code-example">
           <pre><code>// Full bundle -- everything in one import
@@ -289,7 +329,7 @@ import '@universityofmaryland/web-styles-library/css/typography.min.css';
 import '@universityofmaryland/web-styles-library/css/layout.min.css';</code></pre>
         </div>
 
-        <h4 class="mt-4">Minimal Vite Example</h4>
+        <h4 class="umd-sans-medium">Minimal Vite Example</h4>
         <p>A complete entry point for a Vite-based application.</p>
         <div class="code-example">
           <pre><code>// main.js
@@ -300,73 +340,105 @@ import { LoadContentComponents } from '@universityofmaryland/web-components-libr
 LoadStructuralComponents();
 LoadContentComponents();</code></pre>
         </div>
-        <p class="text-muted small mt-2">Then use <code>&lt;umd-element-*&gt;</code> tags in your HTML just as you would with the CDN approach.</p>
+        <p>Then use <code>&lt;umd-element-*&gt;</code> tags in your HTML just as you would with the CDN approach.</p>
 
-        <div class="cm-callout mt-4">
-          <strong>Going further:</strong> See the
-          <a href="components/advanced-bundling.html">Advanced Bundling guide</a> for individual component loading, lazy loading, and per-route code splitting. See the
-          <a href="styles/static-css.html">Static CSS guide</a> for a full breakdown of every CSS module available.
-        </div>
+        <umd-element-alert-page>
+          <p slot="headline">Going further</p>
+          <p slot="text">See the <a href="components/advanced-bundling.html">Advanced Bundling guide</a> for individual component loading, lazy loading, and per-route code splitting. See the <a href="styles/static-css.html">Static CSS guide</a> for a full breakdown of every CSS module available.</p>
+        </umd-element-alert-page>
       </div>
 
-      <!-- ================================================================ -->
-      <!-- What to Explore Next -->
-      <!-- ================================================================ -->
-      <h2 class="mb-3">What to Explore Next</h2>
-      <div class="row">
-        <!-- CDN track links -->
-        <div class="col-md-6">
-          <div class="content-section h-100">
-            <h5>CDN Track</h5>
-            <ul class="mb-0">
-              <li><a href="components/usage.html">Component HTML Usage</a> -- slot-based markup patterns for every component</li>
-              <li><a href="styles/static-css.html">Static CSS Reference</a> -- all available utility classes and tokens</li>
-              <li><a href="feeds/use-cases.html">Feeds Use Cases</a> -- dynamic content feeds via CDN</li>
-            </ul>
-          </div>
-        </div>
-        <!-- npm track links -->
-        <div class="col-md-6">
-          <div class="content-section h-100">
-            <h5>npm Track</h5>
-            <ul class="mb-0">
-              <li><a href="components/advanced-bundling.html">Advanced Bundling</a> -- code splitting and lazy loading patterns</li>
-              <li><a href="styles/tailwind.html">Tailwind Integration</a> -- using UMD tokens with Tailwind CSS</li>
-              <li><a href="architecture.html">Architecture Overview</a> -- understand the package dependency graph</li>
-            </ul>
-          </div>
-        </div>
-      </div>
     </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="bg-dark text-light py-4 mt-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <h6>UMD Design System</h6>
-            <p class="small text-muted">9 composable packages for consistent, accessible UMD digital experiences.</p>
-          </div>
-          <div class="col-md-4">
-            <h6>Resources</h6>
-            <ul class="list-unstyled small">
-              <li><a href="https://designsystem.umd.edu" class="text-muted">designsystem.umd.edu</a></li>
-              <li><a href="http://playground.designsystem.umd.edu" class="text-muted">Component Playground</a></li>
-              <li><a href="https://github.com/UMD-Digital/design-system" class="text-muted">GitHub</a></li>
-            </ul>
-          </div>
-          <div class="col-md-4">
-            <h6>npm Packages</h6>
-            <ul class="list-unstyled small">
-              <li><a href="https://www.npmjs.com/org/universityofmaryland" class="text-muted">@universityofmaryland on npm</a></li>
-            </ul>
-          </div>
-        </div>
-        <hr class="my-3 border-secondary">
-        <p class="text-center text-muted small mb-0">&copy; University of Maryland. All rights reserved. | <a href="https://umd.edu" class="text-muted">umd.edu</a> | <a href="https://brand.umd.edu" class="text-muted">Brand Guidelines</a></p>
+  <!-- ================================================================ -->
+  <!-- What to Explore Next -->
+  <!-- ================================================================ -->
+  <section class="umd-layout-space-vertical-landing">
+    <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
+      <h2 slot="headline">What to Explore Next</h2>
+    </umd-element-section-intro>
+    <div class="umd-layout-space-horizontal-normal">
+      <h5 class="umd-sans-medium">CDN Track</h5>
+      <div class="umd-layout-grid-gap-three">
+        <umd-element-card data-visual-bordered="true">
+          <h3 slot="headline"><a href="components/usage.html">Component HTML Usage</a></h3>
+          <p slot="text">Slot-based markup patterns for every component.</p>
+          <umd-element-call-to-action slot="actions" data-display="secondary">
+            <a href="components/usage.html">View Usage</a>
+          </umd-element-call-to-action>
+        </umd-element-card>
+        <umd-element-card data-visual-bordered="true">
+          <h3 slot="headline"><a href="styles/static-css.html">Static CSS Reference</a></h3>
+          <p slot="text">All available utility classes and tokens.</p>
+          <umd-element-call-to-action slot="actions" data-display="secondary">
+            <a href="styles/static-css.html">View CSS</a>
+          </umd-element-call-to-action>
+        </umd-element-card>
+        <umd-element-card data-visual-bordered="true">
+          <h3 slot="headline"><a href="feeds/use-cases.html">Feeds Use Cases</a></h3>
+          <p slot="text">Dynamic content feeds via CDN.</p>
+          <umd-element-call-to-action slot="actions" data-display="secondary">
+            <a href="feeds/use-cases.html">View Feeds</a>
+          </umd-element-call-to-action>
+        </umd-element-card>
       </div>
-    </footer>
+      <h5 class="umd-sans-medium">npm Track</h5>
+      <div class="umd-layout-grid-gap-three">
+        <umd-element-card data-visual-bordered="true">
+          <h3 slot="headline"><a href="components/advanced-bundling.html">Advanced Bundling</a></h3>
+          <p slot="text">Code splitting and lazy loading patterns.</p>
+          <umd-element-call-to-action slot="actions" data-display="secondary">
+            <a href="components/advanced-bundling.html">View Guide</a>
+          </umd-element-call-to-action>
+        </umd-element-card>
+        <umd-element-card data-visual-bordered="true">
+          <h3 slot="headline"><a href="styles/tailwind.html">Tailwind Integration</a></h3>
+          <p slot="text">Using UMD tokens with Tailwind CSS.</p>
+          <umd-element-call-to-action slot="actions" data-display="secondary">
+            <a href="styles/tailwind.html">View Guide</a>
+          </umd-element-call-to-action>
+        </umd-element-card>
+        <umd-element-card data-visual-bordered="true">
+          <h3 slot="headline"><a href="architecture.html">Architecture Overview</a></h3>
+          <p slot="text">Understand the package dependency graph.</p>
+          <umd-element-call-to-action slot="actions" data-display="secondary">
+            <a href="architecture.html">View Architecture</a>
+          </umd-element-call-to-action>
+        </umd-element-card>
+      </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+    </div>
+  </section>
+
+</main>
+
+<umd-element-footer data-display="mega" data-theme="dark">
+  <div slot="link-column-one">
+    <h3>Developer Tools</h3>
+    <ul>
+      <li><a href="https://umd-digital.github.io/design-system/">TypeDoc API Reference</a></li>
+      <li><a href="https://www.npmjs.com/org/universityofmaryland">@universityofmaryland on npm</a></li>
+      <li><a href="https://github.com/UMD-Digital/design-system">GitHub Repository</a></li>
+    </ul>
+  </div>
+  <div slot="link-column-two">
+    <h3>Learning</h3>
+    <ul>
+      <li><a href="getting-started.html">Getting Started Guide</a></li>
+      <li><a href="architecture.html">Architecture Overview</a></li>
+      <li><a href="http://playground.designsystem.umd.edu" target="_blank">Component Playground</a></li>
+    </ul>
+  </div>
+  <div slot="link-column-three">
+    <h3>UMD Links</h3>
+    <ul>
+      <li><a href="https://designsystem.umd.edu">designsystem.umd.edu</a></li>
+      <li><a href="https://brand.umd.edu">brand.umd.edu</a></li>
+      <li><a href="https://umd.edu">umd.edu</a></li>
+    </ul>
+  </div>
+</umd-element-footer>
+
+</body>
 </html>

@@ -4,46 +4,28 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Performance Best Practices - UMD Design System</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/styles.min.css" />
+    <script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/cdn.js"></script>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
       rel="stylesheet"
     />
     <style>
-      .header {
-        background-color: #e21833;
-        color: white;
-        padding: 2rem 0;
-      }
-      .content-section {
-        background-color: #f8f9fa;
-        border-radius: 8px;
-        padding: 2rem;
-        margin-bottom: 2rem;
-      }
-      .code-example {
-        background-color: #ffffff;
-        border: 1px solid #dee2e6;
-        border-radius: 4px;
-        padding: 1rem;
-        margin: 1rem 0;
-      }
-      pre {
-        background-color: #f8f9fa;
-        border-radius: 4px;
-        padding: 1rem;
-        overflow-x: auto;
-        margin-bottom: 0;
-      }
-      code {
-        color: #e83e8c;
-      }
+      pre[class*="language-"] { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+      pre { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; }
+      code { color: #e21833; }
+      pre code { color: inherit; }
+      table { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; }
+      th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
+      td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
+      td code, th code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
+      .code-example { background-color: #fff; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
+      .use-case-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 1.5rem; margin-bottom: 2.5rem; background-color: #fff; }
+      .use-case-card h4 { color: #e21833; margin-bottom: 1rem; }
+      .use-case-card ul { padding-left: 1.5rem; }
       .toc {
         position: sticky;
-        top: 20px;
+        top: 80px;
         background-color: white;
         border-radius: 8px;
         padding: 1.5rem;
@@ -75,6 +57,9 @@
         background-color: #e3f2fd;
         border: 1px solid #90caf9;
         color: #0d47a1;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
       }
       .feature-badge {
         display: inline-block;
@@ -114,129 +99,194 @@
         font-size: 2rem;
         font-weight: bold;
       }
+      .two-column-layout {
+        display: grid;
+        grid-template-columns: 240px 1fr;
+        gap: 2rem;
+      }
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1rem;
+      }
+      .cm-callout-info {
+        background-color: #e3f2fd;
+        border: 1px solid #90caf9;
+        color: #0d47a1;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-top: 1rem;
+      }
+      .release-note {
+        display: block;
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+        color: #6c757d;
+      }
+      @media (max-width: 767px) {
+        .two-column-layout {
+          grid-template-columns: 1fr;
+        }
+        .toc {
+          position: static;
+        }
+      }
+      h3 { margin-top: 3rem; margin-bottom: 1rem; }
+      h5 { font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+      section > h3:first-child, .use-case-card > h4:first-child { margin-top: 0; }
     </style>
   </head>
-  <body data-bs-spy="scroll" data-bs-target="#toc" data-bs-offset="20">
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #e21833;">
-      <div class="container">
-        <a class="navbar-brand fw-bold" href="../index.html">UMD Design System</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="mainNav">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="../architecture.html">Architecture</a></li>
-            <li class="nav-item"><a class="nav-link" href="../getting-started.html">Getting Started</a></li>
-          </ul>
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Packages</a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="../components/usage.html">Components</a></li>
-                <li><a class="dropdown-item" href="../styles/static-css.html">Styles</a></li>
-                <li><a class="dropdown-item" href="../feeds/use-cases.html">Feeds</a></li>
-                <li><a class="dropdown-item" href="../elements/use-cases.html">Elements</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="../tokens/use-cases.html">Tokens</a></li>
-                <li><a class="dropdown-item" href="../icons/use-cases.html">Icons</a></li>
-                <li><a class="dropdown-item" href="../utilities/use-cases.html">Utilities</a></li>
-                <li><a class="dropdown-item" href="../infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
-              </ul>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="http://playground.designsystem.umd.edu" target="_blank">Playground</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <header class="header">
-      <div class="container">
-        <h1>Performance Best Practices</h1>
-        <p class="lead">Optimize bundle size and loading performance with the UMD Design System</p>
+  <body>
+    <header>
+      <div class="umd-layout-space-horizontal-full">
+        <umd-element-navigation-header sticky>
+          <a slot="logo" href="../index.html">
+            <span class="umd-sans-larger-bold">Design System Docs</span>
+          </a>
+          <div slot="main-navigation">
+            <umd-element-nav-item>
+              <a slot="primary-link" href="../index.html">Home</a>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="../architecture.html">Architecture</a>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="../getting-started.html">Getting Started</a>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="#">Packages</a>
+              <nav slot="dropdown-links">
+                <ul>
+                  <li><a href="usage.html">Components</a></li>
+                  <li><a href="../styles/static-css.html">Styles</a></li>
+                  <li><a href="../elements/use-cases.html">Elements</a></li>
+                  <li><a href="../feeds/use-cases.html">Feeds</a></li>
+                  <li><a href="../tokens/use-cases.html">Tokens</a></li>
+                  <li><a href="../icons/use-cases.html">Icons</a></li>
+                  <li><a href="../utilities/use-cases.html">Utilities</a></li>
+                  <li><a href="../infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
+                </ul>
+              </nav>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="http://playground.designsystem.umd.edu" target="_blank">Playground</a>
+            </umd-element-nav-item>
+          </div>
+          <div slot="primary-slide-links">
+            <a href="../index.html"><span>Home</span></a>
+            <a href="../architecture.html"><span>Architecture</span></a>
+            <a href="../getting-started.html"><span>Getting Started</span></a>
+            <a href="#" data-child-ref="slide-packages"><span>Packages</span></a>
+            <a href="http://playground.designsystem.umd.edu" target="_blank"><span>Playground</span></a>
+          </div>
+          <div slot="children-slides">
+            <div data-parent-ref="slide-packages">
+              <a href="usage.html"><span>Components</span></a>
+              <a href="../styles/static-css.html"><span>Styles</span></a>
+              <a href="../elements/use-cases.html"><span>Elements</span></a>
+              <a href="../feeds/use-cases.html"><span>Feeds</span></a>
+              <a href="../tokens/use-cases.html"><span>Tokens</span></a>
+              <a href="../icons/use-cases.html"><span>Icons</span></a>
+              <a href="../utilities/use-cases.html"><span>Utilities</span></a>
+              <a href="../infrastructure/model-and-builder.html"><span>Model &amp; Builder</span></a>
+            </div>
+          </div>
+        </umd-element-navigation-header>
       </div>
     </header>
 
-    <div class="container py-5">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
-          <li class="breadcrumb-item"><a href="index.html">Components</a></li>
-          <li class="breadcrumb-item active">Performance</li>
-        </ol>
-      </nav>
-
-      <div style="background-color: #e8f5e9; border-left: 4px solid #4caf50; padding: 1rem 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
-        <strong>Where This Package Fits:</strong> Components sits at the top of the <strong>Application</strong> layer. It depends on all lower packages and provides ready-to-use web components.
-        <a href="../architecture.html">See full architecture</a>.
+    <main>
+      <div class="umd-layout-space-vertical-interior">
+        <umd-element-hero-minimal data-theme="light">
+          <h1 slot="headline">Performance Best Practices</h1>
+          <div slot="text"><p>Optimize bundle size and loading performance with the UMD Design System</p></div>
+        </umd-element-hero-minimal>
+        <div class="umd-layout-space-horizontal-larger umd-lock">
+          <umd-element-breadcrumb>
+            <div slot="paths">
+              <a href="../index.html">Home</a>
+              <a href="usage.html">Components</a>
+              <p>Performance</p>
+            </div>
+          </umd-element-breadcrumb>
+        </div>
       </div>
 
-      <div class="row">
-        <!-- Table of Contents -->
-        <div class="col-md-3">
-          <nav id="toc" class="toc">
-            <h5>On This Page</h5>
-            <a class="toc-link" href="#introduction">Introduction</a>
-            <a class="toc-link" href="#export-strategy">Export Strategy</a>
-            <a class="toc-link" href="#bundling-config">Bundling Configuration</a>
-            <a class="toc-link" href="#dynamic-loading">Dynamic Loading</a>
-            <a class="toc-link" href="#critical-css">Critical CSS</a>
-            <a class="toc-link" href="#performance-metrics">Performance Metrics</a>
-            <a class="toc-link" href="#best-practices">Best Practices Checklist</a>
-          </nav>
-        </div>
+      <section class="umd-layout-space-vertical-interior">
+        <div class="umd-layout-space-horizontal-normal">
 
-        <!-- Main Content -->
-        <div class="col-md-9">
-          <!-- Introduction -->
-          <section id="introduction" class="content-section">
-            <h2>Introduction</h2>
-            <p>
-              The UMD Design System provides multiple strategies for optimizing bundle size and loading performance.
-              By leveraging ES modules, tree-shaking, and strategic code splitting, you can significantly reduce
-              initial load times and improve the user experience of your applications.
-            </p>
-            <p>
-              This guide covers the design system's export strategy, bundling configuration with Vite, and
-              production-ready patterns for dynamic component loading. Whether you're building a simple static
-              site or a complex web application, these patterns will help you achieve optimal performance while
-              maintaining code maintainability.
-            </p>
-            <p>
-              The design system is built with performance in mind, providing granular control over what gets
-              loaded and when. Components are organized into logical groups that align with common usage patterns,
-              allowing you to load only what you need, when you need it.
-              <small class="text-muted d-block mt-2">
-                <em>Note: Grouped exports (structural, content, interactive, feed) were introduced in Release 1.14.0.</em>
-              </small>
-            </p>
-
-            <div class="alert alert-info mt-3">
-              <strong>Alternative Loading Methods:</strong> While this guide focuses on performance optimization through code splitting,
-              simpler options are available for prototyping and development:
-              <ul class="mb-0 mt-2">
-                <li><strong>CDN Usage</strong> - Quick setup via unpkg for prototypes (see <a href="../getting-started.html">Getting Started</a>)</li>
-                <li><strong>Bundle Import</strong> - Single import with all packages included via <code>@universityofmaryland/web-components-library/bundle</code></li>
-              </ul>
-              For production applications, we recommend the code splitting approaches detailed below.
-            </div>
+          <section id="getting-started">
+            <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+              <h2 slot="headline">Getting Started</h2>
+              <div slot="text"><p>
+                <strong>Where This Package Fits:</strong> Components sits at the top of the <strong>Application</strong> layer. It depends on all lower packages and provides ready-to-use web components.
+                <a href="../architecture.html">See full architecture</a>.
+              </p></div>
+            </umd-element-section-intro>
           </section>
 
-          <!-- Export Strategy -->
-          <section id="export-strategy" class="content-section">
-            <h2>Export Strategy</h2>
-            <p>
-              The component library provides two complementary export strategies to optimize bundle size and
-              loading performance. Choose the approach that best fits your application's needs.
-            </p>
+          <div class="two-column-layout">
+            <!-- Table of Contents -->
+            <div>
+              <nav id="toc" class="toc">
+                <h5>On This Page</h5>
+                <a class="toc-link" href="#introduction">Introduction</a>
+                <a class="toc-link" href="#export-strategy">Export Strategy</a>
+                <a class="toc-link" href="#bundling-config">Bundling Configuration</a>
+                <a class="toc-link" href="#dynamic-loading">Dynamic Loading</a>
+                <a class="toc-link" href="#critical-css">Critical CSS</a>
+                <a class="toc-link" href="#performance-metrics">Performance Metrics</a>
+                <a class="toc-link" href="#best-practices">Best Practices Checklist</a>
+              </nav>
+            </div>
 
-            <h3>Grouped Exports</h3>
-            <p>
-              The design system provides pre-configured component groups based on common usage patterns.
-              This approach balances convenience with performance.
-            </p>
-            <div class="code-example">
-              <pre><code class="language-javascript">// Structural Components - Page layout and navigation
+            <!-- Main Content -->
+            <div>
+              <!-- Introduction -->
+              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+                <h2 slot="headline">Introduction</h2>
+                <div slot="text"><p>The UMD Design System provides multiple strategies for optimizing bundle size and loading performance. By leveraging ES modules, tree-shaking, and strategic code splitting, you can significantly reduce initial load times and improve the user experience of your applications.</p></div>
+              </umd-element-section-intro>
+              <section id="introduction" class="umd-layout-space-vertical-interior">
+                <p>
+                  This guide covers the design system's export strategy, bundling configuration with Vite, and
+                  production-ready patterns for dynamic component loading. Whether you're building a simple static
+                  site or a complex web application, these patterns will help you achieve optimal performance while
+                  maintaining code maintainability.
+                </p>
+                <p>
+                  The design system is built with performance in mind, providing granular control over what gets
+                  loaded and when. Components are organized into logical groups that align with common usage patterns,
+                  allowing you to load only what you need, when you need it.
+                  <span class="release-note">
+                    <em>Note: Grouped exports (structural, content, interactive, feed) were introduced in Release 1.14.0.</em>
+                  </span>
+                </p>
+
+                <div class="cm-callout-info">
+                  <strong>Alternative Loading Methods:</strong> While this guide focuses on performance optimization through code splitting,
+                  simpler options are available for prototyping and development:
+                  <ul style="margin-bottom: 0; margin-top: 0.5rem;">
+                    <li><strong>CDN Usage</strong> - Quick setup via unpkg for prototypes (see <a href="../getting-started.html">Getting Started</a>)</li>
+                    <li><strong>Bundle Import</strong> - Single import with all packages included via <code>@universityofmaryland/web-components-library/bundle</code></li>
+                  </ul>
+                  For production applications, we recommend the code splitting approaches detailed below.
+                </div>
+              </section>
+
+              <!-- Export Strategy -->
+              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+                <h2 slot="headline">Export Strategy</h2>
+                <div slot="text"><p>The component library provides two complementary export strategies to optimize bundle size and loading performance. Choose the approach that best fits your application's needs.</p></div>
+              </umd-element-section-intro>
+              <section id="export-strategy" class="umd-layout-space-vertical-interior">
+                <h3 class="umd-sans-larger">Grouped Exports</h3>
+                <p>
+                  The design system provides pre-configured component groups based on common usage patterns.
+                  This approach balances convenience with performance.
+                </p>
+                <div class="code-example">
+                  <pre><code class="language-javascript">// Structural Components - Page layout and navigation
 // Typically loaded first for above-the-fold content
 import { LoadStructuralComponents } from '@universityofmaryland/web-components-library/structural';
 LoadStructuralComponents(); // Loads: actions, hero, navigation
@@ -255,15 +305,15 @@ LoadInteractiveComponents(); // Loads: accordion, carousel, footer, social, tab
 // Load on-demand for pages with feeds
 import { LoadFeedComponents } from '@universityofmaryland/web-components-library/feed';
 LoadFeedComponents(); // Loads: events, news, people feeds</code></pre>
-            </div>
+                </div>
 
-            <h3>Individual Component Exports</h3>
-            <p>
-              Import specific component types individually using dynamic imports for maximum tree-shaking efficiency
-              and granular control over what gets loaded.
-            </p>
-            <div class="code-example">
-              <pre><code class="language-javascript">// Dynamically import individual component types on demand
+                <h3 class="umd-sans-larger">Individual Component Exports</h3>
+                <p>
+                  Import specific component types individually using dynamic imports for maximum tree-shaking efficiency
+                  and granular control over what gets loaded.
+                </p>
+                <div class="code-example">
+                  <pre><code class="language-javascript">// Dynamically import individual component types on demand
 const loadSpecificComponents = async () => {
   // Load only card components and their variants
   const cardComponents = await import(
@@ -298,14 +348,14 @@ if (document.querySelector('[class*="umd-element-hero"]')) {
   import('@universityofmaryland/web-components-library/components/hero')
     .then(module => module.base());
 }</code></pre>
-            </div>
+                </div>
 
-            <h3>Bundle Import with Tree-Shaking</h3>
-            <p>
-              Even when using the bundle import, you can still benefit from tree-shaking by importing specific components:
-            </p>
-            <div class="code-example">
-              <pre><code class="language-javascript">// Import specific components from the bundle for tree-shaking
+                <h3 class="umd-sans-larger">Bundle Import with Tree-Shaking</h3>
+                <p>
+                  Even when using the bundle import, you can still benefit from tree-shaking by importing specific components:
+                </p>
+                <div class="code-example">
+                  <pre><code class="language-javascript">// Import specific components from the bundle for tree-shaking
 import { Components, Styles } from '@universityofmaryland/web-components-library/bundle';
 
 // Register only the components you need
@@ -315,78 +365,76 @@ Components.navigation.primary();
 
 // The bundler will tree-shake unused components from Elements, Feeds, etc.
 // This gives you the convenience of a single import path with optimized output</code></pre>
-            </div>
+                </div>
 
-            <h3>Export Strategy Comparison</h3>
-            <table class="comparison-table">
-              <thead>
-                <tr>
-                  <th>Approach</th>
-                  <th>Bundle Size</th>
-                  <th>Tree-shaking</th>
-                  <th>Development Speed</th>
-                  <th>Best For</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><strong>Grouped Imports</strong></td>
-                  <td>Moderate (group-level)</td>
-                  <td>Good (per group)</td>
-                  <td>Faster setup</td>
-                  <td>Standard sites with typical patterns</td>
-                </tr>
-                <tr>
-                  <td><strong>Individual Imports</strong></td>
-                  <td>Smallest possible</td>
-                  <td>Maximum efficiency</td>
-                  <td>More verbose</td>
-                  <td>Production apps with specific needs</td>
-                </tr>
-                <tr>
-                  <td><strong>Bundle + Tree-shaking</strong></td>
-                  <td>Small (with proper imports)</td>
-                  <td>Good (when destructured)</td>
-                  <td>Simple imports</td>
-                  <td>Apps wanting single import path</td>
-                </tr>
-                <tr>
-                  <td><strong>Full Bundle Init</strong></td>
-                  <td>Largest</td>
-                  <td>None</td>
-                  <td>Quickest</td>
-                  <td>Prototypes and development only</td>
-                </tr>
-              </tbody>
-            </table>
+                <h3 class="umd-sans-larger">Export Strategy Comparison</h3>
+                <table class="comparison-table">
+                  <thead>
+                    <tr>
+                      <th>Approach</th>
+                      <th>Bundle Size</th>
+                      <th>Tree-shaking</th>
+                      <th>Development Speed</th>
+                      <th>Best For</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>Grouped Imports</strong></td>
+                      <td>Moderate (group-level)</td>
+                      <td>Good (per group)</td>
+                      <td>Faster setup</td>
+                      <td>Standard sites with typical patterns</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Individual Imports</strong></td>
+                      <td>Smallest possible</td>
+                      <td>Maximum efficiency</td>
+                      <td>More verbose</td>
+                      <td>Production apps with specific needs</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Bundle + Tree-shaking</strong></td>
+                      <td>Small (with proper imports)</td>
+                      <td>Good (when destructured)</td>
+                      <td>Simple imports</td>
+                      <td>Apps wanting single import path</td>
+                    </tr>
+                    <tr>
+                      <td><strong>Full Bundle Init</strong></td>
+                      <td>Largest</td>
+                      <td>None</td>
+                      <td>Quickest</td>
+                      <td>Prototypes and development only</td>
+                    </tr>
+                  </tbody>
+                </table>
 
-            <div class="alert alert-pro-tip">
-              <h5 class="alert-heading">Pro Tip: Hybrid Approach</h5>
-              <p>
-                Combine both strategies for optimal results. Use grouped imports for common component sets
-                and individual imports for specific components used sparingly:
-              </p>
-              <pre><code class="language-javascript">// Load structural components as a group
+                <div class="alert-pro-tip">
+                  <h5>Pro Tip: Hybrid Approach</h5>
+                  <p>
+                    Combine both strategies for optimal results. Use grouped imports for common component sets
+                    and individual imports for specific components used sparingly:
+                  </p>
+                  <pre><code class="language-javascript">// Load structural components as a group
 import { LoadStructuralComponents } from '@universityofmaryland/web-components-library/structural';
 LoadStructuralComponents();
 
 // Import specific components individually
 import { Components } from '@universityofmaryland/web-components-library';
 Components.specialFeature.custom(); // Only this specific component</code></pre>
-            </div>
-          </section>
+                </div>
+              </section>
 
-          <!-- Bundling Configuration -->
-          <section id="bundling-config" class="content-section">
-            <h2>Bundling Configuration</h2>
-            <p>
-              The design system includes an optimized Vite configuration that implements intelligent
-              chunk splitting for optimal caching and loading performance.
-            </p>
-
-            <h3>Complete Vite Configuration</h3>
-            <div class="code-example">
-              <pre><code class="language-javascript">// vite.config.js
+              <!-- Bundling Configuration -->
+              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+                <h2 slot="headline">Bundling Configuration</h2>
+                <div slot="text"><p>The design system includes an optimized Vite configuration that implements intelligent chunk splitting for optimal caching and loading performance.</p></div>
+              </umd-element-section-intro>
+              <section id="bundling-config" class="umd-layout-space-vertical-interior">
+                <h3 class="umd-sans-larger">Complete Vite Configuration</h3>
+                <div class="code-example">
+                  <pre><code class="language-javascript">// vite.config.js
 import { defineConfig } from 'vite';
 import path from 'path';
 
@@ -493,41 +541,39 @@ export default defineConfig(({ mode }) => {
     },
   };
 });</code></pre>
-            </div>
+                </div>
 
-            <div class="type-card">
-              <strong>Key Configuration Options Explained:</strong>
-              <ul>
-                <li>
-                  <code>chunkFileNames</code> - Creates predictable vendor chunks for better long-term caching
-                </li>
-                <li>
-                  <code>modulePreload</code> - Ensures critical resources are preloaded for faster initial render
-                </li>
-                <li>
-                  <code>optimizeDeps.include</code> - Pre-bundles frequently used dependencies to avoid waterfall loading
-                </li>
-                <li>
-                  <code>alias</code> - Maps grouped exports to their distribution files for cleaner imports
-                </li>
-                <li>
-                  <code>terserOptions</code> - Removes development code in production builds
-                </li>
-              </ul>
-            </div>
-          </section>
+                <div class="type-card">
+                  <strong>Key Configuration Options Explained:</strong>
+                  <ul>
+                    <li>
+                      <code>chunkFileNames</code> - Creates predictable vendor chunks for better long-term caching
+                    </li>
+                    <li>
+                      <code>modulePreload</code> - Ensures critical resources are preloaded for faster initial render
+                    </li>
+                    <li>
+                      <code>optimizeDeps.include</code> - Pre-bundles frequently used dependencies to avoid waterfall loading
+                    </li>
+                    <li>
+                      <code>alias</code> - Maps grouped exports to their distribution files for cleaner imports
+                    </li>
+                    <li>
+                      <code>terserOptions</code> - Removes development code in production builds
+                    </li>
+                  </ul>
+                </div>
+              </section>
 
-          <!-- Dynamic Loading -->
-          <section id="dynamic-loading" class="content-section">
-            <h2>Dynamic Loading Patterns</h2>
-            <p>
-              The design system implements sophisticated loading strategies to optimize initial page load
-              and progressively enhance the user experience.
-            </p>
-
-            <h3>Progressive Component Loading</h3>
-            <div class="code-example">
-              <pre><code class="language-typescript">// main.ts - Production-ready loading strategy
+              <!-- Dynamic Loading -->
+              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+                <h2 slot="headline">Dynamic Loading Patterns</h2>
+                <div slot="text"><p>The design system implements sophisticated loading strategies to optimize initial page load and progressively enhance the user experience.</p></div>
+              </umd-element-section-intro>
+              <section id="dynamic-loading" class="umd-layout-space-vertical-interior">
+                <h3 class="umd-sans-larger">Progressive Component Loading</h3>
+                <div class="code-example">
+                  <pre><code class="language-typescript">// main.ts - Production-ready loading strategy
 import './styles.ts';
 
 // Component loaders with dynamic imports for code splitting
@@ -622,15 +668,15 @@ const initializeApp = async () => {
 };
 
 initializeApp();</code></pre>
-            </div>
+                </div>
 
-            <h3>Intersection Observer Pattern</h3>
-            <p>
-              Load component groups only when they're about to enter the viewport. This leverages the pre-built
-              chunks for optimal performance:
-            </p>
-            <div class="code-example">
-              <pre><code class="language-javascript">// Lazy load component chunks based on viewport visibility
+                <h3 class="umd-sans-larger">Intersection Observer Pattern</h3>
+                <p>
+                  Load component groups only when they're about to enter the viewport. This leverages the pre-built
+                  chunks for optimal performance:
+                </p>
+                <div class="code-example">
+                  <pre><code class="language-javascript">// Lazy load component chunks based on viewport visibility
 const observeAndLoadComponents = () => {
   // Map components to their optimized chunk groups
   const componentGroups = {
@@ -682,22 +728,19 @@ const observeAndLoadComponents = () => {
     });
   });
 };</code></pre>
-            </div>
-          </section>
+                </div>
+              </section>
 
-          <!-- Critical CSS -->
-          <section id="critical-css" class="content-section">
-            <h2>Critical CSS Strategy</h2>
-            <p>
-              The design system provides multiple approaches for CSS loading. For most projects,
-              static CSS files are the simplest and most performant option. For advanced use cases,
-              programmatic CSS loading is also available.
-            </p>
-
-            <h3>Static CSS Files (Recommended)</h3>
-            <p>Pre-compiled CSS files are available in the styles package (v1.8.0+). This is the simplest approach for most projects.</p>
-            <div class="code-example">
-              <pre><code class="language-html">&lt;!-- Critical CSS (render-blocking) --&gt;
+              <!-- Critical CSS -->
+              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+                <h2 slot="headline">Critical CSS Strategy</h2>
+                <div slot="text"><p>The design system provides multiple approaches for CSS loading. For most projects, static CSS files are the simplest and most performant option. For advanced use cases, programmatic CSS loading is also available.</p></div>
+              </umd-element-section-intro>
+              <section id="critical-css" class="umd-layout-space-vertical-interior">
+                <h3 class="umd-sans-larger">Static CSS Files (Recommended)</h3>
+                <p>Pre-compiled CSS files are available in the styles package (v1.8.0+). This is the simplest approach for most projects.</p>
+                <div class="code-example">
+                  <pre><code class="language-html">&lt;!-- Critical CSS (render-blocking) --&gt;
 &lt;link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/font-faces.min.css"&gt;
 &lt;link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/tokens.min.css"&gt;
 &lt;link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/base.min.css"&gt;
@@ -706,11 +749,11 @@ const observeAndLoadComponents = () => {
 &lt;link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/layout.min.css" media="print" onload="this.media='all'"&gt;
 &lt;link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/element.min.css" media="print" onload="this.media='all'"&gt;
 &lt;link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/web-components.min.css" media="print" onload="this.media='all'"&gt;</code></pre>
-            </div>
+                </div>
 
-            <h3>Bundler CSS Import</h3>
-            <div class="code-example">
-              <pre><code class="language-javascript">// Import in your entry file
+                <h3 class="umd-sans-larger">Bundler CSS Import</h3>
+                <div class="code-example">
+                  <pre><code class="language-javascript">// Import in your entry file
 import '@universityofmaryland/web-styles-library/css/styles.min.css';
 
 // Or selective imports
@@ -719,22 +762,22 @@ import '@universityofmaryland/web-styles-library/css/font-faces.min.css';
 import '@universityofmaryland/web-styles-library/css/base.min.css';
 import '@universityofmaryland/web-styles-library/css/typography.min.css';
 import '@universityofmaryland/web-styles-library/css/layout.min.css';</code></pre>
-            </div>
+                </div>
 
-            <p class="mt-3">
-              For a complete guide to the static CSS files, including all available files and usage patterns,
-              see the <a href="../styles/static-css.html">Static CSS documentation</a>.
-            </p>
+                <p style="margin-top: 1rem;">
+                  For a complete guide to the static CSS files, including all available files and usage patterns,
+                  see the <a href="../styles/static-css.html">Static CSS documentation</a>.
+                </p>
 
-            <h3>Programmatic CSS Loading (Advanced)</h3>
-            <p>
-              For cases where static CSS files are not sufficient &mdash; such as when you need dynamic
-              theme switching, conditional style loading, or fine-grained control over CSS injection order
-              &mdash; the styles package provides a programmatic API.
-            </p>
+                <h3 class="umd-sans-larger">Programmatic CSS Loading (Advanced)</h3>
+                <p>
+                  For cases where static CSS files are not sufficient &mdash; such as when you need dynamic
+                  theme switching, conditional style loading, or fine-grained control over CSS injection order
+                  &mdash; the styles package provides a programmatic API.
+                </p>
 
-            <div class="code-example">
-              <pre><code class="language-typescript">// styles.ts - Critical CSS loading implementation
+                <div class="code-example">
+                  <pre><code class="language-typescript">// styles.ts - Critical CSS loading implementation
 import * as Styles from '@universityofmaryland/web-styles-library';
 
 const inlineCriticalStyles = async () => {
@@ -795,65 +838,56 @@ if (document.readyState === 'loading') {
 }
 
 export { inlineCriticalStyles, loadNonCriticalStyles };</code></pre>
-            </div>
-
-            <div class="type-card">
-              <strong>CSS Loading Phases:</strong>
-              <ul>
-                <li>
-                  <strong>Phase 1: Critical CSS</strong> - Inline base64 fonts and above-the-fold styles directly in the document head
-                </li>
-                <li>
-                  <strong>Phase 2: Non-Critical CSS</strong> - Load decorative styles and animations during idle time
-                </li>
-                <li>
-                  <strong>Fallback Strategy</strong> - Always reveal content if styles fail to load
-                </li>
-              </ul>
-            </div>
-          </section>
-
-          <!-- Performance Metrics -->
-          <section id="performance-metrics" class="content-section">
-            <h2>Performance Metrics</h2>
-            <p>
-              Expected performance improvements when implementing these optimization strategies:
-            </p>
-
-            <div class="row">
-              <div class="col-md-6">
-                <div class="metric-card">
-                  <h4>Initial Bundle Size</h4>
-                  <div class="metric-value">-65%</div>
-                  <p>Reduction with grouped exports vs full import</p>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <div class="metric-card">
-                  <h4>Time to Interactive</h4>
-                  <div class="metric-value">-40%</div>
-                  <p>Faster with progressive loading strategy</p>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="metric-card">
-                  <h4>First Contentful Paint</h4>
-                  <div class="metric-value">-50%</div>
-                  <p>Improvement with critical CSS inlining</p>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="metric-card">
-                  <h4>Cache Hit Rate</h4>
-                  <div class="metric-value">+80%</div>
-                  <p>Better with vendor chunk splitting</p>
-                </div>
-              </div>
-            </div>
 
-            <h3>Measuring Performance</h3>
-            <div class="code-example">
-              <pre><code class="language-javascript">// Add performance monitoring to track improvements
+                <div class="type-card">
+                  <strong>CSS Loading Phases:</strong>
+                  <ul>
+                    <li>
+                      <strong>Phase 1: Critical CSS</strong> - Inline base64 fonts and above-the-fold styles directly in the document head
+                    </li>
+                    <li>
+                      <strong>Phase 2: Non-Critical CSS</strong> - Load decorative styles and animations during idle time
+                    </li>
+                    <li>
+                      <strong>Fallback Strategy</strong> - Always reveal content if styles fail to load
+                    </li>
+                  </ul>
+                </div>
+              </section>
+
+              <!-- Performance Metrics -->
+              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+                <h2 slot="headline">Performance Metrics</h2>
+                <div slot="text"><p>Expected performance improvements when implementing these optimization strategies:</p></div>
+              </umd-element-section-intro>
+              <section id="performance-metrics" class="umd-layout-space-vertical-interior">
+                <div class="metrics-grid">
+                  <div class="metric-card">
+                    <h4>Initial Bundle Size</h4>
+                    <div class="metric-value">-65%</div>
+                    <p>Reduction with grouped exports vs full import</p>
+                  </div>
+                  <div class="metric-card">
+                    <h4>Time to Interactive</h4>
+                    <div class="metric-value">-40%</div>
+                    <p>Faster with progressive loading strategy</p>
+                  </div>
+                  <div class="metric-card">
+                    <h4>First Contentful Paint</h4>
+                    <div class="metric-value">-50%</div>
+                    <p>Improvement with critical CSS inlining</p>
+                  </div>
+                  <div class="metric-card">
+                    <h4>Cache Hit Rate</h4>
+                    <div class="metric-value">+80%</div>
+                    <p>Better with vendor chunk splitting</p>
+                  </div>
+                </div>
+
+                <h3 class="umd-sans-larger">Measuring Performance</h3>
+                <div class="code-example">
+                  <pre><code class="language-javascript">// Add performance monitoring to track improvements
 const measureComponentLoad = (componentName) => {
   const startMark = `${componentName}-start`;
   const endMark = `${componentName}-end`;
@@ -885,64 +919,63 @@ const measureComponentLoad = (componentName) => {
 const heroTimer = measureComponentLoad('hero-components');
 await loadStructuralComponents();
 heroTimer.complete();</code></pre>
-            </div>
-          </section>
+                </div>
+              </section>
 
-          <!-- Best Practices Checklist -->
-          <section id="best-practices" class="content-section">
-            <h2>Best Practices Checklist</h2>
-            <p>
-              Follow these recommendations to achieve optimal performance with the UMD Design System:
-            </p>
+              <!-- Best Practices Checklist -->
+              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+                <h2 slot="headline">Best Practices Checklist</h2>
+                <div slot="text"><p>Follow these recommendations to achieve optimal performance with the UMD Design System:</p></div>
+              </umd-element-section-intro>
+              <section id="best-practices" class="umd-layout-space-vertical-interior">
+                <div class="type-card">
+                  <h4>Loading Strategy</h4>
+                  <ul style="margin-bottom: 0;">
+                    <li>Load structural components (hero, navigation) immediately for above-the-fold content</li>
+                    <li>Defer interactive components until user interaction or idle time</li>
+                    <li>Use Intersection Observer for below-the-fold components</li>
+                    <li>Implement fallback timers to ensure components eventually load</li>
+                    <li>Leverage <code>requestIdleCallback</code> for non-critical resources</li>
+                  </ul>
+                </div>
 
-            <div class="type-card">
-              <h4>Loading Strategy</h4>
-              <ul class="mb-0">
-                <li>Load structural components (hero, navigation) immediately for above-the-fold content</li>
-                <li>Defer interactive components until user interaction or idle time</li>
-                <li>Use Intersection Observer for below-the-fold components</li>
-                <li>Implement fallback timers to ensure components eventually load</li>
-                <li>Leverage <code>requestIdleCallback</code> for non-critical resources</li>
-              </ul>
-            </div>
+                <div class="type-card">
+                  <h4>Bundle Optimization</h4>
+                  <ul style="margin-bottom: 0;">
+                    <li>Use grouped exports for logical component sets instead of importing everything</li>
+                    <li>Configure vendor chunk splitting for better caching across deployments</li>
+                    <li>Enable production minification with console.log removal</li>
+                    <li>Set appropriate chunk size warning limits (500KB recommended)</li>
+                    <li>Use path aliases to simplify imports and improve maintainability</li>
+                  </ul>
+                </div>
 
-            <div class="type-card">
-              <h4>Bundle Optimization</h4>
-              <ul class="mb-0">
-                <li>Use grouped exports for logical component sets instead of importing everything</li>
-                <li>Configure vendor chunk splitting for better caching across deployments</li>
-                <li>Enable production minification with console.log removal</li>
-                <li>Set appropriate chunk size warning limits (500KB recommended)</li>
-                <li>Use path aliases to simplify imports and improve maintainability</li>
-              </ul>
-            </div>
+                <div class="type-card">
+                  <h4>CSS Performance</h4>
+                  <ul style="margin-bottom: 0;">
+                    <li>Use static CSS files for the simplest and fastest loading approach</li>
+                    <li>Split critical and non-critical CSS using async loading patterns</li>
+                    <li>Inline critical CSS including base64 fonts for immediate rendering</li>
+                    <li>Defer non-critical styles using <code>requestIdleCallback</code> or async link tags</li>
+                    <li>Always provide fallbacks for CSS loading failures</li>
+                  </ul>
+                </div>
 
-            <div class="type-card">
-              <h4>CSS Performance</h4>
-              <ul class="mb-0">
-                <li>Use static CSS files for the simplest and fastest loading approach</li>
-                <li>Split critical and non-critical CSS using async loading patterns</li>
-                <li>Inline critical CSS including base64 fonts for immediate rendering</li>
-                <li>Defer non-critical styles using <code>requestIdleCallback</code> or async link tags</li>
-                <li>Always provide fallbacks for CSS loading failures</li>
-              </ul>
-            </div>
+                <div class="type-card">
+                  <h4>Development Workflow</h4>
+                  <ul style="margin-bottom: 0;">
+                    <li>Use the bundle analyzer (<code>ANALYZE=true npm run build</code>) to identify optimization opportunities</li>
+                    <li>Monitor performance metrics in development to catch regressions early</li>
+                    <li>Test with network throttling to simulate real-world conditions</li>
+                    <li>Validate that tree-shaking is working correctly for unused components</li>
+                    <li>Keep component dependencies minimal to reduce bundle size</li>
+                  </ul>
+                </div>
 
-            <div class="type-card">
-              <h4>Development Workflow</h4>
-              <ul class="mb-0">
-                <li>Use the bundle analyzer (<code>ANALYZE=true npm run build</code>) to identify optimization opportunities</li>
-                <li>Monitor performance metrics in development to catch regressions early</li>
-                <li>Test with network throttling to simulate real-world conditions</li>
-                <li>Validate that tree-shaking is working correctly for unused components</li>
-                <li>Keep component dependencies minimal to reduce bundle size</li>
-              </ul>
-            </div>
-
-            <div class="alert alert-pro-tip mt-4">
-              <h5 class="alert-heading">Quick Start Template</h5>
-              <p>Copy this minimal setup for optimal performance out of the box:</p>
-              <pre><code class="language-javascript">// main.js - Minimal performance-optimized setup
+                <div class="alert-pro-tip" style="margin-top: 1.5rem;">
+                  <h5>Quick Start Template</h5>
+                  <p>Copy this minimal setup for optimal performance out of the box:</p>
+                  <pre><code class="language-javascript">// main.js - Minimal performance-optimized setup
 import './styles/critical.css';
 
 // Load structural components immediately
@@ -962,62 +995,68 @@ requestIdleCallback(() => {
   import('@universityofmaryland/web-components-library/interactive')
     .then(m => m.LoadInteractiveComponents());
 }, { timeout: 2000 });</code></pre>
+                </div>
+              </section>
+
+              <!-- Related Resources -->
+              <div style="margin-top: 3rem;">
+                <h3 class="umd-sans-larger">Related Resources</h3>
+                <div class="umd-layout-grid-gap-three">
+                  <umd-element-card data-visual-bordered="true">
+                    <h3 slot="headline"><a href="index.html">Components API Reference</a></h3>
+                    <p slot="text">Complete API documentation for all component exports.</p>
+                    <umd-element-call-to-action slot="actions" data-display="secondary">
+                      <a href="index.html">View API</a>
+                    </umd-element-call-to-action>
+                  </umd-element-card>
+                  <umd-element-card data-visual-bordered="true">
+                    <h3 slot="headline"><a href="../styles/static-css.html">Static CSS Guide</a></h3>
+                    <p slot="text">Pre-compiled CSS files for zero-JavaScript styling.</p>
+                    <umd-element-call-to-action slot="actions" data-display="secondary">
+                      <a href="../styles/static-css.html">View Guide</a>
+                    </umd-element-call-to-action>
+                  </umd-element-card>
+                  <umd-element-card data-visual-bordered="true">
+                    <h3 slot="headline"><a href="advanced-usage.html">Advanced Usage</a></h3>
+                    <p slot="text">TypeScript integration and custom components.</p>
+                    <umd-element-call-to-action slot="actions" data-display="secondary">
+                      <a href="advanced-usage.html">View Guide</a>
+                    </umd-element-call-to-action>
+                  </umd-element-card>
+                </div>
+              </div>
             </div>
-          </section>
-
-          <!-- Next Steps -->
-          <div class="mt-5">
-            <h3>Related Documentation</h3>
-            <ul>
-              <li>
-                <a href="../styles/static-css.html">Static CSS Guide</a> - Complete reference for pre-compiled CSS files
-              </li>
-              <li>
-                <a href="advanced-usage.html">Advanced Component Usage</a> - TypeScript integration and custom components
-              </li>
-              <li>
-                <a href="https://github.com/UMD-Digital/design-system/tree/main/design-system-ui">
-                  Example Implementation
-                </a> - Production-ready reference implementation
-              </li>
-              <li>
-                <a href="https://vitejs.dev/config/">Vite Configuration Reference</a> - Full Vite configuration options
-              </li>
-              <li>
-                <a href="https://web.dev/metrics/">Web Vitals</a> - Core Web Vitals performance metrics
-              </li>
-            </ul>
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
 
-    <footer class="bg-dark text-light py-4 mt-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <h6>UMD Design System</h6>
-            <p class="small text-muted">9 composable packages for consistent, accessible UMD digital experiences.</p>
-          </div>
-          <div class="col-md-4">
-            <h6>Resources</h6>
-            <ul class="list-unstyled small">
-              <li><a href="https://designsystem.umd.edu" class="text-muted">designsystem.umd.edu</a></li>
-              <li><a href="http://playground.designsystem.umd.edu" class="text-muted">Component Playground</a></li>
-              <li><a href="https://github.com/UMD-Digital/design-system" class="text-muted">GitHub</a></li>
-            </ul>
-          </div>
-          <div class="col-md-4">
-            <h6>npm Packages</h6>
-            <ul class="list-unstyled small">
-              <li><a href="https://www.npmjs.com/org/universityofmaryland" class="text-muted">@universityofmaryland on npm</a></li>
-            </ul>
-          </div>
-        </div>
-        <hr class="my-3 border-secondary">
-        <p class="text-center text-muted small mb-0">&copy; University of Maryland. All rights reserved. | <a href="https://umd.edu" class="text-muted">umd.edu</a> | <a href="https://brand.umd.edu" class="text-muted">Brand Guidelines</a></p>
+    <umd-element-footer data-display="mega" data-theme="dark">
+      <div slot="link-column-one">
+        <h3>Developer Tools</h3>
+        <ul>
+          <li><a href="https://umd-digital.github.io/design-system/">TypeDoc API Reference</a></li>
+          <li><a href="https://www.npmjs.com/org/universityofmaryland">@universityofmaryland on npm</a></li>
+          <li><a href="https://github.com/UMD-Digital/design-system">GitHub Repository</a></li>
+        </ul>
       </div>
-    </footer>
+      <div slot="link-column-two">
+        <h3>Learning</h3>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started Guide</a></li>
+          <li><a href="../architecture.html">Architecture Overview</a></li>
+          <li><a href="http://playground.designsystem.umd.edu" target="_blank">Component Playground</a></li>
+        </ul>
+      </div>
+      <div slot="link-column-three">
+        <h3>UMD Links</h3>
+        <ul>
+          <li><a href="https://designsystem.umd.edu">designsystem.umd.edu</a></li>
+          <li><a href="https://brand.umd.edu">brand.umd.edu</a></li>
+          <li><a href="https://umd.edu">umd.edu</a></li>
+        </ul>
+      </div>
+    </umd-element-footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>

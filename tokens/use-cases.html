@@ -5,390 +5,384 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tokens Use Cases - UMD Design System</title>
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
+      href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/styles.min.css"
     />
+    <script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/cdn.js"></script>
     <link
       href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css"
       rel="stylesheet"
     />
     <style>
-      .header {
-        background-color: #e21833;
-        color: white;
-        padding: 2rem 0;
-      }
-      pre[class*="language-"] {
-        background-color: #f8f9fa;
-        border-radius: 4px;
-        padding: 1rem;
-        overflow-x: auto;
-      }
-      code {
-        color: #e83e8c;
-      }
-      .use-case-card {
-        border: 1px solid #dee2e6;
-        border-radius: 8px;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-        background-color: #fff;
-      }
-      .use-case-card h4 {
-        color: #e21833;
-        margin-bottom: 1rem;
-      }
-      .token-table {
-        width: 100%;
-        margin: 1rem 0;
-      }
-      .token-table th {
-        background-color: #f8f9fa;
-        padding: 0.75rem;
-        text-align: left;
-        border-bottom: 2px solid #dee2e6;
-      }
-      .token-table td {
-        padding: 0.75rem;
-        border-bottom: 1px solid #dee2e6;
-      }
-      .token-table code {
-        background-color: #f8f9fa;
-        padding: 0.2rem 0.4rem;
-        border-radius: 3px;
-      }
-      .color-swatch {
-        display: inline-block;
-        width: 20px;
-        height: 20px;
-        border-radius: 3px;
-        vertical-align: middle;
-        margin-right: 0.5rem;
-        border: 1px solid #dee2e6;
-      }
-      .cm-callout {
-        background-color: #fff3cd;
-        border-left: 4px solid #ffc107;
-        padding: 1rem 1.5rem;
-        border-radius: 0 8px 8px 0;
-        margin: 2rem 0;
-      }
+      pre[class*="language-"] { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+      pre { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; }
+      code { color: #e21833; }
+      pre code { color: inherit; }
+      table { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; }
+      th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
+      td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
+      td code, th code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
+      .code-example { background-color: #fff; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
+      .use-case-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 1.5rem; margin-bottom: 2.5rem; background-color: #fff; }
+      .use-case-card h4 { color: #e21833; margin-bottom: 1rem; }
+      .use-case-card ul { padding-left: 1.5rem; }
+      .token-table { width: 100%; margin: 1rem 0; }
+      .token-table th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
+      .token-table td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
+      .token-table code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
+      .color-swatch { display: inline-block; width: 20px; height: 20px; border-radius: 3px; vertical-align: middle; margin-right: 0.5rem; border: 1px solid #dee2e6; }
+      h3 { margin-top: 3rem; margin-bottom: 1rem; }
+      h5 { font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+      section > h3:first-child, .use-case-card > h4:first-child { margin-top: 0; }
     </style>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #e21833;">
-      <div class="container">
-        <a class="navbar-brand fw-bold" href="../index.html">UMD Design System</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="mainNav">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="../architecture.html">Architecture</a></li>
-            <li class="nav-item"><a class="nav-link" href="../getting-started.html">Getting Started</a></li>
-          </ul>
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Packages</a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="../components/usage.html">Components</a></li>
-                <li><a class="dropdown-item" href="../styles/static-css.html">Styles</a></li>
-                <li><a class="dropdown-item" href="../feeds/use-cases.html">Feeds</a></li>
-                <li><a class="dropdown-item" href="../elements/use-cases.html">Elements</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item active" href="../tokens/use-cases.html">Tokens</a></li>
-                <li><a class="dropdown-item" href="../icons/use-cases.html">Icons</a></li>
-                <li><a class="dropdown-item" href="../utilities/use-cases.html">Utilities</a></li>
-                <li><a class="dropdown-item" href="../infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
-              </ul>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="http://playground.designsystem.umd.edu" target="_blank">Playground</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <header class="header">
-      <div class="container">
-        <h1>Tokens Use Cases</h1>
-        <p class="lead">Design token reference and usage patterns</p>
+    <header>
+      <div class="umd-layout-space-horizontal-full">
+        <umd-element-navigation-header sticky>
+          <a slot="logo" href="../index.html">
+            <span class="umd-sans-larger-bold">Design System Docs</span>
+          </a>
+          <div slot="main-navigation">
+            <umd-element-nav-item>
+              <a slot="primary-link" href="../index.html">Home</a>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="../architecture.html">Architecture</a>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="../getting-started.html">Getting Started</a>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="#">Packages</a>
+              <nav slot="dropdown-links">
+                <ul>
+                  <li><a href="../components/usage.html">Components</a></li>
+                  <li><a href="../styles/static-css.html">Styles</a></li>
+                  <li><a href="../elements/use-cases.html">Elements</a></li>
+                  <li><a href="../feeds/use-cases.html">Feeds</a></li>
+                  <li><a href="../tokens/use-cases.html">Tokens</a></li>
+                  <li><a href="../icons/use-cases.html">Icons</a></li>
+                  <li><a href="../utilities/use-cases.html">Utilities</a></li>
+                  <li><a href="../infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
+                </ul>
+              </nav>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="http://playground.designsystem.umd.edu" target="_blank">Playground</a>
+            </umd-element-nav-item>
+          </div>
+          <div slot="primary-slide-links">
+            <a href="../index.html"><span>Home</span></a>
+            <a href="../architecture.html"><span>Architecture</span></a>
+            <a href="../getting-started.html"><span>Getting Started</span></a>
+            <a href="#" data-child-ref="slide-packages"><span>Packages</span></a>
+            <a href="http://playground.designsystem.umd.edu" target="_blank"><span>Playground</span></a>
+          </div>
+          <div slot="children-slides">
+            <div data-parent-ref="slide-packages">
+              <a href="../components/usage.html"><span>Components</span></a>
+              <a href="../styles/static-css.html"><span>Styles</span></a>
+              <a href="../elements/use-cases.html"><span>Elements</span></a>
+              <a href="../feeds/use-cases.html"><span>Feeds</span></a>
+              <a href="../tokens/use-cases.html"><span>Tokens</span></a>
+              <a href="../icons/use-cases.html"><span>Icons</span></a>
+              <a href="../utilities/use-cases.html"><span>Utilities</span></a>
+              <a href="../infrastructure/model-and-builder.html"><span>Model &amp; Builder</span></a>
+            </div>
+          </div>
+        </umd-element-navigation-header>
       </div>
     </header>
 
-    <div class="container py-5">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
-          <li class="breadcrumb-item">Tokens</li>
-          <li class="breadcrumb-item active">Use Cases</li>
-        </ol>
-      </nav>
-
-      <div style="background-color: #f0f4ff; border-left: 4px solid #4a90d9; padding: 1rem 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
-        <strong>Where This Package Fits:</strong> Tokens sits in the <strong>Foundation</strong> layer. It has no dependencies and provides raw design values used by <strong>Styles</strong>, <strong>Utilities</strong>, and <strong>Elements</strong>.
-        <a href="../architecture.html">See full architecture</a>.
+    <div class="umd-layout-space-vertical-landing">
+      <umd-element-hero-minimal data-theme="light">
+        <h1 slot="headline">Tokens Use Cases</h1>
+        <div slot="text"><p>Design token reference and usage patterns</p></div>
+      </umd-element-hero-minimal>
+      <div class="umd-layout-space-horizontal-larger umd-lock">
+        <umd-element-breadcrumb>
+          <div slot="paths">
+            <a href="../index.html">Home</a>
+            <p>Tokens Use Cases</p>
+          </div>
+        </umd-element-breadcrumb>
       </div>
+    </div>
 
-      <!-- Section 1: Token Reference Tables -->
-      <div class="use-case-card">
-        <h4>1. Token Reference</h4>
+    <main>
+      <section class="umd-layout-space-vertical-landing">
+        <div class="umd-layout-space-horizontal-normal">
 
-        <h5>Colors</h5>
-        <table class="token-table">
-          <thead>
-            <tr>
-              <th>Token</th>
-              <th>Value</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><span class="color-swatch" style="background-color: #e21833;"></span><code>color.red</code></td>
-              <td><code>#e21833</code></td>
-              <td>UMD primary red</td>
-            </tr>
-            <tr>
-              <td><span class="color-swatch" style="background-color: #ffd200;"></span><code>color.gold</code></td>
-              <td><code>#ffd200</code></td>
-              <td>UMD secondary gold</td>
-            </tr>
-            <tr>
-              <td><span class="color-swatch" style="background-color: #000000;"></span><code>color.black</code></td>
-              <td><code>#000000</code></td>
-              <td>Black</td>
-            </tr>
-            <tr>
-              <td><span class="color-swatch" style="background-color: #ffffff;"></span><code>color.white</code></td>
-              <td><code>#ffffff</code></td>
-              <td>White</td>
-            </tr>
-            <tr>
-              <td><span class="color-swatch" style="background-color: #f1f1f1;"></span><code>color.grayLighter</code></td>
-              <td><code>#f1f1f1</code></td>
-              <td>Gray -- lighter</td>
-            </tr>
-            <tr>
-              <td><span class="color-swatch" style="background-color: #e6e6e6;"></span><code>color.grayLight</code></td>
-              <td><code>#e6e6e6</code></td>
-              <td>Gray -- light</td>
-            </tr>
-            <tr>
-              <td><span class="color-swatch" style="background-color: #757575;"></span><code>color.grayMedium</code></td>
-              <td><code>#757575</code></td>
-              <td>Gray -- medium</td>
-            </tr>
-            <tr>
-              <td><span class="color-swatch" style="background-color: #454545;"></span><code>color.grayDark</code></td>
-              <td><code>#454545</code></td>
-              <td>Gray -- dark</td>
-            </tr>
-            <tr>
-              <td><span class="color-swatch" style="background-color: #242424;"></span><code>color.grayDarker</code></td>
-              <td><code>#242424</code></td>
-              <td>Gray -- darker</td>
-            </tr>
-            <tr>
-              <td><span class="color-swatch" style="background-color: #0072ce;"></span><code>color.blue</code></td>
-              <td><code>#0072ce</code></td>
-              <td>Blue</td>
-            </tr>
-            <tr>
-              <td><span class="color-swatch" style="background-color: #008000;"></span><code>color.green</code></td>
-              <td><code>#008000</code></td>
-              <td>Green</td>
-            </tr>
-            <tr>
-              <td><span class="color-swatch" style="background-color: #a51c30;"></span><code>color.redDark</code></td>
-              <td><code>#a51c30</code></td>
-              <td>Red -- dark</td>
-            </tr>
-          </tbody>
-        </table>
+          <section id="getting-started">
+            <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
+              <h2 slot="headline">Getting Started</h2>
+              <div slot="text"><p>
+                <strong>Where This Package Fits:</strong> Tokens sits in the <strong>Foundation</strong> layer. It has no dependencies and provides raw design values used by <strong>Styles</strong>, <strong>Utilities</strong>, and <strong>Elements</strong>.
+                <a href="../architecture.html">See full architecture</a>.
+              </p></div>
+            </umd-element-section-intro>
+          </section>
 
-        <h5 class="mt-4">Spacing Scale</h5>
-        <table class="token-table">
-          <thead>
-            <tr>
-              <th>Token</th>
-              <th>Value</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>spacing.min</code></td>
-              <td><code>4px</code></td>
-              <td>Minimum spacing</td>
-            </tr>
-            <tr>
-              <td><code>spacing.xs</code></td>
-              <td><code>8px</code></td>
-              <td>Extra small</td>
-            </tr>
-            <tr>
-              <td><code>spacing.sm</code></td>
-              <td><code>16px</code></td>
-              <td>Small</td>
-            </tr>
-            <tr>
-              <td><code>spacing.md</code></td>
-              <td><code>24px</code></td>
-              <td>Medium</td>
-            </tr>
-            <tr>
-              <td><code>spacing.lg</code></td>
-              <td><code>32px</code></td>
-              <td>Large</td>
-            </tr>
-            <tr>
-              <td><code>spacing.xl</code></td>
-              <td><code>48px</code></td>
-              <td>Extra large</td>
-            </tr>
-            <tr>
-              <td><code>spacing.2xl</code></td>
-              <td><code>64px</code></td>
-              <td>2x large</td>
-            </tr>
-            <tr>
-              <td><code>spacing.3xl</code></td>
-              <td><code>80px</code></td>
-              <td>3x large</td>
-            </tr>
-            <tr>
-              <td><code>spacing.4xl</code></td>
-              <td><code>96px</code></td>
-              <td>4x large</td>
-            </tr>
-            <tr>
-              <td><code>spacing.max</code></td>
-              <td><code>120px</code></td>
-              <td>Maximum spacing</td>
-            </tr>
-          </tbody>
-        </table>
+          <!-- Section 1: Token Reference Tables -->
+          <div class="use-case-card">
+            <h4>1. Token Reference</h4>
 
-        <h5 class="mt-4">Typography</h5>
-        <table class="token-table">
-          <thead>
-            <tr>
-              <th>Token</th>
-              <th>Value</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>font.family.sans</code></td>
-              <td>Interstate</td>
-              <td>Primary sans-serif family</td>
-            </tr>
-            <tr>
-              <td><code>font.family.serif</code></td>
-              <td>Crimson Pro</td>
-              <td>Serif family</td>
-            </tr>
-            <tr>
-              <td><code>font.family.campaign</code></td>
-              <td>Barlow Condensed</td>
-              <td>Campaign / display family</td>
-            </tr>
-            <tr>
-              <td><code>font.size.xs</code> -- <code>font.size.6xl</code></td>
-              <td>Responsive scale</td>
-              <td>Size tokens from extra-small to 6x-large</td>
-            </tr>
-            <tr>
-              <td><code>font.weight.light</code></td>
-              <td><code>300</code></td>
-              <td>Light weight</td>
-            </tr>
-            <tr>
-              <td><code>font.weight.regular</code></td>
-              <td><code>400</code></td>
-              <td>Regular weight</td>
-            </tr>
-            <tr>
-              <td><code>font.weight.semiBold</code></td>
-              <td><code>600</code></td>
-              <td>Semi-bold weight</td>
-            </tr>
-            <tr>
-              <td><code>font.weight.bold</code></td>
-              <td><code>700</code></td>
-              <td>Bold weight</td>
-            </tr>
-            <tr>
-              <td><code>font.weight.extraBold</code></td>
-              <td><code>800</code></td>
-              <td>Extra-bold weight</td>
-            </tr>
-          </tbody>
-        </table>
+            <h5 class="umd-sans-medium">Colors</h5>
+            <table class="token-table">
+              <thead>
+                <tr>
+                  <th>Token</th>
+                  <th>Value</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><span class="color-swatch" style="background-color: #e21833;"></span><code>color.red</code></td>
+                  <td><code>#e21833</code></td>
+                  <td>UMD primary red</td>
+                </tr>
+                <tr>
+                  <td><span class="color-swatch" style="background-color: #ffd200;"></span><code>color.gold</code></td>
+                  <td><code>#ffd200</code></td>
+                  <td>UMD secondary gold</td>
+                </tr>
+                <tr>
+                  <td><span class="color-swatch" style="background-color: #000000;"></span><code>color.black</code></td>
+                  <td><code>#000000</code></td>
+                  <td>Black</td>
+                </tr>
+                <tr>
+                  <td><span class="color-swatch" style="background-color: #ffffff;"></span><code>color.white</code></td>
+                  <td><code>#ffffff</code></td>
+                  <td>White</td>
+                </tr>
+                <tr>
+                  <td><span class="color-swatch" style="background-color: #f1f1f1;"></span><code>color.grayLighter</code></td>
+                  <td><code>#f1f1f1</code></td>
+                  <td>Gray -- lighter</td>
+                </tr>
+                <tr>
+                  <td><span class="color-swatch" style="background-color: #e6e6e6;"></span><code>color.grayLight</code></td>
+                  <td><code>#e6e6e6</code></td>
+                  <td>Gray -- light</td>
+                </tr>
+                <tr>
+                  <td><span class="color-swatch" style="background-color: #757575;"></span><code>color.grayMedium</code></td>
+                  <td><code>#757575</code></td>
+                  <td>Gray -- medium</td>
+                </tr>
+                <tr>
+                  <td><span class="color-swatch" style="background-color: #454545;"></span><code>color.grayDark</code></td>
+                  <td><code>#454545</code></td>
+                  <td>Gray -- dark</td>
+                </tr>
+                <tr>
+                  <td><span class="color-swatch" style="background-color: #242424;"></span><code>color.grayDarker</code></td>
+                  <td><code>#242424</code></td>
+                  <td>Gray -- darker</td>
+                </tr>
+                <tr>
+                  <td><span class="color-swatch" style="background-color: #0072ce;"></span><code>color.blue</code></td>
+                  <td><code>#0072ce</code></td>
+                  <td>Blue</td>
+                </tr>
+                <tr>
+                  <td><span class="color-swatch" style="background-color: #008000;"></span><code>color.green</code></td>
+                  <td><code>#008000</code></td>
+                  <td>Green</td>
+                </tr>
+                <tr>
+                  <td><span class="color-swatch" style="background-color: #a51c30;"></span><code>color.redDark</code></td>
+                  <td><code>#a51c30</code></td>
+                  <td>Red -- dark</td>
+                </tr>
+              </tbody>
+            </table>
 
-        <h5 class="mt-4">Media Breakpoints</h5>
-        <table class="token-table">
-          <thead>
-            <tr>
-              <th>Breakpoint</th>
-              <th>Range</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>media.mobile</code></td>
-              <td><code>0 -- 767px</code></td>
-              <td>Mobile devices</td>
-            </tr>
-            <tr>
-              <td><code>media.tablet</code></td>
-              <td><code>768px -- 1023px</code></td>
-              <td>Tablet devices</td>
-            </tr>
-            <tr>
-              <td><code>media.desktop</code></td>
-              <td><code>1024px+</code></td>
-              <td>Desktop screens</td>
-            </tr>
-            <tr>
-              <td><code>media.highDef</code></td>
-              <td><code>1200px+</code></td>
-              <td>High-definition screens</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+            <h5 class="umd-sans-medium">Spacing Scale</h5>
+            <table class="token-table">
+              <thead>
+                <tr>
+                  <th>Token</th>
+                  <th>Value</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>spacing.min</code></td>
+                  <td><code>4px</code></td>
+                  <td>Minimum spacing</td>
+                </tr>
+                <tr>
+                  <td><code>spacing.xs</code></td>
+                  <td><code>8px</code></td>
+                  <td>Extra small</td>
+                </tr>
+                <tr>
+                  <td><code>spacing.sm</code></td>
+                  <td><code>16px</code></td>
+                  <td>Small</td>
+                </tr>
+                <tr>
+                  <td><code>spacing.md</code></td>
+                  <td><code>24px</code></td>
+                  <td>Medium</td>
+                </tr>
+                <tr>
+                  <td><code>spacing.lg</code></td>
+                  <td><code>32px</code></td>
+                  <td>Large</td>
+                </tr>
+                <tr>
+                  <td><code>spacing.xl</code></td>
+                  <td><code>48px</code></td>
+                  <td>Extra large</td>
+                </tr>
+                <tr>
+                  <td><code>spacing.2xl</code></td>
+                  <td><code>64px</code></td>
+                  <td>2x large</td>
+                </tr>
+                <tr>
+                  <td><code>spacing.3xl</code></td>
+                  <td><code>80px</code></td>
+                  <td>3x large</td>
+                </tr>
+                <tr>
+                  <td><code>spacing.4xl</code></td>
+                  <td><code>96px</code></td>
+                  <td>4x large</td>
+                </tr>
+                <tr>
+                  <td><code>spacing.max</code></td>
+                  <td><code>120px</code></td>
+                  <td>Maximum spacing</td>
+                </tr>
+              </tbody>
+            </table>
 
-      <!-- Section 2: Usage Patterns -->
-      <div class="use-case-card">
-        <h4>2. Usage Patterns</h4>
+            <h5 class="umd-sans-medium">Typography</h5>
+            <table class="token-table">
+              <thead>
+                <tr>
+                  <th>Token</th>
+                  <th>Value</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>font.family.sans</code></td>
+                  <td>Interstate</td>
+                  <td>Primary sans-serif family</td>
+                </tr>
+                <tr>
+                  <td><code>font.family.serif</code></td>
+                  <td>Crimson Pro</td>
+                  <td>Serif family</td>
+                </tr>
+                <tr>
+                  <td><code>font.family.campaign</code></td>
+                  <td>Barlow Condensed</td>
+                  <td>Campaign / display family</td>
+                </tr>
+                <tr>
+                  <td><code>font.size.xs</code> -- <code>font.size.6xl</code></td>
+                  <td>Responsive scale</td>
+                  <td>Size tokens from extra-small to 6x-large</td>
+                </tr>
+                <tr>
+                  <td><code>font.weight.light</code></td>
+                  <td><code>300</code></td>
+                  <td>Light weight</td>
+                </tr>
+                <tr>
+                  <td><code>font.weight.regular</code></td>
+                  <td><code>400</code></td>
+                  <td>Regular weight</td>
+                </tr>
+                <tr>
+                  <td><code>font.weight.semiBold</code></td>
+                  <td><code>600</code></td>
+                  <td>Semi-bold weight</td>
+                </tr>
+                <tr>
+                  <td><code>font.weight.bold</code></td>
+                  <td><code>700</code></td>
+                  <td>Bold weight</td>
+                </tr>
+                <tr>
+                  <td><code>font.weight.extraBold</code></td>
+                  <td><code>800</code></td>
+                  <td>Extra-bold weight</td>
+                </tr>
+              </tbody>
+            </table>
 
-        <h5>Namespace Import (Recommended)</h5>
-        <pre><code class="language-typescript">import * as token from '@universityofmaryland/web-token-library';
+            <h5 class="umd-sans-medium">Media Breakpoints</h5>
+            <table class="token-table">
+              <thead>
+                <tr>
+                  <th>Breakpoint</th>
+                  <th>Range</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>media.mobile</code></td>
+                  <td><code>0 -- 767px</code></td>
+                  <td>Mobile devices</td>
+                </tr>
+                <tr>
+                  <td><code>media.tablet</code></td>
+                  <td><code>768px -- 1023px</code></td>
+                  <td>Tablet devices</td>
+                </tr>
+                <tr>
+                  <td><code>media.desktop</code></td>
+                  <td><code>1024px+</code></td>
+                  <td>Desktop screens</td>
+                </tr>
+                <tr>
+                  <td><code>media.highDef</code></td>
+                  <td><code>1200px+</code></td>
+                  <td>High-definition screens</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Section 2: Usage Patterns -->
+          <div class="use-case-card">
+            <h4>2. Usage Patterns</h4>
+
+            <h5 class="umd-sans-medium">Namespace Import (Recommended)</h5>
+            <pre><code class="language-typescript">import * as token from '@universityofmaryland/web-token-library';
 
 token.color.red;    // '#e21833'
 token.spacing.md;   // '24px'
 token.font.family.sans; // 'Interstate, ...'</code></pre>
 
-        <h5 class="mt-3">Named Imports</h5>
-        <pre><code class="language-typescript">import { color, spacing } from '@universityofmaryland/web-token-library';</code></pre>
+            <h5 class="umd-sans-medium">Named Imports</h5>
+            <pre><code class="language-typescript">import { color, spacing } from '@universityofmaryland/web-token-library';</code></pre>
 
-        <h5 class="mt-3">Category Imports</h5>
-        <pre><code class="language-typescript">import * as color from '@universityofmaryland/web-token-library/color';
+            <h5 class="umd-sans-medium">Category Imports</h5>
+            <pre><code class="language-typescript">import * as color from '@universityofmaryland/web-token-library/color';
 import * as font from '@universityofmaryland/web-token-library/font';
 import * as media from '@universityofmaryland/web-token-library/media';
 import * as spacing from '@universityofmaryland/web-token-library/spacing';</code></pre>
-      </div>
+          </div>
 
-      <!-- Section 3: Using Tokens in Custom CSS -->
-      <div class="use-case-card">
-        <h4>3. Using Tokens in Custom CSS</h4>
-        <p>After importing the generated <code>tokens.min.css</code> file, you can use design tokens as CSS custom properties:</p>
+          <!-- Section 3: Using Tokens in Custom CSS -->
+          <div class="use-case-card">
+            <h4>3. Using Tokens in Custom CSS</h4>
+            <p>After importing the generated <code>tokens.min.css</code> file, you can use design tokens as CSS custom properties:</p>
 
-        <pre><code class="language-css">/* After importing tokens.min.css */
+            <pre><code class="language-css">/* After importing tokens.min.css */
 .my-header {
   color: var(--umd-color-red);
   font-family: var(--umd-font-sans);
@@ -401,54 +395,74 @@ import * as spacing from '@universityofmaryland/web-token-library/spacing';</cod
   margin-bottom: var(--umd-space-md);
 }</code></pre>
 
-        <p class="mt-3">For more about the static CSS export pipeline, see the <a href="../styles/static-css.html">Styles static CSS guide</a>.</p>
-      </div>
+            <p>For more about the static CSS export pipeline, see the <a href="../styles/static-css.html">Styles static CSS guide</a>.</p>
+          </div>
 
-      <!-- Section 4: Content Manager Note -->
-      <div class="cm-callout">
-        <strong>Content Manager Note:</strong> Design token values are documented with visual examples at <a href="https://designsystem.umd.edu">designsystem.umd.edu</a>.
-      </div>
+          <!-- Section 4: Content Manager Note -->
+          <umd-element-alert-page>
+            <p slot="headline">Content Manager Note</p>
+            <p slot="text">Design token values are documented with visual examples at <a href="https://designsystem.umd.edu">designsystem.umd.edu</a>.</p>
+          </umd-element-alert-page>
 
-      <!-- Related Resources -->
-      <div class="mt-5">
-        <h3>Related Resources</h3>
+          <!-- Related Resources -->
+          <div style="margin-top: 3rem;">
+            <h3 class="umd-sans-larger">Related Resources</h3>
+            <div class="umd-layout-grid-gap-three">
+              <umd-element-card data-visual-bordered="true">
+                <h3 slot="headline"><a href="https://umd-digital.github.io/design-system/" target="_blank">TypeDoc API Reference</a></h3>
+                <p slot="text">Generated API documentation for all design system packages.</p>
+                <umd-element-call-to-action slot="actions" data-display="secondary">
+                  <a href="https://umd-digital.github.io/design-system/" target="_blank">View API</a>
+                </umd-element-call-to-action>
+              </umd-element-card>
+              <umd-element-card data-visual-bordered="true">
+                <h3 slot="headline"><a href="../styles/static-css.html">Static CSS Guide</a></h3>
+                <p slot="text">Use tokens as pre-compiled CSS custom properties.</p>
+                <umd-element-call-to-action slot="actions" data-display="secondary">
+                  <a href="../styles/static-css.html">View Guide</a>
+                </umd-element-call-to-action>
+              </umd-element-card>
+              <umd-element-card data-visual-bordered="true">
+                <h3 slot="headline"><a href="../styles/use-cases.html">Styles Use Cases</a></h3>
+                <p slot="text">See how tokens are applied in real-world styling patterns.</p>
+                <umd-element-call-to-action slot="actions" data-display="secondary">
+                  <a href="../styles/use-cases.html">View Use Cases</a>
+                </umd-element-call-to-action>
+              </umd-element-card>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </main>
+
+    <umd-element-footer data-display="mega" data-theme="dark">
+      <div slot="link-column-one">
+        <h3>Developer Tools</h3>
         <ul>
-          <li><a href="../architecture.html">System Architecture</a></li>
-          <li><a href="../styles/static-css.html">Styles Static CSS Guide</a></li>
-          <li><a href="../styles/use-cases.html">Styles Use Cases</a></li>
-          <li><a href="../utilities/use-cases.html">Utilities Use Cases</a></li>
+          <li><a href="https://umd-digital.github.io/design-system/">TypeDoc API Reference</a></li>
+          <li><a href="https://www.npmjs.com/org/universityofmaryland">@universityofmaryland on npm</a></li>
+          <li><a href="https://github.com/UMD-Digital/design-system">GitHub Repository</a></li>
         </ul>
       </div>
-    </div>
-
-    <footer class="bg-dark text-light py-4 mt-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <h6>UMD Design System</h6>
-            <p class="small text-muted">9 composable packages for consistent, accessible UMD digital experiences.</p>
-          </div>
-          <div class="col-md-4">
-            <h6>Resources</h6>
-            <ul class="list-unstyled small">
-              <li><a href="https://designsystem.umd.edu" class="text-muted">designsystem.umd.edu</a></li>
-              <li><a href="http://playground.designsystem.umd.edu" class="text-muted">Component Playground</a></li>
-              <li><a href="https://github.com/UMD-Digital/design-system" class="text-muted">GitHub</a></li>
-            </ul>
-          </div>
-          <div class="col-md-4">
-            <h6>npm Packages</h6>
-            <ul class="list-unstyled small">
-              <li><a href="https://www.npmjs.com/org/universityofmaryland" class="text-muted">@universityofmaryland on npm</a></li>
-            </ul>
-          </div>
-        </div>
-        <hr class="my-3 border-secondary">
-        <p class="text-center text-muted small mb-0">&copy; University of Maryland. All rights reserved. | <a href="https://umd.edu" class="text-muted">umd.edu</a> | <a href="https://brand.umd.edu" class="text-muted">Brand Guidelines</a></p>
+      <div slot="link-column-two">
+        <h3>Learning</h3>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started Guide</a></li>
+          <li><a href="../architecture.html">Architecture Overview</a></li>
+          <li><a href="http://playground.designsystem.umd.edu" target="_blank">Component Playground</a></li>
+        </ul>
       </div>
-    </footer>
+      <div slot="link-column-three">
+        <h3>UMD Links</h3>
+        <ul>
+          <li><a href="https://designsystem.umd.edu">designsystem.umd.edu</a></li>
+          <li><a href="https://brand.umd.edu">brand.umd.edu</a></li>
+          <li><a href="https://umd.edu">umd.edu</a></li>
+        </ul>
+      </div>
+    </umd-element-footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-typescript.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-css.min.js"></script>

@@ -5,51 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Model &amp; Builder - UMD Design System</title>
     <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
       rel="stylesheet"
+      href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/styles.min.css"
     />
+    <script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/cdn.js"></script>
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
       rel="stylesheet"
     />
     <style>
-      .header {
-        background-color: #e21833;
-        color: white;
-        padding: 2rem 0;
-      }
-      .nav-link {
-        color: #000;
-      }
-      .nav-link:hover {
-        color: #e21833;
-      }
-      .content-section {
-        background-color: #f8f9fa;
-        border-radius: 8px;
-        padding: 2rem;
-        margin-bottom: 2rem;
-      }
-      .code-example {
-        background-color: #ffffff;
-        border: 1px solid #dee2e6;
-        border-radius: 4px;
-        padding: 1rem;
-        margin: 1rem 0;
-      }
-      pre {
-        background-color: #f8f9fa;
-        border-radius: 4px;
-        padding: 1rem;
-        overflow-x: auto;
-        margin-bottom: 0;
-      }
-      code {
-        color: #e83e8c;
-      }
+      pre[class*="language-"] { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+      pre { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; }
+      code { color: #e21833; }
+      pre code { color: inherit; }
+      table { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; }
+      th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
+      td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
+      td code, th code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
+      .code-example { background-color: #fff; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
+      .use-case-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 1.5rem; margin-bottom: 2.5rem; background-color: #fff; }
+      .use-case-card h4 { color: #e21833; margin-bottom: 1rem; }
+      .use-case-card ul { padding-left: 1.5rem; }
       .toc {
         position: sticky;
-        top: 20px;
+        top: 80px;
         background-color: white;
         border-radius: 8px;
         padding: 1.5rem;
@@ -77,167 +56,191 @@
       .type-card code {
         color: #0066cc;
       }
-      .module-table {
-        width: 100%;
-        margin: 1rem 0;
+      .module-table { width: 100%; margin: 1rem 0; }
+      .module-table th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
+      .module-table td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
+      .module-table code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
+      .two-column-layout { display: grid; grid-template-columns: 250px 1fr; gap: 2rem; }
+      @media (max-width: 768px) {
+        .two-column-layout { grid-template-columns: 1fr; }
+        .toc { position: static; }
       }
-      .module-table th {
-        background-color: #f8f9fa;
-        padding: 0.75rem;
-        text-align: left;
-        border-bottom: 2px solid #dee2e6;
-      }
-      .module-table td {
-        padding: 0.75rem;
-        border-bottom: 1px solid #dee2e6;
-      }
-      .module-table code {
-        background-color: #f8f9fa;
-        padding: 0.2rem 0.4rem;
-        border-radius: 3px;
-      }
+      h3 { margin-top: 3rem; margin-bottom: 1rem; }
+      h5 { font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+      section > h3:first-child, .use-case-card > h4:first-child { margin-top: 0; }
     </style>
   </head>
-  <body data-bs-spy="scroll" data-bs-target="#toc" data-bs-offset="20">
-    <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #e21833;">
-      <div class="container">
-        <a class="navbar-brand fw-bold" href="../index.html">UMD Design System</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="mainNav">
-          <ul class="navbar-nav me-auto">
-            <li class="nav-item"><a class="nav-link" href="../index.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="../architecture.html">Architecture</a></li>
-            <li class="nav-item"><a class="nav-link" href="../getting-started.html">Getting Started</a></li>
-          </ul>
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Packages</a>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="../components/usage.html">Components</a></li>
-                <li><a class="dropdown-item" href="../styles/static-css.html">Styles</a></li>
-                <li><a class="dropdown-item" href="../feeds/use-cases.html">Feeds</a></li>
-                <li><a class="dropdown-item" href="../elements/use-cases.html">Elements</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="../tokens/use-cases.html">Tokens</a></li>
-                <li><a class="dropdown-item" href="../icons/use-cases.html">Icons</a></li>
-                <li><a class="dropdown-item" href="../utilities/use-cases.html">Utilities</a></li>
-                <li><a class="dropdown-item" href="../infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
-              </ul>
-            </li>
-            <li class="nav-item"><a class="nav-link" href="http://playground.designsystem.umd.edu" target="_blank">Playground</a></li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-
-    <header class="header">
-      <div class="container">
-        <h1>Model &amp; Builder</h1>
-        <p class="lead">Build custom web components with UMD patterns</p>
+  <body>
+    <header>
+      <div class="umd-layout-space-horizontal-full">
+        <umd-element-navigation-header sticky>
+          <a slot="logo" href="../index.html">
+            <span class="umd-sans-larger-bold">Design System Docs</span>
+          </a>
+          <div slot="main-navigation">
+            <umd-element-nav-item>
+              <a slot="primary-link" href="../index.html">Home</a>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="../architecture.html">Architecture</a>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="../getting-started.html">Getting Started</a>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="#">Packages</a>
+              <nav slot="dropdown-links">
+                <ul>
+                  <li><a href="../components/usage.html">Components</a></li>
+                  <li><a href="../styles/static-css.html">Styles</a></li>
+                  <li><a href="../elements/use-cases.html">Elements</a></li>
+                  <li><a href="../feeds/use-cases.html">Feeds</a></li>
+                  <li><a href="../tokens/use-cases.html">Tokens</a></li>
+                  <li><a href="../icons/use-cases.html">Icons</a></li>
+                  <li><a href="../utilities/use-cases.html">Utilities</a></li>
+                  <li><a href="../infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
+                </ul>
+              </nav>
+            </umd-element-nav-item>
+            <umd-element-nav-item>
+              <a slot="primary-link" href="http://playground.designsystem.umd.edu" target="_blank">Playground</a>
+            </umd-element-nav-item>
+          </div>
+          <div slot="primary-slide-links">
+            <a href="../index.html"><span>Home</span></a>
+            <a href="../architecture.html"><span>Architecture</span></a>
+            <a href="../getting-started.html"><span>Getting Started</span></a>
+            <a href="#" data-child-ref="slide-packages"><span>Packages</span></a>
+            <a href="http://playground.designsystem.umd.edu" target="_blank"><span>Playground</span></a>
+          </div>
+          <div slot="children-slides">
+            <div data-parent-ref="slide-packages">
+              <a href="../components/usage.html"><span>Components</span></a>
+              <a href="../styles/static-css.html"><span>Styles</span></a>
+              <a href="../elements/use-cases.html"><span>Elements</span></a>
+              <a href="../feeds/use-cases.html"><span>Feeds</span></a>
+              <a href="../tokens/use-cases.html"><span>Tokens</span></a>
+              <a href="../icons/use-cases.html"><span>Icons</span></a>
+              <a href="../utilities/use-cases.html"><span>Utilities</span></a>
+              <a href="../infrastructure/model-and-builder.html"><span>Model &amp; Builder</span></a>
+            </div>
+          </div>
+        </umd-element-navigation-header>
       </div>
     </header>
 
-    <div class="container py-5">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
-          <li class="breadcrumb-item">Infrastructure</li>
-          <li class="breadcrumb-item active">Model &amp; Builder</li>
-        </ol>
-      </nav>
-
-      <div style="background-color: #fff4e6; border-left: 4px solid #e8a838; padding: 1rem 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
-        <strong>Where These Packages Fit:</strong> Model and Builder sit in the <strong>Infrastructure</strong> layer. Model provides the web component lifecycle system. Builder provides fluent DOM construction. Together they power the Components package.
-        <a href="../architecture.html">See full architecture</a>.
+    <div class="umd-layout-space-vertical-interior">
+      <umd-element-hero-minimal data-theme="light">
+        <h1 slot="headline">Model &amp; Builder</h1>
+        <div slot="text"><p>Build custom web components with UMD patterns</p></div>
+      </umd-element-hero-minimal>
+      <div class="umd-layout-space-horizontal-larger umd-lock">
+        <umd-element-breadcrumb>
+          <div slot="paths">
+            <a href="../index.html">Home</a>
+            <p>Model &amp; Builder</p>
+          </div>
+        </umd-element-breadcrumb>
       </div>
+    </div>
 
-      <div class="row">
-        <!-- Table of Contents -->
-        <div class="col-md-3">
-          <nav id="toc" class="toc">
-            <h5>On This Page</h5>
-            <a class="toc-link" href="#when-to-use">When to Use</a>
-            <a class="toc-link" href="#model-overview">Model Overview</a>
-            <a class="toc-link" href="#custom-component">Custom Component</a>
-            <a class="toc-link" href="#builder-overview">Builder Overview</a>
-            <a class="toc-link" href="#builder-usage">Using ElementBuilder</a>
-            <a class="toc-link" href="#composing-styles">Composing with Styles</a>
-            <a class="toc-link" href="#integration">Integration</a>
-          </nav>
-        </div>
+    <main>
+      <section class="umd-layout-space-vertical-interior">
+        <div class="umd-layout-space-horizontal-normal">
 
-        <!-- Main Content -->
-        <div class="col-md-9">
-          <!-- When to Use -->
-          <section id="when-to-use" class="content-section">
-            <h2>When to Use</h2>
+          <div style="background-color: #fff4e6; border-left: 4px solid #e8a838; padding: 1rem 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
+            <strong>Where These Packages Fit:</strong> Model and Builder sit in the <strong>Infrastructure</strong> layer. Model provides the web component lifecycle system. Builder provides fluent DOM construction. Together they power the Components package.
+            <a href="../architecture.html">See full architecture</a>.
+          </div>
 
-            <h4>Model</h4>
-            <p>
-              <code>@universityofmaryland/web-model-library</code> -- Use when building custom web components that follow UMD patterns. Provides attribute parsing, slot management, registration, and lifecycle hooks.
-            </p>
-
-            <h4>Builder</h4>
-            <p>
-              <code>@universityofmaryland/web-builder-library</code> -- Use when constructing DOM elements with a fluent API. Provides <code>ElementBuilder</code> for building complex element trees with automatic style management.
-            </p>
-          </section>
-
-          <!-- Model Overview -->
-          <section id="model-overview" class="content-section">
-            <h2>Model Package Overview</h2>
-            <p>The model package exports 5 main modules:</p>
-
-            <div class="code-example">
-              <pre><code class="language-typescript">import { Attributes, Model, Register, Slots, Lifecycle } from '@universityofmaryland/web-model-library';</code></pre>
+          <div class="two-column-layout">
+            <!-- Table of Contents -->
+            <div>
+              <nav id="toc" class="toc">
+                <h5 class="umd-sans-medium">On This Page</h5>
+                <a class="toc-link" href="#when-to-use">When to Use</a>
+                <a class="toc-link" href="#model-overview">Model Overview</a>
+                <a class="toc-link" href="#custom-component">Custom Component</a>
+                <a class="toc-link" href="#builder-overview">Builder Overview</a>
+                <a class="toc-link" href="#builder-usage">Using ElementBuilder</a>
+                <a class="toc-link" href="#composing-styles">Composing with Styles</a>
+                <a class="toc-link" href="#integration">Integration</a>
+              </nav>
             </div>
 
-            <table class="module-table">
-              <thead>
-                <tr>
-                  <th>Module</th>
-                  <th>Purpose</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><code>Attributes</code></td>
-                  <td>Parse and validate HTML attributes (data-*, boolean, enum)</td>
-                </tr>
-                <tr>
-                  <td><code>Model</code></td>
-                  <td>Core web component model with Shadow DOM management</td>
-                </tr>
-                <tr>
-                  <td><code>Register</code></td>
-                  <td>Register custom elements with the browser</td>
-                </tr>
-                <tr>
-                  <td><code>Slots</code></td>
-                  <td>Manage slot content distribution and validation</td>
-                </tr>
-                <tr>
-                  <td><code>Lifecycle</code></td>
-                  <td>Connected/disconnected callbacks, attribute change handling</td>
-                </tr>
-              </tbody>
-            </table>
+            <!-- Main Content -->
+            <div>
+              <!-- When to Use -->
+              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+                <h2 slot="headline">When to Use</h2>
+              </umd-element-section-intro>
+              <section id="when-to-use" class="umd-layout-space-vertical-interior">
+                <h4 class="umd-sans-medium">Model</h4>
+                <p>
+                  <code>@universityofmaryland/web-model-library</code> -- Use when building custom web components that follow UMD patterns. Provides attribute parsing, slot management, registration, and lifecycle hooks.
+                </p>
 
-            <div class="type-card">
-              <strong>Types Exported:</strong>
-              <code>SlotProps</code>, <code>BaseProps</code>, <code>OptionalProps</code>, <code>SlotResult</code>
-            </div>
-          </section>
+                <h4 class="umd-sans-medium">Builder</h4>
+                <p>
+                  <code>@universityofmaryland/web-builder-library</code> -- Use when constructing DOM elements with a fluent API. Provides <code>ElementBuilder</code> for building complex element trees with automatic style management.
+                </p>
+              </section>
 
-          <!-- Custom Component -->
-          <section id="custom-component" class="content-section">
-            <h2>Building a Custom Web Component</h2>
-            <p>Full example showing how to create a custom component using the Model package:</p>
+              <!-- Model Overview -->
+              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+                <h2 slot="headline">Model Package Overview</h2>
+                <div slot="text"><p>The model package exports 5 main modules:</p></div>
+              </umd-element-section-intro>
+              <section id="model-overview" class="umd-layout-space-vertical-interior">
+                <div class="code-example">
+                  <pre><code class="language-typescript">import { Attributes, Model, Register, Slots, Lifecycle } from '@universityofmaryland/web-model-library';</code></pre>
+                </div>
 
-            <div class="code-example">
-              <pre><code class="language-typescript">import { Attributes, Model, Register, Slots, Lifecycle } from '@universityofmaryland/web-model-library';
+                <table class="module-table">
+                  <thead>
+                    <tr>
+                      <th>Module</th>
+                      <th>Purpose</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>Attributes</code></td>
+                      <td>Parse and validate HTML attributes (data-*, boolean, enum)</td>
+                    </tr>
+                    <tr>
+                      <td><code>Model</code></td>
+                      <td>Core web component model with Shadow DOM management</td>
+                    </tr>
+                    <tr>
+                      <td><code>Register</code></td>
+                      <td>Register custom elements with the browser</td>
+                    </tr>
+                    <tr>
+                      <td><code>Slots</code></td>
+                      <td>Manage slot content distribution and validation</td>
+                    </tr>
+                    <tr>
+                      <td><code>Lifecycle</code></td>
+                      <td>Connected/disconnected callbacks, attribute change handling</td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <div class="type-card">
+                  <strong>Types Exported:</strong>
+                  <code>SlotProps</code>, <code>BaseProps</code>, <code>OptionalProps</code>, <code>SlotResult</code>
+                </div>
+              </section>
+
+              <!-- Custom Component -->
+              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+                <h2 slot="headline">Building a Custom Web Component</h2>
+                <div slot="text"><p>Full example showing how to create a custom component using the Model package:</p></div>
+              </umd-element-section-intro>
+              <section id="custom-component" class="umd-layout-space-vertical-interior">
+                <div class="code-example">
+                  <pre><code class="language-typescript">import { Attributes, Model, Register, Slots, Lifecycle } from '@universityofmaryland/web-model-library';
 import { Composite } from '@universityofmaryland/web-elements-library/composite';
 
 const ELEMENT_TAG = 'umd-custom-feature-card';
@@ -282,37 +285,39 @@ const registration = () => {
 };
 
 export { registration };</code></pre>
-            </div>
+                </div>
 
-            <h3>Usage in HTML</h3>
-            <div class="code-example">
-              <pre><code class="language-html">&lt;umd-custom-feature-card data-theme="dark"&gt;
+                <h3 class="umd-sans-larger">Usage in HTML</h3>
+                <div class="code-example">
+                  <pre><code class="language-html">&lt;umd-custom-feature-card data-theme="dark"&gt;
   &lt;h2 slot="headline"&gt;Custom Feature&lt;/h2&gt;
   &lt;p slot="text"&gt;Built with the model and elements packages.&lt;/p&gt;
 &lt;/umd-custom-feature-card&gt;</code></pre>
-            </div>
-          </section>
+                </div>
+              </section>
 
-          <!-- Builder Overview -->
-          <section id="builder-overview" class="content-section">
-            <h2>Builder Package Overview</h2>
-            <p>The Builder package provides a fluent API for constructing DOM elements with automatic style management.</p>
+              <!-- Builder Overview -->
+              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+                <h2 slot="headline">Builder Package Overview</h2>
+                <div slot="text"><p>The Builder package provides a fluent API for constructing DOM elements with automatic style management.</p></div>
+              </umd-element-section-intro>
+              <section id="builder-overview" class="umd-layout-space-vertical-interior">
+                <div class="code-example">
+                  <pre><code class="language-typescript">import { ElementBuilder } from '@universityofmaryland/web-builder-library';</code></pre>
+                </div>
 
-            <div class="code-example">
-              <pre><code class="language-typescript">import { ElementBuilder } from '@universityofmaryland/web-builder-library';</code></pre>
-            </div>
+                <p>
+                  The <code>ElementBuilder</code> provides a chainable interface for creating DOM elements, attaching styles, nesting children, and producing the standard <code>{ element, styles }</code> result that the rest of the design system expects.
+                </p>
+              </section>
 
-            <p>
-              The <code>ElementBuilder</code> provides a chainable interface for creating DOM elements, attaching styles, nesting children, and producing the standard <code>{ element, styles }</code> result that the rest of the design system expects.
-            </p>
-          </section>
-
-          <!-- Builder Usage -->
-          <section id="builder-usage" class="content-section">
-            <h2>Using ElementBuilder</h2>
-
-            <div class="code-example">
-              <pre><code class="language-typescript">import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+              <!-- Builder Usage -->
+              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+                <h2 slot="headline">Using ElementBuilder</h2>
+              </umd-element-section-intro>
+              <section id="builder-usage" class="umd-layout-space-vertical-interior">
+                <div class="code-example">
+                  <pre><code class="language-typescript">import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 
 const card = new ElementBuilder('div')
   .withClassName('feature-card')
@@ -337,20 +342,21 @@ const card = new ElementBuilder('div')
       .withText('Card description goes here.')
   )
   .build(); // Returns { element, styles }</code></pre>
-            </div>
+                </div>
 
-            <div class="type-card">
-              <strong>Return Value:</strong> <code>build()</code> returns an <code>ElementModel</code> with <code>element</code> (HTMLElement) and <code>styles</code> (string) properties, matching the standard interface used throughout the design system.
-            </div>
-          </section>
+                <div class="type-card">
+                  <strong>Return Value:</strong> <code>build()</code> returns an <code>ElementModel</code> with <code>element</code> (HTMLElement) and <code>styles</code> (string) properties, matching the standard interface used throughout the design system.
+                </div>
+              </section>
 
-          <!-- Composing with Styles -->
-          <section id="composing-styles" class="content-section">
-            <h2>Composing with Styles</h2>
-            <p>Combine the Styles library tokens and utilities with the Builder for consistent theming:</p>
-
-            <div class="code-example">
-              <pre><code class="language-typescript">import * as Styles from '@universityofmaryland/web-styles-library';
+              <!-- Composing with Styles -->
+              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+                <h2 slot="headline">Composing with Styles</h2>
+                <div slot="text"><p>Combine the Styles library tokens and utilities with the Builder for consistent theming:</p></div>
+              </umd-element-section-intro>
+              <section id="composing-styles" class="umd-layout-space-vertical-interior">
+                <div class="code-example">
+                  <pre><code class="language-typescript">import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 
 // Use styles library tokens and utilities alongside builder
@@ -363,20 +369,21 @@ const styledElement = new ElementBuilder('section')
     }
   `)
   .build();</code></pre>
-            </div>
+                </div>
 
-            <p>
-              Because the Builder produces standard CSS strings, you can reference any token or utility from the Styles package directly inside template literals. This keeps your custom components visually aligned with the rest of the design system without hard-coding values.
-            </p>
-          </section>
+                <p>
+                  Because the Builder produces standard CSS strings, you can reference any token or utility from the Styles package directly inside template literals. This keeps your custom components visually aligned with the rest of the design system without hard-coding values.
+                </p>
+              </section>
 
-          <!-- Integration -->
-          <section id="integration" class="content-section">
-            <h2>Integration with Components</h2>
-            <p>Register custom components alongside official ones so they coexist on the same page:</p>
-
-            <div class="code-example">
-              <pre><code class="language-typescript">import { LoadStructuralComponents } from '@universityofmaryland/web-components-library/structural';
+              <!-- Integration -->
+              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
+                <h2 slot="headline">Integration with Components</h2>
+                <div slot="text"><p>Register custom components alongside official ones so they coexist on the same page:</p></div>
+              </umd-element-section-intro>
+              <section id="integration" class="umd-layout-space-vertical-interior">
+                <div class="code-example">
+                  <pre><code class="language-typescript">import { LoadStructuralComponents } from '@universityofmaryland/web-components-library/structural';
 import { registration as customFeatureCard } from './custom-feature-card';
 
 // Register official components
@@ -384,60 +391,78 @@ LoadStructuralComponents();
 
 // Register custom components
 customFeatureCard();</code></pre>
+                </div>
+
+                <p>
+                  Both official and custom components share the same Shadow DOM, slot, and attribute patterns provided by the Model package. This means your custom components will behave identically to the built-in ones -- same lifecycle, same style encapsulation, same attribute handling.
+                </p>
+
+                <div class="type-card">
+                  <strong>Next Steps:</strong> See <a href="../components/advanced-usage.html">Advanced Component Usage</a> for more patterns including TypeScript integration, event handling, and testing strategies.
+                </div>
+              </section>
+
+              <!-- Related Resources -->
+              <div style="margin-top: 3rem;">
+                <h3 class="umd-sans-larger">Related Resources</h3>
+                <div class="umd-layout-grid-gap-three">
+                  <umd-element-card data-visual-bordered="true">
+                    <h3 slot="headline"><a href="https://umd-digital.github.io/design-system/" target="_blank">TypeDoc API Reference</a></h3>
+                    <p slot="text">Generated API documentation for all design system packages.</p>
+                    <umd-element-call-to-action slot="actions" data-display="secondary">
+                      <a href="https://umd-digital.github.io/design-system/" target="_blank">View API</a>
+                    </umd-element-call-to-action>
+                  </umd-element-card>
+                  <umd-element-card data-visual-bordered="true">
+                    <h3 slot="headline"><a href="../components/advanced-usage.html">Advanced Component Usage</a></h3>
+                    <p slot="text">TypeScript integration, testing, and custom component patterns.</p>
+                    <umd-element-call-to-action slot="actions" data-display="secondary">
+                      <a href="../components/advanced-usage.html">View Guide</a>
+                    </umd-element-call-to-action>
+                  </umd-element-card>
+                  <umd-element-card data-visual-bordered="true">
+                    <h3 slot="headline"><a href="../elements/use-cases.html">Elements Use Cases</a></h3>
+                    <p slot="text">See how element builders leverage the model and builder packages.</p>
+                    <umd-element-call-to-action slot="actions" data-display="secondary">
+                      <a href="../elements/use-cases.html">View Use Cases</a>
+                    </umd-element-call-to-action>
+                  </umd-element-card>
+                </div>
+              </div>
             </div>
-
-            <p>
-              Both official and custom components share the same Shadow DOM, slot, and attribute patterns provided by the Model package. This means your custom components will behave identically to the built-in ones -- same lifecycle, same style encapsulation, same attribute handling.
-            </p>
-
-            <div class="type-card">
-              <strong>Next Steps:</strong> See <a href="../components/advanced-usage.html">Advanced Component Usage</a> for more patterns including TypeScript integration, event handling, and testing strategies.
-            </div>
-          </section>
-
-          <!-- Additional Resources -->
-          <div class="mt-5">
-            <h3>Additional Resources</h3>
-            <ul>
-              <li><a href="../components/advanced-usage.html">Advanced Component Usage</a></li>
-              <li><a href="../architecture.html">Architecture Overview</a></li>
-              <li><a href="https://github.com/UMD-Digital/design-system">GitHub Repository</a></li>
-              <li><a href="https://umd-digital.github.io/design-system/">TypeDoc API Reference</a></li>
-              <li><a href="http://playground.designsystem.umd.edu">Component Playground</a></li>
-            </ul>
           </div>
+
         </div>
-      </div>
-    </div>
+      </section>
+    </main>
 
-    <footer class="bg-dark text-light py-4 mt-5">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <h6>UMD Design System</h6>
-            <p class="small text-muted">9 composable packages for consistent, accessible UMD digital experiences.</p>
-          </div>
-          <div class="col-md-4">
-            <h6>Resources</h6>
-            <ul class="list-unstyled small">
-              <li><a href="https://designsystem.umd.edu" class="text-muted">designsystem.umd.edu</a></li>
-              <li><a href="http://playground.designsystem.umd.edu" class="text-muted">Component Playground</a></li>
-              <li><a href="https://github.com/UMD-Digital/design-system" class="text-muted">GitHub</a></li>
-            </ul>
-          </div>
-          <div class="col-md-4">
-            <h6>npm Packages</h6>
-            <ul class="list-unstyled small">
-              <li><a href="https://www.npmjs.com/org/universityofmaryland" class="text-muted">@universityofmaryland on npm</a></li>
-            </ul>
-          </div>
-        </div>
-        <hr class="my-3 border-secondary">
-        <p class="text-center text-muted small mb-0">&copy; University of Maryland. All rights reserved. | <a href="https://umd.edu" class="text-muted">umd.edu</a> | <a href="https://brand.umd.edu" class="text-muted">Brand Guidelines</a></p>
+    <umd-element-footer data-display="mega" data-theme="dark">
+      <div slot="link-column-one">
+        <h3>Developer Tools</h3>
+        <ul>
+          <li><a href="https://umd-digital.github.io/design-system/">TypeDoc API Reference</a></li>
+          <li><a href="https://www.npmjs.com/org/universityofmaryland">@universityofmaryland on npm</a></li>
+          <li><a href="https://github.com/UMD-Digital/design-system">GitHub Repository</a></li>
+        </ul>
       </div>
-    </footer>
+      <div slot="link-column-two">
+        <h3>Learning</h3>
+        <ul>
+          <li><a href="../getting-started.html">Getting Started Guide</a></li>
+          <li><a href="../architecture.html">Architecture Overview</a></li>
+          <li><a href="http://playground.designsystem.umd.edu" target="_blank">Component Playground</a></li>
+        </ul>
+      </div>
+      <div slot="link-column-three">
+        <h3>UMD Links</h3>
+        <ul>
+          <li><a href="https://designsystem.umd.edu">designsystem.umd.edu</a></li>
+          <li><a href="https://brand.umd.edu">brand.umd.edu</a></li>
+          <li><a href="https://umd.edu">umd.edu</a></li>
+        </ul>
+      </div>
+    </umd-element-footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>

@@ -137,6 +137,59 @@ describe('createImageOrLinkedImage', () => {
     });
   });
 
+  describe('openInNewTab parameter', () => {
+    it('should default to opening in new tab when not specified', () => {
+      const linkedImage = createImageOrLinkedImage({
+        imageUrl: '/images/photo.jpg',
+        altText: 'Photo',
+        linkUrl: '/profile',
+      });
+
+      expect((linkedImage as HTMLAnchorElement).getAttribute('target')).toBe('_blank');
+      expect((linkedImage as HTMLAnchorElement).getAttribute('rel')).toBe('noopener noreferrer');
+    });
+
+    it('should open in new tab when openInNewTab is true', () => {
+      const linkedImage = createImageOrLinkedImage({
+        imageUrl: '/images/photo.jpg',
+        altText: 'Photo',
+        linkUrl: '/profile',
+        openInNewTab: true,
+      });
+
+      expect((linkedImage as HTMLAnchorElement).getAttribute('target')).toBe('_blank');
+      expect((linkedImage as HTMLAnchorElement).getAttribute('rel')).toBe('noopener noreferrer');
+    });
+
+    it('should not set target or rel when openInNewTab is false', () => {
+      const linkedImage = createImageOrLinkedImage({
+        imageUrl: '/images/photo.jpg',
+        altText: 'Photo',
+        linkUrl: '/profile',
+        openInNewTab: false,
+      });
+
+      expect((linkedImage as HTMLAnchorElement).hasAttribute('target')).toBe(false);
+      expect((linkedImage as HTMLAnchorElement).hasAttribute('rel')).toBe(false);
+    });
+
+    it('should still create anchor with href and nested img when openInNewTab is false', () => {
+      const linkedImage = createImageOrLinkedImage({
+        imageUrl: '/images/photo.jpg',
+        altText: 'Photo',
+        linkUrl: '/profile',
+        openInNewTab: false,
+      });
+
+      expect(linkedImage.tagName).toBe('A');
+      expect((linkedImage as HTMLAnchorElement).getAttribute('href')).toBe('/profile');
+      const img = linkedImage.querySelector('img');
+      expect(img).not.toBeNull();
+      expect(img?.src).toContain('/images/photo.jpg');
+      expect(img?.alt).toBe('Photo');
+    });
+  });
+
   describe('edge cases', () => {
     it('should handle empty image URL', () => {
       const image = createImageOrLinkedImage({

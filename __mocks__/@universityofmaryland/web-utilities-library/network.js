@@ -1,6 +1,7 @@
 // Mock for @universityofmaryland/web-utilities-library/network
 
 module.exports = {
+  isExternalUrl: jest.fn().mockReturnValue(true),
   fetchGraphQL: jest.fn().mockImplementation(({ query }) => {
     // Check if this is a news query (contains 'getArticles' or 'section: "articles"')
     const isNewsQuery = query && (query.includes('getArticles') || query.includes('section: "articles"'));

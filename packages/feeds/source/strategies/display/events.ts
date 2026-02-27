@@ -14,6 +14,7 @@ import {
   createTextContainer,
   createImageOrLinkedImage,
 } from '@universityofmaryland/web-utilities-library/elements';
+import { isExternalUrl } from '@universityofmaryland/web-utilities-library/network';
 import { DisplayStrategy, CardMappingOptions } from '../../factory/core/types';
 import { ElementModel } from '../../_types';
 import { EventEntry } from 'types/data';
@@ -59,9 +60,7 @@ export const eventsDisplayStrategy: DisplayStrategy<EventEntry> = {
       cardType = 'block',
     } = options;
 
-    // Open in new tab by default; keep in same tab on calendar.umd.edu
-    const openInNewTab =
-      window.location.hostname !== 'calendar.umd.edu';
+    const openInNewTab = isExternalUrl(entry.url);
 
     const headline = createTextWithLink({
       text: entry.title,
@@ -86,7 +85,7 @@ export const eventsDisplayStrategy: DisplayStrategy<EventEntry> = {
     const imageData = imageConfig ? imageConfig(entry) : null;
     const image =
       imageData && imageData.imageUrl && imageData.altText
-        ? createImageOrLinkedImage(imageData)
+        ? createImageOrLinkedImage({ ...imageData, openInNewTab })
         : null;
 
     // Create date sign for list layout

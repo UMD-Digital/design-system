@@ -16,6 +16,7 @@ import {
   createTextContainer,
   createImageOrLinkedImage,
 } from '@universityofmaryland/web-utilities-library/elements';
+import { isExternalUrl } from '@universityofmaryland/web-utilities-library/network';
 import { LoadingState, PaginationState, EmptyState, Announcer } from 'states';
 import { eventsFetchStrategyRange } from 'strategies';
 import { type EventEntry } from 'types/data';
@@ -261,14 +262,15 @@ const createEventCard = (
   entry: EventEntry,
   isThemeDark: boolean,
 ): ElementModel => {
+  const openInNewTab = isExternalUrl(entry.url);
   const imageData = createImageConfig(entry);
   const image =
     imageData && imageData.imageUrl && imageData.altText
-      ? createImageOrLinkedImage(imageData)
+      ? createImageOrLinkedImage({ ...imageData, openInNewTab })
       : null;
 
   return card.list({
-    headline: createTextWithLink({ text: entry.title, url: entry.url }),
+    headline: createTextWithLink({ text: entry.title, url: entry.url, openInNewTab }),
     text: createTextContainer({ text: entry.summary, allowHTML: true }),
     dateSign: eventElements.sign({
       startMonth: entry.startMonth,

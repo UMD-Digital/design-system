@@ -4,7 +4,12 @@
  * @group strategies
  */
 
-import { eventsDisplayStrategy, EventType } from '../../../source/strategies/display/events';
+import { eventsDisplayStrategy } from '../../../source/strategies/display/events';
+import type { EventEntry } from '../../../source/types/data';
+import { isExternalUrl } from '@universityofmaryland/web-utilities-library/network';
+import { createTextWithLink, createImageOrLinkedImage } from '@universityofmaryland/web-utilities-library/elements';
+
+type EventType = EventEntry;
 
 describe('eventsDisplayStrategy', () => {
   const mockEvent: EventType = {
@@ -91,6 +96,54 @@ describe('eventsDisplayStrategy', () => {
       });
 
       expect(result.element).toBeInstanceOf(HTMLElement);
+    });
+  });
+
+  describe('link tab behavior', () => {
+    beforeEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('should call isExternalUrl with entry URL', () => {
+      eventsDisplayStrategy.mapEntryToCard(mockEvent, {});
+
+      expect(isExternalUrl).toHaveBeenCalledWith(mockEvent.url);
+    });
+
+    it('should pass openInNewTab false when isExternalUrl returns false', () => {
+      (isExternalUrl as jest.Mock).mockReturnValueOnce(false);
+
+      eventsDisplayStrategy.mapEntryToCard(mockEvent, {});
+
+      expect(createTextWithLink).toHaveBeenCalledWith(
+        expect.objectContaining({ openInNewTab: false }),
+      );
+    });
+
+    it('should pass openInNewTab true when isExternalUrl returns true', () => {
+      (isExternalUrl as jest.Mock).mockReturnValueOnce(true);
+
+      eventsDisplayStrategy.mapEntryToCard(mockEvent, {});
+
+      expect(createTextWithLink).toHaveBeenCalledWith(
+        expect.objectContaining({ openInNewTab: true }),
+      );
+    });
+
+    it('should pass openInNewTab to image config when provided', () => {
+      (isExternalUrl as jest.Mock).mockReturnValueOnce(false);
+
+      const imageConfig = jest.fn().mockReturnValue({
+        imageUrl: 'test.jpg',
+        altText: 'Test',
+        linkUrl: 'https://example.com',
+      });
+
+      eventsDisplayStrategy.mapEntryToCard(mockEvent, { imageConfig });
+
+      expect(createImageOrLinkedImage).toHaveBeenCalledWith(
+        expect.objectContaining({ openInNewTab: false }),
+      );
     });
   });
 });

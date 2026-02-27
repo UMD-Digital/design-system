@@ -1,6 +1,6 @@
 # @universityofmaryland/web-utilities-library
 
-[![Utilities Version](https://img.shields.io/badge/Utilities-v1.0.3-blue)](https://www.npmjs.com/package/@universityofmaryland/web-utilities-library)
+[![Utilities Version](https://img.shields.io/badge/Utilities-v1.0.4-blue)](https://www.npmjs.com/package/@universityofmaryland/web-utilities-library)
 
 Shared utility functions for the University of Maryland Design System, organized by category for optimal tree-shaking and selective imports. Includes utilities for DOM manipulation, accessibility, animations, date formatting, style processing, and more.
 

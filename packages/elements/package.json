@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-elements-library",
-  "version": "1.6.8",
+  "version": "1.6.9",
   "description": "UMD Web Elements",
   "type": "module",
   "main": "dist/index.js",

@@ -672,7 +672,7 @@ const CreateMenuItems = ({
   if (isGiftsFeed) {
     hasItems = true;
     const getURL = () => {
-      const defaultURL = 'https://giving.umd.edu/giving';
+      const defaultURL = 'https://giving.umd.edu';
 
       if (!giftUrl) return defaultURL;
 

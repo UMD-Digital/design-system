@@ -263,7 +263,7 @@ const isData = {
       ...props,
       attributeName: AttributeNames.feed.union,
       attributeValue: AttributeValues.state.TRUE,
-      defaultValue: false,
+      defaultValue: true,
     }),
 } as const;
 

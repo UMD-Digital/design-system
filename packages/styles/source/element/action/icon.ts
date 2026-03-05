@@ -36,6 +36,7 @@ const svgIcon = {
  */
 const baseIconSmall = {
   width: '28px',
+  minWidth: '28px',
   height: '28px',
   display: 'flex',
   color: `${color.black}`,

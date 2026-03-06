@@ -15,9 +15,6 @@
       pre { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; }
       code { color: #e21833; }
       pre code { color: inherit; }
-      table { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; }
-      th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
-      td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
       td code, th code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
       .code-example { background-color: #fff; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
       .use-case-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 1.5rem; margin-bottom: 2.5rem; background-color: #fff; }
@@ -47,22 +44,25 @@
         border-radius: 8px;
         margin-bottom: 2rem;
       }
-      .slot-table th {
-        background-color: #e21833;
-        color: white;
-        padding: 0.75rem 1rem;
-        border: 1px solid #dee2e6;
+      .docs-table-black-header thead th {
+        background-color: #000;
+        color: #fff;
       }
-      .slot-table td {
-        padding: 0.75rem 1rem;
-        border: 1px solid #dee2e6;
+      .docs-table-black-header th,
+      .docs-table-black-header td {
+        padding: 16px 12px;
       }
-      .slot-table {
-        background-color: white;
-        border-radius: 8px;
-        overflow: hidden;
-        margin: 1rem 0 2rem;
-        width: 100%;
+      @media (min-width: 768px) {
+        .docs-table-black-header th,
+        .docs-table-black-header td {
+          padding: 24px 20px;
+        }
+      }
+      @media (min-width: 1024px) {
+        .docs-table-black-header th,
+        .docs-table-black-header td {
+          padding: 32px 24px;
+        }
       }
       .content-manager-callout {
         background-color: #fff8e1;
@@ -194,7 +194,7 @@
             </div>
 
             <h4 class="umd-sans-medium">Hero Slot Reference</h4>
-            <table class="slot-table">
+            <table class="umd-table-inline docs-table-black-header">
               <thead>
                 <tr>
                   <th>Slot Name</th>
@@ -259,7 +259,7 @@
             </div>
 
             <h4 class="umd-sans-medium">Card Slot Reference</h4>
-            <table class="slot-table">
+            <table class="umd-table-inline docs-table-black-header">
               <thead>
                 <tr>
                   <th>Slot Name</th>
@@ -326,7 +326,7 @@
             </div>
 
             <h4 class="umd-sans-medium">Navigation Slot Reference</h4>
-            <table class="slot-table">
+            <table class="umd-table-inline docs-table-black-header">
               <thead>
                 <tr>
                   <th>Slot Name</th>

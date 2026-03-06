@@ -52,7 +52,7 @@ jobs:
           pnpm run styles:docs
           pnpm run model:docs
           pnpm run elements:docs
-          pnpm run feed:docs
+          pnpm run feeds:docs
           pnpm run components:docs
 
       - name: Remove .gitignore files from docs subdirectories

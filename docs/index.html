@@ -9,28 +9,22 @@
       href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/styles.min.css"
     />
     <script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/cdn.js"></script>
+    <link rel="stylesheet" href="assets/styles/docs.css" />
     <style>
-      .tier-foundation {
-        background-color: #e3f2fd;
-        border: 1px solid #90caf9;
-        border-radius: 8px;
-        padding: 1.5rem;
-        margin-bottom: 1rem;
+      .tier-box {
+        background-color: #FAFAFA;
+        border: 1px solid #F1F1F1;
+        border-top: 3px solid transparent;
+        border-radius: 2px;
+        padding: 1.5rem 2.5rem;
+        margin-bottom: 2em;
       }
-      .tier-infrastructure {
-        background-color: #fff9c4;
-        border: 1px solid #fff176;
-        border-radius: 8px;
-        padding: 1.5rem;
-        margin-bottom: 1rem;
-      }
-      .tier-application {
-        background-color: #e8f5e9;
-        border: 1px solid #a5d6a7;
-        border-radius: 8px;
-        padding: 1.5rem;
-        margin-bottom: 1rem;
-      }
+      .tier-box[data-tier="application"] { border-top-color: #E21833; }
+      .tier-box[data-tier="application"] .tier-label { color: #E21833; }
+      .tier-box[data-tier="infrastructure"] { border-top-color: #FFD200; }
+      .tier-box[data-tier="infrastructure"] .tier-label { color: #757575; }
+      .tier-box[data-tier="foundation"] { border-top-color: #000000; }
+      .tier-box[data-tier="foundation"] .tier-label { color: #000000; }
       .tier-row {
         display: flex;
         justify-content: space-between;
@@ -43,7 +37,7 @@
         margin: 0;
       }
       .tier-sub {
-        color: #6c757d;
+        color: #757575;
         font-size: 0.9rem;
       }
       .tier-badge {
@@ -55,20 +49,20 @@
         color: #fff;
       }
       .tier-badge-green {
-        background-color: #2e7d32;
+        background-color: #008000;
       }
       .tier-badge-amber {
-        background-color: #f9a825;
-        color: #333;
+        background-color: #FFD200;
+        color: #242424;
       }
       .tier-badge-blue {
-        background-color: #1565c0;
+        background-color: #2F7EDA;
       }
       .pkg-card {
-        border: 1px solid #dee2e6;
+        border: 1px solid #E6E6E6;
         border-radius: 8px;
         padding: 1.25rem;
-        background: #fff;
+        background: #FFFFFF;
       }
       .pkg-card h4 {
         margin: 0 0 0.25rem;
@@ -76,7 +70,7 @@
       }
       .pkg-card .pkg-npm {
         font-size: 0.8rem;
-        color: #6c757d;
+        color: #757575;
       }
       .pkg-card .pkg-npm code {
         color: #e21833;
@@ -94,8 +88,8 @@
       .pkg-card .pkg-version {
         display: inline-block;
         padding: 0.2em 0.5em;
-        background: #6c757d;
-        color: #fff;
+        background: #757575;
+        color: #FFFFFF;
         border-radius: 3px;
         font-size: 0.75rem;
       }
@@ -106,14 +100,14 @@
         letter-spacing: 0.05em;
         margin-bottom: 0.75rem;
       }
-      .tier-heading-blue {
-        color: #1565c0;
+      .tier-heading-foundation {
+        color: #000000;
       }
-      .tier-heading-amber {
-        color: #e6a100;
+      .tier-heading-infrastructure {
+        color: #757575;
       }
-      .tier-heading-green {
-        color: #2e7d32;
+      .tier-heading-application {
+        color: #E21833;
       }
       .arch-cta {
         text-align: center;
@@ -132,10 +126,11 @@
   </head>
   <body>
     <header>
+      <umd-element-navigation-utility data-info="search"></umd-element-navigation-utility>
       <div class="umd-layout-space-horizontal-full">
         <umd-element-navigation-header sticky>
           <a slot="logo" href="index.html">
-            <span class="umd-sans-larger-bold">Design System Docs</span>
+            <img src="assets/logo-ds-docs.svg" alt="Design System Docs" height="32" style="display:block;">
           </a>
           <div slot="main-navigation">
             <umd-element-nav-item>
@@ -488,7 +483,7 @@
           class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-larger"
         >
           <!-- Foundation Row -->
-          <p class="tier-heading tier-heading-blue">Foundation</p>
+          <p class="tier-heading tier-heading-foundation">Foundation</p>
           <div class="umd-layout-grid-gap-three" style="margin-bottom: 2rem">
             <div class="pkg-card">
               <h4>Tokens</h4>
@@ -501,9 +496,10 @@
               </p>
               <div class="pkg-footer">
                 <div>
-                  <a href="tokens/use-cases.html">Docs</a> |
-                  <a href="tokens/index.html">API</a> |
+                  <a class="umd-text-link-red" href="tokens/use-cases.html">Docs</a> |
+                  <a class="umd-text-link-red" href="tokens/index.html">API</a> |
                   <a
+                    class="umd-text-link-red"
                     href="https://www.npmjs.com/package/@universityofmaryland/web-token-library"
                     target="_blank"
                     >npm</a
@@ -522,9 +518,10 @@
               </p>
               <div class="pkg-footer">
                 <div>
-                  <a href="icons/use-cases.html">Docs</a> |
-                  <a href="icons/index.html">API</a> |
+                  <a class="umd-text-link-red" href="icons/use-cases.html">Docs</a> |
+                  <a class="umd-text-link-red" href="icons/index.html">API</a> |
                   <a
+                    class="umd-text-link-red"
                     href="https://www.npmjs.com/package/@universityofmaryland/web-icons-library"
                     target="_blank"
                     >npm</a
@@ -544,9 +541,10 @@
               </p>
               <div class="pkg-footer">
                 <div>
-                  <a href="utilities/use-cases.html">Docs</a> |
-                  <a href="utilities/index.html">API</a> |
+                  <a class="umd-text-link-red" href="utilities/use-cases.html">Docs</a> |
+                  <a class="umd-text-link-red" href="utilities/index.html">API</a> |
                   <a
+                    class="umd-text-link-red"
                     href="https://www.npmjs.com/package/@universityofmaryland/web-utilities-library"
                     target="_blank"
                     >npm</a
@@ -558,7 +556,7 @@
           </div>
 
           <!-- Infrastructure Row -->
-          <p class="tier-heading tier-heading-amber">Infrastructure</p>
+          <p class="tier-heading tier-heading-infrastructure">Infrastructure</p>
           <div class="umd-layout-grid-gap-three" style="margin-bottom: 2rem">
             <div class="pkg-card">
               <h4>Styles</h4>
@@ -571,9 +569,10 @@
               </p>
               <div class="pkg-footer">
                 <div>
-                  <a href="styles/static-css.html">Docs</a> |
-                  <a href="styles/index.html">API</a> |
+                  <a class="umd-text-link-red" href="styles/static-css.html">Docs</a> |
+                  <a class="umd-text-link-red" href="styles/index.html">API</a> |
                   <a
+                    class="umd-text-link-red"
                     href="https://www.npmjs.com/package/@universityofmaryland/web-styles-library"
                     target="_blank"
                     >npm</a
@@ -593,9 +592,10 @@
               </p>
               <div class="pkg-footer">
                 <div>
-                  <a href="infrastructure/model-and-builder.html">Docs</a> |
-                  <a href="infrastructure/index.html">API</a> |
+                  <a class="umd-text-link-red" href="infrastructure/model-and-builder.html">Docs</a> |
+                  <a class="umd-text-link-red" href="infrastructure/index.html">API</a> |
                   <a
+                    class="umd-text-link-red"
                     href="https://www.npmjs.com/package/@universityofmaryland/web-model-library"
                     target="_blank"
                     >npm</a
@@ -615,9 +615,10 @@
               </p>
               <div class="pkg-footer">
                 <div>
-                  <a href="infrastructure/model-and-builder.html">Docs</a> |
-                  <a href="infrastructure/index.html">API</a> |
+                  <a class="umd-text-link-red" href="infrastructure/model-and-builder.html">Docs</a> |
+                  <a class="umd-text-link-red" href="infrastructure/index.html">API</a> |
                   <a
+                    class="umd-text-link-red"
                     href="https://www.npmjs.com/package/@universityofmaryland/web-builder-library"
                     target="_blank"
                     >npm</a
@@ -629,7 +630,7 @@
           </div>
 
           <!-- Application Row -->
-          <p class="tier-heading tier-heading-green">Application</p>
+          <p class="tier-heading tier-heading-application">Application</p>
           <div class="umd-layout-grid-gap-three">
             <div class="pkg-card">
               <h4>Elements</h4>
@@ -641,9 +642,10 @@
               </p>
               <div class="pkg-footer">
                 <div>
-                  <a href="elements/use-cases.html">Docs</a> |
-                  <a href="elements/index.html">API</a> |
+                  <a class="umd-text-link-red" href="elements/use-cases.html">Docs</a> |
+                  <a class="umd-text-link-red" href="elements/index.html">API</a> |
                   <a
+                    class="umd-text-link-red"
                     href="https://www.npmjs.com/package/@universityofmaryland/web-elements-library"
                     target="_blank"
                     >npm</a
@@ -663,9 +665,10 @@
               </p>
               <div class="pkg-footer">
                 <div>
-                  <a href="feeds/use-cases.html">Docs</a> |
-                  <a href="feeds/index.html">API</a> |
+                  <a class="umd-text-link-red" href="feeds/use-cases.html">Docs</a> |
+                  <a class="umd-text-link-red" href="feeds/index.html">API</a> |
                   <a
+                    class="umd-text-link-red"
                     href="https://www.npmjs.com/package/@universityofmaryland/web-feeds-library"
                     target="_blank"
                     >npm</a
@@ -685,9 +688,10 @@
               </p>
               <div class="pkg-footer">
                 <div>
-                  <a href="components/usage.html">Docs</a> |
-                  <a href="components/index.html">API</a> |
+                  <a class="umd-text-link-red" href="components/usage.html">Docs</a> |
+                  <a class="umd-text-link-red" href="components/index.html">API</a> |
                   <a
+                    class="umd-text-link-red"
                     href="https://www.npmjs.com/package/@universityofmaryland/web-components-library"
                     target="_blank"
                     >npm</a
@@ -698,7 +702,17 @@
             </div>
           </div>
         </div>
+      <umd-element-banner-promo class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-larger" data-theme="dark" data-visual-icon-seal="true">
+        <p slot="headline">Explore the Playground</p>
+        <p slot="text">Try content with interactive component examples and ready to copy code.</p>
+        <div slot="actions">
+          <umd-element-call-to-action data-display="primary">
+            <a href="http://playground.designsystem.umd.edu" target="_blank">Open Playground</a>
+          </umd-element-call-to-action>
+        </div>
+      </umd-element-banner-promo>
       </section>
+
     </main>
 
     <umd-element-footer data-display="mega" data-theme="dark">

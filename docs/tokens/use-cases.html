@@ -13,35 +13,15 @@
       href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css"
       rel="stylesheet"
     />
-    <style>
-      pre[class*="language-"] { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
-      pre { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; }
-      code { color: #e21833; }
-      pre code { color: inherit; }
-      table { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; }
-      th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
-      td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
-      td code, th code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
-      .code-example { background-color: #fff; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
-      .use-case-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 1.5rem; margin-bottom: 2.5rem; background-color: #fff; }
-      .use-case-card h4 { color: #e21833; margin-bottom: 1rem; }
-      .use-case-card ul { padding-left: 1.5rem; }
-      .token-table { width: 100%; margin: 1rem 0; }
-      .token-table th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
-      .token-table td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
-      .token-table code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
-      .color-swatch { display: inline-block; width: 20px; height: 20px; border-radius: 3px; vertical-align: middle; margin-right: 0.5rem; border: 1px solid #dee2e6; }
-      h3 { margin-top: 3rem; margin-bottom: 1rem; }
-      h5 { font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; }
-      section > h3:first-child, .use-case-card > h4:first-child { margin-top: 0; }
-    </style>
+    <link rel="stylesheet" href="../assets/styles/docs.css" />
   </head>
   <body>
     <header>
+      <umd-element-navigation-utility data-info="search"></umd-element-navigation-utility>
       <div class="umd-layout-space-horizontal-full">
         <umd-element-navigation-header sticky>
           <a slot="logo" href="../index.html">
-            <span class="umd-sans-larger-bold">Design System Docs</span>
+            <img src="../assets/logo-ds-docs.svg" alt="Design System Docs" height="32" style="display:block;">
           </a>
           <div slot="main-navigation">
             <umd-element-nav-item>
@@ -104,32 +84,27 @@
         <umd-element-breadcrumb>
           <div slot="paths">
             <a href="../index.html">Home</a>
-            <p>Tokens Use Cases</p>
+            <a href="use-cases.html">Tokens</a>
+            <p>Use Cases</p>
           </div>
         </umd-element-breadcrumb>
       </div>
     </div>
 
     <main>
-      <section class="umd-layout-space-vertical-landing">
-        <div class="umd-layout-space-horizontal-normal">
+      <section class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal">
 
-          <section id="getting-started">
-            <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
-              <h2 slot="headline">Getting Started</h2>
-              <div slot="text"><p>
-                <strong>Where This Package Fits:</strong> Tokens sits in the <strong>Foundation</strong> layer. It has no dependencies and provides raw design values used by <strong>Styles</strong>, <strong>Utilities</strong>, and <strong>Elements</strong>.
-                <a href="../architecture.html">See full architecture</a>.
-              </p></div>
-            </umd-element-section-intro>
-          </section>
+          <div class="umd-layout-space-vertical-landing-child">
+            <h2 class="umd-sans-extralarge-bold">Getting Started</h2>
+          </div>
 
           <!-- Section 1: Token Reference Tables -->
-          <div class="use-case-card">
-            <h4>1. Token Reference</h4>
+          <div id="getting-started" class="umd-layout-space-vertical-landing-child">
+            <h3 class="umd-sans-larger-bold">1. Token Reference</h3>
 
-            <h5 class="umd-sans-medium">Colors</h5>
-            <table class="token-table">
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-medium">Colors</h4>
+              <table class="umd-table-inline docs-table-black-header token-table">
               <thead>
                 <tr>
                   <th>Token</th>
@@ -199,10 +174,12 @@
                   <td>Red -- dark</td>
                 </tr>
               </tbody>
-            </table>
+              </table>
+            </div>
 
-            <h5 class="umd-sans-medium">Spacing Scale</h5>
-            <table class="token-table">
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-medium">Spacing Scale</h4>
+              <table class="umd-table-inline docs-table-black-header token-table">
               <thead>
                 <tr>
                   <th>Token</th>
@@ -262,10 +239,12 @@
                   <td>Maximum spacing</td>
                 </tr>
               </tbody>
-            </table>
+              </table>
+            </div>
 
-            <h5 class="umd-sans-medium">Typography</h5>
-            <table class="token-table">
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-medium">Typography</h4>
+              <table class="umd-table-inline docs-table-black-header token-table">
               <thead>
                 <tr>
                   <th>Token</th>
@@ -320,10 +299,12 @@
                   <td>Extra-bold weight</td>
                 </tr>
               </tbody>
-            </table>
+              </table>
+            </div>
 
-            <h5 class="umd-sans-medium">Media Breakpoints</h5>
-            <table class="token-table">
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-medium">Media Breakpoints</h4>
+              <table class="umd-table-inline docs-table-black-header token-table">
               <thead>
                 <tr>
                   <th>Breakpoint</th>
@@ -353,36 +334,48 @@
                   <td>High-definition screens</td>
                 </tr>
               </tbody>
-            </table>
+              </table>
+            </div>
           </div>
 
           <!-- Section 2: Usage Patterns -->
-          <div class="use-case-card">
-            <h4>2. Usage Patterns</h4>
+          <p class="umd-text-line-trailing umd-layout-space-vertical-landing-child" aria-hidden="true"><span></span></p>
 
-            <h5 class="umd-sans-medium">Namespace Import (Recommended)</h5>
-            <pre><code class="language-typescript">import * as token from '@universityofmaryland/web-token-library';
+          <div class="umd-layout-space-vertical-landing-child">
+            <h3 class="umd-sans-larger-bold">2. Usage Patterns</h3>
+
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-medium">Namespace Import (Recommended)</h4>
+              <pre class="language-typescript" tabindex="0"><code class="language-typescript">import * as token from '@universityofmaryland/web-token-library';
 
 token.color.red;    // '#e21833'
 token.spacing.md;   // '24px'
 token.font.family.sans; // 'Interstate, ...'</code></pre>
+            </div>
 
-            <h5 class="umd-sans-medium">Named Imports</h5>
-            <pre><code class="language-typescript">import { color, spacing } from '@universityofmaryland/web-token-library';</code></pre>
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-medium">Named Imports</h4>
+              <pre class="language-typescript" tabindex="0"><code class="language-typescript">import { color, spacing } from '@universityofmaryland/web-token-library';</code></pre>
+            </div>
 
-            <h5 class="umd-sans-medium">Category Imports</h5>
-            <pre><code class="language-typescript">import * as color from '@universityofmaryland/web-token-library/color';
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-medium">Category Imports</h4>
+              <pre class="language-typescript" tabindex="0"><code class="language-typescript">import * as color from '@universityofmaryland/web-token-library/color';
 import * as font from '@universityofmaryland/web-token-library/font';
 import * as media from '@universityofmaryland/web-token-library/media';
 import * as spacing from '@universityofmaryland/web-token-library/spacing';</code></pre>
+            </div>
           </div>
 
           <!-- Section 3: Using Tokens in Custom CSS -->
-          <div class="use-case-card">
-            <h4>3. Using Tokens in Custom CSS</h4>
+          <p class="umd-text-line-trailing umd-layout-space-vertical-landing-child" aria-hidden="true"><span></span></p>
+
+          <div class="umd-layout-space-vertical-landing-child">
+            <h3 class="umd-sans-larger-bold">3. Using Tokens in Custom CSS</h3>
             <p>After importing the generated <code>tokens.min.css</code> file, you can use design tokens as CSS custom properties:</p>
 
-            <pre><code class="language-css">/* After importing tokens.min.css */
+            <div class="umd-layout-space-vertical-landing-child">
+              <pre class="language-css" tabindex="0"><code class="language-css">/* After importing tokens.min.css */
 .my-header {
   color: var(--umd-color-red);
   font-family: var(--umd-font-sans);
@@ -394,44 +387,45 @@ import * as spacing from '@universityofmaryland/web-token-library/spacing';</cod
   border: 1px solid var(--umd-color-gray-light);
   margin-bottom: var(--umd-space-md);
 }</code></pre>
+            </div>
 
-            <p>For more about the static CSS export pipeline, see the <a href="../styles/static-css.html">Styles static CSS guide</a>.</p>
+            <p class="umd-rich-text-simple">For more about the static CSS export pipeline, see the <a class="umd-text-link-red" href="../styles/static-css.html">Styles static CSS guide</a>.</p>
           </div>
 
           <!-- Section 4: Content Manager Note -->
-          <umd-element-alert-page>
+          <umd-element-banner-promo data-theme="dark" data-visual-icon-seal="true">
             <p slot="headline">Content Manager Note</p>
             <p slot="text">Design token values are documented with visual examples at <a href="https://designsystem.umd.edu">designsystem.umd.edu</a>.</p>
-          </umd-element-alert-page>
+          </umd-element-banner-promo>
 
-          <!-- Related Resources -->
-          <div style="margin-top: 3rem;">
-            <h3 class="umd-sans-larger">Related Resources</h3>
-            <div class="umd-layout-grid-gap-three">
-              <umd-element-card data-visual-bordered="true">
-                <h3 slot="headline"><a href="https://umd-digital.github.io/design-system/" target="_blank">TypeDoc API Reference</a></h3>
-                <p slot="text">Generated API documentation for all design system packages.</p>
-                <umd-element-call-to-action slot="actions" data-display="secondary">
-                  <a href="https://umd-digital.github.io/design-system/" target="_blank">View API</a>
-                </umd-element-call-to-action>
-              </umd-element-card>
-              <umd-element-card data-visual-bordered="true">
-                <h3 slot="headline"><a href="../styles/static-css.html">Static CSS Guide</a></h3>
-                <p slot="text">Use tokens as pre-compiled CSS custom properties.</p>
-                <umd-element-call-to-action slot="actions" data-display="secondary">
-                  <a href="../styles/static-css.html">View Guide</a>
-                </umd-element-call-to-action>
-              </umd-element-card>
-              <umd-element-card data-visual-bordered="true">
-                <h3 slot="headline"><a href="../styles/use-cases.html">Styles Use Cases</a></h3>
-                <p slot="text">See how tokens are applied in real-world styling patterns.</p>
-                <umd-element-call-to-action slot="actions" data-display="secondary">
-                  <a href="../styles/use-cases.html">View Use Cases</a>
-                </umd-element-call-to-action>
-              </umd-element-card>
-            </div>
+      </section>
+
+      <section class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal">
+        <div class="umd-layout-background-highlight-light">
+          <p class="umd-text-line-trailing-light umd-layout-space-vertical-interior-child"><span>Related Resources</span></p>
+          <div class="umd-layout-grid-gap-three">
+            <umd-element-card>
+              <h3 slot="headline"><a href="https://umd-digital.github.io/design-system/" target="_blank">TypeDoc API Reference</a></h3>
+              <p slot="text">Generated API documentation for all design system packages.</p>
+              <umd-element-call-to-action slot="actions" data-display="secondary">
+                <a href="https://umd-digital.github.io/design-system/" target="_blank">View API</a>
+              </umd-element-call-to-action>
+            </umd-element-card>
+            <umd-element-card>
+              <h3 slot="headline"><a href="../styles/static-css.html">Static CSS Guide</a></h3>
+              <p slot="text">Use tokens as pre-compiled CSS custom properties.</p>
+              <umd-element-call-to-action slot="actions" data-display="secondary">
+                <a href="../styles/static-css.html">View Guide</a>
+              </umd-element-call-to-action>
+            </umd-element-card>
+            <umd-element-card>
+              <h3 slot="headline"><a href="../styles/use-cases.html">Styles Use Cases</a></h3>
+              <p slot="text">See how tokens are applied in real-world styling patterns.</p>
+              <umd-element-call-to-action slot="actions" data-display="secondary">
+                <a href="../styles/use-cases.html">View Use Cases</a>
+              </umd-element-call-to-action>
+            </umd-element-card>
           </div>
-
         </div>
       </section>
     </main>

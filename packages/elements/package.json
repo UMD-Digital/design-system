@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "@types/postcss-js": "^4.0.4",
-    "@universityofmaryland/web-token-library": "^1.0.0"
+    "@universityofmaryland/web-token-library": "workspace:^"
   },
   "peerDependencies": {
     "@universityofmaryland/web-builder-library": "^1.0.0",

@@ -14,7 +14,7 @@ module.exports = {
     '!**/__tests__/**',
   ],
   transform: {
-    '^.+\\.ts$': ['ts-jest', { tsconfig: 'tsconfig.json' }],
+    '^.+\\.ts$': ['ts-jest', { tsconfig: 'tsconfig.json', isolatedModules: true }],
   },
   moduleNameMapper: {
     '^@universityofmaryland/web-token-library$': path.resolve(
@@ -125,7 +125,7 @@ module.exports = {
     '^macros$': path.resolve(__dirname, './__mocks__/macros.js'),
   },
   transformIgnorePatterns: [
-    'node_modules/(?!(web-styles-library|web-elements-library)/)',
+    '/node_modules/(?!(.pnpm|web-styles-library|web-elements-library))',
   ],
   extensionsToTreatAsEsm: ['.ts'],
 };

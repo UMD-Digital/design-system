@@ -54,22 +54,24 @@ jobs:
           node-version: '22'
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Enable Corepack
-        run: corepack enable
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: pnpm install --frozen-lockfile
 
       - name: Build packages in dependency order
         run: |
           echo "Building packages in topological order..."
-          npx lerna run build --stream
+          pnpm exec lerna run build --stream
 
       - name: Generate mocks for testing
-        run: npm run generate:mocks
+        run: pnpm run generate:mocks
 
       - name: Run tests
-        run: npx lerna run test --stream
+        run: pnpm exec lerna run test --stream
 
       - name: Update version badges
         run: npm run update-badges
@@ -89,7 +91,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
-          npx lerna version ${{ github.event.inputs.version_bump }} \
+          pnpm exec lerna version ${{ github.event.inputs.version_bump }} \
             --preid ${{ github.event.inputs.preid }} \
             --conventional-commits \
             --create-release github \
@@ -100,7 +102,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.PAT_TOKEN }}
         run: |
-          npx lerna version ${{ github.event.inputs.version_bump }} \
+          pnpm exec lerna version ${{ github.event.inputs.version_bump }} \
             --conventional-commits \
             --create-release github \
             --yes
@@ -109,14 +111,14 @@ jobs:
         if: ${{ github.event.inputs.dry_run == true }}
         run: |
           echo "Dry run enabled - skipping NPM publish"
-          npx lerna publish from-package --yes --dry-run
+          pnpm exec lerna publish from-package --yes --dry-run
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish to NPM
         if: ${{ github.event.inputs.dry_run != true }}
         run: |
-          npx lerna publish from-package \
+          pnpm exec lerna publish from-package \
             --yes \
             --dist-tag ${{ contains(github.event.inputs.version_bump, 'pre') && github.event.inputs.preid || 'latest' }}
         env:
@@ -130,7 +132,7 @@ jobs:
       - name: Collect changed packages
         id: packages
         run: |
-          PACKAGES=$(npx lerna changed --json | jq -r '.[].name' | paste -sd "," - || echo "none")
+          PACKAGES=$(pnpm exec lerna changed --json | jq -r '.[].name' | paste -sd "," - || echo "none")
           echo "packages=$PACKAGES" >> $GITHUB_OUTPUT
 
       - name: Summary
@@ -144,7 +146,7 @@ jobs:
           echo "**Dry Run:** ${{ github.event.inputs.dry_run }}" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
           echo "### Changed Packages" >> $GITHUB_STEP_SUMMARY
-          npx lerna changed --json | jq -r '.[] | "- **\(.name)**: \(.version)"' >> $GITHUB_STEP_SUMMARY || echo "No changed packages" >> $GITHUB_STEP_SUMMARY
+          pnpm exec lerna changed --json | jq -r '.[] | "- **\(.name)**: \(.version)"' >> $GITHUB_STEP_SUMMARY || echo "No changed packages" >> $GITHUB_STEP_SUMMARY
 
   notify:
     name: Send Notifications

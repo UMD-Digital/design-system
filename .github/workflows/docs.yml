@@ -23,34 +23,36 @@ jobs:
         with:
           node-version: '22'
 
-      - name: Enable Corepack
-        run: corepack enable
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
 
       - name: Install dependencies
-        run: yarn install --immutable
+        run: pnpm install --frozen-lockfile
 
       - name: Build packages in dependency order
         run: |
-          yarn lerna run build --scope=@universityofmaryland/web-icons-library
-          yarn lerna run build --scope=@universityofmaryland/web-token-library
-          yarn lerna run build --scope=@universityofmaryland/web-styles-library
-          yarn lerna run build --scope=@universityofmaryland/web-utilities-library
-          yarn lerna run build --scope=@universityofmaryland/web-builder-library
-          yarn lerna run build --scope=@universityofmaryland/web-model-library
-          yarn lerna run build --scope=@universityofmaryland/web-elements-library
-          yarn lerna run build --scope=@universityofmaryland/web-feeds-library
-          yarn lerna run build --scope=@universityofmaryland/web-components-library
+          pnpm exec lerna run build --scope=@universityofmaryland/web-icons-library
+          pnpm exec lerna run build --scope=@universityofmaryland/web-token-library
+          pnpm exec lerna run build --scope=@universityofmaryland/web-styles-library
+          pnpm exec lerna run build --scope=@universityofmaryland/web-utilities-library
+          pnpm exec lerna run build --scope=@universityofmaryland/web-builder-library
+          pnpm exec lerna run build --scope=@universityofmaryland/web-model-library
+          pnpm exec lerna run build --scope=@universityofmaryland/web-elements-library
+          pnpm exec lerna run build --scope=@universityofmaryland/web-feeds-library
+          pnpm exec lerna run build --scope=@universityofmaryland/web-components-library
 
       - name: Generate package documentation
         run: |
-          yarn run icons:docs
-          yarn run tokens:docs
-          yarn run utilities:docs
-          yarn run styles:docs
-          yarn run model:docs
-          yarn run elements:docs
-          yarn run feed:docs
-          yarn run components:docs
+          pnpm run icons:docs
+          pnpm run tokens:docs
+          pnpm run utilities:docs
+          pnpm run styles:docs
+          pnpm run model:docs
+          pnpm run elements:docs
+          pnpm run feed:docs
+          pnpm run components:docs
 
       - name: Remove .gitignore files from docs subdirectories
         run: find docs -mindepth 2 -name ".gitignore" -delete

@@ -11,8 +11,4 @@ coverage
 # TypeScript
 *.tsbuildinfo
 
-# Yarn 4
-.yarn/install-state.gz
-.yarn/cache
-.pnp.*
 sessions.jsonl

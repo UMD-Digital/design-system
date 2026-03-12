@@ -17,10 +17,6 @@ h2.umd-sans-extralarge-bold {
   margin-bottom: 0.75em;
 }
 
-.umd-layout-space-vertical-landing-child h2.umd-sans-extralarge-bold {
-  margin-bottom: 0;
-}
-
 h3.umd-sans-larger {
   margin-bottom: 0.75em;
 }
@@ -40,6 +36,11 @@ h5.umd-sans-small {
 /* All umd-sans-larger headings in docs get uppercase */
 .umd-sans-larger {
   text-transform: uppercase;
+}
+
+.umd-rich-text-simple ul,
+.umd-rich-text-simple ol {
+  padding-left: 1.5rem;
 }
 
 /* --- Alert box ---
@@ -156,7 +157,7 @@ pre code {
 
 .use-case-card h4 {
   text-transform: uppercase;
-  margin-bottom: 2.5rem;
+  margin-bottom: 0.75em;
 }
 
 .use-case-card h5 {
@@ -196,13 +197,13 @@ pre code {
 
 h3 {
   margin-top: 3rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75em;
 }
 
 h5 {
   font-weight: 700;
   margin-top: 1.5rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.75em;
 }
 
 /* --- Tier badges (table) ---
@@ -344,7 +345,7 @@ h5 {
 }
 
 .metric-card h4 {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.75em;
 }
 
 .metric-value {
@@ -431,7 +432,7 @@ h5 {
 
 .integration-card h4 {
   color: #e21833;
-  margin-bottom: 1rem;
+  margin-bottom: 0.75em;
 }
 
 /* --- Example box (tailwind page) ---

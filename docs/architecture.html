@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/styles.min.css" />
   <script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/cdn.js"></script>
   <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="assets/docs.css" />
+  <link rel="stylesheet" href="assets/styles/docs.css" />
 </head>
 <body>
     <header>
@@ -88,7 +88,9 @@
   <section class="umd-layout-space-vertical-landing">
     <div class="umd-layout-space-horizontal-normal umd-layout-space-vertical-landing-child">
       <h2 class="umd-sans-extralarge-bold">The Composable Pyramid</h2>
-      <p>The UMD Design System is organized into three tiers. Each tier builds on the one below, and you can enter at whichever level matches your needs.</p>
+      <div class="umd-rich-text-simple">
+        <p>The UMD Design System is organized into three tiers. Each tier builds on the one below, and you can enter at whichever level matches your needs.</p>
+      </div>
     </div>
     <div class="umd-layout-space-horizontal-normal tier-stack tier-stack--pyramid">
 
@@ -252,32 +254,37 @@
   <section class="umd-layout-space-vertical-landing">
     <div class="umd-layout-space-horizontal-normal umd-layout-space-vertical-landing-child">
       <h2 class="umd-sans-extralarge-bold">The ElementModel Pattern</h2>
-      <p>Every element creation function in the design system returns an <code>ElementModel</code> — a DOM node paired with its scoped CSS. This consistent contract is used by Elements, Feeds, and Builder throughout the system.</p>
+      <div class="umd-rich-text-simple">
+        <p>Every element creation function in the design system returns an <code>ElementModel</code> -- a DOM node paired with its scoped CSS. This consistent contract is used by Elements, Feeds, and Builder throughout the system.</p>
+      </div>
     </div>
     <div class="umd-layout-space-horizontal-normal">
 
-      <div>
-        <h4 class="umd-sans-small">Interface</h4>
-        <div class="code-example">
-          <pre><code class="language-typescript">interface ElementModel {
+      <div class="umd-layout-space-vertical-interior-child">
+        <h4 class="umd-sans-larger-bold">Interface</h4>
+        <div class="umd-rich-text-simple">
+          <div class="code-example">
+            <pre><code class="language-typescript">interface ElementModel {
   element: HTMLElement | DocumentFragment;
   styles: string;
   update?: (props: Record&lt;string, unknown&gt;) =&gt; void;
   destroy?: () =&gt; void;
 }</code></pre>
+          </div>
+          <ul>
+            <li><strong>element</strong> -- The constructed DOM node or fragment, ready for insertion.</li>
+            <li><strong>styles</strong> -- A CSS string scoped to this element. Injected into Shadow DOM or a style tag.</li>
+            <li><strong>update</strong> -- Optional callback to reactively update the element with new props.</li>
+            <li><strong>destroy</strong> -- Optional cleanup callback for removing event listeners and references.</li>
+          </ul>
         </div>
-
-        <ul>
-          <li><strong>element</strong> -- The constructed DOM node or fragment, ready for insertion.</li>
-          <li><strong>styles</strong> -- A CSS string scoped to this element. Injected into Shadow DOM or a style tag.</li>
-          <li><strong>update</strong> -- Optional callback to reactively update the element with new props.</li>
-          <li><strong>destroy</strong> -- Optional cleanup callback for removing event listeners and references.</li>
-        </ul>
       </div>
 
-      <div>
-        <h4 class="umd-sans-small">Two-Step Usage Pattern</h4>
-        <p>Creating and mounting an element follows a consistent two-step pattern:</p>
+      <div class="umd-layout-space-vertical-interior-child">
+        <h4 class="umd-sans-larger-bold">Two-Step Usage Pattern</h4>
+        <div class="umd-rich-text-simple">
+          <p>Creating and mounting an element follows a consistent two-step pattern:</p>
+        </div>
         <div class="code-example">
           <pre><code class="language-typescript">import { textLockup } from '@universityofmaryland/web-elements-library/composite';
 
@@ -302,7 +309,9 @@ model.update?.({ headline: 'Updated Headline' });
 // Cleanup when done
 model.destroy?.();</code></pre>
         </div>
-        <p>In Web Components (Shadow DOM), the styles string is injected into the shadow root automatically. For standalone usage, append a style tag to the document head or a container element.</p>
+        <div class="umd-rich-text-simple">
+          <p>In Web Components (Shadow DOM), the styles string is injected into the shadow root automatically. For standalone usage, append a style tag to the document head or a container element.</p>
+        </div>
       </div>
 
     </div>
@@ -312,7 +321,9 @@ model.destroy?.();</code></pre>
   <section class="umd-layout-space-vertical-landing">
     <div class="umd-layout-space-horizontal-normal umd-layout-space-vertical-landing-child">
       <h2 class="umd-sans-extralarge-bold">Choosing Your Entry Point</h2>
-      <p>Use the decision tree below to find the right starting package for your use case.</p>
+      <div class="umd-rich-text-simple">
+        <p>Use the decision tree below to find the right starting package for your use case.</p>
+      </div>
     </div>
     <div class="umd-layout-space-horizontal-normal">
 

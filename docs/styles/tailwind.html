@@ -10,7 +10,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../assets/docs.css" />
+    <link rel="stylesheet" href="../assets/styles/docs.css" />
   </head>
   <body>
     <header>
@@ -73,7 +73,7 @@
     </header>
 
     <main>
-      <div class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal">
+      <div class="umd-layout-space-vertical-landing">
         <umd-element-hero-minimal data-theme="light">
           <h1 slot="headline">Tailwind Integration</h1>
           <div slot="text"><p>Integrate the UMD Design System with Tailwind CSS</p></div>
@@ -117,7 +117,7 @@
               all UMD tokens directly with Tailwind 4's <code>@theme</code> directive.
             </p>
 
-            <h4 class="umd-sans-medium" style="margin-top: 1.5rem;">Quick Start</h4>
+            <h4 class="umd-sans-larger-bold" style="margin-top: 1.5rem;">Quick Start</h4>
             <p>Just import the UMD Tailwind CSS file in your main stylesheet:</p>
             <pre><code class="language-css">/* main.css */
 @import '@universityofmaryland/web-styles-library/tailwind.css';
@@ -126,7 +126,7 @@
 
             <p style="margin-top: 1rem;"><strong>That's it!</strong> You now have access to all UMD design tokens as Tailwind utilities.</p>
 
-            <h4 class="umd-sans-medium" style="margin-top: 1.5rem;">What You Get</h4>
+            <h4 class="umd-sans-larger-bold" style="margin-top: 1.5rem;">What You Get</h4>
             <div class="umd-layout-grid-gap-two">
               <div>
                 <h5 class="umd-sans-medium">UMD Colors</h5>
@@ -166,7 +166,7 @@
               </div>
             </div>
 
-            <h4 class="umd-sans-medium" style="margin-top: 1.5rem;">CSS Variables</h4>
+            <h4 class="umd-sans-larger-bold" style="margin-top: 1.5rem;">CSS Variables</h4>
             <p>All tokens are also available as CSS custom properties:</p>
             <pre><code class="language-css">.my-element {
   color: var(--color-red);
@@ -175,11 +175,11 @@
   font-size: var(--font-size-lg);
 }</code></pre>
 
-            <h4 class="umd-sans-medium" style="margin-top: 1.5rem;">Theme-Only Option</h4>
+            <h4 class="umd-sans-larger-bold" style="margin-top: 1.5rem;">Theme-Only Option</h4>
             <p>If you don't need Tailwind utilities, import just the theme variables:</p>
             <pre><code class="language-css">/* For projects not using Tailwind */
 @import '@universityofmaryland/web-styles-library/tailwind-theme.css';</code></pre>
-            <h4 class="umd-sans-medium">What This Configuration Does</h4>
+            <h4 class="umd-sans-larger-bold">What This Configuration Does</h4>
             <div class="umd-layout-grid-gap-two">
               <div>
                 <h5 class="umd-sans-medium">Design Tokens</h5>
@@ -223,7 +223,7 @@
           </umd-element-section-intro>
 
           <div class="integration-card">
-            <h4>Using UMD Colors</h4>
+            <h4 class="umd-sans-larger-bold">Using UMD Colors</h4>
             <p>
               With the configuration above, you can use UMD colors as Tailwind
               utilities:
@@ -243,7 +243,7 @@
           </div>
 
           <div class="integration-card">
-            <h4>Using UMD Spacing &amp; Layout</h4>
+            <h4 class="umd-sans-larger-bold">Using UMD Spacing &amp; Layout</h4>
             <p>
               The integration provides UMD-specific spacing and layout
               utilities:
@@ -267,7 +267,7 @@
           </div>
 
           <div class="integration-card">
-            <h4>Typography with UMD Fonts</h4>
+            <h4 class="umd-sans-larger-bold">Typography with UMD Fonts</h4>
             <p>Use UMD's typography system within Tailwind:</p>
             <pre><code class="language-html">&lt;!-- UMD Sans font utilities --&gt;
 &lt;h1 class="umd-sans-largest-uppercase"&gt;
@@ -291,7 +291,7 @@
           </umd-element-section-intro>
 
           <div class="integration-card">
-            <h4>Custom Plugin Extension</h4>
+            <h4 class="umd-sans-larger-bold">Custom Plugin Extension</h4>
             <p>
               You can extend the plugin to add your own custom utilities while
               maintaining UMD standards:
@@ -320,7 +320,7 @@ const plugins = [
           </div>
 
           <div class="integration-card">
-            <h4>Responsive Design Patterns</h4>
+            <h4 class="umd-sans-larger-bold">Responsive Design Patterns</h4>
             <p>Use UMD's breakpoints for responsive design:</p>
             <pre><code class="language-html">&lt;!-- UMD breakpoints: mobile (0-767px), tablet (768-1023px), desktop (1024px+) --&gt;
 &lt;div class="p-4 md:p-6 lg:p-8"&gt;

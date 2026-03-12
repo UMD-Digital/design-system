@@ -13,7 +13,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../assets/docs.css" />
+    <link rel="stylesheet" href="../assets/styles/docs.css" />
   </head>
   <body>
     <header>
@@ -99,21 +99,25 @@
             <a href="../architecture.html">See full architecture</a>.
           </div>
 
-          <div>
+          <div class="umd-layout-space-vertical-interior-child">
               <!-- When to Use -->
               <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
                 <h2 slot="headline">When to Use</h2>
               </umd-element-section-intro>
               <section id="when-to-use" class="umd-layout-space-vertical-interior">
-                <h4 class="umd-sans-medium">Model</h4>
-                <p>
-                  <code>@universityofmaryland/web-model-library</code> -- Use when building custom web components that follow UMD patterns. Provides attribute parsing, slot management, registration, and lifecycle hooks.
-                </p>
+                <h4 class="umd-sans-larger-bold">Model</h4>
+                <div class="umd-rich-text-simple">
+                  <p>
+                    <code>@universityofmaryland/web-model-library</code> -- Use when building custom web components that follow UMD patterns. Provides attribute parsing, slot management, registration, and lifecycle hooks.
+                  </p>
+                </div>
 
-                <h4 class="umd-sans-medium">Builder</h4>
-                <p>
-                  <code>@universityofmaryland/web-builder-library</code> -- Use when constructing DOM elements with a fluent API. Provides <code>ElementBuilder</code> for building complex element trees with automatic style management.
-                </p>
+                <h4 class="umd-sans-larger-bold">Builder</h4>
+                <div class="umd-rich-text-simple">
+                  <p>
+                    <code>@universityofmaryland/web-builder-library</code> -- Use when constructing DOM elements with a fluent API. Provides <code>ElementBuilder</code> for building complex element trees with automatic style management.
+                  </p>
+                </div>
               </section>
 
               <!-- Model Overview -->

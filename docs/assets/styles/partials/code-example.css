@@ -8,3 +8,7 @@
   border-radius: 2px;
   padding: 1rem;
 }
+
+.code-example:not(:last-child) {
+  margin-bottom: 0.75em;
+}

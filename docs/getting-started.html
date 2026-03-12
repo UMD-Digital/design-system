@@ -104,21 +104,21 @@
         </thead>
         <tbody>
           <tr>
-            <td><strong>CDN</strong></td>
+            <td><a href="#cdn"><strong>CDN</strong></a></td>
             <td>~2 min</td>
             <td>Full download</td>
             <td>No</td>
             <td>Prototyping and simple sites</td>
           </tr>
           <tr>
-            <td><strong>npm (grouped imports)</strong></td>
+            <td><a href="#npm-grouped-imports"><strong>npm (grouped imports)</strong></a></td>
             <td>~15 min</td>
             <td>Moderate</td>
             <td>Good</td>
             <td>Standard production apps</td>
           </tr>
           <tr>
-            <td><strong>npm (individual imports)</strong></td>
+            <td><a href="#npm-individual-imports"><strong>npm (individual imports)</strong></a></td>
             <td>~30 min</td>
             <td>Smallest</td>
             <td>Maximum</td>
@@ -140,7 +140,7 @@
         <!-- ============================================================ -->
         <!-- CDN Panel -->
         <!-- ============================================================ -->
-        <div data-title="CDN / No Build Tools">
+        <div id="cdn" data-title="CDN / No Build Tools">
             <p>The fastest way to start using UMD components · no build tools, no package manager, just HTML.</p>
 
             <h4 class="umd-sans-larger-bold">Step 1 · Add the Components CDN Script</h4>
@@ -288,9 +288,9 @@
 npm install @universityofmaryland/web-styles-library</code></pre>
             </div>
 
-            <h4 class="umd-sans-larger-bold">Step 2 · Import and Initialize Components</h4>
+            <h4 id="npm-grouped-imports" class="umd-sans-larger-bold">Step 2 · Import and Initialize Components</h4>
             <p>Use grouped imports to register only the component categories your application needs.</p>
-            <div class="code-example umd-layout-space-vertical-landing-child">
+            <div id="npm-individual-imports" class="code-example umd-layout-space-vertical-landing-child">
               <pre class="language-typescript"><code class="language-typescript">// Grouped imports (recommended)
 import { LoadStructuralComponents } from '@universityofmaryland/web-components-library/structural';
 import { LoadContentComponents } from '@universityofmaryland/web-components-library/content';

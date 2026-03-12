@@ -117,16 +117,17 @@
               <h2 class="umd-sans-extralarge-bold">Web Component Use Cases</h2>
             </div>
 
+          <div class="umd-layout-space-vertical-landing-child">
           <!-- Use Case 1: News Feeds -->
-          <umd-element-accordion-item>
-            <p slot="headline">Use Case 1: News Feed Components</p>
-            <div slot="text">
-              <p>
-                Display news content using web components with various layout options
-                and configurations.
-              </p>
+            <umd-element-accordion-item>
+              <p slot="headline">Use Case 1: News Feed Components</p>
+              <div slot="text">
+                <p>
+                  Display news content using web components with various layout options
+                  and configurations.
+                </p>
 
-              <h5 class="umd-sans-large">Simple News Block</h5>
+              <h3 class="umd-sans-larger-bold">Simple News Block</h3>
               <pre><code class="language-html">&lt;!-- Basic 3-column news grid --&gt;
 &lt;umd-feed-news
   data-token="your-api-token"&gt;
@@ -148,7 +149,7 @@
   data-visual-transparent&gt;
 &lt;/umd-feed-news&gt;</code></pre>
 
-            <h5 class="umd-sans-large">Featured News Layout</h5>
+            <h3 class="umd-sans-larger-bold">Featured News Layout</h3>
             <pre><code class="language-html">&lt;!-- Featured news with sticky positioning --&gt;
 &lt;umd-feed-news-featured
   data-token="your-api-token"&gt;
@@ -167,7 +168,7 @@
   data-visual-transparent&gt;
 &lt;/umd-feed-news-featured&gt;</code></pre>
 
-            <h5 class="umd-sans-large">Available Attributes</h5>
+            <h3 class="umd-sans-larger-bold">Available Attributes</h3>
             <table class="umd-table-inline docs-table-black-header option-table">
               <thead>
                 <tr>
@@ -214,13 +215,13 @@
                 </tr>
               </tbody>
             </table>
-            </div>
-          </umd-element-accordion-item>
+              </div>
+            </umd-element-accordion-item>
 
           <!-- Use Case 2: Events Feeds -->
-          <umd-element-accordion-item>
-            <p slot="headline">Use Case 2: Events Feed Components</p>
-            <div slot="text">
+            <umd-element-accordion-item>
+              <p slot="headline">Use Case 2: Events Feed Components</p>
+              <div slot="text">
               <p>
                 Display university events using web components with filtering and
                 display options.
@@ -285,13 +286,13 @@
                 <li><code>data-lazy-load</code> - Load more on scroll</li>
               </ul>
             </div>
-            </div>
-          </umd-element-accordion-item>
+              </div>
+            </umd-element-accordion-item>
 
           <!-- Use Case 3: Academic Feed Components -->
-          <umd-element-accordion-item>
-            <p slot="headline">Use Case 3: Academic Feed Components</p>
-            <div slot="text">
+            <umd-element-accordion-item>
+              <p slot="headline">Use Case 3: Academic Feed Components</p>
+              <div slot="text">
               <p>
                 Display academic calendar events using the slider web component with
                 the academic feed type.
@@ -370,13 +371,13 @@
                 <li><code>actions</code> - Call-to-action links (optional)</li>
               </ul>
             </div>
-            </div>
-          </umd-element-accordion-item>
+              </div>
+            </umd-element-accordion-item>
 
           <!-- Union Feeds -->
-          <umd-element-accordion-item>
-            <p slot="headline">Union Feeds</p>
-            <div slot="text">
+            <umd-element-accordion-item>
+              <p slot="headline">Union Feeds</p>
+              <div slot="text">
               <p>Use the <code>data-union</code> attribute to aggregate content from multiple UMD sources into a single feed.</p>
 
               <h5 class="umd-sans-large">Usage</h5>
@@ -400,8 +401,9 @@
                   <tr><td><code>data-union</code></td><td>Aggregate content from multiple UMD sources</td><td>Present or absent (boolean attribute)</td></tr>
                 </tbody>
               </table>
-            </div>
-          </umd-element-accordion-item>
+              </div>
+            </umd-element-accordion-item>
+          </div>
 
           <div class="umd-layout-space-vertical-landing-child">
               <h2 class="umd-sans-extralarge-bold">Advanced TypeScript Implementation</h2>
@@ -612,25 +614,27 @@ class CustomFeedWrapper extends HTMLElement {
           <!-- Best Practices -->
           <div class="best-practices-callout">
             <h5 class="umd-sans-large">Best Practices</h5>
-            <ul>
-              <li>
-                Always provide a valid API token via
-                <code>data-token</code> attribute
-              </li>
-              <li>
-                Use <code>data-lazy-load="true"</code> for better initial page
-                performance
-              </li>
-              <li>Implement error handling for network failures</li>
-              <li>Use appropriate column counts for different screen sizes</li>
-              <li>
-                Filter content using <code>data-filter-group-ids</code> to reduce
-                payload
-              </li>
-              <li>Enable event delegation for multiple feeds on the same page</li>
-              <li>Consider caching strategies for frequently accessed feeds</li>
-              <li>Test with slow network connections and API failures</li>
-            </ul>
+            <div class="umd-rich-text-simple">
+              <ul>
+                <li>
+                  Always provide a valid API token via
+                  <code>data-token</code> attribute
+                </li>
+                <li>
+                  Use <code>data-lazy-load="true"</code> for better initial page
+                  performance
+                </li>
+                <li>Implement error handling for network failures</li>
+                <li>Use appropriate column counts for different screen sizes</li>
+                <li>
+                  Filter content using <code>data-filter-group-ids</code> to reduce
+                  payload
+                </li>
+                <li>Enable event delegation for multiple feeds on the same page</li>
+                <li>Consider caching strategies for frequently accessed feeds</li>
+                <li>Test with slow network connections and API failures</li>
+              </ul>
+            </div>
           </div>
 
           <!-- Performance Tips -->

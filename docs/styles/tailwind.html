@@ -98,35 +98,46 @@
 
           <p class="umd-text-rich-simple" style="margin-bottom: 1.5rem;">Not using Tailwind? See the <a href="static-css.html">Static CSS Guide</a> for a simpler approach using pre-compiled CSS files.</p>
 
-          <umd-element-banner-promo data-theme="dark" data-visual-icon-seal="true">
-            <h5 slot="headline">About This Integration</h5>
-            <p slot="text">
-              The UMD Styles Library can be seamlessly integrated with Tailwind
-              CSS to provide a comprehensive styling solution. This integration
-              allows you to use UMD's design tokens, utilities, and components
-              within your Tailwind workflow.
-            </p>
-          </umd-element-banner-promo>
+          <div class="umd-layout-space-vertical-landing-child">
+            <h2 class="umd-sans-extralarge-bold">About This Integration</h2>
+            <div class="umd-rich-text-simple">
+              <p>
+                The UMD Styles Library can be seamlessly integrated with Tailwind
+                CSS to provide a comprehensive styling solution. This integration
+                allows you to use UMD's design tokens, utilities, and components
+                within your Tailwind workflow.
+              </p>
+            </div>
+          </div>
 
-          <!-- Tailwind 4 Section (Primary) -->
-          <div id="tailwind-4" class="example-box" style="border-color: #28a745;">
-            <h2 style="color: #28a745; margin-bottom: 1.5rem;">Tailwind CSS v4 (Recommended)</h2>
-            <p>
-              Tailwind 4 introduces a <strong>CSS-first configuration</strong> approach.
-              The UMD Design System provides a pre-built CSS file that integrates
-              all UMD tokens directly with Tailwind 4's <code>@theme</code> directive.
-            </p>
+          <div id="tailwind-4" class="umd-layout-space-vertical-landing-child">
+            <h2 class="umd-sans-extralarge-bold">Tailwind CSS v4 (Recommended)</h2>
+            <div class="umd-rich-text-simple">
+              <p>
+                Tailwind 4 introduces a <strong>CSS-first configuration</strong> approach.
+                The UMD Design System provides a pre-built CSS file that integrates
+                all UMD tokens directly with Tailwind 4's <code>@theme</code> directive.
+              </p>
+            </div>
+          </div>
 
-            <h4 class="umd-sans-larger-bold" style="margin-top: 1.5rem;">Quick Start</h4>
-            <p>Just import the UMD Tailwind CSS file in your main stylesheet:</p>
+          <div class="umd-layout-space-vertical-landing-child">
+            <h4 class="umd-sans-larger-bold">Quick Start</h4>
+            <div class="umd-rich-text-simple">
+              <p>Just import the UMD Tailwind CSS file in your main stylesheet:</p>
+            </div>
             <pre><code class="language-css">/* main.css */
 @import '@universityofmaryland/web-styles-library/tailwind.css';
 
 /* Your custom styles */</code></pre>
 
-            <p style="margin-top: 1rem;"><strong>That's it!</strong> You now have access to all UMD design tokens as Tailwind utilities.</p>
+            <div class="umd-rich-text-simple">
+              <p><strong>That's it!</strong> You now have access to all UMD design tokens as Tailwind utilities.</p>
+            </div>
+          </div>
 
-            <h4 class="umd-sans-larger-bold" style="margin-top: 1.5rem;">What You Get</h4>
+          <div class="umd-layout-space-vertical-landing-child">
+            <h4 class="umd-sans-larger-bold">What You Get</h4>
             <div class="umd-layout-grid-gap-two">
               <div>
                 <h5 class="umd-sans-medium">UMD Colors</h5>
@@ -165,20 +176,31 @@
                 </ul>
               </div>
             </div>
+          </div>
 
-            <h4 class="umd-sans-larger-bold" style="margin-top: 1.5rem;">CSS Variables</h4>
-            <p>All tokens are also available as CSS custom properties:</p>
+          <div class="umd-layout-space-vertical-landing-child">
+            <h4 class="umd-sans-larger-bold">CSS Variables</h4>
+            <div class="umd-rich-text-simple">
+              <p>All tokens are also available as CSS custom properties:</p>
+            </div>
             <pre><code class="language-css">.my-element {
   color: var(--color-red);
   padding: var(--spacing-md);
   font-family: var(--font-sans);
   font-size: var(--font-size-lg);
 }</code></pre>
+          </div>
 
-            <h4 class="umd-sans-larger-bold" style="margin-top: 1.5rem;">Theme-Only Option</h4>
-            <p>If you don't need Tailwind utilities, import just the theme variables:</p>
+          <div class="umd-layout-space-vertical-landing-child">
+            <h4 class="umd-sans-larger-bold">Theme-Only Option</h4>
+            <div class="umd-rich-text-simple">
+              <p>If you don't need Tailwind utilities, import just the theme variables:</p>
+            </div>
             <pre><code class="language-css">/* For projects not using Tailwind */
 @import '@universityofmaryland/web-styles-library/tailwind-theme.css';</code></pre>
+          </div>
+
+          <div class="umd-layout-space-vertical-landing-child">
             <h4 class="umd-sans-larger-bold">What This Configuration Does</h4>
             <div class="umd-layout-grid-gap-two">
               <div>
@@ -218,16 +240,18 @@
           </div>
 
           <!-- Usage Examples -->
-          <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
-            <h2 slot="headline">Usage Examples</h2>
-          </umd-element-section-intro>
+          <div class="umd-layout-space-vertical-landing-child">
+            <h2 class="umd-sans-extralarge-bold">Usage Examples</h2>
+          </div>
 
-          <div class="integration-card">
+          <div class="umd-layout-space-vertical-landing-child">
             <h4 class="umd-sans-larger-bold">Using UMD Colors</h4>
-            <p>
-              With the configuration above, you can use UMD colors as Tailwind
-              utilities:
-            </p>
+            <div class="umd-rich-text-simple">
+              <p>
+                With the configuration above, you can use UMD colors as Tailwind
+                utilities:
+              </p>
+            </div>
             <pre><code class="language-html">&lt;!-- UMD Red background --&gt;
 &lt;div class="bg-red text-white p-4"&gt;
   UMD Red Background
@@ -242,12 +266,14 @@
 &lt;/div&gt;</code></pre>
           </div>
 
-          <div class="integration-card">
+          <div class="umd-layout-space-vertical-landing-child">
             <h4 class="umd-sans-larger-bold">Using UMD Spacing &amp; Layout</h4>
-            <p>
-              The integration provides UMD-specific spacing and layout
-              utilities:
-            </p>
+            <div class="umd-rich-text-simple">
+              <p>
+                The integration provides UMD-specific spacing and layout
+                utilities:
+              </p>
+            </div>
             <pre><code class="language-html">&lt;!-- UMD Layout spacing utilities --&gt;
 &lt;div class="umd-layout-space-vertical-landing"&gt;
   &lt;h1&gt;Landing Page Section&lt;/h1&gt;
@@ -266,9 +292,11 @@
 &lt;/div&gt;</code></pre>
           </div>
 
-          <div class="integration-card">
+          <div class="umd-layout-space-vertical-landing-child">
             <h4 class="umd-sans-larger-bold">Typography with UMD Fonts</h4>
-            <p>Use UMD's typography system within Tailwind:</p>
+            <div class="umd-rich-text-simple">
+              <p>Use UMD's typography system within Tailwind:</p>
+            </div>
             <pre><code class="language-html">&lt;!-- UMD Sans font utilities --&gt;
 &lt;h1 class="umd-sans-largest-uppercase"&gt;
   Page Title
@@ -286,16 +314,18 @@
           </div>
 
           <!-- Advanced Usage -->
-          <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
-            <h2 slot="headline">Advanced Usage</h2>
-          </umd-element-section-intro>
+          <div class="umd-layout-space-vertical-landing-child">
+            <h2 class="umd-sans-extralarge-bold">Advanced Usage</h2>
+          </div>
 
-          <div class="integration-card">
+          <div class="umd-layout-space-vertical-landing-child">
             <h4 class="umd-sans-larger-bold">Custom Plugin Extension</h4>
-            <p>
-              You can extend the plugin to add your own custom utilities while
-              maintaining UMD standards:
-            </p>
+            <div class="umd-rich-text-simple">
+              <p>
+                You can extend the plugin to add your own custom utilities while
+                maintaining UMD standards:
+              </p>
+            </div>
             <pre><code class="language-javascript">import * as Styles from '@universityofmaryland/web-styles-library';
 import plugin from 'tailwindcss/plugin';
 
@@ -319,9 +349,11 @@ const plugins = [
 ];</code></pre>
           </div>
 
-          <div class="integration-card">
+          <div class="umd-layout-space-vertical-landing-child">
             <h4 class="umd-sans-larger-bold">Responsive Design Patterns</h4>
-            <p>Use UMD's breakpoints for responsive design:</p>
+            <div class="umd-rich-text-simple">
+              <p>Use UMD's breakpoints for responsive design:</p>
+            </div>
             <pre><code class="language-html">&lt;!-- UMD breakpoints: mobile (0-767px), tablet (768-1023px), desktop (1024px+) --&gt;
 &lt;div class="p-4 md:p-6 lg:p-8"&gt;
   &lt;h2 class="text-xl md:text-2xl lg:text-3xl"&gt;
@@ -335,33 +367,37 @@ const plugins = [
           </div>
 
           <!-- Best Practices -->
-          <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
-            <h2 slot="headline">Best Practices</h2>
-          </umd-element-section-intro>
+          <div class="umd-layout-space-vertical-landing-child">
+            <h2 class="umd-sans-extralarge-bold">Best Practices</h2>
+          </div>
 
-          <umd-element-banner-promo data-theme="dark" data-visual-icon-seal="true">
-            <h5 slot="headline">Do's</h5>
-            <div slot="text"><ul>
-              <li>Use UMD color tokens for brand consistency</li>
-              <li>Leverage UMD spacing utilities for consistent layouts</li>
-              <li>
-                Combine UMD utilities with Tailwind's responsive modifiers
-              </li>
-              <li>Use the provided breakpoints for responsive design</li>
-            </ul></div>
-          </umd-element-banner-promo>
+          <div class="alert-custom checklist-do">
+            <h4 class="umd-sans-larger-bold">Do's</h4>
+            <div class="umd-rich-text-simple">
+              <ul>
+                <li>Use UMD color tokens for brand consistency</li>
+                <li>Leverage UMD spacing utilities for consistent layouts</li>
+                <li>
+                  Combine UMD utilities with Tailwind's responsive modifiers
+                </li>
+                <li>Use the provided breakpoints for responsive design</li>
+              </ul>
+            </div>
+          </div>
 
-          <umd-element-banner-promo data-theme="dark" data-visual-icon-seal="true">
-            <h5 slot="headline">Don'ts</h5>
-            <div slot="text"><ul>
-              <li>Don't override UMD brand colors</li>
-              <li>
-                Don't mix different spacing systems (stick to UMD's scale)
-              </li>
-              <li>Don't ignore accessibility when using color utilities</li>
-              <li>Don't forget to test across all breakpoints</li>
-            </ul></div>
-          </umd-element-banner-promo>
+          <div class="alert-custom checklist-dont">
+            <h4 class="umd-sans-larger-bold">Don'ts</h4>
+            <div class="umd-rich-text-simple">
+              <ul>
+                <li>Don't override UMD brand colors</li>
+                <li>
+                  Don't mix different spacing systems (stick to UMD's scale)
+                </li>
+                <li>Don't ignore accessibility when using color utilities</li>
+                <li>Don't forget to test across all breakpoints</li>
+              </ul>
+            </div>
+          </div>
 
       </section>
 

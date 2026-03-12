@@ -92,37 +92,25 @@
       <section class="umd-layout-space-vertical-interior umd-layout-space-horizontal-normal">
 
           <section id="getting-started">
-            <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
-              <h2 slot="headline">Getting Started</h2>
-              <div slot="text"><p>
-                <strong>Where This Package Fits:</strong> Components sits at the top of the <strong>Application</strong> layer. It depends on all lower packages and provides ready-to-use web components.
-                <a href="../architecture.html">See full architecture</a>.
-              </p></div>
-            </umd-element-section-intro>
+            <div class="umd-layout-space-vertical-interior-child">
+              <h2 class="umd-sans-extralarge-bold">Getting Started</h2>
+              <div class="umd-rich-text-simple">
+                <p>
+                  <strong>Where This Package Fits:</strong> Components sits at the top of the <strong>Application</strong> layer. It depends on all lower packages and provides ready-to-use web components.
+                  <a href="../architecture.html">See full architecture</a>.
+                </p>
+              </div>
+            </div>
           </section>
 
-          <div class="two-column-layout">
-            <!-- Table of Contents -->
-            <div>
-              <nav id="toc" class="toc">
-                <h5>On This Page</h5>
-                <a class="toc-link" href="#typescript">TypeScript Integration</a>
-                <a class="toc-link" href="#events">Event Handling</a>
-                <a class="toc-link" href="#reactive">Reactive Components</a>
-                <a class="toc-link" href="#testing">Testing Components</a>
-                <a class="toc-link" href="#frameworks">Framework Integration</a>
-                <a class="toc-link" href="#custom">Custom Components</a>
-                <a class="toc-link" href="#performance">Performance</a>
-              </nav>
-            </div>
-
-            <!-- Main Content -->
-            <div>
+          <div>
               <!-- TypeScript Integration -->
-              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
-                <h2 slot="headline">TypeScript Integration</h2>
-                <div slot="text"><p>The components library provides comprehensive TypeScript support with full type definitions.</p></div>
-              </umd-element-section-intro>
+              <div class="umd-layout-space-vertical-interior-child">
+                <h2 class="umd-sans-extralarge-bold">TypeScript Integration</h2>
+                <div class="umd-rich-text-simple">
+                  <p>The components library provides comprehensive TypeScript support with full type definitions.</p>
+                </div>
+              </div>
               <section id="typescript" class="umd-layout-space-vertical-interior">
                 <h3 class="umd-sans-larger-bold">Type Imports</h3>
                 <div class="code-example">
@@ -181,8 +169,8 @@ const createTypedHero = (): HTMLElement =&gt; {
 };</code></pre>
                 </div>
 
-                <div class="type-card">
-                  <strong>Key Types:</strong>
+                <div class="umd-rich-text-simple">
+                  <p><strong>Key Types:</strong></p>
                   <ul>
                     <li>
                       <code>ComponentRef</code> - Base reference returned by
@@ -205,10 +193,12 @@ const createTypedHero = (): HTMLElement =&gt; {
               </section>
 
               <!-- Event Handling -->
-              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
-                <h2 slot="headline">Event Handling</h2>
-                <div slot="text"><p>Components emit custom events for lifecycle and interaction handling.</p></div>
-              </umd-element-section-intro>
+              <div class="umd-layout-space-vertical-interior-child">
+                <h2 class="umd-sans-extralarge-bold">Event Handling</h2>
+                <div class="umd-rich-text-simple">
+                  <p>Components emit custom events for lifecycle and interaction handling.</p>
+                </div>
+              </div>
               <section id="events" class="umd-layout-space-vertical-interior">
                 <h3 class="umd-sans-larger-bold">Component Lifecycle Events</h3>
                 <div class="code-example">
@@ -232,10 +222,12 @@ card.addEventListener('component:destroy', (event) =&gt; {
               </section>
 
               <!-- Reactive Components -->
-              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
-                <h2 slot="headline">Reactive Components</h2>
-                <div slot="text"><p>Components support reactive updates through observed attributes.</p></div>
-              </umd-element-section-intro>
+              <div class="umd-layout-space-vertical-interior-child">
+                <h2 class="umd-sans-extralarge-bold">Reactive Components</h2>
+                <div class="umd-rich-text-simple">
+                  <p>Components support reactive updates through observed attributes.</p>
+                </div>
+              </div>
               <section id="reactive" class="umd-layout-space-vertical-interior">
                 <h3 class="umd-sans-larger-bold">Observed Attributes</h3>
                 <div class="code-example">
@@ -286,10 +278,12 @@ document.querySelectorAll('[class*="umd-element-"]').forEach((element) =&gt; {
               </section>
 
               <!-- Testing Components -->
-              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
-                <h2 slot="headline">Testing Components</h2>
-                <div slot="text"><p>Best practices for testing components in your application.</p></div>
-              </umd-element-section-intro>
+              <div class="umd-layout-space-vertical-interior-child">
+                <h2 class="umd-sans-extralarge-bold">Testing Components</h2>
+                <div class="umd-rich-text-simple">
+                  <p>Best practices for testing components in your application.</p>
+                </div>
+              </div>
               <section id="testing" class="umd-layout-space-vertical-interior">
                 <h3 class="umd-sans-larger-bold">Jest Testing Setup</h3>
                 <div class="code-example">
@@ -330,10 +324,12 @@ describe('UMD Components', () =&gt; {
               </section>
 
               <!-- Framework Integration -->
-              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
-                <h2 slot="headline">Framework Integration</h2>
-                <div slot="text"><p>Web components work natively in any framework. Here are common integration patterns.</p></div>
-              </umd-element-section-intro>
+              <div class="umd-layout-space-vertical-interior-child">
+                <h2 class="umd-sans-extralarge-bold">Framework Integration</h2>
+                <div class="umd-rich-text-simple">
+                  <p>Web components work natively in any framework. Here are common integration patterns.</p>
+                </div>
+              </div>
               <section id="frameworks" class="umd-layout-space-vertical-interior">
                 <h3 class="umd-sans-larger-bold">React</h3>
                 <div class="code-example">
@@ -386,10 +382,12 @@ export class AppModule {}</code></pre>
               </section>
 
               <!-- Custom Components -->
-              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
-                <h2 slot="headline">Building Custom Components</h2>
-                <div slot="text"><p>Extend the component library with your own custom components using the Model package.</p></div>
-              </umd-element-section-intro>
+              <div class="umd-layout-space-vertical-interior-child">
+                <h2 class="umd-sans-extralarge-bold">Building Custom Components</h2>
+                <div class="umd-rich-text-simple">
+                  <p>Extend the component library with your own custom components using the Model package.</p>
+                </div>
+              </div>
               <section id="custom" class="umd-layout-space-vertical-interior">
                 <h3 class="umd-sans-larger-bold">Custom Component Template</h3>
                 <div class="code-example">
@@ -457,18 +455,20 @@ export const CustomFeature = Register.webComponent({
 });</code></pre>
                 </div>
 
-                <div class="alert-pro-tip">
-                  <strong>Full Custom Component Guide:</strong> For a comprehensive guide to building custom
+                <div class="umd-rich-text-simple">
+                  <p><strong>Full Custom Component Guide:</strong> For a comprehensive guide to building custom
                   components with the Model and Builder packages, see the
-                  <a href="../infrastructure/model-and-builder.html">Model &amp; Builder documentation</a>.
+                  <a href="../infrastructure/model-and-builder.html">Model &amp; Builder documentation</a>.</p>
                 </div>
               </section>
 
               <!-- Performance -->
-              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
-                <h2 slot="headline">Performance Optimization</h2>
-                <div slot="text"><p>Techniques for optimizing component performance in production.</p></div>
-              </umd-element-section-intro>
+              <div class="umd-layout-space-vertical-interior-child">
+                <h2 class="umd-sans-extralarge-bold">Performance Optimization</h2>
+                <div class="umd-rich-text-simple">
+                  <p>Techniques for optimizing component performance in production.</p>
+                </div>
+              </div>
               <section id="performance" class="umd-layout-space-vertical-interior">
                 <h3 class="umd-sans-larger-bold">Lazy Loading Components</h3>
                 <div class="code-example">
@@ -531,8 +531,8 @@ export default {
 };</code></pre>
                 </div>
 
-                <div class="alert-pro-tip">
-                  <h5>Performance Tips</h5>
+                <h4 class="umd-sans-larger-bold">Performance Tips</h4>
+                <div class="umd-rich-text-simple">
                   <ul>
                     <li>Load only the components you use</li>
                     <li>Use dynamic imports for below-the-fold components</li>
@@ -576,8 +576,6 @@ export default {
                   </umd-element-card>
                 </div>
               </div>
-            </div>
-          </div>
       </section>
     </main>
 
@@ -612,39 +610,5 @@ export default {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
-    <script>
-      // Smooth scrolling for TOC links
-      document.querySelectorAll('.toc-link').forEach(link => {
-        link.addEventListener('click', (e) => {
-          e.preventDefault();
-          const target = document.querySelector(link.getAttribute('href'));
-          if (target) {
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        });
-      });
-
-      // Update active TOC link on scroll
-      const sections = document.querySelectorAll('section[id]');
-      const tocLinks = document.querySelectorAll('.toc-link');
-
-      window.addEventListener('scroll', () => {
-        let current = '';
-        sections.forEach(section => {
-          const sectionTop = section.offsetTop;
-          const sectionHeight = section.clientHeight;
-          if (scrollY >= sectionTop - 100) {
-            current = section.getAttribute('id');
-          }
-        });
-
-        tocLinks.forEach(link => {
-          link.classList.remove('active');
-          if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
-          }
-        });
-      });
-    </script>
   </body>
 </html>

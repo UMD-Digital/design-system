@@ -419,6 +419,35 @@ h5 {
   font-weight: bold;
 }
 
+.checklist-do ul,
+.checklist-dont ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.checklist-do li,
+.checklist-dont li {
+  padding: 0.5rem 0 0.5rem 1.5rem;
+  position: relative;
+}
+
+.checklist-do li::before,
+.checklist-dont li::before {
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
+
+.checklist-do li::before {
+  content: '\2713';
+  color: #008000;
+}
+
+.checklist-dont li::before {
+  content: '\00D7';
+  color: #e21833;
+}
+
 /* --- Integration card (tailwind page) ---
    ============================================================ */
 

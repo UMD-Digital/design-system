@@ -169,7 +169,7 @@
             class="umd-layout-space-vertical-interior"
           >
             <umd-element-accordion-item>
-              <p slot="headline">Grouped Exports</p>
+              <h4 slot="headline" class="umd-sans-larger-bold">Grouped Exports</h4>
               <div slot="text">
                 <p>
                   The design system provides pre-configured component groups
@@ -201,7 +201,7 @@ LoadFeedComponents(); // Loads: events, news, people feeds</code></pre>
             </umd-element-accordion-item>
 
             <umd-element-accordion-item>
-              <p slot="headline">Individual Component Exports</p>
+              <h4 slot="headline" class="umd-sans-larger-bold">Individual Component Exports</h4>
               <div slot="text">
                 <p>
                   Import specific component types individually using dynamic
@@ -249,7 +249,7 @@ if (document.querySelector('[class*="umd-element-hero"]')) {
             </umd-element-accordion-item>
 
             <umd-element-accordion-item>
-              <p slot="headline">Bundle Import with Tree-Shaking</p>
+              <h4 slot="headline" class="umd-sans-larger-bold">Bundle Import with Tree-Shaking</h4>
               <div slot="text">
                 <p>
                   Even when using the bundle import, you can still benefit from
@@ -271,7 +271,7 @@ Components.navigation.primary();
             </umd-element-accordion-item>
 
             <umd-element-accordion-item>
-              <p slot="headline">Export Strategy Comparison</p>
+              <h4 slot="headline" class="umd-sans-larger-bold">Export Strategy Comparison</h4>
               <div slot="text">
                 <table class="umd-table-inline docs-table-black-header">
                   <thead>
@@ -342,7 +342,7 @@ Components.specialFeature.custom(); // Only this specific component</code></pre>
             class="umd-layout-space-vertical-interior"
           >
             <umd-element-accordion-item>
-              <p slot="headline">Complete Vite Configuration</p>
+              <h4 slot="headline" class="umd-sans-larger-bold">Complete Vite Configuration</h4>
               <div slot="text">
                 <div class="code-example">
                   <pre><code class="language-javascript">// vite.config.js
@@ -492,7 +492,7 @@ export default defineConfig(({ mode }) => {
             class="umd-layout-space-vertical-interior"
           >
             <umd-element-accordion-item>
-              <p slot="headline">Progressive Component Loading</p>
+              <h4 slot="headline" class="umd-sans-larger-bold">Progressive Component Loading</h4>
               <div slot="text">
                 <div class="code-example">
                   <pre><code class="language-typescript">// main.ts - Production-ready loading strategy
@@ -595,7 +595,7 @@ initializeApp();</code></pre>
             </umd-element-accordion-item>
 
             <umd-element-accordion-item>
-              <p slot="headline">Intersection Observer Pattern</p>
+              <h4 slot="headline" class="umd-sans-larger-bold">Intersection Observer Pattern</h4>
               <div slot="text">
                 <p>
                   Load component groups only when they're about to enter the
@@ -665,7 +665,7 @@ const observeAndLoadComponents = () => {
             <h2 class="umd-sans-extralarge-bold">Critical CSS Strategy</h2>
           </div>
           <section id="critical-css" class="umd-layout-space-vertical-interior">
-            <h3 class="umd-sans-larger">Static CSS Files (Recommended)</h3>
+            <h3 class="umd-sans-larger-bold">Static CSS Files (Recommended)</h3>
             <p>
               Pre-compiled CSS files are available in the styles package
               (v1.8.0+). This is the simplest approach for most projects.
@@ -682,7 +682,7 @@ const observeAndLoadComponents = () => {
 &lt;link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/web-components.min.css" media="print" onload="this.media='all'"&gt;</code></pre>
             </div>
 
-            <h3 class="umd-sans-larger">Bundler CSS Import</h3>
+            <h3 class="umd-sans-larger-bold">Bundler CSS Import</h3>
             <div class="code-example">
               <pre><code class="language-javascript">// Import in your entry file
 import '@universityofmaryland/web-styles-library/css/styles.min.css';
@@ -701,7 +701,7 @@ import '@universityofmaryland/web-styles-library/css/layout.min.css';</code></pr
               <a href="../styles/static-css.html">Static CSS documentation</a>.
             </p>
 
-            <h3 class="umd-sans-larger">Programmatic CSS Loading (Advanced)</h3>
+            <h3 class="umd-sans-larger-bold">Programmatic CSS Loading (Advanced)</h3>
             <p>
               For cases where static CSS files are not sufficient &mdash; such
               as when you need dynamic theme switching, conditional style
@@ -773,8 +773,8 @@ if (document.readyState === 'loading') {
 export { inlineCriticalStyles, loadNonCriticalStyles };</code></pre>
             </div>
 
-            <div class="type-card">
-              <strong>CSS Loading Phases:</strong>
+            <h3 class="umd-sans-larger-bold">CSS Loading Phases</h3>
+            <div class="umd-rich-text-simple">
               <ul>
                 <li>
                   <strong>Phase 1: Critical CSS</strong> - Inline base64 fonts
@@ -853,7 +853,7 @@ export { inlineCriticalStyles, loadNonCriticalStyles };</code></pre>
               </div>
             </umd-element-sticky-columns>
 
-            <h3 class="umd-sans-larger">Measuring Performance</h3>
+            <h3 class="umd-sans-larger-bold">Measuring Performance</h3>
             <div class="code-example">
               <pre><code class="language-javascript">// Add performance monitoring to track improvements
 const measureComponentLoad = (componentName) => {
@@ -898,104 +898,113 @@ heroTimer.complete();</code></pre>
             id="best-practices"
             class="umd-layout-space-vertical-interior"
           >
-            <div class="type-card">
+            <div class="umd-layout-space-vertical-interior-child">
               <h4 class="umd-sans-larger-bold">Loading Strategy</h4>
-              <ul style="margin-bottom: 0">
-                <li>
-                  Load structural components (hero, navigation) immediately for
-                  above-the-fold content
-                </li>
-                <li>
-                  Defer interactive components until user interaction or idle
-                  time
-                </li>
-                <li>Use Intersection Observer for below-the-fold components</li>
-                <li>
-                  Implement fallback timers to ensure components eventually load
-                </li>
-                <li>
-                  Leverage <code>requestIdleCallback</code> for non-critical
-                  resources
-                </li>
-              </ul>
+              <div class="umd-rich-text-simple">
+                <ul style="margin-bottom: 0">
+                  <li>
+                    Load structural components (hero, navigation) immediately for
+                    above-the-fold content
+                  </li>
+                  <li>
+                    Defer interactive components until user interaction or idle
+                    time
+                  </li>
+                  <li>Use Intersection Observer for below-the-fold components</li>
+                  <li>
+                    Implement fallback timers to ensure components eventually load
+                  </li>
+                  <li>
+                    Leverage <code>requestIdleCallback</code> for non-critical
+                    resources
+                  </li>
+                </ul>
+              </div>
             </div>
 
-            <div class="type-card">
+            <div class="umd-layout-space-vertical-interior-child">
               <h4 class="umd-sans-larger-bold">Bundle Optimization</h4>
-              <ul style="margin-bottom: 0">
-                <li>
-                  Use grouped exports for logical component sets instead of
-                  importing everything
-                </li>
-                <li>
-                  Configure vendor chunk splitting for better caching across
-                  deployments
-                </li>
-                <li>Enable production minification with console.log removal</li>
-                <li>
-                  Set appropriate chunk size warning limits (500KB recommended)
-                </li>
-                <li>
-                  Use path aliases to simplify imports and improve
-                  maintainability
-                </li>
-              </ul>
+              <div class="umd-rich-text-simple">
+                <ul style="margin-bottom: 0">
+                  <li>
+                    Use grouped exports for logical component sets instead of
+                    importing everything
+                  </li>
+                  <li>
+                    Configure vendor chunk splitting for better caching across
+                    deployments
+                  </li>
+                  <li>Enable production minification with console.log removal</li>
+                  <li>
+                    Set appropriate chunk size warning limits (500KB recommended)
+                  </li>
+                  <li>
+                    Use path aliases to simplify imports and improve
+                    maintainability
+                  </li>
+                </ul>
+              </div>
             </div>
 
-            <div class="type-card">
+            <div class="umd-layout-space-vertical-interior-child">
               <h4 class="umd-sans-larger-bold">CSS Performance</h4>
-              <ul style="margin-bottom: 0">
-                <li>
-                  Use static CSS files for the simplest and fastest loading
-                  approach
-                </li>
-                <li>
-                  Split critical and non-critical CSS using async loading
-                  patterns
-                </li>
-                <li>
-                  Inline critical CSS including base64 fonts for immediate
-                  rendering
-                </li>
-                <li>
-                  Defer non-critical styles using
-                  <code>requestIdleCallback</code> or async link tags
-                </li>
-                <li>Always provide fallbacks for CSS loading failures</li>
-              </ul>
+              <div class="umd-rich-text-simple">
+                <ul style="margin-bottom: 0">
+                  <li>
+                    Use static CSS files for the simplest and fastest loading
+                    approach
+                  </li>
+                  <li>
+                    Split critical and non-critical CSS using async loading
+                    patterns
+                  </li>
+                  <li>
+                    Inline critical CSS including base64 fonts for immediate
+                    rendering
+                  </li>
+                  <li>
+                    Defer non-critical styles using
+                    <code>requestIdleCallback</code> or async link tags
+                  </li>
+                  <li>Always provide fallbacks for CSS loading failures</li>
+                </ul>
+              </div>
             </div>
 
-            <div class="type-card">
+            <div class="umd-layout-space-vertical-interior-child">
               <h4 class="umd-sans-larger-bold">Development Workflow</h4>
-              <ul style="margin-bottom: 0">
-                <li>
-                  Use the bundle analyzer (<code
-                    >ANALYZE=true npm run build</code
-                  >) to identify optimization opportunities
-                </li>
-                <li>
-                  Monitor performance metrics in development to catch
-                  regressions early
-                </li>
-                <li>
-                  Test with network throttling to simulate real-world conditions
-                </li>
-                <li>
-                  Validate that tree-shaking is working correctly for unused
-                  components
-                </li>
-                <li>
-                  Keep component dependencies minimal to reduce bundle size
-                </li>
-              </ul>
+              <div class="umd-rich-text-simple">
+                <ul style="margin-bottom: 0">
+                  <li>
+                    Use the bundle analyzer (<code
+                      >ANALYZE=true npm run build</code
+                    >) to identify optimization opportunities
+                  </li>
+                  <li>
+                    Monitor performance metrics in development to catch
+                    regressions early
+                  </li>
+                  <li>
+                    Test with network throttling to simulate real-world conditions
+                  </li>
+                  <li>
+                    Validate that tree-shaking is working correctly for unused
+                    components
+                  </li>
+                  <li>
+                    Keep component dependencies minimal to reduce bundle size
+                  </li>
+                </ul>
+              </div>
             </div>
 
-            <div class="alert-pro-tip" style="margin-top: 1.5rem">
-              <h5>Quick Start Template</h5>
-              <p>
-                Copy this minimal setup for optimal performance out of the box:
-              </p>
-              <pre><code class="language-javascript">// main.js - Minimal performance-optimized setup
+            <div class="umd-layout-space-vertical-interior-child" style="margin-top: 1.5rem">
+              <h4 class="umd-sans-larger-bold">Quick Start Template</h4>
+              <div class="umd-rich-text-simple">
+                <p>
+                  Copy this minimal setup for optimal performance out of the box:
+                </p>
+                <pre><code class="language-javascript">// main.js - Minimal performance-optimized setup
 import './styles/critical.css';
 
 // Load structural components immediately
@@ -1015,6 +1024,7 @@ requestIdleCallback(() => {
   import('@universityofmaryland/web-components-library/interactive')
     .then(m => m.LoadInteractiveComponents());
 }, { timeout: 2000 });</code></pre>
+              </div>
             </div>
           </section>
 
@@ -1074,7 +1084,7 @@ requestIdleCallback(() => {
           data-theme="dark"
           data-visual-icon-seal="true"
         >
-          <p slot="headline">Alternative Loading Methods</p>
+          <h4 slot="headline" class="umd-sans-larger-bold">Alternative Loading Methods</h4>
           <p slot="text">
             While this guide focuses on performance optimization through code
             splitting, simpler options are available for prototyping and

@@ -94,16 +94,18 @@
     <main>
       <section class="umd-layout-space-vertical-interior umd-layout-space-horizontal-normal">
 
-          <div style="background-color: #fff4e6; border-left: 4px solid #e8a838; padding: 1rem 1.5rem; border-radius: 0 8px 8px 0; margin-bottom: 2rem;">
-            <strong>Where These Packages Fit:</strong> Model and Builder sit in the <strong>Infrastructure</strong> layer. Model provides the web component lifecycle system. Builder provides fluent DOM construction. Together they power the Components package.
-            <a href="../architecture.html">See full architecture</a>.
+          <div class="umd-layout-space-vertical-interior-child">
+            <h4 class="umd-sans-larger-bold">Where These Packages Fit</h4>
+            <div class="umd-rich-text-simple">
+              <p>Model and Builder sit in the <strong>Infrastructure</strong> layer. Model provides the web component lifecycle system. Builder provides fluent DOM construction. Together they power the Components package. <a href="../architecture.html">See full architecture</a>.</p>
+            </div>
           </div>
 
           <div class="umd-layout-space-vertical-interior-child">
               <!-- When to Use -->
-              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
-                <h2 slot="headline">When to Use</h2>
-              </umd-element-section-intro>
+              <div class="umd-layout-space-vertical-interior-child">
+                <h2 class="umd-sans-extralarge-bold">When to Use</h2>
+              </div>
               <section id="when-to-use" class="umd-layout-space-vertical-interior">
                 <h4 class="umd-sans-larger-bold">Model</h4>
                 <div class="umd-rich-text-simple">
@@ -121,10 +123,12 @@
               </section>
 
               <!-- Model Overview -->
-              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
-                <h2 slot="headline">Model Package Overview</h2>
-                <div slot="text"><p>The model package exports 5 main modules:</p></div>
-              </umd-element-section-intro>
+              <div class="umd-layout-space-vertical-interior-child">
+                <h2 class="umd-sans-extralarge-bold">Model Package Overview</h2>
+                <div class="umd-rich-text-simple">
+                  <p>The model package exports 5 main modules:</p>
+                </div>
+              </div>
               <section id="model-overview" class="umd-layout-space-vertical-interior">
                 <div class="code-example">
                   <pre><code class="language-typescript">import { Attributes, Model, Register, Slots, Lifecycle } from '@universityofmaryland/web-model-library';</code></pre>
@@ -161,17 +165,18 @@
                   </tbody>
                 </table>
 
-                <div class="type-card">
-                  <strong>Types Exported:</strong>
-                  <code>SlotProps</code>, <code>BaseProps</code>, <code>OptionalProps</code>, <code>SlotResult</code>
+                <div class="umd-rich-text-simple">
+                  <p><strong>Types Exported:</strong> <code>SlotProps</code>, <code>BaseProps</code>, <code>OptionalProps</code>, <code>SlotResult</code></p>
                 </div>
               </section>
 
               <!-- Custom Component -->
-              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
-                <h2 slot="headline">Building a Custom Web Component</h2>
-                <div slot="text"><p>Full example showing how to create a custom component using the Model package:</p></div>
-              </umd-element-section-intro>
+              <div class="umd-layout-space-vertical-interior-child">
+                <h2 class="umd-sans-extralarge-bold">Building a Custom Web Component</h2>
+                <div class="umd-rich-text-simple">
+                  <p>Full example showing how to create a custom component using the Model package:</p>
+                </div>
+              </div>
               <section id="custom-component" class="umd-layout-space-vertical-interior">
                 <div class="code-example">
                   <pre><code class="language-typescript">import { Attributes, Model, Register, Slots, Lifecycle } from '@universityofmaryland/web-model-library';
@@ -221,7 +226,7 @@ const registration = () => {
 export { registration };</code></pre>
                 </div>
 
-                <h3 class="umd-sans-larger">Usage in HTML</h3>
+                <h3 class="umd-sans-larger-bold">Usage in HTML</h3>
                 <div class="code-example">
                   <pre><code class="language-html">&lt;umd-custom-feature-card data-theme="dark"&gt;
   &lt;h2 slot="headline"&gt;Custom Feature&lt;/h2&gt;
@@ -231,24 +236,28 @@ export { registration };</code></pre>
               </section>
 
               <!-- Builder Overview -->
-              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
-                <h2 slot="headline">Builder Package Overview</h2>
-                <div slot="text"><p>The Builder package provides a fluent API for constructing DOM elements with automatic style management.</p></div>
-              </umd-element-section-intro>
+              <div class="umd-layout-space-vertical-interior-child">
+                <h2 class="umd-sans-extralarge-bold">Builder Package Overview</h2>
+                <div class="umd-rich-text-simple">
+                  <p>The Builder package provides a fluent API for constructing DOM elements with automatic style management.</p>
+                </div>
+              </div>
               <section id="builder-overview" class="umd-layout-space-vertical-interior">
                 <div class="code-example">
                   <pre><code class="language-typescript">import { ElementBuilder } from '@universityofmaryland/web-builder-library';</code></pre>
                 </div>
 
-                <p>
-                  The <code>ElementBuilder</code> provides a chainable interface for creating DOM elements, attaching styles, nesting children, and producing the standard <code>{ element, styles }</code> result that the rest of the design system expects.
-                </p>
+                <div class="umd-rich-text-simple">
+                  <p>
+                    The <code>ElementBuilder</code> provides a chainable interface for creating DOM elements, attaching styles, nesting children, and producing the standard <code>{ element, styles }</code> result that the rest of the design system expects.
+                  </p>
+                </div>
               </section>
 
               <!-- Builder Usage -->
-              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
-                <h2 slot="headline">Using ElementBuilder</h2>
-              </umd-element-section-intro>
+              <div class="umd-layout-space-vertical-interior-child">
+                <h2 class="umd-sans-extralarge-bold">Using ElementBuilder</h2>
+              </div>
               <section id="builder-usage" class="umd-layout-space-vertical-interior">
                 <div class="code-example">
                   <pre><code class="language-typescript">import { ElementBuilder } from '@universityofmaryland/web-builder-library';
@@ -278,16 +287,18 @@ const card = new ElementBuilder('div')
   .build(); // Returns { element, styles }</code></pre>
                 </div>
 
-                <div class="type-card">
-                  <strong>Return Value:</strong> <code>build()</code> returns an <code>ElementModel</code> with <code>element</code> (HTMLElement) and <code>styles</code> (string) properties, matching the standard interface used throughout the design system.
+                <div class="umd-rich-text-simple">
+                  <p><strong>Return Value:</strong> <code>build()</code> returns an <code>ElementModel</code> with <code>element</code> (HTMLElement) and <code>styles</code> (string) properties, matching the standard interface used throughout the design system.</p>
                 </div>
               </section>
 
               <!-- Composing with Styles -->
-              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
-                <h2 slot="headline">Composing with Styles</h2>
-                <div slot="text"><p>Combine the Styles library tokens and utilities with the Builder for consistent theming:</p></div>
-              </umd-element-section-intro>
+              <div class="umd-layout-space-vertical-interior-child">
+                <h2 class="umd-sans-extralarge-bold">Composing with Styles</h2>
+                <div class="umd-rich-text-simple">
+                  <p>Combine the Styles library tokens and utilities with the Builder for consistent theming:</p>
+                </div>
+              </div>
               <section id="composing-styles" class="umd-layout-space-vertical-interior">
                 <div class="code-example">
                   <pre><code class="language-typescript">import * as Styles from '@universityofmaryland/web-styles-library';
@@ -305,16 +316,20 @@ const styledElement = new ElementBuilder('section')
   .build();</code></pre>
                 </div>
 
-                <p>
-                  Because the Builder produces standard CSS strings, you can reference any token or utility from the Styles package directly inside template literals. This keeps your custom components visually aligned with the rest of the design system without hard-coding values.
-                </p>
+                <div class="umd-rich-text-simple">
+                  <p>
+                    Because the Builder produces standard CSS strings, you can reference any token or utility from the Styles package directly inside template literals. This keeps your custom components visually aligned with the rest of the design system without hard-coding values.
+                  </p>
+                </div>
               </section>
 
               <!-- Integration -->
-              <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
-                <h2 slot="headline">Integration with Components</h2>
-                <div slot="text"><p>Register custom components alongside official ones so they coexist on the same page:</p></div>
-              </umd-element-section-intro>
+              <div class="umd-layout-space-vertical-interior-child">
+                <h2 class="umd-sans-extralarge-bold">Integration with Components</h2>
+                <div class="umd-rich-text-simple">
+                  <p>Register custom components alongside official ones so they coexist on the same page:</p>
+                </div>
+              </div>
               <section id="integration" class="umd-layout-space-vertical-interior">
                 <div class="code-example">
                   <pre><code class="language-typescript">import { LoadStructuralComponents } from '@universityofmaryland/web-components-library/structural';
@@ -327,12 +342,11 @@ LoadStructuralComponents();
 customFeatureCard();</code></pre>
                 </div>
 
-                <p>
-                  Both official and custom components share the same Shadow DOM, slot, and attribute patterns provided by the Model package. This means your custom components will behave identically to the built-in ones -- same lifecycle, same style encapsulation, same attribute handling.
-                </p>
-
-                <div class="type-card">
-                  <strong>Next Steps:</strong> See <a href="../components/advanced-usage.html">Advanced Component Usage</a> for more patterns including TypeScript integration, event handling, and testing strategies.
+                <div class="umd-rich-text-simple">
+                  <p>
+                    Both official and custom components share the same Shadow DOM, slot, and attribute patterns provided by the Model package. This means your custom components will behave identically to the built-in ones -- same lifecycle, same style encapsulation, same attribute handling.
+                  </p>
+                  <p><strong>Next Steps:</strong> See <a href="../components/advanced-usage.html">Advanced Component Usage</a> for more patterns including TypeScript integration, event handling, and testing strategies.</p>
                 </div>
               </section>
 

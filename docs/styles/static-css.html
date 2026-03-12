@@ -10,37 +10,15 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
       rel="stylesheet"
     />
-    <style>
-      pre[class*="language-"] { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
-      pre { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; }
-      code { color: #e21833; }
-      pre code { color: inherit; }
-      table { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; }
-      th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
-      td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
-      td code, th code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
-      .code-example { background-color: #fff; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
-      .use-case-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 1.5rem; margin-bottom: 2.5rem; background-color: #fff; }
-      .use-case-card h4 { color: #e21833; margin-bottom: 1rem; }
-      .use-case-card ul { padding-left: 1.5rem; }
-      .option-table { width: 100%; margin: 1rem 0; }
-      .option-table th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
-      .option-table td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
-      .option-table code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
-      h3 { margin-top: 3rem; margin-bottom: 1rem; }
-      h5 { font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; }
-      section > h3:first-child, .use-case-card > h4:first-child { margin-top: 0; }
-    </style>
+    <link rel="stylesheet" href="../assets/docs.css" />
   </head>
   <body>
     <header>
       <umd-element-navigation-utility data-info="search"></umd-element-navigation-utility>
-    </header>
-    <header>
       <div class="umd-layout-space-horizontal-full">
         <umd-element-navigation-header sticky>
           <a slot="logo" href="../index.html">
-            <span class="umd-sans-larger-bold">Design System Docs</span>
+            <img src="../assets/logo-ds-docs.svg" alt="Design System Docs" height="32" style="display:block;">
           </a>
           <div slot="main-navigation">
             <umd-element-nav-item>
@@ -95,7 +73,7 @@
     </header>
 
     <main>
-      <div class="umd-layout-space-vertical-landing">
+      <div class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal">
         <umd-element-hero-minimal data-theme="light">
           <h1 slot="headline">Static CSS Guide</h1>
           <div slot="text"><p>Pre-compiled CSS files for zero-JavaScript styling</p></div>
@@ -111,13 +89,12 @@
         </div>
       </div>
 
-      <section class="umd-layout-space-vertical-landing">
-        <div class="umd-layout-space-horizontal-normal">
+      <section class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal">
 
           <section id="getting-started">
             <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
               <h2 slot="headline">Getting Started</h2>
-              <div slot="text"><p>
+              <div slot="text"><p class="umd-text-rich-simple">
                 <strong>Where This Package Fits:</strong> Styles sits in the <strong>Infrastructure</strong> layer. It depends on <strong>Tokens</strong> and is used by <strong>Elements</strong>, <strong>Components</strong>, and your custom CSS.
                 <a href="../architecture.html">See full architecture</a>.
               </p></div>
@@ -126,9 +103,9 @@
 
           <!-- Section 1: Available Files -->
           <div class="use-case-card">
-            <h4>Available Files</h4>
+            <h4 class="umd-sans-larger-bold">Available Files</h4>
             <p>The styles package ships pre-compiled CSS files that can be used individually or as a full bundle.</p>
-            <table>
+            <table class="umd-table-inline docs-table-black-header">
               <thead>
                 <tr>
                   <th>File</th>
@@ -193,7 +170,7 @@
 
           <!-- Section 2: CDN Usage -->
           <div class="use-case-card">
-            <h4>CDN Usage</h4>
+            <h4 class="umd-sans-larger-bold">CDN Usage</h4>
             <p>Load static CSS files directly from a CDN with no build step required.</p>
             <pre><code class="language-html">&lt;!-- Full bundle (simplest) --&gt;
 &lt;link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/styles.min.css"&gt;
@@ -210,7 +187,7 @@
 
           <!-- Section 3: npm / Bundler Usage -->
           <div class="use-case-card">
-            <h4>npm / Bundler Usage</h4>
+            <h4 class="umd-sans-larger-bold">npm / Bundler Usage</h4>
             <p>Import static CSS files in your JavaScript or CSS entry point when using a bundler like Vite, Webpack, or Rollup.</p>
             <pre><code class="language-javascript">// Full bundle
 import '@universityofmaryland/web-styles-library/css/styles.min.css';
@@ -225,7 +202,7 @@ import '@universityofmaryland/web-styles-library/css/layout.min.css';</code></pr
 
           <!-- Section 4: CSS Custom Properties -->
           <div class="use-case-card">
-            <h4>CSS Custom Properties</h4>
+            <h4 class="umd-sans-larger-bold">CSS Custom Properties</h4>
             <p>The <code>tokens.min.css</code> file defines CSS custom properties for colors, spacing, and more. Use these in your own stylesheets for consistent theming.</p>
             <pre><code class="language-css">/* Colors */
 --umd-color-red: #e21833;
@@ -249,9 +226,9 @@ import '@universityofmaryland/web-styles-library/css/layout.min.css';</code></pr
 
           <!-- Section 5: Comparison Table -->
           <div class="use-case-card">
-            <h4>Approach Comparison</h4>
+            <h4 class="umd-sans-larger-bold">Approach Comparison</h4>
             <p>Choose the approach that best fits your project requirements.</p>
-            <table>
+            <table class="umd-table-inline docs-table-black-header">
               <thead>
                 <tr>
                   <th>Approach</th>
@@ -295,30 +272,33 @@ import '@universityofmaryland/web-styles-library/css/layout.min.css';</code></pr
           </div>
 
           <!-- Content Manager Callout -->
-          <umd-element-alert-page>
+          <umd-element-banner-promo data-theme="dark" data-visual-icon-seal="true">
             <p slot="headline">For Content Managers</p>
-            <p slot="text">Static CSS files are the simplest way to add UMD styles to your site. No build tools or JavaScript knowledge required. For design guidance and visual examples, visit <a href="https://designsystem.umd.edu">designsystem.umd.edu</a>.</p>
-          </umd-element-alert-page>
+            <p slot="text" class="umd-text-rich-simple">Static CSS files are the simplest way to add UMD styles to your site. No build tools or JavaScript knowledge required. For design guidance and visual examples, visit <a href="https://designsystem.umd.edu">designsystem.umd.edu</a>.</p>
+          </umd-element-banner-promo>
 
+      </section>
+
+      <section class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal">
           <!-- Related Resources -->
-          <div style="margin-top: 3rem;">
-            <h3 class="umd-sans-larger">Related Resources</h3>
+          <div class="umd-layout-background-highlight-light">
+            <p class="umd-text-line-trailing-light umd-layout-space-vertical-interior-child"><span>Related Resources</span></p>
             <div class="umd-layout-grid-gap-three">
-              <umd-element-card data-visual-bordered="true">
+              <umd-element-card>
                 <h3 slot="headline"><a href="index.html">Styles API Reference</a></h3>
                 <p slot="text">Complete API documentation for all styles exports.</p>
                 <umd-element-call-to-action slot="actions" data-display="secondary">
                   <a href="index.html">View API</a>
                 </umd-element-call-to-action>
               </umd-element-card>
-              <umd-element-card data-visual-bordered="true">
+              <umd-element-card>
                 <h3 slot="headline"><a href="use-cases.html">Styles Use Cases</a></h3>
                 <p slot="text">Common patterns for applying design system styles.</p>
                 <umd-element-call-to-action slot="actions" data-display="secondary">
                   <a href="use-cases.html">View Use Cases</a>
                 </umd-element-call-to-action>
               </umd-element-card>
-              <umd-element-card data-visual-bordered="true">
+              <umd-element-card>
                 <h3 slot="headline"><a href="tailwind.html">Tailwind Integration</a></h3>
                 <p slot="text">Integrate UMD design tokens with Tailwind CSS.</p>
                 <umd-element-call-to-action slot="actions" data-display="secondary">
@@ -327,7 +307,6 @@ import '@universityofmaryland/web-styles-library/css/layout.min.css';</code></pr
               </umd-element-card>
             </div>
           </div>
-        </div>
       </section>
     </main>
 

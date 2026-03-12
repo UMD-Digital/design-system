@@ -10,90 +10,15 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
       rel="stylesheet"
     />
-    <style>
-      pre[class*="language-"] { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
-      pre { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; }
-      code { color: #e21833; }
-      pre code { color: inherit; }
-      td code, th code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
-      .code-example { background-color: #fff; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
-      .use-case-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 1.5rem; margin-bottom: 2.5rem; background-color: #fff; }
-      .use-case-card h4 { color: #e21833; margin-bottom: 1rem; }
-      .use-case-card ul { padding-left: 1.5rem; }
-      .toc {
-        position: sticky;
-        top: 80px;
-        background-color: white;
-        border-radius: 8px;
-        padding: 1.5rem;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-      }
-      .toc-link {
-        display: block;
-        padding: 0.5rem 0;
-        color: #495057;
-        text-decoration: none;
-        border-left: 3px solid transparent;
-        padding-left: 1rem;
-      }
-      .toc-link:hover,
-      .toc-link.active {
-        color: #e21833;
-        border-left-color: #e21833;
-      }
-      .type-card {
-        background-color: #f8f9fa;
-        border-left: 4px solid #e21833;
-        padding: 1rem;
-        margin-bottom: 1rem;
-      }
-      .type-card code {
-        color: #0066cc;
-      }
-      .alert-pro-tip {
-        background-color: #e3f2fd;
-        border: 1px solid #90caf9;
-        color: #0d47a1;
-        padding: 1.5rem;
-        border-radius: 8px;
-        margin-bottom: 1rem;
-      }
-      .feature-badge {
-        display: inline-block;
-        padding: 0.25rem 0.5rem;
-        font-size: 0.875rem;
-        background-color: #28a745;
-        color: white;
-        border-radius: 4px;
-        margin-left: 0.5rem;
-      }
-      .two-column-layout {
-        display: grid;
-        grid-template-columns: 240px 1fr;
-        gap: 2rem;
-      }
-      @media (max-width: 767px) {
-        .two-column-layout {
-          grid-template-columns: 1fr;
-        }
-        .toc {
-          position: static;
-        }
-      }
-      h3 { margin-top: 3rem; margin-bottom: 1rem; }
-      h5 { font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; }
-      section > h3:first-child, .use-case-card > h4:first-child { margin-top: 0; }
-    </style>
+    <link rel="stylesheet" href="../assets/docs.css" />
   </head>
   <body>
     <header>
       <umd-element-navigation-utility data-info="search"></umd-element-navigation-utility>
-    </header>
-    <header>
       <div class="umd-layout-space-horizontal-full">
         <umd-element-navigation-header sticky>
           <a slot="logo" href="../index.html">
-            <span class="umd-sans-larger-bold">Design System Docs</span>
+            <img src="../assets/logo-ds-docs.svg" alt="Design System Docs" height="32" style="display:block;">
           </a>
           <div slot="main-navigation">
             <umd-element-nav-item>
@@ -164,8 +89,7 @@
         </div>
       </div>
 
-      <section class="umd-layout-space-vertical-interior">
-        <div class="umd-layout-space-horizontal-normal">
+      <section class="umd-layout-space-vertical-interior umd-layout-space-horizontal-normal">
 
           <section id="getting-started">
             <umd-element-section-intro class="umd-layout-space-vertical-interior-child umd-layout-space-horizontal-small">
@@ -622,25 +546,28 @@ export default {
                 </div>
               </section>
 
-              <!-- Related Resources -->
-              <div style="margin-top: 3rem;">
-                <h3 class="umd-sans-larger">Related Resources</h3>
+      </section>
+
+      <section class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal">
+          <!-- Related Resources -->
+          <div class="umd-layout-background-highlight-light">
+                <p class="umd-text-line-trailing-light umd-layout-space-vertical-interior-child"><span>Related Resources</span></p>
                 <div class="umd-layout-grid-gap-three">
-                  <umd-element-card data-visual-bordered="true">
+                  <umd-element-card>
                     <h3 slot="headline"><a href="index.html">Components API Reference</a></h3>
                     <p slot="text">Complete API documentation for all component exports.</p>
                     <umd-element-call-to-action slot="actions" data-display="secondary">
                       <a href="index.html">View API</a>
                     </umd-element-call-to-action>
                   </umd-element-card>
-                  <umd-element-card data-visual-bordered="true">
+                  <umd-element-card>
                     <h3 slot="headline"><a href="usage.html">Component Usage Guide</a></h3>
                     <p slot="text">Slot-based markup patterns for every component.</p>
                     <umd-element-call-to-action slot="actions" data-display="secondary">
                       <a href="usage.html">View Guide</a>
                     </umd-element-call-to-action>
                   </umd-element-card>
-                  <umd-element-card data-visual-bordered="true">
+                  <umd-element-card>
                     <h3 slot="headline"><a href="../infrastructure/model-and-builder.html">Model &amp; Builder</a></h3>
                     <p slot="text">Underlying model and builder patterns for custom components.</p>
                     <umd-element-call-to-action slot="actions" data-display="secondary">
@@ -651,7 +578,6 @@ export default {
               </div>
             </div>
           </div>
-        </div>
       </section>
     </main>
 

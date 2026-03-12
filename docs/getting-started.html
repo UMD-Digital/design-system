@@ -268,9 +268,11 @@
               </div>
             </umd-element-accordion-item>
 
-            <div class="alert-custom umd-layout-space-vertical-landing-child">
-              <h5 class="umd-sans-small">Production CDN usage</h5>
-              <p>Pin to a specific version to avoid unexpected breaking changes: <code>@universityofmaryland/web-components-library@1.17.14</code> and <code>@universityofmaryland/web-styles-library@1.7.2</code>. Note that the CDN loads all components in a single bundle — if you need smaller bundles and tree-shaking, use the npm approach below.</p>
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-larger-bold">Production CDN usage</h4>
+              <div class="umd-rich-text-simple">
+                <p>Pin to a specific version to avoid unexpected breaking changes: <code>@universityofmaryland/web-components-library@1.17.14</code> and <code>@universityofmaryland/web-styles-library@1.7.2</code>. Note that the CDN loads all components in a single bundle -- if you need smaller bundles and tree-shaking, use the npm approach below.</p>
+              </div>
             </div>
         </div>
 
@@ -312,9 +314,9 @@ import '@universityofmaryland/web-styles-library/css/typography.min.css';
 import '@universityofmaryland/web-styles-library/css/layout.min.css';</code></pre>
             </div>
 
-            <umd-element-accordion-item>
-              <p slot="headline">Minimal Vite Example</p>
-              <div slot="text">
+            <umd-element-accordion-item class="umd-layout-space-vertical-landing-child">
+              <h4 slot="headline" class="umd-sans-larger-bold">Minimal Vite Example</h4>
+              <div slot="text" class="umd-rich-text-simple">
                 <p>A complete entry point for a Vite-based application.</p>
                 <div class="code-example umd-layout-space-vertical-landing-child">
                   <pre class="language-typescript"><code class="language-typescript">// main.js
@@ -329,10 +331,11 @@ LoadContentComponents();</code></pre>
               </div>
             </umd-element-accordion-item>
 
-            <umd-element-banner-promo data-theme="dark" data-visual-icon-seal="true">
-              <p slot="headline">Going further</p>
-              <p slot="text" class="umd-text-rich-simple">See the <a href="components/advanced-bundling.html">Advanced Bundling guide</a> for individual component loading, lazy loading, and per-route code splitting. See the <a href="styles/static-css.html">Static CSS guide</a> for a full breakdown of every CSS module available.</p>
-            </umd-element-banner-promo>
+            <h4 class="umd-sans-larger-bold">Going further</h4>
+            <div class="umd-rich-text-simple">
+              <p>See the <a href="components/advanced-bundling.html">Advanced Bundling guide</a> for individual component loading, lazy loading, and per-route code splitting. See the <a href="styles/static-css.html">Static CSS guide</a> for a full breakdown of every CSS module available.</p>
+            </div>
+
         </div>
 
       </div>

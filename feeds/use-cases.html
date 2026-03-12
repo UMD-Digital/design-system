@@ -13,15 +13,35 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../assets/styles/docs.css" />
+    <style>
+      pre[class*="language-"] { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+      pre { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; }
+      code { color: #e21833; }
+      pre code { color: inherit; }
+      table { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; }
+      th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
+      td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
+      td code, th code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
+      .code-example { background-color: #fff; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
+      .use-case-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 1.5rem; margin-bottom: 2.5rem; background-color: #fff; }
+      .use-case-card h4 { color: #e21833; margin-bottom: 1rem; }
+      .use-case-card ul { padding-left: 1.5rem; }
+      .example-output { background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
+      .option-table { width: 100%; margin: 1rem 0; }
+      .option-table th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
+      .option-table td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
+      .option-table code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
+      h3 { margin-top: 3rem; margin-bottom: 1rem; }
+      h5 { font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+      section > h3:first-child, .use-case-card > h4:first-child { margin-top: 0; }
+    </style>
   </head>
   <body>
     <header>
-      <umd-element-navigation-utility data-info="search"></umd-element-navigation-utility>
       <div class="umd-layout-space-horizontal-full">
         <umd-element-navigation-header sticky>
           <a slot="logo" href="../index.html">
-            <img src="../assets/logo-ds-docs.svg" alt="Design System Docs" height="32" style="display:block;">
+            <span class="umd-sans-larger-bold">Design System Docs</span>
           </a>
           <div slot="main-navigation">
             <umd-element-nav-item>
@@ -92,42 +112,46 @@
     </div>
 
     <main>
-      <section class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal">
+      <section class="umd-layout-space-vertical-landing">
+        <div class="umd-layout-space-horizontal-normal">
 
           <section id="getting-started">
-            <div class="umd-layout-space-vertical-landing-child">
-              <h2 class="umd-sans-extralarge-bold">Getting Started</h2>
-            </div>
-            <div class="umd-layout-space-vertical-landing-child">
-              <p class="umd-text-rich-simple">
+            <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
+              <h2 slot="headline">Getting Started</h2>
+              <div slot="text"><p>
                 <strong>Where This Package Fits:</strong> Feeds sits in the <strong>Application</strong> layer. It depends on <strong>Tokens</strong>, <strong>Elements</strong>, and <strong>Utilities</strong>. It provides dynamic content feed components.
                 <a href="../architecture.html">See full architecture</a>.
-              </p>
-            </div>
+              </p></div>
+            </umd-element-section-intro>
           </section>
 
-          <div class="umd-layout-space-vertical-landing-child">
-            <h2 class="umd-sans-extralarge-bold">About This Guide</h2>
-          </div>
-          <div class="umd-layout-space-vertical-landing-child">
-            <p>This guide demonstrates practical implementations of the UMD Feeds Library using web components with HTML attributes for displaying dynamic news, events, and academic content.</p>
+          <umd-element-alert-page>
+            <h5 slot="headline">About This Guide</h5>
+            <p slot="text">
+              This guide demonstrates practical implementations of the UMD Feeds
+              Library using web components with HTML attributes for displaying
+              dynamic news, events, and academic content.
+            </p>
+          </umd-element-alert-page>
+
+          <div style="background-color: #e3f2fd; border: 1px solid #90caf9; border-radius: 8px; padding: 1rem 1.5rem; margin-bottom: 2rem;">
+            <strong>For Content Managers</strong> -- Feeds display dynamic UMD content like news and events. For feed configuration help and visual examples, visit <a href="https://designsystem.umd.edu">designsystem.umd.edu</a>.
           </div>
 
-          <div class="umd-layout-space-vertical-landing-child">
-              <h2 class="umd-sans-extralarge-bold">Web Component Use Cases</h2>
-            </div>
+          <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
+            <h2 slot="headline">Web Component Use Cases</h2>
+          </umd-element-section-intro>
 
           <!-- Use Case 1: News Feeds -->
-          <umd-element-accordion-item>
-            <p slot="headline">Use Case 1: News Feed Components</p>
-            <div slot="text">
-              <p>
-                Display news content using web components with various layout options
-                and configurations.
-              </p>
+          <div class="use-case-card">
+            <h4>Use Case 1: News Feed Components</h4>
+            <p>
+              Display news content using web components with various layout options
+              and configurations.
+            </p>
 
-              <h5 class="umd-sans-large">Simple News Block</h5>
-              <pre><code class="language-html">&lt;!-- Basic 3-column news grid --&gt;
+            <h5 class="umd-sans-medium">Simple News Block</h5>
+            <pre><code class="language-html">&lt;!-- Basic 3-column news grid --&gt;
 &lt;umd-feed-news
   data-token="your-api-token"&gt;
 &lt;/umd-feed-news&gt;
@@ -148,7 +172,7 @@
   data-visual-transparent&gt;
 &lt;/umd-feed-news&gt;</code></pre>
 
-            <h5 class="umd-sans-large">Featured News Layout</h5>
+            <h5 class="umd-sans-medium">Featured News Layout</h5>
             <pre><code class="language-html">&lt;!-- Featured news with sticky positioning --&gt;
 &lt;umd-feed-news-featured
   data-token="your-api-token"&gt;
@@ -167,8 +191,8 @@
   data-visual-transparent&gt;
 &lt;/umd-feed-news-featured&gt;</code></pre>
 
-            <h5 class="umd-sans-large">Available Attributes</h5>
-            <table class="umd-table-inline docs-table-black-header option-table">
+            <h5 class="umd-sans-medium">Available Attributes</h5>
+            <table class="option-table">
               <thead>
                 <tr>
                   <th>Attribute</th>
@@ -214,19 +238,17 @@
                 </tr>
               </tbody>
             </table>
-            </div>
-          </umd-element-accordion-item>
+          </div>
 
           <!-- Use Case 2: Events Feeds -->
-          <umd-element-accordion-item>
-            <p slot="headline">Use Case 2: Events Feed Components</p>
-            <div slot="text">
-              <p>
-                Display university events using web components with filtering and
-                display options.
-              </p>
+          <div class="use-case-card">
+            <h4>Use Case 2: Events Feed Components</h4>
+            <p>
+              Display university events using web components with filtering and
+              display options.
+            </p>
 
-              <h5 class="umd-sans-large">Events Grid Layout</h5>
+            <h5 class="umd-sans-medium">Events Grid Layout</h5>
             <pre><code class="language-html">&lt;!-- Basic events grid --&gt;
 &lt;umd-feed-events
   data-token="your-api-token"&gt;
@@ -249,7 +271,7 @@
   data-layout-column-count="2"&gt;
 &lt;/umd-feed-events&gt;</code></pre>
 
-            <h5 class="umd-sans-large">Events List Layout</h5>
+            <h5 class="umd-sans-medium">Events List Layout</h5>
             <pre><code class="language-html">&lt;!-- Basic events list --&gt;
 &lt;umd-feed-events-list
   data-token="your-api-token"&gt;
@@ -262,7 +284,7 @@
   data-theme="dark"&gt;
 &lt;/umd-feed-events-list&gt;</code></pre>
 
-            <h5 class="umd-sans-large">Common Event Attributes</h5>
+            <h5 class="umd-sans-medium">Common Event Attributes</h5>
             <div class="example-output">
               <p><strong>Required:</strong></p>
               <ul>
@@ -285,19 +307,17 @@
                 <li><code>data-lazy-load</code> - Load more on scroll</li>
               </ul>
             </div>
-            </div>
-          </umd-element-accordion-item>
+          </div>
 
           <!-- Use Case 3: Academic Feed Components -->
-          <umd-element-accordion-item>
-            <p slot="headline">Use Case 3: Academic Feed Components</p>
-            <div slot="text">
-              <p>
-                Display academic calendar events using the slider web component with
-                the academic feed type.
-              </p>
+          <div class="use-case-card">
+            <h4>Use Case 3: Academic Feed Components</h4>
+            <p>
+              Display academic calendar events using the slider web component with
+              the academic feed type.
+            </p>
 
-              <h5 class="umd-sans-large">Academic Calendar Slider</h5>
+            <h5 class="umd-sans-medium">Academic Calendar Slider</h5>
             <pre><code class="language-html">&lt;!-- Basic academic calendar slider --&gt;
 &lt;umd-element-slider-events-feed
   data-token="your-api-token"
@@ -330,8 +350,8 @@
   &lt;/div&gt;
 &lt;/umd-element-slider-events-feed&gt;</code></pre>
 
-            <h5 class="umd-sans-large">Academic Feed Attributes</h5>
-            <table class="umd-table-inline docs-table-black-header option-table">
+            <h5 class="umd-sans-medium">Academic Feed Attributes</h5>
+            <table class="option-table">
               <thead>
                 <tr>
                   <th>Attribute</th>
@@ -363,24 +383,22 @@
               </tbody>
             </table>
 
-            <h5 class="umd-sans-large">Slots</h5>
+            <h5 class="umd-sans-medium">Slots</h5>
             <div class="example-output">
               <ul>
                 <li><code>headline</code> - Section headline (optional)</li>
                 <li><code>actions</code> - Call-to-action links (optional)</li>
               </ul>
             </div>
-            </div>
-          </umd-element-accordion-item>
+          </div>
 
           <!-- Union Feeds -->
-          <umd-element-accordion-item>
-            <p slot="headline">Union Feeds</p>
-            <div slot="text">
-              <p>Use the <code>data-union</code> attribute to aggregate content from multiple UMD sources into a single feed.</p>
+          <div class="use-case-card">
+            <h4>Union Feeds</h4>
+            <p>Use the <code>data-union</code> attribute to aggregate content from multiple UMD sources into a single feed.</p>
 
-              <h5 class="umd-sans-large">Usage</h5>
-              <pre><code class="language-html">&lt;!-- Aggregate news from multiple units --&gt;
+            <h5 class="umd-sans-medium">Usage</h5>
+            <pre><code class="language-html">&lt;!-- Aggregate news from multiple units --&gt;
 &lt;umd-feed-news
   data-token="your-api-token"
   data-union&gt;
@@ -393,29 +411,28 @@
   data-layout-column-count="3"&gt;
 &lt;/umd-feed-events&gt;</code></pre>
 
-              <h5 class="umd-sans-large">Union Attribute</h5>
-              <table class="umd-table-inline docs-table-black-header option-table">
-                <thead><tr><th>Attribute</th><th>Description</th><th>Values</th></tr></thead>
-                <tbody>
-                  <tr><td><code>data-union</code></td><td>Aggregate content from multiple UMD sources</td><td>Present or absent (boolean attribute)</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </umd-element-accordion-item>
+            <h5 class="umd-sans-medium">Union Attribute</h5>
+            <table class="option-table">
+              <thead><tr><th>Attribute</th><th>Description</th><th>Values</th></tr></thead>
+              <tbody>
+                <tr><td><code>data-union</code></td><td>Aggregate content from multiple UMD sources</td><td>Present or absent (boolean attribute)</td></tr>
+              </tbody>
+            </table>
+          </div>
 
-          <div class="umd-layout-space-vertical-landing-child">
-              <h2 class="umd-sans-extralarge-bold">Advanced TypeScript Implementation</h2>
-            </div>
+          <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
+            <h2 slot="headline">Advanced TypeScript Implementation</h2>
+          </umd-element-section-intro>
 
           <!-- Use Case 4: TypeScript Integration -->
           <div class="use-case-card">
-            <h4 class="umd-sans-larger-bold">Use Case 4: TypeScript Integration</h4>
+            <h4>Use Case 4: TypeScript Integration</h4>
             <p>
               Use feeds programmatically in TypeScript applications with full type
               safety.
             </p>
 
-            <h5 class="umd-sans-large">Basic TypeScript Usage</h5>
+            <h5 class="umd-sans-medium">Basic TypeScript Usage</h5>
             <pre><code class="language-typescript">import { news, events, academic, experts, inTheNews } from '@universityofmaryland/web-feeds-library';
 
 // Create news feed with configuration
@@ -461,7 +478,7 @@ const inTheNewsFeed = inTheNews.grid({
 
 document.querySelector('#in-the-news-container')?.appendChild(inTheNewsFeed.element);</code></pre>
 
-            <h5 class="umd-sans-large">Type Definitions</h5>
+            <h5 class="umd-sans-medium">Type Definitions</h5>
             <pre><code class="language-typescript">// News feed properties
 interface BaseProps {
   token: string;
@@ -486,8 +503,8 @@ interface FeaturedProps extends BaseProps {
 }
 </code></pre>
 
-            <h5 class="umd-sans-large">Available Feed Modules</h5>
-            <table class="umd-table-inline docs-table-black-header option-table">
+            <h5 class="umd-sans-medium">Available Feed Modules</h5>
+            <table class="option-table">
               <thead>
                 <tr>
                   <th>Module</th>
@@ -527,12 +544,12 @@ interface FeaturedProps extends BaseProps {
 
           <!-- Use Case 5: Event Bubbling -->
           <div class="use-case-card">
-            <h4 class="umd-sans-larger-bold">Use Case 5: Event Bubbling and Style Callbacks</h4>
+            <h4>Use Case 5: Event Bubbling and Style Callbacks</h4>
             <p>
               Feed components dispatch DOM events when content is loaded or errors occur, and provide callbacks for style injection.
             </p>
 
-            <h5 class="umd-sans-large">Feed Events</h5>
+            <h5 class="umd-sans-medium">Feed Events</h5>
             <pre><code class="language-javascript">// Listen for feed loaded event
 const feedElement = document.querySelector('umd-feed-news');
 
@@ -556,7 +573,7 @@ document.addEventListener('feed:loaded', (event) => {
   }
 });</code></pre>
 
-            <h5 class="umd-sans-large">Style Callback</h5>
+            <h5 class="umd-sans-medium">Style Callback</h5>
             <pre><code class="language-typescript">// Using styleCallback with TypeScript API
 import { news } from '@universityofmaryland/web-feeds-library';
 
@@ -578,7 +595,7 @@ const newsFeed = news.grid({
 
 document.querySelector('#news-container')?.appendChild(newsFeed.element);</code></pre>
 
-            <h5 class="umd-sans-large">Integration with Shadow DOM</h5>
+            <h5 class="umd-sans-medium">Integration with Shadow DOM</h5>
             <pre><code class="language-typescript">// When feeds are inside web components with Shadow DOM
 class CustomFeedWrapper extends HTMLElement {
   constructor() {
@@ -603,15 +620,15 @@ class CustomFeedWrapper extends HTMLElement {
   }
 }</code></pre>
 
-            <umd-element-banner-promo data-theme="dark" data-visual-icon-seal="true">
+            <umd-element-alert-page>
               <p slot="headline">Available Events</p>
               <p slot="text"><code>feed:loaded</code> (with items array) and <code>feed:error</code> (with error details). Standard DOM events (click, focus, etc.) also bubble normally through the component hierarchy.</p>
-            </umd-element-banner-promo>
+            </umd-element-alert-page>
           </div>
 
           <!-- Best Practices -->
           <div class="best-practices-callout">
-            <h5 class="umd-sans-large">Best Practices</h5>
+            <h5 class="umd-sans-medium">Best Practices</h5>
             <ul>
               <li>
                 Always provide a valid API token via
@@ -635,7 +652,7 @@ class CustomFeedWrapper extends HTMLElement {
 
           <!-- Performance Tips -->
           <div class="performance-callout">
-            <h5 class="umd-sans-large">Performance Tips</h5>
+            <h5 class="umd-sans-medium">Performance Tips</h5>
             <ul>
               <li>
                 Limit initial rows with <code>data-layout-row-count="1"</code>
@@ -652,42 +669,35 @@ class CustomFeedWrapper extends HTMLElement {
             </ul>
           </div>
 
-      </section>
-
-      <section class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal">
-        <div class="umd-layout-background-highlight-light">
-          <p class="umd-text-line-trailing-light umd-layout-space-vertical-interior-child"><span>Related Resources</span></p>
-          <div class="umd-layout-grid-gap-three">
-            <umd-element-card>
-              <h3 slot="headline"><a href="index.html">Feeds API Reference</a></h3>
-              <p slot="text">Complete API documentation for all feed exports.</p>
-              <umd-element-call-to-action slot="actions" data-display="secondary">
-                <a href="index.html">View API</a>
-              </umd-element-call-to-action>
-            </umd-element-card>
-            <umd-element-card>
-              <h3 slot="headline"><a href="../components/usage.html">Components Usage Guide</a></h3>
-              <p slot="text">Use feed components alongside other UMD web components.</p>
-              <umd-element-call-to-action slot="actions" data-display="secondary">
-                <a href="../components/usage.html">View Guide</a>
-              </umd-element-call-to-action>
-            </umd-element-card>
-            <umd-element-card>
-              <h3 slot="headline"><a href="../elements/use-cases.html">Elements Use Cases</a></h3>
-              <p slot="text">Imperative DOM creation with the ElementModel pattern.</p>
-              <umd-element-call-to-action slot="actions" data-display="secondary">
-                <a href="../elements/use-cases.html">View Use Cases</a>
-              </umd-element-call-to-action>
-            </umd-element-card>
+          <!-- Related Resources -->
+          <div style="margin-top: 3rem;">
+            <h3 class="umd-sans-larger">Related Resources</h3>
+            <div class="umd-layout-grid-gap-three">
+              <umd-element-card data-visual-bordered="true">
+                <h3 slot="headline"><a href="index.html">Feeds API Reference</a></h3>
+                <p slot="text">Complete API documentation for all feed exports.</p>
+                <umd-element-call-to-action slot="actions" data-display="secondary">
+                  <a href="index.html">View API</a>
+                </umd-element-call-to-action>
+              </umd-element-card>
+              <umd-element-card data-visual-bordered="true">
+                <h3 slot="headline"><a href="../components/usage.html">Components Usage Guide</a></h3>
+                <p slot="text">Use feed components alongside other UMD web components.</p>
+                <umd-element-call-to-action slot="actions" data-display="secondary">
+                  <a href="../components/usage.html">View Guide</a>
+                </umd-element-call-to-action>
+              </umd-element-card>
+              <umd-element-card data-visual-bordered="true">
+                <h3 slot="headline"><a href="../elements/use-cases.html">Elements Use Cases</a></h3>
+                <p slot="text">Imperative DOM creation with the ElementModel pattern.</p>
+                <umd-element-call-to-action slot="actions" data-display="secondary">
+                  <a href="../elements/use-cases.html">View Use Cases</a>
+                </umd-element-call-to-action>
+              </umd-element-card>
+            </div>
           </div>
-        </div>
-      </section>
 
-      <section class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal">
-        <umd-element-banner-promo data-theme="dark" data-visual-icon-seal="true">
-          <p slot="headline">For Content Managers</p>
-          <p slot="text">Feeds display dynamic UMD content like news and events. For feed configuration help and visual examples, visit <a href="https://designsystem.umd.edu">designsystem.umd.edu</a>.</p>
-        </umd-element-banner-promo>
+        </div>
       </section>
     </main>
 

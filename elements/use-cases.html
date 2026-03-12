@@ -13,15 +13,34 @@
       href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../assets/styles/docs.css" />
+    <style>
+      pre[class*="language-"] { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+      pre { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; }
+      code { color: #e21833; }
+      pre code { color: inherit; }
+      table { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; }
+      th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
+      td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
+      td code, th code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
+      .code-example { background-color: #fff; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
+      .use-case-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 1.5rem; margin-bottom: 2.5rem; background-color: #fff; }
+      .use-case-card h4 { color: #e21833; margin-bottom: 1rem; }
+      .use-case-card ul { padding-left: 1.5rem; }
+      .option-table { width: 100%; margin: 1rem 0; }
+      .option-table th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
+      .option-table td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
+      .option-table code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
+      h3 { margin-top: 3rem; margin-bottom: 1rem; }
+      h5 { font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+      section > h3:first-child, .use-case-card > h4:first-child { margin-top: 0; }
+    </style>
   </head>
   <body>
     <header>
-      <umd-element-navigation-utility data-info="search"></umd-element-navigation-utility>
       <div class="umd-layout-space-horizontal-full">
         <umd-element-navigation-header sticky>
           <a slot="logo" href="../index.html">
-            <img src="../assets/logo-ds-docs.svg" alt="Design System Docs" height="32" style="display:block;">
+            <span class="umd-sans-larger-bold">Design System Docs</span>
           </a>
           <div slot="main-navigation">
             <umd-element-nav-item>
@@ -92,17 +111,22 @@
     </div>
 
     <main>
-      <section class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal">
+      <section class="umd-layout-space-vertical-landing">
+        <div class="umd-layout-space-horizontal-normal">
 
           <section id="getting-started">
-            <div class="umd-layout-space-vertical-landing-child">
-              <h2 class="umd-sans-extralarge-bold">Getting Started</h2>
-            </div>
+            <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
+              <h2 slot="headline">Getting Started</h2>
+              <div slot="text"><p>
+                <strong>Where This Package Fits:</strong> Elements sits in the <strong>Application</strong> layer. It depends on <strong>Tokens</strong>, <strong>Builder</strong>, <strong>Utilities</strong>, and <strong>Styles</strong> (peer). It provides imperative DOM creation functions used by <strong>Components</strong>.
+                <a href="../architecture.html">See full architecture</a>.
+              </p></div>
+            </umd-element-section-intro>
           </section>
 
           <!-- Section 1: When to Use Elements -->
           <div class="use-case-card">
-            <h4 class="umd-sans-larger-bold">1. When to Use Elements</h4>
+            <h4>1. When to Use Elements</h4>
             <p>The Elements package is designed for scenarios where you need programmatic control over DOM creation rather than declarative web components.</p>
             <ul>
               <li><strong>Imperative DOM creation</strong> -- When you need to build UI elements directly in JavaScript rather than through custom HTML tags.</li>
@@ -110,13 +134,13 @@
               <li><strong>Custom compositions</strong> -- When you need to combine multiple elements into bespoke layouts not covered by existing web components.</li>
               <li><strong>Lifecycle control</strong> -- When you need the <code>update()</code> and <code>destroy()</code> methods to manage element state and cleanup.</li>
             </ul>
-            <h5 class="umd-sans-large">Elements vs. Components</h5>
-            <p class="umd-text-rich-simple">If you simply need to drop a UMD component into an HTML page, use the <a href="../components/usage.html">Components package</a> (web components). Elements are for developers who need lower-level programmatic control.</p>
+            <h5>Elements vs. Components</h5>
+            <p>If you simply need to drop a UMD component into an HTML page, use the <a href="../components/usage.html">Components package</a> (web components). Elements are for developers who need lower-level programmatic control.</p>
           </div>
 
           <!-- Section 2: The ElementModel Pattern -->
           <div class="use-case-card">
-            <h4 class="umd-sans-larger-bold">2. The ElementModel Pattern</h4>
+            <h4>2. The ElementModel Pattern</h4>
             <p>Every element creation function returns an <code>ElementModel</code> object with a consistent interface:</p>
 
             <pre><code class="language-typescript">interface ElementModel {
@@ -146,7 +170,7 @@ const style = document.createElement('style');
 style.textContent = card.styles;
 document.head.appendChild(style);</code></pre>
 
-            <table class="umd-table-inline docs-table-black-header option-table">
+            <table class="option-table">
               <thead>
                 <tr>
                   <th>Property</th>
@@ -181,7 +205,7 @@ document.head.appendChild(style);</code></pre>
 
           <!-- Section 3: Atomic Elements -->
           <div class="use-case-card">
-            <h4 class="umd-sans-larger-bold">3. Atomic Elements</h4>
+            <h4>3. Atomic Elements</h4>
             <p>Atomic elements are simple, single-purpose building blocks. They represent the smallest visual units in the design system.</p>
 
             <pre><code class="language-typescript">import { Atomic } from '@universityofmaryland/web-elements-library/atomic';
@@ -195,8 +219,8 @@ const cta = Atomic.actions.primary({ label: 'Learn More', url: '/learn' });
 // Assets (images, video)
 const image = Atomic.assets.image({ src: 'photo.jpg', alt: 'Campus' });</code></pre>
 
-            <h5 class="umd-sans-large">Available Atomic Categories</h5>
-            <table class="umd-table-inline docs-table-black-header option-table">
+            <h5 class="umd-sans-medium">Available Atomic Categories</h5>
+            <table class="option-table">
               <thead>
                 <tr>
                   <th>Category</th>
@@ -246,7 +270,7 @@ const image = Atomic.assets.image({ src: 'photo.jpg', alt: 'Campus' });</code></
 
           <!-- Section 4: Composite Elements -->
           <div class="use-case-card">
-            <h4 class="umd-sans-larger-bold">4. Composite Elements</h4>
+            <h4>4. Composite Elements</h4>
             <p>Composite elements combine multiple atomic elements into complex, multi-part UI structures.</p>
 
             <pre><code class="language-typescript">import { Composite } from '@universityofmaryland/web-elements-library/composite';
@@ -260,8 +284,8 @@ const hero = Composite.hero.base({ /* props */ });
 
 // Navigation, Person, Quote, Footer, etc.</code></pre>
 
-            <h5 class="umd-sans-large">Available Composite Categories</h5>
-            <table class="umd-table-inline docs-table-black-header option-table">
+            <h5 class="umd-sans-medium">Available Composite Categories</h5>
+            <table class="option-table">
               <thead>
                 <tr>
                   <th>Category</th>
@@ -306,39 +330,39 @@ const hero = Composite.hero.base({ /* props */ });
           </div>
 
           <!-- Section 5: Content Manager Note -->
-          <umd-element-banner-promo data-theme="dark" data-visual-icon-seal="true">
+          <umd-element-alert-page>
             <p slot="headline">Content Manager Note</p>
             <p slot="text">Elements are a developer tool for building UI programmatically. For visual component examples and design guidance, visit <a href="https://designsystem.umd.edu">designsystem.umd.edu</a>.</p>
-          </umd-element-banner-promo>
+          </umd-element-alert-page>
 
-      </section>
-
-      <section class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal">
-        <div class="umd-layout-background-highlight-light">
-          <p class="umd-text-line-trailing-light umd-layout-space-vertical-interior-child"><span>Related Resources</span></p>
-          <div class="umd-layout-grid-gap-three">
-            <umd-element-card>
-              <h3 slot="headline"><a href="index.html">Elements API Reference</a></h3>
-              <p slot="text">Complete API documentation for all element exports.</p>
-              <umd-element-call-to-action slot="actions" data-display="secondary">
-                <a href="index.html">View API</a>
-              </umd-element-call-to-action>
-            </umd-element-card>
-            <umd-element-card>
-              <h3 slot="headline"><a href="../components/usage.html">Components Usage Guide</a></h3>
-              <p slot="text">Web components that wrap element builders for end users.</p>
-              <umd-element-call-to-action slot="actions" data-display="secondary">
-                <a href="../components/usage.html">View Guide</a>
-              </umd-element-call-to-action>
-            </umd-element-card>
-            <umd-element-card>
-              <h3 slot="headline"><a href="../infrastructure/model-and-builder.html">Model &amp; Builder</a></h3>
-              <p slot="text">Underlying model and builder patterns used by elements.</p>
-              <umd-element-call-to-action slot="actions" data-display="secondary">
-                <a href="../infrastructure/model-and-builder.html">View Docs</a>
-              </umd-element-call-to-action>
-            </umd-element-card>
+          <!-- Related Resources -->
+          <div style="margin-top: 3rem;">
+            <h3 class="umd-sans-larger">Related Resources</h3>
+            <div class="umd-layout-grid-gap-three">
+              <umd-element-card data-visual-bordered="true">
+                <h3 slot="headline"><a href="index.html">Elements API Reference</a></h3>
+                <p slot="text">Complete API documentation for all element exports.</p>
+                <umd-element-call-to-action slot="actions" data-display="secondary">
+                  <a href="index.html">View API</a>
+                </umd-element-call-to-action>
+              </umd-element-card>
+              <umd-element-card data-visual-bordered="true">
+                <h3 slot="headline"><a href="../components/usage.html">Components Usage Guide</a></h3>
+                <p slot="text">Web components that wrap element builders for end users.</p>
+                <umd-element-call-to-action slot="actions" data-display="secondary">
+                  <a href="../components/usage.html">View Guide</a>
+                </umd-element-call-to-action>
+              </umd-element-card>
+              <umd-element-card data-visual-bordered="true">
+                <h3 slot="headline"><a href="../infrastructure/model-and-builder.html">Model &amp; Builder</a></h3>
+                <p slot="text">Underlying model and builder patterns used by elements.</p>
+                <umd-element-call-to-action slot="actions" data-display="secondary">
+                  <a href="../infrastructure/model-and-builder.html">View Docs</a>
+                </umd-element-call-to-action>
+              </umd-element-card>
+            </div>
           </div>
+
         </div>
       </section>
     </main>

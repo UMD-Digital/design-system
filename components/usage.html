@@ -10,15 +10,78 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="../assets/styles/docs.css" />
+    <style>
+      pre[class*="language-"] { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
+      pre { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; }
+      code { color: #e21833; }
+      pre code { color: inherit; }
+      table { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; }
+      th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
+      td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
+      td code, th code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
+      .code-example { background-color: #fff; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
+      .use-case-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 1.5rem; margin-bottom: 2.5rem; background-color: #fff; }
+      .use-case-card h4 { color: #e21833; margin-bottom: 1rem; }
+      .use-case-card ul { padding-left: 1.5rem; }
+      .feature-list {
+        list-style: none;
+        padding-left: 0;
+      }
+      .feature-list li {
+        padding: 0.5rem 0;
+        padding-left: 1.5rem;
+        position: relative;
+      }
+      .feature-list li:before {
+        content: '\2713';
+        position: absolute;
+        left: 0;
+        color: #28a745;
+        font-weight: bold;
+      }
+      .alert-custom {
+        background-color: #e3f2fd;
+        border: 1px solid #90caf9;
+        color: #0d47a1;
+        padding: 1.5rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+      }
+      .slot-table th {
+        background-color: #e21833;
+        color: white;
+        padding: 0.75rem 1rem;
+        border: 1px solid #dee2e6;
+      }
+      .slot-table td {
+        padding: 0.75rem 1rem;
+        border: 1px solid #dee2e6;
+      }
+      .slot-table {
+        background-color: white;
+        border-radius: 8px;
+        overflow: hidden;
+        margin: 1rem 0 2rem;
+        width: 100%;
+      }
+      .content-manager-callout {
+        background-color: #fff8e1;
+        border-left: 4px solid #ffc107;
+        padding: 1rem 1.5rem;
+        border-radius: 0 8px 8px 0;
+        margin-top: 2rem;
+      }
+      h3 { margin-top: 3rem; margin-bottom: 1rem; }
+      h5 { font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+      section > h3:first-child, .use-case-card > h4:first-child { margin-top: 0; }
+    </style>
   </head>
   <body>
     <header>
-      <umd-element-navigation-utility data-info="search"></umd-element-navigation-utility>
       <div class="umd-layout-space-horizontal-full">
         <umd-element-navigation-header sticky>
           <a slot="logo" href="../index.html">
-            <img src="../assets/logo-ds-docs.svg" alt="Design System Docs" height="32" style="display:block;">
+            <span class="umd-sans-larger-bold">Design System Docs</span>
           </a>
           <div slot="main-navigation">
             <umd-element-nav-item>
@@ -89,37 +152,33 @@
         </div>
       </div>
 
-      <section class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal">
+      <section class="umd-layout-space-vertical-landing">
+        <div class="umd-layout-space-horizontal-normal">
 
           <section id="getting-started" class="umd-layout-space-vertical-landing">
-            <div class="umd-layout-space-vertical-landing-child">
-              <h2 class="umd-sans-extralarge-bold">Getting Started</h2>
-            </div>
-            <div class="umd-layout-space-vertical-landing-child">
-              <p>
+            <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
+              <h2 slot="headline">Getting Started</h2>
+              <div slot="text"><p>
                 <strong>Where This Package Fits:</strong> Components sits at the top of the <strong>Application</strong> layer. It depends on all lower packages and provides ready-to-use web components.
                 <a href="../architecture.html">See full architecture</a>.
-              </p>
-              <p>
+              </p><p>
                 For installation and initial setup instructions, see the
                 <a href="../getting-started.html">Getting Started Guide</a>. This page focuses on
                 HTML usage patterns for UMD Web Components.
-              </p>
-            </div>
+              </p></div>
+            </umd-element-section-intro>
           </section>
 
           <!-- Basic Usage Section -->
           <section id="basic-usage" class="umd-layout-space-vertical-landing">
-            <div class="umd-layout-space-vertical-landing-child">
-              <h2 class="umd-sans-extralarge-bold">Basic Usage Examples</h2>
-            </div>
+            <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
+              <h2 slot="headline">Basic Usage Examples</h2>
+            </umd-element-section-intro>
 
-            <umd-element-accordion-item>
-              <p slot="headline">Hero Component</p>
-              <div slot="text">
-                <p>Create engaging hero sections with built-in responsive behavior:</p>
-                <div class="code-example">
-                  <pre><code class="language-html">&lt;umd-element-hero data-theme="dark" data-display="overlay"&gt;
+            <h3 class="umd-sans-larger">Hero Component</h3>
+            <p>Create engaging hero sections with built-in responsive behavior:</p>
+            <div class="code-example">
+              <pre><code class="language-html">&lt;umd-element-hero data-theme="dark" data-display="overlay"&gt;
   &lt;img slot="image" src="hero.jpg" alt="Campus view"&gt;
   &lt;p slot="eyebrow"&gt;Welcome to Maryland&lt;/p&gt;
   &lt;h1 slot="headline"&gt;Fearless Ideas Start Here&lt;/h1&gt;
@@ -132,34 +191,56 @@
     &lt;/umd-element-call-to-action&gt;
   &lt;/div&gt;
 &lt;/umd-element-hero&gt;</code></pre>
-                </div>
-                <h4 class="umd-sans-larger-bold umd-layout-space-vertical-interior-child">Hero Slot Reference</h4>
-                <table class="umd-table-inline docs-table-black-header">
-                  <thead>
-                    <tr>
-                      <th>Slot Name</th>
-                      <th>Required</th>
-                      <th>Allowed Elements</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td><code>image</code></td><td>No</td><td><code>img</code></td><td>Background image</td></tr>
-                    <tr><td><code>eyebrow</code></td><td>No</td><td><code>p</code>, <code>span</code></td><td>Small text above headline</td></tr>
-                    <tr><td><code>headline</code></td><td>Yes</td><td><code>h1</code>&ndash;<code>h6</code></td><td>Main heading</td></tr>
-                    <tr><td><code>text</code></td><td>No</td><td><code>div</code></td><td>Supporting copy</td></tr>
-                    <tr><td><code>actions</code></td><td>No</td><td><code>div</code></td><td>CTA buttons</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </umd-element-accordion-item>
+            </div>
 
-            <umd-element-accordion-item>
-              <p slot="headline">Card Component</p>
-              <div slot="text">
-                <p>Display content in flexible card layouts:</p>
-                <div class="code-example">
-                  <pre><code class="language-html">&lt;umd-element-card data-theme="light"&gt;
+            <h4 class="umd-sans-medium">Hero Slot Reference</h4>
+            <table class="slot-table">
+              <thead>
+                <tr>
+                  <th>Slot Name</th>
+                  <th>Required</th>
+                  <th>Allowed Elements</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>image</code></td>
+                  <td>No</td>
+                  <td><code>img</code></td>
+                  <td>Background image</td>
+                </tr>
+                <tr>
+                  <td><code>eyebrow</code></td>
+                  <td>No</td>
+                  <td><code>p</code>, <code>span</code></td>
+                  <td>Small text above headline</td>
+                </tr>
+                <tr>
+                  <td><code>headline</code></td>
+                  <td>Yes</td>
+                  <td><code>h1</code>&ndash;<code>h6</code></td>
+                  <td>Main heading</td>
+                </tr>
+                <tr>
+                  <td><code>text</code></td>
+                  <td>No</td>
+                  <td><code>div</code></td>
+                  <td>Supporting copy</td>
+                </tr>
+                <tr>
+                  <td><code>actions</code></td>
+                  <td>No</td>
+                  <td><code>div</code></td>
+                  <td>CTA buttons</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 class="umd-sans-larger">Card Component</h3>
+            <p>Display content in flexible card layouts:</p>
+            <div class="code-example">
+              <pre><code class="language-html">&lt;umd-element-card data-theme="light"&gt;
   &lt;a slot="image" href="/article"&gt;
     &lt;img src="news.jpg" alt="News image"&gt;
   &lt;/a&gt;
@@ -171,38 +252,60 @@
     UMD researchers have made a significant breakthrough that could
     revolutionize our understanding of climate patterns.
   &lt;/p&gt;
-  &lt;umd-element-call-to-action data-display="primary" slot="actions"&gt;
-    &lt;a href="/apply"&gt;Apply Now&lt;/a&gt;
-  &lt;/umd-element-call-to-action&gt;
+    &lt;umd-element-call-to-action data-display="primary" slot="actions"&gt;
+      &lt;a href="/apply"&gt;Apply Now&lt;/a&gt;
+    &lt;/umd-element-call-to-action&gt;
 &lt;/umd-element-card&gt;</code></pre>
-                </div>
-                <h4 class="umd-sans-larger-bold umd-layout-space-vertical-interior-child">Card Slot Reference</h4>
-                <table class="umd-table-inline docs-table-black-header">
-                  <thead>
-                    <tr>
-                      <th>Slot Name</th>
-                      <th>Required</th>
-                      <th>Allowed Elements</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td><code>image</code></td><td>No</td><td><code>a &gt; img</code></td><td>Card image (wrap in link for click)</td></tr>
-                    <tr><td><code>eyebrow</code></td><td>No</td><td><code>p</code>, <code>span</code></td><td>Category label</td></tr>
-                    <tr><td><code>headline</code></td><td>Yes</td><td><code>h1</code>&ndash;<code>h6</code> (with optional <code>a</code>)</td><td>Card title</td></tr>
-                    <tr><td><code>text</code></td><td>No</td><td><code>p</code>, <code>div</code></td><td>Card body text</td></tr>
-                    <tr><td><code>actions</code></td><td>No</td><td><code>umd-element-call-to-action</code></td><td>Action buttons</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </umd-element-accordion-item>
+            </div>
 
-            <umd-element-accordion-item>
-              <p slot="headline">Navigation Component</p>
-              <div slot="text">
-                <p>Implement accessible navigation with mobile support:</p>
-                <div class="code-example">
-                  <pre><code class="language-html">&lt;umd-element-navigation-primary&gt;
+            <h4 class="umd-sans-medium">Card Slot Reference</h4>
+            <table class="slot-table">
+              <thead>
+                <tr>
+                  <th>Slot Name</th>
+                  <th>Required</th>
+                  <th>Allowed Elements</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>image</code></td>
+                  <td>No</td>
+                  <td><code>a &gt; img</code></td>
+                  <td>Card image (wrap in link for click)</td>
+                </tr>
+                <tr>
+                  <td><code>eyebrow</code></td>
+                  <td>No</td>
+                  <td><code>p</code>, <code>span</code></td>
+                  <td>Category label</td>
+                </tr>
+                <tr>
+                  <td><code>headline</code></td>
+                  <td>Yes</td>
+                  <td><code>h1</code>&ndash;<code>h6</code> (with optional <code>a</code>)</td>
+                  <td>Card title</td>
+                </tr>
+                <tr>
+                  <td><code>text</code></td>
+                  <td>No</td>
+                  <td><code>p</code>, <code>div</code></td>
+                  <td>Card body text</td>
+                </tr>
+                <tr>
+                  <td><code>actions</code></td>
+                  <td>No</td>
+                  <td><code>umd-element-call-to-action</code></td>
+                  <td>Action buttons</td>
+                </tr>
+              </tbody>
+            </table>
+
+            <h3 class="umd-sans-larger">Navigation Component</h3>
+            <p>Implement accessible navigation with mobile support:</p>
+            <div class="code-example">
+              <pre><code class="language-html">&lt;umd-element-navigation-primary&gt;
   &lt;div slot="logo"&gt;
     &lt;a href="/"&gt;
       &lt;img src="umd-logo.svg" alt="University of Maryland"&gt;
@@ -220,59 +323,66 @@
     &lt;a href="/search"&gt;Search&lt;/a&gt;
   &lt;/div&gt;
 &lt;/umd-element-navigation-primary&gt;</code></pre>
-                </div>
-                <h4 class="umd-sans-larger-bold umd-layout-space-vertical-interior-child">Navigation Slot Reference</h4>
-                <table class="umd-table-inline docs-table-black-header">
-                  <thead>
-                    <tr>
-                      <th>Slot Name</th>
-                      <th>Required</th>
-                      <th>Allowed Elements</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr><td><code>logo</code></td><td>Yes</td><td><code>div &gt; a &gt; img</code></td><td>Site logo</td></tr>
-                    <tr><td><code>primary</code></td><td>Yes</td><td><code>nav &gt; ul &gt; li &gt; a</code></td><td>Main navigation links</td></tr>
-                    <tr><td><code>utility</code></td><td>No</td><td><code>div</code></td><td>Utility links (search, etc.)</td></tr>
-                  </tbody>
-                </table>
-              </div>
-            </umd-element-accordion-item>
+            </div>
+
+            <h4 class="umd-sans-medium">Navigation Slot Reference</h4>
+            <table class="slot-table">
+              <thead>
+                <tr>
+                  <th>Slot Name</th>
+                  <th>Required</th>
+                  <th>Allowed Elements</th>
+                  <th>Description</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>logo</code></td>
+                  <td>Yes</td>
+                  <td><code>div &gt; a &gt; img</code></td>
+                  <td>Site logo</td>
+                </tr>
+                <tr>
+                  <td><code>primary</code></td>
+                  <td>Yes</td>
+                  <td><code>nav &gt; ul &gt; li &gt; a</code></td>
+                  <td>Main navigation links</td>
+                </tr>
+                <tr>
+                  <td><code>utility</code></td>
+                  <td>No</td>
+                  <td><code>div</code></td>
+                  <td>Utility links (search, etc.)</td>
+                </tr>
+              </tbody>
+            </table>
           </section>
 
           <!-- Styles Integration Section -->
           <section id="styles-integration" class="umd-layout-space-vertical-landing">
-            <div class="umd-layout-space-vertical-landing-child">
-              <h2 class="umd-sans-extralarge-bold">Styles Integration</h2>
-            </div>
-            <div class="umd-layout-space-vertical-landing-child">
-              <p>
+            <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
+              <h2 slot="headline">Styles Integration</h2>
+              <div slot="text"><p>
                 Components work seamlessly with the UMD Styles package for consistent
                 spacing, grids, and utilities. You can load styles via static CSS files
                 or through npm imports.
-              </p>
-            </div>
+              </p></div>
+            </umd-element-section-intro>
 
-            <div class="umd-layout-space-vertical-landing-child">
-            <h3 class="umd-sans-larger-bold">Option A: Static CSS (Simplest)</h3>
+            <h3 class="umd-sans-larger">Option A: Static CSS (Simplest)</h3>
             <p>Load pre-compiled CSS directly via CDN or a local copy:</p>
             <div class="code-example">
               <pre><code class="language-html">&lt;!-- Static CSS via CDN --&gt;
 &lt;link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/styles.min.css"&gt;</code></pre>
             </div>
-            </div>
 
-            <div class="umd-layout-space-vertical-landing-child">
-            <h3 class="umd-sans-larger-bold">Option B: npm Import</h3>
+            <h3 class="umd-sans-larger">Option B: npm Import</h3>
             <p>Import CSS in your JavaScript entry file when using a bundler:</p>
             <div class="code-example">
               <pre><code class="language-javascript">import '@universityofmaryland/web-styles-library/css/styles.min.css';</code></pre>
             </div>
-            </div>
 
-            <div class="umd-layout-space-vertical-landing-child">
-            <h3 class="umd-sans-larger-bold">Using CSS Utility Classes</h3>
+            <h3 class="umd-sans-larger">Using CSS Utility Classes</h3>
             <p>Once styles are loaded, use CSS utility classes in your HTML alongside web components:</p>
             <div class="code-example">
               <pre><code class="language-html">&lt;!-- Apply consistent vertical spacing between sections --&gt;
@@ -285,19 +395,17 @@
   &lt;!-- Card grid below --&gt;
 &lt;/div&gt;</code></pre>
             </div>
-            </div>
           </section>
 
           <!-- Common Patterns Section -->
           <section id="common-patterns" class="umd-layout-space-vertical-landing">
-            <div class="umd-layout-space-vertical-landing-child">
-              <h2 class="umd-sans-extralarge-bold">Common Implementation Patterns</h2>
-            </div>
-            <umd-element-accordion-item>
-              <p slot="headline">Landing Page Hero Section</p>
-              <div slot="text">
-                <div class="code-example">
-                  <pre><code class="language-html">&lt;!-- Full-width hero with overlay text --&gt;
+            <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
+              <h2 slot="headline">Common Implementation Patterns</h2>
+            </umd-element-section-intro>
+
+            <h3 class="umd-sans-larger">Landing Page Hero Section</h3>
+            <div class="code-example">
+              <pre><code class="language-html">&lt;!-- Full-width hero with overlay text --&gt;
 &lt;section class="umd-layout-space-vertical-landing"&gt;
   &lt;umd-element-hero data-display="overlay" data-theme="dark"&gt;
     &lt;img slot="image" src="campus-aerial.jpg" alt="Aerial view of campus"&gt;
@@ -317,15 +425,11 @@
     &lt;/div&gt;
   &lt;/umd-element-hero&gt;
 &lt;/section&gt;</code></pre>
-                </div>
-              </div>
-            </umd-element-accordion-item>
+            </div>
 
-            <umd-element-accordion-item>
-              <p slot="headline">News Grid Section</p>
-              <div slot="text">
-                <div class="code-example">
-                  <pre><code class="language-html">&lt;section class="umd-layout-space-vertical-landing"&gt;
+            <h3 class="umd-sans-larger">News Grid Section</h3>
+            <div class="code-example">
+              <pre><code class="language-html">&lt;section class="umd-layout-space-vertical-landing"&gt;
   &lt;div class="umd-layout-space-horizontal-normal"&gt;
     &lt;h2 class="umd-sans-larger"&gt;Latest News&lt;/h2&gt;
 
@@ -350,15 +454,11 @@
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/section&gt;</code></pre>
-                </div>
-              </div>
-            </umd-element-accordion-item>
+            </div>
 
-            <umd-element-accordion-item>
-              <p slot="headline">Accordion FAQ Section</p>
-              <div slot="text">
-                <div class="code-example">
-                  <pre><code class="language-html">&lt;section class="umd-layout-space-vertical"&gt;
+            <h3 class="umd-sans-larger">Accordion FAQ Section</h3>
+            <div class="code-example">
+              <pre><code class="language-html">&lt;section class="umd-layout-space-vertical"&gt;
   &lt;div class="umd-layout-space-horizontal-small"&gt;
     &lt;h2 class="umd-sans-larger"&gt;
       Frequently Asked Questions
@@ -391,14 +491,12 @@
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/section&gt;</code></pre>
-                </div>
-              </div>
-            </umd-element-accordion-item>
+            </div>
           </section>
 
           <!-- Best Practices -->
           <div id="best-practices" class="alert-custom">
-            <h5 class="umd-sans-small">Best Practices</h5>
+            <h5 class="umd-sans-medium">Best Practices</h5>
             <ul class="feature-list">
               <li>Always use semantic HTML within slots</li>
               <li>Include descriptive alt text for images</li>
@@ -410,33 +508,30 @@
           </div>
 
           <!-- Content Manager Callout -->
-          <umd-element-banner-promo data-theme="dark" data-visual-icon-seal="true">
-            <p slot="headline">For Content Managers</p>
-            <p slot="text">See visual examples and component configuration at <a href="https://designsystem.umd.edu" target="_blank">designsystem.umd.edu</a>.</p>
-          </umd-element-banner-promo>
+          <div class="content-manager-callout">
+            <strong>For Content Managers</strong> &mdash; See visual examples and component configuration at
+            <a href="https://designsystem.umd.edu" target="_blank">designsystem.umd.edu</a>.
+          </div>
 
-      </section>
-
-      <section class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal">
           <!-- Related Resources -->
-          <div class="umd-layout-background-highlight-light">
-            <p class="umd-text-line-trailing-light umd-layout-space-vertical-interior-child"><span>Related Resources</span></p>
+          <div style="margin-top: 3rem;">
+            <h3 class="umd-sans-larger">Related Resources</h3>
             <div class="umd-layout-grid-gap-three">
-              <umd-element-card>
+              <umd-element-card data-visual-bordered="true">
                 <h3 slot="headline"><a href="index.html">Components API Reference</a></h3>
                 <p slot="text">Complete API documentation for all component exports.</p>
                 <umd-element-call-to-action slot="actions" data-display="secondary">
                   <a href="index.html">View API</a>
                 </umd-element-call-to-action>
               </umd-element-card>
-              <umd-element-card>
+              <umd-element-card data-visual-bordered="true">
                 <h3 slot="headline"><a href="advanced-usage.html">Advanced Usage</a></h3>
                 <p slot="text">TypeScript, framework integration, testing, and custom component development.</p>
                 <umd-element-call-to-action slot="actions" data-display="secondary">
                   <a href="advanced-usage.html">Advanced Guide</a>
                 </umd-element-call-to-action>
               </umd-element-card>
-              <umd-element-card>
+              <umd-element-card data-visual-bordered="true">
                 <h3 slot="headline"><a href="advanced-bundling.html">Advanced Bundling</a></h3>
                 <p slot="text">Code splitting, lazy loading, and bundle optimization.</p>
                 <umd-element-call-to-action slot="actions" data-display="secondary">
@@ -445,6 +540,7 @@
               </umd-element-card>
             </div>
           </div>
+        </div>
       </section>
     </main>
 

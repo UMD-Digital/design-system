@@ -13,44 +13,36 @@
       href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css"
       rel="stylesheet"
     />
-    <style>
-      pre[class*="language-"] { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
-      pre { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; }
-      code { color: #e21833; }
-      pre code { color: inherit; }
-      table { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; }
-      th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
-      td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
-      td code, th code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
-      .code-example { background-color: #fff; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
-      .use-case-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 1.5rem; margin-bottom: 2.5rem; background-color: #fff; }
-      .use-case-card h4 { color: #e21833; margin-bottom: 1rem; }
-      .use-case-card ul { padding-left: 1.5rem; }
-      .category-table { width: 100%; margin: 1rem 0; }
-      .category-table th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
-      .category-table td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
-      .category-table code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
-      h3 { margin-top: 3rem; margin-bottom: 1rem; }
-      h5 { font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; }
-      section > h3:first-child, .use-case-card > h4:first-child { margin-top: 0; }
-    </style>
+    <link rel="stylesheet" href="../assets/styles/docs.css" />
   </head>
   <body>
     <header>
+      <umd-element-navigation-utility
+        data-info="search"
+      ></umd-element-navigation-utility>
       <div class="umd-layout-space-horizontal-full">
         <umd-element-navigation-header sticky>
           <a slot="logo" href="../index.html">
-            <span class="umd-sans-larger-bold">Design System Docs</span>
+            <img
+              src="../assets/logo-ds-docs.svg"
+              alt="Design System Docs"
+              height="32"
+              style="display: block"
+            />
           </a>
           <div slot="main-navigation">
             <umd-element-nav-item>
               <a slot="primary-link" href="../index.html">Home</a>
             </umd-element-nav-item>
             <umd-element-nav-item>
-              <a slot="primary-link" href="../architecture.html">Architecture</a>
+              <a slot="primary-link" href="../architecture.html"
+                >Architecture</a
+              >
             </umd-element-nav-item>
             <umd-element-nav-item>
-              <a slot="primary-link" href="../getting-started.html">Getting Started</a>
+              <a slot="primary-link" href="../getting-started.html"
+                >Getting Started</a
+              >
             </umd-element-nav-item>
             <umd-element-nav-item>
               <a slot="primary-link" href="#">Packages</a>
@@ -63,20 +55,33 @@
                   <li><a href="../tokens/use-cases.html">Tokens</a></li>
                   <li><a href="../icons/use-cases.html">Icons</a></li>
                   <li><a href="../utilities/use-cases.html">Utilities</a></li>
-                  <li><a href="../infrastructure/model-and-builder.html">Model &amp; Builder</a></li>
+                  <li>
+                    <a href="../infrastructure/model-and-builder.html"
+                      >Model &amp; Builder</a
+                    >
+                  </li>
                 </ul>
               </nav>
             </umd-element-nav-item>
             <umd-element-nav-item>
-              <a slot="primary-link" href="http://playground.designsystem.umd.edu" target="_blank">Playground</a>
+              <a
+                slot="primary-link"
+                href="http://playground.designsystem.umd.edu"
+                target="_blank"
+                >Playground</a
+              >
             </umd-element-nav-item>
           </div>
           <div slot="primary-slide-links">
             <a href="../index.html"><span>Home</span></a>
             <a href="../architecture.html"><span>Architecture</span></a>
             <a href="../getting-started.html"><span>Getting Started</span></a>
-            <a href="#" data-child-ref="slide-packages"><span>Packages</span></a>
-            <a href="http://playground.designsystem.umd.edu" target="_blank"><span>Playground</span></a>
+            <a href="#" data-child-ref="slide-packages"
+              ><span>Packages</span></a
+            >
+            <a href="http://playground.designsystem.umd.edu" target="_blank"
+              ><span>Playground</span></a
+            >
           </div>
           <div slot="children-slides">
             <div data-parent-ref="slide-packages">
@@ -87,7 +92,9 @@
               <a href="../tokens/use-cases.html"><span>Tokens</span></a>
               <a href="../icons/use-cases.html"><span>Icons</span></a>
               <a href="../utilities/use-cases.html"><span>Utilities</span></a>
-              <a href="../infrastructure/model-and-builder.html"><span>Model &amp; Builder</span></a>
+              <a href="../infrastructure/model-and-builder.html"
+                ><span>Model &amp; Builder</span></a
+              >
             </div>
           </div>
         </umd-element-navigation-header>
@@ -111,108 +118,110 @@
     </div>
 
     <main>
-      <section class="umd-layout-space-vertical-landing">
-        <div class="umd-layout-space-horizontal-normal">
-
-          <section id="getting-started">
-            <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
-              <h2 slot="headline">Getting Started</h2>
-              <div slot="text"><p>
-                <strong>Where This Package Fits:</strong> Icons sits in the <strong>Foundation</strong> layer. It has no dependencies and provides SVG icon strings used by <strong>Elements</strong> and <strong>Components</strong>.
-                <a href="../architecture.html">See full architecture</a>.
-              </p></div>
-            </umd-element-section-intro>
-          </section>
-
-          <!-- Section 1: Icon Categories -->
-          <div class="use-case-card">
-            <h4>1. Icon Categories</h4>
-            <p>The Icons package organizes all SVG assets into semantic categories. Each category can be imported independently for optimal tree-shaking.</p>
-
-            <table class="category-table">
-              <thead>
-                <tr>
-                  <th>Category</th>
-                  <th>Import Path</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><code>arrows</code></td>
-                  <td><code>./arrows</code></td>
-                  <td>Directional arrows</td>
-                </tr>
-                <tr>
-                  <td><code>brand</code></td>
-                  <td><code>./brand</code></td>
-                  <td>UMD brand marks</td>
-                </tr>
-                <tr>
-                  <td><code>calendar</code></td>
-                  <td><code>./calendar</code></td>
-                  <td>Calendar and date icons</td>
-                </tr>
-                <tr>
-                  <td><code>communication</code></td>
-                  <td><code>./communication</code></td>
-                  <td>Email, phone, messaging</td>
-                </tr>
-                <tr>
-                  <td><code>controls</code></td>
-                  <td><code>./controls</code></td>
-                  <td>Play, pause, close, menu</td>
-                </tr>
-                <tr>
-                  <td><code>files</code></td>
-                  <td><code>./files</code></td>
-                  <td>Document and file types</td>
-                </tr>
-                <tr>
-                  <td><code>indicators</code></td>
-                  <td><code>./indicators</code></td>
-                  <td>Status indicators, badges</td>
-                </tr>
-                <tr>
-                  <td><code>location</code></td>
-                  <td><code>./location</code></td>
-                  <td>Map pins, directions</td>
-                </tr>
-                <tr>
-                  <td><code>logos</code></td>
-                  <td><code>./logos</code></td>
-                  <td>UMD logos (dark/light), Forward, Campaign, Seal</td>
-                </tr>
-                <tr>
-                  <td><code>media</code></td>
-                  <td><code>./media</code></td>
-                  <td>Image, video, audio</td>
-                </tr>
-                <tr>
-                  <td><code>people</code></td>
-                  <td><code>./people</code></td>
-                  <td>Person, group, profile</td>
-                </tr>
-                <tr>
-                  <td><code>search</code></td>
-                  <td><code>./search</code></td>
-                  <td>Search, filter</td>
-                </tr>
-                <tr>
-                  <td><code>social</code></td>
-                  <td><code>./social</code></td>
-                  <td>Social media platforms</td>
-                </tr>
-              </tbody>
-            </table>
+      <section
+        class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal"
+      >
+        <section id="getting-started">
+          <div class="umd-layout-space-vertical-landing-child">
+            <h2 class="umd-sans-extralarge-bold">Getting Started</h2>
           </div>
+        </section>
 
-          <!-- Section 2: Import Patterns -->
-          <div class="use-case-card">
-            <h4>2. Import Patterns</h4>
+        <!-- Section 1: Icon Categories -->
+        <div class="use-case-card">
+          <h4 class="umd-sans-larger-bold">1. Icon Categories</h4>
+          <p>
+            The Icons package organizes all SVG assets into semantic categories.
+            Each category can be imported independently for optimal
+            tree-shaking.
+          </p>
 
-            <h5 class="umd-sans-medium">Category Imports (Recommended)</h5>
-            <pre><code class="language-typescript">import * as arrows from '@universityofmaryland/web-icons-library/arrows';
+          <table
+            class="umd-table-inline docs-table-black-header category-table"
+          >
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Import Path</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>arrows</code></td>
+                <td><code>./arrows</code></td>
+                <td>Directional arrows</td>
+              </tr>
+              <tr>
+                <td><code>brand</code></td>
+                <td><code>./brand</code></td>
+                <td>UMD brand marks</td>
+              </tr>
+              <tr>
+                <td><code>calendar</code></td>
+                <td><code>./calendar</code></td>
+                <td>Calendar and date icons</td>
+              </tr>
+              <tr>
+                <td><code>communication</code></td>
+                <td><code>./communication</code></td>
+                <td>Email, phone, messaging</td>
+              </tr>
+              <tr>
+                <td><code>controls</code></td>
+                <td><code>./controls</code></td>
+                <td>Play, pause, close, menu</td>
+              </tr>
+              <tr>
+                <td><code>files</code></td>
+                <td><code>./files</code></td>
+                <td>Document and file types</td>
+              </tr>
+              <tr>
+                <td><code>indicators</code></td>
+                <td><code>./indicators</code></td>
+                <td>Status indicators, badges</td>
+              </tr>
+              <tr>
+                <td><code>location</code></td>
+                <td><code>./location</code></td>
+                <td>Map pins, directions</td>
+              </tr>
+              <tr>
+                <td><code>logos</code></td>
+                <td><code>./logos</code></td>
+                <td>UMD logos (dark/light), Forward, Campaign, Seal</td>
+              </tr>
+              <tr>
+                <td><code>media</code></td>
+                <td><code>./media</code></td>
+                <td>Image, video, audio</td>
+              </tr>
+              <tr>
+                <td><code>people</code></td>
+                <td><code>./people</code></td>
+                <td>Person, group, profile</td>
+              </tr>
+              <tr>
+                <td><code>search</code></td>
+                <td><code>./search</code></td>
+                <td>Search, filter</td>
+              </tr>
+              <tr>
+                <td><code>social</code></td>
+                <td><code>./social</code></td>
+                <td>Social media platforms</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Section 2: Import Patterns -->
+        <div class="use-case-card">
+          <h4 class="umd-sans-larger-bold">2. Import Patterns</h4>
+
+          <h5 class="umd-sans-large">Category Imports (Recommended)</h5>
+          <pre><code class="language-typescript">import * as arrows from '@universityofmaryland/web-icons-library/arrows';
 import * as logos from '@universityofmaryland/web-icons-library/logos';
 import * as social from '@universityofmaryland/web-icons-library/social';
 
@@ -220,28 +229,31 @@ import * as social from '@universityofmaryland/web-icons-library/social';
 arrows.CHEVRON_SMALL;  // '&lt;svg ...&gt;...&lt;/svg&gt;'
 logos.UMD_LOGO_DARK;   // '&lt;svg ...&gt;...&lt;/svg&gt;'</code></pre>
 
-            <h5 class="umd-sans-medium">Main Namespace Import</h5>
-            <pre><code class="language-typescript">import * as Icons from '@universityofmaryland/web-icons-library';
+          <h5 class="umd-sans-large">Main Namespace Import</h5>
+          <pre><code class="language-typescript">import * as Icons from '@universityofmaryland/web-icons-library';
 
 Icons.arrows.CHEVRON_SMALL;    // SVG string
 Icons.logos.UMD_LOGO_DARK;     // SVG string
 Icons.social.FACEBOOK;         // SVG string</code></pre>
-          </div>
+        </div>
 
-          <!-- Section 3: Rendering Icons -->
-          <div class="use-case-card">
-            <h4>3. Rendering Icons</h4>
-            <p>Icon exports are raw SVG strings. Insert them into the DOM using <code>innerHTML</code> or framework-specific patterns.</p>
+        <!-- Section 3: Rendering Icons -->
+        <div class="use-case-card">
+          <h4 class="umd-sans-larger-bold">3. Rendering Icons</h4>
+          <p>
+            Icon exports are raw SVG strings. Insert them into the DOM using
+            <code>innerHTML</code> or framework-specific patterns.
+          </p>
 
-            <h5 class="umd-sans-medium">Vanilla JavaScript</h5>
-            <pre><code class="language-typescript">import * as arrows from '@universityofmaryland/web-icons-library/arrows';
+          <h5 class="umd-sans-large">Vanilla JavaScript</h5>
+          <pre><code class="language-typescript">import * as arrows from '@universityofmaryland/web-icons-library/arrows';
 
 const iconContainer = document.createElement('span');
 iconContainer.innerHTML = arrows.CHEVRON_SMALL;
 document.querySelector('#my-icon').appendChild(iconContainer);</code></pre>
 
-            <h5 class="umd-sans-medium">React</h5>
-            <pre><code class="language-typescript">import * as arrows from '@universityofmaryland/web-icons-library/arrows';
+          <h5 class="umd-sans-large">React</h5>
+          <pre><code class="language-typescript">import * as arrows from '@universityofmaryland/web-icons-library/arrows';
 
 function Icon({ svg, label }: { svg: string; label: string }) {
   return (
@@ -256,8 +268,8 @@ function Icon({ svg, label }: { svg: string; label: string }) {
 // Usage
 &lt;Icon svg={arrows.CHEVRON_SMALL} label="Navigate forward" /&gt;</code></pre>
 
-            <h5 class="umd-sans-medium">Sizing and Styling</h5>
-            <pre><code class="language-css">/* SVG icons inherit color from their parent */
+          <h5 class="umd-sans-large">Sizing and Styling</h5>
+          <pre><code class="language-css">/* SVG icons inherit color from their parent */
 .icon-wrapper svg {
   width: 1em;
   height: 1em;
@@ -269,23 +281,29 @@ function Icon({ svg, label }: { svg: string; label: string }) {
   width: 2rem;
   height: 2rem;
 }</code></pre>
-          </div>
+        </div>
 
-          <!-- Section 4: Accessibility -->
-          <div class="use-case-card">
-            <h4>4. Accessibility</h4>
-            <p>Proper accessibility handling depends on whether the icon is decorative or conveys meaning.</p>
+        <!-- Section 4: Accessibility -->
+        <div class="use-case-card">
+          <h4 class="umd-sans-larger-bold">4. Accessibility</h4>
+          <p>
+            Proper accessibility handling depends on whether the icon is
+            decorative or conveys meaning.
+          </p>
 
-            <h5 class="umd-sans-medium">Decorative Icons</h5>
-            <p>Icons that are purely visual and do not convey information should be hidden from assistive technology:</p>
-            <pre><code class="language-html">&lt;!-- Decorative: hidden from screen readers --&gt;
+          <h5 class="umd-sans-large">Decorative Icons</h5>
+          <p>
+            Icons that are purely visual and do not convey information should be
+            hidden from assistive technology:
+          </p>
+          <pre><code class="language-html">&lt;!-- Decorative: hidden from screen readers --&gt;
 &lt;span aria-hidden="true"&gt;
   &lt;!-- SVG icon inserted here --&gt;
 &lt;/span&gt;</code></pre>
 
-            <h5 class="umd-sans-medium">Meaningful Icons</h5>
-            <p>Icons that convey information need a text alternative:</p>
-            <pre><code class="language-html">&lt;!-- Meaningful: labeled for screen readers --&gt;
+          <h5 class="umd-sans-large">Meaningful Icons</h5>
+          <p>Icons that convey information need a text alternative:</p>
+          <pre><code class="language-html">&lt;!-- Meaningful: labeled for screen readers --&gt;
 &lt;span role="img" aria-label="Search"&gt;
   &lt;!-- SVG search icon inserted here --&gt;
 &lt;/span&gt;
@@ -296,81 +314,123 @@ function Icon({ svg, label }: { svg: string; label: string }) {
   Search
 &lt;/button&gt;</code></pre>
 
-            <umd-element-alert-page>
-              <p slot="headline">Best Practice</p>
-              <p slot="text">When an icon accompanies visible text that conveys the same meaning, mark the icon as <code>aria-hidden="true"</code> to avoid redundant announcements.</p>
-            </umd-element-alert-page>
-          </div>
+          <umd-element-banner-promo
+            data-theme="dark"
+            data-visual-icon-seal="true"
+          >
+            <p slot="headline">Best Practice</p>
+            <p slot="text">
+              When an icon accompanies visible text that conveys the same
+              meaning, mark the icon as <code>aria-hidden="true"</code> to avoid
+              redundant announcements.
+            </p>
+          </umd-element-banner-promo>
+        </div>
 
-          <!-- Section 5: Logo Assets -->
-          <div class="use-case-card">
-            <h4>5. Logo Assets</h4>
-            <p>The <code>logos</code> category contains official UMD brand assets in SVG format:</p>
-            <table class="category-table">
-              <thead>
-                <tr>
-                  <th>Export</th>
-                  <th>Description</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><code>UMD_LOGO_DARK</code></td>
-                  <td>UMD logo for light backgrounds</td>
-                </tr>
-                <tr>
-                  <td><code>UMD_LOGO_LIGHT</code></td>
-                  <td>UMD logo for dark backgrounds</td>
-                </tr>
-                <tr>
-                  <td><code>FORWARD_LOGO</code></td>
-                  <td>UMD Forward campaign logo</td>
-                </tr>
-                <tr>
-                  <td><code>CAMPAIGN_LOGO</code></td>
-                  <td>UMD Campaign logo</td>
-                </tr>
-                <tr>
-                  <td><code>SEAL</code></td>
-                  <td>University Seal</td>
-                </tr>
-              </tbody>
-            </table>
+        <!-- Section 5: Logo Assets -->
+        <div class="use-case-card">
+          <h4 class="umd-sans-larger-bold">5. Logo Assets</h4>
+          <p>
+            The <code>logos</code> category contains official UMD brand assets
+            in SVG format:
+          </p>
+          <table
+            class="umd-table-inline docs-table-black-header category-table"
+          >
+            <thead>
+              <tr>
+                <th>Export</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>UMD_LOGO_DARK</code></td>
+                <td>UMD logo for light backgrounds</td>
+              </tr>
+              <tr>
+                <td><code>UMD_LOGO_LIGHT</code></td>
+                <td>UMD logo for dark backgrounds</td>
+              </tr>
+              <tr>
+                <td><code>FORWARD_LOGO</code></td>
+                <td>UMD Forward campaign logo</td>
+              </tr>
+              <tr>
+                <td><code>CAMPAIGN_LOGO</code></td>
+                <td>UMD Campaign logo</td>
+              </tr>
+              <tr>
+                <td><code>SEAL</code></td>
+                <td>University Seal</td>
+              </tr>
+            </tbody>
+          </table>
 
-            <pre><code class="language-typescript">import * as logos from '@universityofmaryland/web-icons-library/logos';
+          <pre><code class="language-typescript">import * as logos from '@universityofmaryland/web-icons-library/logos';
 
 // Insert the dark logo into a header
 document.querySelector('.site-header').innerHTML = logos.UMD_LOGO_DARK;</code></pre>
-          </div>
+        </div>
+      </section>
 
-          <!-- Related Resources -->
-          <div style="margin-top: 3rem;">
-            <h3 class="umd-sans-larger">Related Resources</h3>
-            <div class="umd-layout-grid-gap-three">
-              <umd-element-card data-visual-bordered="true">
-                <h3 slot="headline"><a href="index.html">Icons API Reference</a></h3>
-                <p slot="text">Complete API documentation for all icon and logo exports.</p>
-                <umd-element-call-to-action slot="actions" data-display="secondary">
-                  <a href="index.html">View API</a>
-                </umd-element-call-to-action>
-              </umd-element-card>
-              <umd-element-card data-visual-bordered="true">
-                <h3 slot="headline"><a href="../elements/use-cases.html">Elements Use Cases</a></h3>
-                <p slot="text">See how icons are used within element builders.</p>
-                <umd-element-call-to-action slot="actions" data-display="secondary">
-                  <a href="../elements/use-cases.html">View Use Cases</a>
-                </umd-element-call-to-action>
-              </umd-element-card>
-              <umd-element-card data-visual-bordered="true">
-                <h3 slot="headline"><a href="../components/usage.html">Components Usage Guide</a></h3>
-                <p slot="text">Use icons within web components via slots and attributes.</p>
-                <umd-element-call-to-action slot="actions" data-display="secondary">
-                  <a href="../components/usage.html">View Guide</a>
-                </umd-element-call-to-action>
-              </umd-element-card>
-            </div>
+      <section
+        class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal"
+      >
+        <div class="umd-layout-background-highlight-light">
+          <p
+            class="umd-text-line-trailing-light umd-layout-space-vertical-interior-child"
+          >
+            <span>Related Resources</span>
+          </p>
+          <div class="umd-layout-grid-gap-three">
+            <umd-element-card>
+              <h3 slot="headline">
+                <a
+                  href="https://umd-digital.github.io/design-system/icons/index.html"
+                  >Icons API Reference</a
+                >
+              </h3>
+              <p slot="text">
+                Complete API documentation for all icon and logo exports.
+              </p>
+              <umd-element-call-to-action
+                slot="actions"
+                data-display="secondary"
+              >
+                <a
+                  href="https://umd-digital.github.io/design-system/icons/index.html"
+                  >View API</a
+                >
+              </umd-element-call-to-action>
+            </umd-element-card>
+            <umd-element-card>
+              <h3 slot="headline">
+                <a href="../elements/use-cases.html">Elements Use Cases</a>
+              </h3>
+              <p slot="text">See how icons are used within element builders.</p>
+              <umd-element-call-to-action
+                slot="actions"
+                data-display="secondary"
+              >
+                <a href="../elements/use-cases.html">View Use Cases</a>
+              </umd-element-call-to-action>
+            </umd-element-card>
+            <umd-element-card>
+              <h3 slot="headline">
+                <a href="../components/usage.html">Components Usage Guide</a>
+              </h3>
+              <p slot="text">
+                Use icons within web components via slots and attributes.
+              </p>
+              <umd-element-call-to-action
+                slot="actions"
+                data-display="secondary"
+              >
+                <a href="../components/usage.html">View Guide</a>
+              </umd-element-call-to-action>
+            </umd-element-card>
           </div>
-
         </div>
       </section>
     </main>
@@ -379,9 +439,21 @@ document.querySelector('.site-header').innerHTML = logos.UMD_LOGO_DARK;</code></
       <div slot="link-column-one">
         <h3>Developer Tools</h3>
         <ul>
-          <li><a href="https://umd-digital.github.io/design-system/">TypeDoc API Reference</a></li>
-          <li><a href="https://www.npmjs.com/org/universityofmaryland">@universityofmaryland on npm</a></li>
-          <li><a href="https://github.com/UMD-Digital/design-system">GitHub Repository</a></li>
+          <li>
+            <a href="https://umd-digital.github.io/design-system/"
+              >TypeDoc API Reference</a
+            >
+          </li>
+          <li>
+            <a href="https://www.npmjs.com/org/universityofmaryland"
+              >@universityofmaryland on npm</a
+            >
+          </li>
+          <li>
+            <a href="https://github.com/UMD-Digital/design-system"
+              >GitHub Repository</a
+            >
+          </li>
         </ul>
       </div>
       <div slot="link-column-two">
@@ -389,13 +461,19 @@ document.querySelector('.site-header').innerHTML = logos.UMD_LOGO_DARK;</code></
         <ul>
           <li><a href="../getting-started.html">Getting Started Guide</a></li>
           <li><a href="../architecture.html">Architecture Overview</a></li>
-          <li><a href="http://playground.designsystem.umd.edu" target="_blank">Component Playground</a></li>
+          <li>
+            <a href="http://playground.designsystem.umd.edu" target="_blank"
+              >Component Playground</a
+            >
+          </li>
         </ul>
       </div>
       <div slot="link-column-three">
         <h3>UMD Links</h3>
         <ul>
-          <li><a href="https://designsystem.umd.edu">designsystem.umd.edu</a></li>
+          <li>
+            <a href="https://designsystem.umd.edu">designsystem.umd.edu</a>
+          </li>
           <li><a href="https://brand.umd.edu">brand.umd.edu</a></li>
           <li><a href="https://umd.edu">umd.edu</a></li>
         </ul>

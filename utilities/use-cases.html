@@ -13,34 +13,15 @@
       href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism.min.css"
       rel="stylesheet"
     />
-    <style>
-      pre[class*="language-"] { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
-      pre { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; }
-      code { color: #e21833; }
-      pre code { color: inherit; }
-      table { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; }
-      th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
-      td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
-      td code, th code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
-      .code-example { background-color: #fff; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
-      .use-case-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 1.5rem; margin-bottom: 2.5rem; background-color: #fff; }
-      .use-case-card h4 { color: #e21833; margin-bottom: 1rem; }
-      .use-case-card ul { padding-left: 1.5rem; }
-      .category-table { width: 100%; margin: 1rem 0; }
-      .category-table th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
-      .category-table td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
-      .category-table code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
-      h3 { margin-top: 3rem; margin-bottom: 1rem; }
-      h5 { font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; }
-      section > h3:first-child, .use-case-card > h4:first-child { margin-top: 0; }
-    </style>
+    <link rel="stylesheet" href="../assets/styles/docs.css" />
   </head>
   <body>
     <header>
+      <umd-element-navigation-utility data-info="search"></umd-element-navigation-utility>
       <div class="umd-layout-space-horizontal-full">
         <umd-element-navigation-header sticky>
           <a slot="logo" href="../index.html">
-            <span class="umd-sans-larger-bold">Design System Docs</span>
+            <img src="../assets/logo-ds-docs.svg" alt="Design System Docs" height="32" style="display:block;">
           </a>
           <div slot="main-navigation">
             <umd-element-nav-item>
@@ -103,32 +84,28 @@
         <umd-element-breadcrumb>
           <div slot="paths">
             <a href="../index.html">Home</a>
-            <p>Utilities Use Cases</p>
+            <a href="use-cases.html">Utilities</a>
+            <p>Use Cases</p>
           </div>
         </umd-element-breadcrumb>
       </div>
     </div>
 
     <main>
-      <section class="umd-layout-space-vertical-landing">
-        <div class="umd-layout-space-horizontal-normal">
+      <section class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal">
 
           <section id="getting-started">
-            <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
-              <h2 slot="headline">Getting Started</h2>
-              <div slot="text"><p>
-                <strong>Where This Package Fits:</strong> Utilities sits in the <strong>Foundation</strong> layer. It depends on <strong>Tokens</strong> and <strong>Styles</strong> and provides helper functions used by <strong>Elements</strong>, <strong>Feeds</strong>, and <strong>Components</strong>.
-                <a href="../architecture.html">See full architecture</a>.
-              </p></div>
-            </umd-element-section-intro>
+            <div class="umd-layout-space-vertical-landing-child">
+              <h2 class="umd-sans-extralarge-bold">Getting Started</h2>
+            </div>
           </section>
 
           <!-- Section 1: Category Reference Table -->
           <div class="use-case-card">
-            <h4>1. Category Reference</h4>
+            <h4 class="umd-sans-larger-bold">1. Category Reference</h4>
             <p>The Utilities package is organized into focused categories, each importable independently.</p>
 
-            <table class="category-table">
+            <table class="umd-table-inline docs-table-black-header category-table">
               <thead>
                 <tr>
                   <th>Category</th>
@@ -234,32 +211,32 @@
 
           <!-- Section 2: Import Patterns -->
           <div class="use-case-card">
-            <h4>2. Import Patterns</h4>
+            <h4 class="umd-sans-larger-bold">2. Import Patterns</h4>
 
-            <h5 class="umd-sans-medium">Category Import</h5>
+            <h5 class="umd-sans-large">Category Import</h5>
             <pre><code class="language-typescript">import * as dom from '@universityofmaryland/web-utilities-library/dom';
 
 dom.addClass(element, 'active');</code></pre>
 
-            <h5 class="umd-sans-medium">Individual Function Import</h5>
+            <h5 class="umd-sans-large">Individual Function Import</h5>
             <pre><code class="language-typescript">import { addClass } from '@universityofmaryland/web-utilities-library/dom/addClass';</code></pre>
 
-            <h5 class="umd-sans-medium">Namespace Import</h5>
+            <h5 class="umd-sans-large">Namespace Import</h5>
             <pre><code class="language-typescript">import * as Utilities from '@universityofmaryland/web-utilities-library';
 
 Utilities.dom.addClass(element, 'active');</code></pre>
 
-            <umd-element-alert-page>
+            <umd-element-banner-promo data-theme="dark" data-visual-icon-seal="true">
               <p slot="headline">Tree-shaking Tip</p>
               <p slot="text">Category imports and individual function imports both tree-shake well. Use individual imports when you only need a single function from a large category.</p>
-            </umd-element-alert-page>
+            </umd-element-banner-promo>
           </div>
 
           <!-- Section 3: Most-Used Utilities -->
           <div class="use-case-card">
-            <h4>3. Most-Used Utilities</h4>
+            <h4 class="umd-sans-larger-bold">3. Most-Used Utilities</h4>
 
-            <h5 class="umd-sans-medium">DOM: addClass / removeClass</h5>
+            <h5 class="umd-sans-large">DOM: addClass / removeClass</h5>
             <p>Add or remove CSS classes from elements:</p>
             <pre><code class="language-typescript">import * as dom from '@universityofmaryland/web-utilities-library/dom';
 
@@ -267,7 +244,7 @@ const card = document.querySelector('.card');
 dom.addClass(card, 'active');
 dom.removeClass(card, 'hidden');</code></pre>
 
-            <h5 class="umd-sans-medium">Events: debounce</h5>
+            <h5 class="umd-sans-large">Events: debounce</h5>
             <p>Debounce high-frequency events like scroll and resize:</p>
             <pre><code class="language-typescript">import * as events from '@universityofmaryland/web-utilities-library/events';
 
@@ -278,7 +255,7 @@ const handleResize = events.debounce(() => {
 
 window.addEventListener('resize', handleResize);</code></pre>
 
-            <h5 class="umd-sans-medium">Accessibility: trapFocus</h5>
+            <h5 class="umd-sans-large">Accessibility: trapFocus</h5>
             <p>Trap keyboard focus within a modal or dialog:</p>
             <pre><code class="language-typescript">import * as a11y from '@universityofmaryland/web-utilities-library/accessibility';
 
@@ -290,7 +267,7 @@ a11y.trapFocus(modal);
 // Restore focus to the trigger element when it closes
 a11y.restoreFocus();</code></pre>
 
-            <h5 class="umd-sans-medium">Animation: fadeIn</h5>
+            <h5 class="umd-sans-large">Animation: fadeIn</h5>
             <p>Animate element visibility transitions:</p>
             <pre><code class="language-typescript">import * as animation from '@universityofmaryland/web-utilities-library/animation';
 
@@ -302,7 +279,7 @@ animation.fadeIn(panel);
 // Fade out when closing
 animation.fadeOut(panel);</code></pre>
 
-            <h5 class="umd-sans-medium">Styles: jssToCSS</h5>
+            <h5 class="umd-sans-large">Styles: jssToCSS</h5>
             <p>Convert JSS (JavaScript Style Sheets) objects to CSS strings:</p>
             <pre><code class="language-typescript">import * as styles from '@universityofmaryland/web-utilities-library/styles';
 
@@ -321,34 +298,34 @@ const cssString = styles.jssToCSS(jssObject);
 //         .card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }</code></pre>
           </div>
 
-          <!-- Related Resources -->
-          <div style="margin-top: 3rem;">
-            <h3 class="umd-sans-larger">Related Resources</h3>
-            <div class="umd-layout-grid-gap-three">
-              <umd-element-card data-visual-bordered="true">
-                <h3 slot="headline"><a href="https://umd-digital.github.io/design-system/" target="_blank">TypeDoc API Reference</a></h3>
-                <p slot="text">Generated API documentation for all design system packages.</p>
-                <umd-element-call-to-action slot="actions" data-display="secondary">
-                  <a href="https://umd-digital.github.io/design-system/" target="_blank">View API</a>
-                </umd-element-call-to-action>
-              </umd-element-card>
-              <umd-element-card data-visual-bordered="true">
-                <h3 slot="headline"><a href="../tokens/use-cases.html">Tokens Use Cases</a></h3>
-                <p slot="text">Design token values consumed by utility functions.</p>
-                <umd-element-call-to-action slot="actions" data-display="secondary">
-                  <a href="../tokens/use-cases.html">View Use Cases</a>
-                </umd-element-call-to-action>
-              </umd-element-card>
-              <umd-element-card data-visual-bordered="true">
-                <h3 slot="headline"><a href="../elements/use-cases.html">Elements Use Cases</a></h3>
-                <p slot="text">Element builders that consume utility functions.</p>
-                <umd-element-call-to-action slot="actions" data-display="secondary">
-                  <a href="../elements/use-cases.html">View Use Cases</a>
-                </umd-element-call-to-action>
-              </umd-element-card>
-            </div>
-          </div>
+      </section>
 
+      <section class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal">
+        <div class="umd-layout-background-highlight-light">
+          <p class="umd-text-line-trailing-light umd-layout-space-vertical-interior-child"><span>Related Resources</span></p>
+          <div class="umd-layout-grid-gap-three">
+            <umd-element-card>
+              <h3 slot="headline"><a href="https://umd-digital.github.io/design-system/" target="_blank">TypeDoc API Reference</a></h3>
+              <p slot="text">Generated API documentation for all design system packages.</p>
+              <umd-element-call-to-action slot="actions" data-display="secondary">
+                <a href="https://umd-digital.github.io/design-system/" target="_blank">View API</a>
+              </umd-element-call-to-action>
+            </umd-element-card>
+            <umd-element-card>
+              <h3 slot="headline"><a href="../tokens/use-cases.html">Tokens Use Cases</a></h3>
+              <p slot="text">Design token values consumed by utility functions.</p>
+              <umd-element-call-to-action slot="actions" data-display="secondary">
+                <a href="../tokens/use-cases.html">View Use Cases</a>
+              </umd-element-call-to-action>
+            </umd-element-card>
+            <umd-element-card>
+              <h3 slot="headline"><a href="../elements/use-cases.html">Elements Use Cases</a></h3>
+              <p slot="text">Element builders that consume utility functions.</p>
+              <umd-element-call-to-action slot="actions" data-display="secondary">
+                <a href="../elements/use-cases.html">View Use Cases</a>
+              </umd-element-call-to-action>
+            </umd-element-card>
+          </div>
         </div>
       </section>
     </main>

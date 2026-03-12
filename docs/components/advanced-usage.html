@@ -124,7 +124,7 @@
                 <div slot="text"><p>The components library provides comprehensive TypeScript support with full type definitions.</p></div>
               </umd-element-section-intro>
               <section id="typescript" class="umd-layout-space-vertical-interior">
-                <h3 class="umd-sans-larger">Type Imports</h3>
+                <h3 class="umd-sans-larger-bold">Type Imports</h3>
                 <div class="code-example">
                   <pre><code class="language-typescript">import {
   Components,
@@ -143,7 +143,7 @@ import type {
 } from '@universityofmaryland/web-components-library/types';</code></pre>
                 </div>
 
-                <h3 class="umd-sans-larger">Typed Component References</h3>
+                <h3 class="umd-sans-larger-bold">Typed Component References</h3>
                 <div class="code-example">
                   <pre><code class="language-typescript">// Get typed component reference
 const hero = document.querySelector&lt;HTMLElement &amp; ComponentEvents&gt;('umd-element-hero');
@@ -160,7 +160,7 @@ if (hero) {
 }</code></pre>
                 </div>
 
-                <h3 class="umd-sans-larger">Creating Components Programmatically</h3>
+                <h3 class="umd-sans-larger-bold">Creating Components Programmatically</h3>
                 <div class="code-example">
                   <pre><code class="language-typescript">import { Components } from '@universityofmaryland/web-components-library';
 
@@ -210,7 +210,7 @@ const createTypedHero = (): HTMLElement =&gt; {
                 <div slot="text"><p>Components emit custom events for lifecycle and interaction handling.</p></div>
               </umd-element-section-intro>
               <section id="events" class="umd-layout-space-vertical-interior">
-                <h3 class="umd-sans-larger">Component Lifecycle Events</h3>
+                <h3 class="umd-sans-larger-bold">Component Lifecycle Events</h3>
                 <div class="code-example">
                   <pre><code class="language-javascript">const card = document.querySelector('umd-element-card');
 
@@ -237,7 +237,7 @@ card.addEventListener('component:destroy', (event) =&gt; {
                 <div slot="text"><p>Components support reactive updates through observed attributes.</p></div>
               </umd-element-section-intro>
               <section id="reactive" class="umd-layout-space-vertical-interior">
-                <h3 class="umd-sans-larger">Observed Attributes</h3>
+                <h3 class="umd-sans-larger-bold">Observed Attributes</h3>
                 <div class="code-example">
                   <pre><code class="language-javascript">// Visual state changes
 const drawer = document.querySelector('umd-element-navigation-drawer');
@@ -261,7 +261,7 @@ const observer = new MutationObserver((mutations) =&gt; {
 observer.observe(drawer, { attributes: true });</code></pre>
                 </div>
 
-                <h3 class="umd-sans-larger">Responsive Behavior</h3>
+                <h3 class="umd-sans-larger-bold">Responsive Behavior</h3>
                 <div class="code-example">
                   <pre><code class="language-javascript">// Trigger component resize calculations
 const hero = document.querySelector('umd-element-hero');
@@ -291,7 +291,7 @@ document.querySelectorAll('[class*="umd-element-"]').forEach((element) =&gt; {
                 <div slot="text"><p>Best practices for testing components in your application.</p></div>
               </umd-element-section-intro>
               <section id="testing" class="umd-layout-space-vertical-interior">
-                <h3 class="umd-sans-larger">Jest Testing Setup</h3>
+                <h3 class="umd-sans-larger-bold">Jest Testing Setup</h3>
                 <div class="code-example">
                   <pre><code class="language-javascript">// __tests__/components.test.js
 import { Components } from '@universityofmaryland/web-components-library';
@@ -335,7 +335,7 @@ describe('UMD Components', () =&gt; {
                 <div slot="text"><p>Web components work natively in any framework. Here are common integration patterns.</p></div>
               </umd-element-section-intro>
               <section id="frameworks" class="umd-layout-space-vertical-interior">
-                <h3 class="umd-sans-larger">React</h3>
+                <h3 class="umd-sans-larger-bold">React</h3>
                 <div class="code-example">
                   <pre><code class="language-typescript">import { useEffect, useRef } from 'react';
 
@@ -354,7 +354,7 @@ function UmdHero({ title, image, children }) {
 }</code></pre>
                 </div>
 
-                <h3 class="umd-sans-larger">Vue</h3>
+                <h3 class="umd-sans-larger-bold">Vue</h3>
                 <div class="code-example">
                   <pre><code class="language-javascript">// main.js — tell Vue to ignore umd-* tags
 app.config.compilerOptions.isCustomElement = (tag) =&gt; tag.startsWith('umd-');
@@ -373,7 +373,7 @@ export default defineConfig({
 });</code></pre>
                 </div>
 
-                <h3 class="umd-sans-larger">Angular</h3>
+                <h3 class="umd-sans-larger-bold">Angular</h3>
                 <div class="code-example">
                   <pre><code class="language-typescript">// app.module.ts
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -391,7 +391,7 @@ export class AppModule {}</code></pre>
                 <div slot="text"><p>Extend the component library with your own custom components using the Model package.</p></div>
               </umd-element-section-intro>
               <section id="custom" class="umd-layout-space-vertical-interior">
-                <h3 class="umd-sans-larger">Custom Component Template</h3>
+                <h3 class="umd-sans-larger-bold">Custom Component Template</h3>
                 <div class="code-example">
                   <pre><code class="language-typescript">import {
   Attributes,
@@ -470,7 +470,7 @@ export const CustomFeature = Register.webComponent({
                 <div slot="text"><p>Techniques for optimizing component performance in production.</p></div>
               </umd-element-section-intro>
               <section id="performance" class="umd-layout-space-vertical-interior">
-                <h3 class="umd-sans-larger">Lazy Loading Components</h3>
+                <h3 class="umd-sans-larger-bold">Lazy Loading Components</h3>
                 <div class="code-example">
                   <pre><code class="language-javascript">// Load components only when needed
 const loadHeroComponents = () =&gt;
@@ -498,7 +498,7 @@ if (heroSection) {
 }</code></pre>
                 </div>
 
-                <h3 class="umd-sans-larger">Bundle Optimization</h3>
+                <h3 class="umd-sans-larger-bold">Bundle Optimization</h3>
                 <div class="code-example">
                   <pre><code class="language-javascript">// webpack.config.js
 module.exports = {

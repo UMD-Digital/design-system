@@ -1,0 +1,81 @@
+/* ============================================================
+   Table styles
+   ============================================================ */
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0 2rem;
+}
+
+/* --- Black header variant --- */
+
+.docs-table-black-header {
+  width: 100%;
+  table-layout: auto;
+}
+
+.docs-table-black-header td a {
+  color: #000000;
+  background-image: linear-gradient(#000000, #000000);
+  background-position: left calc(100% - 1px);
+  background-repeat: no-repeat;
+  background-size: 100% 1px;
+  position: relative;
+  transition: color 0.5s, background-size 0.5s, background-image 0.5s,
+    background-position 0.5s;
+}
+
+.docs-table-black-header td a:hover,
+.docs-table-black-header td a:focus {
+  color: #000000 !important;
+  background-image: linear-gradient(#e21833, #e21833);
+  background-position: left calc(100%);
+  background-size: 100% 1px;
+  text-decoration: none !important;
+}
+
+.docs-table-black-header thead th {
+  background-color: #000000;
+  color: #ffffff;
+  text-align: left;
+}
+
+.docs-table-black-header th,
+.docs-table-black-header td {
+  padding: 16px 12px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+@media (min-width: 768px) {
+  .docs-table-black-header th,
+  .docs-table-black-header td {
+    padding: 24px 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .docs-table-black-header th,
+  .docs-table-black-header td {
+    padding: 32px 24px;
+  }
+}
+
+/* --- Named table variants (use-cases pages) --- */
+
+.token-table,
+.category-table,
+.option-table,
+.module-table {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+/* --- Inline code in table cells --- */
+
+td code,
+th code {
+  background-color: #fafafa;
+  padding: 0.2rem 0.4rem;
+  border-radius: 2px;
+}

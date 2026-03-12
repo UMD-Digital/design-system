@@ -6,28 +6,16 @@
   <title>Getting Started - UMD Design System Documentation</title>
   <link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/styles.min.css" />
   <script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/cdn.js"></script>
-  <style>
-    pre[class*="language-"] { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
-    pre { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; }
-    code { color: #e21833; }
-    pre code { color: inherit; }
-    table { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; }
-    th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
-    td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
-    td code, th code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
-    .code-example { background-color: #fff; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
-    h3 { margin-top: 3rem; margin-bottom: 1rem; }
-    h5 { font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; }
-  </style>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/styles/docs.css" />
 </head>
 <body>
-
-<!-- Navigation -->
-<header>
+    <header>
+      <umd-element-navigation-utility data-info="search"></umd-element-navigation-utility>
   <div class="umd-layout-space-horizontal-full">
     <umd-element-navigation-header sticky>
       <a slot="logo" href="index.html">
-        <span class="umd-sans-larger-bold">Design System Docs</span>
+        <img src="assets/logo-ds-docs.svg" alt="Design System Docs" height="32" style="display:block;">
       </a>
       <div slot="main-navigation">
         <umd-element-nav-item>
@@ -98,13 +86,13 @@
   </div>
 
   <section class="umd-layout-space-vertical-landing">
-    <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
-      <h2 slot="headline">Decision Matrix</h2>
-      <div slot="text"><p>Compare the three approaches to find the right fit for your project.</p></div>
-    </umd-element-section-intro>
     <div class="umd-layout-space-horizontal-normal">
+      <h2 class="umd-sans-extralarge-bold">Decision Matrix</h2>
+    </div>
+    <div class="umd-layout-space-horizontal-normal">
+      <p>Compare the three approaches to find the right fit for your project.</p>
 
-      <table>
+      <table class="umd-table-inline docs-table-black-header">
         <thead>
           <tr>
             <th>Approach</th>
@@ -116,21 +104,21 @@
         </thead>
         <tbody>
           <tr>
-            <td><a href="#cdn"><strong>CDN</strong></a></td>
+            <td><strong>CDN</strong></td>
             <td>~2 min</td>
             <td>Full download</td>
             <td>No</td>
             <td>Prototyping and simple sites</td>
           </tr>
           <tr>
-            <td><a href="#npm"><strong>npm (grouped imports)</strong></a></td>
+            <td><strong>npm (grouped imports)</strong></td>
             <td>~15 min</td>
             <td>Moderate</td>
             <td>Good</td>
             <td>Standard production apps</td>
           </tr>
           <tr>
-            <td><a href="#npm"><strong>npm (individual imports)</strong></a></td>
+            <td><strong>npm (individual imports)</strong></td>
             <td>~30 min</td>
             <td>Smallest</td>
             <td>Maximum</td>
@@ -143,32 +131,34 @@
   </section>
 
   <!-- ================================================================ -->
-  <!-- Track A: CDN / No Build Tools -->
+  <!-- Track A & B: CDN and npm (Tabbed) -->
   <!-- ================================================================ -->
-  <section class="umd-layout-space-vertical-landing">
-    <umd-element-section-intro id="cdn" class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
-      <h2 slot="headline">Track A: CDN / No Build Tools</h2>
-    </umd-element-section-intro>
-    <div class="umd-layout-space-horizontal-normal">
-      <div>
-        <p>The fastest way to start using UMD components -- no build tools, no package manager, just HTML.</p>
+  <section class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal">
+    <umd-element-tabs>
+      <div slot="tabs">
 
-        <h4 class="umd-sans-medium">Step 1 -- Add the Components CDN Script</h4>
-        <p>This single script auto-registers every <code>&lt;umd-element-*&gt;</code> web component.</p>
-        <div class="code-example">
-          <pre><code>&lt;script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/cdn.js"&gt;&lt;/script&gt;</code></pre>
-        </div>
+        <!-- ============================================================ -->
+        <!-- CDN Panel -->
+        <!-- ============================================================ -->
+        <div data-title="CDN / No Build Tools">
+            <p>The fastest way to start using UMD components · no build tools, no package manager, just HTML.</p>
 
-        <h4 class="umd-sans-medium">Step 2 -- Add the Static CSS Stylesheet</h4>
-        <p>A pre-compiled CSS file that provides typography, layout utilities, spacing classes, and design tokens as CSS custom properties. This replaces the older JavaScript-based style injection approach.</p>
-        <div class="code-example">
-          <pre><code>&lt;link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/styles.min.css"&gt;</code></pre>
-        </div>
+            <h4 class="umd-sans-larger-bold">Step 1 · Add the Components CDN Script</h4>
+            <p>This single script auto-registers every <code>&lt;umd-element-*&gt;</code> web component.</p>
+            <div class="code-example umd-layout-space-vertical-landing-child">
+              <pre class="language-html"><code class="language-html">&lt;script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/cdn.js"&gt;&lt;/script&gt;</code></pre>
+            </div>
 
-        <h4 class="umd-sans-medium">Step 3 -- Write HTML</h4>
-        <p>Use <code>&lt;umd-element-*&gt;</code> custom element tags and UMD CSS utility classes in your markup.</p>
-        <div class="code-example">
-          <pre><code>&lt;umd-element-hero data-display="overlay" class="umd-layout-space-vertical-landing"&gt;
+            <h4 class="umd-sans-larger-bold">Step 2 · Add the Static CSS Stylesheet</h4>
+            <p>A pre-compiled CSS file that provides typography, layout utilities, spacing classes, and design tokens as CSS custom properties. This replaces the older JavaScript-based style injection approach.</p>
+            <div class="code-example umd-layout-space-vertical-landing-child">
+              <pre class="language-html"><code class="language-html">&lt;link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/styles.min.css"&gt;</code></pre>
+            </div>
+
+            <h4 class="umd-sans-larger-bold">Step 3 · Write HTML</h4>
+            <p>Use <code>&lt;umd-element-*&gt;</code> custom element tags and UMD CSS utility classes in your markup.</p>
+            <div class="code-example umd-layout-space-vertical-landing-child">
+              <pre class="language-html"><code class="language-html">&lt;umd-element-hero data-display="overlay" class="umd-layout-space-vertical-landing"&gt;
   &lt;h1 slot="headline"&gt;Hello, Terps!&lt;/h1&gt;
   &lt;div slot="text"&gt;&lt;p&gt;Welcome to the University of Maryland.&lt;/p&gt;&lt;/div&gt;
 &lt;/umd-element-hero&gt;
@@ -183,12 +173,14 @@
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/section&gt;</code></pre>
-        </div>
+            </div>
 
-        <h4 class="umd-sans-medium">Full Working Example</h4>
-        <p>A complete, self-contained HTML document you can copy, save, and open in any browser.</p>
-        <div class="code-example">
-          <pre><code>&lt;!DOCTYPE html&gt;
+            <umd-element-accordion-item class="umd-layout-space-vertical-landing-child">
+              <p slot="headline">Full Working Example</p>
+              <div slot="text">
+                <p>A complete, self-contained HTML document you can copy, save, and open in any browser.</p>
+                <div class="code-example umd-layout-space-vertical-landing-child">
+                  <pre class="language-html"><code class="language-html">&lt;!DOCTYPE html&gt;
 &lt;html lang="en"&gt;
 &lt;head&gt;
     &lt;meta charset="UTF-8"&gt;
@@ -266,98 +258,94 @@
     &lt;/section&gt;
 &lt;/body&gt;
 &lt;/html&gt;</code></pre>
+                </div>
+                <div style="text-align: center; margin: 2rem 0 1.5rem;">
+                  <umd-element-call-to-action data-display="primary">
+                    <a href="getting-started-example.html" target="_blank">View Live Example</a>
+                  </umd-element-call-to-action>
+                  <p style="font-size: 0.875rem; color: #6c757d; margin-top: 0.5rem;">Opens in a new window</p>
+                </div>
+              </div>
+            </umd-element-accordion-item>
+
+            <div class="alert-custom umd-layout-space-vertical-landing-child">
+              <h5 class="umd-sans-small">Production CDN usage</h5>
+              <p>Pin to a specific version to avoid unexpected breaking changes: <code>@universityofmaryland/web-components-library@1.17.14</code> and <code>@universityofmaryland/web-styles-library@1.7.2</code>. Note that the CDN loads all components in a single bundle — if you need smaller bundles and tree-shaking, use the npm approach below.</p>
+            </div>
         </div>
 
-        <div style="text-align: center; margin: 2rem 0 1.5rem;">
-          <umd-element-call-to-action data-display="primary">
-            <a href="getting-started-example.html" target="_blank">View Live Example</a>
-          </umd-element-call-to-action>
-          <p style="font-size: 0.875rem; color: #6c757d; margin-top: 0.5rem;">Opens in a new window</p>
-        </div>
+        <!-- ============================================================ -->
+        <!-- npm Panel -->
+        <!-- ============================================================ -->
+        <div data-title="npm / Build Tools">
+            <p>For production applications where bundle size and tree-shaking matter.</p>
 
-        <umd-element-alert-page>
-          <p slot="headline">Production CDN usage</p>
-          <div slot="text">
-            <p>Pin to a specific version to avoid unexpected breaking changes: <code>@universityofmaryland/web-components-library@1.17.14</code> and <code>@universityofmaryland/web-styles-library@1.7.2</code>. Note that the CDN loads all components in a single bundle — if you need smaller bundles and tree-shaking, use the npm approach below.</p>
-          </div>
-        </umd-element-alert-page>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ================================================================ -->
-  <!-- Track B: npm / Build Tools -->
-  <!-- ================================================================ -->
-  <section class="umd-layout-space-vertical-landing">
-    <umd-element-section-intro id="npm" class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
-      <h2 slot="headline">Track B: npm / Build Tools</h2>
-    </umd-element-section-intro>
-    <div class="umd-layout-space-horizontal-normal">
-      <div>
-        <p>For production applications where bundle size and tree-shaking matter.</p>
-
-        <h4 class="umd-sans-medium">Step 1 -- Install Packages</h4>
-        <div class="code-example">
-          <pre><code>npm install @universityofmaryland/web-components-library
+            <h4 class="umd-sans-larger-bold">Step 1 · Install Packages</h4>
+            <div class="code-example umd-layout-space-vertical-landing-child">
+              <pre class="language-bash"><code class="language-bash">npm install @universityofmaryland/web-components-library
 npm install @universityofmaryland/web-styles-library</code></pre>
-        </div>
+            </div>
 
-        <h4 class="umd-sans-medium">Step 2 -- Import and Initialize Components</h4>
-        <p>Use grouped imports to register only the component categories your application needs.</p>
-        <div class="code-example">
-          <pre><code>// Grouped imports (recommended)
+            <h4 class="umd-sans-larger-bold">Step 2 · Import and Initialize Components</h4>
+            <p>Use grouped imports to register only the component categories your application needs.</p>
+            <div class="code-example umd-layout-space-vertical-landing-child">
+              <pre class="language-typescript"><code class="language-typescript">// Grouped imports (recommended)
 import { LoadStructuralComponents } from '@universityofmaryland/web-components-library/structural';
 import { LoadContentComponents } from '@universityofmaryland/web-components-library/content';
 
 LoadStructuralComponents();
 LoadContentComponents();</code></pre>
-        </div>
+            </div>
 
-        <h4 class="umd-sans-medium">Step 3 -- Import Static CSS</h4>
-        <p>Import pre-compiled CSS directly into your build pipeline. Choose the full bundle or pick individual modules for the smallest possible output.</p>
-        <div class="code-example">
-          <pre><code>// Full bundle -- everything in one import
+            <h4 class="umd-sans-larger-bold">Step 3 · Import Static CSS</h4>
+            <p>Import pre-compiled CSS directly into your build pipeline. Choose the full bundle or pick individual modules for the smallest possible output.</p>
+            <div class="code-example umd-layout-space-vertical-landing-child">
+              <pre class="language-typescript"><code class="language-typescript">// Full bundle · everything in one import
 import '@universityofmaryland/web-styles-library/css/styles.min.css';</code></pre>
-        </div>
-        <div class="code-example">
-          <pre><code>// Or selective imports for smaller bundles
+            </div>
+            <div class="code-example umd-layout-space-vertical-landing-child">
+              <pre class="language-typescript"><code class="language-typescript">// Or selective imports for smaller bundles
 import '@universityofmaryland/web-styles-library/css/tokens.min.css';
 import '@universityofmaryland/web-styles-library/css/font-faces.min.css';
 import '@universityofmaryland/web-styles-library/css/base.min.css';
 import '@universityofmaryland/web-styles-library/css/typography.min.css';
 import '@universityofmaryland/web-styles-library/css/layout.min.css';</code></pre>
-        </div>
+            </div>
 
-        <h4 class="umd-sans-medium">Minimal Vite Example</h4>
-        <p>A complete entry point for a Vite-based application.</p>
-        <div class="code-example">
-          <pre><code>// main.js
+            <umd-element-accordion-item>
+              <p slot="headline">Minimal Vite Example</p>
+              <div slot="text">
+                <p>A complete entry point for a Vite-based application.</p>
+                <div class="code-example umd-layout-space-vertical-landing-child">
+                  <pre class="language-typescript"><code class="language-typescript">// main.js
 import '@universityofmaryland/web-styles-library/css/styles.min.css';
 import { LoadStructuralComponents } from '@universityofmaryland/web-components-library/structural';
 import { LoadContentComponents } from '@universityofmaryland/web-components-library/content';
 
 LoadStructuralComponents();
 LoadContentComponents();</code></pre>
+                </div>
+                <p>Then use <code>&lt;umd-element-*&gt;</code> tags in your HTML just as you would with the CDN approach.</p>
+              </div>
+            </umd-element-accordion-item>
+
+            <umd-element-banner-promo data-theme="dark" data-visual-icon-seal="true">
+              <p slot="headline">Going further</p>
+              <p slot="text" class="umd-text-rich-simple">See the <a href="components/advanced-bundling.html">Advanced Bundling guide</a> for individual component loading, lazy loading, and per-route code splitting. See the <a href="styles/static-css.html">Static CSS guide</a> for a full breakdown of every CSS module available.</p>
+            </umd-element-banner-promo>
         </div>
-        <p>Then use <code>&lt;umd-element-*&gt;</code> tags in your HTML just as you would with the CDN approach.</p>
 
-        <umd-element-alert-page>
-          <p slot="headline">Going further</p>
-          <p slot="text">See the <a href="components/advanced-bundling.html">Advanced Bundling guide</a> for individual component loading, lazy loading, and per-route code splitting. See the <a href="styles/static-css.html">Static CSS guide</a> for a full breakdown of every CSS module available.</p>
-        </umd-element-alert-page>
       </div>
-
-    </div>
+    </umd-element-tabs>
   </section>
 
   <!-- ================================================================ -->
   <!-- What to Explore Next -->
   <!-- ================================================================ -->
   <section class="umd-layout-space-vertical-landing">
-    <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
-      <h2 slot="headline">What to Explore Next</h2>
-    </umd-element-section-intro>
+    <div class="umd-layout-space-horizontal-normal">
+      <h2 class="umd-sans-extralarge-bold">What to Explore Next</h2>
+    </div>
     <div class="umd-layout-space-horizontal-normal">
       <h5 class="umd-sans-medium">CDN Track</h5>
       <div class="umd-layout-grid-gap-three">
@@ -440,5 +428,8 @@ LoadContentComponents();</code></pre>
   </div>
 </umd-element-footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-typescript.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
 </body>
 </html>

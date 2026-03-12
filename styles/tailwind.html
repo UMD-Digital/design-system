@@ -10,34 +10,15 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism.min.css"
       rel="stylesheet"
     />
-    <style>
-      pre[class*="language-"] { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; margin: 1rem 0; }
-      pre { background-color: #f8f9fa; border-radius: 4px; padding: 1rem; overflow-x: auto; }
-      code { color: #e21833; }
-      pre code { color: inherit; }
-      table { width: 100%; border-collapse: collapse; margin: 1rem 0 2rem; }
-      th { background-color: #f8f9fa; padding: 0.75rem; text-align: left; border-bottom: 2px solid #dee2e6; }
-      td { padding: 0.75rem; border-bottom: 1px solid #dee2e6; }
-      td code, th code { background-color: #f8f9fa; padding: 0.2rem 0.4rem; border-radius: 3px; }
-      .code-example { background-color: #fff; border: 1px solid #dee2e6; border-radius: 4px; padding: 1rem; margin: 1rem 0; }
-
-      .integration-card { border: 1px solid #dee2e6; border-radius: 8px; padding: 1.5rem; margin-bottom: 1.5rem; background-color: #fff; }
-      .integration-card h4 { color: #e21833; margin-bottom: 1rem; }
-      .example-box { background-color: #f8f9fa; border: 2px solid #e21833; border-radius: 8px; padding: 2rem; margin: 2rem 0; }
-      .feature-list { list-style: none; padding-left: 0; }
-      .feature-list li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; }
-      .feature-list li:before { content: '\2713'; position: absolute; left: 0; color: #28a745; font-weight: bold; }
-      h3 { margin-top: 3rem; margin-bottom: 1rem; }
-      h5 { font-weight: 700; margin-top: 1.5rem; margin-bottom: 0.75rem; }
-      section > h3:first-child { margin-top: 0; }
-    </style>
+    <link rel="stylesheet" href="../assets/styles/docs.css" />
   </head>
   <body>
     <header>
+      <umd-element-navigation-utility data-info="search"></umd-element-navigation-utility>
       <div class="umd-layout-space-horizontal-full">
         <umd-element-navigation-header sticky>
           <a slot="logo" href="../index.html">
-            <span class="umd-sans-larger-bold">Design System Docs</span>
+            <img src="../assets/logo-ds-docs.svg" alt="Design System Docs" height="32" style="display:block;">
           </a>
           <div slot="main-navigation">
             <umd-element-nav-item>
@@ -108,17 +89,16 @@
         </div>
       </div>
 
-      <section class="umd-layout-space-vertical-landing">
-        <div class="umd-layout-space-horizontal-normal">
+      <section class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal">
 
-          <p>
+          <p class="umd-text-rich-simple">
             <strong>Where This Package Fits:</strong> Styles sits in the <strong>Infrastructure</strong> layer. It depends on <strong>Tokens</strong> and is used by <strong>Elements</strong>, <strong>Components</strong>, and your custom CSS.
             <a href="../architecture.html">See full architecture</a>.
           </p>
 
-          <p style="margin-bottom: 1.5rem;">Not using Tailwind? See the <a href="static-css.html">Static CSS Guide</a> for a simpler approach using pre-compiled CSS files.</p>
+          <p class="umd-text-rich-simple" style="margin-bottom: 1.5rem;">Not using Tailwind? See the <a href="static-css.html">Static CSS Guide</a> for a simpler approach using pre-compiled CSS files.</p>
 
-          <umd-element-alert-page>
+          <umd-element-banner-promo data-theme="dark" data-visual-icon-seal="true">
             <h5 slot="headline">About This Integration</h5>
             <p slot="text">
               The UMD Styles Library can be seamlessly integrated with Tailwind
@@ -126,7 +106,7 @@
               allows you to use UMD's design tokens, utilities, and components
               within your Tailwind workflow.
             </p>
-          </umd-element-alert-page>
+          </umd-element-banner-promo>
 
           <!-- Tailwind 4 Section (Primary) -->
           <div id="tailwind-4" class="example-box" style="border-color: #28a745;">
@@ -137,7 +117,7 @@
               all UMD tokens directly with Tailwind 4's <code>@theme</code> directive.
             </p>
 
-            <h4 class="umd-sans-medium" style="margin-top: 1.5rem;">Quick Start</h4>
+            <h4 class="umd-sans-larger-bold" style="margin-top: 1.5rem;">Quick Start</h4>
             <p>Just import the UMD Tailwind CSS file in your main stylesheet:</p>
             <pre><code class="language-css">/* main.css */
 @import '@universityofmaryland/web-styles-library/tailwind.css';
@@ -146,7 +126,7 @@
 
             <p style="margin-top: 1rem;"><strong>That's it!</strong> You now have access to all UMD design tokens as Tailwind utilities.</p>
 
-            <h4 class="umd-sans-medium" style="margin-top: 1.5rem;">What You Get</h4>
+            <h4 class="umd-sans-larger-bold" style="margin-top: 1.5rem;">What You Get</h4>
             <div class="umd-layout-grid-gap-two">
               <div>
                 <h5 class="umd-sans-medium">UMD Colors</h5>
@@ -186,7 +166,7 @@
               </div>
             </div>
 
-            <h4 class="umd-sans-medium" style="margin-top: 1.5rem;">CSS Variables</h4>
+            <h4 class="umd-sans-larger-bold" style="margin-top: 1.5rem;">CSS Variables</h4>
             <p>All tokens are also available as CSS custom properties:</p>
             <pre><code class="language-css">.my-element {
   color: var(--color-red);
@@ -195,11 +175,11 @@
   font-size: var(--font-size-lg);
 }</code></pre>
 
-            <h4 class="umd-sans-medium" style="margin-top: 1.5rem;">Theme-Only Option</h4>
+            <h4 class="umd-sans-larger-bold" style="margin-top: 1.5rem;">Theme-Only Option</h4>
             <p>If you don't need Tailwind utilities, import just the theme variables:</p>
             <pre><code class="language-css">/* For projects not using Tailwind */
 @import '@universityofmaryland/web-styles-library/tailwind-theme.css';</code></pre>
-            <h4 class="umd-sans-medium">What This Configuration Does</h4>
+            <h4 class="umd-sans-larger-bold">What This Configuration Does</h4>
             <div class="umd-layout-grid-gap-two">
               <div>
                 <h5 class="umd-sans-medium">Design Tokens</h5>
@@ -243,7 +223,7 @@
           </umd-element-section-intro>
 
           <div class="integration-card">
-            <h4>Using UMD Colors</h4>
+            <h4 class="umd-sans-larger-bold">Using UMD Colors</h4>
             <p>
               With the configuration above, you can use UMD colors as Tailwind
               utilities:
@@ -263,7 +243,7 @@
           </div>
 
           <div class="integration-card">
-            <h4>Using UMD Spacing &amp; Layout</h4>
+            <h4 class="umd-sans-larger-bold">Using UMD Spacing &amp; Layout</h4>
             <p>
               The integration provides UMD-specific spacing and layout
               utilities:
@@ -287,7 +267,7 @@
           </div>
 
           <div class="integration-card">
-            <h4>Typography with UMD Fonts</h4>
+            <h4 class="umd-sans-larger-bold">Typography with UMD Fonts</h4>
             <p>Use UMD's typography system within Tailwind:</p>
             <pre><code class="language-html">&lt;!-- UMD Sans font utilities --&gt;
 &lt;h1 class="umd-sans-largest-uppercase"&gt;
@@ -311,7 +291,7 @@
           </umd-element-section-intro>
 
           <div class="integration-card">
-            <h4>Custom Plugin Extension</h4>
+            <h4 class="umd-sans-larger-bold">Custom Plugin Extension</h4>
             <p>
               You can extend the plugin to add your own custom utilities while
               maintaining UMD standards:
@@ -340,7 +320,7 @@ const plugins = [
           </div>
 
           <div class="integration-card">
-            <h4>Responsive Design Patterns</h4>
+            <h4 class="umd-sans-larger-bold">Responsive Design Patterns</h4>
             <p>Use UMD's breakpoints for responsive design:</p>
             <pre><code class="language-html">&lt;!-- UMD breakpoints: mobile (0-767px), tablet (768-1023px), desktop (1024px+) --&gt;
 &lt;div class="p-4 md:p-6 lg:p-8"&gt;
@@ -359,7 +339,7 @@ const plugins = [
             <h2 slot="headline">Best Practices</h2>
           </umd-element-section-intro>
 
-          <umd-element-alert-page>
+          <umd-element-banner-promo data-theme="dark" data-visual-icon-seal="true">
             <h5 slot="headline">Do's</h5>
             <div slot="text"><ul>
               <li>Use UMD color tokens for brand consistency</li>
@@ -369,9 +349,9 @@ const plugins = [
               </li>
               <li>Use the provided breakpoints for responsive design</li>
             </ul></div>
-          </umd-element-alert-page>
+          </umd-element-banner-promo>
 
-          <umd-element-alert-page>
+          <umd-element-banner-promo data-theme="dark" data-visual-icon-seal="true">
             <h5 slot="headline">Don'ts</h5>
             <div slot="text"><ul>
               <li>Don't override UMD brand colors</li>
@@ -381,27 +361,30 @@ const plugins = [
               <li>Don't ignore accessibility when using color utilities</li>
               <li>Don't forget to test across all breakpoints</li>
             </ul></div>
-          </umd-element-alert-page>
+          </umd-element-banner-promo>
 
+      </section>
+
+      <section class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal">
           <!-- Related Resources -->
-          <div style="margin-top: 3rem;">
+          <div class="umd-layout-background-highlight-light">
             <h3 class="umd-sans-large">Related Resources</h3>
             <div class="umd-layout-grid-gap-three">
-              <umd-element-card data-visual-bordered="true">
+              <umd-element-card>
                 <h3 slot="headline"><a href="index.html">Styles API Reference</a></h3>
                 <p slot="text">Complete API documentation for all styles exports.</p>
                 <umd-element-call-to-action slot="actions" data-display="secondary">
                   <a href="index.html">View API</a>
                 </umd-element-call-to-action>
               </umd-element-card>
-              <umd-element-card data-visual-bordered="true">
+              <umd-element-card>
                 <h3 slot="headline"><a href="static-css.html">Static CSS Guide</a></h3>
                 <p slot="text">Pre-compiled CSS files for projects that don't use Tailwind.</p>
                 <umd-element-call-to-action slot="actions" data-display="secondary">
                   <a href="static-css.html">View Guide</a>
                 </umd-element-call-to-action>
               </umd-element-card>
-              <umd-element-card data-visual-bordered="true">
+              <umd-element-card>
                 <h3 slot="headline"><a href="use-cases.html">Styles Use Cases</a></h3>
                 <p slot="text">Common patterns for applying design system styles.</p>
                 <umd-element-call-to-action slot="actions" data-display="secondary">
@@ -410,7 +393,6 @@ const plugins = [
               </umd-element-card>
             </div>
           </div>
-        </div>
       </section>
     </main>
 

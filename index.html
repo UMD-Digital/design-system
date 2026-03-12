@@ -9,28 +9,22 @@
       href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/styles.min.css"
     />
     <script src="https://unpkg.com/@universityofmaryland/web-components-library/dist/cdn.js"></script>
+    <link rel="stylesheet" href="assets/styles/docs.css" />
     <style>
-      .tier-foundation {
-        background-color: #e3f2fd;
-        border: 1px solid #90caf9;
-        border-radius: 8px;
-        padding: 1.5rem;
-        margin-bottom: 1rem;
+      .tier-box {
+        background-color: #FAFAFA;
+        border: 1px solid #F1F1F1;
+        border-top: 3px solid transparent;
+        border-radius: 2px;
+        padding: 1.5rem 2.5rem;
+        margin-bottom: 2em;
       }
-      .tier-infrastructure {
-        background-color: #fff9c4;
-        border: 1px solid #fff176;
-        border-radius: 8px;
-        padding: 1.5rem;
-        margin-bottom: 1rem;
-      }
-      .tier-application {
-        background-color: #e8f5e9;
-        border: 1px solid #a5d6a7;
-        border-radius: 8px;
-        padding: 1.5rem;
-        margin-bottom: 1rem;
-      }
+      .tier-box[data-tier="application"] { border-top-color: #E21833; }
+      .tier-box[data-tier="application"] .tier-label { color: #E21833; }
+      .tier-box[data-tier="infrastructure"] { border-top-color: #FFD200; }
+      .tier-box[data-tier="infrastructure"] .tier-label { color: #757575; }
+      .tier-box[data-tier="foundation"] { border-top-color: #000000; }
+      .tier-box[data-tier="foundation"] .tier-label { color: #000000; }
       .tier-row {
         display: flex;
         justify-content: space-between;
@@ -43,7 +37,7 @@
         margin: 0;
       }
       .tier-sub {
-        color: #6c757d;
+        color: #757575;
         font-size: 0.9rem;
       }
       .tier-badge {
@@ -55,20 +49,20 @@
         color: #fff;
       }
       .tier-badge-green {
-        background-color: #2e7d32;
+        background-color: #008000;
       }
       .tier-badge-amber {
-        background-color: #f9a825;
-        color: #333;
+        background-color: #FFD200;
+        color: #242424;
       }
       .tier-badge-blue {
-        background-color: #1565c0;
+        background-color: #2F7EDA;
       }
       .pkg-card {
-        border: 1px solid #dee2e6;
+        border: 1px solid #E6E6E6;
         border-radius: 8px;
         padding: 1.25rem;
-        background: #fff;
+        background: #FFFFFF;
       }
       .pkg-card h4 {
         margin: 0 0 0.25rem;
@@ -76,7 +70,7 @@
       }
       .pkg-card .pkg-npm {
         font-size: 0.8rem;
-        color: #6c757d;
+        color: #757575;
       }
       .pkg-card .pkg-npm code {
         color: #e21833;
@@ -94,8 +88,8 @@
       .pkg-card .pkg-version {
         display: inline-block;
         padding: 0.2em 0.5em;
-        background: #6c757d;
-        color: #fff;
+        background: #757575;
+        color: #FFFFFF;
         border-radius: 3px;
         font-size: 0.75rem;
       }
@@ -107,13 +101,13 @@
         margin-bottom: 0.75rem;
       }
       .tier-heading-blue {
-        color: #1565c0;
+        color: #2F7EDA;
       }
       .tier-heading-amber {
-        color: #e6a100;
+        color: #FFD200;
       }
       .tier-heading-green {
-        color: #2e7d32;
+        color: #008000;
       }
       .arch-cta {
         text-align: center;
@@ -132,10 +126,11 @@
   </head>
   <body>
     <header>
+      <umd-element-navigation-utility data-info="search"></umd-element-navigation-utility>
       <div class="umd-layout-space-horizontal-full">
         <umd-element-navigation-header sticky>
           <a slot="logo" href="index.html">
-            <span class="umd-sans-larger-bold">Design System Docs</span>
+            <img src="assets/logo-ds-docs.svg" alt="Design System Docs" height="32" style="display:block;">
           </a>
           <div slot="main-navigation">
             <umd-element-nav-item>
@@ -698,7 +693,17 @@
             </div>
           </div>
         </div>
+      <umd-element-banner-promo class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-larger" data-theme="dark" data-visual-icon-seal="true">
+        <p slot="headline">Explore the Playground</p>
+        <p slot="text">Try content with interactive component examples and ready to copy code.</p>
+        <div slot="actions">
+          <umd-element-call-to-action data-display="primary">
+            <a href="http://playground.designsystem.umd.edu" target="_blank">Open Playground</a>
+          </umd-element-call-to-action>
+        </div>
+      </umd-element-banner-promo>
       </section>
+
     </main>
 
     <umd-element-footer data-display="mega" data-theme="dark">

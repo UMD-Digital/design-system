@@ -48,7 +48,7 @@
     "registry": "https://registry.npmjs.org/"
   },
   "scripts": {
-    "clean": "rm -rf build",
+    "clean": "rm -rf dist",
     "docs": "npx typedoc --options ./typedoc.json",
     "prebuild": "node ../../scripts/update-badges.js",
     "release": "pnpm run test && pnpm run build && pnpm publish --access public",

@@ -14,7 +14,7 @@
     "elements": "pnpm exec lerna run start --scope=@universityofmaryland/web-elements-library",
     "elements:docs": "pnpm exec lerna run docs --scope=@universityofmaryland/web-elements-library",
     "feeds": "pnpm exec lerna run start --scope=@universityofmaryland/web-feeds-library",
-    "feed:docs": "pnpm exec lerna run docs --scope=@universityofmaryland/web-feeds-library",
+    "feeds:docs": "pnpm exec lerna run docs --scope=@universityofmaryland/web-feeds-library",
     "styles": "pnpm exec lerna run start --scope=@universityofmaryland/web-styles-library",
     "styles:docs": "pnpm exec lerna run docs --scope=@universityofmaryland/web-styles-library",
     "styles:test": "pnpm exec lerna run test --scope=@universityofmaryland/web-styles-library",

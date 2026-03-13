@@ -1,49 +1,9 @@
-import { defineConfig, type Plugin } from 'vite';
+import { defineConfig } from 'vite';
 import path from 'path';
-import { exec } from 'child_process';
-import { promisify } from 'util';
 import dts from 'vite-plugin-dts';
 import checker from 'vite-plugin-checker';
 import postcssNesting from 'postcss-nesting';
 import postcssDiscardDuplicates from 'postcss-discard-duplicates';
-
-const execAsync = promisify(exec);
-
-/**
- * Vite plugin that generates CSS files after each build.
- * Runs the generate-css.ts and generate-tailwind.ts scripts via tsx.
- * The scripts use pure CSS generation functions from the exports module,
- * which are testable without Node.js fs dependencies.
- */
-function postBuildCssPlugin(): Plugin {
-  return {
-    name: 'post-build-css',
-    closeBundle: {
-      sequential: true,
-      async handler() {
-        // Skip CSS generation for CDN builds
-        if (process.env.BUILD_CDN === 'true') {
-          return;
-        }
-
-        try {
-          console.log('\n[post-build-css] Generating CSS files...');
-          await execAsync('tsx scripts/generate-css.ts', { cwd: __dirname });
-          console.log('[post-build-css] CSS files generated');
-
-          console.log('[post-build-css] Generating Tailwind files...');
-          await execAsync('tsx scripts/generate-tailwind.ts', {
-            cwd: __dirname,
-          });
-          console.log('[post-build-css] Tailwind files generated\n');
-        } catch (error) {
-          console.error('[post-build-css] Error generating CSS:', error);
-          throw error;
-        }
-      },
-    },
-  };
-}
 
 const getCdnBuildConfig = () => {
   return {
@@ -158,7 +118,6 @@ export default defineConfig(({ mode }) => {
       },
       logLevel: 'silent',
     }),
-    postBuildCssPlugin()
   ],
   css: {
     postcss: {

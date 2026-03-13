@@ -202,7 +202,7 @@ jobs:
 
       - name: Update version badges
         if: ${{ inputs.dry_run != true && inputs.auto_detect_version != true }}
-        run: npm run update-badges -- --package=${{ inputs.package }}
+        run: pnpm run update-badges -- --package=${{ inputs.package }}
 
       - name: Commit badge updates
         if: ${{ inputs.dry_run != true && inputs.auto_detect_version != true }}
@@ -318,16 +318,13 @@ jobs:
         if: ${{ inputs.dry_run == true }}
         run: |
           echo "Dry run enabled - skipping NPM publish"
-          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
-          npm publish --dry-run ./packages/${{ inputs.package }}
+          pnpm publish --dry-run --no-git-checks ./packages/${{ inputs.package }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish to NPM
         if: ${{ inputs.dry_run != true }}
         run: |
-          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
-
           # Determine dist-tag
           if [[ "${{ inputs.auto_detect_version }}" == "true" ]]; then
             # Auto-detect mode: check if version is pre-release
@@ -342,7 +339,7 @@ jobs:
           fi
 
           echo "Publishing with dist-tag: $DIST_TAG"
-          npm publish ./packages/${{ inputs.package }} --tag "$DIST_TAG"
+          pnpm publish --no-git-checks ./packages/${{ inputs.package }} --tag "$DIST_TAG"
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 

@@ -74,7 +74,7 @@ jobs:
         run: pnpm exec lerna run test --stream
 
       - name: Update version badges
-        run: npm run update-badges
+        run: pnpm run update-badges
 
       - name: Commit badge updates
         run: |

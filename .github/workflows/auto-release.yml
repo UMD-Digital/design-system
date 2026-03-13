@@ -197,7 +197,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Update all version badges
-        run: npm run update-badges
+        run: pnpm run update-badges
 
       - name: Commit and push badge updates
         env:

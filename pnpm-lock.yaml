@@ -194,22 +194,22 @@ importers:
       '@types/postcss-js':
         specifier: ^4.0.4
         version: 4.1.0
-      '@universityofmaryland/web-builder-library':
-        specifier: ^1.0.0
-        version: 1.0.2(@universityofmaryland/web-styles-library@1.8.4)(@universityofmaryland/web-utilities-library@1.0.4(@universityofmaryland/web-styles-library@1.8.4))
-      '@universityofmaryland/web-icons-library':
-        specifier: ^1.0.0
-        version: 1.0.3
-      '@universityofmaryland/web-styles-library':
-        specifier: ^1.0.0
-        version: 1.8.4
       '@universityofmaryland/web-token-library':
         specifier: workspace:^
         version: link:../tokens
-      '@universityofmaryland/web-utilities-library':
-        specifier: ^1.0.0
-        version: 1.0.4(@universityofmaryland/web-styles-library@1.8.4)
     devDependencies:
+      '@universityofmaryland/web-builder-library':
+        specifier: workspace:^
+        version: link:../builder
+      '@universityofmaryland/web-icons-library':
+        specifier: workspace:^
+        version: link:../icons
+      '@universityofmaryland/web-styles-library':
+        specifier: workspace:^
+        version: link:../styles
+      '@universityofmaryland/web-utilities-library':
+        specifier: workspace:^
+        version: link:../utilities
       '@vitejs/plugin-legacy':
         specifier: ^7.2.1
         version: 7.2.1(terser@5.46.0)(vite@7.3.1(@types/node@25.4.0)(jiti@1.21.7)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))
@@ -231,22 +231,22 @@ importers:
       '@types/postcss-js':
         specifier: ^4.0.4
         version: 4.1.0
-      '@universityofmaryland/web-builder-library':
-        specifier: ^1.0.0
-        version: 1.0.2(@universityofmaryland/web-styles-library@1.8.4)(@universityofmaryland/web-utilities-library@1.0.4(@universityofmaryland/web-styles-library@1.8.4))
-      '@universityofmaryland/web-elements-library':
-        specifier: ^1.0.0
-        version: 1.6.9(@universityofmaryland/web-builder-library@1.0.2(@universityofmaryland/web-styles-library@1.8.4)(@universityofmaryland/web-utilities-library@1.0.4(@universityofmaryland/web-styles-library@1.8.4)))(@universityofmaryland/web-icons-library@1.0.3)(@universityofmaryland/web-styles-library@1.8.4)(@universityofmaryland/web-utilities-library@1.0.4(@universityofmaryland/web-styles-library@1.8.4))
-      '@universityofmaryland/web-styles-library':
-        specifier: ^1.0.0
-        version: 1.8.4
       '@universityofmaryland/web-token-library':
         specifier: workspace:^
         version: link:../tokens
-      '@universityofmaryland/web-utilities-library':
-        specifier: ^1.0.0
-        version: 1.0.4(@universityofmaryland/web-styles-library@1.8.4)
     devDependencies:
+      '@universityofmaryland/web-builder-library':
+        specifier: workspace:^
+        version: link:../builder
+      '@universityofmaryland/web-elements-library':
+        specifier: workspace:^
+        version: link:../elements
+      '@universityofmaryland/web-styles-library':
+        specifier: workspace:^
+        version: link:../styles
+      '@universityofmaryland/web-utilities-library':
+        specifier: workspace:^
+        version: link:../utilities
       typescript:
         specifier: ^5.8.2
         version: 5.9.3

@@ -71,6 +71,10 @@
     "@universityofmaryland/web-utilities-library": "^1.0.0"
   },
   "devDependencies": {
+    "@universityofmaryland/web-builder-library": "workspace:^",
+    "@universityofmaryland/web-elements-library": "workspace:^",
+    "@universityofmaryland/web-styles-library": "workspace:^",
+    "@universityofmaryland/web-utilities-library": "workspace:^",
     "typescript": "^5.8.2",
     "vite": "^7.1.4",
     "vite-plugin-checker": "^0.10.3",

@@ -78,12 +78,13 @@ const PACKAGES_TO_MOCK = [
   },
 ];
 
-// Helper to check if value is a plain object
+// Helper to check if value is a plain object or module namespace object
 function isPlainObject(obj) {
-  return obj !== null &&
-         typeof obj === 'object' &&
-         obj.constructor === Object &&
-         !Array.isArray(obj);
+  if (obj === null || typeof obj !== 'object' || Array.isArray(obj)) {
+    return false;
+  }
+  // Accept plain objects and module namespace objects (constructor is undefined)
+  return obj.constructor === Object || obj.constructor === undefined;
 }
 
 // Helper to check if a value is a class

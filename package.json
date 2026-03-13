@@ -7,6 +7,7 @@
   "private": true,
   "packageManager": "pnpm@10.28.2",
   "scripts": {
+    "preinstall": "npx only-allow pnpm",
     "clean": "pnpm exec lerna run clean",
     "components": "pnpm exec lerna run start --scope=@universityofmaryland/web-components-library",
     "components:docs": "pnpm exec lerna run docs --scope=@universityofmaryland/web-components-library",
@@ -39,7 +40,7 @@
     "version:dry-run": "pnpm exec lerna version --no-git-tag-version --no-push --yes",
     "generate:mocks": "node source/generate-mocks.js",
     "package:version": "node scripts/version-bump.js",
-    "postpackage:version": "npm run update-badges",
+    "postpackage:version": "pnpm run update-badges",
     "perf": "tsx scripts/performance/fcp-analyzer.ts",
     "perf:audit": "tsx scripts/performance/asset-audit.ts",
     "perf:report": "tsx scripts/performance/report.ts"

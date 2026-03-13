@@ -92,7 +92,7 @@
     "@universityofmaryland/web-styles-library": "workspace:^",
     "@universityofmaryland/web-utilities-library": "workspace:^",
     "postcss": "^8.4.21",
-    "typescript": "^5.8.2",
+    "typescript": "~5.8.2",
     "vite": "^7.1.4",
     "vite-plugin-dts": "^4.5.4"
   }

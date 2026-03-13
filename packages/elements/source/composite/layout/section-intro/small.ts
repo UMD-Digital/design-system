@@ -4,7 +4,7 @@ import * as typography from '@universityofmaryland/web-styles-library/typography
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { type ElementModel } from '../../../_types';
-import { SimpleRichTextOptions } from '../../../../../styles/dist/element/text/rich';
+import { type SimpleRichTextOptions } from '@universityofmaryland/web-styles-library/element/text/rich';
 
 export interface SectionIntroProps {
   headline?: HTMLElement | null;

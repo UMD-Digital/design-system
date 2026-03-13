@@ -146,10 +146,18 @@ export default defineConfig(({ mode }) => {
     }),
     dts({
       insertTypesEntry: true,
-      outDir: 'dist',
       include: ['source/**/*.ts'],
-      exclude: ['**/__tests__/**', '**/*.test.ts'],
-      logLevel: 'silent'
+      exclude: ['**/__tests__/**', '**/*.test.ts', '**/*.spec.ts'],
+      outDir: 'dist',
+      rollupTypes: false,
+      copyDtsFiles: true,
+      compilerOptions: {
+        declaration: true,
+        declarationMap: true,
+        emitDeclarationOnly: false,
+        paths: {},
+      },
+      logLevel: 'silent',
     }),
     postBuildCssPlugin()
   ],

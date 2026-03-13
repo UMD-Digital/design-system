@@ -60,13 +60,18 @@ export default defineConfig({
     }),
     dts({
       insertTypesEntry: true,
-      outDir: 'dist',
       include: ['source/**/*.ts'],
-      exclude: ['**/__tests__/**', '**/*.test.ts'],
+      exclude: ['**/__tests__/**', '**/*.test.ts', '**/*.spec.ts'],
+      outDir: 'dist',
+      rollupTypes: false,
+      copyDtsFiles: true,
       compilerOptions: {
+        declaration: true,
+        declarationMap: true,
+        emitDeclarationOnly: false,
         paths: {},
       },
-      logLevel: 'silent'
+      logLevel: 'silent',
     })
   ]
 });

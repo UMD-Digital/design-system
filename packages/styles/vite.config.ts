@@ -155,7 +155,6 @@ export default defineConfig(({ mode }) => {
         declaration: true,
         declarationMap: true,
         emitDeclarationOnly: false,
-        paths: {},
       },
       logLevel: 'silent',
     }),

@@ -65,6 +65,9 @@
     "@universityofmaryland/web-utilities-library": "^1.0.0"
   },
   "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@universityofmaryland/web-styles-library": "workspace:^",
+    "@universityofmaryland/web-utilities-library": "workspace:^",
     "@vitejs/plugin-legacy": "^7.2.1",
     "typescript": "^5.8.2",
     "vite": "^7.1.4",

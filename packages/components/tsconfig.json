@@ -28,7 +28,6 @@
     }
   },
   "include": [
-    "./source",
-    "./__tests__"
+    "./source"
   ]
 }

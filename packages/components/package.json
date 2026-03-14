@@ -67,7 +67,14 @@
   },
   "dependencies": {
     "@types/postcss-js": "^4.0.4",
+    "@universityofmaryland/web-builder-library": "workspace:^",
+    "@universityofmaryland/web-elements-library": "workspace:^",
+    "@universityofmaryland/web-feeds-library": "workspace:^",
+    "@universityofmaryland/web-icons-library": "workspace:^",
+    "@universityofmaryland/web-model-library": "workspace:^",
+    "@universityofmaryland/web-styles-library": "workspace:^",
     "@universityofmaryland/web-token-library": "workspace:^",
+    "@universityofmaryland/web-utilities-library": "workspace:^",
     "postcss-js": "^4.0.1",
     "postcss-nesting": "^13.0.1",
     "tw-to-css": "^0.0.12"
@@ -84,13 +91,6 @@
   "devDependencies": {
     "@types/jest": "^29.5.14",
     "@types/node": "^22.0.0",
-    "@universityofmaryland/web-builder-library": "workspace:^",
-    "@universityofmaryland/web-elements-library": "workspace:^",
-    "@universityofmaryland/web-feeds-library": "workspace:^",
-    "@universityofmaryland/web-icons-library": "workspace:^",
-    "@universityofmaryland/web-model-library": "workspace:^",
-    "@universityofmaryland/web-styles-library": "workspace:^",
-    "@universityofmaryland/web-utilities-library": "workspace:^",
     "postcss": "^8.4.21",
     "typescript": "~5.8.2",
     "vite": "^7.1.4",

@@ -158,7 +158,7 @@
     "clean": "rm -rf dist",
     "prebuild": "node ../../scripts/update-badges.js",
     "release": "pnpm run test && pnpm run build && pnpm run build:css && pnpm run build:tailwind && pnpm publish --access public",
-    "build": "vite build && pnpm run build:cdn",
+    "build": "vite build && pnpm run build:cdn && pnpm run build:css",
     "build:cdn": "BUILD_CDN=true vite build --mode production",
     "build:css": "tsx scripts/generate-css.ts",
     "build:tailwind": "tsx scripts/generate-tailwind.ts",

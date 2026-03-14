@@ -305,7 +305,7 @@ export default defineConfig((configEnv) => {
         typescript: true,
         overlay: { initialIsOpen: false, position: 'br' },
         terminal: true,
-        enableBuild: true,
+        enableBuild: false,
       }),
       dts({
         ...DTS_COMMON_OPTIONS,

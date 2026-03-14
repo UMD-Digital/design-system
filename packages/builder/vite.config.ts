@@ -52,7 +52,7 @@ export default defineConfig({
         position: 'br',
       },
       terminal: true,
-      enableBuild: true,
+      enableBuild: false,
     }),
     dts({
       insertTypesEntry: true,

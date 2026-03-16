@@ -760,8 +760,11 @@ const defineComponent = (
   config: ComponentConfig,
   options?: RegisterOptions,
 ): (() => void) => {
+  let element: ReturnType<typeof createCustomElement> | null = null;
   return () => {
-    const element = createCustomElement(config);
+    if (!element) {
+      element = createCustomElement(config);
+    }
     registerComponent(config.tagName, element, options);
   };
 };

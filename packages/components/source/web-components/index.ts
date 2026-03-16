@@ -63,6 +63,7 @@ export { BrandCardStack, BrandChevronScroll } from './brand';
 export {
   CardArticle,
   CardEvent,
+  CardEventTime,
   CardIcon,
   CardOverlay,
   CardStandard,

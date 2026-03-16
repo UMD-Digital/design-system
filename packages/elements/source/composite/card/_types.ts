@@ -72,6 +72,22 @@ export interface CardListProps
 }
 
 /**
+ * Properties specific to event-time cards (two-column: content + image)
+ */
+export interface CardEventTimeProps
+  extends CardMediaProps,
+    LoadingProps,
+    Pick<ThemeProps, 'isThemeDark'> {
+  headline?: ContentElement;
+  startTime: ContentElement;
+  endTime?: ContentElement;
+  location?: ContentElement;
+  information?: ContentElement;
+  text?: ContentElement;
+  actions?: ContentElement;
+}
+
+/**
  * Properties specific to overlay cards with color background
  */
 export interface CardOverlayProps

@@ -5,6 +5,7 @@
  */
 export { CardArticle, article } from './article';
 export { CardEvent, event } from './event';
+export { CardEventTime, eventTime } from './event-time';
 export { CardIcon, icon } from './icon';
 export { CardOverlay, overlay } from './overlay';
 export { CardStandard, standard } from './standard';

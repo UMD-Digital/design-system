@@ -1,5 +1,5 @@
 import { banner } from '@universityofmaryland/web-elements-library/composite';
-import { Attributes, Slots, Register } from '@universityofmaryland/web-model-library';
+import { Attributes, Model, Slots } from '@universityofmaryland/web-model-library';
 import {
   CreateComponentFunction,
   ComponentRegistration,
@@ -74,11 +74,11 @@ const createComponent: CreateComponentFunction = (element) =>
  * @category Components
  * @since 1.0.0
  */
-export const AlertPromo: ComponentRegistration = Register.webComponent({
+export const AlertPromo: ComponentRegistration = Model.defineComponent({
   tagName,
   slots,
   createComponent,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { AlertPromo as promo };

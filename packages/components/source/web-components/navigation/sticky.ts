@@ -1,8 +1,8 @@
 import { navigation } from '@universityofmaryland/web-elements-library/composite';
 import { createSlot } from '@universityofmaryland/web-utilities-library/elements';
-import { Register } from '@universityofmaryland/web-model-library';
+import { Model } from '@universityofmaryland/web-model-library';
 
-import { CreateComponentFunction, SlotConfiguration } from '../../_types';
+import { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../../_types';
 
 const tagName = 'umd-element-navigation-sticky';
 
@@ -64,11 +64,11 @@ const createComponent: CreateComponentFunction = (element) =>
  * @category Components
  * @since 1.0.0
  */
-export const NavigationSticky = Register.webComponent({
+export const NavigationSticky: ComponentRegistration = Model.defineComponent({
   tagName,
   slots,
   createComponent,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { NavigationSticky as sticky };

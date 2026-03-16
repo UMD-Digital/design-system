@@ -2,7 +2,7 @@ import { person } from '@universityofmaryland/web-elements-library/composite';
 import { createSlot } from '@universityofmaryland/web-utilities-library/elements';
 import {
   Attributes,
-  Register,
+  Model,
   Slots,
 } from '@universityofmaryland/web-model-library';
 import { CommonPersonData } from './common';
@@ -149,11 +149,11 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const PersonHero: ComponentRegistration = Register.webComponent({
+export const PersonHero: ComponentRegistration = Model.defineComponent({
   tagName,
   slots,
   createComponent,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { PersonHero as hero };

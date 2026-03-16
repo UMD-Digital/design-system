@@ -1,7 +1,7 @@
 import { hero } from '@universityofmaryland/web-elements-library/composite';
 import { createSlot } from '@universityofmaryland/web-utilities-library/elements';
 import { getValidatedSlotImage } from '@universityofmaryland/web-utilities-library/validation';
-import { Attributes, Slots, Register } from '@universityofmaryland/web-model-library';
+import { Attributes, Model, Slots } from '@universityofmaryland/web-model-library';
 
 import type {
   CreateComponentFunction,
@@ -142,7 +142,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const HeroExpand: ComponentRegistration = Register.webComponent({
+export const HeroExpand: ComponentRegistration = Model.defineComponent({
   tagName,
   createComponent,
   attributes,
@@ -156,7 +156,7 @@ export const HeroExpand: ComponentRegistration = Register.webComponent({
       }
     }
   },
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { HeroExpand as expand };

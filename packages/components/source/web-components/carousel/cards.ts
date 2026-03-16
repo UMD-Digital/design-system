@@ -1,6 +1,6 @@
 import { carousel } from '@universityofmaryland/web-elements-library/composite';
 import { createSlot } from '@universityofmaryland/web-utilities-library/elements';
-import { Attributes, Slots, Register, Lifecycle } from '@universityofmaryland/web-model-library';
+import { Attributes, Lifecycle, Model, Slots } from '@universityofmaryland/web-model-library';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
@@ -94,13 +94,13 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const CarouselCards: ComponentRegistration = Register.webComponent({
+export const CarouselCards: ComponentRegistration = Model.defineComponent({
   tagName,
   slots,
   createComponent,
   attributes: [attributes],
   afterConnect: Lifecycle.hooks.loadOnConnect,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { CarouselCards as cards };

@@ -1,4 +1,4 @@
-import { Model, Register, Slots } from '@universityofmaryland/web-model-library';
+import { Model, Slots } from '@universityofmaryland/web-model-library';
 import { ComponentRef } from '../../_types';
 
 interface AlertBaseProps {
@@ -70,16 +70,7 @@ const createAlertComponent = <T extends AlertBaseProps>({
     } as T);
   };
 
-  return () => {
-    Register.registerWebComponent({
-      name: tagName,
-      element: Model.createCustomElement({
-        tagName,
-        slots,
-        createComponent,
-      }),
-    });
-  };
+  return Model.defineComponent({ tagName, slots, createComponent }, { eager: false });
 };
 
 export {

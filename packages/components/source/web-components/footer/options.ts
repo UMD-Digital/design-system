@@ -1,7 +1,7 @@
 import { footer } from '@universityofmaryland/web-elements-library/composite';
 import {
   Attributes,
-  Register,
+  Model,
   Slots,
 } from '@universityofmaryland/web-model-library';
 import type {
@@ -227,11 +227,11 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const FooterOptions: ComponentRegistration = Register.webComponent({
+export const FooterOptions: ComponentRegistration = Model.defineComponent({
   tagName,
   slots,
   createComponent,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { FooterOptions as options };

@@ -1,6 +1,6 @@
 import { carousel } from '@universityofmaryland/web-elements-library/composite';
 import { imageHasAlt } from '@universityofmaryland/web-utilities-library/accessibility';
-import { Attributes, Slots, Register } from '@universityofmaryland/web-model-library';
+import { Attributes, Model, Slots } from '@universityofmaryland/web-model-library';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
@@ -108,12 +108,12 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const CarouselImageSingle: ComponentRegistration = Register.webComponent({
+export const CarouselImageSingle: ComponentRegistration = Model.defineComponent({
   tagName,
   slots,
   createComponent,
   attributes: [attributes],
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { CarouselImageSingle as imageSingle };

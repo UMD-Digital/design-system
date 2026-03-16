@@ -1,5 +1,5 @@
 import { hero } from '@universityofmaryland/web-elements-library/composite';
-import { Lifecycle, Slots, Register } from '@universityofmaryland/web-model-library';
+import { Lifecycle, Model, Slots } from '@universityofmaryland/web-model-library';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
@@ -69,11 +69,11 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const HeroVideoArrow: ComponentRegistration = Register.webComponent({
+export const HeroVideoArrow: ComponentRegistration = Model.defineComponent({
   tagName,
   createComponent,
   afterConnect: Lifecycle.hooks.loadOnConnect,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { HeroVideoArrow as videoArrow };

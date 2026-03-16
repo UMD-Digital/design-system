@@ -1,5 +1,5 @@
 import { grid } from '@universityofmaryland/web-feeds-library/experts';
-import { Attributes, Register } from '@universityofmaryland/web-model-library';
+import { Attributes, Model } from '@universityofmaryland/web-model-library';
 import {
   CreateComponentFunction,
   ComponentRegistration,
@@ -92,13 +92,13 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.17.0
  */
-export const FeedExpertsGrid: ComponentRegistration = Register.webComponent({
+export const FeedExpertsGrid: ComponentRegistration = Model.defineComponent({
   tagName,
   createComponent,
   afterConnect: (element, shadow) => {
     element?.events?.callback(shadow);
   },
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { FeedExpertsGrid as expertsGrid };

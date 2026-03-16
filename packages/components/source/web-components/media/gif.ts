@@ -1,5 +1,5 @@
 import { media } from '@universityofmaryland/web-elements-library/composite';
-import { Slots, Register, Lifecycle } from '@universityofmaryland/web-model-library';
+import { Lifecycle, Model, Slots } from '@universityofmaryland/web-model-library';
 import type {
   CreateComponentFunction,
   SlotConfiguration,
@@ -43,12 +43,12 @@ const createComponent: CreateComponentFunction = (element) =>
  * @category Components
  * @since 1.12.10
  */
-export const MediaGif: ComponentRegistration = Register.webComponent({
+export const MediaGif: ComponentRegistration = Model.defineComponent({
   tagName,
   slots,
   createComponent,
   onReady: Lifecycle.hooks.loadOnConnect,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { MediaGif as gif };

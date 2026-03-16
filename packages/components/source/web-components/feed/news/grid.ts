@@ -1,5 +1,5 @@
 import { grid } from '@universityofmaryland/web-feeds-library/news';
-import { Attributes, Register } from '@universityofmaryland/web-model-library';
+import { Attributes, Model } from '@universityofmaryland/web-model-library';
 import { CommonFeedNewsData } from './common';
 import {
   CreateComponentFunction,
@@ -87,13 +87,13 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const FeedNewsGrid: ComponentRegistration = Register.webComponent({
+export const FeedNewsGrid: ComponentRegistration = Model.defineComponent({
   tagName,
   createComponent,
   afterConnect: (element, shadow) => {
     element?.events?.callback(shadow);
   },
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { FeedNewsGrid as newsGrid };

@@ -1,5 +1,5 @@
 import { carousel } from '@universityofmaryland/web-elements-library/composite';
-import { Attributes, Slots, Register, Lifecycle } from '@universityofmaryland/web-model-library';
+import { Attributes, Lifecycle, Model, Slots } from '@universityofmaryland/web-model-library';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
@@ -77,13 +77,13 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const CarouselThumbnail: ComponentRegistration = Register.webComponent({
+export const CarouselThumbnail: ComponentRegistration = Model.defineComponent({
   tagName,
   slots,
   createComponent,
   attributes: [attributes],
   afterConnect: Lifecycle.hooks.loadOnConnect,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { CarouselThumbnail as thumbnail };

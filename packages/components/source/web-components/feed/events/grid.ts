@@ -1,5 +1,5 @@
 import { grid } from '@universityofmaryland/web-feeds-library/events';
-import { Attributes, Register } from '@universityofmaryland/web-model-library';
+import { Attributes, Model } from '@universityofmaryland/web-model-library';
 import { CommonFeedEventsData } from './common';
 import {
   CreateComponentFunction,
@@ -81,13 +81,13 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const FeedEventsGrid: ComponentRegistration = Register.webComponent({
+export const FeedEventsGrid: ComponentRegistration = Model.defineComponent({
   tagName,
   createComponent,
   afterConnect: (element, shadow) => {
     element?.events?.callback(shadow);
   },
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { FeedEventsGrid as eventsGrid };

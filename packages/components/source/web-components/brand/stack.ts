@@ -1,5 +1,5 @@
 import { animations } from '@universityofmaryland/web-elements-library/atomic';
-import { Attributes, Lifecycle, Register } from '@universityofmaryland/web-model-library';
+import { Attributes, Lifecycle, Model } from '@universityofmaryland/web-model-library';
 import { CreateComponentFunction, ComponentRegistration } from '../../_types';
 
 const tagName = 'umd-element-brand-card-stack';
@@ -107,11 +107,11 @@ const createComponent: CreateComponentFunction = (element) => {
  * @since 1.0.0
  */
 
-export const BrandCardStack: ComponentRegistration = Register.webComponent({
+export const BrandCardStack: ComponentRegistration = Model.defineComponent({
   tagName,
   createComponent,
   afterConnect: Lifecycle.hooks.loadAnimation,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { BrandCardStack as cardStack };

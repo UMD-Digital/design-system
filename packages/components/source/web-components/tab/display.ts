@@ -1,6 +1,6 @@
 import { tabs } from '@universityofmaryland/web-elements-library/composite';
 import { createSlot } from '@universityofmaryland/web-utilities-library/elements';
-import { Attributes, Register, Slots, Lifecycle } from '@universityofmaryland/web-model-library';
+import { Attributes, Lifecycle, Model, Slots } from '@universityofmaryland/web-model-library';
 
 import {
   CreateComponentFunction,
@@ -181,13 +181,13 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const TabDisplay: ComponentRegistration = Register.webComponent({
+export const TabDisplay: ComponentRegistration = Model.defineComponent({
   tagName,
   slots,
   createComponent,
   attributes: [attributes],
   afterConnect: Lifecycle.hooks.loadOnConnect,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { TabDisplay as display };

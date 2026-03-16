@@ -1,6 +1,6 @@
 import { card } from '@universityofmaryland/web-elements-library/composite';
 import * as validation from '@universityofmaryland/web-utilities-library/validation';
-import { Attributes, Slots, Register } from '@universityofmaryland/web-model-library';
+import { Attributes, Model, Slots } from '@universityofmaryland/web-model-library';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
@@ -93,11 +93,11 @@ const createComponent: CreateComponentFunction = (element) =>
  * @category Components
  * @since 1.0.0
  */
-export const CardIcon: ComponentRegistration = Register.webComponent({
+export const CardIcon: ComponentRegistration = Model.defineComponent({
   tagName,
   slots,
   createComponent,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { CardIcon as icon };

@@ -1,5 +1,5 @@
 import { layout } from '@universityofmaryland/web-elements-library/composite';
-import { Attributes, Register, Lifecycle } from '@universityofmaryland/web-model-library';
+import { Attributes, Lifecycle, Model } from '@universityofmaryland/web-model-library';
 import { CreateComponentFunction, ComponentRegistration, LayoutProps } from '../../_types';
 
 interface ScrollTopProps extends Pick<LayoutProps, 'isFixed'> {}
@@ -57,11 +57,11 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const LayoutScrollTop: ComponentRegistration = Register.webComponent({
+export const LayoutScrollTop: ComponentRegistration = Model.defineComponent({
   tagName,
   createComponent,
   afterConnect: Lifecycle.hooks.loadOnConnect,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { LayoutScrollTop as scrollTop };

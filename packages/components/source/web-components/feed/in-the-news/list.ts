@@ -1,5 +1,5 @@
 import { list } from '@universityofmaryland/web-feeds-library/in-the-news';
-import { Attributes, Register } from '@universityofmaryland/web-model-library';
+import { Attributes, Model } from '@universityofmaryland/web-model-library';
 import { CommonFeedInTheNewsData } from './common';
 import {
   CreateComponentFunction,
@@ -23,12 +23,12 @@ const createComponent: CreateComponentFunction = (element) => {
   });
 };
 
-export const FeedInTheNewsList: ComponentRegistration = Register.webComponent({
+export const FeedInTheNewsList: ComponentRegistration = Model.defineComponent({
   tagName,
   createComponent,
   afterConnect: (element, shadow) => {
     element?.events?.callback(shadow);
   },
-});
+}, { eager: false });
 
 export { FeedInTheNewsList as inTheNewsList };

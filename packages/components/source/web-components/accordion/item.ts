@@ -1,6 +1,6 @@
 import { accordion } from '@universityofmaryland/web-elements-library/composite';
-import { Attributes, Slots, Register } from '@universityofmaryland/web-model-library';
-import { CreateComponentFunction, SlotConfiguration } from '../../_types';
+import { Attributes, Model, Slots } from '@universityofmaryland/web-model-library';
+import { ComponentRegistration, CreateComponentFunction, SlotConfiguration } from '../../_types';
 
 const tagName = 'umd-element-accordion-item';
 
@@ -92,12 +92,12 @@ const attributes = Attributes.handler.common.accordion();
  * @category Components
  * @since 1.0.0
  */
-export const AccordionItem = Register.webComponent({
+export const AccordionItem: ComponentRegistration = Model.defineComponent({
   tagName,
   slots,
   createComponent,
   attributes,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { AccordionItem as item };

@@ -1,7 +1,7 @@
 import { navigation } from '@universityofmaryland/web-elements-library/composite';
 import { createStyledSlotOrClone } from '@universityofmaryland/web-utilities-library/elements';
-import { Attributes, Slots, Register } from '@universityofmaryland/web-model-library';
-import { CreateComponentFunction, SlotConfiguration } from '../../_types';
+import { Attributes, Model, Slots } from '@universityofmaryland/web-model-library';
+import { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../../_types';
 
 const tagName = 'umd-element-breadcrumb';
 
@@ -70,11 +70,11 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const NavigationBreadcrumb = Register.webComponent({
+export const NavigationBreadcrumb: ComponentRegistration = Model.defineComponent({
   tagName,
   slots,
   createComponent,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { NavigationBreadcrumb as breadcrumb };

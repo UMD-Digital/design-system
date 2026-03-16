@@ -1,5 +1,5 @@
 import { inTheNews } from '@universityofmaryland/web-feeds-library/experts';
-import { Attributes, Register } from '@universityofmaryland/web-model-library';
+import { Attributes, Model } from '@universityofmaryland/web-model-library';
 import {
   CreateComponentFunction,
   ComponentRegistration,
@@ -29,14 +29,12 @@ const createComponent: CreateComponentFunction = (element) => {
   });
 };
 
-export const FeedExpertInTheNews: ComponentRegistration = Register.webComponent(
-  {
-    tagName,
-    createComponent,
-    afterConnect: (element, shadow) => {
-      element?.events?.callback(shadow);
-    },
+export const FeedExpertInTheNews: ComponentRegistration = Model.defineComponent({
+  tagName,
+  createComponent,
+  afterConnect: (element, shadow) => {
+    element?.events?.callback(shadow);
   },
-);
+}, { eager: false });
 
 export { FeedExpertInTheNews as expertsInTheNews };

@@ -1,9 +1,9 @@
 import { layout } from '@universityofmaryland/web-elements-library/composite';
 import {
   Attributes,
-  Slots,
-  Register,
   Lifecycle,
+  Model,
+  Slots,
 } from '@universityofmaryland/web-model-library';
 import { CommonIntroData } from './common';
 import {
@@ -70,11 +70,10 @@ const createComponent: CreateComponentFunction = (element) =>
  * @category Components
  * @since 1.0.0
  */
-export const LayoutSectionIntroSmall: ComponentRegistration =
-  Register.webComponent({
-    tagName,
-    createComponent,
-  });
+export const LayoutSectionIntroSmall: ComponentRegistration = Model.defineComponent({
+  tagName,
+  createComponent,
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { LayoutSectionIntroSmall as sectionIntroSmall };

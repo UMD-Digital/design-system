@@ -1,5 +1,5 @@
 import { layout } from '@universityofmaryland/web-elements-library/composite';
-import { Attributes, Register } from '@universityofmaryland/web-model-library';
+import { Attributes, Model } from '@universityofmaryland/web-model-library';
 import { CommonIntroData } from './common';
 import {
   CreateComponentFunction,
@@ -66,10 +66,10 @@ const createComponent: CreateComponentFunction = (element) =>
  * @category Components
  * @since 1.0.0
  */
-export const LayoutSectionIntroWide: ComponentRegistration = Register.webComponent({
+export const LayoutSectionIntroWide: ComponentRegistration = Model.defineComponent({
   tagName,
   createComponent,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { LayoutSectionIntroWide as sectionIntroWide };

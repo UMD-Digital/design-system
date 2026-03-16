@@ -1,6 +1,6 @@
 import { person } from '@universityofmaryland/web-elements-library/composite';
 import { createStyledSlotOrClone } from '@universityofmaryland/web-utilities-library/elements';
-import { Attributes, Register, Slots } from '@universityofmaryland/web-model-library';
+import { Attributes, Model, Slots } from '@universityofmaryland/web-model-library';
 import { CommonPersonData } from './common';
 import {
   CreateComponentFunction,
@@ -155,11 +155,11 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const PersonBio: ComponentRegistration = Register.webComponent({
+export const PersonBio: ComponentRegistration = Model.defineComponent({
   tagName,
   slots,
   createComponent,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { PersonBio as bio };

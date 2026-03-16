@@ -1,6 +1,6 @@
 import { card } from '@universityofmaryland/web-elements-library/composite';
 import * as validation from '@universityofmaryland/web-utilities-library/validation';
-import { Attributes, Model, Register, Slots } from '@universityofmaryland/web-model-library';
+import { Attributes, Model, Slots } from '@universityofmaryland/web-model-library';
 
 interface CardData {
   image: HTMLImageElement | null;
@@ -72,16 +72,7 @@ const createCardComponent = ({ tagName }: CardConfig) => {
     });
   };
 
-  return () => {
-    Register.registerWebComponent({
-      name: tagName,
-      element: Model.createCustomElement({
-        tagName,
-        slots,
-        createComponent,
-      }),
-    });
-  };
+  return Model.defineComponent({ tagName, slots, createComponent }, { eager: false });
 };
 
 export { createCardComponent };

@@ -1,5 +1,5 @@
 import { grouped } from '@universityofmaryland/web-feeds-library/events';
-import { Attributes, Register } from '@universityofmaryland/web-model-library';
+import { Attributes, Model } from '@universityofmaryland/web-model-library';
 import { CommonFeedEventsData } from './common';
 import {
   CreateComponentFunction,
@@ -52,13 +52,13 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.13.0
  */
-export const FeedEventsGrouped: ComponentRegistration = Register.webComponent({
+export const FeedEventsGrouped: ComponentRegistration = Model.defineComponent({
   tagName,
   createComponent,
   afterConnect: (element, shadow) => {
     element?.events?.callback(shadow);
   },
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { FeedEventsGrouped as eventsGrouped };

@@ -1,5 +1,5 @@
 import { social } from '@universityofmaryland/web-elements-library/composite';
-import { Attributes, Register, Lifecycle } from '@universityofmaryland/web-model-library';
+import { Attributes, Lifecycle, Model } from '@universityofmaryland/web-model-library';
 import { CreateComponentFunction, ComponentRegistration } from '../../_types';
 
 const tagName = 'umd-element-social-sharing';
@@ -155,11 +155,11 @@ const createComponent: CreateComponentFunction = (element) =>
  * @category Components
  * @since 1.0.0
  */
-export const SocialSharing: ComponentRegistration = Register.webComponent({
+export const SocialSharing: ComponentRegistration = Model.defineComponent({
   tagName,
   createComponent,
   afterConnect: Lifecycle.hooks.loadOnConnect,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { SocialSharing as sharing };

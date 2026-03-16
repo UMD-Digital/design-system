@@ -1,7 +1,7 @@
 import { media } from '@universityofmaryland/web-elements-library/composite';
 import * as validation from '@universityofmaryland/web-utilities-library/validation';
-import { Attributes, Slots, Register, Lifecycle } from '@universityofmaryland/web-model-library';
-import { CreateComponentFunction, SlotConfiguration } from '../../../_types';
+import { Attributes, Lifecycle, Model, Slots } from '@universityofmaryland/web-model-library';
+import { CreateComponentFunction, ComponentRegistration, SlotConfiguration } from '../../../_types';
 
 /**
  * Tag name for the media inline web component
@@ -190,12 +190,12 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const MediaInline = Register.webComponent({
+export const MediaInline: ComponentRegistration = Model.defineComponent({
   tagName,
   slots,
   createComponent,
   onReady: Lifecycle.hooks.loadOnConnect,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { MediaInline as inline };

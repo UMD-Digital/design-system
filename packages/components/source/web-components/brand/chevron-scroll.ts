@@ -1,5 +1,5 @@
 import { animations } from '@universityofmaryland/web-elements-library/atomic';
-import { Register } from '@universityofmaryland/web-model-library';
+import { Model } from '@universityofmaryland/web-model-library';
 import { CreateComponentFunction, ComponentRegistration } from '../../_types';
 
 const tagName = 'umd-element-brand-logo-animation';
@@ -48,10 +48,10 @@ const createComponent: CreateComponentFunction = () =>
  * @category Components
  * @since 1.0.0
  */
-export const BrandChevronScroll: ComponentRegistration = Register.webComponent({
+export const BrandChevronScroll: ComponentRegistration = Model.defineComponent({
   tagName,
   createComponent,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { BrandChevronScroll as chevronScroll };

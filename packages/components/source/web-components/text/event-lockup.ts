@@ -6,7 +6,7 @@ import {
   parseDateFromElement,
   createEventDetails,
 } from '@universityofmaryland/web-utilities-library/date';
-import { Attributes, Register, Slots, Lifecycle } from '@universityofmaryland/web-model-library';
+import { Attributes, Lifecycle, Model, Slots } from '@universityofmaryland/web-model-library';
 import { CreateComponentFunction, ComponentRegistration } from '../../_types';
 
 const tagName = 'umd-element-events-date';
@@ -115,12 +115,12 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const TextEventLockup: ComponentRegistration = Register.webComponent({
+export const TextEventLockup: ComponentRegistration = Model.defineComponent({
   tagName,
   createComponent,
   attributes: [attributes],
   afterConnect: Lifecycle.hooks.loadOnConnect,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { TextEventLockup as eventLockup };

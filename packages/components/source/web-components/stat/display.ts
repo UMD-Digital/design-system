@@ -1,5 +1,5 @@
 import { text } from '@universityofmaryland/web-elements-library/atomic';
-import { Attributes, Register, Slots } from '@universityofmaryland/web-model-library';
+import { Attributes, Model, Slots } from '@universityofmaryland/web-model-library';
 import {
   CreateComponentFunction,
   ComponentRegistration,
@@ -102,11 +102,11 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const StatDisplay: ComponentRegistration = Register.webComponent({
+export const StatDisplay: ComponentRegistration = Model.defineComponent({
   tagName,
   slots,
   createComponent,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { StatDisplay as display };

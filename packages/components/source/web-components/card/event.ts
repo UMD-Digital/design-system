@@ -1,6 +1,6 @@
 import { card } from '@universityofmaryland/web-elements-library/composite';
 import { toUMDElement } from '@universityofmaryland/web-utilities-library/adapters';
-import { Attributes, Slots, Register } from '@universityofmaryland/web-model-library';
+import { Attributes, Model, Slots } from '@universityofmaryland/web-model-library';
 import { extractEventData } from '../_event';
 import type {
   CreateComponentFunction,
@@ -185,11 +185,11 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const CardEvent: ComponentRegistration = Register.webComponent({
+export const CardEvent: ComponentRegistration = Model.defineComponent({
   tagName,
   slots,
   createComponent,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { CardEvent as event };

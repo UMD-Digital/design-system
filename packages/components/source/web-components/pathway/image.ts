@@ -1,6 +1,6 @@
 import { pathway } from '@universityofmaryland/web-elements-library/composite';
 import { toElementVisual } from '@universityofmaryland/web-utilities-library/adapters';
-import { Attributes, Slots, Register, Lifecycle } from '@universityofmaryland/web-model-library';
+import { Attributes, Lifecycle, Model, Slots } from '@universityofmaryland/web-model-library';
 import { extractEventData } from '../_event';
 import type { CreateComponentFunction, ComponentRegistration } from '../../_types';
 
@@ -202,11 +202,11 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const PathwayImage: ComponentRegistration = Register.webComponent({
+export const PathwayImage: ComponentRegistration = Model.defineComponent({
   tagName,
   createComponent,
   afterConnect: Lifecycle.hooks.loadAnimation,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { PathwayImage as image };

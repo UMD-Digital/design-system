@@ -1,5 +1,5 @@
 import { layout } from '@universityofmaryland/web-elements-library/atomic';
-import { Attributes, Slots, Register } from '@universityofmaryland/web-model-library';
+import { Attributes, Model, Slots } from '@universityofmaryland/web-model-library';
 import { CreateComponentFunction, ComponentRegistration, LayoutProps } from '../../_types';
 
 interface ModalProps extends LayoutProps {
@@ -111,11 +111,11 @@ const attributes = Attributes.handler.common.visualShowHide({
  * @category Components
  * @since 1.0.0
  */
-export const LayoutModal: ComponentRegistration = Register.webComponent({
+export const LayoutModal: ComponentRegistration = Model.defineComponent({
   tagName,
   attributes,
   createComponent,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { LayoutModal as modal };

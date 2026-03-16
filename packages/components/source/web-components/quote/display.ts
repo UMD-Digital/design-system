@@ -5,7 +5,7 @@ import { getLinkFromSlot } from '@universityofmaryland/web-utilities-library/dom
 import {
   Attributes,
   Lifecycle,
-  Register,
+  Model,
   Slots,
 } from '@universityofmaryland/web-model-library';
 import {
@@ -177,12 +177,12 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const QuoteDisplay: ComponentRegistration = Register.webComponent({
+export const QuoteDisplay: ComponentRegistration = Model.defineComponent({
   tagName,
   slots,
   createComponent,
   afterConnect: Lifecycle.hooks.loadAnimation,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { QuoteDisplay as display };

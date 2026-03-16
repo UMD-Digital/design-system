@@ -1,6 +1,6 @@
 import { slider as academicSlider } from '@universityofmaryland/web-feeds-library/academic';
 import { slider as eventSlider } from '@universityofmaryland/web-feeds-library/events';
-import { Attributes, Register, Slots } from '@universityofmaryland/web-model-library';
+import { Attributes, Model, Slots } from '@universityofmaryland/web-model-library';
 import {
   CreateComponentFunction,
   ComponentRegistration,
@@ -195,13 +195,13 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const SliderEventFeed: ComponentRegistration = Register.webComponent({
+export const SliderEventFeed: ComponentRegistration = Model.defineComponent({
   tagName,
   createComponent,
   attributes: [attributes],
   afterConnect: (ref: TypedComponentRef, shadow?: ShadowRoot) =>
     ref?.events?.callback?.(shadow),
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { SliderEventFeed as eventFeed };

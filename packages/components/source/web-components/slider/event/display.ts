@@ -1,5 +1,5 @@
 import { slider } from '@universityofmaryland/web-elements-library/composite';
-import { Attributes, Register, Slots, Lifecycle } from '@universityofmaryland/web-model-library';
+import { Attributes, Lifecycle, Model, Slots } from '@universityofmaryland/web-model-library';
 import {
   CreateComponentFunction,
   ComponentRegistration,
@@ -186,12 +186,12 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const SliderEventDisplay: ComponentRegistration = Register.webComponent({
+export const SliderEventDisplay: ComponentRegistration = Model.defineComponent({
   tagName,
   createComponent,
   attributes: [attributes],
   afterConnect: Lifecycle.hooks.loadOnConnect,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { SliderEventDisplay as eventDisplay };

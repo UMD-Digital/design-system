@@ -1,5 +1,5 @@
 import { hero } from '@universityofmaryland/web-elements-library/composite';
-import { Attributes, Register, Slots, Lifecycle } from '@universityofmaryland/web-model-library';
+import { Attributes, Lifecycle, Model, Slots } from '@universityofmaryland/web-model-library';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
@@ -77,11 +77,11 @@ const createComponent: CreateComponentFunction = (element) =>
  * @category Components
  * @since 1.0.0
  */
-export const HeroLogo: ComponentRegistration = Register.webComponent({
+export const HeroLogo: ComponentRegistration = Model.defineComponent({
   tagName,
   createComponent,
   afterConnect: Lifecycle.hooks.loadOnConnect,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { HeroLogo as logo };

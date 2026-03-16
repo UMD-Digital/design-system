@@ -1,6 +1,6 @@
 import { carousel } from '@universityofmaryland/web-elements-library/composite';
 import { imageHasAlt } from '@universityofmaryland/web-utilities-library/accessibility';
-import { Attributes, Register, Lifecycle } from '@universityofmaryland/web-model-library';
+import { Attributes, Lifecycle, Model } from '@universityofmaryland/web-model-library';
 import type {
   CreateComponentFunction,
   ComponentRegistration,
@@ -125,13 +125,13 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.13.0
  */
-export const CarouselWide: ComponentRegistration = Register.webComponent({
+export const CarouselWide: ComponentRegistration = Model.defineComponent({
   tagName,
   slots,
   createComponent,
   attributes: [attributes],
   afterConnect: Lifecycle.hooks.loadOnConnect,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { CarouselWide as wide };

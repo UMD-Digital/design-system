@@ -1,7 +1,7 @@
 import { layout } from '@universityofmaryland/web-elements-library/composite';
 import { createSlot } from '@universityofmaryland/web-utilities-library/elements';
 import * as validation from '@universityofmaryland/web-utilities-library/validation';
-import { Slots, Register } from '@universityofmaryland/web-model-library';
+import { Model, Slots } from '@universityofmaryland/web-model-library';
 import {
   CreateComponentFunction,
   ComponentRegistration,
@@ -70,11 +70,11 @@ const createComponent: CreateComponentFunction = (element) =>
  * @category Components
  * @since 1.0.0
  */
-export const LayoutImageExpand: ComponentRegistration = Register.webComponent({
+export const LayoutImageExpand: ComponentRegistration = Model.defineComponent({
   tagName,
   slots,
   createComponent,
-});
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { LayoutImageExpand as imageExpand };

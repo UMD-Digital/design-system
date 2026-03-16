@@ -46,6 +46,10 @@ import {
 import { ChangeDetector } from '../attributes/change-detection';
 import { AttributeTypeError, AttributeValidationError } from '../attributes/errors';
 import { UpdateScheduler } from './update-cycle';
+import {
+  registerComponent,
+  type RegisterOptions,
+} from './registration';
 import type {
   SlotConfig,
   SlotValidationError,
@@ -735,8 +739,36 @@ const createCustomElement = (config: ComponentConfig): typeof BaseComponent => {
   return Component;
 };
 
+/**
+ * Convenience factory that combines `createCustomElement` and `registerComponent`
+ * into a single call, eliminating tagName duplication.
+ *
+ * @param config - Component configuration (same as `createCustomElement`)
+ * @param options - Registration options (same as `registerComponent`)
+ * @returns A registration function (`ComponentRegistration`)
+ *
+ * @example
+ * ```typescript
+ * export const MyComponent: ComponentRegistration = Model.defineComponent({
+ *   tagName: 'umd-my-component',
+ *   slots,
+ *   createComponent,
+ * }, { eager: false });
+ * ```
+ */
+const defineComponent = (
+  config: ComponentConfig,
+  options?: RegisterOptions,
+): (() => void) => {
+  return () => {
+    const element = createCustomElement(config);
+    registerComponent(config.tagName, element, options);
+  };
+};
+
 export {
   createCustomElement,
+  defineComponent,
   BaseComponent,
   type ComponentConfig,
   type AttributeConfig,
@@ -751,6 +783,6 @@ export {
   isComponentRegistered,
   whenComponentDefined,
   getComponentConstructor,
-  type RegisterOptions,
 } from './registration';
+export type { RegisterOptions } from './registration';
 export { ComponentRegistrationError, BatchRegistrationError } from './errors';

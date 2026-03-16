@@ -55,7 +55,7 @@ const makeTimeRow = ({
   return new ElementBuilder('p')
     .withClassName('card-event-time-row')
     .styled(
-      typography.sans.compose('larger', {
+      typography.sans.compose('medium', {
         theme: isThemeDark ? 'dark' : 'light',
       }),
     )
@@ -107,6 +107,11 @@ const makeMetaRow = ({
     .withStyles({
       element: {
         marginBottom: token.spacing.sm,
+      },
+      '> *:not(:first-child)': {
+        [`@container (min-width: 650px)`]: {
+          width: 'auto',
+        },
       },
     })
     .withChildren(...children)
@@ -191,6 +196,7 @@ export const createCompositeCardEventTime = (props: CardEventTimeProps) => {
     headline: headline || null,
     text: text || null,
     actions: actions || null,
+    isThemeDark,
   });
   contentChildren.push(lockup);
 

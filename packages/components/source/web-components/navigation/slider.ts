@@ -1,17 +1,10 @@
-declare global {
-  interface Window {
-    UMDNavSlider: typeof UMDNavSlider;
-  }
-}
-
 import { navigation } from '@universityofmaryland/web-elements-library/composite';
-import { createStyleTemplate } from '@universityofmaryland/web-utilities-library/elements';
+import { Model } from '@universityofmaryland/web-model-library';
 import { reset } from '../../helpers/styles';
 import { MakeNavSlider, SLOTS } from './common';
 import { ComponentRegistration } from '../../_types';
 
 const tagName = 'umd-element-nav-slider';
-const ATTRIBUTE_RESIZE = 'resize';
 
 export const styles = `
   :host {
@@ -22,45 +15,26 @@ export const styles = `
   ${navigation.elements.slider.Styles}
 `;
 
-const CreateShadowDom = ({ element }: { element: HTMLElement }) =>
-  MakeNavSlider({ element, ...SLOTS });
+const attributes = [
+  {
+    name: 'resize',
+    handler: (ref: any, _oldValue: string, newValue: string) => {
+      if (newValue === 'true') ref.events?.resize();
+    },
+  },
+];
 
-class UMDNavSlider extends HTMLElement {
-  _shadow: ShadowRoot;
-  _elementRef: {
-    container: HTMLElement;
-    events: {
-      resize: () => void;
-    };
-  } | null;
+const createComponent = (element: HTMLElement) => {
+  const ref = MakeNavSlider({ element, ...SLOTS });
 
-  constructor() {
-    const template = createStyleTemplate(styles);
-    super();
-    this._elementRef = null;
-    this._shadow = this.attachShadow({ mode: 'open' });
-    this._shadow.appendChild(template.content.cloneNode(true));
-  }
+  if (!ref) return { element: document.createElement('div'), styles };
 
-  static get observedAttributes() {
-    return [ATTRIBUTE_RESIZE];
-  }
-
-  attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-    if (!this._elementRef) return;
-
-    if (name === ATTRIBUTE_RESIZE && newValue === 'true') {
-      this._elementRef.events.resize();
-    }
-  }
-
-  connectedCallback() {
-    this._elementRef = CreateShadowDom({ element: this });
-
-    if (!this._elementRef) return;
-    this._shadow.appendChild(this._elementRef.container);
-  }
-}
+  return {
+    element: ref.container,
+    styles,
+    events: ref.events,
+  };
+};
 
 /**
  * Navigation Slider
@@ -118,14 +92,11 @@ class UMDNavSlider extends HTMLElement {
  * @category Components
  * @since 1.0.0
  */
-export const NavigationSlider: ComponentRegistration = () => {
-  const hasElement = document.getElementsByTagName(tagName).length > 0;
-
-  if (!window.customElements.get(tagName) && hasElement) {
-    window.UMDNavSlider = UMDNavSlider;
-    window.customElements.define(tagName, UMDNavSlider);
-  }
-};
+export const NavigationSlider: ComponentRegistration = Model.defineComponent({
+  tagName,
+  createComponent,
+  attributes,
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { NavigationSlider as slider };

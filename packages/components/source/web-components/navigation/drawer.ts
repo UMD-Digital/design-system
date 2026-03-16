@@ -1,11 +1,5 @@
-declare global {
-  interface Window {
-    UMDNavDrawerFeature: typeof UMDNavDrawerFeature;
-  }
-}
-
 import { navigation } from '@universityofmaryland/web-elements-library/composite';
-import { createStyleTemplate } from '@universityofmaryland/web-utilities-library/elements';
+import { Model } from '@universityofmaryland/web-model-library';
 import { reset } from '../../helpers/styles';
 import { SLOTS, MakeNavDrawer } from './common';
 import { ComponentRegistration } from '../../_types';
@@ -22,14 +16,11 @@ export const styles = `
   ${navigation.elements.menuButton.Styles}
 `;
 
-const CreateNavigationDrawerElement = ({
-  element,
-}: {
-  element: HTMLElement;
-}) => {
+const createComponent = (element: HTMLElement) => {
   const container = document.createElement('div');
   const drawer = MakeNavDrawer({ element, ...SLOTS });
-  if (!drawer) return null;
+  if (!drawer) return { element: container, styles };
+
   const button = navigation.elements.menuButton.CreateElement({
     eventOpen: drawer.events.eventOpen,
   });
@@ -37,26 +28,8 @@ const CreateNavigationDrawerElement = ({
   container.appendChild(drawer.element);
   container.appendChild(button);
 
-  return container;
+  return { element: container, styles };
 };
-
-class UMDNavDrawerFeature extends HTMLElement {
-  _shadow: ShadowRoot;
-
-  constructor() {
-    const template = createStyleTemplate(styles);
-    super();
-    this._shadow = this.attachShadow({ mode: 'open' });
-    this._shadow.appendChild(template.content.cloneNode(true));
-  }
-
-  connectedCallback() {
-    const navDrawer = CreateNavigationDrawerElement({ element: this });
-    if (!navDrawer) return;
-
-    this._shadow.appendChild(navDrawer);
-  }
-}
 
 /**
  * Navigation Drawer
@@ -120,14 +93,10 @@ class UMDNavDrawerFeature extends HTMLElement {
  * @category Components
  * @since 1.0.0
  */
-export const NavigationDrawer: ComponentRegistration = () => {
-  const hasElement = document.getElementsByTagName(tagName).length > 0;
-
-  if (!window.customElements.get(tagName) && hasElement) {
-    window.UMDNavDrawerFeature = UMDNavDrawerFeature;
-    window.customElements.define(tagName, UMDNavDrawerFeature);
-  }
-};
+export const NavigationDrawer: ComponentRegistration = Model.defineComponent({
+  tagName,
+  createComponent,
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { NavigationDrawer as drawer };

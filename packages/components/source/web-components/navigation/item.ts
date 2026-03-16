@@ -1,14 +1,6 @@
-declare global {
-  interface Window {
-    UMDNavItemElement: typeof UMDNavItemElement;
-  }
-}
-
 import { navigation } from '@universityofmaryland/web-elements-library/composite';
-import {
-  createSlot,
-  createStyleTemplate,
-} from '@universityofmaryland/web-utilities-library/elements';
+import { createSlot } from '@universityofmaryland/web-utilities-library/elements';
+import { Model } from '@universityofmaryland/web-model-library';
 import { reset } from '../../helpers/styles';
 import { ComponentRegistration } from '../../_types';
 
@@ -29,69 +21,58 @@ export const styles = `
   ${navigation.elements.item.Styles}
 `;
 
-class UMDNavItemElement extends HTMLElement {
-  _shadow: ShadowRoot;
+const createComponent = (element: HTMLElement) => {
+  const calloutSlot = element.querySelector<HTMLElement>(
+    `[slot="${SLOTS.DROPDOWN_CALLOUT}"]`,
+  );
 
-  constructor() {
-    const template = createStyleTemplate(styles);
-    super();
-    this._shadow = this.attachShadow({ mode: 'open' });
-    this._shadow.appendChild(template.content.cloneNode(true));
+  const primaryLinkSlot = element.querySelector<HTMLElement>(
+    `[slot="${SLOTS.PRIMARY_LINK}"]`,
+  );
+  const primaryLinkContainer = primaryLinkSlot?.cloneNode(
+    true,
+  ) as HTMLElement | null;
+
+  const dropdownLinksSlot = element.querySelector<HTMLElement>(
+    '[slot="dropdown-links"]',
+  );
+  const dropdownLinksContainer = dropdownLinksSlot?.cloneNode(
+    true,
+  ) as HTMLElement | null;
+
+  if (!primaryLinkContainer) {
+    throw new Error('Primary link is required for a nav item');
   }
 
-  connectedCallback() {
-    const element = this;
-    const calloutSlot = element.querySelector<HTMLElement>(
-      `[slot="${SLOTS.DROPDOWN_CALLOUT}"]`,
-    );
+  let elementData: {
+    primaryLinkContainer: HTMLElement;
+    dropdownLinksContainer: HTMLElement | null;
+    dropdownCalloutsSlot?: HTMLSlotElement;
+    context: HTMLElement;
+  } = {
+    primaryLinkContainer,
+    dropdownLinksContainer,
+    context: element,
+  };
 
-    const primaryLinkSlot = element.querySelector<HTMLElement>(
-      `[slot="${SLOTS.PRIMARY_LINK}"]`,
-    );
-    const primaryLinkContainer = primaryLinkSlot?.cloneNode(
-      true,
-    ) as HTMLElement | null;
-
-    const dropdownLinksSlot = element.querySelector<HTMLElement>(
-      '[slot="dropdown-links"]',
-    );
-    const dropdownLinksContainer = dropdownLinksSlot?.cloneNode(
-      true,
-    ) as HTMLElement | null;
-
-    if (!primaryLinkContainer) {
-      throw new Error('Primary link is required for a nav item');
-    }
-
-    let elementData: {
-      primaryLinkContainer: HTMLElement;
-      dropdownLinksContainer: HTMLElement | null;
-      dropdownCalloutsSlot?: HTMLSlotElement;
-      context: HTMLElement;
-    } = {
-      primaryLinkContainer,
-      dropdownLinksContainer,
-      context: element,
-    };
-
-    if (calloutSlot && calloutSlot.children.length > 0) {
-      const dropdownCalloutsSlot = createSlot(SLOTS.DROPDOWN_CALLOUT);
-      elementData = { ...elementData, dropdownCalloutsSlot };
-    }
-
-    if (!primaryLinkContainer) {
-      throw new Error('Primary link is required for a nav item');
-    }
-
-    const navItem = navigation.elements.item.CreateElement({
-      ...elementData,
-    });
-
-    element._shadow.appendChild(navItem);
-    dropdownLinksSlot?.remove();
-    primaryLinkSlot?.remove();
+  if (calloutSlot && calloutSlot.children.length > 0) {
+    const dropdownCalloutsSlot = createSlot(SLOTS.DROPDOWN_CALLOUT);
+    elementData = { ...elementData, dropdownCalloutsSlot };
   }
-}
+
+  if (!primaryLinkContainer) {
+    throw new Error('Primary link is required for a nav item');
+  }
+
+  const navItem = navigation.elements.item.CreateElement({
+    ...elementData,
+  });
+
+  dropdownLinksSlot?.remove();
+  primaryLinkSlot?.remove();
+
+  return { element: navItem, styles };
+};
 
 /**
  * Navigation Item
@@ -154,14 +135,10 @@ class UMDNavItemElement extends HTMLElement {
  * @category Components
  * @since 1.0.0
  */
-export const NavigationItem: ComponentRegistration = () => {
-  const hasElement = document.getElementsByTagName(tagName).length > 0;
-
-  if (!window.customElements.get(tagName) && hasElement) {
-    window.UMDNavItemElement = UMDNavItemElement;
-    window.customElements.define(tagName, UMDNavItemElement);
-  }
-};
+export const NavigationItem: ComponentRegistration = Model.defineComponent({
+  tagName,
+  createComponent,
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { NavigationItem as item };

@@ -1,23 +1,17 @@
-declare global {
-  interface Window {
-    UMDHeaderElement: typeof UMDHeaderElement;
-  }
-}
-
 import { navigation } from '@universityofmaryland/web-elements-library/composite';
 import {
   createSlot,
   createStyledSlotOrClone,
-  createStyleTemplate,
 } from '@universityofmaryland/web-utilities-library/elements';
+import { Model } from '@universityofmaryland/web-model-library';
 import { reset } from '../../helpers/styles';
 import { SLOTS as GlobalSlots, MakeNavDrawer } from './common';
+import { ComponentRegistration } from '../../_types';
 
 const ELEMENT_NAME = 'umd-element-navigation-header';
 const ATTRIBUTE_SEARCH_URL = 'search-url';
 const ATTRIBUTE_CTA_URL = 'cta-url';
 const ATTRIBUTE_CTA_TEXT = 'cta-text';
-const ATTRIBUTE_STICKY = 'sticky';
 const SLOTS = {
   LOGO: 'logo',
   NAVIGATION: 'main-navigation',
@@ -177,73 +171,45 @@ const CreateHeader = ({
   return value;
 };
 
-class UMDHeaderElement extends HTMLElement {
-  _shadow: ShadowRoot;
-  _elementRef: {
-    element: HTMLDivElement;
-    events: {
-      sticky: ({ isSticky }: { isSticky: boolean }) => void;
-    };
-  } | null;
+const attributes = [
+  {
+    name: 'sticky',
+    handler: (ref: any, _oldValue: string, newValue: string) => {
+      ref.events?.sticky({ isSticky: newValue === 'true' });
+    },
+  },
+];
 
-  constructor() {
-    const template = createStyleTemplate(styles);
+const createComponent = (element: HTMLElement) => {
+  const shadow = element.shadowRoot as ShadowRoot;
+  const drawer = MakeNavDrawer({
+    element,
+    ...SLOTS,
+    displayType: 'drawer-nav',
+  });
+  const headerProps: { element: HTMLElement; eventOpen?: () => void } = {
+    element,
+  };
 
-    super();
-    this._shadow = this.attachShadow({ mode: 'open' });
-    this._shadow.appendChild(template.content.cloneNode(true));
-    this._elementRef = null;
+  if (drawer) {
+    shadow.appendChild(drawer.element);
+    headerProps.eventOpen = drawer.events.eventOpen;
   }
 
-  static get observedAttributes() {
-    return [ATTRIBUTE_STICKY];
-  }
+  const headerRef = CreateHeader(headerProps);
 
-  attributeChangedCallback(
-    name: string,
-    oldValue: string | null,
-    newValue: string | null,
-  ) {
-    if (name == ATTRIBUTE_STICKY && newValue === 'true' && this._elementRef) {
-      this._elementRef.events.sticky({ isSticky: true });
-    }
-
-    if (name == ATTRIBUTE_STICKY && newValue !== 'true' && this._elementRef) {
-      this._elementRef.events.sticky({ isSticky: false });
-    }
-  }
-
-  connectedCallback() {
-    const element = this;
-    const { _shadow } = element;
-    const drawer = MakeNavDrawer({
-      element,
-      ...SLOTS,
-      displayType: 'drawer-nav',
-    });
-    const headerProps: { element: HTMLElement; eventOpen?: () => void } = {
-      element,
-    };
-
-    if (drawer) {
-      _shadow.appendChild(drawer.element);
-      headerProps.eventOpen = drawer.events.eventOpen;
-    }
-
-    this._elementRef = CreateHeader(headerProps);
-    if (this._elementRef) _shadow.appendChild(this._elementRef.element);
-  }
-}
-
-export const NavigationHeader = () => {
-  const hasElement =
-    document.getElementsByTagName(`${ELEMENT_NAME}`).length > 0;
-
-  if (!window.customElements.get(ELEMENT_NAME) && hasElement) {
-    window.UMDHeaderElement = UMDHeaderElement;
-    window.customElements.define(ELEMENT_NAME, UMDHeaderElement);
-  }
+  return {
+    element: headerRef.element,
+    styles,
+    events: { sticky: headerRef.events.sticky },
+  };
 };
+
+export const NavigationHeader: ComponentRegistration = Model.defineComponent({
+  tagName: ELEMENT_NAME,
+  createComponent,
+  attributes,
+}, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */
 export { NavigationHeader as header };

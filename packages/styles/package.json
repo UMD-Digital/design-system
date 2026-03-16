@@ -162,7 +162,7 @@
     "build:cdn": "BUILD_CDN=true vite build --mode production",
     "build:css": "tsx scripts/generate-css.ts",
     "build:tailwind": "tsx scripts/generate-tailwind.ts",
-    "dev": "vite build --watch",
+    "dev": "pnpm run build:css && vite build --watch",
     "start": "pnpm run dev",
     "test": "jest",
     "test:watch": "jest --watch",

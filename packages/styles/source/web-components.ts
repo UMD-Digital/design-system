@@ -73,6 +73,16 @@ const feedElements = [
 const elements = {
   ...baseElements,
   ...createElementStyles('umd-element-accordion-item', {
+    notDefined: {
+      contentVisibility: 'hidden',
+      minHeight: `5vh`,
+      display: 'block',
+    },
+    defined: {
+      contentVisibility: 'visible',
+      containerType: 'inline-size',
+      display: 'block',
+    },
     custom: {
       'umd-element-accordion-item + umd-element-accordion-item': {
         marginTop: spacing.min,

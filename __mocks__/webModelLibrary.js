@@ -82,19 +82,14 @@ const Attributes = {
  * Mock Model system
  */
 const Model = {
-  createCustomElement: jest.fn((config) => {
-    // Return a mock custom element class
-    return class MockCustomElement {
-      constructor() {
-        this.shadowRoot = {
-          appendChild: jest.fn(),
-          innerHTML: '',
-        };
+  defineComponent: jest.fn((config, options) => {
+    return jest.fn(() => {
+      if (typeof customElements !== 'undefined' && customElements.define) {
+        customElements.define(config?.tagName || 'umd-mock', class extends HTMLElement {
+          constructor() { super(); }
+        });
       }
-      connectedCallback() {}
-      disconnectedCallback() {}
-      attributeChangedCallback() {}
-    };
+    });
   }),
 };
 

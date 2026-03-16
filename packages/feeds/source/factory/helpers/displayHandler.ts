@@ -228,6 +228,7 @@ export function createDisplayHandlers<TData>(
         offset: helpers.getOffset(),
         isLazyLoad: true,
         callback: lazyLoadCallback,
+        isThemeDark: cardMappingOptions.isThemeDark,
       });
 
       const paginationElement = pagination.render(container);

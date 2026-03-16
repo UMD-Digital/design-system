@@ -25,9 +25,9 @@ import { type PaginationStateConfig, FeedStateEvent } from './_types';
  * ```
  */
 export function createPaginationElement(
-  config: PaginationStateConfig
+  config: PaginationStateConfig,
 ): ElementModel | undefined {
-  const { callback, isLazyLoad, totalEntries, offset } = config;
+  const { callback, isLazyLoad, isThemeDark, totalEntries, offset } = config;
 
   // Guard clauses for when pagination is not needed
   if (!isLazyLoad) return;
@@ -48,13 +48,15 @@ export function createPaginationElement(
           totalEntries,
           timestamp: Date.now(),
         },
-      })
+      }),
     );
   });
 
-  const ctaButton = new ElementBuilder(button)
-    .styled(Styles.element.action.outline.normal)
-    .build();
+  const buttonStyle = isThemeDark
+    ? Styles.element.action.outline.white
+    : Styles.element.action.outline.normal;
+
+  const ctaButton = new ElementBuilder(button).styled(buttonStyle).build();
 
   return new ElementBuilder()
     .styled(Styles.layout.alignment.block.center)
@@ -171,4 +173,3 @@ export class PaginationState {
     return this.model?.styles;
   }
 }
-

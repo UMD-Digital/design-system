@@ -227,6 +227,7 @@ const renderLayout = async (
       offset: state.getOffset(),
       isLazyLoad: true,
       callback: loadMore,
+      isThemeDark,
     });
 
     const paginationElement = pagination.render(rightColumn);

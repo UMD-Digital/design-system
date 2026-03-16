@@ -408,6 +408,7 @@ const renderFeaturedLayout = async (
       offset: state.getOffset(),
       isLazyLoad: true,
       callback: loadMore,
+      isThemeDark: options.isThemeDark,
     });
 
     const paginationElement = pagination.render(container);

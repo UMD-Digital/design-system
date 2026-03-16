@@ -1,9 +1,23 @@
 import { defineConfig } from 'vite';
+import { execSync } from 'child_process';
 import path from 'path';
 import dts from 'vite-plugin-dts';
 import checker from 'vite-plugin-checker';
 import postcssNesting from 'postcss-nesting';
 import postcssDiscardDuplicates from 'postcss-discard-duplicates';
+
+function generateCssPlugin() {
+  return {
+    name: 'generate-css',
+    closeBundle() {
+      try {
+        execSync('tsx scripts/generate-css.ts', { stdio: 'inherit' });
+      } catch (e) {
+        console.error('CSS generation failed:', e);
+      }
+    },
+  };
+}
 
 const getCdnBuildConfig = () => {
   return {
@@ -118,6 +132,7 @@ export default defineConfig(({ mode }) => {
       },
       logLevel: 'silent',
     }),
+    generateCssPlugin(),
   ],
   css: {
     postcss: {

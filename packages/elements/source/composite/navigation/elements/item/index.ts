@@ -200,7 +200,7 @@ const DropdownStyles = `
     position: absolute;
     top: 100%;
     left: 50%;
-    transform: translateX(-50%);v 
+    transform: translateX(-50%);
     min-width: 200px;
     width: auto;
     padding-top: ${token.spacing.sm};

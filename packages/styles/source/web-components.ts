@@ -16,6 +16,7 @@ const createElementStyles = (
     contentVisibility: 'visible',
     containerType: 'inline-size',
     display: 'block',
+    position: 'relative',
     ...additionalStyles.defined,
   },
 
@@ -211,7 +212,12 @@ const carousels = createBatchStyles(
 
 const heroes = {
   ...createBatchStyles(
-    ['umd-element-hero', 'umd-element-hero-expand', 'umd-element-hero-logo', 'umd-element-person-hero'],
+    [
+      'umd-element-hero',
+      'umd-element-hero-expand',
+      'umd-element-hero-logo',
+      'umd-element-person-hero',
+    ],
     '',
     {
       notDefined: {
@@ -311,6 +317,9 @@ const navigation = {
       '& > *': { display: 'none' },
     },
     defined: {
+      position: 'relative',
+      zIndex: '9999',
+
       '& > *': { display: 'block' },
     },
     custom: {

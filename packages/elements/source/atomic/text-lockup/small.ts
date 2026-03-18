@@ -21,7 +21,7 @@ type TypeActions = {
 };
 
 export type TypeTextLockupSmall = TypeTheme & {
-  headline: HTMLElement | null;
+  headline?: HTMLElement | null;
   eyebrow?: HTMLElement | null;
   text?: HTMLElement | null;
   date?: HTMLElement | null;

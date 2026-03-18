@@ -2,10 +2,13 @@ import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-token-library';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
+import * as animationStyles from '@universityofmaryland/web-styles-library/animation';
 import { createMediaQuery } from '@universityofmaryland/web-utilities-library/styles';
 import { parseDateFromElement } from '@universityofmaryland/web-utilities-library/date';
 import { pin as iconPin } from '@universityofmaryland/web-icons-library/location';
 import { info as iconInfo } from '@universityofmaryland/web-icons-library/indicators';
+import { theme } from '@universityofmaryland/web-utilities-library/theme';
+import { wrapTextNodeInSpan } from '@universityofmaryland/web-utilities-library/dom';
 import { textLockup, assets } from 'atomic';
 import { CardEventTimeProps } from './_types';
 import { type UMDElement } from '../../_types';
@@ -29,6 +32,22 @@ const MakeDetailItem = (props: {
         theme: isThemeDark ? 'dark' : 'light',
       }),
     )
+    .withStyles({
+      element: {
+        display: 'flex',
+        alignItems: 'flex-start',
+
+        [`& + .${elementStyles.event.meta.item.className}, & + .${elementStyles.event.meta.itemDark.className}`]:
+          {
+            marginTop: '5px',
+          },
+
+        ['& span ']: {
+          marginLeft: '0 !important',
+          marginTop: '0 !important',
+        },
+      },
+    })
     .withChildren(iconElement, textElement)
     .build();
 };
@@ -46,7 +65,7 @@ const makeTimeRow = ({
   if (!startParsed) return null;
 
   let timeText = startParsed.time;
-  const endParsed = parseDateFromElement({ element: endTime });
+  const endParsed = parseDateFromElement({ element: endTime ?? null });
 
   if (endParsed && endParsed.time !== startParsed.time) {
     timeText = `${timeText} - ${endParsed.time}`;
@@ -55,13 +74,15 @@ const makeTimeRow = ({
   return new ElementBuilder('p')
     .withClassName('card-event-time-row')
     .styled(
-      typography.sans.compose('medium', {
+      typography.sans.compose('small', {
         theme: isThemeDark ? 'dark' : 'light',
       }),
     )
     .withStyles({
       element: {
         marginBottom: token.spacing.sm,
+        textTransform: 'uppercase',
+        fontWeight: token.font.weight.bold,
       },
     })
     .withHTML(timeText)
@@ -103,14 +124,14 @@ const makeMetaRow = ({
 
   return new ElementBuilder()
     .withClassName('card-event-time-meta')
-    .styled(elementStyles.event.meta.wrapper)
     .withStyles({
       element: {
         marginBottom: token.spacing.sm,
-      },
-      '> *:not(:first-child)': {
-        [`@container (min-width: 650px)`]: {
-          width: 'auto',
+
+        '> *:not(:first-child)': {
+          [`@container (min-width: 650px)`]: {
+            width: 'auto',
+          },
         },
       },
     })
@@ -189,11 +210,40 @@ export const createCompositeCardEventTime = (props: CardEventTimeProps) => {
   const timeRow = makeTimeRow({ startTime, endTime, isThemeDark });
   if (timeRow) contentChildren.push(timeRow);
 
+  if (headline) {
+    const composeHeadlineStyles = {
+      ...animationStyles.line.composeSlideUnder({
+        color: theme.foreground(isThemeDark),
+      }),
+      ...typography.sans.compose('larger', {
+        theme: theme.fontColor(isThemeDark),
+      }),
+    };
+
+    const headlineElement = new ElementBuilder(headline)
+      .styled(composeHeadlineStyles)
+      .withStyles({
+        element: {
+          fontWeight: '700',
+
+          [`& + *`]: {
+            marginTop: token.spacing.sm,
+          },
+        },
+        subElement: {
+          color: 'currentColor',
+        },
+      })
+      .withModifier((el) => wrapTextNodeInSpan(el))
+      .build();
+
+    contentChildren.push(headlineElement);
+  }
+
   const metaRow = makeMetaRow({ location, information, isThemeDark });
   if (metaRow) contentChildren.push(metaRow);
 
   const lockup = textLockup.small({
-    headline: headline || null,
     text: text || null,
     actions: actions || null,
     isThemeDark,

@@ -14,4 +14,4 @@ export const alert = `<svg title="exclamation icon" aria-hidden="true" id="icon_
 
 export const warning = `<svg title="notification icon" aria-hidden="true" id="icon_notification" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20" fill="#ffd200"/><rect x="22" y="30" width="4" height="13" transform="rotate(-180 22 30)" fill="white"/><rect width="4" height="4" transform="matrix(-1 -8.74228e-08 -8.74228e-08 1 22 11)" fill="white"/></svg>`;
 
-export const info = `<svg title="info icon" aria-hidden="true" id="icon_info" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="20" cy="20" r="20"/><rect x="18" y="17" width="4" height="13" fill="white"/><rect x="18" y="11" width="4" height="4" fill="white"/></svg>`;
+export const info = `<svg title="info icon" aria-hidden="true" id="icon_info" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"><path d="M8,0c4.42,0,8,3.58,8,8s-3.58,8-8,8S0,12.42,0,8,3.58,0,8,0ZM6.55,6.55v7.27h2.91v-7.27h-2.91ZM6.55,2.18v2.91h2.91v-2.91h-2.91Z"/></svg>`;

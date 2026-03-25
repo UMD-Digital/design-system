@@ -32,6 +32,8 @@ export interface ElementModel<T = HTMLElement> {
 export interface Image {
   /** URL to the image file */
   url: string;
+  /** Preferred alternative text field from the events feed */
+  alt?: string;
   /** Alternative text for accessibility */
   altText?: string;
   /** Unique identifier for the image */

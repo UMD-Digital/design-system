@@ -14,6 +14,7 @@ import {
   stackedLayout,
 } from 'strategies';
 import { type ListProps } from './_types';
+import { createEventImageConfig } from './image';
 import { type ElementModel } from '../../_types';
 
 /**
@@ -42,19 +43,5 @@ export const eventsList = (props: ListProps): ElementModel =>
     fetchStrategy: eventsFetchStrategy,
     displayStrategy: eventsDisplayStrategy,
     layoutStrategy: stackedLayout,
-    imageConfig: (entry) => {
-      const imageUrl = entry.image?.[0]?.url;
-      const altText = entry.image?.[0]?.altText;
-
-      if (!imageUrl || !altText) {
-        return null;
-      }
-
-      return {
-        imageUrl: imageUrl,
-        altText: altText,
-        linkUrl: entry.url,
-        linkLabel: 'University of Maryland Event',
-      };
-    },
+    imageConfig: createEventImageConfig,
   });

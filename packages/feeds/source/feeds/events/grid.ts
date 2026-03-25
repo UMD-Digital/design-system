@@ -14,6 +14,7 @@ import {
   gridGapLayout,
 } from 'strategies';
 import { type BlockProps } from './_types';
+import { createEventImageConfig } from './image';
 import { type ElementModel } from '../../_types';
 
 /**
@@ -42,17 +43,5 @@ export const eventsGrid = (props: BlockProps): ElementModel =>
     fetchStrategy: eventsFetchStrategy,
     displayStrategy: eventsDisplayStrategy,
     layoutStrategy: gridGapLayout,
-    imageConfig: (entry) => {
-      const imageUrl = entry.image?.[0]?.url;
-      const altText = entry.image?.[0]?.altText;
-
-      if (!imageUrl || !altText) return null;
-
-      return {
-        imageUrl: imageUrl,
-        altText: altText,
-        linkUrl: entry.url,
-        linkLabel: 'University of Maryland Event',
-      };
-    },
+    imageConfig: createEventImageConfig,
   });

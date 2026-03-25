@@ -1,6 +1,6 @@
 interface ImageType {
   url: string;
-  altText: string;
+  alt?: string;
 }
 
 type LocationType = {

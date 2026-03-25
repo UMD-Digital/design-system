@@ -26,6 +26,7 @@ import {
   styles as styleUtilities,
 } from '../../helpers';
 import { type ListProps } from './_types';
+import { createEventImageConfig } from './image';
 import { type ElementModel } from '../../_types';
 
 // ============================================================================
@@ -56,21 +57,7 @@ const createFetchProps = (
  * @param entry - Event entry
  * @returns Image config object
  */
-const createImageConfig = (entry: EventEntry) => {
-  const imageUrl = entry.image?.[0]?.url;
-  const altText = entry.image?.[0]?.altText;
-
-  if (!imageUrl || !altText) {
-    return null;
-  }
-
-  return {
-    imageUrl: imageUrl,
-    altText: altText,
-    linkUrl: entry.url,
-    linkLabel: 'University of Maryland Event',
-  };
-};
+const createImageConfig = (entry: EventEntry) => createEventImageConfig(entry);
 
 /**
  * Create announcer message

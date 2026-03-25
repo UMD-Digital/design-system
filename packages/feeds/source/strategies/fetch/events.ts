@@ -45,7 +45,7 @@ function generateFragments() {
       summary: commonRichTextTwo
       image: commonAssetHeroImageSingle {
         url
-        altText: commonPlainTextTwo
+        alt
       }
       location: categoriesCampusBuildingSingle {
         title
@@ -102,6 +102,10 @@ function generateSliderFragments() {
     fragment EventSliderFields_${cal} on ${cal}_Event {
       title
       url
+      image: commonAssetHeroImageSingle {
+        url
+        alt
+      }
       startMonth: startDate @formatDateTime(format: "M")
       startDay: startDate @formatDateTime(format: "d")
       endMonth: endDate @formatDateTime(format: "M")

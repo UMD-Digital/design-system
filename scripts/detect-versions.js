@@ -11,6 +11,38 @@ const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
+// Lightweight semver helpers (avoids npx/require dependency issues in pnpm CI)
+const SEMVER_RE = /^(\d+)\.(\d+)\.(\d+)(?:-([a-zA-Z0-9.]+))?(?:\+[a-zA-Z0-9.]+)?$/;
+
+function parseSemver(version) {
+  const match = version.match(SEMVER_RE);
+  if (!match) return null;
+  return {
+    major: Number(match[1]),
+    minor: Number(match[2]),
+    patch: Number(match[3]),
+    prerelease: match[4] || null,
+  };
+}
+
+function compareSemver(a, b) {
+  const pa = parseSemver(a);
+  const pb = parseSemver(b);
+  if (!pa || !pb) return 0;
+
+  if (pa.major !== pb.major) return pa.major - pb.major;
+  if (pa.minor !== pb.minor) return pa.minor - pb.minor;
+  if (pa.patch !== pb.patch) return pa.patch - pb.patch;
+
+  // No prerelease > prerelease (1.0.0 > 1.0.0-beta.0)
+  if (!pa.prerelease && pb.prerelease) return 1;
+  if (pa.prerelease && !pb.prerelease) return -1;
+  if (pa.prerelease && pb.prerelease) {
+    return pa.prerelease < pb.prerelease ? -1 : pa.prerelease > pb.prerelease ? 1 : 0;
+  }
+  return 0;
+}
+
 // Retry configuration
 const MAX_RETRIES = 3;
 const RETRY_DELAY_MS = 2000;
@@ -84,31 +116,15 @@ function getLocalVersion(packagePath) {
  * Returns true if localVersion > npmVersion
  */
 function needsRelease(localVersion, npmVersion) {
-  try {
-    const result = execSync(
-      `npx semver ${localVersion} -r ">${npmVersion}"`,
-      { encoding: 'utf-8', stdio: ['pipe', 'pipe', 'pipe'] }
-    );
-    return result.trim() === localVersion;
-  } catch (error) {
-    // semver returns non-zero exit code if comparison is false
-    return false;
-  }
+  return compareSemver(localVersion, npmVersion) > 0;
 }
 
 /**
  * Check if version is a pre-release
  */
 function isPrerelease(version) {
-  try {
-    const result = execSync(
-      `npx semver ${version} --range ">=0.0.0" --coerce`,
-      { encoding: 'utf-8' }
-    );
-    return version.includes('-') && result.trim().includes('-');
-  } catch (error) {
-    return false;
-  }
+  const parsed = parseSemver(version);
+  return parsed !== null && parsed.prerelease !== null;
 }
 
 /**
@@ -123,12 +139,7 @@ function getPrereleaseId(version) {
  * Validate version format
  */
 function isValidSemver(version) {
-  try {
-    execSync(`npx semver ${version}`, { stdio: 'pipe' });
-    return true;
-  } catch (error) {
-    return false;
-  }
+  return parseSemver(version) !== null;
 }
 
 /**
@@ -136,16 +147,7 @@ function isValidSemver(version) {
  */
 function isDowngrade(localVersion, npmVersion) {
   if (npmVersion === '0.0.0') return false;
-
-  try {
-    const result = execSync(
-      `npx semver ${localVersion} -r "<${npmVersion}"`,
-      { encoding: 'utf-8', stdio: ['pipe', 'pipe', 'pipe'] }
-    );
-    return result.trim() === localVersion;
-  } catch (error) {
-    return false;
-  }
+  return compareSemver(localVersion, npmVersion) < 0;
 }
 
 /**

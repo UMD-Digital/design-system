@@ -15,21 +15,24 @@
    ============================================================ */
 
 h2.umd-sans-extralarge-bold {
-  margin-bottom: 0.75em;
+  margin-bottom: 1em;
 }
 
 h3.umd-sans-larger {
   margin-bottom: 0.75em;
 }
 
+h3.umd-sans-larger-bold {
+  margin-bottom: 0.75em;
+}
+
 h4.umd-sans-larger-bold {
-  margin-top: 2em;
   margin-bottom: 0.75em;
 }
 
 h4.umd-sans-medium {
   font-weight: bold;
-  margin-top: 1em;
+  margin-bottom: 0.75em;
 }
 
 /* Eyebrow sub-headings */
@@ -72,7 +75,6 @@ h5.umd-sans-small {
   border: 1px solid #f1f1f1;
   padding: 1.5rem 2.5rem;
   border-radius: 2px;
-  margin-bottom: 2rem;
 }
 
 .alert-custom h1,
@@ -83,10 +85,12 @@ h5.umd-sans-small {
 .alert-custom h6 {
   color: #000000;
   text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 0.75em;
 }
 
-.alert-custom li {
-  margin-bottom: 0.75rem;
+.alert-custom li + li {
+  margin-top: 0.75rem;
 }
 
 /* --- Code ---
@@ -104,7 +108,6 @@ pre[class*='language-'] {
   border-radius: 2px;
   padding: 1rem;
   overflow-x: auto;
-  margin: 1rem 0;
 }
 
 code {
@@ -210,20 +213,6 @@ pre code {
   vertical-align: middle;
   margin-right: 0.5rem;
   border: 1px solid #dee2e6;
-}
-
-/* --- Bare heading defaults ---
-   ============================================================ */
-
-h3 {
-  margin-top: 3rem;
-  margin-bottom: 0.75em;
-}
-
-h5 {
-  font-weight: 700;
-  margin-top: 1.5rem;
-  margin-bottom: 0.75em;
 }
 
 /* --- Tier badges (table) ---

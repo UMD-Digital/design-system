@@ -168,16 +168,19 @@
             id="export-strategy"
             class="umd-layout-space-vertical-interior"
           >
-            <umd-element-accordion-item>
-              <h4 slot="headline" class="umd-sans-larger-bold">Grouped Exports</h4>
-              <div slot="text">
-                <p>
-                  The design system provides pre-configured component groups
-                  based on common usage patterns. This approach balances
-                  convenience with performance.
-                </p>
-                <div class="code-example">
-                  <pre><code class="language-javascript">// Structural Components - Page layout and navigation
+            <div class="umd-layout-space-vertical-landing-child">
+              <div class="umd-layout-space-vertical-landing-child">
+                <h3 class="umd-sans-larger-bold">Grouped Exports</h3>
+                <div class="umd-rich-text-simple">
+                  <p>
+                    The design system provides pre-configured component groups
+                    based on common usage patterns. This approach balances
+                    convenience with performance.
+                  </p>
+                </div>
+              </div>
+              <div class="code-example umd-layout-space-vertical-landing-child">
+                <pre class="language-javascript" tabindex="0"><code class="language-javascript">// Structural Components - Page layout and navigation
 // Typically loaded first for above-the-fold content
 import { LoadStructuralComponents } from '@universityofmaryland/web-components-library/structural';
 LoadStructuralComponents(); // Loads: actions, hero, navigation
@@ -196,20 +199,22 @@ LoadInteractiveComponents(); // Loads: accordion, carousel, footer, social, tab
 // Load on-demand for pages with feeds
 import { LoadFeedComponents } from '@universityofmaryland/web-components-library/feed';
 LoadFeedComponents(); // Loads: events, news, people feeds</code></pre>
+              </div>
+            </div>
+
+            <div class="umd-layout-space-vertical-landing-child">
+              <div class="umd-layout-space-vertical-landing-child">
+                <h3 class="umd-sans-larger-bold">Individual Component Exports</h3>
+                <div class="umd-rich-text-simple">
+                  <p>
+                    Import specific component types individually using dynamic
+                    imports for maximum tree-shaking efficiency and granular
+                    control over what gets loaded.
+                  </p>
                 </div>
               </div>
-            </umd-element-accordion-item>
-
-            <umd-element-accordion-item>
-              <h4 slot="headline" class="umd-sans-larger-bold">Individual Component Exports</h4>
-              <div slot="text">
-                <p>
-                  Import specific component types individually using dynamic
-                  imports for maximum tree-shaking efficiency and granular
-                  control over what gets loaded.
-                </p>
-                <div class="code-example">
-                  <pre><code class="language-javascript">// Dynamically import individual component types on demand
+              <div class="code-example umd-layout-space-vertical-landing-child">
+                <pre class="language-javascript" tabindex="0"><code class="language-javascript">// Dynamically import individual component types on demand
 const loadSpecificComponents = async () => {
   // Load only card components and their variants
   const cardComponents = await import(
@@ -244,19 +249,21 @@ if (document.querySelector('[class*="umd-element-hero"]')) {
   import('@universityofmaryland/web-components-library/components/hero')
     .then(module => module.base());
 }</code></pre>
+              </div>
+            </div>
+
+            <div class="umd-layout-space-vertical-landing-child">
+              <div class="umd-layout-space-vertical-landing-child">
+                <h3 class="umd-sans-larger-bold">Bundle Import with Tree-Shaking</h3>
+                <div class="umd-rich-text-simple">
+                  <p>
+                    Even when using the bundle import, you can still benefit from
+                    tree-shaking by importing specific components:
+                  </p>
                 </div>
               </div>
-            </umd-element-accordion-item>
-
-            <umd-element-accordion-item>
-              <h4 slot="headline" class="umd-sans-larger-bold">Bundle Import with Tree-Shaking</h4>
-              <div slot="text">
-                <p>
-                  Even when using the bundle import, you can still benefit from
-                  tree-shaking by importing specific components:
-                </p>
-                <div class="code-example">
-                  <pre><code class="language-javascript">// Import specific components from the bundle for tree-shaking
+              <div class="code-example umd-layout-space-vertical-landing-child">
+                <pre class="language-javascript" tabindex="0"><code class="language-javascript">// Import specific components from the bundle for tree-shaking
 import { Components, Styles } from '@universityofmaryland/web-components-library/bundle';
 
 // Register only the components you need
@@ -266,13 +273,14 @@ Components.navigation.primary();
 
 // The bundler will tree-shake unused components from Elements, Feeds, etc.
 // This gives you the convenience of a single import path with optimized output</code></pre>
-                </div>
               </div>
-            </umd-element-accordion-item>
+            </div>
 
-            <umd-element-accordion-item>
-              <h4 slot="headline" class="umd-sans-larger-bold">Export Strategy Comparison</h4>
-              <div slot="text">
+            <div class="umd-layout-space-vertical-landing-child">
+              <div class="umd-layout-space-vertical-landing-child">
+                <h3 class="umd-sans-larger-bold">Export Strategy Comparison</h3>
+              </div>
+              <div class="umd-layout-space-vertical-landing-child">
                 <table class="umd-table-inline docs-table-black-header">
                   <thead>
                     <tr>
@@ -314,14 +322,19 @@ Components.navigation.primary();
                     </tr>
                   </tbody>
                 </table>
-                <div class="alert-pro-tip">
-                  <h5>Pro Tip: Hybrid Approach</h5>
-                  <p>
-                    Combine both strategies for optimal results. Use grouped
-                    imports for common component sets and individual imports for
-                    specific components used sparingly:
-                  </p>
-                  <pre><code class="language-javascript">// Load structural components as a group
+              </div>
+                <div class="umd-layout-space-vertical-landing-child">
+                  <div class="umd-layout-space-vertical-landing-child">
+                    <h4 class="umd-sans-larger-bold">Pro Tip: Hybrid Approach</h4>
+                    <div class="umd-rich-text-simple">
+                      <p>
+                        Combine both strategies for optimal results. Use grouped
+                        imports for common component sets and individual imports for
+                        specific components used sparingly:
+                      </p>
+                    </div>
+                  </div>
+                  <pre class="language-javascript" tabindex="0"><code class="language-javascript">// Load structural components as a group
 import { LoadStructuralComponents } from '@universityofmaryland/web-components-library/structural';
 LoadStructuralComponents();
 
@@ -329,8 +342,7 @@ LoadStructuralComponents();
 import { Components } from '@universityofmaryland/web-components-library';
 Components.specialFeature.custom(); // Only this specific component</code></pre>
                 </div>
-              </div>
-            </umd-element-accordion-item>
+            </div>
           </section>
 
           <!-- Bundling Configuration -->
@@ -341,11 +353,10 @@ Components.specialFeature.custom(); // Only this specific component</code></pre>
             id="bundling-config"
             class="umd-layout-space-vertical-interior"
           >
-            <umd-element-accordion-item>
-              <h4 slot="headline" class="umd-sans-larger-bold">Complete Vite Configuration</h4>
-              <div slot="text">
-                <div class="code-example">
-                  <pre><code class="language-javascript">// vite.config.js
+            <div class="umd-layout-space-vertical-landing-child">
+              <h3 class="umd-sans-larger-bold">Complete Vite Configuration</h3>
+                <div class="code-example umd-layout-space-vertical-landing-child">
+                  <pre class="language-javascript" tabindex="0"><code class="language-javascript">// vite.config.js
 import { defineConfig } from 'vite';
 import path from 'path';
 
@@ -454,33 +465,34 @@ export default defineConfig(({ mode }) => {
 });</code></pre>
                 </div>
 
-                <div class="type-card">
-                  <strong>Key Configuration Options Explained:</strong>
-                  <ul>
-                    <li>
-                      <code>chunkFileNames</code> - Creates predictable vendor
-                      chunks for better long-term caching
-                    </li>
-                    <li>
-                      <code>modulePreload</code> - Ensures critical resources
-                      are preloaded for faster initial render
-                    </li>
-                    <li>
-                      <code>optimizeDeps.include</code> - Pre-bundles frequently
-                      used dependencies to avoid waterfall loading
-                    </li>
-                    <li>
-                      <code>alias</code> - Maps grouped exports to their
-                      distribution files for cleaner imports
-                    </li>
-                    <li>
-                      <code>terserOptions</code> - Removes development code in
-                      production builds
-                    </li>
-                  </ul>
+                <div class="umd-layout-space-vertical-landing-child">
+                  <h4 class="umd-sans-larger-bold">Key Configuration Options Explained</h4>
+                  <div class="umd-rich-text-simple">
+                    <ul>
+                      <li>
+                        <code>chunkFileNames</code> - Creates predictable vendor
+                        chunks for better long-term caching
+                      </li>
+                      <li>
+                        <code>modulePreload</code> - Ensures critical resources
+                        are preloaded for faster initial render
+                      </li>
+                      <li>
+                        <code>optimizeDeps.include</code> - Pre-bundles frequently
+                        used dependencies to avoid waterfall loading
+                      </li>
+                      <li>
+                        <code>alias</code> - Maps grouped exports to their
+                        distribution files for cleaner imports
+                      </li>
+                      <li>
+                        <code>terserOptions</code> - Removes development code in
+                        production builds
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </div>
-            </umd-element-accordion-item>
+            </div>
           </section>
 
           <!-- Dynamic Loading -->
@@ -491,11 +503,10 @@ export default defineConfig(({ mode }) => {
             id="dynamic-loading"
             class="umd-layout-space-vertical-interior"
           >
-            <umd-element-accordion-item>
-              <h4 slot="headline" class="umd-sans-larger-bold">Progressive Component Loading</h4>
-              <div slot="text">
-                <div class="code-example">
-                  <pre><code class="language-typescript">// main.ts - Production-ready loading strategy
+            <div class="umd-layout-space-vertical-landing-child">
+              <h3 class="umd-sans-larger-bold">Progressive Component Loading</h3>
+                <div class="code-example umd-layout-space-vertical-landing-child">
+                  <pre class="language-typescript" tabindex="0"><code class="language-typescript">// main.ts - Production-ready loading strategy
 import './styles.ts';
 
 // Component loaders with dynamic imports for code splitting
@@ -591,19 +602,21 @@ const initializeApp = async () => {
 
 initializeApp();</code></pre>
                 </div>
-              </div>
-            </umd-element-accordion-item>
+            </div>
 
-            <umd-element-accordion-item>
-              <h4 slot="headline" class="umd-sans-larger-bold">Intersection Observer Pattern</h4>
-              <div slot="text">
-                <p>
-                  Load component groups only when they're about to enter the
-                  viewport. This leverages the pre-built chunks for optimal
-                  performance:
-                </p>
-                <div class="code-example">
-                  <pre><code class="language-javascript">// Lazy load component chunks based on viewport visibility
+            <div class="umd-layout-space-vertical-landing-child">
+              <div class="umd-layout-space-vertical-landing-child">
+                <h3 class="umd-sans-larger-bold">Intersection Observer Pattern</h3>
+                <div class="umd-rich-text-simple">
+                  <p>
+                    Load component groups only when they're about to enter the
+                    viewport. This leverages the pre-built chunks for optimal
+                    performance:
+                  </p>
+                </div>
+              </div>
+              <div class="code-example umd-layout-space-vertical-landing-child">
+                <pre class="language-javascript" tabindex="0"><code class="language-javascript">// Lazy load component chunks based on viewport visibility
 const observeAndLoadComponents = () => {
   // Map components to their optimized chunk groups
   const componentGroups = {
@@ -655,9 +668,8 @@ const observeAndLoadComponents = () => {
     });
   });
 };</code></pre>
-                </div>
               </div>
-            </umd-element-accordion-item>
+            </div>
           </section>
 
           <!-- Critical CSS -->
@@ -665,13 +677,17 @@ const observeAndLoadComponents = () => {
             <h2 class="umd-sans-extralarge-bold">Critical CSS Strategy</h2>
           </div>
           <section id="critical-css" class="umd-layout-space-vertical-interior">
-            <h3 class="umd-sans-larger-bold">Static CSS Files (Recommended)</h3>
-            <p>
-              Pre-compiled CSS files are available in the styles package
-              (v1.8.0+). This is the simplest approach for most projects.
-            </p>
-            <div class="code-example">
-              <pre><code class="language-html">&lt;!-- Critical CSS (render-blocking) --&gt;
+            <div class="umd-layout-space-vertical-landing-child">
+              <h3 class="umd-sans-larger-bold">Static CSS Files (Recommended)</h3>
+              <div class="umd-rich-text-simple">
+                <p>
+                  Pre-compiled CSS files are available in the styles package
+                  (v1.8.0+). This is the simplest approach for most projects.
+                </p>
+              </div>
+            </div>
+            <div class="code-example umd-layout-space-vertical-landing-child">
+              <pre class="language-html" tabindex="0"><code class="language-html">&lt;!-- Critical CSS (render-blocking) --&gt;
 &lt;link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/font-faces.min.css"&gt;
 &lt;link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/tokens.min.css"&gt;
 &lt;link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/base.min.css"&gt;
@@ -682,9 +698,11 @@ const observeAndLoadComponents = () => {
 &lt;link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/web-components.min.css" media="print" onload="this.media='all'"&gt;</code></pre>
             </div>
 
-            <h3 class="umd-sans-larger-bold">Bundler CSS Import</h3>
-            <div class="code-example">
-              <pre><code class="language-javascript">// Import in your entry file
+            <div class="umd-layout-space-vertical-landing-child">
+              <h3 class="umd-sans-larger-bold">Bundler CSS Import</h3>
+            </div>
+            <div class="code-example umd-layout-space-vertical-landing-child">
+              <pre class="language-javascript" tabindex="0"><code class="language-javascript">// Import in your entry file
 import '@universityofmaryland/web-styles-library/css/styles.min.css';
 
 // Or selective imports
@@ -695,22 +713,28 @@ import '@universityofmaryland/web-styles-library/css/typography.min.css';
 import '@universityofmaryland/web-styles-library/css/layout.min.css';</code></pre>
             </div>
 
-            <p style="margin-top: 1rem">
-              For a complete guide to the static CSS files, including all
-              available files and usage patterns, see the
-              <a href="../styles/static-css.html">Static CSS documentation</a>.
-            </p>
+            <div class="umd-layout-space-vertical-landing-child">
+              <p class="umd-rich-text-simple">
+                For a complete guide to the static CSS files, including all
+                available files and usage patterns, see the
+                <a class="umd-text-link-red" href="../styles/static-css.html">Static CSS documentation</a>.
+              </p>
+            </div>
 
-            <h3 class="umd-sans-larger-bold">Programmatic CSS Loading (Advanced)</h3>
-            <p>
-              For cases where static CSS files are not sufficient &mdash; such
-              as when you need dynamic theme switching, conditional style
-              loading, or fine-grained control over CSS injection order &mdash;
-              the styles package provides a programmatic API.
-            </p>
+            <div class="umd-layout-space-vertical-landing-child">
+              <h3 class="umd-sans-larger-bold">Programmatic CSS Loading (Advanced)</h3>
+              <div class="umd-rich-text-simple">
+                <p>
+                  For cases where static CSS files are not sufficient &mdash; such
+                  as when you need dynamic theme switching, conditional style
+                  loading, or fine-grained control over CSS injection order &mdash;
+                  the styles package provides a programmatic API.
+                </p>
+              </div>
+            </div>
 
-            <div class="code-example">
-              <pre><code class="language-typescript">// styles.ts - Critical CSS loading implementation
+            <div class="code-example umd-layout-space-vertical-landing-child">
+              <pre class="language-typescript" tabindex="0"><code class="language-typescript">// styles.ts - Critical CSS loading implementation
 import * as Styles from '@universityofmaryland/web-styles-library';
 
 const inlineCriticalStyles = async () => {
@@ -773,22 +797,24 @@ if (document.readyState === 'loading') {
 export { inlineCriticalStyles, loadNonCriticalStyles };</code></pre>
             </div>
 
-            <h3 class="umd-sans-larger-bold">CSS Loading Phases</h3>
-            <div class="umd-rich-text-simple">
-              <ul>
-                <li>
-                  <strong>Phase 1: Critical CSS</strong> - Inline base64 fonts
-                  and above-the-fold styles directly in the document head
-                </li>
-                <li>
-                  <strong>Phase 2: Non-Critical CSS</strong> - Load decorative
-                  styles and animations during idle time
-                </li>
-                <li>
-                  <strong>Fallback Strategy</strong> - Always reveal content if
-                  styles fail to load
-                </li>
-              </ul>
+            <div class="umd-layout-space-vertical-landing-child">
+              <h3 class="umd-sans-larger-bold">CSS Loading Phases</h3>
+              <div class="umd-rich-text-simple">
+                <ul>
+                  <li>
+                    <strong>Phase 1: Critical CSS</strong> - Inline base64 fonts
+                    and above-the-fold styles directly in the document head
+                  </li>
+                  <li>
+                    <strong>Phase 2: Non-Critical CSS</strong> - Load decorative
+                    styles and animations during idle time
+                  </li>
+                  <li>
+                    <strong>Fallback Strategy</strong> - Always reveal content if
+                    styles fail to load
+                  </li>
+                </ul>
+              </div>
             </div>
           </section>
 

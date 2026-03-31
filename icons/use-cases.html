@@ -121,14 +121,12 @@
       <section
         class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal"
       >
-        <section id="getting-started">
-          <div class="umd-layout-space-vertical-landing-child">
-            <h2 class="umd-sans-extralarge-bold">Getting Started</h2>
-          </div>
-        </section>
+        <div class="umd-layout-space-vertical-landing-child">
+          <h2 class="umd-sans-extralarge-bold">Getting Started</h2>
+        </div>
 
         <!-- Section 1: Icon Categories -->
-        <div class="use-case-card">
+        <div id="getting-started" class="umd-layout-space-vertical-landing-child">
           <h3 class="umd-sans-larger-bold">1. Icon Categories</h3>
           <p>
             The Icons package organizes all SVG assets into semantic categories.
@@ -217,43 +215,54 @@
         </div>
 
         <!-- Section 2: Import Patterns -->
-        <div class="use-case-card">
+        <p class="umd-text-line-trailing umd-layout-space-vertical-landing-child" aria-hidden="true"><span></span></p>
+
+        <div class="umd-layout-space-vertical-landing-child">
           <h3 class="umd-sans-larger-bold">2. Import Patterns</h3>
 
-          <h4 class="umd-sans-medium">Category Imports (Recommended)</h4>
-          <pre><code class="language-typescript">import * as arrows from '@universityofmaryland/web-icons-library/arrows';
+          <div class="umd-layout-space-vertical-landing-child">
+            <h4 class="umd-sans-medium">Category Imports (Recommended)</h4>
+            <pre class="language-typescript" tabindex="0"><code class="language-typescript">import * as arrows from '@universityofmaryland/web-icons-library/arrows';
 import * as logos from '@universityofmaryland/web-icons-library/logos';
 import * as social from '@universityofmaryland/web-icons-library/social';
 
 // Each export is an SVG string
 arrows.CHEVRON_SMALL;  // '&lt;svg ...&gt;...&lt;/svg&gt;'
 logos.UMD_LOGO_DARK;   // '&lt;svg ...&gt;...&lt;/svg&gt;'</code></pre>
+          </div>
 
-          <h4 class="umd-sans-medium">Main Namespace Import</h4>
-          <pre><code class="language-typescript">import * as Icons from '@universityofmaryland/web-icons-library';
+          <div class="umd-layout-space-vertical-landing-child">
+            <h4 class="umd-sans-medium">Main Namespace Import</h4>
+            <pre class="language-typescript" tabindex="0"><code class="language-typescript">import * as Icons from '@universityofmaryland/web-icons-library';
 
 Icons.arrows.CHEVRON_SMALL;    // SVG string
 Icons.logos.UMD_LOGO_DARK;     // SVG string
 Icons.social.FACEBOOK;         // SVG string</code></pre>
+          </div>
         </div>
 
         <!-- Section 3: Rendering Icons -->
-        <div class="use-case-card">
+        <p class="umd-text-line-trailing umd-layout-space-vertical-landing-child" aria-hidden="true"><span></span></p>
+
+        <div class="umd-layout-space-vertical-landing-child">
           <h3 class="umd-sans-larger-bold">3. Rendering Icons</h3>
           <p>
             Icon exports are raw SVG strings. Insert them into the DOM using
             <code>innerHTML</code> or framework-specific patterns.
           </p>
 
-          <h4 class="umd-sans-medium">Vanilla JavaScript</h4>
-          <pre><code class="language-typescript">import * as arrows from '@universityofmaryland/web-icons-library/arrows';
+          <div class="umd-layout-space-vertical-landing-child">
+            <h4 class="umd-sans-medium">Vanilla JavaScript</h4>
+            <pre class="language-typescript" tabindex="0"><code class="language-typescript">import * as arrows from '@universityofmaryland/web-icons-library/arrows';
 
 const iconContainer = document.createElement('span');
 iconContainer.innerHTML = arrows.CHEVRON_SMALL;
 document.querySelector('#my-icon').appendChild(iconContainer);</code></pre>
+          </div>
 
-          <h4 class="umd-sans-medium">React</h4>
-          <pre><code class="language-typescript">import * as arrows from '@universityofmaryland/web-icons-library/arrows';
+          <div class="umd-layout-space-vertical-landing-child">
+            <h4 class="umd-sans-medium">React</h4>
+            <pre class="language-typescript" tabindex="0"><code class="language-typescript">import * as arrows from '@universityofmaryland/web-icons-library/arrows';
 
 function Icon({ svg, label }: { svg: string; label: string }) {
   return (
@@ -267,9 +276,11 @@ function Icon({ svg, label }: { svg: string; label: string }) {
 
 // Usage
 &lt;Icon svg={arrows.CHEVRON_SMALL} label="Navigate forward" /&gt;</code></pre>
+          </div>
 
-          <h4 class="umd-sans-medium">Sizing and Styling</h4>
-          <pre><code class="language-css">/* SVG icons inherit color from their parent */
+          <div class="umd-layout-space-vertical-landing-child">
+            <h4 class="umd-sans-medium">Sizing and Styling</h4>
+            <pre class="language-css" tabindex="0"><code class="language-css">/* SVG icons inherit color from their parent */
 .icon-wrapper svg {
   width: 1em;
   height: 1em;
@@ -281,29 +292,35 @@ function Icon({ svg, label }: { svg: string; label: string }) {
   width: 2rem;
   height: 2rem;
 }</code></pre>
+          </div>
         </div>
 
         <!-- Section 4: Accessibility -->
-        <div class="use-case-card">
+        <p class="umd-text-line-trailing umd-layout-space-vertical-landing-child" aria-hidden="true"><span></span></p>
+
+        <div class="umd-layout-space-vertical-landing-child">
           <h3 class="umd-sans-larger-bold">4. Accessibility</h3>
           <p>
             Proper accessibility handling depends on whether the icon is
             decorative or conveys meaning.
           </p>
 
-          <h4 class="umd-sans-medium">Decorative Icons</h4>
-          <p>
-            Icons that are purely visual and do not convey information should be
-            hidden from assistive technology:
-          </p>
-          <pre><code class="language-html">&lt;!-- Decorative: hidden from screen readers --&gt;
+          <div class="umd-layout-space-vertical-landing-child">
+            <h4 class="umd-sans-medium">Decorative Icons</h4>
+            <p>
+              Icons that are purely visual and do not convey information should be
+              hidden from assistive technology:
+            </p>
+            <pre class="language-html" tabindex="0"><code class="language-html">&lt;!-- Decorative: hidden from screen readers --&gt;
 &lt;span aria-hidden="true"&gt;
   &lt;!-- SVG icon inserted here --&gt;
 &lt;/span&gt;</code></pre>
+          </div>
 
-          <h4 class="umd-sans-medium">Meaningful Icons</h4>
-          <p>Icons that convey information need a text alternative:</p>
-          <pre><code class="language-html">&lt;!-- Meaningful: labeled for screen readers --&gt;
+          <div class="umd-layout-space-vertical-landing-child">
+            <h4 class="umd-sans-medium">Meaningful Icons</h4>
+            <p>Icons that convey information need a text alternative:</p>
+            <pre class="language-html" tabindex="0"><code class="language-html">&lt;!-- Meaningful: labeled for screen readers --&gt;
 &lt;span role="img" aria-label="Search"&gt;
   &lt;!-- SVG search icon inserted here --&gt;
 &lt;/span&gt;
@@ -313,21 +330,26 @@ function Icon({ svg, label }: { svg: string; label: string }) {
   &lt;span aria-hidden="true"&gt;&lt;!-- SVG icon --&gt;&lt;/span&gt;
   Search
 &lt;/button&gt;</code></pre>
+          </div>
 
-          <umd-element-alert-page>
-            <h2 slot="headline">Best Practice</h2>
-            <div slot="text" class="umd-text-rich-simple-large">
-              <p>
-                When an icon accompanies visible text that conveys the same
-                meaning, mark the icon as <code>aria-hidden="true"</code> to avoid
-                redundant announcements.
-              </p>
-            </div>
-          </umd-element-alert-page>
+          <div class="umd-layout-space-vertical-landing-child">
+            <umd-element-alert-page>
+              <h2 slot="headline">Best Practice</h2>
+              <div slot="text" class="umd-text-rich-simple-large">
+                <p>
+                  When an icon accompanies visible text that conveys the same
+                  meaning, mark the icon as <code>aria-hidden="true"</code> to avoid
+                  redundant announcements.
+                </p>
+              </div>
+            </umd-element-alert-page>
+          </div>
         </div>
 
         <!-- Section 5: Logo Assets -->
-        <div class="use-case-card">
+        <p class="umd-text-line-trailing umd-layout-space-vertical-landing-child" aria-hidden="true"><span></span></p>
+
+        <div class="umd-layout-space-vertical-landing-child">
           <h3 class="umd-sans-larger-bold">5. Logo Assets</h3>
           <p>
             The <code>logos</code> category contains official UMD brand assets
@@ -366,10 +388,12 @@ function Icon({ svg, label }: { svg: string; label: string }) {
             </tbody>
           </table>
 
-          <pre><code class="language-typescript">import * as logos from '@universityofmaryland/web-icons-library/logos';
+          <div class="umd-layout-space-vertical-landing-child">
+            <pre class="language-typescript" tabindex="0"><code class="language-typescript">import * as logos from '@universityofmaryland/web-icons-library/logos';
 
 // Insert the dark logo into a header
 document.querySelector('.site-header').innerHTML = logos.UMD_LOGO_DARK;</code></pre>
+          </div>
         </div>
       </section>
 

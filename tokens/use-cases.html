@@ -94,18 +94,17 @@
     <main>
       <section class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal">
 
-          <section id="getting-started">
-            <div class="umd-layout-space-vertical-landing-child">
-              <h2 class="umd-sans-extralarge-bold">Getting Started</h2>
-            </div>
-          </section>
+          <div class="umd-layout-space-vertical-landing-child">
+            <h2 class="umd-sans-extralarge-bold">Getting Started</h2>
+          </div>
 
           <!-- Section 1: Token Reference Tables -->
-          <div class="use-case-card">
+          <div id="getting-started" class="umd-layout-space-vertical-landing-child">
             <h3 class="umd-sans-larger-bold">1. Token Reference</h3>
 
-            <h4 class="umd-sans-medium">Colors</h4>
-            <table class="umd-table-inline docs-table-black-header token-table">
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-medium">Colors</h4>
+              <table class="umd-table-inline docs-table-black-header token-table">
               <thead>
                 <tr>
                   <th>Token</th>
@@ -175,10 +174,12 @@
                   <td>Red -- dark</td>
                 </tr>
               </tbody>
-            </table>
+              </table>
+            </div>
 
-            <h4 class="umd-sans-medium">Spacing Scale</h4>
-            <table class="umd-table-inline docs-table-black-header token-table">
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-medium">Spacing Scale</h4>
+              <table class="umd-table-inline docs-table-black-header token-table">
               <thead>
                 <tr>
                   <th>Token</th>
@@ -238,10 +239,12 @@
                   <td>Maximum spacing</td>
                 </tr>
               </tbody>
-            </table>
+              </table>
+            </div>
 
-            <h4 class="umd-sans-medium">Typography</h4>
-            <table class="umd-table-inline docs-table-black-header token-table">
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-medium">Typography</h4>
+              <table class="umd-table-inline docs-table-black-header token-table">
               <thead>
                 <tr>
                   <th>Token</th>
@@ -296,10 +299,12 @@
                   <td>Extra-bold weight</td>
                 </tr>
               </tbody>
-            </table>
+              </table>
+            </div>
 
-            <h4 class="umd-sans-medium">Media Breakpoints</h4>
-            <table class="umd-table-inline docs-table-black-header token-table">
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-medium">Media Breakpoints</h4>
+              <table class="umd-table-inline docs-table-black-header token-table">
               <thead>
                 <tr>
                   <th>Breakpoint</th>
@@ -329,36 +334,48 @@
                   <td>High-definition screens</td>
                 </tr>
               </tbody>
-            </table>
+              </table>
+            </div>
           </div>
 
           <!-- Section 2: Usage Patterns -->
-          <div class="use-case-card">
+          <p class="umd-text-line-trailing umd-layout-space-vertical-landing-child" aria-hidden="true"><span></span></p>
+
+          <div class="umd-layout-space-vertical-landing-child">
             <h3 class="umd-sans-larger-bold">2. Usage Patterns</h3>
 
-            <h4 class="umd-sans-medium">Namespace Import (Recommended)</h4>
-            <pre><code class="language-typescript">import * as token from '@universityofmaryland/web-token-library';
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-medium">Namespace Import (Recommended)</h4>
+              <pre class="language-typescript" tabindex="0"><code class="language-typescript">import * as token from '@universityofmaryland/web-token-library';
 
 token.color.red;    // '#e21833'
 token.spacing.md;   // '24px'
 token.font.family.sans; // 'Interstate, ...'</code></pre>
+            </div>
 
-            <h4 class="umd-sans-medium">Named Imports</h4>
-            <pre><code class="language-typescript">import { color, spacing } from '@universityofmaryland/web-token-library';</code></pre>
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-medium">Named Imports</h4>
+              <pre class="language-typescript" tabindex="0"><code class="language-typescript">import { color, spacing } from '@universityofmaryland/web-token-library';</code></pre>
+            </div>
 
-            <h4 class="umd-sans-medium">Category Imports</h4>
-            <pre><code class="language-typescript">import * as color from '@universityofmaryland/web-token-library/color';
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-medium">Category Imports</h4>
+              <pre class="language-typescript" tabindex="0"><code class="language-typescript">import * as color from '@universityofmaryland/web-token-library/color';
 import * as font from '@universityofmaryland/web-token-library/font';
 import * as media from '@universityofmaryland/web-token-library/media';
 import * as spacing from '@universityofmaryland/web-token-library/spacing';</code></pre>
+            </div>
           </div>
 
           <!-- Section 3: Using Tokens in Custom CSS -->
-          <div class="use-case-card">
+          <p class="umd-text-line-trailing umd-layout-space-vertical-landing-child" aria-hidden="true"><span></span></p>
+
+          <div class="umd-layout-space-vertical-landing-child">
             <h3 class="umd-sans-larger-bold">3. Using Tokens in Custom CSS</h3>
             <p>After importing the generated <code>tokens.min.css</code> file, you can use design tokens as CSS custom properties:</p>
 
-            <pre><code class="language-css">/* After importing tokens.min.css */
+            <div class="umd-layout-space-vertical-landing-child">
+              <pre class="language-css" tabindex="0"><code class="language-css">/* After importing tokens.min.css */
 .my-header {
   color: var(--umd-color-red);
   font-family: var(--umd-font-sans);
@@ -370,6 +387,7 @@ import * as spacing from '@universityofmaryland/web-token-library/spacing';</cod
   border: 1px solid var(--umd-color-gray-light);
   margin-bottom: var(--umd-space-md);
 }</code></pre>
+            </div>
 
             <p class="umd-rich-text-simple">For more about the static CSS export pipeline, see the <a class="umd-text-link-red" href="../styles/static-css.html">Styles static CSS guide</a>.</p>
           </div>

@@ -107,18 +107,22 @@
                 <h2 class="umd-sans-extralarge-bold">When to Use</h2>
               </div>
               <section id="when-to-use" class="umd-layout-space-vertical-interior">
-                <h3 class="umd-sans-larger-bold">Model</h3>
-                <div class="umd-rich-text-simple">
-                  <p>
-                    <code>@universityofmaryland/web-model-library</code> -- Use when building custom web components that follow UMD patterns. Provides attribute parsing, slot management, registration, and lifecycle hooks.
-                  </p>
+                <div class="umd-layout-space-vertical-interior-child">
+                  <h3 class="umd-sans-larger-bold">Model</h3>
+                  <div class="umd-rich-text-simple">
+                    <p>
+                      <code>@universityofmaryland/web-model-library</code> -- Use when building custom web components that follow UMD patterns. Provides attribute parsing, slot management, registration, and lifecycle hooks.
+                    </p>
+                  </div>
                 </div>
 
-                <h3 class="umd-sans-larger-bold">Builder</h3>
-                <div class="umd-rich-text-simple">
-                  <p>
-                    <code>@universityofmaryland/web-builder-library</code> -- Use when constructing DOM elements with a fluent API. Provides <code>ElementBuilder</code> for building complex element trees with automatic style management.
-                  </p>
+                <div class="umd-layout-space-vertical-interior-child">
+                  <h3 class="umd-sans-larger-bold">Builder</h3>
+                  <div class="umd-rich-text-simple">
+                    <p>
+                      <code>@universityofmaryland/web-builder-library</code> -- Use when constructing DOM elements with a fluent API. Provides <code>ElementBuilder</code> for building complex element trees with automatic style management.
+                    </p>
+                  </div>
                 </div>
               </section>
 
@@ -130,7 +134,7 @@
                 </div>
               </div>
               <section id="model-overview" class="umd-layout-space-vertical-interior">
-                <div class="code-example">
+                <div class="code-example umd-layout-space-vertical-interior-child">
                   <pre><code class="language-typescript">import { Attributes, Model, Register, Slots, Lifecycle } from '@universityofmaryland/web-model-library';</code></pre>
                 </div>
 
@@ -178,7 +182,7 @@
                 </div>
               </div>
               <section id="custom-component" class="umd-layout-space-vertical-interior">
-                <div class="code-example">
+                <div class="code-example umd-layout-space-vertical-interior-child">
                   <pre><code class="language-typescript">import { Attributes, Model, Register, Slots, Lifecycle } from '@universityofmaryland/web-model-library';
 import { Composite } from '@universityofmaryland/web-elements-library/composite';
 
@@ -226,9 +230,9 @@ const registration = () => {
 export { registration };</code></pre>
                 </div>
 
-                <h3 class="umd-sans-larger-bold">Usage in HTML</h3>
-                <div class="code-example">
-                  <pre><code class="language-html">&lt;umd-custom-feature-card data-theme="dark"&gt;
+                <div class="umd-layout-space-vertical-interior-child">
+                  <h3 class="umd-sans-larger-bold">Usage in HTML</h3>
+                  <pre class="language-html" tabindex="0"><code class="language-html">&lt;umd-custom-feature-card data-theme="dark"&gt;
   &lt;h2 slot="headline"&gt;Custom Feature&lt;/h2&gt;
   &lt;p slot="text"&gt;Built with the model and elements packages.&lt;/p&gt;
 &lt;/umd-custom-feature-card&gt;</code></pre>
@@ -243,7 +247,7 @@ export { registration };</code></pre>
                 </div>
               </div>
               <section id="builder-overview" class="umd-layout-space-vertical-interior">
-                <div class="code-example">
+                <div class="code-example umd-layout-space-vertical-interior-child">
                   <pre><code class="language-typescript">import { ElementBuilder } from '@universityofmaryland/web-builder-library';</code></pre>
                 </div>
 
@@ -259,7 +263,7 @@ export { registration };</code></pre>
                 <h2 class="umd-sans-extralarge-bold">Using ElementBuilder</h2>
               </div>
               <section id="builder-usage" class="umd-layout-space-vertical-interior">
-                <div class="code-example">
+                <div class="code-example umd-layout-space-vertical-interior-child">
                   <pre><code class="language-typescript">import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 
 const card = new ElementBuilder('div')
@@ -300,7 +304,7 @@ const card = new ElementBuilder('div')
                 </div>
               </div>
               <section id="composing-styles" class="umd-layout-space-vertical-interior">
-                <div class="code-example">
+                <div class="code-example umd-layout-space-vertical-interior-child">
                   <pre><code class="language-typescript">import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 
@@ -331,7 +335,7 @@ const styledElement = new ElementBuilder('section')
                 </div>
               </div>
               <section id="integration" class="umd-layout-space-vertical-interior">
-                <div class="code-example">
+                <div class="code-example umd-layout-space-vertical-interior-child">
                   <pre><code class="language-typescript">import { LoadStructuralComponents } from '@universityofmaryland/web-components-library/structural';
 import { registration as customFeatureCard } from './custom-feature-card';
 

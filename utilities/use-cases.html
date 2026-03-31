@@ -94,14 +94,12 @@
     <main>
       <section class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal">
 
-          <section id="getting-started">
-            <div class="umd-layout-space-vertical-landing-child">
-              <h2 class="umd-sans-extralarge-bold">Getting Started</h2>
-            </div>
-          </section>
+          <div class="umd-layout-space-vertical-landing-child">
+            <h2 class="umd-sans-extralarge-bold">Getting Started</h2>
+          </div>
 
           <!-- Section 1: Category Reference Table -->
-          <div class="use-case-card">
+          <div id="getting-started" class="umd-layout-space-vertical-landing-child">
             <h3 class="umd-sans-larger-bold">1. Category Reference</h3>
             <p>The Utilities package is organized into focused categories, each importable independently.</p>
 
@@ -209,46 +207,61 @@
             </table>
           </div>
 
+          <p class="umd-text-line-trailing umd-layout-space-vertical-landing-child" aria-hidden="true"><span></span></p>
+
           <!-- Section 2: Import Patterns -->
-          <div class="use-case-card">
+          <div class="umd-layout-space-vertical-landing-child">
             <h3 class="umd-sans-larger-bold">2. Import Patterns</h3>
 
-            <h4 class="umd-sans-medium">Category Import</h4>
-            <pre><code class="language-typescript">import * as dom from '@universityofmaryland/web-utilities-library/dom';
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-medium">Category Import</h4>
+              <pre class="language-typescript" tabindex="0"><code class="language-typescript">import * as dom from '@universityofmaryland/web-utilities-library/dom';
 
 dom.addClass(element, 'active');</code></pre>
+            </div>
 
-            <h4 class="umd-sans-medium">Individual Function Import</h4>
-            <pre><code class="language-typescript">import { addClass } from '@universityofmaryland/web-utilities-library/dom/addClass';</code></pre>
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-medium">Individual Function Import</h4>
+              <pre class="language-typescript" tabindex="0"><code class="language-typescript">import { addClass } from '@universityofmaryland/web-utilities-library/dom/addClass';</code></pre>
+            </div>
 
-            <h4 class="umd-sans-medium">Namespace Import</h4>
-            <pre><code class="language-typescript">import * as Utilities from '@universityofmaryland/web-utilities-library';
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-medium">Namespace Import</h4>
+              <pre class="language-typescript" tabindex="0"><code class="language-typescript">import * as Utilities from '@universityofmaryland/web-utilities-library';
 
 Utilities.dom.addClass(element, 'active');</code></pre>
+            </div>
 
-            <umd-element-alert-page>
-              <h2 slot="headline">Tree-shaking Tip</h2>
-              <div slot="text" class="umd-text-rich-simple-large">
-                <p>Category imports and individual function imports both tree-shake well. Use individual imports when you only need a single function from a large category.</p>
-              </div>
-            </umd-element-alert-page>
+            <div class="umd-layout-space-vertical-landing-child">
+              <umd-element-alert-page>
+                <h2 slot="headline">Tree-shaking Tip</h2>
+                <div slot="text" class="umd-text-rich-simple-large">
+                  <p>Category imports and individual function imports both tree-shake well. Use individual imports when you only need a single function from a large category.</p>
+                </div>
+              </umd-element-alert-page>
+            </div>
           </div>
 
+          <p class="umd-text-line-trailing umd-layout-space-vertical-landing-child" aria-hidden="true"><span></span></p>
+
           <!-- Section 3: Most-Used Utilities -->
-          <div class="use-case-card">
+          <div class="umd-layout-space-vertical-landing-child">
             <h3 class="umd-sans-larger-bold">3. Most-Used Utilities</h3>
 
-            <h4 class="umd-sans-medium">DOM: addClass / removeClass</h4>
-            <p>Add or remove CSS classes from elements:</p>
-            <pre><code class="language-typescript">import * as dom from '@universityofmaryland/web-utilities-library/dom';
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-medium">DOM: addClass / removeClass</h4>
+              <p>Add or remove CSS classes from elements:</p>
+              <pre class="language-typescript" tabindex="0"><code class="language-typescript">import * as dom from '@universityofmaryland/web-utilities-library/dom';
 
 const card = document.querySelector('.card');
 dom.addClass(card, 'active');
 dom.removeClass(card, 'hidden');</code></pre>
+            </div>
 
-            <h4 class="umd-sans-medium">Events: debounce</h4>
-            <p>Debounce high-frequency events like scroll and resize:</p>
-            <pre><code class="language-typescript">import * as events from '@universityofmaryland/web-utilities-library/events';
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-medium">Events: debounce</h4>
+              <p>Debounce high-frequency events like scroll and resize:</p>
+              <pre class="language-typescript" tabindex="0"><code class="language-typescript">import * as events from '@universityofmaryland/web-utilities-library/events';
 
 const handleResize = events.debounce(() => {
   // Recalculate layout
@@ -256,10 +269,12 @@ const handleResize = events.debounce(() => {
 }, 250);
 
 window.addEventListener('resize', handleResize);</code></pre>
+            </div>
 
-            <h4 class="umd-sans-medium">Accessibility: trapFocus</h4>
-            <p>Trap keyboard focus within a modal or dialog:</p>
-            <pre><code class="language-typescript">import * as a11y from '@universityofmaryland/web-utilities-library/accessibility';
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-medium">Accessibility: trapFocus</h4>
+              <p>Trap keyboard focus within a modal or dialog:</p>
+              <pre class="language-typescript" tabindex="0"><code class="language-typescript">import * as a11y from '@universityofmaryland/web-utilities-library/accessibility';
 
 const modal = document.querySelector('.modal');
 
@@ -268,10 +283,12 @@ a11y.trapFocus(modal);
 
 // Restore focus to the trigger element when it closes
 a11y.restoreFocus();</code></pre>
+            </div>
 
-            <h4 class="umd-sans-medium">Animation: fadeIn</h4>
-            <p>Animate element visibility transitions:</p>
-            <pre><code class="language-typescript">import * as animation from '@universityofmaryland/web-utilities-library/animation';
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-medium">Animation: fadeIn</h4>
+              <p>Animate element visibility transitions:</p>
+              <pre class="language-typescript" tabindex="0"><code class="language-typescript">import * as animation from '@universityofmaryland/web-utilities-library/animation';
 
 const panel = document.querySelector('.info-panel');
 
@@ -280,10 +297,12 @@ animation.fadeIn(panel);
 
 // Fade out when closing
 animation.fadeOut(panel);</code></pre>
+            </div>
 
-            <h4 class="umd-sans-medium">Styles: jssToCSS</h4>
-            <p>Convert JSS (JavaScript Style Sheets) objects to CSS strings:</p>
-            <pre><code class="language-typescript">import * as styles from '@universityofmaryland/web-utilities-library/styles';
+            <div class="umd-layout-space-vertical-landing-child">
+              <h4 class="umd-sans-medium">Styles: jssToCSS</h4>
+              <p>Convert JSS (JavaScript Style Sheets) objects to CSS strings:</p>
+              <pre class="language-typescript" tabindex="0"><code class="language-typescript">import * as styles from '@universityofmaryland/web-utilities-library/styles';
 
 const jssObject = {
   '.card': {
@@ -298,6 +317,7 @@ const jssObject = {
 const cssString = styles.jssToCSS(jssObject);
 // Output: .card { padding: 1rem; background-color: #fff; }
 //         .card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.1); }</code></pre>
+            </div>
           </div>
 
       </section>

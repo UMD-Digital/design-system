@@ -92,18 +92,20 @@
       <section class="umd-layout-space-vertical-landing umd-layout-space-horizontal-normal">
 
           <section id="getting-started">
-            <umd-element-section-intro class="umd-layout-space-vertical-landing-child umd-layout-space-horizontal-small">
-              <h2 slot="headline">Getting Started</h2>
-              <div slot="text"><p class="umd-text-rich-simple">
+            <div class="umd-layout-space-vertical-landing-child">
+              <h2 class="umd-sans-extralarge-bold">Getting Started</h2>
+            </div>
+            <div class="umd-layout-space-vertical-landing-child">
+              <p class="umd-rich-text-simple">
                 <strong>Where This Package Fits:</strong> Styles sits in the <strong>Infrastructure</strong> layer. It depends on <strong>Tokens</strong> and is used by <strong>Elements</strong>, <strong>Components</strong>, and your custom CSS.
-                <a href="../architecture.html">See full architecture</a>.
-              </p></div>
-            </umd-element-section-intro>
+                <a class="umd-text-link-red" href="../architecture.html">See full architecture</a>.
+              </p>
+            </div>
           </section>
 
           <!-- Section 1: Available Files -->
           <div class="use-case-card">
-            <h4 class="umd-sans-larger-bold">Available Files</h4>
+            <h3 class="umd-sans-larger-bold">Available Files</h3>
             <p>The styles package ships pre-compiled CSS files that can be used individually or as a full bundle.</p>
             <table class="umd-table-inline docs-table-black-header">
               <thead>
@@ -170,7 +172,7 @@
 
           <!-- Section 2: CDN Usage -->
           <div class="use-case-card">
-            <h4 class="umd-sans-larger-bold">CDN Usage</h4>
+            <h3 class="umd-sans-larger-bold">CDN Usage</h3>
             <p>Load static CSS files directly from a CDN with no build step required.</p>
             <pre><code class="language-html">&lt;!-- Full bundle (simplest) --&gt;
 &lt;link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/styles.min.css"&gt;
@@ -187,7 +189,7 @@
 
           <!-- Section 3: npm / Bundler Usage -->
           <div class="use-case-card">
-            <h4 class="umd-sans-larger-bold">npm / Bundler Usage</h4>
+            <h3 class="umd-sans-larger-bold">npm / Bundler Usage</h3>
             <p>Import static CSS files in your JavaScript or CSS entry point when using a bundler like Vite, Webpack, or Rollup.</p>
             <pre><code class="language-javascript">// Full bundle
 import '@universityofmaryland/web-styles-library/css/styles.min.css';
@@ -202,7 +204,7 @@ import '@universityofmaryland/web-styles-library/css/layout.min.css';</code></pr
 
           <!-- Section 4: CSS Custom Properties -->
           <div class="use-case-card">
-            <h4 class="umd-sans-larger-bold">CSS Custom Properties</h4>
+            <h3 class="umd-sans-larger-bold">CSS Custom Properties</h3>
             <p>The <code>tokens.min.css</code> file defines CSS custom properties for colors, spacing, and more. Use these in your own stylesheets for consistent theming.</p>
             <pre><code class="language-css">/* Colors */
 --umd-color-red: #e21833;
@@ -226,7 +228,7 @@ import '@universityofmaryland/web-styles-library/css/layout.min.css';</code></pr
 
           <!-- Section 5: Comparison Table -->
           <div class="use-case-card">
-            <h4 class="umd-sans-larger-bold">Approach Comparison</h4>
+            <h3 class="umd-sans-larger-bold">Approach Comparison</h3>
             <p>Choose the approach that best fits your project requirements.</p>
             <table class="umd-table-inline docs-table-black-header">
               <thead>
@@ -274,7 +276,7 @@ import '@universityofmaryland/web-styles-library/css/layout.min.css';</code></pr
           <!-- Content Manager Callout -->
           <umd-element-banner-promo data-theme="dark" data-visual-icon-seal="true">
             <p slot="headline">For Content Managers</p>
-            <p slot="text" class="umd-text-rich-simple">Static CSS files are the simplest way to add UMD styles to your site. No build tools or JavaScript knowledge required. For design guidance and visual examples, visit <a href="https://designsystem.umd.edu">designsystem.umd.edu</a>.</p>
+            <p slot="text" class="umd-rich-text-simple">Static CSS files are the simplest way to add UMD styles to your site. No build tools or JavaScript knowledge required. For design guidance and visual examples, visit <a class="umd-text-link-red" href="https://designsystem.umd.edu">designsystem.umd.edu</a>.</p>
           </umd-element-banner-promo>
 
       </section>

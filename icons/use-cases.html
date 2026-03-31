@@ -129,7 +129,7 @@
 
         <!-- Section 1: Icon Categories -->
         <div class="use-case-card">
-          <h4 class="umd-sans-larger-bold">1. Icon Categories</h4>
+          <h3 class="umd-sans-larger-bold">1. Icon Categories</h3>
           <p>
             The Icons package organizes all SVG assets into semantic categories.
             Each category can be imported independently for optimal
@@ -218,9 +218,9 @@
 
         <!-- Section 2: Import Patterns -->
         <div class="use-case-card">
-          <h4 class="umd-sans-larger-bold">2. Import Patterns</h4>
+          <h3 class="umd-sans-larger-bold">2. Import Patterns</h3>
 
-          <h5 class="umd-sans-large">Category Imports (Recommended)</h5>
+          <h4 class="umd-sans-medium">Category Imports (Recommended)</h4>
           <pre><code class="language-typescript">import * as arrows from '@universityofmaryland/web-icons-library/arrows';
 import * as logos from '@universityofmaryland/web-icons-library/logos';
 import * as social from '@universityofmaryland/web-icons-library/social';
@@ -229,7 +229,7 @@ import * as social from '@universityofmaryland/web-icons-library/social';
 arrows.CHEVRON_SMALL;  // '&lt;svg ...&gt;...&lt;/svg&gt;'
 logos.UMD_LOGO_DARK;   // '&lt;svg ...&gt;...&lt;/svg&gt;'</code></pre>
 
-          <h5 class="umd-sans-large">Main Namespace Import</h5>
+          <h4 class="umd-sans-medium">Main Namespace Import</h4>
           <pre><code class="language-typescript">import * as Icons from '@universityofmaryland/web-icons-library';
 
 Icons.arrows.CHEVRON_SMALL;    // SVG string
@@ -239,20 +239,20 @@ Icons.social.FACEBOOK;         // SVG string</code></pre>
 
         <!-- Section 3: Rendering Icons -->
         <div class="use-case-card">
-          <h4 class="umd-sans-larger-bold">3. Rendering Icons</h4>
+          <h3 class="umd-sans-larger-bold">3. Rendering Icons</h3>
           <p>
             Icon exports are raw SVG strings. Insert them into the DOM using
             <code>innerHTML</code> or framework-specific patterns.
           </p>
 
-          <h5 class="umd-sans-large">Vanilla JavaScript</h5>
+          <h4 class="umd-sans-medium">Vanilla JavaScript</h4>
           <pre><code class="language-typescript">import * as arrows from '@universityofmaryland/web-icons-library/arrows';
 
 const iconContainer = document.createElement('span');
 iconContainer.innerHTML = arrows.CHEVRON_SMALL;
 document.querySelector('#my-icon').appendChild(iconContainer);</code></pre>
 
-          <h5 class="umd-sans-large">React</h5>
+          <h4 class="umd-sans-medium">React</h4>
           <pre><code class="language-typescript">import * as arrows from '@universityofmaryland/web-icons-library/arrows';
 
 function Icon({ svg, label }: { svg: string; label: string }) {
@@ -268,7 +268,7 @@ function Icon({ svg, label }: { svg: string; label: string }) {
 // Usage
 &lt;Icon svg={arrows.CHEVRON_SMALL} label="Navigate forward" /&gt;</code></pre>
 
-          <h5 class="umd-sans-large">Sizing and Styling</h5>
+          <h4 class="umd-sans-medium">Sizing and Styling</h4>
           <pre><code class="language-css">/* SVG icons inherit color from their parent */
 .icon-wrapper svg {
   width: 1em;
@@ -285,13 +285,13 @@ function Icon({ svg, label }: { svg: string; label: string }) {
 
         <!-- Section 4: Accessibility -->
         <div class="use-case-card">
-          <h4 class="umd-sans-larger-bold">4. Accessibility</h4>
+          <h3 class="umd-sans-larger-bold">4. Accessibility</h3>
           <p>
             Proper accessibility handling depends on whether the icon is
             decorative or conveys meaning.
           </p>
 
-          <h5 class="umd-sans-large">Decorative Icons</h5>
+          <h4 class="umd-sans-medium">Decorative Icons</h4>
           <p>
             Icons that are purely visual and do not convey information should be
             hidden from assistive technology:
@@ -301,7 +301,7 @@ function Icon({ svg, label }: { svg: string; label: string }) {
   &lt;!-- SVG icon inserted here --&gt;
 &lt;/span&gt;</code></pre>
 
-          <h5 class="umd-sans-large">Meaningful Icons</h5>
+          <h4 class="umd-sans-medium">Meaningful Icons</h4>
           <p>Icons that convey information need a text alternative:</p>
           <pre><code class="language-html">&lt;!-- Meaningful: labeled for screen readers --&gt;
 &lt;span role="img" aria-label="Search"&gt;
@@ -314,22 +314,21 @@ function Icon({ svg, label }: { svg: string; label: string }) {
   Search
 &lt;/button&gt;</code></pre>
 
-          <umd-element-banner-promo
-            data-theme="dark"
-            data-visual-icon-seal="true"
-          >
-            <p slot="headline">Best Practice</p>
-            <p slot="text">
-              When an icon accompanies visible text that conveys the same
-              meaning, mark the icon as <code>aria-hidden="true"</code> to avoid
-              redundant announcements.
-            </p>
-          </umd-element-banner-promo>
+          <umd-element-alert-page>
+            <h2 slot="headline">Best Practice</h2>
+            <div slot="text" class="umd-text-rich-simple-large">
+              <p>
+                When an icon accompanies visible text that conveys the same
+                meaning, mark the icon as <code>aria-hidden="true"</code> to avoid
+                redundant announcements.
+              </p>
+            </div>
+          </umd-element-alert-page>
         </div>
 
         <!-- Section 5: Logo Assets -->
         <div class="use-case-card">
-          <h4 class="umd-sans-larger-bold">5. Logo Assets</h4>
+          <h3 class="umd-sans-larger-bold">5. Logo Assets</h3>
           <p>
             The <code>logos</code> category contains official UMD brand assets
             in SVG format:

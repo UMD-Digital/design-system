@@ -102,7 +102,7 @@
 
           <!-- Section 1: Category Reference Table -->
           <div class="use-case-card">
-            <h4 class="umd-sans-larger-bold">1. Category Reference</h4>
+            <h3 class="umd-sans-larger-bold">1. Category Reference</h3>
             <p>The Utilities package is organized into focused categories, each importable independently.</p>
 
             <table class="umd-table-inline docs-table-black-header category-table">
@@ -211,32 +211,34 @@
 
           <!-- Section 2: Import Patterns -->
           <div class="use-case-card">
-            <h4 class="umd-sans-larger-bold">2. Import Patterns</h4>
+            <h3 class="umd-sans-larger-bold">2. Import Patterns</h3>
 
-            <h5 class="umd-sans-large">Category Import</h5>
+            <h4 class="umd-sans-medium">Category Import</h4>
             <pre><code class="language-typescript">import * as dom from '@universityofmaryland/web-utilities-library/dom';
 
 dom.addClass(element, 'active');</code></pre>
 
-            <h5 class="umd-sans-large">Individual Function Import</h5>
+            <h4 class="umd-sans-medium">Individual Function Import</h4>
             <pre><code class="language-typescript">import { addClass } from '@universityofmaryland/web-utilities-library/dom/addClass';</code></pre>
 
-            <h5 class="umd-sans-large">Namespace Import</h5>
+            <h4 class="umd-sans-medium">Namespace Import</h4>
             <pre><code class="language-typescript">import * as Utilities from '@universityofmaryland/web-utilities-library';
 
 Utilities.dom.addClass(element, 'active');</code></pre>
 
-            <umd-element-banner-promo data-theme="dark" data-visual-icon-seal="true">
-              <p slot="headline">Tree-shaking Tip</p>
-              <p slot="text">Category imports and individual function imports both tree-shake well. Use individual imports when you only need a single function from a large category.</p>
-            </umd-element-banner-promo>
+            <umd-element-alert-page>
+              <h2 slot="headline">Tree-shaking Tip</h2>
+              <div slot="text" class="umd-text-rich-simple-large">
+                <p>Category imports and individual function imports both tree-shake well. Use individual imports when you only need a single function from a large category.</p>
+              </div>
+            </umd-element-alert-page>
           </div>
 
           <!-- Section 3: Most-Used Utilities -->
           <div class="use-case-card">
-            <h4 class="umd-sans-larger-bold">3. Most-Used Utilities</h4>
+            <h3 class="umd-sans-larger-bold">3. Most-Used Utilities</h3>
 
-            <h5 class="umd-sans-large">DOM: addClass / removeClass</h5>
+            <h4 class="umd-sans-medium">DOM: addClass / removeClass</h4>
             <p>Add or remove CSS classes from elements:</p>
             <pre><code class="language-typescript">import * as dom from '@universityofmaryland/web-utilities-library/dom';
 
@@ -244,7 +246,7 @@ const card = document.querySelector('.card');
 dom.addClass(card, 'active');
 dom.removeClass(card, 'hidden');</code></pre>
 
-            <h5 class="umd-sans-large">Events: debounce</h5>
+            <h4 class="umd-sans-medium">Events: debounce</h4>
             <p>Debounce high-frequency events like scroll and resize:</p>
             <pre><code class="language-typescript">import * as events from '@universityofmaryland/web-utilities-library/events';
 
@@ -255,7 +257,7 @@ const handleResize = events.debounce(() => {
 
 window.addEventListener('resize', handleResize);</code></pre>
 
-            <h5 class="umd-sans-large">Accessibility: trapFocus</h5>
+            <h4 class="umd-sans-medium">Accessibility: trapFocus</h4>
             <p>Trap keyboard focus within a modal or dialog:</p>
             <pre><code class="language-typescript">import * as a11y from '@universityofmaryland/web-utilities-library/accessibility';
 
@@ -267,7 +269,7 @@ a11y.trapFocus(modal);
 // Restore focus to the trigger element when it closes
 a11y.restoreFocus();</code></pre>
 
-            <h5 class="umd-sans-large">Animation: fadeIn</h5>
+            <h4 class="umd-sans-medium">Animation: fadeIn</h4>
             <p>Animate element visibility transitions:</p>
             <pre><code class="language-typescript">import * as animation from '@universityofmaryland/web-utilities-library/animation';
 
@@ -279,7 +281,7 @@ animation.fadeIn(panel);
 // Fade out when closing
 animation.fadeOut(panel);</code></pre>
 
-            <h5 class="umd-sans-large">Styles: jssToCSS</h5>
+            <h4 class="umd-sans-medium">Styles: jssToCSS</h4>
             <p>Convert JSS (JavaScript Style Sheets) objects to CSS strings:</p>
             <pre><code class="language-typescript">import * as styles from '@universityofmaryland/web-utilities-library/styles';
 

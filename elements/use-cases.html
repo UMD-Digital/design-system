@@ -102,7 +102,7 @@
 
           <!-- Section 1: When to Use Elements -->
           <div class="use-case-card">
-            <h4 class="umd-sans-larger-bold">1. When to Use Elements</h4>
+            <h3 class="umd-sans-larger-bold">1. When to Use Elements</h3>
             <p>The Elements package is designed for scenarios where you need programmatic control over DOM creation rather than declarative web components.</p>
             <ul>
               <li><strong>Imperative DOM creation</strong> -- When you need to build UI elements directly in JavaScript rather than through custom HTML tags.</li>
@@ -110,13 +110,13 @@
               <li><strong>Custom compositions</strong> -- When you need to combine multiple elements into bespoke layouts not covered by existing web components.</li>
               <li><strong>Lifecycle control</strong> -- When you need the <code>update()</code> and <code>destroy()</code> methods to manage element state and cleanup.</li>
             </ul>
-            <h5 class="umd-sans-large">Elements vs. Components</h5>
-            <p class="umd-text-rich-simple">If you simply need to drop a UMD component into an HTML page, use the <a href="../components/usage.html">Components package</a> (web components). Elements are for developers who need lower-level programmatic control.</p>
+            <h4 class="umd-sans-medium">Elements vs. Components</h4>
+            <p class="umd-rich-text-simple">If you simply need to drop a UMD component into an HTML page, use the <a class="umd-text-link-red" href="../components/usage.html">Components package</a> (web components). Elements are for developers who need lower-level programmatic control.</p>
           </div>
 
           <!-- Section 2: The ElementModel Pattern -->
           <div class="use-case-card">
-            <h4 class="umd-sans-larger-bold">2. The ElementModel Pattern</h4>
+            <h3 class="umd-sans-larger-bold">2. The ElementModel Pattern</h3>
             <p>Every element creation function returns an <code>ElementModel</code> object with a consistent interface:</p>
 
             <pre><code class="language-typescript">interface ElementModel {
@@ -181,7 +181,7 @@ document.head.appendChild(style);</code></pre>
 
           <!-- Section 3: Atomic Elements -->
           <div class="use-case-card">
-            <h4 class="umd-sans-larger-bold">3. Atomic Elements</h4>
+            <h3 class="umd-sans-larger-bold">3. Atomic Elements</h3>
             <p>Atomic elements are simple, single-purpose building blocks. They represent the smallest visual units in the design system.</p>
 
             <pre><code class="language-typescript">import { Atomic } from '@universityofmaryland/web-elements-library/atomic';
@@ -195,7 +195,7 @@ const cta = Atomic.actions.primary({ label: 'Learn More', url: '/learn' });
 // Assets (images, video)
 const image = Atomic.assets.image({ src: 'photo.jpg', alt: 'Campus' });</code></pre>
 
-            <h5 class="umd-sans-large">Available Atomic Categories</h5>
+            <h4 class="umd-sans-medium">Available Atomic Categories</h4>
             <table class="umd-table-inline docs-table-black-header option-table">
               <thead>
                 <tr>
@@ -246,7 +246,7 @@ const image = Atomic.assets.image({ src: 'photo.jpg', alt: 'Campus' });</code></
 
           <!-- Section 4: Composite Elements -->
           <div class="use-case-card">
-            <h4 class="umd-sans-larger-bold">4. Composite Elements</h4>
+            <h3 class="umd-sans-larger-bold">4. Composite Elements</h3>
             <p>Composite elements combine multiple atomic elements into complex, multi-part UI structures.</p>
 
             <pre><code class="language-typescript">import { Composite } from '@universityofmaryland/web-elements-library/composite';
@@ -260,7 +260,7 @@ const hero = Composite.hero.base({ /* props */ });
 
 // Navigation, Person, Quote, Footer, etc.</code></pre>
 
-            <h5 class="umd-sans-large">Available Composite Categories</h5>
+            <h4 class="umd-sans-medium">Available Composite Categories</h4>
             <table class="umd-table-inline docs-table-black-header option-table">
               <thead>
                 <tr>

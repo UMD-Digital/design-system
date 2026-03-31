@@ -99,9 +99,9 @@
               <h2 class="umd-sans-extralarge-bold">Getting Started</h2>
             </div>
             <div class="umd-layout-space-vertical-landing-child">
-              <p class="umd-text-rich-simple">
+              <p class="umd-rich-text-simple">
                 <strong>Where This Package Fits:</strong> Feeds sits in the <strong>Application</strong> layer. It depends on <strong>Tokens</strong>, <strong>Elements</strong>, and <strong>Utilities</strong>. It provides dynamic content feed components.
-                <a href="../architecture.html">See full architecture</a>.
+                <a class="umd-text-link-red" href="../architecture.html">See full architecture</a>.
               </p>
             </div>
           </section>
@@ -605,10 +605,12 @@ class CustomFeedWrapper extends HTMLElement {
   }
 }</code></pre>
 
-            <umd-element-banner-promo data-theme="dark" data-visual-icon-seal="true">
-              <p slot="headline">Available Events</p>
-              <p slot="text"><code>feed:loaded</code> (with items array) and <code>feed:error</code> (with error details). Standard DOM events (click, focus, etc.) also bubble normally through the component hierarchy.</p>
-            </umd-element-banner-promo>
+            <umd-element-alert-page>
+              <h2 slot="headline">Available Events</h2>
+              <div slot="text" class="umd-text-rich-simple-large">
+                <p><code>feed:loaded</code> (with items array) and <code>feed:error</code> (with error details). Standard DOM events (click, focus, etc.) also bubble normally through the component hierarchy.</p>
+              </div>
+            </umd-element-alert-page>
           </div>
 
           <!-- Best Practices -->

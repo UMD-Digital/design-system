@@ -57,7 +57,7 @@ table {
 @media (min-width: 1024px) {
   .docs-table-black-header th,
   .docs-table-black-header td {
-    padding: 32px 24px;
+    padding: 24px;
   }
 }
 

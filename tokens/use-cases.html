@@ -102,9 +102,9 @@
 
           <!-- Section 1: Token Reference Tables -->
           <div class="use-case-card">
-            <h4 class="umd-sans-larger-bold">1. Token Reference</h4>
+            <h3 class="umd-sans-larger-bold">1. Token Reference</h3>
 
-            <h5 class="umd-sans-large">Colors</h5>
+            <h4 class="umd-sans-medium">Colors</h4>
             <table class="umd-table-inline docs-table-black-header token-table">
               <thead>
                 <tr>
@@ -177,7 +177,7 @@
               </tbody>
             </table>
 
-            <h5 class="umd-sans-large">Spacing Scale</h5>
+            <h4 class="umd-sans-medium">Spacing Scale</h4>
             <table class="umd-table-inline docs-table-black-header token-table">
               <thead>
                 <tr>
@@ -240,7 +240,7 @@
               </tbody>
             </table>
 
-            <h5 class="umd-sans-large">Typography</h5>
+            <h4 class="umd-sans-medium">Typography</h4>
             <table class="umd-table-inline docs-table-black-header token-table">
               <thead>
                 <tr>
@@ -298,7 +298,7 @@
               </tbody>
             </table>
 
-            <h5 class="umd-sans-large">Media Breakpoints</h5>
+            <h4 class="umd-sans-medium">Media Breakpoints</h4>
             <table class="umd-table-inline docs-table-black-header token-table">
               <thead>
                 <tr>
@@ -334,19 +334,19 @@
 
           <!-- Section 2: Usage Patterns -->
           <div class="use-case-card">
-            <h4 class="umd-sans-larger-bold">2. Usage Patterns</h4>
+            <h3 class="umd-sans-larger-bold">2. Usage Patterns</h3>
 
-            <h5 class="umd-sans-large">Namespace Import (Recommended)</h5>
+            <h4 class="umd-sans-medium">Namespace Import (Recommended)</h4>
             <pre><code class="language-typescript">import * as token from '@universityofmaryland/web-token-library';
 
 token.color.red;    // '#e21833'
 token.spacing.md;   // '24px'
 token.font.family.sans; // 'Interstate, ...'</code></pre>
 
-            <h5 class="umd-sans-large">Named Imports</h5>
+            <h4 class="umd-sans-medium">Named Imports</h4>
             <pre><code class="language-typescript">import { color, spacing } from '@universityofmaryland/web-token-library';</code></pre>
 
-            <h5 class="umd-sans-large">Category Imports</h5>
+            <h4 class="umd-sans-medium">Category Imports</h4>
             <pre><code class="language-typescript">import * as color from '@universityofmaryland/web-token-library/color';
 import * as font from '@universityofmaryland/web-token-library/font';
 import * as media from '@universityofmaryland/web-token-library/media';
@@ -355,7 +355,7 @@ import * as spacing from '@universityofmaryland/web-token-library/spacing';</cod
 
           <!-- Section 3: Using Tokens in Custom CSS -->
           <div class="use-case-card">
-            <h4 class="umd-sans-larger-bold">3. Using Tokens in Custom CSS</h4>
+            <h3 class="umd-sans-larger-bold">3. Using Tokens in Custom CSS</h3>
             <p>After importing the generated <code>tokens.min.css</code> file, you can use design tokens as CSS custom properties:</p>
 
             <pre><code class="language-css">/* After importing tokens.min.css */
@@ -371,7 +371,7 @@ import * as spacing from '@universityofmaryland/web-token-library/spacing';</cod
   margin-bottom: var(--umd-space-md);
 }</code></pre>
 
-            <p class="umd-text-rich-simple">For more about the static CSS export pipeline, see the <a href="../styles/static-css.html">Styles static CSS guide</a>.</p>
+            <p class="umd-rich-text-simple">For more about the static CSS export pipeline, see the <a class="umd-text-link-red" href="../styles/static-css.html">Styles static CSS guide</a>.</p>
           </div>
 
           <!-- Section 4: Content Manager Note -->

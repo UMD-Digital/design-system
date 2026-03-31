@@ -7,6 +7,7 @@
 
 @import './partials/table.css';
 @import './partials/code-example.css';
+@import './reset.css';
 
 /* --- Heading group spacing ---
    When h2 + h3 are siblings (title group), keep them close.
@@ -22,7 +23,13 @@ h3.umd-sans-larger {
 }
 
 h4.umd-sans-larger-bold {
+  margin-top: 2em;
   margin-bottom: 0.75em;
+}
+
+h4.umd-sans-medium {
+  font-weight: bold;
+  margin-top: 1em;
 }
 
 /* Eyebrow sub-headings */
@@ -41,6 +48,20 @@ h5.umd-sans-small {
 .umd-rich-text-simple ul,
 .umd-rich-text-simple ol {
   padding-left: 1.5rem;
+}
+
+.umd-rich-text-simple a {
+  text-decoration: none;
+}
+
+.umd-rich-text-simple li {
+  + li {
+    margin-top: 1em;
+  }
+}
+
+.docs-track-heading-secondary {
+  margin-top: 3rem;
 }
 
 /* --- Alert box ---
@@ -156,7 +177,6 @@ pre code {
 }
 
 .use-case-card h4 {
-  text-transform: uppercase;
   margin-bottom: 0.75em;
 }
 

@@ -1,119 +1,84 @@
-# CLAUDE.md - Icons Package
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Package Overview
 
-The **Icons Package** (`@universityofmaryland/web-icons-library`) provides SVG icon and logo assets for the University of Maryland Design System. Icons are organized by category for selective import and optimal tree-shaking.
+The **Icons Package** (`@universityofmaryland/web-icons-library`) provides SVG icon and logo assets as exported string constants. No runtime dependencies.
 
-**Version**: 1.0.0
-**Dependencies**: None (standalone package)
-
-## Build System
-
-### Vite Configuration
-
-- **Builder**: Vite with TypeScript
-- **Output Formats**: ES Modules only (`.js`) - No CommonJS support
-- **Export Style**: Named exports only - No default exports
-- **Type Declarations**: Generated with `vite-plugin-dts`
-- **Build Artifacts**: `dist/` directory with code-split category files
-
-### Build Commands
+## Commands
 
 ```bash
-npm run build      # Production build with type declarations
-npm run dev        # Development mode with watch
-npm run clean      # Remove dist directory
-npm run test       # Run Jest tests
+pnpm run build           # Vite production build (ES modules + .d.ts)
+pnpm run dev             # Build with watch mode
+pnpm run test            # Jest tests
+pnpm run test:watch      # Jest watch mode
+pnpm run test:coverage   # Jest with coverage report
+pnpm run test:snapshot   # Update Jest snapshots
+
+# Single test file
+npx jest __tests__/arrows.test.ts
 ```
 
-## Package Structure
+## Source Structure
 
-### Source Organization
+Icons live in `source/`, one directory per category. Each category has an `index.ts` that exports `const` SVG strings. The root `source/index.ts` re-exports all categories.
 
-```
-source/
-├── alerts/       # Alert and warning icons
-├── brand/        # UMD brand icons (Fearless)
-├── communication/# Email, phone, chat icons
-├── content/      # Content-related icons (quote, etc.)
-├── documents/    # Document type icons
-├── location/     # Location and map icons
-├── logos/        # UMD logos and wordmarks
-├── media/        # Media control icons
-├── navigation/   # Navigation icons (chevron, menu, etc.)
-├── search/       # Search and magnifying glass icons
-├── social/       # Social media icons
-├── time/         # Clock and calendar icons
-├── ui-controls/  # UI control icons (new window, etc.)
-└── user/         # User and person icons
-```
+**Categories**: `arrows`, `brand`, `calendar`, `communication`, `controls`, `files`, `indicators`, `location`, `logos`, `media`, `people`, `search`, `social`
 
-### Export Pattern
+### Naming Convention
 
-Each category is built as a separate entry point for optimal code splitting:
+Icon exports use **snake_case** (not UPPER_CASE):
 
 ```typescript
-// Import entire category
-import * as NavigationIcons from '@universityofmaryland/web-icons-library/navigation';
-
-// Import from main export
-import { CHEVRON_SMALL } from '@universityofmaryland/web-icons-library';
+export const arrow_up = `<svg ...>...</svg>`;
+export const arrow_left = `<svg ...>...</svg>`;
 ```
 
-## package.json Exports
+### Logos Category — Nested Namespace
 
-The package provides selective exports for each category:
-
-```json
-{
-  "type": "module",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    },
-    "./navigation": {
-      "types": "./dist/navigation.d.ts",
-      "import": "./dist/navigation.js"
-    }
-    // ... other categories
-  }
-}
-```
-
-**Note**: CommonJS (`require`) is not supported. Use ES module `import` only.
-
-## Icon Format
-
-All icons are exported as SVG strings:
+`logos/` is unique: it uses namespace re-exports (`export * as umd from './umd'`) creating nested objects with `dark`/`light` variants:
 
 ```typescript
-export const CHEVRON_SMALL = '<svg>...</svg>';
+import * as logos from '@universityofmaryland/web-icons-library/logos';
+logos.umd.dark;       // SVG string
+logos.forward.light;  // SVG string
+// Sub-namespaces: campaign, forward, seal, umd
 ```
 
-## Testing
+## Build & Exports
 
-- **Framework**: Jest
-- **Location**: `source/__tests__/`
-- **Coverage**: Icon exports and SVG structure validation
+Vite builds each category as a separate entry point with `preserveModules: true`. The `package.json` exports map supports three import depths:
 
-## Best Practices
+```typescript
+// Category import (recommended)
+import { arrow_up } from '@universityofmaryland/web-icons-library/arrows';
 
-1. **Import Only What You Need**: Use category imports to minimize bundle size
-2. **SVG Strings**: Icons are raw SVG strings, inject into DOM as needed
-3. **No Dependencies**: This package has no external dependencies
-4. **Type Safety**: Full TypeScript support with generated declarations
+// Deep import to individual file
+import { arrow_up } from '@universityofmaryland/web-icons-library/arrows/index';
 
-## Build Output
+// Main barrel (all icons)
+import { arrow_up } from '@universityofmaryland/web-icons-library';
+```
 
-Each build produces:
-- `dist/index.{js,d.ts}` - Main entry with all icons (ES module only)
-- `dist/{category}.{js,d.ts}` - Individual category exports
-- Source maps for debugging
+ES modules only — no CommonJS. Named exports only — no default exports.
 
-## Notes
+## Tests
 
-- Icons are static assets - no runtime dependencies
-- All icons are optimized SVG strings
-- Package is framework-agnostic
-- Tree-shaking friendly with named exports
+Tests are in `__tests__/` at the package root (not inside `source/`), one file per category. Each test verifies:
+
+- Export availability (`toBeDefined`)
+- Valid SVG markup (`toContain('<svg')`)
+- Accessibility attributes (`aria-hidden="true"`, `title`)
+
+No mocks needed — this package has zero dependencies.
+
+## SVG Conventions
+
+All icon SVGs include:
+- `aria-hidden="true"` attribute
+- `title` attribute on the `<svg>` element (not a `<title>` child element)
+- `viewBox` for scaling
+- Inline `fill` colors or `fill="none"` with stroke paths
+
+Icons are sourced from Figma design files. Direct edits may be overwritten on next Figma sync.

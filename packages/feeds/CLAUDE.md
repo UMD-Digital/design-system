@@ -1,10 +1,12 @@
-# CLAUDE.md - Feeds Package
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Package Overview
 
 The **Feeds Package** (`@universityofmaryland/web-feeds-library`) provides dynamic content feed components for academic programs, news, events, experts, and in-the-news mentions. Feeds fetch and display data from UMD APIs using a composable factory pattern with reusable strategies.
 
-**Version**: 1.3.4
+**Version**: 1.3.9
 **Dependencies**:
 - `@universityofmaryland/web-elements-library` - UI components
 - `@universityofmaryland/web-styles-library` - Design tokens and styles
@@ -29,7 +31,8 @@ The **Feeds Package** (`@universityofmaryland/web-feeds-library`) provides dynam
 npm run build      # Production build
 npm run dev        # Watch mode
 npm run clean      # Remove build directory
-npm test           # Run all tests (171 tests)
+npm test           # Run all tests
+npm test -- __tests__/feeds/events/grid.test.ts  # Run single test file
 ```
 
 ## Package Structure
@@ -49,7 +52,8 @@ source/
 │   │   ├── grid.ts         # ✅ Grid layout (factory pattern)
 │   │   ├── list.ts         # ✅ List layout (factory pattern)
 │   │   ├── grouped.ts      # ✅ Date-grouped layout (specialized)
-│   │   └── slider.ts       # ✅ Carousel (widget pattern)
+│   │   ├── slider.ts       # ✅ Carousel (widget pattern)
+│   │   └── image.ts        # Shared event image config helper
 │   ├── experts/
 │   │   ├── _types.ts       # Expert type definitions
 │   │   ├── index.ts        # Public API
@@ -128,7 +132,7 @@ source/
 │   └── index.ts            # Exports
 └── _types.ts               # Global type definitions
 
-__tests__/                  # Test files (16 suites, 171 tests)
+__tests__/                  # Test files (17 suites)
 ├── feeds/
 │   ├── academic/
 │   │   ├── index.test.ts
@@ -137,7 +141,8 @@ __tests__/                  # Test files (16 suites, 171 tests)
 │   │   ├── grid.test.ts
 │   │   ├── list.test.ts
 │   │   ├── grouped.test.ts
-│   │   └── slider.test.ts
+│   │   ├── slider.test.ts
+│   │   └── image.test.ts
 │   └── news/
 │       ├── grid.test.ts
 │       ├── list.test.ts
@@ -154,7 +159,7 @@ __tests__/                  # Test files (16 suites, 171 tests)
     └── layout/
 ```
 
-**Note**: Experts and in-the-news feeds currently lack dedicated test files. The 16 test suites / 171 tests cover events, news, academic, factory, strategies, helpers, and states.
+**Note**: Experts and in-the-news feeds currently lack dedicated test files. The 17 test suites cover events, news, academic, factory, strategies, helpers, and states.
 
 ## Package Exports
 
@@ -199,6 +204,7 @@ __tests__/                  # Test files (16 suites, 171 tests)
 - **List** (`list.ts`) ✅: Event list display — factory pattern
 - **Grouped** (`grouped.ts`) ✅: Events grouped by date — specialized
 - **Slider** (`slider.ts`) ✅: Carousel display — widget pattern
+- **Image** (`image.ts`): Shared helper for event image config (used by grid, list, grouped)
 
 ### News Feeds
 - **Grid** (`grid.ts`) ✅: News grid display — factory pattern

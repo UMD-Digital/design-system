@@ -1,271 +1,154 @@
-# CLAUDE.md - Elements Package
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+See the root [CLAUDE.md](/CLAUDE.md) for monorepo-wide conventions (ES modules only, named exports only, Vite build pattern, design token system).
 
 ## Package Overview
 
-The **Elements Package** (`@universityofmaryland/web-elements-library`) provides foundational UI element builders using the Element Model pattern. Elements return JavaScript objects containing DOM nodes and their associated styles.
+The **Elements Package** (`@universityofmaryland/web-elements-library`) provides foundational UI element builders. Elements return `ElementModel` objects containing DOM nodes and associated CSS styles. This package is consumed by the `components` and `feeds` packages.
 
-**Version**: 1.5.5
-**Dependencies**:
-- `@universityofmaryland/web-token-library`
-- `@universityofmaryland/web-builder-library`
-- `@universityofmaryland/web-utilities-library`
-- `@universityofmaryland/web-styles-library` (peer)
-- `@universityofmaryland/web-icons-library` (peer)
+**Workspace dependencies**: `web-token-library`, `web-builder-library`, `web-utilities-library`, `web-styles-library`, `web-icons-library`
 
-## Planned: ElementBuilder Migration
+## Commands
 
-**Status**: In Progress (v1.17+)
+```bash
+pnpm start                # Watch mode (alias for pnpm dev)
+pnpm build                # Production build
+pnpm test                 # Run all tests
+pnpm test -- path/to/test # Run single test file
+pnpm run test:watch       # Watch mode for tests
+pnpm run test:coverage    # Generate coverage report
+pnpm run test:snapshot    # Update snapshots
+```
 
-All elements are being migrated to use the ElementBuilder pattern for consistency:
+## Source Structure
+
+```
+source/
+├── _types.ts         # Shared types: ElementModel, ThemeProps, SizeProps, type guards
+├── atomic/           # Simple, single-purpose elements
+│   ├── actions/      # Links, button-like elements
+│   ├── animations/   # Animation definitions
+│   ├── assets/       # Images, videos
+│   ├── buttons/      # Button elements
+│   ├── events/       # Event meta, sign displays
+│   ├── layout/       # Layout containers (block, overlay, person)
+│   ├── text/         # Text elements
+│   └── text-lockup/  # 10 text composition variants (small, medium, large, date, contact, person, etc.)
+├── composite/        # Complex multi-part elements (16 categories)
+│   ├── accordion, alert, banner, card, carousel, footer, hero,
+│   │   layout, media, navigation, pathway, person, quote,
+│   │   slider, social, tabs
+└── layout/           # Layout grid utilities (grid, stacked, gridGap, gridBorder, gridOffset, image)
+```
+
+### Entry Points
+
+| Export path | Entry file | Contents |
+|---|---|---|
+| `.` | `source/index.ts` | Re-exports Atomic, Composite, Layout namespaces |
+| `./atomic` | `source/atomic/index.ts` | actions, animations, assets, buttons, events, layout, text, textLockup |
+| `./composite` | `source/composite/index.ts` | accordion, alert, banner, card, carousel, footer, hero, layout, media, navigation, pathway, person, quote, slider, social, tabs |
+| `./layout` | `source/layout/index.ts` | Image, stacked, grid, gridGap, gridBorder, gridOffset |
+
+### Path Aliases (vite.config.ts + tsconfig.json)
+
+These aliases allow bare imports within the package source:
+
+| Alias | Resolves to |
+|---|---|
+| `_types` | `source/_types` |
+| `helpers` | `source/helpers` |
+| `atomic` | `source/atomic` |
+| `composite` | `source/composite` |
+| `layout` | `source/layout` |
+
+Example: `import { assets } from 'atomic'` resolves to `source/atomic/index.ts`
+
+## Element Model Pattern
+
+All elements return this interface (defined in `source/_types.ts`):
 
 ```typescript
-// Before (direct manipulation)
-export const createTextLockup = (props: TextLockupProps): ElementModel => {
-  const container = document.createElement('div');
-  container.classList.add('umd-text-lockup');
-  // ... manual DOM construction
-  return { element: container, styles };
-};
+interface ElementModel {
+  element: HTMLElement;
+  styles: string;
+  update?: (props: any) => void;
+  destroy?: () => void;
+}
+```
 
-// After (ElementBuilder)
-export const createTextLockup = (props: TextLockupProps): ElementModel => {
+Elements are built using `ElementBuilder` from `@universityofmaryland/web-builder-library`:
+
+```typescript
+export const createTextLockupSmall = (props: TextLockupSmallProps): ElementModel => {
   return new ElementBuilder('div')
-    .withClassName('umd-text-lockup')
+    .withClassName('text-lockup-small')
     .styled(textLockupStyles)
     .withChildIf(props.eyebrow, eyebrowElement)
     .withChild(headlineElement)
-    .withChildIf(props.text, textElement)
     .build();
 };
 ```
 
-**Migration Order**:
-1. Atomic elements (text-lockup, buttons, actions) - In Progress
-2. Assets (images, videos, gifs)
-3. Events (meta, sign)
-4. Composite elements (cards, heroes, navigation)
-5. Complex composites (carousel, pathway, footer)
+## Import Organization
 
-See [PLAN.md](/PLAN.md) for implementation roadmap.
-
-## Build System
-
-### Vite Configuration
-
-- **Builder**: Vite with TypeScript
-- **Output Formats**: ES Modules only (`.js`) - No CommonJS support
-- **Export Style**: Named exports only - No default exports
-- **External Dependencies**: All `@universityofmaryland/*` packages
-- **Type Declarations**: Generated with `vite-plugin-dts`
-- **Module Preservation**: `preserveModules: true` for granular imports
-
-### Build Commands
-
-```bash
-npm run build      # Production build
-npm run dev        # Watch mode
-npm run clean      # Remove dist and build directories
-npm test          # Run all tests
-```
-
-## Package Structure
-
-### Source Organization
-
-```
-source/
-├── atomic/       # Simple, single-purpose elements
-│   ├── actions/      # Links, buttons
-│   ├── animations/   # Animation elements
-│   ├── assets/       # Images, videos
-│   ├── buttons/      # Button elements
-│   ├── events/       # Event-related displays
-│   ├── layout/       # Layout containers
-│   └── text-lockup/  # Text composition elements
-├── composite/    # Complex, multi-part elements
-│   ├── alert/        # Alert components
-│   ├── card/         # Card variations
-│   ├── carousel/     # Carousel systems
-│   ├── footer/       # Footer compositions
-│   ├── hero/         # Hero sections
-│   ├── navigation/   # Navigation systems
-│   ├── person/       # Person displays
-│   ├── quote/        # Quote displays
-│   └── ...
-├── layout/       # Layout utilities
-└── model/        # Element models and utilities
-```
-
-### Export Pattern
+Follow this ordering in all source files:
 
 ```typescript
-// Category import
-import { textLockup, assets } from '@universityofmaryland/web-elements-library/atomic';
-import { createAlert } from '@universityofmaryland/web-elements-library/composite';
-
-// Main export
-import { textLockup, createAlert } from '@universityofmaryland/web-elements-library';
-```
-
-## Element Model Pattern
-
-All elements return an `ElementModel` object:
-
-```typescript
-interface ElementModel {
-  element: HTMLElement | DocumentFragment;  // DOM node
-  styles: string;                          // Associated CSS
-  update?: (props: any) => void;           // Optional updater
-  destroy?: () => void;                    // Optional cleanup
-}
-```
-
-### Example Usage
-
-```typescript
-import { textLockup } from '@universityofmaryland/web-elements-library/atomic';
-
-const myElement = textLockup.small({
-  eyebrow: 'Category',
-  headline: 'My Headline',
-  text: 'Description text'
-});
-
-// Inject into DOM
-document.body.appendChild(myElement.element);
-
-// Inject styles
-const styleEl = document.createElement('style');
-styleEl.textContent = myElement.styles;
-document.head.appendChild(styleEl);
-```
-
-## package.json Exports
-
-```json
-{
-  "type": "module",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js"
-    },
-    "./atomic": {
-      "types": "./dist/atomic.d.ts",
-      "import": "./dist/atomic.js"
-    },
-    "./composite": {
-      "types": "./dist/composite.d.ts",
-      "import": "./dist/composite.js"
-    }
-  }
-}
-```
-
-**Note**: CommonJS (`require`) is not supported. Use ES module `import` only.
-
-## Key Concepts
-
-### Atomic vs Composite
-
-- **Atomic**: Simple, single-purpose elements (buttons, text lockups, images)
-- **Composite**: Complex combinations of atomic elements (heroes, cards, footers)
-
-### Style Integration
-
-Elements use JSS from the styles package:
-
-```typescript
+// 1. Styles - namespace imports
 import * as token from '@universityofmaryland/web-styles-library/token';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
-import { convertJSSObjectToStyles } from '@universityofmaryland/web-utilities-library/styles';
 
-const styles = convertJSSObjectToStyles({
-  styleObj: {
-    '.my-element': {
-      padding: token.spacing.md,
-      ...layout.grid.inline.tabletRows
-    }
-  }
-});
+// 2. Builder - default import
+import ElementBuilder from '@universityofmaryland/web-builder-library';
+
+// 3. Utilities - named imports with subpaths
+import { extractIconElement } from '@universityofmaryland/web-utilities-library/dom';
+import { combineStyles } from '@universityofmaryland/web-utilities-library/styles';
+
+// 4. Icons - named imports with icon prefix aliases
+import { email as iconEmail } from '@universityofmaryland/web-icons-library/communication';
+import { arrow_long as iconArrowLong } from '@universityofmaryland/web-icons-library/arrows';
+
+// 5. Relative directory resources
+import { createContainer } from './container';
+
+// 6. Package resources via path aliases
+import { assets } from 'atomic';
+
+// 7. Local types (use `type` keyword)
+import { type CarouselWideProps } from './_types';
+
+// 8. Package-level types
+import { type BaseProps } from '../../_types';
 ```
+
+**Key rules**: Styles always use `import * as`. Builder always uses default import. Icons use `icon` prefix aliases. Types always use `type` keyword. Blank lines between groups.
 
 ## Testing
 
 - **Framework**: Jest with JSDOM
-- **Location**: `source/__tests__/`
-- **Pattern**: Test element creation, styles, and props
-- **Mocks**: Mock external dependencies
+- **Test location**: `__tests__/` (package root, not inside source)
+- **Guide**: See `__tests__/TESTING.md` for philosophy and patterns
+- **Mocks**: All `@universityofmaryland/*` packages are auto-mocked via Jest config. See `/__mocks__/MOCKS.md` for the mock system.
 
-## Import Organization
+**Testing philosophy**: Test element creation logic (DOM structure, props handling, Element Model return values). Don't test external package logic (token values, utility implementations, style compilation).
 
-All TypeScript files should follow this import ordering structure:
+## Shared Types (`source/_types.ts`)
 
-```typescript
-// 1. Styles package - Use namespace imports
-import * as token from '@universityofmaryland/web-styles-library/token';
-import * as layout from '@universityofmaryland/web-styles-library/layout';
+Common prop interfaces used across elements:
 
-// 2. Builder package - Default import
-import ElementBuilder from '@universityofmaryland/web-builder-library';
+- **ThemeProps**: `isThemeDark`, `isThemeLight`, `isThemeGold`, `isThemeMaryland`
+- **SizeProps**: `isSizeSmall`, `isSizeMedium`, `isSizeLarge`
+- **DisplayProps**: `isAligned`, `hasBorder`, `isTransparent`, `isFullWidth`, `isSticky`, `isFixed`
+- **LayoutProps**: `isTextCenter`, `isTextRight`, `isVerticalCenter`, `isHorizontalCenter`
+- **MediaProps**: `autoPlay`, `loop`, `muted`, `poster`, `controls`
+- **ContentElement**: `HTMLElement | null`
 
-// 3. Utilities package - Named imports with specific paths
-import { extractIconElement } from '@universityofmaryland/web-utilities-library/dom';
-import { combineStyles } from '@universityofmaryland/web-utilities-library/styles';
+Type guards: `isImageElement()`, `isVideoElement()`, `isLinkElement()`, `isButtonElement()`, `isDivElement()`, `hasContent()`, `hasImageContent()`, `hasVideoContent()`
 
-// 4. Icons package - Named imports with aliases
-import { email as iconEmail } from '@universityofmaryland/web-icons-library/communication';
-import { arrow_long as iconArrowLong } from '@universityofmaryland/web-icons-library/arrows';
+## ElementBuilder Migration
 
-// 5. Relative directory resources - Named imports
-import { createContainer } from './container';
-import { createImage } from './image';
-
-// 6. Package resources - Named imports using aliases
-import { assets } from 'atomic';
-import { textLockup } from 'atomic';
-
-// 7. Local types - Type imports from component _types
-import { type CarouselWideProps } from './_types';
-
-// 8. Package types - Type imports from package-level _types
-import { type BaseProps } from '../../_types';
-```
-
-**Key Rules:**
-- Styles: Always use namespace imports (`import * as`)
-- Builder: Always use default import
-- Utilities: Use specific subpath imports
-- Icons: Use named imports with `icon` prefix aliases
-- Types: Always use `type` keyword in imports
-- Group related imports together
-- Maintain blank lines between groups
-
-## Best Practices
-
-1. **Use Namespace Imports**: For styles library modules
-   - ✅ `import * as token from '@universityofmaryland/web-styles-library/token'`
-   - ❌ `import token from '@universityofmaryland/web-styles-library/token'`
-
-2. **Import Ordering**: Follow the structure defined above
-3. **Element Model**: Always return `{ element, styles }`
-4. **Props Validation**: Use TypeScript interfaces for props
-5. **Style Scoping**: Use unique class names to avoid conflicts
-6. **Accessibility**: Include ARIA attributes and semantic HTML
-
-## Build Output
-
-- `dist/index.{js,d.ts}` - Main export with all elements (ES module only)
-- `dist/atomic.{js,d.ts}` - Atomic elements
-- `dist/composite.{js,d.ts}` - Composite elements
-- `dist/layout.{js,d.ts}` - Layout utilities
-- `dist/model.{js,d.ts}` - Element models
-- Preserved module structure for granular imports
-
-## Notes
-
-- Elements are framework-agnostic
-- Peer dependencies allow version flexibility
-- Element Model pattern enables consistent API
-- Styles are co-located with elements
-- Used as building blocks for components package
+Elements are being migrated from direct DOM manipulation to the `ElementBuilder` fluent API. Most atomic and many composite elements have been migrated. When creating or modifying elements, use `ElementBuilder` — do not introduce direct `document.createElement` patterns.

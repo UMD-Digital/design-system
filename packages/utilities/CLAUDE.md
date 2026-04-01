@@ -1,159 +1,100 @@
-# CLAUDE.md - Utilities Package
+# CLAUDE.md
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
 ## Package Overview
 
-The **Utilities Package** (`@universityofmaryland/web-utilities-library`) provides shared utility functions for all UMD Design System packages. It consolidates common functionality with selective import capabilities.
+`@universityofmaryland/web-utilities-library` — shared utility functions for all UMD Design System packages. Provides 56+ utilities organized into 15 categories with selective import support.
 
-**Version**: 1.0.2
-**Dependencies**: `@universityofmaryland/web-token-library`, `@universityofmaryland/web-styles-library`, `postcss`, `postcss-js`, `postcss-nesting`
+**Dependencies**: `@universityofmaryland/web-token-library`, `postcss`, `postcss-js`, `postcss-nesting`
+**Peer dependency**: `@universityofmaryland/web-styles-library`
 
-## Build System
-
-### Vite Configuration
-
-- **Builder**: Vite with TypeScript
-- **Output Formats**: ES Modules only (`.js`) - No CommonJS support
-- **Export Style**: Named exports only - No default exports
-- **External Dependencies**: All `@universityofmaryland/*` packages, postcss libraries
-- **Type Declarations**: Generated with `vite-plugin-dts`
-- **Module Preservation**: `preserveModules: true` for granular imports
-
-### Build Commands
+## Commands
 
 ```bash
-npm run build      # Production build
-npm run dev        # Watch mode
-npm run clean      # Remove dist
-npm test          # Run all tests
-npm run test:coverage  # With coverage
+npm run build              # Vite production build (ES modules only)
+npm run dev                # Vite watch mode
+npm test                   # Jest (all 48 suites, 1032+ tests)
+npm test -- __tests__/dom  # Run tests for a single category
+npm test -- __tests__/dom/addClass.test.ts  # Run a single test file
+npm run test:watch         # Jest watch mode
+npm run test:coverage      # Coverage report (target: 100%)
+npm run test:snapshot      # Update snapshots
+npm run docs               # Generate TypeDoc
 ```
 
-## Package Structure
-
-### Category Organization
+## Source Categories
 
 ```
 source/
-├── accessibility/   # Focus management, a11y utilities
-├── animation/       # Animation helpers, scroll behaviors
-├── converter/       # Data conversion utilities
-├── date/           # Date formatting and comparison
-├── dom/            # DOM manipulation (addClass, removeClass, etc.)
-├── elements/       # Element creation helpers (slots, links, templates)
-├── events/         # Event handling (swipe detection, etc.)
-├── media/          # Image/SVG utilities, responsive sizing
-├── network/        # GraphQL and API fetch wrappers
-├── performance/    # Debounce, throttle, optimization
-├── storage/        # localStorage wrappers
-├── string/         # String processing (capitalize, truncate, etc.)
-├── styles/         # CSS-in-JS conversion, style utilities
-└── validation/     # Input and accessibility validation
+├── accessibility/   # Focus trapping, keyboard nav, motion preferences, alt text
+├── adapters/        # Type converters (ComponentRef → UMDElement/ElementVisual)
+├── animation/       # Smooth scroll, grid animations, shrink-remove
+├── date/            # Date formatting (display, comparison, event details)
+├── dom/             # Class manipulation, parent finding, icon extraction, cloning
+├── elements/        # Slot/template creation for Shadow DOM web components
+├── events/          # Keyboard handling, swipe gesture detection
+├── media/           # SVG parsing, image conversion, responsive sizing
+├── network/         # GraphQL fetch with bearer auth
+├── performance/     # Debounce
+├── storage/         # localStorage get/set wrappers
+├── string/          # Capitalize, truncate (word-boundary and size-based)
+├── styles/          # JSS→CSS conversion (via PostCSS), media queries, view timeline
+├── theme/           # Boolean→token mappings (isDark → colors, variants, borders)
+├── validation/      # Slot image validation, HTMLElement type guard
+└── types/           # PostCSS type declarations
 ```
 
-### Export Patterns
+## Architecture
 
-The package supports multiple import patterns:
+### Category barrel pattern
+
+Every category has an `index.ts` that re-exports individual utility files. The main `source/index.ts` re-exports all categories as namespaces. The Vite config lists each category as a separate entry point, enabling three import levels:
 
 ```typescript
 // Category import (preferred)
-import { addClass, removeClass } from '@universityofmaryland/web-utilities-library/dom';
-
-// Individual function import (maximum tree-shaking)
+import { addClass } from '@universityofmaryland/web-utilities-library/dom';
+// Individual import (max tree-shaking)
 import { addClass } from '@universityofmaryland/web-utilities-library/dom/addClass';
-
-// Wildcard category access
-import * as DomUtils from '@universityofmaryland/web-utilities-library/dom';
-
-// Main export (convenience, less optimal)
+// Main export (convenience)
 import { addClass } from '@universityofmaryland/web-utilities-library';
 ```
 
-## package.json Exports
+### Theme utility
 
-Dual-level exports for flexibility:
+`source/theme/index.ts` exports a `theme` object with methods (`variant`, `foreground`, `background`, `border`, `inverse`, `fontColor`, `subdued`, `muted`) that centralize `isDark?: boolean` → design token value mappings. This eliminates scattered ternary expressions across consuming packages.
 
-```json
-{
-  "type": "module",
-  "exports": {
-    "./dom": {
-      "types": "./dist/dom.d.ts",
-      "import": "./dist/dom.js"
-    },
-    "./dom/*": {
-      "types": "./dist/dom/*.d.ts",
-      "import": "./dist/dom/*.js"
-    }
-  }
-}
-```
+### Styles utilities
 
-**Note**: CommonJS (`require`) is not supported. Use ES module `import` only.
+`jssToCSS` is the most heavily used utility. It converts JSS objects to CSS strings using PostCSS with the `postcss-nesting` plugin. This is the runtime path that processes all component styles in the design system.
 
-## Utility Function Pattern
+### Adapters
 
-Each utility follows this structure:
+`toUMDElement` and `toElementVisual` safely convert `ComponentRef` results (which may be `DocumentFragment` or `HTMLElement`) into typed interfaces for downstream consumption. They include type narrowing via `instanceof HTMLElement`.
 
-```typescript
-/**
- * Brief description
- * @param param1 - Description
- * @returns Description
- * @example
- * ```typescript
- * const result = utilityName(arg1);
- * ```
- */
-export const utilityName = (param1: Type): ReturnType => {
-  // Pure function implementation
-  return result;
-};
-```
+## Adding a New Utility
 
-## Testing Strategy
+1. Create `source/{category}/{utilityName}.ts` with named export
+2. Add `export { utilityName } from './{utilityName}'` to `source/{category}/index.ts`
+3. Category is already re-exported from `source/index.ts` via `export * from './{category}'`
+4. If adding a **new category**: add entry to `vite.config.ts` `lib.entry`, add exports to `package.json`, add re-export to `source/index.ts`
+5. Create `__tests__/{category}/{utilityName}.test.ts`
 
-- **Framework**: Jest with TypeScript
-- **Location**: `source/__tests__/{category}/`
-- **Coverage**: 100% coverage target
-- **Test Patterns**: Happy path, edge cases, error conditions
+## Testing Conventions
 
-## Key Utilities by Category
+- Tests live in `__tests__/{category}/` mirroring the source structure
+- Test environment: jsdom (configured in `jest.config.js`)
+- Jest config extends root `../../jest.config.cjs`
+- Test our utility logic only — don't assert token values or DOM API behavior
+- Structure: happy path → edge cases → error conditions → consistency → type checks
+- Use `jest.useFakeTimers()` for debounce/timing tests
+- Mocks are auto-generated from `/__mocks__/` at repo root
 
-### DOM
-- `addClass`, `removeClass`, `toggleClass`
-- `findParent`, `cleanCopy`
-- `getIcon` - SVG icon injection
+## Build Details
 
-### Styles
-- `convertJSSObjectToStyles` - JSS to CSS conversion
-- `getStyleStringFromJssObject` - Style string generation
-- `withViewTimelineAnimation` - Timeline animations
-
-### Performance
-- `debounce` - Debounce function calls
-- `throttle` - Throttle function execution
-
-### String
-- `capitalize` - Capitalize strings
-- `truncateText` - Text truncation with ellipsis
-
-## Best Practices
-
-1. **Import Granularly**: Use category or individual imports for optimal bundle sizes
-2. **Pure Functions**: Most utilities are pure functions with no side effects
-3. **Type Safety**: Full TypeScript support
-4. **No Package Coupling**: Functions are standalone and reusable
-
-## Build Output
-
-- `dist/index.{js,d.ts}` - Main export (ES module only)
-- `dist/{category}.{js,d.ts}` - Category barrels
-- `dist/{category}/{function}.{js,d.ts}` - Individual functions
-- Source maps for all builds
-
-## Notes
-
-- Utilities have minimal dependencies
-- Functions are framework-agnostic
-- Optimized for tree-shaking
-- Used by elements, components, and feeds packages
+- ES modules only (`.js`) — no CommonJS
+- Named exports only — no default exports
+- `preserveModules: true` with `preserveModulesRoot: 'source'` keeps individual files in dist
+- All `@universityofmaryland/*` packages and postcss libs are externalized
+- `vite-plugin-dts` generates `.d.ts` files alongside each module
+- `minify: false` — consumers handle minification

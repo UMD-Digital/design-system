@@ -15,6 +15,7 @@ interface BoxProps {
   hasBorder?: boolean;
   isThemeDark?: boolean;
   isTransparent?: boolean;
+  hasImage?: boolean;
 }
 
 export const image = ({
@@ -81,6 +82,7 @@ export const textContainer = ({
   hasBorder = false,
   isThemeDark = false,
   isTransparent = false,
+  hasImage = true,
 }: BoxProps & {
   customStyles?: Record<string, any>;
   children: ElementModel[];
@@ -92,11 +94,15 @@ export const textContainer = ({
         maxWidth: `${token.spacing.maxWidth.smallest}`,
 
         ...createMediaQuery('min-width', mediumBreakpointStart, {
-          paddingTop: token.spacing.md,
+          ...(hasImage && {
+            paddingTop: token.spacing.md,
+          }),
         }),
 
         ...createMediaQuery('min-width', mediumBreakpointStart, {
-          paddingTop: token.spacing.lg,
+          ...(hasImage && {
+            paddingTop: token.spacing.lg,
+          }),
 
           ...(hasBorder && {
             padding: token.spacing.md,

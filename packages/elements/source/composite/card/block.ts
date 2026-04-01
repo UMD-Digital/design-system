@@ -55,6 +55,7 @@ export const createCompositeCardBlock = (props: CardBlockProps) => {
     layout.block.stacked.textContainer({
       children: [textLockup.smallScaling(props)],
       ...sizingProps,
+      hasImage: !!image,
     }),
   );
 

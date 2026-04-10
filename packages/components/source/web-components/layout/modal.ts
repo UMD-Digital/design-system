@@ -5,24 +5,15 @@ import { CreateComponentFunction, ComponentRegistration, LayoutProps } from '../
 interface ModalProps extends LayoutProps {
   content: HTMLElement | null;
   context: HTMLElement;
-  callback: () => void;
 }
 
 const tagName = 'umd-element-modal';
 
 const createComponent: CreateComponentFunction = (element) => {
-  const callback = () => {
-    element.setAttribute(
-      Attributes.names.layout.hidden,
-      Attributes.values.state.TRUE,
-    );
-  };
-
   const props: ModalProps = {
     content: Slots.content.default({ element, isDefaultStyling: false }),
     isHidden: Attributes.isLayout.hidden({ element }),
     context: element,
-    callback,
   };
 
   return layout.overlay.modal(props);

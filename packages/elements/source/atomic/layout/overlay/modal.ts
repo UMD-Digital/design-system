@@ -1,53 +1,54 @@
 import * as token from '@universityofmaryland/web-token-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { trapFocus } from '@universityofmaryland/web-utilities-library/accessibility';
 
 type TypeFixedFullScreenProps = {
   content: HTMLElement | null;
   isHidden?: boolean;
-  callback?: () => void;
   context?: HTMLElement | null;
 };
 
-const ELEMENT_CONTAINER = 'modal-screen-container';
-const ELEMENT_CONTAINER_BACKGROUND = 'modal-screen-container-background';
-
-export const STYLES_MODAL = `
-  .${ELEMENT_CONTAINER} {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 999999;
-  }
-
-  .${ELEMENT_CONTAINER_BACKGROUND} {
-    background-color: rgba(0, 0, 0, 0.9);
-    padding: ${token.spacing.xl} ${token.spacing.md};
-    width: 100%;
-    height: 100%;
-  }
-
-  @media (${token.media.queries.tablet.min}) {
-    .${ELEMENT_CONTAINER_BACKGROUND} {
-      padding: 10vh 10vw;
-    }
-  }
-`;
-
 export const createModal = ({
   content,
-  callback,
   isHidden,
   context,
 }: TypeFixedFullScreenProps) => {
   const body = document.body;
   const html = document.documentElement;
-  const container = document.createElement('div');
-  const background = document.createElement('div');
   let eventReference: any = null;
   let accessibiltyEventReference: any = null;
+
+  const backgroundBuilder = new ElementBuilder()
+    .withClassName('modal-screen-container-background')
+    .withStyles({
+      element: {
+        backgroundColor: 'rgba(0, 0, 0, 0.9)',
+        padding: `${token.spacing.xl} ${token.spacing.md}`,
+        width: '100%',
+        height: '100%',
+        [`@media (${token.media.queries.tablet.min})`]: {
+          padding: '10vh 10vw',
+        },
+      },
+    })
+    .withChildIf(!!content, content as HTMLElement);
+
+  const containerBuilder = new ElementBuilder()
+    .withClassName('modal-screen-container')
+    .withStyles({
+      element: {
+        display: 'none',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: 999999,
+      },
+    })
+    .withChild(backgroundBuilder);
+
+  const container = containerBuilder.getElement();
 
   const show = () => {
     container.style.display = 'block';
@@ -71,6 +72,7 @@ export const createModal = ({
       if (content) content.focus();
     }, 100);
   };
+
   const hide = () => {
     body.style.overflow = 'visible';
     body.style.height = 'inherit';
@@ -79,8 +81,8 @@ export const createModal = ({
     container.style.display = 'none';
 
     if (accessibiltyEventReference) accessibiltyEventReference();
-    if (eventReference)
-      eventReference.removeEventListener('click', () => hide());
+		
+    if (eventReference) eventReference.removeEventListener('click', () => hide());
 
     setTimeout(() => {
       if (context) {
@@ -90,19 +92,7 @@ export const createModal = ({
     }, 100);
   };
 
-  background.classList.add(ELEMENT_CONTAINER_BACKGROUND);
-  if (content) background.appendChild(content);
-
-  container.classList.add(ELEMENT_CONTAINER);
-  container.appendChild(background);
   if (isHidden) container.style.display = 'none';
 
-  return {
-    element: container,
-    styles: STYLES_MODAL,
-    events: {
-      show,
-      hide,
-    },
-  };
+  return containerBuilder.withEvents({ show, hide }).build();
 };

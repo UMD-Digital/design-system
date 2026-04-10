@@ -5,24 +5,15 @@ import { CreateComponentFunction, ComponentRegistration, LayoutProps } from '../
 interface ModalProps extends LayoutProps {
   content: HTMLElement | null;
   context: HTMLElement;
-  callback: () => void;
 }
 
 const tagName = 'umd-element-modal';
 
 const createComponent: CreateComponentFunction = (element) => {
-  const callback = () => {
-    element.setAttribute(
-      Attributes.names.layout.hidden,
-      Attributes.values.state.TRUE,
-    );
-  };
-
   const props: ModalProps = {
     content: Slots.content.default({ element, isDefaultStyling: false }),
     isHidden: Attributes.isLayout.hidden({ element }),
     context: element,
-    callback,
   };
 
   return layout.overlay.modal(props);
@@ -52,8 +43,27 @@ const attributes = Attributes.handler.common.visualShowHide({
  *   - Absence implies visible
  *
  * ## Observed Attributes
- * - `data-visual-open` - Shows the modal when set to "true"
- * - `data-visual-closed` - Hides the modal when set to "true"
+ * - `data-layout-hidden` - Controls visibility:
+ *   - `false` (when previously `true`) — shows the modal
+ *   - `true` (when previously `false`) — hides the modal
+ *
+ * ## Dispatched Events
+ * - `modal:show` — dispatched on the host element when the modal opens
+ * - `modal:hide` — dispatched on the host element when the modal closes
+ *
+ * @example
+ * ```html
+ * <!-- Listening for dispatched events -->
+ * <umd-element-modal id="my-modal" data-layout-hidden="true">
+ *   <div slot="content">...</div>
+ * </umd-element-modal>
+ *
+ * <script>
+ *   const modal = document.getElementById('my-modal');
+ *   modal.addEventListener('modal:show', () => console.log('modal opened'));
+ *   modal.addEventListener('modal:hide', () => console.log('modal closed'));
+ * </script>
+ * ```
  *
  * @example
  * ```html

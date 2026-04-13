@@ -75,7 +75,7 @@ const CreateRedArrow = (id: string) =>
         zIndex: '999',
         display: 'flex',
         alignItems: 'center',
-        `& .${CLASS_ANIMATION_ARROW}`: { height: '100%' },
+        [`& .${CLASS_ANIMATION_ARROW}`]: { height: '100%' },
       },
     })
     .build();
@@ -93,7 +93,7 @@ const CreateBlackArrow = (id: string) =>
         height: '100%',
         zIndex: '99',
         '& path': { fill: '#000' },
-        `& .${CLASS_ANIMATION_ARROW}`: { height: '100%' },
+        [`& .${CLASS_ANIMATION_ARROW}`]: { height: '100%' },
         [`& #${ID_ARROW_BEHIND_FOLLOWING}`]: {
           transform: 'translateX(-90%)',
         },

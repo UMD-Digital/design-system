@@ -1,4 +1,5 @@
 import * as token from '@universityofmaryland/web-token-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { createCompositeMediaCaption as CaptionContainer } from '../elements/caption';
 import { Image as LayoutImage } from 'layout';
@@ -9,77 +10,94 @@ export type TypeMediaInlineRequirements = {
   isThemeDark?: boolean;
 };
 
-const { spacing } = token;
-
-const ELEMENT_MEDIA_INLINE_CONTAINER = 'element-media-with-caption-container';
-const ELEMENT_OBJECT_CAPTION_CONTAINER = 'element-media-caption-container';
-
-// prettier-ignore
-const ObjectContainer = `
-  .${ELEMENT_OBJECT_CAPTION_CONTAINER} {
-    display: flex;
-    flex-direction: column;
-    padding-bottom: ${token.spacing.sm};
-    max-width: 100%;
-  }
-`;
-
-// prettier-ignore
-const STYLES_MEDIA_INLINE_ELEMENT = `
-  .${ELEMENT_MEDIA_INLINE_CONTAINER} {
-    display: inline-block;
-    max-width: 100%;
-  }
-
-  ${LayoutImage.Styles}
-  ${CaptionContainer.Styles}
-  ${ObjectContainer}
-`;
-
 const CreateMediaWithCaption = (props: TypeMediaInlineRequirements) =>
-  (() => {
+  {
     const { caption, image, isThemeDark } = props;
     const hasCaption = caption && caption !== null;
-    const elementContainer = document.createElement('div');
-    const objectContainer = document.createElement('div');
+
+    const createImage = () => {
+      if (!image) {
+        console.warn('CreateMediaWithCaption: No image provided');
+        return null;
+      }
+      return LayoutImage.CreateElement({ image, showCaption: true });
+    };
+
+    const createCaption = () => {
+      if (!hasCaption) {
+        console.warn('CreateMediaWithCaption: No caption provided');
+        return null;
+      }
+      const captionContainer = CaptionContainer.CreateElement({ caption, isThemeDark });
+      captionContainer.style.display = 'none';
+      return captionContainer;
+    };
+
+    const imageElement = createImage();
+    const captionElement = createCaption();
+
+    const objectModel = new ElementBuilder()
+      .withClassName('element-media-caption-container')
+      .withStyles({
+        element: {
+          display: 'flex',
+          flexDirection: 'column',
+          paddingBottom: token.spacing.sm,
+          maxWidth: '100%',
+        },
+      })
+      .withChildren(imageElement, captionElement)
+      .build();
+
+    const objectContainer = objectModel.element;
+
+    const containerBuilder = new ElementBuilder()
+      .withClassName('element-media-with-caption-container')
+      .withStyles({
+        element: {
+          display: 'inline-block',
+          maxWidth: '100%',
+        },
+      });
+
+    if (image || hasCaption) {
+      containerBuilder.withChild(objectModel);
+    }
+
+    const containerModel = containerBuilder.build();
+    const elementContainer = containerModel.element;
+
     const sizeCaption = () => {
       const imageContainer = elementContainer.querySelector(
         `.${LayoutImage.Elements.container}`,
       ) as HTMLElement;
-      const caption = elementContainer.querySelector(
+      const captionElement = elementContainer.querySelector(
         `.${CaptionContainer.Elements.container}`,
       ) as HTMLElement;
 
-      if (caption) {
-        caption.style.width = `${imageContainer.offsetWidth}px`;
-        caption.style.display = `block`;
+      if (captionElement) {
+        captionElement.style.width = `${imageContainer.offsetWidth}px`;
+        captionElement.style.display = `block`;
       }
     };
-    const eventResize = () => {
-      sizeCaption();
-    };
-
-    if (image) {
-      objectContainer.appendChild(
-        LayoutImage.CreateElement({
-          image,
-          showCaption: true,
-        }),
-      );
-    }
 
     const load = () => {
       const checkSizing = () => {
-        const caption = objectContainer.querySelector(
+        const captionElement = objectContainer.querySelector(
           `.${CaptionContainer.Elements.container}`,
         ) as HTMLElement;
 
-        if (caption) {
-          caption.style.opacity = `1`;
+        if (captionElement) {
+          captionElement.style.opacity = `1`;
         }
       };
 
-      image?.addEventListener('load', () => {
+			if (!image) {
+        console.warn('CreateMediaWithCaption: No image provided');
+        return null;
+      }
+
+      image.addEventListener('load', () => {
         checkSizing();
 
         setTimeout(() => {
@@ -88,40 +106,26 @@ const CreateMediaWithCaption = (props: TypeMediaInlineRequirements) =>
       });
     };
 
-    if (hasCaption) {
-      const captionElement = CaptionContainer.CreateElement({
-        caption,
-        isThemeDark,
-      });
-      captionElement.style.display = `none`;
-      objectContainer.appendChild(captionElement);
-    }
-
-    if (objectContainer.children.length > 0) {
-      elementContainer.appendChild(objectContainer);
-    }
-
-    objectContainer.classList.add(ELEMENT_OBJECT_CAPTION_CONTAINER);
-    elementContainer.classList.add(ELEMENT_MEDIA_INLINE_CONTAINER);
-
     window.addEventListener(
       'resize',
       debounce(() => {
-        eventResize();
+        sizeCaption();
       }, 20),
     );
 
     setTimeout(() => {
-      eventResize();
+      sizeCaption();
     }, 100);
 
+    containerModel.styles += LayoutImage.Styles;
+    containerModel.styles += CaptionContainer.Styles;
+
     return {
-      element: elementContainer,
+      ...containerModel,
       events: {
         load,
       },
-      styles: STYLES_MEDIA_INLINE_ELEMENT,
     };
-  })();
+  };
 
 export const createCompositeMediaInlineCaption = CreateMediaWithCaption;

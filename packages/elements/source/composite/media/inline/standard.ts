@@ -1,41 +1,36 @@
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { Image as LayoutImage } from 'layout';
 
 export type TypeMediaInlineRequirements = {
   image?: HTMLImageElement | null;
 };
 
-const ELEMENT_MEDIA_INLINE_CONTAINER = 'element-media-inline-container';
-
-// prettier-ignore
-const STYLES_MEDIA_INLINE_ELEMENT = `
-  .${ELEMENT_MEDIA_INLINE_CONTAINER} {
-    display: block;
-    max-width: 100%;
-  }
-
-  ${LayoutImage.Styles}
-`;
-
 const CreateMediaInline = (props: TypeMediaInlineRequirements) =>
   (() => {
-    const elementContainer = document.createElement('div');
     const { image } = props;
 
-    if (image) {
-      elementContainer.appendChild(
-        LayoutImage.CreateElement({
-          image,
-          showCaption: true,
-        }),
-      );
-    }
-
-    elementContainer.classList.add(ELEMENT_MEDIA_INLINE_CONTAINER);
-
-    return {
-      element: elementContainer,
-      styles: STYLES_MEDIA_INLINE_ELEMENT,
+    const createImageChild = () => {
+      if (!image) {
+        console.warn('CreateMediaInline: No image provided');
+        return null;
+      }
+      return LayoutImage.CreateElement({ image, showCaption: true });
     };
+
+    const model = new ElementBuilder()
+      .withClassName('element-media-inline-container')
+      .withStyles({
+        element: {
+          display: 'block',
+          maxWidth: '100%',
+        },
+      })
+      .withChild(createImageChild())
+      .build();
+
+    model.styles += LayoutImage.Styles;
+
+    return model;
   })();
 
 export const createCompositeMediaInlineStandard = CreateMediaInline;

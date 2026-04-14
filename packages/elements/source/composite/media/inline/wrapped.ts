@@ -1,4 +1,5 @@
 import * as token from '@universityofmaryland/web-token-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { createCompositeMediaCaption as CaptionContainer } from '../elements/caption';
 import { Image as LayoutImage } from 'layout';
@@ -11,35 +12,7 @@ export type TypeMediaInlineWrappedRequirements = {
   isThemeDark?: boolean;
 };
 
-const { spacing } = token;
-
 const BREAKPOINT = 400;
-
-const ATTRIBUTE_IS_WRAPPING_TEXT = 'is-wrapping-text';
-
-const ELEMENT_MEDIA_INLINE_CONTAINER = 'element-media-inline-wrapped-container';
-const ELEMENT_OBJECT_WRAPPED_CONTAINER = 'element-object-wrapped-container';
-
-// prettier-ignore
-const ObjectContainer = `
-  .${ELEMENT_OBJECT_WRAPPED_CONTAINER} {
-    display: inline-block;
-    padding-bottom: ${token.spacing.sm};
-    max-width: 100%;
-  }
-`;
-
-// prettier-ignore
-const STYLES_MEDIA_INLINE_WRAPPED_ELEMENT = `
-  .${ELEMENT_MEDIA_INLINE_CONTAINER} {
-    display: inline-block;
-    max-width: 100%;
-  }
-
-  ${LayoutImage.Styles}
-  ${CaptionContainer.Styles}
-  ${ObjectContainer}
-`;
 
 const GetObjectSize = ({
   elementContainer,
@@ -65,59 +38,115 @@ const CreateMediaInlineWrapped = (props: TypeMediaInlineWrappedRequirements) =>
   (() => {
     const { image, isAlignmentRight, isThemeDark, caption, wrappingText } =
       props;
-
-    const elementContainer = document.createElement('div');
-    const objectContainer = document.createElement('div');
-    const hasWrappingtext = wrappingText && wrappingText !== null;
+    const hasWrappingText = wrappingText && wrappingText !== null;
     const hasCaption = caption && caption !== null;
+
+    const createImageChild = () => {
+      if (!image) {
+        console.warn('CreateMediaInlineWrapped: No image provided');
+        return null;
+      }
+      return LayoutImage.CreateElement({ image, showCaption: true });
+    };
+
+    const createCaptionChild = () => {
+      if (!hasCaption) {
+        console.warn('CreateMediaInlineWrapped: No caption provided');
+        return null;
+      }
+      const el = CaptionContainer.CreateElement({ caption, isThemeDark });
+      el.style.opacity = '0';
+      return el;
+    };
+
+    const objectModel = new ElementBuilder()
+      .withClassName('element-object-wrapped-container')
+      .withStyles({
+        element: {
+          display: 'inline-block',
+          paddingBottom: token.spacing.sm,
+          maxWidth: '100%',
+        },
+      })
+      .withChild(createImageChild())
+      .withChild(createCaptionChild())
+      .build();
+
+    const objectContainerElement = objectModel.element;
+
+    const containerBuilder = new ElementBuilder()
+      .withClassName('element-media-inline-wrapped-container')
+      .withStyles({
+        element: {
+          display: 'inline-block',
+          maxWidth: '100%',
+        },
+      });
+
+    if (image || hasCaption) {
+      containerBuilder.withChild(objectModel);
+    }
+
+    if (hasWrappingText && wrappingText) {
+      containerBuilder.withChild(wrappingText).withAttribute('is-wrapping-text', '');
+    }
+
+    const containerModel = containerBuilder.build();
+    const elementContainerElement = containerModel.element;
+
     const sizeCaption = () => {
-      const imageContainer = elementContainer.querySelector(
+      const imageContainer = elementContainerElement.querySelector(
         `.${LayoutImage.Elements.container}`,
       ) as HTMLElement;
-      const caption = elementContainer.querySelector(
+      const captionEl = elementContainerElement.querySelector(
         `.${CaptionContainer.Elements.container}`,
       ) as HTMLElement;
 
-      if (caption) {
-        caption.style.width = `${imageContainer.offsetWidth}px`;
+      if (captionEl) {
+        captionEl.style.width = `${imageContainer.offsetWidth}px`;
       }
     };
+
     const sizeObject = () => {
-      const isAboveBreakPoint = elementContainer.offsetWidth > BREAKPOINT;
-      const objectContainer = elementContainer.querySelector(
-        `.${ELEMENT_OBJECT_WRAPPED_CONTAINER}`,
+      const isAboveBreakPoint = elementContainerElement.offsetWidth > BREAKPOINT;
+      const objectContainerEl = elementContainerElement.querySelector(
+        '.element-object-wrapped-container',
       ) as HTMLElement;
 
       if (!image) return;
 
       if (isAboveBreakPoint) {
-        const objectSize = GetObjectSize({ elementContainer, image });
+        const objectSize = GetObjectSize({
+          elementContainer: elementContainerElement,
+          image,
+        });
 
-        objectContainer.style.width = `${objectSize}px`;
-        objectContainer.style.display = 'inline-block';
-        objectContainer.style.textAlign = 'left';
+        objectContainerEl.style.width = `${objectSize}px`;
+        objectContainerEl.style.display = 'inline-block';
+        objectContainerEl.style.textAlign = 'left';
 
         if (isAlignmentRight) {
-          objectContainer.style.float = `right`;
-          objectContainer.style.paddingLeft = `${token.spacing.md}`;
+          objectContainerEl.style.float = `right`;
+          objectContainerEl.style.paddingLeft = `${token.spacing.md}`;
         } else {
-          objectContainer.style.float = 'left';
-          objectContainer.style.paddingRight = `${token.spacing.md}`;
+          objectContainerEl.style.float = 'left';
+          objectContainerEl.style.paddingRight = `${token.spacing.md}`;
         }
       } else {
-        objectContainer.style.width = '100%';
-        objectContainer.style.float = 'none';
-        objectContainer.style.textAlign = 'center';
-        objectContainer.style.paddingLeft = `0`;
-        objectContainer.style.paddingRight = `0`;
+        objectContainerEl.style.width = '100%';
+        objectContainerEl.style.float = 'none';
+        objectContainerEl.style.textAlign = 'center';
+        objectContainerEl.style.paddingLeft = `0`;
+        objectContainerEl.style.paddingRight = `0`;
       }
 
       setTimeout(() => {
         sizeCaption();
       }, 100);
     };
+
     const eventResize = () => {
-      if (hasWrappingtext) {
+      if (hasWrappingText) {
         sizeObject();
       }
       if (hasCaption) {
@@ -127,12 +156,12 @@ const CreateMediaInlineWrapped = (props: TypeMediaInlineWrappedRequirements) =>
 
     const load = () => {
       const checkSizing = () => {
-        const caption = objectContainer.querySelector(
+        const captionEl = objectContainerElement.querySelector(
           `.${CaptionContainer.Elements.container}`,
         ) as HTMLElement;
 
-        if (caption) {
-          caption.style.opacity = `1`;
+        if (captionEl) {
+          captionEl.style.opacity = `1`;
         }
       };
 
@@ -149,40 +178,6 @@ const CreateMediaInlineWrapped = (props: TypeMediaInlineWrappedRequirements) =>
       });
     };
 
-    objectContainer.classList.add(ELEMENT_OBJECT_WRAPPED_CONTAINER);
-
-    if (image) {
-      objectContainer.appendChild(
-        LayoutImage.CreateElement({
-          image,
-          showCaption: true,
-        }),
-      );
-    }
-
-    if (hasCaption) {
-      const captionElement = CaptionContainer.CreateElement({
-        caption,
-        isThemeDark,
-      });
-      captionElement.style.opacity = `0`;
-      objectContainer.appendChild(captionElement);
-    }
-
-    if (objectContainer.children.length > 0) {
-      elementContainer.appendChild(objectContainer);
-    }
-
-    if (hasWrappingtext) {
-      elementContainer.appendChild(wrappingText);
-      elementContainer.setAttribute(ATTRIBUTE_IS_WRAPPING_TEXT, '');
-      setTimeout(() => {
-        sizeObject();
-      }, 100);
-    }
-
-    elementContainer.classList.add(ELEMENT_MEDIA_INLINE_CONTAINER);
-
     window.addEventListener(
       'resize',
       debounce(() => {
@@ -190,16 +185,24 @@ const CreateMediaInlineWrapped = (props: TypeMediaInlineWrappedRequirements) =>
       }, 20),
     );
 
+    if (hasWrappingText) {
+      setTimeout(() => {
+        sizeObject();
+      }, 100);
+    }
+
     setTimeout(() => {
       eventResize();
     }, 200);
 
+    containerModel.styles += LayoutImage.Styles;
+    containerModel.styles += CaptionContainer.Styles;
+
     return {
-      element: elementContainer,
+      ...containerModel,
       events: {
         load,
       },
-      styles: STYLES_MEDIA_INLINE_WRAPPED_ELEMENT,
     };
   })();
 

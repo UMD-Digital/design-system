@@ -18,7 +18,7 @@ export const styles = `
 const attributes = [
   {
     name: 'resize',
-    handler: (ref: any, _oldValue: string, newValue: string) => {
+    handler: (ref: any, _oldValue: string | null, newValue: string | null) => {
       if (newValue === 'true') ref.events?.resize();
     },
   },

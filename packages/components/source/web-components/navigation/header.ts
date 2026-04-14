@@ -174,7 +174,7 @@ const CreateHeader = ({
 const attributes = [
   {
     name: 'sticky',
-    handler: (ref: any, _oldValue: string, newValue: string) => {
+    handler: (ref: any, _oldValue: string | null, newValue: string | null) => {
       ref.events?.sticky({ isSticky: newValue === 'true' });
     },
   },

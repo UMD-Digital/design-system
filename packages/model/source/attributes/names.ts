@@ -64,6 +64,7 @@ const layout = {
   interior: 'data-layout-interior',
   lock: 'data-layout-lock',
   position: 'data-layout-position',
+  rerender: 'data-layout-rerender',
   reverse: 'data-layout-reverse',
   rowCount: 'data-layout-row-count',
   spaceHorizontal: 'data-layout-space-horizontal',

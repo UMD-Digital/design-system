@@ -1,5 +1,5 @@
 import { navigation } from '@universityofmaryland/web-elements-library/composite';
-import { Model } from '@universityofmaryland/web-model-library';
+import { Attributes, Model } from '@universityofmaryland/web-model-library';
 import { reset } from '../../helpers/styles';
 import { SLOTS, MakeNavDrawer } from './common';
 import { ComponentRegistration } from '../../_types';
@@ -16,19 +16,37 @@ export const styles = `
   ${navigation.elements.menuButton.Styles}
 `;
 
+const attributes = Attributes.handler.combine(
+  Attributes.handler.observe.rerender({
+    callback: (element) => element.events?.rerender?.(),
+  }),
+);
+
 const createComponent = (element: HTMLElement) => {
   const container = document.createElement('div');
-  const drawer = MakeNavDrawer({ element, ...SLOTS });
-  if (!drawer) return { element: container, styles };
 
-  const button = navigation.elements.menuButton.CreateElement({
-    eventOpen: drawer.events.eventOpen,
-  });
+  const build = () => {
+    container.replaceChildren();
+    const drawer = MakeNavDrawer({ element, ...SLOTS });
+    if (!drawer) return;
 
-  container.appendChild(drawer.element);
-  container.appendChild(button);
+    const button = navigation.elements.menuButton.CreateElement({
+      eventOpen: drawer.events.eventOpen,
+    });
 
-  return { element: container, styles };
+    container.appendChild(drawer.element);
+    container.appendChild(button);
+  };
+
+  build();
+
+  return {
+    element: container,
+    styles,
+    events: {
+      rerender: build,
+    },
+  };
 };
 
 /**
@@ -45,6 +63,21 @@ const createComponent = (element: HTMLElement) => {
  * - `main-navigation` - Primary navigation links
  * - `utility-navigation` - Utility/secondary navigation links
  * - `footer-navigation` - Footer navigation links
+ *
+ * ## Observed Attributes
+ * - `data-layout-rerender` - Set to `"true"` to rebuild the drawer after slot content
+ *   changes. Dispatches a `component:layout-rerender` CustomEvent on completion with
+ *   `detail.previousSize` and `detail.currentSize` so consumers can react to layout shifts.
+ *
+ * @example
+ * ```js
+ * // Trigger a rerender after dynamically updating slot content
+ * const drawer = document.querySelector('umd-element-nav-drawer');
+ * drawer.addEventListener('component:layout-rerender', (e) => {
+ *   console.log('drawer rerendered', e.detail.previousSize, e.detail.currentSize);
+ * });
+ * drawer.setAttribute('data-layout-rerender', 'true');
+ * ```
  *
  * @example
  * ```html
@@ -96,6 +129,7 @@ const createComponent = (element: HTMLElement) => {
 export const NavigationDrawer: ComponentRegistration = Model.defineComponent({
   tagName,
   createComponent,
+  attributes,
 }, { eager: false });
 
 /** Backwards compatibility alias for grouped exports */

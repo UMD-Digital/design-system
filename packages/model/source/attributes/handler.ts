@@ -164,6 +164,54 @@ const resize = ({
 });
 
 /**
+ * Observes the 'rerender' attribute.
+ * Triggers callback when data-layout-rerender="true" and dispatches
+ * component:layout-rerender event with previous and current dimensions.
+ * Commonly used to recalculate component dimensions after layout changes.
+ */
+const rerender = ({
+  callback,
+  name,
+}: AttributeHandlerProps): AttributeHandlerConfig => ({
+  name: name || AttributeNames.layout.rerender,
+  handler: (ref, _, newValue) => {
+    if (newValue === AttributeValues.state.TRUE) {
+      const element = ref.element;
+
+      const previousSize = {
+        width: element.offsetWidth,
+        height: element.offsetHeight,
+      };
+
+      callback(ref);
+
+      setTimeout(() => {
+        const currentSize = {
+          width: element.offsetWidth,
+          height: element.offsetHeight,
+        };
+
+        element.dispatchEvent(
+          new CustomEvent('component:layout-rerender', {
+            detail: {
+              tagName: element.tagName.toLowerCase(),
+              element,
+              timestamp: Date.now(),
+              previousSize,
+              currentSize,
+              source: 'attribute',
+              trigger: AttributeNames.layout.rerender,
+            },
+            bubbles: true,
+            composed: true,
+          }),
+        );
+      }, 100);
+    }
+  },
+});
+
+/**
  * @deprecated Use visuallyOpen instead
  * Observes 'state' attribute transition from "closed" to "open".
  */
@@ -285,6 +333,7 @@ const visuallyShow = ({
 
 const observe = {
   resize,
+  rerender,
   stateOpen,
   stateClosed,
   visuallyHide,
@@ -303,6 +352,12 @@ const common = {
    * Resize observer for responsive components
    */
   resize: (callback: (element: AttributeElementRef) => void) =>
+    resize({ callback }),
+
+  /**
+   * Resize observer for responsive components
+   */
+  rerender: (callback: (element: AttributeElementRef) => void) =>
     resize({ callback }),
 
   /**

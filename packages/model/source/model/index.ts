@@ -45,6 +45,10 @@ import {
 } from '../attributes/config';
 import { ChangeDetector } from '../attributes/change-detection';
 import { AttributeTypeError, AttributeValidationError } from '../attributes/errors';
+import type {
+  AttributeHandlerConfig,
+  AttributeElementRef,
+} from '../attributes/handler';
 import { UpdateScheduler } from './update-cycle';
 import {
   registerComponent,
@@ -76,10 +80,7 @@ import {
   hasSlottedContent,
 } from '../slots/slot-query';
 
-interface AttributeConfig {
-  name: string;
-  handler: (element: ElementRef, oldValue: string, newValue: string) => void;
-}
+type AttributeConfig = AttributeHandlerConfig;
 
 interface ComponentLifecycle {
   firstConnected?: (host: HTMLElement, shadow: ShadowRoot) => void;
@@ -283,7 +284,11 @@ class BaseComponent extends HTMLElement implements ReactiveControllerHost {
       )?.handler;
 
       if (handler) {
-        handler(this.elementRef, oldValue, newValue);
+        handler(
+          this.elementRef as unknown as AttributeElementRef,
+          oldValue,
+          newValue,
+        );
       }
     }
 

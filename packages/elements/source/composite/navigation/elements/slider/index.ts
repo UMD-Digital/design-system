@@ -1,7 +1,10 @@
 import * as token from '@universityofmaryland/web-token-library';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { findParent } from '@universityofmaryland/web-utilities-library/dom';
-import { createCompositeNavigationSlides as Slides, TypeSlideProps } from './slides';
+import {
+  createCompositeNavigationSlides as Slides,
+  TypeSlideProps,
+} from './slides';
 import { createCompositeNavigationSliderFirst as SlideFirst } from './slide-first';
 import { createCompositeNavigationSliderAction as SlideAction } from './action';
 
@@ -113,6 +116,7 @@ const SliderStyles = `
     top: 0;
     left: 0;
     width: 100%;
+    height: 100%;
     background-color: ${token.color.white};
     display: none;
   }

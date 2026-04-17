@@ -8,9 +8,7 @@ const tagName = 'umd-element-scroll-top';
 
 const createComponent: CreateComponentFunction = (element) => {
   const props: ScrollTopProps = {
-    isFixed: element.hasAttribute(
-      Attributes.names.deprecated.layout.LAYOUT_FIXED,
-    ),
+    isFixed: Attributes.isLayout.fixed({ element }),
   };
 
   return layout.scrollTop(props);

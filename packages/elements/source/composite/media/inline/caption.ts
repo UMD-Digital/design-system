@@ -11,7 +11,7 @@ export type TypeMediaInlineRequirements = {
 };
 
 const CreateMediaWithCaption = (props: TypeMediaInlineRequirements) =>
-  (() => {
+  {
     const { caption, image, isThemeDark } = props;
     const hasCaption = caption && caption !== null;
 
@@ -90,7 +90,12 @@ const CreateMediaWithCaption = (props: TypeMediaInlineRequirements) =>
         }
       };
 
-      image?.addEventListener('load', () => {
+			if (!image) {
+        console.warn('CreateMediaWithCaption: No image provided');
+        return null;
+      }
+
+      image.addEventListener('load', () => {
         checkSizing();
 
         setTimeout(() => {
@@ -119,6 +124,6 @@ const CreateMediaWithCaption = (props: TypeMediaInlineRequirements) =>
         load,
       },
     };
-  })();
+  };
 
 export const createCompositeMediaInlineCaption = CreateMediaWithCaption;

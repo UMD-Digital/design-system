@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-token-library';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { setupSwipeDetection } from '@universityofmaryland/web-utilities-library/events';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { parsePixelValue } from '@universityofmaryland/web-utilities-library/styles';
@@ -8,6 +8,10 @@ import {
   arrow_left as iconArrowLeft,
   arrow_right as iconArrowRight,
 } from '@universityofmaryland/web-icons-library/arrows';
+
+type TypeThemeProps = {
+  isThemeDark?: boolean;
+};
 
 type TypeSliderEventButtonProps = {
   SetCountForward: () => void;
@@ -17,7 +21,7 @@ type TypeSliderEventButtonProps = {
   SetSlideDatesForward: () => void;
 };
 
-type TypeSliderEventIntroProps = {
+type TypeSliderEventIntroProps = TypeThemeProps & {
   headline?: HTMLElement | null;
   actions?: HTMLElement | null;
 };
@@ -27,400 +31,19 @@ type TypeSliderEventSlideContentProps = {
 };
 
 type TypeSliderEventSlideProps = TypeSliderEventSlideContentProps &
-  TypeSliderEventButtonProps;
+  TypeSliderEventButtonProps &
+  TypeThemeProps;
 
 type TypeSliderEventScrollerProps = TypeSliderEventSlideProps &
   TypeSliderEventIntroProps;
 
 type TypeSliderEventProps = TypeSliderEventSlideContentProps &
-  TypeSliderEventIntroProps & {
-    isThemeDark?: boolean;
-  };
+  TypeSliderEventIntroProps;
 
 const TABLET = 750;
 const DESKTOP = 1000;
 const LARGE = 1300;
-
 const ANIMATION_DURATION = 500;
-
-const ATTRIBUTE_THEME = 'theme';
-const THEME_DARK = 'dark';
-
-const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
-
-const ELEMENT_NAME = 'umd-element-slider-events';
-const ELEMENT_SLIDER_EVENT_DECLRATION = 'slider-events-declaration';
-const ELEMENT_SLIDER_EVENT_CONTAINER = 'slider-events-container';
-const ELEMENT_SLIDER_EVENT_CONTAINER_WRAPPER = 'slider-event-container-wrapper';
-const ELEMENT_SLIDER_EVENT_COVER = 'slider-event-cover';
-
-const ELEMENT_SLIDER_EVENT_INTRO = 'slider-event-intro-container';
-const ELEMENT_SLIDER_EVENT_INTRO_HEADLINE = 'slider-event-intro-headline';
-const ELEMENT_SLIDER_EVENT_INTRO_ACTIONS = 'slider-event-intro-actions';
-
-const ELEMENT_SLIDER_EVENT_SLIDE_CONTAINTER = 'slider-event-slide-container';
-const ELEMENT_SLIDER_EVENT_SLIDE_WRAPPER = 'slider-event-slide-wrapper';
-const ELEMENT_SLIDER_EVENT_SLIDE_SCROLLER = 'slider-event-slide-scroller';
-
-const ELEMENT_SLIDER_EVENT_SLIDE_BUTTON = 'slider-event-slide-button';
-const ELEMENT_SLIDER_EVENT_SLIDE_BUTTON_FORWARD = 'slider-event-button-forward';
-const ELEMENT_SLIDER_EVENT_SLIDE_BUTTON_BACK = 'slider-event-button-back';
-
-const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_SLIDER_EVENT_CONTAINER}${IS_THEME_DARK}`;
-const OVERWRITE_THEME_DARK_CONTAINER_WRAPPER = `.${ELEMENT_SLIDER_EVENT_CONTAINER}${IS_THEME_DARK} .${ELEMENT_SLIDER_EVENT_CONTAINER_WRAPPER}`;
-const OVERWRITE_THEME_DARK_INTRO_COVER = `.${ELEMENT_SLIDER_EVENT_CONTAINER}${IS_THEME_DARK} .${ELEMENT_SLIDER_EVENT_COVER}`;
-const OVERWRITE_THEME_DARK_INTRO_HEADLINE = `.${ELEMENT_SLIDER_EVENT_CONTAINER}${IS_THEME_DARK} .${ELEMENT_SLIDER_EVENT_INTRO_HEADLINE}`;
-const OVERWRITE_THEME_DARK_ARROW = `.${ELEMENT_SLIDER_EVENT_CONTAINER}${IS_THEME_DARK} .${ELEMENT_SLIDER_EVENT_SLIDE_BUTTON}`;
-
-// prettier-ignore
-const VariationThemeDark = `
-  ${OVERWRITE_THEME_DARK_CONTAINER_WRAPPER} {
-    background-color: ${token.color.gray.darker};
-  }
-
-  ${OVERWRITE_THEME_DARK_CONTAINER} * {
-    color: #fff !important;
-  }
-
-  ${OVERWRITE_THEME_DARK_INTRO_COVER} {
-    background-color: ${token.color.gray.darker};
-  }
-
-  ${OVERWRITE_THEME_DARK_INTRO_HEADLINE} {
-    color: ${token.color.white};
-  }
-
-  ${OVERWRITE_THEME_DARK_ARROW} {
-    background-color: ${token.color.gray.dark};
-  }
-
-  ${OVERWRITE_THEME_DARK_ARROW} svg {
-    fill: ${token.color.white}
-  }
-
-  ${OVERWRITE_THEME_DARK_ARROW}:hover {
-    background-color: ${token.color.white}
-  }
-
-  ${OVERWRITE_THEME_DARK_ARROW}:hover svg {
-    fill: ${token.color.black}
-  }
-`
-
-const ButtonStyles = `
-  .${ELEMENT_SLIDER_EVENT_SLIDE_BUTTON} {
-    border: none;
-    width: 32px;
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: ${token.color.gray.light};
-    transition: background-color ${ANIMATION_DURATION}ms;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 99;
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    .${ELEMENT_SLIDER_EVENT_SLIDE_BUTTON} {
-      width: 48px;
-      height: 48px;
-    }
-  }
-
-  .${ELEMENT_SLIDER_EVENT_SLIDE_BUTTON}:hover {
-    background-color: ${token.color.black};
-  }
-
-  .${ELEMENT_SLIDER_EVENT_SLIDE_BUTTON}:hover svg {
-    fill: ${token.color.white};
-  }
-
-  .${ELEMENT_SLIDER_EVENT_SLIDE_BUTTON} svg {
-    transition: fill .5s;
-    fill: ${token.color.black};
-    width: 16px;
-    height: 6px;
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    .${ELEMENT_SLIDER_EVENT_SLIDE_BUTTON} svg {
-      width: 24px;
-      height: 8px;
-    }
-  }
-
-  .${ELEMENT_SLIDER_EVENT_SLIDE_BUTTON_BACK} {
-    left: 0;
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${TABLET - 1}px) {
-    .${ELEMENT_SLIDER_EVENT_SLIDE_BUTTON_BACK} {
-      left: -24px;
-      top: ${token.spacing.xs};
-    }
-  }
-
-  .${ELEMENT_SLIDER_EVENT_SLIDE_BUTTON_FORWARD} {
-    right: 0;
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${TABLET - 1}px) {
-    .${ELEMENT_SLIDER_EVENT_SLIDE_BUTTON_FORWARD} {
-      right: -24px;
-      top: ${token.spacing.xs};
-    }
-  }
-`;
-
-const DatesStyles = `
-  .${ELEMENT_SLIDER_EVENT_SLIDE_CONTAINTER} {
-    display: flex;
-    position: relative;
-    padding: 0 36px;
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    .${ELEMENT_SLIDER_EVENT_SLIDE_CONTAINTER} {
-      padding: 0 60px;
-      width: calc(100% - 96px);
-    }
-  }
-  
-  .${ELEMENT_SLIDER_EVENT_SLIDE_WRAPPER} {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    min-height: 44px;
-  }
-
-  .${ELEMENT_SLIDER_EVENT_SLIDE_WRAPPER} ::slotted(*) {
-    margin-bottom: 0 !important;
-  }
-`;
-
-const IntroStyles = `
-  .${ELEMENT_SLIDER_EVENT_INTRO} {
-    padding: 0 ${token.spacing.lg};
-    position: relative;
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${TABLET - 1}px) {
-    .${ELEMENT_SLIDER_EVENT_INTRO} {
-      text-align: center;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    .${ELEMENT_SLIDER_EVENT_INTRO} {
-      padding: 0;
-      padding-right: 24px;
-      padding-left: 0;
-      width: 200px;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${ELEMENT_SLIDER_EVENT_INTRO} {
-      width: 320px;
-    }
-  }
-
-  .${ELEMENT_SLIDER_EVENT_INTRO_HEADLINE} {
-    color: ${token.color.black};
-    font-weight: 700;
-  }
-
-  .${ELEMENT_SLIDER_EVENT_INTRO_HEADLINE} + * {
-    margin-top: ${token.spacing.min};
-    display: block;
-  }
-
-  ${jssToCSS({
-    styleObj: {
-      [`.${ELEMENT_SLIDER_EVENT_INTRO_HEADLINE}`]: typography.sans.larger,
-    },
-  })}
-
-  * + .${ELEMENT_SLIDER_EVENT_INTRO_ACTIONS} {
-    text-decoration: none;
-  }
-  
-  .${ELEMENT_SLIDER_EVENT_INTRO_ACTIONS} {
-    margin-top: ${token.spacing.min};
-  }
-  
-
-`;
-
-const ScrollerStyles = `
-  .${ELEMENT_SLIDER_EVENT_SLIDE_SCROLLER} {
-    position: relative;
-    z-index: 99;
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-  .${ELEMENT_SLIDER_EVENT_SLIDE_SCROLLER} {
-      display: flex;
-      align-items: center;
-    }
-  }
-`;
-
-const CoverStyles = `
-  .${ELEMENT_SLIDER_EVENT_COVER} {
-    display: block;
-    position: absolute;
-    width: 200vw;
-    height: 100%;
-    top: 0;
-    left: -100vw;
-    background-color: ${token.color.gray.lighter};
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    .${ELEMENT_SLIDER_EVENT_COVER} {
-      width: 40vw;
-      left: calc(100% - 1px);
-    }
-  }
-`;
-
-// prettier-ignore
-const STYLES_SLIDER_EVENTS_ELEMENT = `
-  .${ELEMENT_SLIDER_EVENT_DECLRATION} {
-    container: ${ELEMENT_NAME} / inline-size;
-  }
-  
-  .${ELEMENT_SLIDER_EVENT_CONTAINER_WRAPPER} {
-    padding: 24px 0;
-    background-color: ${token.color.gray.lighter};
-    position: relative;
-    z-index: 99;
-  }
-  
-  @container ${ELEMENT_NAME} (max-width: 260px) {
-    .${ELEMENT_SLIDER_EVENT_CONTAINER_WRAPPER} {
-      display: none
-    }
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${TABLET}px) {
-    .${ELEMENT_SLIDER_EVENT_CONTAINER_WRAPPER} {
-      padding: 40px;
-    }
-  }
-  
-  ${CoverStyles}
-  ${ScrollerStyles}
-  ${IntroStyles}
-  ${DatesStyles}
-  ${ButtonStyles}
-  ${VariationThemeDark}
-`;
-
-const CreateBackButton = ({
-  SetCountBackward,
-  SetButtonVisibility,
-  SetSlideDatesBackwards,
-}: TypeSliderEventButtonProps) => {
-  const button = document.createElement('button');
-
-  button.innerHTML = iconArrowLeft;
-  button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON);
-  button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON_BACK);
-  button.style.display = 'none';
-  button.setAttribute('type', 'button');
-  button.setAttribute('aria-label', 'see previous date');
-
-  const clickEvent = () => {
-    if (button.hasAttribute('disabled')) return;
-    SetCountBackward();
-    SetButtonVisibility();
-    SetSlideDatesBackwards();
-  };
-
-  button.addEventListener('click', clickEvent);
-  button.addEventListener('touchstart', clickEvent);
-
-  return button;
-};
-
-const CreateForwardButton = ({
-  SetCountForward,
-  SetButtonVisibility,
-  SetSlideDatesForward,
-}: TypeSliderEventButtonProps) => {
-  const button = document.createElement('button');
-
-  button.innerHTML = iconArrowRight;
-  button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON);
-  button.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_BUTTON_FORWARD);
-  button.setAttribute('type', 'button');
-  button.setAttribute('aria-label', 'see next date');
-
-  const clickEvent = () => {
-    if (button.hasAttribute('disabled')) return;
-    SetCountForward();
-    SetButtonVisibility();
-    SetSlideDatesForward();
-  };
-
-  button.addEventListener('click', clickEvent);
-  button.addEventListener('touchstart', clickEvent);
-
-  return button;
-};
-
-const CreateDatesContainer = (props: TypeSliderEventSlideProps) => {
-  const { dataSlider } = props;
-  const container = document.createElement('div');
-  const datesWrapper = document.createElement('div');
-  const backButton = CreateBackButton(props);
-  const forwardButton = CreateForwardButton(props);
-
-  datesWrapper.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_WRAPPER);
-  dataSlider.style.display = 'block';
-  datesWrapper.appendChild(dataSlider);
-
-  container.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_CONTAINTER);
-  container.appendChild(backButton);
-  container.appendChild(datesWrapper);
-  container.appendChild(forwardButton);
-
-  return container;
-};
-
-const CreateIntroWrapper = (props: TypeSliderEventIntroProps) => {
-  const { headline, actions } = props;
-  const introductionWrapper = document.createElement('div');
-  if (headline) {
-    headline.classList.add(ELEMENT_SLIDER_EVENT_INTRO_HEADLINE);
-    introductionWrapper.appendChild(headline);
-  }
-  if (actions) {
-    introductionWrapper.appendChild(actions);
-  }
-
-  introductionWrapper.classList.add(ELEMENT_SLIDER_EVENT_INTRO);
-
-  return introductionWrapper;
-};
-
-const CreateScrollerWrapper = (props: TypeSliderEventScrollerProps) => {
-  const container = document.createElement('div');
-  const introductionWrapper = CreateIntroWrapper(props);
-  const datesContainer = CreateDatesContainer(props);
-
-  container.classList.add(ELEMENT_SLIDER_EVENT_SLIDE_SCROLLER);
-
-  container.appendChild(introductionWrapper);
-  container.appendChild(datesContainer);
-
-  return container;
-};
 
 const ShowNumberOfDates = ({ container }: { container: HTMLElement }) => {
   let count = 1;
@@ -442,15 +65,11 @@ const JumpToDate = ({
   const dateElements = Array.from(
     dataSlider.querySelectorAll(':scope > *'),
   ) as HTMLDivElement[];
-
-  if (!dateElements) return;
-
   const firstElement = dateElements[0];
-  const currentPositonAboveZero = currentPosition > 0;
   const currentElement = dateElements[currentPosition];
   let endPosition = 0;
 
-  if (currentPositonAboveZero) {
+  if (currentPosition > 0) {
     endPosition = currentElement.offsetLeft - firstElement.offsetLeft;
   }
 
@@ -469,13 +88,13 @@ const ButtonVisibilityLogic = ({
   const dateElements = Array.from(
     dataSlider.querySelectorAll(':scope > *'),
   ) as HTMLDivElement[];
-  const buttons = Array.from(
-    container.querySelectorAll(`.${ELEMENT_SLIDER_EVENT_SLIDE_BUTTON}`),
+  const [backButton, forwardButton] = Array.from(
+    container.querySelectorAll('.slider-event-slide-button'),
   ) as HTMLButtonElement[];
   const count = ShowNumberOfDates({ container });
   const length = dateElements.length;
 
-  buttons.forEach((button) => {
+  [backButton, forwardButton].forEach((button) => {
     button.setAttribute('disabled', '');
 
     setTimeout(() => {
@@ -484,40 +103,43 @@ const ButtonVisibilityLogic = ({
   });
 
   if (currentPosition === 0) {
-    buttons[0].style.display = 'none';
+    backButton.style.display = 'none';
   } else {
-    buttons[0].style.display = 'flex';
+    backButton.style.display = 'flex';
   }
 
   if (currentPosition >= length - count) {
-    buttons[1].style.display = 'none';
+    forwardButton.style.display = 'none';
   } else {
-    buttons[1].style.display = 'flex';
+    forwardButton.style.display = 'flex';
   }
 };
 
 const SizeDatesElements = ({
   container,
   dataSlider,
-  isThemeDark,
   SetButtonVisibility,
 }: {
   container: HTMLElement;
   dataSlider: HTMLElement;
-  isThemeDark?: boolean;
   SetButtonVisibility: () => void;
 }) => {
-  const sliderWrapper = container.querySelector(
-    `.${ELEMENT_SLIDER_EVENT_SLIDE_WRAPPER}`,
-  ) as HTMLDivElement;
 
-  const sizing = ({ sliderWrapper }: { sliderWrapper: HTMLDivElement }) => {
+  const sizing = () => {
     const dateElements = Array.from(
       dataSlider.querySelectorAll(':scope > *'),
     ) as HTMLDivElement[];
 
+		const sliderWrapper = container.querySelector(
+			'.slider-event-slide-wrapper',
+		) as HTMLDivElement;
+
     const sliderVisibility = ({ show = true }: { show?: boolean }) => {
-      dataSlider.style.visibility = show ? 'visible' : 'hidden';
+      if (show) {
+        dataSlider.style.visibility = 'visible';
+      } else {
+        dataSlider.style.visibility = 'hidden';
+      }
     };
 
     const setHeight = () => {
@@ -526,7 +148,7 @@ const SizeDatesElements = ({
       })[0];
       const height =
         maxHeightElement.offsetHeight +
-        parsePixelValue(maxHeightElement.style.marginTop);
+        parsePixelValue(getComputedStyle(maxHeightElement).marginTop);
 
       sliderWrapper.style.height = `${height}px`;
     };
@@ -534,12 +156,11 @@ const SizeDatesElements = ({
     const setWidthPerDate = () => {
       const count = ShowNumberOfDates({ container });
       const dateElementSize = sliderWrapper.offsetWidth / count;
-      const elementWidth = container.offsetWidth;
-      const isMobile = elementWidth < TABLET;
+      const containerWidth = container.offsetWidth;
 
-      if (elementWidth === 0) {
+      if (containerWidth === 0) {
         setTimeout(() => {
-          sizing({ sliderWrapper });
+          sizing();
         }, 200);
         return;
       }
@@ -548,27 +169,6 @@ const SizeDatesElements = ({
 
       dateElements.forEach((dateElement) => {
         dateElement.style.width = `${dateElementSize}px`;
-
-        if (isMobile) {
-          const lineColor = isThemeDark
-            ? token.color.gray.mediumAA
-            : token.color.gray.light;
-
-          dateElement.style.display = `flex`;
-          dateElement.style.justifyContent = `center`;
-          dateElement.style.paddingRight = `0`;
-          dateElement.style.marginTop = `${token.spacing.xs}`;
-          dateElement.style.paddingTop = `${token.spacing.xs}`;
-          dateElement.style.borderTop = `1px solid ${lineColor}`;
-        } else {
-          dateElement.style.display = `flex`;
-          dateElement.style.justifyContent = `inherit`;
-          dateElement.style.paddingRight = `${token.spacing.lg}`;
-
-          dateElement.style.marginTop = `0`;
-          dateElement.style.paddingTop = `0`;
-          dateElement.style.borderTop = `none`;
-        }
       });
     };
 
@@ -579,7 +179,7 @@ const SizeDatesElements = ({
     SetButtonVisibility();
   };
 
-  sizing({ sliderWrapper });
+  sizing();
 };
 
 const EventSlideDates = ({
@@ -664,44 +264,315 @@ const EventSwipe = ({
   setupSwipeDetection({ container, callback: swipes });
 };
 
-const OnLoadStyles = ({ dataSlider }: { dataSlider: HTMLElement }) => {
-  dataSlider.style.display = 'flex';
-  dataSlider.style.position = 'absolute';
-  dataSlider.style.top = '0';
-  dataSlider.style.left = '0';
+const CreateBackButton = (props: TypeSliderEventSlideProps) => {
+  const { SetCountBackward, SetButtonVisibility, SetSlideDatesBackwards, isThemeDark } = props;
+
+  const clickEvent = (event: Event) => {
+    const button = event.currentTarget as HTMLButtonElement;
+    if (button.hasAttribute('disabled')) return;
+    SetCountBackward();
+    SetButtonVisibility();
+    SetSlideDatesBackwards();
+  };
+
+  return new ElementBuilder('button')
+    .withClassName('slider-event-button-back')
+    .withClassName('slider-event-slide-button')
+    .withHTML(iconArrowLeft)
+    .withAttribute('type', 'button')
+    .withAria({ label: 'see previous date' })
+    .withStyles({
+      element: {
+        border: 'none',
+        width: token.spacing.lg,
+        height: token.spacing.lg,
+        display: 'none',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: token.color.gray.light,
+        transition: `background-color ${ANIMATION_DURATION}ms`,
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        zIndex: 99,
+        left: 0,
+        ...(isThemeDark && { backgroundColor: token.color.gray.dark }),
+        [`@container (min-width: ${TABLET}px)`]: {
+          width: token.spacing['2xl'],
+          height: token.spacing['2xl'],
+        },
+        [`@container (max-width: ${TABLET - 1}px)`]: {
+          left: `-${token.spacing.md}`,
+          top: token.spacing.xs,
+        },
+        '&:hover': {
+          backgroundColor: token.color.black,
+          ...(isThemeDark && { backgroundColor: token.color.white }),
+        },
+        '& svg': {
+          transition: 'fill .5s',
+          fill: token.color.black,
+          width: token.spacing.sm,
+          height: '6px',
+          ...(isThemeDark && { fill: token.color.white }),
+          [`@container (min-width: ${TABLET}px)`]: {
+            width: token.spacing.md,
+            height: '8px',
+          },
+        },
+        '&:hover svg': {
+          fill: token.color.white,
+          ...(isThemeDark && { fill: token.color.black }),
+        },
+      },
+    })
+    .on('click', clickEvent)
+    .on('touchstart', clickEvent)
+    .build();
+};
+
+const CreateForwardButton = (props: TypeSliderEventSlideProps) => {
+  const { SetCountForward, SetButtonVisibility, SetSlideDatesForward, isThemeDark } = props;
+
+  const clickEvent = (event: Event) => {
+    const button = event.currentTarget as HTMLButtonElement;
+    if (button.hasAttribute('disabled')) return;
+    SetCountForward();
+    SetButtonVisibility();
+    SetSlideDatesForward();
+  };
+
+  return new ElementBuilder('button')
+    .withClassName('slider-event-button-forward')
+    .withClassName('slider-event-slide-button')
+    .withHTML(iconArrowRight)
+    .withAttribute('type', 'button')
+    .withAria({ label: 'see next date' })
+    .withStyles({
+      element: {
+        border: 'none',
+        width: token.spacing.lg,
+        height: token.spacing.lg,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: token.color.gray.light,
+        transition: `background-color ${ANIMATION_DURATION}ms`,
+        position: 'absolute',
+        top: '50%',
+        transform: 'translateY(-50%)',
+        zIndex: 99,
+        right: 0,
+        ...(isThemeDark && { backgroundColor: token.color.gray.dark }),
+        [`@container (min-width: ${TABLET}px)`]: {
+          width: token.spacing['2xl'],
+          height: token.spacing['2xl'],
+        },
+        [`@container (max-width: ${TABLET - 1}px)`]: {
+          right: `-${token.spacing.md}`,
+          top: token.spacing.xs,
+        },
+        '&:hover': {
+          backgroundColor: token.color.black,
+          ...(isThemeDark && { backgroundColor: token.color.white }),
+        },
+        '& svg': {
+          transition: 'fill .5s',
+          fill: token.color.black,
+          width: token.spacing.sm,
+          height: '6px',
+          ...(isThemeDark && { fill: token.color.white }),
+          [`@container (min-width: ${TABLET}px)`]: {
+            width: token.spacing.md,
+            height: '8px',
+          },
+        },
+        '&:hover svg': {
+          fill: token.color.white,
+          ...(isThemeDark && { fill: token.color.black }),
+        },
+      },
+    })
+    .on('click', clickEvent)
+    .on('touchstart', clickEvent)
+    .build();
+};
+
+const CreateDatesContainer = (props: TypeSliderEventSlideProps) => {
+  const { dataSlider, isThemeDark } = props;
+
+  const backButton = CreateBackButton(props);
+  const forwardButton = CreateForwardButton(props);
+
+  const dataSliderModel = new ElementBuilder(dataSlider)
+    .withClassName('slider-event-data-slider')
+    .withStyles({
+      element: {
+        display: 'flex',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        '& > *': {
+          display: 'flex',
+          justifyContent: 'inherit',
+          paddingRight: token.spacing.lg,
+          [`@container (max-width: ${TABLET - 1}px)`]: {
+            justifyContent: 'center',
+            paddingRight: 0,
+            marginTop: token.spacing.xs,
+            paddingTop: token.spacing.xs,
+            borderTop: `1px solid ${token.color.gray.light}`,
+            ...(isThemeDark && {
+              borderTop: `1px solid ${token.color.gray.mediumAA}`,
+            }),
+          },
+        },
+      },
+    })
+    .build();
+
+  const datesWrapper = new ElementBuilder()
+    .withClassName('slider-event-slide-wrapper')
+    .withStyles({
+      element: {
+        position: 'relative',
+        width: '100%',
+        overflow: 'hidden',
+        minHeight: '44px',
+        '& ::slotted(*)': {
+          marginBottom: '0 !important',
+        },
+      },
+    })
+    .withChild(dataSliderModel)
+    .build();
+
+  return new ElementBuilder()
+    .withClassName('slider-event-slide-container')
+    .withStyles({
+      element: {
+        display: 'flex',
+        position: 'relative',
+        padding: '0 36px',
+        [`@container (min-width: ${TABLET}px)`]: {
+          padding: '0 60px',
+          width: 'calc(100% - 96px)',
+        },
+      },
+    })
+    .withChildren(backButton, datesWrapper, forwardButton)
+    .build();
+};
+
+const CreateIntroWrapper = (props: TypeSliderEventIntroProps) => {
+  const { headline, actions, isThemeDark } = props;
+
+  const createHeadline = () => {
+    if (!headline) {
+      console.warn('CreateIntroWrapper: headline element is required');
+      return null;
+    }
+
+    return new ElementBuilder(headline)
+      .withClassName('slider-event-intro-headline')
+      .withStyles({
+        element: {
+          ...typography.sans.larger,
+          color: token.color.black,
+          fontWeight: 700,
+          ...(isThemeDark && { color: token.color.white }),
+          '& + *': {
+            marginTop: token.spacing.min,
+            display: 'block',
+          },
+        },
+      })
+      .build();
+  };
+
+  const createActions = () => {
+    if (!actions) return null;
+
+    return new ElementBuilder(actions)
+      .withClassName('slider-event-intro-actions')
+      .withStyles({
+        element: {
+          marginTop: token.spacing.min,
+        },
+      })
+      .build();
+  };
+
+  return new ElementBuilder()
+    .withClassName('slider-event-intro-container')
+    .withStyles({
+      element: {
+        padding: `0 ${token.spacing.lg}`,
+        position: 'relative',
+        [`@container (max-width: ${TABLET - 1}px)`]: {
+          textAlign: 'center',
+        },
+        [`@container (min-width: ${TABLET}px)`]: {
+          padding: 0,
+          paddingRight: '24px',
+          width: '200px',
+        },
+        [`@container (min-width: ${LARGE}px)`]: {
+          width: '320px',
+        },
+      },
+    })
+    .withChild(createHeadline())
+    .withChild(createActions())
+    .build();
+};
+
+const CreateScrollerWrapper = (props: TypeSliderEventScrollerProps) => {
+  const introductionWrapper = CreateIntroWrapper(props);
+  const datesContainer = CreateDatesContainer(props);
+
+  return new ElementBuilder()
+    .withClassName('slider-event-slide-scroller')
+    .withStyles({
+      element: {
+        position: 'relative',
+        zIndex: 99,
+        [`@container (min-width: ${TABLET}px)`]: {
+          display: 'flex',
+          alignItems: 'center',
+        },
+      },
+    })
+    .withChildren(introductionWrapper, datesContainer)
+    .build();
 };
 
 export const createCompositeSliderEvents = (props: TypeSliderEventProps) =>
   (() => {
     const { isThemeDark, dataSlider } = props;
-    const declaration = document.createElement('div');
-    const container = document.createElement('div');
-    const wrapper = document.createElement('div');
-    const coverElement = document.createElement('div');
-    const CommonDomElements = {
-      container,
-      dataSlider,
-    };
+    let currentPosition = 0;
+    let container!: HTMLElement;
 
     const SetCountForward = () => (currentPosition = currentPosition + 1);
     const SetCountBackward = () => (currentPosition = currentPosition - 1);
     const SetButtonVisibility = () =>
-      ButtonVisibilityLogic({ ...CommonDomElements, currentPosition });
+      ButtonVisibilityLogic({ container, dataSlider, currentPosition });
     const size = () =>
       SizeDatesElements({
-        ...CommonDomElements,
-        isThemeDark,
+        container,
+        dataSlider,
         SetButtonVisibility,
       });
     const SetJumpToDate = () =>
-      JumpToDate({ ...CommonDomElements, currentPosition });
+      JumpToDate({ dataSlider, currentPosition });
     const SetSlideDatesForward = () =>
-      EventSlideDates({ ...CommonDomElements, forward: true });
+      EventSlideDates({ dataSlider, forward: true });
     const SetSlideDatesBackwards = () =>
-      EventSlideDates({ ...CommonDomElements, forward: false });
+      EventSlideDates({ dataSlider, forward: false });
     const SetEventSwipe = () =>
       EventSwipe({
-        ...CommonDomElements,
+        container,
+        dataSlider,
         currentPosition,
         SetCountBackward,
         SetCountForward,
@@ -714,7 +585,12 @@ export const createCompositeSliderEvents = (props: TypeSliderEventProps) =>
       SetJumpToDate();
       SetButtonVisibility();
     };
-    const containerWrapper = CreateScrollerWrapper({
+    const load = () => {
+      EventResize();
+      SetEventSwipe();
+    };
+
+    const scrollerModel = CreateScrollerWrapper({
       ...props,
       SetCountForward,
       SetCountBackward,
@@ -722,39 +598,73 @@ export const createCompositeSliderEvents = (props: TypeSliderEventProps) =>
       SetSlideDatesBackwards,
       SetSlideDatesForward,
     });
-    const load = () => {
-      OnLoadStyles({ dataSlider });
-      EventResize();
-      SetEventSwipe();
-    };
 
-    let currentPosition = 0;
-    let styles = STYLES_SLIDER_EVENTS_ELEMENT;
+    const coverModel = new ElementBuilder()
+      .withClassName('slider-event-cover')
+      .withStyles({
+        element: {
+          display: 'block',
+          position: 'absolute',
+          width: '200vw',
+          height: '100%',
+          top: 0,
+          left: '-100vw',
+          backgroundColor: token.color.gray.lighter,
+          ...(isThemeDark && { backgroundColor: token.color.gray.darker }),
+          [`@container (min-width: ${TABLET}px)`]: {
+            width: '40vw',
+            left: 'calc(100% - 1px)',
+          },
+        },
+      })
+      .build();
+
+    const wrapperModel = new ElementBuilder()
+      .withClassName('slider-event-container-wrapper')
+      .withStyles({
+        element: {
+          padding: '24px 0',
+          backgroundColor: token.color.gray.lighter,
+          position: 'relative',
+          zIndex: 99,
+          ...(isThemeDark && { backgroundColor: token.color.gray.darker }),
+          '@container (max-width: 260px)': {
+            display: 'none',
+          },
+          [`@container (min-width: ${TABLET}px)`]: {
+            padding: '40px',
+          },
+        },
+      })
+      .withChildren(scrollerModel, coverModel)
+      .build();
+
+    const containerModel = new ElementBuilder()
+      .withClassName('slider-events-container')
+      .withStylesIf(!!isThemeDark, {
+        element: {
+          '& *': { color: '#fff !important' },
+        },
+      })
+      .ref((element) => {
+        container = element;
+      })
+      .withChild(wrapperModel)
+      .build();
+
+    const declarationModel = new ElementBuilder()
+      .withClassName('slider-events-declaration')
+      .withStyles({
+        element: {
+          containerType: 'inline-size',
+        },
+      })
+      .withChild(containerModel)
+      .withEvents({ load, size })
+      .build();
 
     dataSlider.style.visibility = 'hidden';
-
-    coverElement.classList.add(ELEMENT_SLIDER_EVENT_COVER);
-
-    wrapper.classList.add(ELEMENT_SLIDER_EVENT_CONTAINER_WRAPPER);
-
-    wrapper.appendChild(containerWrapper);
-    wrapper.appendChild(coverElement);
-
-    if (isThemeDark) container.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
-    container.classList.add(ELEMENT_SLIDER_EVENT_CONTAINER);
-    container.appendChild(wrapper);
-
-    declaration.classList.add(ELEMENT_SLIDER_EVENT_DECLRATION);
-    declaration.appendChild(container);
-
     window.addEventListener('resize', debounce(EventResize, 20));
 
-    return {
-      element: declaration,
-      styles,
-      events: {
-        load,
-        size,
-      },
-    };
+    return declarationModel;
   })();

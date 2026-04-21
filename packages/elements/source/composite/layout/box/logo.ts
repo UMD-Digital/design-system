@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-token-library';
-import * as typography from '@universityofmaryland/web-styles-library/typography';
-import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 
 export type TypeLogoRequirements = {
   isBordered?: boolean;
@@ -9,127 +9,77 @@ export type TypeLogoRequirements = {
   text?: HTMLElement | null;
 };
 
-const ATTRIBUTE_THEME = 'theme';
-const ATTRIBUTE_BORDER = 'border';
-const THEME_DARK = 'dark';
-
-const ELEMENT_NAME = 'umd-logo-block';
-const ELEMENT_LOGO_BLOCK_CONTAINER = 'logo-block-container';
-const ELEMENT_LOGO_BLOCK_ASSET = 'logo-block-asset';
-const ELEMENT_LOGO_BLOCK_TEXT = 'logo-block-text';
-
-const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
-const IS_BORDER = `[${ATTRIBUTE_BORDER}]`;
-
-const OVERWRITE_THEME_DARK_ASSET = `.${ELEMENT_LOGO_BLOCK_CONTAINER}${IS_THEME_DARK} .${ELEMENT_LOGO_BLOCK_ASSET}`;
-const OVERWRITE_THEME_DARK_TEXT = `.${ELEMENT_LOGO_BLOCK_CONTAINER}${IS_THEME_DARK} .${ELEMENT_LOGO_BLOCK_TEXT}`;
-
-const OVERWRITE_BORDER_ASSET = `.${ELEMENT_LOGO_BLOCK_CONTAINER}${IS_BORDER} .${ELEMENT_LOGO_BLOCK_ASSET}`;
-const OVERWRITE_THEME_DARK_BORDER_ASSET = `.${ELEMENT_LOGO_BLOCK_CONTAINER}${IS_THEME_DARK}${IS_BORDER} .${ELEMENT_LOGO_BLOCK_ASSET}`;
-
-// prettier-ignore
-const VariantThemeStyles = `
-  ${OVERWRITE_THEME_DARK_ASSET} {
-    background-color: ${token.color.gray.darker};
-    padding: ${token.spacing.xl};
-  }
-
-  ${OVERWRITE_THEME_DARK_BORDER_ASSET} {
-    border: 1px solid ${token.color.gray.dark};
-  }
-
-  ${OVERWRITE_THEME_DARK_TEXT},
-  ${OVERWRITE_THEME_DARK_TEXT} * {
-    color: ${token.color.white};
-  };
-`;
-
-// prettier-ignore
-const VariantBorderStyles = `
-  ${OVERWRITE_BORDER_ASSET} {
-    border: 1px solid ${token.color.gray.light};
-    padding: ${token.spacing.xl};
-    height: 100%;
-  }
-`;
-
-// prettier-ignore
-const TextStyles = `
-  .${ELEMENT_LOGO_BLOCK_TEXT},
-  .${ELEMENT_LOGO_BLOCK_TEXT} * {
-    color: ${token.color.gray.darker};
-  }
-
-  ${jssToCSS({
-    styleObj: {
-      [`.${ELEMENT_LOGO_BLOCK_TEXT}`]: typography.sans.min,
-    },
-  })}
-
-  ${jssToCSS({
-    styleObj: {
-      [`.${ELEMENT_LOGO_BLOCK_TEXT} *`]: typography.sans.min,
-    },
-  })}
-
-  .${ELEMENT_LOGO_BLOCK_TEXT} a:hover,
-  .${ELEMENT_LOGO_BLOCK_TEXT} a:focus {
-    text-decoration: underline;
-   }
-`;
-
-// prettier-ignore
-const STYLES_LOGO_BLOCK_ELEMENT = `
-  .${ELEMENT_LOGO_BLOCK_CONTAINER} {
-    container: ${ELEMENT_NAME} / inline-size;
-    height: 100%;
-  }
-
-  .${ELEMENT_LOGO_BLOCK_ASSET} {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .${ELEMENT_LOGO_BLOCK_ASSET} > * {
-    max-height: 50px;
-    max-width: 150px;
-    display: flex;
-  }
-
-  .${ELEMENT_LOGO_BLOCK_ASSET} img {
-    object-fit: contain;
-  }
-
-  .${ELEMENT_LOGO_BLOCK_ASSET} + * {
-    margin-top: ${token.spacing.min};
-  }
-
-  ${TextStyles}
-  ${VariantBorderStyles}
-  ${VariantThemeStyles}
-`;
-
 const CreateBoxLogoElement = (element: TypeLogoRequirements) => {
   const { isThemeDark, image, text, isBordered = false } = element;
 
-  const elementContainer = document.createElement('div');
-  const assetContainer = document.createElement('div');
+  const createText = () => {
+    if (!text) {
+      console.warn('CreateBoxLogoElement: text element is not provided');
+      return null;
+    }
 
-  assetContainer.appendChild(image);
-  assetContainer.classList.add(ELEMENT_LOGO_BLOCK_ASSET);
+    return new ElementBuilder(text)
+      .withClassName('logo-block-text')
+      .styled(Styles.typography.sans.min)
+      .withStyles({
+        element: {
+          color: token.color.gray.darker,
+          ...(isThemeDark && { color: token.color.white }),
+          '& *': {
+            ...Styles.typography.sans.min,
+            color: token.color.gray.darker,
+            ...(isThemeDark && { color: token.color.white }),
+          },
+          '& a:hover, & a:focus': {
+            textDecoration: 'underline',
+          },
+        },
+      })
+      .build();
+  };
 
-  elementContainer.classList.add(ELEMENT_LOGO_BLOCK_CONTAINER);
-  if (isThemeDark) elementContainer.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
-  if (isBordered) elementContainer.setAttribute(ATTRIBUTE_BORDER, '');
-  elementContainer.appendChild(assetContainer);
+  const assetBuilder = new ElementBuilder()
+    .withClassName('logo-block-asset')
+    .withChild(image)
+    .withStyles({
+      element: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        ...(isBordered && {
+          border: `1px solid ${token.color.gray.light}`,
+          ...(isThemeDark && { border: `1px solid ${token.color.gray.dark}` }),
+          height: '100%',
+        }),
+        ...(isThemeDark && {
+          backgroundColor: token.color.gray.darker,
+        }),
+        ...((isBordered || isThemeDark) && { padding: token.spacing.xl }),
+        '& > *': {
+          maxHeight: '50px',
+          maxWidth: '150px',
+          display: 'flex',
+        },
+        '& img': {
+          objectFit: 'contain',
+        },
+      },
+      siblingAfter: {
+        marginTop: token.spacing.min,
+      },
+    });
 
-  if (text) {
-    text.classList.add(ELEMENT_LOGO_BLOCK_TEXT);
-    elementContainer.appendChild(text);
-  }
-
-  return { element: elementContainer, styles: STYLES_LOGO_BLOCK_ELEMENT };
+  return new ElementBuilder()
+    .withClassName('logo-block-container')
+    .withStyles({
+      element: {
+        containerType: 'inline-size',
+        height: '100%',
+      },
+    })
+    .withChild(assetBuilder)
+    .withChild(createText())
+    .build();
 };
 
 export const createCompositeLayoutBoxLogo = CreateBoxLogoElement;

@@ -35,13 +35,12 @@ const extractImageElement = (
 const renderFirstFrame = (
   image: HTMLImageElement,
   canvas: HTMLCanvasElement,
-  container: HTMLElement,
 ) => {
   const ctx = canvas.getContext('2d');
   if (!ctx) return;
 
-  const containerWidth = container.clientWidth;
-  const containerHeight = container.clientHeight;
+  const containerWidth = image.clientWidth;
+  const containerHeight = image.clientHeight;
 
   canvas.width = containerWidth;
   canvas.height = containerHeight;
@@ -156,14 +155,12 @@ const applyGifToggle = (
     if (!canvasEl || !img) return;
 
     // Set canvas display dimensions to match container
-    canvasEl.style.width = '100%';
-    canvasEl.style.height = `${img.clientHeight}px`;
     canvasEl.style.position = 'absolute';
     canvasEl.style.top = '0';
     canvasEl.style.left = '0';
 
-    if (state.isLoaded && img.complete && img.naturalWidth > 0) {
-      renderFirstFrame(img, canvasEl, container);
+    if (state.isLoaded && img.complete && img.width > 0) {
+      renderFirstFrame(img, canvasEl);
     }
   };
 
@@ -195,11 +192,11 @@ const applyGifToggle = (
   // Handle initial image load for first frame capture
   const captureFirstFrame = () => {
     sizeCanvas();
-    renderFirstFrame(image, canvas, container);
+    renderFirstFrame(image, canvas);
   };
 
   // If image is already loaded (from cache), capture first frame immediately
-  if (image.complete && image.naturalWidth > 0) {
+  if (image.complete && image.width > 0) {
     captureFirstFrame();
   } else {
     image.addEventListener('load', captureFirstFrame, { once: true });

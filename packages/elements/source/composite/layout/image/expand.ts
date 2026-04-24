@@ -1,7 +1,10 @@
 import * as token from '@universityofmaryland/web-token-library';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
-import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
-import { parsePixelValue } from '@universityofmaryland/web-utilities-library/styles';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import {
+  parsePixelValue,
+  withViewTimelineAnimation,
+} from '@universityofmaryland/web-utilities-library/styles';
 import {
   isScreenZoomed,
   isPreferredReducedMotion,
@@ -12,303 +15,215 @@ type TypeLayoutImageExpandProps = {
   image: HTMLImageElement;
 };
 
-const { spacing } = token;
-
-const ELEMENT_NAME = 'umd-layout-image-expand';
-const ELEMENT_EXPLAND_DECLARATION = 'layout-image-expand-declaration';
-const ELEMENT_EXPAND_CONTAINER = 'layout-image-expand-container';
-
-const ELEMENT_EXPAND_IMAGE_CONTAINER = 'layout-image-expand-image-container';
-const ELEMENT_EXPAND_IMAGE_POSITION = 'layout-image-expand-image-position';
-const ELEMENT_EXPAND_IMAGE_SIZE = 'layout-image-expand-image-size';
-const ELEMENT_EXPAND_IMAGE_OVERLAY = 'layout-image-expand-image-overlay';
-
-const ELEMENT_EXPAND_TEXT_CONTAINER = 'layout-image-expand-text-container';
-const ELEMENT_EXPAND_TEXT_LOCK = 'layout-image-expand-text-lock';
-const ELEMENT_EXPAND_TEXT_ANIMATION = 'layout-image-expand-text-animation';
-
-// prettier-ignore
-const TextLock = `
-  ${jssToCSS({
-    styleObj: {
-      [`.${ELEMENT_EXPAND_TEXT_LOCK}`]: layout.space.horizontal.larger,
-    },
-  })}
-
-  .${ELEMENT_EXPAND_TEXT_LOCK} {
-    display: flex;
-    height: 100%;
-  }
-`;
-
-// prettier-ignore
-const TextContainer = `
-  .${ELEMENT_EXPAND_TEXT_CONTAINER} {
-    position: relative;
-    padding-top: ${token.spacing.max};
-    padding-bottom: ${token.spacing.max};
-    height: 100%;
-    z-index: 9999;
-  }
-`;
-
-// prettier-ignore
-const TextAnimation = `
-  .${ELEMENT_EXPAND_TEXT_ANIMATION} {
-    width: 100vw;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: scroll()) {
-      .${ELEMENT_EXPAND_TEXT_ANIMATION} {
-        position: absolute;
-        top: 0;
-        height: 80vh;
-        transform: translateY(80vh);
-      }
-    }
-  }
-
-  @media (${token.media.queries.tablet.min}) {
-    @media (prefers-reduced-motion: no-preference) {
-      @supports (animation-timeline: scroll()) {
-        .${ELEMENT_EXPAND_TEXT_ANIMATION} {
-          transform: translateY(100vh);
-        }
-      }
-    }
-  }
-`;
-
-// prettier-ignore
-const ImageOverlayContainer = `
+const KEYFRAMES = `
   @keyframes img-overlay {
     from { opacity: 0; }
     to { opacity: 1; }
   }
 
-  .${ELEMENT_EXPAND_IMAGE_OVERLAY} {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background: rgba(0,0,0,0.65);
-    opacity: 1;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: scroll()) {
-      .${ELEMENT_EXPAND_IMAGE_OVERLAY} {
-        opacity: 1;
-        animation: img-overlay forwards;
-        animation-timeline: view();
-        animation-range-start: 70vh;
-        animation-range-end: 100vh;
-      }
-    }
-  }
-`;
-
-// prettier-ignore
-const ImageSizeContainer = `
   @keyframes img-size {
     to { width: 100%; height: 100vh; }
   }
-
-  .${ELEMENT_EXPAND_IMAGE_SIZE} {
-    overflow: hidden;
-    position: relative;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: scroll()) {
-      .${ELEMENT_EXPAND_IMAGE_SIZE} {
-        width: ${token.spacing.maxWidth.smallest};
-        height: 70vh;
-        animation: img-size ease-in-out forwards;
-        animation-timeline: view();
-        animation-range-start: cover;
-        animation-range-end: 200vh;
-      }
-    }
-  }
-
-  @supports not (animation-timeline: scroll()) {
-    .${ELEMENT_EXPAND_IMAGE_SIZE} {
-      height: 100%;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .${ELEMENT_EXPAND_IMAGE_SIZE} {
-      height: 100%;
-    }
-  }
-`;
-
-// prettier-ignore
-const ImagePosition = `
-  .${ELEMENT_EXPAND_IMAGE_POSITION} {
-    width: 100%;
-    margin: 0 auto;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: scroll()) {
-      .${ELEMENT_EXPAND_IMAGE_POSITION} {
-        display: flex;
-        justify-content: center;
-        position: sticky;
-        top: 0; 
-        animation: img-position ease-in-out forwards;
-        animation-timeline: view();
-        animation-range-start: cover;
-        animation-range-end: 200vh;
-      }
-    }
-  }
-
-  @supports not (animation-timeline: scroll()) {
-    .${ELEMENT_EXPAND_IMAGE_POSITION} {
-      height: 100%;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .${ELEMENT_EXPAND_IMAGE_POSITION} {
-      height: 100%;
-    }
-  }
-`;
-
-// prettier-ignore
-const ImageContainer = `
-  .${ELEMENT_EXPAND_IMAGE_CONTAINER} {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: scroll()) {
-      .${ELEMENT_EXPAND_IMAGE_CONTAINER} {
-        position: relative;
-      }
-    }
-  }
-`;
-
-// prettier-ignore
-const Container = `
-  .${ELEMENT_EXPAND_CONTAINER} {
-    height: 100%;
-    width: 100%;
-    position: relative;
-  }
-`;
-
-// prettier-ignore
-const STYLES_LAYOUT_IMAGE_EXPAND = `
-  .${ELEMENT_EXPLAND_DECLARATION} {
-    container: ${ELEMENT_NAME} / inline-size;
-    overflow: clip;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: scroll()) {
-      .${ELEMENT_EXPLAND_DECLARATION} {
-        height: 180vh;
-      }
-    }
-  }
-
-  @media (${token.media.queries.tablet.min}) {
-    @media (prefers-reduced-motion: no-preference) {
-      @supports (animation-timeline: scroll()) {
-        .${ELEMENT_EXPLAND_DECLARATION} {
-          height: 200vh;
-        }
-      }
-    }
-  }
-
-  .${ELEMENT_EXPLAND_DECLARATION} img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  ${Container}
-  ${ImageContainer}
-  ${ImageSizeContainer}
-  ${ImagePosition}
-  ${ImageOverlayContainer}
-  ${TextAnimation}
-  ${TextContainer}
-  ${TextLock}
 `;
 
 const CreateImageContainer = ({ image }: TypeLayoutImageExpandProps) => {
-  const imageContainer = document.createElement('div');
-  const imagePosition = document.createElement('div');
-  const imageSize = document.createElement('div');
-  const imageOverlay = document.createElement('div');
+  const imageOverlay = new ElementBuilder()
+    .withClassName('layout-image-expand-image-overlay')
+    .withStyles({
+      element: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        height: '100%',
+        width: '100%',
+        background: 'rgba(0,0,0,0.65)',
+        opacity: 1,
+        ...withViewTimelineAnimation({
+          animation: 'img-overlay forwards',
+          animationTimeline: 'view()',
+          animationRangeStart: '70vh',
+          animationRangeEnd: '100vh',
+        }),
+      },
+    })
+    .build();
 
-  imageOverlay.classList.add(ELEMENT_EXPAND_IMAGE_OVERLAY);
+  const imageSize = new ElementBuilder()
+    .withClassName('layout-image-expand-image-size')
+    .withStyles({
+      element: {
+        overflow: 'hidden',
+        position: 'relative',
+        ...withViewTimelineAnimation({
+          width: token.spacing.maxWidth.smallest,
+          height: '70vh',
+          animation: 'img-size ease-in-out forwards',
+          animationTimeline: 'view()',
+          animationRangeStart: 'cover',
+          animationRangeEnd: '200vh',
+        }),
+        '@supports not (animation-timeline: scroll())': {
+          height: '100%',
+        },
+        '@media (prefers-reduced-motion: reduce)': {
+          height: '100%',
+        },
+        '& img': {
+          display: 'block',
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+        },
+      },
+    })
+    .withChildren(image, imageOverlay)
+    .build();
 
-  imageSize.classList.add(ELEMENT_EXPAND_IMAGE_SIZE);
-  imageSize.appendChild(image);
-  imageSize.appendChild(imageOverlay);
+  const imagePosition = new ElementBuilder()
+    .withClassName('layout-image-expand-image-position')
+    .withStyles({
+      element: {
+        width: '100%',
+        margin: '0 auto',
+        ...withViewTimelineAnimation({
+          display: 'flex',
+          justifyContent: 'center',
+          position: 'sticky',
+          top: 0,
+          animation: 'img-position ease-in-out forwards',
+          animationTimeline: 'view()',
+          animationRangeStart: 'cover',
+          animationRangeEnd: '200vh',
+        }),
+        '@supports not (animation-timeline: scroll())': {
+          height: '100%',
+        },
+        '@media (prefers-reduced-motion: reduce)': {
+          height: '100%',
+        },
+      },
+    })
+    .withChild(imageSize)
+    .build();
 
-  imagePosition.classList.add(ELEMENT_EXPAND_IMAGE_POSITION);
-  imagePosition.appendChild(imageSize);
-
-  imageContainer.appendChild(imagePosition);
-  imageContainer.classList.add(ELEMENT_EXPAND_IMAGE_CONTAINER);
-
-  return imageContainer;
+  return new ElementBuilder()
+    .withClassName('layout-image-expand-image-container')
+    .withStyles({
+      element: {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        ...withViewTimelineAnimation({
+          position: 'relative',
+        }),
+      },
+    })
+    .withChild(imagePosition)
+    .build();
 };
 
 const CreateTextContainer = ({ content }: TypeLayoutImageExpandProps) => {
-  const textAnimation = document.createElement('div');
-  const textContainer = document.createElement('div');
-  const textLock = document.createElement('div');
+  const textLock = new ElementBuilder()
+    .withClassName('layout-image-expand-text-lock')
+    .withStyles({
+      element: {
+        ...layout.space.horizontal.larger,
+        display: 'flex',
+        height: '100%',
+      },
+    })
+    .withChild(content)
+    .build();
 
-  textLock.classList.add(ELEMENT_EXPAND_TEXT_LOCK);
-  textLock.appendChild(content);
+  const textContainer = new ElementBuilder()
+    .withClassName('layout-image-expand-text-container')
+    .withStyles({
+      element: {
+        position: 'relative',
+        paddingTop: token.spacing.max,
+        paddingBottom: token.spacing.max,
+        height: '100%',
+        zIndex: 9999,
+      },
+    })
+    .withChild(textLock)
+    .build();
 
-  textContainer.appendChild(textLock);
-  textContainer.classList.add(ELEMENT_EXPAND_TEXT_CONTAINER);
-
-  textAnimation.classList.add(ELEMENT_EXPAND_TEXT_ANIMATION);
-  textAnimation.appendChild(textContainer);
-
-  return textAnimation;
+  return new ElementBuilder()
+    .withClassName('layout-image-expand-text-animation')
+    .withStyles({
+      element: {
+        width: '100vw',
+        ...withViewTimelineAnimation({
+          position: 'absolute',
+          top: 0,
+          height: '80vh',
+          transform: 'translateY(80vh)',
+        }),
+        [`@media (${token.media.queries.tablet.min})`]: {
+          ...withViewTimelineAnimation({
+            transform: 'translateY(100vh)',
+          }),
+        },
+      },
+    })
+    .withChild(textContainer)
+    .build();
 };
 
 const CreateImageExpandElement = (props: TypeLayoutImageExpandProps) => {
-  const declaration = document.createElement('div');
-  const container = document.createElement('div');
-  const imageContainer = CreateImageContainer(props);
-  const textContainer = CreateTextContainer(props);
+  const imageContainerModel = CreateImageContainer(props);
+  const textContainerModel = CreateTextContainer(props);
+  let containerElement!: HTMLElement;
+
   const sizeImageForText = () => {
     const textContainerHeight =
-      textContainer.clientHeight +
-      parsePixelValue(spacing['2xl']) * 2;
-    const imageContainerHeight = container.clientHeight;
+      textContainerModel.element.clientHeight +
+      parsePixelValue(token.spacing['2xl']) * 2;
+    const imageContainerHeight = containerElement.clientHeight;
 
     if (textContainerHeight > imageContainerHeight) {
-      container.style.minHeight = `${textContainerHeight}px`;
+      containerElement.style.minHeight = `${textContainerHeight}px`;
     }
   };
 
+  const containerModel = new ElementBuilder()
+    .withClassName('layout-image-expand-container')
+    .withStyles({
+      element: {
+        height: '100%',
+        width: '100%',
+        position: 'relative',
+      },
+    })
+    .ref((element) => {
+      containerElement = element;
+    })
+    .withChildren(imageContainerModel, textContainerModel)
+    .build();
+
+  const declarationModel = new ElementBuilder()
+    .withClassName('layout-image-expand-declaration')
+    .withStyles({
+      element: {
+        containerType: 'inline-size',
+        overflow: 'clip',
+        ...withViewTimelineAnimation({ height: '180vh' }),
+        [`@media (${token.media.queries.tablet.min})`]: {
+          ...withViewTimelineAnimation({ height: '200vh' }),
+        },
+      },
+    })
+    .withChild(containerModel)
+    .build();
+
+  declarationModel.styles += KEYFRAMES;
+
   if (isScreenZoomed() && !isPreferredReducedMotion()) {
-    textContainer.style.height = '90vh';
-    textContainer.style.transform = 'translateY(0)';
+    textContainerModel.element.style.height = '90vh';
+    textContainerModel.element.style.transform = 'translateY(0)';
   }
 
   if (!CSS.supports('animation-timeline', 'view()')) {
@@ -318,14 +233,7 @@ const CreateImageExpandElement = (props: TypeLayoutImageExpandProps) => {
     window.addEventListener('resize', () => sizeImageForText());
   }
 
-  container.appendChild(imageContainer);
-  container.appendChild(textContainer);
-  container.classList.add(ELEMENT_EXPAND_CONTAINER);
-
-  declaration.appendChild(container);
-  declaration.classList.add(ELEMENT_EXPLAND_DECLARATION);
-
-  return { element: declaration, styles: STYLES_LAYOUT_IMAGE_EXPAND };
+  return declarationModel;
 };
 
 export const createCompositeLayoutImageExpand = CreateImageExpandElement;

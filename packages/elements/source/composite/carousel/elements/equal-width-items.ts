@@ -1,9 +1,16 @@
 import * as token from '@universityofmaryland/web-token-library';
 import * as element from '@universityofmaryland/web-styles-library/element';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { setupSwipeDetection } from '@universityofmaryland/web-utilities-library/events';
 import { parsePixelValue } from '@universityofmaryland/web-utilities-library/styles';
-import { arrow_right as iconArrowRight } from '@universityofmaryland/web-icons-library/arrows';
+import { CreateButton, ButtonVisibility } from './nav-button';
+
+export type TypeButtonConfig = {
+  backgroundColor?: string;
+  verticalCenter?: boolean;
+  outsetOffset?: string;
+};
 
 type TypeDisplayLogic = {
   mobileCount: number;
@@ -21,13 +28,24 @@ type TypeDisplayLogic = {
   fullScreenCallback?: (index: number) => void;
 };
 
-type TypeDisplayLogicProps = Partial<TypeDisplayLogic>;
-
 type TypeAnimationCarouselBlockProps = {
   slide: HTMLElement;
   shadowRef?: HTMLElement;
   blocks: HTMLElement[];
-  overwriteDisplayLogic?: TypeDisplayLogicProps;
+  mobileBreakpoint?: number;
+  tabletBreakpoint?: number;
+  desktopBreakpoint?: number;
+  mobileCount?: number;
+  tabletCount?: number;
+  desktopCount?: number;
+  maxCount?: number;
+  blockGap?: number;
+  hasLeftButton?: boolean;
+  hasRightButton?: boolean;
+  showMobileHint?: boolean;
+  showHint?: boolean;
+  fullScreenCallback?: (index: number) => void;
+  button?: TypeButtonConfig;
 };
 
 type TypeHelpers = {
@@ -36,6 +54,10 @@ type TypeHelpers = {
     container: () => HTMLDivElement;
     slide: () => HTMLElement;
     blocks: () => HTMLElement[];
+  };
+  GetButtons: {
+    prev: () => HTMLButtonElement;
+    next: () => HTMLButtonElement;
   };
   GetViewOptions: {
     isTabletView: () => boolean;
@@ -58,79 +80,18 @@ type TypeEventScroll = TypeHelpers & {
   isDirectionRight?: boolean;
 };
 
-const fullScreenClassName = element.action.button.fullScreen.className;
+type CarouselBlockModel = {
+  element: HTMLElement;
+  styles: string;
+  events: {
+    resize: () => void;
+    load: () => void;
+  };
+};
 
-const ATTRIBUTE_SINGLE_BLOCK = 'single';
 const ANIMATION_DURATION = 750;
 const HINT_MULTIPLER_MOBILE_SIZING = 0.2;
 const HINT_MULTIPLER_SIZING = 0.6;
-
-const IS_SINGLE_BLOCK = `[${ATTRIBUTE_SINGLE_BLOCK}]`;
-
-const ELEMENT_NAME = 'umd-element-animation-carousel-block';
-const ELEMENT_ANIMATION_CAROUSEL_DECLARATION =
-  'animation-carousel-block-declaration';
-const ELEMENT_ANIMATION_CAROUSEL_CONTAINER =
-  'animation-carousel-block-container';
-const ELEMENT_ANIMATION_CAROUSEL_WRAPPER = 'animation-carousel-block-wrapper';
-const ELEMENT_ANIMATION_CAROUSEL_BUTTON = `animation-carousel-block-button`;
-const ELEMENT_ANIMATION_CAROUSEL_NEXT = `animation-carousel-block-button-next`;
-const ELEMENT_ANIMATION_CAROUSEL_PREVIOUS = `animation-carousel-block-button-previous`;
-
-const OVERWRITE_SINGLE_BLOCK_CONTAINER = `.${ELEMENT_ANIMATION_CAROUSEL_CONTAINER}${IS_SINGLE_BLOCK}`;
-
-// prettier-ignore
-const ButtonStyles = `
-  .${ELEMENT_ANIMATION_CAROUSEL_BUTTON} {
-    background-color: ${token.color.red};
-    padding: 10px ${token.spacing.xs};
-    position: absolute;
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    display: none;
-  }
-
-  .${ELEMENT_ANIMATION_CAROUSEL_BUTTON}:disabled {
-    opacity: 0.5;
-  }
-
-  .${ELEMENT_ANIMATION_CAROUSEL_BUTTON} svg {
-    width: 20px;
-    height: 20px;
-    fill: ${token.color.white};
-  }
-
-  .${ELEMENT_ANIMATION_CAROUSEL_PREVIOUS} svg {
-    transform: rotate(180deg);
-  }
-`;
-
-// prettier-ignore
-const ContainerStyles = `
-  .${ELEMENT_ANIMATION_CAROUSEL_CONTAINER} {
-    position: relative;
-  }
-
-  .${ELEMENT_ANIMATION_CAROUSEL_WRAPPER} {
-    overflow: hidden;
-    padding-right: 0;
-    width: 100%;
-  }
-`;
-
-// prettier-ignore
-const STYLES_CAROUSEL_CARDS_ELEMENT = `
-  .${ELEMENT_ANIMATION_CAROUSEL_DECLARATION} {
-    container: ${ELEMENT_NAME} / inline-size;
-    width: 100%;
-  }
-
-  ${ContainerStyles}
-  ${ButtonStyles}
-`;
 
 const EventScrollCarousel = (props: TypeEventScroll) => {
   const {
@@ -150,9 +111,11 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
   const isShowHint = GetViewOptions.shouldShowHint();
   const count = GetViewOptions.showCount();
 
-  // Force layout recalculation to get accurate measurements
-  void slotContent[0]?.offsetHeight;
-  const elementSize = slotContent[0]?.offsetWidth || 0;
+  const firstSlot = slotContent[0];
+  if (!firstSlot) return;
+
+  const elementSize = firstSlot.offsetWidth;
+
   const carouselSize = GetSizes.carouselWidthBasedOnBlock({ count });
   const { fullScreenCallback } = displayLogic;
 
@@ -162,17 +125,18 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
   const temporaryCarouselSize = carouselSize + elementSizeWithSpace;
 
   const cloneReferenceEvents = ({
-    orginal,
+    original,
     clone,
   }: {
-    orginal: HTMLElement;
+    original: HTMLElement;
     clone: HTMLElement;
   }) => {
-    const orginalFullScreen = orginal.querySelector(`.${fullScreenClassName}`);
+    const fullScreenClassName = element.action.button.fullScreen.className;
+    const originalFullScreen = original.querySelector(`.${fullScreenClassName}`);
     const cloneFullScreen = clone.querySelector(`.${fullScreenClassName}`);
 
-    if (orginalFullScreen && cloneFullScreen) {
-      const indexAttr = orginalFullScreen.getAttribute('data-index');
+    if (originalFullScreen && cloneFullScreen) {
+      const indexAttr = originalFullScreen.getAttribute('data-index');
       const index = indexAttr ? parseInt(indexAttr) : 0;
       cloneFullScreen.addEventListener('click', () =>
         fullScreenCallback(index),
@@ -186,23 +150,19 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
     const upcomingElement = slotContent[count];
     const hintElement = slotContent[count + 1];
 
-    // Prepare elements before animation
     upcomingElement.style.display = 'block';
-    cloneReferenceEvents({ orginal: firstElement, clone: clonedElement });
+    cloneReferenceEvents({ original: firstElement, clone: clonedElement });
 
     if (hintElement && (isShowMobileHint || isShowHint)) {
       hintElement.style.display = 'block';
     }
 
-    // Add clone but keep it hidden initially
     carouselSlider.appendChild(clonedElement);
     clonedElement.style.display = 'none';
 
-    // Set width first and force layout recalculation
     carouselSlider.style.width = `${temporaryCarouselSize}px`;
     void carouselSlider.offsetHeight;
 
-    // Use requestAnimationFrame for smoother animation timing
     requestAnimationFrame(() => {
       carouselSlider.style.transition = `transform ${ANIMATION_DURATION}ms ease-in-out`;
       carouselSlider.style.transform = `translateX(-${elementSizeWithSpace}px)`;
@@ -220,23 +180,15 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
     const hintElementSibiling = slotContent[count];
     const clonedElement = lastElement.cloneNode(true) as HTMLDivElement;
 
-    // Prepare clone with proper event handlers
-    cloneReferenceEvents({ orginal: lastElement, clone: clonedElement });
+    cloneReferenceEvents({ original: lastElement, clone: clonedElement });
 
-    // Set width first before DOM manipulation
     carouselSlider.style.width = `${temporaryCarouselSize}px`;
-
-    // Add cloned element at the beginning
     carouselSlider.prepend(clonedElement);
     clonedElement.style.display = 'block';
-
-    // Set initial transform position
     carouselSlider.style.transform = `translateX(-${elementSizeWithSpace}px)`;
 
-    // Force layout recalculation
     void carouselSlider.offsetHeight;
 
-    // Use requestAnimationFrame for smoother animation timing
     requestAnimationFrame(() => {
       carouselSlider.style.transition = `transform ${ANIMATION_DURATION}ms ease-in-out`;
       carouselSlider.style.transform = `translateX(0)`;
@@ -257,15 +209,19 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
     });
   };
 
-  isDirectionRight ? animateRight() : animateLeft();
+  if (isDirectionRight) {
+    animateRight();
+  } else {
+    animateLeft();
+  }
 };
 
 const EventSwipe = (props: TypeHelpers) => {
   const { GetElements } = props;
   const container = GetElements.container();
 
-  const swipes = (isrightswipe: Boolean) => {
-    if (!isrightswipe) {
+  const swipes = (isRightSwipe: boolean) => {
+    if (!isRightSwipe) {
       EventScrollCarousel(props);
     } else {
       EventScrollCarousel({ ...props, isDirectionRight: false });
@@ -275,128 +231,50 @@ const EventSwipe = (props: TypeHelpers) => {
   setupSwipeDetection({ container, callback: swipes });
 };
 
-const ButtonVisibility = (props: TypeHelpers) => {
-  const { GetElements, GetViewOptions } = props;
-  const prevousButton = GetElements.container().querySelector(
-    `.${ELEMENT_ANIMATION_CAROUSEL_PREVIOUS}`,
-  ) as HTMLButtonElement;
-  const nextButton = GetElements.container().querySelector(
-    `.${ELEMENT_ANIMATION_CAROUSEL_NEXT}`,
-  ) as HTMLButtonElement;
-  const buttons = [nextButton, prevousButton];
-
-  const shouldShowLeftButton = GetViewOptions.shouldShowLeftButton();
-  const shouldShowRightButton = GetViewOptions.shouldShowRightButton();
-  const showCount = GetViewOptions.showCount();
-  const cardsTotal = GetElements.blocks().length;
-  const shouldHideLeftButton = showCount > 1 && !shouldShowLeftButton;
-  const shouldHideRightButton = showCount > 1 && !shouldShowRightButton;
-
-  if (cardsTotal === showCount) {
-    buttons.forEach((button) => (button.style.display = 'none'));
-    return;
-  }
-
-  if (shouldHideLeftButton) {
-    prevousButton.style.display = 'none';
-  } else {
-    prevousButton.style.display = 'block';
-  }
-
-  if (shouldHideRightButton) {
-    nextButton.style.display = 'none';
-  } else {
-    nextButton.style.display = 'block';
-  }
-};
-
-const ButtonDisplay = (props: TypeHelpers) => {
-  const { GetElements } = props;
-  const prevousButton = GetElements.container().querySelector(
-    `.${ELEMENT_ANIMATION_CAROUSEL_PREVIOUS}`,
-  ) as HTMLButtonElement;
-  const nextButton = GetElements.container().querySelector(
-    `.${ELEMENT_ANIMATION_CAROUSEL_NEXT}`,
-  ) as HTMLButtonElement;
-
-  prevousButton.setAttribute('aria-label', 'Previous');
-  nextButton.setAttribute('aria-label', 'Next');
-
-  ButtonVisibility(props);
-};
-
-const CreateButton = ({
-  EventMoveForward,
-  EventMoveBackward,
-  isRight = true,
-}: {
-  EventMoveForward: () => void;
-  EventMoveBackward: () => void;
-  isRight?: boolean;
-}) => {
-  const button = document.createElement('button');
-  button.setAttribute('type', 'button');
-  button.setAttribute('aria-label', 'Next');
-  button.classList.add(ELEMENT_ANIMATION_CAROUSEL_BUTTON);
-  button.innerHTML = iconArrowRight;
-
-  if (isRight) {
-    button.classList.add(ELEMENT_ANIMATION_CAROUSEL_NEXT);
-  }
-
-  if (!isRight) {
-    button.setAttribute('aria-label', 'Previous');
-    button.classList.add(ELEMENT_ANIMATION_CAROUSEL_PREVIOUS);
-  }
-
-  button.addEventListener('click', () => {
-    if (isRight) EventMoveForward();
-    if (!isRight) EventMoveBackward();
-    button.disabled = true;
-
-    setTimeout(() => {
-      button.disabled = false;
-    }, ANIMATION_DURATION);
-  });
-
-  return button;
-};
 
 const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
   (() => {
-    const { slide, shadowRef, blocks, overwriteDisplayLogic } = props;
-    const declaration = document.createElement('div');
-    const container = document.createElement('div');
-    const wrapper = document.createElement('div');
+    const {
+      slide,
+      shadowRef,
+      blocks,
+      mobileBreakpoint = token.media.breakpointValues.medium.max,
+      tabletBreakpoint = token.media.breakpointValues.tablet.min,
+      desktopBreakpoint = token.media.breakpointValues.desktop.min,
+      mobileCount = 1,
+      tabletCount = 2,
+      desktopCount = 3,
+      maxCount = 4,
+      blockGap = parsePixelValue(token.spacing.lg),
+      hasLeftButton = true,
+      hasRightButton = true,
+      showMobileHint = true,
+      showHint = true,
+      fullScreenCallback,
+      button,
+    } = props;
+
     const displayLogic: TypeDisplayLogic = {
-      mobileBreakpoint: 550,
-      tabletBreakpoint: 768,
-      desktopBreakpoint: 1000,
-      mobileCount: 1,
-      tabletCount: 2,
-      desktopCount: 3,
-      maxCount: 4,
-      blockGap: parsePixelValue(token.spacing.lg),
-      hasRightButton: true,
-      hasLeftButton: true,
-      showMobileHint: true,
-      showHint: true,
-      fullScreenCallback: undefined,
+      mobileBreakpoint,
+      tabletBreakpoint,
+      desktopBreakpoint,
+      mobileCount,
+      tabletCount,
+      desktopCount,
+      maxCount,
+      blockGap,
+      hasLeftButton,
+      hasRightButton,
+      showMobileHint,
+      showHint,
+      fullScreenCallback,
     };
     let blockWidth = 0;
     let hasInteractionOccured = false;
-
-    if (overwriteDisplayLogic) {
-      Object.keys(overwriteDisplayLogic).forEach((key) => {
-        const refKey = key as keyof typeof displayLogic;
-        const refValue = overwriteDisplayLogic[refKey] as never;
-
-        displayLogic[refKey] = refValue;
-      });
-    }
+    let containerElement: HTMLDivElement | null = null;
 
     const GetElements = {
-      container: () => container,
+      container: () => containerElement as HTMLDivElement,
       slide: () => slide,
       blocks: () => blocks,
     };
@@ -411,7 +289,6 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
           GetSizes.containerWidth() <= displayLogic.tabletBreakpoint
         );
       },
-
       isDesktopView: () => {
         return (
           GetSizes.containerWidth() > displayLogic.tabletBreakpoint &&
@@ -428,21 +305,18 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
         const isHighDef = GetViewOptions.isHighView();
         let count = 1;
 
-        if (isMobile) count = displayLogic.mobileCount;
-        if (isTablet) count = displayLogic.tabletCount;
-        if (isDesktop) count = displayLogic.desktopCount;
-        if (isHighDef) count = displayLogic.maxCount;
+        if (isMobile) { count = displayLogic.mobileCount; }
+        else if (isTablet) { count = displayLogic.tabletCount; }
+        else if (isDesktop) { count = displayLogic.desktopCount; }
+        else if (isHighDef) { count = displayLogic.maxCount; }
 
         return count;
       },
       shouldShowMobileHint: () => {
         const isMobileView = GetViewOptions.isMobileView();
-        const isShowMobileHint = displayLogic.showMobileHint;
-        const isShowHint = displayLogic.showHint;
+        const showHintOnMobile = displayLogic.showMobileHint || displayLogic.showHint;
 
-        return (
-          (isShowMobileHint && isMobileView) || (isShowHint && isMobileView)
-        );
+        return showHintOnMobile && isMobileView;
       },
       shouldShowHint: () => {
         return displayLogic.showHint && !GetViewOptions.isMobileView();
@@ -457,12 +331,12 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
 
     const GetSizes = {
       mobileHintWidth: ({ count }: { count: number }) => {
-        const containerWidth = container.offsetWidth;
-        return (containerWidth / count) * HINT_MULTIPLER_MOBILE_SIZING;
+        if (!containerElement) return 0;
+        return (containerElement.offsetWidth / count) * HINT_MULTIPLER_MOBILE_SIZING;
       },
       hintWidth: ({ count }: { count: number }) => {
-        const containerWidth = container.offsetWidth;
-        return (containerWidth / count) * HINT_MULTIPLER_SIZING;
+        if (!containerElement) return 0;
+        return (containerElement.offsetWidth / count) * HINT_MULTIPLER_SIZING;
       },
       carouselWidthBasedOnBlock: ({ count }: { count: number }) => {
         const elementSize = blockWidth;
@@ -478,7 +352,8 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
         return elementSize * count;
       },
       containerWidth: () => {
-        return container.offsetWidth;
+        if (!containerElement) return 0;
+        return containerElement.offsetWidth;
       },
     };
 
@@ -507,20 +382,37 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
           }
         });
 
-        if (isShowMobileHint) containerBlocks[1].style.display = 'block';
-        if (isHint) containerBlocks[count].style.display = 'block';
+        if (isShowMobileHint) {
+          containerBlocks[1].style.display = 'block';
+        }
+        if (isHint) {
+          containerBlocks[count].style.display = 'block';
+        }
       },
+    };
+
+    const buttonRefs: { next: HTMLButtonElement | null; prev: HTMLButtonElement | null } = {
+      next: null,
+      prev: null,
+    };
+
+    const GetButtons = {
+      next: () => buttonRefs.next as HTMLButtonElement,
+      prev: () => buttonRefs.prev as HTMLButtonElement,
     };
 
     const Event = {
       helpers: {
         displayLogic,
         GetElements,
+        GetButtons,
         GetViewOptions,
         GetSizes,
         SetLayout,
       },
       resize: () => {
+        if (!containerElement) { return; }
+        const container = containerElement;
         const count = GetViewOptions.showCount();
         const cacluateBlockWidth = ({ count }: { count: number }) => {
           const isShowMobileHint = GetViewOptions.shouldShowMobileHint();
@@ -544,13 +436,7 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
         SetLayout.blockWidth();
         SetLayout.blockDisplay({ count });
         SetLayout.carouselWidth({ count });
-        ButtonDisplay({ ...Event.helpers });
-
-        if (count === 1) {
-          container.setAttribute(ATTRIBUTE_SINGLE_BLOCK, '');
-        } else {
-          container.removeAttribute(ATTRIBUTE_SINGLE_BLOCK);
-        }
+        ButtonVisibility({ ...Event.helpers });
       },
       load: () => {
         slide.style.display = 'flex';
@@ -576,56 +462,98 @@ const CreateCarouselCardsElement = (props: TypeAnimationCarouselBlockProps) =>
       },
     };
 
-    container.appendChild(
-      CreateButton({
-        EventMoveForward: Event.forward,
-        EventMoveBackward: Event.backward,
-      }),
-    );
+    const { verticalCenter, outsetOffset, backgroundColor } = button || {};
+    const buttonConfig = {
+      isVerticalCenter: verticalCenter !== false || Boolean(outsetOffset),
+      outsetOffset,
+      backgroundColor,
+    };
 
-    container.appendChild(
-      CreateButton({
-        EventMoveForward: Event.forward,
-        EventMoveBackward: Event.backward,
-        isRight: false,
-      }),
-    );
+    const nextButtonModel = CreateButton({
+      EventMoveForward: Event.forward,
+      EventMoveBackward: Event.backward,
+      ...buttonConfig,
+    });
 
-    wrapper.classList.add(ELEMENT_ANIMATION_CAROUSEL_WRAPPER);
+    const prevButtonModel = CreateButton({
+      EventMoveForward: Event.forward,
+      EventMoveBackward: Event.backward,
+      isRight: false,
+      ...buttonConfig,
+    });
 
-    if (shadowRef) {
-      wrapper.appendChild(shadowRef);
-    } else {
-      blocks.forEach((block) => slide.appendChild(block));
-      wrapper.appendChild(slide);
-    }
+    buttonRefs.next = nextButtonModel.element as HTMLButtonElement;
+    buttonRefs.prev = prevButtonModel.element as HTMLButtonElement;
 
-    container.classList.add(ELEMENT_ANIMATION_CAROUSEL_CONTAINER);
-    container.appendChild(wrapper);
+    const wrapperModel = new ElementBuilder()
+      .withClassName('animation-carousel-block-wrapper')
+      .withStyles({
+        element: {
+          overflow: 'hidden',
+          width: '100%',
+        },
+      })
+      .withModifier((element) => {
+        if (shadowRef) {
+          element.appendChild(shadowRef);
+        } else {
+          blocks.forEach((block) => slide.appendChild(block));
+          element.appendChild(slide);
+        }
+      })
+      .build();
 
-    declaration.classList.add(ELEMENT_ANIMATION_CAROUSEL_DECLARATION);
-    declaration.appendChild(container);
+    const buttonWrapperModel = new ElementBuilder()
+      .withClassName('animation-carousel-block-buttons')
+      .withStyles({
+        element: {
+          display: 'flex',
+          justifyContent: 'center',
+          gap: token.spacing.min,
+          [`@media (max-width: ${tabletBreakpoint}px)`]: {
+            marginTop: token.spacing.md,
+            marginBottom: token.spacing.md,
+          },
+        },
+      })
+      .withChildren(prevButtonModel, nextButtonModel)
+      .build();
+
+    const containerModel = new ElementBuilder()
+      .withClassName('animation-carousel-block-container')
+      .withStyles({
+        element: {
+          position: 'relative',
+          [`@media (max-width: ${tabletBreakpoint}px)`]: {
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+          },
+        },
+      })
+      .ref((element) => {
+        containerElement = element as HTMLDivElement;
+      })
+      .withChildren(wrapperModel, buttonWrapperModel)
+      .build();
+
+    const declarationModel = new ElementBuilder()
+      .withClassName('animation-carousel-block-declaration')
+      .withStyles({
+        element: {
+          containerType: 'inline-size',
+          width: '100%',
+        },
+      })
+      .withChild(containerModel)
+      .withEvents({ resize: Event.resize, load: Event.load })
+      .build();
 
     window.addEventListener('resize', debounce(Event.resize, 30));
 
-    return {
-      element: declaration,
-      events: {
-        resize: Event.resize,
-        load: Event.load,
-      },
-    };
+    return declarationModel as CarouselBlockModel;
   })();
 
 export const createCompositeCarouselBlocks = {
   CreateElement: CreateCarouselCardsElement,
-  Styles: STYLES_CAROUSEL_CARDS_ELEMENT,
-  Elements: {
-    declaration: ELEMENT_ANIMATION_CAROUSEL_DECLARATION,
-    container: ELEMENT_ANIMATION_CAROUSEL_CONTAINER,
-    containerSingleBlock: OVERWRITE_SINGLE_BLOCK_CONTAINER,
-    button: ELEMENT_ANIMATION_CAROUSEL_BUTTON,
-    nextButton: ELEMENT_ANIMATION_CAROUSEL_NEXT,
-    previousButton: ELEMENT_ANIMATION_CAROUSEL_PREVIOUS,
-  },
 };

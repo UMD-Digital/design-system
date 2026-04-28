@@ -29,11 +29,9 @@ interface CarouselRefs {
   info: HTMLParagraphElement;
 }
 
-// Constants
-const ANIMATION_TIME: 500 = 500;
-const PREVIEW_ANIMATION_TIME: 440 = 440; // 60ms faster than main animation
+const ANIMATION_TIME = 500;
+const PREVIEW_ANIMATION_TIME = 440;
 
-// Pure animation functions
 const getAdjacentIndices = (
   currentIndex: number,
   totalSlides: number,
@@ -51,7 +49,7 @@ const positionSlideOffScreen = (
 ): void => {
   slide.setAttribute('data-direction', direction);
   slide.setAttribute('data-animating', 'true');
-  slide.offsetHeight; // Force reflow
+  slide.offsetHeight;
 };
 
 const activateSlideTransition = (
@@ -76,7 +74,6 @@ const cleanupSlideTransition = (slide: HTMLElement, isNew: boolean): void => {
   }
 };
 
-// Pure preview functions
 const createPreviewElement = (
   slide: CarouselWideProps['slides'][0],
 ): HTMLElement => {
@@ -102,15 +99,11 @@ const appendPreviewWithAnimation = (
   preview: HTMLElement,
   animationDirection: 'reverse' | 'advance',
 ): void => {
-  // Position off-screen initially based on animation direction
-  // For advance (forward), new content comes from right
-  // For reverse (backward), new content comes from left
   preview.style.transform =
     animationDirection === 'advance' ? 'translateX(100%)' : 'translateX(-100%)';
 
   container.appendChild(preview);
 
-  // Trigger animation to slide in
   requestAnimationFrame(() => {
     preview.style.transform = 'translateX(0)';
   });
@@ -121,8 +114,6 @@ const animatePreviewOut = (
   animationDirection: 'reverse' | 'advance',
 ): Promise<void> => {
   return new Promise((resolve) => {
-    // For advance (forward), old content exits to left
-    // For reverse (backward), old content exits to right
     preview.style.transform =
       animationDirection === 'advance'
         ? 'translateX(-100%)'
@@ -137,7 +128,6 @@ const animatePreviewOut = (
   });
 };
 
-// State management
 const updatePreviews = (
   refs: CarouselRefs,
   state: CarouselState,
@@ -149,7 +139,6 @@ const updatePreviews = (
     slides.length,
   );
 
-  // Handle left preview
   if (slides[leftIndex]) {
     const existingLeft = refs.previews.left.firstElementChild as HTMLElement;
     if (existingLeft && direction) {
@@ -166,7 +155,6 @@ const updatePreviews = (
     }
   }
 
-  // Handle right preview
   if (slides[rightIndex]) {
     const existingRight = refs.previews.right.firstElementChild as HTMLElement;
     if (existingRight && direction) {
@@ -200,47 +188,35 @@ const animateSlides = (
   const currentSlide = refs.slides[state.currentIndex];
   const newSlide = refs.slides[newIndex];
 
-  // Disable controls during animation
   refs.controls.prev.setAttribute('disabled', '');
   refs.controls.next.setAttribute('disabled', '');
 
-  // Position new slide off-screen
   const newSlideDirection = direction === 'reverse' ? 'left' : 'right';
   positionSlideOffScreen(newSlide, newSlideDirection);
 
-  // Update indicator position
   refs.indicator.position(newIndex);
 
-  // Start synchronized animations for all frames
   requestAnimationFrame(() => {
-    // Animate main slides
     activateSlideTransition(newSlide);
     const currentSlideDirection = direction === 'reverse' ? 'right' : 'left';
     activateSlideTransition(currentSlide, currentSlideDirection);
 
-    // Update previews with animation (this will animate in sync)
     const nextState = { ...state, currentIndex: newIndex };
     updatePreviews(refs, nextState, direction);
   });
 
-  // Clean up after animation
   setTimeout(() => {
-    // Clean up main slides
     cleanupSlideTransition(currentSlide, false);
     cleanupSlideTransition(newSlide, true);
 
-    // Show content with fade-in animation
     newSlide.setAttribute('data-content-visible', 'true');
 
-    // Re-enable controls
     refs.controls.prev.removeAttribute('disabled');
     refs.controls.next.removeAttribute('disabled');
 
-    // Update state
     state.currentIndex = newIndex;
     state.isAnimating = false;
 
-    // Update accessibility info
     updateInfo(refs, newIndex);
   }, ANIMATION_TIME);
 };
@@ -252,24 +228,22 @@ const setupSliderControls = (refs: CarouselRefs, state: CarouselState) => {
     if (state.isAnimating) return;
 
     const newIndex =
-      state.currentIndex === lastIndex ? 0 : state.currentIndex + 1;
-    animateSlides(refs, state, newIndex, 'advance');
+      state.currentIndex === 0 ? lastIndex : state.currentIndex - 1;
+    animateSlides(refs, state, newIndex, 'reverse');
   });
 
   refs.controls.next.addEventListener('click', () => {
     if (state.isAnimating) return;
 
     const newIndex =
-      state.currentIndex === 0 ? lastIndex : state.currentIndex - 1;
-    animateSlides(refs, state, newIndex, 'reverse');
+      state.currentIndex === lastIndex ? 0 : state.currentIndex + 1;
+    animateSlides(refs, state, newIndex, 'advance');
   });
 };
 
-// Main component
 export const createCompositeCarouselWide = (props: CarouselWideProps) => {
   const { title } = props;
 
-  // Initialize state early
   const state: CarouselState = {
     currentIndex: 0,
     isAnimating: false,
@@ -283,41 +257,33 @@ export const createCompositeCarouselWide = (props: CarouselWideProps) => {
     animateSlides(refs, state, index, direction);
   });
 
-  const builder = new ElementBuilder();
+  const carouselTitle = title || 'Animated Image Carousel';
 
-  builder.withClassName('umd-carousel-wide');
-  builder.withChild(container);
+  const composite = new ElementBuilder()
+    .withClassName('umd-carousel-wide')
+    .withAttribute('title', carouselTitle)
+    .withStyles({
+      element: {
+        containerType: 'inline-size',
+        display: 'block',
+        position: 'relative',
 
-  if (title) {
-    builder.withAttribute('title', title);
-  } else {
-    builder.withAttribute('title', 'Animated Image Carousel');
-  }
-
-  builder.withStyles({
-    element: {
-      container: 'umd-carousel-wide / inline-size',
-      display: 'block',
-      position: 'relative',
-
-      [`@media (${token.media.queries.large.min})`]: {
-        paddingBottom: 0,
+        [`@media (${token.media.queries.large.min})`]: {
+          paddingBottom: 0,
+        },
       },
-    },
-  });
+    })
+    .withChild(container)
+    .build();
 
-  const composite = builder.build();
-
-  // Initialize refs
   const refs: CarouselRefs = {
     container: composite.element,
     ...container.refs,
   };
 
-  // Set up event handlers after DOM is ready
   requestAnimationFrame(() => {
     setupSliderControls(refs, state);
-    updatePreviews(refs, state); // Initial preview setup without animation
+    updatePreviews(refs, state);
   });
 
   return composite;

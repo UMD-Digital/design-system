@@ -3,7 +3,6 @@ import * as token from '@universityofmaryland/web-token-library';
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { assets } from 'atomic';
-import { createElementWithRefs } from './_elementModel';
 import { createControlButton } from './controls';
 import { type CarouselWideProps } from '../_types';
 import { type UMDElement } from '../../../_types';
@@ -19,7 +18,6 @@ const createSlideContent = ({
 }) => {
   const children: UMDElement[] = [];
 
-  // Create content container first to get reference
   let contentContainer: UMDElement | null = null;
 
   const closeButton = new ElementBuilder('button')
@@ -42,8 +40,9 @@ const createSlideContent = ({
         color: token.color.gray.dark,
         transition: 'color 0.2s ease',
 
-        [`@media (${token.media.queries.large.max})`]: {
-          display: 'none',
+        display: 'none',
+        [`@media (${token.media.queries.desktop.min})`]: {
+          display: 'block',
         },
 
         '&:hover, &:focus': {
@@ -58,9 +57,11 @@ const createSlideContent = ({
         }),
       },
     })
-    .withModifier((el) => {
-      el.addEventListener('click', () => {
-        if (contentContainer) contentContainer.element.style.display = 'none';
+    .withModifier((element) => {
+      element.addEventListener('click', () => {
+        if (contentContainer) {
+          contentContainer.element.style.display = 'none';
+        }
       });
     })
     .build();
@@ -122,11 +123,9 @@ const createSlideContent = ({
           border: `1px solid ${token.color.gray.dark}`,
         }),
 
-        [`@media (${token.media.queries.large.max})`]: {
-          borderTop: 'none',
-        },
+        borderTop: 'none',
 
-        [`@media (${token.media.queries.tablet.min})`]: {
+        [`@media (${token.media.queries.desktop.min})`]: {
           border: 'none',
           boxShadow: '0 0 5px 0 rgba(0, 0, 0, 0.4)',
           maxWidth: '50%',
@@ -163,7 +162,9 @@ const createMainFrameSlide = (
     }),
   );
 
-  if (slideContentWrapper) children.push(slideContentWrapper);
+  if (slideContentWrapper) {
+    children.push(slideContentWrapper);
+  }
 
   return new ElementBuilder('figure')
     .withClassName('umd-carousel-wide__slide')
@@ -173,10 +174,9 @@ const createMainFrameSlide = (
         display: 'none',
         opacity: 0,
         transition: 'opacity 0.3s ease-in-out, transform 0.5s ease-in-out',
-        transform: 'translateX(0)',
         aspectRatio: ASPECT_RATIO,
 
-        [`@media (${token.media.queries.tablet.min})`]: {
+        [`@media (${token.media.queries.desktop.min})`]: {
           position: 'absolute',
           width: '100%',
           height: '100%',
@@ -195,13 +195,10 @@ const createMainFrameSlide = (
           zIndex: 1,
           display: 'block',
           opacity: 1,
-
-          [`@media (${token.media.queries.large.max})`]: {
-            position: 'absolute',
-            width: '100%',
-            top: 0,
-            left: 0,
-          },
+          position: 'absolute',
+          width: '100%',
+          top: 0,
+          left: 0,
         },
 
         '&[data-direction="left"]': {
@@ -238,7 +235,7 @@ const createPreviewContainer = (position: 'left' | 'right') => {
         overflow: 'hidden',
         position: 'relative',
 
-        [`@media (${token.media.queries.tablet.min})`]: {
+        [`@media (${token.media.queries.desktop.min})`]: {
           display: 'flex',
           alignItems: 'flex-end',
           height: '100%',
@@ -261,10 +258,7 @@ const createPreviewContainer = (position: 'left' | 'right') => {
           ['&:before ']: {
             content: '""',
             position: 'absolute',
-            top: '0',
-            left: '0',
-            right: '0',
-            bottom: '0',
+            inset: 0,
             background: token.color.gray.darker,
             opacity: 0.5,
             zIndex: 1,
@@ -276,33 +270,18 @@ const createPreviewContainer = (position: 'left' | 'right') => {
 };
 
 const createMainContainer = (
-  slides: CarouselWideProps['slides'],
-  isThemeDark?: boolean,
-) => {
-  const slideElements = slides.map((slide, index) => {
-    return createMainFrameSlide(slide, index, isThemeDark);
-  });
-
-  // Set first slide as active and content visible
-  if (slideElements.length > 0) {
-    slideElements[0].element.setAttribute('data-active', 'true');
-    slideElements[0].element.setAttribute('data-content-visible', 'true');
-  }
-
-  return {
-    component: new ElementBuilder()
-      .withClassName('umd-carousel-wide__main-container')
-      .withStyles({
-        element: {
-          position: 'relative',
-          overflow: 'hidden',
-        },
-      })
-      .withChildren(...slideElements)
-      .build(),
-    refs: slideElements.map((el) => el.element),
-  };
-};
+  slideElements: ReturnType<typeof createMainFrameSlide>[],
+) =>
+  new ElementBuilder()
+    .withClassName('umd-carousel-wide__main-container')
+    .withStyles({
+      element: {
+        position: 'relative',
+        overflow: 'hidden',
+      },
+    })
+    .withChildren(...slideElements)
+    .build();
 
 export const createFramesContainer = (
   slides: CarouselWideProps['slides'],
@@ -312,46 +291,49 @@ export const createFramesContainer = (
   const previewRight = createPreviewContainer('right');
   const previousButton = createControlButton('prev', isThemeDark);
   const nextButton = createControlButton('next', isThemeDark);
-  const mainContainer = createMainContainer(slides, isThemeDark);
+  const slideElements = slides.map((slide, index) =>
+    createMainFrameSlide(slide, index, isThemeDark),
+  );
 
-  return createElementWithRefs({
-    className: 'umd-carousel-wide__frames-container',
-    children: [
-      previewLeft,
-      mainContainer.component,
-      previewRight,
-      previousButton,
-      nextButton,
-    ],
-    elementStyles: {
+  if (slideElements.length > 0) {
+    slideElements[0].element.setAttribute('data-active', 'true');
+    slideElements[0].element.setAttribute('data-content-visible', 'true');
+  }
+
+  const mainContainer = createMainContainer(slideElements);
+
+  const model = new ElementBuilder()
+    .withClassName('umd-carousel-wide__frames-container')
+    .withStyles({
       element: {
         position: 'relative',
-
-        [`@media (${token.media.queries.large.max})`]: {
-          padding: `0 ${token.spacing.md}`,
-        },
-
-        [`@media (${token.media.queries.tablet.min})`]: {
-          display: 'grid',
-          gridTemplateColumns: '10vw 1fr 10vw',
-          gridGap: token.spacing.md,
-          height: '56vw',
-          maxHeight: '60vh',
-        },
+        width: '100%',
+        padding: `0 ${token.spacing.md} 0`,
 
         [`@media (${token.media.queries.desktop.min})`]: {
+          padding: `0 0 ${token.spacing.md}`,
+          display: 'grid',
           gridTemplateColumns: '15vw 1fr 15vw',
           gridGap: token.spacing.lg,
+          height: '56vw',
+          maxHeight: '60vh',
         },
 
         [`@media (${token.media.queries.highDef.min})`]: {
           gridTemplateColumns: '20vw 1fr 20vw',
         },
       },
-    },
+    })
+    .withChildren(previewLeft, mainContainer, previewRight)
+    .build();
+
+  return {
+    element: model.element,
+    styles: model.styles,
+    buttons: { prev: previousButton, next: nextButton },
     refs: {
-      slidesContainer: mainContainer.component.element as HTMLDivElement,
-      slides: mainContainer.refs,
+      slidesContainer: mainContainer.element as HTMLDivElement,
+      slides: slideElements.map((el) => el.element),
       previews: {
         left: previewLeft.element as HTMLElement,
         right: previewRight.element as HTMLElement,
@@ -361,5 +343,5 @@ export const createFramesContainer = (
         next: nextButton.element as HTMLButtonElement,
       },
     },
-  });
+  };
 };

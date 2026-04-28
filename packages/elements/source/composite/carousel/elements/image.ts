@@ -1,173 +1,155 @@
 import * as token from '@universityofmaryland/web-token-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { getResponsiveImageSize } from '@universityofmaryland/web-utilities-library/media';
 import { setupSwipeDetection } from '@universityofmaryland/web-utilities-library/events';
-import { arrow_right as iconArrowRight } from '@universityofmaryland/web-icons-library/arrows';
+import { createCarouselNavButton, buttonColorsOnGray } from './nav-button';
 
 type TypeCarouselImageProps = {
   slides: HTMLElement[];
   callback?: (index: number) => void;
   maxHeight?: number;
+  isThemeDark?: boolean;
+  includeButtonWrapper?: boolean;
+};
+
+type CarouselImageModel = {
+  element: HTMLElement;
+  styles: string;
+  buttons: { prev: { element: HTMLElement; styles: string }; next: { element: HTMLElement; styles: string } };
+  events: {
+    Load: () => void;
+    EventMoveTo: (index: number) => void;
+    EventResize: () => void;
+    EventSlideLeft: () => void;
+    EventSlideRight: () => void;
+  };
 };
 
 const ANIMATION_DURATION = 500;
 const ATTRIBUTE_ACTIVE_SLIDE = 'data-active-slide';
-
-const ELEMENT_CAROUSEL_DECLARATION = 'carousel-image-slider-container';
-const ELEMENT_CAROUSEL_CONTAINER = 'carousel-image-slider';
-const ELEMENT_CAROUSEL_SLIDE = 'carousel-image-slide';
-const ELEMENT_CAROUSEL_SLIDER_BUTTON = 'carousel-slider-button';
-
-const OVERWRITE_ACTIVE_SLIDE = `.${ELEMENT_CAROUSEL_SLIDE}[${ATTRIBUTE_ACTIVE_SLIDE}]`;
-
-// prettier-ignore
-const SliderButtons = `
-  .${ELEMENT_CAROUSEL_SLIDER_BUTTON} {
-    background-color: ${token.color.white};
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 40px;
-    width: 40px;
-    position: absolute;
-    top: 50%;
-    z-index: 99;
-  }
-
-  .${ELEMENT_CAROUSEL_SLIDER_BUTTON}:first-of-type {
-    left: ${token.spacing.sm};
-  }
-
-  .${ELEMENT_CAROUSEL_SLIDER_BUTTON}:first-of-type svg {
-    transform: rotate(180deg);
-  }
-
-  .${ELEMENT_CAROUSEL_SLIDER_BUTTON}:last-of-type {
-    right: ${token.spacing.sm};
-  }
-
-  .${ELEMENT_CAROUSEL_SLIDER_BUTTON} svg {
-    fill: ${token.color.black};
-    width: 16px;
-  }
-`
-
-// prettier-ignore
-const SlideStyles = `
-  .${ELEMENT_CAROUSEL_SLIDE} {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    left: 100%;
-    display: none;
-    transition: transform ${ANIMATION_DURATION}ms ease-in-out;
-  }
-
-  ${OVERWRITE_ACTIVE_SLIDE} {
-    z-index: 99;
-    left: 0;
-    display: block;
-    transform: translateX(0);
-  }
-`
-
-// prettier-ignore
-const SliderStyles = `
-  .${ELEMENT_CAROUSEL_CONTAINER} {
-    position: relative;
-  }
-`
-
-// prettier-ignore
-const STYLES_CAROUSEL_IMAGE_ELEMENT = `
-  .${ELEMENT_CAROUSEL_DECLARATION} {
-    overflow: hidden;
-  }
-
-  ${SliderStyles}
-  ${SlideStyles}
-  ${SliderButtons}
-`;
+const BUTTON_CLASS_NEXT = 'carousel-slider-button--next';
+const BUTTON_CLASS_PREV = 'carousel-slider-button--prev';
 
 const CreateButton = ({
   EventSlide,
   isRight = true,
+  isThemeDark,
 }: {
   EventSlide: ({ forward }: { forward?: boolean }) => void;
   isRight?: boolean;
+  isThemeDark?: boolean;
 }) => {
-  const button = document.createElement('button');
-  button.setAttribute('type', 'button');
-  button.classList.add(ELEMENT_CAROUSEL_SLIDER_BUTTON);
-  button.innerHTML = iconArrowRight;
+  const buttonClassName = isRight ? BUTTON_CLASS_NEXT : BUTTON_CLASS_PREV;
+  const buttonDirection = isRight ? 'next' : 'prev';
 
-  if (!isRight) {
-    button.setAttribute('aria-label', 'Previous');
-  } else {
-    button.setAttribute('aria-label', 'Next');
-  }
+  return createCarouselNavButton({
+    className: buttonClassName,
+    direction: buttonDirection,
+  })
+    .withStyles({
+      element: {
+        position: 'relative',
+        top: 'auto',
+        left: 'auto',
+        right: 'auto',
+        zIndex: 99,
+        ...buttonColorsOnGray(isThemeDark),
+        [`@media (${token.media.queries.desktop.min})`]: {
+          position: 'absolute',
+          top: '50%',
+          left: 0,
+          right: 'auto',
+          ...(isRight && {
+            left: 'auto',
+            right: 0,
+          }),
+        },
+      },
+    })
+    .on('click', (event) => {
+      const button = event.currentTarget as HTMLButtonElement;
+      event.stopPropagation();
+      if (isRight) {
+        EventSlide({});
+      } else {
+        EventSlide({ forward: false });
+      }
+      button.disabled = true;
+      setTimeout(() => {
+        button.disabled = false;
+      }, ANIMATION_DURATION + 100);
+    })
+    .build();
+};
 
-  button.addEventListener('click', (event) => {
-    event.stopPropagation();
-    if (isRight) EventSlide({});
-    if (!isRight) EventSlide({ forward: false });
-    button.disabled = true;
+const CreateSlide = ({ slide }: { slide: HTMLElement }) => {
+  return new ElementBuilder(slide)
+    .withClassName('carousel-image-slide')
+    .withStyles({
+      element: {
+        height: '100%',
+        width: '100%',
+        position: 'absolute',
+        left: '100%',
+        display: 'none',
+        transition: `transform ${ANIMATION_DURATION}ms ease-in-out`,
 
-    setTimeout(() => {
-      button.disabled = false;
-    }, ANIMATION_DURATION + 100);
-  });
-
-  return button;
+        '&[data-active-slide]': {
+          zIndex: 99,
+          left: 0,
+          display: 'block',
+          transform: 'translateX(0)',
+        },
+      },
+    })
+    .build();
 };
 
 const SetCarouselSize = ({
   slider,
   activeSlide,
-  transition = false,
   maxHeight,
 }: {
   slider: HTMLElement;
   activeSlide: HTMLElement;
-  transition?: boolean;
   maxHeight?: number;
 }) => {
   const windowHeight = window.innerHeight - 48;
   const children = Array.from(activeSlide.children) as HTMLDivElement[];
-  const buttons = Array.from(
-    slider.querySelectorAll(`.${ELEMENT_CAROUSEL_SLIDER_BUTTON}`),
-  ) as HTMLButtonElement[];
+  const sliderContainer = slider.parentElement;
+  const sliderWrapper = sliderContainer && sliderContainer.parentElement;
+  const buttonRoot = sliderWrapper || sliderContainer;
+  const buttons = buttonRoot
+    ? (Array.from(buttonRoot.querySelectorAll(`.${BUTTON_CLASS_PREV}, .${BUTTON_CLASS_NEXT}`)) as HTMLButtonElement[])
+    : [];
   const img = activeSlide.querySelector('img') as HTMLImageElement;
-  const maxWindowHeight = maxHeight
-    ? maxHeight > windowHeight
-      ? windowHeight
-      : maxHeight
-    : windowHeight;
+  const maxWindowHeight = Math.min(maxHeight || windowHeight, windowHeight);
   const imageSize = getResponsiveImageSize({
     image: img,
     parentNode: slider,
     maxWindowHeight,
   });
-  const imageContainer = children.find((child) =>
-    child.contains(img),
-  ) as HTMLElement;
+  const imageContainer = children.find((child) => child.contains(img)) as HTMLElement;
+  const isMobile = window.matchMedia(`(${token.media.queries.tablet.max})`).matches;
   let size = imageSize;
 
   imageContainer.style.height = `${imageSize}px`;
 
+  if (isMobile) {
+    buttons.forEach((button) => { button.style.top = ''; });
+  } else {
+    buttons.forEach((button) => {
+      button.style.top = `${imageSize / 2 - button.offsetHeight / 2}px`;
+    });
+  }
+
   if (children.length > 1) {
-    size = children.reduce((acc, currentElement) => {
-      return currentElement.offsetHeight + acc;
+    size = children.reduce((accumulator, currentElement) => {
+      return currentElement.offsetHeight + accumulator;
     }, 0);
   }
 
-  buttons.forEach((button) => (button.style.top = `${imageSize / 2}px`));
-
-  if (transition) {
-    slider.style.transition = `height ${ANIMATION_DURATION}ms ease-in-out`;
-  } else {
-    slider.style.transition = `none`;
-  }
   slider.style.height = `${size}px`;
 };
 
@@ -178,8 +160,9 @@ const SlideActiveSlide = ({
   slide: HTMLElement;
   isRight: boolean;
 }) => {
-  const transformDirection = isRight ? 'translateX(-100%)' : 'translateX(100%)';
-  slide.style.transform = `${transformDirection}`;
+  const transformDirection = isRight ? '-100%' : '100%';
+
+  slide.style.transform = `translateX(${transformDirection})`;
 
   setTimeout(() => {
     slide.removeAttribute(ATTRIBUTE_ACTIVE_SLIDE);
@@ -198,9 +181,7 @@ const SlideUpcomingSlide = ({
   isRight: boolean;
 }) => {
   const amount = '90';
-  const transformDirection = isRight
-    ? `translateX(-${amount}%)`
-    : `translateX(${amount}%)`;
+  const translate = isRight ? `translateX(-${amount}%)` : `translateX(${amount}%)`;
   const startingPosition = isRight ? `${amount}%` : `-${amount}%`;
 
   slide.style.zIndex = '9';
@@ -209,7 +190,7 @@ const SlideUpcomingSlide = ({
   slide.style.left = `${startingPosition}`;
 
   setTimeout(() => {
-    slide.style.transform = `${transformDirection}`;
+    slide.style.transform = translate;
   }, 1);
 
   setTimeout(() => {
@@ -226,104 +207,167 @@ const SlideUpcomingSlide = ({
 
 export const createCompositeCarouselImage = (props: TypeCarouselImageProps) =>
   (() => {
-    const { slides, callback, maxHeight } = props;
-    const container = document.createElement('div');
-    const slider = document.createElement('div');
+    const { slides, callback, maxHeight, isThemeDark, includeButtonWrapper = true } = props;
     let activeIndex = 0;
-    let styles = STYLES_CAROUSEL_IMAGE_ELEMENT;
+    let sliderElement: HTMLElement | null = null;
 
     const EventSlide = ({ forward = true }: { forward?: boolean }) => {
       SlideActiveSlide({ slide: slides[activeIndex], isRight: forward });
 
       if (forward) {
         activeIndex = activeIndex + 1;
-        if (activeIndex >= slides.length) activeIndex = 0;
+        if (activeIndex >= slides.length) {
+          activeIndex = 0;
+        }
       } else {
         activeIndex = activeIndex - 1;
-        if (activeIndex < 0) activeIndex = slides.length - 1;
+        if (activeIndex < 0) {
+          activeIndex = slides.length - 1;
+        }
       }
 
       SlideUpcomingSlide({ slide: slides[activeIndex], isRight: forward });
-      SetCarouselSize({
-        slider,
-        activeSlide: slides[activeIndex],
-        transition: true,
-        maxHeight,
-      });
-      if (callback) callback(activeIndex);
+      if (sliderElement) {
+        SetCarouselSize({
+          slider: sliderElement,
+          activeSlide: slides[activeIndex],
+          maxHeight,
+        });
+      }
+      if (callback) {
+        callback(activeIndex);
+      }
     };
 
     const EventMoveTo = (index: number) => {
       SlideActiveSlide({ slide: slides[activeIndex], isRight: true });
       activeIndex = index;
       SlideUpcomingSlide({ slide: slides[activeIndex], isRight: true });
-      SetCarouselSize({
-        slider,
-        activeSlide: slides[activeIndex],
-        transition: true,
-        maxHeight,
-      });
-      if (callback) callback(activeIndex);
+      if (sliderElement) {
+        SetCarouselSize({
+          slider: sliderElement,
+          activeSlide: slides[activeIndex],
+          maxHeight,
+        });
+      }
+      if (callback) {
+        callback(activeIndex);
+      }
     };
 
     const EventSlideLeft = () => EventSlide({ forward: false });
     const EventSlideRight = () => EventSlide({ forward: true });
 
     const EventSwipe = () => {
-      const swipes = (isrightswipe: Boolean) => {
-        if (!isrightswipe) {
+      const swipes = (isRightSwipe: boolean) => {
+        if (!isRightSwipe) {
           EventSlide({ forward: true });
         } else {
           EventSlide({ forward: false });
         }
       };
-
-      setupSwipeDetection({
-        container: slider,
-        callback: swipes,
-      });
+      if (sliderElement) {
+        setupSwipeDetection({ container: sliderElement, callback: swipes });
+      }
     };
 
     const EventResize = () => {
-      SetCarouselSize({ slider, activeSlide: slides[activeIndex], maxHeight });
+      if (sliderElement) {
+        SetCarouselSize({
+          slider: sliderElement,
+          activeSlide: slides[activeIndex],
+          maxHeight,
+        });
+      }
     };
 
     const Load = () => {
       const setSize = () => {
+        if (!sliderElement) return;
         const activeSlide = slides[activeIndex];
-        SetCarouselSize({ slider, activeSlide, maxHeight });
+        SetCarouselSize({ slider: sliderElement, activeSlide, maxHeight });
         activeSlide.setAttribute(ATTRIBUTE_ACTIVE_SLIDE, '');
       };
       setTimeout(setSize, 100);
       setTimeout(setSize, 300);
     };
 
-    slider.classList.add(ELEMENT_CAROUSEL_CONTAINER);
-    slides.forEach((slide) => slide.classList.add(ELEMENT_CAROUSEL_SLIDE));
-    slider.append(...slides);
-    slider.appendChild(CreateButton({ EventSlide, isRight: false }));
-    slider.appendChild(
-      CreateButton({
-        EventSlide,
-        isRight: true,
-      }),
-    );
+    const prevButtonModel = CreateButton({ EventSlide, isRight: false, isThemeDark });
+    const nextButtonModel = CreateButton({ EventSlide, isRight: true, isThemeDark });
+    const slidesElements = slides.map((slide) => CreateSlide({ slide: slide }));
+    const sliderModel = new ElementBuilder()
+      .withClassName('carousel-image-slider')
+      .withStyles({
+        element: {
+          position: 'relative',
+          overflow: 'hidden',
+          width: '100%',
+        },
+      })
+      .ref((element) => {
+        sliderElement = element;
+      })
+      .withChildren(...slidesElements)
+      .build();
 
-    container.classList.add(ELEMENT_CAROUSEL_DECLARATION);
-    container.appendChild(slider);
+    const containerBuilder = new ElementBuilder()
+      .withClassName('carousel-image-slider-container')
+      .withStyles({
+        element: {
+          position: 'relative',
+          width: '100%',
+          ...(includeButtonWrapper && {
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+            [`@media (${token.media.queries.desktop.min})`]: {
+              display: 'block',
+            },
+          }),
+        },
+      })
+      .withChild(sliderModel);
 
-    window.addEventListener('resize', debounce(EventResize, 10));
-    EventSwipe();
+    if (includeButtonWrapper) {
+      const buttonWrapperModel = new ElementBuilder()
+        .withClassName('carousel-image-slider-buttons')
+        .withStyles({
+          element: {
+            display: 'flex',
+            justifyContent: 'center',
+            gap: token.spacing.min,
+            width: '100%',
+            marginTop: token.spacing.md,
+            marginBottom: token.spacing.md,
+            [`@media (${token.media.queries.desktop.min})`]: {
+              width: 'auto',
+              marginTop: 0,
+              marginBottom: 0,
+            },
+          },
+        })
+        .withChildren(prevButtonModel, nextButtonModel)
+        .build();
+      containerBuilder.withChild(buttonWrapperModel);
+    }
 
-    return {
-      element: container,
-      styles,
-      events: {
+    const containerModel = containerBuilder
+      .withEvents({
         Load,
         EventMoveTo,
         EventResize,
         EventSlideLeft,
         EventSlideRight,
-      },
-    };
+      })
+      .build();
+
+    window.addEventListener('resize', debounce(EventResize, 10));
+    EventSwipe();
+
+    return {
+      element: containerModel.element,
+      styles: containerModel.styles,
+      buttons: { prev: prevButtonModel, next: nextButtonModel },
+      events: containerModel.events,
+    } as CarouselImageModel;
   })();

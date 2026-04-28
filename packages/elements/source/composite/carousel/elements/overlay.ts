@@ -1,99 +1,110 @@
 import * as token from '@universityofmaryland/web-token-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { combineStyles } from '@universityofmaryland/web-utilities-library/styles';
 import * as carouselElements from '../elements';
 import { Image as LayoutImage } from 'layout';
 
-const ELEMENT_CAROUSEL_OVERLAY_COINTAINER = 'carousel-overlay-container';
-
-// prettier-ignore
-const OverlayImageContainerStyles = `
-  .${ELEMENT_CAROUSEL_OVERLAY_COINTAINER} {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: ${token.color.gray.dark};
-  }
-
-  .${ELEMENT_CAROUSEL_OVERLAY_COINTAINER} img {
-    object-fit: contain;
-    max-height: 100%;
-  }
-`;
-
-// prettier-ignore
-const STYLES_CAROUSEL_OVERLAY_ELEMENT = `
-  ${LayoutImage.Styles}
-  ${OverlayImageContainerStyles}
-`;
-
 const CreateOverlaySlide = ({ images }: { images: HTMLImageElement[] }) =>
   images.map((image) => {
-    const slide = document.createElement('div');
-    const imageContainer = document.createElement('div');
-    const imageBlock = LayoutImage.CreateElement({
-      image,
-      showCaption: true,
-    });
+    const imageBlock = LayoutImage.CreateElement({ image, showCaption: true });
 
-    imageContainer.classList.add(ELEMENT_CAROUSEL_OVERLAY_COINTAINER);
-    imageContainer.appendChild(imageBlock);
+    const imageContainerModel = new ElementBuilder()
+      .withClassName('carousel-overlay-container')
+      .withStyles({
+        element: {
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: token.color.gray.dark,
 
-    slide.appendChild(imageContainer);
+          '& > *': {
+            width: '100%',
+            height: '100%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          },
 
-    return slide;
+          '& img': {
+            objectFit: 'contain',
+            maxHeight: '100%',
+            maxWidth: '100%',
+          },
+        },
+      })
+      .withChild(imageBlock)
+      .build();
+
+    return imageContainerModel;
   });
 
-export const createCompositeCarouselOverlay = ({ images }: { images: HTMLImageElement[] }) =>
+export const createCompositeCarouselOverlay = ({
+  images,
+}: {
+  images: HTMLImageElement[];
+}) =>
   (() => {
-    let styles = STYLES_CAROUSEL_OVERLAY_ELEMENT;
+    let isFullScreenEvents: any = null;
 
     const setFullScreen = (index: number) => {
       let canMove = true;
 
-      const checkKeyEvents = (event: KeyboardEvent) => {
-        if (!canMove) return;
-        canMove = false;
-        if (event.key == 'ArrowLeft') overlayCarousel.events.EventSlideLeft();
-        if (event.key == 'ArrowRight') overlayCarousel.events.EventSlideRight();
-
-        setTimeout(() => {
-          canMove = true;
-        }, 700);
-      };
-
       overlayCarousel.events.EventMoveTo(index);
+
       setTimeout(() => fixedFullScreen.events.show(), 100);
 
       setTimeout(() => {
         overlayCarousel.events.EventResize();
       }, 100);
 
-      isFullScreenEvents = window.addEventListener('keyup', checkKeyEvents);
+      isFullScreenEvents = window.addEventListener(
+        'keyup',
+        (event: KeyboardEvent) => {
+          if (!canMove) return;
+
+          canMove = false;
+          if (event.key === 'ArrowLeft') {
+            overlayCarousel.events.EventSlideLeft();
+          } else if (event.key === 'ArrowRight') {
+            overlayCarousel.events.EventSlideRight();
+          }
+
+          setTimeout(() => {
+            canMove = true;
+          }, 700);
+        },
+      );
     };
 
-    const overlaySlides = CreateOverlaySlide({ images });
+    const overlaySlideModels = CreateOverlaySlide({ images });
+    const overlaySlides = overlaySlideModels.map((model) => model.element);
+    const firstSlide = overlaySlideModels[0];
+    const slideStyles = firstSlide ? firstSlide.styles : '';
 
     const overlayCarousel = carouselElements.image({
       slides: overlaySlides,
       maxHeight: (window.innerHeight / 10) * 8,
     });
 
-    styles += overlayCarousel.styles;
-
     const fixedFullScreen = carouselElements.fullScreen({
       content: overlayCarousel.element,
       callback: () => {
-        if (isFullScreenEvents)
+        if (isFullScreenEvents) {
           window.removeEventListener('keyup', isFullScreenEvents);
+        }
       },
     });
 
-    styles += fixedFullScreen.styles;
-
-    let isFullScreenEvents: any = null;
-
     return {
       element: fixedFullScreen.element,
-      styles,
+      styles: combineStyles(
+        LayoutImage.Styles,
+        slideStyles,
+        overlayCarousel.styles,
+        fixedFullScreen.styles,
+      ),
       events: {
         setFullScreen,
       },

@@ -3,7 +3,7 @@ import {
   createSlot,
   createStyledSlotOrClone,
 } from '@universityofmaryland/web-utilities-library/elements';
-import { Model } from '@universityofmaryland/web-model-library';
+import { Attributes, Model } from '@universityofmaryland/web-model-library';
 import { reset } from '../../helpers/styles';
 import { SLOTS as GlobalSlots, MakeNavDrawer } from './common';
 import { ComponentRegistration } from '../../_types';
@@ -53,6 +53,22 @@ const styles = `
  *
  * ## Observed Attributes
  * - `sticky` - Dynamically toggle sticky behavior
+ * - `data-layout-rerender` - Set to `"true"` to rebuild the header (and its
+ *   internal mobile drawer) after slot content changes. Newly added
+ *   `umd-element-nav-item` children — either as direct descendants with
+ *   `slot="nav-item-N"` or wrapped inside a fresh `<div slot="main-navigation">`
+ *   — are picked up on the next build. Dispatches a `component:layout-rerender`
+ *   CustomEvent on completion with `detail.previousSize` and `detail.currentSize`.
+ *
+ * @example
+ * ```js
+ * // Trigger a rerender after dynamically updating slot content
+ * const header = document.querySelector('umd-element-navigation-header');
+ * header.addEventListener('component:layout-rerender', (e) => {
+ *   console.log('header rerendered', e.detail.previousSize, e.detail.currentSize);
+ * });
+ * header.setAttribute('data-layout-rerender', 'true');
+ * ```
  *
  * @example
  * ```html
@@ -106,26 +122,38 @@ const styles = `
  */
 const CreateNavItemSlots = ({ element }: { element: HTMLElement }) => {
   const { NAVIGATION } = SLOTS;
+
+  const existingItems = Array.from(
+    element.querySelectorAll(
+      ':scope > umd-element-nav-item[slot^="nav-item-"]',
+    ),
+  ) as HTMLElement[];
+
   const navigationSlot = element.querySelector(
-    `[slot="${NAVIGATION}"]`,
-  ) as HTMLElement;
-  let navItems: HTMLElement[] = [];
+    `:scope > [slot="${NAVIGATION}"]`,
+  ) as HTMLElement | null;
+
+  const newItems = navigationSlot
+    ? (Array.from(
+        navigationSlot.querySelectorAll(':scope > umd-element-nav-item'),
+      ) as HTMLElement[])
+    : [];
+
+  const allItems = [...existingItems, ...newItems];
+  const navItems: HTMLElement[] = [];
+
+  allItems.forEach((item, i) => {
+    const slotAttr = `nav-item-${i}`;
+    if (item.getAttribute('slot') !== slotAttr) {
+      item.setAttribute('slot', slotAttr);
+    }
+    if (item.parentElement !== element) {
+      element.appendChild(item);
+    }
+    navItems.push(createSlot(slotAttr));
+  });
 
   if (navigationSlot) {
-    const navItem = Array.from(
-      navigationSlot.querySelectorAll(':scope > umd-element-nav-item'),
-    ) as HTMLElement[];
-
-    navigationSlot.removeAttribute('slot');
-
-    navItem.forEach((item, i) => {
-      const slotAttr = `nav-item-${i}`;
-      item.setAttribute(`slot`, slotAttr);
-
-      navItems.push(createSlot(slotAttr));
-      element.appendChild(item);
-    });
-
     navigationSlot.remove();
   }
 
@@ -171,37 +199,54 @@ const CreateHeader = ({
   return value;
 };
 
-const attributes = [
+const attributes = Attributes.handler.combine(
+  Attributes.handler.observe.rerender({
+    callback: (element) => element.events?.rerender?.(),
+  }),
   {
     name: 'sticky',
     handler: (ref: any, _oldValue: string | null, newValue: string | null) => {
-      ref.events?.sticky({ isSticky: newValue === 'true' });
+      ref.events?.sticky?.({ isSticky: newValue === 'true' });
     },
   },
-];
+);
 
 const createComponent = (element: HTMLElement) => {
-  const shadow = element.shadowRoot as ShadowRoot;
-  const drawer = MakeNavDrawer({
-    element,
-    ...SLOTS,
-    displayType: 'drawer-nav',
-  });
-  const headerProps: { element: HTMLElement; eventOpen?: () => void } = {
-    element,
+  const container = document.createElement('div');
+  let stickyEvent: ((args: { isSticky: boolean }) => void) | undefined;
+
+  const build = () => {
+    container.replaceChildren();
+
+    const drawer = MakeNavDrawer({
+      element,
+      ...SLOTS,
+      displayType: 'drawer-nav',
+      excludeSlots: ['nav-item-'],
+    });
+    const headerProps: { element: HTMLElement; eventOpen?: () => void } = {
+      element,
+    };
+
+    if (drawer) {
+      container.appendChild(drawer.element);
+      headerProps.eventOpen = drawer.events.eventOpen;
+    }
+
+    const headerRef = CreateHeader(headerProps);
+    container.appendChild(headerRef.element);
+    stickyEvent = headerRef.events.sticky;
   };
 
-  if (drawer) {
-    shadow.appendChild(drawer.element);
-    headerProps.eventOpen = drawer.events.eventOpen;
-  }
-
-  const headerRef = CreateHeader(headerProps);
+  build();
 
   return {
-    element: headerRef.element,
+    element: container,
     styles,
-    events: { sticky: headerRef.events.sticky },
+    events: {
+      sticky: (args: { isSticky: boolean }) => stickyEvent?.(args),
+      rerender: build,
+    },
   };
 };
 

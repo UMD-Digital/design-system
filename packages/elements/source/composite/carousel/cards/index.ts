@@ -1,10 +1,7 @@
-import {
-  element,
-  layout,
-  token,
-  typography,
-} from '@universityofmaryland/web-styles-library';
-import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
+import { element, layout, typography } from '@universityofmaryland/web-styles-library';
+import * as token from '@universityofmaryland/web-token-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
 import * as carouselElements from '../elements';
 
 type TypeCarouselCardsRequirements = {
@@ -16,293 +13,112 @@ type TypeCarouselCardsRequirements = {
   cards: HTMLElement[];
 };
 
-const MEDIUM = 768;
-const LARGE = 1024;
-
 const BACKGROUND_TEXTURE = `<svg aria-hidden="true" width="1599" height="618" viewBox="0 0 1599 618" fill="none" xmlns="http://www.w3.org/2000/svg"
 "><mask id="mask0_2135_11278" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="1600" height="618"><rect width="1600" height="618" fill="#242424"></rect></mask><g mask="url(#mask0_2135_11278)"><g opacity="0.5"><mask id="mask1_2135_11278" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="-17" y="-56" width="1823" height="408"><path d="M-17 351.98V-56H1806V351.98" fill="white"></path></mask><g mask="url(#mask1_2135_11278)"><path d="M807.562 -68.3515L-433.759 1173.58L-217.501 1389.94L1023.82 148.012L807.562 -68.3515Z" fill="#262626"></path><path d="M360.649 -82.8017L-880.672 1159.13L-649.997 1389.92L591.324 147.986L360.649 -82.8017Z" fill="black"></path><path d="M1154.8 1173.26L-533.139 -515.499L-677.311 -371.256L1010.63 1317.51L1154.8 1173.26Z" fill="#262626"></path><path d="M2162.77 710.525L1312.18 -140.478L1168.01 3.76505L2018.6 854.768L2162.77 710.525Z" fill="black"></path><path d="M1312.16 -140.485L202.096 -1251.09L57.9241 -1106.85L1167.99 3.75794L1312.16 -140.485Z" fill="#EDEDED"></path><path d="M2133.89 -1251.07L1023.83 -140.458L1168 3.78455L2278.07 -1106.83L2133.89 -1251.07Z" fill="#383838"></path><path d="M591.343 147.968L-634.061 -1078.04L-864.736 -847.248L360.668 378.756L591.343 147.968Z" fill="black"></path><path d="M1023.82 147.97L-217.503 -1093.96L-433.761 -877.595L807.559 364.333L1023.82 147.97Z" fill="#383838"></path></g><mask id="mask2_2135_11278" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="-17" y="351" width="1823" height="780"><path d="M-17 351.938V753.629L837.67 753.672L845.662 1130.18L1806 1130.26V352.094" fill="white"></path></mask><g mask="url(#mask2_2135_11278)"><path d="M1023.81 555.952L-217.506 -685.977L-433.764 -469.613L807.557 772.316L1023.81 555.952Z" fill="#262626"></path><path d="M591.347 555.967L-649.973 -685.962L-880.648 -455.174L360.672 786.755L591.347 555.967Z" fill="black"></path><path d="M1010.63 -613.543L-677.305 1075.22L-533.133 1219.46L1154.8 -469.3L1010.63 -613.543Z" fill="#262626"></path><path d="M1760.63 110.929L910.039 961.932L1054.21 1106.17L1904.8 255.172L1760.63 110.929Z" fill="black"></path><path d="M360.674 325.168L-864.73 1551.17L-634.055 1781.96L591.349 555.956L360.674 325.168Z" fill="black"></path><path d="M807.565 339.631L-433.756 1581.56L-217.498 1797.92L1023.82 555.995L807.565 339.631Z" fill="#383838"></path></g></g></g></svg>`;
 
-const ELEMENT_NAME = 'umd-element-carousel-cards';
-
-const ELEMENT_DECLARATION = 'carousel-cards-declaration';
-const CAROUSEL_CONTAINER = 'element-carousel-container';
-const CAROUSEL_LOCK = 'element-carousel-lock';
-
-const INTRO_CONTAINER = 'carousel-cards-intro-container';
-const INTRO_CONTAINER_LOCK = 'carousel-cards-intro-container-lock';
-const INTRO_CONTAINER_HEADLINE = 'carousel-cards-intro-container-headline';
-const INTRO_CONTAINER_TEXT = 'carousel-cards-intro-container-text';
-const INTRO_CONTAINER_CTA = 'carousel-cards-intro-container-cta';
-
-const OVERWRITE_ANIMATION_CAROUSEL_DECLARATION = `.${CAROUSEL_CONTAINER} .${carouselElements.blocks.Elements.declaration}`;
-const OVERWRITE_ANIMATION_CAROUSEL_CONTAINER = `.${CAROUSEL_CONTAINER} .${carouselElements.blocks.Elements.container}`;
-const OVERWRITE_ANIMATION_CAROUSEL_BUTTON = `.${CAROUSEL_CONTAINER} .${carouselElements.blocks.Elements.button}`;
-
-// prettier-ignore
-const OverwriteCarouselStyles = `
-  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    ${OVERWRITE_ANIMATION_CAROUSEL_CONTAINER} {
-      padding-bottom: 60px;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    ${OVERWRITE_ANIMATION_CAROUSEL_DECLARATION} {
-      width: 60%;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON} {
-      bottom: 0;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON} {
-      top: 50%;
-      transform: translateY(-50%);
-    }
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON}:first-of-type {
-      left: 49px;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON}:first-of-type {
-      right: -52px;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON}:last-of-type {
-      left: 0;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    ${OVERWRITE_ANIMATION_CAROUSEL_BUTTON}:last-of-type {
-      left: -52px;
-    }
-  }
-`;
-
-// prettier-ignore
-const HeadlineStyles = `
-  ${jssToCSS({
-    styleObj: {
-      [`.${INTRO_CONTAINER_HEADLINE}`]: typography.sans.largest,
-    },
-  })}
-
-  ${jssToCSS({
-    styleObj: {
-      [`.${INTRO_CONTAINER_HEADLINE} *`]: typography.sans.largest,
-    },
-  })}
-
-  .${INTRO_CONTAINER_HEADLINE},
-  .${INTRO_CONTAINER_HEADLINE} * {
-    color: ${token.color.white};
-    font-weight: 800;
-    text-transform: uppercase;
-  }
-`;
-
-// prettier-ignore
-const TextStyles = `
-  * + .${INTRO_CONTAINER_TEXT} {
-    margin-top: ${token.spacing.md};
-  }
-
-  ${jssToCSS({
-    styleObj: {
-      [`.${INTRO_CONTAINER_TEXT}`]: element.text.rich.advancedDark,
-    },
-  })}
-
-  ${jssToCSS({
-    styleObj: {
-      [`.${INTRO_CONTAINER_TEXT}`]: typography.sans.medium,
-    },
-  })}
-`;
-
-// prettier-ignore
-const ActionStyles = `
-  * + .${INTRO_CONTAINER_CTA} {
-    margin-top: ${token.spacing.md};
-  }
-
-  .${INTRO_CONTAINER_CTA} a {
-    color: ${token.color.white};
-  }
-`;
-
-// prettier-ignore
-const IntroContainer = `
-  @container ${ELEMENT_NAME} (max-width: ${LARGE - 1}px) {
-    .${INTRO_CONTAINER} {
-      margin-bottom: ${token.spacing.md};
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${INTRO_CONTAINER} {
-      width: calc(40% - ${token.spacing['2xl']});
-      padding-right: ${token.spacing['2xl']};
-    }
-  }
-
-  @media (min-width: ${LARGE}px) {
-    .${INTRO_CONTAINER} .${INTRO_CONTAINER_LOCK} {
-      max-width: inherit;
-      padding: 0;
-    }
-  }
-`;
-
-// prettier-ignore
-const ContainerLock = `
-  .${CAROUSEL_LOCK} {
-    position: relative;
-    ${jssToCSS({
-      styleObj: layout.space.horizontal.larger,
-    })}
-  }
-
-  @media (max-width: ${MEDIUM - 1}px) {
-    .${CAROUSEL_LOCK} {
-      padding-right: 0;
-    }
-  }
-
-  @media (min-width: ${LARGE}px) {
-    .${CAROUSEL_LOCK} {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-  }
-
-  @media umd-carousel-card (max-width: ${LARGE - 1}px) {
-    .${CAROUSEL_LOCK} {
-      max-width: inherit;
-      padding: 0;
-    }
-  }
-`;
-
-// prettier-ignore
-const ContainerStyles = `
+const KEYFRAMES = `
   @keyframes card-carousel-slide-in {
     from { transform: translateX(-25vw); }
-    to { transform: translateX(0);}
+    to { transform: translateX(0); }
   }
-
-  .${CAROUSEL_CONTAINER} {
-    background-color: ${token.color.black};
-    padding: ${token.spacing['3xl']} 0;
-    position: relative;
-    overflow: clip;
-  }
-
-  @container ${ELEMENT_NAME} (max-width: 300px) {
-    .${CAROUSEL_CONTAINER} {
-      display: none;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${CAROUSEL_CONTAINER} {
-      padding: ${token.spacing['4xl']} 0;
-    }
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${LARGE}px) {
-    .${CAROUSEL_CONTAINER} {
-      padding: ${token.spacing['max']} 0;
-    }
-  }
-
-  .${CAROUSEL_CONTAINER} > svg {
-    width: auto;
-    height: 100%;
-    object-fit: cover;
-    position: absolute;
-    top: 0;
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: scroll()) {
-      .${CAROUSEL_CONTAINER} > svg {
-        animation: card-carousel-slide-in ease-in-out forwards;
-        animation-timeline: view();
-        animation-range-start: 0;
-        animation-range-end: 100vh;
-        transform: translateX(-15vw);
-      }
-    }
-  }
-`
-
-// prettier-ignore
-const STYLES_CAROUSEL_CARDS_ELEMENT = `
-  .${ELEMENT_DECLARATION} {
-    container: ${ELEMENT_NAME} / inline-size;
-  }
-
-  .${ELEMENT_DECLARATION} * {
-    color: ${token.color.white};
-  }
-  
-  ${carouselElements.blocks.Styles}
-  ${ContainerStyles}
-  ${ContainerLock}
-  ${HeadlineStyles}
-  ${TextStyles}
-  ${ActionStyles}
-  ${IntroContainer}
-  ${OverwriteCarouselStyles}
 `;
 
 const CreateIntro = (props: TypeCarouselCardsRequirements) => {
   const { headline, text, actions } = props;
-  const introContainer = document.createElement('div');
-  const introWrapper = document.createElement('div');
 
-  introWrapper.classList.add(INTRO_CONTAINER_LOCK);
+  const createHeadline = () => {
+    if (!headline) return null;
+    return new ElementBuilder(headline)
+      .withClassName('carousel-cards-intro-container-headline')
+      .withStyles({
+        element: {
+          ...typography.sans.largest,
+          color: token.color.white,
+          fontWeight: 800,
+          textTransform: 'uppercase',
+          [`@container carousel-cards (${token.media.queries.large.max})`]: {
+            fontSize: token.font.size.xl,
+          },
+          '& *': {
+            ...typography.sans.largest,
+            color: token.color.white,
+            fontWeight: 800,
+            textTransform: 'uppercase',
+            [`@container carousel-cards (${token.media.queries.large.max})`]: {
+              fontSize: token.font.size.xl,
+            },
+          },
+        },
+      })
+      .build();
+  };
 
-  if (headline) {
-    headline.classList.add(INTRO_CONTAINER_HEADLINE);
-    introWrapper.appendChild(headline);
-  }
+  const createText = () => {
+    if (!text) return null;
+    return new ElementBuilder(text)
+      .withClassName('carousel-cards-intro-container-text')
+      .withStyles({
+        element: {
+          ...element.text.rich.advancedDark,
+          ...typography.sans.medium,
+          '* + &': { marginTop: token.spacing.md },
+        },
+      })
+      .build();
+  };
 
-  if (text) {
-    text.classList.add(INTRO_CONTAINER_TEXT);
-    introWrapper.appendChild(text);
-  }
+  const createActions = () => {
+    if (!actions) {
+      return null;
+    }
+    return new ElementBuilder(actions)
+      .withClassName('carousel-cards-intro-container-cta')
+      .withStyles({
+        element: {
+          '* + &': { marginTop: token.spacing.md },
+          '& a': { color: token.color.white },
+        },
+      })
+      .build();
+  };
 
-  if (actions) {
-    actions.classList.add(INTRO_CONTAINER_CTA);
-    introWrapper.appendChild(actions);
-  }
+  const children = [createHeadline(), createText(), createActions()].filter(
+    (children) => children != null,
+  );
 
-  introContainer.classList.add(INTRO_CONTAINER);
-  introContainer.appendChild(introWrapper);
+  const lockModel = new ElementBuilder()
+    .withClassName('carousel-cards-intro-container-lock')
+    .withStyles({
+      element: {
+        [`@media (${token.media.queries.desktop.min})`]: {
+          maxWidth: 'inherit',
+          padding: 0,
+        },
+      },
+    })
+    .withChildren(...children)
+    .build();
 
-  return introContainer;
+  return new ElementBuilder()
+    .withClassName('carousel-cards-intro-container')
+    .withStyles({
+      element: {
+        [`@container (${token.media.queries.tablet.max})`]: {
+          marginBottom: token.spacing.md,
+        },
+        [`@container (${token.media.queries.desktop.min})`]: {
+          width: `calc(40% - ${token.spacing['2xl']})`,
+          paddingRight: token.spacing['2xl'],
+        },
+      },
+    })
+    .withChild(lockModel)
+    .build();
 };
 
 export const createCompositeCarouselCards = (props: TypeCarouselCardsRequirements) =>
   (() => {
     const { slide, shadowRef } = props;
-    const declaration = document.createElement('div');
-    const container = document.createElement('div');
-    const wrapper = document.createElement('div');
 
     if (slide) slide.style.minHeight = '360px';
     if (shadowRef) shadowRef.style.minHeight = '360px';
@@ -322,25 +138,123 @@ export const createCompositeCarouselCards = (props: TypeCarouselCardsRequirement
         showHint: false,
       },
     });
-    const introContainer = CreateIntro(props);
 
-    wrapper.classList.add(CAROUSEL_LOCK);
-    wrapper.appendChild(introContainer);
-    wrapper.appendChild(carouselContainer.element);
+    const introModel = CreateIntro(props);
 
-    container.classList.add(CAROUSEL_CONTAINER);
-    container.innerHTML = BACKGROUND_TEXTURE;
-    container.appendChild(wrapper);
+    const lockModel = new ElementBuilder()
+      .withClassName('element-carousel-lock')
+      .withStyles({
+        element: {
+          position: 'relative',
+          ...layout.space.horizontal.larger,
+          [`@media (${token.media.queries.large.max})`]: {
+            paddingRight: 0,
+          },
+          [`@media (${token.media.queries.desktop.min})`]: {
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          },
+          [`@container carousel-cards (${token.media.queries.tablet.max})`]: {
+            maxWidth: 'inherit',
+          },
+        },
+      })
+      .withChildren(introModel, carouselContainer.element)
+      .build();
 
-    declaration.classList.add(ELEMENT_DECLARATION);
-    declaration.appendChild(container);
+    const containerModel = new ElementBuilder()
+      .withClassName('element-carousel-container')
+      .withStyles({
+        element: {
+          backgroundColor: token.color.black,
+          padding: `${token.spacing['3xl']} 0`,
+          position: 'relative',
+          overflow: 'clip',
+          '@container (max-width: 300px)': {
+            display: 'none',
+          },
+          [`@container (${token.media.queries.tablet.min})`]: {
+            padding: `${token.spacing['4xl']} 0`,
+          },
+          [`@container (${token.media.queries.desktop.min})`]: {
+            padding: `${token.spacing['max']} 0`,
+          },
+          '& > svg': {
+            width: 'auto',
+            height: '100%',
+            objectFit: 'cover',
+            position: 'absolute',
+            top: 0,
+            ...withViewTimelineAnimation({
+              animation: 'card-carousel-slide-in ease-in-out forwards',
+              animationTimeline: 'view()',
+              animationRangeStart: '0',
+              animationRangeEnd: '100vh',
+              transform: 'translateX(-15vw)',
+            }),
+          },
+          [`& .${carouselElements.blocks.Elements.declaration}`]: {
+            [`@container (${token.media.queries.desktop.min})`]: {
+              width: '60%',
+            },
+          },
+          [`& .${carouselElements.blocks.Elements.container}`]: {
+            [`@container carousel-cards (${token.media.queries.tablet.max})`]: {
+              paddingBottom: '60px',
+            },
+          },
+          [`& .${carouselElements.blocks.Elements.button}`]: {
+            [`@container carousel-cards (${token.media.queries.tablet.max})`]: {
+              bottom: 0,
+            },
+            [`@container carousel-cards (${token.media.queries.desktop.min})`]: {
+              top: '50%',
+              transform: 'translateY(-50%)',
+            },
+            '&:first-of-type': {
+              [`@container carousel-cards (${token.media.queries.tablet.max})`]: {
+                left: '49px',
+              },
+              [`@container carousel-cards (${token.media.queries.desktop.min})`]: {
+                right: '-52px',
+              },
+            },
+            '&:last-of-type': {
+              [`@container carousel-cards (${token.media.queries.tablet.max})`]: {
+                left: 0,
+              },
+              [`@container carousel-cards (${token.media.queries.desktop.min})`]: {
+                left: '-52px',
+              },
+            },
+          },
+        },
+      })
+      .withChild(lockModel)
+      .withModifier((containerElement) => {
+        containerElement.insertAdjacentHTML('afterbegin', BACKGROUND_TEXTURE);
+      })
+      .build();
 
-    return {
-      element: declaration,
-      styles: STYLES_CAROUSEL_CARDS_ELEMENT,
-      events: {
-        resize: carouselContainer.events.resize,
-        load: carouselContainer.events.load,
-      },
+    const declarationModel = new ElementBuilder()
+      .withClassName('carousel-cards-declaration')
+      .withStyles({
+        element: {
+          container: 'carousel-cards / inline-size',
+          '& *': { color: token.color.white },
+        },
+      })
+      .withChild(containerModel)
+      .build();
+
+    declarationModel.events = {
+      resize: carouselContainer.events.resize,
+      load: carouselContainer.events.load,
     };
+		
+    declarationModel.styles += carouselElements.blocks.Styles;
+    declarationModel.styles += KEYFRAMES;
+
+    return declarationModel;
   })();

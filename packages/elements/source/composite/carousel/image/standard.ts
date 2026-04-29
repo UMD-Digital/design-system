@@ -1,9 +1,6 @@
-import {
-  element,
-  token,
-  typography,
-} from '@universityofmaryland/web-styles-library';
-import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
+import * as token from '@universityofmaryland/web-token-library';
+import * as Styles from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as carouselElements from '../elements';
 import { animations, buttons } from 'atomic';
 import { Image as LayoutImage } from 'layout';
@@ -30,11 +27,14 @@ type TypeImageContainerProps = TypeImage &
   TypeFullScreen &
   TypesetFullScreen & {
     index: number;
+    isThemeDark?: boolean;
   };
 
 type TypeCarouselSlideProps = TypeSlideContent &
   TypesetFullScreen &
-  TypeFullScreen;
+  TypeFullScreen & {
+    isThemeDark?: boolean;
+  };
 
 type TypeCarouselImageStandardProps = TypeSlideContent &
   TypeFullScreen & {
@@ -42,353 +42,334 @@ type TypeCarouselImageStandardProps = TypeSlideContent &
   };
 
 const MEDIUM = 500;
-
 const ATTRIBUTE_REFERENCE = 'data-reference';
-const ATTRIBUTE_THEME = 'data-theme';
-const THEME_DARK = 'dark';
-
-const IS_THEME_DARK = `[${ATTRIBUTE_THEME}="${THEME_DARK}"]`;
-
-const ELEMENT_NAME = 'umd-carousel-image-standard';
-const ELEMENT_CAROUSEL_IMAGE_DECLARATION =
-  'carousel-image-standard-declaration';
-const ELEMENT_CAROUSEL_IMAGE_CONTAINER = 'carousel-image-standard-container';
-
-const ELEMENT_SLIDE = 'carousel-image-standard-slide';
-const ELEMENT_SLIDE_IMAGE_CONTAINER = 'carousel-image-standard-slide-image';
-const ELEMENT_SLIDE_IMAGE_WRAPPER = 'carousel-image-standard-slide-wrapper';
-const ELEMENT_SLIDE_TEXT_CONTAINER = 'carousel-image-standard-slide-text';
-const ELEMENT_SLIDE_HEADLINE = 'carousel-image-standard-slide-headline';
-const ELEMENT_SLIDE_RICH_TEXT = 'carousel-image-standard-slide-rich-text';
-const ELEMENT_CAROUSEL_SLIDER_BUTTON = 'carousel-slider-button';
-
-const ELEMENT_CAROUSEL_INDICATOR_WRAPPER = 'carousel-indicator-wrapper';
-const ELEMENT_CAROUSEL_OVERLAY_IMAGE_COINTAINER =
-  'carousel-overlay-image-container';
-
-const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_CAROUSEL_IMAGE_CONTAINER}${IS_THEME_DARK}`;
-const OVERWRITE_THEME_DARK_RICH_TEXT = `${OVERWRITE_THEME_DARK_CONTAINER} .${ELEMENT_SLIDE_RICH_TEXT}`;
-const OVERWRITE_THEME_DARK_TEXT_CONTAINER = `.${ELEMENT_CAROUSEL_IMAGE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_SLIDE_TEXT_CONTAINER}`;
-const OVERWRITE_THEME_DARK_IMAGE_CONTAINER = `.${ELEMENT_CAROUSEL_IMAGE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_SLIDE_IMAGE_CONTAINER}`;
-const OVERWRITE_THEME_DARK_INDICATOR = `.${ELEMENT_CAROUSEL_IMAGE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_CAROUSEL_INDICATOR_WRAPPER}`;
-const OVERWRITE_THEME_DARK_BUTTON = `.${ELEMENT_CAROUSEL_IMAGE_CONTAINER}${IS_THEME_DARK} .${ELEMENT_CAROUSEL_SLIDER_BUTTON}`;
-
-// prettier-ignore
-const OverwriteThemeDark = `
-  ${OVERWRITE_THEME_DARK_CONTAINER},
-  ${OVERWRITE_THEME_DARK_TEXT_CONTAINER},
-  ${OVERWRITE_THEME_DARK_INDICATOR} {
-    background-color: ${token.color.black};
-  }
-
-  ${OVERWRITE_THEME_DARK_IMAGE_CONTAINER} {
-    background-color: ${token.color.gray.dark};
-  }
-
-  ${OVERWRITE_THEME_DARK_TEXT_CONTAINER} * {
-    color: ${token.color.white};
-  }
-
-  ${OVERWRITE_THEME_DARK_BUTTON} {
-    background-color: ${token.color.black};
-  }
-
-  ${OVERWRITE_THEME_DARK_BUTTON} > svg {
-    fill: ${token.color.white};
-  }
-
-  ${OVERWRITE_THEME_DARK_RICH_TEXT} {
-    color: ${token.color.white};
-  }
-
-  ${jssToCSS({
-    styleObj: {
-      [`${OVERWRITE_THEME_DARK_RICH_TEXT}`]: element.text.rich.advancedDark,
-    },
-  })}
-`;
-
-// prettier-ignore
-const IndicatorContainerStyles = `
-  .${ELEMENT_CAROUSEL_INDICATOR_WRAPPER} {
-    padding: ${token.spacing.md};
-    background-color: ${token.color.gray.lightest};
-    display: flex;
-    justify-content: center;
-  }
-  
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${ELEMENT_CAROUSEL_INDICATOR_WRAPPER} {
-      padding: ${token.spacing.lg};
-    }
-  }
-`;
-
-// prettier-ignore
-const OverlayImageContainerStyles = `
-  .${ELEMENT_CAROUSEL_OVERLAY_IMAGE_COINTAINER} {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: ${token.color.gray.dark};
-  }
-
-  .${ELEMENT_CAROUSEL_OVERLAY_IMAGE_COINTAINER} img {
-    object-fit: contain;
-    max-height: 100%;
-  }
-`;
-
-// prettier-ignore
-const TextContainerStyles = `
-  .${ELEMENT_SLIDE_TEXT_CONTAINER} {
-    padding: ${token.spacing.md};
-    padding-bottom: 0;
-    background-color: ${token.color.gray.lightest};
-  }
-
-  @container ${ELEMENT_NAME} (min-width: ${MEDIUM}px) {
-    .${ELEMENT_SLIDE_TEXT_CONTAINER} {
-      padding: ${token.spacing.lg};
-      padding-bottom: 0;
-    }
-  }
-
-  ${jssToCSS({
-    styleObj: {
-      [`.${ELEMENT_SLIDE_HEADLINE}`]: typography.sans.large,
-    },
-  })}
-
-  .${ELEMENT_SLIDE_RICH_TEXT} {
-    margin-top: ${token.spacing.min};
-    color: ${token.color.gray.dark}
-  }
-
-  ${jssToCSS({
-    styleObj: {
-      [`.${ELEMENT_SLIDE_RICH_TEXT}`]: element.text.rich.advanced,
-    },
-  })}
-`
-
-// prettier-ignore
-const ImageContainerStyles = `
-  .${ELEMENT_SLIDE_IMAGE_CONTAINER} {
-    position: relative;
-    background-color: ${token.color.black};
-  }
-
-  .${ELEMENT_SLIDE_IMAGE_WRAPPER} {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .${ELEMENT_SLIDE_IMAGE_WRAPPER} > * {
-    height: 100%;
-  }
-
-  .${ELEMENT_SLIDE_IMAGE_CONTAINER} img {
-    object-fit: contain;
-    max-height: 100%;
-  }
-`
-
-// prettier-ignore
-const STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT = `
-  .${ELEMENT_CAROUSEL_IMAGE_DECLARATION} {
-    container: ${ELEMENT_NAME} / inline-size;
-  }
-
-  .${ELEMENT_CAROUSEL_IMAGE_CONTAINER} {
-    overflow: hidden;
-    background-color: ${token.color.gray.lightest};
-  }
-
-  ${LayoutImage.Styles}
-  ${ImageContainerStyles}
-  ${TextContainerStyles}
-  ${OverlayImageContainerStyles}
-  ${IndicatorContainerStyles}
-  ${OverwriteThemeDark}
-`;
 
 export const createCompositeCarouselImageStandard = (
   props: TypeCarouselImageStandardProps,
 ) =>
   (() => {
     const { images, isThemeDark, isFullScreenOption } = props;
-    const elementDeclaration = document.createElement('div');
-    const elementContainer = document.createElement('div');
-    const elementIndicator = document.createElement('div');
     const overlayCarousel = carouselElements.overlay({
       images,
     });
-    let styles = STYLES_CAROUSEL_IMAGE_STANDARD_ELEMENT;
 
-    styles += overlayCarousel.styles;
+    const createHeadline = ({
+      headline,
+      isThemeDark,
+    }: {
+      headline?: HTMLElement | null;
+      isThemeDark?: boolean;
+    }) => {
+      if (!headline) {
+        return null;
+      }
 
-    const CreateTextContainer = ({
+      return new ElementBuilder(headline)
+        .withClassName('carousel-image-standard-slide-headline')
+        .styled(Styles.typography.sans.large)
+        .withStyles({
+          element: {
+            ...(isThemeDark && {
+              color: token.color.white,
+              '& *': {
+                color: token.color.white,
+              },
+            }),
+          },
+        })
+        .build();
+    };
+
+    const createRichText = ({
+      richText,
+      isThemeDark,
+    }: {
+      richText?: HTMLElement | null;
+      isThemeDark?: boolean;
+    }) => {
+      if (!richText) {
+        return null;
+      }
+
+      let builder = new ElementBuilder(richText)
+        .withClassName('carousel-image-standard-slide-rich-text')
+        .withStyles({
+          element: {
+            marginTop: token.spacing.min,
+            color: token.color.gray.dark,
+            ...(isThemeDark && {
+              color: token.color.white,
+            }),
+          },
+        });
+
+      if (isThemeDark) {
+        builder = builder.styled(Styles.element.text.rich.advancedDark);
+      } else {
+        builder = builder.styled(Styles.element.text.rich.advanced);
+      }
+
+      return builder.build();
+    };
+
+    const createTextContainer = ({
       headlines,
       texts,
       reference,
+      isThemeDark,
     }: {
       headlines?: HTMLElement[] | null;
       texts?: HTMLElement[] | null;
       reference: string | null;
+      isThemeDark?: boolean;
     }) => {
-      const textContainer = document.createElement('div');
+      let headline: HTMLElement | null = null;
+      let richText: HTMLElement | null = null;
 
-      const headline = headlines?.find(
-        (headline) => headline.getAttribute(ATTRIBUTE_REFERENCE) === reference,
-      );
-      const richText = texts?.find(
-        (text) => text.getAttribute(ATTRIBUTE_REFERENCE) === reference,
-      );
-
-      textContainer.classList.add(ELEMENT_SLIDE_TEXT_CONTAINER);
-
-      if (headline || richText) {
-        if (headline) {
-          headline.classList.add(ELEMENT_SLIDE_HEADLINE);
-          textContainer.appendChild(headline);
-        }
-
-        if (richText) {
-          richText.classList.add(ELEMENT_SLIDE_RICH_TEXT);
-          textContainer.appendChild(richText);
-        }
-
-        return textContainer;
+      if (headlines) {
+        headline =
+          headlines.find(
+            (currentHeadline) =>
+              currentHeadline.getAttribute(ATTRIBUTE_REFERENCE) === reference,
+          ) || null;
       }
 
-      return null;
+      if (texts) {
+        richText =
+          texts.find(
+            (currentText) =>
+              currentText.getAttribute(ATTRIBUTE_REFERENCE) === reference,
+          ) || null;
+      }
+
+      if (!headline && !richText) {
+        return null;
+      }
+
+      const textContainerBuilder = new ElementBuilder()
+        .withClassName('carousel-image-standard-slide-text')
+        .withStyles({
+          element: {
+            padding: token.spacing.md,
+            paddingBottom: 0,
+            backgroundColor: token.color.gray.lightest,
+            ...(isThemeDark && {
+              backgroundColor: token.color.black,
+            }),
+            [`@container (min-width: ${MEDIUM}px)`]: {
+              padding: token.spacing.lg,
+              paddingBottom: 0,
+            },
+          },
+        });
+      const headlineElement = createHeadline({
+        headline,
+        isThemeDark,
+      });
+      const richTextElement = createRichText({
+        richText,
+        isThemeDark,
+      });
+
+      if (headlineElement) {
+        textContainerBuilder.withChild(headlineElement);
+      }
+
+      if (richTextElement) {
+        textContainerBuilder.withChild(richTextElement);
+      }
+
+      return textContainerBuilder.build();
     };
 
-    const CreateImageContainer = ({
+    const createImageContainer = ({
       image,
       isFullScreenOption,
       setFullScreen,
       index,
+      isThemeDark,
     }: TypeImageContainerProps) => {
-      const imageContainer = document.createElement('div');
-      const imageWrapper = document.createElement('div');
       const imageBlock = LayoutImage.CreateElement({
         image,
         showCaption: true,
       });
-
-      imageContainer.classList.add(ELEMENT_SLIDE_IMAGE_CONTAINER);
-
-      imageWrapper.classList.add(ELEMENT_SLIDE_IMAGE_WRAPPER);
-      imageWrapper.appendChild(imageBlock);
+      const imageBlockBuilder = new ElementBuilder(imageBlock);
 
       if (isFullScreenOption) {
-        const button = buttons.fullscreen.create({
-          callback: setFullScreen,
-          index,
-        });
-        imageBlock.appendChild(button.element);
-
-        styles += button.styles;
+        imageBlockBuilder.withChild(
+          buttons.fullscreen.create({
+            callback: setFullScreen,
+            index,
+          }),
+        );
       }
 
-      imageContainer.appendChild(imageWrapper);
-
-      return imageContainer;
+      return new ElementBuilder()
+        .withClassName('carousel-image-standard-slide-image')
+        .withStyles({
+          element: {
+            position: 'relative',
+            backgroundColor: token.color.black,
+            ...(isThemeDark && {
+              backgroundColor: token.color.gray.dark,
+            }),
+            '& img': {
+              objectFit: 'contain',
+              maxHeight: '100%',
+            },
+          },
+        })
+        .withChild(
+          new ElementBuilder()
+            .withClassName('carousel-image-standard-slide-wrapper')
+            .withStyles({
+              element: {
+                height: '100%',
+                width: '100%',
+                position: 'absolute',
+                top: 0,
+                left: '50%',
+                transform: 'translateX(-50%)',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                '& > *': {
+                  height: '100%',
+                },
+              },
+            })
+            .withChild(imageBlockBuilder.build())
+            .build(),
+        )
+        .build();
     };
 
-    const CreateSlide = (props: TypeCarouselSlideProps) => {
-      const { images, setFullScreen } = props;
-      const clonedImages = images.map((image) =>
-        image.cloneNode(true),
-      ) as HTMLImageElement[];
+    const createSlide = (props: TypeCarouselSlideProps) => {
+      const { images, setFullScreen, isThemeDark } = props;
+      const clonedImages = images.map(
+        (image) => image.cloneNode(true) as HTMLImageElement,
+      );
 
       return clonedImages.map((image, index) => {
         const reference = image.getAttribute(ATTRIBUTE_REFERENCE);
-        const slide = document.createElement('div');
-        const imageContainer = CreateImageContainer({
+        const textContainer = createTextContainer({
           ...props,
-          image,
-          setFullScreen,
-          index,
+          reference,
+          isThemeDark,
         });
-        const textContainer = CreateTextContainer({ ...props, reference });
+        const slideBuilder = new ElementBuilder()
+          .withClassName('carousel-image-standard-slide')
+          .withChild(
+            createImageContainer({
+              ...props,
+              image,
+              setFullScreen,
+              index,
+              isThemeDark,
+            }),
+          );
 
-        slide.classList.add(ELEMENT_SLIDE);
-        slide.appendChild(imageContainer);
-        if (textContainer) slide.appendChild(textContainer);
+        if (textContainer) {
+          slideBuilder.withChild(textContainer);
+        }
 
-        return slide;
+        return slideBuilder.build();
       });
     };
 
-    const slides = CreateSlide({
+    const slideModels = createSlide({
       ...props,
       setFullScreen: overlayCarousel.events.setFullScreen,
     });
+		
     const carousel = carouselElements.image({
-      slides,
+      slides: slideModels.map((slide) => slide.element),
       callback: (activeIndex) => {
         indicator.position(activeIndex);
       },
       maxHeight: 500,
     });
-
-    styles += carousel.styles;
-
-    const indicator = animations.actions.indicator({
+    const indicatorOptions: {
+      count: number;
+      callback: (index: number) => void;
+      isThemeDark?: boolean;
+      overlayColor?: string;
+    } = {
       count: images.length || 0,
       callback: carousel.events.EventMoveTo,
       isThemeDark,
-      ...(!isThemeDark && {
-        overlayColor: token.color.gray.lightest,
-      }),
-    });
+    };
 
-    styles += indicator.styles;
+    if (!isThemeDark) {
+      indicatorOptions.overlayColor = token.color.gray.lightest;
+    }
 
-    elementIndicator.classList.add(ELEMENT_CAROUSEL_INDICATOR_WRAPPER);
-    elementIndicator.appendChild(indicator.element);
+    const indicator = animations.actions.indicator(indicatorOptions);
+    const indicatorWrapper = new ElementBuilder()
+      .withClassName('carousel-indicator-wrapper')
+      .withStyles({
+        element: {
+          padding: token.spacing.md,
+          backgroundColor: token.color.gray.lightest,
+          display: 'flex',
+          justifyContent: 'center',
+          ...(isThemeDark && {
+            backgroundColor: token.color.black,
+          }),
+          [`@container (min-width: ${MEDIUM}px)`]: {
+            padding: token.spacing.lg,
+          },
+        },
+      })
+      .withChild(indicator)
+      .build();
 
-    elementContainer.classList.add(ELEMENT_CAROUSEL_IMAGE_CONTAINER);
-    elementContainer.appendChild(carousel.element);
-    elementContainer.appendChild(elementIndicator);
-    if (isThemeDark) elementContainer.setAttribute(ATTRIBUTE_THEME, THEME_DARK);
-
-    elementDeclaration.classList.add(ELEMENT_CAROUSEL_IMAGE_DECLARATION);
-    elementDeclaration.appendChild(elementContainer);
+    const declaration = new ElementBuilder()
+      .withClassName('carousel-image-standard-declaration')
+      .withStyles({
+        element: {
+          containerType: 'inline-size',
+        },
+      })
+      .withChild(
+        new ElementBuilder()
+          .withClassName('carousel-image-standard-container')
+          .withStyles({
+            element: {
+              overflow: 'hidden',
+              backgroundColor: token.color.gray.lightest,
+              ...(isThemeDark && {
+                backgroundColor: token.color.black,
+              }),
+            },
+          })
+          .withChild(carousel)
+          .withChild(indicatorWrapper)
+          .build(),
+      )
+      .build();
 
     images[images.length - 1].addEventListener('load', carousel.events.Load);
 
-    const responseOptions = {
-      styles,
+    let elementModel = declaration;
+
+    if (isFullScreenOption) {
+      elementModel = new ElementBuilder()
+        .withChild(overlayCarousel)
+        .withChild(declaration)
+        .build();
+    }
+
+    elementModel.styles += slideModels.reduce(
+      (accumulator, currentSlide) => accumulator + currentSlide.styles,
+      '',
+    );
+    elementModel.styles += LayoutImage.Styles;
+
+    return {
+      ...elementModel,
       events: {
         SetEventReize: carousel.events.EventResize,
       },
-    };
-
-    if (isFullScreenOption) {
-      const element = document.createElement('div');
-
-      element.appendChild(overlayCarousel.element);
-      element.appendChild(elementDeclaration);
-
-      return {
-        element,
-        ...responseOptions,
-      };
-    }
-
-    return {
-      element: elementDeclaration,
-      ...responseOptions,
     };
   })();

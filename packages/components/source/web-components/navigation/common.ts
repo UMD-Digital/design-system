@@ -18,6 +18,7 @@ type TypeSliderRequirements = {
   PRIMARY_SLIDE_LINKS: string;
   PRIMARY_SLIDE_SECONDARY_LINKS: string;
   CHILDREN_SLIDES: string;
+  excludeSlots?: string[];
 };
 
 type TypeNavDrawerRequirements = TypeSliderRequirements & {
@@ -30,6 +31,7 @@ export const MakeSliderData = ({
   PRIMARY_SLIDE_LINKS,
   PRIMARY_SLIDE_SECONDARY_LINKS,
   CHILDREN_SLIDES,
+  excludeSlots = [],
 }: TypeSliderRequirements) => {
   const allSlots = Array.from(element.querySelectorAll(':scope > [slot]'));
 
@@ -47,9 +49,17 @@ export const MakeSliderData = ({
   ) as HTMLSlotElement;
 
   const childrenSlotContent = allSlots.filter((element) => {
-    return !Object.values(DRAWER_SLOTS).find(
-      (value) => value == element.getAttribute('slot'),
-    );
+    const slotName = element.getAttribute('slot');
+    if (Object.values(DRAWER_SLOTS).find((value) => value === slotName)) {
+      return false;
+    }
+    if (
+      slotName &&
+      excludeSlots.some((prefix) => slotName.startsWith(prefix))
+    ) {
+      return false;
+    }
+    return true;
   });
 
   const hasPrimarySlideContent =

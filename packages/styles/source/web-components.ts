@@ -168,6 +168,8 @@ const brandCardStack = createElementStyles('umd-element-brand-card-stack', {
     containIntrinsicSize: 'auto 100vh',
     minHeight: `100vh`,
     display: 'block',
+
+    '& > *': { display: 'none' },
   },
   defined: {
     contentVisibility: 'visible',
@@ -190,13 +192,15 @@ const carousels = createBatchStyles(
     'carousel-people',
     'carousel-thumbnail',
   ],
-  '',
+  'umd-element-',
   {
     notDefined: {
-      contentVisibility: 'hidden',
+      contentVisibility: 'auto',
       containIntrinsicSize: 'auto 80vh',
       minHeight: `80vh`,
       display: 'block',
+
+      '& > *': { opacity: '0' },
     },
     defined: {
       contentVisibility: 'visible',
@@ -212,19 +216,16 @@ const carousels = createBatchStyles(
 
 const heroes = {
   ...createBatchStyles(
-    [
-      'umd-element-hero',
-      'umd-element-hero-expand',
-      'umd-element-hero-logo',
-      'umd-element-person-hero',
-    ],
-    '',
+    ['hero', 'hero-expand', 'hero-logo', 'person-hero'],
+    'umd-element-',
     {
       notDefined: {
-        contentVisibility: 'hidden',
+        contentVisibility: 'auto',
         containIntrinsicSize: 'auto 50vh',
         minHeight: `50vh`,
         display: 'block',
+
+        '& > *': { opacity: '0' },
       },
       defined: {
         contentVisibility: 'visible',
@@ -233,23 +234,19 @@ const heroes = {
       },
     },
   ),
-  ...createBatchStyles(
-    ['umd-element-hero-brand-video', 'umd-element-hero-grid'],
-    '',
-    {
-      notDefined: {
-        contentVisibility: 'hidden',
-        containIntrinsicSize: 'auto 100vh',
-        minHeight: `100vh`,
-        display: 'block',
-      },
-      defined: {
-        contentVisibility: 'visible',
-        containerType: 'inline-size',
-        display: 'block',
-      },
+  ...createBatchStyles(['hero-brand-video', 'hero-grid'], 'umd-element-', {
+    notDefined: {
+      contentVisibility: 'hidden',
+      containIntrinsicSize: 'auto 100vh',
+      minHeight: `100vh`,
+      display: 'block',
     },
-  ),
+    defined: {
+      contentVisibility: 'visible',
+      containerType: 'inline-size',
+      display: 'block',
+    },
+  }),
   ...createElementStyles('umd-element-hero-minimal', {
     notDefined: {
       contentVisibility: 'hidden',

@@ -309,26 +309,6 @@ const navigation = {
       },
     },
   }),
-  ...createElementStyles('umd-element-navigation-utility', {
-    notDefined: {
-      display: 'block !important',
-      minHeight: '44px !important',
-      containIntrinsicSize: 'auto !important',
-      '& > *': { display: 'none' },
-    },
-    defined: {
-      position: 'relative',
-      zIndex: '9999',
-
-      '& > *': { display: 'block' },
-    },
-    custom: {
-      ['umd-element-navigation-utility']: {
-        minHeight: '44px',
-        backgroundColor: color.red,
-      },
-    },
-  }),
 };
 
 // ---------------------------------------------------------------------------
@@ -414,6 +394,32 @@ const layoutExpand = createElementStyles('umd-layout-image-expand', {
     containerType: 'inline-size',
   },
 });
+
+// Navigation Utility Alert
+const navigationUtilityAlert = createElementStyles(
+  'umd-element-navigation-utility',
+  {
+    notDefined: {
+      display: 'block !important',
+      minHeight: '44px !important',
+      containIntrinsicSize: 'auto !important',
+      '& > *': { display: 'none' },
+    },
+    defined: {
+      position: 'relative',
+      zIndex: '99999',
+      containerType: 'normal',
+
+      '& > *': { display: 'block' },
+    },
+    custom: {
+      ['umd-element-navigation-utility']: {
+        minHeight: '44px',
+        backgroundColor: color.red,
+      },
+    },
+  },
+);
 
 // Pathway
 const pathway = createElementStyles('umd-element-pathway', {
@@ -542,24 +548,25 @@ const personTabular = createElementStyles('umd-element-person', {
 // ---------------------------------------------------------------------------
 
 export const webComponentStyles = {
-  ...simpleElements,
   ...accordion,
-  ...brandLogoAnimation,
-  ...cardOverlay,
-  ...feedElements,
-  ...callToAction,
-  ...breadcrumb,
   ...brandCardStack,
+  ...brandLogoAnimation,
+  ...breadcrumb,
+  ...callToAction,
   ...cardListStyles,
+  ...cardOverlay,
   ...carousels,
+  ...feedElements,
   ...footer,
   ...heroes,
   ...layoutExpand,
+  ...navigation,
+  ...navigationUtilityAlert,
   ...pathway,
   ...personTabular,
-  ...navigation,
   ...scrollTop,
   ...sectionIntro,
+  ...simpleElements,
   ...socialSharing,
   ...stickyColumns,
   ...tabs,

@@ -89,13 +89,15 @@ const PrimaryStyles = `
     color: ${token.color.black};
     font-size: ${token.font.size.base};
     transition: color 0.2s ease-in-out;
-    line-height: 1.15em;
     font-weight: 700;
     text-wrap: pretty;
     display: block;
     display: flex;
     align-items: flex-end;
     text-align: right;
+    line-height: 1.15em !important;
+    letter-spacing: 0 !important;
+    word-spacing: 0 !important;
   }
 
   .${ELEMENT_PRIMARLY_LINK_WRAPPER} > a:hover,

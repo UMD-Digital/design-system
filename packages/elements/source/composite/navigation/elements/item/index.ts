@@ -411,8 +411,14 @@ const CreateNavItemElement = (props: TypeNavItem) =>
     };
 
     const ShowDropdown = () => {
+      if (elementContainer.hasAttribute(ATTRIBUTE_SHOWING)) return;
       elementContainer.setAttribute(ATTRIBUTE_SHOWING, '');
       DropdownPositionPerViewPort();
+      focusCallback = handleKeyboardNavigation({
+        element: elementContainer,
+        action: () => HideDropdown(),
+        shadowDomContext: context,
+      });
     };
 
     const HideDropdown = () => {
@@ -424,11 +430,6 @@ const CreateNavItemElement = (props: TypeNavItem) =>
     const EventButtonClick = () => {
       if (isShowing && dropdownLinksContainer) {
         ShowDropdown();
-        focusCallback = handleKeyboardNavigation({
-          element: elementContainer,
-          action: () => HideDropdown(),
-          shadowDomContext: context,
-        });
 
         setTimeout(() => {
           const firstElement = dropdownLinksContainer.querySelector(

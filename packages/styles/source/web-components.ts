@@ -263,52 +263,6 @@ const heroes = {
 };
 
 // ---------------------------------------------------------------------------
-// Navigation
-// ---------------------------------------------------------------------------
-
-const navigation = {
-  ...createElementStyles('umd-element-navigation-header', {
-    notDefined: {
-      contentVisibility: 'hidden',
-      containIntrinsicSize: 'auto 44px',
-      backgroundColor: color.white,
-      height: '60px',
-      '& > *': { display: 'none' },
-    },
-    defined: {
-      containerType: 'normal',
-    },
-  }),
-  ...createElementStyles('umd-element-nav-item', {
-    notDefined: {
-      display: 'none',
-    },
-    defined: {
-      containerType: 'normal',
-      display: 'block',
-    },
-  }),
-  ...createElementStyles('umd-element-nav-drawer', {
-    notDefined: {
-      contentVisibility: 'hidden',
-      containIntrinsicSize: '44px 44px',
-      backgroundColor: color.white,
-      height: '44px',
-      width: '44px',
-      '& > *': { display: 'none' },
-    },
-  }),
-  ...createElementStyles('umd-element-navigation-sticky', {
-    custom: {
-      ['umd-element-navigation-sticky']: {
-        position: 'relative',
-        zIndex: '9999',
-      },
-    },
-  }),
-};
-
-// ---------------------------------------------------------------------------
 // Miscellaneous elements (alphabetical)
 // ---------------------------------------------------------------------------
 
@@ -389,6 +343,57 @@ const layoutExpand = createElementStyles('umd-layout-image-expand', {
   defined: {
     contentVisibility: 'visible',
     containerType: 'inline-size',
+  },
+});
+
+// Navigation Header
+const navigationHeader = createElementStyles('umd-element-navigation-header', {
+  notDefined: {
+    contentVisibility: 'hidden',
+    containIntrinsicSize: 'auto 44px',
+    backgroundColor: color.white,
+    height: '60px',
+    '& > *': { display: 'none' },
+  },
+  defined: {
+    containerType: 'normal',
+  },
+});
+
+// Navigation Item
+const navigationItem = createElementStyles('umd-element-nav-item', {
+  notDefined: {
+    display: 'none',
+  },
+  defined: {
+    containerType: 'normal',
+    display: 'block',
+  },
+});
+
+// Navigation Drawer
+const navigationDrawer = createElementStyles('umd-element-nav-drawer', {
+  notDefined: {
+    contentVisibility: 'hidden',
+    containIntrinsicSize: '44px 44px',
+    backgroundColor: color.white,
+    height: '44px',
+    width: '44px',
+    '& > *': { display: 'none' },
+  },
+});
+
+// Navigation Sticky
+const navigationSticky = createElementStyles('umd-element-navigation-sticky', {
+  defined: {
+    position: 'relative',
+    zIndex: '99999',
+  },
+  custom: {
+    ['umd-element-navigation-sticky']: {
+      position: 'relative',
+      zIndex: '99999',
+    },
   },
 });
 
@@ -557,7 +562,10 @@ export const webComponentStyles = {
   ...footer,
   ...heroes,
   ...layoutExpand,
-  ...navigation,
+  ...navigationSticky,
+  ...navigationHeader,
+  ...navigationItem,
+  ...navigationDrawer,
   ...navigationUtilityAlert,
   ...pathway,
   ...personTabular,

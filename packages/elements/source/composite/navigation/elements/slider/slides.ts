@@ -3,8 +3,15 @@ import * as typography from '@universityofmaryland/web-styles-library/typography
 import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import { cloneElementWithoutAttributes } from '@universityofmaryland/web-utilities-library/dom';
 import { chevron_down as iconChevronDown } from '@universityofmaryland/web-icons-library/controls';
-import { createCompositeNavigationSliderFirst as FirstSlide, TypeFirstSlideProps, TypeFirstSlide } from './slide-first';
-import { createCompositeNavigationSliderAction as SlideAction, TypeActionProps } from './action';
+import {
+  createCompositeNavigationSliderFirst as FirstSlide,
+  TypeFirstSlideProps,
+  TypeFirstSlide,
+} from './slide-first';
+import {
+  createCompositeNavigationSliderAction as SlideAction,
+  TypeActionProps,
+} from './action';
 
 export type TypeSlideProps = TypeActionProps &
   TypeFirstSlideProps & {
@@ -41,6 +48,14 @@ const ELEMENT_NAV_SLIDE_CONTENT = 'nav-slide-action-content';
 const ContentStyles = `
   * + .${ELEMENT_NAV_SLIDE_CONTENT} {
     margin-top: ${token.spacing.lg};
+  }
+`;
+
+// prettier-ignore
+const WrapperStyles = `
+  .${ELEMENT_NAV_SLIDE_WRAPPER} {
+    overflow-y: scroll;
+    height: 100%;
   }
 `;
 
@@ -103,6 +118,7 @@ const STYLES_NAV_SLIDES = `
   ${BackButtonStyles}
   ${HeadlineStyles}
   ${ContentStyles}
+  ${WrapperStyles}
   ${SlideAction.Styles}
   ${FirstSlide.Styles}
 `;

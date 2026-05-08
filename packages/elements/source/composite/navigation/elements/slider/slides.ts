@@ -52,14 +52,6 @@ const ContentStyles = `
 `;
 
 // prettier-ignore
-const WrapperStyles = `
-  .${ELEMENT_NAV_SLIDE_WRAPPER} {
-    overflow-y: scroll;
-    height: 100%;
-  }
-`;
-
-// prettier-ignore
 const BackButtonStyles = `
   .${ELEMENT_NAV_SLIDE_BACK_BUTTON} {
     display: block;
@@ -118,7 +110,6 @@ const STYLES_NAV_SLIDES = `
   ${BackButtonStyles}
   ${HeadlineStyles}
   ${ContentStyles}
-  ${WrapperStyles}
   ${SlideAction.Styles}
   ${FirstSlide.Styles}
 `;

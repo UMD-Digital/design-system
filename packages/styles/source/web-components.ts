@@ -48,7 +48,6 @@ const simpleElements = createBatchStyles(
     'card-video',
     'events-date',
     'logo',
-    'nav-slider',
     'media-inline',
     'media-gif',
     'modal',
@@ -383,6 +382,18 @@ const navigationDrawer = createElementStyles('umd-element-nav-drawer', {
   },
 });
 
+// Navigation Slider
+const navigationSlider = createElementStyles('umd-element-navigation-slider', {
+  notDefined: {
+    contentVisibility: 'hidden',
+    '& > *': { display: 'none' },
+  },
+  defined: {
+    position: 'relative',
+    zIndex: '99',
+  },
+});
+
 // Navigation Sticky
 const navigationSticky = createElementStyles('umd-element-navigation-sticky', {
   defined: {
@@ -562,10 +573,11 @@ export const webComponentStyles = {
   ...footer,
   ...heroes,
   ...layoutExpand,
-  ...navigationSticky,
+  ...navigationDrawer,
   ...navigationHeader,
   ...navigationItem,
-  ...navigationDrawer,
+  ...navigationSlider,
+  ...navigationSticky,
   ...navigationUtilityAlert,
   ...pathway,
   ...personTabular,

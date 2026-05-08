@@ -2,7 +2,11 @@ import * as token from '@universityofmaryland/web-token-library';
 import { handleKeyboardNavigation } from '@universityofmaryland/web-utilities-library/events';
 import { close_large as iconCloseLarge } from '@universityofmaryland/web-icons-library/controls';
 import { TypeMenuDisplayButtonRequirements } from '../menu-button';
-import { createCompositeNavigationSlider as NavDrawerSlider, TypeNavSliderRequirements } from '../slider';
+import {
+  createCompositeNavigationSlider as NavDrawerSlider,
+  TypeNavSliderRequirements,
+} from '../slider';
+import { createCompositeNavigationSlides as NavDrawerSlides } from '../slider/slides';
 
 export type TypeNavDrawerRequirements = TypeNavSliderRequirements & {
   context?: HTMLElement;
@@ -24,6 +28,16 @@ const ELEMENT_NAV_DRAWER_CONTAINER = 'nav-drawer-container';
 const ELEMENT_NAV_DRAWER_OVERLAY = 'nav-drawer-overlay';
 const ELEMENT_NAV_DRAWER_OVERLAY_WRAPPER = 'nav-drawer-overlay-wrapper';
 const ELEMENT_NAV_DRAWER_CLOSE_BUTTON = 'nav-drawer-close-button';
+
+const OVERWRITE_NAV_SLIDER_WRAPPER = `.${NavDrawerSlides.Elements.wrapper}`;
+
+// prettier-ignore
+const slidesWrapper = `
+  ${OVERWRITE_NAV_SLIDER_WRAPPER} {
+    overflow-y: scroll;
+    height: 100%;
+  }
+`;
 
 // prettier-ignore
 const DrawerButtonClose = `
@@ -88,6 +102,7 @@ const STYLES_NAV_DRAWER_ELEMENT = `
   ${NavDrawerSlider.Styles}
   ${DrawerButtonClose}
   ${DrawerContainer}
+  ${slidesWrapper}
 `;
 
 const CreateDrawerButton = (element: TypeDrawerCloseButton) => {

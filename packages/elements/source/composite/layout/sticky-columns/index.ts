@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-token-library';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
-import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 
 type TypeStickyProps = {
   stickyColumn?: HTMLElement | null;
@@ -9,101 +9,77 @@ type TypeStickyProps = {
   topPosition?: string | null;
 };
 
-const ELEMENT_NAME = 'umd-sticky-columns';
-const ATTRIBUTE_STICKY_LAST = 'sticky-last';
-
-const ELEMENT_STICKY_CONTAINER = 'sticky-columns-container';
-const ELEMENT_STICKY_CONTAINER_WRAPPER = 'sticky-columns-container-wrapper';
-
-const ELEMENT_STICKY_COLUMN = 'sticky-column';
-const ELEMENT_STATIC_COLUMN = 'static-column';
-
-const OVERWRITE_STICKY_LAST_STICKY = `.${ELEMENT_STICKY_CONTAINER}[${ATTRIBUTE_STICKY_LAST}] .${ELEMENT_STICKY_COLUMN}`;
-
-// prettier-ignore
-const OverwriteStickyLast = `
-  @media (min-width: ${token.media.breakpoints.highDef.min}) {
-    ${OVERWRITE_STICKY_LAST_STICKY} {
-       order: 2;
-     }
-  }
-`;
-
-// prettier-ignore
-const ColumnSticky = `
-  @media (min-width: ${token.media.breakpoints.highDef.min}) {
-    .${ELEMENT_STICKY_COLUMN} {
-      position: sticky;
-      top: 32px;
-    }
-  }
-`;
-
-// prettier-ignore
-const STYLES_STICKY_COLUMNS_ELEMENT = `
-  .${ELEMENT_STICKY_CONTAINER} {
-    container: ${ELEMENT_NAME} / inline-size;
-  }
-
-  ${jssToCSS({
-    styleObj: {
-      [`.${ELEMENT_STICKY_CONTAINER_WRAPPER}`]: layout.grid.gap.two,
-    },
-  })}
-
-  .${ELEMENT_STICKY_CONTAINER_WRAPPER} {
-    align-items: start;
-    grid-template-columns: 1fr;
-  }
-
-  @media (min-width: ${token.media.breakpoints.highDef.min}) {
-    .${ELEMENT_STICKY_CONTAINER_WRAPPER} {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  ${ColumnSticky}
-  ${OverwriteStickyLast}
-`;
-
-const CreateStickyColumnsElement = (element: TypeStickyProps) => {
-  const { stickyColumn, staticColumn, isStickyLast, topPosition } = element;
-  const container = document.createElement('div');
-  const wrapper = document.createElement('div');
-  const stickyElement = document.createElement('div');
+const CreateStickyColumnsElement = (props: TypeStickyProps) => {
+  const { stickyColumn, staticColumn, isStickyLast, topPosition } = props;
+  let stickyColumnElement: HTMLElement | null = null;
 
   const setPosition = ({ value }: { value: string | null }) => {
+    if (!stickyColumnElement) return;
     if (value) {
-      stickyElement.style.top = value;
+      stickyColumnElement.style.top = value;
     } else {
-      stickyElement.style.removeProperty('top');
+      stickyColumnElement.style.removeProperty('top');
     }
   };
 
-  if (isStickyLast) container.setAttribute(ATTRIBUTE_STICKY_LAST, '');
-  container.classList.add(ELEMENT_STICKY_CONTAINER);
-  wrapper.classList.add(ELEMENT_STICKY_CONTAINER_WRAPPER);
+  const createStickyColumn = () => {
+    if (!stickyColumn) return null;
+    return new ElementBuilder()
+      .withClassName('sticky-column')
+      .withStyles({
+        element: {
+          [`@media (${token.media.queries.highDef.min})`]: {
+            position: 'sticky',
+            top: '32px',
+            ...(isStickyLast && { order: 2 }),
+          },
+        },
+      })
+      .withChild(stickyColumn)
+      .ref((element) => {
+        stickyColumnElement = element;
+      });
+  };
 
-  if (stickyColumn) {
-    stickyElement.classList.add(ELEMENT_STICKY_COLUMN);
-    stickyElement.appendChild(stickyColumn);
-    wrapper.appendChild(stickyElement);
-  }
+  const createStaticColumn = () => {
+    if (!staticColumn) return null;
+    return new ElementBuilder(staticColumn).withClassName('static-column');
+  };
 
-  if (staticColumn) {
-    staticColumn.classList.add(ELEMENT_STATIC_COLUMN);
-    wrapper.appendChild(staticColumn);
-  }
+  const children = [createStickyColumn(), createStaticColumn()].filter((child) => child !== null);
 
-  container.appendChild(wrapper);
+  const wrapperModel = new ElementBuilder()
+    .withClassName('sticky-columns-container-wrapper')
+    .styled(layout.grid.gap.two)
+    .withStyles({
+      element: {
+        alignItems: 'start',
+        gridTemplateColumns: '1fr',
+        [`@media (${token.media.queries.highDef.min})`]: {
+          gridTemplateColumns: '1fr 1fr',
+        },
+      },
+    })
+    .withChildren(...children)
+    .build();
+
+  const containerModel = new ElementBuilder()
+    .withClassName('sticky-columns-container')
+    .withStyles({
+      element: {
+        containerType: 'inline-size',
+      },
+    })
+    .withChild(wrapperModel)
+    .build();
 
   if (topPosition) {
     setPosition({ value: topPosition });
   }
 
   return {
-    element: container,
-    styles: STYLES_STICKY_COLUMNS_ELEMENT,
+    element: containerModel.element,
+    styles: containerModel.styles,
     events: {
       setPosition,
     },

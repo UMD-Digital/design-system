@@ -228,58 +228,67 @@ const CreateNavSliderElement = (props: TypeNavSliderRequirements) =>
       }, ANIMATION_TIME);
     };
     const eventSlide = ({ isRight = false }: { isRight?: boolean }) => {
+      if (isAnimating) return;
+
       const activeSlide = elementContainer.querySelector(
         `[${ATTRIBUTE_ACTIVE_SLIDE}]`,
       ) as HTMLDivElement;
       const upcomingSlide = isRight
         ? getUpcomingSlideParent()
         : getUpcomingSlide();
-      const slides = [activeSlide, upcomingSlide];
 
       if (!upcomingSlide) {
         console.error('Missing slide for slide event');
         return null;
       }
+      if (!activeSlide) throw new Error('Missing slide for slide event');
+
+      const slides = [activeSlide, upcomingSlide];
       const firstLink = upcomingSlide.querySelector('a') as HTMLAnchorElement;
+      const startPositionForUpcomingSlide = isRight ? '-100%' : '100%';
+      const transitionPosition = isRight ? '100%' : '-100%';
 
-      const animate = () => {
-        let startPositionForUpcomingSlide = '100%';
-        let transitionPosition = '-100%';
+      isAnimating = true;
 
-        if (isRight) {
-          startPositionForUpcomingSlide = '-100%';
-          transitionPosition = '100%';
-        }
+      upcomingSlide.style.left = startPositionForUpcomingSlide;
+      upcomingSlide.style.display = 'block';
 
-        upcomingSlide.style.left = startPositionForUpcomingSlide;
-        upcomingSlide.style.display = 'block';
+      // Defer to next frame so display:block is committed before the transition starts.
+      let rafId: number | null = requestAnimationFrame(() => {
+        rafId = null;
+        slides.forEach((slide) => {
+          slide.style.transition = `transform ${ANIMATION_TIME}ms ease-in-out`;
+          slide.style.transform = `translateX(${transitionPosition})`;
+        });
+        setCurrentSlide({ element: upcomingSlide, withTransition: true });
+      });
 
-        setTimeout(() => {
-          slides.forEach((slide) => {
-            slide.style.transition = `transform ${ANIMATION_TIME}ms ease-in-out`;
-            slide.style.transform = `translateX(${transitionPosition})`;
-          });
-          setCurrentSlide({ element: upcomingSlide, withTransition: true });
-        }, 100);
+      let cleanedUp = false;
+      const cleanup = () => {
+        if (cleanedUp) return;
+        cleanedUp = true;
+        if (rafId !== null) cancelAnimationFrame(rafId);
+        activeSlide.removeEventListener('transitionend', onTransitionEnd);
 
-        setTimeout(() => {
-          slides.forEach((slide) => {
-            slide.style.transition = 'none';
-            slide.style.transform = 'translateX(0)';
-            slide.style.left = '0';
-            slide.removeAttribute('style');
-          });
+        // Toggle data-active before wiping styles so CSS display:none wins.
+        upcomingSlide.setAttribute(ATTRIBUTE_ACTIVE_SLIDE, '');
+        activeSlide.removeAttribute(ATTRIBUTE_ACTIVE_SLIDE);
 
-          upcomingSlide.setAttribute(ATTRIBUTE_ACTIVE_SLIDE, '');
-          activeSlide.removeAttribute(ATTRIBUTE_ACTIVE_SLIDE);
-          if (firstLink) firstLink.focus();
-        }, ANIMATION_TIME + 100);
+        slides.forEach((slide) => {
+          slide.removeAttribute('style');
+        });
+
+        if (firstLink) firstLink.focus({ preventScroll: true });
+        isAnimating = false;
       };
-
-      if (!upcomingSlide || !activeSlide)
-        throw new Error('Missing slide for slide event');
-
-      animate();
+      const onTransitionEnd = (event: TransitionEvent) => {
+        // Ignore bubbled transitions from descendants (e.g. chevron icons).
+        if (event.target !== activeSlide) return;
+        if (event.propertyName !== 'transform') return;
+        cleanup();
+      };
+      activeSlide.addEventListener('transitionend', onTransitionEnd);
+      setTimeout(cleanup, ANIMATION_TIME + 100);
 
       if (upcomingSlide.offsetHeight > elementContainer.offsetHeight) {
         setTimeout(() => {
@@ -314,6 +323,7 @@ const CreateNavSliderElement = (props: TypeNavSliderRequirements) =>
     const GetContainer = () => elementContainer;
     let upcomingSlideRef: string | null = null;
     let currentSlide: HTMLElement | null = null;
+    let isAnimating = false;
 
     const children = CreateChildrenElements({
       ...props,

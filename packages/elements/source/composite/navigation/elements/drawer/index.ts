@@ -29,11 +29,11 @@ const ELEMENT_NAV_DRAWER_OVERLAY = 'nav-drawer-overlay';
 const ELEMENT_NAV_DRAWER_OVERLAY_WRAPPER = 'nav-drawer-overlay-wrapper';
 const ELEMENT_NAV_DRAWER_CLOSE_BUTTON = 'nav-drawer-close-button';
 
-const OVERWRITE_NAV_SLIDER_WRAPPER = `.${NavDrawerSlides.Elements.wrapper}`;
+const OVERWRITE_NAV_SLIDER_OVERFLOW = `.${NavDrawerSlides.Elements.overflow}`;
 
 // prettier-ignore
 const slidesWrapper = `
-  ${OVERWRITE_NAV_SLIDER_WRAPPER} {
+  ${OVERWRITE_NAV_SLIDER_OVERFLOW} {
     overflow-y: scroll;
     height: 100%;
   }

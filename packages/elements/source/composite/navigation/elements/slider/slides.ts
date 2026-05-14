@@ -39,6 +39,7 @@ type TypeSliderSlideActions = TypeSlideProps & {
 };
 
 const ELEMENT_NAV_SLIDE_CONTAINER = 'nav-slide-container';
+const ELEMENT_NAV_SLIDE_OVERFLOW = 'nav-slide-overflow';
 const ELEMENT_NAV_SLIDE_WRAPPER = 'nav-slide-wrapper';
 const ELEMENT_NAV_SLIDE_HEADLINE = 'nav-slide-headline';
 const ELEMENT_NAV_SLIDE_BACK_BUTTON = 'nav-slide-action-back-button';
@@ -209,6 +210,7 @@ const CreateNavSlides = (props: TypeDrawerChildSlide) => {
   slides.forEach((slide, i) => {
     const contentRef = slide.getAttribute('content-slot');
     const sliderContainer = document.createElement('div');
+    const sliderOverflow = document.createElement('div');
     const sliderWrapper = document.createElement('div');
     const isSlideActive = slide.hasAttribute(ATTRIBUTE_ACTIVE_SLIDE);
     const parentRef = slide.getAttribute(ATTRIBUTE_PARENT_REF) as string;
@@ -236,12 +238,14 @@ const CreateNavSlides = (props: TypeDrawerChildSlide) => {
     sliderContainer.classList.add(ELEMENT_NAV_SLIDE_CONTAINER);
     sliderContainer.setAttribute(`${ATTRIBUTE_PARENT_REF}`, `${parentRef}`);
 
+    sliderOverflow.classList.add(ELEMENT_NAV_SLIDE_OVERFLOW);
+
     if (slideBackButton) sliderWrapper.appendChild(slideBackButton);
     sliderWrapper.appendChild(slideHeadline);
     sliderWrapper.appendChild(slideActions);
 
     sliderWrapper.classList.add(ELEMENT_NAV_SLIDE_WRAPPER);
-    sliderContainer.appendChild(sliderWrapper);
+    sliderOverflow.appendChild(sliderWrapper);
 
     if (contentRef) {
       const additionalContent = childrenSlideContent?.find(
@@ -251,13 +255,14 @@ const CreateNavSlides = (props: TypeDrawerChildSlide) => {
       if (additionalContent) {
         const contentContainer = document.createElement('div');
 
-        contentContainer.appendChild(additionalContent);
+        sliderOverflow.appendChild(additionalContent);
         contentContainer.classList.add(ELEMENT_NAV_SLIDE_CONTENT);
 
         sliderContainer.appendChild(contentContainer);
       }
     }
 
+    sliderContainer.appendChild(sliderOverflow);
     slider.appendChild(sliderContainer);
 
     if (i === slides.length - 1) {
@@ -273,6 +278,7 @@ export const createCompositeNavigationSlides = {
   Styles: STYLES_NAV_SLIDES,
   Elements: {
     container: ELEMENT_NAV_SLIDE_CONTAINER,
+    overflow: ELEMENT_NAV_SLIDE_OVERFLOW,
     wrapper: ELEMENT_NAV_SLIDE_WRAPPER,
     headline: ELEMENT_NAV_SLIDE_HEADLINE,
   },

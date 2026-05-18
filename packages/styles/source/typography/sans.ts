@@ -174,7 +174,7 @@ const largestBase = {
 const extraLargeBase = {
   fontFamily: font.family['sans'],
   textWrap: 'pretty',
-  ...sizeLarge,
+  ...sizeLarger,
 
   [`@media (${breakpointLarge})`]: {
     ...sizeExtraLargeResponsive,

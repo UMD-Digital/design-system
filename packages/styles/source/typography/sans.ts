@@ -39,6 +39,7 @@ export interface SansComposeOptions {
  * @type {string}
  * @private
  */
+const breakpointMedium = media.queries.medium.min;
 const breakpointLarge = media.queries.large.min;
 const breakpointDesktop = media.queries.desktop.min;
 
@@ -292,7 +293,12 @@ const mediumBase = {
  */
 const smallBase = {
   fontFamily: font.family['sans'],
-  ...sizeSmall,
+  fontSize: font.size['sm'],
+  lineHeight: `1.375em`,
+
+  [`@media (${breakpointMedium})`]: {
+    ...sizeSmall,
+  },
 
   [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${font.size['sm']} + 0.16vw)`,

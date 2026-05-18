@@ -11,6 +11,8 @@ const createElementStyles = (
     containIntrinsicSize: 'auto 10vh',
     minHeight: '10vh',
     ...additionalStyles.notDefined,
+
+    '& > *': { display: 'none' },
   },
   [`${elementName}:defined`]: {
     contentVisibility: 'visible',

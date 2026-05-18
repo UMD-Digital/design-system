@@ -34,6 +34,7 @@ export interface CampaignComposeOptions {
  * Breakpoint constants for responsive styles
  * @private
  */
+const breakpointMedium = media.queries.medium.min;
 const breakpointLarge = media.queries.large.min;
 const breakpointDesktop = media.queries.desktop.min;
 
@@ -111,8 +112,14 @@ const extralargeBase = {
  */
 const largeBase = {
   ...base,
-  ...sizeSmall,
+  fontSize: font.size['4xl'],
+  letterSpacing: '0.02em',
+  lineHeight: `0.91em`,
   textWrap: 'pretty',
+
+  [`@media (${breakpointMedium})`]: {
+    fontSize: font.size['5xl'],
+  },
 
   [`@media (${breakpointLarge})`]: {
     fontSize: `calc(${font.size['5xl']} + 2.66vw)`,

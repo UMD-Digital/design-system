@@ -144,6 +144,7 @@ const CreateSlideFirstElement = (props: TypeFirstSlide) => {
     isContextMenu,
   } = props;
   const sliderContainer = document.createElement('div');
+  const sliderOverflow = document.createElement('div');
   const wrapper = document.createElement('div');
   const primarlyLinkContent = createPrimaryLinks(props);
   const secondaryLinkContent = createSecondaryLinks(props);
@@ -162,7 +163,10 @@ const CreateSlideFirstElement = (props: TypeFirstSlide) => {
   if (additionalContent) wrapper.appendChild(additionalContent);
 
   wrapper.classList.add(Slides.Elements.wrapper);
-  sliderContainer.appendChild(wrapper);
+  sliderOverflow.classList.add(Slides.Elements.overflow);
+
+  sliderOverflow.appendChild(wrapper);
+  sliderContainer.appendChild(sliderOverflow);
 
   return sliderContainer;
 };

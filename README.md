@@ -36,7 +36,7 @@ Mid-level building blocks that combine foundation packages:
 
 - **[Elements](packages/elements/README.md)**: Foundational UI element builders that return Element Model objects containing DOM nodes and associated styles. Provides atomic components (typography, actions, media) and composite components (cards, navigation, hero sections, tabs, carousels) with framework-agnostic, imperative APIs. All elements follow WCAG 2.1 AA standards and support lightweight, tree-shakeable usage.
 
-- **[Styles](packages/styles/README.md)**: JSS (JavaScript Style Sheets) objects and style utilities consistent with UMD brand guidelines. Features composable style functions for flexible customization, Tailwind CSS integration support, and pre/post render CSS bundles. Re-exports design tokens from the Tokens package for backwards compatibility. Includes layout patterns, typography styles, utility classes, and CSS transformation utilities with WCAG 2.1 AA compliance.
+- **[Styles](packages/styles/README.md)**: JSS (JavaScript Style Sheets) objects and style utilities consistent with UMD brand guidelines. Features composable style functions for flexible customization, Tailwind CSS integration support, and pre/post render CSS bundles. Re-exports design tokens from the Tokens package for backwards compatibility. Includes layout patterns, typography styles, utility classes, and CSS transformation utilities with WCAG 2.1 AA compliance. Ships automatic CLS-safe placeholder sizing for every `umd-*` web component plus an opt-in coordinated fade-in (`scripts/fout-gate`) to keep Core Web Vitals (CLS / LCP / FOUC) in the "good" range.
 
 ### Foundation Packages
 

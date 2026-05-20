@@ -2,23 +2,49 @@ import { color, media, spacing } from '@universityofmaryland/web-token-library';
 
 type ElementStyles = Record<string, any>;
 
+// CLS placeholder sizing.
+// vh-based reservations virtually guarantee CLS because real component height
+// scales with viewport width, not height. Use px per breakpoint instead.
+// Numbers are conservative defaults; calibrate against measured render heights.
+type Reservation = {
+  mobile: number;
+  tablet?: number;
+  desktop?: number;
+  highDef?: number;
+};
+
+const sizeReservation = ({
+  mobile,
+  tablet,
+  desktop,
+  highDef,
+}: Reservation) => {
+  const block = (px: number) => ({
+    minHeight: `${px}px`,
+    containIntrinsicSize: `auto ${px}px`,
+  });
+  return {
+    ...block(mobile),
+    ...(tablet != null && {
+      [`@media (${media.queries.tablet.min})`]: block(tablet),
+    }),
+    ...(desktop != null && {
+      [`@media (${media.queries.desktop.min})`]: block(desktop),
+    }),
+    ...(highDef != null && {
+      [`@media (${media.queries.highDef.min})`]: block(highDef),
+    }),
+  };
+};
+
 const createElementStyles = (
   elementName: string,
   additionalStyles: ElementStyles = {},
 ) => ({
   [`${elementName}:not(:defined)`]: {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh',
     ...additionalStyles.notDefined,
-
-    '& > *': { display: 'none' },
   },
   [`${elementName}:defined`]: {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block',
-    position: 'relative',
     ...additionalStyles.defined,
   },
 
@@ -30,13 +56,28 @@ const createBatchStyles = (
   prefix: string,
   overrides: ElementStyles = {},
 ) =>
-  names.reduce(
-    (acc, name) => ({
+  names.reduce((acc, name) => {
+    const elementName = `${prefix}${name}`;
+    return {
       ...acc,
-      ...createElementStyles(`${prefix}${name}`, overrides),
-    }),
-    {},
-  );
+      ...createElementStyles(elementName, overrides),
+      [`${elementName}:not(:defined)`]: {
+        contentVisibility: 'hidden',
+        ...overrides.notDefined,
+
+        '& > *': { display: 'none' },
+      },
+      [`${elementName}:defined`]: {
+        contentVisibility: 'visible',
+        containerType: 'inline-size',
+        display: 'block',
+        position: 'relative',
+        ...overrides.defined,
+      },
+
+      ...overrides.custom,
+    };
+  }, {});
 
 // ---------------------------------------------------------------------------
 // Simple elements (umd-element-*) with default display toggle
@@ -61,6 +102,9 @@ const simpleElements = createBatchStyles(
     'stat',
   ],
   'umd-element-',
+  {
+    notDefined: sizeReservation({ mobile: 120, tablet: 160, desktop: 200 }),
+  },
 );
 
 // ---------------------------------------------------------------------------
@@ -83,6 +127,9 @@ const feedElements = createBatchStyles(
     'news-featured',
   ],
   'umd-feed-',
+  {
+    notDefined: sizeReservation({ mobile: 480, tablet: 640, desktop: 800 }),
+  },
 );
 
 // ---------------------------------------------------------------------------
@@ -103,8 +150,10 @@ const cardListStyles = [
     ...createElementStyles(`umd-element-${type}`, {
       notDefined: {
         contentVisibility: 'hidden',
-        minHeight: `5vh`,
         display: 'block',
+        ...sizeReservation({ mobile: 360, tablet: 420, desktop: 480 }),
+
+        '& > *': { contentVisibility: 'hidden' },
       },
       defined: {
         contentVisibility: 'visible',
@@ -166,9 +215,8 @@ const cardOverlay = createElementStyles('umd-element-card-overlay', {
 const brandCardStack = createElementStyles('umd-element-brand-card-stack', {
   notDefined: {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 100vh',
-    minHeight: `100vh`,
     display: 'block',
+    ...sizeReservation({ mobile: 600, tablet: 800, desktop: 1000 }),
 
     '& > *': { display: 'none' },
   },
@@ -197,11 +245,11 @@ const carousels = createBatchStyles(
   {
     notDefined: {
       contentVisibility: 'auto',
-      containIntrinsicSize: 'auto 80vh',
-      minHeight: `80vh`,
       display: 'block',
-
-      '& > *': { opacity: '0' },
+      ...sizeReservation({ mobile: 480, tablet: 600, desktop: 700 }),
+      // Slot content is left visible: a carousel slide is a likely LCP
+      // candidate, and the parent's min-height reservation already
+      // prevents CLS. Hiding children would disqualify them from LCP.
     },
     defined: {
       contentVisibility: 'visible',
@@ -222,11 +270,11 @@ const heroes = {
     {
       notDefined: {
         contentVisibility: 'auto',
-        containIntrinsicSize: 'auto 50vh',
-        minHeight: `50vh`,
         display: 'block',
-
-        '& > *': { opacity: '0' },
+        ...sizeReservation({ mobile: 480, tablet: 560, desktop: 640 }),
+        // Slot content (hero image / headline) is the LCP candidate on
+        // most pages — leave it visible so it can be painted and counted.
+        // CLS is protected by the parent's min-height reservation.
       },
       defined: {
         contentVisibility: 'visible',
@@ -238,9 +286,8 @@ const heroes = {
   ...createBatchStyles(['hero-brand-video', 'hero-grid'], 'umd-element-', {
     notDefined: {
       contentVisibility: 'hidden',
-      containIntrinsicSize: 'auto 100vh',
-      minHeight: `100vh`,
       display: 'block',
+      ...sizeReservation({ mobile: 600, tablet: 720, desktop: 800 }),
     },
     defined: {
       contentVisibility: 'visible',
@@ -251,9 +298,8 @@ const heroes = {
   ...createElementStyles('umd-element-hero-minimal', {
     notDefined: {
       contentVisibility: 'hidden',
-      containIntrinsicSize: 'auto 30vh',
-      minHeight: `30vh`,
       display: 'block',
+      ...sizeReservation({ mobile: 240, tablet: 280, desktop: 320 }),
     },
     defined: {
       contentVisibility: 'visible',
@@ -270,8 +316,8 @@ const heroes = {
 const accordion = createElementStyles('umd-element-accordion-item', {
   notDefined: {
     contentVisibility: 'hidden',
-    minHeight: `5vh`,
     display: 'block',
+    ...sizeReservation({ mobile: 56, tablet: 64 }),
   },
   defined: {
     contentVisibility: 'visible',
@@ -321,12 +367,13 @@ const callToAction = createElementStyles('umd-element-call-to-action', {
 });
 
 // Footer
+// Footer sits below the fold; pre-upgrade we keep it out of layout entirely
+// (display: none) — any min-height/contain-intrinsic-size would be dead under
+// display: none and only add noise. CLS impact is negligible because the
+// shift happens off-screen on first paint.
 const footer = createElementStyles('umd-element-footer', {
   notDefined: {
-    contentVisibility: 'hidden',
     backgroundColor: color.black,
-    containIntrinsicSize: 'auto 50vh',
-    minHeight: '50vh',
     display: 'none',
   },
   defined: {
@@ -338,8 +385,7 @@ const footer = createElementStyles('umd-element-footer', {
 const layoutExpand = createElementStyles('umd-layout-image-expand', {
   notDefined: {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 100vh',
-    minHeight: `100vh`,
+    ...sizeReservation({ mobile: 600, tablet: 800, desktop: 1000 }),
   },
   defined: {
     contentVisibility: 'visible',
@@ -440,9 +486,8 @@ const navigationUtilityAlert = createElementStyles(
 const pathway = createElementStyles('umd-element-pathway', {
   notDefined: {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 40vh',
-    minHeight: `40vh`,
     display: 'block',
+    ...sizeReservation({ mobile: 360, tablet: 480, desktop: 560 }),
   },
   defined: {
     contentVisibility: 'visible',

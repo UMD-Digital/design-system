@@ -91,6 +91,38 @@ Use `utilities/create/jss.ts` → `objectWithClassName()` for type-checked JSS c
 Use `utilities/transform/jss.ts` for JSS→CSS conversion.
 Use `utilities/transform/variables.ts` for token→CSS variable conversion.
 
+## Web Component FOUC + CLS Strategy (`web-components.ts`)
+
+This file ships the `:not(:defined)` / `:defined` placeholder rules for every UMD custom element. It serves two distinct goals that pull in opposite directions:
+
+1. **Prevent FOUC** — hide undefined elements so users never see unstyled internals flash.
+2. **Prevent CLS** — reserve the same vertical space pre- and post-upgrade so the page does not jump when the component registers.
+
+### Placeholder sizing convention — **px per breakpoint, never `vh`**
+
+- Viewport-height units (`vh`) scale with screen height, but real component height scales with screen **width** plus breakpoint-specific layout decisions. A `50vh` placeholder almost never matches what the upgraded component renders, which guarantees a layout shift.
+- Use the `sizeReservation({ mobile, tablet?, desktop?, highDef? })` helper in `web-components.ts` — it emits `min-height` + `contain-intrinsic-size` in px at each breakpoint via `media.queries.{tablet,desktop,highDef}.min`.
+- Values are educated estimates today; the right long-term move is to measure rendered heights per component per breakpoint (Playwright pass) and pipe them into `sizeReservation`.
+
+### `display: none` vs `visibility: hidden` on children
+
+- `display: none` on `& > *` collapses the slot content out of layout. That is fine when the **parent itself reserves space** (via `min-height` + `contain-intrinsic-size`), because the parent's box drives the placeholder height.
+- `opacity: 0` / `visibility: hidden` is preferred when slot content should keep contributing to height. Carousels and heroes currently use `opacity: 0` for this reason.
+
+### `display: none` + `min-height` is contradictory
+
+A parent with `display: none` has no box, so `min-height` and `contain-intrinsic-size` are dead declarations. Only `footer` currently uses `display: none` pre-upgrade (intentionally — it sits below the fold and CLS impact is negligible). Don't reintroduce dead size hints elsewhere.
+
+### Coordinated fade-in (opt-in)
+
+`root.ts` exports `html.umd-fout-gate` (opacity 0) and `html.umd-fout-ready` (opacity 1 + 200ms fade). A reference JS coordinator ships at `source/scripts/fout-gate.ts` (subpath `./scripts/fout-gate`) and auto-runs `initFoutGate()` on import — it adds the gate class to `<html>` synchronously, awaits `customElements.whenDefined()` for every `umd-*` tag in the DOM, then swaps to the ready class.
+
+**Why `<html>` and not `<body>`** — Chrome's LCP algorithm disqualifies elements inside an `opacity: 0` subtree from being LCP candidates, except when the documentElement is the opacity-0 ancestor (a deliberate carve-out for A/B testing libraries). A `body` gate therefore inflates LCP by the full gate duration; an `html` gate does not.
+
+**LCP-bearing components don't hide slot content** — `heroes` and `carousels` `:not(:defined)` rules reserve placeholder height via `sizeReservation` but leave their slot children visible. The slot image/headline is typically the page's LCP candidate; hiding it (via `opacity: 0`, `visibility: hidden`, or `content-visibility: hidden`) blocks LCP from firing until the component upgrades. Below-the-fold families (cards, feeds, pathway) keep aggressive hiding because they are not LCP candidates and pop-in protection matters more there.
+
+**Default `fallbackMs: 200`** — short fallback caps worst-case LCP. The per-element placeholder sizing carries the CLS load; the gate is just there to remove final pop-in micro-shifts after content paints.
+
 ## Composable Style Pattern
 
 Files with 3+ related style variants use a composable function pattern:

@@ -80,6 +80,7 @@ export default defineConfig(({ mode }) => {
         typography: path.resolve(__dirname, 'source/typography/index.ts'),
         utilities: path.resolve(__dirname, 'source/utilities/index.ts'),
         tailwind: path.resolve(__dirname, 'source/tailwind/index.ts'),
+        'scripts/fout-gate': path.resolve(__dirname, 'source/scripts/fout-gate.ts'),
         'exports/index': path.resolve(__dirname, 'source/exports/index.ts'),
         'exports/generate': path.resolve(__dirname, 'source/exports/generate.ts'),
         'exports/tailwind': path.resolve(__dirname, 'source/exports/tailwind.ts'),

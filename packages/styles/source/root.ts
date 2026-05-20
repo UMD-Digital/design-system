@@ -92,6 +92,23 @@ export const reset = {
   '.umd-layout-space-vertical-landing': {
     marginBottom: spacing.max,
   },
+
+  // Opt-in coordinated fade-in. Consumers add `umd-fout-gate` to <html> at
+  // parse time and swap it for `umd-fout-ready` once all `umd-*` tags have
+  // upgraded (or a fallback timeout fires).
+  //
+  // Gate on <html>, NOT <body>. Chrome's LCP algorithm disqualifies
+  // candidates inside an opacity:0 subtree — except when documentElement
+  // is the opacity-0 ancestor (carve-out for A/B testing tools). A body
+  // gate would inflate LCP by the gate duration; an html gate does not.
+  'html.umd-fout-gate': {
+    opacity: 0,
+  },
+
+  'html.umd-fout-ready': {
+    opacity: 1,
+    transition: 'opacity 200ms ease',
+  },
 };
 
 /**

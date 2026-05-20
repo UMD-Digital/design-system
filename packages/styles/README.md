@@ -212,4 +212,87 @@ src/
 └── vite.config.ts
 ```
 
-##
+## Web Components Performance: Coordinated Fade-In (CLS + LCP + FOUC)
+
+UMD custom elements (`umd-*`) upgrade asynchronously, which can produce three measurable problems:
+
+- **FOUC** — slot content flashes before the custom element registers
+- **CLS** — the component's box shifts when its real dimensions appear
+- **LCP** — naive "hide everything until ready" strategies inflate Largest Contentful Paint
+
+The styles library addresses all three in two layers. Layer 1 is automatic; Layer 2 is opt-in.
+
+### Layer 1 — Automatic placeholder sizing (no opt-in required)
+
+Every supported `umd-*` element family in `web-components.min.css` reserves vertical space pre-upgrade via `:not(:defined)` rules using `min-height` and `contain-intrinsic-size` declared in **pixels per breakpoint** (mobile / tablet / desktop). This eliminates layout shift on upgrade with no work from you — as long as `web-components.min.css` loads in the critical path, which the Recommended critical CSS configuration above already covers.
+
+LCP-bearing components (`hero*`, `carousel*`) intentionally leave their slot content visible pre-upgrade so the slot image or headline can be painted and counted as the LCP candidate. Below-the-fold families (cards, feeds, pathway) hide their slot content for stronger FOUC protection.
+
+### Layer 2 — Opt-in coordinated fade-in
+
+For pages where residual per-component pop-in is still distracting, opt into a single page-wide fade-in. Two pieces ship for this:
+
+**1. CSS classes** (included in `base.min.css` and `styles.min.css`)
+
+| Class | Effect |
+|---|---|
+| `html.umd-fout-gate` | `opacity: 0` |
+| `html.umd-fout-ready` | `opacity: 1` with a 200 ms fade transition |
+
+**2. JS coordinator** (subpath module — only loaded if you import it)
+
+```ts
+// Easiest — auto-runs on import with sensible defaults
+import '@universityofmaryland/web-styles-library/scripts/fout-gate';
+```
+
+```ts
+// Or explicit control
+import { initFoutGate } from '@universityofmaryland/web-styles-library/scripts/fout-gate';
+
+await initFoutGate({
+  fallbackMs: 100,    // shorter fallback for fast networks (default: 200)
+  tagPrefix: 'umd-',  // which custom-element prefix to wait for
+});
+```
+
+The coordinator adds `umd-fout-gate` to `<html>` synchronously on import, awaits `customElements.whenDefined()` for every undefined `umd-*` tag currently in the DOM, then swaps to `umd-fout-ready` inside `requestAnimationFrame`. A configurable fallback timeout guarantees the page becomes visible even if a component never registers.
+
+**Option defaults**
+
+| Option | Type | Default |
+|---|---|---|
+| `gateClass` | `string` | `'umd-fout-gate'` |
+| `readyClass` | `string` | `'umd-fout-ready'` |
+| `tagPrefix` | `string` | `'umd-'` |
+| `fallbackMs` | `number` | `200` |
+
+### Why `<html>` and not `<body>`?
+
+Chrome's LCP algorithm disqualifies elements inside an `opacity: 0` subtree from being LCP candidates — **except** when the `documentElement` itself is the opacity-0 ancestor (a carve-out for A/B testing libraries). Gating on `<body>` would inflate LCP by the entire gate duration; gating on `<html>` does not.
+
+### Recommended: pre-apply the gate in HTML (zero-race opt-in)
+
+For the lowest-risk loading order, ship the gate class directly in your HTML so it applies before any script executes. The JS coordinator then only handles release:
+
+```html
+<!DOCTYPE html>
+<html lang="en" class="umd-fout-gate">
+  <head>
+    <link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/base.min.css" blocking="render">
+    <link rel="stylesheet" href="https://unpkg.com/@universityofmaryland/web-styles-library/dist/css/web-components.min.css" blocking="render">
+    <script type="module" src="https://unpkg.com/@universityofmaryland/web-styles-library/dist/scripts/fout-gate.js"></script>
+  </head>
+  <body>
+    <!-- your umd-* components here -->
+  </body>
+</html>
+```
+
+### When to skip Layer 2
+
+Layer 1 alone (placeholder sizing) keeps CLS near zero on most pages. Skip the coordinated fade-in if:
+
+- Your page has only one or two `umd-*` components — per-component pop-in is barely visible.
+- You cannot guarantee the JS coordinator loads early (a late-loaded script leaves a window where content paints, then disappears, then re-appears).
+- You are debugging visual issues — the gate hides everything, making CSS bugs harder to spot.

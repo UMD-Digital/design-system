@@ -38,14 +38,14 @@ export const left: JssObject = create.jss.objectWithClassName({
       display: 'none',
     },
 
-    [`@media (${media.queries.tablet.min})`]: {
+    [`@media (${media.queries.desktop.min})`]: {
       marginRight: spacing['max'],
       width: '242px',
     },
   },
 
   '& > *:last-child': {
-    [`@media (${media.queries.tablet.min})`]: {
+    [`@media (${media.queries.desktop.min})`]: {
       width: 'calc(100% - 242px)',
     },
   },

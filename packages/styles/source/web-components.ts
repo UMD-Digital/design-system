@@ -13,12 +13,7 @@ type Reservation = {
   highDef?: number;
 };
 
-const sizeReservation = ({
-  mobile,
-  tablet,
-  desktop,
-  highDef,
-}: Reservation) => {
+const sizeReservation = ({ mobile, tablet, desktop, highDef }: Reservation) => {
   const block = (px: number) => ({
     minHeight: `${px}px`,
     containIntrinsicSize: `auto ${px}px`,
@@ -575,6 +570,22 @@ const stickyColumns = createElementStyles('umd-element-sticky-columns', {
 // Tabs
 const tabsTag = 'umd-element-tabs';
 const tabs = createElementStyles(tabsTag, {
+  notDefined: {
+    '& > *': { display: 'none' },
+    ...sizeReservation({ mobile: 360, tablet: 480, desktop: 560 }),
+  },
+  defined: {
+    display: 'block',
+
+    [`& button, & button`]: {
+      transition: 'color 0.3s ease',
+    },
+
+    [`& button:not([aria-expanded="true"]):hover, & button:not([aria-expanded="true"]):focus`]:
+      {
+        color: `${color.red}`,
+      },
+  },
   custom: {
     [`${tabsTag} + *`]: { marginTop: spacing.lg },
   },

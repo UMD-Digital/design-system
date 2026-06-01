@@ -219,7 +219,7 @@ const createText = (
         display: 'flex',
         position: 'relative',
         zIndex: 999,
-        width: '100%',
+        width: `calc(100% - 60px)`,
 
         [`@container (${token.media.queries.tablet.min})`]: {
           padding: `${token.spacing['5xl']} 0`,

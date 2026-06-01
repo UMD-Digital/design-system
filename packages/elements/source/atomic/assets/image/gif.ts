@@ -1,5 +1,6 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import {
   pause as iconPause,
@@ -207,9 +208,15 @@ const applyGifToggle = (
 
   // Set up lazy loading observer
   setupLazyLoading(container, image, canvas, button, state, () => {
-    // Once loaded, render the first frame properly and set to play
+    // Once loaded, render the first frame properly. Respect the user's
+    // reduced-motion preference: start paused (first frame) rather than
+    // auto-animating, leaving the play button for manual playback.
     sizeCanvas();
-    setButtonPlay();
+    if (isPreferredReducedMotion()) {
+      setButtonPause();
+    } else {
+      setButtonPlay();
+    }
   });
 
   // Handle resize

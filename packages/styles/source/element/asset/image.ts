@@ -67,7 +67,7 @@ const imageScaled = {
  * @private
  */
 const imageAnimationStart = {
-  transform: 'scale(1)',
+  transform: 'scale(1.0)',
   transition: 'transform 0.5s',
 };
 
@@ -78,6 +78,7 @@ const imageAnimationStart = {
  */
 const imageAnimationEnd = {
   transform: 'scale(1.025)',
+  transition: 'transform 0.5s',
 };
 
 /**
@@ -118,7 +119,7 @@ const linkImage = {
     ...imageBase,
   },
 
-  '& > a': {
+  '& a': {
     ...linkBase,
 
     '& img': {
@@ -141,18 +142,14 @@ const linkImage = {
 const linkImageScaled = {
   '& img': {
     ...imageBase,
-    ...imageAnimationStart,
     ...imageScaled,
+    ...imageAnimationStart,
   },
 
   '& > a': {
     ...linkBase,
     height: '100%',
     width: '100%',
-
-    '& img': {
-      ...imageAnimationStart,
-    },
   },
 
   [`a:hover, a:focus`]: {

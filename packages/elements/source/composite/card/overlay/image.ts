@@ -82,10 +82,6 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
           background:
             'linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .55) 30%, rgba(0, 0, 0, 0.9) 100%)',
         },
-
-        [`img`]: {
-          transform: 'scale(1.025)',
-        },
       },
     });
 
@@ -201,14 +197,15 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
         height: '100%',
         containerType: 'inline-size',
 
-        [`&:hover .${imageContainerClass}:before, &:focus .${imageContainerClass}:before`]:
-          {
+        [`&:hover, &:focus`]: {
+          [`& .${imageContainerClass}:before`]: {
             opacity: 0.7,
           },
 
-        ['&:hover img, &:focus img']: {
-          transform: 'scale(1)',
-          transition: 'transform 0.5s ease-in-out',
+          ['& img']: {
+            transform: 'scale(1.025)',
+            transition: 'transform 0.5s ease-in-out',
+          },
         },
       },
     })

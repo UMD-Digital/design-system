@@ -36,7 +36,7 @@ export const eyebrow = {
   fontWeight: 700,
   color: color.black,
   fontSize: font.size.min,
-  lineHeight: 1,
+  lineHeight: 1.2,
   textTransform: `uppercase`,
   letterSpacing: `.05em`,
 };

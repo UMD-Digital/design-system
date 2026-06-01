@@ -1,5 +1,6 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
 import {
   pause as iconPause,
   play as iconPlay,
@@ -56,11 +57,20 @@ export const createVideoToggle = (props: VideoProps) =>
       }
     });
 
-    if (
+    const isAutoplay =
       video.getAttribute('autoplay') === '' ||
-      video.getAttribute('autoplay') === 'true'
-    ) {
-      setPlay();
+      video.getAttribute('autoplay') === 'true';
+
+    if (isAutoplay) {
+      if (isPreferredReducedMotion()) {
+        // The native `autoplay` attribute makes the browser start playback on
+        // its own, regardless of our JS. Remove it and pause so the video
+        // stays on its first frame, leaving the play button for manual start.
+        video.removeAttribute('autoplay');
+        setPause();
+      } else {
+        setPlay();
+      }
     }
 
     return new ElementBuilder()

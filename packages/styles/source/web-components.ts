@@ -583,7 +583,7 @@ const tabs = createElementStyles(tabsTag, {
 
     [`& button:not([aria-expanded="true"]):hover, & button:not([aria-expanded="true"]):focus`]:
       {
-        color: `${color.red}`,
+        color: `${color.red} !important`,
       },
   },
   custom: {

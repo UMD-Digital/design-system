@@ -187,6 +187,18 @@ const cardListStyles = [
 );
 
 const cardOverlay = createElementStyles('umd-element-card-overlay', {
+  notDefined: {
+    contentVisibility: 'hidden',
+    display: 'block',
+    ...sizeReservation({ mobile: 360, tablet: 420, desktop: 480 }),
+
+    '& > *': { contentVisibility: 'hidden' },
+  },
+  defined: {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+  },
   custom: {
     ['umd-element-card-overlay.size-large']: {
       minHeight: '320px',
@@ -381,6 +393,8 @@ const layoutExpand = createElementStyles('umd-layout-image-expand', {
   notDefined: {
     contentVisibility: 'hidden',
     ...sizeReservation({ mobile: 600, tablet: 800, desktop: 1000 }),
+
+    '& > *': { contentVisibility: 'hidden' },
   },
   defined: {
     contentVisibility: 'visible',
@@ -439,6 +453,7 @@ const navigationSlider = createElementStyles('umd-element-navigation-slider', {
 
 // Navigation Sticky
 const navigationSticky = createElementStyles('umd-element-navigation-sticky', {
+  notDefined: {},
   defined: {
     position: 'relative',
     zIndex: '99999',
@@ -494,9 +509,13 @@ const pathway = createElementStyles('umd-element-pathway', {
 // Scroll top
 const scrollTopTag = 'umd-element-scroll-top';
 const scrollTop = createElementStyles(scrollTopTag, {
+  notDefined: {
+    display: 'none',
+  },
   defined: {
     height: '40px',
     width: '40px',
+    display: 'block',
   },
   custom: {
     [`* + ${scrollTopTag}`]: { marginTop: spacing.md },
@@ -521,6 +540,16 @@ const sectionIntro = {
     (acc, name) => ({
       ...acc,
       ...createElementStyles(`umd-element-${name}`, {
+        notDefined: {
+          contentVisibility: 'hidden',
+          display: 'block',
+          ...sizeReservation({ mobile: 360, tablet: 480, desktop: 560 }),
+        },
+        defined: {
+          contentVisibility: 'visible',
+          containerType: 'inline-size',
+          display: 'block',
+        },
         custom: {
           [`umd-element-section-intro-wide + *, umd-element-section-intro + *`]:
             {
@@ -540,6 +569,12 @@ const sectionIntro = {
 // Social sharing
 const socialSharingTag = 'umd-element-social-sharing';
 const socialSharing = createElementStyles(socialSharingTag, {
+  notDefined: {
+    display: 'none',
+  },
+  defined: {
+    display: 'block',
+  },
   custom: {
     [`* + ${socialSharingTag}`]: { marginTop: spacing.md },
     [`${socialSharingTag}[fixed], ${socialSharingTag}[data-layout-fixed="true"]`]:
@@ -598,6 +633,12 @@ const tabs = createElementStyles(tabsTag, {
 // ---------------------------------------------------------------------------
 
 const personTabular = createElementStyles('umd-element-person', {
+  notDefined: {
+    display: 'none',
+  },
+  defined: {
+    display: 'block',
+  },
   custom: {
     ['umd-element-person[data-display="tabular"] + umd-element-person[data-display="tabular"]']:
       {

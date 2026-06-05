@@ -1,5 +1,5 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import { Image as LayoutImage } from 'layout';
+import { createLayoutImageContainer } from 'layout';
 
 export type TypeMediaInlineRequirements = {
   image?: HTMLImageElement | null;
@@ -14,7 +14,7 @@ const CreateMediaInline = (props: TypeMediaInlineRequirements) =>
         console.warn('CreateMediaInline: No image provided');
         return null;
       }
-      return LayoutImage.CreateElement({ image, showCaption: true });
+      return createLayoutImageContainer({ image, showCaption: true });
     };
 
     const imageElement = createImage();
@@ -30,7 +30,6 @@ const CreateMediaInline = (props: TypeMediaInlineRequirements) =>
       .withChild(imageElement)
       .build();
 
-    model.styles += LayoutImage.Styles;
 
     return model;
   })();

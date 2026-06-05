@@ -96,6 +96,7 @@ const visual = {
   play: 'data-visual-play',
   size: 'data-visual-size',
   time: 'data-visual-time',
+  textToggle: 'data-visual-text-toggle',
   transparent: 'data-visual-transparent',
 };
 

@@ -272,13 +272,15 @@ export const createCompositeCarouselImage = (props: TypeCarouselImageProps) =>
     };
 
     const EventResize = () => {
-      if (sliderElement) {
-        SetCarouselSize({
-          slider: sliderElement,
-          activeSlide: slides[activeIndex],
-          maxHeight,
-        });
+      if (!sliderElement || sliderElement.offsetWidth === 0) {
+        return;
       }
+
+      SetCarouselSize({
+        slider: sliderElement,
+        activeSlide: slides[activeIndex],
+        maxHeight,
+      });
     };
 
     const Load = () => {

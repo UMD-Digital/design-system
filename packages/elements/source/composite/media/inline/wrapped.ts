@@ -2,7 +2,7 @@ import * as token from '@universityofmaryland/web-token-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { createCompositeMediaCaption as CaptionContainer } from '../elements/caption';
-import { Image as LayoutImage } from 'layout';
+import { createLayoutImageContainer } from 'layout';
 
 export type TypeMediaInlineWrappedRequirements = {
   image?: HTMLImageElement | null;
@@ -46,7 +46,7 @@ const CreateMediaInlineWrapped = (props: TypeMediaInlineWrappedRequirements) =>
         console.warn('CreateMediaInlineWrapped: No image provided');
         return null;
       }
-      return LayoutImage.CreateElement({ image, showCaption: true });
+      return createLayoutImageContainer({ image, showCaption: true });
     };
 
     const createCaption = () => {
@@ -98,15 +98,13 @@ const CreateMediaInlineWrapped = (props: TypeMediaInlineWrappedRequirements) =>
     const elementContainer = containerModel.element;
 
     const sizeCaption = () => {
-      const imageContainer = elementContainer.querySelector(
-        `.${LayoutImage.Elements.container}`,
-      ) as HTMLElement;
+      if (!imageElement) return;
       const captionContainer = elementContainer.querySelector(
         `.${CaptionContainer.Elements.container}`,
       ) as HTMLElement;
 
       if (captionContainer) {
-        captionContainer.style.width = `${imageContainer.offsetWidth}px`;
+        captionContainer.style.width = `${imageElement.element.offsetWidth}px`;
       }
     };
 
@@ -200,7 +198,6 @@ const CreateMediaInlineWrapped = (props: TypeMediaInlineWrappedRequirements) =>
       eventResize();
     }, 200);
 
-    containerModel.styles += LayoutImage.Styles;
     containerModel.styles += CaptionContainer.Styles;
 
     return {

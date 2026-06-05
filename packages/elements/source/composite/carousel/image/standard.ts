@@ -7,7 +7,7 @@ import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { combineStyles } from '@universityofmaryland/web-utilities-library/styles';
 import * as carouselElements from '../elements';
 import { buttons } from 'atomic';
-import { Image as LayoutImage } from 'layout';
+import { createLayoutImageContainer } from 'layout';
 
 type TypeFullScreen = {
   isFullScreenOption?: boolean;
@@ -36,6 +36,7 @@ type TypeCarouselSlideProps = TypeSlideContent &
 type TypeCarouselImageStandardProps = TypeSlideContent &
   TypeFullScreen & {
     isThemeDark?: boolean;
+    isToggleCaption?: boolean;
   };
 
 const ATTRIBUTE_REFERENCE = 'data-reference';
@@ -44,8 +45,8 @@ export const createCompositeCarouselImageStandard = (
   props: TypeCarouselImageStandardProps,
 ) =>
   (() => {
-    const { images, isThemeDark, isFullScreenOption } = props;
-    const overlayCarousel = carouselElements.overlay({ images });
+    const { images, isThemeDark, isFullScreenOption, isToggleCaption = true } = props;
+    const overlayCarousel = carouselElements.overlay({ images, isToggleCaption });
     let buttonStyles = '';
 
     const CreateTextContainer = ({
@@ -117,10 +118,7 @@ export const createCompositeCarouselImageStandard = (
       setFullScreen,
       index,
     }: TypeImageContainerProps) => {
-      const imageBlock = LayoutImage.CreateElement({
-        image,
-        showCaption: true,
-      });
+      const imageBlock = createLayoutImageContainer({ image, showCaption: true, isToggleCaption });
 
       const standardSlideWrapperElement = new ElementBuilder()
         .withClassName('carousel-image-standard-slide-wrapper')
@@ -143,7 +141,7 @@ export const createCompositeCarouselImageStandard = (
           callback: setFullScreen,
           index,
         });
-        imageBlock.appendChild(buttonFullscreen.element);
+        imageBlock.element.appendChild(buttonFullscreen.element);
         buttonStyles += buttonFullscreen.styles;
       }
 
@@ -278,7 +276,6 @@ export const createCompositeCarouselImageStandard = (
 
     declarationModel.styles = combineStyles(
       slideStyles,
-      LayoutImage.Styles,
       overlayCarousel.styles,
       buttonStyles,
       declarationModel.styles,

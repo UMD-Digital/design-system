@@ -43,9 +43,8 @@ const createComponent: CreateComponentFunction = (element) => {
   return carousel.images({
     images,
     isThemeDark: Attributes.isTheme.dark({ element }),
-    isFullScreenOption: Attributes.includesFeature.fullScreenOption({
-      element,
-    }),
+    isFullScreenOption: Attributes.includesFeature.fullScreenOption({ element }),
+    isToggleCaption: Attributes.isVisual.textToggle({ element }),
   });
 };
 
@@ -66,6 +65,9 @@ const createComponent: CreateComponentFunction = (element) => {
  *   - `dark` - Dark theme
  * - `data-feature` - Additional features:
  *   - `fullscreen` - Enable fullscreen viewing option
+ * - `data-visual-text-toggle` - Caption display style (default: true)
+ *   - `true` - Toggle button that expands to reveal caption
+ *   - `false` - Block caption overlaid directly on the image
  *
  * ## Observed Attributes
  * - `resize` - Triggers carousel size recalculation

@@ -4,27 +4,31 @@ import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { combineStyles } from '@universityofmaryland/web-utilities-library/styles';
 import * as carouselElements from '../elements';
 import { buttons } from 'atomic';
-import { Image as LayoutImage } from 'layout';
+import { createLayoutImageContainer } from 'layout';
 
 type TypeCarouselMultipleProps = {
   images: HTMLImageElement[];
   isThemeDark?: boolean;
   isFullScreenOption?: boolean;
+  isToggleCaption?: boolean;
 };
 
 const fullScreenClassName = elementStyles.action.button.fullScreen.className;
 
 export const createCompositeCarouselImageMultiple = (props: TypeCarouselMultipleProps) =>
   (() => {
-    const { images, isThemeDark, isFullScreenOption = false } = props;
+    const { images, isThemeDark, isFullScreenOption = false, isToggleCaption = true } = props;
     const clonedImages = images.map((image) => image.cloneNode(true)) as HTMLImageElement[];
     const slide = new ElementBuilder().build().element;
-    const overlayCarousel = carouselElements.overlay({ images });
+    const overlayCarousel = carouselElements.overlay({ images, isToggleCaption });
 
     let buttonStyles = '';
+    let blockStyles = '';
+    let containerClass = '';
 
-    const blocks = clonedImages.map((image, index) => {
-      const block = LayoutImage.CreateElement({ image, showCaption: true });
+    const blockModels = clonedImages.map((image, index) => {
+      const block = createLayoutImageContainer({ image, showCaption: true, isToggleCaption });
+      containerClass = block.element.className;
 
       if (isFullScreenOption) {
         const button = buttons.fullscreen.create({
@@ -32,15 +36,16 @@ export const createCompositeCarouselImageMultiple = (props: TypeCarouselMultiple
           index,
         });
 
-        block.appendChild(button.element);
+        block.element.appendChild(button.element);
         buttonStyles += button.styles;
       }
 
-      return block;
+      blockStyles += block.styles;
+      return block.element;
     });
 
     const carousel = carouselElements.blocks.CreateElement({
-      blocks,
+      blocks: blockModels,
       slide,
       mobileBreakpoint: token.media.breakpointValues.medium.max,
       tabletBreakpoint: token.media.breakpointValues.desktop.min,
@@ -70,11 +75,7 @@ export const createCompositeCarouselImageMultiple = (props: TypeCarouselMultiple
       .withStyles({
         element: {
           containerType: 'inline-size',
-          [`& .${LayoutImage.Elements.container} img`]: {
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-          },
+          [`& .${containerClass} img`]: { objectFit: 'cover' },
         },
       })
       .withStylesIf(isFullScreenOption, {
@@ -85,11 +86,11 @@ export const createCompositeCarouselImageMultiple = (props: TypeCarouselMultiple
             transition: 'visibility 0s, opacity 0.5s linear',
             '&:focus': { visibility: 'visible', opacity: 1 },
           },
-          [`& .${LayoutImage.Elements.container}:focus-within .${fullScreenClassName}`]: {
+          [`& .${containerClass}:focus-within .${fullScreenClassName}`]: {
             visibility: 'visible',
             opacity: 1,
           },
-          [`& .${LayoutImage.Elements.container}:hover .${fullScreenClassName}`]: {
+          [`& .${containerClass}:hover .${fullScreenClassName}`]: {
             visibility: 'visible',
             opacity: 1,
           },
@@ -101,7 +102,7 @@ export const createCompositeCarouselImageMultiple = (props: TypeCarouselMultiple
 
     declarationModel.styles = combineStyles(
       declarationModel.styles,
-      LayoutImage.Styles,
+      blockStyles,
       overlayCarousel.styles,
       buttonStyles,
     );

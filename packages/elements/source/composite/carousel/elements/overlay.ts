@@ -2,11 +2,17 @@ import * as token from '@universityofmaryland/web-token-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { combineStyles } from '@universityofmaryland/web-utilities-library/styles';
 import * as carouselElements from '../elements';
-import { Image as LayoutImage } from 'layout';
+import { createLayoutImageContainer } from 'layout';
 
-const CreateOverlaySlide = ({ images }: { images: HTMLImageElement[] }) =>
+const CreateOverlaySlide = ({
+  images,
+  isToggleCaption,
+}: {
+  images: HTMLImageElement[];
+  isToggleCaption: boolean;
+}) =>
   images.map((image) => {
-    const imageBlock = LayoutImage.CreateElement({ image, showCaption: true });
+    const imageBlock = createLayoutImageContainer({ image, showCaption: true, isToggleCaption });
 
     const imageContainerModel = new ElementBuilder()
       .withClassName('carousel-overlay-container')
@@ -42,8 +48,10 @@ const CreateOverlaySlide = ({ images }: { images: HTMLImageElement[] }) =>
 
 export const createCompositeCarouselOverlay = ({
   images,
+  isToggleCaption = true,
 }: {
   images: HTMLImageElement[];
+  isToggleCaption?: boolean;
 }) =>
   (() => {
     let isFullScreenEvents: any = null;
@@ -78,7 +86,7 @@ export const createCompositeCarouselOverlay = ({
       );
     };
 
-    const overlaySlideModels = CreateOverlaySlide({ images });
+    const overlaySlideModels = CreateOverlaySlide({ images, isToggleCaption });
     const overlaySlides = overlaySlideModels.map((model) => model.element);
     const firstSlide = overlaySlideModels[0];
     const slideStyles = firstSlide ? firstSlide.styles : '';
@@ -100,7 +108,6 @@ export const createCompositeCarouselOverlay = ({
     return {
       element: fixedFullScreen.element,
       styles: combineStyles(
-        LayoutImage.Styles,
         slideStyles,
         overlayCarousel.styles,
         fixedFullScreen.styles,

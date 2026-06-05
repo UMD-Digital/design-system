@@ -883,6 +883,11 @@ const isVisual = {
     AttributeValues.state.TRUE,
     true,
   ),
+  textToggle: createAttributeCheck(
+    AttributeNames.visual.textToggle,
+    AttributeValues.state.TRUE,
+    true,
+  ),
   transparent: (props: AttributeElementProps): boolean =>
     checkDeprecatedAttribute({
       ...props,

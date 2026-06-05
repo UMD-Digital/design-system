@@ -2,7 +2,7 @@ import * as token from '@universityofmaryland/web-token-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { createCompositeMediaCaption as CaptionContainer } from '../elements/caption';
-import { Image as LayoutImage } from 'layout';
+import { createLayoutImageContainer } from 'layout';
 
 export type TypeMediaInlineRequirements = {
   image?: HTMLImageElement | null;
@@ -20,7 +20,7 @@ const CreateMediaWithCaption = (props: TypeMediaInlineRequirements) =>
         console.warn('CreateMediaWithCaption: No image provided');
         return null;
       }
-      return LayoutImage.CreateElement({ image, showCaption: true });
+      return createLayoutImageContainer({ image, showCaption: true });
     };
 
     const createCaption = () => {
@@ -35,6 +35,7 @@ const CreateMediaWithCaption = (props: TypeMediaInlineRequirements) =>
 
     const imageElement = createImage();
     const captionElement = createCaption();
+    const children = [imageElement, captionElement].filter((child) => child != null);
 
     const objectModel = new ElementBuilder()
       .withClassName('element-media-caption-container')
@@ -46,10 +47,8 @@ const CreateMediaWithCaption = (props: TypeMediaInlineRequirements) =>
           maxWidth: '100%',
         },
       })
-      .withChildren(imageElement, captionElement)
+      .withChildren(...children)
       .build();
-
-    const objectContainer = objectModel.element;
 
     const containerBuilder = new ElementBuilder()
       .withClassName('element-media-with-caption-container')
@@ -65,20 +64,12 @@ const CreateMediaWithCaption = (props: TypeMediaInlineRequirements) =>
     }
 
     const containerModel = containerBuilder.build();
-    const elementContainer = containerModel.element;
+    const objectContainer = objectModel.element;
 
     const sizeCaption = () => {
-      const imageContainer = elementContainer.querySelector(
-        `.${LayoutImage.Elements.container}`,
-      ) as HTMLElement;
-      const captionElement = elementContainer.querySelector(
-        `.${CaptionContainer.Elements.container}`,
-      ) as HTMLElement;
-
-      if (captionElement) {
-        captionElement.style.width = `${imageContainer.offsetWidth}px`;
-        captionElement.style.display = `block`;
-      }
+      if (!imageElement || !captionElement) return;
+      captionElement.style.width = `${imageElement.element.offsetWidth}px`;
+      captionElement.style.display = `block`;
     };
 
     const load = () => {
@@ -92,7 +83,7 @@ const CreateMediaWithCaption = (props: TypeMediaInlineRequirements) =>
         }
       };
 
-			if (!image) {
+      if (!image) {
         console.warn('CreateMediaWithCaption: No image provided');
         return null;
       }
@@ -117,7 +108,6 @@ const CreateMediaWithCaption = (props: TypeMediaInlineRequirements) =>
       sizeCaption();
     }, 100);
 
-    containerModel.styles += LayoutImage.Styles;
     containerModel.styles += CaptionContainer.Styles;
 
     return {

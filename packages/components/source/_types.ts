@@ -294,11 +294,30 @@ export interface AttributeElementRef {
 
 /**
  * Global type augmentation for component events
+ *
+ * This is the canonical, type-safe registry of every event dispatched by the
+ * design system. Adding an entry here gives consumers autocomplete and type
+ * checking on `addEventListener`. Every component that dispatches an event MUST
+ * register it here, in addition to documenting it with a `## Dispatched Events`
+ * JSDoc section and `@fires` tags on the component definition.
+ *
+ * Naming convention: `{component}:{action}` (e.g. `accordion:open`, `modal:show`).
+ *
+ * - Framework events (`component:*`) are dispatched by the model package.
+ * - Feature events (`accordion:*`, `modal:*`, …) are dispatched by the elements
+ *   package and bubble out of the Shadow DOM (`composed: true`).
  */
 declare global {
   interface HTMLElementEventMap {
+    // Framework events (model package)
     'component:ready': CustomEvent<ComponentReadyDetail>;
     'component:error': CustomEvent<ComponentErrorDetail>;
     'component:resize': CustomEvent<ComponentResizeDetail>;
+
+    // Feature events (elements package)
+    'accordion:open': CustomEvent;
+    'accordion:close': CustomEvent;
+    'modal:show': CustomEvent;
+    'modal:hide': CustomEvent;
   }
 }

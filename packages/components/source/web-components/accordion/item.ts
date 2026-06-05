@@ -19,6 +19,7 @@ const createComponent: CreateComponentFunction = (element) =>
     isStateOpen: Attributes.isVisual.open({
       element,
     }),
+    context: element,
   });
 
 const slots: SlotConfiguration = {
@@ -59,6 +60,25 @@ const attributes = Attributes.handler.common.accordion();
  * ## Observed Attributes
  * - `data-visual-open` - When changed to "true", opens accordion with animation; when changed to "false", closes with animation
  * - `resize` - When set to "true", re-evaluates accordion height without animation
+ *
+ * ## Dispatched Events
+ * Both events bubble and are `composed: true` (they cross the Shadow DOM boundary),
+ * and fire on the host element for every toggle — whether triggered by a header click
+ * or a programmatic `data-visual-open` change. They do not fire for the initial open
+ * state set on load.
+ * - `accordion:open` — fired when the item opens
+ * - `accordion:close` — fired when the item closes
+ *
+ * @fires accordion:open - When the accordion item opens (header click or `data-visual-open="true"`)
+ * @fires accordion:close - When the accordion item closes (header click or `data-visual-open="false"`)
+ *
+ * @example
+ * ```javascript
+ * // Listening for open/close events
+ * const accordion = document.querySelector('umd-element-accordion-item');
+ * accordion.addEventListener('accordion:open', () => console.log('opened'));
+ * accordion.addEventListener('accordion:close', () => console.log('closed'));
+ * ```
  *
  * @example
  * ```html

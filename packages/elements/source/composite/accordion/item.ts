@@ -8,6 +8,7 @@ type TypeAccordionProps = {
   isThemeLight?: boolean;
   isThemeDark?: boolean;
   isStateOpen: boolean;
+  context?: HTMLElement;
 };
 
 type StateProps = {
@@ -230,7 +231,7 @@ const ActionAnimation = ({
 
 export const createCompositeAccordionItem = (props: TypeAccordionProps) =>
   (() => {
-    const { isStateOpen = false } = props;
+    const { isStateOpen = false, context } = props;
     const containerBuilder = new ElementBuilder().withClassName(
       'accordion-container',
     );
@@ -240,11 +241,17 @@ export const createCompositeAccordionItem = (props: TypeAccordionProps) =>
     const open = (props: StateProps) => {
       ActionAnimation({ ...props, container, isOpening: true });
       isOpen = true;
+      context?.dispatchEvent(
+        new CustomEvent('accordion:open', { bubbles: true, composed: true }),
+      );
     };
 
     const close = (props: StateProps) => {
       ActionAnimation({ ...props, container, isOpening: false });
       isOpen = false;
+      context?.dispatchEvent(
+        new CustomEvent('accordion:close', { bubbles: true, composed: true }),
+      );
     };
 		
     const EventSize = () => {
@@ -267,7 +274,10 @@ export const createCompositeAccordionItem = (props: TypeAccordionProps) =>
       .build();
 
     if (isStateOpen) {
-      open({ hasAnimation: false });
+      // Initial render: animate open without dispatching an event — the
+      // accordion:open/close events represent toggles, not initial state.
+      ActionAnimation({ container, isOpening: true, hasAnimation: false });
+      isOpen = true;
     }
 
     window.addEventListener('resize', debounce(EventSize, 20));

@@ -139,3 +139,25 @@ Components use `data-*` attributes (migrated from bare attributes):
 - `data-loading-priority` — `eager`, `lazy`
 
 Legacy bare attributes (`theme`, `visual`) still work but emit deprecation warnings.
+
+## Dispatched Events
+
+Components publish behavior to consumers via bubbling `CustomEvent`s. Because events are
+actually dispatched from a lower layer (framework events like `component:resize` come from the
+**model** package; feature events like `accordion:open` / `modal:show` come from the **elements**
+package — note the elements package does **not** depend on model, so it dispatches with raw
+`new CustomEvent(...)`), the documentation must live here, in the component package, where
+consumers look. The convention has **two required parts** for every component that dispatches:
+
+1. **Typed registry** — add the event to the `HTMLElementEventMap` augmentation in
+   `source/_types.ts`. This is the single source of truth and gives consumers autocomplete +
+   type checking on `addEventListener`.
+2. **Per-component JSDoc** — on the component definition, add a `## Dispatched Events` markdown
+   section (rendered by TypeDoc) and a `@fires {event}` tag per event. See
+   `web-components/accordion/item.ts` and `web-components/layout/modal.ts` for the pattern.
+
+**Naming**: `{component}:{action}` (e.g. `accordion:open`, `accordion:close`, `modal:show`).
+All feature events bubble and use `composed: true` so they cross the Shadow DOM boundary.
+Dispatch from the single choke point that both user interaction and programmatic attribute
+changes funnel through (for accordion, the element-layer `open`/`close`), and dispatch on the
+host element by threading it in as a `context` prop.

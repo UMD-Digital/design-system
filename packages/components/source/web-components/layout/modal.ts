@@ -48,8 +48,12 @@ const attributes = Attributes.handler.common.visualShowHide({
  *   - `true` (when previously `false`) — hides the modal
  *
  * ## Dispatched Events
+ * Both events bubble and are `composed: true` (they cross the Shadow DOM boundary).
  * - `modal:show` — dispatched on the host element when the modal opens
  * - `modal:hide` — dispatched on the host element when the modal closes
+ *
+ * @fires modal:show - When the modal opens
+ * @fires modal:hide - When the modal closes
  *
  * @example
  * ```html

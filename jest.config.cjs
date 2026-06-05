@@ -77,6 +77,10 @@ module.exports = {
       __dirname,
       './__mocks__/@universityofmaryland/web-utilities-library/styles.js',
     ),
+    '^@universityofmaryland/web-utilities-library/performance$': path.resolve(
+      __dirname,
+      './__mocks__/@universityofmaryland/web-utilities-library/performance.js',
+    ),
     '^@universityofmaryland/web-builder-library$': path.resolve(
       __dirname,
       './__mocks__/webBuilderLibrary.js',

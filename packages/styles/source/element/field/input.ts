@@ -133,6 +133,41 @@ export const text: JssObject = create.jss.objectWithClassName({
 });
 
 /**
+ * Simple input field styles with a transparent background and bottom-border only.
+ * @returns {JssObject} Styles for minimal, underline-style input fields.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.field.input.simple
+ * ```
+ * @example
+ * ```css
+ * class="umd-field-input-simple"
+ * ```
+ * @since 2.1.0
+ */
+export const simple: JssObject = create.jss.objectWithClassName({
+  ...baseInput,
+
+  className: [`${classNamePrefix}-simple`],
+
+  backgroundColor: 'transparent',
+  border: 'none',
+  borderBottom: `1px solid ${color.gray.mediumAA}`,
+  borderRadius: 0,
+  padding: `${spacing.xs} ${spacing.sm}`,
+  paddingLeft: 0,
+
+  [`&::placeholder`]: {
+    color: `${color.black}`,
+  },
+
+  [`&:focus, &:focus-within`]: {
+    borderBottom: `1px solid ${color.black}`,
+  },
+});
+
+/**
  * Date and datetime input wrapper with calendar icon.
  * @returns {JssObject} Wrapper styles for date and datetime inputs with calendar icon.
  * @example

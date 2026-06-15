@@ -112,3 +112,44 @@ export const selectWrapper: JssObject = create.jss.objectWithClassName({
     width: spacing.sm,
   },
 });
+
+/**
+ * Simple select dropdown wrapper with a transparent background and bottom-border only.
+ * Pair with `element.field.input.simple` on the `<select>` for the underline field styling.
+ * @returns {JssObject} Wrapper styles for a minimal, underline-style select with chevron indicator.
+ * @example
+ * ```typescript
+ * import * as Styles from '@universityofmaryland/web-styles-library';
+ * Styles.element.field.select.selectSimpleWrapper
+ * ```
+ * @example
+ * ```css
+ * class="umd-field-select-simple"
+ * ```
+ * @since 1.8.13
+ */
+export const selectSimpleWrapper: JssObject = create.jss.objectWithClassName({
+  position: 'relative',
+
+  className: [`${classNamePrefix}-simple`],
+
+  '& select': {
+    appearance: 'none',
+    backgroundColor: 'transparent',
+    cursor: 'pointer',
+    padding: `${spacing.xs} ${spacing.sm}`,
+    position: 'relative',
+		paddingRight: spacing.lg,
+  },
+
+  '&:before': {
+    content: "''",
+    backgroundImage: `url("${CHEVRON_DOWN_RED}")`,
+    backgroundSize: 'contain',
+    position: 'absolute',
+    right: `${spacing.sm}`,
+    top: `calc(50% - ${spacing.min})`,
+    height: spacing.sm,
+    width: spacing.sm,
+  },
+});

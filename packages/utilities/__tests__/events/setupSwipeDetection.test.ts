@@ -205,6 +205,93 @@ describe('setupSwipeDetection', () => {
     });
   });
 
+  describe('interactive targets', () => {
+    const swipeFrom = (element: HTMLElement) => {
+      const dispatch = (type: string, pageX: number) => {
+        const touchEvent = new Event(type, {
+          bubbles: true,
+          cancelable: true,
+        }) as any;
+        touchEvent.changedTouches = [{ pageX, pageY: 0 }];
+        element.dispatchEvent(touchEvent);
+      };
+
+      dispatch('touchstart', 100);
+      jest.advanceTimersByTime(150);
+      dispatch('touchend', 150);
+    };
+
+    it('should not trigger callback when touch starts on a summary element', () => {
+      const details = document.createElement('details');
+      const summary = document.createElement('summary');
+      details.appendChild(summary);
+      container.appendChild(details);
+
+      setupSwipeDetection({ container, callback: mockCallback });
+      swipeFrom(summary);
+
+      expect(mockCallback).not.toHaveBeenCalled();
+    });
+
+    it('should not trigger callback when touch starts on a button', () => {
+      const button = document.createElement('button');
+      container.appendChild(button);
+
+      setupSwipeDetection({ container, callback: mockCallback });
+      swipeFrom(button);
+
+      expect(mockCallback).not.toHaveBeenCalled();
+    });
+
+    it('should not trigger callback when touch starts on a link', () => {
+      const link = document.createElement('a');
+      container.appendChild(link);
+
+      setupSwipeDetection({ container, callback: mockCallback });
+      swipeFrom(link);
+
+      expect(mockCallback).not.toHaveBeenCalled();
+    });
+
+    it('should not trigger callback when touch starts on a child of an interactive element', () => {
+      const button = document.createElement('button');
+      const icon = document.createElement('span');
+      button.appendChild(icon);
+      container.appendChild(button);
+
+      setupSwipeDetection({ container, callback: mockCallback });
+      swipeFrom(icon);
+
+      expect(mockCallback).not.toHaveBeenCalled();
+    });
+
+    it('should trigger callback when touch starts on non-interactive content', () => {
+      const image = document.createElement('img');
+      container.appendChild(image);
+
+      setupSwipeDetection({ container, callback: mockCallback });
+      swipeFrom(image);
+
+      expect(mockCallback).toHaveBeenCalledWith(true);
+    });
+
+    it('should resume swipe detection after an interactive gesture', () => {
+      const button = document.createElement('button');
+      container.appendChild(button);
+
+      setupSwipeDetection({ container, callback: mockCallback });
+      swipeFrom(button);
+      expect(mockCallback).not.toHaveBeenCalled();
+
+      container.dispatchEvent(createTouchEvent('touchstart', 100));
+      jest.advanceTimersByTime(150);
+      container.dispatchEvent(createTouchEvent('touchend', 150));
+
+      expect(mockCallback).toHaveBeenCalledWith(true);
+      expect(mockCallback).toHaveBeenCalledTimes(1);
+    });
+  });
+
   describe('error conditions', () => {
     it('should handle null container', () => {
       expect(() =>

@@ -35,16 +35,20 @@ export const setupSwipeDetection = ({
 }): void => {
   const threshold = 20; // Minimum distance in pixels to trigger swipe
   const allowedTime = 100; // Minimum time in ms for swipe detection
+  const interactiveSelector = 'summary, details, button, a, input, [role="button"]';
   let startX = 0;
   let dist = 0;
   let elapsedTime = 0;
   let startTime = 0;
+  let isInteractiveTarget = false;
 
   container.addEventListener(
     'touchstart',
     (event) => {
       const touchObject = event.changedTouches[0];
+      const target = event.target as HTMLElement | null;
 
+      isInteractiveTarget = !!target?.closest?.(interactiveSelector);
       dist = 0;
       startX = touchObject.pageX;
       startTime = new Date().getTime();
@@ -55,6 +59,8 @@ export const setupSwipeDetection = ({
   container.addEventListener(
     'touchend',
     (event) => {
+      if (isInteractiveTarget) return;
+
       const touchObject = event.changedTouches[0];
 
       dist = touchObject.pageX - startX;

@@ -126,6 +126,8 @@ export interface ElementModel<T extends HTMLElement = HTMLElement> {
   destroy?: () => void;
   /** Optional custom events/methods attached to the element */
   events?: Record<string, Function>;
+  /** Child elements keyed by their primary CSS class name */
+  children: Record<string, HTMLElement>;
 }
 
 // ====================

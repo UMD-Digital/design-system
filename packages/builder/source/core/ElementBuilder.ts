@@ -740,6 +740,7 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
       return {
         element: this.element,
         styles: this.styles.compile(),
+        children: {},
         update: (props) => this.update(props),
         destroy: () => this.destroy(),
         ...(Object.keys(this.customEvents).length > 0 && {
@@ -757,23 +758,33 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
     });
 
     const childStyles: string[] = [];
+    const childRegistry: Record<string, HTMLElement> = {};
     this.children.forEach((child) => {
+      let childElement: HTMLElement | null = null;
       if (isElementBuilder(child)) {
         const built = child.build();
         this.element.appendChild(built.element);
         if (built.styles) {
           childStyles.push(built.styles);
         }
+        childElement = built.element;
       } else if (isElementModel(child)) {
         // Handle ElementModel children - extract element and merge styles
         this.element.appendChild(child.element);
         if (child.styles) {
           childStyles.push(child.styles);
         }
+        childElement = child.element;
       } else if (child instanceof HTMLElement) {
         this.element.appendChild(child);
+        childElement = child;
       } else if (typeof child === 'string') {
         this.element.appendChild(document.createTextNode(child));
+      }
+
+      if (childElement) {
+        const key = childElement.classList[0];
+        if (key) childRegistry[key] = childElement;
       }
     });
 
@@ -801,6 +812,7 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
     const model: ElementModel<T> = {
       element: this.element,
       styles: allStyles,
+      children: childRegistry,
       update: (props: Partial<BuilderOptions>) => this.update(props),
       destroy: () => this.destroy(),
       ...(Object.keys(this.customEvents).length > 0 && {

@@ -45,6 +45,7 @@ const makeToggleCaption = (image: HTMLImageElement): ElementModel | null => {
     .withStyles({
       element: {
         cursor: 'pointer',
+        pointerEvents: 'auto',
         width: token.spacing.lg,
         height: token.spacing.lg,
         position: 'relative',
@@ -94,6 +95,9 @@ const makeToggleCaption = (image: HTMLImageElement): ElementModel | null => {
       element: {
         display: 'none',
         overflow: 'auto',
+        boxSizing: 'border-box',
+        maxHeight: '100%',
+        pointerEvents: 'auto',
         color: token.color.white,
         backgroundColor: token.color.gray.darker,
         border: `${token.spacing.sm} solid ${token.color.gray.darker}`,
@@ -101,8 +105,6 @@ const makeToggleCaption = (image: HTMLImageElement): ElementModel | null => {
         lineHeight: 1.1,
         scrollbarWidth: 'none',
         '&::-webkit-scrollbar': { display: 'none' },
-        maxHeight: '100px',
-        [`@media (${token.media.queries.desktop.min})`]: { maxHeight: '200px' },
       },
     })
     .build();
@@ -123,8 +125,16 @@ const makeToggleCaption = (image: HTMLImageElement): ElementModel | null => {
 
         '&[open]': {
           width: `calc(100% - (${token.spacing.sm} * 2))`,
+          height: `calc(100% - (${token.spacing.sm} * 2))`,
           gap: token.spacing.sm,
           alignItems: 'flex-end',
+          pointerEvents: 'none',
+          '&::details-content': {
+            alignSelf: 'stretch',
+            flex: 1,
+            display: 'flex',
+            alignItems: 'flex-end',
+          },
           '& .image-caption-toggle-text': {
             display: 'block',
             flex: 1,

@@ -8,7 +8,7 @@
  * @example
  * ```typescript
  * import * as Styles from '@universityofmaryland/web-styles-library';
- * Styles.element.action.button.fullScreen
+ * Styles.element.action.button.videoState
  * ```
  * @since 1.1.0
  */

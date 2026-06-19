@@ -1,10 +1,11 @@
 import * as token from '@universityofmaryland/web-token-library';
-import * as element from '@universityofmaryland/web-styles-library/element';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { setupSwipeDetection } from '@universityofmaryland/web-utilities-library/events';
 import { parsePixelValue } from '@universityofmaryland/web-utilities-library/styles';
 import { CreateButton, ButtonVisibility } from './nav-button';
+import { createCaption } from '../../../atomic/assets/image/caption';
+import { fullscreen } from '../../../atomic/buttons/fullscreen';
 
 export type TypeButtonConfig = {
   backgroundColor?: string;
@@ -131,7 +132,7 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
     original: HTMLElement;
     clone: HTMLElement;
   }) => {
-    const fullScreenClassName = element.action.button.fullScreen.className;
+    const fullScreenClassName = fullscreen.className;
     const originalFullScreen = original.querySelector(`.${fullScreenClassName}`);
     const cloneFullScreen = clone.querySelector(`.${fullScreenClassName}`);
 
@@ -142,6 +143,9 @@ const EventScrollCarousel = (props: TypeEventScroll) => {
         fullScreenCallback(index),
       );
     }
+
+    // cloneNode(true) drops the caption toggle's click listener; restore it.
+    createCaption.bindToggle(clone);
   };
 
   const animateRight = () => {

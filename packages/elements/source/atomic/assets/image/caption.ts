@@ -1,9 +1,44 @@
 import * as token from '@universityofmaryland/web-token-library';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import { ElementBuilder, type ElementModel } from '@universityofmaryland/web-builder-library';
+import {
+  ElementBuilder,
+  type ElementModel,
+} from '@universityofmaryland/web-builder-library';
 
 const ATTRIBUTE_CAPTION = 'data-caption';
 const ATTRIBUTE_CREDIT = 'data-credit';
+
+let captionInstanceCount = 0;
+
+const INDICATOR_CLASS = 'image-caption-toggle-indicator';
+const TOGGLE_CLASS = 'image-caption-toggle';
+
+const toggleCaption = (event: Event) => {
+  event.stopPropagation();
+
+  const button = event.currentTarget as HTMLElement;
+  const container = button.closest(`.${TOGGLE_CLASS}`);
+  if (!container) return;
+
+  const isExpanded = button.getAttribute('aria-expanded') === 'true';
+  button.setAttribute('aria-expanded', String(!isExpanded));
+
+  if (isExpanded) {
+    container.removeAttribute('data-expanded');
+  } else {
+    container.setAttribute('data-expanded', '');
+  }
+};
+
+// cloneNode(true) does not copy listeners added via addEventListener, so a
+// cloned subtree (e.g. carousel slides duplicated for infinite scroll) loses
+// its caption toggle behavior. Consumers that clone caption markup must call
+// this on the clone to restore interactivity.
+const bindToggle = (root: ParentNode): void => {
+  root
+    .querySelectorAll(`.${INDICATOR_CLASS}`)
+    .forEach((button) => button.addEventListener('click', toggleCaption));
+};
 
 const getCaptionText = (image: HTMLImageElement): string | null => {
   if (image.hasAttribute(ATTRIBUTE_CAPTION)) {
@@ -11,7 +46,10 @@ const getCaptionText = (image: HTMLImageElement): string | null => {
       `Attribute "data-caption" is deprecated. Use "data-credit" instead. This attribute will be removed in version 2.0.`,
     );
   }
-  return image.getAttribute(ATTRIBUTE_CREDIT) || image.getAttribute(ATTRIBUTE_CAPTION);
+  return (
+    image.getAttribute(ATTRIBUTE_CREDIT) ||
+    image.getAttribute(ATTRIBUTE_CAPTION)
+  );
 };
 
 const makeBlockCaption = (image: HTMLImageElement): ElementModel | null => {
@@ -39,25 +77,43 @@ const makeToggleCaption = (image: HTMLImageElement): ElementModel | null => {
   const text = getCaptionText(image);
   if (!text) return null;
 
-  const indicator = new ElementBuilder('summary')
-    .withClassName('image-caption-toggle-indicator')
-    .withAria({ label: 'Toggle caption' })
+  const captionId = `image-caption-text-${(captionInstanceCount += 1)}`;
+
+  const indicator = new ElementBuilder('button')
+    .withClassName(INDICATOR_CLASS)
+    .withAttributes({
+      type: 'button',
+      'aria-expanded': 'false',
+      'aria-controls': captionId,
+      'aria-label': 'Toggle caption',
+    })
+    .on('click', toggleCaption)
     .withStyles({
       element: {
+        appearance: 'none',
+        WebkitAppearance: 'none',
+        border: 'none',
+        margin: 0,
+        padding: 0,
         cursor: 'pointer',
         pointerEvents: 'auto',
+        touchAction: 'manipulation',
+        WebkitTapHighlightColor: 'transparent',
         width: token.spacing.lg,
         height: token.spacing.lg,
         position: 'relative',
-        display: 'grid',
+        display: 'block',
         flexShrink: 0,
         borderRadius: '50%',
         backgroundColor: token.color.gray.darker,
         color: token.color.white,
         transition: 'background-color 0.5s ease, color 0.5s ease',
-        '&:hover': {
-          backgroundColor: token.color.white,
-          color: token.color.gray.darker,
+
+        '@media (hover: hover)': {
+          '&:hover': {
+            backgroundColor: token.color.white,
+            color: token.color.gray.darker,
+          },
         },
         '&::before': {
           content: "''",
@@ -89,6 +145,7 @@ const makeToggleCaption = (image: HTMLImageElement): ElementModel | null => {
 
   const captionText = new ElementBuilder('span')
     .withClassName('image-caption-toggle-text')
+    .withAttribute('id', captionId)
     .withText(text)
     .styled(typography.sans.smaller)
     .withStyles({
@@ -109,8 +166,8 @@ const makeToggleCaption = (image: HTMLImageElement): ElementModel | null => {
     })
     .build();
 
-  const model = new ElementBuilder('details')
-    .withClassName('image-caption-toggle')
+  const model = new ElementBuilder('div')
+    .withClassName(TOGGLE_CLASS)
     .withStyles({
       element: {
         position: 'absolute',
@@ -123,18 +180,12 @@ const makeToggleCaption = (image: HTMLImageElement): ElementModel | null => {
         maxWidth: `calc(100% - (${token.spacing.sm} * 2))`,
         maxHeight: `calc(100% - (${token.spacing.sm} * 2))`,
 
-        '&[open]': {
+        '&[data-expanded]': {
           width: `calc(100% - (${token.spacing.sm} * 2))`,
           height: `calc(100% - (${token.spacing.sm} * 2))`,
           gap: token.spacing.sm,
           alignItems: 'flex-end',
           pointerEvents: 'none',
-          '&::details-content': {
-            alignSelf: 'stretch',
-            flex: 1,
-            display: 'flex',
-            alignItems: 'flex-end',
-          },
           '& .image-caption-toggle-text': {
             display: 'block',
             flex: 1,
@@ -150,13 +201,17 @@ const makeToggleCaption = (image: HTMLImageElement): ElementModel | null => {
   return model;
 };
 
-const create = (isToggleCaption: boolean, image: HTMLImageElement): ElementModel | null => {
+const create = (
+  isToggleCaption: boolean,
+  image: HTMLImageElement,
+): ElementModel | null => {
   if (isToggleCaption) return makeToggleCaption(image);
   return makeBlockCaption(image);
 };
 
 export const createCaption = {
   create,
+  bindToggle,
   Elements: {
     container: 'image-container',
   },

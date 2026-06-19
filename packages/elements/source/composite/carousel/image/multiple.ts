@@ -1,5 +1,4 @@
 import * as token from '@universityofmaryland/web-token-library';
-import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { combineStyles } from '@universityofmaryland/web-utilities-library/styles';
 import * as carouselElements from '../elements';
@@ -13,7 +12,7 @@ type TypeCarouselMultipleProps = {
   isToggleCaption?: boolean;
 };
 
-const fullScreenClassName = elementStyles.action.button.fullScreen.className;
+const fullScreenClassName = buttons.fullscreen.className;
 
 export const createCompositeCarouselImageMultiple = (props: TypeCarouselMultipleProps) =>
   (() => {
@@ -80,19 +79,27 @@ export const createCompositeCarouselImageMultiple = (props: TypeCarouselMultiple
       })
       .withStylesIf(isFullScreenOption, {
         element: {
-          [`& .${fullScreenClassName}`]: {
-            visibility: 'hidden',
-            opacity: 0,
-            transition: 'visibility 0s, opacity 0.5s linear',
-            '&:focus': { visibility: 'visible', opacity: 1 },
-          },
-          [`& .${containerClass}:focus-within .${fullScreenClassName}`]: {
-            visibility: 'visible',
-            opacity: 1,
-          },
-          [`& .${containerClass}:hover .${fullScreenClassName}`]: {
-            visibility: 'visible',
-            opacity: 1,
+          // Only hide/reveal the Full Screen button on devices that actually
+          // hover. On touch (hover: none) the button stays visible by default —
+          // and, crucially, no `:hover` rule exists on this container, so iOS
+          // Safari does not swallow the first tap as a hover. A hover-reveal on
+          // the container would make iOS treat the first tap on the caption
+          // toggle (a child of this container) as a hover instead of a click.
+          '@media (hover: hover)': {
+            [`& .${fullScreenClassName}`]: {
+              visibility: 'hidden',
+              opacity: 0,
+              transition: 'visibility 0s, opacity 0.5s linear',
+              '&:focus': { visibility: 'visible', opacity: 1 },
+            },
+            [`& .${containerClass}:focus-within .${fullScreenClassName}`]: {
+              visibility: 'visible',
+              opacity: 1,
+            },
+            [`& .${containerClass}:hover .${fullScreenClassName}`]: {
+              visibility: 'visible',
+              opacity: 1,
+            },
           },
         },
       })

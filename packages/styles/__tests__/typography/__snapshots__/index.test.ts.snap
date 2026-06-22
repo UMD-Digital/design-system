@@ -210,7 +210,7 @@ exports[`typography module should match snapshot 1`] = `
       "fontSize": "12px",
       "fontWeight": 700,
       "letterSpacing": ".05em",
-      "lineHeight": 1,
+      "lineHeight": 1.2,
       "textTransform": "uppercase",
     },
     "fonts": {
@@ -220,7 +220,7 @@ exports[`typography module should match snapshot 1`] = `
         "fontSize": "12px",
         "fontWeight": 700,
         "letterSpacing": ".05em",
-        "lineHeight": 1,
+        "lineHeight": 1.2,
         "textTransform": "uppercase",
       },
       "labelMedium": {

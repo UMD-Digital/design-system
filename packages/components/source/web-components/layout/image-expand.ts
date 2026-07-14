@@ -1,7 +1,7 @@
 import { layout } from '@universityofmaryland/web-elements-library/composite';
 import { createSlot } from '@universityofmaryland/web-utilities-library/elements';
 import * as validation from '@universityofmaryland/web-utilities-library/validation';
-import { Model, Slots } from '@universityofmaryland/web-model-library';
+import { Attributes, Model, Slots } from '@universityofmaryland/web-model-library';
 import {
   CreateComponentFunction,
   ComponentRegistration,
@@ -26,6 +26,7 @@ const createComponent: CreateComponentFunction = (element) =>
       element,
       slotName: Slots.name.assets.image,
     }) as HTMLImageElement,
+    includesAnimation: Attributes.includesFeature.animation({ element }),
   });
 
 /**
@@ -41,6 +42,11 @@ const createComponent: CreateComponentFunction = (element) =>
  * ## Slots
  * - `content` - Main content area (required, accepts: any elements)
  * - `image` - Featured image that can expand (required, accepts: img)
+ *
+ * ## Attributes
+ * - `data-animation` - Enable scroll-triggered expand animation:
+ *   - `false` - Disables the animation and shows the completed/expanded state
+ *   - Default - Enabled (`true`)
  *
  * @example
  * ```html

@@ -6,6 +6,7 @@ import {
   validateSlots,
   createSlotContent,
 } from '../test-helpers/component';
+import { getComponentAttributes } from '../test-helpers/validation';
 
 describe('Component: umd-layout-image-expand', () => {
   const tagName = 'umd-layout-image-expand';
@@ -188,6 +189,28 @@ describe('Component: umd-layout-image-expand', () => {
       
       const actions = content?.querySelectorAll('.actions a');
       expect(actions?.length).toBe(2);
+    });
+  });
+
+  describe('Attributes', () => {
+    beforeEach(() => {
+      layoutImageExpand();
+    });
+
+    it('should handle data-animation attribute with true value', () => {
+      const { element } = createTestComponent(tagName, '', {
+        'data-animation': 'true'
+      });
+      const attributes = getComponentAttributes(element);
+      expect(attributes['data-animation']).toBe('true');
+    });
+
+    it('should handle data-animation attribute with false value', () => {
+      const { element } = createTestComponent(tagName, '', {
+        'data-animation': 'false'
+      });
+      const attributes = getComponentAttributes(element);
+      expect(attributes['data-animation']).toBe('false');
     });
   });
 

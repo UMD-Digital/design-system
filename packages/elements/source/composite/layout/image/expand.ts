@@ -13,6 +13,7 @@ import {
 type TypeLayoutImageExpandProps = {
   content: HTMLElement;
   image: HTMLImageElement;
+  includesAnimation: boolean;
 };
 
 const KEYFRAMES = `
@@ -26,7 +27,10 @@ const KEYFRAMES = `
   }
 `;
 
-const CreateImageContainer = ({ image }: TypeLayoutImageExpandProps) => {
+const CreateImageContainer = ({
+  image,
+  includesAnimation,
+}: TypeLayoutImageExpandProps) => {
   const imageOverlay = new ElementBuilder()
     .withClassName('layout-image-expand-image-overlay')
     .withStyles({
@@ -38,12 +42,13 @@ const CreateImageContainer = ({ image }: TypeLayoutImageExpandProps) => {
         width: '100%',
         background: 'rgba(0,0,0,0.65)',
         opacity: 1,
-        ...withViewTimelineAnimation({
-          animation: 'img-overlay forwards',
-          animationTimeline: 'view()',
-          animationRangeStart: '70vh',
-          animationRangeEnd: '100vh',
-        }),
+        ...(includesAnimation &&
+          withViewTimelineAnimation({
+            animation: 'img-overlay forwards',
+            animationTimeline: 'view()',
+            animationRangeStart: '70vh',
+            animationRangeEnd: '100vh',
+          })),
       },
     })
     .build();
@@ -54,20 +59,22 @@ const CreateImageContainer = ({ image }: TypeLayoutImageExpandProps) => {
       element: {
         overflow: 'hidden',
         position: 'relative',
-        ...withViewTimelineAnimation({
-          width: token.spacing.maxWidth.smallest,
-          height: '70vh',
-          animation: 'img-size ease-in-out forwards',
-          animationTimeline: 'view()',
-          animationRangeStart: 'cover',
-          animationRangeEnd: '200vh',
-        }),
+        ...(includesAnimation &&
+          withViewTimelineAnimation({
+            width: token.spacing.maxWidth.smallest,
+            height: '70vh',
+            animation: 'img-size ease-in-out forwards',
+            animationTimeline: 'view()',
+            animationRangeStart: 'cover',
+            animationRangeEnd: '200vh',
+          })),
         '@supports not (animation-timeline: scroll())': {
           height: '100%',
         },
         '@media (prefers-reduced-motion: reduce)': {
           height: '100%',
         },
+        ...(!includesAnimation && { height: '100%' }),
         '& img': {
           display: 'block',
           width: '100%',
@@ -85,22 +92,24 @@ const CreateImageContainer = ({ image }: TypeLayoutImageExpandProps) => {
       element: {
         width: '100%',
         margin: '0 auto',
-        ...withViewTimelineAnimation({
-          display: 'flex',
-          justifyContent: 'center',
-          position: 'sticky',
-          top: 0,
-          animation: 'img-position ease-in-out forwards',
-          animationTimeline: 'view()',
-          animationRangeStart: 'cover',
-          animationRangeEnd: '200vh',
-        }),
+        ...(includesAnimation &&
+          withViewTimelineAnimation({
+            display: 'flex',
+            justifyContent: 'center',
+            position: 'sticky',
+            top: 0,
+            animation: 'img-position ease-in-out forwards',
+            animationTimeline: 'view()',
+            animationRangeStart: 'cover',
+            animationRangeEnd: '200vh',
+          })),
         '@supports not (animation-timeline: scroll())': {
           height: '100%',
         },
         '@media (prefers-reduced-motion: reduce)': {
           height: '100%',
         },
+        ...(!includesAnimation && { height: '100%' }),
       },
     })
     .withChild(imageSize)
@@ -124,7 +133,10 @@ const CreateImageContainer = ({ image }: TypeLayoutImageExpandProps) => {
     .build();
 };
 
-const CreateTextContainer = ({ content }: TypeLayoutImageExpandProps) => {
+const CreateTextContainer = ({
+  content,
+  includesAnimation,
+}: TypeLayoutImageExpandProps) => {
   const textLock = new ElementBuilder()
     .withClassName('layout-image-expand-text-lock')
     .withStyles({
@@ -156,16 +168,23 @@ const CreateTextContainer = ({ content }: TypeLayoutImageExpandProps) => {
     .withStyles({
       element: {
         width: '100vw',
-        ...withViewTimelineAnimation({
-          position: 'absolute',
-          top: 0,
-          height: '80vh',
-          transform: 'translateY(80vh)',
-        }),
+        ...(includesAnimation
+          ? withViewTimelineAnimation({
+              position: 'absolute',
+              top: 0,
+              height: '80vh',
+              transform: 'translateY(80vh)',
+            })
+          : {
+              position: 'absolute',
+              top: 0,
+              transform: 'translateY(0)',
+            }),
         [`@media (${token.media.queries.tablet.min})`]: {
-          ...withViewTimelineAnimation({
-            transform: 'translateY(100vh)',
-          }),
+          ...(includesAnimation &&
+            withViewTimelineAnimation({
+              transform: 'translateY(100vh)',
+            })),
         },
       },
     })
@@ -210,10 +229,13 @@ const CreateImageExpandElement = (props: TypeLayoutImageExpandProps) => {
       element: {
         containerType: 'inline-size',
         overflow: 'clip',
-        ...withViewTimelineAnimation({ height: '180vh' }),
+        ...(props.includesAnimation &&
+          withViewTimelineAnimation({ height: '180vh' })),
         [`@media (${token.media.queries.tablet.min})`]: {
-          ...withViewTimelineAnimation({ height: '200vh' }),
+          ...(props.includesAnimation &&
+            withViewTimelineAnimation({ height: '200vh' })),
         },
+        ...(!props.includesAnimation && { height: '100%' }),
       },
     })
     .withChild(containerModel)
@@ -221,12 +243,19 @@ const CreateImageExpandElement = (props: TypeLayoutImageExpandProps) => {
 
   declarationModel.styles += KEYFRAMES;
 
-  if (isScreenZoomed() && !isPreferredReducedMotion()) {
+  if (
+    props.includesAnimation &&
+    isScreenZoomed() &&
+    !isPreferredReducedMotion()
+  ) {
     textContainerModel.element.style.height = '90vh';
     textContainerModel.element.style.transform = 'translateY(0)';
   }
 
-  if (!CSS.supports('animation-timeline', 'view()')) {
+  if (
+    !props.includesAnimation ||
+    !CSS.supports('animation-timeline', 'view()')
+  ) {
     setTimeout(() => {
       sizeImageForText();
     }, 1000);

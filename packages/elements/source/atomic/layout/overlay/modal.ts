@@ -17,6 +17,7 @@ export const createModal = ({
   const html = document.documentElement;
   let eventReference: any = null;
   let accessibiltyEventReference: any = null;
+  let scrollPosition = 0;
 
   const backgroundBuilder = new ElementBuilder()
     .withClassName('modal-screen-container-background')
@@ -51,7 +52,12 @@ export const createModal = ({
   const container = containerBuilder.getElement();
 
   const show = () => {
+    scrollPosition = window.scrollY;
     container.style.display = 'block';
+    body.style.position = 'fixed';
+    body.style.top = `-${scrollPosition}px`;
+    body.style.left = '0';
+    body.style.right = '0';
     body.style.overflow = 'hidden';
     body.style.height = '100%';
     html.style.overflow = 'hidden';
@@ -76,11 +82,16 @@ export const createModal = ({
   };
 
   const hide = () => {
+    body.style.position = '';
+    body.style.top = '';
+    body.style.left = '';
+    body.style.right = '';
     body.style.overflow = 'visible';
     body.style.height = 'inherit';
     html.style.overflow = 'visible';
     html.style.height = 'inherit';
     container.style.display = 'none';
+    window.scrollTo(0, scrollPosition);
 
     if (accessibiltyEventReference) accessibiltyEventReference();
 		

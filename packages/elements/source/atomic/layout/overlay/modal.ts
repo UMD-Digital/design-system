@@ -6,12 +6,14 @@ type TypeFixedFullScreenProps = {
   content: HTMLElement | null;
   isHidden?: boolean;
   context?: HTMLElement | null;
+  onHide?: () => void;
 };
 
 export const createModal = ({
   content,
   isHidden,
   context,
+  onHide,
 }: TypeFixedFullScreenProps) => {
   const body = document.body;
   const html = document.documentElement;
@@ -94,8 +96,10 @@ export const createModal = ({
     window.scrollTo(0, scrollPosition);
 
     if (accessibiltyEventReference) accessibiltyEventReference();
-		
+
     if (eventReference) eventReference.removeEventListener('click', () => hide());
+
+    if (onHide) onHide();
 
 		if (context) context.dispatchEvent(new CustomEvent('modal:hide', {bubbles: true, composed: true}))
     

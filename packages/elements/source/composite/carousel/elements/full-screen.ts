@@ -18,8 +18,11 @@ type FullScreenModel = {
   };
 };
 
-export const createCompositeCarouselFullScreen = ({ content }: TypeFixedFullScreenProps) => {
-  const modal = layout.overlay.modal({ content });
+export const createCompositeCarouselFullScreen = ({
+  content,
+  callback,
+}: TypeFixedFullScreenProps) => {
+  const modal = layout.overlay.modal({ content, onHide: callback });
   const modalEvents = modal.events;
 
   const closeButtonModel = new ElementBuilder('button')

@@ -59,6 +59,10 @@ export const createCompositeCarouselOverlay = ({
     const setFullScreen = (index: number) => {
       let canMove = true;
 
+      if (isFullScreenEvents) {
+        window.removeEventListener('keyup', isFullScreenEvents);
+      }
+
       overlayCarousel.events.EventMoveTo(index);
 
       setTimeout(() => fixedFullScreen.events.show(), 100);
@@ -67,23 +71,23 @@ export const createCompositeCarouselOverlay = ({
         overlayCarousel.events.EventResize();
       }, 100);
 
-      isFullScreenEvents = window.addEventListener(
-        'keyup',
-        (event: KeyboardEvent) => {
-          if (!canMove) return;
+      const handleKeyup = (event: KeyboardEvent) => {
+        if (!canMove) return;
 
-          canMove = false;
-          if (event.key === 'ArrowLeft') {
-            overlayCarousel.events.EventSlideLeft();
-          } else if (event.key === 'ArrowRight') {
-            overlayCarousel.events.EventSlideRight();
-          }
+        canMove = false;
+        if (event.key === 'ArrowLeft') {
+          overlayCarousel.events.EventSlideLeft();
+        } else if (event.key === 'ArrowRight') {
+          overlayCarousel.events.EventSlideRight();
+        }
 
-          setTimeout(() => {
-            canMove = true;
-          }, 700);
-        },
-      );
+        setTimeout(() => {
+          canMove = true;
+        }, 700);
+      };
+
+      isFullScreenEvents = handleKeyup;
+      window.addEventListener('keyup', handleKeyup);
     };
 
     const overlaySlideModels = CreateOverlaySlide({ images, isToggleCaption });

@@ -118,7 +118,7 @@ const createAssetColumn = ({
         isScaled: true,
         videoPreload: 'auto',
         videoFetchPriority: 'high',
-        additionalElementStyles: {
+        customStyles: {
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',
@@ -189,7 +189,7 @@ const createTextColumn = (
     ribbon: eyebrow,
     textLargest: text,
     headlineComposite: createHeadline({ headline }),
-    additionalStyles: {
+    customStyles: {
       maxWidth: '720px',
     },
   });

@@ -9,7 +9,7 @@ import {
 interface VideoProps {
   video: HTMLVideoElement;
   isScaled?: boolean;
-  additionalElementStyles?: Record<string, any>;
+  customStyles?: Record<string, any>;
   callback?: (isPlaying: boolean) => void;
 }
 
@@ -17,7 +17,7 @@ export const createVideoToggle = (props: VideoProps) =>
   (() => {
     const {
       video,
-      additionalElementStyles,
+      customStyles,
       isScaled = false,
       callback,
     } = props;
@@ -78,7 +78,7 @@ export const createVideoToggle = (props: VideoProps) =>
       .withStyles({
         element: {
           position: 'relative',
-          ...additionalElementStyles,
+          ...customStyles,
           ...(isScaled && {
             width: '100%',
             height: '100%',

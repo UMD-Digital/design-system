@@ -104,7 +104,7 @@ const createAssetElement = ({
   if (video) {
     return assets.video.toggle({
       video,
-      additionalElementStyles: {
+      customStyles: {
         width: '100%',
         height: '100%',
         position: 'relative',

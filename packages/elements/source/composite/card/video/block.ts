@@ -9,7 +9,7 @@ export const createCompositeCardVideoBlock = (props: CardVideoShortProps) =>
   (() =>
     assets.video.observedAutoPlay({
       ...props,
-      additionalElementStyles: {
+      customStyles: {
         width: '100%',
         aspectRatio: '1 / 1',
         position: 'relative',

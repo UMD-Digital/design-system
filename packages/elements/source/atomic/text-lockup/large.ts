@@ -14,7 +14,7 @@ interface TypeTextLockupLarge {
   textLargest?: HTMLElement | null;
   actions?: HTMLElement | null;
   isThemeDark?: boolean;
-  additionalStyles?: Record<string, unknown>;
+  customStyles?: Record<string, unknown>;
 }
 
 export const createTextLockupLarge = ({
@@ -25,7 +25,7 @@ export const createTextLockupLarge = ({
   textLargest,
   actions,
   isThemeDark,
-  additionalStyles,
+  customStyles,
 }: TypeTextLockupLarge) => {
   const container = new ElementBuilder()
     .withClassName('text-lockup-large')
@@ -33,7 +33,7 @@ export const createTextLockupLarge = ({
       element: {
         zIndex: '9',
         position: 'relative',
-        ...additionalStyles,
+        ...customStyles,
       },
     });
 

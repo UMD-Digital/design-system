@@ -139,7 +139,7 @@ const createVideo = (video: HTMLVideoElement) => {
     isScaled: true,
     videoPreload: 'auto',
     videoFetchPriority: 'high',
-    additionalElementStyles: {
+    customStyles: {
       width: '100%',
       height: '100%',
       position: 'absolute',

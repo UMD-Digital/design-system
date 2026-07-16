@@ -149,6 +149,15 @@ Common prop interfaces used across elements:
 
 Type guards: `isImageElement()`, `isVideoElement()`, `isLinkElement()`, `isButtonElement()`, `isDivElement()`, `hasContent()`, `hasImageContent()`, `hasVideoContent()`
 
+### Style Override Props
+
+Two prop names exist for caller-supplied style overrides — use only these, with these exact meanings:
+
+- **`customStyles?: Record<string, any>`** — a flat JSS record merged into the root element's own styles (spread inside the `element` key of `.withStyles({ element: { ... } })`). Do not use `additionalStyles` or `additionalElementStyles` — these are deprecated aliases that were renamed to `customStyles`.
+- **`elementStyles?: ElementStyles`** — the full structured `ElementStyles` object (`element`, `pseudoBefore`, `pseudoAfter`, `siblingAfter`, `subElement`) forwarded whole to `ElementBuilder.withStyles()`.
+
+Note: `elementStyles` is also the conventional import alias for `@universityofmaryland/web-styles-library/element`. Prefer a different alias (e.g. `stylePresets`) in new files to keep the prop name greppable.
+
 ## ElementBuilder Migration
 
 Elements are being migrated from direct DOM manipulation to the `ElementBuilder` fluent API. Most atomic and many composite elements have been migrated. When creating or modifying elements, use `ElementBuilder` — do not introduce direct `document.createElement` patterns.

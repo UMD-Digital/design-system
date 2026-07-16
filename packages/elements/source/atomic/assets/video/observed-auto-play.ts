@@ -5,7 +5,7 @@ interface CardVideoShortProps {
   video: HTMLVideoElement;
   isAutoplay?: boolean;
   isScaled?: boolean;
-  additionalElementStyles?: Record<string, any>;
+  customStyles?: Record<string, any>;
   /** Control video preload strategy. Defaults to 'metadata' */
   videoPreload?: 'none' | 'metadata' | 'auto';
   /** Control fetch priority for the video. Defaults to 'auto' */
@@ -16,7 +16,7 @@ export const createVideoObservedAutoPlay = ({
   video,
   isAutoplay = false,
   isScaled = false,
-  additionalElementStyles,
+  customStyles,
   videoPreload = 'metadata',
   videoFetchPriority = 'auto',
 }: CardVideoShortProps) =>
@@ -66,7 +66,7 @@ export const createVideoObservedAutoPlay = ({
 
     const composite = createVideoToggle({
       video,
-      additionalElementStyles,
+      customStyles,
       isScaled,
       callback,
     });

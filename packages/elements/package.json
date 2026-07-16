@@ -43,6 +43,7 @@
     "prebuild": "node ../../scripts/update-badges.js",
     "release": "pnpm run test && pnpm run build && pnpm publish --access public",
     "build": "vite build",
+    "typecheck": "tsgo --noEmit -p tsconfig.json",
     "dev": "vite build --watch",
     "start": "pnpm run dev",
     "test": "jest",

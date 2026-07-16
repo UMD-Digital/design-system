@@ -3,9 +3,8 @@
   "compilerOptions": {
     "outDir": "./dist",
     "rootDir": "./source",
-    "baseUrl": "./source",
     "paths": {
-      "*": ["*"]
+      "*": ["./source/*"]
     }
   },
   "include": ["source/**/*"],

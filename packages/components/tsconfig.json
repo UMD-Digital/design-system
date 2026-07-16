@@ -2,8 +2,7 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
-    "baseUrl": ".",
-    "moduleResolution": "bundler",
+    "types": ["node"],
     "paths": {
       "../../source/*": ["./source/*"],
       "../../../source/*": ["./source/*"],

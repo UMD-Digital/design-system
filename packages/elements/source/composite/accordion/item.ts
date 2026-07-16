@@ -270,7 +270,8 @@ export const createCompositeAccordionItem = (props: TypeAccordionProps) =>
     const body = CreateBody({ ...props, isStateOpen });
 
     const containerModel = containerBuilder
-      .withChildren(headline, body)
+      .withChild(headline)
+      .withChild(body)
       .build();
 
     if (isStateOpen) {

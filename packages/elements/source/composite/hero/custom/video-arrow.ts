@@ -178,7 +178,7 @@ const createEventHandlers = (
   };
 
   const eventLoad = () => {
-    overlay.events.load();
+    overlay.events?.load();
     eventResize();
   };
 

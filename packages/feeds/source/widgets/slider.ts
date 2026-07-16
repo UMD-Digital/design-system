@@ -106,7 +106,7 @@ export const createSliderWidget = ({
 
     if (shadowRoot) setShadowStyles({ shadowRoot, styles: slider.styles });
     setTimeout(() => {
-      slider.events.load();
+      slider.events?.load();
     }, 100);
   };
 

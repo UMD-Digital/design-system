@@ -1,7 +1,6 @@
 const path = require('path');
 
 module.exports = {
-  preset: 'ts-jest',
   testEnvironment: 'jsdom',
   testMatch: ['**/__tests__/**/*.test.ts'],
   moduleFileExtensions: ['ts', 'js'],
@@ -15,10 +14,19 @@ module.exports = {
     '!**/index.ts', // Exclude barrel exports from coverage
   ],
   transform: {
-    '^.+\\.ts$': ['ts-jest', { tsconfig: 'tsconfig.json' }],
+    '^.+\\.ts$': [
+      '@swc/jest',
+      {
+        jsc: {
+          parser: { syntax: 'typescript', decorators: true },
+          transform: { decoratorVersion: '2022-03' },
+          target: 'es2020',
+        },
+        module: { type: 'commonjs' },
+      },
+    ],
   },
   transformIgnorePatterns: [
     'node_modules/',
   ],
-  extensionsToTreatAsEsm: ['.ts'],
 };

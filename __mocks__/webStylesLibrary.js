@@ -415,33 +415,6 @@ module.exports = {
     element: {
     action: {
     button: {
-    fullScreen: {
-    className: 'umd-action-button-full-screen',
-    fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '12px',
-    lineHeight: '1.16em',
-    position: 'absolute',
-    top: '0',
-    right: '0',
-    color: '#FFFFFF',
-    textTransform: 'uppercase',
-    fontWeight: '700',
-    padding: '8px',
-    display: 'flex',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    transition: 'background-color 0.3s',
-    "&:hover, &:focus": {
-    backgroundColor: 'rgba(0, 0, 0, 1)'
-  },
-    "& > span": {
-    display: 'block',
-    height: '12px',
-    width: '1px',
-    margin: '0 8px',
-    backgroundColor: '#757575'
-  }
-  },
     videoState: {
     className: 'umd-action-button-video-state',
     position: 'absolute',
@@ -472,6 +445,7 @@ module.exports = {
     composeIcon: jest.fn(),
     small: {
     width: '28px',
+    minWidth: '28px',
     height: '28px',
     display: 'flex',
     color: '#000000',
@@ -494,6 +468,7 @@ module.exports = {
   },
     smallDark: {
     width: '28px',
+    minWidth: '28px',
     height: '28px',
     display: 'flex',
     color: '#FFFFFF',
@@ -1013,18 +988,19 @@ module.exports = {
     "& img": {
     display: 'block'
   },
-    "& > a": {
+    "& a": {
     lineHeight: '0',
     overflow: 'hidden',
     display: 'flex',
     "& img": {
-    transform: 'scale(1)',
+    transform: 'scale(1.0)',
     transition: 'transform 0.5s'
   }
   },
     "a:hover, a:focus": {
     "& > img": {
-    transform: 'scale(1.025)'
+    transform: 'scale(1.025)',
+    transition: 'transform 0.5s'
   }
   },
     className: 'umd-asset-image-wrapper'
@@ -1045,27 +1021,24 @@ module.exports = {
     height: '100%',
     "& img": {
     display: 'block',
-    transform: 'scale(1)',
-    transition: 'transform 0.5s',
     objectFit: 'cover',
     objectPosition: 'center',
     width: '100%',
-    height: '100%'
+    height: '100%',
+    transform: 'scale(1.0)',
+    transition: 'transform 0.5s'
   },
     "& > a": {
     lineHeight: '0',
     overflow: 'hidden',
     display: 'flex',
     height: '100%',
-    width: '100%',
-    "& img": {
-    transform: 'scale(1)',
-    transition: 'transform 0.5s'
-  }
+    width: '100%'
   },
     "a:hover, a:focus": {
     "& > img": {
-    transform: 'scale(1.025)'
+    transform: 'scale(1.025)',
+    transition: 'transform 0.5s'
   }
   },
     className: 'umd-asset-image-wrapper-scaled'
@@ -1307,7 +1280,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -1390,8 +1363,12 @@ module.exports = {
     input: {
     className: 'umd-field-input',
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -1427,7 +1404,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -1627,8 +1604,12 @@ module.exports = {
     select: {
     select: {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -1664,7 +1645,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -1755,7 +1736,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -2056,8 +2037,12 @@ module.exports = {
   },
     "& td": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -2230,7 +2215,7 @@ module.exports = {
     fontWeight: 700,
     color: '#000000',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     backgroundColor: '#FFD200',
@@ -2967,8 +2952,12 @@ module.exports = {
   },
     "& td": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -3395,8 +3384,12 @@ module.exports = {
   },
     "& td": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -4686,13 +4679,13 @@ module.exports = {
     "@media (max-width: 1023px)": {
     display: 'none'
   },
-    "@media (min-width: 768px)": {
+    "@media (min-width: 1024px)": {
     marginRight: '120px',
     width: '242px'
   }
   },
     "& > *:last-child": {
-    "@media (min-width: 768px)": {
+    "@media (min-width: 1024px)": {
     width: 'calc(100% - 242px)'
   }
   },
@@ -5140,8 +5133,12 @@ module.exports = {
     input: {
     className: 'umd-field-input',
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -5177,7 +5174,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -5199,8 +5196,12 @@ module.exports = {
   },
     textarea: {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -5236,7 +5237,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -5253,8 +5254,12 @@ module.exports = {
   },
     select: {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -5290,7 +5295,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -5329,160 +5334,22 @@ module.exports = {
     marginBottom: '120px'
   }
   },
-    "umd-element-alert-page:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    "html.umd-fout-gate": {
+    opacity: 0
   },
-    "umd-element-alert-page:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-alert-site:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-alert-site:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-banner-promo:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-banner-promo:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-events-date:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-events-date:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-logo:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-logo:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-nav-slider:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-nav-slider:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-media-inline:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-media-inline:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-media-gif:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-media-gif:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-modal:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-modal:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-pathway-highlight:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-pathway-highlight:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-person-bio:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-person-bio:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-quote:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-quote:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-slider-events-feed:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-slider-events-feed:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-slider-events:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-slider-events:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-stat:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-stat:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
+    "html.umd-fout-ready": {
+    opacity: 1,
+    transition: 'opacity 200ms ease'
   },
     "umd-element-accordion-item:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '56px',
+    containIntrinsicSize: 'auto 56px',
+    "@media (min-width: 768px)": {
+    minHeight: '64px',
+    containIntrinsicSize: 'auto 64px'
+  }
   },
     "umd-element-accordion-item:defined": {
     contentVisibility: 'visible',
@@ -5492,30 +5359,73 @@ module.exports = {
     "umd-element-accordion-item + umd-element-accordion-item": {
     marginTop: '8px'
   },
-    "umd-element-brand-logo-animation:not(:defined)": {
+    "umd-element-brand-card-stack:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px',
+    "@media (min-width: 768px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '1000px',
+    containIntrinsicSize: 'auto 1000px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-brand-card-stack:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block'
+  },
+    "umd-element-brand-logo-animation:not(:defined)": {
+
   },
     "umd-element-brand-logo-animation:defined": {
-    contentVisibility: 'visible',
-    containerType: 'normal',
-    display: 'block',
     position: 'absolute',
     right: '0',
     top: '-3vw',
     height: '25vw',
     zIndex: '9',
     overflow: 'clip',
+    containerType: 'normal',
     "@media (min-width: 1200px)": {
     top: '-11vw',
     height: '50vw'
   }
   },
+    "umd-element-breadcrumb:not(:defined)": {
+
+  },
+    "umd-element-breadcrumb:defined": {
+    display: 'block',
+    marginTop: '16px'
+  },
+    "umd-element-call-to-action:not(:defined)": {
+
+  },
+    "umd-element-call-to-action:defined": {
+    containerType: 'normal'
+  },
     "umd-element-article:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '420px',
+    containIntrinsicSize: 'auto 420px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "& > *": {
+    contentVisibility: 'hidden'
+  }
   },
     "umd-element-article:defined": {
     contentVisibility: 'visible',
@@ -5544,8 +5454,20 @@ module.exports = {
   },
     "umd-element-card:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '420px',
+    containIntrinsicSize: 'auto 420px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "& > *": {
+    contentVisibility: 'hidden'
+  }
   },
     "umd-element-card:defined": {
     contentVisibility: 'visible',
@@ -5574,8 +5496,20 @@ module.exports = {
   },
     "umd-element-card-icon:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '420px',
+    containIntrinsicSize: 'auto 420px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "& > *": {
+    contentVisibility: 'hidden'
+  }
   },
     "umd-element-card-icon:defined": {
     contentVisibility: 'visible',
@@ -5604,8 +5538,20 @@ module.exports = {
   },
     "umd-element-event:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '420px',
+    containIntrinsicSize: 'auto 420px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "& > *": {
+    contentVisibility: 'hidden'
+  }
   },
     "umd-element-event:defined": {
     contentVisibility: 'visible',
@@ -5632,14 +5578,52 @@ module.exports = {
     paddingTop: '24px',
     borderTop: '1px solid #454545'
   },
-    "umd-element-person:not(:defined)": {
+    "umd-element-event-time:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '420px',
+    containIntrinsicSize: 'auto 420px'
   },
-    "umd-element-person:defined": {
+    "@media (min-width: 1024px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "& > *": {
+    contentVisibility: 'hidden'
+  }
+  },
+    "umd-element-event-time:defined": {
     contentVisibility: 'visible',
     containerType: 'inline-size',
+    display: 'block'
+  },
+    "umd-element-event-time[display=\"list\"] + umd-element-event-time[display=\"list\"]": {
+    marginTop: '24px',
+    paddingTop: '24px',
+    borderTop: '1px solid #E6E6E6'
+  },
+    "umd-element-event-time[display=\"list\"][data-theme=\"dark\"]  + umd-element-event-time[data-theme=\"dark\"]": {
+    marginTop: '24px',
+    paddingTop: '24px',
+    borderTop: '1px solid #454545'
+  },
+    "umd-element-event-time[data-display=\"list\"] + umd-element-event-time[data-display=\"list\"]": {
+    marginTop: '24px',
+    paddingTop: '24px',
+    borderTop: '1px solid #E6E6E6'
+  },
+    "umd-element-event-time[data-display=\"list\"][data-theme=\"dark\"] + umd-element-event-time[data-display=\"list\"][data-theme=\"dark\"]": {
+    marginTop: '24px',
+    paddingTop: '24px',
+    borderTop: '1px solid #454545'
+  },
+    "umd-element-person:not(:defined)": {
+    display: 'none'
+  },
+    "umd-element-person:defined": {
     display: 'block'
   },
     "umd-element-person[display=\"list\"] + umd-element-person[display=\"list\"]": {
@@ -5662,20 +5646,22 @@ module.exports = {
     paddingTop: '24px',
     borderTop: '1px solid #454545'
   },
-    "umd-element-card-video:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-card-video:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
     "umd-element-card-overlay:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '420px',
+    containIntrinsicSize: 'auto 420px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "& > *": {
+    contentVisibility: 'hidden'
+  }
   },
     "umd-element-card-overlay:defined": {
     contentVisibility: 'visible',
@@ -5694,6 +5680,707 @@ module.exports = {
     "umd-element-card-overlay[data-display=\"list\"] + umd-element-card-overlay[data-display=\"list\"]": {
     marginTop: '24px'
   },
+    "umd-element-carousel:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '700px',
+    containIntrinsicSize: 'auto 700px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-carousel:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-carousel-cards:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '700px',
+    containIntrinsicSize: 'auto 700px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-carousel-cards:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-carousel-image:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '700px',
+    containIntrinsicSize: 'auto 700px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-carousel-image:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-carousel-image-wide:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '700px',
+    containIntrinsicSize: 'auto 700px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-carousel-image-wide:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-carousel-multiple-image:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '700px',
+    containIntrinsicSize: 'auto 700px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-carousel-multiple-image:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-carousel-people:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '700px',
+    containIntrinsicSize: 'auto 700px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-carousel-people:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-carousel-thumbnail:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '700px',
+    containIntrinsicSize: 'auto 700px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-carousel-thumbnail:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-expert-bio:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-expert-bio:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-experts-list:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-experts-list:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-experts-grid:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-experts-grid:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-expert-in-the-news:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-expert-in-the-news:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-events:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-events:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-events-grouped:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-events-grouped:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-events-list:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-events-list:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-in-the-news-grid:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-in-the-news-grid:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-in-the-news-list:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-in-the-news-list:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-news:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-news:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-news-list:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-news-list:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-news-featured:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-news-featured:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-footer:not(:defined)": {
+    backgroundColor: '#000000',
+    display: 'none'
+  },
+    "umd-element-footer:defined": {
+    display: 'block'
+  },
+    "umd-element-hero:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-hero:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-hero-expand:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-hero-expand:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-hero-logo:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-hero-logo:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-person-hero:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-person-hero:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-hero-brand-video:not(:defined)": {
+    contentVisibility: 'hidden',
+    display: 'block',
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px',
+    "@media (min-width: 768px)": {
+    minHeight: '720px',
+    containIntrinsicSize: 'auto 720px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-hero-brand-video:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-hero-grid:not(:defined)": {
+    contentVisibility: 'hidden',
+    display: 'block',
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px',
+    "@media (min-width: 768px)": {
+    minHeight: '720px',
+    containIntrinsicSize: 'auto 720px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-hero-grid:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-hero-minimal:not(:defined)": {
+    contentVisibility: 'hidden',
+    display: 'block',
+    minHeight: '240px',
+    containIntrinsicSize: 'auto 240px',
+    "@media (min-width: 768px)": {
+    minHeight: '280px',
+    containIntrinsicSize: 'auto 280px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '320px',
+    containIntrinsicSize: 'auto 320px'
+  }
+  },
+    "umd-element-hero-minimal:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block'
+  },
+    "umd-layout-image-expand:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px',
+    "@media (min-width: 768px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '1000px',
+    containIntrinsicSize: 'auto 1000px'
+  },
+    "& > *": {
+    contentVisibility: 'hidden'
+  }
+  },
+    "umd-layout-image-expand:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size'
+  },
+    "umd-element-nav-drawer:not(:defined)": {
+    contentVisibility: 'hidden',
+    containIntrinsicSize: '44px 44px',
+    backgroundColor: '#FFFFFF',
+    height: '44px',
+    width: '44px',
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-nav-drawer:defined": {
+
+  },
+    "umd-element-navigation-header:not(:defined)": {
+    contentVisibility: 'hidden',
+    containIntrinsicSize: 'auto 44px',
+    backgroundColor: '#FFFFFF',
+    height: '60px',
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-navigation-header:defined": {
+    containerType: 'normal'
+  },
+    "umd-element-nav-item:not(:defined)": {
+    display: 'none'
+  },
+    "umd-element-nav-item:defined": {
+    containerType: 'normal',
+    display: 'block'
+  },
+    "umd-element-navigation-slider:not(:defined)": {
+    contentVisibility: 'hidden',
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-navigation-slider:defined": {
+    position: 'relative',
+    zIndex: '99'
+  },
+    "umd-element-navigation-sticky:not(:defined)": {
+
+  },
+    "umd-element-navigation-sticky:defined": {
+    position: 'relative',
+    zIndex: '99999'
+  },
+    "umd-element-navigation-sticky": {
+    position: 'relative',
+    zIndex: '99999'
+  },
+    "umd-element-navigation-utility:not(:defined)": {
+    display: 'block !important',
+    minHeight: '44px !important',
+    containIntrinsicSize: 'auto !important',
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-navigation-utility:defined": {
+    position: 'relative',
+    zIndex: '99999',
+    containerType: 'normal',
+    "& > *": {
+    display: 'block'
+  }
+  },
+    "umd-element-navigation-utility": {
+    minHeight: '44px',
+    backgroundColor: '#E21833'
+  },
+    "umd-element-pathway:not(:defined)": {
+    contentVisibility: 'hidden',
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  }
+  },
+    "umd-element-pathway:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block'
+  },
     "umd-element-person[data-display=\"tabular\"] + umd-element-person[data-display=\"tabular\"]": {
     marginTop: '24px',
     paddingTop: '24px',
@@ -5704,433 +6391,13 @@ module.exports = {
     paddingTop: '24px',
     borderTop: '1px solid #454545'
   },
-    "umd-feed-expert-bio:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-expert-bio:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-experts-list:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-experts-list:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-experts-grid:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-experts-grid:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-expert-in-the-news:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-expert-in-the-news:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-events:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-events:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-events-grouped:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-events-grouped:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-events-list:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-events-list:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-in-the-news-grid:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-in-the-news-grid:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-in-the-news-list:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-in-the-news-list:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-news:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-news:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-news-list:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-news-list:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-news-featured:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-news-featured:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-call-to-action:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-call-to-action:defined": {
-    contentVisibility: 'visible',
-    containerType: 'normal',
-    display: 'block'
-  },
-    "umd-element-breadcrumb:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-breadcrumb:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block',
-    marginTop: '16px'
-  },
-    "umd-element-brand-card-stack:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 100vh',
-    minHeight: '100vh',
-    display: 'block'
-  },
-    "umd-element-brand-card-stack:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "carousel:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 80vh',
-    minHeight: '80vh',
-    display: 'block'
-  },
-    "carousel:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "carousel-cards:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 80vh',
-    minHeight: '80vh',
-    display: 'block'
-  },
-    "carousel-cards:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "carousel-image:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 80vh',
-    minHeight: '80vh',
-    display: 'block'
-  },
-    "carousel-image:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "carousel-image-wide:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 80vh',
-    minHeight: '80vh',
-    display: 'block'
-  },
-    "carousel-image-wide:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "carousel-multiple-image:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 80vh',
-    minHeight: '80vh',
-    display: 'block'
-  },
-    "carousel-multiple-image:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "carousel-people:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 80vh',
-    minHeight: '80vh',
-    display: 'block'
-  },
-    "carousel-people:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "carousel-thumbnail:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 80vh',
-    minHeight: '80vh',
-    display: 'block'
-  },
-    "carousel-thumbnail:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-footer:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 50vh',
-    minHeight: '50vh',
-    backgroundColor: '#000000',
-    display: 'none'
-  },
-    "umd-element-footer:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-hero:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 50vh',
-    minHeight: '50vh',
-    display: 'block'
-  },
-    "umd-element-hero:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-hero-expand:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 50vh',
-    minHeight: '50vh',
-    display: 'block'
-  },
-    "umd-element-hero-expand:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-hero-logo:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 50vh',
-    minHeight: '50vh',
-    display: 'block'
-  },
-    "umd-element-hero-logo:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-person-hero:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 50vh',
-    minHeight: '50vh',
-    display: 'block'
-  },
-    "umd-element-person-hero:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-hero-brand-video:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 100vh',
-    minHeight: '100vh',
-    display: 'block'
-  },
-    "umd-element-hero-brand-video:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-hero-grid:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 100vh',
-    minHeight: '100vh',
-    display: 'block'
-  },
-    "umd-element-hero-grid:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-hero-minimal:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 30vh',
-    minHeight: '30vh',
-    display: 'block'
-  },
-    "umd-element-hero-minimal:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-layout-image-expand:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 100vh',
-    minHeight: '100vh'
-  },
-    "umd-layout-image-expand:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-pathway:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 40vh',
-    minHeight: '40vh',
-    display: 'block'
-  },
-    "umd-element-pathway:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-navigation-header:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 44px',
-    minHeight: '10vh',
-    backgroundColor: '#FFFFFF',
-    height: '60px',
-    "& > *": {
-    display: 'none'
-  }
-  },
-    "umd-element-navigation-header:defined": {
-    contentVisibility: 'visible',
-    containerType: 'normal',
-    display: 'block'
-  },
-    "umd-element-nav-item:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh',
-    display: 'none'
-  },
-    "umd-element-nav-item:defined": {
-    contentVisibility: 'visible',
-    containerType: 'normal',
-    display: 'block'
-  },
-    "umd-element-nav-drawer:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: '44px 44px',
-    minHeight: '10vh',
-    backgroundColor: '#FFFFFF',
-    height: '44px',
-    width: '44px',
-    "& > *": {
-    display: 'none'
-  }
-  },
-    "umd-element-nav-drawer:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-navigation-sticky:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-navigation-sticky:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-navigation-sticky": {
-    position: 'relative',
-    zIndex: '9999'
-  },
-    "umd-element-navigation-utility:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto !important',
-    minHeight: '44px !important',
-    display: 'block !important',
-    "& > *": {
-    display: 'none'
-  }
-  },
-    "umd-element-navigation-utility:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block',
-    "& > *": {
-    display: 'block'
-  }
-  },
-    "umd-element-navigation-utility": {
-    minHeight: '44px',
-    backgroundColor: '#E21833'
-  },
     "umd-element-scroll-top:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'none'
   },
     "umd-element-scroll-top:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block',
     height: '40px',
-    width: '40px'
+    width: '40px',
+    display: 'block'
   },
     "* + umd-element-scroll-top": {
     marginTop: '24px'
@@ -6148,8 +6415,17 @@ module.exports = {
   },
     "umd-element-section-intro-wide:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  }
   },
     "umd-element-section-intro-wide:defined": {
     contentVisibility: 'visible',
@@ -6164,22 +6440,357 @@ module.exports = {
   },
     "umd-element-section-intro:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  }
   },
     "umd-element-section-intro:defined": {
     contentVisibility: 'visible',
     containerType: 'inline-size',
     display: 'block'
   },
-    "umd-element-social-sharing:not(:defined)": {
+    "umd-element-alert-page:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
   },
-    "umd-element-social-sharing:defined": {
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-alert-page:defined": {
     contentVisibility: 'visible',
     containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-alert-site:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-alert-site:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-banner-promo:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-banner-promo:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-card-video:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-card-video:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-events-date:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-events-date:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-logo:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-logo:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-media-inline:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-media-inline:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-media-gif:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-media-gif:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-modal:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-modal:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-pathway-highlight:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-pathway-highlight:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-person-bio:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-person-bio:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-quote:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-quote:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-slider-events-feed:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-slider-events-feed:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-slider-events:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-slider-events:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-stat:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-stat:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-social-sharing:not(:defined)": {
+    display: 'none'
+  },
+    "umd-element-social-sharing:defined": {
     display: 'block'
   },
     "* + umd-element-social-sharing": {
@@ -6197,25 +6808,34 @@ module.exports = {
   }
   },
     "umd-element-sticky-columns:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh',
     display: 'none'
   },
     "umd-element-sticky-columns:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
     display: 'block'
   },
     "umd-element-tabs:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    "& > *": {
+    display: 'none'
+  },
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  }
   },
     "umd-element-tabs:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
+    display: 'block',
+    "& button, & button": {
+    transition: 'color 0.3s ease'
+  },
+    "& button:not([aria-expanded=\"true\"]):hover, & button:not([aria-expanded=\"true\"]):focus": {
+    color: '#E21833 !important'
+  }
   },
     "umd-element-tabs + *": {
     marginTop: '32px'
@@ -6789,32 +7409,6 @@ module.exports = {
   }
   }
   },
-    ".umd-action-button-full-screen": {
-    fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '12px',
-    lineHeight: '1.16em',
-    position: 'absolute',
-    top: '0',
-    right: '0',
-    color: '#FFFFFF',
-    textTransform: 'uppercase',
-    fontWeight: '700',
-    padding: '8px',
-    display: 'flex',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    transition: 'background-color 0.3s',
-    "&:hover, &:focus": {
-    backgroundColor: 'rgba(0, 0, 0, 1)'
-  },
-    "& > span": {
-    display: 'block',
-    height: '12px',
-    width: '1px',
-    margin: '0 8px',
-    backgroundColor: '#757575'
-  }
-  },
     ".umd-action-button-video-state": {
     position: 'absolute',
     bottom: '0',
@@ -6841,6 +7435,7 @@ module.exports = {
   },
     ".umd-element-action-icon-button": {
     width: '28px',
+    minWidth: '28px',
     height: '28px',
     display: 'flex',
     color: '#FFFFFF',
@@ -7403,18 +7998,19 @@ module.exports = {
     "& img": {
     display: 'block'
   },
-    "& > a": {
+    "& a": {
     lineHeight: '0',
     overflow: 'hidden',
     display: 'flex',
     "& img": {
-    transform: 'scale(1)',
+    transform: 'scale(1.0)',
     transition: 'transform 0.5s'
   }
   },
     "a:hover, a:focus": {
     "& > img": {
-    transform: 'scale(1.025)'
+    transform: 'scale(1.025)',
+    transition: 'transform 0.5s'
   }
   }
   },
@@ -7434,27 +8030,24 @@ module.exports = {
     height: '100%',
     "& img": {
     display: 'block',
-    transform: 'scale(1)',
-    transition: 'transform 0.5s',
     objectFit: 'cover',
     objectPosition: 'center',
     width: '100%',
-    height: '100%'
+    height: '100%',
+    transform: 'scale(1.0)',
+    transition: 'transform 0.5s'
   },
     "& > a": {
     lineHeight: '0',
     overflow: 'hidden',
     display: 'flex',
     height: '100%',
-    width: '100%',
-    "& img": {
-    transform: 'scale(1)',
-    transition: 'transform 0.5s'
-  }
+    width: '100%'
   },
     "a:hover, a:focus": {
     "& > img": {
-    transform: 'scale(1.025)'
+    transform: 'scale(1.025)',
+    transition: 'transform 0.5s'
   }
   }
   },
@@ -7688,7 +8281,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -7724,7 +8317,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -7860,8 +8453,12 @@ module.exports = {
   },
     ".umd-field-input": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -7897,7 +8494,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -8228,7 +8825,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -8273,7 +8870,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -8565,8 +9162,12 @@ module.exports = {
   },
     "& td": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -8613,8 +9214,12 @@ module.exports = {
   },
     "& td": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -8873,7 +9478,7 @@ module.exports = {
     fontWeight: 700,
     color: '#000000',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     backgroundColor: '#FFD200',
@@ -8885,7 +9490,7 @@ module.exports = {
     fontWeight: 700,
     color: '#000000',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     backgroundColor: '#FFD200',
@@ -9823,8 +10428,12 @@ module.exports = {
   },
     "& td": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -10244,8 +10853,12 @@ module.exports = {
   },
     "& td": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -10671,8 +11284,12 @@ module.exports = {
   },
     "& td": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -11098,8 +11715,12 @@ module.exports = {
   },
     "& td": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -12831,13 +13452,13 @@ module.exports = {
     "@media (max-width: 1023px)": {
     display: 'none'
   },
-    "@media (min-width: 768px)": {
+    "@media (min-width: 1024px)": {
     marginRight: '120px',
     width: '242px'
   }
   },
     "& > *:last-child": {
-    "@media (min-width: 768px)": {
+    "@media (min-width: 1024px)": {
     width: 'calc(100% - 242px)'
   }
   }
@@ -12850,13 +13471,13 @@ module.exports = {
     "@media (max-width: 1023px)": {
     display: 'none'
   },
-    "@media (min-width: 768px)": {
+    "@media (min-width: 1024px)": {
     marginRight: '120px',
     width: '242px'
   }
   },
     "& > *:last-child": {
-    "@media (min-width: 768px)": {
+    "@media (min-width: 1024px)": {
     width: 'calc(100% - 242px)'
   }
   }
@@ -13166,10 +13787,13 @@ module.exports = {
     fontFamily: "'Barlow Condensed', Arial Narrow, sans-serif",
     fontStyle: 'italic',
     fontWeight: '700',
-    fontSize: '44px',
+    fontSize: '32px',
     letterSpacing: '0.02em',
     lineHeight: '0.91em',
     textWrap: 'pretty',
+    "@media (min-width: 480px)": {
+    fontSize: '44px'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(44px + 2.66vw)'
   },
@@ -13215,7 +13839,7 @@ module.exports = {
     fontWeight: 700,
     color: '#000000',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em'
   },
@@ -13262,7 +13886,7 @@ module.exports = {
     ".umd-sans-extralarge": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
     textWrap: 'pretty',
-    fontSize: '18px',
+    fontSize: '22px',
     lineHeight: '1.25em',
     "@media (min-width: 650px)": {
     fontSize: 'calc(18px + 1.16vw)'
@@ -13319,8 +13943,12 @@ module.exports = {
   },
     ".umd-sans-small": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -13364,8 +13992,12 @@ module.exports = {
     lineHeight: '1.16em',
     "@container (min-width: 480px)": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -13393,7 +14025,7 @@ module.exports = {
     ".umd-sans-extralarge-uppercase": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
     textWrap: 'pretty',
-    fontSize: '18px',
+    fontSize: '22px',
     lineHeight: '1.25em',
     "@media (min-width: 650px)": {
     fontSize: 'calc(18px + 1.16vw)'
@@ -13408,7 +14040,7 @@ module.exports = {
     ".umd-sans-extralarge-bold": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
     textWrap: 'pretty',
-    fontSize: '18px',
+    fontSize: '22px',
     lineHeight: '1.25em',
     "@media (min-width: 650px)": {
     fontSize: 'calc(18px + 1.16vw)'
@@ -14088,32 +14720,6 @@ module.exports = {
   }
   }
   },
-    ".umd-action-button-full-screen": {
-    fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '12px',
-    lineHeight: '1.16em',
-    position: 'absolute',
-    top: '0',
-    right: '0',
-    color: '#FFFFFF',
-    textTransform: 'uppercase',
-    fontWeight: '700',
-    padding: '8px',
-    display: 'flex',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    transition: 'background-color 0.3s',
-    "&:hover, &:focus": {
-    backgroundColor: 'rgba(0, 0, 0, 1)'
-  },
-    "& > span": {
-    display: 'block',
-    height: '12px',
-    width: '1px',
-    margin: '0 8px',
-    backgroundColor: '#757575'
-  }
-  },
     ".umd-action-button-video-state": {
     position: 'absolute',
     bottom: '0',
@@ -14140,6 +14746,7 @@ module.exports = {
   },
     ".umd-element-action-icon-button": {
     width: '28px',
+    minWidth: '28px',
     height: '28px',
     display: 'flex',
     color: '#FFFFFF',
@@ -14702,18 +15309,19 @@ module.exports = {
     "& img": {
     display: 'block'
   },
-    "& > a": {
+    "& a": {
     lineHeight: '0',
     overflow: 'hidden',
     display: 'flex',
     "& img": {
-    transform: 'scale(1)',
+    transform: 'scale(1.0)',
     transition: 'transform 0.5s'
   }
   },
     "a:hover, a:focus": {
     "& > img": {
-    transform: 'scale(1.025)'
+    transform: 'scale(1.025)',
+    transition: 'transform 0.5s'
   }
   }
   },
@@ -14733,27 +15341,24 @@ module.exports = {
     height: '100%',
     "& img": {
     display: 'block',
-    transform: 'scale(1)',
-    transition: 'transform 0.5s',
     objectFit: 'cover',
     objectPosition: 'center',
     width: '100%',
-    height: '100%'
+    height: '100%',
+    transform: 'scale(1.0)',
+    transition: 'transform 0.5s'
   },
     "& > a": {
     lineHeight: '0',
     overflow: 'hidden',
     display: 'flex',
     height: '100%',
-    width: '100%',
-    "& img": {
-    transform: 'scale(1)',
-    transition: 'transform 0.5s'
-  }
+    width: '100%'
   },
     "a:hover, a:focus": {
     "& > img": {
-    transform: 'scale(1.025)'
+    transform: 'scale(1.025)',
+    transition: 'transform 0.5s'
   }
   }
   },
@@ -14987,7 +15592,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -15023,7 +15628,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -15159,8 +15764,12 @@ module.exports = {
   },
     ".umd-field-input": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -15196,7 +15805,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -15527,7 +16136,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -15572,7 +16181,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -15864,8 +16473,12 @@ module.exports = {
   },
     "& td": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -15912,8 +16525,12 @@ module.exports = {
   },
     "& td": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -16172,7 +16789,7 @@ module.exports = {
     fontWeight: 700,
     color: '#000000',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     backgroundColor: '#FFD200',
@@ -16184,7 +16801,7 @@ module.exports = {
     fontWeight: 700,
     color: '#000000',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     backgroundColor: '#FFD200',
@@ -17122,8 +17739,12 @@ module.exports = {
   },
     "& td": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -17543,8 +18164,12 @@ module.exports = {
   },
     "& td": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -17970,8 +18595,12 @@ module.exports = {
   },
     "& td": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -18397,8 +19026,12 @@ module.exports = {
   },
     "& td": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -20130,13 +20763,13 @@ module.exports = {
     "@media (max-width: 1023px)": {
     display: 'none'
   },
-    "@media (min-width: 768px)": {
+    "@media (min-width: 1024px)": {
     marginRight: '120px',
     width: '242px'
   }
   },
     "& > *:last-child": {
-    "@media (min-width: 768px)": {
+    "@media (min-width: 1024px)": {
     width: 'calc(100% - 242px)'
   }
   }
@@ -20149,13 +20782,13 @@ module.exports = {
     "@media (max-width: 1023px)": {
     display: 'none'
   },
-    "@media (min-width: 768px)": {
+    "@media (min-width: 1024px)": {
     marginRight: '120px',
     width: '242px'
   }
   },
     "& > *:last-child": {
-    "@media (min-width: 768px)": {
+    "@media (min-width: 1024px)": {
     width: 'calc(100% - 242px)'
   }
   }
@@ -20474,10 +21107,13 @@ module.exports = {
     fontFamily: "'Barlow Condensed', Arial Narrow, sans-serif",
     fontStyle: 'italic',
     fontWeight: '700',
-    fontSize: '44px',
+    fontSize: '32px',
     letterSpacing: '0.02em',
     lineHeight: '0.91em',
     textWrap: 'pretty',
+    "@media (min-width: 480px)": {
+    fontSize: '44px'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(44px + 2.66vw)'
   },
@@ -20523,7 +21159,7 @@ module.exports = {
     fontWeight: 700,
     color: '#000000',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em'
   },
@@ -20570,7 +21206,7 @@ module.exports = {
     ".umd-sans-extralarge": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
     textWrap: 'pretty',
-    fontSize: '18px',
+    fontSize: '22px',
     lineHeight: '1.25em',
     "@media (min-width: 650px)": {
     fontSize: 'calc(18px + 1.16vw)'
@@ -20627,8 +21263,12 @@ module.exports = {
   },
     ".umd-sans-small": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -20672,8 +21312,12 @@ module.exports = {
     lineHeight: '1.16em',
     "@container (min-width: 480px)": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -20701,7 +21345,7 @@ module.exports = {
     ".umd-sans-extralarge-uppercase": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
     textWrap: 'pretty',
-    fontSize: '18px',
+    fontSize: '22px',
     lineHeight: '1.25em',
     "@media (min-width: 650px)": {
     fontSize: 'calc(18px + 1.16vw)'
@@ -20716,7 +21360,7 @@ module.exports = {
     ".umd-sans-extralarge-bold": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
     textWrap: 'pretty',
-    fontSize: '18px',
+    fontSize: '22px',
     lineHeight: '1.25em',
     "@media (min-width: 650px)": {
     fontSize: 'calc(18px + 1.16vw)'
@@ -21012,8 +21656,12 @@ module.exports = {
     input: {
     className: 'umd-field-input',
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -21049,7 +21697,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -21071,8 +21719,12 @@ module.exports = {
   },
     textarea: {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -21108,7 +21760,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -21125,8 +21777,12 @@ module.exports = {
   },
     select: {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -21162,7 +21818,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -21195,160 +21851,22 @@ module.exports = {
     ".umd-layout-space-vertical-landing": {
     marginBottom: '120px'
   },
-    "umd-element-alert-page:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    "html.umd-fout-gate": {
+    opacity: 0
   },
-    "umd-element-alert-page:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-alert-site:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-alert-site:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-banner-promo:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-banner-promo:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-events-date:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-events-date:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-logo:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-logo:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-nav-slider:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-nav-slider:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-media-inline:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-media-inline:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-media-gif:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-media-gif:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-modal:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-modal:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-pathway-highlight:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-pathway-highlight:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-person-bio:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-person-bio:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-quote:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-quote:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-slider-events-feed:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-slider-events-feed:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-slider-events:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-slider-events:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-stat:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-stat:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
+    "html.umd-fout-ready": {
+    opacity: 1,
+    transition: 'opacity 200ms ease'
   },
     "umd-element-accordion-item:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '56px',
+    containIntrinsicSize: 'auto 56px',
+    "@media (min-width: 768px)": {
+    minHeight: '64px',
+    containIntrinsicSize: 'auto 64px'
+  }
   },
     "umd-element-accordion-item:defined": {
     contentVisibility: 'visible',
@@ -21358,30 +21876,73 @@ module.exports = {
     "umd-element-accordion-item + umd-element-accordion-item": {
     marginTop: '8px'
   },
-    "umd-element-brand-logo-animation:not(:defined)": {
+    "umd-element-brand-card-stack:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px',
+    "@media (min-width: 768px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '1000px',
+    containIntrinsicSize: 'auto 1000px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-brand-card-stack:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block'
+  },
+    "umd-element-brand-logo-animation:not(:defined)": {
+
   },
     "umd-element-brand-logo-animation:defined": {
-    contentVisibility: 'visible',
-    containerType: 'normal',
-    display: 'block',
     position: 'absolute',
     right: '0',
     top: '-3vw',
     height: '25vw',
     zIndex: '9',
     overflow: 'clip',
+    containerType: 'normal',
     "@media (min-width: 1200px)": {
     top: '-11vw',
     height: '50vw'
   }
   },
+    "umd-element-breadcrumb:not(:defined)": {
+
+  },
+    "umd-element-breadcrumb:defined": {
+    display: 'block',
+    marginTop: '16px'
+  },
+    "umd-element-call-to-action:not(:defined)": {
+
+  },
+    "umd-element-call-to-action:defined": {
+    containerType: 'normal'
+  },
     "umd-element-article:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '420px',
+    containIntrinsicSize: 'auto 420px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "& > *": {
+    contentVisibility: 'hidden'
+  }
   },
     "umd-element-article:defined": {
     contentVisibility: 'visible',
@@ -21410,8 +21971,20 @@ module.exports = {
   },
     "umd-element-card:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '420px',
+    containIntrinsicSize: 'auto 420px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "& > *": {
+    contentVisibility: 'hidden'
+  }
   },
     "umd-element-card:defined": {
     contentVisibility: 'visible',
@@ -21440,8 +22013,20 @@ module.exports = {
   },
     "umd-element-card-icon:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '420px',
+    containIntrinsicSize: 'auto 420px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "& > *": {
+    contentVisibility: 'hidden'
+  }
   },
     "umd-element-card-icon:defined": {
     contentVisibility: 'visible',
@@ -21470,8 +22055,20 @@ module.exports = {
   },
     "umd-element-event:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '420px',
+    containIntrinsicSize: 'auto 420px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "& > *": {
+    contentVisibility: 'hidden'
+  }
   },
     "umd-element-event:defined": {
     contentVisibility: 'visible',
@@ -21498,14 +22095,52 @@ module.exports = {
     paddingTop: '24px',
     borderTop: '1px solid #454545'
   },
-    "umd-element-person:not(:defined)": {
+    "umd-element-event-time:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '420px',
+    containIntrinsicSize: 'auto 420px'
   },
-    "umd-element-person:defined": {
+    "@media (min-width: 1024px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "& > *": {
+    contentVisibility: 'hidden'
+  }
+  },
+    "umd-element-event-time:defined": {
     contentVisibility: 'visible',
     containerType: 'inline-size',
+    display: 'block'
+  },
+    "umd-element-event-time[display=\"list\"] + umd-element-event-time[display=\"list\"]": {
+    marginTop: '24px',
+    paddingTop: '24px',
+    borderTop: '1px solid #E6E6E6'
+  },
+    "umd-element-event-time[display=\"list\"][data-theme=\"dark\"]  + umd-element-event-time[data-theme=\"dark\"]": {
+    marginTop: '24px',
+    paddingTop: '24px',
+    borderTop: '1px solid #454545'
+  },
+    "umd-element-event-time[data-display=\"list\"] + umd-element-event-time[data-display=\"list\"]": {
+    marginTop: '24px',
+    paddingTop: '24px',
+    borderTop: '1px solid #E6E6E6'
+  },
+    "umd-element-event-time[data-display=\"list\"][data-theme=\"dark\"] + umd-element-event-time[data-display=\"list\"][data-theme=\"dark\"]": {
+    marginTop: '24px',
+    paddingTop: '24px',
+    borderTop: '1px solid #454545'
+  },
+    "umd-element-person:not(:defined)": {
+    display: 'none'
+  },
+    "umd-element-person:defined": {
     display: 'block'
   },
     "umd-element-person[display=\"list\"] + umd-element-person[display=\"list\"]": {
@@ -21528,20 +22163,22 @@ module.exports = {
     paddingTop: '24px',
     borderTop: '1px solid #454545'
   },
-    "umd-element-card-video:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-card-video:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
     "umd-element-card-overlay:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '420px',
+    containIntrinsicSize: 'auto 420px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "& > *": {
+    contentVisibility: 'hidden'
+  }
   },
     "umd-element-card-overlay:defined": {
     contentVisibility: 'visible',
@@ -21560,6 +22197,707 @@ module.exports = {
     "umd-element-card-overlay[data-display=\"list\"] + umd-element-card-overlay[data-display=\"list\"]": {
     marginTop: '24px'
   },
+    "umd-element-carousel:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '700px',
+    containIntrinsicSize: 'auto 700px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-carousel:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-carousel-cards:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '700px',
+    containIntrinsicSize: 'auto 700px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-carousel-cards:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-carousel-image:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '700px',
+    containIntrinsicSize: 'auto 700px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-carousel-image:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-carousel-image-wide:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '700px',
+    containIntrinsicSize: 'auto 700px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-carousel-image-wide:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-carousel-multiple-image:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '700px',
+    containIntrinsicSize: 'auto 700px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-carousel-multiple-image:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-carousel-people:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '700px',
+    containIntrinsicSize: 'auto 700px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-carousel-people:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-carousel-thumbnail:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '700px',
+    containIntrinsicSize: 'auto 700px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-carousel-thumbnail:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-expert-bio:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-expert-bio:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-experts-list:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-experts-list:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-experts-grid:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-experts-grid:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-expert-in-the-news:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-expert-in-the-news:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-events:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-events:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-events-grouped:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-events-grouped:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-events-list:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-events-list:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-in-the-news-grid:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-in-the-news-grid:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-in-the-news-list:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-in-the-news-list:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-news:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-news:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-news-list:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-news-list:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-news-featured:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-news-featured:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-footer:not(:defined)": {
+    backgroundColor: '#000000',
+    display: 'none'
+  },
+    "umd-element-footer:defined": {
+    display: 'block'
+  },
+    "umd-element-hero:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-hero:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-hero-expand:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-hero-expand:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-hero-logo:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-hero-logo:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-person-hero:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-person-hero:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-hero-brand-video:not(:defined)": {
+    contentVisibility: 'hidden',
+    display: 'block',
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px',
+    "@media (min-width: 768px)": {
+    minHeight: '720px',
+    containIntrinsicSize: 'auto 720px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-hero-brand-video:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-hero-grid:not(:defined)": {
+    contentVisibility: 'hidden',
+    display: 'block',
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px',
+    "@media (min-width: 768px)": {
+    minHeight: '720px',
+    containIntrinsicSize: 'auto 720px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-hero-grid:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-hero-minimal:not(:defined)": {
+    contentVisibility: 'hidden',
+    display: 'block',
+    minHeight: '240px',
+    containIntrinsicSize: 'auto 240px',
+    "@media (min-width: 768px)": {
+    minHeight: '280px',
+    containIntrinsicSize: 'auto 280px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '320px',
+    containIntrinsicSize: 'auto 320px'
+  }
+  },
+    "umd-element-hero-minimal:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block'
+  },
+    "umd-layout-image-expand:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px',
+    "@media (min-width: 768px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '1000px',
+    containIntrinsicSize: 'auto 1000px'
+  },
+    "& > *": {
+    contentVisibility: 'hidden'
+  }
+  },
+    "umd-layout-image-expand:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size'
+  },
+    "umd-element-nav-drawer:not(:defined)": {
+    contentVisibility: 'hidden',
+    containIntrinsicSize: '44px 44px',
+    backgroundColor: '#FFFFFF',
+    height: '44px',
+    width: '44px',
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-nav-drawer:defined": {
+
+  },
+    "umd-element-navigation-header:not(:defined)": {
+    contentVisibility: 'hidden',
+    containIntrinsicSize: 'auto 44px',
+    backgroundColor: '#FFFFFF',
+    height: '60px',
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-navigation-header:defined": {
+    containerType: 'normal'
+  },
+    "umd-element-nav-item:not(:defined)": {
+    display: 'none'
+  },
+    "umd-element-nav-item:defined": {
+    containerType: 'normal',
+    display: 'block'
+  },
+    "umd-element-navigation-slider:not(:defined)": {
+    contentVisibility: 'hidden',
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-navigation-slider:defined": {
+    position: 'relative',
+    zIndex: '99'
+  },
+    "umd-element-navigation-sticky:not(:defined)": {
+
+  },
+    "umd-element-navigation-sticky:defined": {
+    position: 'relative',
+    zIndex: '99999'
+  },
+    "umd-element-navigation-sticky": {
+    position: 'relative',
+    zIndex: '99999'
+  },
+    "umd-element-navigation-utility:not(:defined)": {
+    display: 'block !important',
+    minHeight: '44px !important',
+    containIntrinsicSize: 'auto !important',
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-navigation-utility:defined": {
+    position: 'relative',
+    zIndex: '99999',
+    containerType: 'normal',
+    "& > *": {
+    display: 'block'
+  }
+  },
+    "umd-element-navigation-utility": {
+    minHeight: '44px',
+    backgroundColor: '#E21833'
+  },
+    "umd-element-pathway:not(:defined)": {
+    contentVisibility: 'hidden',
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  }
+  },
+    "umd-element-pathway:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block'
+  },
     "umd-element-person[data-display=\"tabular\"] + umd-element-person[data-display=\"tabular\"]": {
     marginTop: '24px',
     paddingTop: '24px',
@@ -21570,433 +22908,13 @@ module.exports = {
     paddingTop: '24px',
     borderTop: '1px solid #454545'
   },
-    "umd-feed-expert-bio:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-expert-bio:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-experts-list:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-experts-list:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-experts-grid:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-experts-grid:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-expert-in-the-news:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-expert-in-the-news:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-events:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-events:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-events-grouped:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-events-grouped:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-events-list:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-events-list:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-in-the-news-grid:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-in-the-news-grid:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-in-the-news-list:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-in-the-news-list:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-news:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-news:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-news-list:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-news-list:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-news-featured:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-news-featured:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-call-to-action:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-call-to-action:defined": {
-    contentVisibility: 'visible',
-    containerType: 'normal',
-    display: 'block'
-  },
-    "umd-element-breadcrumb:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-breadcrumb:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block',
-    marginTop: '16px'
-  },
-    "umd-element-brand-card-stack:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 100vh',
-    minHeight: '100vh',
-    display: 'block'
-  },
-    "umd-element-brand-card-stack:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "carousel:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 80vh',
-    minHeight: '80vh',
-    display: 'block'
-  },
-    "carousel:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "carousel-cards:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 80vh',
-    minHeight: '80vh',
-    display: 'block'
-  },
-    "carousel-cards:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "carousel-image:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 80vh',
-    minHeight: '80vh',
-    display: 'block'
-  },
-    "carousel-image:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "carousel-image-wide:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 80vh',
-    minHeight: '80vh',
-    display: 'block'
-  },
-    "carousel-image-wide:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "carousel-multiple-image:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 80vh',
-    minHeight: '80vh',
-    display: 'block'
-  },
-    "carousel-multiple-image:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "carousel-people:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 80vh',
-    minHeight: '80vh',
-    display: 'block'
-  },
-    "carousel-people:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "carousel-thumbnail:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 80vh',
-    minHeight: '80vh',
-    display: 'block'
-  },
-    "carousel-thumbnail:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-footer:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 50vh',
-    minHeight: '50vh',
-    backgroundColor: '#000000',
-    display: 'none'
-  },
-    "umd-element-footer:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-hero:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 50vh',
-    minHeight: '50vh',
-    display: 'block'
-  },
-    "umd-element-hero:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-hero-expand:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 50vh',
-    minHeight: '50vh',
-    display: 'block'
-  },
-    "umd-element-hero-expand:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-hero-logo:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 50vh',
-    minHeight: '50vh',
-    display: 'block'
-  },
-    "umd-element-hero-logo:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-person-hero:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 50vh',
-    minHeight: '50vh',
-    display: 'block'
-  },
-    "umd-element-person-hero:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-hero-brand-video:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 100vh',
-    minHeight: '100vh',
-    display: 'block'
-  },
-    "umd-element-hero-brand-video:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-hero-grid:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 100vh',
-    minHeight: '100vh',
-    display: 'block'
-  },
-    "umd-element-hero-grid:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-hero-minimal:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 30vh',
-    minHeight: '30vh',
-    display: 'block'
-  },
-    "umd-element-hero-minimal:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-layout-image-expand:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 100vh',
-    minHeight: '100vh'
-  },
-    "umd-layout-image-expand:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-pathway:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 40vh',
-    minHeight: '40vh',
-    display: 'block'
-  },
-    "umd-element-pathway:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-navigation-header:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 44px',
-    minHeight: '10vh',
-    backgroundColor: '#FFFFFF',
-    height: '60px',
-    "& > *": {
-    display: 'none'
-  }
-  },
-    "umd-element-navigation-header:defined": {
-    contentVisibility: 'visible',
-    containerType: 'normal',
-    display: 'block'
-  },
-    "umd-element-nav-item:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh',
-    display: 'none'
-  },
-    "umd-element-nav-item:defined": {
-    contentVisibility: 'visible',
-    containerType: 'normal',
-    display: 'block'
-  },
-    "umd-element-nav-drawer:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: '44px 44px',
-    minHeight: '10vh',
-    backgroundColor: '#FFFFFF',
-    height: '44px',
-    width: '44px',
-    "& > *": {
-    display: 'none'
-  }
-  },
-    "umd-element-nav-drawer:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-navigation-sticky:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-navigation-sticky:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-navigation-sticky": {
-    position: 'relative',
-    zIndex: '9999'
-  },
-    "umd-element-navigation-utility:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto !important',
-    minHeight: '44px !important',
-    display: 'block !important',
-    "& > *": {
-    display: 'none'
-  }
-  },
-    "umd-element-navigation-utility:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block',
-    "& > *": {
-    display: 'block'
-  }
-  },
-    "umd-element-navigation-utility": {
-    minHeight: '44px',
-    backgroundColor: '#E21833'
-  },
     "umd-element-scroll-top:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'none'
   },
     "umd-element-scroll-top:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block',
     height: '40px',
-    width: '40px'
+    width: '40px',
+    display: 'block'
   },
     "* + umd-element-scroll-top": {
     marginTop: '24px'
@@ -22014,8 +22932,17 @@ module.exports = {
   },
     "umd-element-section-intro-wide:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  }
   },
     "umd-element-section-intro-wide:defined": {
     contentVisibility: 'visible',
@@ -22030,22 +22957,357 @@ module.exports = {
   },
     "umd-element-section-intro:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  }
   },
     "umd-element-section-intro:defined": {
     contentVisibility: 'visible',
     containerType: 'inline-size',
     display: 'block'
   },
-    "umd-element-social-sharing:not(:defined)": {
+    "umd-element-alert-page:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
   },
-    "umd-element-social-sharing:defined": {
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-alert-page:defined": {
     contentVisibility: 'visible',
     containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-alert-site:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-alert-site:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-banner-promo:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-banner-promo:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-card-video:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-card-video:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-events-date:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-events-date:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-logo:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-logo:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-media-inline:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-media-inline:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-media-gif:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-media-gif:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-modal:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-modal:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-pathway-highlight:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-pathway-highlight:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-person-bio:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-person-bio:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-quote:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-quote:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-slider-events-feed:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-slider-events-feed:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-slider-events:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-slider-events:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-stat:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-stat:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-social-sharing:not(:defined)": {
+    display: 'none'
+  },
+    "umd-element-social-sharing:defined": {
     display: 'block'
   },
     "* + umd-element-social-sharing": {
@@ -22063,25 +23325,34 @@ module.exports = {
   }
   },
     "umd-element-sticky-columns:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh',
     display: 'none'
   },
     "umd-element-sticky-columns:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
     display: 'block'
   },
     "umd-element-tabs:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    "& > *": {
+    display: 'none'
+  },
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  }
   },
     "umd-element-tabs:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
+    display: 'block',
+    "& button, & button": {
+    transition: 'color 0.3s ease'
+  },
+    "& button:not([aria-expanded=\"true\"]):hover, & button:not([aria-expanded=\"true\"]):focus": {
+    color: '#E21833 !important'
+  }
   },
     "umd-element-tabs + *": {
     marginTop: '32px'
@@ -22173,8 +23444,12 @@ module.exports = {
     input: {
     className: 'umd-field-input',
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -22210,7 +23485,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -22232,8 +23507,12 @@ module.exports = {
   },
     textarea: {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -22269,7 +23548,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -22286,8 +23565,12 @@ module.exports = {
   },
     select: {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -22323,7 +23606,7 @@ module.exports = {
     fontWeight: 700,
     color: '#A90007',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em',
     display: 'block',
@@ -22355,6 +23638,13 @@ module.exports = {
   },
     ".umd-layout-space-vertical-landing": {
     marginBottom: '120px'
+  },
+    "html.umd-fout-gate": {
+    opacity: 0
+  },
+    "html.umd-fout-ready": {
+    opacity: 1,
+    transition: 'opacity 200ms ease'
   }
   },
     root: {
@@ -22743,10 +24033,13 @@ module.exports = {
     fontFamily: "'Barlow Condensed', Arial Narrow, sans-serif",
     fontStyle: 'italic',
     fontWeight: '700',
-    fontSize: '44px',
+    fontSize: '32px',
     letterSpacing: '0.02em',
     lineHeight: '0.91em',
     textWrap: 'pretty',
+    "@media (min-width: 480px)": {
+    fontSize: '44px'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(44px + 2.66vw)'
   },
@@ -22805,10 +24098,13 @@ module.exports = {
     fontFamily: "'Barlow Condensed', Arial Narrow, sans-serif",
     fontStyle: 'italic',
     fontWeight: '700',
-    fontSize: '44px',
+    fontSize: '32px',
     letterSpacing: '0.02em',
     lineHeight: '0.91em',
     textWrap: 'pretty',
+    "@media (min-width: 480px)": {
+    fontSize: '44px'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(44px + 2.66vw)'
   },
@@ -22877,7 +24173,7 @@ module.exports = {
     fontWeight: 700,
     color: '#000000',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em'
   },
@@ -22887,7 +24183,7 @@ module.exports = {
     fontWeight: 700,
     color: '#000000',
     fontSize: '12px',
-    lineHeight: 1,
+    lineHeight: 1.2,
     textTransform: 'uppercase',
     letterSpacing: '.05em'
   },
@@ -23234,7 +24530,7 @@ module.exports = {
     extraLarge: {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
     textWrap: 'pretty',
-    fontSize: '18px',
+    fontSize: '22px',
     lineHeight: '1.25em',
     "@media (min-width: 650px)": {
     fontSize: 'calc(18px + 1.16vw)'
@@ -23264,7 +24560,7 @@ module.exports = {
     extraLarge: {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
     textWrap: 'pretty',
-    fontSize: '18px',
+    fontSize: '22px',
     lineHeight: '1.25em',
     "@media (min-width: 650px)": {
     fontSize: 'calc(18px + 1.16vw)'
@@ -23311,8 +24607,12 @@ module.exports = {
   },
     small: {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -23417,8 +24717,12 @@ module.exports = {
     lineHeight: '1.16em',
     "@container (min-width: 480px)": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -23449,8 +24753,12 @@ module.exports = {
     lineHeight: '1.16em',
     "@container (min-width: 480px)": {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -23463,8 +24771,12 @@ module.exports = {
   },
     small: {
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
-    fontSize: '16px',
+    fontSize: '14px',
     lineHeight: '1.375em',
+    "@media (min-width: 480px)": {
+    fontSize: '16px',
+    lineHeight: '1.375em'
+  },
     "@media (min-width: 650px)": {
     fontSize: 'calc(14px + 0.16vw)'
   },
@@ -23508,7 +24820,7 @@ module.exports = {
     className: 'umd-sans-extralarge-uppercase',
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
     textWrap: 'pretty',
-    fontSize: '18px',
+    fontSize: '22px',
     lineHeight: '1.25em',
     "@media (min-width: 650px)": {
     fontSize: 'calc(18px + 1.16vw)'
@@ -23524,7 +24836,7 @@ module.exports = {
     className: 'umd-sans-extralarge-bold',
     fontFamily: "'Interstate', Helvetica, Arial, Verdana, sans-serif",
     textWrap: 'pretty',
-    fontSize: '18px',
+    fontSize: '22px',
     lineHeight: '1.25em',
     "@media (min-width: 650px)": {
     fontSize: 'calc(18px + 1.16vw)'
@@ -23875,160 +25187,15 @@ module.exports = {
     "--umd-font-size-max": '120px'
   },
     webComponents: {
-    "umd-element-alert-page:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-alert-page:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-alert-site:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-alert-site:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-banner-promo:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-banner-promo:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-events-date:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-events-date:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-logo:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-logo:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-nav-slider:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-nav-slider:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-media-inline:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-media-inline:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-media-gif:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-media-gif:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-modal:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-modal:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-pathway-highlight:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-pathway-highlight:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-person-bio:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-person-bio:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-quote:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-quote:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-slider-events-feed:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-slider-events-feed:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-slider-events:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-slider-events:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-stat:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-stat:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
     "umd-element-accordion-item:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '56px',
+    containIntrinsicSize: 'auto 56px',
+    "@media (min-width: 768px)": {
+    minHeight: '64px',
+    containIntrinsicSize: 'auto 64px'
+  }
   },
     "umd-element-accordion-item:defined": {
     contentVisibility: 'visible',
@@ -24038,30 +25205,73 @@ module.exports = {
     "umd-element-accordion-item + umd-element-accordion-item": {
     marginTop: '8px'
   },
-    "umd-element-brand-logo-animation:not(:defined)": {
+    "umd-element-brand-card-stack:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px',
+    "@media (min-width: 768px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '1000px',
+    containIntrinsicSize: 'auto 1000px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-brand-card-stack:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block'
+  },
+    "umd-element-brand-logo-animation:not(:defined)": {
+
   },
     "umd-element-brand-logo-animation:defined": {
-    contentVisibility: 'visible',
-    containerType: 'normal',
-    display: 'block',
     position: 'absolute',
     right: '0',
     top: '-3vw',
     height: '25vw',
     zIndex: '9',
     overflow: 'clip',
+    containerType: 'normal',
     "@media (min-width: 1200px)": {
     top: '-11vw',
     height: '50vw'
   }
   },
+    "umd-element-breadcrumb:not(:defined)": {
+
+  },
+    "umd-element-breadcrumb:defined": {
+    display: 'block',
+    marginTop: '16px'
+  },
+    "umd-element-call-to-action:not(:defined)": {
+
+  },
+    "umd-element-call-to-action:defined": {
+    containerType: 'normal'
+  },
     "umd-element-article:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '420px',
+    containIntrinsicSize: 'auto 420px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "& > *": {
+    contentVisibility: 'hidden'
+  }
   },
     "umd-element-article:defined": {
     contentVisibility: 'visible',
@@ -24090,8 +25300,20 @@ module.exports = {
   },
     "umd-element-card:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '420px',
+    containIntrinsicSize: 'auto 420px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "& > *": {
+    contentVisibility: 'hidden'
+  }
   },
     "umd-element-card:defined": {
     contentVisibility: 'visible',
@@ -24120,8 +25342,20 @@ module.exports = {
   },
     "umd-element-card-icon:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '420px',
+    containIntrinsicSize: 'auto 420px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "& > *": {
+    contentVisibility: 'hidden'
+  }
   },
     "umd-element-card-icon:defined": {
     contentVisibility: 'visible',
@@ -24150,8 +25384,20 @@ module.exports = {
   },
     "umd-element-event:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '420px',
+    containIntrinsicSize: 'auto 420px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "& > *": {
+    contentVisibility: 'hidden'
+  }
   },
     "umd-element-event:defined": {
     contentVisibility: 'visible',
@@ -24178,14 +25424,52 @@ module.exports = {
     paddingTop: '24px',
     borderTop: '1px solid #454545'
   },
-    "umd-element-person:not(:defined)": {
+    "umd-element-event-time:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '420px',
+    containIntrinsicSize: 'auto 420px'
   },
-    "umd-element-person:defined": {
+    "@media (min-width: 1024px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "& > *": {
+    contentVisibility: 'hidden'
+  }
+  },
+    "umd-element-event-time:defined": {
     contentVisibility: 'visible',
     containerType: 'inline-size',
+    display: 'block'
+  },
+    "umd-element-event-time[display=\"list\"] + umd-element-event-time[display=\"list\"]": {
+    marginTop: '24px',
+    paddingTop: '24px',
+    borderTop: '1px solid #E6E6E6'
+  },
+    "umd-element-event-time[display=\"list\"][data-theme=\"dark\"]  + umd-element-event-time[data-theme=\"dark\"]": {
+    marginTop: '24px',
+    paddingTop: '24px',
+    borderTop: '1px solid #454545'
+  },
+    "umd-element-event-time[data-display=\"list\"] + umd-element-event-time[data-display=\"list\"]": {
+    marginTop: '24px',
+    paddingTop: '24px',
+    borderTop: '1px solid #E6E6E6'
+  },
+    "umd-element-event-time[data-display=\"list\"][data-theme=\"dark\"] + umd-element-event-time[data-display=\"list\"][data-theme=\"dark\"]": {
+    marginTop: '24px',
+    paddingTop: '24px',
+    borderTop: '1px solid #454545'
+  },
+    "umd-element-person:not(:defined)": {
+    display: 'none'
+  },
+    "umd-element-person:defined": {
     display: 'block'
   },
     "umd-element-person[display=\"list\"] + umd-element-person[display=\"list\"]": {
@@ -24208,20 +25492,22 @@ module.exports = {
     paddingTop: '24px',
     borderTop: '1px solid #454545'
   },
-    "umd-element-card-video:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-card-video:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
     "umd-element-card-overlay:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '420px',
+    containIntrinsicSize: 'auto 420px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "& > *": {
+    contentVisibility: 'hidden'
+  }
   },
     "umd-element-card-overlay:defined": {
     contentVisibility: 'visible',
@@ -24240,6 +25526,707 @@ module.exports = {
     "umd-element-card-overlay[data-display=\"list\"] + umd-element-card-overlay[data-display=\"list\"]": {
     marginTop: '24px'
   },
+    "umd-element-carousel:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '700px',
+    containIntrinsicSize: 'auto 700px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-carousel:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-carousel-cards:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '700px',
+    containIntrinsicSize: 'auto 700px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-carousel-cards:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-carousel-image:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '700px',
+    containIntrinsicSize: 'auto 700px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-carousel-image:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-carousel-image-wide:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '700px',
+    containIntrinsicSize: 'auto 700px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-carousel-image-wide:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-carousel-multiple-image:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '700px',
+    containIntrinsicSize: 'auto 700px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-carousel-multiple-image:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-carousel-people:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '700px',
+    containIntrinsicSize: 'auto 700px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-carousel-people:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-carousel-thumbnail:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '700px',
+    containIntrinsicSize: 'auto 700px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-carousel-thumbnail:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-expert-bio:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-expert-bio:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-experts-list:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-experts-list:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-experts-grid:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-experts-grid:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-expert-in-the-news:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-expert-in-the-news:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-events:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-events:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-events-grouped:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-events-grouped:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-events-list:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-events-list:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-in-the-news-grid:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-in-the-news-grid:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-in-the-news-list:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-in-the-news-list:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-news:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-news:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-news-list:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-news-list:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-feed-news-featured:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-feed-news-featured:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-footer:not(:defined)": {
+    backgroundColor: '#000000',
+    display: 'none'
+  },
+    "umd-element-footer:defined": {
+    display: 'block'
+  },
+    "umd-element-hero:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-hero:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-hero-expand:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-hero-expand:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-hero-logo:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-hero-logo:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-person-hero:not(:defined)": {
+    contentVisibility: 'auto',
+    display: 'block',
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px',
+    "@media (min-width: 768px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '640px',
+    containIntrinsicSize: 'auto 640px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-person-hero:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-hero-brand-video:not(:defined)": {
+    contentVisibility: 'hidden',
+    display: 'block',
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px',
+    "@media (min-width: 768px)": {
+    minHeight: '720px',
+    containIntrinsicSize: 'auto 720px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-hero-brand-video:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-hero-grid:not(:defined)": {
+    contentVisibility: 'hidden',
+    display: 'block',
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px',
+    "@media (min-width: 768px)": {
+    minHeight: '720px',
+    containIntrinsicSize: 'auto 720px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-hero-grid:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-hero-minimal:not(:defined)": {
+    contentVisibility: 'hidden',
+    display: 'block',
+    minHeight: '240px',
+    containIntrinsicSize: 'auto 240px',
+    "@media (min-width: 768px)": {
+    minHeight: '280px',
+    containIntrinsicSize: 'auto 280px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '320px',
+    containIntrinsicSize: 'auto 320px'
+  }
+  },
+    "umd-element-hero-minimal:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block'
+  },
+    "umd-layout-image-expand:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '600px',
+    containIntrinsicSize: 'auto 600px',
+    "@media (min-width: 768px)": {
+    minHeight: '800px',
+    containIntrinsicSize: 'auto 800px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '1000px',
+    containIntrinsicSize: 'auto 1000px'
+  },
+    "& > *": {
+    contentVisibility: 'hidden'
+  }
+  },
+    "umd-layout-image-expand:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size'
+  },
+    "umd-element-nav-drawer:not(:defined)": {
+    contentVisibility: 'hidden',
+    containIntrinsicSize: '44px 44px',
+    backgroundColor: '#FFFFFF',
+    height: '44px',
+    width: '44px',
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-nav-drawer:defined": {
+
+  },
+    "umd-element-navigation-header:not(:defined)": {
+    contentVisibility: 'hidden',
+    containIntrinsicSize: 'auto 44px',
+    backgroundColor: '#FFFFFF',
+    height: '60px',
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-navigation-header:defined": {
+    containerType: 'normal'
+  },
+    "umd-element-nav-item:not(:defined)": {
+    display: 'none'
+  },
+    "umd-element-nav-item:defined": {
+    containerType: 'normal',
+    display: 'block'
+  },
+    "umd-element-navigation-slider:not(:defined)": {
+    contentVisibility: 'hidden',
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-navigation-slider:defined": {
+    position: 'relative',
+    zIndex: '99'
+  },
+    "umd-element-navigation-sticky:not(:defined)": {
+
+  },
+    "umd-element-navigation-sticky:defined": {
+    position: 'relative',
+    zIndex: '99999'
+  },
+    "umd-element-navigation-sticky": {
+    position: 'relative',
+    zIndex: '99999'
+  },
+    "umd-element-navigation-utility:not(:defined)": {
+    display: 'block !important',
+    minHeight: '44px !important',
+    containIntrinsicSize: 'auto !important',
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-navigation-utility:defined": {
+    position: 'relative',
+    zIndex: '99999',
+    containerType: 'normal',
+    "& > *": {
+    display: 'block'
+  }
+  },
+    "umd-element-navigation-utility": {
+    minHeight: '44px',
+    backgroundColor: '#E21833'
+  },
+    "umd-element-pathway:not(:defined)": {
+    contentVisibility: 'hidden',
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  }
+  },
+    "umd-element-pathway:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block'
+  },
     "umd-element-person[data-display=\"tabular\"] + umd-element-person[data-display=\"tabular\"]": {
     marginTop: '24px',
     paddingTop: '24px',
@@ -24250,433 +26237,13 @@ module.exports = {
     paddingTop: '24px',
     borderTop: '1px solid #454545'
   },
-    "umd-feed-expert-bio:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-expert-bio:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-experts-list:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-experts-list:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-experts-grid:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-experts-grid:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-expert-in-the-news:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-expert-in-the-news:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-events:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-events:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-events-grouped:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-events-grouped:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-events-list:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-events-list:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-in-the-news-grid:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-in-the-news-grid:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-in-the-news-list:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-in-the-news-list:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-news:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-news:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-news-list:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-news-list:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-feed-news-featured:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-feed-news-featured:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-call-to-action:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-call-to-action:defined": {
-    contentVisibility: 'visible',
-    containerType: 'normal',
-    display: 'block'
-  },
-    "umd-element-breadcrumb:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-breadcrumb:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block',
-    marginTop: '16px'
-  },
-    "umd-element-brand-card-stack:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 100vh',
-    minHeight: '100vh',
-    display: 'block'
-  },
-    "umd-element-brand-card-stack:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "carousel:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 80vh',
-    minHeight: '80vh',
-    display: 'block'
-  },
-    "carousel:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "carousel-cards:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 80vh',
-    minHeight: '80vh',
-    display: 'block'
-  },
-    "carousel-cards:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "carousel-image:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 80vh',
-    minHeight: '80vh',
-    display: 'block'
-  },
-    "carousel-image:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "carousel-image-wide:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 80vh',
-    minHeight: '80vh',
-    display: 'block'
-  },
-    "carousel-image-wide:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "carousel-multiple-image:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 80vh',
-    minHeight: '80vh',
-    display: 'block'
-  },
-    "carousel-multiple-image:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "carousel-people:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 80vh',
-    minHeight: '80vh',
-    display: 'block'
-  },
-    "carousel-people:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "carousel-thumbnail:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 80vh',
-    minHeight: '80vh',
-    display: 'block'
-  },
-    "carousel-thumbnail:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-footer:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 50vh',
-    minHeight: '50vh',
-    backgroundColor: '#000000',
-    display: 'none'
-  },
-    "umd-element-footer:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-hero:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 50vh',
-    minHeight: '50vh',
-    display: 'block'
-  },
-    "umd-element-hero:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-hero-expand:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 50vh',
-    minHeight: '50vh',
-    display: 'block'
-  },
-    "umd-element-hero-expand:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-hero-logo:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 50vh',
-    minHeight: '50vh',
-    display: 'block'
-  },
-    "umd-element-hero-logo:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-person-hero:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 50vh',
-    minHeight: '50vh',
-    display: 'block'
-  },
-    "umd-element-person-hero:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-hero-brand-video:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 100vh',
-    minHeight: '100vh',
-    display: 'block'
-  },
-    "umd-element-hero-brand-video:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-hero-grid:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 100vh',
-    minHeight: '100vh',
-    display: 'block'
-  },
-    "umd-element-hero-grid:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-hero-minimal:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 30vh',
-    minHeight: '30vh',
-    display: 'block'
-  },
-    "umd-element-hero-minimal:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-layout-image-expand:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 100vh',
-    minHeight: '100vh'
-  },
-    "umd-layout-image-expand:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-pathway:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 40vh',
-    minHeight: '40vh',
-    display: 'block'
-  },
-    "umd-element-pathway:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-navigation-header:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 44px',
-    minHeight: '10vh',
-    backgroundColor: '#FFFFFF',
-    height: '60px',
-    "& > *": {
-    display: 'none'
-  }
-  },
-    "umd-element-navigation-header:defined": {
-    contentVisibility: 'visible',
-    containerType: 'normal',
-    display: 'block'
-  },
-    "umd-element-nav-item:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh',
-    display: 'none'
-  },
-    "umd-element-nav-item:defined": {
-    contentVisibility: 'visible',
-    containerType: 'normal',
-    display: 'block'
-  },
-    "umd-element-nav-drawer:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: '44px 44px',
-    minHeight: '10vh',
-    backgroundColor: '#FFFFFF',
-    height: '44px',
-    width: '44px',
-    "& > *": {
-    display: 'none'
-  }
-  },
-    "umd-element-nav-drawer:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-navigation-sticky:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
-  },
-    "umd-element-navigation-sticky:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
-  },
-    "umd-element-navigation-sticky": {
-    position: 'relative',
-    zIndex: '9999'
-  },
-    "umd-element-navigation-utility:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto !important',
-    minHeight: '44px !important',
-    display: 'block !important',
-    "& > *": {
-    display: 'none'
-  }
-  },
-    "umd-element-navigation-utility:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block',
-    "& > *": {
-    display: 'block'
-  }
-  },
-    "umd-element-navigation-utility": {
-    minHeight: '44px',
-    backgroundColor: '#E21833'
-  },
     "umd-element-scroll-top:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'none'
   },
     "umd-element-scroll-top:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block',
     height: '40px',
-    width: '40px'
+    width: '40px',
+    display: 'block'
   },
     "* + umd-element-scroll-top": {
     marginTop: '24px'
@@ -24694,8 +26261,17 @@ module.exports = {
   },
     "umd-element-section-intro-wide:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  }
   },
     "umd-element-section-intro-wide:defined": {
     contentVisibility: 'visible',
@@ -24710,22 +26286,357 @@ module.exports = {
   },
     "umd-element-section-intro:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    display: 'block',
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  }
   },
     "umd-element-section-intro:defined": {
     contentVisibility: 'visible',
     containerType: 'inline-size',
     display: 'block'
   },
-    "umd-element-social-sharing:not(:defined)": {
+    "umd-element-alert-page:not(:defined)": {
     contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
   },
-    "umd-element-social-sharing:defined": {
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-alert-page:defined": {
     contentVisibility: 'visible',
     containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-alert-site:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-alert-site:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-banner-promo:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-banner-promo:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-card-video:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-card-video:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-events-date:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-events-date:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-logo:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-logo:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-media-inline:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-media-inline:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-media-gif:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-media-gif:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-modal:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-modal:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-pathway-highlight:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-pathway-highlight:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-person-bio:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-person-bio:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-quote:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-quote:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-slider-events-feed:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-slider-events-feed:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-slider-events:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-slider-events:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-stat:not(:defined)": {
+    contentVisibility: 'hidden',
+    minHeight: '120px',
+    containIntrinsicSize: 'auto 120px',
+    "@media (min-width: 768px)": {
+    minHeight: '160px',
+    containIntrinsicSize: 'auto 160px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '200px',
+    containIntrinsicSize: 'auto 200px'
+  },
+    "& > *": {
+    display: 'none'
+  }
+  },
+    "umd-element-stat:defined": {
+    contentVisibility: 'visible',
+    containerType: 'inline-size',
+    display: 'block',
+    position: 'relative'
+  },
+    "umd-element-social-sharing:not(:defined)": {
+    display: 'none'
+  },
+    "umd-element-social-sharing:defined": {
     display: 'block'
   },
     "* + umd-element-social-sharing": {
@@ -24743,25 +26654,34 @@ module.exports = {
   }
   },
     "umd-element-sticky-columns:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh',
     display: 'none'
   },
     "umd-element-sticky-columns:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
     display: 'block'
   },
     "umd-element-tabs:not(:defined)": {
-    contentVisibility: 'hidden',
-    containIntrinsicSize: 'auto 10vh',
-    minHeight: '10vh'
+    "& > *": {
+    display: 'none'
+  },
+    minHeight: '360px',
+    containIntrinsicSize: 'auto 360px',
+    "@media (min-width: 768px)": {
+    minHeight: '480px',
+    containIntrinsicSize: 'auto 480px'
+  },
+    "@media (min-width: 1024px)": {
+    minHeight: '560px',
+    containIntrinsicSize: 'auto 560px'
+  }
   },
     "umd-element-tabs:defined": {
-    contentVisibility: 'visible',
-    containerType: 'inline-size',
-    display: 'block'
+    display: 'block',
+    "& button, & button": {
+    transition: 'color 0.3s ease'
+  },
+    "& button:not([aria-expanded=\"true\"]):hover, & button:not([aria-expanded=\"true\"]):focus": {
+    color: '#E21833 !important'
+  }
   },
     "umd-element-tabs + *": {
     marginTop: '32px'

@@ -3,8 +3,7 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "source",
-    "baseUrl": "source",
-    "moduleResolution": "bundler",
+    "types": ["node"],
     "paths": {
       "@universityofmaryland/web-token-library": ["../tokens/dist/index.d.ts"],
       "@universityofmaryland/web-token-library/*": ["../tokens/dist/*"],

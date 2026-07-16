@@ -1,7 +1,6 @@
 const path = require('path');
 
 module.exports = {
-  preset: 'ts-jest',
   testEnvironment: 'jsdom',
   testMatch: ['**/__tests__/**/*.test.ts'],
   moduleFileExtensions: ['ts', 'js'],
@@ -14,7 +13,17 @@ module.exports = {
     '!**/__tests__/**',
   ],
   transform: {
-    '^.+\\.ts$': ['ts-jest', { tsconfig: 'tsconfig.json', isolatedModules: true }],
+    '^.+\\.ts$': [
+      '@swc/jest',
+      {
+        jsc: {
+          parser: { syntax: 'typescript', decorators: true },
+          transform: { decoratorVersion: '2022-03' },
+          target: 'es2020',
+        },
+        module: { type: 'commonjs' },
+      },
+    ],
   },
   moduleNameMapper: {
     '^@universityofmaryland/web-token-library$': path.resolve(

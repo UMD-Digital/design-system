@@ -48,6 +48,7 @@
     "prebuild": "node ../../scripts/update-badges.js",
     "release": "pnpm run test && pnpm run build && pnpm publish --access public",
     "build": "vite build && pnpm run build:cdn",
+    "typecheck": "tsgo --noEmit -p tsconfig.json",
     "build:cdn": "BUILD_CDN=true vite build --mode production",
     "dev": "vite build --watch",
     "start": "pnpm run dev",

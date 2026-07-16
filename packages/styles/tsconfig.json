@@ -3,10 +3,8 @@
   "compilerOptions": {
     "allowSyntheticDefaultImports": true,
     "isolatedModules": true,
-    "baseUrl": "source",
     "outDir": "dist",
     "rootDir": "source",
-    "moduleResolution": "bundler",
     "paths": {
       "@universityofmaryland/web-token-library": ["../tokens/dist/index.d.ts"],
       "@universityofmaryland/web-token-library/*": ["../tokens/dist/*"],

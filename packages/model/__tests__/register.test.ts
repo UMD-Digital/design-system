@@ -2,6 +2,17 @@ import { Register } from '../source';
 import * as registrationModule from '../source/model/registration';
 import * as errorsModule from '../source/attributes/errors';
 
+// swc's CommonJS output defines exports as non-configurable getters, so
+// jest.spyOn cannot patch them — partial-mock the modules instead.
+jest.mock('../source/model/registration', () => {
+  const actual = jest.requireActual('../source/model/registration');
+  return { ...actual, registerComponent: jest.fn(actual.registerComponent) };
+});
+jest.mock('../source/attributes/errors', () => {
+  const actual = jest.requireActual('../source/attributes/errors');
+  return { ...actual, devWarning: jest.fn(actual.devWarning) };
+});
+
 describe('Register', () => {
   beforeEach(() => {
     jest.clearAllMocks();
@@ -52,7 +63,7 @@ describe('Register', () => {
 
   describe('Deprecation warnings', () => {
     it('registerWebComponent fires deprecation warning in dev mode', () => {
-      const devWarningSpy = jest.spyOn(errorsModule, 'devWarning');
+      const devWarningSpy = jest.mocked(errorsModule.devWarning);
       (window.customElements.get as jest.Mock).mockReturnValue(undefined);
 
       Register.registerWebComponent({
@@ -63,11 +74,11 @@ describe('Register', () => {
       expect(devWarningSpy).toHaveBeenCalledWith(
         expect.stringContaining('registerWebComponent() is deprecated'),
       );
-      devWarningSpy.mockRestore();
+      devWarningSpy.mockClear();
     });
 
     it('webComponent fires deprecation warning when called', () => {
-      const devWarningSpy = jest.spyOn(errorsModule, 'devWarning');
+      const devWarningSpy = jest.mocked(errorsModule.devWarning);
       (window.customElements.get as jest.Mock).mockReturnValue(undefined);
 
       const registration = Register.webComponent({
@@ -83,13 +94,13 @@ describe('Register', () => {
       expect(devWarningSpy).toHaveBeenCalledWith(
         expect.stringContaining('Register.webComponent() is deprecated'),
       );
-      devWarningSpy.mockRestore();
+      devWarningSpy.mockClear();
     });
   });
 
   describe('Registration migration', () => {
     it('webComponent uses registerComponent internally', () => {
-      const registerSpy = jest.spyOn(registrationModule, 'registerComponent');
+      const registerSpy = jest.mocked(registrationModule.registerComponent);
       (window.customElements.get as jest.Mock).mockReturnValue(undefined);
 
       const registration = Register.webComponent({
@@ -107,16 +118,16 @@ describe('Register', () => {
         expect.any(Function),
         { eager: false },
       );
-      registerSpy.mockRestore();
+      registerSpy.mockClear();
     });
 
     it('falls back to legacy on validation error', () => {
       const registerSpy = jest
-        .spyOn(registrationModule, 'registerComponent')
-        .mockImplementation(() => {
+        .mocked(registrationModule.registerComponent)
+        .mockImplementationOnce(() => {
           throw new Error('validation failed');
         });
-      const devWarningSpy = jest.spyOn(errorsModule, 'devWarning');
+      const devWarningSpy = jest.mocked(errorsModule.devWarning);
       (window.customElements.get as jest.Mock).mockReturnValue(undefined);
 
       const registration = Register.webComponent({
@@ -130,14 +141,14 @@ describe('Register', () => {
       // Should not throw — falls back to legacy
       expect(() => registration()).not.toThrow();
 
-      registerSpy.mockRestore();
-      devWarningSpy.mockRestore();
+      registerSpy.mockClear();
+      devWarningSpy.mockClear();
     });
 
     it('maintains WebComponents global after successful registration', () => {
       jest
-        .spyOn(registrationModule, 'registerComponent')
-        .mockReturnValue(true);
+        .mocked(registrationModule.registerComponent)
+        .mockReturnValueOnce(true);
       (window.customElements.get as jest.Mock).mockReturnValue(undefined);
 
       const registration = Register.webComponent({

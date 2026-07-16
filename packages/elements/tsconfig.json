@@ -3,8 +3,6 @@
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "source",
-    "baseUrl": "source",
-    "moduleResolution": "bundler",
     "paths": {
       "@universityofmaryland/web-token-library": ["../tokens/dist/index.d.ts"],
       "@universityofmaryland/web-token-library/*": ["../tokens/dist/*"],
@@ -16,10 +14,10 @@
       "@universityofmaryland/web-icons-library/*": ["../icons/dist/*"],
       "@universityofmaryland/web-builder-library": ["../builder/dist/index.d.ts"],
       "@universityofmaryland/web-builder-library/*": ["../builder/dist/*"],
-      "_types": ["./_types"],
-      "helpers": ["./helpers"],
-      "helpers/*": ["./helpers/*"],
-      "*": ["./*"]
+      "_types": ["./source/_types"],
+      "helpers": ["./source/helpers"],
+      "helpers/*": ["./source/helpers/*"],
+      "*": ["./source/*"]
     }
   },
   "include": ["./source"]

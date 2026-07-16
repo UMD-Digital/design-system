@@ -53,6 +53,7 @@
     "prebuild": "node ../../scripts/update-badges.js",
     "release": "pnpm run test && pnpm run build && pnpm publish --access public",
     "build": "vite build",
+    "typecheck": "tsgo --noEmit -p tsconfig.json",
     "dev": "vite build --watch",
     "start": "pnpm run dev",
     "test": "jest",
@@ -68,6 +69,7 @@
     "@universityofmaryland/web-styles-library": "^1.0.0"
   },
   "devDependencies": {
+    "@types/node": "^22.0.0",
     "@vitejs/plugin-legacy": "^7.2.1",
     "typescript": "~5.8.2",
     "vite": "^7.1.4",

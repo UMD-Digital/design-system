@@ -50,6 +50,17 @@ export interface DisplayProps { /* ... */ }
 export interface StateProps { /* ... */ }
 export interface SizeProps { /* ... */ }
 
+// Caller style overrides — customStyles (flat JSS merged into the root
+// element) and elementStyles (structured ElementStyles forwarded to
+// ElementBuilder.withStyles()). Never re-declare these props inline.
+export interface StyleOverrideProps { /* ... */ }
+
+// The standard prop vocabulary: ThemeProps + CommonContentProps +
+// StyleOverrideProps. Factories extend the subset they support via Pick;
+// consumers (the components package) can build one ElementBaseProps bag
+// and spread it into any factory.
+export interface ElementBaseProps { /* ... */ }
+
 // Type guards
 export const isImageElement = (element: any): element is HTMLImageElement => { /* ... */ }
 ```
@@ -219,6 +230,31 @@ When extending shared interfaces:
 - Use `Pick<Interface, 'prop1' | 'prop2'>` to select specific properties
 - Be explicit about required vs optional properties
 - Don't use complex type gymnastics that obscure what's actually needed
+
+### Style Override Props
+
+Factories that accept caller style overrides must source them from
+`StyleOverrideProps` — never re-declare them inline:
+
+```typescript
+// Good
+interface CardIconProps
+  extends Pick<ThemeProps, 'isThemeDark'>,
+    Pick<StyleOverrideProps, 'customStyles'> {
+  headline: ContentElement;
+}
+
+// Avoid — ad-hoc re-declaration drifts (Record<string, string>,
+// Record<string, unknown>, etc. have all appeared historically)
+interface CardIconProps {
+  customStyles?: Record<string, any>;
+}
+```
+
+`customStyles` is a flat JSS record merged into the root element's styles;
+`elementStyles` is a structured `ElementStyles` object forwarded whole to
+`ElementBuilder.withStyles()`. A factory should accept whichever it
+actually forwards, via `Pick`.
 
 ### 3. Type Guards Usage
 

@@ -6,10 +6,11 @@ import {
   play as iconPlay,
 } from '@universityofmaryland/web-icons-library/controls';
 
-interface VideoProps {
+import { type StyleOverrideProps } from '_types';
+
+interface VideoProps extends Pick<StyleOverrideProps, 'customStyles'> {
   video: HTMLVideoElement;
   isScaled?: boolean;
-  customStyles?: Record<string, any>;
   callback?: (isPlaying: boolean) => void;
 }
 

@@ -1,11 +1,13 @@
 import { isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
 import { createVideoToggle } from './toggle';
 
-interface CardVideoShortProps {
+import { type StyleOverrideProps } from '_types';
+
+interface CardVideoShortProps
+  extends Pick<StyleOverrideProps, 'customStyles'> {
   video: HTMLVideoElement;
   isAutoplay?: boolean;
   isScaled?: boolean;
-  customStyles?: Record<string, any>;
   /** Control video preload strategy. Defaults to 'metadata' */
   videoPreload?: 'none' | 'metadata' | 'auto';
   /** Control fetch priority for the video. Defaults to 'auto' */

@@ -1,7 +1,10 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { createImageGif } from './gif';
-import { type UMDElement } from '../../../_types';
+import {
+  type StyleOverrideProps,
+  type UMDElement,
+} from '../../../_types';
 
 const ATTRIBUTE_CAPTION = 'data-caption';
 const ATTRIBUTE_CREDIT = 'data-credit';
@@ -17,10 +20,9 @@ interface Asset {
   imageFetchPriority?: 'high' | 'low' | 'auto';
 }
 
-interface Props extends Asset {
+interface Props extends Asset, Pick<StyleOverrideProps, 'customStyles'> {
   dateSign?: UMDElement;
   isShowCaption?: boolean;
-  customStyles?: Record<string, any>;
 }
 
 const isImageElement = (element: HTMLElement): element is HTMLImageElement => {

@@ -151,10 +151,12 @@ Type guards: `isImageElement()`, `isVideoElement()`, `isLinkElement()`, `isButto
 
 ### Style Override Props
 
-Two prop names exist for caller-supplied style overrides — use only these, with these exact meanings:
+Caller-supplied style overrides are defined once in `source/_types.ts` as `StyleOverrideProps` — factories accept them via `Pick<StyleOverrideProps, 'customStyles'>` (or `'elementStyles'`), never by re-declaring the props inline:
 
 - **`customStyles?: Record<string, any>`** — a flat JSS record merged into the root element's own styles (spread inside the `element` key of `.withStyles({ element: { ... } })`). Do not use `additionalStyles` or `additionalElementStyles` — these are deprecated aliases that were renamed to `customStyles`.
 - **`elementStyles?: ElementStyles`** — the full structured `ElementStyles` object (`element`, `pseudoBefore`, `pseudoAfter`, `siblingAfter`, `subElement`) forwarded whole to `ElementBuilder.withStyles()`.
+
+`ElementBaseProps` (also in `source/_types.ts`) combines `ThemeProps + CommonContentProps + StyleOverrideProps` — the standard prop bag consumers can assemble once and spread into any factory.
 
 Note: `elementStyles` is also the conventional import alias for `@universityofmaryland/web-styles-library/element`. Prefer a different alias (e.g. `stylePresets`) in new files to keep the prop name greppable.
 

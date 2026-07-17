@@ -4,16 +4,21 @@ import * as typography from '@universityofmaryland/web-styles-library/typography
 import * as layout from '@universityofmaryland/web-styles-library/layout';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
-import { ElementModel, type ThemeProps } from '../../_types';
+import {
+  ElementModel,
+  type StyleOverrideProps,
+  type ThemeProps,
+} from '../../_types';
 
-interface TypeTextLockupLarge extends Pick<ThemeProps, 'isThemeDark'> {
+interface TypeTextLockupLarge
+  extends Pick<ThemeProps, 'isThemeDark'>,
+    Pick<StyleOverrideProps, 'customStyles'> {
   headlineComposite?: ElementModel<HTMLElement> | null;
   eyebrow?: HTMLElement | null;
   ribbon?: HTMLElement | null;
   text?: HTMLElement | null;
   textLargest?: HTMLElement | null;
   actions?: HTMLElement | null;
-  customStyles?: Record<string, unknown>;
 }
 
 export const createTextLockupLarge = ({

@@ -177,11 +177,44 @@ export interface StyleObject {
   [key: string]: any;
 }
 
+/**
+ * Caller-supplied style overrides accepted by element factories.
+ *
+ * - `customStyles` — a flat JSS record merged into the root element's own
+ *   styles (spread inside the `element` key of the builder's styles).
+ * - `elementStyles` — the full structured ElementStyles object forwarded
+ *   whole to ElementBuilder.withStyles().
+ *
+ * Factories must source these props from this interface (via Pick) rather
+ * than re-declaring them.
+ */
+export interface StyleOverrideProps {
+  customStyles?: Record<string, any>;
+  elementStyles?: ElementStyles;
+}
+
 // ===== Element Props (Combined) =====
 
-export interface BaseElementProps extends ThemeProps, ColorProps {
+/**
+ * The standard prop vocabulary shared by element factories: theme flags,
+ * common content slots, and caller style overrides.
+ *
+ * Factories extend the subset they support (via Pick) so their signatures
+ * stay honest about what each variant renders. Consumers — primarily the
+ * components package — can assemble a single ElementBaseProps bag from
+ * attributes/slots and spread it into any factory, adding only the
+ * variant-specific and required props.
+ */
+export interface ElementBaseProps
+  extends ThemeProps,
+    CommonContentProps,
+    StyleOverrideProps {}
+
+export interface BaseElementProps
+  extends ThemeProps,
+    ColorProps,
+    Pick<StyleOverrideProps, 'elementStyles'> {
   element: HTMLElement;
-  elementStyles?: ElementStyles;
 }
 
 export interface ConfigurationProps extends BaseElementProps {

@@ -12,11 +12,15 @@ import {
   textStyles,
   dateStyles,
 } from './small';
-import { type ThemeProps, type UMDElement } from '../../_types';
+import {
+  type StyleOverrideProps,
+  type ThemeProps,
+  type UMDElement,
+} from '../../_types';
 
-export type TypeTextLockupSmallScaling = Pick<ThemeProps, 'isThemeDark'> & {
+export type TypeTextLockupSmallScaling = Pick<ThemeProps, 'isThemeDark'> &
+  Pick<StyleOverrideProps, 'customStyles'> & {
   actions?: HTMLElement | null;
-  customStyles?: Record<string, string>;
   date?: HTMLElement | null;
   eventMeta?: UMDElement;
   eyebrow?: HTMLElement | null;

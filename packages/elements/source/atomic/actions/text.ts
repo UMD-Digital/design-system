@@ -15,13 +15,13 @@ import { email as iconEmail } from '@universityofmaryland/web-icons-library/comm
 import { document as iconDocument } from '@universityofmaryland/web-icons-library/files';
 import { fearless as iconFearless } from '@universityofmaryland/web-icons-library/brand';
 
-import { type ElementStyles, type ThemeProps } from '../../_types';
+import { type StyleOverrideProps, type ThemeProps } from '../../_types';
 
 interface ElementProps
-  extends Pick<ThemeProps, 'isThemeDark' | 'isThemeGold'> {
+  extends Pick<ThemeProps, 'isThemeDark' | 'isThemeGold'>,
+    Pick<StyleOverrideProps, 'elementStyles'> {
   element: HTMLElement;
   isSizeLarge?: boolean;
-  elementStyles?: ElementStyles;
 }
 
 interface OptionProps extends ElementProps {

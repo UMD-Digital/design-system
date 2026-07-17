@@ -7,6 +7,7 @@ import {
   type PersonTextLockupPropsWithStyles,
   type PersonFullProps,
 } from '../../_types';
+import { type StyleOverrideProps, type ThemeProps } from '../../../_types';
 
 const smallBreakpoint = token.media.breakpointValues.small.max;
 const mediumBreakpointStart = token.media.breakpointValues.medium.min;
@@ -16,11 +17,10 @@ export const image = ({
   customStyles,
   image,
   isThemeDark,
-}: {
-  customStyles?: Record<string, any>;
-  image: HTMLImageElement | HTMLAnchorElement;
-  isThemeDark?: boolean;
-}) => {
+}: Pick<StyleOverrideProps, 'customStyles'> &
+  Pick<ThemeProps, 'isThemeDark'> & {
+    image: HTMLImageElement | HTMLAnchorElement;
+  }) => {
   const backgroundImage = assets.image.background({
     element: image,
     isScaled: false,

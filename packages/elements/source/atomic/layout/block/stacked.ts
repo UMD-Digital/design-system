@@ -5,7 +5,11 @@ import {
   createMediaQuery,
   createMediaQueryRange,
 } from '@universityofmaryland/web-utilities-library/styles';
-import { type ElementModel, type ThemeProps } from '../../../_types';
+import {
+  type ElementModel,
+  type StyleOverrideProps,
+  type ThemeProps,
+} from '../../../_types';
 
 const smallBreakpoint = token.media.breakpointValues.small.max;
 const mediumBreakpointStart = token.media.breakpointValues.medium.min;
@@ -22,10 +26,10 @@ export const image = ({
   children,
   hasBorder = false,
   isThemeDark = false,
-}: BoxProps & {
-  children: ElementModel[];
-  customStyles?: Record<string, any>;
-}) => {
+}: BoxProps &
+  Pick<StyleOverrideProps, 'customStyles'> & {
+    children: ElementModel[];
+  }) => {
   return new ElementBuilder()
     .withClassName('layout-block-stacked-image')
     .withStyles({
@@ -82,10 +86,10 @@ export const textContainer = ({
   isThemeDark = false,
   isTransparent = false,
   hasImage = true,
-}: BoxProps & {
-  customStyles?: Record<string, any>;
-  children: ElementModel[];
-}) => {
+}: BoxProps &
+  Pick<StyleOverrideProps, 'customStyles'> & {
+    children: ElementModel[];
+  }) => {
   return new ElementBuilder()
     .withClassName('layout-block-stacked-text')
     .withStyles({
@@ -120,10 +124,10 @@ export const container = ({
   hasBorder = false,
   isThemeDark = false,
   isTransparent = false,
-}: BoxProps & {
-  customStyles?: Record<string, any>;
-  children: ElementModel[];
-}) => {
+}: BoxProps &
+  Pick<StyleOverrideProps, 'customStyles'> & {
+    children: ElementModel[];
+  }) => {
   return new ElementBuilder()
     .withClassName('layout-block-stacked-container')
     .withStyles({

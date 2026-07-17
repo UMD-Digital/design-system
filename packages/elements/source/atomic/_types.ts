@@ -1,5 +1,6 @@
 import {
   type ContentElement,
+  type StyleOverrideProps,
   type UMDElement,
   type ThemeProps,
 } from '../_types';
@@ -36,20 +37,19 @@ export interface PersonTextLockupProps
 }
 
 // For layout components that need custom styles
-export interface PersonContactPropsWithStyles extends PersonContactProps {
-  customStyles?: Record<string, any>;
-}
+export interface PersonContactPropsWithStyles
+  extends PersonContactProps,
+    Pick<StyleOverrideProps, 'customStyles'> {}
 
-export interface PersonTextLockupPropsWithStyles extends PersonTextLockupProps {
-  customStyles?: Record<string, any>;
-}
+export interface PersonTextLockupPropsWithStyles
+  extends PersonTextLockupProps,
+    Pick<StyleOverrideProps, 'customStyles'> {}
 
 // Combined props for components that use both contact and details
 export interface PersonFullProps
   extends PersonTextLockupProps,
-    PersonContactProps {
-  customStyles?: Record<string, any>;
-}
+    PersonContactProps,
+    Pick<StyleOverrideProps, 'customStyles'> {}
 
 // For components that include an image
 export interface PersonWithImageProps extends PersonFullProps {

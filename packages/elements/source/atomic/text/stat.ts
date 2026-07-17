@@ -5,10 +5,9 @@ import {
   stats as statsFont,
   sans as sansFonts,
 } from '@universityofmaryland/web-styles-library/typography';
-import { type ElementModel } from '../../_types';
+import { type ElementModel, type ThemeProps } from '../../_types';
 
-export interface StatProps {
-  isThemeDark?: boolean;
+export interface StatProps extends Pick<ThemeProps, 'isThemeDark'> {
   isDisplayBlock: boolean;
   isSizeLarge: boolean;
   hasLine: boolean;

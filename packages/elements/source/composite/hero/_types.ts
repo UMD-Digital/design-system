@@ -1,7 +1,8 @@
 import {
+  type AnimationProps,
+  type StandaloneAssetProps,
   type ContentElement,
-  type ImageElement,
-  type VideoElement,
+  type LayoutProps,
   type ThemeProps,
 } from '../../_types';
 
@@ -9,13 +10,6 @@ import {
  * Hero-specific type definitions that extend the base types from _types.ts
  * These types provide explicit interfaces for each hero variation
  */
-
-/**
- * Hero-specific animation properties
- */
-export interface HeroAnimationProps {
-  includesAnimation?: boolean;
-}
 
 /**
  * Hero-specific sizing properties
@@ -26,30 +20,14 @@ export interface HeroSizingProps {
 }
 
 /**
- * Hero-specific layout properties
- */
-export interface HeroLayoutProps {
-  isTextCenter?: boolean;
-  isTextRight?: boolean;
-}
-
-/**
- * Hero-specific asset properties
- */
-export interface HeroAssetProps {
-  image?: ImageElement;
-  video?: VideoElement;
-}
-
-/**
  * Standard hero variant props
  * Explicitly defines all properties needed for standard hero
  */
 export interface HeroStandardProps
-  extends HeroAssetProps,
-    HeroAnimationProps,
-    HeroSizingProps,
-    HeroLayoutProps,
+  extends HeroSizingProps,
+    StandaloneAssetProps,
+    Pick<AnimationProps, 'includesAnimation'>,
+    Pick<LayoutProps, 'isTextCenter' | 'isTextRight'>,
     Pick<ThemeProps, 'isThemeDark'> {
   headline?: ContentElement;
   eyebrow?: ContentElement;
@@ -62,7 +40,7 @@ export interface HeroStandardProps
  * Explicitly defines all properties needed for minimal hero
  */
 export interface HeroMinimalProps
-  extends HeroAssetProps,
+  extends StandaloneAssetProps,
     Pick<ThemeProps, 'isThemeDark' | 'isThemeLight' | 'isThemeMaryland'> {
   headline?: ContentElement;
   eyebrow?: ContentElement;
@@ -75,9 +53,9 @@ export interface HeroMinimalProps
  * Explicitly defines all properties needed for stacked hero
  */
 export interface HeroStackedProps
-  extends HeroAssetProps,
-    HeroAnimationProps,
-    HeroSizingProps,
+  extends HeroSizingProps,
+    StandaloneAssetProps,
+    Pick<AnimationProps, 'includesAnimation'>,
     Pick<ThemeProps, 'isThemeDark'> {
   headline?: ContentElement;
   eyebrow?: ContentElement;
@@ -92,9 +70,9 @@ export interface HeroStackedProps
  * Explicitly defines all properties needed for overlay hero
  */
 export interface HeroOverlayProps
-  extends HeroAssetProps,
-    HeroAnimationProps,
-    HeroLayoutProps,
+  extends StandaloneAssetProps,
+    Pick<AnimationProps, 'includesAnimation'>,
+    Pick<LayoutProps, 'isTextCenter' | 'isTextRight'>,
     Pick<ThemeProps, 'isThemeDark'> {
   headline?: ContentElement;
   eyebrow?: ContentElement;
@@ -110,8 +88,8 @@ export interface HeroOverlayProps
  * Explicitly defines all properties needed for logo hero
  */
 export interface HeroLogoProps
-  extends HeroAssetProps,
-    HeroAnimationProps,
+  extends StandaloneAssetProps,
+    Pick<AnimationProps, 'includesAnimation'>,
     Pick<ThemeProps, 'isThemeDark' | 'isThemeLight' | 'isThemeMaryland'> {
   headline?: ContentElement;
   eyebrow?: ContentElement;
@@ -125,8 +103,8 @@ export interface HeroLogoProps
  * Explicitly defines all properties needed for grid hero
  */
 export interface HeroGridProps
-  extends HeroAssetProps,
-    HeroAnimationProps,
+  extends StandaloneAssetProps,
+    Pick<AnimationProps, 'includesAnimation'>,
     Pick<ThemeProps, 'isThemeDark'> {
   headline?: ContentElement;
   text?: ContentElement;
@@ -139,8 +117,8 @@ export interface HeroGridProps
  * Explicitly defines all properties needed for expand hero
  */
 export interface HeroExpandProps
-  extends HeroAssetProps,
-    HeroAnimationProps,
+  extends StandaloneAssetProps,
+    Pick<AnimationProps, 'includesAnimation'>,
     Pick<ThemeProps, 'isThemeDark'> {
   headline?: ContentElement;
   text?: ContentElement;
@@ -153,8 +131,8 @@ export interface HeroExpandProps
  * Explicitly defines all properties needed for video arrow hero
  */
 export interface HeroVideoArrowProps
-  extends HeroAssetProps,
-    HeroAnimationProps,
+  extends StandaloneAssetProps,
+    Pick<AnimationProps, 'includesAnimation'>,
     Pick<ThemeProps, 'isThemeDark'> {
   headline?: ContentElement;
   text?: ContentElement;

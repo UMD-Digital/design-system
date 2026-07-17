@@ -3,8 +3,9 @@ import * as animation from '@universityofmaryland/web-styles-library/animation';
 import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
 
-export interface BreadcrumbProps {
-  isThemeDark?: boolean;
+import { type ThemeProps } from '_types';
+
+export interface BreadcrumbProps extends Pick<ThemeProps, 'isThemeDark'> {
   linkListSlot: HTMLElement;
 }
 

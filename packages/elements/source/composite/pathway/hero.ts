@@ -3,15 +3,15 @@ import * as token from '@universityofmaryland/web-token-library';
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
 import { assets, textLockup } from 'atomic';
+import { type ThemeProps } from '_types';
 
-interface PathwayHeroProps {
+interface PathwayHeroProps extends Pick<ThemeProps, 'isThemeDark'> {
   actions: HTMLElement | null;
   eyebrow: HTMLElement | null;
   headline: HTMLElement | null;
   image: HTMLImageElement | null;
   includesAnimation?: boolean;
   isImagePositionLeft?: boolean;
-  isThemeDark?: boolean;
   text: HTMLElement | null;
   video: HTMLVideoElement | null;
 }

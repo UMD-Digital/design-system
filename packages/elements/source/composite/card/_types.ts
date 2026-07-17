@@ -1,16 +1,10 @@
 import {
+  type AssetProps,
   type ContentElement,
-  type ImageElement,
-  type LinkElement,
   type ThemeProps,
   type UMDElement,
   type LoadingProps,
 } from '../../_types';
-
-/**
- * Card-specific type for image or link elements
- */
-export type CardImageOrLinkElement = ImageElement | LinkElement;
 
 /**
  * Style variants available for cards
@@ -24,8 +18,7 @@ export enum CardVariant {
 /**
  * Common properties for cards that can display images
  */
-export interface CardMediaProps {
-  image?: CardImageOrLinkElement;
+export interface CardMediaProps extends Pick<AssetProps, 'image'> {
   isAligned?: boolean;
 }
 
@@ -100,6 +93,6 @@ export interface CardOverlayProps
   eyebrow?: ContentElement;
   date?: ContentElement;
   ctaIcon?: ContentElement;
-  backgroundImage?: CardImageOrLinkElement;
+  backgroundImage?: AssetProps['image'];
   isQuote?: boolean;
 }

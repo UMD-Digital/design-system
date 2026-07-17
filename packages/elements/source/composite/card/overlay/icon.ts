@@ -1,13 +1,12 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-token-library';
 import { textLockup } from 'atomic';
-import { type UMDElement } from '../../../_types';
+import { type ThemeProps, type UMDElement } from '../../../_types';
 
-interface CardIconProps {
+interface CardIconProps extends Pick<ThemeProps, 'isThemeDark'> {
   headline: HTMLElement | null;
   text?: HTMLElement | null;
   image?: HTMLImageElement | null;
-  isThemeDark?: boolean;
 }
 
 export const createCompositeCardOverlayIcon = (props: CardIconProps) => {

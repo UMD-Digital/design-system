@@ -4,11 +4,9 @@ import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { assets, textLockup } from 'atomic';
 import { PersonContact } from './_types';
-import { type ElementModel } from '../../_types';
+import { type ElementModel, type ThemeProps } from '../../_types';
 
-interface Theme {
-  isThemeDark?: boolean;
-}
+interface Theme extends Pick<ThemeProps, 'isThemeDark'> {}
 
 interface PersonText extends Theme {
   name: HTMLElement | null;

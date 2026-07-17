@@ -1,6 +1,6 @@
-export interface ThemeProps {
-  isThemeLight: boolean;
-}
+import { type ThemeProps as SharedThemeProps } from '_types';
+
+type ThemeProps = Required<Pick<SharedThemeProps, 'isThemeLight'>>;
 
 export interface TypeProps {
   isTypeSimple?: boolean;

@@ -1,10 +1,10 @@
 import * as token from '@universityofmaryland/web-token-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as carouselElements from '../elements';
+import { type ThemeProps } from '_types';
 
-type TypeCarouselThumbnailProps = {
+type TypeCarouselThumbnailProps = Pick<ThemeProps, 'isThemeDark'> & {
   blocks: HTMLElement[];
-  isThemeDark?: boolean;
 };
 
 export const createCompositeCarouselThumbnail = (

@@ -3,15 +3,14 @@ import * as token from '@universityofmaryland/web-token-library';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
-import { type ElementModel } from '../../../_types';
+import { type ElementModel, type ThemeProps } from '../../../_types';
 import { type SimpleRichTextOptions } from '@universityofmaryland/web-styles-library/element/text/rich';
 
-export interface SectionIntroProps {
+export interface SectionIntroProps extends Pick<ThemeProps, 'isThemeDark'> {
   headline?: HTMLElement | null;
   actions?: HTMLElement | null;
   text?: HTMLElement | null;
   hasSeparator?: boolean;
-  isThemeDark?: boolean;
 }
 
 const createHeadline = (

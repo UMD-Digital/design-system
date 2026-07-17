@@ -2,12 +2,12 @@ import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-token-library';
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
-import { type ElementModel } from '../../../_types';
+import { type ElementModel, type ThemeProps } from '../../../_types';
 
-export interface SectionIntroWideProps {
+export interface SectionIntroWideProps
+  extends Pick<ThemeProps, 'isThemeDark'> {
   headline?: HTMLElement | null;
   actions?: HTMLElement | null;
-  isThemeDark?: boolean;
 }
 
 const TABLET = 500;

@@ -1,26 +1,25 @@
-import { type ElementVisual } from '../../_types';
+import {
+  type AnimationProps,
+  type ContentElement,
+  type ElementVisual,
+  type StandaloneAssetProps,
+  type ThemeProps,
+} from '../../_types';
 
-export interface PathwayThemeProps {
-  isThemeDark?: boolean;
-  isThemeLight?: boolean;
-  isThemeMaryland?: boolean;
-}
-
-export interface PathwayTextLockupProps extends PathwayThemeProps {
-  actions?: HTMLElement | null;
+export interface PathwayTextLockupProps
+  extends Pick<ThemeProps, 'isThemeDark' | 'isThemeLight' | 'isThemeMaryland'> {
+  actions?: ContentElement;
   eventDetails?: ElementVisual;
-  eyebrow?: HTMLElement | null;
-  headline?: HTMLElement | null;
-  stats?: HTMLElement | null;
-  text?: HTMLElement | null;
+  eyebrow?: ContentElement;
+  headline?: ContentElement;
+  stats?: ContentElement;
+  text?: ContentElement;
 }
 
-export interface PathwayAssetProps {
+export interface PathwayAssetProps extends StandaloneAssetProps {
   dateSign?: ElementVisual;
-  image?: HTMLImageElement | null;
   isImagePositionLeft?: boolean;
   isImageScaled?: boolean;
-  video?: HTMLVideoElement | null;
 }
 
 export interface PathwayBaseProps
@@ -28,16 +27,16 @@ export interface PathwayBaseProps
     PathwayAssetProps {}
 
 export interface PathwayHighlightProps extends PathwayTextLockupProps {
-  attribution?: HTMLElement | null;
-  quote?: HTMLElement | null;
+  attribution?: ContentElement;
+  quote?: ContentElement;
 }
 
-export interface PathwayOverlayProps extends PathwayBaseProps {
-  includesAnimation?: boolean;
-}
+export interface PathwayOverlayProps
+  extends PathwayBaseProps,
+    Pick<AnimationProps, 'includesAnimation'> {}
 
-export interface PathwayStandardProps extends PathwayBaseProps {
-  includesAnimation?: boolean;
-}
+export interface PathwayStandardProps
+  extends PathwayBaseProps,
+    Pick<AnimationProps, 'includesAnimation'> {}
 
 export interface PathwayStickyProps extends PathwayBaseProps {}

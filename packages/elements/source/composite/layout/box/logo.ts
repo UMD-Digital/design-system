@@ -1,10 +1,10 @@
 import * as token from '@universityofmaryland/web-token-library';
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import { type ThemeProps } from '_types';
 
-export type TypeLogoRequirements = {
+export type TypeLogoRequirements = Pick<ThemeProps, 'isThemeDark'> & {
   isBordered?: boolean;
-  isThemeDark?: boolean;
   image: HTMLElement;
   text?: HTMLElement | null;
 };

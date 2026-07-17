@@ -2,11 +2,11 @@ import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { layout } from '@universityofmaryland/web-styles-library';
 import * as token from '@universityofmaryland/web-token-library';
 
-import { type ElementModel } from '../_types';
+import { type ElementModel, type ThemeProps } from '../_types';
 
-export interface GridBorderLayoutProps {
+export interface GridBorderLayoutProps
+  extends Pick<ThemeProps, 'isThemeDark'> {
   columns?: 2 | 3 | 4;
-  isThemeDark?: boolean;
   enableContainerQueries?: boolean;
   alignItems?: 'start' | 'center' | 'end' | 'stretch';
 }

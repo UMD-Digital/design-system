@@ -6,6 +6,8 @@ import {
   clock as iconClock,
 } from '@universityofmaryland/web-icons-library/calendar';
 
+import { type ThemeProps } from '_types';
+
 type LocationType = {
   title: string;
 }[];
@@ -21,19 +23,19 @@ type DateInformaitonType = {
   endTime: string;
 };
 
-type DateDisplayType = DateInformaitonType & {
-  isMultiDay?: boolean;
-  isThemeDark?: boolean;
-};
+type DateDisplayType = DateInformaitonType &
+  Pick<ThemeProps, 'isThemeDark'> & {
+    isMultiDay?: boolean;
+  };
 
 type EventType = DateInformaitonType & {
   location: LocationType;
 };
 
-export type TypeMetaDisplay = EventType & {
-  isThemeDark?: boolean;
-  showTime?: boolean;
-};
+export type TypeMetaDisplay = EventType &
+  Pick<ThemeProps, 'isThemeDark'> & {
+    showTime?: boolean;
+  };
 
 const MakeDetailItem = (props: {
   icon: string;

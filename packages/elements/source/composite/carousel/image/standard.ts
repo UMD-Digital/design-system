@@ -8,6 +8,7 @@ import { combineStyles } from '@universityofmaryland/web-utilities-library/style
 import * as carouselElements from '../elements';
 import { buttons } from 'atomic';
 import { createLayoutImageContainer } from 'layout';
+import { type ThemeProps } from '_types';
 
 type TypeFullScreen = {
   isFullScreenOption?: boolean;
@@ -34,8 +35,8 @@ type TypeCarouselSlideProps = TypeSlideContent &
   TypeFullScreen;
 
 type TypeCarouselImageStandardProps = TypeSlideContent &
-  TypeFullScreen & {
-    isThemeDark?: boolean;
+  TypeFullScreen &
+  Pick<ThemeProps, 'isThemeDark'> & {
     isToggleCaption?: boolean;
   };
 

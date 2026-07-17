@@ -2,12 +2,12 @@ import * as token from '@universityofmaryland/web-token-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as carouselElements from '../elements';
 import { type TypeButtonConfig } from '../elements/equal-width-items';
+import { type ThemeProps } from '_types';
 
-type TypeCarouselRequirements = {
+type TypeCarouselRequirements = Pick<ThemeProps, 'isThemeDark'> & {
   slide: HTMLElement;
   shadowRef?: HTMLElement;
   blocks: HTMLElement[];
-  isThemeDark?: boolean;
   gridGap?: string | null;
   hasLeftButton?: boolean;
   hasRightButton?: boolean;

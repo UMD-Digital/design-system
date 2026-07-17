@@ -143,6 +143,16 @@ export interface AssetProps {
   isScaled?: boolean;
 }
 
+/**
+ * Asset props for elements that render media as a standalone visual
+ * (hero, pathway). The image may not be wrapped in an anchor — calls to
+ * action are overlaid on top of the visual display instead.
+ */
+export interface StandaloneAssetProps {
+  image?: ImageElement;
+  video?: VideoElement;
+}
+
 // ===== Media Component Base =====
 
 export interface MediaComponentProps extends AssetProps, MediaProps {

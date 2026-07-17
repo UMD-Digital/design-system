@@ -11,16 +11,17 @@ import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { wrapTextNodeInSpan } from '@universityofmaryland/web-utilities-library/dom';
 import { textLockup, assets } from 'atomic';
 import { CardEventTimeProps } from './_types';
-import { type UMDElement } from '../../_types';
+import { type ThemeProps, type UMDElement } from '../../_types';
 
 const mediumBreakpointStart = token.media.breakpointValues.medium.min;
 const smallBreakpoint = token.media.breakpointValues.small.max;
 
-const MakeDetailItem = (props: {
-  icon: string;
-  text: string;
-  isThemeDark?: boolean;
-}) => {
+const MakeDetailItem = (
+  props: {
+    icon: string;
+    text: string;
+  } & Pick<ThemeProps, 'isThemeDark'>,
+) => {
   const { icon, text, isThemeDark } = props;
 
   const iconElement = new ElementBuilder('span').withHTML(icon).build();
@@ -59,8 +60,7 @@ const makeTimeRow = ({
 }: {
   startTime: CardEventTimeProps['startTime'];
   endTime?: CardEventTimeProps['endTime'];
-  isThemeDark?: boolean;
-}) => {
+} & Pick<ThemeProps, 'isThemeDark'>) => {
   const startParsed = parseDateFromElement({ element: startTime });
   if (!startParsed) return null;
 
@@ -96,8 +96,7 @@ const makeMetaRow = ({
 }: {
   location?: CardEventTimeProps['location'];
   information?: CardEventTimeProps['information'];
-  isThemeDark?: boolean;
-}) => {
+} & Pick<ThemeProps, 'isThemeDark'>) => {
   const children: UMDElement[] = [];
 
   if (location?.textContent) {

@@ -5,13 +5,12 @@ import * as typography from '@universityofmaryland/web-styles-library/typography
 import * as layout from '@universityofmaryland/web-styles-library/layout';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
-import type { ElementModel } from '../../../_types';
+import type { ElementModel, ThemeProps } from '../../../_types';
 
-export interface AlertTextProps {
+export interface AlertTextProps extends Pick<ThemeProps, 'isThemeDark'> {
   headline?: HTMLElement | null;
   text?: HTMLElement | null;
   actions?: HTMLElement | null;
-  isThemeDark?: boolean;
 }
 
 const createHeadline = (

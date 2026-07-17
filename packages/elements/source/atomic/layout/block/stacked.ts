@@ -5,15 +5,14 @@ import {
   createMediaQuery,
   createMediaQueryRange,
 } from '@universityofmaryland/web-utilities-library/styles';
-import { type ElementModel } from '../../../_types';
+import { type ElementModel, type ThemeProps } from '../../../_types';
 
 const smallBreakpoint = token.media.breakpointValues.small.max;
 const mediumBreakpointStart = token.media.breakpointValues.medium.min;
 const mediumBreakpoint = token.media.breakpointValues.large.min;
 
-interface BoxProps {
+interface BoxProps extends Pick<ThemeProps, 'isThemeDark'> {
   hasBorder?: boolean;
-  isThemeDark?: boolean;
   isTransparent?: boolean;
   hasImage?: boolean;
 }

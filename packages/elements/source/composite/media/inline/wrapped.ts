@@ -3,13 +3,13 @@ import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { createCompositeMediaCaption as CaptionContainer } from '../elements/caption';
 import { createLayoutImageContainer } from 'layout';
+import { type ThemeProps } from '_types';
 
-export type TypeMediaInlineWrappedRequirements = {
+export type TypeMediaInlineWrappedRequirements = Pick<ThemeProps, 'isThemeDark'> & {
   image?: HTMLImageElement | null;
   caption?: HTMLElement | null;
   wrappingText?: HTMLElement | null;
   isAlignmentRight?: boolean;
-  isThemeDark?: boolean;
 };
 
 const BREAKPOINT = 400;

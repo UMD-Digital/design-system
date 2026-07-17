@@ -12,9 +12,9 @@ import {
   textStyles,
   dateStyles,
 } from './small';
-import { type UMDElement } from '../../_types';
+import { type ThemeProps, type UMDElement } from '../../_types';
 
-export type TypeTextLockupSmallScaling = {
+export type TypeTextLockupSmallScaling = Pick<ThemeProps, 'isThemeDark'> & {
   actions?: HTMLElement | null;
   customStyles?: Record<string, string>;
   date?: HTMLElement | null;
@@ -22,7 +22,6 @@ export type TypeTextLockupSmallScaling = {
   eyebrow?: HTMLElement | null;
   hasEyebrowRibbon?: boolean;
   headline?: HTMLElement | null;
-  isThemeDark?: boolean;
   text?: HTMLElement | null;
 };
 

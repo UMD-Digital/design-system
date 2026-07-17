@@ -4,16 +4,15 @@ import * as typography from '@universityofmaryland/web-styles-library/typography
 import * as layout from '@universityofmaryland/web-styles-library/layout';
 import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
-import { ElementModel } from '../../_types';
+import { ElementModel, type ThemeProps } from '../../_types';
 
-interface TypeTextLockupLarge {
+interface TypeTextLockupLarge extends Pick<ThemeProps, 'isThemeDark'> {
   headlineComposite?: ElementModel<HTMLElement> | null;
   eyebrow?: HTMLElement | null;
   ribbon?: HTMLElement | null;
   text?: HTMLElement | null;
   textLargest?: HTMLElement | null;
   actions?: HTMLElement | null;
-  isThemeDark?: boolean;
   customStyles?: Record<string, unknown>;
 }
 

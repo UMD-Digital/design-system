@@ -3,10 +3,10 @@ import * as typography from '@universityofmaryland/web-styles-library/typography
 import { smoothScrollToElement } from '@universityofmaryland/web-utilities-library/animation';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { parsePixelValue } from '@universityofmaryland/web-utilities-library/styles';
+import { type ThemeProps } from '_types';
 
-type TypeTabsProps = {
+type TypeTabsProps = Pick<ThemeProps, 'isThemeDark'> & {
   tabsContainer: HTMLElement;
-  isThemeDark?: boolean;
   shadowContent?: HTMLSlotElement;
   topPosition?: string | null;
 };

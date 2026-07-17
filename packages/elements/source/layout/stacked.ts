@@ -1,10 +1,9 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { token, layout } from '@universityofmaryland/web-styles-library';
 
-import { type ElementModel } from '../_types';
+import { type ElementModel, type ThemeProps } from '../_types';
 
-export interface StackedLayoutProps {
-  isThemeDark?: boolean;
+export interface StackedLayoutProps extends Pick<ThemeProps, 'isThemeDark'> {
   gap?: string;
   spacing?: string;
   showDividers?: boolean;

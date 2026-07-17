@@ -4,10 +4,10 @@ import { combineStyles } from '@universityofmaryland/web-utilities-library/style
 import * as carouselElements from '../elements';
 import { buttons } from 'atomic';
 import { createLayoutImageContainer } from 'layout';
+import { type ThemeProps } from '_types';
 
-type TypeCarouselMultipleProps = {
+type TypeCarouselMultipleProps = Pick<ThemeProps, 'isThemeDark'> & {
   images: HTMLImageElement[];
-  isThemeDark?: boolean;
   isFullScreenOption?: boolean;
   isToggleCaption?: boolean;
 };

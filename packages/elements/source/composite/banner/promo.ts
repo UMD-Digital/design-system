@@ -5,14 +5,13 @@ import * as elementStyles from '@universityofmaryland/web-styles-library/element
 import { imageFromSvg } from '@universityofmaryland/web-utilities-library/media';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { seal as logoSeal } from '@universityofmaryland/web-icons-library/logos';
-import { type ElementModel } from '../../_types';
+import { type ElementModel, type ThemeProps } from '../../_types';
 import { wrapTextNodeInSpan } from '@universityofmaryland/web-utilities-library';
 
-type TypeBannerPromoProps = {
+type TypeBannerPromoProps = Pick<ThemeProps, 'isThemeDark'> & {
   headline?: HTMLElement | null;
   text?: HTMLElement | null;
   actions?: HTMLElement | null;
-  isThemeDark?: boolean;
   includeSeal?: boolean;
 };
 

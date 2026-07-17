@@ -3,11 +3,11 @@ import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
 import { createCompositeMediaCaption as CaptionContainer } from '../elements/caption';
 import { createLayoutImageContainer } from 'layout';
+import { type ThemeProps } from '_types';
 
-export type TypeMediaInlineRequirements = {
+export type TypeMediaInlineRequirements = Pick<ThemeProps, 'isThemeDark'> & {
   image?: HTMLImageElement | null;
   caption?: HTMLElement | null;
-  isThemeDark?: boolean;
 };
 
 const CreateMediaWithCaption = (props: TypeMediaInlineRequirements) =>

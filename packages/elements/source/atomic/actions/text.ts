@@ -15,12 +15,11 @@ import { email as iconEmail } from '@universityofmaryland/web-icons-library/comm
 import { document as iconDocument } from '@universityofmaryland/web-icons-library/files';
 import { fearless as iconFearless } from '@universityofmaryland/web-icons-library/brand';
 
-import { type ElementStyles } from '../../_types';
+import { type ElementStyles, type ThemeProps } from '../../_types';
 
-interface ElementProps {
+interface ElementProps
+  extends Pick<ThemeProps, 'isThemeDark' | 'isThemeGold'> {
   element: HTMLElement;
-  isThemeDark?: boolean;
-  isThemeGold?: boolean;
   isSizeLarge?: boolean;
   elementStyles?: ElementStyles;
 }

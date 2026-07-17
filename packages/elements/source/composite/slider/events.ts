@@ -9,9 +9,9 @@ import {
   arrow_right as iconArrowRight,
 } from '@universityofmaryland/web-icons-library/arrows';
 
-type TypeThemeProps = {
-  isThemeDark?: boolean;
-};
+import { type ThemeProps } from '_types';
+
+type TypeThemeProps = Pick<ThemeProps, 'isThemeDark'>;
 
 type TypeSliderEventButtonProps = {
   SetCountForward: () => void;

@@ -1,12 +1,11 @@
 import * as Styles from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
+import { type ThemeProps } from '_types';
 
-type TypeAccordionProps = {
+type TypeAccordionProps = Pick<ThemeProps, 'isThemeLight' | 'isThemeDark'> & {
   headline?: HTMLElement | null;
   text?: HTMLElement | null;
-  isThemeLight?: boolean;
-  isThemeDark?: boolean;
   isStateOpen: boolean;
   context?: HTMLElement;
 };

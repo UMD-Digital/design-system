@@ -1,10 +1,10 @@
 import * as token from '@universityofmaryland/web-token-library';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
 import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
+import { type ThemeProps } from '_types';
 
-export type TypeMediaCaptionRequirements = {
+export type TypeMediaCaptionRequirements = Pick<ThemeProps, 'isThemeDark'> & {
   caption: HTMLElement;
-  isThemeDark?: boolean;
 };
 
 const ATTRIBUTE_THEME = 'data-theme';

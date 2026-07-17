@@ -1,34 +1,36 @@
-interface PersonTheme {
-  isThemeDark?: boolean;
-}
+import {
+  type AssetProps,
+  type ContentElement,
+  type ThemeProps,
+} from '../../_types';
 
-interface PersonDisplay extends PersonTheme {
+interface PersonDisplay extends Pick<ThemeProps, 'isThemeDark'> {
   displayType?: string;
 }
 
-export interface PersonContact extends PersonTheme {
-  phone?: HTMLElement | null;
-  email?: HTMLElement | null;
-  linkedin?: HTMLElement | null;
-  bluesky?: HTMLElement | null;
-  substack?: HTMLElement | null;
-  address?: HTMLElement | null;
-  additionalContact?: HTMLElement | null;
+export interface PersonContact extends Pick<ThemeProps, 'isThemeDark'> {
+  phone?: ContentElement;
+  email?: ContentElement;
+  linkedin?: ContentElement;
+  bluesky?: ContentElement;
+  substack?: ContentElement;
+  address?: ContentElement;
+  additionalContact?: ContentElement;
 }
 
 export interface Person extends PersonContact, PersonDisplay {
-  name: HTMLElement | null;
-  slotOne?: HTMLElement | null;
-  slotTwo?: HTMLElement | null;
-  slotThreeItalic?: HTMLElement | null;
-  slotFour?: HTMLElement | null;
-  actions?: HTMLElement | null;
+  name: ContentElement;
+  slotOne?: ContentElement;
+  slotTwo?: ContentElement;
+  slotThreeItalic?: ContentElement;
+  slotFour?: ContentElement;
+  actions?: ContentElement;
 }
 
 export interface PersonCard extends Person {
-  image?: HTMLImageElement | HTMLAnchorElement | null;
+  image?: AssetProps['image'];
 }
 
 export interface PersonBio extends PersonCard {
-  description?: HTMLElement | null;
+  description?: ContentElement;
 }

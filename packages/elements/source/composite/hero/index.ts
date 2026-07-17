@@ -7,10 +7,7 @@ export { createCompositeHeroStandard as standard } from './standard';
 
 // Export types for external use
 export type {
-  HeroAnimationProps,
   HeroSizingProps,
-  HeroLayoutProps,
-  HeroAssetProps,
   HeroStandardProps,
   HeroMinimalProps,
   HeroStackedProps,

@@ -4,12 +4,12 @@ import { debounce } from '@universityofmaryland/web-utilities-library/performanc
 import { getResponsiveImageSize } from '@universityofmaryland/web-utilities-library/media';
 import { setupSwipeDetection } from '@universityofmaryland/web-utilities-library/events';
 import { createCarouselNavButton, buttonColorsOnGray } from './nav-button';
+import { type ThemeProps } from '_types';
 
-type TypeCarouselImageProps = {
+type TypeCarouselImageProps = Pick<ThemeProps, 'isThemeDark'> & {
   slides: HTMLElement[];
   callback?: (index: number) => void;
   maxHeight?: number;
-  isThemeDark?: boolean;
   includeButtonWrapper?: boolean;
 };
 

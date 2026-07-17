@@ -6,15 +6,14 @@ import * as layout from '@universityofmaryland/web-styles-library/layout';
 import * as animationStyles from '@universityofmaryland/web-styles-library/animation';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
 import { wrapTextNodeInSpan } from '@universityofmaryland/web-utilities-library/dom';
-import { ElementModel } from '../../_types';
+import { ElementModel, type ThemeProps } from '../../_types';
 
-interface TypeTextLockupMedium {
+interface TypeTextLockupMedium
+  extends Pick<ThemeProps, 'isThemeDark' | 'isThemeMaryland'> {
   actions?: HTMLElement | null;
   compositeHeadline?: ElementModel<HTMLElement> | null;
   eventDetails?: ElementModel<HTMLElement>;
   headline?: HTMLElement | null;
-  isThemeDark?: boolean;
-  isThemeMaryland?: boolean;
   ribbon?: HTMLElement | null;
   compositeStats?: ElementModel<HTMLElement> | null;
   text?: HTMLElement | null;

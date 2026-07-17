@@ -6,11 +6,9 @@ import * as layout from '@universityofmaryland/web-styles-library/layout';
 import * as animationStyles from '@universityofmaryland/web-styles-library/animation';
 import { wrapTextNodeInSpan } from '@universityofmaryland/web-utilities-library/dom';
 import { theme } from '@universityofmaryland/web-utilities-library/theme';
-import { type UMDElement } from '../../_types';
+import { type ThemeProps, type UMDElement } from '../../_types';
 
-type TypeTheme = {
-  isThemeDark?: boolean;
-};
+type TypeTheme = Pick<ThemeProps, 'isThemeDark'>;
 
 type TypeEyebrow = TypeTheme & {
   eyebrow: HTMLElement;

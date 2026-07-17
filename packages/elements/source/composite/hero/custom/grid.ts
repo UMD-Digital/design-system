@@ -4,7 +4,11 @@ import * as Styles from '@universityofmaryland/web-styles-library';
 import { isPreferredReducedMotion } from '@universityofmaryland/web-utilities-library/accessibility';
 import { withViewTimelineAnimation } from '@universityofmaryland/web-utilities-library/styles';
 import { assets, textLockup } from 'atomic';
-import { type ContentElement, type ElementModel } from '../../../_types';
+import {
+  type ContentElement,
+  type ElementModel,
+  type ThemeProps,
+} from '../../../_types';
 
 interface CornerProps {
   images: Array<HTMLImageElement>;
@@ -16,13 +20,12 @@ interface CenterProps {
   video?: HTMLVideoElement | null;
 }
 
-interface HeroGridProps {
+interface HeroGridProps extends Pick<ThemeProps, 'isThemeDark'> {
   headline?: ContentElement;
   text?: ContentElement;
   actions?: ContentElement;
   corners: Array<CornerProps>;
   center: CenterProps | null;
-  isThemeDark?: boolean;
 }
 
 const isPreferReducedMotion = isPreferredReducedMotion();

@@ -1,10 +1,10 @@
 import * as token from '@universityofmaryland/web-token-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { animations } from 'atomic';
+import { type ThemeProps } from '_types';
 
-type TypeIndicatorWrapperProps = {
+type TypeIndicatorWrapperProps = Pick<ThemeProps, 'isThemeDark'> & {
   count: number;
-  isThemeDark?: boolean;
   isBackground?: boolean;
   callback?: (index: number) => void;
 };

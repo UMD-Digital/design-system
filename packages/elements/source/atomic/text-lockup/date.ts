@@ -5,10 +5,11 @@ import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { truncateText } from '@universityofmaryland/web-utilities-library/string';
 import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
 
-type TypeEventLockupDate = {
+import { type ThemeProps } from '_types';
+
+type TypeEventLockupDate = Pick<ThemeProps, 'isThemeDark'> & {
   headline: HTMLElement | null;
   dateSign?: { element: HTMLElement; styles: string };
-  isThemeDark?: boolean;
 };
 
 export const createTextLockupDate = (props: TypeEventLockupDate) => {

@@ -48,7 +48,6 @@ export const createCompositeCardOverlayColor = (props: CardOverlayProps) => {
     .withClassName('card-overlay-color')
     .withStyles({
       element: {
-        containerType: 'inline-size',
         padding: `${token.spacing.lg} ${token.spacing.md}`,
         minHeight: '360px',
         height: '100%',

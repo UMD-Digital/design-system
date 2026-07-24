@@ -73,6 +73,21 @@ describe('ElementBuilder', () => {
       expect(model.element.classList.contains('class3')).toBe(true);
     });
 
+    test('should expose className on the built model', () => {
+      const div = document.createElement('div');
+      const model = new ElementBuilder(div)
+        .withClassName('class1', 'class2')
+        .build();
+
+      expect(model.className).toBe('class1 class2');
+    });
+
+    test('should omit className from the model when none set', () => {
+      const model = new ElementBuilder(document.createElement('div')).build();
+
+      expect(model.className).toBeUndefined();
+    });
+
     test('should chain multiple withClassName calls', () => {
       const div = document.createElement('div');
       const model = new ElementBuilder(div)

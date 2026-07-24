@@ -120,6 +120,8 @@ export interface ElementModel<T extends HTMLElement = HTMLElement> {
   element: T;
   /** The compiled CSS styles for this element and its children */
   styles: string;
+  /** Space-separated class names applied to the root element */
+  className?: string;
   /** Optional update method for reactivity */
   update?: (props: Partial<BuilderOptions>) => void;
   /** Optional destroy method for cleanup */

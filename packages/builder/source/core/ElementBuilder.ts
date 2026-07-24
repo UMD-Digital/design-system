@@ -740,6 +740,7 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
       return {
         element: this.element,
         styles: this.styles.compile(),
+        ...(classNames.length > 0 && { className: classNames.join(' ') }),
         update: (props) => this.update(props),
         destroy: () => this.destroy(),
         ...(Object.keys(this.customEvents).length > 0 && {
@@ -801,6 +802,9 @@ export class ElementBuilder<T extends HTMLElement = HTMLElement>
     const model: ElementModel<T> = {
       element: this.element,
       styles: allStyles,
+      ...(this.classNames.size > 0 && {
+        className: this.getClassNames().join(' '),
+      }),
       update: (props: Partial<BuilderOptions>) => this.update(props),
       destroy: () => this.destroy(),
       ...(Object.keys(this.customEvents).length > 0 && {

@@ -140,6 +140,21 @@ Components use `data-*` attributes (migrated from bare attributes):
 
 Legacy bare attributes (`theme`, `visual`) still work but emit deprecation warnings.
 
+## Image Captions
+
+Components that render images through the elements package's shared image wrappers (`assets.image.background` and `createLayoutImageContainer` — see the elements package `CLAUDE.md`, "Image Wrapper & Captions") inherit caption support. Captions are **off by default** at the element layer; the components below opt in. Caption text comes from the `data-credit` attribute on the slotted `<img>` (`data-caption` is deprecated, removed in 2.0).
+
+| Component | Caption source | Display | Consumer control |
+|---|---|---|---|
+| `umd-element-hero` (standard, minimal, overlay, stacked) | `data-credit` on slotted image | Static overlay span | None — shown whenever `data-credit` is present |
+| `umd-element-hero-custom` (grid, expand) | `data-credit` on slotted image | Static overlay span | Same |
+| `umd-element-pathway` / `umd-element-pathway-highlight` | `data-credit` on slotted image | Static overlay span | Same |
+| `umd-element-carousel-image` | `data-credit` on slotted images | Toggle button (default) or block overlay | `data-visual-text-toggle` — `true` (default) collapsible toggle, `false` block overlay |
+| `umd-element-carousel-multiple-image` | `data-credit` on slotted images | Toggle button (default) or block overlay | Same |
+| `umd-element-media-inline` | `caption` slot (text below image) and `data-credit` (overlay) | Block overlay; slotted caption renders under the image | Provide/omit the `caption` slot |
+
+Card, person, and feed components use the same image wrapper but never enable captions — a `data-credit` attribute on their images is ignored by design. If a new component should surface image credits, opt in at the element layer (`isShowCaption` / `showCaption`) and add it to this table.
+
 ## Dispatched Events
 
 Components publish behavior to consumers via bubbling `CustomEvent`s. Because events are

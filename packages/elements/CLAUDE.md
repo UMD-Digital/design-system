@@ -160,6 +160,37 @@ Caller-supplied style overrides are defined once in `source/_types.ts` as `Style
 
 Note: `elementStyles` is also the conventional import alias for `@universityofmaryland/web-styles-library/element`. Prefer a different alias (e.g. `stylePresets`) in new files to keep the prop name greppable.
 
+## Image Wrapper & Captions
+
+Many elements reuse a shared image wrapper. There are **two wrapper paths**, and both have captions **off by default** — a consumer must opt in:
+
+1. **`atomic/assets/image/background.ts`** (`assets.image.background`) — the widely reused background/asset image wrapper. `isShowCaption?: boolean` defaults to `false`. When enabled, caption text is read from the `data-credit` attribute on the `<img>` (`data-caption` is deprecated, removed in 2.0) and rendered as a static overlay span styled with `Styles.element.asset.image.caption`.
+2. **`layout/image.ts`** (`createLayoutImageContainer`) — layout image container. `showCaption?: boolean` defaults to `false`; `isToggleCaption?: boolean` picks the caption UI from `atomic/assets/image/caption.ts` (`createCaption.create`): a collapsible toggle button (`true`) or a block overlay (`false`). Note: `createCaption.bindToggle(clone)` must be called on any cloned caption markup (e.g. duplicated carousel slides) — `cloneNode` drops listeners; see `composite/carousel/elements/equal-width-items.ts`.
+
+### Caption use cases
+
+Elements that opt in to captions (everything not listed keeps the default of no caption — notably all `card/*`, `person/*`, `carousel/wide`, `hero/logo`, and `animations/brand/card-stack` consumers of `assets.image.background`):
+
+| Element (source file) | Wrapper | Caption style | Notes |
+|---|---|---|---|
+| `composite/hero/standard.ts` | `assets.image.background` | Static overlay span | Shown when `<img>` has `data-credit` |
+| `composite/hero/minimal.ts` | `assets.image.background` | Static overlay span | Same |
+| `composite/hero/overlay.ts` | `assets.image.background` | Static overlay span | Same |
+| `composite/hero/stacked.ts` | `assets.image.background` | Static overlay span | Same |
+| `composite/hero/custom/expand.ts` | `assets.image.background` | Static overlay span | Same |
+| `composite/hero/custom/grid.ts` | `assets.image.background` | Static overlay span | Same |
+| `composite/pathway/_common.ts` | `assets.image.background` | Static overlay span | All standard pathway variants |
+| `composite/pathway/hero.ts` | `assets.image.background` | Static overlay span | Pathway hero variant |
+| `composite/media/elements/gif.ts` | `assets.image.background` | Static overlay span | GIF media asset |
+| `composite/carousel/image/standard.ts` | `createLayoutImageContainer` | Toggle (default) or block | `isToggleCaption` prop, default `true` |
+| `composite/carousel/image/multiple.ts` | `createLayoutImageContainer` | Toggle (default) or block | Same |
+| `composite/carousel/elements/overlay.ts` | `createLayoutImageContainer` | Toggle (default) or block | Fullscreen carousel overlay |
+| `composite/media/inline/standard.ts` | `createLayoutImageContainer` | Block | `showCaption: true` |
+| `composite/media/inline/caption.ts` | `createLayoutImageContainer` | Block | Plus a slotted text caption below the image |
+| `composite/media/inline/wrapped.ts` | `createLayoutImageContainer` | Block | Text-wrapped variant |
+
+When building a new element that reuses either wrapper, decide explicitly whether image credits should surface and document the choice — do not rely on the default silently.
+
 ## ElementBuilder Migration
 
 Elements are being migrated from direct DOM manipulation to the `ElementBuilder` fluent API. Most atomic and many composite elements have been migrated. When creating or modifying elements, use `ElementBuilder` — do not introduce direct `document.createElement` patterns.

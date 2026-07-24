@@ -6,3 +6,5 @@ export * as events from './events';
 export * as layout from './layout';
 export * as textLockup from './text-lockup';
 export * as text from './text';
+
+export type * from './_types';

@@ -14,3 +14,12 @@ export * as quote from './quote';
 export * as slider from './slider';
 export * as social from './social';
 export * as tabs from './tabs';
+
+export type * from './card/_types';
+export type * from './carousel/_types';
+export type * from './footer/_types';
+export type * from './hero/_types';
+export type * from './pathway/_types';
+export type * from './person/_types';
+export type * from './quote/_types';
+export type * from './social/_types';

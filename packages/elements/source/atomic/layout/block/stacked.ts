@@ -97,12 +97,6 @@ export const textContainer = ({
           ...(hasImage && {
             paddingTop: token.spacing.md,
           }),
-        }),
-
-        ...createMediaQuery('min-width', mediumBreakpointStart, {
-          ...(hasImage && {
-            paddingTop: token.spacing.lg,
-          }),
 
           ...(hasBorder && {
             padding: token.spacing.md,

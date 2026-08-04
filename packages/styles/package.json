@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-styles-library",
-  "version": "1.8.14",
+  "version": "1.8.15",
   "description": "Styles used for use in the University of Maryland Design System",
   "type": "module",
   "main": "dist/index.js",

@@ -3,7 +3,12 @@
  * Provides rich text styles for formatted HTML content with various variants.
  */
 
-import { color, font, media, spacing } from '@universityofmaryland/web-token-library';
+import {
+  color,
+  font,
+  media,
+  spacing,
+} from '@universityofmaryland/web-token-library';
 import { sans } from '../../typography';
 import * as animation from '../../animation';
 import { create } from '../../utilities';
@@ -191,7 +196,18 @@ export function composeSimple(options?: SimpleRichTextOptions): JssObject {
     color: explicitColor,
     scaling = false,
   } = options || {};
-  let composed: Record<string, any> = { ...simpleBase };
+  let composed: Record<string, any> = {
+    ...simpleBase,
+    [`& ul, & ol ul`]: {
+      ...list.unordered,
+    },
+    [`& ol, & ul ol`]: {
+      ...list.ordered,
+    },
+    ['& + ol, &ol + ul']: {
+      marginTop: spacing.sm,
+    },
+  };
 
   if (size === 'large') {
     composed = {

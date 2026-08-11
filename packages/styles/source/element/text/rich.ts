@@ -98,6 +98,10 @@ const simpleBase = {
     ...childSpacing,
   },
 
+  [`& p`]: {
+    lineHeight: '1.5em',
+  },
+
   '& em, & i': {
     fontStyle: 'italic',
   },
@@ -124,6 +128,10 @@ const advancedBase = {
   '& > *': {
     fontSize: font.size.lg,
     ...childSpacing,
+  },
+
+  [`& p`]: {
+    lineHeight: '1.5em',
   },
 
   [`& p,

@@ -87,7 +87,7 @@ const sizeLarger = {
  * @private
  */
 const sizeLargerResponsive = {
-  fontSize: `calc(${font.size['lg']} + 0.5vw)`,
+  fontSize: `calc(${font.size['lg']} + 0.3vw)`,
 };
 
 /**

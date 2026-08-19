@@ -185,6 +185,11 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
             minHeight: `424px`,
           },
         ),
+
+        [`@container  (min-width: 600px)`]: {
+          paddingLeft: token.spacing.xl,
+          paddingRight: token.spacing.xl,
+        },
       },
     })
     .withChildren(...children, textWrapper)

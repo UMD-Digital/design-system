@@ -50,6 +50,7 @@ export const createCompositeCardOverlayColor = (props: CardOverlayProps) => {
       element: {
         padding: `${token.spacing.lg} ${token.spacing.md}`,
         minHeight: '360px',
+        display: 'grid',
         height: '100%',
         overflow: 'hidden',
         position: 'relative',
@@ -63,6 +64,11 @@ export const createCompositeCardOverlayColor = (props: CardOverlayProps) => {
           [`@media (${token.media.queries.tablet.min})`]: {
             marginTop: 'auto !important',
           },
+        },
+
+        [`@container  (min-width: 600px)`]: {
+          paddingLeft: token.spacing.xl,
+          paddingRight: token.spacing.xl,
         },
       },
     })

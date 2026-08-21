@@ -92,9 +92,13 @@
   "devDependencies": {
     "@types/jest": "^29.5.14",
     "@types/node": "^22.0.0",
+    "browserslist-to-esbuild": "^2.1.1",
     "postcss": "^8.4.21",
     "typescript": "~5.8.2",
     "vite": "^7.1.4",
     "vite-plugin-dts": "^4.5.4"
-  }
+  },
+  "browserslist": [
+    "baseline widely available"
+  ]
 }

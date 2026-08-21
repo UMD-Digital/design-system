@@ -5,6 +5,9 @@ import dts from 'vite-plugin-dts';
 import checker from 'vite-plugin-checker';
 import postcssNesting from 'postcss-nesting';
 import postcssDiscardDuplicates from 'postcss-discard-duplicates';
+import browserslistToEsbuild from 'browserslist-to-esbuild';
+
+const BUILD_TARGET = browserslistToEsbuild();
 
 function generateCssPlugin() {
   return {
@@ -32,7 +35,7 @@ const getCdnBuildConfig = () => {
       emptyOutDir: false,
       sourcemap: true,
       minify: 'esbuild' as 'esbuild',
-      target: 'es2020',
+      target: BUILD_TARGET,
       rollupOptions: {
         external: [],
         output: {

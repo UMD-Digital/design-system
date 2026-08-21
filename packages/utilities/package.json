@@ -201,5 +201,8 @@
     "vite": "^7.1.4",
     "vite-plugin-checker": "^0.10.3",
     "vite-plugin-dts": "^4.5.4"
-  }
+  },
+  "browserslist": [
+    "baseline widely available"
+  ]
 }

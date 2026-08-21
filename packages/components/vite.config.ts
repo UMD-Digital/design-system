@@ -4,10 +4,11 @@ import { resolve } from 'path';
 import { readdirSync, statSync } from 'fs';
 import dts from 'vite-plugin-dts';
 import checker from 'vite-plugin-checker';
+import browserslistToEsbuild from 'browserslist-to-esbuild';
 
 const SOURCE_DIR = resolve(__dirname, 'source');
 const DIST_DIR = 'dist';
-const BUILD_TARGET = 'es2020';
+const BUILD_TARGET = browserslistToEsbuild();
 const DEV_TARGET = 'esnext';
 
 const PATH_ALIASES = {

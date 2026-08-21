@@ -1,6 +1,10 @@
 import { card } from '@universityofmaryland/web-elements-library/composite';
 import { toUMDElement } from '@universityofmaryland/web-utilities-library/adapters';
-import { Attributes, Model, Slots } from '@universityofmaryland/web-model-library';
+import {
+  Attributes,
+  Model,
+  Slots,
+} from '@universityofmaryland/web-model-library';
 import { extractEventData } from '../_event';
 import type {
   CreateComponentFunction,
@@ -56,6 +60,7 @@ const createComponent: CreateComponentFunction = (element) => {
       image: Slots.assets.image({ element }) as HTMLImageElement,
       isThemeDark: Attributes.isTheme.dark({ element }),
       isTransparent: Attributes.isVisual.transparent({ element }),
+
       text: Slots.text.default({ element }),
     });
   }
@@ -107,6 +112,7 @@ const createComponent: CreateComponentFunction = (element) => {
     image: Slots.assets.image({ element }) as HTMLImageElement,
     isThemeDark: Attributes.isTheme.dark({ element }),
     isTransparent: Attributes.isVisual.transparent({ element }),
+    hasBorder: Attributes.isVisual.bordered({ element }),
     text: Slots.text.default({ element }),
   });
 };
@@ -185,11 +191,14 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const CardEvent: ComponentRegistration = Model.defineComponent({
-  tagName,
-  slots,
-  createComponent,
-}, { eager: false });
+export const CardEvent: ComponentRegistration = Model.defineComponent(
+  {
+    tagName,
+    slots,
+    createComponent,
+  },
+  { eager: false },
+);
 
 /** Backwards compatibility alias for grouped exports */
 export { CardEvent as event };

@@ -37,23 +37,29 @@ const CreateBody = ({ text, isStateOpen, isThemeDark }: TypeAccordionProps) => {
     .withStyles({
       element: {
         padding: token.spacing.md,
+
         ...(isThemeDark && {
           color: token.color.white,
         }),
+
         [`@container umd-element-accordion-item (min-width: ${SMALL}px)`]: {
           padding: token.spacing.lg,
         },
-        '& > *': {
-          marginTop: token.spacing.sm,
-          [`@container umd-element-accordion-item (min-width: ${SMALL}px)`]: {
-            marginTop: token.spacing.lg,
-          },
-          '&:first-child': { marginTop: '0' },
-        },
+
         '& *': {
           ...(isThemeDark && {
             color: token.color.white,
           }),
+        },
+
+        '& > *': {
+          marginTop: token.spacing.sm,
+
+          [`@container umd-element-accordion-item (min-width: ${SMALL}px)`]: {
+            marginTop: token.spacing.lg,
+          },
+
+          '&:first-child': { marginTop: '0' },
         },
       },
     })
@@ -70,9 +76,18 @@ const CreateBody = ({ text, isStateOpen, isThemeDark }: TypeAccordionProps) => {
         height: '0',
         overflow: 'hidden',
         display: 'none',
+
         ...(isThemeDark && {
           backgroundColor: token.color.gray.darker,
         }),
+
+        [`&[aria-hidden="false"] .${bodyContent.className}`]: {
+          borderBottom: `2px solid ${token.color.red}`,
+
+          ...(isThemeDark && {
+            borderBottom: `2px solid ${token.color.gold}`,
+          }),
+        },
       },
     })
     .withChild(bodyContent)
@@ -158,7 +173,7 @@ const CreateHeadline = ({
             right: `calc(${token.spacing.lg} + 8px)`,
           },
         },
-        "&[aria-expanded='true'], &:hover, &:focus": {
+        '&:hover, &:focus': {
           borderTop: `2px solid ${token.color.red}`,
           ...(isThemeDark && {
             borderTop: `2px solid ${token.color.gold}`,
@@ -235,7 +250,7 @@ export const createCompositeAccordionItem = (props: TypeAccordionProps) =>
       'accordion-container',
     );
     const container = containerBuilder.getElement() as HTMLDivElement;
-		let isOpen = isStateOpen;
+    let isOpen = isStateOpen;
 
     const open = (props: StateProps) => {
       ActionAnimation({ ...props, container, isOpening: true });
@@ -252,7 +267,7 @@ export const createCompositeAccordionItem = (props: TypeAccordionProps) =>
         new CustomEvent('accordion:close', { bubbles: true, composed: true }),
       );
     };
-		
+
     const EventSize = () => {
       if (!isOpen) return;
       const bodyElement = container.querySelector(

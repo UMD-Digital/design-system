@@ -689,7 +689,7 @@ exports[`typography module should match snapshot 1`] = `
           "lineHeight": "1.25em",
         },
         "@media (min-width: 650px)": {
-          "fontSize": "calc(18px + 0.5vw)",
+          "fontSize": "calc(18px + 0.3vw)",
         },
         "className": "umd-sans-larger",
         "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
@@ -775,7 +775,7 @@ exports[`typography module should match snapshot 1`] = `
         "lineHeight": "1.25em",
       },
       "@media (min-width: 650px)": {
-        "fontSize": "calc(18px + 0.5vw)",
+        "fontSize": "calc(18px + 0.3vw)",
       },
       "className": "umd-sans-larger",
       "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
@@ -820,7 +820,7 @@ exports[`typography module should match snapshot 1`] = `
     "scalingFonts": {
       "larger": {
         "@container (min-width: 320px)": {
-          "fontSize": "calc(18px + 0.5vw)",
+          "fontSize": "calc(18px + 0.3vw)",
         },
         "@container (min-width: 650px)": {
           "fontSize": "32px",
@@ -856,7 +856,7 @@ exports[`typography module should match snapshot 1`] = `
     },
     "scalingLarger": {
       "@container (min-width: 320px)": {
-        "fontSize": "calc(18px + 0.5vw)",
+        "fontSize": "calc(18px + 0.3vw)",
       },
       "@container (min-width: 650px)": {
         "fontSize": "32px",
@@ -957,7 +957,7 @@ exports[`typography module should match snapshot 1`] = `
           "lineHeight": "1.25em",
         },
         "@media (min-width: 650px)": {
-          "fontSize": "calc(18px + 0.5vw)",
+          "fontSize": "calc(18px + 0.3vw)",
         },
         "className": "umd-sans-larger-bold",
         "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",

@@ -29,7 +29,7 @@ exports[`typography/sans fonts objects should match snapshot for all fonts objec
       "lineHeight": "1.25em",
     },
     "@media (min-width: 650px)": {
-      "fontSize": "calc(18px + 0.5vw)",
+      "fontSize": "calc(18px + 0.3vw)",
     },
     "className": "umd-sans-larger",
     "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
@@ -108,7 +108,7 @@ exports[`typography/sans scaling fonts should match snapshot for scaling fonts 1
 {
   "larger": {
     "@container (min-width: 320px)": {
-      "fontSize": "calc(18px + 0.5vw)",
+      "fontSize": "calc(18px + 0.3vw)",
     },
     "@container (min-width: 650px)": {
       "fontSize": "32px",
@@ -189,7 +189,7 @@ exports[`typography/sans should match snapshot 1`] = `
         "lineHeight": "1.25em",
       },
       "@media (min-width: 650px)": {
-        "fontSize": "calc(18px + 0.5vw)",
+        "fontSize": "calc(18px + 0.3vw)",
       },
       "className": "umd-sans-larger",
       "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
@@ -275,7 +275,7 @@ exports[`typography/sans should match snapshot 1`] = `
       "lineHeight": "1.25em",
     },
     "@media (min-width: 650px)": {
-      "fontSize": "calc(18px + 0.5vw)",
+      "fontSize": "calc(18px + 0.3vw)",
     },
     "className": "umd-sans-larger",
     "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
@@ -320,7 +320,7 @@ exports[`typography/sans should match snapshot 1`] = `
   "scalingFonts": {
     "larger": {
       "@container (min-width: 320px)": {
-        "fontSize": "calc(18px + 0.5vw)",
+        "fontSize": "calc(18px + 0.3vw)",
       },
       "@container (min-width: 650px)": {
         "fontSize": "32px",
@@ -356,7 +356,7 @@ exports[`typography/sans should match snapshot 1`] = `
   },
   "scalingLarger": {
     "@container (min-width: 320px)": {
-      "fontSize": "calc(18px + 0.5vw)",
+      "fontSize": "calc(18px + 0.3vw)",
     },
     "@container (min-width: 650px)": {
       "fontSize": "32px",
@@ -457,7 +457,7 @@ exports[`typography/sans should match snapshot 1`] = `
         "lineHeight": "1.25em",
       },
       "@media (min-width: 650px)": {
-        "fontSize": "calc(18px + 0.5vw)",
+        "fontSize": "calc(18px + 0.3vw)",
       },
       "className": "umd-sans-larger-bold",
       "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
@@ -528,7 +528,7 @@ exports[`typography/sans size objects should have correctly defined size values 
     "lineHeight": "1.25em",
   },
   "@media (min-width: 650px)": {
-    "fontSize": "calc(18px + 0.5vw)",
+    "fontSize": "calc(18px + 0.3vw)",
   },
   "className": "umd-sans-larger",
   "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",
@@ -648,7 +648,7 @@ exports[`typography/sans transformations should match snapshot for all transform
       "lineHeight": "1.25em",
     },
     "@media (min-width: 650px)": {
-      "fontSize": "calc(18px + 0.5vw)",
+      "fontSize": "calc(18px + 0.3vw)",
     },
     "className": "umd-sans-larger-bold",
     "fontFamily": "'Interstate', Helvetica, Arial, Verdana, sans-serif",

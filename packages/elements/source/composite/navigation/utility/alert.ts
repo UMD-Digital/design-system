@@ -194,7 +194,7 @@ const TextStyles = `
 
   ${jssToCSS({
     styleObj: {
-      [`${ALERT_TEXT}`]: element.text.rich.advanced,
+      [`${ALERT_TEXT}`]: element.text.rich.simple,
     },
   })}
 

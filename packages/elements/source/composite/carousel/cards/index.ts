@@ -55,7 +55,7 @@ const CreateIntro = (props: TypeCarouselCardsRequirements) => {
     if (!text) return null;
     return new ElementBuilder(text)
       .withClassName('carousel-cards-intro-container-text')
-      .styled(element.text.rich.advancedDark)
+      .styled(element.text.rich.simpleDark)
       .styled(typography.sans.medium)
       .withStyles({
         element: {
@@ -77,7 +77,11 @@ const CreateIntro = (props: TypeCarouselCardsRequirements) => {
       });
   };
 
-  const wrapperChildren = [createHeadline(), createText(), createActions()].filter((child) => child !== null);
+  const wrapperChildren = [
+    createHeadline(),
+    createText(),
+    createActions(),
+  ].filter((child) => child !== null);
 
   const wrapperModel = new ElementBuilder()
     .withClassName('carousel-cards-intro-container-lock')
@@ -91,7 +95,6 @@ const CreateIntro = (props: TypeCarouselCardsRequirements) => {
     })
     .withChildren(...wrapperChildren)
     .build();
-
 
   return new ElementBuilder()
     .withClassName('carousel-cards-intro-container')
@@ -109,7 +112,9 @@ const CreateIntro = (props: TypeCarouselCardsRequirements) => {
     .build();
 };
 
-export const createCompositeCarouselCards = (props: TypeCarouselCardsRequirements) =>
+export const createCompositeCarouselCards = (
+  props: TypeCarouselCardsRequirements,
+) =>
   (() => {
     const { slide, shadowRef } = props;
 
@@ -160,8 +165,12 @@ export const createCompositeCarouselCards = (props: TypeCarouselCardsRequirement
         element: {
           position: 'relative',
           paddingRight: 0,
-          [`@media (${token.media.queries.tablet.min})`]: { paddingRight: token.spacing['2xl'] },
-          [`@media (${token.media.queries.highDef.min})`]: { paddingRight: token.spacing['4xl'] },
+          [`@media (${token.media.queries.tablet.min})`]: {
+            paddingRight: token.spacing['2xl'],
+          },
+          [`@media (${token.media.queries.highDef.min})`]: {
+            paddingRight: token.spacing['4xl'],
+          },
           [`@media (${token.media.queries.desktop.min})`]: {
             display: 'flex',
             justifyContent: 'space-between',
@@ -195,8 +204,12 @@ export const createCompositeCarouselCards = (props: TypeCarouselCardsRequirement
             }),
           },
           '@container (max-width: 300px)': { display: 'none' },
-          [`@container (${token.media.queries.tablet.min})`]: { padding: `${token.spacing['4xl']} 0` },
-          [`@container (${token.media.queries.desktop.min})`]: { padding: `${token.spacing['max']} 0` },
+          [`@container (${token.media.queries.tablet.min})`]: {
+            padding: `${token.spacing['4xl']} 0`,
+          },
+          [`@container (${token.media.queries.desktop.min})`]: {
+            padding: `${token.spacing['max']} 0`,
+          },
         },
       })
       .withChild(wrapperModel)

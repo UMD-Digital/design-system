@@ -45,8 +45,16 @@ export const createCompositeCarouselImageStandard = (
   props: TypeCarouselImageStandardProps,
 ) =>
   (() => {
-    const { images, isThemeDark, isFullScreenOption, isToggleCaption = true } = props;
-    const overlayCarousel = carouselElements.overlay({ images, isToggleCaption });
+    const {
+      images,
+      isThemeDark,
+      isFullScreenOption,
+      isToggleCaption = true,
+    } = props;
+    const overlayCarousel = carouselElements.overlay({
+      images,
+      isToggleCaption,
+    });
     let buttonStyles = '';
 
     const CreateTextContainer = ({
@@ -58,9 +66,17 @@ export const createCompositeCarouselImageStandard = (
       texts?: HTMLElement[] | null;
       reference: string | null;
     }) => {
-      const headline = headlines && headlines.find((item) => item.getAttribute(ATTRIBUTE_REFERENCE) === reference);
-      const richText = texts && texts.find((item) => item.getAttribute(ATTRIBUTE_REFERENCE) === reference);
-			
+      const headline =
+        headlines &&
+        headlines.find(
+          (item) => item.getAttribute(ATTRIBUTE_REFERENCE) === reference,
+        );
+      const richText =
+        texts &&
+        texts.find(
+          (item) => item.getAttribute(ATTRIBUTE_REFERENCE) === reference,
+        );
+
       if (!headline && !richText) return null;
 
       const createHeadline = () => {
@@ -78,16 +94,18 @@ export const createCompositeCarouselImageStandard = (
             element: {
               marginTop: token.spacing.min,
               color: token.color.gray.dark,
-              ...element.text.rich.advanced,
+              ...element.text.rich.simple,
               ...(isThemeDark && {
                 color: token.color.white,
-                ...element.text.rich.advancedDark,
+                ...element.text.rich.simpleDark,
               }),
             },
           });
       };
 
-      const textChildren = [createHeadline(), createRichText()].filter((child) => child !== null);
+      const textChildren = [createHeadline(), createRichText()].filter(
+        (child) => child !== null,
+      );
 
       return new ElementBuilder()
         .withClassName('carousel-image-standard-slide-text')
@@ -118,7 +136,11 @@ export const createCompositeCarouselImageStandard = (
       setFullScreen,
       index,
     }: TypeImageContainerProps) => {
-      const imageBlock = createLayoutImageContainer({ image, showCaption: true, isToggleCaption });
+      const imageBlock = createLayoutImageContainer({
+        image,
+        showCaption: true,
+        isToggleCaption,
+      });
 
       const standardSlideWrapperElement = new ElementBuilder()
         .withClassName('carousel-image-standard-slide-wrapper')
@@ -184,7 +206,9 @@ export const createCompositeCarouselImageStandard = (
           reference,
         });
 
-        const slideChildren = [imageContainerModel, textContainerModel].filter((child) => child !== null);
+        const slideChildren = [imageContainerModel, textContainerModel].filter(
+          (child) => child !== null,
+        );
 
         return new ElementBuilder()
           .withClassName('carousel-image-standard-slide')

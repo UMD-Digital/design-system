@@ -65,10 +65,10 @@ describe('Component: umd-element-brand-chevron-promo', () => {
 
     it('should accept the data-animation attribute', () => {
       const { element } = createTestComponent(tagName, '', {
-        'data-animation': 'load',
+        'data-animation': 'false',
       });
 
-      expect(element.getAttribute('data-animation')).toBe('load');
+      expect(element.getAttribute('data-animation')).toBe('false');
     });
   });
 });

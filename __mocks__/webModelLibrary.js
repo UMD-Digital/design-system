@@ -78,7 +78,6 @@ const Attributes = {
   },
   includesFeature: {
     animation: jest.fn(() => true),
-    animationOnLoad: jest.fn(() => false),
     imageExpand: jest.fn(() => false),
     lazyLoad: jest.fn(() => false),
   },

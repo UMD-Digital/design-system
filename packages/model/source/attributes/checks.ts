@@ -208,10 +208,6 @@ const includesFeature = {
     AttributeValues.state.TRUE,
     true,
   ),
-  animationOnLoad: createAttributeCheck(
-    AttributeNames.feature.animation,
-    AttributeValues.animation.LOAD,
-  ),
   imageExpand: createAttributeCheck(
     AttributeNames.feature.imageExpand,
     AttributeValues.state.TRUE,

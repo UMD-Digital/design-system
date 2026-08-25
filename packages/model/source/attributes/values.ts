@@ -1,5 +1,9 @@
 // Values
 
+const animation = {
+  LOAD: 'load',
+};
+
 const campaign = {
   forward: 'forward',
 };
@@ -84,6 +88,7 @@ const loading = {
 };
 
 export const AttributeValues = {
+  animation,
   campaign,
   data,
   display,

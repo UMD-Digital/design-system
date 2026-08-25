@@ -234,6 +234,25 @@ const brandCardStack = createElementStyles('umd-element-brand-card-stack', {
   },
 });
 
+const brandChevronPromo = createElementStyles(
+  'umd-element-brand-chevron-promo',
+  {
+    notDefined: {
+      contentVisibility: 'hidden',
+      display: 'block',
+      backgroundColor: color.black,
+      ...sizeReservation({ mobile: 355, tablet: 500 }),
+
+      '& > *': { display: 'none' },
+    },
+    defined: {
+      contentVisibility: 'visible',
+      containerType: 'inline-size',
+      display: 'block',
+    },
+  },
+);
+
 // ---------------------------------------------------------------------------
 // Carousels (bare tag names, no prefix)
 // ---------------------------------------------------------------------------
@@ -662,6 +681,7 @@ const personTabular = createElementStyles('umd-element-person', {
 export const webComponentStyles = {
   ...accordion,
   ...brandCardStack,
+  ...brandChevronPromo,
   ...brandLogoAnimation,
   ...breadcrumb,
   ...callToAction,

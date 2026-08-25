@@ -76,6 +76,12 @@ const Attributes = {
     list: jest.fn(() => false),
     grid: jest.fn(() => false),
   },
+  includesFeature: {
+    animation: jest.fn(() => true),
+    animationOnLoad: jest.fn(() => false),
+    imageExpand: jest.fn(() => false),
+    lazyLoad: jest.fn(() => false),
+  },
 };
 
 /**

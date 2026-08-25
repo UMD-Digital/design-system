@@ -1,6 +1,7 @@
 export * as accordion from './accordion';
 export * as banner from './banner';
 export * as alert from './alert';
+export * as brand from './brand';
 export * as card from './card';
 export * as carousel from './carousel';
 export * as footer from './footer';

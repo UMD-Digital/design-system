@@ -1,6 +1,15 @@
 // Mock for @universityofmaryland/web-elements-library/composite
 
 module.exports = {
+  brand: {
+    chevronPromo: jest.fn().mockReturnValue({
+      element: document.createElement('section'),
+      styles: '.mock-style-brand-chevron-promo',
+      events: {
+        load: jest.fn(),
+      },
+    }),
+  },
   slider: {
     events: jest.fn().mockReturnValue({
       element: document.createElement('div'),

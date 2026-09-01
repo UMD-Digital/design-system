@@ -143,7 +143,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * - `data-layout-position` - Sticky position offset in pixels (e.g., `80` for 80px from top)
  *
  * ## Deprecated Attributes
- * The following attributes are deprecated and will be removed in v2.0:
+ * The following attributes are deprecated and will be removed in v3.0:
  * - `type="default-centered"` → Use `data-display="standard" data-layout-text="center"`
  * - `type="default-interior"` → Use `data-display="standard" data-layout-height="small"`
  * - `type="default-interior-centered"` → Use `data-display="standard" data-layout-height="small" data-layout-text="center"`

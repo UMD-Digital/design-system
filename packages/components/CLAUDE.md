@@ -142,7 +142,7 @@ Legacy bare attributes (`theme`, `visual`) still work but emit deprecation warni
 
 ## Image Captions
 
-Components that render images through the elements package's shared image wrappers (`assets.image.background` and `createLayoutImageContainer` — see the elements package `CLAUDE.md`, "Image Wrapper & Captions") inherit caption support. Captions are **off by default** at the element layer; the components below opt in. Caption text comes from the `data-credit` attribute on the slotted `<img>` (`data-caption` is deprecated, removed in 2.0).
+Components that render images through the elements package's shared image wrappers (`assets.image.background` and `createLayoutImageContainer` — see the elements package `CLAUDE.md`, "Image Wrapper & Captions") inherit caption support. Captions are **off by default** at the element layer; the components below opt in. Caption text comes from the `data-credit` attribute on the slotted `<img>` (`data-caption` is deprecated, removed in 3.0).
 
 | Component | Caption source | Display | Consumer control |
 |---|---|---|---|

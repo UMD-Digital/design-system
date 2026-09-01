@@ -211,7 +211,7 @@ describe('Component: umd-element-accordion-item', () => {
       // In the real component, using 'is-visual-open' would:
       // 1. Still function correctly for backwards compatibility
       // 2. Log a deprecation warning suggesting to use 'data-visual-open' instead
-      // 3. Be removed in version 2.0
+      // 3. Be removed in version 3.0
     });
   });
 });

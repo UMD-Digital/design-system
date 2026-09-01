@@ -51,7 +51,7 @@ const validateSlotRequirements = ({
       element,
       slot: type,
       error: 'deprecated',
-      message: `${element.tagName} - Slot "${type}" is deprecated and will be removed in release 2.0`,
+      message: `${element.tagName} - Slot "${type}" is deprecated and will be removed in release 3.0`,
     });
   }
 

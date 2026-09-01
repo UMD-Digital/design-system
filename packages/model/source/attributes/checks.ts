@@ -108,7 +108,7 @@ const deprecationWarning = ({
 }) => {
   devWarning(
     `UMD Web Component: ${element.nodeName} - Attribute "${attributeNameOld}" is deprecated. ` +
-      `Use "${attributeNameNew}" instead. This attribute will be removed in version 2.0.`,
+      `Use "${attributeNameNew}" instead. This attribute will be removed in version 3.0.`,
   );
 };
 

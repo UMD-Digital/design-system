@@ -35,7 +35,7 @@ export const loadComponentClass = (componentMap: ComponentMap) => {
 const allList = umdComponents as unknown as ComponentMap;
 
 /**
- * @deprecated This function is deprecated and will be removed in version 2.0.
+ * @deprecated This function is deprecated and will be removed in version 3.0.
  * Use the bundle export instead:
  * ```typescript
  * import { initializeBundle } from '@universityofmaryland/web-components-library/bundle';

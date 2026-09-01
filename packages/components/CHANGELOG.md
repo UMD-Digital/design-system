@@ -75,7 +75,7 @@ All notable changes to the `@universityofmaryland/web-components-library` packag
 
 ## Migration Notes
 
-### Deprecations (for v2.0)
+### Deprecations (for v3.0)
 - Non-prefixed attributes (use `data-*` prefix)
 - Legacy slot names (see individual component documentation)
 

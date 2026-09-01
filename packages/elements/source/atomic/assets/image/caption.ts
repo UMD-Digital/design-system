@@ -43,7 +43,7 @@ const bindToggle = (root: ParentNode): void => {
 const getCaptionText = (image: HTMLImageElement): string | null => {
   if (image.hasAttribute(ATTRIBUTE_CAPTION)) {
     console.log(
-      `Attribute "data-caption" is deprecated. Use "data-credit" instead. This attribute will be removed in version 2.0.`,
+      `Attribute "data-caption" is deprecated. Use "data-credit" instead. This attribute will be removed in version 3.0.`,
     );
   }
   return (

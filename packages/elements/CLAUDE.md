@@ -164,7 +164,7 @@ Note: `elementStyles` is also the conventional import alias for `@universityofma
 
 Many elements reuse a shared image wrapper. There are **two wrapper paths**, and both have captions **off by default** — a consumer must opt in:
 
-1. **`atomic/assets/image/background.ts`** (`assets.image.background`) — the widely reused background/asset image wrapper. `isShowCaption?: boolean` defaults to `false`. When enabled, caption text is read from the `data-credit` attribute on the `<img>` (`data-caption` is deprecated, removed in 2.0) and rendered as a static overlay span styled with `Styles.element.asset.image.caption`.
+1. **`atomic/assets/image/background.ts`** (`assets.image.background`) — the widely reused background/asset image wrapper. `isShowCaption?: boolean` defaults to `false`. When enabled, caption text is read from the `data-credit` attribute on the `<img>` (`data-caption` is deprecated, removed in 3.0) and rendered as a static overlay span styled with `Styles.element.asset.image.caption`.
 2. **`layout/image.ts`** (`createLayoutImageContainer`) — layout image container. `showCaption?: boolean` defaults to `false`; `isToggleCaption?: boolean` picks the caption UI from `atomic/assets/image/caption.ts` (`createCaption.create`): a collapsible toggle button (`true`) or a block overlay (`false`). Note: `createCaption.bindToggle(clone)` must be called on any cloned caption markup (e.g. duplicated carousel slides) — `cloneNode` drops listeners; see `composite/carousel/elements/equal-width-items.ts`.
 
 ### Caption use cases

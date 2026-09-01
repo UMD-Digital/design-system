@@ -42,7 +42,7 @@ const slots = {
   body: {
     allowedElements: ['div', 'p'],
     deprecated:
-      'Use "text" instead. This attribute will be removed in version 2.0.',
+      'Use "text" instead. This attribute will be removed in version 3.0.',
   },
   text: {
     allowedElements: ['div', 'p'],

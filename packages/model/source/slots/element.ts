@@ -23,7 +23,7 @@ export const allowed: Record<string, SlotConfig> = {
   },
   body: {
     deprecated:
-      'Use "text" instead. This attribute will be removed in version 2.0.',
+      'Use "text" instead. This attribute will be removed in version 3.0.',
     allowedElements: [...textElements],
   },
   content: {

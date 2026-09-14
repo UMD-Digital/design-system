@@ -1,7 +1,6 @@
 import { navigation } from '@universityofmaryland/web-elements-library/composite';
 import { createSlot } from '@universityofmaryland/web-utilities-library/elements';
 import { Model } from '@universityofmaryland/web-model-library';
-import { reset } from '../../helpers/styles';
 import { ComponentRegistration } from '../../_types';
 
 const tagName = 'umd-element-nav-item';
@@ -11,15 +10,6 @@ const SLOTS = {
   DROPDOWN_LINKS: 'dropdown-links',
   DROPDOWN_CALLOUT: 'dropdown-callout',
 };
-
-export const styles = `
-  :host {
-    display: block;
-  }
-
-  ${reset}
-  ${navigation.elements.item.Styles}
-`;
 
 const createComponent = (element: HTMLElement) => {
   const calloutSlot = element.querySelector<HTMLElement>(
@@ -64,14 +54,20 @@ const createComponent = (element: HTMLElement) => {
     throw new Error('Primary link is required for a nav item');
   }
 
-  const navItem = navigation.elements.item.CreateElement({
-    ...elementData,
-  });
+  const navItemModel = navigation.elements.item({ ...elementData });
 
   dropdownLinksSlot?.remove();
   primaryLinkSlot?.remove();
 
-  return { element: navItem, styles };
+  const styles = `
+    :host {
+      display: block;
+    }
+
+    ${navItemModel.styles}
+  `;
+
+  return { element: navItemModel.element, styles };
 };
 
 /**
@@ -135,10 +131,13 @@ const createComponent = (element: HTMLElement) => {
  * @category Components
  * @since 1.0.0
  */
-export const NavigationItem: ComponentRegistration = Model.defineComponent({
-  tagName,
-  createComponent,
-}, { eager: false });
+export const NavigationItem: ComponentRegistration = Model.defineComponent(
+  {
+    tagName,
+    createComponent,
+  },
+  { eager: false },
+);
 
 /** Backwards compatibility alias for grouped exports */
 export { NavigationItem as item };

@@ -108,7 +108,7 @@ export const MakeSliderData = ({
 
 export const MakeNavDrawer = (props: TypeNavDrawerRequirements) => {
   const { element, displayType } = props;
-  return navigation.elements.drawer.CreateElement({
+  return navigation.elements.drawer({
     ...MakeSliderData(props),
     context: element,
     displayType,
@@ -116,7 +116,7 @@ export const MakeNavDrawer = (props: TypeNavDrawerRequirements) => {
 };
 
 export const MakeNavSlider = (props: TypeSliderRequirements) =>
-  navigation.elements.slider.CreateElement({
+  navigation.elements.slider({
     ...MakeSliderData(props),
     displayType: 'interior-nav',
   });

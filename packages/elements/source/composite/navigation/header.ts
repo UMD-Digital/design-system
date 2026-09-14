@@ -1,10 +1,9 @@
 import * as token from '@universityofmaryland/web-token-library';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { isExternalUrl } from '@universityofmaryland/web-utilities-library/network';
 import { search as iconSearch } from '@universityofmaryland/web-icons-library/search';
 import { createCompositeNavigationMenuButton as MenuButton } from './elements/menu-button';
-import { createCompositeNavigationItem as NavigationItem } from './elements/item';
 
 type TypeLogoRequirments = {
   logo?: HTMLElement | null;
@@ -33,357 +32,309 @@ const ANIMATION_TIME = 500;
 const ATTRIBUTE_STICKY = 'data-sticky';
 const ATTRIBUTE_CTA = 'data-cta';
 
-const IS_STICKY = `[${ATTRIBUTE_STICKY}="true"]`;
-const IS_CTA = `[${ATTRIBUTE_CTA}="true"]`;
-
-const ELEMENT_HEADER_DECLARATION = 'element-header-declaration';
-const ELEMENT_HEADER_CONTAINTER = 'element-header-container';
-const ELEMENT_HEADER_WRAPPER = 'element-header-wrapper';
-const ELEMENT_HEADER_LOGO_COLUMN = 'element-header-logo-column';
-const ELEMENT_HEADER_NAVIGATION_COLUMN = 'element-header-navigation-column';
-const ELEMENT_HEADER_LOGO = 'element-header-logo';
-const ELEMENT_HEADER_MENU_BUTTON = 'element-header-menu-button';
-const ELEMENT_HEADER_MENU_CTA = 'element-header-menu-cta';
-const ELEMENT_HEADER_MENU_SEARCH = 'element-header-menu-search';
-const ELEMENT_HEADER_NAVIGATION_ROW = 'element-header-navigation-row';
-const ELEMENT_HEADER_UTILITY_ROW = 'element-header-utility-row';
-
-const OVERWRITE_STICKY_CONTAINER = `.${ELEMENT_HEADER_CONTAINTER}${IS_STICKY}`;
-const OVERWRITE_STICKY_LOGO = `${OVERWRITE_STICKY_CONTAINER} .${ELEMENT_HEADER_LOGO}`;
-const OVERWRITE_CTA_WRAPPER = `.${ELEMENT_HEADER_WRAPPER}${IS_CTA}`;
-const OVERWRITE_CTA_WRAPPER_NAV_ROW = `${OVERWRITE_CTA_WRAPPER} .${ELEMENT_HEADER_NAVIGATION_ROW}`;
-const OVERWRITE_CTA_WRAPPER_CTA = `${OVERWRITE_CTA_WRAPPER} .${ELEMENT_HEADER_MENU_CTA}`;
-
-const OverwriteStickyStyles = `
-  ${OVERWRITE_STICKY_CONTAINER} {
-    padding: ${token.spacing.xs} 0;
-  }
-
-  .${ELEMENT_HEADER_WRAPPER} {
-     align-items: center;
-  }
-
-  ${OVERWRITE_STICKY_LOGO} img {
-    max-height: 30px;
-  }
-`;
-
-const CtaStyles = `
-  .${ELEMENT_HEADER_MENU_CTA} {
-    color: ${token.color.white};
-    font-weight: ${token.font.weight.bold};
-    font-size: ${token.font.size.sm};
-    padding: ${token.spacing.xs};
-    background-color: ${token.color.red};
-    transition: background .5s;
-    white-space: nowrap;
-  }
-
-  .${ELEMENT_HEADER_MENU_CTA}:hover,
-  .${ELEMENT_HEADER_MENU_CTA}:focus {
-    background-color: ${token.color.redDark};
-  }
-
-  ${OVERWRITE_CTA_WRAPPER_CTA} {
-    margin-top: -${token.spacing.min};
-  }
-`;
-
-const NavigationColumnStyles = `
-  @media (max-width: 1240px) {
-    .${ELEMENT_HEADER_NAVIGATION_COLUMN} {
-      display: none;
-    }
-  }
-
-  .${ELEMENT_HEADER_NAVIGATION_ROW} {
-    display: grid;
-    grid-auto-flow: column;
-  }
-
-  ${OVERWRITE_CTA_WRAPPER_NAV_ROW} {
-    padding-top: ${token.spacing.sm};
-  }
-
-  .${ELEMENT_HEADER_NAVIGATION_ROW} > * {
-    display: block;
-  }
-
-  .${ELEMENT_HEADER_NAVIGATION_ROW} > *:not(:first-child) {
-    margin-left: ${token.spacing.md};
-  }
-
-  .${ELEMENT_HEADER_NAVIGATION_ROW} svg {
-    width: 24px;
-    height: 24px;
-    fill: ${token.color.black};
-  }
-
-  .${ELEMENT_HEADER_UTILITY_ROW} {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: ${token.spacing.sm};
-  }
-
-  .${ELEMENT_HEADER_UTILITY_ROW} ::slotted(*) {
-    display: flex;
-    justify-content: flex-end;
-    gap: ${token.spacing.md};
-  }
-`;
-
-const LogoColumnStyles = `
-  .${ELEMENT_HEADER_LOGO_COLUMN} {
-    align-items: center;
-    display: flex;
-    justify-content: flex-start;
-    position: relative;
-    width: 100%;
-    max-width: 400px;
-  }
-
-  .${ELEMENT_HEADER_MENU_BUTTON} {
-    border-right: 1px solid ${token.color.gray.light};
-    padding-right: ${token.spacing.min};
-    margin-right: ${token.spacing.sm};
-  }
-
-  .${ELEMENT_HEADER_LOGO} {
-    display: grid;
-    justify-content: flex-start;
-    max-width: 350px;
-  }
-
-  .${ELEMENT_HEADER_LOGO}:has(img[src*=".svg"]) img {
-    height: 240px;
-  }
-
-  ${jssToCSS({
-    styleObj: {
-      [`.${ELEMENT_HEADER_LOGO}`]: typography.sans.larger,
-    },
-  })}
-
-  ${jssToCSS({
-    styleObj: {
-      [`.${ELEMENT_HEADER_LOGO} *`]: typography.sans.larger,
-    },
-  })}
-
-  .${ELEMENT_HEADER_LOGO},
-  .${ELEMENT_HEADER_LOGO} * {
-    line-height: 1.05em;
-    width: 100%;
-  }
-
-  ${jssToCSS({
-    styleObj: {
-      [`.${ELEMENT_HEADER_LOGO}[size="large"]`]: typography.sans.extraLarge,
-    },
-  })}
-
-  ${jssToCSS({
-    styleObj: {
-      [`.${ELEMENT_HEADER_LOGO}[size="large"] *`]: typography.sans.extraLarge,
-    },
-  })}
-
-  .${ELEMENT_HEADER_LOGO},
-  .${ELEMENT_HEADER_LOGO} * {
-    font-weight: 700;
-  }
-
-  .${ELEMENT_HEADER_LOGO} img {
-    width: 100%;
-    max-height: 48px;
-    max-width: 190px;
-  }
-
-  @media (min-width: ${token.media.breakpoints.tablet.min}) {
-    .${ELEMENT_HEADER_LOGO} img {
-      max-width: 240px;
-    }
-  }
-`;
-
-const WrapperStyles = `
-  .${ELEMENT_HEADER_WRAPPER} {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    gap: ${token.spacing.lg};
-    z-index: 999;
-  }
-`;
-
-const STYLES_NAVIGATION_HEADER = `
-  .${ELEMENT_HEADER_CONTAINTER} {
-    background-color: ${token.color.white};
-    display: block;
-    padding: ${token.spacing.md} 0;
-    position: relative;
-    transition: padding ${ANIMATION_TIME}ms;
-  }
-
-  ${WrapperStyles}
-  ${LogoColumnStyles}
-  ${NavigationColumnStyles}
-  ${CtaStyles}
-  ${OverwriteStickyStyles}
-  ${NavigationItem.Styles}
-  ${MenuButton.Styles}
-`;
-
-const CreateSearchLink = ({ searchUrl }: TypeSearchLink) => {
+const createSearchLink = ({ searchUrl }: TypeSearchLink) => {
   if (!searchUrl) return null;
 
-  const searchLink = document.createElement('a');
-
-  searchLink.href = searchUrl;
-  searchLink.ariaLabel = 'Visit the search page';
-  searchLink.innerHTML = iconSearch;
-  searchLink.classList.add(ELEMENT_HEADER_MENU_SEARCH);
-
-  return searchLink;
+  return new ElementBuilder('a')
+    .withClassName('element-header-menu-search')
+    .withAttribute('href', searchUrl)
+    .withAria({ label: 'Visit the search page' })
+    .withHTML(iconSearch);
 };
 
-const CreateCtaLink = ({ ctaUrl, ctaText }: TypeCtaLink) => {
+const createCtaLink = ({ ctaUrl, ctaText }: TypeCtaLink) => {
   if (!ctaUrl || !ctaText) return null;
 
-  const cta = document.createElement('a');
+  let ctaBuilder = new ElementBuilder('a')
+    .withClassName('element-header-menu-cta')
+    .withAttribute('href', ctaUrl)
+    .withHTML(ctaText)
+    .withStyles({
+      element: {
+        color: token.color.white,
+        fontWeight: token.font.weight.bold,
+        fontSize: token.font.size.sm,
+        padding: token.spacing.xs,
+        backgroundColor: token.color.red,
+        transition: 'background .5s',
+        whiteSpace: 'nowrap',
 
-  cta.innerHTML = ctaText;
+        '&:hover, &:focus': {
+          backgroundColor: token.color.redDark,
+        },
+      },
+    });
+
   if (isExternalUrl(ctaUrl)) {
-    cta.setAttribute('target', '_blank');
+    ctaBuilder = ctaBuilder.withAttribute('target', '_blank');
   }
-  cta.setAttribute('href', ctaUrl);
-  cta.classList.add(ELEMENT_HEADER_MENU_CTA);
 
-  return cta;
+  return ctaBuilder;
 };
 
-const CreateNavigationColumn = ({
+const createUtilityRow = (utilityRow?: HTMLElement | null) => {
+  if (!utilityRow) return null;
+
+  return new ElementBuilder()
+    .withClassName('element-header-utility-row')
+    .withChild(utilityRow)
+    .withStyles({
+      element: {
+        display: 'flex',
+        justifyContent: 'flex-end',
+        marginBottom: token.spacing.sm,
+
+        '& ::slotted(*)': {
+          display: 'flex',
+          justifyContent: 'flex-end',
+          gap: token.spacing.md,
+        },
+      },
+    });
+};
+
+const createNavigationColumn = ({
   utilityRow,
   navItems,
   searchUrl,
   ctaText,
   ctaUrl,
 }: TypeNavRow) => {
-  if (!navItems) return;
+  if (!navItems) return null;
 
-  const navColumnContainer = document.createElement('div');
-  const utilityRowContainer = document.createElement('div');
-  const navRowContainer = document.createElement('div');
-  const searchLink = CreateSearchLink({
-    searchUrl,
-  });
-  const ctaLink = CreateCtaLink({ ctaText, ctaUrl });
+  const searchLink = createSearchLink({ searchUrl });
+  const ctaLink = createCtaLink({ ctaText, ctaUrl });
+  const utilityRowContainer = createUtilityRow(utilityRow);
 
-  if (utilityRow) {
-    utilityRowContainer.classList.add(ELEMENT_HEADER_UTILITY_ROW);
-    utilityRowContainer.appendChild(utilityRow);
-    navColumnContainer.appendChild(utilityRowContainer);
-  }
+  const navRowChildren = [...navItems, searchLink, ctaLink].filter(
+    (child) => child != null,
+  );
 
-  navRowContainer.classList.add(ELEMENT_HEADER_NAVIGATION_ROW);
+  const navRowContainer = new ElementBuilder()
+    .withClassName('element-header-navigation-row')
+    .withChildren(...navRowChildren)
+    .withStyles({
+      element: {
+        display: 'grid',
+        gridAutoFlow: 'column',
 
-  navItems.forEach((item) => {
-    navRowContainer.appendChild(item);
-  });
-  if (searchLink) navRowContainer.appendChild(searchLink);
-  if (ctaLink) navRowContainer.appendChild(ctaLink);
+        '& > *': {
+          display: 'block',
+        },
 
-  navColumnContainer.classList.add(ELEMENT_HEADER_NAVIGATION_COLUMN);
-  navColumnContainer.appendChild(navRowContainer);
+        '& > *:not(:first-child)': {
+          marginLeft: token.spacing.md,
+        },
 
-  return navColumnContainer;
+        '& svg': {
+          width: '24px',
+          height: '24px',
+          fill: token.color.black,
+        },
+      },
+    });
+
+  const navigationColumnChildren = [
+    utilityRowContainer,
+    navRowContainer,
+  ].filter((child) => child != null);
+
+  return new ElementBuilder()
+    .withClassName('element-header-navigation-column')
+    .withChildren(...navigationColumnChildren)
+    .withStyles({
+      element: {
+        '@media (max-width: 1240px)': {
+          display: 'none',
+        },
+      },
+    });
 };
 
-const CreateLogoColumn = ({ logo, eventOpen }: TypeLogoRequirments) => {
-  const container = document.createElement('div');
+const createMenuButton = ({ eventOpen }: TypeLogoRequirments) => {
+  if (!eventOpen) return null;
 
-  if (eventOpen) {
-    const menuButton = MenuButton.CreateElement({ eventOpen });
-    menuButton.classList.add(ELEMENT_HEADER_MENU_BUTTON);
-    container.appendChild(menuButton);
-  }
-
-  if (logo) {
-    const childrenText = Array.from(logo.children).reduce((acc, child) => {
-      if (child.nodeName === 'IMG') return acc;
-
-      if (child.textContent) {
-        return acc + child.textContent.length;
-      }
-
-      return acc;
-    }, 0);
-    logo.classList.add(ELEMENT_HEADER_LOGO);
-
-    if (childrenText < 30) {
-      logo.setAttribute('size', 'large');
-    }
-
-    container.appendChild(logo);
-  }
-  container.classList.add(ELEMENT_HEADER_LOGO_COLUMN);
-  return container;
+  return MenuButton({ eventOpen })
+    .withClassName('element-header-menu-button')
+    .withStyles({
+      element: {
+        borderRight: `1px solid ${token.color.gray.light}`,
+        paddingRight: token.spacing.min,
+        marginRight: token.spacing.sm,
+      },
+    });
 };
 
-const CreateNavigationHeader = (props: TypeHeaderRequirements) => {
+const createLogo = ({ logo }: TypeLogoRequirments) => {
+  if (!logo) return null;
+
+  const childrenText = Array.from(logo.children).reduce(
+    (accumulator, child) => {
+      if (child.nodeName === 'IMG') return accumulator;
+      if (child.textContent) return accumulator + child.textContent.length;
+      return accumulator;
+    },
+    0,
+  );
+
+  let logoBuilder = new ElementBuilder(logo)
+    .withClassName('element-header-logo')
+    .withStyles({
+      element: {
+        display: 'grid',
+        justifyContent: 'flex-start',
+        maxWidth: '350px',
+
+        '&:has(img[src*=".svg"]) img': {
+          height: '240px',
+        },
+
+        ...typography.sans.larger,
+        lineHeight: '1.05em',
+        width: '100%',
+        fontWeight: 700,
+
+        '& *': {
+          ...typography.sans.larger,
+          lineHeight: '1.05em',
+          width: '100%',
+          fontWeight: 700,
+        },
+
+        '&[size="large"]': {
+          ...typography.sans.extraLarge,
+        },
+
+        '&[size="large"] *': {
+          ...typography.sans.extraLarge,
+        },
+
+        '& img': {
+          width: '100%',
+          maxHeight: '48px',
+          maxWidth: '190px',
+
+          [`@media (${token.media.queries.tablet.min})`]: {
+            maxWidth: '240px',
+          },
+        },
+      },
+    });
+
+  if (childrenText < 30) {
+    logoBuilder = logoBuilder.withAttribute('size', 'large');
+  }
+
+  return logoBuilder;
+};
+
+const createLogoColumn = (props: TypeLogoRequirments) => {
+  const menuButton = createMenuButton(props);
+  const logo = createLogo(props);
+
+  const logoColumnChildren = [menuButton, logo].filter(
+    (child) => child != null,
+  );
+
+  return new ElementBuilder()
+    .withClassName('element-header-logo-column')
+    .withChildren(...logoColumnChildren)
+    .withStyles({
+      element: {
+        alignItems: 'center',
+        display: 'flex',
+        justifyContent: 'flex-start',
+        position: 'relative',
+        width: '100%',
+        maxWidth: '400px',
+      },
+    });
+};
+
+export const createCompositeNavigationHeader = (
+  props: TypeHeaderRequirements,
+) => {
   const { ctaUrl, ctaText } = props;
-  const declaration = document.createElement('div');
-  const container = document.createElement('div');
-  const wrapper = document.createElement('div');
-  const logoColumn = CreateLogoColumn(props);
-  const navigationColumn = CreateNavigationColumn(props);
+
+  const logoColumn = createLogoColumn(props);
+  const navigationColumn = createNavigationColumn(props);
+
+  const containerBuilder = new ElementBuilder()
+    .withClassName('element-header-container')
+    .withStyles({
+      element: {
+        backgroundColor: token.color.white,
+        display: 'block',
+        padding: `${token.spacing.md} 0`,
+        position: 'relative',
+        transition: `padding ${ANIMATION_TIME}ms`,
+
+        [`&[${ATTRIBUTE_STICKY}="true"]`]: {
+          padding: `${token.spacing.xs} 0`,
+        },
+
+        [`&[${ATTRIBUTE_STICKY}="true"] .element-header-logo img`]: {
+          maxHeight: '30px',
+        },
+      },
+    });
+
+  const containerElement = containerBuilder.getElement();
+  let isElementSticky = false;
+
   const eventSticky = ({ isSticky }: { isSticky: boolean }) => {
-    const utility = container.querySelector(
-      `.${ELEMENT_HEADER_UTILITY_ROW}`,
+    const utility = containerElement.querySelector(
+      '.element-header-utility-row',
     ) as HTMLDivElement;
 
     if (isSticky && isElementSticky) return;
 
     if (isSticky) {
       isElementSticky = true;
-      container.setAttribute(ATTRIBUTE_STICKY, 'true');
+      containerElement.setAttribute(ATTRIBUTE_STICKY, 'true');
 
-      if (utility) {
-        utility.style.display = 'none';
-      }
+      if (utility) utility.style.display = 'none';
     }
     if (!isSticky) {
       isElementSticky = false;
-      container.removeAttribute(ATTRIBUTE_STICKY);
+      containerElement.removeAttribute(ATTRIBUTE_STICKY);
 
-      if (utility) {
-        utility.style.display = 'block';
-      }
+      if (utility) utility.style.display = 'block';
     }
   };
-  let isElementSticky = false;
 
-  wrapper.classList.add(ELEMENT_HEADER_WRAPPER);
-  wrapper.appendChild(logoColumn);
+  const wrapperChildren = [logoColumn, navigationColumn].filter(
+    (child) => child != null,
+  );
 
-  if (navigationColumn) wrapper.appendChild(navigationColumn);
-  if (ctaUrl && ctaText) wrapper.setAttribute(ATTRIBUTE_CTA, 'true');
+  let wrapperBuilder = new ElementBuilder()
+    .withClassName('element-header-wrapper')
+    .withChildren(...wrapperChildren)
+    .withStyles({
+      element: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        gap: token.spacing.lg,
+        zIndex: 999,
 
-  container.appendChild(wrapper);
-  container.classList.add(ELEMENT_HEADER_CONTAINTER);
+        [`&[${ATTRIBUTE_CTA}="true"] .element-header-navigation-row`]: {
+          paddingTop: token.spacing.sm,
+        },
 
-  declaration.classList.add(ELEMENT_HEADER_DECLARATION);
-  declaration.appendChild(container);
+        [`&[${ATTRIBUTE_CTA}="true"] .element-header-menu-cta`]: {
+          marginTop: `-${token.spacing.min}`,
+        },
+      },
+    });
 
-  return {
-    element: declaration,
-    events: {
-      sticky: eventSticky,
-    },
-  };
-};
+  if (ctaUrl && ctaText) {
+    wrapperBuilder = wrapperBuilder.withAttribute(ATTRIBUTE_CTA, 'true');
+  }
 
-export const createCompositeNavigationHeader = {
-  CreateElement: CreateNavigationHeader,
-  Styles: STYLES_NAVIGATION_HEADER,
+  return new ElementBuilder()
+    .withClassName('element-header-declaration')
+    .withChild(containerBuilder.withChild(wrapperBuilder))
+    .withEvents({ sticky: eventSticky })
+    .build();
 };

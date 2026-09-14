@@ -1,153 +1,121 @@
 import * as token from '@universityofmaryland/web-token-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 
 type TypeUtilitySearchProps = {
   isSearchDomain?: boolean;
+  isLayoutDesktop?: boolean;
+  isLayoutMobile?: boolean;
 };
 
 const SEARCH_URL = 'https://search.umd.edu';
 const ANIMATION_IN_SPEED = 800;
 const ANIMATION_OUT_SPEED = 400;
-const LARGE = 1024;
 
-const ATTRIBUTE_LAYOUT = 'layout';
-const LAYOUT_DESKTOP = 'desktop';
-const LAYOUT_MOBILE = 'mobile';
+export const createCompositeNavigationSearch = ({
+  isSearchDomain,
+  isLayoutDesktop,
+  isLayoutMobile,
+}: TypeUtilitySearchProps) => {
+  const inputTextLabel = new ElementBuilder('label')
+    .withClassName('sr-only')
+    .withAttribute('for', 'input-text')
+    .withHTML('Search input');
 
-const IS_LAYOUT_DESKTOP = `[${ATTRIBUTE_LAYOUT}=${LAYOUT_DESKTOP}]`;
-const IS_LAYOUT_MOBILE = `[${ATTRIBUTE_LAYOUT}=${LAYOUT_MOBILE}]`;
+  const inputTextBuilder = new ElementBuilder('input')
+    .withClassName('element-utility-form-input')
+    .withAttribute('type', 'text')
+    .withAttribute('id', 'input-text')
+    .withAttribute('name', 'query')
+    .withAttribute('placeholder', 'Search for People, places and things')
+    .withAttribute('required', '')
+    .withStyles({
+      element: {
+        width: 'calc(100% - 120px)',
+        display: 'block',
+        padding: '0 10px',
+        height: '44px',
+        fontFamily: token.font.family.sans,
+        fontSize: '13px',
+        lineHeight: '1.3',
+        border: '1px solid #ccc',
+      },
+    });
 
-const ELEMENT_UTILITY_FORM = 'element-utility-form';
-const ELEMENT_UTILITY_FORM_WRAPPER = 'element-utility-form-wrapper';
+  const inputTextElement = inputTextBuilder.getElement() as HTMLInputElement;
 
-const OVERWRITE_UTILITY_FORM_LAYOUT_DESKTOP = `.${ELEMENT_UTILITY_FORM}${IS_LAYOUT_DESKTOP}`;
-const OVERWRITE_UTILITY_FORM_LAYOUT_MOBILE = `.${ELEMENT_UTILITY_FORM}${IS_LAYOUT_MOBILE}`;
+  const inputSubmit = new ElementBuilder('input')
+    .withClassName('element-utility-form-submit')
+    .withAttribute('type', 'submit')
+    .withAttribute('value', 'Submit')
+    .withStyles({
+      element: {
+        border: 'none',
+        backgroundColor: token.color.red,
+        color: token.color.white,
+        fontWeight: token.font.weight.bold,
+        fontSize: token.font.size.min,
+        fontFamily: token.font.family.sans,
+        transition: `background ${ANIMATION_OUT_SPEED}ms`,
+        minWidth: '120px',
+        height: '44px',
 
-const OverwriteLayoutDesktop = `
-  ${OVERWRITE_UTILITY_FORM_LAYOUT_DESKTOP} {
-    margin: 0;
-    padding: 0;
-    display: none;
-    overflow: hidden;
-    min-width: 420px;
-    height: 0;
-    position: absolute;
-    top: 48px;
-    right: 0;
-    background-color: ${token.color.white};
-    transition: height ${ANIMATION_OUT_SPEED}ms;
-  }
+        '&:hover, &:focus': {
+          backgroundColor: token.color.redDark,
+          transition: `background ${ANIMATION_IN_SPEED}ms`,
+        },
+      },
+    });
 
-  ${ELEMENT_UTILITY_FORM}[aria-hidden="true"] {
-    transition: height ${ANIMATION_OUT_SPEED}ms;
-  }
+  const wrapper = new ElementBuilder()
+    .withClassName('element-utility-form-wrapper')
+    .withChildren(inputTextLabel, inputTextBuilder, inputSubmit)
+    .withStyles({
+      element: {
+        display: 'flex',
 
-  ${ELEMENT_UTILITY_FORM}[aria-hidden="false"] {
-    transition: height ${ANIMATION_IN_SPEED}ms;
-  }
-`;
+        [`@container (${token.media.queries.desktop.min})`]: {
+          padding: '10px',
+        },
+      },
+    });
 
-const OverwriteLayoutMobile = `
-  ${OVERWRITE_UTILITY_FORM_LAYOUT_MOBILE} {
-    padding: ${token.spacing.md} ${token.spacing.lg};
-    order: 1;
-    display: block;
-    height: auto;
-  }
-`;
+  const formBuilder = new ElementBuilder('form')
+    .withClassName('element-utility-form')
+    .withAttribute('id', 'element-utility-form')
+    .withChild(wrapper)
+    .withStyles({
+      element: {
+        '&[data-layout-desktop="true"]': {
+          margin: 0,
+          padding: 0,
+          display: 'none',
+          overflow: 'hidden',
+          minWidth: '420px',
+          height: 0,
+          position: 'absolute',
+          top: '48px',
+          right: 0,
+          backgroundColor: token.color.white,
+          transition: `height ${ANIMATION_OUT_SPEED}ms`,
+        },
 
-// prettier-ignore
-const FormElementsStyles = `
-  .${ELEMENT_UTILITY_FORM} input[type="text"] {
-    width: calc(100% - 120px);
-    display: block;
-    padding: 0 10px;
-    height: 44px;
-    font-family: Source Sans,Source Sans Pro,sans-serif;
-    font-size: 13px;
-    line-height: 1.3;
-    border: 1px solid #ccc;
-  }
-
-  .${ELEMENT_UTILITY_FORM} input[type="submit"] {
-    border: none;
-    background-color: ${token.color.red};
-    color: ${token.color.white};
-    font-weight: 700;
-    font-size: 12px;
-    transition: background ${ANIMATION_OUT_SPEED}ms;
-    min-width: 120px;
-    height: 44px;
-  }
-
-  .${ELEMENT_UTILITY_FORM} input[type="submit"]:hover,
-  .${ELEMENT_UTILITY_FORM} input[type="submit"]:focus {
-    background-color: ${token.color.redDark};
-    transition: background ${ANIMATION_IN_SPEED}ms;
-  }
-`;
-
-// prettier-ignore
-const FormWrapperStyles = `
-  .${ELEMENT_UTILITY_FORM_WRAPPER} {
-    display: flex;
-  }
-
-  @container (min-width: ${LARGE}px) {
-    .${ELEMENT_UTILITY_FORM_WRAPPER} {
-      padding: 10px;
-    }
-  }
-`;
-
-// prettier-ignore
-const STYLES_NAV_UTILITY_SEARCH = `
-  ${FormWrapperStyles}
-  ${FormElementsStyles}
-  ${OverwriteLayoutDesktop}
-  ${OverwriteLayoutMobile}
-`
-
-const CreateNavUtilitySearch = ({ isSearchDomain }: TypeUtilitySearchProps) =>
-  (() => {
-    const isDesktop = window.innerWidth >= LARGE;
-    const form = document.createElement('form');
-    const wrapper = document.createElement('div');
-    const inputTextLabel = document.createElement('label');
-    const inputText = document.createElement('input');
-    const inputSubmit = document.createElement('input');
-
-    inputTextLabel.innerHTML = 'Search input';
-    inputTextLabel.setAttribute('for', 'input-text');
-    inputTextLabel.classList.add('sr-only');
-
-    inputText.setAttribute('type', 'text');
-    inputText.setAttribute('id', 'input-text');
-    inputText.setAttribute('name', 'query');
-    inputText.setAttribute(
-      'placeholder',
-      'Search for People, places and things',
-    );
-    inputText.setAttribute('required', '');
-
-    inputSubmit.setAttribute('type', 'submit');
-    inputSubmit.value = 'Submit';
-
-    wrapper.appendChild(inputTextLabel);
-    wrapper.appendChild(inputText);
-    wrapper.appendChild(inputSubmit);
-    wrapper.classList.add(ELEMENT_UTILITY_FORM_WRAPPER);
-
-    form.setAttribute('id', ELEMENT_UTILITY_FORM);
-    form.classList.add(ELEMENT_UTILITY_FORM);
-    form.addEventListener('submit', (event) => {
+        '&[data-layout-mobile="true"]': {
+          padding: `${token.spacing.md} ${token.spacing.lg}`,
+          order: 1,
+          display: 'block',
+          height: 'auto',
+        },
+      },
+    })
+    .on('submit', (event) => {
       event.preventDefault();
 
       let searchString = `#gsc.tab=0&gsc`;
 
       if (isSearchDomain) {
-        searchString += `.q=site:${window.location.hostname} ${inputText.value}`;
+        searchString += `.q=site:${window.location.hostname} ${inputTextElement.value}`;
       } else {
-        searchString += `.q=${inputText.value}`;
+        searchString += `.q=${inputTextElement.value}`;
       }
 
       searchString += `&gsc.sort=`;
@@ -155,23 +123,19 @@ const CreateNavUtilitySearch = ({ isSearchDomain }: TypeUtilitySearchProps) =>
       window.open(`${SEARCH_URL}${encodeURI(searchString)}`, '_blank');
     });
 
-    if (isDesktop) {
-      form.setAttribute('aria-hidden', 'true');
-      form.setAttribute(ATTRIBUTE_LAYOUT, LAYOUT_DESKTOP);
-    } else {
-      form.setAttribute('aria-hidden', 'false');
-      form.setAttribute(ATTRIBUTE_LAYOUT, LAYOUT_MOBILE);
-    }
+  const isDesktopLayout = isLayoutDesktop ?? !isLayoutMobile;
 
-    form.appendChild(wrapper);
+  if (isDesktopLayout) {
+    formBuilder
+      .withAttribute('aria-hidden', 'true')
+      .withAttribute('data-layout-desktop', 'true')
+      .withAttribute('data-layout-mobile', 'false');
+  } else {
+    formBuilder
+      .withAttribute('aria-hidden', 'false')
+      .withAttribute('data-layout-desktop', 'false')
+      .withAttribute('data-layout-mobile', 'true');
+  }
 
-    return form;
-  })();
-
-export const createCompositeNavigationSearch = {
-  CreateElement: CreateNavUtilitySearch,
-  Styles: STYLES_NAV_UTILITY_SEARCH,
-  Elements: {
-    form: ELEMENT_UTILITY_FORM,
-  },
+  return formBuilder;
 };

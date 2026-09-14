@@ -1,20 +1,15 @@
 import * as token from '@universityofmaryland/web-token-library';
-import * as elementStyles from '@universityofmaryland/web-styles-library/element';
 import * as layout from '@universityofmaryland/web-styles-library/layout';
 import {
-  jssToCSS,
-  jssEntryToCSS,
-} from '@universityofmaryland/web-utilities-library/styles';
+  ElementBuilder,
+  ElementModel,
+  createStyleTag,
+} from '@universityofmaryland/web-builder-library';
 import { handleKeyboardNavigation } from '@universityofmaryland/web-utilities-library/events';
 import { search as iconSearch } from '@universityofmaryland/web-icons-library/search';
 import { chevron_down as iconChevronDown } from '@universityofmaryland/web-icons-library/controls';
-import {
-  createNavAlert,
-  STYLES_NAV_ALERT,
-  ALERT_CONSTANTS,
-  TypeAlertProps,
-} from './alert';
-import { createCompositeNavigationSearch as UtilitySearch } from './search';
+import { createNavAlert, ALERT_CONSTANTS, TypeAlertProps } from './alert';
+import { createCompositeNavigationSearch } from './search';
 
 type TypeMenuItemsRequirements = {
   alertUrl?: string | null;
@@ -38,8 +33,6 @@ const starIcon = `<svg aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" wi
 const calendarIcon = `<svg aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" width="26" height="28" viewBox="0 0 26 28"><title>Calendar</title><path d="M2 26h22V10H2v16zM8 7V2.5c0-.28-.22-.5-.5-.5h-1c-.28 0-.5.22-.5.5V7c0 .28.22.5.5.5h1c.28 0 .5-.22.5-.5zm12 0V2.5c0-.28-.22-.5-.5-.5h-1c-.28 0-.5.22-.5.5V7c0 .28.22.5.5.5h1c.28 0 .5-.22.5-.5zm6-1v20c0 1.094-.906 2-2 2H2c-1.094 0-2-.906-2-2V6c0-1.094.906-2 2-2h2V2.5C4 1.125 5.125 0 6.5 0h1C8.875 0 10 1.125 10 2.5V4h6V2.5C16 1.125 17.125 0 18.5 0h1C20.875 0 22 1.125 22 2.5V4h2c1.094 0 2 .906 2 2z"></path></svg>`;
 const mIcon = `<svg aria-hidden="true"  xmlns="http://www.w3.org/2000/svg" width="24" height="28" viewBox="0 0 35 28"><title>Gift</title><path d="M16 1.4C7.937 1.4 1.4 7.937 1.4 16S7.937 30.6 16 30.6c8.063 0 14.6-6.537 14.6-14.6S24.063 1.4 16 1.4zm3.38 22.66v-2.55h2L21 13l-4.68 8.36h-.38L11.11 13l-.27 8.55h2v2.55H6.08v-2.55H8l.45-11.5H6.42V7.5h4.54l5.16 9.19 5-9.27h4.51v2.55h-2.04l.61 11.49h2v2.55z"></path></svg>`;
 
-const TABLET = 768;
-const DESKTOP = 1024;
 const ANIMATION_OUT_SPEED = 400;
 const ANIMATION_IN_SPEED = 800;
 
@@ -49,381 +42,129 @@ const LOCK_FULL = 'full';
 
 const ELEMENT_NAME = 'umd-element-utility-header';
 
-const IS_LOCK_FULL = `[${ATTRIBUTE_LOCK}=${LOCK_FULL}]`;
-const IS_HAS_ITEMS = `[${WITH_ITEMS}="true"]`;
-const IS_WITHOUT_ITEMS = `[${WITH_ITEMS}="false"]`;
+const isDesktop = () =>
+  window.innerWidth >= token.media.breakpointValues.desktop.min;
 
-const ELEMENT_UTILITY_DECLARATION = 'element-utility-declaration';
-const ELEMENT_UTILITY_CONTAINTER = 'element-utility-container';
-const ELEMENT_UTILITY_LOCK = 'umd-element-nav-utility-lock';
-const ELEMENT_UTILITY_WRAPPER = 'umd-element-nav-utility-wrapper';
-const ELEMENT_UTILITY_LOGO = 'umd-element-nav-utility-logo';
-const ELEMENT_UTILITY_LOGO_COLUMN = 'umd-element-nav-utility-logo-column';
-const ELEMENT_UTILITY_MENU = 'umd-element-nav-utility-menu';
-const ELEMENT_UTILITY_MOBILE_MENU = 'umd-element-nav-utility-mobile-menu';
-const ELEMENT_UTILITY_MOBILE_BUTTON = 'umd-element-nav-utility-mobile-button';
-const ELEMENT_UTILITY_SEARCH_BUTTON = 'umd-element-nav-utility-search-button';
-
-const OVERWRITE_LOCK_FULL = `.${ELEMENT_UTILITY_CONTAINTER}${IS_LOCK_FULL} .${ELEMENT_UTILITY_LOCK}`;
-
-const OVERWRITE_CONTAINER_WITH_ITEMS = `.${ELEMENT_UTILITY_CONTAINTER}${IS_HAS_ITEMS}`;
-const OVERWRITE_CONTAINER_WITHOUT_ITEMS = `.${ELEMENT_UTILITY_CONTAINTER}${IS_WITHOUT_ITEMS}`;
-const OVERWRIE_WRAPPER_WITH_ITEMS = `${OVERWRITE_CONTAINER_WITH_ITEMS} .${ELEMENT_UTILITY_WRAPPER}`;
-const OVERWRIE_WRAPPER_WITHOUT_ITEMS = `${OVERWRITE_CONTAINER_WITHOUT_ITEMS} .${ELEMENT_UTILITY_WRAPPER}`;
-
-const isDesktop = () => window.innerWidth >= DESKTOP;
+const isValidUrl = (url: string) => {
+  try {
+    new URL(url);
+  } catch (e) {
+    return false;
+  }
+  return true;
+};
 
 const TOP_TWENTY_TEXT = `A Top 20 Public Research University`;
 
-// prettier-ignore
-const LockStyles = `
-  ${jssToCSS({
-    styleObj: {
-      [`.${ELEMENT_UTILITY_LOCK}`]: layout.space.horizontal.larger,
-    },
-  })}
+const createLogoElement = () => {
+  return new ElementBuilder('a')
+    .withClassName('umd-element-nav-utility-logo')
+    .withAttribute('href', 'https://umd.edu')
+    .withAttribute('target', '_blank')
+    .withAttribute('rel', 'noopener noreferrer')
+    .withHTML('University of Maryland')
+    .withStyles({
+      element: {
+        color: token.color.white,
+        fontFamily: token.font.family.serif,
+        letterSpacing: '1px',
+        fontSize: token.font.size.sm,
+        textTransform: 'uppercase',
+      },
+    });
+};
 
-  ${jssToCSS({
-    styleObj: {
-      [`${OVERWRITE_LOCK_FULL}`]: layout.space.horizontal.full,
-    },
-  })}
-`;
+const createLogoText = () => {
+  return new ElementBuilder('p')
+    .withClassName('umd-element-nav-utility-logo-text')
+    .withHTML(TOP_TWENTY_TEXT)
+    .withStyles({
+      element: {
+        color: token.color.white,
+        display: 'block',
+        fontSize: '11px',
 
-// prettier-ignore
-const WrapperStyles = `
-  .${ELEMENT_UTILITY_WRAPPER} {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
-    min-height: 44px;
-  }
+        [`@media (${token.media.queries.tablet.min})`]: {
+          position: 'relative',
+          fontSize: '13px',
 
-  .${ELEMENT_UTILITY_WRAPPER} > a {
-    color: ${token.color.white};
-    text-transform: uppercase;
-  }
+          '&:before': {
+            content: "''",
+            position: 'absolute',
+            left: '-7px',
+            height: '100%',
+            width: '1px',
+            backgroundColor: token.color.white,
+          },
+        },
+      },
+    });
+};
 
-  .${ELEMENT_UTILITY_WRAPPER} > a:hover,
-  .${ELEMENT_UTILITY_WRAPPER} > a:focus {
-    text-decoration: underline;
-  }
+const createLogoColumn = () => {
+  const logo = createLogoElement();
+  const text = createLogoText();
 
-  ${OVERWRIE_WRAPPER_WITHOUT_ITEMS} {
-    display: flex;
-    justify-content: center;
-    justify-self: center;
-  }
-`;
+  const container = new ElementBuilder()
+    .withClassName('umd-element-nav-utility-logo-column')
+    .withChildren(logo, text)
+    .withStyles({
+      element: {
+        display: 'flex',
+        opacity: 0,
+        transition: 'opacity .3s ease-in',
+        padding: '10px 0',
 
-// prettier-ignore
-const MenuStyles = `
-  .${ELEMENT_UTILITY_MENU} {
-    display: flex;
-  }
+        [`@media (${token.media.queries.large.max})`]: {
+          flexDirection: 'column',
+          gap: token.spacing.min,
+          textAlign: 'center',
+        },
 
-  @container (max-width: ${DESKTOP - 1}px) {
-    .${ELEMENT_UTILITY_MENU} {
-      flex-direction: column;
-    }
-  }
+        [`@media (${token.media.queries.tablet.min})`]: {
+          alignItems: 'center',
+          gap: token.spacing.xs,
+        },
+      },
+    });
 
-  @container (min-width: ${DESKTOP}px) {
-    .${ELEMENT_UTILITY_MENU} {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-  }
+  const containerElement = container.getElement();
 
-  .${ELEMENT_UTILITY_MENU} a {
-    color: ${token.color.white};
-    text-decoration: none;
-    text-transform: uppercase;
-  }
+  setTimeout(() => {
+    containerElement.style.opacity = '1';
+  }, 400);
 
-  .${ELEMENT_UTILITY_MENU} > * {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    height: 100%;
-    padding: ${token.spacing.min} ${token.spacing.sm};
-    font-weight: 700;
-    font-size: 13px;
-    transition: background ${ANIMATION_IN_SPEED}ms;
-  }
+  return container;
+};
 
-  @container (min-width: ${DESKTOP}px) {
-   .${ELEMENT_UTILITY_MENU} > * {
-      justify-content: space-between;
-    }
-  }
-
-  .${ELEMENT_UTILITY_MENU} > *[aria-expanded="true"] {
-    background-color: ${token.color.redDark};
-  }
-
-  @container (max-width: ${DESKTOP - 1}px) {
-    .${ELEMENT_UTILITY_CONTAINTER} .${ELEMENT_UTILITY_MENU} > * {
-      border-top: 1px solid ${token.color.gray.lighter};
-      color: ${token.color.red};
-      order: 2;
-      transition: background ${ANIMATION_OUT_SPEED}ms, color ${ANIMATION_OUT_SPEED}ms;
-    }
-  }
-
-  @container (max-width: ${DESKTOP - 1}px) {
-    .${ELEMENT_UTILITY_MENU} > *:first-child {
-      border-top: none;
-    }
-  }
-
-  @container (max-width: ${DESKTOP - 1}px) {
-    .${ELEMENT_UTILITY_MENU} > a:hover,
-    .${ELEMENT_UTILITY_MENU} > a:focus {
-      background-color: ${token.color.red};
-      color: ${token.color.white};
-      transition: background ${ANIMATION_IN_SPEED}ms, color ${ANIMATION_IN_SPEED}ms;
-    }
-  }
-
-  @container (min-width: ${DESKTOP}px) {
-    .${ELEMENT_UTILITY_MENU} > *:hover,
-    .${ELEMENT_UTILITY_MENU} > *:focus {
-      background-color: ${token.color.redDark};
-    }
-  }
-
-  @container (max-width: ${DESKTOP - 1}px) {
-    .${ELEMENT_UTILITY_MENU} > a:hover svg,
-    .${ELEMENT_UTILITY_MENU} > a:focus svg {
-      fill: ${token.color.white};
-    }
-  }
-
-  .${ELEMENT_UTILITY_SEARCH_BUTTON} svg {
-    height: 22px;
-    width: inherit;
-  }
-
-  @container (max-width: ${DESKTOP - 1}px) {
-    .${ELEMENT_UTILITY_SEARCH_BUTTON} {
-      display: none;
-    }
-  }
-
-  .${ELEMENT_UTILITY_MENU} svg {
-    max-width: 15px;
-    transition: fill ${ANIMATION_OUT_SPEED}ms;
-  }
-
-  @container (max-width: ${DESKTOP - 1}px) {
-    .${ELEMENT_UTILITY_MENU} svg {
-      fill: ${token.color.red};
-      transition: fill ${ANIMATION_IN_SPEED}ms;
-    }
-  }
-
-  @container (min-width: ${DESKTOP}px) {
-    .${ELEMENT_UTILITY_MENU} svg {
-      fill: ${token.color.white};
-    }
-  }
-`;
-
-// prettier-ignore
-const MobileMenuStyles = `
-  @container (max-width: ${DESKTOP - 1}px) {
-    .${ELEMENT_UTILITY_MOBILE_MENU} {
-      position: absolute;
-      left: -${token.spacing['2xl']};
-      right: -${token.spacing['2xl']};
-      top: 44px;
-      box-shadow: 0 5px 5px 1px rgba(0, 0, 0, .2);
-      height: 0;
-      overflow: hidden;
-      transition: height ${ANIMATION_OUT_SPEED}ms;
-      display: flex;
-      flex-direction: column;
-      background-color: ${token.color.white};
-    }
-  }
-
-  @container (max-width: ${TABLET - 1}px) {
-    .${ELEMENT_UTILITY_MOBILE_MENU} {
-      left: -${token.spacing.md};
-      right: -${token.spacing.md};
-    }
-  }
-
-  @container (min-width: ${DESKTOP}px) {
-    .${ELEMENT_UTILITY_MOBILE_MENU} {
-      display: flex;
-      height: inherit !important;
-      margin-left: auto;
-      position: relative;
-      margin-right: -${token.spacing.md};
-    }
-  }
-
-  @container (max-width: ${DESKTOP - 1}px) {
-    .${ELEMENT_UTILITY_MOBILE_MENU}[aria-hidden="true"] {
-      transition: height ${ANIMATION_OUT_SPEED}ms;
-      display: none;
-    }
-  }
-
-  @container (max-width: ${DESKTOP - 1}px) {
-    .${ELEMENT_UTILITY_MOBILE_MENU}[aria-hidden="false"] {
-      transition: height ${ANIMATION_IN_SPEED}ms;
-    }
-  }
-
-  @container (max-width: ${DESKTOP - 1}px) {
-    .${ELEMENT_UTILITY_MOBILE_MENU} > button {
-      display: none;
-    }
-  }
-
-  @container (min-width: ${DESKTOP}px) {
-    .${ELEMENT_UTILITY_MOBILE_MENU} > button {
-      transition: background ${ANIMATION_OUT_SPEED}ms;
-    }
-  }
-`
-
-// prettier-ignore
-const MobileButtonStyles = `
-  .${ELEMENT_UTILITY_MOBILE_BUTTON} {
-    margin-left: auto;
-    height: 100%;
-    padding: ${token.spacing.xs} ${token.spacing.md};
-    margin-right: -${token.spacing.md};
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  @media (min-width: ${TABLET}px) {
-    margin-right: -${token.spacing['2xl']};
-  }
-
-  @container (min-width: ${DESKTOP}px) {
-    .${ELEMENT_UTILITY_MOBILE_BUTTON} {
-      display: none;
-    }
-  }
-
-  .${ELEMENT_UTILITY_MOBILE_BUTTON}:hover,
-  .${ELEMENT_UTILITY_MOBILE_BUTTON}:focus {
-    background-color: ${token.color.redDark};
-  }
-
-  @container (max-width: ${DESKTOP - 1}px) {
-    .${ELEMENT_UTILITY_MOBILE_BUTTON} svg {
-      fill: ${token.color.white};
-      width: 18px;
-      height: 18px;
-    }
-  }
-`;
-
-// prettier-ignore
-const LogoStyles = `
-  .${ELEMENT_UTILITY_LOGO_COLUMN} {
-    display: flex;
-    opacity: 0;
-    transition: opacity .3s ease-in;
-    padding: 10px 0;
-  }
-
-  @media (max-width: ${TABLET - 1}px) {
-    .${ELEMENT_UTILITY_LOGO_COLUMN} {
-      flex-direction: column;
-      gap: ${token.spacing.min};
-      text-align: center;
-    }
-  }
-
-  @media (min-width: ${TABLET}px) {
-    .${ELEMENT_UTILITY_LOGO_COLUMN} {
-      align-items: center;
-      gap: ${token.spacing.xs};
-    }
-  }
-
-  .${ELEMENT_UTILITY_LOGO_COLUMN} * {
-    color: ${token.color.white};
-
-  }
-
-  .${ELEMENT_UTILITY_LOGO_COLUMN} > p {
-    display: block;
-    font-size: 11px;
-  }
-
-  @media (max-width: ${TABLET - 1}px) {
-    ${OVERWRIE_WRAPPER_WITH_ITEMS} .${ELEMENT_UTILITY_LOGO_COLUMN} > p {
-      display: none;
-    }
-  }
-
-  @media (min-width: ${TABLET}px) {
-    .${ELEMENT_UTILITY_LOGO_COLUMN} > p {
-      position: relative;
-      font-size: 13px;
-    }
-
-    .${ELEMENT_UTILITY_LOGO_COLUMN} > p:before {
-      content: '';
-      position: absolute;
-      left: -7px;
-      height: 100%;
-      width: 1px;
-      background-color: ${token.color.white};
-    }
-  }
-
-  .${ELEMENT_UTILITY_LOGO} {
-    font-family: Crimson Text, Georgia, serif;
-    letter-spacing: 1px;
-    font-size: 14px;
-    text-transform: uppercase;
-  }
-`;
-
-let STYLES_NAVIGATION_UTILITY = `
-  .${ELEMENT_UTILITY_DECLARATION} {
-    container: ${ELEMENT_NAME} / inline-size;
-  }
-
-  .${ELEMENT_UTILITY_CONTAINTER} {
-    display: block;
-    background-color: ${token.color.red};
-    position: relative;
-    z-index: 999;
-  }
-
-  ${LockStyles}
-  ${WrapperStyles}
-  ${LogoStyles}
-  ${MenuStyles}
-  ${MobileButtonStyles}
-  ${MobileMenuStyles}
-  ${STYLES_NAV_ALERT}
-  ${UtilitySearch.Styles}
-`;
-
-const CreateSearchFormButton = ({
+const createSearchFormButton = ({
   expandElement,
 }: {
   expandElement: HTMLDivElement | HTMLFormElement;
 }) => {
-  const button = document.createElement('button');
-  const elements = Array.from(expandElement.querySelectorAll('div'));
   let focusCallback = () => {};
+
+  const buttonBuilder = new ElementBuilder('button')
+    .withClassName('umd-element-nav-utility-search-button')
+    .withAttribute('aria-label', 'enable the search form')
+    .withAttribute('type', 'button')
+    .withHTML(iconSearch)
+    .withAttribute('aria-controls', 'element-utility-form')
+    .withAttribute('aria-expanded', 'false')
+    .withStyles({
+      element: {
+        '& svg': {
+          height: '22px',
+          width: 'inherit',
+        },
+
+        [`@container (${token.media.queries.tablet.max})`]: {
+          display: 'none',
+        },
+      },
+    });
+
+  const buttonElement = buttonBuilder.getElement() as HTMLButtonElement;
 
   const eventClose = () => {
     expandElement.style.height = `0`;
@@ -431,8 +172,8 @@ const CreateSearchFormButton = ({
     setTimeout(() => {
       expandElement.style.display = 'none';
       expandElement.setAttribute('aria-hidden', 'true');
-      button.setAttribute('aria-expanded', 'false');
-      button.focus();
+      buttonElement.setAttribute('aria-expanded', 'false');
+      buttonElement.focus();
 
       if (focusCallback) {
         focusCallback();
@@ -449,13 +190,14 @@ const CreateSearchFormButton = ({
     expandElement.style.display = 'block';
 
     setTimeout(() => {
+      const elements = Array.from(expandElement.querySelectorAll('div'));
       const size = elements.reduce((accumulator, currentValue) => {
         return accumulator + currentValue.offsetHeight;
       }, 0);
 
       expandElement.setAttribute('aria-hidden', 'false');
       expandElement.style.height = `${size}px`;
-      button.setAttribute('aria-expanded', 'true');
+      buttonElement.setAttribute('aria-expanded', 'true');
       if (focusElement) focusElement.focus();
     }, 100);
 
@@ -465,15 +207,8 @@ const CreateSearchFormButton = ({
     });
   };
 
-  button.setAttribute('aria-label', 'enable the search form');
-  button.setAttribute('type', 'button');
-  button.innerHTML = `${iconSearch}`;
-  button.setAttribute('aria-controls', UtilitySearch.Elements.form);
-  button.classList.add(ELEMENT_UTILITY_SEARCH_BUTTON);
-  button.setAttribute('aria-expanded', 'false');
-
-  button.addEventListener('click', () => {
-    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+  buttonBuilder.on('click', () => {
+    const isExpanded = buttonElement.getAttribute('aria-expanded') === 'true';
 
     if (isExpanded) {
       eventClose();
@@ -482,16 +217,51 @@ const CreateSearchFormButton = ({
     }
   });
 
-  return button;
+  return buttonBuilder;
 };
 
-const CreateMobileMenuButton = ({
+const createMobileMenuButton = ({
   expandElement,
 }: {
   expandElement: HTMLDivElement;
 }) => {
-  const button = document.createElement('button');
   let focusCallback = () => {};
+
+  const buttonBuilder = new ElementBuilder('button')
+    .withClassName('umd-element-nav-utility-mobile-button')
+    .withHTML(iconChevronDown)
+    .withAttribute('type', 'button')
+    .withAttribute('aria-label', 'toggle mobile menu')
+    .withAttribute('aria-controls', 'umd-element-nav-utility-mobile-menu')
+    .withStyles({
+      element: {
+        marginLeft: 'auto',
+        height: '100%',
+        padding: `${token.spacing.xs} ${token.spacing.md}`,
+        marginRight: `-${token.spacing.md}`,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+
+        '&:hover, &:focus': {
+          backgroundColor: token.color.redDark,
+        },
+
+        [`@container (${token.media.queries.desktop.min})`]: {
+          display: 'none',
+        },
+
+        [`@container (${token.media.queries.tablet.max})`]: {
+          '& svg': {
+            fill: token.color.white,
+            width: '18px',
+            height: '18px',
+          },
+        },
+      },
+    });
+
+  const buttonElement = buttonBuilder.getElement() as HTMLButtonElement;
 
   const eventClose = () => {
     expandElement.style.height = `0`;
@@ -499,8 +269,8 @@ const CreateMobileMenuButton = ({
     setTimeout(() => {
       expandElement.style.display = 'none';
       expandElement.setAttribute('aria-hidden', 'true');
-      button.setAttribute('aria-expanded', 'false');
-      button.focus();
+      buttonElement.setAttribute('aria-expanded', 'false');
+      buttonElement.focus();
 
       if (focusCallback) {
         focusCallback();
@@ -511,7 +281,7 @@ const CreateMobileMenuButton = ({
 
   const eventOpen = () => {
     const wrapper = expandElement.querySelector(
-      `.${ELEMENT_UTILITY_MENU}`,
+      '.umd-element-nav-utility-menu',
     ) as HTMLElement;
     const focusElement = expandElement.querySelector('a') as HTMLAnchorElement;
 
@@ -520,7 +290,7 @@ const CreateMobileMenuButton = ({
     setTimeout(() => {
       expandElement.setAttribute('aria-hidden', 'false');
       expandElement.style.height = `${wrapper.offsetHeight}px`;
-      button.setAttribute('aria-expanded', 'true');
+      buttonElement.setAttribute('aria-expanded', 'true');
       if (focusElement) focusElement.focus();
     }, 100);
 
@@ -530,14 +300,8 @@ const CreateMobileMenuButton = ({
     });
   };
 
-  button.innerHTML = `${iconChevronDown}`;
-  button.setAttribute('type', 'button');
-  button.setAttribute('aria-label', 'toggle mobile menu');
-  button.setAttribute('aria-controls', `${ELEMENT_UTILITY_MOBILE_MENU}`);
-  button.classList.add(ELEMENT_UTILITY_MOBILE_BUTTON);
-
-  button.addEventListener('click', () => {
-    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+  buttonBuilder.on('click', () => {
+    const isExpanded = buttonElement.getAttribute('aria-expanded') === 'true';
 
     if (isExpanded) {
       eventClose();
@@ -546,40 +310,83 @@ const CreateMobileMenuButton = ({
     }
   });
 
-  return button;
+  return buttonBuilder;
 };
 
-const createLogoElement = () => {
-  const logo = document.createElement('a');
+const createLinkElement = ({
+  name,
+  icon,
+  url,
+}: {
+  name: string;
+  icon: string;
+  url: string;
+}) =>
+  new ElementBuilder('a')
+    .withClassName('umd-element-nav-utility-menu-link')
+    .withAttribute('href', url)
+    .withAttribute('target', '_blank')
+    .withAttribute('rel', 'noopener noreferrer')
+    .withHTML(`${icon} <span>${name}</span>`)
+    .withStyles({
+      element: {
+        color: token.color.white,
+        textDecoration: 'none',
+        textTransform: 'uppercase',
+      },
+    });
 
-  logo.innerHTML = 'University of Maryland';
-  logo.setAttribute('href', 'https://umd.edu');
-  logo.setAttribute('target', '_blank');
-  logo.setAttribute('rel', 'noopener noreferrer');
-  logo.classList.add(ELEMENT_UTILITY_LOGO);
+const createAdmissionsLink = (isAdmissionsFeed?: boolean) => {
+  if (!isAdmissionsFeed) return null;
 
-  return logo;
+  return createLinkElement({
+    name: 'Admissions',
+    url: 'https://umd.edu/admissions',
+    icon: flagIcon,
+  });
 };
 
-const createLogoColumn = () => {
-  const container = document.createElement('div');
-  const text = document.createElement('p');
-  const logo = createLogoElement();
+const createSchoolsLink = (isSchoolsFeed?: boolean) => {
+  if (!isSchoolsFeed) return null;
 
-  text.innerHTML = TOP_TWENTY_TEXT;
-
-  container.appendChild(logo);
-  container.appendChild(text);
-  container.classList.add(ELEMENT_UTILITY_LOGO_COLUMN);
-
-  setTimeout(() => {
-    container.style.opacity = '1';
-  }, 400);
-
-  return container;
+  return createLinkElement({
+    name: 'Colleges & Schools',
+    url: 'https://umd.edu/colleges-and-schools',
+    icon: homeIcon,
+  });
 };
 
-const CreateMenuItems = ({
+const createNewsLink = (isNewsFeed?: boolean) => {
+  if (!isNewsFeed) return null;
+
+  return createLinkElement({
+    name: 'News',
+    url: 'https://today.umd.edu/',
+    icon: starIcon,
+  });
+};
+
+const createEventsLink = (isEventsFeed?: boolean) => {
+  if (!isEventsFeed) return null;
+
+  return createLinkElement({
+    name: 'Events',
+    url: 'https://calendar.umd.edu',
+    icon: calendarIcon,
+  });
+};
+
+const createGiftsLink = (isGiftsFeed?: boolean, giftUrl?: string) => {
+  if (!isGiftsFeed) return null;
+
+  const defaultURL = 'https://giving.umd.edu';
+  const validURL = giftUrl ? isValidUrl(giftUrl) : null;
+  const url = validURL && giftUrl ? giftUrl : defaultURL;
+
+  return createLinkElement({ name: 'Make a Gift', url, icon: mIcon });
+};
+
+const createMenuItems = ({
   isAdmissionsFeed,
   isEventsFeed,
   isGiftsFeed,
@@ -589,243 +396,364 @@ const CreateMenuItems = ({
   giftUrl,
   isSearchDomain,
 }: TypeMenuItemsRequirements) => {
-  const container = document.createElement('div');
+  const linkItems = [
+    createAdmissionsLink(isAdmissionsFeed),
+    createSchoolsLink(isSchoolsFeed),
+    createNewsLink(isNewsFeed),
+    createEventsLink(isEventsFeed),
+    createGiftsLink(isGiftsFeed, giftUrl),
+  ];
 
-  const isValidUrl = (url: string) => {
-    try {
-      new URL(url);
-    } catch (e) {
-      return false;
-    }
-    return true;
-  };
-
-  const makeLinkElement = ({
-    name,
-    icon,
-    url,
-  }: {
-    name: string;
-    icon: string;
-    url: string;
-  }) => {
-    const tag = document.createElement('a');
-
-    tag.setAttribute('href', url);
-    tag.setAttribute('target', '_blank');
-    tag.setAttribute('rel', 'noopener noreferrer');
-    tag.innerHTML = `${icon} <span>${name}</span>`;
-
-    return tag;
-  };
-
-  let hasItems = false;
-
-  if (isAdmissionsFeed) {
-    hasItems = true;
-
-    container.appendChild(
-      makeLinkElement({
-        name: 'Admissions',
-        url: 'https://umd.edu/admissions',
-        icon: flagIcon,
-      }),
-    );
-  }
-
-  if (isSchoolsFeed) {
-    hasItems = true;
-
-    container.appendChild(
-      makeLinkElement({
-        name: 'Colleges & Schools',
-        url: 'https://umd.edu/colleges-and-schools',
-        icon: homeIcon,
-      }),
-    );
-  }
-
-  if (isNewsFeed) {
-    hasItems = true;
-
-    container.appendChild(
-      makeLinkElement({
-        name: 'News',
-        url: 'https://today.umd.edu/',
-        icon: starIcon,
-      }),
-    );
-  }
-
-  if (isEventsFeed) {
-    hasItems = true;
-
-    container.appendChild(
-      makeLinkElement({
-        name: 'Events',
-        url: 'https://calendar.umd.edu',
-        icon: calendarIcon,
-      }),
-    );
-  }
-
-  if (isGiftsFeed) {
-    hasItems = true;
-    const getURL = () => {
-      const defaultURL = 'https://giving.umd.edu';
-
-      if (!giftUrl) return defaultURL;
-
-      const validURL = giftUrl ? isValidUrl(giftUrl) : null;
-      return validURL ? giftUrl : defaultURL;
-    };
-
-    container.appendChild(
-      makeLinkElement({
-        name: 'Make a Gift',
-        url: getURL(),
-        icon: mIcon,
-      }),
-    );
-  }
+  const children: Array<ElementBuilder<HTMLElement>> = linkItems.filter(
+    (child): child is ElementBuilder<HTMLElement> => child !== null,
+  );
 
   if (isSearch || isSearchDomain) {
-    hasItems = true;
-    const formElement = UtilitySearch.CreateElement({ isSearchDomain });
-    const button = CreateSearchFormButton({
-      expandElement: formElement,
+    const searchForm = createCompositeNavigationSearch({
+      isSearchDomain,
+      isLayoutDesktop: isDesktop(),
+      isLayoutMobile: !isDesktop(),
+    });
+    const searchButton = createSearchFormButton({
+      expandElement: searchForm.getElement() as HTMLFormElement,
     });
 
-    container.appendChild(button);
-    container.appendChild(formElement);
+    children.push(searchButton, searchForm);
   }
 
-  container.classList.add(ELEMENT_UTILITY_MENU);
+  if (children.length === 0) return null;
 
-  if (!hasItems) return null;
+  return new ElementBuilder()
+    .withClassName('umd-element-nav-utility-menu')
+    .withChildren(...children)
+    .withStyles({
+      element: {
+        display: 'flex',
 
-  return container;
+        '& > *': {
+          display: 'flex',
+          alignItems: 'center',
+          gap: '4px',
+          height: '100%',
+          padding: `${token.spacing.min} ${token.spacing.sm}`,
+          fontWeight: token.font.weight.bold,
+          fontSize: '13px',
+          transition: `background ${ANIMATION_IN_SPEED}ms`,
+
+          '&[aria-expanded="true"]': {
+            backgroundColor: token.color.redDark,
+          },
+        },
+
+        '& svg': {
+          maxWidth: '15px',
+          transition: `fill ${ANIMATION_OUT_SPEED}ms`,
+        },
+
+        [`@container (${token.media.queries.tablet.max})`]: {
+          flexDirection: 'column',
+
+          '& > *': {
+            borderTop: `1px solid ${token.color.gray.lighter}`,
+            color: token.color.red,
+            order: 2,
+            transition: `background ${ANIMATION_OUT_SPEED}ms, color ${ANIMATION_OUT_SPEED}ms`,
+          },
+
+          '& > *:first-child': {
+            borderTop: 'none',
+          },
+
+          '& > a:hover, & > a:focus': {
+            backgroundColor: token.color.red,
+            color: token.color.white,
+            transition: `background ${ANIMATION_IN_SPEED}ms, color ${ANIMATION_IN_SPEED}ms`,
+          },
+
+          '& > a:hover svg, & > a:focus svg': {
+            fill: token.color.white,
+          },
+
+          '& svg': {
+            fill: token.color.red,
+            transition: `fill ${ANIMATION_IN_SPEED}ms`,
+          },
+        },
+
+        [`@container (${token.media.queries.desktop.min})`]: {
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+
+          '& > *': {
+            justifyContent: 'space-between',
+          },
+
+          '& > *:hover, & > *:focus': {
+            backgroundColor: token.color.redDark,
+          },
+
+          '& svg': {
+            fill: token.color.white,
+          },
+        },
+      },
+    });
 };
 
-const CreateNavigationUtility = (props: TypeUtilityRequirements) =>
-  (() => {
-    {
-      const { isLockFull, isAlertOff } = props;
-      const declaration = document.createElement('div');
-      const container = document.createElement('div');
-      const lock = document.createElement('div');
-      const wrapper = document.createElement('div');
-      const logoColumn = createLogoColumn();
+const createMobileMenu = ({
+  menuItemsBuilder,
+  isHidden,
+}: {
+  menuItemsBuilder: ReturnType<typeof createMenuItems>;
+  isHidden: boolean;
+}) => {
+  const mobileMenuBuilder = new ElementBuilder()
+    .withAttribute('id', 'umd-element-nav-utility-mobile-menu')
+    .withClassName('umd-element-nav-utility-mobile-menu')
+    .withAttribute('aria-hidden', isHidden.toString())
+    .withStyles({
+      element: {
+        [`@container (${token.media.queries.tablet.max})`]: {
+          position: 'absolute',
+          left: `-${token.spacing['2xl']}`,
+          right: `-${token.spacing['2xl']}`,
+          top: '44px',
+          boxShadow: '0 5px 5px 1px rgba(0, 0, 0, .2)',
+          height: 0,
+          overflow: 'hidden',
+          transition: `height ${ANIMATION_OUT_SPEED}ms`,
+          display: 'flex',
+          flexDirection: 'column',
+          backgroundColor: token.color.white,
 
-      const secondaryCta = {
-        ...elementStyles.action.secondary.normal,
-        className: `${ALERT_CONSTANTS.ELEMENTS.CTA}`,
-      };
+          '&[aria-hidden="true"]': {
+            transition: `height ${ANIMATION_OUT_SPEED}ms`,
+            display: 'none',
+          },
 
-      let styles = STYLES_NAVIGATION_UTILITY + jssEntryToCSS(secondaryCta);
+          '&[aria-hidden="false"]': {
+            transition: `height ${ANIMATION_IN_SPEED}ms`,
+          },
 
-      const setLayout = () => {
-        const menuItems = CreateMenuItems({ ...props });
-        const mobileMenu = document.createElement('div');
-        const mobileMenuButton = CreateMobileMenuButton({
-          expandElement: mobileMenu,
-        });
-
-        mobileMenu.setAttribute('id', `${ELEMENT_UTILITY_MOBILE_MENU}`);
-        mobileMenu.classList.add(ELEMENT_UTILITY_MOBILE_MENU);
-        mobileMenu.setAttribute('aria-hidden', (!isDesktop()).toString());
-
-        if (menuItems) {
-          mobileMenu.appendChild(menuItems);
-          wrapper.appendChild(mobileMenuButton);
-          wrapper.appendChild(mobileMenu);
-          container.setAttribute(WITH_ITEMS, 'true');
-        } else {
-          container.setAttribute(WITH_ITEMS, 'false');
-        }
-      };
-
-      const resizeEvent = () => {
-        const isDesktop = window.innerWidth >= DESKTOP;
-
-        const form = container.querySelector(`.${UtilitySearch.Elements.form}`);
-        const menu = container.querySelector(`.${ELEMENT_UTILITY_MOBILE_MENU}`);
-
-        if (!form || !menu) return;
-
-        if (isDesktop) {
-          menu.setAttribute('aria-hidden', 'false');
-          form.setAttribute('aria-hidden', 'true');
-          form.setAttribute('layout', 'desktop');
-        } else {
-          menu.setAttribute('aria-hidden', 'true');
-          form.setAttribute('aria-hidden', 'false');
-          form.setAttribute('layout', 'mobile');
-        }
-      };
-
-      const load = async () => {
-        if (!isAlertOff) {
-          const alert = await createNavAlert(props);
-
-          if (alert) {
-            container.insertBefore(alert?.element, container.firstChild);
-          }
-        }
-
-        setLayout();
-        resizeEvent();
-      };
-
-      const showAlert = async () => {
-        const isCurrentAlert = container.querySelector(
-          `.${ALERT_CONSTANTS.ELEMENTS.CONTAINER}`,
-        );
-
-        if (isCurrentAlert) return;
-
-        const alert = await createNavAlert(props);
-
-        if (alert) {
-          container.insertBefore(alert?.element, container.firstChild);
-        }
-      };
-
-      const hideAlert = () => {
-        const alert = container.querySelector(
-          `.${ALERT_CONSTANTS.ELEMENTS.CONTAINER}`,
-        );
-
-        if (alert) {
-          alert.remove();
-        }
-      };
-
-      wrapper.appendChild(logoColumn);
-      wrapper.classList.add(ELEMENT_UTILITY_WRAPPER);
-
-      lock.appendChild(wrapper);
-      lock.classList.add(ELEMENT_UTILITY_LOCK);
-
-      container.appendChild(lock);
-      container.classList.add(ELEMENT_UTILITY_CONTAINTER);
-      if (isLockFull) container.setAttribute(ATTRIBUTE_LOCK, LOCK_FULL);
-
-      declaration.appendChild(container);
-      declaration.classList.add(ELEMENT_UTILITY_DECLARATION);
-
-      load();
-      window.addEventListener('resize', resizeEvent);
-
-      return {
-        element: declaration,
-        styles,
-        events: {
-          showAlert,
-          hideAlert,
+          '& > button': {
+            display: 'none',
+          },
         },
-      };
-    }
-  })();
 
-export const createCompositeNavigationUtility = CreateNavigationUtility;
+        [`@container (${token.media.queries.large.max})`]: {
+          left: `-${token.spacing.md}`,
+          right: `-${token.spacing.md}`,
+        },
+
+        [`@container (${token.media.queries.desktop.min})`]: {
+          display: 'flex',
+          height: 'inherit !important',
+          marginLeft: 'auto',
+          position: 'relative',
+          marginRight: `-${token.spacing.md}`,
+
+          '& > button': {
+            transition: `background ${ANIMATION_OUT_SPEED}ms`,
+          },
+        },
+      },
+    });
+
+  if (menuItemsBuilder) mobileMenuBuilder.withChild(menuItemsBuilder);
+
+  return mobileMenuBuilder;
+};
+
+const createWrapper = (children: Array<ReturnType<typeof createLogoColumn>>) =>
+  new ElementBuilder()
+    .withClassName('umd-element-nav-utility-wrapper')
+    .withChildren(...children)
+    .withStyles({
+      element: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        position: 'relative',
+        minHeight: '44px',
+
+        '& > a': {
+          color: token.color.white,
+          textTransform: 'uppercase',
+
+          '&:hover, &:focus': {
+            textDecoration: 'underline',
+          },
+        },
+      },
+    });
+
+const createLock = (content: ReturnType<typeof createWrapper>) =>
+  new ElementBuilder()
+    .withClassName('umd-element-nav-utility-lock')
+    .withChild(content)
+    .withStyles({ element: { ...layout.space.horizontal.larger } });
+
+const createContainer = ({
+  content,
+  isLockFull,
+}: {
+  content: ReturnType<typeof createLock>;
+  isLockFull?: boolean;
+}) => {
+  const containerBuilder = new ElementBuilder()
+    .withClassName('element-utility-container')
+    .withChild(content)
+    .withStyles({
+      element: {
+        display: 'block',
+        backgroundColor: token.color.red,
+        position: 'relative',
+        zIndex: 999,
+
+        [`&[${ATTRIBUTE_LOCK}=${LOCK_FULL}] .umd-element-nav-utility-lock`]: {
+          ...layout.space.horizontal.full,
+        },
+
+        [`&[${WITH_ITEMS}="false"] .umd-element-nav-utility-wrapper`]: {
+          display: 'flex',
+          justifyContent: 'center',
+          justifySelf: 'center',
+        },
+
+        [`@media (${token.media.queries.large.max})`]: {
+          [`&[${WITH_ITEMS}="true"] .umd-element-nav-utility-wrapper .umd-element-nav-utility-logo-column > p`]:
+            {
+              display: 'none',
+            },
+        },
+      },
+    });
+
+  if (isLockFull) containerBuilder.withAttribute(ATTRIBUTE_LOCK, LOCK_FULL);
+
+  return containerBuilder;
+};
+
+const createDeclaration = (content: ReturnType<typeof createContainer>) =>
+  new ElementBuilder()
+    .withClassName('element-utility-declaration')
+    .withChild(content)
+    .withStyles({
+      element: {
+        container: `${ELEMENT_NAME} / inline-size`,
+      },
+    });
+
+const createNavigationUtility = (props: TypeUtilityRequirements) => {
+  const { isLockFull, isAlertOff } = props;
+
+  const logoColumn = createLogoColumn();
+  const wrapperBuilder = createWrapper([logoColumn]);
+
+  const lockBuilder = createLock(wrapperBuilder);
+  const containerBuilder = createContainer({
+    content: lockBuilder,
+    isLockFull,
+  });
+  const containerElement = containerBuilder.getElement();
+
+  const menuItemsBuilder = createMenuItems({ ...props });
+
+  if (menuItemsBuilder) {
+    const mobileMenuBuilder = createMobileMenu({
+      menuItemsBuilder,
+      isHidden: !isDesktop(),
+    });
+    const mobileMenuButton = createMobileMenuButton({
+      expandElement: mobileMenuBuilder.getElement() as HTMLDivElement,
+    });
+
+    wrapperBuilder.withChildren(mobileMenuButton, mobileMenuBuilder);
+    containerBuilder.withAttribute(WITH_ITEMS, 'true');
+  } else {
+    containerBuilder.withAttribute(WITH_ITEMS, 'false');
+  }
+
+  let alertStyleTag: HTMLStyleElement | null = null;
+
+  const insertAlert = (alert: ElementModel) => {
+    containerElement.insertBefore(alert.element, containerElement.firstChild);
+
+    if (alertStyleTag || !alert.styles) return;
+
+    alertStyleTag = createStyleTag(alert.styles);
+    containerElement.appendChild(alertStyleTag);
+  };
+
+  const resizeEvent = () => {
+    const isDesktopValue =
+      window.innerWidth >= token.media.breakpointValues.desktop.min;
+
+    const form = containerElement.querySelector('.element-utility-form');
+    const menu = containerElement.querySelector(
+      '.umd-element-nav-utility-mobile-menu',
+    );
+
+    if (!form || !menu) return;
+
+    if (isDesktopValue) {
+      menu.setAttribute('aria-hidden', 'false');
+      form.setAttribute('aria-hidden', 'true');
+      form.setAttribute('data-layout-desktop', 'true');
+      form.setAttribute('data-layout-mobile', 'false');
+    } else {
+      menu.setAttribute('aria-hidden', 'true');
+      form.setAttribute('aria-hidden', 'false');
+      form.setAttribute('data-layout-desktop', 'false');
+      form.setAttribute('data-layout-mobile', 'true');
+    }
+  };
+
+  const load = async () => {
+    if (!isAlertOff) {
+      const alert = await createNavAlert(props);
+
+      if (alert) {
+        insertAlert(alert);
+      }
+    }
+
+    resizeEvent();
+  };
+
+  const showAlert = async () => {
+    const isCurrentAlert = containerElement.querySelector(
+      `.${ALERT_CONSTANTS.ELEMENTS.CONTAINER}`,
+    );
+
+    if (isCurrentAlert) return;
+
+    const alert = await createNavAlert(props);
+
+    if (alert) {
+      insertAlert(alert);
+    }
+  };
+
+  const hideAlert = () => {
+    const alert = containerElement.querySelector(
+      `.${ALERT_CONSTANTS.ELEMENTS.CONTAINER}`,
+    );
+
+    if (alert) {
+      alert.remove();
+    }
+  };
+
+  const declarationModel = createDeclaration(containerBuilder)
+    .withEvents({ showAlert, hideAlert })
+    .build();
+
+  load();
+  window.addEventListener('resize', resizeEvent);
+
+  return declarationModel;
+};
+
+export const createCompositeNavigationUtility = createNavigationUtility;

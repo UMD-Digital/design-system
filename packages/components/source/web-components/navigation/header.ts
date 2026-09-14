@@ -4,7 +4,6 @@ import {
   createStyledSlotOrClone,
 } from '@universityofmaryland/web-utilities-library/elements';
 import { Attributes, Model } from '@universityofmaryland/web-model-library';
-import { reset } from '../../helpers/styles';
 import { SLOTS as GlobalSlots, MakeNavDrawer } from './common';
 import { ComponentRegistration } from '../../_types';
 
@@ -23,10 +22,6 @@ const styles = `
   :host {
     display: block;
   }
-
-  ${reset}
-  ${navigation.elements.drawer.Styles}
-  ${navigation.header.Styles}
 `;
 
 /**
@@ -186,7 +181,7 @@ const CreateHeader = ({
     console.error('UMDHeaderElement: Logo slot is required');
   }
 
-  const value = navigation.header.CreateElement({
+  const value = navigation.header({
     logo: logoSlot,
     utilityRow,
     navItems: CreateNavItemSlots({ element }),
@@ -228,14 +223,21 @@ const createComponent = (element: HTMLElement) => {
       element,
     };
 
+    let drawerStyles = '';
+
     if (drawer) {
       container.appendChild(drawer.element);
+      drawerStyles = drawer.styles;
       headerProps.eventOpen = drawer.events.eventOpen;
     }
 
     const headerRef = CreateHeader(headerProps);
     container.appendChild(headerRef.element);
     stickyEvent = headerRef.events.sticky;
+
+    const styleTag = document.createElement('style');
+    styleTag.textContent = `${drawerStyles}\n${headerRef.styles}`;
+    container.appendChild(styleTag);
   };
 
   build();
@@ -250,11 +252,14 @@ const createComponent = (element: HTMLElement) => {
   };
 };
 
-export const NavigationHeader: ComponentRegistration = Model.defineComponent({
-  tagName: ELEMENT_NAME,
-  createComponent,
-  attributes,
-}, { eager: false });
+export const NavigationHeader: ComponentRegistration = Model.defineComponent(
+  {
+    tagName: ELEMENT_NAME,
+    createComponent,
+    attributes,
+  },
+  { eager: false },
+);
 
 /** Backwards compatibility alias for grouped exports */
 export { NavigationHeader as header };

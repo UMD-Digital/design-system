@@ -1,7 +1,7 @@
 import * as token from '@universityofmaryland/web-token-library';
 import * as animation from '@universityofmaryland/web-styles-library/animation';
-import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 
 import { type ThemeProps } from '_types';
 
@@ -9,120 +9,77 @@ export interface BreadcrumbProps extends Pick<ThemeProps, 'isThemeDark'> {
   linkListSlot: HTMLElement;
 }
 
-const Attributes = {
-  names: {
-    theme: 'theme',
-  },
-  values: {
-    theme: {
-      DARK: 'dark',
-    },
-  },
-};
-
-const ELEMENT_NAME = 'umd-element-breadcrumb';
-
-const IS_THEME_DARK = `[${Attributes.names.theme}=${Attributes.values.theme.DARK}]`;
-
-const ELEMENT_CONTAINER = 'breadcrumb-container';
-const ELEMENT_PATH = 'breadcrumb-path';
-
-const OVERWRITE_THEME_DARK_CONTAINER = `.${ELEMENT_CONTAINER}${IS_THEME_DARK}`;
-const OVERWRITE_THEME_DARK_PATH = `${OVERWRITE_THEME_DARK_CONTAINER} .${ELEMENT_PATH}`;
-
-const OverwriteThemeStyles = `
-  ${OVERWRITE_THEME_DARK_CONTAINER} * {
-    color: ${token.color.white};
-  }
-
-  ${OVERWRITE_THEME_DARK_PATH} + *::before {
-    background-color: ${token.color.gray.dark};
-  }
-  
-  ${jssToCSS({
-    styleObj: {
-      [`${OVERWRITE_THEME_DARK_PATH}:not(:last-child)`]:
-        animation.line.slideUnderGrayDarkRed,
-    },
-  })}
-`;
-
-const PathStyles = `
-  .${ELEMENT_PATH}::-webkit-scrollbar { 
-    display: none;
-  }
-
-  .${ELEMENT_PATH}:last-child {
-    color: ${token.color.black};
-  }
-
-  .${ELEMENT_PATH}:not(:last-child) {
-    margin-right: 14px;
-  }
-
-  .${ELEMENT_PATH} + *::before {
-    content: '';
-    display: inline-block;
-    height: 14px;
-    background-color: ${token.color.gray.dark};
-    left: -8px;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%) rotate(15deg);
-    width: 1px;
-  }
-`;
-
-const ContainerStyles = `
-  .${ELEMENT_CONTAINER} {
-    display: flex;
-    padding-right: 24px;
-    font-size: 12px;
-    padding-bottom: 1px;
-    overflow-x: auto;
-    scrollbar-width: none;
-    white-space: nowrap;
-    mask-image: linear-gradient(90deg, ${
-      token.color.white
-    } calc(100% - 24px), transparent);
-  }
-
-  .${ELEMENT_CONTAINER} * {
-    color: ${token.color.gray.mediumAA};
-    position: relative;
-  }
-
-  ${jssToCSS({
-    styleObj: {
-      [`.${ELEMENT_CONTAINER} a:not(:last-child)`]:
-        animation.line.slideUnderGrayRed,
-    },
-  })}
-`;
-
-const CreateBreadcrumbElement = ({ isThemeDark, linkListSlot }: BreadcrumbProps) => {
+export const createCompositeNavigationBreadcrumb = ({
+  isThemeDark,
+  linkListSlot,
+}: BreadcrumbProps) => {
   const links = linkListSlot.querySelectorAll('a') as NodeListOf<HTMLElement>;
-  let styles = `
-    ${ContainerStyles}
-    ${PathStyles}
-    ${OverwriteThemeStyles}
-  `;
-
-  if (isThemeDark)
-    linkListSlot.setAttribute(
-      Attributes.names.theme,
-      Attributes.values.theme.DARK,
-    );
-  linkListSlot.classList.add(ELEMENT_CONTAINER);
 
   for (const linkElement of links) {
-    linkElement.classList.add(ELEMENT_PATH);
+    linkElement.classList.add('breadcrumb-path');
     wrapLinkForAnimation({
       element: linkElement,
     });
   }
 
-  return { element: linkListSlot, styles };
-};
+  const breadcrumbContainer = new ElementBuilder(linkListSlot)
+    .withClassName('breadcrumb-container')
+    .withStyles({
+      element: {
+        display: 'flex',
+        paddingRight: '24px',
+        fontSize: '12px',
+        paddingBottom: '1px',
+        overflowX: 'auto',
+        scrollbarWidth: 'none',
+        whiteSpace: 'nowrap',
+        maskImage: `linear-gradient(90deg, ${token.color.white} calc(100% - 24px), transparent)`,
 
-export const createCompositeNavigationBreadcrumb = CreateBreadcrumbElement;
+        '& *': {
+          color: token.color.gray.mediumAA,
+          position: 'relative',
+        },
+
+        '& a:not(:last-child)': {
+          ...animation.line.slideUnderGrayRed,
+        },
+
+        '& .breadcrumb-path::-webkit-scrollbar': {
+          display: 'none',
+        },
+
+        '& .breadcrumb-path:last-child': {
+          color: token.color.black,
+        },
+
+        '& .breadcrumb-path:not(:last-child)': {
+          marginRight: '14px',
+        },
+
+        '& .breadcrumb-path + *::before': {
+          content: "''",
+          display: 'inline-block',
+          height: '14px',
+          backgroundColor: token.color.gray.dark,
+          left: '-8px',
+          position: 'absolute',
+          top: '50%',
+          transform: 'translateY(-50%) rotate(15deg)',
+          width: '1px',
+        },
+
+        ...(isThemeDark && {
+          '& *': {
+            color: token.color.white,
+            position: 'relative',
+          },
+
+          '& a:not(:last-child)': {
+            ...animation.line.slideUnderGrayDarkRed,
+          },
+        }),
+      },
+    });
+
+  return breadcrumbContainer.build();
+};

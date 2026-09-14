@@ -1,19 +1,14 @@
 import { navigation } from '@universityofmaryland/web-elements-library/composite';
 import { Attributes, Model } from '@universityofmaryland/web-model-library';
-import { reset } from '../../helpers/styles';
 import { SLOTS, MakeNavDrawer } from './common';
 import { ComponentRegistration } from '../../_types';
 
 const tagName = 'umd-element-nav-drawer';
 
-export const styles = `
+const styles = `
   :host {
     display: block;
   }
-
-  ${reset}
-  ${navigation.elements.drawer.Styles}
-  ${navigation.elements.menuButton.Styles}
 `;
 
 const attributes = Attributes.handler.combine(
@@ -30,12 +25,16 @@ const createComponent = (element: HTMLElement) => {
     const drawer = MakeNavDrawer({ element, ...SLOTS });
     if (!drawer) return;
 
-    const button = navigation.elements.menuButton.CreateElement({
-      eventOpen: drawer.events.eventOpen,
-    });
+    const button = navigation.elements
+      .menuButton({ eventOpen: drawer.events.eventOpen })
+      .build();
 
     container.appendChild(drawer.element);
-    container.appendChild(button);
+    container.appendChild(button.element);
+
+    const styleTag = document.createElement('style');
+    styleTag.textContent = `${drawer.styles}\n${button.styles}`;
+    container.appendChild(styleTag);
   };
 
   build();
@@ -126,11 +125,14 @@ const createComponent = (element: HTMLElement) => {
  * @category Components
  * @since 1.0.0
  */
-export const NavigationDrawer: ComponentRegistration = Model.defineComponent({
-  tagName,
-  createComponent,
-  attributes,
-}, { eager: false });
+export const NavigationDrawer: ComponentRegistration = Model.defineComponent(
+  {
+    tagName,
+    createComponent,
+    attributes,
+  },
+  { eager: false },
+);
 
 /** Backwards compatibility alias for grouped exports */
 export { NavigationDrawer as drawer };

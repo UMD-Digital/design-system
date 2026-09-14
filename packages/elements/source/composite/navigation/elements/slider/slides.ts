@@ -1,12 +1,14 @@
 import * as token from '@universityofmaryland/web-token-library';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
+import {
+  ElementBuilder,
+  ElementModel,
+} from '@universityofmaryland/web-builder-library';
 import { cloneElementWithoutAttributes } from '@universityofmaryland/web-utilities-library/dom';
 import { chevron_down as iconChevronDown } from '@universityofmaryland/web-icons-library/controls';
 import {
   createCompositeNavigationSliderFirst as FirstSlide,
   TypeFirstSlideProps,
-  TypeFirstSlide,
 } from './slide-first';
 import {
   createCompositeNavigationSliderAction as SlideAction,
@@ -15,8 +17,6 @@ import {
 
 export type TypeSlideProps = TypeActionProps &
   TypeFirstSlideProps & {
-    ATTRIBUTE_DATA_SLIDE: string;
-    ATTRIBUTE_ACTIVE_SLIDE: string;
     childrenSlides?: HTMLElement | null;
     childrenSlideContent?: HTMLSlotElement[];
     primarySlideLinks?: HTMLElement | null;
@@ -28,191 +28,242 @@ type TypeSlideBackContainer = TypeSlideProps & {
   parentRef: string;
 };
 
-type TypeDrawerChildSlide = TypeSlideProps & {
-  slider: HTMLElement;
-};
-
-type TypeSlideFirstContainer = TypeDrawerChildSlide & TypeFirstSlide;
+type TypeDrawerChildSlide = TypeSlideProps & {};
 
 type TypeSliderSlideActions = TypeSlideProps & {
   slide: HTMLDivElement;
 };
 
-const ELEMENT_NAV_SLIDE_CONTAINER = 'nav-slide-container';
-const ELEMENT_NAV_SLIDE_OVERFLOW = 'nav-slide-overflow';
-const ELEMENT_NAV_SLIDE_WRAPPER = 'nav-slide-wrapper';
-const ELEMENT_NAV_SLIDE_HEADLINE = 'nav-slide-headline';
-const ELEMENT_NAV_SLIDE_BACK_BUTTON = 'nav-slide-action-back-button';
-const ELEMENT_NAV_SLIDE_CONTENT = 'nav-slide-action-content';
-
-// prettier-ignore
-const ContentStyles = `
-  * + .${ELEMENT_NAV_SLIDE_CONTENT} {
-    margin-top: ${token.spacing.lg};
-  }
-`;
-
-// prettier-ignore
-const BackButtonStyles = `
-  .${ELEMENT_NAV_SLIDE_BACK_BUTTON} {
-    display: block;
-    border-bottom: 1px solid ${token.color.black};
-    margin-bottom: ${token.spacing.sm};
-    padding-bottom: ${token.spacing.sm};
-  }
-
-  @media (min-width: 480px) {
-    .${ELEMENT_NAV_SLIDE_BACK_BUTTON} {
-      margin-bottom: ${token.spacing.md};
-      padding-bottom: ${token.spacing.md};
-    }
-  }
-
-  .${ELEMENT_NAV_SLIDE_BACK_BUTTON} button {
-    text-transform: uppercase;
-    font-weight: 600;
-    letter-Spacing: 1px;
-    display: flex;
-    align-items: center;
-    color: ${token.color.black};
-  }
-
-  .${ELEMENT_NAV_SLIDE_BACK_BUTTON} button:hover,
-  .${ELEMENT_NAV_SLIDE_BACK_BUTTON} button:focus {
-    text-decoration: underline;
-  }
-
-  .${ELEMENT_NAV_SLIDE_BACK_BUTTON} button svg {
-    fill: ${token.color.red};
-    width: 12px;
-    height: 12px;
-    margin-right: ${token.spacing.min};
-    transform: rotate(90deg);
-  }
-`;
-
-// prettier-ignore
-const HeadlineStyles = `
-  ${jssToCSS({
-    styleObj: {
-      [`.${ELEMENT_NAV_SLIDE_HEADLINE}`]: typography.sans.large,
-    },
-  })}
-
-  .${ELEMENT_NAV_SLIDE_HEADLINE} {
-    margin-bottom: ${token.spacing.md};
-    font-weight: 700;
-    color: ${token.color.black};
-  }
-`;
-
-// prettier-ignore
-const STYLES_NAV_SLIDES = `
-  ${BackButtonStyles}
-  ${HeadlineStyles}
-  ${ContentStyles}
-  ${SlideAction.Styles}
-  ${FirstSlide.Styles}
-`;
-
 const createSlideBackButton = (props: TypeSlideBackContainer) => {
   const { eventSlideRight, parentRef, setUpcomingSlide } = props;
 
-  if (!parentRef) return;
-  const backButtonContainer = document.createElement('div');
-  const slideBackButton = document.createElement('button');
+  if (!parentRef) return null;
 
-  slideBackButton.innerHTML = `${iconChevronDown} Back`;
-  slideBackButton.setAttribute('type', 'button');
-  slideBackButton.setAttribute('aria-label', 'Previous level of navigation');
-  slideBackButton.addEventListener('click', () => {
-    setUpcomingSlide(parentRef);
-    eventSlideRight();
-  });
+  const button = new ElementBuilder('button')
+    .withClassName('nav-slide-back-button')
+    .withAttribute('type', 'button')
+    .withAttribute('aria-label', 'Previous level of navigation')
+    .withHTML(`${iconChevronDown} Back`)
+    .withStyles({
+      element: {
+        textTransform: 'uppercase',
+        fontWeight: 600,
+        letterSpacing: '1px',
+        display: 'flex',
+        alignItems: 'center',
+        color: token.color.black,
 
-  backButtonContainer.classList.add(ELEMENT_NAV_SLIDE_BACK_BUTTON);
-  backButtonContainer.appendChild(slideBackButton);
+        '&:hover, &:focus': {
+          textDecoration: 'underline',
+        },
 
-  return backButtonContainer;
+        '& svg': {
+          fill: token.color.red,
+          width: '12px',
+          height: '12px',
+          marginRight: token.spacing.min,
+          transform: 'rotate(90deg)',
+        },
+      },
+    })
+    .on('click', () => {
+      setUpcomingSlide(parentRef);
+      eventSlideRight();
+    });
+
+  return new ElementBuilder()
+    .withClassName('nav-slide-action-back-button')
+    .withChild(button)
+    .withStyles({
+      element: {
+        display: 'block',
+        borderBottom: `1px solid ${token.color.black}`,
+        marginBottom: token.spacing.sm,
+        paddingBottom: token.spacing.sm,
+
+        [`@media (${token.media.queries.medium.min})`]: {
+          marginBottom: token.spacing.md,
+          paddingBottom: token.spacing.md,
+        },
+      },
+    });
 };
 
-const createSlideHeadline = ({ link }: { link: HTMLAnchorElement }) => {
-  const slideHeadline = document.createElement('p');
+const createSlideHeadline = ({
+  link,
+  displayType,
+}: {
+  link: HTMLAnchorElement;
+  displayType?: string;
+}) => {
+  const isInteriorNav = displayType !== 'drawer-nav';
+  const clonedLink = cloneElementWithoutAttributes({ element: link });
 
-  slideHeadline.appendChild(cloneElementWithoutAttributes({ element: link }));
-  slideHeadline.classList.add(ELEMENT_NAV_SLIDE_HEADLINE);
+  return new ElementBuilder('p')
+    .withClassName('nav-slide-headline')
+    .withChild(clonedLink)
+    .withStyles({
+      element: {
+        ...typography.sans.large,
+        marginBottom: token.spacing.md,
+        fontWeight: 700,
+        color: token.color.black,
 
-  return slideHeadline;
+        ...(isInteriorNav && {
+          borderBottom: `1px solid ${token.color.gray.light}`,
+          paddingBottom: token.spacing.md,
+        }),
+      },
+    });
 };
 
 const createSlideActions = (props: TypeSliderSlideActions) => {
   const { slide } = props;
-
-  const slideActionsContainer = document.createElement('div');
   const clonedSlide = slide.cloneNode(true) as HTMLDivElement;
   const links = Array.from(
     clonedSlide.querySelectorAll('a'),
   ) as HTMLAnchorElement[];
 
-  if (links.length > 0) {
-    links.forEach((link) =>
-      slideActionsContainer.appendChild(
-        SlideAction.CreateElement({ ...props, link }),
-      ),
+  const actionElements = links.map((link) => SlideAction({ ...props, link }));
+
+  return new ElementBuilder().withChildren(...actionElements);
+};
+
+const createContentContainer = () =>
+  new ElementBuilder().withClassName('nav-slide-action-content').withStyles({
+    element: {
+      '* + &': {
+        marginTop: token.spacing.lg,
+      },
+    },
+  });
+
+const buildSlideEntry = ({
+  props,
+  slide,
+  parentRef,
+  parentElement,
+}: {
+  props: TypeDrawerChildSlide;
+  slide: HTMLDivElement;
+  parentRef: string;
+  parentElement: HTMLAnchorElement;
+}) => {
+  const {
+    setCurrentSlide,
+    childrenSlideContent,
+    ATTRIBUTE_ACTIVE_SLIDE,
+    ATTRIBUTE_DATA_SLIDE,
+    ATTRIBUTE_PARENT_REF,
+  } = props;
+
+  const contentRef = slide.getAttribute('content-slot');
+  const isSlideActive = slide.hasAttribute(ATTRIBUTE_ACTIVE_SLIDE);
+
+  const slideBackButton = createSlideBackButton({ ...props, parentRef });
+  const slideHeadline = createSlideHeadline({
+    link: parentElement,
+    displayType: props.displayType,
+  });
+  const slideActions = createSlideActions({ ...props, slide });
+
+  const sliderWrapperChildren = [
+    slideBackButton,
+    slideHeadline,
+    slideActions,
+  ].filter((child) => child != null);
+
+  const sliderWrapper = new ElementBuilder()
+    .withClassName('nav-slide-wrapper')
+    .withChildren(...sliderWrapperChildren);
+
+  const sliderOverflowModel = new ElementBuilder()
+    .withClassName('nav-slide-overflow')
+    .withChild(sliderWrapper)
+    .build();
+
+  let contentContainer = null;
+
+  if (contentRef) {
+    const additionalContent = childrenSlideContent?.find(
+      (element) => element.getAttribute('name') === contentRef,
+    );
+
+    if (additionalContent) {
+      sliderOverflowModel.element.appendChild(additionalContent);
+      contentContainer = createContentContainer();
+    }
+  }
+
+  const sliderContainerChildren = [
+    contentContainer,
+    sliderOverflowModel,
+  ].filter((child) => child != null);
+
+  let sliderContainerBuilder = new ElementBuilder()
+    .withClassName('nav-slide-container')
+    .withAttribute(ATTRIBUTE_DATA_SLIDE, '')
+    .withAttribute(ATTRIBUTE_PARENT_REF, parentRef)
+    .withChildren(...sliderContainerChildren);
+
+  if (isSlideActive) {
+    sliderContainerBuilder = sliderContainerBuilder.withAttribute(
+      ATTRIBUTE_ACTIVE_SLIDE,
+      '',
     );
   }
 
-  return slideActionsContainer;
+  const sliderContainerElement = sliderContainerBuilder.getElement();
+
+  if (isSlideActive) {
+    setCurrentSlide({ element: sliderContainerElement });
+  }
+
+  return {
+    model: sliderContainerBuilder.build(),
+    isContextMenu: isSlideActive,
+  };
 };
 
-const CreateFirstSlide = (props: TypeSlideFirstContainer) => {
-  const { slider } = props;
-  slider.appendChild(FirstSlide.CreateElement(props));
+const queryAll = <ElementType extends Element>(
+  container: Element | null | undefined,
+  selector: string,
+): ElementType[] => {
+  if (!container) return [];
+
+  return Array.from(container.querySelectorAll<ElementType>(selector));
 };
 
-const CreateNavSlides = (props: TypeDrawerChildSlide) => {
+export const createCompositeNavigationSlides = (
+  props: TypeDrawerChildSlide,
+) => {
   const {
-    slider,
-    setCurrentSlide,
     childrenSlides,
-    childrenSlideContent,
     primarySlideLinks,
     primarySlidesSecondaryLinks,
     ATTRIBUTE_PARENT_REF,
     ATTRIBUTE_CHILD_REF,
-    ATTRIBUTE_ACTIVE_SLIDE,
-    ATTRIBUTE_DATA_SLIDE,
   } = props;
+
+  const slideModels: ElementModel[] = [];
+
   let isContextMenu = false;
+
   if (!childrenSlides) {
-    CreateFirstSlide({ ...props, isContextMenu });
-    return;
+    return [FirstSlide({ ...props, isContextMenu })];
   }
 
-  const slides = Array.from(
-    childrenSlides.querySelectorAll(`[${ATTRIBUTE_PARENT_REF}]`),
-  ) as HTMLDivElement[];
-  const primaryLinks = primarySlideLinks
-    ? Array.from(primarySlideLinks.querySelectorAll('a'))
-    : [];
-  const secondaryLinks = primarySlidesSecondaryLinks
-    ? Array.from(primarySlidesSecondaryLinks.querySelectorAll(':scope > *'))
-    : [];
-  const childLinks = Array.from(
-    childrenSlides.querySelectorAll(`[${ATTRIBUTE_CHILD_REF}]`),
-  ) as HTMLAnchorElement[];
+  const slides = queryAll<HTMLDivElement>(
+    childrenSlides,
+    `[${ATTRIBUTE_PARENT_REF}]`,
+  );
   const parentOptions = [
-    ...primaryLinks,
-    ...secondaryLinks,
-    ...childLinks,
-  ] as HTMLAnchorElement[];
+    ...queryAll<HTMLAnchorElement>(primarySlideLinks, 'a'),
+    ...queryAll<HTMLAnchorElement>(primarySlidesSecondaryLinks, ':scope > *'),
+    ...queryAll<HTMLAnchorElement>(childrenSlides, `[${ATTRIBUTE_CHILD_REF}]`),
+  ];
 
-  slides.forEach((slide, i) => {
-    const contentRef = slide.getAttribute('content-slot');
-    const sliderContainer = document.createElement('div');
-    const sliderOverflow = document.createElement('div');
-    const sliderWrapper = document.createElement('div');
-    const isSlideActive = slide.hasAttribute(ATTRIBUTE_ACTIVE_SLIDE);
+  slides.forEach((slide) => {
     const parentRef = slide.getAttribute(ATTRIBUTE_PARENT_REF) as string;
     const parentElement = parentOptions.find(
       (option) => option.getAttribute(ATTRIBUTE_CHILD_REF) === parentRef,
@@ -223,63 +274,14 @@ const CreateNavSlides = (props: TypeDrawerChildSlide) => {
       return;
     }
 
-    const slideBackButton = createSlideBackButton({ ...props, parentRef });
-    const slideHeadline = createSlideHeadline({ link: parentElement });
-    const slideActions = createSlideActions({ ...props, slide });
+    const entry = buildSlideEntry({ props, slide, parentRef, parentElement });
 
-    // Context Menu
-    if (isSlideActive) {
-      sliderContainer.setAttribute(`${ATTRIBUTE_ACTIVE_SLIDE}`, ``);
-      setCurrentSlide({ element: sliderContainer });
-      isContextMenu = true;
-    }
+    if (entry.isContextMenu) isContextMenu = true;
 
-    sliderContainer.setAttribute(`${ATTRIBUTE_DATA_SLIDE}`, '');
-    sliderContainer.classList.add(ELEMENT_NAV_SLIDE_CONTAINER);
-    sliderContainer.setAttribute(`${ATTRIBUTE_PARENT_REF}`, `${parentRef}`);
-
-    sliderOverflow.classList.add(ELEMENT_NAV_SLIDE_OVERFLOW);
-
-    if (slideBackButton) sliderWrapper.appendChild(slideBackButton);
-    sliderWrapper.appendChild(slideHeadline);
-    sliderWrapper.appendChild(slideActions);
-
-    sliderWrapper.classList.add(ELEMENT_NAV_SLIDE_WRAPPER);
-    sliderOverflow.appendChild(sliderWrapper);
-
-    if (contentRef) {
-      const additionalContent = childrenSlideContent?.find(
-        (element) => element.getAttribute('name') === contentRef,
-      );
-
-      if (additionalContent) {
-        const contentContainer = document.createElement('div');
-
-        sliderOverflow.appendChild(additionalContent);
-        contentContainer.classList.add(ELEMENT_NAV_SLIDE_CONTENT);
-
-        sliderContainer.appendChild(contentContainer);
-      }
-    }
-
-    sliderContainer.appendChild(sliderOverflow);
-    slider.appendChild(sliderContainer);
-
-    if (i === slides.length - 1) {
-      setTimeout(() => {
-        CreateFirstSlide({ ...props, isContextMenu });
-      }, 100);
-    }
+    slideModels.push(entry.model);
   });
-};
 
-export const createCompositeNavigationSlides = {
-  CreateElement: CreateNavSlides,
-  Styles: STYLES_NAV_SLIDES,
-  Elements: {
-    container: ELEMENT_NAV_SLIDE_CONTAINER,
-    overflow: ELEMENT_NAV_SLIDE_OVERFLOW,
-    wrapper: ELEMENT_NAV_SLIDE_WRAPPER,
-    headline: ELEMENT_NAV_SLIDE_HEADLINE,
-  },
+  slideModels.push(FirstSlide({ ...props, isContextMenu }));
+
+  return slideModels;
 };

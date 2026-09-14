@@ -1,101 +1,99 @@
 import { debounce } from '@universityofmaryland/web-utilities-library/performance';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 
-const ELEMENT_NAV_STICKY_CONTAINER = 'nav-sticky-container';
-const ELEMENT_NAV_STICKY_WRAPPER = 'nav-sticky-wrapper';
-
-const ELEMENT_NAV_STIKCY_WRAPPER_FIXED = 'nav-sticky-wrapper-fixed';
-
-// prettier-ignore
-const STYLES_NAV_STICKY_ELEMENT = `
-  .${ELEMENT_NAV_STICKY_CONTAINER} {
-    width: 100%;
-  }
-
-  .${ELEMENT_NAV_STICKY_WRAPPER} {
-    width: 100%;
-    background-color: white;
-  }
-
-  .${ELEMENT_NAV_STIKCY_WRAPPER_FIXED} {
-    position: fixed;
-    top: 0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-`;
-
-const CreateStickyElement = ({
+export const createCompositeNavigationSticky = ({
   content,
   component,
 }: {
   content: HTMLElement;
   component: HTMLElement;
-}) =>
-  (() => {
-    const elementContainer = document.createElement('div');
-    const elementWrapper = document.createElement('div');
-    const headerElement = component.querySelector(
-      'umd-element-navigation-header',
-    );
-    const eventScroll = () => {
-      const componentBounds = component.getBoundingClientRect();
+}) => {
+  const headerElement = component.querySelector(
+    'umd-element-navigation-header',
+  );
 
-      if (componentBounds.top < 0) {
-        if (headerElement) {
-          headerElement.setAttribute('sticky', 'true');
-          elementWrapper.classList.add(ELEMENT_NAV_STIKCY_WRAPPER_FIXED);
-        }
-      } else {
-        if (headerElement) {
-          headerElement.removeAttribute('sticky');
-          elementWrapper.classList.remove(ELEMENT_NAV_STIKCY_WRAPPER_FIXED);
+  const wrapperBuilder = new ElementBuilder()
+    .withClassName('nav-sticky-wrapper')
+    .withChild(content)
+    .withStyles({
+      element: {
+        width: '100%',
+        backgroundColor: 'white',
 
-          if (hasIncorrectHeight) {
-            setTimeout(() => {
-              eventResize();
-            }, 200);
-            setTimeout(() => {
-              eventResize();
-            }, 500);
-            hasIncorrectHeight = false;
-          }
-        }
-      }
-    };
-
-    const eventResize = () => {
-      const wrapperSize = elementWrapper.offsetHeight;
-
-      if (wrapperSize !== 0) {
-        elementContainer.style.height = `${wrapperSize}px`;
-      }
-    };
-    let hasIncorrectHeight = false;
-
-    elementWrapper.classList.add(ELEMENT_NAV_STICKY_WRAPPER);
-    elementWrapper.appendChild(content);
-
-    elementContainer.classList.add(ELEMENT_NAV_STICKY_CONTAINER);
-    elementContainer.appendChild(elementWrapper);
-
-    window.addEventListener('scroll', eventScroll);
-    window.addEventListener(
-      'resize',
-      debounce(() => {
-        eventResize();
-      }, 20),
-    );
-
-    window.addEventListener('load', () => {
-      setTimeout(() => {
-        eventResize();
-      }, 500);
+        '&.nav-sticky-wrapper-fixed': {
+          position: 'fixed',
+          top: 0,
+          boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+        },
+      },
     });
 
-    if (window.scrollY > 0) {
-      hasIncorrectHeight = true;
+  const wrapperElement = wrapperBuilder.getElement();
+
+  const containerBuilder = new ElementBuilder()
+    .withClassName('nav-sticky-container')
+    .withChild(wrapperBuilder)
+    .withStyles({
+      element: {
+        width: '100%',
+      },
+    });
+
+  const containerElement = containerBuilder.getElement();
+
+  let hasIncorrectHeight = false;
+
+  const eventResize = () => {
+    const wrapperSize = wrapperElement.offsetHeight;
+
+    if (wrapperSize !== 0) {
+      containerElement.style.height = `${wrapperSize}px`;
     }
+  };
 
-    return { element: elementContainer, styles: STYLES_NAV_STICKY_ELEMENT };
-  })();
+  const eventScroll = () => {
+    const componentBounds = component.getBoundingClientRect();
 
-export const createCompositeNavigationSticky = CreateStickyElement;
+    if (componentBounds.top < 0) {
+      if (headerElement) {
+        headerElement.setAttribute('sticky', 'true');
+        wrapperElement.classList.add('nav-sticky-wrapper-fixed');
+      }
+    } else {
+      if (headerElement) {
+        headerElement.removeAttribute('sticky');
+        wrapperElement.classList.remove('nav-sticky-wrapper-fixed');
+
+        if (hasIncorrectHeight) {
+          setTimeout(() => {
+            eventResize();
+          }, 200);
+          setTimeout(() => {
+            eventResize();
+          }, 500);
+          hasIncorrectHeight = false;
+        }
+      }
+    }
+  };
+
+  window.addEventListener('scroll', eventScroll);
+  window.addEventListener(
+    'resize',
+    debounce(() => {
+      eventResize();
+    }, 20),
+  );
+
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      eventResize();
+    }, 500);
+  });
+
+  if (window.scrollY > 0) {
+    hasIncorrectHeight = true;
+  }
+
+  return containerBuilder.build();
+};

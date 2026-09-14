@@ -4,8 +4,8 @@ import {
   token,
   typography,
 } from '@universityofmaryland/web-styles-library';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { fetchGraphQL } from '@universityofmaryland/web-utilities-library/network';
-import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
 import { close_large as iconCloseLarge } from '@universityofmaryland/web-icons-library/controls';
 import { actions } from 'atomic';
 
@@ -34,8 +34,6 @@ export type TypeAlertProps = {
   alertUrl?: string | null;
 };
 
-type ElementAttributes = Record<string, string>;
-
 type CacheCheckResult = {
   shouldCheck: boolean;
   cachedData: AlertData | null;
@@ -59,6 +57,7 @@ const QUERY = `
 `;
 
 const ELEMENT_NAME = 'umd-element-nav-alert';
+
 export const ALERT_CONSTANTS = {
   URLS: {
     DEFAULT: 'https://umd.edu/api/v2',
@@ -70,14 +69,8 @@ export const ALERT_CONSTANTS = {
   },
   ELEMENTS: {
     ALERT_ID: 'umd-global-alert',
-    DECLARATION: 'umd-element-nav-alert-declaration',
     CONTAINER: 'umd-element-nav-alert-container',
-    LOCK: 'umd-element-nav-alert-lock',
-    WRAPPER: 'umd-element-nav-alert-wrapper',
-    TITLE: 'umd-element-nav-alert-title',
-    TEXT: 'umd-element-nav-alert-text',
     CTA: 'umd-element-nav-alert-cta',
-    CLOSE_BUTTON: 'umd-element-nav-alert-close',
   },
   ATTRIBUTES: {
     TYPE: 'type',
@@ -90,190 +83,12 @@ export const ALERT_CONSTANTS = {
   ANIMATION: {
     SPEED: 800,
   },
-  BREAKPOINTS: {
-    MEDIUM: 768,
-    LARGE: 1024,
-  },
   CACHE: {
-    DURATION: 60 * 1000, // One minute in milliseconds
+    DURATION: 60 * 1000,
   },
 } as const;
 
-const { ATTRIBUTES, ANIMATION, BREAKPOINTS, ELEMENTS, TYPES } = ALERT_CONSTANTS;
-const IS_TYPE_GENERAL = `[${ATTRIBUTES.TYPE}=${TYPES.GENERAL}]`;
-const IS_TYPE_CLOSED = `[${ATTRIBUTES.TYPE}=${TYPES.CLOSED}]`;
-
-const DECLARATION = `.${ELEMENTS.DECLARATION}`;
-const CONTAINER = `.${ELEMENTS.CONTAINER}`;
-const WRAPPER = `.${ELEMENTS.WRAPPER}`;
-const LOCK = `.${ELEMENTS.LOCK}`;
-const ALERT_TITLE = `.${ELEMENTS.TITLE}`;
-const ALERT_TEXT = `.${ELEMENTS.TEXT}`;
-const CLOSE_BUTTON = `.${ELEMENTS.CLOSE_BUTTON}`;
-const CTA = `.${ELEMENTS.CTA}`;
-
-const OVERWRITE_CONTAINER_TYPE_GENERAL = `${CONTAINER}${IS_TYPE_GENERAL}`;
-const OVERWRITE_CONTAINER_TYPE_CLOSED = `${CONTAINER}${IS_TYPE_CLOSED}`;
-
-// prettier-ignore
-const OverwriteTypeGeneral = `
-  ${OVERWRITE_CONTAINER_TYPE_GENERAL} {
-    background-color: ${token.color.black};
-  }
-
-  ${OVERWRITE_CONTAINER_TYPE_GENERAL} * {
-    color: ${token.color.white};
-  }
-
-  ${OVERWRITE_CONTAINER_TYPE_GENERAL} a:hover,
-  ${OVERWRITE_CONTAINER_TYPE_GENERAL} a:focus {
-    color: ${token.color.white} !important;
-  }
-
-  ${OVERWRITE_CONTAINER_TYPE_GENERAL} ${ALERT_TITLE} {
-    color: ${token.color.gold};
-  }
-
-   ${OVERWRITE_CONTAINER_TYPE_GENERAL} ${CLOSE_BUTTON} > svg {
-    fill: ${token.color.white};
-  }
-`
-
-// prettier-ignore
-const OverwriteTypeClosed = `
-  ${OVERWRITE_CONTAINER_TYPE_CLOSED} {
-    background-color: ${token.color.gold};
-  }
-
-  ${OVERWRITE_CONTAINER_TYPE_CLOSED} * {
-    color: ${token.color.black};
-  }
-
-   ${OVERWRITE_CONTAINER_TYPE_CLOSED} .${CLOSE_BUTTON} > svg {
-    fill: ${token.color.black};
-  }
-`
-
-// prettier-ignore
-const CloseButtonStyles = `
-  ${CLOSE_BUTTON} {
-    position: absolute;
-    top: 30px;
-    right: 10px;
-  }
-  
-  @container (max-width: ${BREAKPOINTS.MEDIUM - 1}px) {
-    ${CLOSE_BUTTON} {
-      top: 25px;
-      right: 5px;
-    }
-  }
-
-  ${CLOSE_BUTTON} > svg {
-    fill: ${token.color.black};
-    width: 24px;
-    height: 24px;
-  }
-`
-
-// prettier-ignore
-const TextStyles = `
-  ${jssToCSS({
-    styleObj: {
-      [`${ALERT_TITLE}`]: typography.sans.large,
-    },
-  })}
-
-  ${ALERT_TITLE} {
-    text-transform: uppercase;
-  }
-
-  ${ALERT_TITLE} + * {
-    margin-top: ${token.spacing.sm};
-  }
-
-  ${jssToCSS({
-    styleObj: {
-      [`${ALERT_TEXT}`]: element.text.rich.simple,
-    },
-  })}
-
-  ${ALERT_TEXT},
-  ${ALERT_TEXT} * {
-    font-size: 16px;;
-  }
-
-  ${ALERT_TEXT} + * {
-    margin-top: ${token.spacing.lg};
-  }
-
-  ${CTA} {
-    text-decoration: none;
-  }
-
-  ${CTA} svg {
-    max-width: 20px;
-  }
-`
-
-// prettier-ignore
-const WrapperStyles = `
-  ${WRAPPER} {
-    position: relative;
-    padding-top: ${token.spacing.md};
-    padding-bottom: ${token.spacing.md};
-    padding-right: ${token.spacing.lg};
-  }
-
-  @container (min-width: ${BREAKPOINTS.MEDIUM}px) {
-    ${WRAPPER} {
-      padding-top: ${token.spacing.lg};
-      padding-bottom: ${token.spacing.lg};
-    }
-  }
-`
-
-// prettier-ignore
-const LockStyles = `
-  ${jssToCSS({
-    styleObj: {
-      [`${LOCK}`]: layout.space.horizontal.full,
-    },
-  })}
-`
-
-// prettier-ignore
-const ContainerStyles = `
-  ${CONTAINER} {
-    container: ${ELEMENT_NAME} / inline-size;
-    background-color: ${token.color.gray.lighter};
-    border-left: 4px solid ${token.color.red};
-    transition: height ${ANIMATION.SPEED}ms;
-    overflow: hidden;
-    position: relative;
-  }
-
-  @container (min-width: ${BREAKPOINTS.LARGE}px) {
-    ${CONTAINER} {
-      border-left: 8px solid ${token.color.red};
-    }
-  }
-`
-
-// prettier-ignore
-export const STYLES_NAV_ALERT = `
-  ${DECLARATION} {
-    container: ${ELEMENT_NAME} / inline-size;
-  }
-
-  ${ContainerStyles}
-  ${LockStyles}
-  ${WrapperStyles}
-  ${TextStyles}
-  ${CloseButtonStyles}
-  ${OverwriteTypeGeneral}
-  ${OverwriteTypeClosed}
-`;
+const { ATTRIBUTES, ANIMATION, ELEMENTS, TYPES } = ALERT_CONSTANTS;
 
 // storage.ts
 const logStorageError = (operation: string, error: Error): void => {
@@ -336,50 +151,55 @@ const updateAlertCache = (alert: AlertData): void => {
   setStoredValue(ALERT_CONSTANTS.STORAGE_KEYS.ALERT, alert);
 };
 
-const createElement = (
-  tag: string,
-  className?: string,
-  attributes?: ElementAttributes,
-): HTMLElement => {
-  const element = document.createElement(tag);
-  if (className) element.classList.add(className);
-  if (attributes) {
-    Object.entries(attributes).forEach(([key, value]) => {
-      element.setAttribute(key, value);
+const createCloseButton = (container: HTMLElement) => {
+  return new ElementBuilder('button')
+    .withClassName('umd-element-nav-alert-close')
+    .withAria({ label: 'remove alert' })
+    .withHTML(iconCloseLarge)
+    .withStyles({
+      element: {
+        position: 'absolute',
+        top: '30px',
+        right: '10px',
+
+        [`@container (${token.media.queries.large.max})`]: {
+          top: '25px',
+          right: '5px',
+        },
+
+        '& > svg': {
+          fill: token.color.black,
+          width: '24px',
+          height: '24px',
+        },
+
+        [`.${ELEMENTS.CONTAINER}[${ATTRIBUTES.TYPE}=${TYPES.GENERAL}] & > svg`]:
+          {
+            fill: token.color.white,
+          },
+      },
+    })
+    .on('click', () => {
+      const cachedAlert = getStoredValue<AlertData>(
+        ALERT_CONSTANTS.STORAGE_KEYS.ALERT,
+      );
+
+      if (cachedAlert) {
+        // Animate close
+        container.style.height = `${container.offsetHeight}px`;
+        container.style.transition = `height ${ANIMATION.SPEED}ms`;
+
+        updateAlertCache({ ...cachedAlert, hidden: true });
+
+        setTimeout(() => {
+          container.style.height = '0px';
+        }, 100);
+
+        setTimeout(() => {
+          container.remove();
+        }, ANIMATION.SPEED + 100);
+      }
     });
-  }
-  return element;
-};
-
-const createCloseButton = (container: HTMLElement): HTMLButtonElement => {
-  const { ELEMENTS, ANIMATION } = ALERT_CONSTANTS;
-  const button = createElement('button', ELEMENTS.CLOSE_BUTTON, {
-    'aria-label': 'remove alert',
-  }) as HTMLButtonElement;
-
-  button.innerHTML = iconCloseLarge;
-  button.addEventListener('click', () => {
-    const cachedAlert = getStoredValue<AlertData>(
-      ALERT_CONSTANTS.STORAGE_KEYS.ALERT,
-    );
-    if (cachedAlert) {
-      // Animate close
-      container.style.height = `${container.offsetHeight}px`;
-      container.style.transition = `height ${ANIMATION.SPEED}ms`;
-
-      updateAlertCache({ ...cachedAlert, hidden: true });
-
-      setTimeout(() => {
-        container.style.height = '0px';
-      }, 100);
-
-      setTimeout(() => {
-        container.remove();
-      }, ANIMATION.SPEED + 100);
-    }
-  });
-
-  return button;
 };
 
 const createCTAElement = ({
@@ -389,70 +209,165 @@ const createCTAElement = ({
   ctaText: string;
   ctaUrl: string;
 }) => {
-  const link = createElement('a', ALERT_CONSTANTS.ELEMENTS.CTA, {
-    href: ctaUrl,
-    rel: 'noopener noreferrer',
-    target: '_blank',
-  });
-  link.innerHTML = ctaText;
+  const link = new ElementBuilder('a')
+    .withClassName(ELEMENTS.CTA)
+    .withAttribute('href', ctaUrl)
+    .withAttribute('rel', 'noopener noreferrer')
+    .withAttribute('target', '_blank')
+    .withHTML(ctaText)
+    .build();
 
   return actions.options({
-    element: link,
+    element: link.element,
     isTypeSecondary: true,
   });
 };
 
-const createAlertContent = (
-  alert: AlertData,
-  container: HTMLElement,
-): HTMLElement => {
-  const { ELEMENTS } = ALERT_CONSTANTS;
-  const wrapper = createElement('div', ELEMENTS.WRAPPER);
-  const lock = createElement('div', ELEMENTS.LOCK);
-  const headlineText = alert.headline || alert.title;
+const createTitle = (headlineText: string) => {
+  return new ElementBuilder('p')
+    .withClassName('umd-element-nav-alert-title')
+    .withHTML(headlineText)
+    .withStyles({
+      element: {
+        ...typography.sans.large,
+        textTransform: 'uppercase',
 
-  // Create elements
-  const title = createElement('p', ELEMENTS.TITLE);
-  title.innerHTML = headlineText;
+        '& + *': {
+          marginTop: token.spacing.sm,
+        },
 
-  const closeButton = createCloseButton(container);
-
-  wrapper.append(closeButton, title);
-
-  if (alert.text) {
-    const message = createElement('div', ELEMENTS.TEXT);
-    message.innerHTML = alert.text;
-    wrapper.append(closeButton, title, message);
-  }
-
-  // Add CTA if exists
-  if (alert.ctaUrl) {
-    const cta = createCTAElement({
-      ctaText: alert.ctaText || headlineText,
-      ctaUrl: alert.ctaUrl,
+        [`.${ELEMENTS.CONTAINER}[${ATTRIBUTES.TYPE}=${TYPES.GENERAL}] &`]: {
+          color: token.color.gold,
+        },
+      },
     });
-
-    wrapper.appendChild(cta.element);
-  }
-
-  lock.appendChild(wrapper);
-  return lock;
 };
 
-const createAlertComponent = (alert: AlertData): HTMLElement => {
-  const { ELEMENTS, ATTRIBUTES } = ALERT_CONSTANTS;
+const createMessage = (alert: AlertData) => {
+  if (!alert.text) return null;
 
-  const declaration = createElement('div', ELEMENTS.DECLARATION);
-  const container = createElement('div', ELEMENTS.CONTAINER, {
-    id: ELEMENTS.ALERT_ID,
-    [ATTRIBUTES.TYPE]: alert.type,
+  return new ElementBuilder('div')
+    .withClassName('umd-element-nav-alert-text')
+    .withHTML(alert.text)
+    .withStyles({
+      element: {
+        ...element.text.rich.advanced,
+        fontSize: '16px',
+
+        '& *': {
+          fontSize: '16px',
+        },
+
+        '& + *': {
+          marginTop: token.spacing.lg,
+        },
+      },
+    });
+};
+
+const createCta = (alert: AlertData) => {
+  if (!alert.ctaUrl) return null;
+
+  const headlineText = alert.headline || alert.title;
+
+  return createCTAElement({
+    ctaText: alert.ctaText || headlineText,
+    ctaUrl: alert.ctaUrl,
   });
+};
 
-  const content = createAlertContent(alert, container);
-  container.appendChild(content);
-  declaration.appendChild(container);
+const buildAlertComponent = (alert: AlertData) => {
+  const headlineText = alert.headline || alert.title;
 
-  return declaration;
+  const containerBuilder = new ElementBuilder()
+    .withClassName(ELEMENTS.CONTAINER)
+    .withAttribute('id', ELEMENTS.ALERT_ID)
+    .withAttribute(ATTRIBUTES.TYPE, alert.type)
+    .withStyles({
+      element: {
+        container: `${ELEMENT_NAME} / inline-size`,
+        backgroundColor: token.color.gray.lighter,
+        borderLeft: `4px solid ${token.color.red}`,
+        transition: `height ${ANIMATION.SPEED}ms`,
+        overflow: 'hidden',
+        position: 'relative',
+
+        [`@container (${token.media.queries.desktop.min})`]: {
+          borderLeft: `8px solid ${token.color.red}`,
+        },
+
+        [`&[${ATTRIBUTES.TYPE}=${TYPES.GENERAL}]`]: {
+          backgroundColor: token.color.black,
+
+          '& *': {
+            color: token.color.white,
+          },
+
+          '& a:hover, & a:focus': {
+            color: `${token.color.white} !important`,
+          },
+        },
+
+        [`&[${ATTRIBUTES.TYPE}=${TYPES.CLOSED}]`]: {
+          backgroundColor: token.color.gold,
+
+          '& *': {
+            color: token.color.black,
+          },
+        },
+      },
+    });
+
+  const containerElement = containerBuilder.getElement();
+
+  const closeButton = createCloseButton(containerElement);
+  const title = createTitle(headlineText);
+  const message = createMessage(alert);
+  const cta = createCta(alert);
+
+  const wrapperChildren = [closeButton, title, message, cta].filter(
+    (child) => child != null,
+  );
+
+  const wrapper = new ElementBuilder()
+    .withClassName('umd-element-nav-alert-wrapper')
+    .withChildren(...wrapperChildren)
+    .withStyles({
+      element: {
+        position: 'relative',
+        paddingTop: token.spacing.md,
+        paddingBottom: token.spacing.md,
+        paddingRight: token.spacing.lg,
+
+        [`@container (${token.media.queries.tablet.min})`]: {
+          paddingTop: token.spacing.lg,
+          paddingBottom: token.spacing.lg,
+        },
+
+        [`& .${ELEMENTS.CTA}`]: {
+          textDecoration: 'none',
+        },
+
+        [`& .${ELEMENTS.CTA} svg`]: {
+          maxWidth: '20px',
+        },
+      },
+    });
+
+  const lock = new ElementBuilder()
+    .withClassName('umd-element-nav-alert-lock')
+    .withChild(wrapper)
+    .withStyles({ element: { ...layout.space.horizontal.full } });
+
+  return new ElementBuilder()
+    .withClassName('umd-element-nav-alert-declaration')
+    .withChild(containerBuilder.withChild(lock))
+    .withStyles({
+      element: {
+        container: `${ELEMENT_NAME} / inline-size`,
+      },
+    })
+    .build();
 };
 
 const fetchAlerts = async ({
@@ -481,30 +396,30 @@ export const createNavAlert = async ({ alertUrl }: AlertProps) => {
     alertCache.cachedData &&
     !alertCache.cachedData.hidden
   ) {
-    return { element: createAlertComponent(alertCache.cachedData) };
+    return buildAlertComponent(alertCache.cachedData);
   }
 
   // Fetch new alerts
   const response = await fetchAlerts({ alertUrl });
-  if (!response?.data?.entries[0]) {
+  if (!response || !response.data || !response.data.entries[0]) {
     clearAlertStorage();
     return null;
   }
 
-  const alert = response.data?.entries[0];
+  const alert = response.data.entries[0];
   const cachedAlert = getStoredValue<AlertData>(
     ALERT_CONSTANTS.STORAGE_KEYS.ALERT,
   );
 
   // Handle alert updates
-  if (cachedAlert?.id === alert.id) {
+  if (cachedAlert && cachedAlert.id === alert.id) {
     if (!cachedAlert.hidden && alertCache.shouldCheck) {
-      return { element: createAlertComponent(cachedAlert) };
+      return buildAlertComponent(cachedAlert);
     }
   } else {
     clearAlertStorage();
     updateAlertCache(alert);
-    return { element: createAlertComponent(alert) };
+    return buildAlertComponent(alert);
   }
 
   return null;

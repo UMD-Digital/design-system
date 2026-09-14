@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-token-library';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { chevron_down as iconChevronDown } from '@universityofmaryland/web-icons-library/controls';
 
 export type TypeActionProps = {
@@ -15,116 +15,83 @@ export type TypeAction = TypeActionProps & {
   link: HTMLAnchorElement;
 };
 
-const ELEMENT_SLIDE_ACTION_CONTAINER = 'nav-slide-action-container';
-const ELEMENT_SLIDE_ACTION_LINK = 'nav-slide-action-link';
-const ELEMENT_SLIDE_ACTION_BUTTON = 'nav-slide-action-button';
-
-// prettier-ignore
-const LinkStyles = `
-  ${jssToCSS({
-    styleObj: {
-      [`.${ELEMENT_SLIDE_ACTION_LINK}`]: typography.sans.small,
-    },
-  })}
-
-  .${ELEMENT_SLIDE_ACTION_LINK} {
-    transition: color 0.3s ease-in-out;
-  }
-
-  a.${ELEMENT_SLIDE_ACTION_LINK}:hover,
-  a.${ELEMENT_SLIDE_ACTION_LINK}:focus {
-    color: ${token.color.red};
-  }
-`;
-
-// prettier-ignore
-const ButtonStyles = `
-  .${ELEMENT_SLIDE_ACTION_BUTTON} {
-    position: absolute;
-    right: ${token.spacing.min};
-    top: 5px;
-    width: ${token.spacing.lg};
-    height: ${token.spacing.lg};
-    display: flex;
-    justify-content: center;
-  }
-
-  .${ELEMENT_SLIDE_ACTION_BUTTON}:hover svg,
-  .${ELEMENT_SLIDE_ACTION_BUTTON}:focus svg {
-    transform: rotate(-90deg) translateY(4px);
-  }
-
-  .${ELEMENT_SLIDE_ACTION_BUTTON} svg {
-    fill: ${token.color.red};
-    height: 16px;
-    width: 16px;
-    transform: rotate(-90deg) translateY(0);
-    transition: transform 0.3s ease-in-out;
-  }
-`;
-
-// prettier-ignore
-const STYLES_SLIDER_ACTION_ELEMENT = `
-  .${ELEMENT_SLIDE_ACTION_CONTAINER} {
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    padding-right: ${token.spacing['3xl']};
-    margin-bottom: ${token.spacing.xs};
-  }
-
-  ${LinkStyles}
-  ${ButtonStyles}
-`;
-
-const CreateSlideButton = ({
+const createSlideButton = ({
   link,
   GetContainer,
   setUpcomingSlide,
   eventSlideLeft,
   ATTRIBUTE_CHILD_REF,
 }: TypeAction) => {
-  const element = GetContainer();
-
-  if (!element) return null;
+  if (!GetContainer()) return null;
 
   const childReference = link.getAttribute(ATTRIBUTE_CHILD_REF);
 
   if (!childReference) return null;
 
-  const button = document.createElement('button');
-  button.classList.add(ELEMENT_SLIDE_ACTION_BUTTON);
-  button.setAttribute('type', 'button');
-  button.setAttribute('aria-label', 'Next level of navigation');
-  button.innerHTML = iconChevronDown;
-  button.addEventListener('click', () => {
-    setUpcomingSlide(childReference);
-    eventSlideLeft();
-  });
+  return new ElementBuilder('button')
+    .withClassName('nav-slide-action-button')
+    .withAttribute('type', 'button')
+    .withAttribute('aria-label', 'Next level of navigation')
+    .withHTML(iconChevronDown)
+    .withStyles({
+      element: {
+        position: 'absolute',
+        right: token.spacing.min,
+        top: '5px',
+        width: token.spacing.lg,
+        height: token.spacing.lg,
+        display: 'flex',
+        justifyContent: 'center',
 
-  return button;
+        '&:hover svg, &:focus svg': {
+          transform: 'rotate(-90deg) translateY(4px)',
+        },
+
+        '& svg': {
+          fill: token.color.red,
+          height: '16px',
+          width: '16px',
+          transform: 'rotate(-90deg) translateY(0)',
+          transition: 'transform 0.3s ease-in-out',
+        },
+      },
+    })
+    .on('click', () => {
+      setUpcomingSlide(childReference);
+      eventSlideLeft();
+    });
 };
 
-const CreateSliderActionElement = (props: TypeAction) => {
+export const createCompositeNavigationSliderAction = (props: TypeAction) => {
   const { link } = props;
-  const actionContainer = document.createElement('div');
-  const button = CreateSlideButton(props);
 
-  actionContainer.classList.add(ELEMENT_SLIDE_ACTION_CONTAINER);
+  const linkBuilder = new ElementBuilder(link)
+    .withClassName('nav-slide-action-link')
+    .withStyles({
+      element: {
+        ...typography.sans.small,
+        transition: 'color 0.3s ease-in-out',
 
-  link.classList.add(ELEMENT_SLIDE_ACTION_LINK);
-  actionContainer.appendChild(link);
+        '&:hover, &:focus': {
+          color: token.color.red,
+        },
+      },
+    });
 
-  if (button) actionContainer.appendChild(button);
+  const button = createSlideButton(props);
+  const children = [linkBuilder, button].filter((child) => child != null);
 
-  return actionContainer;
-};
-
-export const createCompositeNavigationSliderAction = {
-  CreateElement: CreateSliderActionElement,
-  Styles: STYLES_SLIDER_ACTION_ELEMENT,
-  Elements: {
-    container: ELEMENT_SLIDE_ACTION_CONTAINER,
-    link: ELEMENT_SLIDE_ACTION_LINK,
-  },
+  return new ElementBuilder()
+    .withClassName('nav-slide-action-container')
+    .withChildren(...children)
+    .withStyles({
+      element: {
+        display: 'flex',
+        justifyContent: 'space-between',
+        position: 'relative',
+        paddingRight: token.spacing['3xl'],
+        marginBottom: token.spacing.xs,
+      },
+    })
+    .build();
 };

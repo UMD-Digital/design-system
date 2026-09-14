@@ -1,10 +1,13 @@
 import * as token from '@universityofmaryland/web-token-library';
 import * as typography from '@universityofmaryland/web-styles-library/typography';
-import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
-import { createCompositeNavigationSlides as Slides } from './slides';
-import { createCompositeNavigationSliderAction as SlideAction, TypeActionProps } from './action';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
+import {
+  createCompositeNavigationSliderAction as SlideAction,
+  TypeActionProps,
+} from './action';
 
 export type TypeFirstSlideProps = TypeActionProps & {
+  displayType?: string;
   ATTRIBUTE_ACTIVE_SLIDE: string;
   ATTRIBUTE_DATA_SLIDE: string;
   currentSlide: HTMLElement | null;
@@ -22,64 +25,7 @@ export type TypeFirstSlide = TypeFirstSlideProps & {
   isContextMenu: boolean;
 };
 
-const ELEMENT_SLIDER_FIRST_SLIDE_CONTAINER = 'nav-slider-first-slide-container';
-const ELEMENT_SLIDER_FIRST_SLIDE_PRIMARY_LINKS_CONTAINER =
-  'nav-slider-first-slide-primary-links-container';
-const ELEMENT_SLIDER_SECONDARY_LINKS_CONTAINER =
-  'nav-slider-secondary-links-container';
-const ELEMENT_SLIDER_ADDITIONAL_CONTENT = 'nav-slider-additional-content';
-
-const OVERWRITE_ACTION_PRIMARY_CONTAINER = `.${ELEMENT_SLIDER_FIRST_SLIDE_PRIMARY_LINKS_CONTAINER} .${SlideAction.Elements.container}`;
-const OVERWRITE_ACTION_PRIMARY_LINK = `.${ELEMENT_SLIDER_FIRST_SLIDE_PRIMARY_LINKS_CONTAINER} .${SlideAction.Elements.link}`;
-
-//prettier-ignore;
-const OverwriteSlidePrimaryLink = `
-  ${jssToCSS({
-    styleObj: {
-      [`${OVERWRITE_ACTION_PRIMARY_LINK}`]: typography.sans.large,
-    },
-  })}
-
-  ${OVERWRITE_ACTION_PRIMARY_LINK} {
-    font-weight: 700;
-    line-height: 1.3em;
-  }
-`;
-
-//prettier-ignore;
-const OverwriteSlidePrimaryContainer = `
-  ${OVERWRITE_ACTION_PRIMARY_CONTAINER} {
-    border-bottom: 1px solid ${token.color.gray.light};
-    padding-bottom: ${token.spacing.md};
-    margin-bottom: ${token.spacing.md};
-  }
-`;
-
-//prettier-ignore;
-const SecondaryLinksContainer = `
-  .${ELEMENT_SLIDER_SECONDARY_LINKS_CONTAINER} .${SlideAction.Elements.container}:last-child {
-    border-bottom: 1px solid ${token.color.gray.light};
-    padding-bottom: ${token.spacing.md};
-  }
-`;
-
-//prettier-ignore;
-const AdditonalContent = `
-  .${ELEMENT_SLIDER_ADDITIONAL_CONTENT} {
-    padding-top: ${token.spacing.md};
-  }
-`;
-
-// prettier-ignore
-const STYLES_SLIDE_FIRST_ELEMENT = `
-  ${SecondaryLinksContainer}
-  ${AdditonalContent}
-  ${OverwriteSlidePrimaryContainer}
-  ${OverwriteSlidePrimaryLink}
-`;
-
 const createPrimaryLinks = (props: TypeFirstSlideProps) => {
-  const container = document.createElement('div');
   const { primarySlideLinks } = props;
 
   if (!primarySlideLinks) return null;
@@ -88,21 +34,32 @@ const createPrimaryLinks = (props: TypeFirstSlideProps) => {
     primarySlideLinks.querySelectorAll('a'),
   ) as HTMLAnchorElement[];
 
-  if (links.length > 0) {
-    container.classList.add(ELEMENT_SLIDER_FIRST_SLIDE_PRIMARY_LINKS_CONTAINER);
+  if (links.length === 0) return null;
 
-    links.forEach((link) =>
-      container.appendChild(SlideAction.CreateElement({ ...props, link })),
-    );
+  const linkElements = links.map((link) => SlideAction({ ...props, link }));
 
-    return container;
-  }
+  return new ElementBuilder()
+    .withClassName('nav-slider-first-slide-primary-links-container')
+    .withChildren(...linkElements)
+    .withStyles({
+      element: {
+        ['& .nav-slide-action-link']: {
+          ...typography.sans.large,
+          fontWeight: 700,
+          lineHeight: '1.3em',
+        },
 
-  return null;
+        ['& .nav-slide-action-container']: {
+          borderBottom: `1px solid ${token.color.gray.light}`,
+          paddingBottom: token.spacing.md,
+          marginBottom: token.spacing.md,
+        },
+      },
+    });
 };
 
 const createSecondaryLinks = (props: TypeFirstSlideProps) => {
-  const container = document.createElement('div');
+  const isInteriorNav = props.displayType !== 'drawer-nav';
   const { primarySlidesSecondaryLinks } = props;
 
   if (!primarySlidesSecondaryLinks) return null;
@@ -111,70 +68,79 @@ const createSecondaryLinks = (props: TypeFirstSlideProps) => {
     primarySlidesSecondaryLinks.querySelectorAll(':scope > *'),
   ) as HTMLAnchorElement[];
 
-  if (elements.length > 0) {
-    container.classList.add(ELEMENT_SLIDER_SECONDARY_LINKS_CONTAINER);
+  if (elements.length === 0) return null;
 
-    elements.forEach((link) =>
-      container.appendChild(SlideAction.CreateElement({ ...props, link })),
-    );
+  const linkElements = elements.map((link) => SlideAction({ ...props, link }));
 
-    return container;
-  }
-
-  return null;
+  return new ElementBuilder()
+    .withClassName('nav-slider-secondary-links-container')
+    .withChildren(...linkElements)
+    .withStyles({
+      element: {
+        ['& .nav-slide-action-container:last-child']: {
+          borderBottom: `1px solid ${token.color.gray.light}`,
+          paddingBottom: token.spacing.md,
+          ...(isInteriorNav && { marginBottom: 0 }),
+        },
+      },
+    });
 };
 
-const createAdditonalContent = (element: TypeFirstSlideProps) => {
-  const container = document.createElement('div');
-  const { primarySlideContent } = element;
+const createAdditionalContent = (props: TypeFirstSlideProps) => {
+  const { primarySlideContent } = props;
 
   if (!primarySlideContent) return null;
 
-  container.classList.add(ELEMENT_SLIDER_ADDITIONAL_CONTENT);
-  container.appendChild(primarySlideContent);
-
-  return container;
+  return new ElementBuilder()
+    .withClassName('nav-slider-additional-content')
+    .withChild(primarySlideContent)
+    .withStyles({
+      element: {
+        paddingTop: token.spacing.md,
+      },
+    });
 };
 
-const CreateSlideFirstElement = (props: TypeFirstSlide) => {
+export const createCompositeNavigationSliderFirst = (props: TypeFirstSlide) => {
   const {
     setCurrentSlide,
     ATTRIBUTE_DATA_SLIDE,
     ATTRIBUTE_ACTIVE_SLIDE,
     isContextMenu,
   } = props;
-  const sliderContainer = document.createElement('div');
-  const sliderOverflow = document.createElement('div');
-  const wrapper = document.createElement('div');
-  const primarlyLinkContent = createPrimaryLinks(props);
-  const secondaryLinkContent = createSecondaryLinks(props);
-  const additionalContent = createAdditonalContent(props);
 
-  sliderContainer.classList.add(ELEMENT_SLIDER_FIRST_SLIDE_CONTAINER);
-  sliderContainer.setAttribute(`${ATTRIBUTE_DATA_SLIDE}`, '');
+  const primaryLinkContent = createPrimaryLinks(props);
+  const secondaryLinkContent = createSecondaryLinks(props);
+  const additionalContent = createAdditionalContent(props);
+
+  const wrapperChildren = [
+    primaryLinkContent,
+    secondaryLinkContent,
+    additionalContent,
+  ].filter((child) => child != null);
+
+  const wrapper = new ElementBuilder()
+    .withClassName('nav-slide-wrapper')
+    .withChildren(...wrapperChildren);
+
+  const sliderOverflow = new ElementBuilder()
+    .withClassName('nav-slide-overflow')
+    .withChild(wrapper);
+
+  let sliderContainerBuilder = new ElementBuilder()
+    .withClassName('nav-slider-first-slide-container')
+    .withAttribute(ATTRIBUTE_DATA_SLIDE, '')
+    .withChild(sliderOverflow);
+
+  const sliderContainerElement = sliderContainerBuilder.getElement();
 
   if (!isContextMenu) {
-    sliderContainer.setAttribute(`${ATTRIBUTE_ACTIVE_SLIDE}`, '');
-    setCurrentSlide({ element: sliderContainer });
+    sliderContainerBuilder = sliderContainerBuilder.withAttribute(
+      ATTRIBUTE_ACTIVE_SLIDE,
+      '',
+    );
+    setCurrentSlide({ element: sliderContainerElement });
   }
 
-  if (primarlyLinkContent) wrapper.appendChild(primarlyLinkContent);
-  if (secondaryLinkContent) wrapper.appendChild(secondaryLinkContent);
-  if (additionalContent) wrapper.appendChild(additionalContent);
-
-  wrapper.classList.add(Slides.Elements.wrapper);
-  sliderOverflow.classList.add(Slides.Elements.overflow);
-
-  sliderOverflow.appendChild(wrapper);
-  sliderContainer.appendChild(sliderOverflow);
-
-  return sliderContainer;
-};
-
-export const createCompositeNavigationSliderFirst = {
-  CreateElement: CreateSlideFirstElement,
-  Styles: STYLES_SLIDE_FIRST_ELEMENT,
-  Elements: {
-    secondaryContainer: ELEMENT_SLIDER_SECONDARY_LINKS_CONTAINER,
-  },
+  return sliderContainerBuilder.build();
 };

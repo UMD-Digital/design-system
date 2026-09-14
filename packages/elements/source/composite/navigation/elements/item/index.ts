@@ -1,6 +1,6 @@
 import * as token from '@universityofmaryland/web-token-library';
 import * as animation from '@universityofmaryland/web-styles-library/animation';
-import { jssToCSS } from '@universityofmaryland/web-utilities-library/styles';
+import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import { wrapLinkForAnimation } from '@universityofmaryland/web-utilities-library/animation';
 import { handleKeyboardNavigation } from '@universityofmaryland/web-utilities-library/events';
 import { chevron_down as iconChevronDown } from '@universityofmaryland/web-icons-library/controls';
@@ -31,456 +31,417 @@ export type TypeNavItemRequirements = TypeDropdownProps &
 
 type TypeNavItem = TypeNavItemRequirements;
 
-const ELEMENT_NAME = 'umd-element-nav-item';
-const ATTRIBUTE_DROPDOWN = 'data-dropdown';
 const ATTRIBUTE_SHOWING = 'data-showing';
 const ATTRIBUTE_SELECTED = 'data-selected';
-
 const BOUNDS_SHIFT = 140;
 const MAX_COLUMN_ITEMS = 8;
 
-const ELEMENT_NAV_ITEM_CONTAINER = `nav-item-container`;
-const ELEMENT_PRIMARY_LINK_CONTAINER = 'nav-item-primary-link-container';
-const ELEMENT_PRIMARLY_LINK_WRAPPER = `nav-item-primary-link-wrapper`;
-const ELEMENT_PRIMARY_LINK_CONTAINER_BUTTON = `nav-item-primary-link-button`;
-
-const ELEMENT_DROPDOWN_CONTAINER = `nav-item-dropdown-container`;
-const ELEMENT_DROPDOWN_LIST_CONTAINER = 'nav-item-dropdown-list';
-const ELEMENT_DROPDOWN_MULTIPLE_COLUMN = 'nav-item-dropdown-multiple-column';
-const ELEMENT_DROPDOWN_CTA_COLUMN = 'nav-item-dropdown-cta-column';
-
-const IS_SELECTED = `[${ATTRIBUTE_SELECTED}]`;
-const IS_SHOWING = `[${ATTRIBUTE_SHOWING}]`;
-const IS_DROPDOWN = `[${ATTRIBUTE_DROPDOWN}]`;
-
-const OVERWRITE_DROPDOWN_CONTAINER = `.${ELEMENT_NAV_ITEM_CONTAINER}${IS_DROPDOWN}`;
-const OVERWRITE_IS_SHOWING_DROPDOWN_CONTAINER = `${OVERWRITE_DROPDOWN_CONTAINER}${IS_SHOWING} .${ELEMENT_DROPDOWN_CONTAINER}`;
-const OVERWRITE_IS_SHOWING_PRIMARY_LINK = `${OVERWRITE_DROPDOWN_CONTAINER} .${ELEMENT_PRIMARLY_LINK_WRAPPER}`;
-const OVERWRITE_IS_SHOWING_PRIMARY_BUTTON = `${OVERWRITE_DROPDOWN_CONTAINER}${IS_SHOWING} .${ELEMENT_PRIMARY_LINK_CONTAINER_BUTTON}`;
-
-// prettier-ignore
-const OverwriteDropdownStyles = `
-  ${OVERWRITE_IS_SHOWING_DROPDOWN_CONTAINER} {
-    display: block;
-  }
-
-  ${OVERWRITE_IS_SHOWING_PRIMARY_BUTTON} {
-    transform: rotate(180deg) translateY(4px);
-  }
-
-  ${OVERWRITE_IS_SHOWING_PRIMARY_LINK} > a${IS_SELECTED}:before {
-    bottom: 1px;
-    right: 20px;
-  }
-`
-
-// prettier-ignore
-const PrimaryStyles = `
-  .${ELEMENT_PRIMARY_LINK_CONTAINER} {
-    position: relative;
-  }
-
-  .${ELEMENT_PRIMARLY_LINK_WRAPPER} {
-    display: block;
-    position: relative;
-  }
-
-  .${ELEMENT_PRIMARLY_LINK_WRAPPER} > a {
-    color: ${token.color.black};
-    font-size: ${token.font.size.base};
-    transition: color 0.2s ease-in-out;
-    font-weight: 700;
-    text-wrap: pretty;
-    display: block;
-    display: flex;
-    align-items: flex-end;
-    text-align: right;
-    line-height: 1.15em !important;
-    letter-spacing: 0 !important;
-    word-spacing: 0 !important;
-  }
-
-  .${ELEMENT_PRIMARLY_LINK_WRAPPER} > a:hover,
-  .${ELEMENT_PRIMARLY_LINK_WRAPPER} > a:focus {
-    color: ${token.color.red};
-   }
-
-  .${ELEMENT_PRIMARLY_LINK_WRAPPER} > a[${ATTRIBUTE_SELECTED}] span {
-    display: inline;
-    position: relative;
-    background-position: left calc(100% - 0px);
-    background-repeat: no-repeat;
-    background-size: 100% 2.5px;
-    background-image: linear-gradient(${token.color.gold}, ${token.color.gold});
-  }
-
-  .${ELEMENT_PRIMARY_LINK_CONTAINER_BUTTON} {
-    position: absolute;
-    top: 2px;
-    right: -20px;
-    transition: transform .5s;
-  }
-
-  .${ELEMENT_PRIMARY_LINK_CONTAINER_BUTTON} svg {
-    fill: ${token.color.red};
-    height: 14px;
-    width: 14px;
-    transform: rotate(0deg) translateY(0);
-    transition: fill .5s,transform .5s;
-  }
-`;
-
-// prettier-ignore
-const DropdownMultipleColumnStyles = `
-  .${ELEMENT_DROPDOWN_MULTIPLE_COLUMN} {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .${ELEMENT_DROPDOWN_MULTIPLE_COLUMN} > * {
-    min-width: 232px;
-  }
-
-  .${ELEMENT_DROPDOWN_MULTIPLE_COLUMN} > *:not(:first-child) {
-    margin-left: 40px;
-  }
-`
-
-// prettier-ignore
-const DropdownListStyles = `
-  .${ELEMENT_DROPDOWN_LIST_CONTAINER} {
-    background-color: ${token.color.white};
-    border-top: 2px solid ${token.color.red};
-    padding: ${token.spacing.lg};
-    box-shadow: -1px 9px 32px -10px rgba(0,0,0,0.19);
-  }
-
-  .${ELEMENT_DROPDOWN_LIST_CONTAINER} a {
-    display: block;
-    min-width: 120px;
-    max-width: 230px;
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 1.5em;
-  }
-
-  ${jssToCSS({
-    styleObj: {
-      [`.${ELEMENT_DROPDOWN_LIST_CONTAINER} a`]:
-      animation.line.slideUnderRed,
-    },
-  })}
-
-  .${ELEMENT_DROPDOWN_LIST_CONTAINER} a:hover,
-  .${ELEMENT_DROPDOWN_LIST_CONTAINER} a:focus {
-    color: ${token.color.red};
-  }
-
-  .${ELEMENT_DROPDOWN_LIST_CONTAINER} a + a {
-    margin-top: ${token.spacing.md};
-    display: block;
-  }
-
-  .${ELEMENT_DROPDOWN_LIST_CONTAINER} a${IS_SELECTED} span:not(.sr-only) {
-    display: inline;
-    position: relative;
-    background-position: left calc(100% - 0px);
-    background-repeat: no-repeat;
-    background-size: 100% 2.5px;
-    background-image: linear-gradient(${token.color.gold}, ${token.color.gold});
-  }
-
-  .${ELEMENT_DROPDOWN_LIST_CONTAINER} a${IS_SELECTED}:hover span,
-  .${ELEMENT_DROPDOWN_LIST_CONTAINER} a${IS_SELECTED}:focus span {
-    border-bottom: none;
-  }
-`
-
-// prettier-ignore
-const DropdownStyles = `
-  .${ELEMENT_DROPDOWN_CONTAINER} {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    min-width: 200px;
-    width: auto;
-    padding-top: ${token.spacing.sm};
-    display: none;
-  }
-`;
-
-const STYLES_NAV_ITEM_ELEMENT = `
-  .${ELEMENT_NAV_ITEM_CONTAINER} {
-    position: relative;
-    z-index: 9999;
-  }
-
-  ${OVERWRITE_DROPDOWN_CONTAINER} {
-    padding-right: 20px;
-  }
-
-  .${ELEMENT_NAV_ITEM_CONTAINER} a {
-    font-family: ${token.font.family.sans};
-    font-size: ${token.font.size.sm};
-    font-weight: 700;
-    color: ${token.color.black};
-    text-decoration: none;
-  }
-  
-  .${ELEMENT_NAV_ITEM_CONTAINER}:foucs-within .${ELEMENT_DROPDOWN_CONTAINER} {
-    display: block;
-  }
-
-  ${PrimaryStyles}
-  ${DropdownStyles}
-  ${DropdownMultipleColumnStyles}
-  ${DropdownListStyles}
-  ${OverwriteDropdownStyles}
-`;
-
-const CreateMultipleColumns = ({ links }: { links: HTMLAnchorElement[] }) => {
-  const column1 = document.createElement('div');
-  const column2 = document.createElement('div');
+const createMultipleColumns = ({ links }: { links: HTMLAnchorElement[] }) => {
   const firstColumnLinks = links.splice(0, Math.ceil(links.length / 2));
 
-  firstColumnLinks.forEach((link) => {
-    wrapLinkForAnimation({ element: link });
-    column1.appendChild(link);
-  });
-  links.forEach((link) => {
-    wrapLinkForAnimation({ element: link });
-    column2.appendChild(link);
-  });
+  firstColumnLinks.forEach((link) => wrapLinkForAnimation({ element: link }));
+  links.forEach((link) => wrapLinkForAnimation({ element: link }));
 
-  return [column1, column2];
+  return [
+    new ElementBuilder().withChildren(...firstColumnLinks),
+    new ElementBuilder().withChildren(...links),
+  ];
 };
 
-const CreateSingleColumn = ({ links }: { links: HTMLAnchorElement[] }) => {
-  const container = document.createElement('div');
-  links.forEach((link) => {
-    wrapLinkForAnimation({ element: link });
-    container.appendChild(link);
-  });
+const createSingleColumn = ({ links }: { links: HTMLAnchorElement[] }) => {
+  links.forEach((link) => wrapLinkForAnimation({ element: link }));
 
-  return container;
+  return new ElementBuilder().withChildren(...links);
 };
 
-const CreateDropdown = ({
+const createDropdownCtaColumn = (dropdownCalloutsSlot?: HTMLElement | null) => {
+  if (!dropdownCalloutsSlot) return null;
+
+  return new ElementBuilder()
+    .withClassName('nav-item-dropdown-cta-column')
+    .withChild(dropdownCalloutsSlot);
+};
+
+const createDropdown = ({
   dropdownLinksContainer,
   dropdownCalloutsSlot,
 }: TypeDropdownProps) => {
-  if (!dropdownLinksContainer) return;
+  if (!dropdownLinksContainer) return null;
 
   const links = Array.from(
     dropdownLinksContainer.querySelectorAll('a'),
   ) as HTMLAnchorElement[];
+  const isMultipleColumn =
+    links.length > MAX_COLUMN_ITEMS || Boolean(dropdownCalloutsSlot);
 
-  const container = document.createElement('div');
-  const wrapper = document.createElement('div');
-
-  wrapper.classList.add(ELEMENT_DROPDOWN_LIST_CONTAINER);
-  container.classList.add(ELEMENT_DROPDOWN_CONTAINER);
+  let columnChildren = [createSingleColumn({ links })];
 
   if (links.length > MAX_COLUMN_ITEMS) {
-    const columns = CreateMultipleColumns({ links });
-    columns.forEach((column) => {
-      wrapper.appendChild(column);
+    columnChildren = createMultipleColumns({ links });
+  }
+
+  const dropdownCtaColumn = createDropdownCtaColumn(dropdownCalloutsSlot);
+
+  const wrapperChildren = [...columnChildren, dropdownCtaColumn].filter(
+    (child) => child != null,
+  );
+
+  const wrapper = new ElementBuilder()
+    .withClassName('nav-item-dropdown-list')
+    .withChildren(...wrapperChildren)
+    .withStyles({
+      element: {
+        backgroundColor: token.color.white,
+        borderTop: `2px solid ${token.color.red}`,
+        padding: token.spacing.lg,
+        boxShadow: '-1px 9px 32px -10px rgba(0,0,0,0.19)',
+
+        '& a': {
+          display: 'block',
+          minWidth: '120px',
+          maxWidth: '230px',
+          fontWeight: 700,
+          fontSize: '14px',
+          lineHeight: '1.5em',
+          ...animation.line.slideUnderRed,
+        },
+
+        '& a:hover, & a:focus': {
+          color: token.color.red,
+        },
+
+        '& a + a': {
+          marginTop: token.spacing.md,
+          display: 'block',
+        },
+
+        [`& a[${ATTRIBUTE_SELECTED}] span:not(.sr-only)`]: {
+          display: 'inline',
+          position: 'relative',
+          backgroundPosition: 'left calc(100% - 0px)',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '100% 2.5px',
+          backgroundImage: `linear-gradient(${token.color.gold}, ${token.color.gold})`,
+        },
+
+        [`& a[${ATTRIBUTE_SELECTED}]:hover span, & a[${ATTRIBUTE_SELECTED}]:focus span`]:
+          {
+            borderBottom: 'none',
+          },
+
+        ...(isMultipleColumn && {
+          display: 'flex',
+          justifyContent: 'space-between',
+
+          '& > *': {
+            minWidth: '232px',
+          },
+
+          '& > *:not(:first-child)': {
+            marginLeft: '40px',
+          },
+        }),
+      },
     });
-    wrapper.classList.add(ELEMENT_DROPDOWN_MULTIPLE_COLUMN);
-  } else {
-    wrapper.appendChild(CreateSingleColumn({ links }));
 
-    if (dropdownCalloutsSlot) {
-      wrapper.classList.add(ELEMENT_DROPDOWN_MULTIPLE_COLUMN);
-    }
-  }
+  return new ElementBuilder()
+    .withClassName('nav-item-dropdown-container')
+    .withChild(wrapper)
+    .withStyles({
+      element: {
+        position: 'absolute',
+        top: '100%',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        minWidth: '200px',
+        width: 'auto',
+        paddingTop: token.spacing.sm,
+        display: 'none',
 
-  if (dropdownCalloutsSlot) {
-    const dropdownWrapper = document.createElement('div');
+        [`.nav-item-container[data-dropdown][${ATTRIBUTE_SHOWING}] &`]: {
+          display: 'block',
+        },
 
-    dropdownWrapper.classList.add(ELEMENT_DROPDOWN_CTA_COLUMN);
-    dropdownWrapper.appendChild(dropdownCalloutsSlot);
-    wrapper.appendChild(dropdownWrapper);
-  }
-
-  container.appendChild(wrapper);
-
-  return container;
+        '.nav-item-container:focus-within &': {
+          display: 'block',
+        },
+      },
+    });
 };
 
-const CreateButton = ({
+const createButton = ({
   buttonClick,
   navItemName,
-}: TypePrimaryLinkButtonProps) => {
-  const button = document.createElement('button');
+}: TypePrimaryLinkButtonProps) =>
+  new ElementBuilder('button')
+    .withClassName('nav-item-primary-link-button')
+    .withHTML(iconChevronDown)
+    .withAttribute('aria-expanded', 'false')
+    .withAttribute('aria-controls', 'nav-links-')
+    .withAttribute('aria-label', `List of menu items for ${navItemName}`)
+    .withStyles({
+      element: {
+        position: 'absolute',
+        top: '2px',
+        right: '-20px',
+        transition: 'transform .5s',
 
-  button.classList.add(ELEMENT_PRIMARY_LINK_CONTAINER_BUTTON);
-  button.innerHTML = iconChevronDown;
-  button.addEventListener('click', () => buttonClick());
-  button.setAttribute('aria-expanded', 'false');
-  button.setAttribute('aria-controls', `nav-links-`);
-  button.setAttribute('aria-label', `List of menu items for ${navItemName}`);
+        '& svg': {
+          fill: token.color.red,
+          height: '14px',
+          width: '14px',
+          transform: 'rotate(0deg) translateY(0)',
+          transition: 'fill .5s,transform .5s',
+        },
 
-  return button;
+        [`.nav-item-container[data-dropdown][${ATTRIBUTE_SHOWING}] &`]: {
+          transform: 'rotate(180deg) translateY(4px)',
+        },
+      },
+    })
+    .on('click', () => buttonClick());
+
+const createPrimaryLinkAnchor = ({
+  primaryLinkContainer,
+  hasDropdown,
+}: {
+  primaryLinkContainer?: HTMLElement | null;
+  hasDropdown: boolean;
+}) => {
+  if (!primaryLinkContainer) return null;
+
+  const clonedPrimaryLink = primaryLinkContainer.cloneNode(true) as HTMLElement;
+
+  return new ElementBuilder(clonedPrimaryLink)
+    .withClassName('nav-item-primary-link')
+    .withStyles({
+      element: {
+        color: token.color.black,
+        fontSize: token.font.size.base,
+        transition: 'color 0.2s ease-in-out',
+        fontWeight: 700,
+        textWrap: 'pretty',
+        display: 'flex',
+        alignItems: 'flex-end',
+        textAlign: 'right',
+        lineHeight: '1.15em !important',
+        letterSpacing: '0 !important',
+        wordSpacing: '0 !important',
+
+        '&:hover, &:focus': {
+          color: token.color.red,
+        },
+
+        [`&[${ATTRIBUTE_SELECTED}] span`]: {
+          display: 'inline',
+          position: 'relative',
+          backgroundPosition: 'left calc(100% - 0px)',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: '100% 2.5px',
+          backgroundImage: `linear-gradient(${token.color.gold}, ${token.color.gold})`,
+        },
+
+        [`.nav-item-container[data-dropdown] &[${ATTRIBUTE_SELECTED}]:before`]:
+          {
+            bottom: '1px',
+            right: '20px',
+          },
+      },
+    });
 };
 
-const CreatePrimaryLink = (props: TypePrimaryLinkProps) => {
-  const { hasDropdown, primaryLinkContainer } = props;
-  const container = document.createElement('div');
-  const wrapper = document.createElement('div');
+const createDropdownButton = ({
+  hasDropdown,
+  buttonClick,
+  navItemName,
+}: TypePrimaryLinkButtonProps & { hasDropdown?: boolean }) => {
+  if (!hasDropdown) return null;
 
-  const dropdown = CreateDropdown(props);
-
-  container.classList.add(ELEMENT_PRIMARY_LINK_CONTAINER);
-  wrapper.classList.add(ELEMENT_PRIMARLY_LINK_WRAPPER);
-
-  if (primaryLinkContainer) {
-    const clonedPrimaryLink = primaryLinkContainer.cloneNode(
-      true,
-    ) as HTMLElement;
-    wrapper.appendChild(clonedPrimaryLink);
-  }
-
-  if (hasDropdown) {
-    const button = CreateButton(props);
-    wrapper.appendChild(button);
-  }
-
-  if (dropdown) wrapper.appendChild(dropdown);
-
-  container.appendChild(wrapper);
-  return container;
+  return createButton({ buttonClick, navItemName });
 };
 
-const CreateNavItemElement = (props: TypeNavItem) =>
-  (() => {
-    const { dropdownLinksContainer, primaryLinkContainer, context } = props;
+const createPrimaryLink = (props: TypePrimaryLinkProps) => {
+  const { hasDropdown, primaryLinkContainer, navItemName, buttonClick } = props;
 
-    if (!primaryLinkContainer) {
-      throw new Error('Primary link is required for a nav item');
+  const primaryLinkAnchor = createPrimaryLinkAnchor({
+    primaryLinkContainer,
+    hasDropdown,
+  });
+  const button = createDropdownButton({
+    hasDropdown,
+    buttonClick,
+    navItemName,
+  });
+  const dropdown = createDropdown(props);
+
+  const wrapperChildren = [primaryLinkAnchor, button, dropdown].filter(
+    (child) => child != null,
+  );
+
+  const wrapper = new ElementBuilder()
+    .withClassName('nav-item-primary-link-wrapper')
+    .withChildren(...wrapperChildren)
+    .withStyles({
+      element: {
+        display: 'block',
+        position: 'relative',
+      },
+    });
+
+  return new ElementBuilder()
+    .withClassName('nav-item-primary-link-container')
+    .withChild(wrapper)
+    .withStyles({
+      element: {
+        position: 'relative',
+      },
+    });
+};
+
+export const createCompositeNavigationItem = (props: TypeNavItem) => {
+  const { dropdownLinksContainer, primaryLinkContainer, context } = props;
+
+  if (!primaryLinkContainer) {
+    throw new Error('Primary link is required for a nav item');
+  }
+
+  const dropDownContainerLinks = dropdownLinksContainer?.children;
+  const hasDropdown =
+    (dropDownContainerLinks && dropDownContainerLinks.length > 0) || false;
+  const navItemName = primaryLinkContainer.innerHTML
+    .replace(/(<([^>]+)>)/gi, '')
+    .trim();
+
+  let isShowing = false;
+  let focusCallback = () => {};
+
+  let containerBuilder = new ElementBuilder()
+    .withClassName('nav-item-container')
+    .withStyles({
+      element: {
+        position: 'relative',
+        zIndex: 9999,
+
+        '& a': {
+          fontFamily: token.font.family.sans,
+          fontSize: token.font.size.sm,
+          fontWeight: 700,
+          color: token.color.black,
+          textDecoration: 'none',
+        },
+
+        '&[data-dropdown]': {
+          paddingRight: '20px',
+        },
+      },
+    });
+
+  const elementContainer = containerBuilder.getElement();
+
+  const onLoadDropdownSpans = () => {
+    if (!dropdownLinksContainer) return;
+
+    const links = Array.from(
+      dropdownLinksContainer.querySelectorAll('a'),
+    ) as HTMLAnchorElement[];
+
+    links.forEach((link) => {
+      const hasSpan = link.querySelector('span');
+
+      if (!hasSpan) {
+        wrapLinkForAnimation({ element: link });
+        link.appendChild(link);
+      }
+    });
+  };
+
+  const dropdownPositionPerViewPort = () => {
+    const elementBounds = elementContainer.getBoundingClientRect();
+    const dropdownContainer = elementContainer.querySelector(
+      '.nav-item-dropdown-container',
+    ) as HTMLDivElement;
+    const width = elementContainer.offsetWidth;
+
+    if (!dropdownContainer) return;
+
+    const size = dropdownContainer.offsetWidth + BOUNDS_SHIFT;
+
+    if (elementBounds.left + width < size) {
+      dropdownContainer.style.left = '0';
+      dropdownContainer.style.transform = 'translateX(0)';
     }
 
-    const elementContainer = document.createElement('div');
-    const dropDownContainerLinks = dropdownLinksContainer?.children;
-    const hasDropdown =
-      (dropDownContainerLinks && dropDownContainerLinks.length > 0) || false;
+    if (window.innerWidth - elementBounds.right < size / 2) {
+      dropdownContainer.style.right = '0';
+      dropdownContainer.style.left = 'inherit';
+      dropdownContainer.style.transform = 'translateX(0)';
+    }
+  };
 
-    const navItemName = primaryLinkContainer.innerHTML
-      .replace(/(<([^>]+)>)/gi, '')
-      .trim();
-    let isShowing = false;
-    let focusCallback = () => {};
-
-    const OnLoadDropdownSpans = () => {
-      if (!dropdownLinksContainer) return;
-
-      const links = Array.from(
-        dropdownLinksContainer.querySelectorAll('a'),
-      ) as HTMLAnchorElement[];
-
-      links.forEach((link) => {
-        const hasSpan = link.querySelector('span');
-
-        if (!hasSpan) {
-          wrapLinkForAnimation({ element: link });
-          link.appendChild(link);
-        }
-      });
-    };
-
-    const DropdownPositionPerViewPort = () => {
-      const elementBounds = elementContainer.getBoundingClientRect();
-      const dropdownContainer = elementContainer.querySelector(
-        `.${ELEMENT_DROPDOWN_CONTAINER}`,
-      ) as HTMLDivElement;
-      const width = elementContainer.offsetWidth;
-
-      if (!dropdownContainer) return;
-
-      const size = dropdownContainer.offsetWidth + BOUNDS_SHIFT;
-
-      if (elementBounds.left + width < size) {
-        dropdownContainer.style.left = '0';
-        dropdownContainer.style.transform = 'translateX(0)';
-      }
-
-      if (window.innerWidth - elementBounds.right < size / 2) {
-        dropdownContainer.style.right = '0';
-        dropdownContainer.style.left = 'inherit';
-        dropdownContainer.style.transform = 'translateX(0)';
-      }
-    };
-
-    const ShowDropdown = () => {
-      if (elementContainer.hasAttribute(ATTRIBUTE_SHOWING)) return;
-      elementContainer.setAttribute(ATTRIBUTE_SHOWING, '');
-      DropdownPositionPerViewPort();
-      focusCallback = handleKeyboardNavigation({
-        element: elementContainer,
-        action: () => HideDropdown(),
-        shadowDomContext: context,
-      });
-    };
-
-    const HideDropdown = () => {
-      elementContainer.removeAttribute(ATTRIBUTE_SHOWING);
-      focusCallback();
-      focusCallback = () => {};
-    };
-
-    const EventButtonClick = () => {
-      if (isShowing && dropdownLinksContainer) {
-        ShowDropdown();
-
-        setTimeout(() => {
-          const firstElement = dropdownLinksContainer.querySelector(
-            'a',
-          ) as HTMLAnchorElement;
-
-          if (firstElement) firstElement.focus();
-        }, 100);
-      }
-
-      if (!isShowing) HideDropdown();
-    };
-
-    const buttonClick = () => {
-      isShowing = isShowing ? false : true;
-      EventButtonClick();
-    };
-
-    // Load
-
-    const linkContainer = CreatePrimaryLink({
-      ...props,
-      hasDropdown,
-      buttonClick,
-      navItemName,
+  const showDropdown = () => {
+    if (elementContainer.hasAttribute(ATTRIBUTE_SHOWING)) return;
+    elementContainer.setAttribute(ATTRIBUTE_SHOWING, '');
+    dropdownPositionPerViewPort();
+    focusCallback = handleKeyboardNavigation({
+      element: elementContainer,
+      action: () => hideDropdown(),
+      shadowDomContext: context,
     });
+  };
 
-    elementContainer.addEventListener('mouseover', () => {
-      isShowing = true;
-      ShowDropdown();
-    });
+  const hideDropdown = () => {
+    elementContainer.removeAttribute(ATTRIBUTE_SHOWING);
+    focusCallback();
+    focusCallback = () => {};
+  };
 
-    elementContainer.addEventListener('mouseleave', () => {
-      isShowing = false;
-      HideDropdown();
-    });
+  const eventButtonClick = () => {
+    if (isShowing && dropdownLinksContainer) {
+      showDropdown();
 
-    setTimeout(() => {
-      OnLoadDropdownSpans();
-    }, 10);
+      setTimeout(() => {
+        const firstElement = dropdownLinksContainer.querySelector(
+          'a',
+        ) as HTMLAnchorElement;
 
-    if (hasDropdown) elementContainer.setAttribute(ATTRIBUTE_DROPDOWN, '');
-    elementContainer.classList.add(ELEMENT_NAV_ITEM_CONTAINER);
-    elementContainer.appendChild(linkContainer);
+        if (firstElement) firstElement.focus();
+      }, 100);
+    }
 
-    return elementContainer;
-  })();
+    if (!isShowing) hideDropdown();
+  };
 
-export const createCompositeNavigationItem = {
-  CreateElement: CreateNavItemElement,
-  Styles: STYLES_NAV_ITEM_ELEMENT,
+  const buttonClick = () => {
+    isShowing = !isShowing;
+    eventButtonClick();
+  };
+
+  const linkContainer = createPrimaryLink({
+    ...props,
+    hasDropdown,
+    buttonClick,
+    navItemName,
+  });
+
+  if (hasDropdown) {
+    containerBuilder = containerBuilder.withAttribute('data-dropdown', '');
+  }
+
+  containerBuilder = containerBuilder.withChild(linkContainer);
+
+  elementContainer.addEventListener('mouseover', () => {
+    isShowing = true;
+    showDropdown();
+  });
+
+  elementContainer.addEventListener('mouseleave', () => {
+    isShowing = false;
+    hideDropdown();
+  });
+
+  setTimeout(() => {
+    onLoadDropdownSpans();
+  }, 10);
+
+  return containerBuilder.build();
 };

@@ -1,19 +1,9 @@
 import { navigation } from '@universityofmaryland/web-elements-library/composite';
 import { Model } from '@universityofmaryland/web-model-library';
-import { reset } from '../../helpers/styles';
 import { MakeNavSlider, SLOTS } from './common';
 import { ComponentRegistration } from '../../_types';
 
 const tagName = 'umd-element-nav-slider';
-
-export const styles = `
-  :host {
-    display: block;
-  }
-
-  ${reset}
-  ${navigation.elements.slider.Styles}
-`;
 
 const attributes = [
   {
@@ -27,13 +17,17 @@ const attributes = [
 const createComponent = (element: HTMLElement) => {
   const ref = MakeNavSlider({ element, ...SLOTS });
 
-  if (!ref) return { element: document.createElement('div'), styles };
+  if (!ref) return { element: document.createElement('div'), styles: '' };
 
-  return {
-    element: ref.container,
-    styles,
-    events: ref.events,
-  };
+  const styles = `
+    :host {
+      display: block;
+    }
+
+    ${ref.styles}
+  `;
+
+  return { element: ref.element, styles, events: ref.events };
 };
 
 /**
@@ -92,11 +86,14 @@ const createComponent = (element: HTMLElement) => {
  * @category Components
  * @since 1.0.0
  */
-export const NavigationSlider: ComponentRegistration = Model.defineComponent({
-  tagName,
-  createComponent,
-  attributes,
-}, { eager: false });
+export const NavigationSlider: ComponentRegistration = Model.defineComponent(
+  {
+    tagName,
+    createComponent,
+    attributes,
+  },
+  { eager: false },
+);
 
 /** Backwards compatibility alias for grouped exports */
 export { NavigationSlider as slider };

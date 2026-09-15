@@ -72,6 +72,9 @@ export const ALERT_CONSTANTS = {
     ALERT_TIME: 'umd-utility-alert-time',
     ALERT: 'umd-utility-alert',
     ALERT_ID: 'umd-utility-alert-id',
+    // Time of the last SUCCESSFUL read. Distinct from ALERT_TIME, which is
+    // reset on every attempt and so cannot bound an outage.
+    ALERT_FETCHED: 'umd-utility-alert-fetched',
   },
   ELEMENTS: {
     ALERT_ID: 'umd-global-alert',
@@ -91,6 +94,10 @@ export const ALERT_CONSTANTS = {
   },
   CACHE: {
     DURATION: 60 * 1000,
+    // How long a cached alert may keep being shown while the feed is
+    // unreachable. Bounded so a stale banner cannot outlive the incident it
+    // describes.
+    FALLBACK_GRACE: 24 * 60 * 60 * 1000, // 24 hours
   },
 } as const;
 
@@ -123,6 +130,7 @@ const clearAlertStorage = (): void => {
   const { STORAGE_KEYS } = ALERT_CONSTANTS;
   window.localStorage.removeItem(STORAGE_KEYS.ALERT_TIME);
   window.localStorage.removeItem(STORAGE_KEYS.ALERT);
+  window.localStorage.removeItem(STORAGE_KEYS.ALERT_FETCHED);
 };
 
 const checkAlertCache = (): CacheCheckResult => {
@@ -162,6 +170,34 @@ const isSameAlertContent = (a: AlertData, b: AlertData): boolean =>
 
 const updateAlertCache = (alert: AlertData): void => {
   setStoredValue(ALERT_CONSTANTS.STORAGE_KEYS.ALERT, alert);
+};
+
+/**
+ * Records that the feed was read successfully, whether or not the alert
+ * itself changed. Deliberately not folded into updateAlertCache, which also
+ * runs on dismiss -- a dismissal is not evidence the feed is reachable.
+ */
+const markAlertFetched = (): void => {
+  setStoredValue(
+    ALERT_CONSTANTS.STORAGE_KEYS.ALERT_FETCHED,
+    new Date().getTime().toString(),
+  );
+};
+
+/**
+ * Whether a cached alert is still young enough to stand in for a live read.
+ * Absent or unparseable timestamps fail closed: no timestamp, no fallback.
+ */
+const withinFallbackGrace = (): boolean => {
+  const fetchedAt = getStoredValue<string>(
+    ALERT_CONSTANTS.STORAGE_KEYS.ALERT_FETCHED,
+  );
+  if (!fetchedAt) return false;
+
+  const parsed = parseInt(fetchedAt, 10);
+  if (Number.isNaN(parsed)) return false;
+
+  return new Date().getTime() - parsed < ALERT_CONSTANTS.CACHE.FALLBACK_GRACE;
 };
 
 const createCloseButton = (container: HTMLElement) => {
@@ -460,7 +496,25 @@ export const createNavAlert = async ({ alertUrl }: AlertProps) => {
 
   // Fetch new alerts
   const response = await fetchAlerts({ alertUrl });
-  if (!response || !response.data || !response.data.entries[0]) {
+
+  // Feed unreachable. Keep serving the last known alert rather than treating
+  // an outage as "no alerts" -- the gateway itself is built on the same
+  // keep-last-good principle, and clearing here would both hide a live alert
+  // and reset every visitor's dismissal. Storage is deliberately left intact.
+  if (response === null) {
+    const lastKnown = getStoredValue<AlertData>(
+      ALERT_CONSTANTS.STORAGE_KEYS.ALERT,
+    );
+
+    if (lastKnown && !lastKnown.hidden && withinFallbackGrace()) {
+      return buildAlertComponent(lastKnown);
+    }
+
+    return null;
+  }
+
+  // Read succeeded and the feed is empty: that is how an alert is turned off.
+  if (!response.data.entries[0]) {
     clearAlertStorage();
     return null;
   }
@@ -470,11 +524,14 @@ export const createNavAlert = async ({ alertUrl }: AlertProps) => {
     ALERT_CONSTANTS.STORAGE_KEYS.ALERT,
   );
 
-  // Handle alert updates
+  // Handle alert updates. markAlertFetched runs after any storage write --
+  // clearAlertStorage drops the timestamp too, so stamping earlier would be
+  // undone on the new-alert path.
   if (cachedAlert && cachedAlert.id === alert.id) {
     const isUnchanged = isSameAlertContent(cachedAlert, alert);
 
     updateAlertCache({ ...alert, hidden: isUnchanged && cachedAlert.hidden });
+    markAlertFetched();
 
     if (!isUnchanged) {
       return buildAlertComponent(alert);
@@ -486,6 +543,7 @@ export const createNavAlert = async ({ alertUrl }: AlertProps) => {
   } else {
     clearAlertStorage();
     updateAlertCache(alert);
+    markAlertFetched();
     return buildAlertComponent(alert);
   }
 

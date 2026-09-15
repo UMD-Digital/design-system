@@ -54,7 +54,8 @@ const attributes = Attributes.handler.common.visualShowHide({
  *
  * ## Attributes
  * - `data-gift-url` - Custom URL for giving link (default: https://giving.umd.edu/giving)
- * - `data-alert-url` - URL for alert/emergency information
+ * - `data-alert-url` - API Gateway campus-alerts feed URL
+ *   (JSON over GET; defaults to the production gateway feed)
  * - `data-info` - Enable specific information feeds:
  *   - `search` - Enable search functionality
  *   - `search-domain` - Enable domain-specific search
@@ -84,7 +85,7 @@ const attributes = Attributes.handler.common.visualShowHide({
  * <umd-element-navigation-utility
  *   data-info="search,news,events"
  *   data-gift-url="/support-umd"
- *   data-alert-url="/emergency">
+ *   data-alert-url="https://umd.edu/v1/feeds/campus-alerts">
  * </umd-element-navigation-utility>
  * ```
  *

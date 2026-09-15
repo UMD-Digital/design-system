@@ -5,7 +5,6 @@ import {
   typography,
 } from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import { fetchGraphQL } from '@universityofmaryland/web-utilities-library/network';
 import { close_large as iconCloseLarge } from '@universityofmaryland/web-icons-library/controls';
 import { actions } from 'atomic';
 
@@ -14,10 +13,30 @@ type AlertData = {
   type: string;
   title: string;
   headline?: string;
-  text: string;
-  ctaUrl: string;
+  text?: string;
+  ctaUrl?: string;
   ctaText?: string;
   hidden?: boolean;
+};
+
+/**
+ * One alert exactly as the API Gateway serves it at
+ * GET /v1/feeds/campus-alerts. Every key is always present; absent values are
+ * null rather than omitted. Deliberately has no `hidden` key -- that flag is
+ * client-only dismissal state and must never arrive from the network.
+ */
+type GatewayAlert = {
+  id: string;
+  type: string | null;
+  title: string;
+  headline: string | null;
+  text: string | null;
+  ctaUrl: string | null;
+  ctaText: string | null;
+};
+
+type GatewayFeedResponse = {
+  alerts: GatewayAlert[];
 };
 
 type AlertResponse = {
@@ -39,28 +58,15 @@ type CacheCheckResult = {
   cachedData: AlertData | null;
 };
 
-const QUERY = `
-  query CampusAlertsQuery {
-    entries: entries(
-      limit: 1
-      type: "mainElementsCampusAlert"
-    ) {
-        id: uid
-        type: optionsType
-        headline
-        title
-        text
-        ctaUrl: cta
-        ctaText
-    }
-  }
-`;
-
 const ELEMENT_NAME = 'umd-element-nav-alert';
 
 export const ALERT_CONSTANTS = {
   URLS: {
-    DEFAULT: 'https://umd.edu/api/v2',
+    // API Gateway campus-alerts feed. Override per-instance with
+    // data-alert-url (e.g. http://localhost:8080/v1/feeds/campus-alerts
+    // against a local gateway).
+    // TODO: replace with the production gateway host once it is deployed.
+    DEFAULT: 'https://umd.edu/v1/feeds/campus-alerts',
   },
   STORAGE_KEYS: {
     ALERT_TIME: 'umd-utility-alert-time',
@@ -377,17 +383,63 @@ const buildAlertComponent = (alert: AlertData) => {
     .build();
 };
 
+/**
+ * Maps one gateway alert onto the shape this module renders.
+ *
+ * Nulls become undefined so the existing falsy guards keep working, and a
+ * missing type falls back to the default styling rather than writing the
+ * literal string "null" into the type attribute. `hidden` is never copied
+ * across: it is local dismissal state, and honouring a network-supplied value
+ * would let the source permanently suppress an alert for a user.
+ */
+const normalizeAlert = (alert: GatewayAlert): AlertData => ({
+  id: alert.id,
+  type: alert.type ?? ALERT_CONSTANTS.TYPES.GENERAL,
+  title: alert.title,
+  headline: alert.headline ?? undefined,
+  text: alert.text ?? undefined,
+  ctaUrl: alert.ctaUrl ?? undefined,
+  ctaText: alert.ctaText ?? undefined,
+});
+
+/**
+ * Reads campus alerts from the API Gateway.
+ *
+ * The gateway serves cached snapshots over a plain unauthenticated GET, so
+ * there is no query and no bearer token here. It also owns all selection --
+ * entry type, ordering, live status and expiry -- so whatever arrives first is
+ * the alert to show.
+ *
+ * Returns null when the feed could not be read, and an empty entries array
+ * when the feed was read successfully and holds no alerts. Those two cases are
+ * different: an empty feed is how an alert is turned off.
+ */
 const fetchAlerts = async ({
   alertUrl,
 }: AlertProps): Promise<AlertResponse | null> => {
-  try {
-    const url = alertUrl || ALERT_CONSTANTS.URLS.DEFAULT;
+  const url = alertUrl || ALERT_CONSTANTS.URLS.DEFAULT;
 
-    return await fetchGraphQL({
-      query: QUERY,
-      url,
-      token: 'VIDnMeNYHTrLvWPtPpK5MNpjuv5WmmhU',
+  try {
+    const response = await fetch(url, {
+      method: 'GET',
+      headers: { Accept: 'application/json' },
     });
+
+    if (!response.ok) {
+      console.error(
+        `Failed to fetch alerts: ${response.status} ${response.statusText}`,
+      );
+      return null;
+    }
+
+    const payload: GatewayFeedResponse = await response.json();
+
+    if (!Array.isArray(payload?.alerts)) {
+      console.error('Failed to fetch alerts: unexpected response shape');
+      return null;
+    }
+
+    return { data: { entries: payload.alerts.map(normalizeAlert) } };
   } catch (error) {
     console.error('Failed to fetch alerts:', error);
     return null;

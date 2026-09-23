@@ -134,7 +134,7 @@ const createTextContent = (
     .withChild(createTextLockupMedium(props))
     .withStyles({
       element: {
-        padding: `${token.spacing.md} ${token.spacing.lg}`,
+        padding: token.spacing.lg,
 
         [`@container (min-width: ${mediumSize}px)`]: {
           padding: `0 ${token.spacing['2xl']}`,

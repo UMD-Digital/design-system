@@ -73,7 +73,7 @@ const createTextContent = (
     .withChild(createTextLockupMedium(props))
     .withStyles({
       element: {
-        padding: `${token.spacing.md} 0`,
+        padding: `${token.spacing.lg} 0`,
 
         [`@container (max-width: ${mediumSize - 1}px)`]: {
           ...layout.space.horizontal.larger,

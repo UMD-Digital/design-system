@@ -40,11 +40,9 @@ const CreateIntro = (props: TypeCarouselCardsRequirements) => {
       .withStyles({
         element: {
           color: token.color.white,
-          fontWeight: token.font.weight.extraBold,
           textTransform: 'uppercase',
           '& *': {
             color: token.color.white,
-            fontWeight: token.font.weight.extraBold,
             textTransform: 'uppercase',
           },
         },

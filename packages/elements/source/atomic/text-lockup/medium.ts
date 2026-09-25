@@ -77,7 +77,6 @@ export const createTextLockupMedium = ({
       .styled(headlineStyles)
       .withStyles({
         element: {
-          fontWeight: 800,
           textTransform: 'uppercase',
           textWrap: 'balance',
 

@@ -27,7 +27,6 @@ const createHeadline = (
     )
     .withStyles({
       element: {
-        fontWeight: 800,
         textTransform: 'uppercase',
       },
     })

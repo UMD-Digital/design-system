@@ -36,7 +36,7 @@ const createHeadline = (
     .withStyles({
       element: {
         textTransform: 'uppercase',
-        fontWeight: 800,
+        fontWeight: token.font.weight.bold,
       },
     })
     .withModifier((el) => wrapTextNodeInSpan(el))

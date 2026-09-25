@@ -34,7 +34,6 @@ export const createCompositeHeadline = ({
     .styled(headlineStyles)
     .withStyles({
       element: {
-        fontWeight: 800,
         textTransform: 'uppercase',
         textWrap: 'balance',
 

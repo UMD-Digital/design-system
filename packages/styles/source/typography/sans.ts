@@ -174,6 +174,7 @@ const largestBase = {
  */
 const extraLargeBase = {
   fontFamily: font.family['sans'],
+  fontWeight: font.weight['light'],
   textWrap: 'pretty',
   ...sizeLarger,
 
@@ -199,6 +200,7 @@ const extraLargeBase = {
  */
 const largerBase = {
   fontFamily: font.family['sans'],
+  fontWeight: font.weight['light'],
   ...sizeLarge,
   textWrap: 'pretty',
   lineHeight: `1.40em`,
@@ -225,6 +227,7 @@ const largerBase = {
  */
 const scalingLargerBase = {
   fontFamily: font.family['sans'],
+  fontWeight: font.weight['light'],
   fontSize: font.size['lg'],
   lineHeight: `1.25em`,
   textWrap: 'pretty',
@@ -268,6 +271,7 @@ const largeBase = {
  */
 const mediumBase = {
   fontFamily: font.family['sans'],
+  fontWeight: font.weight['light'],
   ...sizeSmall,
 
   [`@media (${breakpointLarge})`]: {
@@ -293,6 +297,7 @@ const mediumBase = {
  */
 const smallBase = {
   fontFamily: font.family['sans'],
+  fontWeight: font.weight['light'],
   fontSize: font.size['sm'],
   lineHeight: `1.375em`,
 
@@ -322,6 +327,7 @@ const smallBase = {
  */
 const smallerBase = {
   fontFamily: font.family['sans'],
+  fontWeight: font.weight['light'],
   ...sizeSmaller,
 
   [`@media (${breakpointLarge})`]: {
@@ -346,6 +352,7 @@ const smallerBase = {
  */
 const minBase = {
   fontFamily: font.family['sans'],
+  fontWeight: font.weight['light'],
   ...sizeMin,
 };
 
@@ -578,7 +585,7 @@ export const transformations = (() => {
       className: 'umd-sans-largest-uppercase',
       ...largestStyles,
 
-      fontWeight: font.weight['extraBold'],
+      fontWeight: font.weight['bold'],
       textTransform: 'uppercase',
     }),
 
@@ -586,7 +593,7 @@ export const transformations = (() => {
       className: 'umd-sans-extralarge-uppercase',
       ...extraLargeStyles,
 
-      fontWeight: font.weight['extraBold'],
+      fontWeight: font.weight['bold'],
       textTransform: 'uppercase',
     }),
 

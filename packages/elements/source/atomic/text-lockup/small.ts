@@ -103,7 +103,7 @@ export const dateStyles = (isThemeDark?: boolean) => ({
     display: 'block',
 
     ...(!isThemeDark && {
-      color: `${token.color.gray.mediumAA}`,
+      color: `${token.color.gray.dark}`,
     }),
   },
   child: {

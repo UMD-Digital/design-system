@@ -25,7 +25,7 @@ const createTextContainer = (props: PersonBio): ElementModel<HTMLElement> => {
         .withStyles({
           element: {
             textTransform: 'uppercase',
-            fontWeight: '800',
+            fontWeight: token.font.weight.bold,
             display: 'block',
             ...(!isThemeDark && { color: `${token.color.black}` }),
           },

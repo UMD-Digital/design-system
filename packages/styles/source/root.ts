@@ -43,6 +43,7 @@ export const reset = {
 
   li: {
     ...sans.medium,
+    fontWeight: font.weight.light,
     color: color.gray.dark,
   },
 
@@ -52,6 +53,7 @@ export const reset = {
 
   p: {
     ...sans.medium,
+    fontWeight: font.weight.light,
     color: color.gray.dark,
     marginBottom: spacing.md,
 

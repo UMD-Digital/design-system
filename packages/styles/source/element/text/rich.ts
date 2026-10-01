@@ -342,7 +342,7 @@ export function composeAdvanced(options?: AdvancedRichTextOptions): JssObject {
       marginTop: spacing.sm,
     },
     '& table': {
-      ...table.inline,
+      ...table.composeInline({ theme }),
     },
   };
 
@@ -361,12 +361,6 @@ export function composeAdvanced(options?: AdvancedRichTextOptions): JssObject {
     ...(useWhiteLinks ? animation.nestedElements.linksDark : {}),
     // Additional dark theme styles for tables and lists when using white color
     ...(useWhiteLinks && {
-      '& table': {
-        ...table.inline,
-        '& tr:nth-child(even)': {
-          background: 'none',
-        },
-      },
       [`& ul, & ol ul`]: {
         ...list.unordered,
         '& *, & * > *': {

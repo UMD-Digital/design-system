@@ -165,6 +165,9 @@ const createSpecialBuildConfig = (
           : { inlineDynamicImports: true },
     },
   },
+  define: {
+    'process.env.NODE_ENV': JSON.stringify('production'),
+  },
   resolve: {
     extensions: ['.ts', '.js', '.css'],
     alias: [

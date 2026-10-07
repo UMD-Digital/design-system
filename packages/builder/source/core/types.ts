@@ -130,40 +130,6 @@ export interface ElementModel<T extends HTMLElement = HTMLElement> {
   events?: Record<string, Function>;
 }
 
-/**
- * What build() returns — an ElementModel plus access to its children
- *
- * Deliberately a separate interface rather than fields on ElementModel: any
- * required field added to ElementModel breaks every looser model-shaped type
- * that consumers hand-declare. Extending keeps those assignable, since a
- * BuiltElementModel is still an ElementModel wherever one is expected.
- */
-export interface BuiltElementModel<T extends HTMLElement = HTMLElement>
-  extends ElementModel<T> {
-  /**
-   * Every model child, in the order it was added
-   * Raw HTMLElement children are not included — they carry no model
-   */
-  children: ElementModel[];
-  /**
-   * Children reachable by name, derived from their first class name
-   *
-   * `.withClassName('accordion-body-wrapper')` becomes
-   * `model.parts.accordionBodyWrapper`. Children with no class name are absent
-   * here but still present in `children`. First sibling wins on a repeat.
-   *
-   * @example
-   * ```typescript
-   * const header = new ElementBuilder()
-   *   .withChild(utilityRow, 'utilityRow')
-   *   .build();
-   *
-   * header.parts.utilityRow.element;
-   * ```
-   */
-  parts: Record<string, ElementModel>;
-}
-
 // ====================
 // Lifecycle Types
 // ====================
@@ -236,9 +202,7 @@ export interface ElementBuilderInterface<T extends HTMLElement = HTMLElement> {
   withHTML(html: string): this;
 
   // Child methods
-  withChild(
-    child: ElementBuilderInterface | ElementModel | HTMLElement | string | null | undefined,
-  ): this;
+  withChild(child: ElementBuilderInterface | HTMLElement | string | null | undefined): this;
   withChildren(...children: Array<ElementBuilderInterface | HTMLElement | string>): this;
   withChildIf(
     condition: boolean,
@@ -265,7 +229,7 @@ export interface ElementBuilderInterface<T extends HTMLElement = HTMLElement> {
   getElement(): T;
 
   // Terminal methods (return different types)
-  build(): BuiltElementModel<T>;
+  build(): ElementModel<T>;
   mountTo(parent: HTMLElement): this;
 }
 

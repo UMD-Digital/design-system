@@ -48,7 +48,7 @@ const CreatePersonBioFullElement = (
           element: {
             marginTop: token.spacing.lg,
             textTransform: 'uppercase',
-            fontWeight: '800',
+            fontWeight: token.font.weight.bold,
             display: 'block',
 
             ...(!isThemeDark && { color: `${token.color.black}` }),

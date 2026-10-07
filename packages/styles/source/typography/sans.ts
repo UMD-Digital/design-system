@@ -578,7 +578,7 @@ export const transformations = (() => {
       className: 'umd-sans-largest-uppercase',
       ...largestStyles,
 
-      fontWeight: font.weight['extraBold'],
+      fontWeight: font.weight['bold'],
       textTransform: 'uppercase',
     }),
 
@@ -586,7 +586,7 @@ export const transformations = (() => {
       className: 'umd-sans-extralarge-uppercase',
       ...extraLargeStyles,
 
-      fontWeight: font.weight['extraBold'],
+      fontWeight: font.weight['bold'],
       textTransform: 'uppercase',
     }),
 

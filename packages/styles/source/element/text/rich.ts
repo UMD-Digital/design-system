@@ -91,6 +91,7 @@ const largestTypography = {
 const simpleBase = {
   ...animation.nestedElements.linksWhite,
   fontSize: font.size.base,
+  fontWeight: font.weight.light,
   lineHeight: '1.5em',
 
   '& > *': {
@@ -103,7 +104,7 @@ const simpleBase = {
   },
 
   '& strong, & b': {
-    FontWeight: font.weight.bold,
+    fontWeight: font.weight.bold,
   },
 
   '& u': {
@@ -328,7 +329,6 @@ export function composeAdvanced(options?: AdvancedRichTextOptions): JssObject {
   const { theme = 'light', color: explicitColor } = options || {};
 
   let composed: Record<string, any> = {
-    FontWeight: font.weight.normal,
     ...advancedBase,
     ...code,
     ...quote,

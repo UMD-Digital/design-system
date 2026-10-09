@@ -1,8 +1,8 @@
 # University of Maryland Design System
 
-[![Components Version](https://img.shields.io/badge/Components-v2.0.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-components-library)
+[![Components Version](https://img.shields.io/badge/Components-v2.1.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-components-library)
 
-[![Elements Version](https://img.shields.io/badge/Elements-v2.0.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-elements-library) [![Feeds Version](https://img.shields.io/badge/Feeds-v2.0.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-feeds-library) [![Styles Version](https://img.shields.io/badge/Styles-v2.0.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)
+[![Elements Version](https://img.shields.io/badge/Elements-v2.0.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-elements-library) [![Feeds Version](https://img.shields.io/badge/Feeds-v2.0.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-feeds-library) [![Styles Version](https://img.shields.io/badge/Styles-v2.1.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-styles-library)
 
 [![Model Version](https://img.shields.io/badge/Model-v2.0.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-model-library) [![Builder Version](https://img.shields.io/badge/Builder-v2.0.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-builder-library) [![Utilities Version](https://img.shields.io/badge/Utilities-v2.0.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-utilities-library) [![Tokens Version](https://img.shields.io/badge/Tokens-v2.0.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-token-library) [![Icons Version](https://img.shields.io/badge/Icons-v2.0.0-blue)](https://www.npmjs.com/package/@universityofmaryland/web-icons-library)
 

@@ -162,9 +162,6 @@ const createDropdown = ({
           display: 'block',
         },
 
-        '.nav-item-container:focus-within &': {
-          display: 'block',
-        },
       },
     });
 };
@@ -427,6 +424,34 @@ export const createCompositeNavigationItem = (props: TypeNavItem) => {
   }
 
   containerBuilder = containerBuilder.withChild(linkContainer);
+
+  elementContainer.addEventListener('keydown', (event: KeyboardEvent) => {
+    if (event.key !== 'Escape') return;
+
+    isShowing = false;
+    hideDropdown();
+
+    const primaryLink = elementContainer.querySelector(
+      '.nav-item-primary-link',
+    ) as HTMLElement | null;
+
+    if (primaryLink) primaryLink.focus();
+  });
+
+  elementContainer.addEventListener('focusin', (event: FocusEvent) => {
+    const previousFocus = event.relatedTarget as Node | null;
+
+    if (previousFocus && elementContainer.contains(previousFocus)) return;
+    showDropdown();
+  });
+
+  elementContainer.addEventListener('focusout', (event: FocusEvent) => {
+    const nextFocus = event.relatedTarget as Node | null;
+
+    if (nextFocus && elementContainer.contains(nextFocus)) return;
+    isShowing = false;
+    hideDropdown();
+  });
 
   elementContainer.addEventListener('mouseover', () => {
     isShowing = true;

@@ -1,6 +1,6 @@
 {
   "name": "@universityofmaryland/web-model-library",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "UMD Web Component Model - Base utilities for building web components",
   "type": "module",
   "main": "dist/index.js",
@@ -66,7 +66,7 @@
     "postcss-discard-duplicates": "^5.1.0"
   },
   "peerDependencies": {
-    "@universityofmaryland/web-styles-library": "^1.0.0"
+    "@universityofmaryland/web-styles-library": "^2.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

@@ -131,7 +131,7 @@ export const CreateButton = ({
         transform: 'none',
         zIndex: 9999,
         display: 'none',
-        '&:disabled': { opacity: 0.5 },
+        '&[aria-disabled="true"]': { opacity: 0.5 },
         [`@media (${token.media.queries.desktop.min})`]: {
           position: 'absolute',
           ...(isVerticalCenter && {
@@ -150,14 +150,15 @@ export const CreateButton = ({
     })
     .on('click', (event) => {
       const button = event.currentTarget as HTMLButtonElement;
+      if (button.getAttribute('aria-disabled') === 'true') return;
       if (isRight) {
         EventMoveForward();
       } else {
         EventMoveBackward();
       }
-      button.disabled = true;
+      button.setAttribute('aria-disabled', 'true');
       setTimeout(() => {
-        button.disabled = false;
+        button.removeAttribute('aria-disabled');
       }, BUTTON_DISABLE_DURATION);
     })
     .build();

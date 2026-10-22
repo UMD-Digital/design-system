@@ -95,10 +95,10 @@ const ButtonVisibilityLogic = ({
   const length = dateElements.length;
 
   [backButton, forwardButton].forEach((button) => {
-    button.setAttribute('disabled', '');
+    button.setAttribute('aria-disabled', 'true');
 
     setTimeout(() => {
-      button.removeAttribute('disabled');
+      button.removeAttribute('aria-disabled');
     }, ANIMATION_DURATION + 100);
   });
 
@@ -269,7 +269,7 @@ const CreateBackButton = (props: TypeSliderEventSlideProps) => {
 
   const clickEvent = (event: Event) => {
     const button = event.currentTarget as HTMLButtonElement;
-    if (button.hasAttribute('disabled')) return;
+    if (button.getAttribute('aria-disabled') === 'true') return;
     SetCountBackward();
     SetButtonVisibility();
     SetSlideDatesBackwards();
@@ -336,7 +336,7 @@ const CreateForwardButton = (props: TypeSliderEventSlideProps) => {
 
   const clickEvent = (event: Event) => {
     const button = event.currentTarget as HTMLButtonElement;
-    if (button.hasAttribute('disabled')) return;
+    if (button.getAttribute('aria-disabled') === 'true') return;
     SetCountForward();
     SetButtonVisibility();
     SetSlideDatesForward();

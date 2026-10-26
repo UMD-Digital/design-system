@@ -65,8 +65,8 @@ export const ALERT_CONSTANTS = {
     // API Gateway campus-alerts feed. Override per-instance with
     // data-alert-url (e.g. http://localhost:8080/v1/feeds/campus-alerts
     // against a local gateway).
-    // TODO: replace with the production gateway host once it is deployed.
-    DEFAULT: 'https://umd.edu/v1/feeds/campus-alerts',
+    // TODO: switch to gateway.omc-prod-it.aws.umd.edu once production is live.
+    DEFAULT: 'https://gateway.umd-staging.com/v1/feeds/campus-alerts',
   },
   STORAGE_KEYS: {
     ALERT_TIME: 'umd-utility-alert-time',

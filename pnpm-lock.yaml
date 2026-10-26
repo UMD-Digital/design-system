@@ -308,8 +308,8 @@ importers:
   packages/model:
     dependencies:
       '@universityofmaryland/web-styles-library':
-        specifier: ^1.0.0
-        version: 1.8.4
+        specifier: ^2.0.0
+        version: 2.1.0
       postcss:
         specifier: ^8.4.31
         version: 8.5.8
@@ -397,8 +397,8 @@ importers:
   packages/utilities:
     dependencies:
       '@universityofmaryland/web-styles-library':
-        specifier: ^1.0.0
-        version: 1.8.4
+        specifier: ^2.0.0
+        version: 2.1.0
       '@universityofmaryland/web-token-library':
         specifier: workspace:^
         version: link:../tokens
@@ -2222,11 +2222,11 @@ packages:
     engines: {node: '>=16.20.0'}
     hasBin: true
 
-  '@universityofmaryland/web-styles-library@1.8.4':
-    resolution: {integrity: sha512-PfW/Pkyn2HRPrFMY3RDJGyFPBH3rDJmHzbCgtsSWWUwE/3Vsg4yeGsJrRFfI2FwG1+L3dxOjQqlFlexJ79KAEQ==}
+  '@universityofmaryland/web-styles-library@2.1.0':
+    resolution: {integrity: sha512-UXeADTAKAwwSW3D8FlHEnrpATnNDzH0GTx9C52G0hg3TtnkgwQEwE3uf7wENn/tm9CQYnMWjl+v4sQgkHw9MLQ==}
 
-  '@universityofmaryland/web-token-library@1.0.1':
-    resolution: {integrity: sha512-Ovb4QLmdqkwkkhSq/RUYKfxh77FnwpePf+/Jw0fztZm0bpps+YoCN1tn4v2ogML79MM7lxCMihvPxn98bj8VNg==}
+  '@universityofmaryland/web-token-library@2.1.0':
+    resolution: {integrity: sha512-Kf3bDBtp8Yn5CTOOh1O5BWfthH5cVNAWxrRyk8vGdPMOJmWI0yGk/h6niWmEvsJuMNVhqkOsZS+7RVvfrZGDjw==}
 
   '@vitejs/plugin-legacy@7.2.1':
     resolution: {integrity: sha512-CaXb/y0mlfu7jQRELEJJc2/5w2bX2m1JraARgFnvSB2yfvnCNJVWWlqAo6WjnKoepOwKx8gs0ugJThPLKCOXIg==}
@@ -8107,15 +8107,16 @@ snapshots:
       '@typescript/native-preview-win32-arm64': 7.0.0-dev.20260707.2
       '@typescript/native-preview-win32-x64': 7.0.0-dev.20260707.2
 
-  '@universityofmaryland/web-styles-library@1.8.4':
+  '@universityofmaryland/web-styles-library@2.1.0':
     dependencies:
-      '@universityofmaryland/web-token-library': 1.0.1
+      '@types/postcss-js': 4.1.0
+      '@universityofmaryland/web-token-library': 2.1.0
       postcss: 8.5.8
       postcss-discard-duplicates: 7.0.2(postcss@8.5.8)
       postcss-js: 4.1.0(postcss@8.5.8)
       postcss-nesting: 13.0.2(postcss@8.5.8)
 
-  '@universityofmaryland/web-token-library@1.0.1': {}
+  '@universityofmaryland/web-token-library@2.1.0': {}
 
   '@vitejs/plugin-legacy@7.2.1(terser@5.46.0)(vite@7.3.1(@types/node@22.19.15)(jiti@1.21.7)(terser@5.46.0)(tsx@4.21.0)(yaml@2.8.2))':
     dependencies:

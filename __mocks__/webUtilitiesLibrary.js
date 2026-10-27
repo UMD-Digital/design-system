@@ -40,6 +40,7 @@ module.exports = {
     createTimeElement: jest.fn(),
     debounce: jest.fn(),
     extractIconElement: jest.fn(),
+    fetchREST: jest.fn(),
     fetchGraphQL: jest.fn(),
     findParent: jest.fn(),
     formatDateForComparison: jest.fn(),

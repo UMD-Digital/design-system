@@ -5,25 +5,31 @@ import {
   typography,
 } from '@universityofmaryland/web-styles-library';
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
-import { fetchGraphQL } from '@universityofmaryland/web-utilities-library/network';
 import { close_large as iconCloseLarge } from '@universityofmaryland/web-icons-library/controls';
+import { fetchREST } from '@universityofmaryland/web-utilities-library/network';
 import { actions } from 'atomic';
 
+/**
+ * One alert from GET /v1/feeds/campus-alerts. Absent values are null. No
+ * `hidden` key: dismissal is client-only.
+ */
 type AlertData = {
   id: string;
   type: string;
   title: string;
-  headline?: string;
-  text: string;
-  ctaUrl: string;
-  ctaText?: string;
-  hidden?: boolean;
+  headline: string | null;
+  text: string | null;
+  ctaUrl: string | null;
+  ctaText: string | null;
 };
 
 type AlertResponse = {
-  data: {
-    entries: AlertData[];
-  };
+  alerts: AlertData[];
+};
+
+/** An alert as kept in storage; `hidden` records a dismissal. */
+type CachedAlert = AlertData & {
+  hidden?: boolean;
 };
 
 type AlertProps = {
@@ -36,36 +42,22 @@ export type TypeAlertProps = {
 
 type CacheCheckResult = {
   shouldCheck: boolean;
-  cachedData: AlertData | null;
+  cachedData: CachedAlert | null;
 };
-
-const QUERY = `
-  query CampusAlertsQuery {
-    entries: entries(
-      limit: 1
-      type: "mainElementsCampusAlert"
-    ) {
-        id: uid
-        type: optionsType
-        headline
-        title
-        text
-        ctaUrl: cta
-        ctaText
-    }
-  }
-`;
 
 const ELEMENT_NAME = 'umd-element-nav-alert';
 
 export const ALERT_CONSTANTS = {
   URLS: {
-    DEFAULT: 'https://umd.edu/api/v2',
+    // Override with data-alert-url.
+    DEFAULT: 'https://gateway.designsystem.umd.edu/v1/feeds/campus-alerts',
   },
   STORAGE_KEYS: {
     ALERT_TIME: 'umd-utility-alert-time',
     ALERT: 'umd-utility-alert',
     ALERT_ID: 'umd-utility-alert-id',
+    // Last successful read; ALERT_TIME resets on every attempt.
+    ALERT_FETCHED: 'umd-utility-alert-fetched',
   },
   ELEMENTS: {
     ALERT_ID: 'umd-global-alert',
@@ -85,6 +77,8 @@ export const ALERT_CONSTANTS = {
   },
   CACHE: {
     DURATION: 60 * 1000,
+    // How long a cached alert may show while the feed is unreachable.
+    FALLBACK_GRACE: 24 * 60 * 60 * 1000, // 24 hours
   },
 } as const;
 
@@ -117,6 +111,7 @@ const clearAlertStorage = (): void => {
   const { STORAGE_KEYS } = ALERT_CONSTANTS;
   window.localStorage.removeItem(STORAGE_KEYS.ALERT_TIME);
   window.localStorage.removeItem(STORAGE_KEYS.ALERT);
+  window.localStorage.removeItem(STORAGE_KEYS.ALERT_FETCHED);
 };
 
 const checkAlertCache = (): CacheCheckResult => {
@@ -125,7 +120,7 @@ const checkAlertCache = (): CacheCheckResult => {
 
   try {
     const alertTimeStr = getStoredValue<string>(STORAGE_KEYS.ALERT_TIME);
-    const cachedResponse = getStoredValue<AlertData>(STORAGE_KEYS.ALERT);
+    const cachedResponse = getStoredValue<CachedAlert>(STORAGE_KEYS.ALERT);
 
     if (!alertTimeStr) {
       setStoredValue(STORAGE_KEYS.ALERT_TIME, currentTime.toString());
@@ -147,15 +142,41 @@ const checkAlertCache = (): CacheCheckResult => {
   }
 };
 
-const isSameAlertContent = (a: AlertData, b: AlertData): boolean =>
+const isSameAlertContent = (a: CachedAlert, b: CachedAlert): boolean =>
   a.title === b.title &&
   a.headline === b.headline &&
   a.text === b.text &&
   a.ctaUrl === b.ctaUrl &&
   a.ctaText === b.ctaText;
 
-const updateAlertCache = (alert: AlertData): void => {
+const updateAlertCache = (alert: CachedAlert): void => {
   setStoredValue(ALERT_CONSTANTS.STORAGE_KEYS.ALERT, alert);
+};
+
+/**
+ * Stamps a successful read. Kept out of updateAlertCache, which also runs on
+ * dismiss.
+ */
+const markAlertFetched = (): void => {
+  setStoredValue(
+    ALERT_CONSTANTS.STORAGE_KEYS.ALERT_FETCHED,
+    new Date().getTime().toString(),
+  );
+};
+
+/**
+ * Whether the cached alert may stand in for a live read. Fails closed.
+ */
+const withinFallbackGrace = (): boolean => {
+  const fetchedAt = getStoredValue<string>(
+    ALERT_CONSTANTS.STORAGE_KEYS.ALERT_FETCHED,
+  );
+  if (!fetchedAt) return false;
+
+  const parsed = parseInt(fetchedAt, 10);
+  if (Number.isNaN(parsed)) return false;
+
+  return new Date().getTime() - parsed < ALERT_CONSTANTS.CACHE.FALLBACK_GRACE;
 };
 
 const createCloseButton = (container: HTMLElement) => {
@@ -187,7 +208,7 @@ const createCloseButton = (container: HTMLElement) => {
       },
     })
     .on('click', () => {
-      const cachedAlert = getStoredValue<AlertData>(
+      const cachedAlert = getStoredValue<CachedAlert>(
         ALERT_CONSTANTS.STORAGE_KEYS.ALERT,
       );
 
@@ -252,7 +273,7 @@ const createTitle = (headlineText: string) => {
     });
 };
 
-const createMessage = (alert: AlertData) => {
+const createMessage = (alert: CachedAlert) => {
   if (!alert.text) return null;
 
   return new ElementBuilder('div')
@@ -274,7 +295,7 @@ const createMessage = (alert: AlertData) => {
     });
 };
 
-const createCta = (alert: AlertData) => {
+const createCta = (alert: CachedAlert) => {
   if (!alert.ctaUrl) return null;
 
   return createCTAElement({
@@ -283,7 +304,7 @@ const createCta = (alert: AlertData) => {
   });
 };
 
-const buildAlertComponent = (alert: AlertData) => {
+const buildAlertComponent = (alert: CachedAlert) => {
   const headlineText = alert.headline || alert.title;
 
   const containerBuilder = new ElementBuilder()
@@ -377,17 +398,34 @@ const buildAlertComponent = (alert: AlertData) => {
     .build();
 };
 
+/**
+ * Reads campus alerts from the gateway with a plain GET; the gateway picks
+ * which alert to show. Returns null when the feed can't be read, and an empty
+ * list when there are no alerts.
+ */
 const fetchAlerts = async ({
   alertUrl,
-}: AlertProps): Promise<AlertResponse | null> => {
-  try {
-    const url = alertUrl || ALERT_CONSTANTS.URLS.DEFAULT;
+}: AlertProps): Promise<AlertData[] | null> => {
+  const url = alertUrl || ALERT_CONSTANTS.URLS.DEFAULT;
 
-    return await fetchGraphQL({
-      query: QUERY,
-      url,
-      token: 'VIDnMeNYHTrLvWPtPpK5MNpjuv5WmmhU',
-    });
+  try {
+    const response = await fetchREST({ url });
+
+    if (!response.ok) {
+      console.error(
+        `Failed to fetch alerts: ${response.status} ${response.statusText}`,
+      );
+      return null;
+    }
+
+    const payload: AlertResponse = await response.json();
+
+    if (!Array.isArray(payload?.alerts)) {
+      console.error('Failed to fetch alerts: unexpected response shape');
+      return null;
+    }
+
+    return payload.alerts;
   } catch (error) {
     console.error('Failed to fetch alerts:', error);
     return null;
@@ -407,22 +445,40 @@ export const createNavAlert = async ({ alertUrl }: AlertProps) => {
   }
 
   // Fetch new alerts
-  const response = await fetchAlerts({ alertUrl });
-  if (!response || !response.data || !response.data.entries[0]) {
+  const alerts = await fetchAlerts({ alertUrl });
+
+  // Feed unreachable: keep the last alert and dismissal; leave storage intact.
+  if (alerts === null) {
+    const lastKnown = getStoredValue<CachedAlert>(
+      ALERT_CONSTANTS.STORAGE_KEYS.ALERT,
+    );
+
+    if (lastKnown && !lastKnown.hidden && withinFallbackGrace()) {
+      return buildAlertComponent(lastKnown);
+    }
+
+    return null;
+  }
+
+  const alert = alerts[0];
+
+  // An empty feed turns the alert off.
+  if (!alert) {
     clearAlertStorage();
     return null;
   }
 
-  const alert = response.data.entries[0];
-  const cachedAlert = getStoredValue<AlertData>(
+  const cachedAlert = getStoredValue<CachedAlert>(
     ALERT_CONSTANTS.STORAGE_KEYS.ALERT,
   );
 
-  // Handle alert updates
+  // Handle alert updates. Stamp after storage writes, since
+  // clearAlertStorage drops the timestamp.
   if (cachedAlert && cachedAlert.id === alert.id) {
     const isUnchanged = isSameAlertContent(cachedAlert, alert);
 
     updateAlertCache({ ...alert, hidden: isUnchanged && cachedAlert.hidden });
+    markAlertFetched();
 
     if (!isUnchanged) {
       return buildAlertComponent(alert);
@@ -433,7 +489,8 @@ export const createNavAlert = async ({ alertUrl }: AlertProps) => {
     }
   } else {
     clearAlertStorage();
-    updateAlertCache(alert);
+    updateAlertCache({ ...alert, hidden: false });
+    markAlertFetched();
     return buildAlertComponent(alert);
   }
 

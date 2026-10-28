@@ -9,6 +9,7 @@ const tagName = 'umd-feed-expert-in-the-news';
 
 const createComponent: CreateComponentFunction = (element) => {
   const token = Attributes.getValue.feedToken({ element });
+  const apiUrl = Attributes.getValue.url({ element });
   const expertId = Attributes.getValue.id({ element }) || '';
 
   if (!token || !expertId) {
@@ -22,6 +23,7 @@ const createComponent: CreateComponentFunction = (element) => {
 
   return inTheNews({
     token,
+    ...(apiUrl && { apiUrl }),
     expertId,
     numberOfRowsToStart: Math.min(Math.max(rowCount, 2), 10),
     isThemeDark: Attributes.isTheme.dark({ element }),

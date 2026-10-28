@@ -39,6 +39,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *
  * ## Attributes
  * - `data-token` - API authentication token (required)
+ * - `data-url` - API endpoint override, e.g. a staging API (optional)
  * - `data-filter-group-ids` - Comma-separated category IDs to filter events
  * - `data-layout-column-count` - Number of columns (1-4, default: 3)
  * - `data-layout-row-count` - Initial rows to display (1-2, default: 1)
@@ -81,13 +82,16 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const FeedEventsGrid: ComponentRegistration = Model.defineComponent({
-  tagName,
-  createComponent,
-  afterConnect: (element, shadow) => {
-    element?.events?.callback(shadow);
+export const FeedEventsGrid: ComponentRegistration = Model.defineComponent(
+  {
+    tagName,
+    createComponent,
+    afterConnect: (element, shadow) => {
+      element?.events?.callback(shadow);
+    },
   },
-}, { eager: false });
+  { eager: false },
+);
 
 /** Backwards compatibility alias for grouped exports */
 export { FeedEventsGrid as eventsGrid };

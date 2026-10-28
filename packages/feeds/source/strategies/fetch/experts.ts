@@ -233,7 +233,7 @@ export const EXPERTS_QUERY = `
  * ```
  */
 export const expertsFetchStrategy = createGraphQLFetchStrategy<ExpertEntry>({
-  endpoint: 'https://content-api.umd.edu/graphql',
+  endpoint: 'https://shared-source.umd.edu/graphql',
 
   queries: {
     entries: EXPERTS_QUERY,

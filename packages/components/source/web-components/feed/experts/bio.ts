@@ -9,6 +9,7 @@ const tagName = 'umd-feed-expert-bio';
 
 const createComponent: CreateComponentFunction = (element) => {
   const token = Attributes.getValue.feedToken({ element });
+  const apiUrl = Attributes.getValue.url({ element });
   const expertId = Attributes.getValue.id({ element }) || '';
 
   if (!token || !expertId) {
@@ -17,6 +18,7 @@ const createComponent: CreateComponentFunction = (element) => {
 
   const bioElement = bio({
     token,
+    ...(apiUrl && { apiUrl }),
     expertId,
     isThemeDark: Attributes.isTheme.dark({ element }),
   });
@@ -35,6 +37,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *
  * ## Attributes
  * - `data-token` - API authentication token (required)
+ * - `data-url` - API endpoint override, e.g. a staging API (optional)
  * - `data-id` - Expert ID to display (required)
  * - `data-theme` - Theme options:
  *   - `dark` - Dark theme styling
@@ -61,13 +64,16 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.17.0
  */
-export const FeedExpertsBio: ComponentRegistration = Model.defineComponent({
-  tagName,
-  createComponent,
-  afterConnect: (element, shadow) => {
-    element?.events?.callback(shadow);
+export const FeedExpertsBio: ComponentRegistration = Model.defineComponent(
+  {
+    tagName,
+    createComponent,
+    afterConnect: (element, shadow) => {
+      element?.events?.callback(shadow);
+    },
   },
-}, { eager: false });
+  { eager: false },
+);
 
 /** Backwards compatibility alias for grouped exports */
 export { FeedExpertsBio as expertsBio };

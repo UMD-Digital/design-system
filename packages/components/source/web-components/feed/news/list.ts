@@ -34,6 +34,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *
  * ## Attributes
  * - `data-token` - API authentication token (required)
+ * - `data-url` - API endpoint override, e.g. a staging API (optional)
  * - `data-filter-group-ids` - Comma-separated category IDs to filter news
  * - `data-layout-row-count` - Initial rows to display (1-10, default: 5)
  * - `data-entry-remove-ids` - Comma-separated entry IDs to exclude
@@ -76,13 +77,16 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const FeedNewsList: ComponentRegistration = Model.defineComponent({
-  tagName,
-  createComponent,
-  afterConnect: (element, shadow) => {
-    element?.events?.callback(shadow);
+export const FeedNewsList: ComponentRegistration = Model.defineComponent(
+  {
+    tagName,
+    createComponent,
+    afterConnect: (element, shadow) => {
+      element?.events?.callback(shadow);
+    },
   },
-}, { eager: false });
+  { eager: false },
+);
 
 /** Backwards compatibility alias for grouped exports */
 export { FeedNewsList as newsList };

@@ -41,10 +41,14 @@ import { type ElementModel } from '../../_types';
  * @returns Base props object for strategy's composeApiVariables
  */
 const createFetchProps = (
-  props: Pick<ListProps, 'token' | 'categories' | 'numberOfRowsToStart'>,
+  props: Pick<
+    ListProps,
+    'token' | 'apiUrl' | 'categories' | 'numberOfRowsToStart'
+  >,
   offset: number,
 ) => ({
   token: props.token,
+  apiUrl: props.apiUrl,
   categories: props.categories,
   numberOfColumnsToShow: 1,
   numberOfRowsToStart: props.numberOfRowsToStart,
@@ -470,6 +474,7 @@ const renderError = async (
 export const eventsGrouped = (props: ListProps): ElementModel => {
   const {
     token,
+    apiUrl,
     isThemeDark = false,
     isLazyLoad = false,
     numberOfRowsToStart,
@@ -499,7 +504,7 @@ export const eventsGrouped = (props: ListProps): ElementModel => {
    */
   const loadMore = async (): Promise<void> => {
     const fetchProps = createFetchProps(
-      { token, categories, numberOfRowsToStart },
+      { token, apiUrl, categories, numberOfRowsToStart },
       state.getOffset(),
     );
     const variables = eventsFetchStrategyRange.composeApiVariables(fetchProps);
@@ -524,7 +529,7 @@ export const eventsGrouped = (props: ListProps): ElementModel => {
     loading.show(container);
 
     const fetchProps = createFetchProps(
-      { token, categories, numberOfRowsToStart },
+      { token, apiUrl, categories, numberOfRowsToStart },
       0,
     );
     const variables = eventsFetchStrategyRange.composeApiVariables(fetchProps);

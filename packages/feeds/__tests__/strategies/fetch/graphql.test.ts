@@ -108,6 +108,85 @@ describe('createGraphQLFetchStrategy', () => {
     });
   });
 
+  describe('apiUrl override', () => {
+    it('should fetch from apiUrl instead of the default endpoint', async () => {
+      mockFetchGraphQL.mockResolvedValue({ data: { entries: [] } });
+
+      await testStrategy.fetchEntries({
+        token: 'test-token',
+        apiUrl: 'https://staging.test.com/graphql',
+      });
+
+      expect(mockFetchGraphQL).toHaveBeenCalledWith(
+        expect.objectContaining({ url: 'https://staging.test.com/graphql' }),
+      );
+    });
+
+    it('should use apiUrl for count queries', async () => {
+      mockFetchGraphQL.mockResolvedValue({ data: { count: 1 } });
+
+      await testStrategy.fetchCount({
+        token: 'test-token',
+        apiUrl: 'https://staging.test.com/graphql',
+      });
+
+      expect(mockFetchGraphQL).toHaveBeenCalledWith(
+        expect.objectContaining({ url: 'https://staging.test.com/graphql' }),
+      );
+    });
+
+    it('should not send apiUrl as a query variable', async () => {
+      mockFetchGraphQL.mockResolvedValue({ data: { entries: [] } });
+
+      await testStrategy.fetchEntries({
+        token: 'test-token',
+        limit: 3,
+        apiUrl: 'https://staging.test.com/graphql',
+      });
+
+      const { variables } = mockFetchGraphQL.mock.calls[0][0] as any;
+      expect(variables).not.toHaveProperty('apiUrl');
+      expect(variables).toMatchObject({ token: 'test-token', limit: 3 });
+    });
+
+    it('should carry apiUrl through composeApiVariables', () => {
+      const result = testStrategy.composeApiVariables({
+        token: 'test-token',
+        numberOfRowsToStart: 1,
+        apiUrl: 'https://staging.test.com/graphql',
+      });
+
+      expect(result).toHaveProperty('apiUrl', 'https://staging.test.com/graphql');
+    });
+
+    it('should carry apiUrl through custom composeVariables', () => {
+      const customStrategy = createGraphQLFetchStrategy({
+        endpoint: 'https://test.com/graphql',
+        queries: { entries: 'query' },
+        transformResponse: mockTransformResponse,
+        transformCount: mockTransformCount,
+        composeVariables: ({ token, limit }) => ({ token, limit }),
+      });
+
+      const result = customStrategy.composeApiVariables({
+        token: 'test-token',
+        numberOfRowsToStart: 1,
+        apiUrl: 'https://staging.test.com/graphql',
+      });
+
+      expect(result).toHaveProperty('apiUrl', 'https://staging.test.com/graphql');
+    });
+
+    it('should omit apiUrl when none is passed', () => {
+      const result = testStrategy.composeApiVariables({
+        token: 'test-token',
+        numberOfRowsToStart: 1,
+      });
+
+      expect(result).not.toHaveProperty('apiUrl');
+    });
+  });
+
   describe('composeApiVariables', () => {
     it('should compose basic variables', () => {
       const props = {

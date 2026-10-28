@@ -14,6 +14,7 @@
 export interface BaseProps {
   /** API authentication token */
   token: string;
+  apiUrl?: string;
   /** Number of rows to display initially */
   numberOfRowsToStart: number;
   /** Category IDs to filter by (areas of expertise, campus units, etc.) */

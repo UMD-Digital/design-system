@@ -56,10 +56,11 @@ const LOAD_MORE_ITEMS = 2;
  * @returns Base props object for strategy's composeApiVariables
  */
 const createFetchProps = (
-  props: Pick<FeaturedProps, 'token' | 'categories' | 'isUnion'>,
+  props: Pick<FeaturedProps, 'token' | 'apiUrl' | 'categories' | 'isUnion'>,
   offset: number,
 ) => ({
   token: props.token,
+  apiUrl: props.apiUrl,
   categories: props.categories,
   isUnion: props.isUnion,
   numberOfRowsToStart: offset === 0 ? INITIAL_ITEMS : LOAD_MORE_ITEMS,
@@ -522,6 +523,7 @@ const renderError = async (
 export const newsFeatured = (props: FeaturedProps): ElementModel => {
   const {
     token,
+    apiUrl,
     categories,
     isUnion,
     isThemeDark = false,
@@ -556,7 +558,7 @@ export const newsFeatured = (props: FeaturedProps): ElementModel => {
 
     // Load more items
     const fetchProps = createFetchProps(
-      { token, categories, isUnion },
+      { token, apiUrl, categories, isUnion },
       state.getOffset(),
     );
     const variables = newsFetchStrategy.composeApiVariables(fetchProps);
@@ -611,7 +613,7 @@ export const newsFeatured = (props: FeaturedProps): ElementModel => {
     loading.show(container);
 
     // Fetch initial items
-    const fetchProps = createFetchProps({ token, categories, isUnion }, 0);
+    const fetchProps = createFetchProps({ token, apiUrl, categories, isUnion }, 0);
     const variables = newsFetchStrategy.composeApiVariables(fetchProps);
 
     const [count, entries] = await Promise.all([

@@ -9,6 +9,7 @@ const tagName = 'umd-feed-experts-grid';
 
 const createComponent: CreateComponentFunction = (element) => {
   const token = Attributes.getValue.feedToken({ element });
+  const apiUrl = Attributes.getValue.url({ element });
 
   if (!token) {
     return { element: document.createElement('div'), styles: '' };
@@ -23,6 +24,7 @@ const createComponent: CreateComponentFunction = (element) => {
 
   return grid({
     token,
+    ...(apiUrl && { apiUrl }),
     numberOfColumnsToShow: Math.min(Math.max(columnCount, 1), 4),
     numberOfRowsToStart: Math.min(Math.max(rowCount, 1), 2),
     isThemeDark: Attributes.isTheme.dark({ element }),
@@ -48,6 +50,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *
  * ## Attributes
  * - `data-token` - API authentication token (required)
+ * - `data-url` - API endpoint override, e.g. a staging API (optional)
  * - `data-filter-group-ids` - Comma-separated category IDs to filter experts
  * - `data-layout-column-count` - Number of columns (default: 3)
  * - `data-layout-row-count` - Initial rows to display (default: 1)
@@ -92,13 +95,16 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.17.0
  */
-export const FeedExpertsGrid: ComponentRegistration = Model.defineComponent({
-  tagName,
-  createComponent,
-  afterConnect: (element, shadow) => {
-    element?.events?.callback(shadow);
+export const FeedExpertsGrid: ComponentRegistration = Model.defineComponent(
+  {
+    tagName,
+    createComponent,
+    afterConnect: (element, shadow) => {
+      element?.events?.callback(shadow);
+    },
   },
-}, { eager: false });
+  { eager: false },
+);
 
 /** Backwards compatibility alias for grouped exports */
 export { FeedExpertsGrid as expertsGrid };

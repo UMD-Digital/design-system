@@ -8,7 +8,10 @@
  */
 
 import { slider } from '../../widgets';
-import { EVENTS_SLIDER_QUERY } from '../../strategies/fetch/events';
+import {
+  EVENTS_ENDPOINT,
+  EVENTS_SLIDER_QUERY,
+} from '../../strategies/fetch/events';
 import { type SliderProps } from './_types';
 import { type ElementModel } from '../../_types';
 
@@ -31,5 +34,5 @@ export const eventsSlider = (props: SliderProps): ElementModel =>
   slider({
     ...props,
     query: EVENTS_SLIDER_QUERY,
-    url: 'https://calendar.umd.edu/graphql',
+    endpoint: EVENTS_ENDPOINT,
   });

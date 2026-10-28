@@ -66,6 +66,7 @@ export interface FetchStrategy<TData, TVariables = any> {
   fetchCategoryNames?: (
     categoryIds: string[],
     token?: string,
+    apiUrl?: string,
   ) => Promise<string[] | null>;
 }
 

@@ -10,6 +10,8 @@ import { createGraphQLFetchStrategy } from './graphql';
 import { EventEntry } from 'types/data';
 import { fetchGraphQL } from '@universityofmaryland/web-utilities-library/network';
 
+export const EVENTS_ENDPOINT = 'https://calendar.umd.edu/graphql';
+
 /**
  * Calendar types available in the UMD Calendar system
  */
@@ -206,7 +208,7 @@ export const EVENTS_SLIDER_QUERY = `
  * ```
  */
 const baseFetchStrategy = createGraphQLFetchStrategy<EventEntry>({
-  endpoint: 'https://calendar.umd.edu/graphql',
+  endpoint: EVENTS_ENDPOINT,
 
   queries: {
     entries: EVENTS_QUERY,
@@ -244,10 +246,11 @@ const baseFetchStrategy = createGraphQLFetchStrategy<EventEntry>({
 async function fetchCategoryNames(
   categoryIds: string[],
   token?: string,
+  apiUrl?: string,
 ): Promise<string[] | null> {
   try {
     const response = await fetchGraphQL({
-      url: 'https://calendar.umd.edu/graphql',
+      url: apiUrl || EVENTS_ENDPOINT,
       query: CATEGORY_NAMES_QUERY,
       token: token || '',
       variables: { ids: categoryIds },
@@ -276,7 +279,7 @@ export const eventsFetchStrategy = {
  * Used for grouped event displays.
  */
 const baseFetchStrategyRange = createGraphQLFetchStrategy<EventEntry>({
-  endpoint: 'https://calendar.umd.edu/graphql',
+  endpoint: EVENTS_ENDPOINT,
 
   queries: {
     entries: buildEventsQuery('rangeStart'),

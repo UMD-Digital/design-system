@@ -17,7 +17,8 @@ type TypeSlideFeedResponse = {
 export const createSliderWidget = ({
   token,
   query,
-  url,
+  endpoint,
+  apiUrl,
   categories,
   isThemeDark,
   headline,
@@ -25,7 +26,8 @@ export const createSliderWidget = ({
 }: {
   token: string;
   query: string;
-  url: string;
+  endpoint: string;
+  apiUrl?: string | null;
   categories?: string | null;
   isThemeDark?: boolean;
   headline?: HTMLElement | null;
@@ -68,7 +70,7 @@ export const createSliderWidget = ({
 
     const fetchVariables = {
       query,
-      url,
+      url: apiUrl || endpoint,
       token,
       variables,
     };

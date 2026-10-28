@@ -62,6 +62,7 @@ export interface DisplayStartResultsProps
 
 export interface BaseProps {
   token: string;
+  apiUrl?: string;
   numberOfRowsToStart: number;
   categories?: string[];
   isThemeDark?: boolean;

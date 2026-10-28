@@ -29,10 +29,16 @@ import { type ElementModel } from '../../_types';
  *
  * @param token - API authentication token
  * @param expertId - Expert ID to fetch
+ * @param apiUrl - Optional API endpoint override
  * @returns Base props object for strategy's composeApiVariables
  */
-const createFetchProps = (token: string, expertId: string) => ({
+const createFetchProps = (
+  token: string,
+  expertId: string,
+  apiUrl?: string,
+) => ({
   token,
+  apiUrl,
   limit: 1,
   offset: 0,
   ids: [expertId],
@@ -232,7 +238,7 @@ const logError = (
  * ```
  */
 export const expertsBio = (props: BioProps): ElementModel => {
-  const { token, expertId, isThemeDark = false } = props;
+  const { token, apiUrl, expertId, isThemeDark = false } = props;
 
   // Create container using ElementBuilder
   const containerBuilder = new ElementBuilder('div').withClassName(
@@ -267,7 +273,7 @@ export const expertsBio = (props: BioProps): ElementModel => {
     loading.show(container);
 
     try {
-      const fetchProps = createFetchProps(token, validExpertId);
+      const fetchProps = createFetchProps(token, validExpertId, apiUrl);
       const variables = expertsFetchStrategy.composeApiVariables(fetchProps);
       const entries = await expertsFetchStrategy.fetchEntries(variables);
 

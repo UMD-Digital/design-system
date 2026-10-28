@@ -3,6 +3,7 @@ import { newsProps } from '../_types';
 
 export const CommonFeedNewsData = ({ element }: { element: HTMLElement }) => {
   const token = Attributes.getValue.feedToken({ element });
+  const apiUrl = Attributes.getValue.url({ element });
 
   if (!token) {
     console.error(`Feed news requires a token to be set`);
@@ -14,6 +15,7 @@ export const CommonFeedNewsData = ({ element }: { element: HTMLElement }) => {
 
   return {
     token,
+    ...(apiUrl && { apiUrl }),
     isThemeDark: Attributes.isTheme.dark({ element }),
     isLazyLoad: Attributes.includesFeature.lazyLoad({ element }),
     isUnion: Attributes.isData.union({ element }),

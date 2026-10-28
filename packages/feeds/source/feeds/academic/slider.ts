@@ -8,7 +8,10 @@
  */
 
 import { slider } from '../../widgets';
-import { ACADEMIC_SLIDER_QUERY } from '../../strategies/fetch/academic';
+import {
+  ACADEMIC_ENDPOINT,
+  ACADEMIC_SLIDER_QUERY,
+} from '../../strategies/fetch/academic';
 import { type AcademicSliderProps } from './_types';
 import { type ElementModel } from '../../_types';
 
@@ -31,5 +34,5 @@ export const academicSlider = (props: AcademicSliderProps): ElementModel =>
   slider({
     ...props,
     query: ACADEMIC_SLIDER_QUERY,
-    url: 'https://provost.umd.edu/graphql',
+    endpoint: ACADEMIC_ENDPOINT,
   });

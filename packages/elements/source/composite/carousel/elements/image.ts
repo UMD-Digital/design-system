@@ -16,7 +16,10 @@ type TypeCarouselImageProps = Pick<ThemeProps, 'isThemeDark'> & {
 type CarouselImageModel = {
   element: HTMLElement;
   styles: string;
-  buttons: { prev: { element: HTMLElement; styles: string }; next: { element: HTMLElement; styles: string } };
+  buttons: {
+    prev: { element: HTMLElement; styles: string };
+    next: { element: HTMLElement; styles: string };
+  };
   events: {
     Load: () => void;
     EventMoveTo: (index: number) => void;
@@ -106,6 +109,7 @@ const CreateSlide = ({ slide }: { slide: HTMLElement }) => {
     })
     .build();
 };
+const PLACEHOLDER_HEIGHT = 500;
 
 const SetCarouselSize = ({
   slider,
@@ -122,23 +126,34 @@ const SetCarouselSize = ({
   const sliderWrapper = sliderContainer && sliderContainer.parentElement;
   const buttonRoot = sliderWrapper || sliderContainer;
   const buttons = buttonRoot
-    ? (Array.from(buttonRoot.querySelectorAll(`.${BUTTON_CLASS_PREV}, .${BUTTON_CLASS_NEXT}`)) as HTMLButtonElement[])
+    ? (Array.from(
+        buttonRoot.querySelectorAll(
+          `.${BUTTON_CLASS_PREV}, .${BUTTON_CLASS_NEXT}`,
+        ),
+      ) as HTMLButtonElement[])
     : [];
   const img = activeSlide.querySelector('img') as HTMLImageElement;
   const maxWindowHeight = Math.min(maxHeight || windowHeight, windowHeight);
-  const imageSize = getResponsiveImageSize({
-    image: img,
-    parentNode: slider,
-    maxWindowHeight,
-  });
-  const imageContainer = children.find((child) => child.contains(img)) as HTMLElement;
-  const isMobile = window.matchMedia(`(${token.media.queries.tablet.max})`).matches;
+  const imageSize =
+    getResponsiveImageSize({
+      image: img,
+      parentNode: slider,
+      maxWindowHeight,
+    }) || PLACEHOLDER_HEIGHT;
+  const imageContainer = children.find((child) =>
+    child.contains(img),
+  ) as HTMLElement;
+  const isMobile = window.matchMedia(
+    `(${token.media.queries.tablet.max})`,
+  ).matches;
   let size = imageSize;
 
   imageContainer.style.height = `${imageSize}px`;
 
   if (isMobile) {
-    buttons.forEach((button) => { button.style.top = ''; });
+    buttons.forEach((button) => {
+      button.style.top = '';
+    });
   } else {
     buttons.forEach((button) => {
       button.style.top = `${imageSize / 2 - button.offsetHeight / 2}px`;
@@ -182,7 +197,9 @@ const SlideUpcomingSlide = ({
   isRight: boolean;
 }) => {
   const amount = '90';
-  const translate = isRight ? `translateX(-${amount}%)` : `translateX(${amount}%)`;
+  const translate = isRight
+    ? `translateX(-${amount}%)`
+    : `translateX(${amount}%)`;
   const startingPosition = isRight ? `${amount}%` : `-${amount}%`;
 
   slide.style.zIndex = '9';
@@ -208,11 +225,30 @@ const SlideUpcomingSlide = ({
 
 export const createCompositeCarouselImage = (props: TypeCarouselImageProps) =>
   (() => {
-    const { slides, callback, maxHeight, isThemeDark, includeButtonWrapper = true } = props;
+    const {
+      slides,
+      callback,
+      maxHeight,
+      isThemeDark,
+      includeButtonWrapper = true,
+    } = props;
     let activeIndex = 0;
     let sliderElement: HTMLElement | null = null;
 
-    const EventSlide = ({ forward = true }: { forward?: boolean }) => {
+    // Fetch the neighbouring slide's image early, so its size is known before the slide is shown.
+    const PreloadNeighbor = ({ index, forward }: { index: number; forward: boolean }) => {
+      const nextIndex = forward
+        ? (index + 1) % slides.length
+        : (index - 1 + slides.length) % slides.length;
+      const image = slides[nextIndex]?.querySelector('img');
+
+      if (!image) return;
+
+      const preload = new Image();
+      preload.src = image.src;
+    };
+
+    const EventSlide =({ forward = true }: { forward?: boolean }) => {
       SlideActiveSlide({ slide: slides[activeIndex], isRight: forward });
 
       if (forward) {
@@ -235,6 +271,7 @@ export const createCompositeCarouselImage = (props: TypeCarouselImageProps) =>
           maxHeight,
         });
       }
+      PreloadNeighbor({ index: activeIndex, forward });
       if (callback) {
         callback(activeIndex);
       }
@@ -251,6 +288,7 @@ export const createCompositeCarouselImage = (props: TypeCarouselImageProps) =>
           maxHeight,
         });
       }
+      PreloadNeighbor({ index: activeIndex, forward: true });
       if (callback) {
         callback(activeIndex);
       }
@@ -295,8 +333,16 @@ export const createCompositeCarouselImage = (props: TypeCarouselImageProps) =>
       setTimeout(setSize, 300);
     };
 
-    const prevButtonModel = CreateButton({ EventSlide, isRight: false, isThemeDark });
-    const nextButtonModel = CreateButton({ EventSlide, isRight: true, isThemeDark });
+    const prevButtonModel = CreateButton({
+      EventSlide,
+      isRight: false,
+      isThemeDark,
+    });
+    const nextButtonModel = CreateButton({
+      EventSlide,
+      isRight: true,
+      isThemeDark,
+    });
     const slidesElements = slides.map((slide) => CreateSlide({ slide: slide }));
     const sliderModel = new ElementBuilder()
       .withClassName('carousel-image-slider')
@@ -366,6 +412,16 @@ export const createCompositeCarouselImage = (props: TypeCarouselImageProps) =>
 
     window.addEventListener('resize', debounce(EventResize, 10));
     EventSwipe();
+    PreloadNeighbor({ index: activeIndex, forward: true });
+
+    if (sliderElement) {
+      const sizeObserver = new ResizeObserver(([entry]) => {
+        if (entry.contentRect.width === 0) return;
+        sizeObserver.disconnect();
+        Load();
+      });
+      sizeObserver.observe(sliderElement);
+    }
 
     return {
       element: containerModel.element,

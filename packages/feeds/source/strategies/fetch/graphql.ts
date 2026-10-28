@@ -17,7 +17,7 @@ import { FetchStrategy } from '../../factory/core/types';
  * Configuration for creating a GraphQL fetch strategy
  */
 export interface GraphQLFetchConfig<TData, TResponse = any> {
-  /** GraphQL endpoint URL */
+  /** Default GraphQL endpoint */
   endpoint: string;
 
   /** GraphQL queries */
@@ -82,6 +82,15 @@ export function createGraphQLFetchStrategy<
     composeVariables,
   } = config;
 
+  // apiUrl overrides the endpoint; not sent as a query variable
+  const resolveRequest = (variables: TVariables) => {
+    const { apiUrl, ...queryVariables } = variables as any;
+    return {
+      url: apiUrl || endpoint,
+      queryVariables: queryVariables as GraphQLVariables,
+    };
+  };
+
   return {
     /**
      * Fetch the total count of entries
@@ -90,11 +99,12 @@ export function createGraphQLFetchStrategy<
       try {
         // Use count query if provided, otherwise use entries query
         const query = queries.count || queries.entries;
+        const { url, queryVariables } = resolveRequest(variables);
         const response = await fetchGraphQL({
-          url: endpoint,
+          url,
           query,
           token: (variables as any).token,
-          variables: variables as GraphQLVariables,
+          variables: queryVariables,
         });
 
         // Check for errors
@@ -117,11 +127,12 @@ export function createGraphQLFetchStrategy<
      */
     fetchEntries: async (variables: TVariables): Promise<TData[] | null> => {
       try {
+        const { url, queryVariables } = resolveRequest(variables);
         const response = await fetchGraphQL({
-          url: endpoint,
+          url,
           query: queries.entries,
           token: (variables as any).token,
-          variables: variables as GraphQLVariables,
+          variables: queryVariables,
         });
 
         // Check for errors
@@ -145,6 +156,7 @@ export function createGraphQLFetchStrategy<
     composeApiVariables: (props: any): TVariables => {
       const {
         token,
+        apiUrl,
         categories,
         numberOfColumnsToShow = 1,
         numberOfRowsToStart,
@@ -177,9 +189,13 @@ export function createGraphQLFetchStrategy<
       // Forward strategy-specific props (e.g. isMediaTrained, isUnion, expertId)
       Object.assign(baseVariables, extraProps);
 
+      // Carried alongside the query variables so it survives custom composition
+      const withApiUrl = (composed: any): TVariables =>
+        apiUrl ? { ...composed, apiUrl } : composed;
+
       // Allow custom variable composition
       if (composeVariables) {
-        return composeVariables(baseVariables);
+        return withApiUrl(composeVariables(baseVariables));
       }
 
       // Default mapping (for strategies without custom composeVariables)
@@ -191,7 +207,7 @@ export function createGraphQLFetchStrategy<
         delete defaultVariables.categories;
       }
 
-      return defaultVariables as TVariables;
+      return withApiUrl(defaultVariables);
     },
   };
 }

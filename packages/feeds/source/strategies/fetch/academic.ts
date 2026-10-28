@@ -6,6 +6,8 @@
  * @module strategies/fetch/academic
  */
 
+export const ACADEMIC_ENDPOINT = 'https://provost.umd.edu/graphql';
+
 /**
  * GraphQL fragments for academic event data
  */

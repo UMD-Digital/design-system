@@ -1,6 +1,10 @@
 import { slider as academicSlider } from '@universityofmaryland/web-feeds-library/academic';
 import { slider as eventSlider } from '@universityofmaryland/web-feeds-library/events';
-import { Attributes, Model, Slots } from '@universityofmaryland/web-model-library';
+import {
+  Attributes,
+  Model,
+  Slots,
+} from '@universityofmaryland/web-model-library';
 import {
   CreateComponentFunction,
   ComponentRegistration,
@@ -27,6 +31,7 @@ const tagName = 'umd-element-slider-events-feed';
  * - `data-theme` - Color theme of the component:
  *   - `dark` - Dark background with light text
  * - `data-token` - API token for fetching events (required)
+ * - `data-url` - API endpoint override, e.g. a staging API (optional)
  * - `data-feed-type` - Feed type:
  *   - `academic` - Academic calendar events
  *   - Default - General events feed
@@ -94,6 +99,7 @@ const attributes = Attributes.handler.common.resize((element) =>
 const createComponent: CreateComponentFunction = (element) => {
   const isThemeDark = Attributes.isTheme.dark({ element });
   const token = Attributes.getValue.feedToken({ element });
+  const apiUrl = Attributes.getValue.url({ element });
   const categories = Attributes.getValue.feedFilterIds({ element });
   const isTypeAcademic = Attributes.isData.type.academic({
     element,
@@ -106,6 +112,7 @@ const createComponent: CreateComponentFunction = (element) => {
 
   const sliderProps = {
     token,
+    ...(apiUrl && { apiUrl }),
     categories,
     isThemeDark,
     headline: Slots.headline.default({ element }),
@@ -135,6 +142,7 @@ const createComponent: CreateComponentFunction = (element) => {
  * - `data-theme` - Color theme of the component:
  *   - `dark` - Dark background with light text
  * - `data-token` - API token for fetching events (required)
+ * - `data-url` - API endpoint override, e.g. a staging API (optional)
  * - `data-feed-type` - Feed type:
  *   - `academic` - Academic calendar events
  *   - Default - General events feed
@@ -195,13 +203,16 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const SliderEventFeed: ComponentRegistration = Model.defineComponent({
-  tagName,
-  createComponent,
-  attributes: [attributes],
-  afterConnect: (ref: TypedComponentRef, shadow?: ShadowRoot) =>
-    ref?.events?.callback?.(shadow),
-}, { eager: false });
+export const SliderEventFeed: ComponentRegistration = Model.defineComponent(
+  {
+    tagName,
+    createComponent,
+    attributes: [attributes],
+    afterConnect: (ref: TypedComponentRef, shadow?: ShadowRoot) =>
+      ref?.events?.callback?.(shadow),
+  },
+  { eager: false },
+);
 
 /** Backwards compatibility alias for grouped exports */
 export { SliderEventFeed as eventFeed };

@@ -9,6 +9,7 @@ const tagName = 'umd-feed-experts-list';
 
 const createComponent: CreateComponentFunction = (element) => {
   const token = Attributes.getValue.feedToken({ element });
+  const apiUrl = Attributes.getValue.url({ element });
 
   if (!token) {
     return { element: document.createElement('div'), styles: '' };
@@ -22,6 +23,7 @@ const createComponent: CreateComponentFunction = (element) => {
 
   return list({
     token,
+    ...(apiUrl && { apiUrl }),
     numberOfRowsToStart: Math.min(Math.max(rowCount, 1), 10),
     cardType: isDisplayList ? 'list' : 'tabular',
     isThemeDark: Attributes.isTheme.dark({ element }),
@@ -45,6 +47,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *
  * ## Attributes
  * - `data-token` - API authentication token (required)
+ * - `data-url` - API endpoint override, e.g. a staging API (optional)
  * - `data-theme` - Theme options:
  *   - `dark` - Dark theme styling
  *
@@ -76,13 +79,16 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.0.0
  */
-export const FeedExpertsList: ComponentRegistration = Model.defineComponent({
-  tagName,
-  createComponent,
-  afterConnect: (element, shadow) => {
-    element?.events?.callback(shadow);
+export const FeedExpertsList: ComponentRegistration = Model.defineComponent(
+  {
+    tagName,
+    createComponent,
+    afterConnect: (element, shadow) => {
+      element?.events?.callback(shadow);
+    },
   },
-}, { eager: false });
+  { eager: false },
+);
 
 /** Backwards compatibility alias for grouped exports */
 export { FeedExpertsList as expertsList };

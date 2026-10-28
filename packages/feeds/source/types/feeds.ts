@@ -15,6 +15,7 @@
 export interface BaseFeedProps {
   /** API authentication token */
   token: string;
+  apiUrl?: string;
   /** Number of rows to display initially */
   numberOfRowsToStart: number;
   /** Category IDs to filter by */
@@ -58,6 +59,7 @@ export interface ListFeedProps extends BaseFeedProps {
 export interface SliderFeedProps {
   /** API authentication token */
   token: string;
+  apiUrl?: string;
   /** Category ID or slug to filter by */
   categories?: string | null;
   /** Use dark theme styling */

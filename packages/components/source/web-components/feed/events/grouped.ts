@@ -37,6 +37,7 @@ const createComponent: CreateComponentFunction = (element) => {
  *
  * ## Attributes
  * - `data-token` - API authentication token (required)
+ * - `data-url` - API endpoint override, e.g. a staging API (optional)
  * - `data-theme` - Theme options:
  *   - `dark` - Dark theme styling
  *
@@ -52,13 +53,16 @@ const createComponent: CreateComponentFunction = (element) => {
  * @category Components
  * @since 1.13.0
  */
-export const FeedEventsGrouped: ComponentRegistration = Model.defineComponent({
-  tagName,
-  createComponent,
-  afterConnect: (element, shadow) => {
-    element?.events?.callback(shadow);
+export const FeedEventsGrouped: ComponentRegistration = Model.defineComponent(
+  {
+    tagName,
+    createComponent,
+    afterConnect: (element, shadow) => {
+      element?.events?.callback(shadow);
+    },
   },
-}, { eager: false });
+  { eager: false },
+);
 
 /** Backwards compatibility alias for grouped exports */
 export { FeedEventsGrouped as eventsGrouped };

@@ -1,5 +1,6 @@
 interface baseFeedProps {
   token: string;
+  apiUrl?: string;
   categories?: string[];
   isThemeDark?: boolean;
   isLazyLoad: boolean;
@@ -18,6 +19,7 @@ export interface newsProps extends baseFeedProps {
 
 export interface inTheNewsProps {
   token: string;
+  apiUrl?: string;
   isThemeDark?: boolean;
   isLazyLoad: boolean;
   entriesToRemove?: string[];

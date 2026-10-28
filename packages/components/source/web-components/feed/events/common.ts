@@ -3,6 +3,7 @@ import { eventProps } from '../_types';
 
 export const CommonFeedEventsData = ({ element }: { element: HTMLElement }) => {
   const token = Attributes.getValue.feedToken({ element });
+  const apiUrl = Attributes.getValue.url({ element });
 
   if (!token) {
     console.error(`Feed events requires a token to be set`);
@@ -13,6 +14,7 @@ export const CommonFeedEventsData = ({ element }: { element: HTMLElement }) => {
 
   const data: eventProps = {
     token,
+    ...(apiUrl && { apiUrl }),
     isThemeDark: Attributes.isTheme.dark({ element }),
     isLazyLoad: Attributes.includesFeature.lazyLoad({ element }),
     ...(categories && { categories: categories.split(',') }),

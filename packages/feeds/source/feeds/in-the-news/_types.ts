@@ -1,5 +1,6 @@
 export interface BaseProps {
   token: string;
+  apiUrl?: string;
   numberOfRowsToStart: number;
   isThemeDark?: boolean;
   isLazyLoad: boolean;

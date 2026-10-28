@@ -79,12 +79,6 @@ export const createCompositeCarouselImageMultiple = (props: TypeCarouselMultiple
       })
       .withStylesIf(isFullScreenOption, {
         element: {
-          // Only hide/reveal the Full Screen button on devices that actually
-          // hover. On touch (hover: none) the button stays visible by default —
-          // and, crucially, no `:hover` rule exists on this container, so iOS
-          // Safari does not swallow the first tap as a hover. A hover-reveal on
-          // the container would make iOS treat the first tap on the caption
-          // toggle (a child of this container) as a hover instead of a click.
           '@media (hover: hover)': {
             [`& .${fullScreenClassName}`]: {
               visibility: 'hidden',
@@ -114,9 +108,7 @@ export const createCompositeCarouselImageMultiple = (props: TypeCarouselMultiple
       buttonStyles,
     );
 
-    images[images.length - 1].addEventListener('load', () => {
-      carousel.events.load();
-
+    const setMinHeight = () => {
       setTimeout(() => {
         const maxHeight = clonedImages.reduce(
           (accumulator, image) => Math.max(image.offsetHeight, accumulator),
@@ -125,6 +117,19 @@ export const createCompositeCarouselImageMultiple = (props: TypeCarouselMultiple
 
         slide.style.minHeight = `${maxHeight}px`;
       }, 100);
+    };
+
+    const sizeObserver = new ResizeObserver(([entry]) => {
+      if (entry.contentRect.width === 0) return;
+      sizeObserver.disconnect();
+      carousel.events.load();
+      setMinHeight();
+    });
+    sizeObserver.observe(slide);
+
+    images[images.length - 1].addEventListener('load', () => {
+      carousel.events.resize();
+      setMinHeight();
     });
 
     if (isFullScreenOption) {

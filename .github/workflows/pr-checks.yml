@@ -1,0 +1,57 @@
+# .github/workflows/pr-checks.yml
+name: PR Checks
+
+# Checks:
+# 1. Lockfile matches package.json (frozen install, as releases use)
+# 2. Changed JS/TS files pass Prettier (fix: pnpm exec prettier --write)
+on:
+  pull_request:
+    branches:
+      - main
+      - 'patch/**'
+      - 'release/*'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pr-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  checks:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      # pnpm must be on PATH before setup-node can cache its store
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Check formatting of changed files
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          git diff --name-only -z --diff-filter=ACMR "origin/$BASE_REF...HEAD" \
+            -- '*.ts' '*.tsx' '*.js' '*.mjs' '*.cjs' > changed-files
+          if [ ! -s changed-files ]; then
+            echo "No JS/TS files changed."
+            exit 0
+          fi
+          xargs -0 pnpm exec prettier --check < changed-files

@@ -25,9 +25,12 @@ const createComponent = (element: HTMLElement) => {
     const drawer = MakeNavDrawer({ element, ...SLOTS });
     if (!drawer) return;
 
-    const button = navigation.elements
-      .menuButton({ eventOpen: drawer.events.eventOpen })
-      .build();
+    const eventOpen = () => {
+      if (!drawer.events) return;
+      drawer.events.eventOpen();
+    };
+
+    const button = navigation.elements.menuButton({ eventOpen }).build();
 
     container.appendChild(drawer.element);
     container.appendChild(button.element);

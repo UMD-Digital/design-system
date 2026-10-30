@@ -228,12 +228,18 @@ const createComponent = (element: HTMLElement) => {
     if (drawer) {
       container.appendChild(drawer.element);
       drawerStyles = drawer.styles;
-      headerProps.eventOpen = drawer.events.eventOpen;
+      headerProps.eventOpen = () => {
+        if (!drawer.events) return;
+        drawer.events.eventOpen();
+      };
     }
 
     const headerRef = CreateHeader(headerProps);
     container.appendChild(headerRef.element);
-    stickyEvent = headerRef.events.sticky;
+    stickyEvent = (args) => {
+      if (!headerRef.events) return;
+      headerRef.events.sticky(args);
+    };
 
     const styleTag = document.createElement('style');
     styleTag.textContent = `${drawerStyles}\n${headerRef.styles}`;

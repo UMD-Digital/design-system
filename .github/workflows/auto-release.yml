@@ -1,11 +1,25 @@
 # .github/workflows/auto-release.yml
-name: Automated Package Release
+name: Automated Release
 
-# Trigger on push to npm-release branch
+# All packages share one version (2.0+ release philosophy). Every release
+# publishes every package at that version, whether or not it changed.
 on:
-  push:
-    branches:
-      - npm-release
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version for every package (e.g. 2.2.0 or 2.2.0-alpha.1)'
+        required: true
+        type: string
+      tag:
+        description: 'npm dist-tag (e.g. alpha)'
+        required: false
+        type: string
+        default: 'latest'
+      dry_run:
+        description: 'Dry run (build, test, and simulate publishing without releasing)'
+        required: false
+        type: boolean
+        default: true
 
 # Prevent concurrent releases
 concurrency:
@@ -14,333 +28,170 @@ concurrency:
 
 permissions:
   contents: write
-  packages: write
-  pull-requests: write
+  # Required for npm trusted publishing (OIDC); replaces NPM_TOKEN and 2FA prompts
+  id-token: write
 
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+  DRY_RUN: ${{ inputs.dry_run }}
+  GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
 jobs:
-  # Job 1: Detect which packages need releasing
-  detect-versions:
-    name: Detect Version Changes
+  release:
+    name: Release
     runs-on: ubuntu-latest
     outputs:
-      has-releases: ${{ steps.detect.outputs.has-releases }}
-      release-count: ${{ steps.detect.outputs.release-count }}
-      foundation-packages: ${{ steps.detect.outputs.foundation-packages }}
-      core-packages: ${{ steps.detect.outputs.core-packages }}
-      primary-packages: ${{ steps.detect.outputs.primary-packages }}
-      all-packages: ${{ steps.detect.outputs.all-packages }}
+      version: ${{ inputs.version }}
+      published: ${{ steps.publish.outputs.published }}
+      dry_run: ${{ env.DRY_RUN }}
 
     steps:
+      # Runs first so bad inputs fail before any build or test time is spent
+      - name: Validate inputs
+        env:
+          VERSION: ${{ inputs.version }}
+          DIST_TAG: ${{ inputs.tag }}
+        run: |
+          if [ "$GITHUB_REF_NAME" != "npm-release" ]; then
+            echo "::error::Releases must run from npm-release, not $GITHUB_REF_NAME"
+            exit 1
+          fi
+
+          # Exact version check
+          if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+            echo "::error::$VERSION is not a valid version (e.g. 2.2.0 or 2.2.0-alpha.1)"
+            exit 1
+          fi
+
+          # A pre-release on latest would become the default install for everyone
+          if [[ "$VERSION" == *-* ]] && [ "$DIST_TAG" = "latest" ]; then
+            echo "::error::$VERSION is a pre-release; set the tag input (e.g. alpha) instead of latest"
+            exit 1
+          fi
+
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
+          ref: ${{ github.ref_name }}
           fetch-depth: 0
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '22'
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-
-      - name: Install dependencies
-        run: pnpm install --frozen-lockfile
-
-      - name: Make detection script executable
-        run: chmod +x scripts/detect-versions.js
-
-      - name: Detect version changes
-        id: detect
-        run: node scripts/detect-versions.js
-
-      - name: Create detection summary
-        run: |
-          echo "## 🔍 Version Detection Results" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Branch:** \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "**Commit:** ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Triggered by:** @${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Packages to Release" >> $GITHUB_STEP_SUMMARY
-          echo "**Total:** ${{ steps.detect.outputs.release-count }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          if [[ "${{ steps.detect.outputs.foundation-packages }}" != "" ]]; then
-            echo "**Foundation Tier:** ${{ steps.detect.outputs.foundation-packages }}" >> $GITHUB_STEP_SUMMARY
-          fi
-          if [[ "${{ steps.detect.outputs.core-packages }}" != "" ]]; then
-            echo "**Core Tier:** ${{ steps.detect.outputs.core-packages }}" >> $GITHUB_STEP_SUMMARY
-          fi
-          if [[ "${{ steps.detect.outputs.primary-packages }}" != "" ]]; then
-            echo "**Primary Tier:** ${{ steps.detect.outputs.primary-packages }}" >> $GITHUB_STEP_SUMMARY
-          fi
-
-  # Job 2: Release foundation tier packages (parallel within tier)
-  release-foundation:
-    name: Release Foundation Tier
-    needs: detect-versions
-    if: needs.detect-versions.outputs.foundation-packages != ''
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Make release script executable
-        run: chmod +x scripts/trigger-releases.sh
-
-      - name: Trigger foundation releases
-        env:
-          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          GITHUB_REF_NAME: ${{ github.ref_name }}
-        run: |
-          scripts/trigger-releases.sh \
-            "${{ needs.detect-versions.outputs.foundation-packages }}" \
-            "Foundation"
-
-  # Job 3: Release core tier packages (after foundation)
-  release-core:
-    name: Release Core Tier
-    needs: [detect-versions, release-foundation]
-    if: |
-      always() &&
-      needs.detect-versions.outputs.core-packages != '' &&
-      (needs.release-foundation.result == 'success' || needs.release-foundation.result == 'skipped')
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Make release script executable
-        run: chmod +x scripts/trigger-releases.sh
-
-      - name: Trigger core releases
-        env:
-          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          GITHUB_REF_NAME: ${{ github.ref_name }}
-        run: |
-          scripts/trigger-releases.sh \
-            "${{ needs.detect-versions.outputs.core-packages }}" \
-            "Core"
-
-  # Job 4: Release primary tier packages (after core)
-  release-primary:
-    name: Release Primary Tier
-    needs: [detect-versions, release-core]
-    if: |
-      always() &&
-      needs.detect-versions.outputs.primary-packages != '' &&
-      (needs.release-core.result == 'success' || needs.release-core.result == 'skipped')
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Make release script executable
-        run: chmod +x scripts/trigger-releases.sh
-
-      - name: Trigger primary releases
-        env:
-          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          GITHUB_REF_NAME: ${{ github.ref_name }}
-        run: |
-          scripts/trigger-releases.sh \
-            "${{ needs.detect-versions.outputs.primary-packages }}" \
-            "Primary"
-
-  # Job 5: Update version badges for all released packages
-  update-badges:
-    name: Update Version Badges
-    needs: [detect-versions, release-foundation, release-core, release-primary]
-    if: |
-      always() &&
-      needs.detect-versions.outputs.has-releases == 'true' &&
-      (needs.release-primary.result == 'success' || needs.release-primary.result == 'skipped') &&
-      (needs.release-core.result == 'success' || needs.release-core.result == 'skipped') &&
-      (needs.release-foundation.result == 'success' || needs.release-foundation.result == 'skipped')
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.PAT_TOKEN }}
-
-      - name: Pull latest changes
-        run: |
-          git pull origin ${{ github.ref_name }}
 
       - name: Configure Git
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "ds-release-gh-workflow[bot]"
+          git config user.email "ds-release-gh-workflow[bot]@users.noreply.github.com"
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: '22'
+          node-version: '26'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Update npm
+        run: npm install -g npm@^12.0.0
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v4
+        uses: pnpm/action-setup@v6
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Update all version badges
+      - name: Build packages in dependency order
+        run: |
+          PACKAGES=$(pnpm exec lerna list --toposort --json | jq -r '.[] | "\(.name) \(.location)"')
+
+          while read -r name location; do
+            (cd "$location" && pnpm run build && pnpm run --if-present build:css)
+          done <<< "$PACKAGES"
+
+      - name: Generate mocks for testing
+        run: pnpm run generate:mocks
+
+      - name: Run tests
+        run: pnpm exec lerna run test --stream
+
+      - name: Bump package versions
+        env:
+          VERSION: ${{ inputs.version }}
+        run: pnpm -r --include-workspace-root exec pnpm version "$VERSION" --no-git-tag-version --allow-same-version
+
+      - name: Update package badges
         run: pnpm run update-badges
 
-      - name: Commit and push badge updates
+      - name: Publish to npm
+        id: publish
         env:
-          GH_TOKEN: ${{ secrets.PAT_TOKEN }}
+          VERSION: ${{ inputs.version }}
+          DIST_TAG: ${{ inputs.tag }}
         run: |
-          git add **/README.md
-          if ! git diff --cached --quiet; then
-            git commit -m "docs: update version badges after automated release [skip ci]"
-            git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git
-            git push origin ${{ github.ref_name }}
-            echo "✅ Badge updates committed and pushed"
-          else
-            echo "ℹ️  No badge changes to commit"
+          PUBLISHED=()
+
+          PACKAGES=$(pnpm exec lerna list --toposort --json | jq -r '.[] | "\(.name) \(.location)"')
+
+          while read -r name location; do
+            if npm view "$name@$VERSION" version; then
+              echo "⏭️  $name@$VERSION already on npm"
+              continue
+            fi
+
+            if [ "$DRY_RUN" = "true" ]; then
+              echo "🧪 Would publish $name@$VERSION ($DIST_TAG)"
+              (cd "$location" && pnpm publish --tag "$DIST_TAG" --dry-run --no-git-checks)
+            else
+              (cd "$location" && pnpm publish --tag "$DIST_TAG" --no-git-checks)
+              echo "✅ Published $name@$VERSION ($DIST_TAG)"
+            fi
+
+            PUBLISHED+=("$name@$VERSION")
+          done <<< "$PACKAGES"
+
+          echo "published=$(echo "${PUBLISHED[*]}")" >> "$GITHUB_OUTPUT"
+
+      # Commits after publishing, so a failed publish never leaves a version bump on the branch
+      - name: Commit version and badges
+        if: env.DRY_RUN != 'true'
+        env:
+          VERSION: ${{ inputs.version }}
+        run: |
+          git add README.md package.json packages/*/README.md packages/*/package.json
+          if git diff --cached --quiet; then
+            echo "ℹ️  No version or badge changes to commit"
+            exit 0
+          fi
+          git commit -m "Release (Workflow): version $VERSION"
+
+          # Packages are already on npm here; rebase in case npm-release moved during the run
+          if ! git pull --rebase --autostash origin "$GITHUB_REF_NAME" || ! git push origin "HEAD:$GITHUB_REF_NAME"; then
+            echo "::error::$VERSION is on npm, but the version bump could not be pushed to $GITHUB_REF_NAME. Rerun the workflow or commit the bump by hand."
+            exit 1
           fi
 
-  # Job 6: Aggregate results and notify
-  notify-results:
-    name: Notify Release Results
-    needs: [detect-versions, release-foundation, release-core, release-primary, update-badges]
-    if: always() && needs.detect-versions.outputs.has-releases == 'true'
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Determine overall status
-        id: status
+      - name: Tag and draft release
+        if: env.DRY_RUN != 'true'
+        env:
+          VERSION: ${{ inputs.version }}
         run: |
-          FOUNDATION_STATUS="${{ needs.release-foundation.result }}"
-          CORE_STATUS="${{ needs.release-core.result }}"
-          PRIMARY_STATUS="${{ needs.release-primary.result }}"
+          TAG="release-v$VERSION"
 
-          # Check if any job failed
-          if [[ "$FOUNDATION_STATUS" == "failure" ]] || [[ "$CORE_STATUS" == "failure" ]] || [[ "$PRIMARY_STATUS" == "failure" ]]; then
-            echo "status=failure" >> $GITHUB_OUTPUT
-            echo "message=One or more package releases failed. Check workflow logs for details." >> $GITHUB_OUTPUT
-          else
-            echo "status=success" >> $GITHUB_OUTPUT
-            echo "message=All package releases completed successfully!" >> $GITHUB_OUTPUT
+          git tag "$TAG"
+          git push origin "$TAG"
+
+          # Pre-releases are marked so they don't show as "Latest" on GitHub
+          RELEASE_FLAGS=()
+          if [[ "$VERSION" == *-* ]]; then
+            RELEASE_FLAGS+=("--prerelease")
           fi
 
-      - name: Create release summary
-        run: |
-          echo "## 🚀 Automated Release Summary" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Branch:** \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
-          echo "**Triggered by:** @${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Status:** ${{ steps.status.outputs.status == 'success' && '✅ Success' || '❌ Failed' }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Released Packages" >> $GITHUB_STEP_SUMMARY
-          echo "**Total:** ${{ needs.detect-versions.outputs.release-count }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "**Foundation Tier:** ${{ needs.detect-versions.outputs.foundation-packages || 'none' }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Core Tier:** ${{ needs.detect-versions.outputs.core-packages || 'none' }}" >> $GITHUB_STEP_SUMMARY
-          echo "**Primary Tier:** ${{ needs.detect-versions.outputs.primary-packages || 'none' }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "### Job Results" >> $GITHUB_STEP_SUMMARY
-          echo "- Foundation: ${{ needs.release-foundation.result }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Core: ${{ needs.release-core.result }}" >> $GITHUB_STEP_SUMMARY
-          echo "- Primary: ${{ needs.release-primary.result }}" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "🔗 [View on NPM](https://www.npmjs.com/org/universityofmaryland)" >> $GITHUB_STEP_SUMMARY
-          echo "🔗 [View Releases](https://github.com/${{ github.repository }}/releases)" >> $GITHUB_STEP_SUMMARY
-          echo "📝 [View Badge Updates](https://github.com/${{ github.repository }}/commit/${{ needs.update-badges.result == 'success' && github.sha || 'latest' }})" >> $GITHUB_STEP_SUMMARY
+          gh release create "$TAG" --draft --verify-tag --title "Release $VERSION" --notes "" "${RELEASE_FLAGS[@]}"
 
-      - name: Send Slack notification
-        uses: slackapi/slack-github-action@v1.25.0
-        with:
-          payload: |
-            {
-              "text": "${{ steps.status.outputs.status == 'success' && '✅' || '❌' }} Automated Release ${{ steps.status.outputs.status == 'success' && 'Successful' || 'Failed' }}",
-              "blocks": [
-                {
-                  "type": "header",
-                  "text": {
-                    "type": "plain_text",
-                    "text": "${{ steps.status.outputs.status == 'success' && '✅ Automated Release Success' || '❌ Automated Release Failed' }}",
-                    "emoji": true
-                  }
-                },
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Branch:*\n`${{ github.ref_name }}`"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Triggered by:*\n@${{ github.actor }}"
-                    }
-                  ]
-                },
-                {
-                  "type": "section",
-                  "fields": [
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Packages Released:*\n```${{ needs.detect-versions.outputs.all-packages }}```"
-                    },
-                    {
-                      "type": "mrkdwn",
-                      "text": "*Total Count:*\n${{ needs.detect-versions.outputs.release-count }}"
-                    }
-                  ]
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "*Message:*\n${{ steps.status.outputs.message }}"
-                  }
-                },
-                {
-                  "type": "section",
-                  "text": {
-                    "type": "mrkdwn",
-                    "text": "📦 <https://www.npmjs.com/org/universityofmaryland|View on NPM> | 📰 <${{ github.server_url }}/${{ github.repository }}/releases|View Releases> | 🔍 <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View Workflow>"
-                  }
-                }
-              ]
-            }
-        env:
-          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
-
-  # Job 7: Handle no releases case
-  no-releases:
-    name: No Releases Needed
-    needs: detect-versions
-    if: needs.detect-versions.outputs.has-releases != 'true'
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Log no releases
-        run: |
-          echo "ℹ️  No packages need releasing at this time."
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "## ℹ️  No Releases Needed" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "All package versions in \`${{ github.ref_name }}\` match or are behind the published NPM versions." >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "To release packages:" >> $GITHUB_STEP_SUMMARY
-          echo "1. Update version in package.json (use \`npm version\` or manual edit)" >> $GITHUB_STEP_SUMMARY
-          echo "2. Commit and push to the release branch" >> $GITHUB_STEP_SUMMARY
-          echo "3. This workflow will automatically detect and publish the new version" >> $GITHUB_STEP_SUMMARY
+  notify:
+    name: Send Notifications
+    needs: release
+    if: always() && needs.release.outputs.dry_run != 'true'
+    uses: ./.github/workflows/release-notification.yml
+    with:
+      status: ${{ needs.release.result == 'success' && 'success' || 'failure' }}
+      version_bump: ${{ needs.release.outputs.version }}
+      package_version: ${{ needs.release.outputs.version }}
+      packages_changed: ${{ needs.release.outputs.published || 'none' }}
+      error_message: ${{ needs.release.result == 'failure' && 'Release failed. Check workflow logs.' || '' }}
+    secrets:
+      SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}

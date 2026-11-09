@@ -106,6 +106,7 @@ const CreateSlide = ({ slide }: { slide: HTMLElement }) => {
     })
     .build();
 };
+const PLACEHOLDER_HEIGHT = 500;
 
 const SetCarouselSize = ({
   slider,
@@ -130,7 +131,7 @@ const SetCarouselSize = ({
     image: img,
     parentNode: slider,
     maxWindowHeight,
-  });
+  }) || PLACEHOLDER_HEIGHT;
   const imageContainer = children.find((child) => child.contains(img)) as HTMLElement;
   const isMobile = window.matchMedia(`(${token.media.queries.tablet.max})`).matches;
   let size = imageSize;
@@ -212,6 +213,25 @@ export const createCompositeCarouselImage = (props: TypeCarouselImageProps) =>
     let activeIndex = 0;
     let sliderElement: HTMLElement | null = null;
 
+    const LoadSlideImages = ({ index, forward }: { index: number; forward: boolean }) => {
+      const loadImage = (slideIndex: number) => {
+        const image = slides[slideIndex].querySelector('img');
+
+        if (image === null) return;
+
+        image.loading = 'eager';
+        image.addEventListener('load', EventResize, { once: true });
+      };
+
+      loadImage(index);
+
+      if (forward) {
+        loadImage((index + 1) % slides.length);
+      } else {
+        loadImage((index - 1 + slides.length) % slides.length);
+      }
+    };
+
     const EventSlide = ({ forward = true }: { forward?: boolean }) => {
       SlideActiveSlide({ slide: slides[activeIndex], isRight: forward });
 
@@ -235,6 +255,7 @@ export const createCompositeCarouselImage = (props: TypeCarouselImageProps) =>
           maxHeight,
         });
       }
+      LoadSlideImages({ index: activeIndex, forward });
       if (callback) {
         callback(activeIndex);
       }
@@ -251,6 +272,7 @@ export const createCompositeCarouselImage = (props: TypeCarouselImageProps) =>
           maxHeight,
         });
       }
+      LoadSlideImages({ index: activeIndex, forward: true });
       if (callback) {
         callback(activeIndex);
       }
@@ -366,6 +388,16 @@ export const createCompositeCarouselImage = (props: TypeCarouselImageProps) =>
 
     window.addEventListener('resize', debounce(EventResize, 10));
     EventSwipe();
+    LoadSlideImages({ index: activeIndex, forward: true });
+
+    if (sliderElement) {
+      const sizeObserver = new ResizeObserver(([entry]) => {
+        if (entry.contentRect.width === 0) return;
+        sizeObserver.disconnect();
+        Load();
+      });
+      sizeObserver.observe(sliderElement);
+    }
 
     return {
       element: containerModel.element,

@@ -113,6 +113,7 @@ const createAssetColumn = (
 
         [`@container (max-width: ${mediumSize - 1}px)`]: {
           display: 'grid',
+          justifyContent: 'normal',
           height: '56vw',
         },
 

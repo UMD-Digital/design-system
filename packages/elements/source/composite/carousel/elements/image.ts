@@ -70,14 +70,15 @@ const CreateButton = ({
     .on('click', (event) => {
       const button = event.currentTarget as HTMLButtonElement;
       event.stopPropagation();
+      if (button.getAttribute('aria-disabled') === 'true') return;
       if (isRight) {
         EventSlide({});
       } else {
         EventSlide({ forward: false });
       }
-      button.disabled = true;
+      button.setAttribute('aria-disabled', 'true');
       setTimeout(() => {
-        button.disabled = false;
+        button.removeAttribute('aria-disabled');
       }, ANIMATION_DURATION + 100);
     })
     .build();

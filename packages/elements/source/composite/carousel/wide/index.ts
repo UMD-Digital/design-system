@@ -188,9 +188,6 @@ const animateSlides = (
   const currentSlide = refs.slides[state.currentIndex];
   const newSlide = refs.slides[newIndex];
 
-  refs.controls.prev.setAttribute('disabled', '');
-  refs.controls.next.setAttribute('disabled', '');
-
   const newSlideDirection = direction === 'reverse' ? 'left' : 'right';
   positionSlideOffScreen(newSlide, newSlideDirection);
 
@@ -210,9 +207,6 @@ const animateSlides = (
     cleanupSlideTransition(newSlide, true);
 
     newSlide.setAttribute('data-content-visible', 'true');
-
-    refs.controls.prev.removeAttribute('disabled');
-    refs.controls.next.removeAttribute('disabled');
 
     state.currentIndex = newIndex;
     state.isAnimating = false;

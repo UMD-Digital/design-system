@@ -3,7 +3,7 @@ name: PR Checks
 
 # Checks:
 # 1. Lockfile matches package.json (frozen install, as releases use)
-# 2. Changed JS/TS files pass Prettier (fix: pnpm exec prettier --write)
+# 2. Changed files pass Prettier (fix: pnpm exec prettier --write)
 on:
   pull_request:
     branches:
@@ -47,11 +47,10 @@ jobs:
       - name: Check formatting of changed files
         env:
           BASE_REF: ${{ github.base_ref }}
+        # Uses the lint-staged config in package.json, same as the pre-commit hook
         run: |
-          git diff --name-only -z --diff-filter=ACMR "origin/$BASE_REF...HEAD" \
-            -- '*.ts' '*.tsx' '*.js' '*.mjs' '*.cjs' > changed-files
-          if [ ! -s changed-files ]; then
-            echo "No JS/TS files changed."
-            exit 0
-          fi
-          xargs -0 pnpm exec prettier --check < changed-files
+          pnpm exec lint-staged --diff="origin/$BASE_REF...HEAD" --fail-on-changes || {
+            echo "::error::Not formatted. Fix with: pnpm exec prettier --write <files>"
+            git diff --name-only
+            exit 1
+          }

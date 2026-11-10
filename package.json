@@ -44,7 +44,8 @@
     "postpackage:version": "pnpm run update-badges",
     "perf": "tsx scripts/performance/fcp-analyzer.ts",
     "perf:audit": "tsx scripts/performance/asset-audit.ts",
-    "perf:report": "tsx scripts/performance/report.ts"
+    "perf:report": "tsx scripts/performance/report.ts",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@babel/core": "^7.23.2",
@@ -60,8 +61,10 @@
     "caniuse-lite": "^1.0.30001809",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.8.1",
+    "husky": "^9.1.7",
     "jest": "^29.7.0",
     "jest-environment-jsdom": "^29.7.0",
+    "lint-staged": "^17.6.0",
     "postcss": "^8.4.21",
     "postcss-import": "^15.1.0",
     "postcss-loader": "^7.3.3",
@@ -101,5 +104,8 @@
   },
   "browserslist": [
     "baseline widely available"
-  ]
+  ],
+  "lint-staged": {
+    "*.{ts,tsx,js,mjs,cjs}": "prettier --write"
+  }
 }

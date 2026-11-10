@@ -4,6 +4,7 @@ name: PR Checks
 # Checks:
 # 1. Lockfile matches package.json (frozen install, as releases use)
 # 2. Changed files pass Prettier (fix: pnpm exec prettier --write)
+# 3. Tests pass (pnpm test)
 on:
   pull_request:
     branches:
@@ -42,6 +43,7 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
+        id: install
         run: pnpm install --frozen-lockfile
 
       - name: Check formatting of changed files
@@ -54,3 +56,8 @@ jobs:
             git diff --name-only
             exit 1
           }
+
+      # Runs even if formatting failed, so both results show in one run
+      - name: Run tests
+        if: ${{ !cancelled() && steps.install.outcome == 'success' }}
+        run: pnpm test

@@ -14,19 +14,35 @@ type TypeCarouselMultipleProps = Pick<ThemeProps, 'isThemeDark'> & {
 
 const fullScreenClassName = buttons.fullscreen.className;
 
-export const createCompositeCarouselImageMultiple = (props: TypeCarouselMultipleProps) =>
+export const createCompositeCarouselImageMultiple = (
+  props: TypeCarouselMultipleProps,
+) =>
   (() => {
-    const { images, isThemeDark, isFullScreenOption = false, isToggleCaption = true } = props;
-    const clonedImages = images.map((image) => image.cloneNode(true)) as HTMLImageElement[];
+    const {
+      images,
+      isThemeDark,
+      isFullScreenOption = false,
+      isToggleCaption = true,
+    } = props;
+    const clonedImages = images.map((image) =>
+      image.cloneNode(true),
+    ) as HTMLImageElement[];
     const slide = new ElementBuilder().build().element;
-    const overlayCarousel = carouselElements.overlay({ images, isToggleCaption });
+    const overlayCarousel = carouselElements.overlay({
+      images,
+      isToggleCaption,
+    });
 
     let buttonStyles = '';
     let blockStyles = '';
     let containerClass = '';
 
     const blockModels = clonedImages.map((image, index) => {
-      const block = createLayoutImageContainer({ image, showCaption: true, isToggleCaption });
+      const block = createLayoutImageContainer({
+        image,
+        showCaption: true,
+        isToggleCaption,
+      });
       containerClass = block.element.className;
 
       if (isFullScreenOption) {

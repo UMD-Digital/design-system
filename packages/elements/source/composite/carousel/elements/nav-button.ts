@@ -119,7 +119,10 @@ export const CreateButton = ({
         ...(backgroundColor === token.color.red && buttonColorsOnBlack()),
         ...(backgroundColor === token.color.white && buttonColorsOnGray()),
         '& svg': {
-          fill: backgroundColor === token.color.red ? token.color.white : token.color.black,
+          fill:
+            backgroundColor === token.color.red
+              ? token.color.white
+              : token.color.black,
           width: '20px',
           height: '20px',
         },

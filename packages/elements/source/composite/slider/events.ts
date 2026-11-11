@@ -124,15 +124,14 @@ const SizeDatesElements = ({
   dataSlider: HTMLElement;
   SetButtonVisibility: () => void;
 }) => {
-
   const sizing = () => {
     const dateElements = Array.from(
       dataSlider.querySelectorAll(':scope > *'),
     ) as HTMLDivElement[];
 
-		const sliderWrapper = container.querySelector(
-			'.slider-event-slide-wrapper',
-		) as HTMLDivElement;
+    const sliderWrapper = container.querySelector(
+      '.slider-event-slide-wrapper',
+    ) as HTMLDivElement;
 
     const sliderVisibility = ({ show = true }: { show?: boolean }) => {
       if (show) {
@@ -265,7 +264,12 @@ const EventSwipe = ({
 };
 
 const CreateBackButton = (props: TypeSliderEventSlideProps) => {
-  const { SetCountBackward, SetButtonVisibility, SetSlideDatesBackwards, isThemeDark } = props;
+  const {
+    SetCountBackward,
+    SetButtonVisibility,
+    SetSlideDatesBackwards,
+    isThemeDark,
+  } = props;
 
   const clickEvent = (event: Event) => {
     const button = event.currentTarget as HTMLButtonElement;
@@ -332,7 +336,12 @@ const CreateBackButton = (props: TypeSliderEventSlideProps) => {
 };
 
 const CreateForwardButton = (props: TypeSliderEventSlideProps) => {
-  const { SetCountForward, SetButtonVisibility, SetSlideDatesForward, isThemeDark } = props;
+  const {
+    SetCountForward,
+    SetButtonVisibility,
+    SetSlideDatesForward,
+    isThemeDark,
+  } = props;
 
   const clickEvent = (event: Event) => {
     const button = event.currentTarget as HTMLButtonElement;
@@ -563,8 +572,7 @@ export const createCompositeSliderEvents = (props: TypeSliderEventProps) =>
         dataSlider,
         SetButtonVisibility,
       });
-    const SetJumpToDate = () =>
-      JumpToDate({ dataSlider, currentPosition });
+    const SetJumpToDate = () => JumpToDate({ dataSlider, currentPosition });
     const SetSlideDatesForward = () =>
       EventSlideDates({ dataSlider, forward: true });
     const SetSlideDatesBackwards = () =>

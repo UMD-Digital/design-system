@@ -119,7 +119,10 @@ export const CreateButton = ({
         ...(backgroundColor === token.color.red && buttonColorsOnBlack()),
         ...(backgroundColor === token.color.white && buttonColorsOnGray()),
         '& svg': {
-          fill: backgroundColor === token.color.red ? token.color.white : token.color.black,
+          fill:
+            backgroundColor === token.color.red
+              ? token.color.white
+              : token.color.black,
           width: '20px',
           height: '20px',
         },
@@ -131,7 +134,7 @@ export const CreateButton = ({
         transform: 'none',
         zIndex: 9999,
         display: 'none',
-        '&:disabled': { opacity: 0.5 },
+        '&[aria-disabled="true"]': { opacity: 0.5 },
         [`@media (${token.media.queries.desktop.min})`]: {
           position: 'absolute',
           ...(isVerticalCenter && {
@@ -150,14 +153,15 @@ export const CreateButton = ({
     })
     .on('click', (event) => {
       const button = event.currentTarget as HTMLButtonElement;
+      if (button.getAttribute('aria-disabled') === 'true') return;
       if (isRight) {
         EventMoveForward();
       } else {
         EventMoveBackward();
       }
-      button.disabled = true;
+      button.setAttribute('aria-disabled', 'true');
       setTimeout(() => {
-        button.disabled = false;
+        button.removeAttribute('aria-disabled');
       }, BUTTON_DISABLE_DURATION);
     })
     .build();

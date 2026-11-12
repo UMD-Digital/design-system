@@ -62,7 +62,7 @@ export const IN_THE_NEWS_QUERY = `
 
 export const inTheNewsFetchStrategy =
   createGraphQLFetchStrategy<InTheNewsEntry>({
-    endpoint: 'https://content-api.umd.edu/graphql',
+    endpoint: 'https://shared-source.umd.edu/graphql',
 
     queries: {
       entries: IN_THE_NEWS_QUERY,

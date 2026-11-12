@@ -35,7 +35,7 @@ source/
 ├── elements/        # Slot/template creation for Shadow DOM web components
 ├── events/          # Keyboard handling, swipe gesture detection
 ├── media/           # SVG parsing, image conversion, responsive sizing
-├── network/         # GraphQL fetch with bearer auth
+├── network/         # REST GET, GraphQL fetch with bearer auth
 ├── performance/     # Debounce
 ├── storage/         # localStorage get/set wrappers
 ├── string/          # Capitalize, truncate (word-boundary and size-based)

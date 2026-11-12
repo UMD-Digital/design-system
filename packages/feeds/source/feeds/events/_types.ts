@@ -74,6 +74,7 @@ export interface NoResultsProps extends HelperFunctionProps {
 
 export interface BaseProps {
   token: string;
+  apiUrl?: string;
   numberOfRowsToStart: number;
   categories?: string[];
   isThemeDark?: boolean;
@@ -91,6 +92,7 @@ export interface ListProps extends BaseProps {}
 
 export interface SliderProps {
   token: string;
+  apiUrl?: string;
   categories?: string | null;
   isThemeDark?: boolean;
 }

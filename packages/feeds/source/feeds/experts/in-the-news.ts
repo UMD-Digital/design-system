@@ -30,8 +30,13 @@ const normalizeRowCount = (rows?: number): number => {
   return Math.max(MIN_ROWS_TO_START, Math.min(MAX_ROWS_TO_START, rows));
 };
 
-const createExpertFetchProps = (token: string, expertId: string) => ({
+const createExpertFetchProps = (
+  token: string,
+  expertId: string,
+  apiUrl?: string,
+) => ({
   token,
+  apiUrl,
   limit: 1,
   offset: 0,
   ids: [expertId],
@@ -42,8 +47,10 @@ const createNewsFetchProps = (
   expertId: string,
   numberOfRowsToStart: number,
   offset: number,
+  apiUrl?: string,
 ) => ({
   token,
+  apiUrl,
   expertId,
   numberOfRowsToStart,
   getOffset: () => offset,
@@ -321,7 +328,13 @@ const logError = (
 };
 
 export const expertsInTheNews = (props: InTheNewsProps): ElementModel => {
-  const { token, expertId, isThemeDark = false, isLazyLoad = false } = props;
+  const {
+    token,
+    apiUrl,
+    expertId,
+    isThemeDark = false,
+    isLazyLoad = false,
+  } = props;
   const numberOfRowsToStart = normalizeRowCount(props.numberOfRowsToStart);
 
   const containerBuilder = new ElementBuilder('div').withClassName(
@@ -343,6 +356,7 @@ export const expertsInTheNews = (props: InTheNewsProps): ElementModel => {
       expertId,
       LOAD_MORE_ITEMS,
       state.getOffset(),
+      apiUrl,
     );
     const variables = inTheNewsFetchStrategy.composeApiVariables(fetchProps);
     const entries = await inTheNewsFetchStrategy.fetchEntries(variables);
@@ -387,7 +401,7 @@ export const expertsInTheNews = (props: InTheNewsProps): ElementModel => {
     loading.show(container);
 
     try {
-      const expertFetchProps = createExpertFetchProps(token, expertId);
+      const expertFetchProps = createExpertFetchProps(token, expertId, apiUrl);
       const expertVariables =
         expertsFetchStrategy.composeApiVariables(expertFetchProps);
 
@@ -396,6 +410,7 @@ export const expertsInTheNews = (props: InTheNewsProps): ElementModel => {
         expertId,
         numberOfRowsToStart,
         0,
+        apiUrl,
       );
       const newsVariables =
         inTheNewsFetchStrategy.composeApiVariables(newsFetchProps);

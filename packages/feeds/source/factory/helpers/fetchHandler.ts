@@ -142,7 +142,11 @@ export function createFetchHandlers<TData, TVariables>(
 
     if (count === 0) {
       // Only attempt category fallback if explicitly enabled (for events feeds)
-      if (enableCategoryFallback && baseProps.categories && baseProps.categories.length > 0) {
+      if (
+        enableCategoryFallback &&
+        baseProps.categories &&
+        baseProps.categories.length > 0
+      ) {
         const fallbackVariables = fetchStrategy.composeApiVariables({
           ...baseProps,
           categories: undefined,
@@ -163,6 +167,7 @@ export function createFetchHandlers<TData, TVariables>(
             let categoryNames = await fetchStrategy.fetchCategoryNames?.(
               baseProps.categories,
               baseProps.token,
+              baseProps.apiUrl,
             );
 
             // If fetch fails, format IDs as fallback

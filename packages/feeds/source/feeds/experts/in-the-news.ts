@@ -1,7 +1,10 @@
 import { ElementBuilder } from '@universityofmaryland/web-builder-library';
 import * as token from '@universityofmaryland/web-token-library';
 import { card } from '@universityofmaryland/web-elements-library/composite';
-import { gridOffset, stacked } from '@universityofmaryland/web-elements-library/layout';
+import {
+  gridOffset,
+  stacked,
+} from '@universityofmaryland/web-elements-library/layout';
 import {
   LoadingState,
   PaginationState,

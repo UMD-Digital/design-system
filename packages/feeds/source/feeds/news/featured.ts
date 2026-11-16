@@ -613,7 +613,10 @@ export const newsFeatured = (props: FeaturedProps): ElementModel => {
     loading.show(container);
 
     // Fetch initial items
-    const fetchProps = createFetchProps({ token, apiUrl, categories, isUnion }, 0);
+    const fetchProps = createFetchProps(
+      { token, apiUrl, categories, isUnion },
+      0,
+    );
     const variables = newsFetchStrategy.composeApiVariables(fetchProps);
 
     const [count, entries] = await Promise.all([

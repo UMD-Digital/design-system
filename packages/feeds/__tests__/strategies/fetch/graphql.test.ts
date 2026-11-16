@@ -13,7 +13,9 @@ jest.mock('@universityofmaryland/web-utilities-library/network', () => ({
 
 import { fetchGraphQL } from '@universityofmaryland/web-utilities-library/network';
 
-const mockFetchGraphQL = fetchGraphQL as jest.MockedFunction<typeof fetchGraphQL>;
+const mockFetchGraphQL = fetchGraphQL as jest.MockedFunction<
+  typeof fetchGraphQL
+>;
 
 describe('createGraphQLFetchStrategy', () => {
   const mockTransformResponse = jest.fn((data) => data?.data?.entries || null);
@@ -48,7 +50,7 @@ describe('createGraphQLFetchStrategy', () => {
         expect.objectContaining({
           url: 'https://test.com/graphql',
           query: 'query GetCount { count }',
-        })
+        }),
       );
     });
 
@@ -91,7 +93,7 @@ describe('createGraphQLFetchStrategy', () => {
         expect.objectContaining({
           url: 'https://test.com/graphql',
           query: 'query GetEntries { entries }',
-        })
+        }),
       );
     });
 
@@ -156,7 +158,10 @@ describe('createGraphQLFetchStrategy', () => {
         apiUrl: 'https://staging.test.com/graphql',
       });
 
-      expect(result).toHaveProperty('apiUrl', 'https://staging.test.com/graphql');
+      expect(result).toHaveProperty(
+        'apiUrl',
+        'https://staging.test.com/graphql',
+      );
     });
 
     it('should carry apiUrl through custom composeVariables', () => {
@@ -174,7 +179,10 @@ describe('createGraphQLFetchStrategy', () => {
         apiUrl: 'https://staging.test.com/graphql',
       });
 
-      expect(result).toHaveProperty('apiUrl', 'https://staging.test.com/graphql');
+      expect(result).toHaveProperty(
+        'apiUrl',
+        'https://staging.test.com/graphql',
+      );
     });
 
     it('should omit apiUrl when none is passed', () => {

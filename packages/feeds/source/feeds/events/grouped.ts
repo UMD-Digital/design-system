@@ -261,7 +261,11 @@ const createEventCard = (
       : null;
 
   return card.list({
-    headline: createTextWithLink({ text: entry.title, url: entry.url, openInNewTab }),
+    headline: createTextWithLink({
+      text: entry.title,
+      url: entry.url,
+      openInNewTab,
+    }),
     text: createTextContainer({ text: entry.summary, allowHTML: true }),
     dateSign: eventElements.sign({
       startMonth: entry.startMonth,

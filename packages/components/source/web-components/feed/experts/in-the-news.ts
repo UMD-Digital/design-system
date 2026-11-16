@@ -31,12 +31,15 @@ const createComponent: CreateComponentFunction = (element) => {
   });
 };
 
-export const FeedExpertInTheNews: ComponentRegistration = Model.defineComponent({
-  tagName,
-  createComponent,
-  afterConnect: (element, shadow) => {
-    element?.events?.callback(shadow);
+export const FeedExpertInTheNews: ComponentRegistration = Model.defineComponent(
+  {
+    tagName,
+    createComponent,
+    afterConnect: (element, shadow) => {
+      element?.events?.callback(shadow);
+    },
   },
-}, { eager: false });
+  { eager: false },
+);
 
 export { FeedExpertInTheNews as expertsInTheNews };

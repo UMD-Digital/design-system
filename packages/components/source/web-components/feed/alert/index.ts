@@ -1,6 +1,9 @@
 import { navigation } from '@universityofmaryland/web-elements-library/composite';
 import { Attributes, Model } from '@universityofmaryland/web-model-library';
-import { ComponentRegistration, CreateComponentFunction } from '../../../_types';
+import {
+  ComponentRegistration,
+  CreateComponentFunction,
+} from '../../../_types';
 
 const tagName = 'umd-element-navigation-utility';
 
@@ -103,11 +106,14 @@ const attributes = Attributes.handler.common.visualShowHide({
  * @category Components
  * @since 1.0.0
  */
-export const FeedAlert: ComponentRegistration = Model.defineComponent({
-  tagName,
-  createComponent,
-  attributes,
-}, { eager: false });
+export const FeedAlert: ComponentRegistration = Model.defineComponent(
+  {
+    tagName,
+    createComponent,
+    attributes,
+  },
+  { eager: false },
+);
 
 /** Backwards compatibility alias for grouped exports */
 export { FeedAlert as alert };

@@ -82,14 +82,43 @@ const imageAnimationEnd = {
 };
 
 /**
+ * Keyboard focus indicator for image links.
+ * The wrapper and link both clip overflow, so the default outline (drawn
+ * outside the link) is hidden. The ring is drawn inside the link on an
+ * overlay above the image instead: a black outline with a white inner ring
+ * stays visible on light and dark images, and the outline survives forced
+ * colors mode where box-shadow is removed.
+ * @type {object}
+ * @private
+ */
+const linkFocus = {
+  '&:focus-visible': {
+    outline: `none`,
+  },
+
+  '&:focus-visible::after': {
+    content: '""',
+    position: `absolute`,
+    inset: `0`,
+    zIndex: `1`,
+    pointerEvents: `none`,
+    outline: `2px solid ${color.black}`,
+    outlineOffset: `-2px`,
+    boxShadow: `inset 0 0 0 4px ${color.white}`,
+  },
+};
+
+/**
  * Base link styles for image links.
  * @type {object}
  * @private
  */
 const linkBase = {
+  position: `relative`,
   lineHeight: `0`,
   overflow: `hidden`,
   display: `flex`,
+  ...linkFocus,
 };
 
 /**
@@ -146,7 +175,7 @@ const linkImageScaled = {
     ...imageAnimationStart,
   },
 
-  '& > a': {
+  '& a': {
     ...linkBase,
     height: '100%',
     width: '100%',

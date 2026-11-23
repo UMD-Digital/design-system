@@ -164,11 +164,11 @@ const createDefaultColumn = (
       }
 
       if (row.elmentType === 'headline') {
-        const headline = document.createElement('p');
+        const headline = document.createElement('h2');
 
         headline.textContent = row.title;
 
-        return createLinkColumnHeadline(headline);
+        return createLinkColumnHeadline(props, headline);
       }
 
       return undefined as unknown as UMDElement;
@@ -240,15 +240,9 @@ const createSlotColumn = ({
 
   if (slotHasHeadline) {
     const headlineAttr = slot.getAttribute('data-headline') ?? '';
-    const headline = document.createElement('p');
+    const headline = createSlotHeadline({ headlineAttr, isColumnOne });
 
-    headline.innerHTML = headlineAttr;
-
-    if (!headlineAttr && !isColumnOne) {
-      headline.setAttribute('data-empty', 'true');
-    }
-
-    wrapperChildren.push(createLinkColumnHeadline(headline));
+    wrapperChildren.push(createLinkColumnHeadline(props, headline));
   }
 
   wrapperChildren.push(...linkChildren);
@@ -256,7 +250,46 @@ const createSlotColumn = ({
   return createRowLinksColumnWrapper({ children: wrapperChildren });
 };
 
-const createLinkColumnHeadline = (element: HTMLElement) => {
+const createHeadlineSpacer = ({
+  isColumnOne,
+}: {
+  isColumnOne: boolean;
+}): HTMLElement => {
+  const spacer = document.createElement('p');
+
+  spacer.setAttribute('aria-hidden', 'true');
+
+  if (isColumnOne) {
+    return spacer;
+  }
+
+  spacer.setAttribute('data-empty', 'true');
+
+  return spacer;
+};
+
+const createSlotHeadline = ({
+  headlineAttr,
+  isColumnOne,
+}: {
+  headlineAttr: string;
+  isColumnOne: boolean;
+}): HTMLElement => {
+  if (!headlineAttr) return createHeadlineSpacer({ isColumnOne });
+
+  const headline = document.createElement('h2');
+
+  headline.innerHTML = headlineAttr;
+
+  return headline;
+};
+
+const createLinkColumnHeadline = (
+  props: Pick<slotColumnsProps, 'isThemeLight'>,
+  element: HTMLElement,
+) => {
+  const { isThemeLight } = props;
+
   return new ElementBuilder(element)
     .withClassName('link-column-headline')
     .withStyles({
@@ -265,6 +298,11 @@ const createLinkColumnHeadline = (element: HTMLElement) => {
         marginBottom: token.spacing.sm,
         fontWeight: 700,
         gridColumn: '1 / span 2',
+        color: token.color.white,
+
+        ...(isThemeLight && {
+          color: token.color.gray.dark,
+        }),
       },
     })
     .build();

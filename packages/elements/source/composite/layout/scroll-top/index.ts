@@ -15,14 +15,18 @@ const CreateScrollTopElement = (props: TypeScrollTopProps) =>
     let startingPosition: null | number = null;
     let isShowing = false;
 
+    const iconBuilder = new ElementBuilder('span')
+      .withAttribute('aria-hidden', 'true')
+      .withHTML(iconArrowUp);
+
     const textBuilder = new ElementBuilder('span')
       .withClassName('sr-only')
-      .withHTML('Scroll To Top');
+      .withText('Scroll to top');
 
     const containerBuilder = new ElementBuilder('button')
       .withClassName('scroll-top-container')
-      .withHTML(iconArrowUp)
-      .withChild(textBuilder)
+      .withAttribute('type', 'button')
+      .withChildren(iconBuilder, textBuilder)
       .withStyles({
         element: {
           backgroundColor: token.color.black,

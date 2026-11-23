@@ -29,15 +29,25 @@ const createChildren = (
   const wrapperChildren: ElementModel<HTMLElement>[] = [];
 
   if (quote) {
-    wrapperChildren.push(
-      elementQuote({
-        ...props,
-        shouldHaveWhiteText,
-        quote,
-        hasImage,
-        isSizeLarge,
-      }),
-    );
+    const quoteElement = elementQuote({
+      ...props,
+      shouldHaveWhiteText,
+      quote,
+      hasImage,
+      isSizeLarge,
+    });
+
+    const blockquoteElement = new ElementBuilder('blockquote')
+      .withClassName('quote-container-blockquote')
+      .withStyles({
+        element: {
+          margin: 0,
+        },
+      })
+      .withChild(quoteElement)
+      .build();
+
+    wrapperChildren.push(blockquoteElement);
   }
 
   if (attribution) {

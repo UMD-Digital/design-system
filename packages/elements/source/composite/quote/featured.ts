@@ -93,6 +93,7 @@ const createTextureContainer = ({
 
   const backgroundTextureElement = new ElementBuilder(backgroundTexture)
     .withClassName('quote-background-texture')
+    .withAttribute('alt', '')
     .build();
 
   const container = new ElementBuilder()

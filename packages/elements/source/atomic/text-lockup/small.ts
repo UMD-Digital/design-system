@@ -164,10 +164,14 @@ export const createTextLockupSmall = ({
   }
 
   if (headline) {
+    const isHeadlineLinked =
+      headline instanceof HTMLAnchorElement ||
+      headline.querySelector('a') !== null;
     const composeHeadlineStyles = {
-      ...animationStyles.line.composeSlideUnder({
-        color: theme.foreground(isThemeDark),
-      }),
+      ...(isHeadlineLinked &&
+        animationStyles.line.composeSlideUnder({
+          color: theme.foreground(isThemeDark),
+        })),
       ...typography.sans.compose('larger', {
         theme: theme.fontColor(isThemeDark),
       }),

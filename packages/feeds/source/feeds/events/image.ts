@@ -1,7 +1,7 @@
 import { type EventEntry } from 'types/data';
 
 export const createEventImageConfig = (
-  entry: Pick<EventEntry, 'image' | 'url'>,
+  entry: Pick<EventEntry, 'image' | 'title' | 'url'>,
 ) => {
   const imageUrl = entry.image?.[0]?.url;
   const altText = entry.image?.[0]?.alt;
@@ -14,6 +14,6 @@ export const createEventImageConfig = (
     imageUrl,
     altText,
     linkUrl: entry.url,
-    linkLabel: 'University of Maryland Event',
+    linkLabel: `View ${entry.title}`,
   };
 };

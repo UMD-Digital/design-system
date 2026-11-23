@@ -101,7 +101,7 @@ const eventsFeed = createBaseFeed({
       imageUrl: imageUrl,
       altText: altText,
       linkUrl: entry.url,
-      linkLabel: 'University of Maryland Event',
+      linkLabel: `View ${entry.title}`,
     };
   },
 });
@@ -448,7 +448,7 @@ export default (props: BlockProps): ElementModel =>
         imageUrl: imageUrl,
         altText: altText,
         linkUrl: entry.url,
-        linkLabel: 'University of Maryland Event',
+        linkLabel: `View ${entry.title}`,
       };
     },
   });

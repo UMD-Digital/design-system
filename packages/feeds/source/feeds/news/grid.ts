@@ -64,7 +64,7 @@ export const newsGrid = (props: BlockProps): ElementModel => {
         imageUrl: imageUrl,
         altText: altText,
         linkUrl: entry.url,
-        linkLabel: 'Maryland Today Article with image',
+        linkLabel: `Read ${entry.title}`,
       };
     },
   });

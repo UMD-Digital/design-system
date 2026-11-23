@@ -53,7 +53,7 @@ const feed = createBaseFeed({
       imageUrl: imageUrl,
       altText: altText,
       linkUrl: entry.url,
-      linkLabel: 'University of Maryland Event',
+      linkLabel: `View ${entry.title}`,
     };
   },
   // ...

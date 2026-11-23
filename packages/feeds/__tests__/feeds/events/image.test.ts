@@ -1,26 +1,48 @@
 import { createEventImageConfig } from '../../../source/feeds/events/image';
-import { EVENTS_QUERY, EVENTS_SLIDER_QUERY } from '../../../source/strategies/fetch/events';
+import {
+  EVENTS_QUERY,
+  EVENTS_SLIDER_QUERY,
+} from '../../../source/strategies/fetch/events';
 
 describe('event image config', () => {
   it('uses the alt field for event image alt text', () => {
     expect(
       createEventImageConfig({
+        title: 'Maryland Day',
         url: 'https://example.com/event',
-        image: [{ url: 'https://example.com/image.jpg', alt: 'Event alt text' }],
+        image: [
+          { url: 'https://example.com/image.jpg', alt: 'Event alt text' },
+        ],
       } as any),
     ).toEqual({
       imageUrl: 'https://example.com/image.jpg',
       altText: 'Event alt text',
       linkUrl: 'https://example.com/event',
-      linkLabel: 'University of Maryland Event',
+      linkLabel: 'View Maryland Day',
     });
+  });
+
+  it('names the image link after the event it links to', () => {
+    const config = createEventImageConfig({
+      title: 'Terrapin Trot',
+      url: 'https://example.com/event',
+      image: [{ url: 'https://example.com/image.jpg', alt: 'Event alt text' }],
+    } as any);
+
+    if (config === null) {
+      throw new Error('Event image config was not created');
+    }
+
+    expect(config.linkLabel).toBe('View Terrapin Trot');
   });
 
   it('returns null when only legacy altText is available', () => {
     expect(
       createEventImageConfig({
         url: 'https://example.com/event',
-        image: [{ url: 'https://example.com/image.jpg', altText: 'Legacy alt text' }],
+        image: [
+          { url: 'https://example.com/image.jpg', altText: 'Legacy alt text' },
+        ],
       } as any),
     ).toBeNull();
   });

@@ -72,6 +72,7 @@ export const createCardOverlayImage = (props: CardOverlayProps) => {
           width: '100%',
           height: '100%',
           zIndex: 1,
+          pointerEvents: 'none',
           opacity: 1,
           transition: `opacity 0.5s ease-in-out`,
           background:
